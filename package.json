@@ -1,7 +1,11 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "0.0.1",
+  "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
+  "version": "0.0.2",
   "devDependencies": {
     "typescript": "4.3.2"
-  }
+  },
+  "files": [
+    "Distributable"
+  ]
 }

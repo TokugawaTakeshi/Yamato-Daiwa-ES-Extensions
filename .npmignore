@@ -1,4 +1,7 @@
 .gitignore
 tsconfig.json
 
-/.idea/
+.idea/
+
+Source/
+Tests/
