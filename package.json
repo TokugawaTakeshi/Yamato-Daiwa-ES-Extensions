@@ -1,11 +1,24 @@
 {
   "name": "@yamato-daiwa/es-extensions",
+  "version": "0.0.3",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
-  "version": "0.0.2",
+  "keywords": [ "utils" ],
+  "author": {
+    "name": "Takesi Tokugawa",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": "./Distributable/index.js",
+    "./NodeJS": "./Distributable/NodeJS.js",
+    "./BrowserJS": "./Distributable/BrowserJS.js"
+  },
   "devDependencies": {
+    "@types/node": "15.12.2",
     "typescript": "4.3.2"
   },
-  "files": [
-    "Distributable"
-  ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TokugawaTakesi/yamato_daiwa-es_extensions.git"
+  }
 }
