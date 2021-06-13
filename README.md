@@ -123,6 +123,23 @@ isArrayOfCertainTypeElements<ArrayElementType>(
 ): potentialArray is Array<ArrayElementType>
 ```
 
+```typescript
+isArrayOfCertainTypeElements("abcde".split(""), { exactElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abcd".split(""), { exactElementsCount: 5 }); // false
+
+isArrayOfCertainTypeElements("abcde".split(""), { minimalElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abcd".split(""), { minimalElementsCount: 5 }); // false
+
+isArrayOfCertainTypeElements("abcde".split(""), { maximalElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abcdef".split(""), { maximalElementsCount: 5 }); // false
+
+isArrayOfCertainTypeElements("ab".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abc".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abcde".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfCertainTypeElements("abcdef".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
+isArrayOfCertainTypeElements("a".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
+```
+
 
 #### Nullables
 
@@ -142,7 +159,7 @@ checks like `if (value)` for non-booleans. Below checkers allows to simplify the
 * `isFunctionLike(potentialFunction: unknown): potentialFunction is Function`
 
 ```
-`isElementOfEnumeration<EnumerationElement extends string | number>(
+isElementOfEnumeration<EnumerationElement extends string | number>(
   possibleEnumerationElement: string | number, 
   targetEnumeration: { [key: string]: EnumerationElement; 
 }): possibleEnumerationElement is EnumerationElement`
