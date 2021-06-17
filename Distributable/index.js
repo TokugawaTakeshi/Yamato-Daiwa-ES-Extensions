@@ -1,10 +1,27 @@
 "use strict";
+/*!
+ * @yamato-daiwa/es-extensions v0.0.7
+ * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * Released under the MIT License.
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Timer = exports.secondsToMilliseconds = exports.millisecondsToSeconds = exports.isFunctionLike = exports.isElementOfEnumeration = exports.isBoolean = exports.isUndefined = exports.isNull = exports.isNotUndefined = exports.isNotNull = exports.isNeitherUndefinedNorNull = exports.isNonEmptyArray = exports.isEmptyArray = exports.isArrayOfCertainTypeElements = exports.isNonNullObject = exports.isNonEmptyObject = exports.isEmptyObject = exports.IsStringOfLengthCheckingOperation = exports.isStringOfLength = exports.isString = exports.isNonEmptyString = exports.isEmptyString = exports.isPositiveDecimalFraction = exports.isNumber = exports.isNonNegativeInteger = exports.isNegativeIntegerOrZero = exports.isNegativeInteger = exports.isNegativeDecimalFraction = exports.isNatualNumber = exports.isDecimalFractionOfAnySign = void 0;
+exports.Timer = exports.secondsToMilliseconds = exports.millisecondsToSeconds = exports.isFunctionLike = exports.isElementOfEnumeration = exports.isBoolean = exports.isUndefined = exports.isNull = exports.isNotUndefined = exports.isNotNull = exports.isNeitherUndefinedNorNull = exports.isNonEmptyArray = exports.isEmptyArray = exports.IsArrayOfLengthCheckingOperation = exports.isArrayOfLength = exports.isArrayOfCertainTypeElements = exports.isNonNullObject = exports.isNonEmptyObject = exports.isEmptyObject = exports.IsStringOfLengthCheckingOperation = exports.isStringOfLength = exports.isString = exports.isNonEmptyString = exports.isEmptyString = exports.isPositiveDecimalFraction = exports.isNumber = exports.isNonNegativeInteger = exports.isNegativeIntegerOrZero = exports.isNegativeInteger = exports.isNegativeDecimalFraction = exports.isNaturalNumber = exports.isDecimalFractionOfAnySign = exports.computeLastItemNumberForSpecificPaginationPage = exports.computeFirstItemNumberForSpecificPaginationPage = exports.separateEach4DigitsGroupWithComma = exports.separateEach3DigitsGroupWithComma = exports.isStringifiedNonNegativeIntegerOfRegularNotation = exports.formatNumberWith4KetaKanji = void 0;
+const formatNumberWith4KetaKanji_1 = require("./Numbers/formatNumberWith4KetaKanji");
+exports.formatNumberWith4KetaKanji = formatNumberWith4KetaKanji_1.default;
+const isStringifiedNonNegativeIntegerOfRegularNotation_1 = require("./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation");
+exports.isStringifiedNonNegativeIntegerOfRegularNotation = isStringifiedNonNegativeIntegerOfRegularNotation_1.default;
+const separateEach3DigitsGroupWithComma_1 = require("./Numbers/separateEach3DigitsGroupWithComma");
+exports.separateEach3DigitsGroupWithComma = separateEach3DigitsGroupWithComma_1.default;
+const separateEach4DigitsGroupWithComma_1 = require("./Numbers/separateEach4DigitsGroupWithComma");
+exports.separateEach4DigitsGroupWithComma = separateEach4DigitsGroupWithComma_1.default;
+const computeFirstItemNumberForSpecificPaginationPage_1 = require("./Numbers/Pagination/computeFirstItemNumberForSpecificPaginationPage");
+exports.computeFirstItemNumberForSpecificPaginationPage = computeFirstItemNumberForSpecificPaginationPage_1.default;
+const computeLastItemNumberForSpecificPaginationPage_1 = require("./Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage");
+exports.computeLastItemNumberForSpecificPaginationPage = computeLastItemNumberForSpecificPaginationPage_1.default;
 const isDecimalFractionOfAnySign_1 = require("./TypeGuards/Numbers/isDecimalFractionOfAnySign");
 exports.isDecimalFractionOfAnySign = isDecimalFractionOfAnySign_1.default;
 const isNaturalNumber_1 = require("./TypeGuards/Numbers/isNaturalNumber");
-exports.isNatualNumber = isNaturalNumber_1.default;
+exports.isNaturalNumber = isNaturalNumber_1.default;
 const isNegativeDecimalFraction_1 = require("./TypeGuards/Numbers/isNegativeDecimalFraction");
 exports.isNegativeDecimalFraction = isNegativeDecimalFraction_1.default;
 const isNegativeInteger_1 = require("./TypeGuards/Numbers/isNegativeInteger");
@@ -34,6 +51,9 @@ const isNonNullObject_1 = require("./TypeGuards/Objects/isNonNullObject");
 exports.isNonNullObject = isNonNullObject_1.default;
 const isArrayOfCertainTypeElements_1 = require("./TypeGuards/Arrays/isArrayOfCertainTypeElements");
 exports.isArrayOfCertainTypeElements = isArrayOfCertainTypeElements_1.default;
+const isArrayOfLength_1 = require("./TypeGuards/Arrays/isArrayOfLength");
+exports.isArrayOfLength = isArrayOfLength_1.default;
+Object.defineProperty(exports, "IsArrayOfLengthCheckingOperation", { enumerable: true, get: function () { return isArrayOfLength_1.IsArrayOfLengthCheckingOperation; } });
 const isEmptyArray_1 = require("./TypeGuards/Arrays/isEmptyArray");
 exports.isEmptyArray = isEmptyArray_1.default;
 const isNonEmptyArray_1 = require("./TypeGuards/Arrays/isNonEmptyArray");

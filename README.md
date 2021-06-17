@@ -42,6 +42,159 @@ export { delegateClickEventHandling } from "@yamato-daiwa/es-extensions/BrowserJ
 export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
 ```
 
+
+### Numbers
+
+#### `formatNumberWith4KetaKanji`: Format number with 4-digits Kanji (CJK Ideographic characters)
+
+```
+formatNumberWith4KetaKanji(targetNumber: number | bigint | string): string
+```
+
+```typescript
+console.log(formatNumberWith4KetaKanji(12345)); // "1万2345"
+console.log(formatNumberWith4KetaKanji(123456)); // "12万3456"
+console.log(formatNumberWith4KetaKanji(1234567)); // "123万4567"
+console.log(formatNumberWith4KetaKanji(12345678)); // "1234万5678"
+
+console.log(formatNumberWith4KetaKanji(123456789)); // "1億2345万6789"
+console.log(formatNumberWith4KetaKanji(1234567890)); // "12億3456万7890"
+console.log(formatNumberWith4KetaKanji(12345678901)); // "123億4567万8901"
+console.log(formatNumberWith4KetaKanji(123456789012)); // "1234億5678万9012"
+
+console.log(formatNumberWith4KetaKanji(1234567890123)); // "1兆2345億6789万0123"
+console.log(formatNumberWith4KetaKanji(12345678901234)); // "12兆3456億7890万1234"
+console.log(formatNumberWith4KetaKanji(123456789012345)); // "123兆4567億8901万2345"
+console.log(formatNumberWith4KetaKanji(1234567890123456)); // "1234兆5678億9012万3456"
+
+// MAX_SAFE_INTEGER excess:
+console.log(formatNumberWith4KetaKanji(12345678901234567)); // "1234兆5678億9012万3458" !! Last ditig is differs!
+// Solution:
+console.log(formatNumberWith4KetaKanji(BigInt(12345678901234567)));　// 1京2345兆6789億0123万4567
+// Or:
+console.log(formatNumberWith4KetaKanji(String(12345678901234567)));　// 1京2345兆6789億0123万4567
+
+console.log(formatNumberWith4KetaKanji(1234567890123456)); // -1234兆5678億9012万3456
+console.log(formatNumberWith4KetaKanji(-123456789.543)); // -1億2345万6789.543
+```
+
+#### `isStringifiedNonNegativeIntegerOfRegularNotation`: Is stringified non-negative integer of regular notation check
+
+```
+isStringifiedNonNegativeIntegerOfRegularNotation(value: string): boolean
+```
+
+The "regular notation" is unofficial name of antonym of [Scientific notation](https://en.wikipedia.org/wiki/Scientific_notation)
+AKA **exponential notation**.
+It means that `isStringifiedNonNegativeIntegerOfRegularNotation` returns `true` for `"30"` but `false` for `"3e+1"`
+although `"3e+1"` is `30` in exponential notation.
+
+```typescript
+console.log(isStringifiedNonNegativeIntegerOfRegularNotation("30")) // true
+console.log(isStringifiedNonNegativeIntegerOfRegularNotation("3e+1")) // false
+```
+
+#### `separateEach3DigitsGroupWithComma`: Separate each 3 digits group with comma
+
+```
+separateEach3DigitsGroupWithComma(targetNumber: number | bigint | string): string
+```
+
+```typescript
+console.log(separateEach3DigitsGroupWithComma(1234)); // "1,234"
+console.log(separateEach3DigitsGroupWithComma("1234")); // "1,234"
+console.log(separateEach3DigitsGroupWithComma(BigInt("1234"))); // "1,234"
+
+console.log(separateEach3DigitsGroupWithComma(12345)); // "12,345"
+console.log(separateEach3DigitsGroupWithComma(123456)); // "123,456"
+console.log(separateEach3DigitsGroupWithComma(1234567)); // "1,234,567"
+
+console.log(separateEach3DigitsGroupWithComma(-3456)); // "-3,456"
+console.log(separateEach3DigitsGroupWithComma(-3456.4567)); // "-3,456.4,567"
+console.log(separateEach3DigitsGroupWithComma("1.23456e+5")); // "1.23,456e+5"
+
+// MAX_SAFE_INTEGER excess:
+console.log(separateEach3DigitsGroupWithComma(13000000000000007)); // "13,000,000,000,000,008" !
+// Solution:
+console.log(separateEach3DigitsGroupWithComma("13000000000000007")); // "13,000,000,000,000,007"
+// Or:
+console.log(separateEach3DigitsGroupWithComma(BitInt("13000000000000007"))); // "13,000,000,000,000,007"
+```
+
+
+#### `separateEach4DigitsGroupWithComma`: Separate each 4 digits group with comma
+
+```
+separateEach4DigitsGroupWithComma(targetNumber: number | bigint | string): string
+```
+
+Some Eastern calculus system are oriented to 4-digits group, not to 3-digits group
+(thousands, millions, billions, trillions etc).
+
+```typescript
+console.log(separateEach4DigitsGroupWithComma(12345)); // "1,2345"
+console.log(separateEach4DigitsGroupWithComma("12345")); // "1,2345"
+console.log(separateEach4DigitsGroupWithComma(BigInt("12345"))); // "1,2345"
+
+console.log(separateEach4DigitsGroupWithComma(123456)); // "12,3456"
+console.log(separateEach4DigitsGroupWithComma(1234567)); // "123,4567"
+console.log(separateEach4DigitsGroupWithComma(12345678)); // "1234,5678"
+
+console.log(separateEach4DigitsGroupWithComma(-34567)); // "-3,4567"
+console.log(separateEach4DigitsGroupWithComma(-34568.45679)); // "-3,4568.4,5679"
+console.log(separateEach4DigitsGroupWithComma("1.23456e+5")); // "1.2,3456e+5"
+
+// MAX_SAFE_INTEGER excess:
+console.log(separateEach3DigitsGroupWithComma(13000000000000007)); // "1,3000,0000,0000,0008" !
+// Solution:
+console.log(separateEach3DigitsGroupWithComma("13000000000000007")); // "1,3000,0000,0000,0007"
+// Or:
+console.log(separateEach3DigitsGroupWithComma(BitInt("13000000000000007"))); // "1,3000,0000,0000,0007"
+```
+
+
+#### Pagination related computings
+
+Pagination is GUI component, however related computing are executed on both client and server sides.
+
+##### `computeFirstItemNumberForSpecificPaginationPage`: Compute first item number for specific pagination page
+
+```
+function computeFirstItemNumberForSpecificPaginationPage(
+  parametersObject: {
+    currentPageNumber: number;
+    itemsCountPerPage: number;
+  }
+): number
+```
+
+To compute it, it's required to know the **current page number** and **items count per pagination page**.
+For example, when pagination has 20 items per page, the first item number in page 2 will be 21.
+
+
+##### `computeLastItemNumberForSpecificPaginationPage`: Compute last item number for specific pagination page
+
+```
+export default function computeLastItemNumberForSpecificPaginationPage(
+  parametersObject: {
+    currentPageNumber: number;
+    itemsCountPerPage: number;
+    totalItemsCount: number;
+  }
+): number
+}
+```
+
+To compute it independently on first item number for specific pagination page, it's required to know below parameters:
+
+* Current page number
+* Items count per page
+* Total items count
+
+For example, when pagination has 20 items per page and total 25 items, the last item number for first page will be 20,
+but for last one - 25.
+
+
 ### Date & Time
 
 * `millisecondsToSeconds(millisecondsAmount: number): number`
@@ -124,20 +277,20 @@ isArrayOfCertainTypeElements<ArrayElementType>(
 ```
 
 ```typescript
-isArrayOfCertainTypeElements("abcde".split(""), { exactElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abcd".split(""), { exactElementsCount: 5 }); // false
+isArrayOfLength("abcde".split(""), { exactElementsCount: 5 }); // true
+isArrayOfLength("abcd".split(""), { exactElementsCount: 5 }); // false
 
-isArrayOfCertainTypeElements("abcde".split(""), { minimalElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abcd".split(""), { minimalElementsCount: 5 }); // false
+isArrayOfLength("abcde".split(""), { minimalElementsCount: 5 }); // true
+isArrayOfLength("abcd".split(""), { minimalElementsCount: 5 }); // false
 
-isArrayOfCertainTypeElements("abcde".split(""), { maximalElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abcdef".split(""), { maximalElementsCount: 5 }); // false
+isArrayOfLength("abcde".split(""), { maximalElementsCount: 5 }); // true
+isArrayOfLength("abcdef".split(""), { maximalElementsCount: 5 }); // false
 
-isArrayOfCertainTypeElements("ab".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abc".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abcde".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
-isArrayOfCertainTypeElements("abcdef".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
-isArrayOfCertainTypeElements("a".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
+isArrayOfLength("ab".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfLength("abc".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfLength("abcde".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // true
+isArrayOfLength("abcdef".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
+isArrayOfLength("a".split(""), { minimalElementsCount: 2, maximalElementsCount: 5 }); // false
 ```
 
 
