@@ -1,7 +1,27 @@
+/*!
+ * @yamato-daiwa/es-extensions v0.0.7
+ * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * Released under the MIT License.
+ */
+
+/* === Numbers ====================================================================================================== */
+import formatNumberWith4KetaKanji from "./Numbers/formatNumberWith4KetaKanji";
+import isStringifiedNonNegativeIntegerOfRegularNotation
+  from "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
+import separateEach3DigitsGroupWithComma from "./Numbers/separateEach3DigitsGroupWithComma";
+import separateEach4DigitsGroupWithComma from "./Numbers/separateEach4DigitsGroupWithComma";
+
+/* --- Pagination --------------------------------------------------------------------------------------------------- */
+import computeFirstItemNumberForSpecificPaginationPage
+  from "./Numbers/Pagination/computeFirstItemNumberForSpecificPaginationPage";
+import computeLastItemNumberForSpecificPaginationPage
+  from "./Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage";
+
+
 /* === Type guards ================================================================================================== */
 /* --- Numbers ------------------------------------------------------------------------------------------------------ */
 import isDecimalFractionOfAnySign from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-import isNatualNumber from "./TypeGuards/Numbers/isNaturalNumber";
+import isNaturalNumber from "./TypeGuards/Numbers/isNaturalNumber";
 import isNegativeDecimalFraction from "./TypeGuards/Numbers/isNegativeDecimalFraction";
 import isNegativeInteger from "./TypeGuards/Numbers/isNegativeInteger";
 import isNegativeIntegerOrZero from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
@@ -22,6 +42,7 @@ import isNonNullObject from "./TypeGuards/Objects/isNonNullObject";
 
 /* --- Arrays ------------------------------------------------------------------------------------------------------- */
 import isArrayOfCertainTypeElements from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
+import isArrayOfLength, { IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
 import isEmptyArray from "./TypeGuards/Arrays/isEmptyArray";
 import isNonEmptyArray from "./TypeGuards/Arrays/isNonEmptyArray";
 
@@ -46,10 +67,21 @@ import Timer from "./DateTime/Timer";
 
 export {
 
+  /* === Numbers ==================================================================================================== */
+  formatNumberWith4KetaKanji,
+  isStringifiedNonNegativeIntegerOfRegularNotation,
+  separateEach3DigitsGroupWithComma,
+  separateEach4DigitsGroupWithComma,
+
+  /* --- Pagination ------------------------------------------------------------------------------------------------- */
+  computeFirstItemNumberForSpecificPaginationPage,
+  computeLastItemNumberForSpecificPaginationPage,
+
+
   /* === Type guards ================================================================================================ */
   /* --- Numbers ---------------------------------------------------------------------------------------------------- */
   isDecimalFractionOfAnySign,
-  isNatualNumber,
+  isNaturalNumber,
   isNegativeDecimalFraction,
   isNegativeInteger,
   isNegativeIntegerOrZero,
@@ -71,6 +103,8 @@ export {
 
   /* --- Arrays ----------------------------------------------------------------------------------------------------- */
   isArrayOfCertainTypeElements,
+  isArrayOfLength,
+  IsArrayOfLengthCheckingOperation,
   isEmptyArray,
   isNonEmptyArray,
 

@@ -1,22 +1,15 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
-  "keywords": [ "utils" ],
+  "keywords": [
+    "utils"
+  ],
   "author": {
     "name": "Takeshi Tokugawa",
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
-  "exports": {
-    ".": "./Distributable/index.js",
-    "./NodeJS": "./Distributable/NodeJS.js",
-    "./BrowserJS": "./Distributable/BrowserJS.js"
-  },
-  "devDependencies": {
-    "@types/node": "15.12.2",
-    "typescript": "4.3.2"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions.git"
@@ -24,5 +17,21 @@
   "bugs": {
     "url": "https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions/issues",
     "email": "tokugawa.takesi@gmail.com"
+  },
+  "exports": {
+    ".": "./Distributable/index.js",
+    "./NodeJS": "./Distributable/NodeJS.js",
+    "./BrowserJS": "./Distributable/BrowserJS.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "8.2.2",
+    "@types/node": "15.12.2",
+    "mocha": "9.0.0",
+    "ts-node": "10.0.0",
+    "typescript": "4.3.2",
+    "yamato-daiwa_code_quality_management": "0.0.14"
+  },
+  "scripts": {
+    "Lint": "eslint Source Tests"
   }
 }

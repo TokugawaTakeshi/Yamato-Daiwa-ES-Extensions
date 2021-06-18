@@ -1,7 +1,12 @@
+.eslintignore
+.eslintrc.yaml
 .gitignore
+.mocharc.yaml
 tsconfig.json
 
 .idea/
 
 Source/
 Tests/
+
+Pre-realize checklist.md

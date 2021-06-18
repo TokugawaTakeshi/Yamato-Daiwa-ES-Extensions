@@ -9,7 +9,7 @@ export default class NodeJS_Timer extends Timer {
 
 
   public start(): void {
-    this.timeout = setTimeout(this.onElapsed.bind(this), secondsToMilliseconds(1000*this.period__seconds));
+    this.timeout = setTimeout(this.onElapsed.bind(this), secondsToMilliseconds(this.period__seconds));
   }
 
   public stop(): void {
