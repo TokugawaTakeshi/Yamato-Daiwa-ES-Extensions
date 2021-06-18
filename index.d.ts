@@ -1,47 +1,47 @@
 /* === Type guards ================================================================================================== */
 /* --- Numbers ------------------------------------------------------------------------------------------------------ */
-import isDecimalFractionOfAnySign from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-import isNatualNumber from "./TypeGuards/Numbers/isNaturalNumber";
-import isNegativeDecimalFraction from "./TypeGuards/Numbers/isNegativeDecimalFraction";
-import isNegativeInteger from "./TypeGuards/Numbers/isNegativeInteger";
-import isNegativeIntegerOrZero from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
-import isNonNegativeInteger from "./TypeGuards/Numbers/isNonNegativeInteger";
-import isNumber from "./TypeGuards/Numbers/isNumber";
-import isPositiveDecimalFraction from "./TypeGuards/Numbers/isPositiveDecimalFraction";
+import { isDecimalFractionOfAnySign } from "./Distributable"
+import { isNatualNumber } from "./Distributable"
+import { isNegativeDecimalFraction } from "./Distributable"
+import { isNegativeInteger } from "./Distributable"
+import { isNegativeIntegerOrZero } from "./Distributable"
+import { isNonNegativeInteger } from "./Distributable"
+import { isNumber } from "./Distributable"
+import { isPositiveDecimalFraction } from "./Distributable"
 
 /* --- Strings ------------------------------------------------------------------------------------------------------ */
-import isEmptyString from "./TypeGuards/Strings/isEmptyString";
-import isNonEmptyString from "./TypeGuards/Strings/isNonEmptyString";
-import isString from "./TypeGuards/Strings/isString";
-import isStringOfLength, { IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
+import { isEmptyString } from "./Distributable"
+import { isNonEmptyString } from "./Distributable"
+import { isString } from "./Distributable"
+import { isStringOfLength, IsStringOfLengthCheckingOperation } from "./Distributable";
 
 /* --- Objects ------------------------------------------------------------------------------------------------------ */
-import isEmptyObject from "./TypeGuards/Objects/isEmptyObject";
-import isNonEmptyObject from "./TypeGuards/Objects/isNonEmptyObject";
-import isNonNullObject from "./TypeGuards/Objects/isNonNullObject";
+import { isEmptyObject } from "./Distributable"
+import { isNonEmptyObject } from "./Distributable"
+import { isNonNullObject } from "./Distributable"
 
 /* --- Arrays ------------------------------------------------------------------------------------------------------- */
-import isArrayOfCertainTypeElements from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
-import isEmptyArray from "./TypeGuards/Arrays/isEmptyArray";
-import isNonEmptyArray from "./TypeGuards/Arrays/isNonEmptyArray";
+import { isArrayOfCertainTypeElements } from "./Distributable"
+import { isEmptyArray } from "./Distributable"
+import { isNonEmptyArray } from "./Distributable"
 
 /* --- undefined & null --------------------------------------------------------------------------------------------- */
-import isNeitherUndefinedNorNull from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
-import isNotNull from "./TypeGuards/Nullables/isNotNull";
-import isNotUndefined from "./TypeGuards/Nullables/isNotUndefined";
-import isNull from "./TypeGuards/Nullables/isNull";
-import isUndefined from "./TypeGuards/Nullables/isUndefined";
+import { isNeitherUndefinedNorNull } from "./Distributable"
+import { isNotNull } from "./Distributable"
+import { isNotUndefined } from "./Distributable"
+import { isNull } from "./Distributable"
+import { isUndefined } from "./Distributable"
 
 /* --- Others ------------------------------------------------------------------------------------------------------- */
-import isBoolean from "./TypeGuards/isBoolean";
-import isElementOfEnumeration from "./TypeGuards/isElementOfEnumeration";
-import isFunctionLike from "./TypeGuards/isFunctionLike";
+import { isBoolean } from "./Distributable"
+import { isElementOfEnumeration } from "./Distributable"
+import { isFunctionLike } from "./Distributable"
 
 
 /* === Date & Time ================================================================================================== */
-import millisecondsToSeconds from "./DateTime/millisecondsToSeconds";
-import secondsToMilliseconds from "./DateTime/secondsToMilliseconds";
-import Timer from "./DateTime/Timer";
+import { millisecondsToSeconds } from "./Distributable"
+import { secondsToMilliseconds } from "./Distributable"
+import { Timer } from "./Distributable"
 
 
 export {
