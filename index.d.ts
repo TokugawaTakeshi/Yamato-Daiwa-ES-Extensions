@@ -6,9 +6,28 @@ import {
   separateEach3DigitsGroupWithComma,
   separateEach4DigitsGroupWithComma,
 
-  /* --- Pagination --------------------------------------------------------------------------------------------------- */
+  /* --- Pagination ------------------------------------------------------------------------------------------------- */
   computeFirstItemNumberForSpecificPaginationPage,
   computeLastItemNumberForSpecificPaginationPage,
+
+
+  /* === Sets ======================================================================================================= */
+  addMultipleElementsToSet,
+
+
+  /* === Maps ======================================================================================================= */
+  addMultiplePairsToMap,
+  createMapBasedOnOtherMap,
+  filterMap,
+
+
+  /* === Value transformers ========================================================================================= */
+  emptyStringToNull,
+  nullToUndefined,
+  nullToZero,
+  undefinedToEmptyArray,
+  undefinedToEmptyString,
+  undefinedToNull,
 
 
   /* === Type guards ================================================================================================ */
@@ -60,6 +79,15 @@ import {
 } from "./Distributable"
 
 
+import type {
+  /* === Types ====================================================================================================== */
+  ParsedJSON,
+  ParsedJSON_Object,
+  ParsedJSON_Array,
+  ParsedJSON_NestedProperty
+} from "./Distributable";
+
+
 export {
 
   /* === Numbers ==================================================================================================== */
@@ -71,6 +99,25 @@ export {
   /* --- Pagination ------------------------------------------------------------------------------------------------- */
   computeFirstItemNumberForSpecificPaginationPage,
   computeLastItemNumberForSpecificPaginationPage,
+
+
+  /* === Sets ======================================================================================================= */
+  addMultipleElementsToSet,
+
+
+  /* === Maps ======================================================================================================= */
+  addMultiplePairsToMap,
+  createMapBasedOnOtherMap,
+  filterMap,
+
+
+  /* === Value transformers ========================================================================================= */
+  emptyStringToNull,
+  nullToUndefined,
+  nullToZero,
+  undefinedToEmptyArray,
+  undefinedToEmptyString,
+  undefinedToNull,
 
 
   /* === Type guards ================================================================================================ */
@@ -119,4 +166,13 @@ export {
   millisecondsToSeconds,
   secondsToMilliseconds,
   Timer
+};
+
+
+export type {
+  /* === Types ====================================================================================================== */
+  ParsedJSON,
+  ParsedJSON_Object,
+  ParsedJSON_Array,
+  ParsedJSON_NestedProperty
 };

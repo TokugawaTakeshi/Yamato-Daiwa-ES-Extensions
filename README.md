@@ -195,10 +195,96 @@ For example, when pagination has 20 items per page and total 25 items, the last 
 but for last one - 25.
 
 
+### Sets
+#### `addMultipleElementsToSet`: Add multiple element to set
+
+```
+addMultipleElementsToSet<SetElement>(targetSet: Set<SetElement>, newElements: Array<SetElement>): Set<SetElement>
+```
+
+```typescript
+const exampleSet: Set<string> = new Set<string>([ "alpha" ]);
+const updatedExampleSet: Set<string> = addMultipleElementsToSet(exampleSet, [ "bravo", "charlie" ]);
+
+console.log(updatedExampleSet); // Result: Set(3) { 'alpha', 'bravo', 'charlie' }
+```
+
+
+### Maps
+
+#### `addMultiplePairsToMap`: Add multiple pairs to map
+
+```
+addMultiplePairsToMap<Key, Value>(targetMap: Map<Key, Value>, newPairs: Map<Key, Value> | Array<[Key, Value]> ): Map<Key, Value>
+```
+
+
+#### `createMapBasedOnOtherMap`: Create map based on other map
+
+```
+createMapBasedOnOtherMap<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(
+  inputMap: Map<InputMapKey, InputMapValue>,
+  transformer: (inputMapKey: InputMapKey, inputMapValue: InputMapValue) => [ OutputMapKey, OutputMapValue ]
+): Map<OutputMapKey, OutputMapValue>
+```
+
+This function is similar to method with short but confusing name `map` of native `Array`, but for `Map` type.
+Like in `map` method of `Array`, it's required to specify now each key and value of initial map will be transformed.
+
+
+#### `filterMap`: Filer map
+
+```
+filterMap<Key, Value>(
+  targetMap: Map<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
+): Map<Key, Value> 
+```
+
+This method is similar to `filter` method of native `Array`, but for maps.
+
+
 ### Date & Time
 
 * `millisecondsToSeconds(millisecondsAmount: number): number`
 * `secondsToMilliseconds(secondsAmount: number): number`
+
+
+### Types
+
+#### `ParsedJSON`, `ParsedJSON_Object`, `ParsedJSON_Array`, `ParsedJSON_NestedProperty`
+
+<div style="border: 1px solid red; padding: 12px 14px">
+  ⚠ Be sure that you are understanding the difference between <code>JSON</code> which is the <code>string</code> and native 
+  JavaScript object which <code>ParsedJSON</code> is`.
+</div>
+
+`ParsedJSON` could be the the `ParsedJSON_Object` or `ParsedJSON_Array`
+
+```typescript
+export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;
+
+export type ParsedJSON_Object = {
+  [key: string]: ParsedJSON_NestedProperty;
+};
+
+export type ParsedJSON_Array = Array<ParsedJSON_NestedProperty>;
+``` 
+
+In indexed type does not respect the `undefined` value like `{ [key: string]: string; }` it means "any property
+which will be called is definitely exists", that is impossible. Thus, the `ParsedJSON_NestedProperty` as very wide
+(but narrower than `any`) type must respect the cases when called property does not exist.
+`null` is also possible scenario.
+
+```typescript
+export type ParsedJSON_NestedProperty =
+    | number
+    | string
+    | boolean
+    | null
+    | ParsedJSON_Object
+    | ParsedJSON_Array
+    | undefined;
+```
 
 
 ### Type Guards
@@ -317,3 +403,22 @@ isElementOfEnumeration<EnumerationElement extends string | number>(
   targetEnumeration: { [key: string]: EnumerationElement; 
 }): possibleEnumerationElement is EnumerationElement`
 ```
+
+
+### Value transforming
+
+The names of below functions has been developed such as everything should be obvious without explanation.
+If it not such as, please create the issue with title "[FunctionName]: Unclear name".
+
+* `emptyStringToNull(targetValue: string): string | null`
+* `nullToUndefined<BasicType>(targetValue: BasicType | null): BasicType | undefined`
+* `nullToZero(targetValue: number | null): number`
+* `undefinedToEmptyArray<ArrayElement>(targetValue: Array<ArrayElement> | undefined): Array<ArrayElement>`
+* `undefinedToEmptyString(targetValue: string | undefined): string`
+* `undefinedToNull<BasicType>(targetValue: BasicType): Exclude<BasicType, undefined> | null`
+
+
+### Default value substituters
+
+* `substituteWhenNull<TargetValue>(targetValue: TargetValue | null, defaultValue: TargetValue): TargetValue`
+* `substituteWhenUndefined<TargetValue>(targetValue: TargetValue | undefined, defaultValue: TargetValue): TargetValue`

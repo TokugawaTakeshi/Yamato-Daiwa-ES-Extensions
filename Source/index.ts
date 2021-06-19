@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.0.7
+ * @yamato-daiwa/es-extensions v0.0.8
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -17,6 +17,24 @@ import computeFirstItemNumberForSpecificPaginationPage
 import computeLastItemNumberForSpecificPaginationPage
   from "./Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage";
 
+
+/* === Sets ========================================================================================================= */
+import addMultipleElementsToSet from "./Sets/addMultipleElementsToSet";
+
+
+/* === Maps ========================================================================================================= */
+import addMultiplePairsToMap from "./Maps/addMultiplePairsToMap";
+import createMapBasedOnOtherMap from "./Maps/createMapBasedOnOtherMap";
+import filterMap from "./Maps/filterMap";
+
+
+/* === Types ======================================================================================================== */
+import type {
+  ParsedJSON,
+  ParsedJSON_Object,
+  ParsedJSON_Array,
+  ParsedJSON_NestedProperty
+} from "./Types/ParsedJSON";
 
 /* === Type guards ================================================================================================== */
 /* --- Numbers ------------------------------------------------------------------------------------------------------ */
@@ -65,6 +83,15 @@ import secondsToMilliseconds from "./DateTime/secondsToMilliseconds";
 import Timer from "./DateTime/Timer";
 
 
+/* === Value transformers =========================================================================================== */
+import emptyStringToNull from "./ValueTransformers/emptyStringToNull";
+import nullToUndefined from "./ValueTransformers/nullToUndefined";
+import nullToZero from "./ValueTransformers/nullToZero";
+import undefinedToEmptyArray from "./ValueTransformers/undefinedToEmptyArray";
+import undefinedToEmptyString from "./ValueTransformers/undefinedToEmptyString";
+import undefinedToNull from "./ValueTransformers/undefinedToNull";
+
+
 export {
 
   /* === Numbers ==================================================================================================== */
@@ -76,6 +103,16 @@ export {
   /* --- Pagination ------------------------------------------------------------------------------------------------- */
   computeFirstItemNumberForSpecificPaginationPage,
   computeLastItemNumberForSpecificPaginationPage,
+
+
+  /* === Sets ======================================================================================================= */
+  addMultipleElementsToSet,
+
+
+  /* === Maps ======================================================================================================= */
+  addMultiplePairsToMap,
+  createMapBasedOnOtherMap,
+  filterMap,
 
 
   /* === Type guards ================================================================================================ */
@@ -123,5 +160,23 @@ export {
   /* === Date & Time ================================================================================================ */
   millisecondsToSeconds,
   secondsToMilliseconds,
-  Timer
+  Timer,
+
+
+  /* === Value transformers ========================================================================================= */
+  emptyStringToNull,
+  nullToUndefined,
+  nullToZero,
+  undefinedToEmptyArray,
+  undefinedToEmptyString,
+  undefinedToNull
+};
+
+
+export type {
+  /* === Value transformers ========================================================================================= */
+  ParsedJSON,
+  ParsedJSON_Object,
+  ParsedJSON_Array,
+  ParsedJSON_NestedProperty
 };
