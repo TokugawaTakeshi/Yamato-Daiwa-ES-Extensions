@@ -1,9 +1,10 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
-    "utils"
+    "utils",
+    "logger"
   ],
   "author": {
     "name": "Takeshi Tokugawa",

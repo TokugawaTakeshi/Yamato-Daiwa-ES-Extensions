@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.0.10
+ * @yamato-daiwa/es-extensions v0.1.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -96,6 +96,19 @@ import undefinedToNull from "./ValueTransformers/undefinedToNull";
 import substituteWhenNull from "./DefaultValueSubstituters/substituteWhenNull";
 import substituteWhenUndefined from "./DefaultValueSubstituters/substituteWhenUndefined";
 
+/* === Random values generators =================================================================================== */
+import getRandomArrayElement from "./RandomValuesGenerators/getRandomArrayElement";
+import getRandomBoolean from "./RandomValuesGenerators/getRandomBoolean";
+import getRandomInteger from "./RandomValuesGenerators/getRandomInteger";
+import getRandomLatinSymbol from "./RandomValuesGenerators/getRandomLatinSymbol";
+import getRandomObjectPropertyValue from "./RandomValuesGenerators/getRandomObjectPropertyValue";
+import getSpecificBooleanValueWithProbability from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
+
+
+/* === Constants and enumerations =================================================================================== */
+import HTTP_Methods from "./ConstantsAndEnumerations/HTTP_Methods";
+import HTTP_StatusCodes from "./ConstantsAndEnumerations/HTTP_StatusCodes";
+
 
 export {
 
@@ -179,7 +192,21 @@ export {
 
   /* === Default value substituters ================================================================================= */
   substituteWhenNull,
-  substituteWhenUndefined
+  substituteWhenUndefined,
+
+
+  /* === Random values generators =================================================================================== */
+  getRandomArrayElement,
+  getRandomBoolean,
+  getRandomInteger,
+  getRandomLatinSymbol,
+  getRandomObjectPropertyValue,
+  getSpecificBooleanValueWithProbability,
+
+
+  /* === Constants and enumerations ================================================================================= */
+  HTTP_Methods,
+  HTTP_StatusCodes
 };
 
 

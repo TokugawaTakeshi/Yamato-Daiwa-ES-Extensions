@@ -165,19 +165,34 @@ export {
   Timer,
 
 
-  /* === Default value substituters ================================================================================= */
-  substituteWhenNull,
-  substituteWhenUndefined,
-
-
   /* === Value transformers ========================================================================================= */
   emptyStringToNull,
   nullToUndefined,
   nullToZero,
   undefinedToEmptyArray,
   undefinedToEmptyString,
-  undefinedToNull
+  undefinedToNull,
+
+
+  /* === Default value substituters ================================================================================= */
+  substituteWhenNull,
+  substituteWhenUndefined
 };
+
+
+export {
+  /* === Random values generators =================================================================================== */
+  getRandomArrayElement,
+  getRandomBoolean,
+  getRandomInteger,
+  getRandomLatinSymbol,
+  getRandomObjectPropertyValue,
+  getSpecificBooleanValueWithProbability,
+
+  /* === Constants and enumerations ================================================================================= */
+  HTTP_StatusCodes,
+  HTTP_Methods
+} from "./Source";
 
 
 export type {
