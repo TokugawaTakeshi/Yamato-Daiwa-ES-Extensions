@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.0.8
+ * @yamato-daiwa/es-extensions v0.0.10
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -92,6 +92,11 @@ import undefinedToEmptyString from "./ValueTransformers/undefinedToEmptyString";
 import undefinedToNull from "./ValueTransformers/undefinedToNull";
 
 
+/* === Default value substituters =================================================================================== */
+import substituteWhenNull from "./DefaultValueSubstituters/substituteWhenNull";
+import substituteWhenUndefined from "./DefaultValueSubstituters/substituteWhenUndefined";
+
+
 export {
 
   /* === Numbers ==================================================================================================== */
@@ -169,7 +174,12 @@ export {
   nullToZero,
   undefinedToEmptyArray,
   undefinedToEmptyString,
-  undefinedToNull
+  undefinedToNull,
+
+
+  /* === Default value substituters ================================================================================= */
+  substituteWhenNull,
+  substituteWhenUndefined
 };
 
 

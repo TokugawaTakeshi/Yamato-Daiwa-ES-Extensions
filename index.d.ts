@@ -21,15 +21,6 @@ import {
   filterMap,
 
 
-  /* === Value transformers ========================================================================================= */
-  emptyStringToNull,
-  nullToUndefined,
-  nullToZero,
-  undefinedToEmptyArray,
-  undefinedToEmptyString,
-  undefinedToNull,
-
-
   /* === Type guards ================================================================================================ */
   /* --- Numbers ---------------------------------------------------------------------------------------------------- */
   isDecimalFractionOfAnySign,
@@ -75,7 +66,21 @@ import {
   /* === Date & Time ================================================================================================ */
   millisecondsToSeconds,
   secondsToMilliseconds,
-  Timer
+  Timer,
+
+
+  /* === Value transformers ========================================================================================= */
+  emptyStringToNull,
+  nullToUndefined,
+  nullToZero,
+  undefinedToEmptyArray,
+  undefinedToEmptyString,
+  undefinedToNull,
+
+
+  /* === Default value substituters ================================================================================= */
+  substituteWhenNull,
+  substituteWhenUndefined
 } from "./Distributable"
 
 
@@ -111,15 +116,6 @@ export {
   filterMap,
 
 
-  /* === Value transformers ========================================================================================= */
-  emptyStringToNull,
-  nullToUndefined,
-  nullToZero,
-  undefinedToEmptyArray,
-  undefinedToEmptyString,
-  undefinedToNull,
-
-
   /* === Type guards ================================================================================================ */
   /* --- Numbers ---------------------------------------------------------------------------------------------------- */
   isDecimalFractionOfAnySign,
@@ -162,10 +158,25 @@ export {
   isElementOfEnumeration,
   isFunctionLike,
 
+
   /* === Date & Time ================================================================================================ */
   millisecondsToSeconds,
   secondsToMilliseconds,
-  Timer
+  Timer,
+
+
+  /* === Default value substituters ================================================================================= */
+  substituteWhenNull,
+  substituteWhenUndefined,
+
+
+  /* === Value transformers ========================================================================================= */
+  emptyStringToNull,
+  nullToUndefined,
+  nullToZero,
+  undefinedToEmptyArray,
+  undefinedToEmptyString,
+  undefinedToNull
 };
 
 
