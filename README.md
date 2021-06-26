@@ -107,5 +107,5 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
   * `getSpecificBooleanValueWithProbability` Returns specific boolean value with specified probability.
 
 * Constants and Enumerations
-  * [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods)
-  * [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes)
+  * [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods/HTTP_Methods.md)
+  * [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes/HTTP_StatusCodes.md)
