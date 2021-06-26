@@ -80,7 +80,20 @@ import {
 
   /* === Default value substituters ================================================================================= */
   substituteWhenNull,
-  substituteWhenUndefined
+  substituteWhenUndefined,
+
+
+  /* === Random values generators =================================================================================== */
+  getRandomArrayElement,
+  getRandomBoolean,
+  getRandomInteger,
+  getRandomLatinSymbol,
+  getRandomObjectPropertyValue,
+  getSpecificBooleanValueWithProbability,
+
+  /* === Constants and enumerations ================================================================================= */
+  HTTP_StatusCodes,
+  HTTP_Methods
 } from "./Distributable"
 
 
@@ -176,11 +189,9 @@ export {
 
   /* === Default value substituters ================================================================================= */
   substituteWhenNull,
-  substituteWhenUndefined
-};
+  substituteWhenUndefined,
 
 
-export {
   /* === Random values generators =================================================================================== */
   getRandomArrayElement,
   getRandomBoolean,
@@ -192,7 +203,7 @@ export {
   /* === Constants and enumerations ================================================================================= */
   HTTP_StatusCodes,
   HTTP_Methods
-} from "./Source";
+};
 
 
 export type {
