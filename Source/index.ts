@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.1.1
+ * @yamato-daiwa/es-extensions v0.2.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -17,6 +17,11 @@ import computeFirstItemNumberForSpecificPaginationPage
 import computeLastItemNumberForSpecificPaginationPage
   from "./Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage";
 
+
+/* === Strings ====================================================================================================== */
+import reverseString from "./Strings/reverseString";
+import insertSubstringIf from "./Strings/insertSubstringIf";
+import stringifyAndFormatUnknownAtAdvanceEntity from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
 
 /* === Sets ========================================================================================================= */
 import addMultipleElementsToSet from "./Sets/addMultipleElementsToSet";
@@ -123,6 +128,12 @@ export {
   computeLastItemNumberForSpecificPaginationPage,
 
 
+  /* === Strings ==================================================================================================== */
+  reverseString,
+  insertSubstringIf,
+  stringifyAndFormatUnknownAtAdvanceEntity,
+
+    
   /* === Sets ======================================================================================================= */
   addMultipleElementsToSet,
 

@@ -60,6 +60,12 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
     * [`computeLastItemNumberForSpecificPaginationPage`](Documentation/Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
       Computes the last item number for specified pagination page.
       
+* Strings
+
+  * `reverseString` Reverses the symbols sequence in string value.
+  * `insertSubstringIf` Insets substring conditionally.
+  * `stringifyAndFormatUnknownAtAdvanceEntity` Converts to readable string any type of data.
+
 * Sets
   
   * [`addMultipleElementsToSet`](Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md)

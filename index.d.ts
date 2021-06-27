@@ -11,6 +11,12 @@ import {
   computeLastItemNumberForSpecificPaginationPage,
 
 
+  /* === Strings ==================================================================================================== */
+  reverseString,
+  insertSubstringIf,
+  stringifyAndFormatUnknownAtAdvanceEntity,
+
+
   /* === Sets ======================================================================================================= */
   addMultipleElementsToSet,
 
@@ -117,6 +123,12 @@ export {
   /* --- Pagination ------------------------------------------------------------------------------------------------- */
   computeFirstItemNumberForSpecificPaginationPage,
   computeLastItemNumberForSpecificPaginationPage,
+
+
+  /* === Strings ==================================================================================================== */
+  reverseString,
+  insertSubstringIf,
+  stringifyAndFormatUnknownAtAdvanceEntity,
 
 
   /* === Sets ======================================================================================================= */
