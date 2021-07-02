@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.2.0
+ * @yamato-daiwa/es-extensions v0.3.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -19,9 +19,11 @@ import computeLastItemNumberForSpecificPaginationPage
 
 
 /* === Strings ====================================================================================================== */
-import reverseString from "./Strings/reverseString";
+import insertSubstring from "./Strings/insertSubstring";
 import insertSubstringIf from "./Strings/insertSubstringIf";
+import reverseString from "./Strings/reverseString";
 import stringifyAndFormatUnknownAtAdvanceEntity from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
+
 
 /* === Sets ========================================================================================================= */
 import addMultipleElementsToSet from "./Sets/addMultipleElementsToSet";
@@ -40,6 +42,7 @@ import type {
   ParsedJSON_Array,
   ParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
+
 
 /* === Type guards ================================================================================================== */
 /* --- Numbers ------------------------------------------------------------------------------------------------------ */
@@ -101,6 +104,7 @@ import undefinedToNull from "./ValueTransformers/undefinedToNull";
 import substituteWhenNull from "./DefaultValueSubstituters/substituteWhenNull";
 import substituteWhenUndefined from "./DefaultValueSubstituters/substituteWhenUndefined";
 
+
 /* === Random values generators =================================================================================== */
 import getRandomArrayElement from "./RandomValuesGenerators/getRandomArrayElement";
 import getRandomBoolean from "./RandomValuesGenerators/getRandomBoolean";
@@ -113,6 +117,67 @@ import getSpecificBooleanValueWithProbability from "./RandomValuesGenerators/get
 /* === Constants and enumerations =================================================================================== */
 import HTTP_Methods from "./ConstantsAndEnumerations/HTTP_Methods";
 import HTTP_StatusCodes from "./ConstantsAndEnumerations/HTTP_StatusCodes";
+
+
+/* === Logging ====================================================================================================== */
+import type {
+  Log,
+  ErrorLog,
+  ThrownErrorLog,
+  WarningLog,
+  SuccessLog,
+  InfoLog
+} from "./Logging/Logs";
+import type { ILogger } from "./Logging/ILogger";
+import Logger from "./Logging/Logger";
+import LoggerLocalization__English from "./Logging/LoggerLocalization__English";
+
+import AlgorithmMismatchError from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError";
+import AlgorithmMismatchErrorLocalization__English
+  from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization__English";
+import ClassRedundantSubsequentInitializationError
+  from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
+import ClassRedundantSubsequentInitializationErrorLocalization__English
+  from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__English";
+import ClassRequiredInitializationHasNotBeenExecutedError
+  from "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
+import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English
+  from "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English";
+import ConfigFileNotFoundError from "./Logging/Errors/ConfigFileNotFound/СonfigFileNotFoundError";
+import ConfigFileNotFoundErrorLocalization__English
+  from "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization__English";
+import CrossBrowserIssueError from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueError";
+import CrossBrowserIssueErrorLocalization__English
+  from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization__English";
+import DataRetrievingFailedError from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedError";
+import DataRetrievingFailedErrorLocalization__English
+  from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization__English";
+import DataSubmittingFailedError from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedError";
+import DataSubmittingFailedErrorLocalization__English
+  from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization__English";
+import DOM_ElementRetrievingFailedError
+  from "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedError";
+import DOM_ElementRetrievingFailedErrorLocalization__English
+  from "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization__English";
+import FileReadingFailedError from "./Logging/Errors/FileReadingFailed/FileReadingFailedError";
+import FileReadingFailedErrorLocalization__English
+  from "./Logging/Errors/FileReadingFailed/FileReadingFailedErrorLocalization__English";
+import FileWritingFailedError from "./Logging/Errors/FileWritingFailed/FileWritingFailedError";
+import FileWritingFailedErrorLocalization__English
+  from "./Logging/Errors/FileWritingFailed/FileWritingFailedErrorLocalization__English";
+import ImproperUsageError from "./Logging/Errors/ImproperUsage/ImproperUsageError";
+import ImproperUsageErrorLocalization__English
+  from "./Logging/Errors/ImproperUsage/ImproperUsageErrorLocalization__English";
+import InterProcessInteractionFailedError
+  from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
+import InterProcessInteractionFailedErrorLocalization__English
+  from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization__English";
+import UnexpectedEventError from "./Logging/Errors/UnexpectedEvent/UnexpectedEventError";
+import UnexpectedEventErrorLocalization__English
+  from "./Logging/Errors/UnexpectedEvent/UnexpectedEventErrorLocalization__English";
+import UnsupportedScenarioError from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioError";
+import UnsupportedScenarioErrorLocalization__English
+  from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization__English";
 
 
 export {
@@ -129,8 +194,9 @@ export {
 
 
   /* === Strings ==================================================================================================== */
-  reverseString,
+  insertSubstring,
   insertSubstringIf,
+  reverseString,
   stringifyAndFormatUnknownAtAdvanceEntity,
 
     
@@ -217,14 +283,58 @@ export {
 
   /* === Constants and enumerations ================================================================================= */
   HTTP_Methods,
-  HTTP_StatusCodes
+  HTTP_StatusCodes,
+
+
+  /* === Logging ==================================================================================================== */
+  Logger,
+  LoggerLocalization__English,
+  AlgorithmMismatchError,
+  AlgorithmMismatchErrorLocalization__English,
+  ClassRedundantSubsequentInitializationError,
+  ClassRedundantSubsequentInitializationErrorLocalization__English,
+  ClassRequiredInitializationHasNotBeenExecutedError,
+  ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English,
+  ConfigFileNotFoundError,
+  ConfigFileNotFoundErrorLocalization__English,
+  CrossBrowserIssueError,
+  CrossBrowserIssueErrorLocalization__English,
+  DataRetrievingFailedError,
+  DataRetrievingFailedErrorLocalization__English,
+  DataSubmittingFailedError,
+  DataSubmittingFailedErrorLocalization__English,
+  DOM_ElementRetrievingFailedError,
+  DOM_ElementRetrievingFailedErrorLocalization__English,
+  FileReadingFailedError,
+  FileReadingFailedErrorLocalization__English,
+  FileWritingFailedError,
+  FileWritingFailedErrorLocalization__English,
+  ImproperUsageError,
+  ImproperUsageErrorLocalization__English,
+  InterProcessInteractionFailedError,
+  InterProcessInteractionFailedErrorLocalization__English,
+  UnexpectedEventError,
+  UnexpectedEventErrorLocalization__English,
+  UnsupportedScenarioError,
+  UnsupportedScenarioErrorLocalization__English
 };
 
 
 export type {
-  /* === Value transformers ========================================================================================= */
+
+  /* === Types ===================================================================================================== */
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
-  ParsedJSON_NestedProperty
+  ParsedJSON_NestedProperty,
+
+
+  /* === Logging ==================================================================================================== */
+  Log,
+  ErrorLog,
+  ThrownErrorLog,
+  WarningLog,
+  SuccessLog,
+  InfoLog,
+  ILogger
 };

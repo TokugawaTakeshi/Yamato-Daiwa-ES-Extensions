@@ -99,16 +99,60 @@ import {
 
   /* === Constants and enumerations ================================================================================= */
   HTTP_StatusCodes,
-  HTTP_Methods
+  HTTP_Methods,
+
+
+  /* === Logging ==================================================================================================== */
+  Logger,
+  LoggerLocalization__English,
+  AlgorithmMismatchError,
+  AlgorithmMismatchErrorLocalization__English,
+  ClassRedundantSubsequentInitializationError,
+  ClassRedundantSubsequentInitializationErrorLocalization__English,
+  ClassRequiredInitializationHasNotBeenExecutedError,
+  ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English,
+  ConfigFileNotFoundError,
+  ConfigFileNotFoundErrorLocalization__English,
+  CrossBrowserIssueError,
+  CrossBrowserIssueErrorLocalization__English,
+  DataRetrievingFailedError,
+  DataRetrievingFailedErrorLocalization__English,
+  DataSubmittingFailedError,
+  DataSubmittingFailedErrorLocalization__English,
+  DOM_ElementRetrievingFailedError,
+  DOM_ElementRetrievingFailedErrorLocalization__English,
+  FileReadingFailedError,
+  FileReadingFailedErrorLocalization__English,
+  FileWritingFailedError,
+  FileWritingFailedErrorLocalization__English,
+  ImproperUsageError,
+  ImproperUsageErrorLocalization__English,
+  InterProcessInteractionFailedError,
+  InterProcessInteractionFailedErrorLocalization__English,
+  UnexpectedEventError,
+  UnexpectedEventErrorLocalization__English,
+  UnsupportedScenarioError,
+  UnsupportedScenarioErrorLocalization__English
 } from "./Distributable"
 
 
 import type {
+
   /* === Types ====================================================================================================== */
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
-  ParsedJSON_NestedProperty
+  ParsedJSON_NestedProperty,
+
+
+  /* === Logging ==================================================================================================== */
+  Log,
+  ErrorLog,
+  ThrownErrorLog,
+  WarningLog,
+  SuccessLog,
+  InfoLog,
+  ILogger
 } from "./Distributable";
 
 
@@ -212,16 +256,61 @@ export {
   getRandomObjectPropertyValue,
   getSpecificBooleanValueWithProbability,
 
+
   /* === Constants and enumerations ================================================================================= */
   HTTP_StatusCodes,
-  HTTP_Methods
+  HTTP_Methods,
+
+
+  /* === Logging ==================================================================================================== */
+  Logger,
+  LoggerLocalization__English,
+  AlgorithmMismatchError,
+  AlgorithmMismatchErrorLocalization__English,
+  ClassRedundantSubsequentInitializationError,
+  ClassRedundantSubsequentInitializationErrorLocalization__English,
+  ClassRequiredInitializationHasNotBeenExecutedError,
+  ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English,
+  ConfigFileNotFoundError,
+  ConfigFileNotFoundErrorLocalization__English,
+  CrossBrowserIssueError,
+  CrossBrowserIssueErrorLocalization__English,
+  DataRetrievingFailedError,
+  DataRetrievingFailedErrorLocalization__English,
+  DataSubmittingFailedError,
+  DataSubmittingFailedErrorLocalization__English,
+  DOM_ElementRetrievingFailedError,
+  DOM_ElementRetrievingFailedErrorLocalization__English,
+  FileReadingFailedError,
+  FileReadingFailedErrorLocalization__English,
+  FileWritingFailedError,
+  FileWritingFailedErrorLocalization__English,
+  ImproperUsageError,
+  ImproperUsageErrorLocalization__English,
+  InterProcessInteractionFailedError,
+  InterProcessInteractionFailedErrorLocalization__English,
+  UnexpectedEventError,
+  UnexpectedEventErrorLocalization__English,
+  UnsupportedScenarioError,
+  UnsupportedScenarioErrorLocalization__English
 };
 
 
 export type {
+
   /* === Types ====================================================================================================== */
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
-  ParsedJSON_NestedProperty
+  ParsedJSON_NestedProperty,
+
+
+  /* === Logging ==================================================================================================== */
+  Log,
+  ErrorLog,
+  ThrownErrorLog,
+  WarningLog,
+  SuccessLog,
+  InfoLog,
+  ILogger
 };

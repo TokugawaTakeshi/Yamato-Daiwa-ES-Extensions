@@ -62,8 +62,9 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
       
 * Strings
 
-  * `reverseString` Reverses the symbols sequence in string value.
+  * `insertSubstring` Insets nullable substring with optional condition and transformations.
   * `insertSubstringIf` Insets substring conditionally.
+  * `reverseString` Reverses the symbols sequence in string value.
   * `stringifyAndFormatUnknownAtAdvanceEntity` Converts to readable string any type of data.
 
 * Sets
@@ -115,3 +116,42 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
 * Constants and Enumerations
   * [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods/HTTP_Methods.md)
   * [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes/HTTP_StatusCodes.md)
+
+* Logging
+
+  * [`Logger` facade](Documentation/Logging/Logger/Logger.md) 
+      Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
+    
+  * Pre-made errors
+    * `AlgorithmMismatchError` Recommended to throw in general cases when real behaviour of the program is not
+      corresponding to desired.
+    * `ClassRedundantSubsequentInitializationError` Recommended to throw when the class intended to be a singleton
+      has been attempted to initialize twice.
+    * `ClassRequiredInitializationHasNotBeenExecutedError` Recommended to throw when the class besides the construction requires
+      the initialization, but the initialization has not been executed.
+    * `ConfigFileNotFoundError` Recommended to throw when some utility requires the config file bit it has not been found.
+    * `CrossBrowserIssueError` Recommended to throw when some processing could not be executed because of certain browsers's 
+      limitations.
+    * `DataRetrievingFailedError`　Recommended to throw when the data retrieving from any external resource (server, database, etc.)
+      was failed.
+    * `DataSubmittingFailed` Recommended to throw when the data submitting to any external resource (server, database, etc.)
+      was failed.
+    * `DOM_ElementRetrievingFailedError` Recommended to throw when some requiring element retrieving from the DOM has been failed.
+    * `FileReadingFailedError` Recommended to throw when the file reading was not go as expected.
+    * `FileWritingFailed` Recommended to throw when the file writing was not go as expected.
+    * `ImproperUsageError` Recommended to throw when the cass/function has been attempted to use improperly. However, try to name the
+        function/methods such as it will be obvious how to use it and also limit the usage by TypeScript typing.
+    * `InterProcessInteractionFailedError` Recommended to throw when the interaction between NodeJS processed is not going as
+        expected. Could be actual for the Electron.js where the main process and render process exchanging by data.
+    * `InvalidConfigError` Recommended to throw when config validation was not passed. Append the validation errors messages to
+        `InvalidConfigError`'s message.
+    * `InvalidExternalDataError` Recommended to throw when the data from the external data source does not match with expected.
+        Append the validation errors messages to `InvalidExternalDataError`'s message.
+    * `InvalidParameterValueError` Recommended to throw when the parameter's does not fit to some limitations.
+        Although the TypeScript allows to define and check the parameter's type, this functionality will not be available
+        if the library will be used by JavaScript users. Also, is the parameter has limitations like smallest numerical value
+        or maximal symbols count, `InvalidParameterValueError` has been developed for such cases. 
+    * `ModuleDynamicLoadingFailedError` Recommended to throw when the module dynamical loading failed.
+    * `UnexpectedEventError` Recommended to throw when the probability of the occurrence of some `else if` branch is very small
+        and impossible for normal operation of the program.
+    * `UnsupportedScenarioError` Recommended to throw when occurred some scenario which the does not supports yet. 
