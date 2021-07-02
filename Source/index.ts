@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.3.0
+ * @yamato-daiwa/es-extensions v0.3.1
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -172,6 +172,19 @@ import InterProcessInteractionFailedError
   from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
 import InterProcessInteractionFailedErrorLocalization__English
   from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization__English";
+import InvalidConfigError from "./Logging/Errors/InvalidConfig/InvalidConfigError";
+import InvalidConfigErrorLocalization__English
+  from "./Logging/Errors/InvalidConfig/InvalidConfigErrorLocalization__English";
+import InvalidExternalDataError from "./Logging/Errors/InvalidExternalData/InvalidExternalDataError";
+import InvalidExternalDataErrorLocalization__English
+  from "./Logging/Errors/InvalidExternalData/InvalidExternalDataErrorLocalization__English";
+import InvalidParameterValueError from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueErrorLocalization__English
+  from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization__English";
+import ModuleDynamicLoadingFailedError
+  from "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedError";
+import ModuleDynamicLoadingFailedErrorLocalization__English
+  from "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization__English";
 import UnexpectedEventError from "./Logging/Errors/UnexpectedEvent/UnexpectedEventError";
 import UnexpectedEventErrorLocalization__English
   from "./Logging/Errors/UnexpectedEvent/UnexpectedEventErrorLocalization__English";
@@ -313,6 +326,14 @@ export {
   ImproperUsageErrorLocalization__English,
   InterProcessInteractionFailedError,
   InterProcessInteractionFailedErrorLocalization__English,
+  InvalidConfigError,
+  InvalidConfigErrorLocalization__English,
+  InvalidExternalDataError,
+  InvalidExternalDataErrorLocalization__English,
+  InvalidParameterValueError,
+  InvalidParameterValueErrorLocalization__English,
+  ModuleDynamicLoadingFailedError,
+  ModuleDynamicLoadingFailedErrorLocalization__English,
   UnexpectedEventError,
   UnexpectedEventErrorLocalization__English,
   UnsupportedScenarioError,

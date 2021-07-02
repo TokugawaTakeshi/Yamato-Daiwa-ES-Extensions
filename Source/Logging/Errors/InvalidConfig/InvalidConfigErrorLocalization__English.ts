@@ -1,7 +1,7 @@
 import InvalidConfigError from "./InvalidConfigError";
 
 
-const InvalidConfigErrorLocalization__Russian: InvalidConfigError.Localization = {
+const InvalidConfigErrorLocalization__English: InvalidConfigError.Localization = {
   defaultTitle: "Invalid config",
   genericDescriptionPartTemplate: (
     parametersObject: InvalidConfigError.Localization.GenericDescriptionPartTemplateParameters
@@ -9,4 +9,4 @@ const InvalidConfigErrorLocalization__Russian: InvalidConfigError.Localization =
 };
 
 
-export default InvalidConfigErrorLocalization__Russian;
+export default InvalidConfigErrorLocalization__English;
