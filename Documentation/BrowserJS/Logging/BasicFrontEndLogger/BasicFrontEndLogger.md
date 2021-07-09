@@ -3,10 +3,9 @@
 The implementation of `ILogger` interface for the `Logger` facade.
 As default, it just makes the logs more fancy than default `Logger` formatting what could be enough for early development
 phase of the the website / web application development.
-.
 
 ```typescript
-/* 〔 ✏ 〕 Set `BasicFrontEndLogger` as custom implementation for `Logger` facade */
+/* 〔 ✏ 〕 Set `BasicFrontEndLogger` as custom implementation for the `Logger` facade */
 Logger.setImplementation(BasicFrontEndLogger);
 ```
 
@@ -15,7 +14,7 @@ Later you may want to add:
 * Limitation of output to console in production mode.
 * Submit the logs to some logging service.
 
-[📖 The example for Sentry](#).
+[📖 The example for Sentry](https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions/blob/master/Documentation/BrowserJS/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md#using-of-basicfrontendlogger-for-the-custom-frontendlogger-implementation-on-sentry-example).
 
 
 ## Methods
@@ -103,7 +102,114 @@ Logger.logErrorLikeMessage({
 ![logErrorLikeMessage](Images/logErrorLikeMessage-Example.png)
 
 
-### `generateConsoleMethodParametersForFormattedOutput`: generating of formatted console output
+### `logWarning`: logging of the warnings
+
+```
+logWarning(warningLog: WarningLog): void
+```
+
+```typescript
+Logger.logWarning({
+  customBadgeText: "Caution",
+  title: UnexpectedEventError.DEFAULT_TITLE,
+  occurrenceLocation: "className.methodName(parametersObject)",
+  description: "'foo' is 'null'. With correctly working validation it could not be.",
+  additionalData: {
+    foo: null,
+    bar: "bravo"
+  }
+});
+```
+
+![logWarning](Images/logWarning-Example.png)
+
+
+### `logSuccess`: logging of the success messages
+
+```
+logSuccess(successLog: SuccessLog): void
+```
+
+```typescript
+Logger.logSuccess({
+  title: "Sign in success",
+  description: "Successfully signed in.",
+  customBadgeText: "Normal operation",
+  additionalData: {
+    ID: "123456",
+    userName: "Takeshi Tokugawa"
+  }
+});
+```
+
+![logSuccess](Images/logSuccess-Example.png)
+
+
+### `logInfo`: logging of the other messages
+
+```
+logInfo(infoLog: InfoLog): void 
+```
+
+```typescript
+Logger.logInfo({
+  customBadgeText: "Output",
+  title: "Data logging",
+  description: "'foo' is 'null'.",
+  additionalData: {
+    foo: null,
+    bar: "bravo"
+  }
+});
+```
+
+![logInfo](Images/logInfo-Example.png)
+
+
+### `generateConsoleMethodParametersForFormattedOutput`: generating of the formatted console output
+
+```
+generateConsoleMethodParametersForFormattedOutput(
+  formattedOutputData: BasicFrontEndLogger.FormattedOutputData
+): Array<string>
+``` 
+
+```typescript
+type FormattedOutputData = Array<[string, { [CSS_Key: string]: string; }]>;
+```
+
+To format the console output natively, it's required mark all stylable substrings by `%c` than define the styles of each
+stylable substirngs in subsequent parameters:
+
+```typescript
+console.log(
+  "%cALPHA " +  // 1st substring
+  "%cBRAVO " +   // 2nd substring
+  "%cCHARLIE " + // 3rd substring
+  "%cDELTA ", // 4th substring
+  "color: #e74c3c; font-weight: bold;", // Styles for the 1st substring
+  "color: #27ae60; font-style: italic", // Styles for the 2nd substring
+  "color: #2980b9; text-decoration: underline", // Styles for the 3rd substring
+  "color: #f39c12;"  // Styles for the 4th substring
+);
+```
+
+![logInfo](Images/NativeConsoleOutputFormatting.png)
+
+The method `generateConsoleMethodParametersForFormattedOutput` suggests more readable syntax.
+
+
+```typescript
+BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
+  [ "ALPHA", { color: "#e74c3c", "font-weight": "bold" } ],
+  [ "BRAVO", { color: "#27ae60", "font-style": "italic" } ],
+  [ "CHARLIE", { color: "#2980b9", "text-decoration": "underline" } ],
+  [ "DELTA", { color: "#f39c12" } ],
+])
+```
+
+Using this method, you can redefine the default formatting of `logInfo`, `logSuccess` etc.
+
 
 
 ## Using of `BasicFrontEndLogger` for the custom `FrontendLogger` implementation on `Sentry` example

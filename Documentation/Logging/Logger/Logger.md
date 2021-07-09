@@ -241,6 +241,34 @@ With default implementation of `ILogger` the output in Chrome browser's console 
 ![logErrorLikeMessage](Images/logWarning-Example.png)
 
 
+### `logSuccess`: logging of the success messages
+
+```
+logSuccess(successLog: SuccessLog): void
+```
+
+Currently, the `SuccessLog` is even with `Log` but in the future new properties could be added.
+
+
+#### Example
+
+```typescript
+Logger.logSuccess({
+  title: "Sign in success",
+  description: "Successfully signed in.",
+  customBadgeText: "Normal operation",
+  additionalData: {
+    ID: "123456",
+    userName: "Takeshi Tokugawa"
+  }
+});
+```
+
+With default implementation of `ILogger` the output in Chrome browser's console will be:
+
+![logErrorLikeMessage](Images/logSuccess-Example.png)
+
+
 ### `logInfo`: logging of the other messages
 
 ```
@@ -267,33 +295,6 @@ With default implementation of `ILogger` the output in Chrome browser's console 
 
 ![logErrorLikeMessage](Images/logInfo-Example.png)
 
-
-### `logSuccess`: logging of the success message
-
-```
-logSuccess(successLog: SuccessLog): void
-```
-
-Currently, the `SuccessLog` is even with `Log` but in the future new properties could be added.
-
-
-#### Example
-
-```typescript
-Logger.logSuccess({
-  title: "Sign in success",
-  description: "Successfully signed in.",
-  customBadgeText: "Normal operation",
-  additionalData: {
-    ID: "123456",
-    userName: "Takeshi Tokugawa"
-  }
-});
-```
-
-With default implementation of `ILogger` the output in Chrome browser's console will be:
-
-![logErrorLikeMessage](Images/logSuccess-Example.png)
 
 
 ### `highlightText`: message text highlighting

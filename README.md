@@ -1,10 +1,5 @@
 # @yamato-daiwa/es-extensions
 
-<div style="border: 1px solid #F1C40F; padding: 12px 14px">
-  ⚠ Currently the library is under development.
-</div>
-
-
 Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety without `any` type.
 
 
