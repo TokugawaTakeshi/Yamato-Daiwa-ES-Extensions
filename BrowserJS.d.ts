@@ -1,6 +1,16 @@
-import { delegateClickEventHandling } from "./Distributable/BrowserJS";
+import {
+
+  delegateClickEventHandling,
+
+  /* === Logging ==================================================================================================== */
+  BasicFrontEndLogger
+} from "./Distributable/BrowserJS";
 
 
 export {
-  delegateClickEventHandling
+
+  delegateClickEventHandling,
+
+  /* === Logging ==================================================================================================== */
+  BasicFrontEndLogger
 };

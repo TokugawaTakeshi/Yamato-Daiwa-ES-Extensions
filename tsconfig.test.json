@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [ "Source/**/*", "Tests/**/*", "index.d.ts", "BrowserJS.d.ts", "NodeJS.d.ts" ]
+}

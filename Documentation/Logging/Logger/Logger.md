@@ -42,14 +42,15 @@ Basically,
 
 * In the production mode of the front-end application the logs are being frequently submitted to logging service 
   (e. g. [Sentry](https://sentry.io/)) instead of the output in console, but no need to do same thing in local development mode.
+  This behaviour is application-dependent, but the 
+  [`BacicFrontendLogger`](../../BrowserJS/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md) could be used for pre-made 
+  formatting of your own implementation.  
 * In production mode of server applications, besides the console output logs are being frequently submitted to database,
   or, again, third-party logging service.
 * For the console utilities aimed for engineer users, basically nothing requires besides of normal of formatted output to console,
   but some application could collect the statistics.
   
 `setImplementation` accepts the implementation of the interface `ILogger` or the class/object compatible with `ILogger`.
-
-<!-- TODO examples for the frontend and backend -->
 
 
 ### `setLocalization`: localizes the static string which are being used by `Logger` facade

@@ -12,9 +12,21 @@ import {
 
 
   /* === Strings ==================================================================================================== */
-  reverseString,
+  areStringifiedDigitsOnly,
+  capitalizeFirstSymbol,
+  getLastSymbol,
+  getPositionsOfAllSubstringOccurrences,
+  insertSubstring,
   insertSubstringIf,
+  removeAllSpecifiedCharacters,
+  removeNonDigitsCharacters,
+  reverseString,
   stringifyAndFormatUnknownAtAdvanceEntity,
+
+
+  /* === Arrays ===================================================================================================== */
+  getIndexesOfArrayElementsWhichSatisfiesToPredicate,
+  getIndexOfArrayElementByPredicate,
 
 
   /* === Sets ======================================================================================================= */
@@ -141,7 +153,7 @@ import {
   UnexpectedEventErrorLocalization__English,
   UnsupportedScenarioError,
   UnsupportedScenarioErrorLocalization__English
-} from "./Distributable"
+} from "./Distributable";
 
 
 import type {
@@ -178,9 +190,21 @@ export {
 
 
   /* === Strings ==================================================================================================== */
-  reverseString,
+  areStringifiedDigitsOnly,
+  capitalizeFirstSymbol,
+  getLastSymbol,
+  getPositionsOfAllSubstringOccurrences,
+  insertSubstring,
   insertSubstringIf,
+  removeAllSpecifiedCharacters,
+  removeNonDigitsCharacters,
+  reverseString,
   stringifyAndFormatUnknownAtAdvanceEntity,
+
+
+  /* === Arrays ===================================================================================================== */
+  getIndexesOfArrayElementsWhichSatisfiesToPredicate,
+  getIndexOfArrayElementByPredicate,
 
 
   /* === Sets ======================================================================================================= */

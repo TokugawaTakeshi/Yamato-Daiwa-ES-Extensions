@@ -78,7 +78,8 @@ abstract class Logger {
       `\n${Logger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
       `${insertSubstringIf(
         `\n\n${Logger.localization.caughtError}:` + 
-        `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.caughtError)}`, 
+        `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.caughtError)}` +
+        `${errorLog.caughtError instanceof Error ? `\n${errorLog.caughtError.stack}` : ""}`, 
         isNotUndefined(errorLog.caughtError)
       )}` +
       `${insertSubstringIf(

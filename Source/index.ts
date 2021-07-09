@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.3.1
+ * @yamato-daiwa/es-extensions v0.4.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -19,11 +19,22 @@ import computeLastItemNumberForSpecificPaginationPage
 
 
 /* === Strings ====================================================================================================== */
+import areStringifiedDigitsOnly from "./Strings/areStringifiedDigitsOnly";
+import capitalizeFirstSymbol from "./Strings/capitalizeFirstSymbol";
+import getLastSymbol from "./Strings/getLastSymbol";
+import getPositionsOfAllSubstringOccurrences from "./Strings/getPositionsOfAllSubstringOccurrences";
 import insertSubstring from "./Strings/insertSubstring";
 import insertSubstringIf from "./Strings/insertSubstringIf";
+import removeAllSpecifiedCharacters from "./Strings/removeAllSpecifiedCharacters";
+import removeNonDigitsCharacters from "./Strings/removeNonDigitsCharacters";
 import reverseString from "./Strings/reverseString";
 import stringifyAndFormatUnknownAtAdvanceEntity from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
 
+
+/* === Arrays ======================================================================================================= */
+import getIndexesOfArrayElementsWhichSatisfiesToPredicate
+  from "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
+import getIndexOfArrayElementByPredicate from "./Arrays/getIndexOfArrayElementByPredicate";
 
 /* === Sets ========================================================================================================= */
 import addMultipleElementsToSet from "./Sets/addMultipleElementsToSet";
@@ -207,12 +218,22 @@ export {
 
 
   /* === Strings ==================================================================================================== */
+  areStringifiedDigitsOnly,
+  capitalizeFirstSymbol,
+  getLastSymbol,
+  getPositionsOfAllSubstringOccurrences,
   insertSubstring,
   insertSubstringIf,
+  removeAllSpecifiedCharacters,
+  removeNonDigitsCharacters,
   reverseString,
   stringifyAndFormatUnknownAtAdvanceEntity,
 
-    
+
+  /* === Arrays ===================================================================================================== */
+  getIndexesOfArrayElementsWhichSatisfiesToPredicate,
+  getIndexOfArrayElementByPredicate,
+
   /* === Sets ======================================================================================================= */
   addMultipleElementsToSet,
 
