@@ -234,6 +234,20 @@ You also need to initialize the Sentry. It's possible to add the initialization 
 for example, in the entry point of your application.
 
 ```typescript
+import {
+  Logger,
+  ThrownErrorLog,
+  ErrorLog,
+  Log,
+  WarningLog,
+  SuccessLog,
+  InfoLog,
+  stringifyAndFormatUnknownAtAdvanceEntity
+} from "hikari-es-extensions";
+import { BasicFrontEndLogger } from "hikari-es-extensions/BrowserJS";
+import * as Sentry from "@sentry/browser";
+
+
 abstract class FrontEndLogger {
 
   public static throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
