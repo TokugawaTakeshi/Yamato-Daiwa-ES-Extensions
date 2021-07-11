@@ -1,6 +1,6 @@
 # `BasicFrontEndLogger`
 
-The implementation of `ILogger` interface for the `Logger` facade.
+The implementation of `ILogger` interface for the `Logger` facade and browser applications.
 As default, it just makes the logs more fancy than default `Logger` formatting what could be enough for early development
 phase of the the website / web application development.
 

@@ -60,7 +60,8 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
   * `areStringifiedDigitsOnly` Checks is string value consists exclusively from the digits.
   * `capitalizeFirstSymbol` Capitalizes first symbol of target string value.
   * `getLastSymbol` Returns the last symbol of target string value.
-  * `getPositionsOfAllSubstringOccurrences` Returns the positions of each occurrence of specified substring.
+  * [`getPositionsOfAllSubstringOccurrences`](Documentation/Strings/getPositionsOfAllSubstringOccurrences.md) 
+    Returns the positions of each occurrence of specified substring.
   * `removeAllSpecifiedCharacters` Removes specified characters from the string value.
   * `removeNonDigitsCharacters` Removes all characters from the string excepts digits.
   * `insertSubstring` Insets nullable substring with optional condition and transformations.
@@ -73,7 +74,7 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
   * [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md) 
   Returns the array of indexes of elements of array which are satisfies to predicate function.
   * [`getIndexOfArrayElementByPredicate`](Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
-  Return the index of array element matching with predicate of `null` if no such element.
+  Returns the index of array element matching with predicate of `null` if no such element.
   
 
 * Sets
