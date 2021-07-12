@@ -1,0 +1,3 @@
+import ConfigFileNotFoundError from "./СonfigFileNotFoundError";
+declare const ConfigFileNotFoundErrorLocalization__English: ConfigFileNotFoundError.Localization;
+export default ConfigFileNotFoundErrorLocalization__English;

@@ -1,0 +1,3 @@
+import FileWritingFailedError from "./FileWritingFailedError";
+declare const FileWritingFailedErrorLocalization__English: FileWritingFailedError.Localization;
+export default FileWritingFailedErrorLocalization__English;

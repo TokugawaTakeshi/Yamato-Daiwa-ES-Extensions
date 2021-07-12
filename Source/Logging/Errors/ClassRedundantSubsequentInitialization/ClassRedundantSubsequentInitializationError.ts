@@ -27,9 +27,7 @@ class ClassRedundantSubsequentInitializationError extends Error {
     if ("customMessage" in parametersObject) {
       this.message = parametersObject.customMessage;
     } else {
-      this.message = ClassRedundantSubsequentInitializationError.localization.genericDescriptionPartTemplate({
-        className: parametersObject.className
-      });
+      this.message = ClassRedundantSubsequentInitializationError.localization.genericDescriptionPartTemplate(parametersObject);
     }
   }
 }

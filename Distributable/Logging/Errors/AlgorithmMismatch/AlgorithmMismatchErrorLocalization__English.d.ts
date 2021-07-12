@@ -1,0 +1,3 @@
+import AlgorithmMismatchError from "./AlgorithmMismatchError";
+declare const AlgorithmMismatchErrorLocalization__English: AlgorithmMismatchError.Localization;
+export default AlgorithmMismatchErrorLocalization__English;

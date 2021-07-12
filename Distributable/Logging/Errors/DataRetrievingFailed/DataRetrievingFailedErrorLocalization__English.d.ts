@@ -1,0 +1,3 @@
+import DataRetrievingFailedError from "./DataRetrievingFailedError";
+declare const DataRetrievingFailedErrorLocalization__English: DataRetrievingFailedError.Localization;
+export default DataRetrievingFailedErrorLocalization__English;
