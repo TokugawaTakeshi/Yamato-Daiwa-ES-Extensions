@@ -1,0 +1,3 @@
+import ImproperUsageError from "./ImproperUsageError";
+declare const ImproperUsageErrorLocalization__English: ImproperUsageError.Localization;
+export default ImproperUsageErrorLocalization__English;

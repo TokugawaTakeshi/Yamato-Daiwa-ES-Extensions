@@ -1,0 +1,3 @@
+import DOM_ElementRetrievingFailedError from "./DOM_ElementRetrievingFailedError";
+declare const DOM_ElementRetrievingFailedErrorLocalization__English: DOM_ElementRetrievingFailedError.Localization;
+export default DOM_ElementRetrievingFailedErrorLocalization__English;

@@ -1,0 +1,3 @@
+import InvalidExternalDataError from "./InvalidExternalDataError";
+export declare const InvalidExternalDataErrorLocalization__English: InvalidExternalDataError.Localization;
+export default InvalidExternalDataErrorLocalization__English;

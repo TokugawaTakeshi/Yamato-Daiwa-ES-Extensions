@@ -1,0 +1,1 @@
+export default function createMapBasedOnOtherMap<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(inputMap: Map<InputMapKey, InputMapValue>, transformer: (inputMapKey: InputMapKey, inputMapValue: InputMapValue) => [OutputMapKey, OutputMapValue]): Map<OutputMapKey, OutputMapValue>;
