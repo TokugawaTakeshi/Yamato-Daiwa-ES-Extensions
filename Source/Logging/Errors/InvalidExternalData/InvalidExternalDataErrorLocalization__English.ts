@@ -8,7 +8,7 @@ export const InvalidExternalDataErrorLocalization__English: InvalidExternalDataE
       (
         parametersObject: InvalidExternalDataError.Localization.
             GenericDescriptionPartTemplateParameters
-      ): string => `The data: ${parametersObject.mentionToExpectedData} does not match wil expected` +
+      ): string => `The data: ${parametersObject.mentionToExpectedData} does not match with expected.` +
           `${insertSubstring(parametersObject.messageSpecificPart, {
             modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
           })}`

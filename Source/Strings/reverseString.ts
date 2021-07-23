@@ -1,6 +1,8 @@
+import splitString from "./splitString";
+
+
 export default function reverseString(targetString: string): string {
-  return targetString.
-      split("").
+  return splitString(targetString, "").
       reverse().
       join("");
 }

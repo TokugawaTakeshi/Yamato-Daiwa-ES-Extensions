@@ -1,0 +1,3 @@
+import { GetLastElementOfNonEmptyArrayOperation } from "./getLastElementOfNonEmptyArray";
+declare const GetLastElementOfNonEmptyArrayOperationLocalization__English: GetLastElementOfNonEmptyArrayOperation.Localization;
+export default GetLastElementOfNonEmptyArrayOperationLocalization__English;

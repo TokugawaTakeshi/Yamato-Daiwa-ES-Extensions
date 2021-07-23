@@ -9,9 +9,7 @@ class ClassRedundantSubsequentInitializationError extends Error {
             this.message = parametersObject.customMessage;
         }
         else {
-            this.message = ClassRedundantSubsequentInitializationError.localization.genericDescriptionPartTemplate({
-                className: parametersObject.className
-            });
+            this.message = ClassRedundantSubsequentInitializationError.localization.genericDescriptionPartTemplate(parametersObject);
         }
     }
     static get DEFAULT_TITLE() {

@@ -20,11 +20,19 @@ import {
   insertSubstringIf,
   removeAllSpecifiedCharacters,
   removeNonDigitsCharacters,
+  removeNthSymbol,
+  replace2OrMoreSpacesTo1,
+  replaceBrHTML_TagToNewLineEscapeSequence,
   reverseString,
+  splitString,
   stringifyAndFormatUnknownAtAdvanceEntity,
 
 
   /* === Arrays ===================================================================================================== */
+  getArrayElementWhichMustExistByPredicate,
+  GetArrayElementWhichMustExistByPredicateOperation,
+  getLastElementOfNonEmptyArray,
+  GetLastElementOfNonEmptyArrayOperation,
   getIndexesOfArrayElementsWhichSatisfiesToPredicate,
   getIndexOfArrayElementByPredicate,
 
@@ -139,6 +147,8 @@ import {
   FileWritingFailedErrorLocalization__English,
   ImproperUsageError,
   ImproperUsageErrorLocalization__English,
+  IncompatiblePropertiesInObjectTypeParameterError,
+  IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English,
   InterProcessInteractionFailedError,
   InterProcessInteractionFailedErrorLocalization__English,
   InvalidConfigError,
@@ -164,6 +174,7 @@ import type {
   ParsedJSON_Array,
   ParsedJSON_NestedProperty,
 
+  PartialBy,
 
   /* === Logging ==================================================================================================== */
   Log,
@@ -198,11 +209,19 @@ export {
   insertSubstringIf,
   removeAllSpecifiedCharacters,
   removeNonDigitsCharacters,
+  removeNthSymbol,
+  replace2OrMoreSpacesTo1,
+  replaceBrHTML_TagToNewLineEscapeSequence,
   reverseString,
+  splitString,
   stringifyAndFormatUnknownAtAdvanceEntity,
 
 
   /* === Arrays ===================================================================================================== */
+  getArrayElementWhichMustExistByPredicate,
+  GetArrayElementWhichMustExistByPredicateOperation,
+  getLastElementOfNonEmptyArray,
+  GetLastElementOfNonEmptyArrayOperation,
   getIndexesOfArrayElementsWhichSatisfiesToPredicate,
   getIndexOfArrayElementByPredicate,
 
@@ -319,6 +338,8 @@ export {
   FileWritingFailedErrorLocalization__English,
   ImproperUsageError,
   ImproperUsageErrorLocalization__English,
+  IncompatiblePropertiesInObjectTypeParameterError,
+  IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English,
   InterProcessInteractionFailedError,
   InterProcessInteractionFailedErrorLocalization__English,
   InvalidConfigError,
@@ -343,6 +364,8 @@ export type {
   ParsedJSON_Object,
   ParsedJSON_Array,
   ParsedJSON_NestedProperty,
+
+  PartialBy,
 
 
   /* === Logging ==================================================================================================== */
