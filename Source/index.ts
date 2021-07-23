@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.4.0
+ * @yamato-daiwa/es-extensions v0.5.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -27,11 +27,21 @@ import insertSubstring from "./Strings/insertSubstring";
 import insertSubstringIf from "./Strings/insertSubstringIf";
 import removeAllSpecifiedCharacters from "./Strings/removeAllSpecifiedCharacters";
 import removeNonDigitsCharacters from "./Strings/removeNonDigitsCharacters";
+import removeNthSymbol from "./Strings/removeNthSymbol";
+import replace2OrMoreSpacesTo1 from "./Strings/replace2OrMoreSpacesTo1";
+import replaceBrHTML_TagToNewLineEscapeSequence from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
 import reverseString from "./Strings/reverseString";
+import splitString from "./Strings/splitString";
 import stringifyAndFormatUnknownAtAdvanceEntity from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
 
 
 /* === Arrays ======================================================================================================= */
+import getArrayElementWhichMustExistByPredicate, {
+  GetArrayElementWhichMustExistByPredicateOperation
+} from "./Arrays/getArrayElementWhichMustExistByPredicate/getArrayElementWhichMustExistByPredicate";
+import getLastElementOfNonEmptyArray, {
+  GetLastElementOfNonEmptyArrayOperation
+} from "./Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray";
 import getIndexesOfArrayElementsWhichSatisfiesToPredicate
   from "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
 import getIndexOfArrayElementByPredicate from "./Arrays/getIndexOfArrayElementByPredicate";
@@ -53,6 +63,7 @@ import type {
   ParsedJSON_Array,
   ParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
+import { PartialBy } from "./Types/PartialBy";
 
 
 /* === Type guards ================================================================================================== */
@@ -179,6 +190,10 @@ import FileWritingFailedErrorLocalization__English
 import ImproperUsageError from "./Logging/Errors/ImproperUsage/ImproperUsageError";
 import ImproperUsageErrorLocalization__English
   from "./Logging/Errors/ImproperUsage/ImproperUsageErrorLocalization__English";
+import IncompatiblePropertiesInObjectTypeParameterError
+  from "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
+import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English
+  from "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English";
 import InterProcessInteractionFailedError
   from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
 import InterProcessInteractionFailedErrorLocalization__English
@@ -226,11 +241,19 @@ export {
   insertSubstringIf,
   removeAllSpecifiedCharacters,
   removeNonDigitsCharacters,
+  removeNthSymbol,
+  replace2OrMoreSpacesTo1,
+  replaceBrHTML_TagToNewLineEscapeSequence,
   reverseString,
+  splitString,
   stringifyAndFormatUnknownAtAdvanceEntity,
 
 
   /* === Arrays ===================================================================================================== */
+  getArrayElementWhichMustExistByPredicate,
+  GetArrayElementWhichMustExistByPredicateOperation,
+  getLastElementOfNonEmptyArray,
+  GetLastElementOfNonEmptyArrayOperation,
   getIndexesOfArrayElementsWhichSatisfiesToPredicate,
   getIndexOfArrayElementByPredicate,
 
@@ -345,6 +368,8 @@ export {
   FileWritingFailedErrorLocalization__English,
   ImproperUsageError,
   ImproperUsageErrorLocalization__English,
+  IncompatiblePropertiesInObjectTypeParameterError,
+  IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English,
   InterProcessInteractionFailedError,
   InterProcessInteractionFailedErrorLocalization__English,
   InvalidConfigError,
@@ -369,6 +394,8 @@ export type {
   ParsedJSON_Object,
   ParsedJSON_Array,
   ParsedJSON_NestedProperty,
+
+  PartialBy,
 
 
   /* === Logging ==================================================================================================== */

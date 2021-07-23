@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const splitString_1 = require("./splitString");
 function reverseString(targetString) {
-    return targetString.
-        split("").
+    return splitString_1.default(targetString, "").
         reverse().
         join("");
 }

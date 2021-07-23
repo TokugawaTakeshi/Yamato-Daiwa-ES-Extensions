@@ -10,7 +10,7 @@ export default function insertSubstring(
     return "";
   }
 
-  if (options.condition !== true) {
+  if (options.condition === false) {
     return "";
   }
 

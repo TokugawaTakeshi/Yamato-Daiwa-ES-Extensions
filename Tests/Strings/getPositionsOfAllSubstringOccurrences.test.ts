@@ -1,6 +1,6 @@
 import getPositionsOfAllSubstringOccurrences from "../../Source/Strings/getPositionsOfAllSubstringOccurrences";
 
-import { strictEqual, deepStrictEqual } from "assert";
+import { deepStrictEqual } from "assert";
 
 
 describe("getPositionsOfAllSubstringOccurrences", (): void => {
@@ -16,13 +16,20 @@ describe("getPositionsOfAllSubstringOccurrences", (): void => {
 
     const sample: string = "The quick brown fox jumps over the lazy dog.";
 
-    strictEqual(getPositionsOfAllSubstringOccurrences(sample, "dog"), [ 40 ]);
+    deepStrictEqual(getPositionsOfAllSubstringOccurrences(sample, "dog"), [ 40 ]);
   });
 
   it("Two matches", (): void => {
 
     const sample: string = "The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?";
 
-    strictEqual(getPositionsOfAllSubstringOccurrences(sample, "dog"), [ 40, 52 ]);
+    deepStrictEqual(getPositionsOfAllSubstringOccurrences(sample, "dog"), [ 40, 52 ]);
+  });
+
+  it("Surrogate pairs support", (): void => {
+
+    const sample: string = "The q😀ick b😀rown fox jumps over the lazy dog";
+
+    deepStrictEqual(getPositionsOfAllSubstringOccurrences(sample, "😀"), [ 5, 12 ]);
   });
 });
