@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English_1 = require("./IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English");
+import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English from "./IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English";
 class IncompatiblePropertiesInObjectTypeParameterError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class IncompatiblePropertiesInObjectTypeParameterError extends Error {
     }
 }
 IncompatiblePropertiesInObjectTypeParameterError.NAME = "IncompatiblePropertiesError";
-IncompatiblePropertiesInObjectTypeParameterError.localization = IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English_1.default;
-exports.default = IncompatiblePropertiesInObjectTypeParameterError;
+IncompatiblePropertiesInObjectTypeParameterError.localization = IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English;
+export default IncompatiblePropertiesInObjectTypeParameterError;

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function filterMap(targetMap, filteringPredicate) {
+export default function filterMap(targetMap, filteringPredicate) {
     const filteredMap = new Map();
     targetMap.forEach((value, key) => {
         if (filteringPredicate(key, value)) {
@@ -9,4 +7,3 @@ function filterMap(targetMap, filteringPredicate) {
     });
     return filteredMap;
 }
-exports.default = filterMap;

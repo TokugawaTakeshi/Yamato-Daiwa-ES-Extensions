@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const getRandomInteger_1 = require("./getRandomInteger");
-function getRandomArrayElement(targetArray) {
-    return targetArray[getRandomInteger_1.default({
+import getRandomInteger from "./getRandomInteger";
+export default function getRandomArrayElement(targetArray) {
+    return targetArray[getRandomInteger({
         minimalValue: 0,
         maximalValue: targetArray.length - 1
     })];
 }
-exports.default = getRandomArrayElement;

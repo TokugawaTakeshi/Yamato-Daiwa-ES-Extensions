@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const FileWritingFailedErrorLocalization__English_1 = require("./FileWritingFailedErrorLocalization__English");
+import FileWritingFailedErrorLocalization__English from "./FileWritingFailedErrorLocalization__English";
 class FileWritingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class FileWritingFailedError extends Error {
     }
 }
 FileWritingFailedError.NAME = "FileWritingFailedError";
-FileWritingFailedError.localization = FileWritingFailedErrorLocalization__English_1.default;
-exports.default = FileWritingFailedError;
+FileWritingFailedError.localization = FileWritingFailedErrorLocalization__English;
+export default FileWritingFailedError;

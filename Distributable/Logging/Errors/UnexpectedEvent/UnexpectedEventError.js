@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const UnexpectedEventErrorLocalization__English_1 = require("./UnexpectedEventErrorLocalization__English");
+import UnexpectedEventErrorLocalization__English from "./UnexpectedEventErrorLocalization__English";
 class UnexpectedEventError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class UnexpectedEventError extends Error {
     }
 }
 UnexpectedEventError.NAME = "UnexpectedEventError";
-UnexpectedEventError.localization = UnexpectedEventErrorLocalization__English_1.default;
-exports.default = UnexpectedEventError;
+UnexpectedEventError.localization = UnexpectedEventErrorLocalization__English;
+export default UnexpectedEventError;

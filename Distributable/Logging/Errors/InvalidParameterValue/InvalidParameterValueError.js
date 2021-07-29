@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const InvalidParameterValueErrorLocalization__English_1 = require("./InvalidParameterValueErrorLocalization__English");
+import InvalidParameterValueErrorLocalization__English from "./InvalidParameterValueErrorLocalization__English";
 class InvalidParameterValueError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class InvalidParameterValueError extends Error {
     }
 }
 InvalidParameterValueError.NAME = "InvalidParameterValueError";
-InvalidParameterValueError.localization = InvalidParameterValueErrorLocalization__English_1.default;
-exports.default = InvalidParameterValueError;
+InvalidParameterValueError.localization = InvalidParameterValueErrorLocalization__English;
+export default InvalidParameterValueError;

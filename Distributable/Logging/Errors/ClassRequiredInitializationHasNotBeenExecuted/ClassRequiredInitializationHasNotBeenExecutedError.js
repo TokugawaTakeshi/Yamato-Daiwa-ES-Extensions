@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English_1 = require("./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English");
+import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English from "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English";
 class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
     }
 }
 ClassRequiredInitializationHasNotBeenExecutedError.NAME = "ClassRequiredInitializationHasNotBeenExecutedError";
-ClassRequiredInitializationHasNotBeenExecutedError.localization = ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English_1.default;
-exports.default = ClassRequiredInitializationHasNotBeenExecutedError;
+ClassRequiredInitializationHasNotBeenExecutedError.localization = ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English;
+export default ClassRequiredInitializationHasNotBeenExecutedError;

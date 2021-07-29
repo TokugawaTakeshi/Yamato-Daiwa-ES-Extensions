@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const substituteWhenUndefined_1 = require("../DefaultValueSubstituters/substituteWhenUndefined");
-const stringifyAndFormatUnknownAtAdvanceEntity_1 = require("../Strings/stringifyAndFormatUnknownAtAdvanceEntity");
-const insertSubstringIf_1 = require("../Strings/insertSubstringIf");
-const isNotUndefined_1 = require("../TypeGuards/Nullables/isNotUndefined");
-const LoggerLocalization__English_1 = require("../Logging/LoggerLocalization__English");
+import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenUndefined";
+import stringifyAndFormatUnknownAtAdvanceEntity from "../Strings/stringifyAndFormatUnknownAtAdvanceEntity";
+import insertSubstringIf from "../Strings/insertSubstringIf";
+import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import LoggerLocalization__English from "../Logging/LoggerLocalization__English";
 class BasicFrontEndLogger {
     static setLocalization(localization) {
         BasicFrontEndLogger.localization = localization;
@@ -14,10 +12,10 @@ class BasicFrontEndLogger {
         if ("errorInstance" in errorLog) {
             errorLog.errorInstance.message = `${errorLog.title}\n${errorLog.errorInstance.message}` +
                 `\n\n${BasicFrontEndLogger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
-                `${insertSubstringIf_1.default(`\n\n${BasicFrontEndLogger.localization.wrappableError}:` +
-                    `\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(errorLog.wrappableError)}`, isNotUndefined_1.default(errorLog.wrappableError))}` +
-                `${insertSubstringIf_1.default(`\n\n${BasicFrontEndLogger.localization.appendedData}:` +
-                    `\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(errorLog.additionalData)}`, isNotUndefined_1.default(errorLog.additionalData))}` +
+                `${insertSubstringIf(`\n\n${BasicFrontEndLogger.localization.wrappableError}:` +
+                    `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.wrappableError)}`, isNotUndefined(errorLog.wrappableError))}` +
+                `${insertSubstringIf(`\n\n${BasicFrontEndLogger.localization.appendedData}:` +
+                    `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.additionalData)}`, isNotUndefined(errorLog.additionalData))}` +
                 "\n";
             throw errorLog.errorInstance;
         }
@@ -26,7 +24,7 @@ class BasicFrontEndLogger {
         throw errorWillBeThrown;
     }
     static logError(errorLog) {
-        const badgeText = substituteWhenUndefined_1.default(errorLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
+        const badgeText = substituteWhenUndefined(errorLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
         console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
             [` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" }],
             [` ${errorLog.title}\n`, { color: "red", "font-weight": "bold" }],
@@ -39,30 +37,30 @@ class BasicFrontEndLogger {
                 [`\n\n${BasicFrontEndLogger.localization.caughtError}:`, { "font-weight": "bold", color: "red" }],
                 [
                     errorLog.caughtError instanceof Error ? `\n${errorLog.caughtError.stack}` :
-                        `\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(errorLog.caughtError)}`,
+                        `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.caughtError)}`,
                     { color: "red" }
                 ]
             ] : []),
             ...("additionalData" in errorLog ? [
                 [`\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "red" }],
-                [`\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(errorLog.additionalData)}`, { color: "red" }]
+                [`\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.additionalData)}`, { color: "red" }]
             ] : [])
         ]));
     }
     static logErrorLikeMessage(errorLikeLog) {
-        const badgeText = substituteWhenUndefined_1.default(errorLikeLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
+        const badgeText = substituteWhenUndefined(errorLikeLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
         console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
             [` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" }],
             [` ${errorLikeLog.title}\n`, { color: "red", "font-weight": "bold" }],
             [`${errorLikeLog.description}`, { color: "red" }],
             ...("additionalData" in errorLikeLog ? [
                 [`\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "red" }],
-                [`\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(errorLikeLog.additionalData)}`, { color: "red" }]
+                [`\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLikeLog.additionalData)}`, { color: "red" }]
             ] : [])
         ]));
     }
     static logWarning(warningLog) {
-        const badgeText = substituteWhenUndefined_1.default(warningLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
+        const badgeText = substituteWhenUndefined(warningLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
         console.warn(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
             [` ${badgeText} `, { background: "orange", color: "white", "font-weight": "bold", "border-radius": "4px" }],
             [` ${warningLog.title}\n`, { color: "orange", "font-weight": "bold" }],
@@ -73,31 +71,31 @@ class BasicFrontEndLogger {
             ] : []),
             ...("additionalData" in warningLog ? [
                 [`\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "orange" }],
-                [`\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(warningLog.additionalData)}`, { color: "orange" }]
+                [`\n${stringifyAndFormatUnknownAtAdvanceEntity(warningLog.additionalData)}`, { color: "orange" }]
             ] : [])
         ]));
     }
     static logSuccess(successLog) {
-        const badgeText = substituteWhenUndefined_1.default(successLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
+        const badgeText = substituteWhenUndefined(successLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
         console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
             [` ${badgeText} `, { background: "mediumseagreen", color: "white", "font-weight": "bold", "border-radius": "4px" }],
             [` ${successLog.title}\n`, { color: "mediumseagreen", "font-weight": "bold" }],
             [`${successLog.description}`, { color: "mediumseagreen" }],
             ...("additionalData" in successLog ? [
                 [`\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "mediumseagreen" }],
-                [`\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(successLog.additionalData)}`, { color: "mediumseagreen" }]
+                [`\n${stringifyAndFormatUnknownAtAdvanceEntity(successLog.additionalData)}`, { color: "mediumseagreen" }]
             ] : [])
         ]));
     }
     static logInfo(infoLog) {
-        const badgeText = substituteWhenUndefined_1.default(infoLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
+        const badgeText = substituteWhenUndefined(infoLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error);
         console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
             [` ${badgeText} `, { background: "dodgerblue", color: "white", "font-weight": "bold", "border-radius": "4px" }],
             [` ${infoLog.title}\n`, { color: "dodgerblue", "font-weight": "bold" }],
             [`${infoLog.description}`, { color: "dodgerblue" }],
             ...("additionalData" in infoLog ? [
                 [`\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "dodgerblue" }],
-                [`\n${stringifyAndFormatUnknownAtAdvanceEntity_1.default(infoLog.additionalData)}`, { color: "dodgerblue" }]
+                [`\n${stringifyAndFormatUnknownAtAdvanceEntity(infoLog.additionalData)}`, { color: "dodgerblue" }]
             ] : [])
         ]));
     }
@@ -118,5 +116,5 @@ class BasicFrontEndLogger {
         return [outputContents.join(""), ...CSS_DeclarationsForEachContent];
     }
 }
-BasicFrontEndLogger.localization = LoggerLocalization__English_1.default;
-exports.default = BasicFrontEndLogger;
+BasicFrontEndLogger.localization = LoggerLocalization__English;
+export default BasicFrontEndLogger;

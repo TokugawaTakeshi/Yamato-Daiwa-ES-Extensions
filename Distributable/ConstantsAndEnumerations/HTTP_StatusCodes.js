@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var HTTP_StatusCodes;
 (function (HTTP_StatusCodes) {
     HTTP_StatusCodes[HTTP_StatusCodes["continue"] = 100] = "continue";
@@ -43,4 +41,4 @@ var HTTP_StatusCodes;
     HTTP_StatusCodes[HTTP_StatusCodes["gatewayTimeout"] = 504] = "gatewayTimeout";
     HTTP_StatusCodes[HTTP_StatusCodes["HTTP_VersionNotSupported"] = 505] = "HTTP_VersionNotSupported";
 })(HTTP_StatusCodes || (HTTP_StatusCodes = {}));
-exports.default = HTTP_StatusCodes;
+export default HTTP_StatusCodes;

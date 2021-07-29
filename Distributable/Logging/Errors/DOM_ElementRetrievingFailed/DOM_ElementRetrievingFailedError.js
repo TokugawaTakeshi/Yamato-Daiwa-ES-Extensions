@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const DOM_ElementRetrievingFailedErrorLocalization__English_1 = require("./DOM_ElementRetrievingFailedErrorLocalization__English");
+import DOM_ElementRetrievingFailedErrorLocalization__English from "./DOM_ElementRetrievingFailedErrorLocalization__English";
 class DOM_ElementRetrievingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class DOM_ElementRetrievingFailedError extends Error {
     }
 }
 DOM_ElementRetrievingFailedError.NAME = "DOM_ElementRetrievingFailedError";
-DOM_ElementRetrievingFailedError.localization = DOM_ElementRetrievingFailedErrorLocalization__English_1.default;
-exports.default = DOM_ElementRetrievingFailedError;
+DOM_ElementRetrievingFailedError.localization = DOM_ElementRetrievingFailedErrorLocalization__English;
+export default DOM_ElementRetrievingFailedError;

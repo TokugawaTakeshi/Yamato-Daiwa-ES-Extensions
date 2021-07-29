@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var HTTP_Methods;
 (function (HTTP_Methods) {
     HTTP_Methods["get"] = "GET";
@@ -13,4 +11,4 @@ var HTTP_Methods;
     HTTP_Methods["trace"] = "TRACE";
     HTTP_Methods["patch"] = "PATCH";
 })(HTTP_Methods || (HTTP_Methods = {}));
-exports.default = HTTP_Methods;
+export default HTTP_Methods;

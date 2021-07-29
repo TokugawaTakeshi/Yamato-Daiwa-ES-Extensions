@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const CrossBrowserIssueErrorLocalization__English_1 = require("./CrossBrowserIssueErrorLocalization__English");
+import CrossBrowserIssueErrorLocalization__English from "./CrossBrowserIssueErrorLocalization__English";
 class CrossBrowserIssueError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class CrossBrowserIssueError extends Error {
     }
 }
 CrossBrowserIssueError.NAME = "CrossBrowserIssueError";
-CrossBrowserIssueError.localization = CrossBrowserIssueErrorLocalization__English_1.default;
-exports.default = CrossBrowserIssueError;
+CrossBrowserIssueError.localization = CrossBrowserIssueErrorLocalization__English;
+export default CrossBrowserIssueError;

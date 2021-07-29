@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const InterProcessInteractionFailedErrorLocalization__English_1 = require("./InterProcessInteractionFailedErrorLocalization__English");
+import InterProcessInteractionFailedErrorLocalization__English from "./InterProcessInteractionFailedErrorLocalization__English";
 class InterProcessInteractionFailedError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class InterProcessInteractionFailedError extends Error {
     }
 }
 InterProcessInteractionFailedError.NAME = "InterProcessInteractionFailedError";
-InterProcessInteractionFailedError.localization = InterProcessInteractionFailedErrorLocalization__English_1.default;
-exports.default = InterProcessInteractionFailedError;
+InterProcessInteractionFailedError.localization = InterProcessInteractionFailedErrorLocalization__English;
+export default InterProcessInteractionFailedError;

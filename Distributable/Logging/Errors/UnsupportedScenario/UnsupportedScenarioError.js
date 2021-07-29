@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const UnsupportedScenarioErrorLocalization__English_1 = require("./UnsupportedScenarioErrorLocalization__English");
+import UnsupportedScenarioErrorLocalization__English from "./UnsupportedScenarioErrorLocalization__English";
 class UnsupportedScenarioError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class UnsupportedScenarioError extends Error {
     }
 }
 UnsupportedScenarioError.NAME = "UnsupportedScenarioError";
-UnsupportedScenarioError.localization = UnsupportedScenarioErrorLocalization__English_1.default;
-exports.default = UnsupportedScenarioError;
+UnsupportedScenarioError.localization = UnsupportedScenarioErrorLocalization__English;
+export default UnsupportedScenarioError;

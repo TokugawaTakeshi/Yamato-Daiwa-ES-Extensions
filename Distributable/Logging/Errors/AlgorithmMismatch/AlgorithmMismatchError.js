@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const AlgorithmMismatchErrorLocalization__English_1 = require("./AlgorithmMismatchErrorLocalization__English");
+import AlgorithmMismatchErrorLocalization__English from "./AlgorithmMismatchErrorLocalization__English";
 class AlgorithmMismatchError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class AlgorithmMismatchError extends Error {
     }
 }
 AlgorithmMismatchError.NAME = "AlgorithmMismatchError";
-AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__English_1.default;
-exports.default = AlgorithmMismatchError;
+AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__English;
+export default AlgorithmMismatchError;

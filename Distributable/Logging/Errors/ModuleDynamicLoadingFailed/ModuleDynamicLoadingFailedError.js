@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ModuleDynamicLoadingFailedErrorLocalization__English_1 = require("./ModuleDynamicLoadingFailedErrorLocalization__English");
+import ModuleDynamicLoadingFailedErrorLocalization__English from "./ModuleDynamicLoadingFailedErrorLocalization__English";
 class ModuleDynamicLoadingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class ModuleDynamicLoadingFailedError extends Error {
     }
 }
 ModuleDynamicLoadingFailedError.NAME = "ModuleDynamicLoadingFailure";
-ModuleDynamicLoadingFailedError.localization = ModuleDynamicLoadingFailedErrorLocalization__English_1.default;
-exports.default = ModuleDynamicLoadingFailedError;
+ModuleDynamicLoadingFailedError.localization = ModuleDynamicLoadingFailedErrorLocalization__English;
+export default ModuleDynamicLoadingFailedError;

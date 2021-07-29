@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function isFunctionLike(potentialFunction) {
+export default function isFunctionLike(potentialFunction) {
     return potentialFunction instanceof Function;
 }
-exports.default = isFunctionLike;

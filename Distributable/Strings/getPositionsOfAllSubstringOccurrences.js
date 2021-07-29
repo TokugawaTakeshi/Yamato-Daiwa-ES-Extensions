@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function getPositionsOfAllSubstringOccurrences(targetString, targetSubstring) {
+export default function getPositionsOfAllSubstringOccurrences(targetString, targetSubstring) {
     let indexOfCurrentSubstringOccurrence = targetString.indexOf(targetSubstring);
     if (indexOfCurrentSubstringOccurrence === -1) {
         return [];
@@ -12,4 +10,3 @@ function getPositionsOfAllSubstringOccurrences(targetString, targetSubstring) {
     } while (indexOfCurrentSubstringOccurrence !== -1);
     return indexesOfAllSubstringOccurrences;
 }
-exports.default = getPositionsOfAllSubstringOccurrences;

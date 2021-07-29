@@ -36,6 +36,8 @@
     "node": ">=10.4.0"
   },
   "scripts": {
-    "Lint": "eslint Source Tests"
+    "Lint": "eslint Source Tests",
+    "clean": "rm -rf Distributable",
+    "build": "npm run clean; tsc"
   }
 }

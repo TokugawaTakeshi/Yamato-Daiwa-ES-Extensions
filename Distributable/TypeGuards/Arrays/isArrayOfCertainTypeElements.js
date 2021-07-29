@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function isArrayOfCertainTypeElements(potentialArray, elementTypeGuard) {
+export default function isArrayOfCertainTypeElements(potentialArray, elementTypeGuard) {
     if (!Array.isArray(potentialArray)) {
         return false;
     }
@@ -11,4 +9,3 @@ function isArrayOfCertainTypeElements(potentialArray, elementTypeGuard) {
     }
     return true;
 }
-exports.default = isArrayOfCertainTypeElements;

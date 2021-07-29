@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const InvalidConfigErrorLocalization__English_1 = require("./InvalidConfigErrorLocalization__English");
+import InvalidConfigErrorLocalization__Japanese from "./InvalidConfigErrorLocalization__English";
 class InvalidConfigError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class InvalidConfigError extends Error {
     }
 }
 InvalidConfigError.NAME = "InvalidConfigError";
-InvalidConfigError.localization = InvalidConfigErrorLocalization__English_1.default;
-exports.default = InvalidConfigError;
+InvalidConfigError.localization = InvalidConfigErrorLocalization__Japanese;
+export default InvalidConfigError;

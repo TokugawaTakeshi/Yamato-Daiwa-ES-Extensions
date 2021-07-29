@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ImproperUsageErrorLocalization__English_1 = require("./ImproperUsageErrorLocalization__English");
+import ImproperUsageErrorLocalization__English from "./ImproperUsageErrorLocalization__English";
 class ImproperUsageError extends Error {
     constructor(message) {
         super();
@@ -15,5 +13,5 @@ class ImproperUsageError extends Error {
     }
 }
 ImproperUsageError.NAME = "ImproperUsageError";
-ImproperUsageError.localization = ImproperUsageErrorLocalization__English_1.default;
-exports.default = ImproperUsageError;
+ImproperUsageError.localization = ImproperUsageErrorLocalization__English;
+export default ImproperUsageError;

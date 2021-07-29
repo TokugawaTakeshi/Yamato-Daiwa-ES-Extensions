@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function getIndexesOfArrayElementsWhichSatisfiesToPredicate(targetArray, predicate) {
+export default function getIndexesOfArrayElementsWhichSatisfiesToPredicate(targetArray, predicate) {
     const indexesOfElementsWhichSatisfiesToPredicate = [];
     targetArray.forEach((arrayElement, index) => {
         if (predicate(arrayElement)) {
@@ -9,4 +7,3 @@ function getIndexesOfArrayElementsWhichSatisfiesToPredicate(targetArray, predica
     });
     return indexesOfElementsWhichSatisfiesToPredicate;
 }
-exports.default = getIndexesOfArrayElementsWhichSatisfiesToPredicate;

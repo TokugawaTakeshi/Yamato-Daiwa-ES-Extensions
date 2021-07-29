@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function secondsToMilliseconds(secondsAmount) {
+export default function secondsToMilliseconds(secondsAmount) {
     return 1000 * secondsAmount;
 }
-exports.default = secondsToMilliseconds;

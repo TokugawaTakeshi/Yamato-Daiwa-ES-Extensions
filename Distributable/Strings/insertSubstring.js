@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function insertSubstring(targetSubstring, options = {}) {
+export default function insertSubstring(targetSubstring, options = {}) {
     if (typeof targetSubstring === "undefined" || targetSubstring === null) {
         return "";
     }
@@ -9,4 +7,3 @@ function insertSubstring(targetSubstring, options = {}) {
     }
     return typeof options.modifier === "undefined" ? targetSubstring : options.modifier(targetSubstring);
 }
-exports.default = insertSubstring;

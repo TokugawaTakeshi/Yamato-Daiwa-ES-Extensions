@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ConfigFileNotFoundErrorLocalization__English_1 = require("./ConfigFileNotFoundErrorLocalization__English");
+import ConfigFileNotFoundErrorLocalization__English from "./ConfigFileNotFoundErrorLocalization__English";
 class ConfigFileNotFoundError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class ConfigFileNotFoundError extends Error {
     }
 }
 ConfigFileNotFoundError.NAME = "ConfigFileNotFoundError";
-ConfigFileNotFoundError.localization = ConfigFileNotFoundErrorLocalization__English_1.default;
-exports.default = ConfigFileNotFoundError;
+ConfigFileNotFoundError.localization = ConfigFileNotFoundErrorLocalization__English;
+export default ConfigFileNotFoundError;

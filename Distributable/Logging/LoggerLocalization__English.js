@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const LoggerLocalization__English = {
     badgesDefaultTitles: {
         error: "Error",
@@ -13,4 +11,4 @@ const LoggerLocalization__English = {
     wrappableError: "Wrappable error",
     appendedData: "Appended data"
 };
-exports.default = LoggerLocalization__English;
+export default LoggerLocalization__English;

@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const ConfigFileNotFoundErrorLocalization__English = {
     defaultTitle: "Configuration file not found",
     genericDescriptionPartTemplate(parametersObject) {
@@ -11,4 +9,4 @@ const ConfigFileNotFoundErrorLocalization__English = {
             `${parametersObject.configFilePathOrMultipleOfThem} not found.`;
     }
 };
-exports.default = ConfigFileNotFoundErrorLocalization__English;
+export default ConfigFileNotFoundErrorLocalization__English;

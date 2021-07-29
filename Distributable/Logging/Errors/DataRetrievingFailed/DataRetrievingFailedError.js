@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const DataRetrievingFailedErrorLocalization__English_1 = require("./DataRetrievingFailedErrorLocalization__English");
+import DataRetrievingFailedErrorLocalization__English from "./DataRetrievingFailedErrorLocalization__English";
 class DataRetrievingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class DataRetrievingFailedError extends Error {
     }
 }
 DataRetrievingFailedError.NAME = "DataRetrievingFailedError";
-DataRetrievingFailedError.localization = DataRetrievingFailedErrorLocalization__English_1.default;
-exports.default = DataRetrievingFailedError;
+DataRetrievingFailedError.localization = DataRetrievingFailedErrorLocalization__English;
+export default DataRetrievingFailedError;

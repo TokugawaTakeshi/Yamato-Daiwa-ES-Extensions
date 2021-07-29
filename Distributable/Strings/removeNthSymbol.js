@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-function removeNthSymbol(targetString, options) {
+export default function removeNthSymbol(targetString, options) {
     const charactersSequence = Array.from(targetString);
     if (options.numerationFrom === 0) {
         charactersSequence.splice(options.targetSymbolNumber, 1);
@@ -10,4 +8,3 @@ function removeNthSymbol(targetString, options) {
     }
     return charactersSequence.join("");
 }
-exports.default = removeNthSymbol;

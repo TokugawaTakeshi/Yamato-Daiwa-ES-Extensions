@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const InvalidExternalDataErrorLocalization__English_1 = require("./InvalidExternalDataErrorLocalization__English");
+import InvalidExternalDataErrorLocalization__English from "./InvalidExternalDataErrorLocalization__English";
 class InvalidExternalDataError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class InvalidExternalDataError extends Error {
     }
 }
 InvalidExternalDataError.NAME = "InvalidExternalDataError";
-InvalidExternalDataError.localization = InvalidExternalDataErrorLocalization__English_1.default;
-exports.default = InvalidExternalDataError;
+InvalidExternalDataError.localization = InvalidExternalDataErrorLocalization__English;
+export default InvalidExternalDataError;

@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const getRandomInteger_1 = require("./getRandomInteger");
-const getRandomBoolean_1 = require("./getRandomBoolean");
-function getRandomLatinSymbol({ capital = false, lowercase = false } = {}) {
+import getRandomInteger from "./getRandomInteger";
+import getRandomBoolean from "./getRandomBoolean";
+export default function getRandomLatinSymbol({ capital = false, lowercase = false } = {}) {
     const latinSymbols = "abcdefghijklmnopqrstuvwxyz";
-    const randomLatinSymbol = latinSymbols[getRandomInteger_1.default({
+    const randomLatinSymbol = latinSymbols[getRandomInteger({
         minimalValue: 0,
         maximalValue: latinSymbols.length - 1
     })];
@@ -14,6 +12,5 @@ function getRandomLatinSymbol({ capital = false, lowercase = false } = {}) {
     else if (lowercase) {
         return randomLatinSymbol;
     }
-    return getRandomBoolean_1.default() ? randomLatinSymbol : randomLatinSymbol.toUpperCase();
+    return getRandomBoolean() ? randomLatinSymbol : randomLatinSymbol.toUpperCase();
 }
-exports.default = getRandomLatinSymbol;

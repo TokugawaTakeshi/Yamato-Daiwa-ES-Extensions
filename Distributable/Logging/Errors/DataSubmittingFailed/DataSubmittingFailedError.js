@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const DataSubmittingFailedErrorLocalization__English_1 = require("./DataSubmittingFailedErrorLocalization__English");
+import DataSubmittingFailedErrorLocalization__English from "./DataSubmittingFailedErrorLocalization__English";
 class DataSubmittingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class DataSubmittingFailedError extends Error {
     }
 }
 DataSubmittingFailedError.NAME = "DataSubmittingFailedError";
-DataSubmittingFailedError.localization = DataSubmittingFailedErrorLocalization__English_1.default;
-exports.default = DataSubmittingFailedError;
+DataSubmittingFailedError.localization = DataSubmittingFailedErrorLocalization__English;
+export default DataSubmittingFailedError;

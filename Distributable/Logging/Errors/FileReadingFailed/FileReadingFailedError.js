@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const FileReadingFailedErrorLocalization__English_1 = require("./FileReadingFailedErrorLocalization__English");
+import FileReadingFailedErrorLocalization__English from "./FileReadingFailedErrorLocalization__English";
 class FileReadingFailedError extends Error {
     constructor(parametersObject) {
         super();
@@ -20,5 +18,5 @@ class FileReadingFailedError extends Error {
     }
 }
 FileReadingFailedError.NAME = "FileReadingFailure";
-FileReadingFailedError.localization = FileReadingFailedErrorLocalization__English_1.default;
-exports.default = FileReadingFailedError;
+FileReadingFailedError.localization = FileReadingFailedErrorLocalization__English;
+export default FileReadingFailedError;
