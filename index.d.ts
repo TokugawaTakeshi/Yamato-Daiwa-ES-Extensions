@@ -93,6 +93,7 @@ import {
 
   /* === Value transformers ========================================================================================= */
   emptyStringToNull,
+  nullToEmptyString,
   nullToUndefined,
   nullToZero,
   undefinedToEmptyArray,
@@ -287,6 +288,7 @@ export {
 
   /* === Value transformers ========================================================================================= */
   emptyStringToNull,
+  nullToEmptyString,
   nullToUndefined,
   nullToZero,
   undefinedToEmptyArray,
