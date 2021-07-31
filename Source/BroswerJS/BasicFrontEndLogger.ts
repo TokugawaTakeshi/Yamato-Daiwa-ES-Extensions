@@ -116,7 +116,7 @@ abstract class BasicFrontEndLogger {
   public static logWarning(warningLog: WarningLog): void {
 
     const badgeText: string = substituteWhenUndefined(
-      warningLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
+      warningLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.warning
     );
 
     console.warn(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
@@ -140,7 +140,7 @@ abstract class BasicFrontEndLogger {
   public static logSuccess(successLog: SuccessLog): void {
 
     const badgeText: string = substituteWhenUndefined(
-      successLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
+      successLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.success
     );
 
     console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
@@ -157,7 +157,7 @@ abstract class BasicFrontEndLogger {
   public static logInfo(infoLog: InfoLog): void {
 
     const badgeText: string = substituteWhenUndefined(
-      infoLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
+      infoLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.info
     );
 
     console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([

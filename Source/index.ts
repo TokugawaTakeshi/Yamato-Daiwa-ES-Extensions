@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.5.0
+ * @yamato-daiwa/es-extensions v0.6.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -10,12 +10,6 @@ import isStringifiedNonNegativeIntegerOfRegularNotation
   from "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
 import separateEach3DigitsGroupWithComma from "./Numbers/separateEach3DigitsGroupWithComma";
 import separateEach4DigitsGroupWithComma from "./Numbers/separateEach4DigitsGroupWithComma";
-
-/* --- Pagination --------------------------------------------------------------------------------------------------- */
-import computeFirstItemNumberForSpecificPaginationPage
-  from "./Numbers/Pagination/computeFirstItemNumberForSpecificPaginationPage";
-import computeLastItemNumberForSpecificPaginationPage
-  from "./Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage";
 
 
 /* === Strings ====================================================================================================== */
@@ -115,6 +109,7 @@ import Timer from "./DateTime/Timer";
 
 /* === Value transformers =========================================================================================== */
 import emptyStringToNull from "./ValueTransformers/emptyStringToNull";
+import nullToEmptyString from "./ValueTransformers/nullToEmptyString";
 import nullToUndefined from "./ValueTransformers/nullToUndefined";
 import nullToZero from "./ValueTransformers/nullToZero";
 import undefinedToEmptyArray from "./ValueTransformers/undefinedToEmptyArray";
@@ -140,6 +135,14 @@ import getSpecificBooleanValueWithProbability from "./RandomValuesGenerators/get
 import HTTP_Methods from "./ConstantsAndEnumerations/HTTP_Methods";
 import HTTP_StatusCodes from "./ConstantsAndEnumerations/HTTP_StatusCodes";
 
+
+/* === Pagination =================================================================================================== */
+import computeFirstItemNumberForSpecificPaginationPage
+  from "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
+import computeLastItemNumberForSpecificPaginationPage
+  from "./Pagination/computeLastItemNumberForSpecificPaginationPage";
+import splitToPaginationCollection from "./Pagination/splitToPaginationCollection";
+import type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
 
 /* === Logging ====================================================================================================== */
 import type {
@@ -227,10 +230,6 @@ export {
   separateEach3DigitsGroupWithComma,
   separateEach4DigitsGroupWithComma,
 
-  /* --- Pagination ------------------------------------------------------------------------------------------------- */
-  computeFirstItemNumberForSpecificPaginationPage,
-  computeLastItemNumberForSpecificPaginationPage,
-
 
   /* === Strings ==================================================================================================== */
   areStringifiedDigitsOnly,
@@ -317,6 +316,7 @@ export {
 
   /* === Value transformers ========================================================================================= */
   emptyStringToNull,
+  nullToEmptyString,
   nullToUndefined,
   nullToZero,
   undefinedToEmptyArray,
@@ -341,6 +341,12 @@ export {
   /* === Constants and enumerations ================================================================================= */
   HTTP_Methods,
   HTTP_StatusCodes,
+
+
+  /* === Pagination ================================================================================================= */
+  computeFirstItemNumberForSpecificPaginationPage,
+  computeLastItemNumberForSpecificPaginationPage,
+  splitToPaginationCollection,
 
 
   /* === Logging ==================================================================================================== */
@@ -396,6 +402,10 @@ export type {
   ParsedJSON_NestedProperty,
 
   PartialBy,
+
+
+  /* === Pagination ================================================================================================= */
+  PaginationCollection,
 
 
   /* === Logging ==================================================================================================== */

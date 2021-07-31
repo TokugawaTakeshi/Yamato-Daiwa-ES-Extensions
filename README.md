@@ -49,11 +49,6 @@ export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
   Formats the number separating each 3 digits group with comma
 * [`separateEach4DigitsGroupWithComma`](Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md)
   Formats the number separating each 4 digits group with comma
-* Pagination related computings
-  * [`computeFirstItemNumberForSpecificPaginationPage`](Documentation/Numbers/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
-    Computes the first item number for specified pagination page.
-  * [`computeLastItemNumberForSpecificPaginationPage`](Documentation/Numbers/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
-    Computes the last item number for specified pagination page.
       
 #### Strings
 
@@ -134,6 +129,7 @@ Returns the index of array element matching with predicate of `null` if no such 
 #### Value transformers
 
 * `emptyStringToNull`
+* `nullToEmptyString`
 * `nullToUndefined`
 * `nullToZero`
 * `undefinedToEmptyArray`
@@ -154,6 +150,13 @@ Returns the index of array element matching with predicate of `null` if no such 
 
 * [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods/HTTP_Methods.md)
 * [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes/HTTP_StatusCodes.md)
+
+#### Pagination
+
+* [`computeFirstItemNumberForSpecificPaginationPage`](Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
+  Computes the first item number for specified pagination page.
+* [`computeLastItemNumberForSpecificPaginationPage`](Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
+  Computes the last item number for specified pagination page.
 
 #### Logging
 

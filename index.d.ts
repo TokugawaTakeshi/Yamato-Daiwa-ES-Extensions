@@ -6,10 +6,6 @@ import {
   separateEach3DigitsGroupWithComma,
   separateEach4DigitsGroupWithComma,
 
-  /* --- Pagination ------------------------------------------------------------------------------------------------- */
-  computeFirstItemNumberForSpecificPaginationPage,
-  computeLastItemNumberForSpecificPaginationPage,
-
 
   /* === Strings ==================================================================================================== */
   areStringifiedDigitsOnly,
@@ -120,6 +116,12 @@ import {
   /* === Constants and enumerations ================================================================================= */
   HTTP_StatusCodes,
   HTTP_Methods,
+
+
+  /* === Pagination ================================================================================================= */
+  computeFirstItemNumberForSpecificPaginationPage,
+  computeLastItemNumberForSpecificPaginationPage,
+  splitToPaginationCollection,
 
 
   /* === Logging ==================================================================================================== */
@@ -176,6 +178,8 @@ import type {
 
   PartialBy,
 
+  PaginationCollection,
+
   /* === Logging ==================================================================================================== */
   Log,
   ErrorLog,
@@ -194,10 +198,6 @@ export {
   isStringifiedNonNegativeIntegerOfRegularNotation,
   separateEach3DigitsGroupWithComma,
   separateEach4DigitsGroupWithComma,
-
-  /* --- Pagination ------------------------------------------------------------------------------------------------- */
-  computeFirstItemNumberForSpecificPaginationPage,
-  computeLastItemNumberForSpecificPaginationPage,
 
 
   /* === Strings ==================================================================================================== */
@@ -313,6 +313,12 @@ export {
   HTTP_Methods,
 
 
+  /* === Pagination ================================================================================================= */
+  computeFirstItemNumberForSpecificPaginationPage,
+  computeLastItemNumberForSpecificPaginationPage,
+  splitToPaginationCollection,
+
+
   /* === Logging ==================================================================================================== */
   Logger,
   LoggerLocalization__English,
@@ -366,6 +372,10 @@ export type {
   ParsedJSON_NestedProperty,
 
   PartialBy,
+
+
+  /* === Pagination ================================================================================================= */
+  PaginationCollection,
 
 
   /* === Logging ==================================================================================================== */
