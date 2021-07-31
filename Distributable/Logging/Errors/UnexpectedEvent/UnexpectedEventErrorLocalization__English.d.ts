@@ -1,3 +1,0 @@
-import UnexpectedEventError from "./UnexpectedEventError";
-declare const UnexpectedEventErrorLocalization__English: UnexpectedEventError.Localization;
-export default UnexpectedEventErrorLocalization__English;

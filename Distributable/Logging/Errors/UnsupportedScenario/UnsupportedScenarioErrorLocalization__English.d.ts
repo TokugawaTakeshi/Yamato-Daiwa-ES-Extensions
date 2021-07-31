@@ -1,3 +1,0 @@
-import UnsupportedScenarioError from "./UnsupportedScenarioError";
-declare const UnsupportedScenarioErrorLocalization__English: UnsupportedScenarioError.Localization;
-export default UnsupportedScenarioErrorLocalization__English;

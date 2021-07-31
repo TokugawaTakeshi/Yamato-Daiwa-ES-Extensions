@@ -1,3 +1,0 @@
-import InvalidConfigError from "./InvalidConfigError";
-declare const InvalidConfigErrorLocalization__English: InvalidConfigError.Localization;
-export default InvalidConfigErrorLocalization__English;

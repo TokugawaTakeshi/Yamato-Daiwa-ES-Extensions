@@ -1,3 +1,0 @@
-import InvalidParameterValueError from "./InvalidParameterValueError";
-declare const InvalidParameterValueErrorLocalization__English: InvalidParameterValueError.Localization;
-export default InvalidParameterValueErrorLocalization__English;

@@ -1,3 +1,0 @@
-import ClassRedundantSubsequentInitializationError from "./ClassRedundantSubsequentInitializationError";
-declare const ClassRedundantSubsequentInitializationErrorLocalization__English: ClassRedundantSubsequentInitializationError.Localization;
-export default ClassRedundantSubsequentInitializationErrorLocalization__English;

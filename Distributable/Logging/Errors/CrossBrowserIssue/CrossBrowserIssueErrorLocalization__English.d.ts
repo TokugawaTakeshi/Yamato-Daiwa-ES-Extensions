@@ -1,3 +1,0 @@
-import CrossBrowserIssueError from "./CrossBrowserIssueError";
-declare const CrossBrowserIssueErrorLocalization__English: CrossBrowserIssueError.Localization;
-export default CrossBrowserIssueErrorLocalization__English;

@@ -1,1 +1,0 @@
-export default function isArrayOfCertainTypeElements<ArrayElementType>(potentialArray: unknown, elementTypeGuard: (element: unknown) => element is ArrayElementType): potentialArray is Array<ArrayElementType>;
