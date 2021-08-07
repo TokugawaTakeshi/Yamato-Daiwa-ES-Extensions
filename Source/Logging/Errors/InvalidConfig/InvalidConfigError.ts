@@ -1,4 +1,4 @@
-import InvalidConfigErrorLocalization__Japanese from "./InvalidConfigErrorLocalization__English";
+import InvalidConfigErrorLocalization__English from "./InvalidConfigErrorLocalization__English";
 
 
 class InvalidConfigError extends Error {
@@ -8,7 +8,7 @@ class InvalidConfigError extends Error {
     return InvalidConfigError.localization.defaultTitle;
   }
 
-  public static localization: InvalidConfigError.Localization = InvalidConfigErrorLocalization__Japanese;
+  public static localization: InvalidConfigError.Localization = InvalidConfigErrorLocalization__English;
 
 
   public static setLocalization(localization: InvalidConfigError.Localization): void {
@@ -43,7 +43,10 @@ namespace InvalidConfigError {
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = { mentionToConfig: string; };
+    export type GenericDescriptionPartTemplateParameters = {
+      mentionToConfig: string;
+      messageSpecificPart?: string;
+    };
   }
 }
 
