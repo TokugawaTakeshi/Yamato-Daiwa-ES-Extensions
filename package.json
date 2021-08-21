@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "0.6.2",
+  "version": "1.0.0",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -20,16 +20,13 @@
     "url": "https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions/issues",
     "email": "tokugawa.takesi@gmail.com"
   },
-  "exports": {
-    ".": "./Distributable/index.js",
-    "./NodeJS": "./Distributable/NodeJS.js",
-    "./BrowserJS": "./Distributable/BrowserJS.js"
-  },
+  "main": "./Distributable/index.js",
+  "types": "./Distributable/index.d.ts",
   "devDependencies": {
     "@types/mocha": "9.0.0",
-    "@types/node": "16.4.8",
-    "mocha": "9.0.3",
-    "ts-node": "10.1.0",
+    "@types/node": "16.7.1",
+    "mocha": "9.1.0",
+    "ts-node": "10.2.1",
     "typescript": "4.3.5",
     "yamato-daiwa_code_quality_management": "0.0.17"
   },

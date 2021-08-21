@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v0.6.2
+ * @yamato-daiwa/es-extensions v1.0.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -123,6 +123,7 @@ import substituteWhenUndefined from "./DefaultValueSubstituters/substituteWhenUn
 
 
 /* === Random values generators =================================================================================== */
+import getRandomString, { RandomStringsGenerator } from "./RandomValuesGenerators/getRandomString/getRandomString";
 import getRandomArrayElement from "./RandomValuesGenerators/getRandomArrayElement";
 import getRandomBoolean from "./RandomValuesGenerators/getRandomBoolean";
 import getRandomInteger from "./RandomValuesGenerators/getRandomInteger";
@@ -330,6 +331,8 @@ export {
 
 
   /* === Random values generators =================================================================================== */
+  getRandomString,
+  RandomStringsGenerator,
   getRandomArrayElement,
   getRandomBoolean,
   getRandomInteger,

@@ -97,7 +97,7 @@ abstract class Logger {
       return;
     }
 
-    console.error(Logger.formatGenericLog(errorLikeLog));
+    console.error(Logger.formatGenericLog(errorLikeLog, Logger.localization.badgesDefaultTitles.error));
   }
 
   public static logWarning(warningLog: WarningLog): void {
@@ -108,7 +108,7 @@ abstract class Logger {
     }
 
     console.warn(
-      `[ ${substituteWhenUndefined(warningLog.customBadgeText, Logger.localization.badgesDefaultTitles.error)} ] ` +
+      `[ ${substituteWhenUndefined(warningLog.customBadgeText, Logger.localization.badgesDefaultTitles.warning)} ] ` +
       `${warningLog.title}\n` +
       `${warningLog.description}` +
       `\n\n${insertSubstringIf(
@@ -129,7 +129,7 @@ abstract class Logger {
       return;
     }
 
-    console.info(Logger.formatGenericLog(infoLog));
+    console.info(Logger.formatGenericLog(infoLog, Logger.localization.badgesDefaultTitles.info));
   }
 
   public static logSuccess(successLog: SuccessLog): void {
@@ -139,7 +139,7 @@ abstract class Logger {
       return;
     }
 
-    console.info(Logger.formatGenericLog(successLog));
+    console.info(Logger.formatGenericLog(successLog, Logger.localization.badgesDefaultTitles.success));
   }
 
   public static highlightText(targetString: string): string {
@@ -152,8 +152,8 @@ abstract class Logger {
   }
 
 
-  private static formatGenericLog(genericLog: Log): string {
-    return `[ ${substituteWhenUndefined(genericLog.customBadgeText, Logger.localization.badgesDefaultTitles.error)} ] ` +
+  private static formatGenericLog(genericLog: Log, defaultBadgeText: string): string {
+    return `[ ${substituteWhenUndefined(genericLog.customBadgeText, defaultBadgeText)} ] ` +
         `${genericLog.title}\n` +
         `${genericLog.description}` +
         `\n\n${insertSubstringIf(
