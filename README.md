@@ -17,24 +17,10 @@ Please refer to this documentation during the official documentation is under de
 
 ### Get functionality
 
-Most of the functionality is available for both Browser JavaScript and Node.js.
+All available functionality could be imported from `"@yamato-daiwa/es-extensions"`:  
 
 ```typescript
 export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
-```
-
-
-#### BrowserJS functionality
-
-```typescript
-export { delegateClickEventHandling } from "@yamato-daiwa/es-extensions/BrowserJS";
-```
-
-
-#### NodeJS functionality
-
-```typescript
-export { NodeJS_Timer } from "@yamato-daiwa/es-extensions/NodeJS";
 ```
 
 ### Functionality reference
@@ -162,9 +148,6 @@ Returns the index of array element matching with predicate of `null` if no such 
 
 * [`Logger` facade](Documentation/Logging/Logger/Logger.md) 
     Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
-* [`BasicFrontEndLogger`](Documentation/BrowserJS/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md)
-    The implementation of `ILogger` interface for the `Logger` facade which could be used as the base of the custom implementation
-    for the frontend side of the websites / web application.
 * Pre-made errors
   * `AlgorithmMismatchError` Recommended to throw in general cases when real behaviour of the program is not
     corresponding to desired.
