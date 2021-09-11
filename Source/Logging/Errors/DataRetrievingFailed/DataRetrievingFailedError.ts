@@ -10,6 +10,8 @@ class DataRetrievingFailedError extends Error {
 
   private static localization: DataRetrievingFailedError.Localization = DataRetrievingFailedErrorLocalization__English;
 
+  public readonly additionalData?: unknown;
+
 
   public static setLocalization(localization: DataRetrievingFailedError.Localization): void {
     DataRetrievingFailedError.localization = localization;
@@ -27,13 +29,17 @@ class DataRetrievingFailedError extends Error {
     } else {
       this.message = DataRetrievingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
     }
+
+    this.additionalData = parametersObject.additionalData;
   }
 }
 
 
 namespace DataRetrievingFailedError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorParametersObject =
+      (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
+      { additionalData: unknown; };
 
   export type Localization = {
     readonly defaultTitle: string;

@@ -1,152 +1,152 @@
 /*!
- * @yamato-daiwa/es-extensions v1.0.1
+ * @yamato-daiwa/es-extensions v1.1.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
 /* === Numbers ====================================================================================================== */
-import formatNumberWith4KetaKanji from "./Numbers/formatNumberWith4KetaKanji";
-import isStringifiedNonNegativeIntegerOfRegularNotation
+export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
+export { default as isStringifiedNonNegativeIntegerOfRegularNotation }
   from "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
-import separateEach3DigitsGroupWithComma from "./Numbers/separateEach3DigitsGroupWithComma";
-import separateEach4DigitsGroupWithComma from "./Numbers/separateEach4DigitsGroupWithComma";
+export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separateEach3DigitsGroupWithComma";
+export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
 
 
 /* === Strings ====================================================================================================== */
-import areStringifiedDigitsOnly from "./Strings/areStringifiedDigitsOnly";
-import capitalizeFirstSymbol from "./Strings/capitalizeFirstSymbol";
-import getLastSymbol from "./Strings/getLastSymbol";
-import getPositionsOfAllSubstringOccurrences from "./Strings/getPositionsOfAllSubstringOccurrences";
-import insertSubstring from "./Strings/insertSubstring";
-import insertSubstringIf from "./Strings/insertSubstringIf";
-import removeAllSpecifiedCharacters from "./Strings/removeAllSpecifiedCharacters";
-import removeNonDigitsCharacters from "./Strings/removeNonDigitsCharacters";
-import removeNthSymbol from "./Strings/removeNthSymbol";
-import replace2OrMoreSpacesTo1 from "./Strings/replace2OrMoreSpacesTo1";
-import replaceBrHTML_TagToNewLineEscapeSequence from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
-import reverseString from "./Strings/reverseString";
-import splitString from "./Strings/splitString";
-import stringifyAndFormatUnknownAtAdvanceEntity from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
+export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
+export { default as capitalizeFirstSymbol } from "./Strings/capitalizeFirstSymbol";
+export { default as getLastSymbol } from "./Strings/getLastSymbol";
+export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
+export { default as insertSubstring } from "./Strings/insertSubstring";
+export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
+export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
+export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
+export { default as removeNthSymbol } from "./Strings/removeNthSymbol";
+export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
+export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
+export { default as reverseString } from "./Strings/reverseString";
+export { default as splitString } from "./Strings/splitString";
+export { default as stringifyAndFormatUnknownAtAdvanceEntity } from "./Strings/stringifyAndFormatUnknownAtAdvanceEntity";
 
 
 /* === Arrays ======================================================================================================= */
-import getArrayElementWhichMustExistByPredicate, {
-  GetArrayElementWhichMustExistByPredicateOperation
+export {
+  default as getArrayElementWhichMustExistByPredicate, GetArrayElementWhichMustExistByPredicateOperation
 } from "./Arrays/getArrayElementWhichMustExistByPredicate/getArrayElementWhichMustExistByPredicate";
-import getLastElementOfNonEmptyArray, {
-  GetLastElementOfNonEmptyArrayOperation
+export {
+  default as getLastElementOfNonEmptyArray, GetLastElementOfNonEmptyArrayOperation
 } from "./Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray";
-import getIndexesOfArrayElementsWhichSatisfiesToPredicate
+export { default as getIndexesOfArrayElementsWhichSatisfiesToPredicate }
   from "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
-import getIndexOfArrayElementByPredicate from "./Arrays/getIndexOfArrayElementByPredicate";
+export { default as getIndexOfArrayElementByPredicate } from "./Arrays/getIndexOfArrayElementByPredicate";
 
 /* === Sets ========================================================================================================= */
-import addMultipleElementsToSet from "./Sets/addMultipleElementsToSet";
+export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
 
 
 /* === Maps ========================================================================================================= */
-import addMultiplePairsToMap from "./Maps/addMultiplePairsToMap";
-import createMapBasedOnOtherMap from "./Maps/createMapBasedOnOtherMap";
-import filterMap from "./Maps/filterMap";
+export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
+export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
+export { default as filterMap } from "./Maps/filterMap";
 
 
 /* === Types ======================================================================================================== */
-import type {
+export type {
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
   ParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
-import { PartialBy } from "./Types/PartialBy";
+export { PartialBy } from "./Types/PartialBy";
 
 
 /* === Type guards ================================================================================================== */
 /* --- Numbers ------------------------------------------------------------------------------------------------------ */
-import isDecimalFractionOfAnySign from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-import isNaturalNumber from "./TypeGuards/Numbers/isNaturalNumber";
-import isNegativeDecimalFraction from "./TypeGuards/Numbers/isNegativeDecimalFraction";
-import isNegativeInteger from "./TypeGuards/Numbers/isNegativeInteger";
-import isNegativeIntegerOrZero from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
-import isNonNegativeInteger from "./TypeGuards/Numbers/isNonNegativeInteger";
-import isNumber from "./TypeGuards/Numbers/isNumber";
-import isPositiveDecimalFraction from "./TypeGuards/Numbers/isPositiveDecimalFraction";
+export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
+export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
+export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
+export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInteger";
+export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
+export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegativeInteger";
+export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
+export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
 
 /* --- Strings ------------------------------------------------------------------------------------------------------ */
-import isEmptyString from "./TypeGuards/Strings/isEmptyString";
-import isNonEmptyString from "./TypeGuards/Strings/isNonEmptyString";
-import isString from "./TypeGuards/Strings/isString";
-import isStringOfLength, { IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
+export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
+export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
+export { default as isString } from "./TypeGuards/Strings/isString";
+export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
 
 /* --- Objects ------------------------------------------------------------------------------------------------------ */
-import isEmptyObject from "./TypeGuards/Objects/isEmptyObject";
-import isNonEmptyObject from "./TypeGuards/Objects/isNonEmptyObject";
-import isNonNullObject from "./TypeGuards/Objects/isNonNullObject";
+export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
+export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
+export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
 /* --- Arrays ------------------------------------------------------------------------------------------------------- */
-import isArrayOfCertainTypeElements from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
-import isArrayOfLength, { IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
-import isEmptyArray from "./TypeGuards/Arrays/isEmptyArray";
-import isNonEmptyArray from "./TypeGuards/Arrays/isNonEmptyArray";
+export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
+export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
+export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
+export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
 
 /* --- undefined & null --------------------------------------------------------------------------------------------- */
-import isNeitherUndefinedNorNull from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
-import isNotNull from "./TypeGuards/Nullables/isNotNull";
-import isNotUndefined from "./TypeGuards/Nullables/isNotUndefined";
-import isNull from "./TypeGuards/Nullables/isNull";
-import isUndefined from "./TypeGuards/Nullables/isUndefined";
+export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
+export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
+export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined";
+export { default as isNull } from "./TypeGuards/Nullables/isNull";
+export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 
 /* --- Others ------------------------------------------------------------------------------------------------------- */
-import isBoolean from "./TypeGuards/isBoolean";
-import isElementOfEnumeration from "./TypeGuards/isElementOfEnumeration";
-import isFunctionLike from "./TypeGuards/isFunctionLike";
+export { default as isBoolean } from "./TypeGuards/isBoolean";
+export { default as isElementOfEnumeration } from "./TypeGuards/isElementOfEnumeration";
+export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
 /* === Date & Time ================================================================================================== */
-import millisecondsToSeconds from "./DateTime/millisecondsToSeconds";
-import secondsToMilliseconds from "./DateTime/secondsToMilliseconds";
-import Timer from "./DateTime/Timer";
+export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
+export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
+export { default as Timer } from "./DateTime/Timer";
 
 
 /* === Value transformers =========================================================================================== */
-import emptyStringToNull from "./ValueTransformers/emptyStringToNull";
-import nullToEmptyString from "./ValueTransformers/nullToEmptyString";
-import nullToUndefined from "./ValueTransformers/nullToUndefined";
-import nullToZero from "./ValueTransformers/nullToZero";
-import undefinedToEmptyArray from "./ValueTransformers/undefinedToEmptyArray";
-import undefinedToEmptyString from "./ValueTransformers/undefinedToEmptyString";
-import undefinedToNull from "./ValueTransformers/undefinedToNull";
+export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
+export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
+export { default as nullToUndefined } from "./ValueTransformers/nullToUndefined";
+export { default as nullToZero } from "./ValueTransformers/nullToZero";
+export { default as undefinedToEmptyArray } from "./ValueTransformers/undefinedToEmptyArray";
+export { default as undefinedToEmptyString } from "./ValueTransformers/undefinedToEmptyString";
+export { default as undefinedToNull } from "./ValueTransformers/undefinedToNull";
 
 
 /* === Default value substituters =================================================================================== */
-import substituteWhenNull from "./DefaultValueSubstituters/substituteWhenNull";
-import substituteWhenUndefined from "./DefaultValueSubstituters/substituteWhenUndefined";
+export { default as substituteWhenNull } from "./DefaultValueSubstituters/substituteWhenNull";
+export { default as substituteWhenUndefined } from "./DefaultValueSubstituters/substituteWhenUndefined";
 
 
 /* === Random values generators =================================================================================== */
-import getRandomString, { RandomStringsGenerator } from "./RandomValuesGenerators/getRandomString/getRandomString";
-import getRandomArrayElement from "./RandomValuesGenerators/getRandomArrayElement";
-import getRandomBoolean from "./RandomValuesGenerators/getRandomBoolean";
-import getRandomInteger from "./RandomValuesGenerators/getRandomInteger";
-import getRandomLatinSymbol from "./RandomValuesGenerators/getRandomLatinSymbol";
-import getRandomObjectPropertyValue from "./RandomValuesGenerators/getRandomObjectPropertyValue";
-import getSpecificBooleanValueWithProbability from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
+export { default as getRandomString, RandomStringsGenerator } from "./RandomValuesGenerators/getRandomString/getRandomString";
+export { default as getRandomArrayElement } from "./RandomValuesGenerators/getRandomArrayElement";
+export { default as getRandomBoolean } from "./RandomValuesGenerators/getRandomBoolean";
+export { default as getRandomInteger } from "./RandomValuesGenerators/getRandomInteger";
+export { default as getRandomLatinSymbol } from "./RandomValuesGenerators/getRandomLatinSymbol";
+export { default as getRandomObjectPropertyValue } from "./RandomValuesGenerators/getRandomObjectPropertyValue";
+export { default as getSpecificBooleanValueWithProbability } from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
 
 
 /* === Constants and enumerations =================================================================================== */
-import HTTP_Methods from "./ConstantsAndEnumerations/HTTP_Methods";
-import HTTP_StatusCodes from "./ConstantsAndEnumerations/HTTP_StatusCodes";
+export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
+export { default as HTTP_StatusCodes } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
 
 
 /* === Pagination =================================================================================================== */
-import computeFirstItemNumberForSpecificPaginationPage
+export { default as computeFirstItemNumberForSpecificPaginationPage }
   from "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
-import computeLastItemNumberForSpecificPaginationPage
+export { default as computeLastItemNumberForSpecificPaginationPage }
   from "./Pagination/computeLastItemNumberForSpecificPaginationPage";
-import splitToPaginationCollection from "./Pagination/splitToPaginationCollection";
-import type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
+export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
+export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
 
 /* === Logging ====================================================================================================== */
-import type {
+export type {
   Log,
   ErrorLog,
   ThrownErrorLog,
@@ -154,269 +154,70 @@ import type {
   SuccessLog,
   InfoLog
 } from "./Logging/Logs";
-import type { ILogger } from "./Logging/ILogger";
-import Logger from "./Logging/Logger";
-import LoggerLocalization__English from "./Logging/LoggerLocalization__English";
+export type { ILogger } from "./Logging/ILogger";
+export { default as Logger } from "./Logging/Logger";
+export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization__English";
 
-import AlgorithmMismatchError from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError";
-import AlgorithmMismatchErrorLocalization__English
+export { default as AlgorithmMismatchError } from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError";
+export { default as AlgorithmMismatchErrorLocalization__English }
   from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization__English";
-import ClassRedundantSubsequentInitializationError
+export { default as ClassRedundantSubsequentInitializationError }
   from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
-import ClassRedundantSubsequentInitializationErrorLocalization__English
+export { default as ClassRedundantSubsequentInitializationErrorLocalization__English }
   from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__English";
-import ClassRequiredInitializationHasNotBeenExecutedError
+export { default as ClassRequiredInitializationHasNotBeenExecutedError }
   from "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
-import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English
+export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English }
   from "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English";
-import ConfigFileNotFoundError from "./Logging/Errors/ConfigFileNotFound/СonfigFileNotFoundError";
-import ConfigFileNotFoundErrorLocalization__English
+export { default as ConfigFileNotFoundError } from "./Logging/Errors/ConfigFileNotFound/СonfigFileNotFoundError";
+export { default as ConfigFileNotFoundErrorLocalization__English }
   from "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization__English";
-import CrossBrowserIssueError from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueError";
-import CrossBrowserIssueErrorLocalization__English
+export { default as CrossBrowserIssueError } from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueError";
+export { default as CrossBrowserIssueErrorLocalization__English }
   from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization__English";
-import DataRetrievingFailedError from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedError";
-import DataRetrievingFailedErrorLocalization__English
+export { default as DataRetrievingFailedError } from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedError";
+export { default as DataRetrievingFailedErrorLocalization__English }
   from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization__English";
-import DataSubmittingFailedError from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedError";
-import DataSubmittingFailedErrorLocalization__English
+export { default as DataSubmittingFailedError } from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedError";
+export { default as DataSubmittingFailedErrorLocalization__English }
   from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization__English";
-import DOM_ElementRetrievingFailedError
+export { default as DOM_ElementRetrievingFailedError }
   from "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedError";
-import DOM_ElementRetrievingFailedErrorLocalization__English
+export { default as DOM_ElementRetrievingFailedErrorLocalization__English }
   from "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization__English";
-import FileReadingFailedError from "./Logging/Errors/FileReadingFailed/FileReadingFailedError";
-import FileReadingFailedErrorLocalization__English
+export { default as FileReadingFailedError } from "./Logging/Errors/FileReadingFailed/FileReadingFailedError";
+export { default as FileReadingFailedErrorLocalization__English }
   from "./Logging/Errors/FileReadingFailed/FileReadingFailedErrorLocalization__English";
-import FileWritingFailedError from "./Logging/Errors/FileWritingFailed/FileWritingFailedError";
-import FileWritingFailedErrorLocalization__English
+export { default as FileWritingFailedError } from "./Logging/Errors/FileWritingFailed/FileWritingFailedError";
+export { default as FileWritingFailedErrorLocalization__English }
   from "./Logging/Errors/FileWritingFailed/FileWritingFailedErrorLocalization__English";
-import ImproperUsageError from "./Logging/Errors/ImproperUsage/ImproperUsageError";
-import ImproperUsageErrorLocalization__English
+export { default as ImproperUsageError } from "./Logging/Errors/ImproperUsage/ImproperUsageError";
+export { default as ImproperUsageErrorLocalization__English }
   from "./Logging/Errors/ImproperUsage/ImproperUsageErrorLocalization__English";
-import IncompatiblePropertiesInObjectTypeParameterError
+export { default as IncompatiblePropertiesInObjectTypeParameterError }
   from "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
-import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English
+export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English }
   from "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English";
-import InterProcessInteractionFailedError
+export { default as InterProcessInteractionFailedError }
   from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
-import InterProcessInteractionFailedErrorLocalization__English
+export { default as InterProcessInteractionFailedErrorLocalization__English }
   from "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization__English";
-import InvalidConfigError from "./Logging/Errors/InvalidConfig/InvalidConfigError";
-import InvalidConfigErrorLocalization__English
+export { default as InvalidConfigError } from "./Logging/Errors/InvalidConfig/InvalidConfigError";
+export { default as InvalidConfigErrorLocalization__English }
   from "./Logging/Errors/InvalidConfig/InvalidConfigErrorLocalization__English";
-import InvalidExternalDataError from "./Logging/Errors/InvalidExternalData/InvalidExternalDataError";
-import InvalidExternalDataErrorLocalization__English
+export { default as InvalidExternalDataError } from "./Logging/Errors/InvalidExternalData/InvalidExternalDataError";
+export { default as InvalidExternalDataErrorLocalization__English }
   from "./Logging/Errors/InvalidExternalData/InvalidExternalDataErrorLocalization__English";
-import InvalidParameterValueError from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
-import InvalidParameterValueErrorLocalization__English
+export { default as InvalidParameterValueError } from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+export { default as InvalidParameterValueErrorLocalization__English }
   from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization__English";
-import ModuleDynamicLoadingFailedError
+export { default as ModuleDynamicLoadingFailedError }
   from "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedError";
-import ModuleDynamicLoadingFailedErrorLocalization__English
+export { default as ModuleDynamicLoadingFailedErrorLocalization__English }
   from "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization__English";
-import UnexpectedEventError from "./Logging/Errors/UnexpectedEvent/UnexpectedEventError";
-import UnexpectedEventErrorLocalization__English
+export { default as UnexpectedEventError } from "./Logging/Errors/UnexpectedEvent/UnexpectedEventError";
+export { default as UnexpectedEventErrorLocalization__English }
   from "./Logging/Errors/UnexpectedEvent/UnexpectedEventErrorLocalization__English";
-import UnsupportedScenarioError from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioError";
-import UnsupportedScenarioErrorLocalization__English
+export { default as UnsupportedScenarioError } from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioError";
+export { default as UnsupportedScenarioErrorLocalization__English }
   from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization__English";
-
-
-export {
-
-  /* === Numbers ==================================================================================================== */
-  formatNumberWith4KetaKanji,
-  isStringifiedNonNegativeIntegerOfRegularNotation,
-  separateEach3DigitsGroupWithComma,
-  separateEach4DigitsGroupWithComma,
-
-
-  /* === Strings ==================================================================================================== */
-  areStringifiedDigitsOnly,
-  capitalizeFirstSymbol,
-  getLastSymbol,
-  getPositionsOfAllSubstringOccurrences,
-  insertSubstring,
-  insertSubstringIf,
-  removeAllSpecifiedCharacters,
-  removeNonDigitsCharacters,
-  removeNthSymbol,
-  replace2OrMoreSpacesTo1,
-  replaceBrHTML_TagToNewLineEscapeSequence,
-  reverseString,
-  splitString,
-  stringifyAndFormatUnknownAtAdvanceEntity,
-
-
-  /* === Arrays ===================================================================================================== */
-  getArrayElementWhichMustExistByPredicate,
-  GetArrayElementWhichMustExistByPredicateOperation,
-  getLastElementOfNonEmptyArray,
-  GetLastElementOfNonEmptyArrayOperation,
-  getIndexesOfArrayElementsWhichSatisfiesToPredicate,
-  getIndexOfArrayElementByPredicate,
-
-  /* === Sets ======================================================================================================= */
-  addMultipleElementsToSet,
-
-
-  /* === Maps ======================================================================================================= */
-  addMultiplePairsToMap,
-  createMapBasedOnOtherMap,
-  filterMap,
-
-
-  /* === Type guards ================================================================================================ */
-  /* --- Numbers ---------------------------------------------------------------------------------------------------- */
-  isDecimalFractionOfAnySign,
-  isNaturalNumber,
-  isNegativeDecimalFraction,
-  isNegativeInteger,
-  isNegativeIntegerOrZero,
-  isNonNegativeInteger,
-  isNumber,
-  isPositiveDecimalFraction,
-
-  /* --- Strings ---------------------------------------------------------------------------------------------------- */
-  isEmptyString,
-  isNonEmptyString,
-  isString,
-  isStringOfLength,
-  IsStringOfLengthCheckingOperation,
-
-  /* --- Objects ---------------------------------------------------------------------------------------------------- */
-  isEmptyObject,
-  isNonEmptyObject,
-  isNonNullObject,
-
-  /* --- Arrays ----------------------------------------------------------------------------------------------------- */
-  isArrayOfCertainTypeElements,
-  isArrayOfLength,
-  IsArrayOfLengthCheckingOperation,
-  isEmptyArray,
-  isNonEmptyArray,
-
-  /* --- undefined/null --------------------------------------------------------------------------------------------- */
-  isNeitherUndefinedNorNull,
-  isNotNull,
-  isNotUndefined,
-  isNull,
-  isUndefined,
-
-  /* --- Others ----------------------------------------------------------------------------------------------------- */
-  isBoolean,
-  isElementOfEnumeration,
-  isFunctionLike,
-
-  /* === Date & Time ================================================================================================ */
-  millisecondsToSeconds,
-  secondsToMilliseconds,
-  Timer,
-
-
-  /* === Value transformers ========================================================================================= */
-  emptyStringToNull,
-  nullToEmptyString,
-  nullToUndefined,
-  nullToZero,
-  undefinedToEmptyArray,
-  undefinedToEmptyString,
-  undefinedToNull,
-
-
-  /* === Default value substituters ================================================================================= */
-  substituteWhenNull,
-  substituteWhenUndefined,
-
-
-  /* === Random values generators =================================================================================== */
-  getRandomString,
-  RandomStringsGenerator,
-  getRandomArrayElement,
-  getRandomBoolean,
-  getRandomInteger,
-  getRandomLatinSymbol,
-  getRandomObjectPropertyValue,
-  getSpecificBooleanValueWithProbability,
-
-
-  /* === Constants and enumerations ================================================================================= */
-  HTTP_Methods,
-  HTTP_StatusCodes,
-
-
-  /* === Pagination ================================================================================================= */
-  computeFirstItemNumberForSpecificPaginationPage,
-  computeLastItemNumberForSpecificPaginationPage,
-  splitToPaginationCollection,
-
-
-  /* === Logging ==================================================================================================== */
-  Logger,
-  LoggerLocalization__English,
-  AlgorithmMismatchError,
-  AlgorithmMismatchErrorLocalization__English,
-  ClassRedundantSubsequentInitializationError,
-  ClassRedundantSubsequentInitializationErrorLocalization__English,
-  ClassRequiredInitializationHasNotBeenExecutedError,
-  ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English,
-  ConfigFileNotFoundError,
-  ConfigFileNotFoundErrorLocalization__English,
-  CrossBrowserIssueError,
-  CrossBrowserIssueErrorLocalization__English,
-  DataRetrievingFailedError,
-  DataRetrievingFailedErrorLocalization__English,
-  DataSubmittingFailedError,
-  DataSubmittingFailedErrorLocalization__English,
-  DOM_ElementRetrievingFailedError,
-  DOM_ElementRetrievingFailedErrorLocalization__English,
-  FileReadingFailedError,
-  FileReadingFailedErrorLocalization__English,
-  FileWritingFailedError,
-  FileWritingFailedErrorLocalization__English,
-  ImproperUsageError,
-  ImproperUsageErrorLocalization__English,
-  IncompatiblePropertiesInObjectTypeParameterError,
-  IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English,
-  InterProcessInteractionFailedError,
-  InterProcessInteractionFailedErrorLocalization__English,
-  InvalidConfigError,
-  InvalidConfigErrorLocalization__English,
-  InvalidExternalDataError,
-  InvalidExternalDataErrorLocalization__English,
-  InvalidParameterValueError,
-  InvalidParameterValueErrorLocalization__English,
-  ModuleDynamicLoadingFailedError,
-  ModuleDynamicLoadingFailedErrorLocalization__English,
-  UnexpectedEventError,
-  UnexpectedEventErrorLocalization__English,
-  UnsupportedScenarioError,
-  UnsupportedScenarioErrorLocalization__English
-};
-
-
-export type {
-
-  /* === Types ===================================================================================================== */
-  ParsedJSON,
-  ParsedJSON_Object,
-  ParsedJSON_Array,
-  ParsedJSON_NestedProperty,
-
-  PartialBy,
-
-
-  /* === Pagination ================================================================================================= */
-  PaginationCollection,
-
-
-  /* === Logging ==================================================================================================== */
-  Log,
-  ErrorLog,
-  ThrownErrorLog,
-  WarningLog,
-  SuccessLog,
-  InfoLog,
-  ILogger
-};

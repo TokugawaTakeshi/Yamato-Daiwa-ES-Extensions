@@ -5,8 +5,8 @@ const DataRetrievingFailedErrorLocalization__English: DataRetrievingFailedError.
   defaultTitle: "Retrieving of the data from data source failed",
   genericDescriptionPartTemplate: (
     parametersObject: DataRetrievingFailedError.Localization.GenericDescriptionPartTemplateParameters
-  ): string => `The error occurred during the retrieving of data ${parametersObject.mentionToData} from he external ` +
-      "data source"
+  ): string => `The error occurred during the retrieving of the data '${parametersObject.mentionToData}' from the external ` +
+      "data source."
 };
 
 

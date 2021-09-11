@@ -2,7 +2,7 @@ export type Log = {
   customBadgeText?: string;
   title: string;
   description: string;
-  additionalData?: { [key: string]: unknown; };
+  additionalData?: unknown;
 };
 
 

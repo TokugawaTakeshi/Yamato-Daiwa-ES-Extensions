@@ -10,6 +10,8 @@ class DataSubmittingFailedError extends Error {
 
   private static localization: DataSubmittingFailedError.Localization = DataSubmittingFailedErrorLocalization__English;
 
+  public readonly additionalData?: unknown;
+
 
   public static setLocalization(localization: DataSubmittingFailedError.Localization): void {
     DataSubmittingFailedError.localization = localization;
@@ -27,13 +29,17 @@ class DataSubmittingFailedError extends Error {
     } else {
       this.message = DataSubmittingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
     }
+
+    this.additionalData = parametersObject.additionalData;
   }
 }
 
 
 namespace DataSubmittingFailedError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorParametersObject =
+      (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
+      { additionalData: unknown; };
 
   export type Localization = {
     readonly defaultTitle: string;
