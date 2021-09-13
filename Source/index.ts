@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.1.1
+ * @yamato-daiwa/es-extensions v1.1.2
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */

@@ -39,7 +39,7 @@ namespace DataRetrievingFailedError {
 
   export type ConstructorParametersObject =
       (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
-      { additionalData: unknown; };
+      { additionalData?: unknown; };
 
   export type Localization = {
     readonly defaultTitle: string;
