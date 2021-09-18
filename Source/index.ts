@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.1.2
+ * @yamato-daiwa/es-extensions v1.2.0
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -51,6 +51,7 @@ export { default as filterMap } from "./Maps/filterMap";
 
 
 /* === Types ======================================================================================================== */
+export type { ArbitraryObject } from "./Types/ArbitraryObject";
 export type {
   ParsedJSON,
   ParsedJSON_Object,
@@ -78,8 +79,10 @@ export { default as isString } from "./TypeGuards/Strings/isString";
 export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
 
 /* --- Objects ------------------------------------------------------------------------------------------------------ */
+export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
 export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
 export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
+export { default as isNonNullArbitraryObject } from "./TypeGuards/Objects/isNonNullArbitraryObject";
 export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
 /* --- Arrays ------------------------------------------------------------------------------------------------------- */
@@ -102,6 +105,7 @@ export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
 /* === Date & Time ================================================================================================== */
+export { default as hasTimeCome } from "./DateTime/hasTimeCome";
 export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
 export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
 export { default as Timer } from "./DateTime/Timer";
@@ -130,6 +134,7 @@ export { default as getRandomInteger } from "./RandomValuesGenerators/getRandomI
 export { default as getRandomLatinSymbol } from "./RandomValuesGenerators/getRandomLatinSymbol";
 export { default as getRandomObjectPropertyValue } from "./RandomValuesGenerators/getRandomObjectPropertyValue";
 export { default as getSpecificBooleanValueWithProbability } from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
+export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
 
 
 /* === Constants and enumerations =================================================================================== */

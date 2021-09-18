@@ -10,6 +10,7 @@ class DataSubmittingFailedError extends Error {
 
   private static localization: DataSubmittingFailedError.Localization = DataSubmittingFailedErrorLocalization__English;
 
+  public readonly typicalCause?: DataSubmittingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
@@ -30,6 +31,7 @@ class DataSubmittingFailedError extends Error {
       this.message = DataSubmittingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
     }
 
+    this.typicalCause = parametersObject.typicalCause;
     this.additionalData = parametersObject.additionalData;
   }
 }
@@ -39,7 +41,15 @@ namespace DataSubmittingFailedError {
 
   export type ConstructorParametersObject =
       (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
-      { additionalData?: unknown; };
+      {
+        additionalData?: unknown;
+        typicalCause?: TypicalCauses;
+      };
+
+  export enum TypicalCauses {
+    notFound = "NOT_FOUND",
+    notEnoughPermissions = "NOT_ENOUGH_PERMISSIONS"
+  }
 
   export type Localization = {
     readonly defaultTitle: string;

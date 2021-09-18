@@ -10,6 +10,7 @@ class DataRetrievingFailedError extends Error {
 
   private static localization: DataRetrievingFailedError.Localization = DataRetrievingFailedErrorLocalization__English;
 
+  public readonly typicalCause?: DataRetrievingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
@@ -30,6 +31,7 @@ class DataRetrievingFailedError extends Error {
       this.message = DataRetrievingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
     }
 
+    this.typicalCause = parametersObject.typicalCause;
     this.additionalData = parametersObject.additionalData;
   }
 }
@@ -39,7 +41,15 @@ namespace DataRetrievingFailedError {
 
   export type ConstructorParametersObject =
       (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
-      { additionalData?: unknown; };
+      {
+        additionalData?: unknown;
+        typicalCause?: TypicalCauses;
+      };
+
+  export enum TypicalCauses {
+    notFound = "NOT_FOUND",
+    notEnoughPermissions = "NOT_ENOUGH_PERMISSIONS"
+  }
 
   export type Localization = {
     readonly defaultTitle: string;
