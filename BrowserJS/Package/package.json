@@ -1,0 +1,46 @@
+{
+  "name": "@yamato-daiwa/es-extensions-browserjs",
+  "private": true,
+  "version": "1.3.0-alpha.8",
+  "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
+  "keywords": [
+    "browser",
+    "typescript",
+    "utils",
+    "logger"
+  ],
+  "author": {
+    "name": "Takeshi Tokugawa",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git/issues",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "main": "./Distributable/index.js",
+  "types": "./Distributable/index.d.ts",
+  "files": [
+    "Distributable"
+  ],
+  "devDependencies": {
+    "@types/mocha": "9.0.0",
+    "@types/node": "16.7.1",
+    "mocha": "9.1.0",
+    "rimraf": "3.0.2",
+    "ts-node": "10.2.1",
+    "typescript": "4.3.5",
+    "yamato-daiwa_code_quality_management": "0.0.17"
+  },
+  "dependencies": {
+    "@yamato-daiwa/es-extensions": "1.3.0-alpha.6"
+  },
+  "scripts": {
+    "Rebuild distributable": "rimraf Distributable & tsc",
+    "Lint": "eslint Source"
+  }
+}

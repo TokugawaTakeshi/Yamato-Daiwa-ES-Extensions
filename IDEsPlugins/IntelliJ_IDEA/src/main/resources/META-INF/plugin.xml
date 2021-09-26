@@ -1,0 +1,13 @@
+<idea-plugin>
+
+    <name>Yamato-Daiwa ES-Extensions</name>
+    <vendor url="https://github.com/TokugawaTakeshi" email="tokugawa.takesi@gmail.com">Tokugawa Takeshi</vendor>
+
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <defaultLiveTemplates file="/liveTemplates/Yamato-Daiwa-ES_Extensions"/>
+    </extensions>
+</idea-plugin>

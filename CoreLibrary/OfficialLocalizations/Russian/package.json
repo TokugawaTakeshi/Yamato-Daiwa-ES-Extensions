@@ -1,0 +1,46 @@
+{
+  "name": "@yamato-daiwa/es-extensions-localization-russian",
+  "private": "true",
+  "version": "1.3.0",
+  "description": "Russian localization for @yamato-daiwa/es-extensions package.",
+  "keywords": [
+    "localization"
+  ],
+  "author": {
+    "name": "Takeshi Tokugawa",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git/issues",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "exports": {
+    ".": "./Distributable/index.js",
+    "./Distributable/localizeAllOnImport": "./Distributable/localizeAllOnImport.js"
+  },
+  "files": [
+    "Distributable"
+  ],
+  "types": "./Distributable/index.d.ts",
+  "devDependencies": {
+    "@types/mocha": "9.0.0",
+    "@types/node": "16.7.1",
+    "mocha": "9.1.0",
+    "rimraf": "3.0.2",
+    "ts-node": "10.2.1",
+    "typescript": "4.3.5",
+    "yamato-daiwa_code_quality_management": "0.0.17"
+  },
+  "dependencies": {
+    "@yamato-daiwa/es-extensions": "1.3.0-alpha.2"
+  },
+  "scripts": {
+    "Rebuild distributable": "del-cli Distributable & tsc",
+    "Lint": "eslint Source Tests"
+  }
+}
