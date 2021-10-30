@@ -11,6 +11,8 @@ Adds [Live Templates](https://www.jetbrains.com/help/idea/using-live-templates.h
 
 Currently, below live templates are available:
 
+* [`RawObjectDataProcessor`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#rawobjectdataprocessor)
+  * `prod`: working example with error handling
 * Logging
   * `teal` : [`Logger.throwErrorAndLog`](https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions/blob/master/Documentation/Logging/Logger/Logger.md#throwerrorandlog-throw-the-error-and-make-log)
   * `le`: [`Logger.logError`](https://github.com/TokugawaTakeshi/yamato_daiwa-es_extensions/blob/master/Documentation/Logging/Logger/Logger.md#logerror-error-logging-without-throwing)

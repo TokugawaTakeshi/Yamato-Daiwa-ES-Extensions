@@ -1,0 +1,39 @@
+<templateSet group="Yamato-Daiwa ES-Extensions (TypeScript)">
+  <template name="teal" value="Logger.throwErrorAndLog({&#10;  &#10;  errorInstance: new UnexpectedEventError(&quot;$END$&quot;),&#10;  // OR:&#10;  errorType: UnexpectedEventError.NAME,&#10;  description: &quot;&quot;,&#10;  &#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  wrappableError: error&#10;});" description="Logger.throwErrorAndLog()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="li" value="Logger.logInfo({&#10;  title: &quot;$TITLE$&quot;,&#10;  description: &quot;$DESCRIPTION$&quot;&#10;});" description="Logger.logInfo()" toReformat="false" toShortenFQNames="true">
+    <variable name="TITLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DESCRIPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="le" value="Logger.logError({&#10;  errorType: UnexpectedEventError.NAME,&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  caughtError: error&#10;});" description="Logger.logError()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="lelm" value="Logger.logErrorLikeMessage({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;'foo' is 'null'. With correctly working validation it could not be.&quot;,&#10;  customBadgeText: &quot;Exception&quot;&#10;});" description="Logger.logErrorLikeMessage()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="lw" value="Logger.logWarning({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;&#10;});" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ls" value="Logger.logSuccess({&#10;  title: &quot;Sign in success&quot;,&#10;  description: &quot;$END$&quot;&#10;});" description="Logger.logSuccess()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="prod" value="type ValidData = {&#10;  foo: number;&#10;  bar: string;&#10;  baz: boolean;&#10;  quux: {&#10;    alpha: number;&#10;    bravo: &quot;PLATINUM&quot; | &quot;GOLD&quot; | &quot;SILVER&quot;;&#10;  };&#10;};&#10;&#10;const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {&#10;  nameForLogging: &quot;Example&quot;,&#10;  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,&#10;  properties: {&#10;    foo: {&#10;      type: Number,&#10;      required: true,&#10;      numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger&#10;    },&#10;    bar: {&#10;      type: String,&#10;      required: true,&#10;      minimalCharactersCount: 5&#10;    },&#10;    baz: {&#10;      type: Boolean,&#10;      required: true&#10;    },&#10;    quux: {&#10;      type: Object,&#10;      required: true,&#10;      properties: {&#10;        alpha: {&#10;          type: Number,&#10;          required: true,&#10;          numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,&#10;          minimalValue: 3&#10;        },&#10;        bravo: {&#10;          type: String,&#10;          required: true,&#10;          minimalCharactersCount: 5,&#10;          allowedAlternatives: [ &quot;PLATINUM&quot;, &quot;GOLD&quot;, &quot;SILVER&quot; ]&#10;        }&#10;      }&#10;    }&#10;  }&#10;};&#10;&#10;const dataSample: unknown = {&#10;  foo: 5,&#10;  bar: &quot;beekeeper&quot;,&#10;  baz: true,&#10;  quux: {&#10;    alpha: 5,&#10;    bravo: &quot;PLATINUM&quot;&#10;  }&#10;};&#10;&#10;&#10;const dataSampleProcessingResult: RawObjectDataProcessor.ProcessingResult&lt;ValidData&gt; = RawObjectDataProcessor.&#10;    process(dataSample, validDataSpecification);&#10;&#10;if (dataSampleProcessingResult.rawDataIsInvalid) {&#10;  Logger.logError({&#10;    errorType: InvalidExternalDataError.NAME,&#10;    title: InvalidExternalDataError.DEFAULT_TITLE,&#10;    description: &quot;The dataSample is invalid:&quot; +&#10;        `${RawObjectDataProcessor.formatValidationErrorsList(dataSample1ProcessingResult.validationErrorsMessages)}`,&#10;    occurrenceLocation: &quot;upper scope&quot;&#10;  });&#10;}" description="`RawObjectDataProcessor.process()` example (fixed key and value pairs type object case)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
