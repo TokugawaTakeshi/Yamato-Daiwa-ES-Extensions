@@ -483,6 +483,8 @@ class RawObjectDataProcessor {
       }
     }
 
+    this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.splice(-1, 1);
+
 
     for (
       const customValidator of
@@ -749,6 +751,8 @@ class RawObjectDataProcessor {
         }
       }
     }
+
+    this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.splice(-1, 1);
 
 
     for (
@@ -1105,6 +1109,8 @@ class RawObjectDataProcessor {
       }
     }
 
+    this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.splice(-1, 1);
+
 
     for (
       const customValidator of
@@ -1252,7 +1258,7 @@ class RawObjectDataProcessor {
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.DEFAULT_TITLE,
           description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
-          occurrenceLocation: "RawObjectDataProcessor.processData(rawData, validDataSpecification, options)" +
+          occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
               "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
         });
 

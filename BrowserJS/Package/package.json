@@ -1,7 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-browserjs",
-  "private": true,
-  "version": "1.3.0-alpha.8",
+  "version": "1.3.0",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "browser",
@@ -37,7 +36,10 @@
     "yamato-daiwa_code_quality_management": "0.0.17"
   },
   "dependencies": {
-    "@yamato-daiwa/es-extensions": "1.3.0-alpha.6"
+    "@yamato-daiwa/es-extensions": "1.3.0"
+  },
+  "peerDependencies": {
+    "@yamato-daiwa/es-extensions": "1.3.0"
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc",

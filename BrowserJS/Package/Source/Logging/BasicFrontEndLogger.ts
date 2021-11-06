@@ -7,7 +7,7 @@ import {
   Log,
   Logger,
   substituteWhenUndefined,
-  stringifyAndFormatUnknownAtAdvanceEntity,
+  stringifyAndFormatArbitraryValue,
   insertSubstringIf,
   isNotUndefined,
   LoggerLocalization__English
@@ -32,12 +32,12 @@ abstract class BasicFrontEndLogger {
           `\n\n${BasicFrontEndLogger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
           `${insertSubstringIf(
             `\n\n${BasicFrontEndLogger.localization.wrappableError}:` +
-            `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.wrappableError)}`,
+            `\n${stringifyAndFormatArbitraryValue(errorLog.wrappableError)}`,
             isNotUndefined(errorLog.wrappableError)
           )}` +
           `${insertSubstringIf(
             `\n\n${BasicFrontEndLogger.localization.appendedData}:` +
-            `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.additionalData)}`,
+            `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`,
             isNotUndefined(errorLog.additionalData)
           )}` +
           /* Divider before stack trace */
@@ -80,13 +80,13 @@ abstract class BasicFrontEndLogger {
         [ `\n\n${BasicFrontEndLogger.localization.caughtError}:`, { "font-weight": "bold", color: "red" } ],
         [
           errorLog.caughtError instanceof Error ? `\n${errorLog.caughtError.stack}` :
-              `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.caughtError)}`,
+              `\n${stringifyAndFormatArbitraryValue(errorLog.caughtError)}`,
           { color: "red" }
         ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData,
       ...("additionalData" in errorLog ? [
         [ `\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "red" } ],
-        [ `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLog.additionalData)}`, { color: "red" } ]
+        [ `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`, { color: "red" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData
     ]));
   }
@@ -106,7 +106,7 @@ abstract class BasicFrontEndLogger {
        * https://stackoverflow.com/a/67015118/4818123 */
       ...("additionalData" in errorLikeLog ? [
         [ `\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "red" } ],
-        [ `\n${stringifyAndFormatUnknownAtAdvanceEntity(errorLikeLog.additionalData)}`, { color: "red" } ]
+        [ `\n${stringifyAndFormatArbitraryValue(errorLikeLog.additionalData)}`, { color: "red" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData
     ]));
   }
@@ -130,7 +130,7 @@ abstract class BasicFrontEndLogger {
       ] : []) as BasicFrontEndLogger.FormattedOutputData,
       ...("additionalData" in warningLog ? [
         [ `\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "orange" } ],
-        [ `\n${stringifyAndFormatUnknownAtAdvanceEntity(warningLog.additionalData)}`, { color: "orange" } ]
+        [ `\n${stringifyAndFormatArbitraryValue(warningLog.additionalData)}`, { color: "orange" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData
     ]));
   }
@@ -147,7 +147,7 @@ abstract class BasicFrontEndLogger {
       [ `${successLog.description}`, { color: "mediumseagreen" } ],
       ...("additionalData" in successLog ? [
         [ `\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "mediumseagreen" } ],
-        [ `\n${stringifyAndFormatUnknownAtAdvanceEntity(successLog.additionalData)}`, { color: "mediumseagreen" } ]
+        [ `\n${stringifyAndFormatArbitraryValue(successLog.additionalData)}`, { color: "mediumseagreen" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData
     ]));
   }
@@ -164,7 +164,7 @@ abstract class BasicFrontEndLogger {
       [ `${infoLog.description}`, { color: "dodgerblue" } ],
       ...("additionalData" in infoLog ? [
         [ `\n\n${BasicFrontEndLogger.localization.appendedData}:`, { "font-weight": "bold", color: "dodgerblue" } ],
-        [ `\n${stringifyAndFormatUnknownAtAdvanceEntity(infoLog.additionalData)}`, { color: "dodgerblue" } ]
+        [ `\n${stringifyAndFormatArbitraryValue(infoLog.additionalData)}`, { color: "dodgerblue" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData
     ]));
   }
