@@ -7,7 +7,15 @@
 
 Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety without `any` type.
 
-[🛣️ Roadmap](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/current)
+## Roadmap
+
+* [🛣️ v1.4](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/current)
+* [🛣️ v1.5](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/122-13)
+
+**Hint:** Set the unlabeled slider in the top right corner of the screen to `XL` to see the tags and descriptions.
+
+![image](https://user-images.githubusercontent.com/41653501/141427403-ca6e9a61-880c-4b1c-bc66-2fdac2f6a491.png)
+
 
 ## ⚠️ Request to Stack Overflow users with `>=1500` reputation
 
@@ -119,6 +127,8 @@ Returns the index of array element matching with predicate of `null` if no such 
 
 * [`ParsedJSON` and related](Documentation/Types/ParsedJSON/ParsedJSON.md)
   The native object including the Array case which could be the result of JSON parsing.
+* [`InheritEnumerationKeys`](Documentation/Types/InheritEnumerationKeys.md) 
+  Allows to create the object with same key as reference enumeration.
 * `PartialBy` Makes specified properties of base type optional.
 
 #### Type guards
@@ -155,10 +165,12 @@ Returns the index of array element matching with predicate of `null` if no such 
 * `getRandomObjectPropertyValue` Returns random object property value.
 * `getSpecificBooleanValueWithProbability` Returns specific boolean value with specified probability.
 
-#### Constants and Enumerations
+#### Constants and enumerations
 
-* [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods/HTTP_Methods.md)
-* [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes/HTTP_StatusCodes.md)
+* [DaysOfWeek](Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
+* [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods.md)
+* [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
+* [Months](Documentation/ConstantsAndEnumerations/Months.md)
 
 #### Pagination
 

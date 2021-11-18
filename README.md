@@ -6,4 +6,11 @@
 * IDEs plugins
   * [📖 IntelliJ IDEA](IDEsPlugins/IntelliJ_IDEA/README.md)
 
-[🛣️ Roadmap](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/current)
+## Roadmap
+
+* [🛣️ v1.4](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/current)
+* [🛣️ v1.5](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/122-13)
+
+**Hint:** Set the unlabeled slider in the top right corner of the screen to `XL` to see the tags and descriptions.
+
+![image](https://user-images.githubusercontent.com/41653501/141427403-ca6e9a61-880c-4b1c-bc66-2fdac2f6a491.png)
