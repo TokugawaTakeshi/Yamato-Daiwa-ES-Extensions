@@ -18,6 +18,6 @@ enum DaysOfWeek {
 If you need lower case or capitalize first character, use dedicated functionality:
 
 ```typescript
-console.log(DaysOfWeek.sunday.toLowerCase()) // "sunday"
-console.log(capitalizeFirstCharacter(DaysOfWeek.sunday.toLowerCase())) // "Sunday"
+console.log(DaysOfWeek.sunday.toLowerCase()); // "sunday"
+console.log(capitalizeFirstCharacter(DaysOfWeek.sunday.toLowerCase())); // "Sunday"
 ```

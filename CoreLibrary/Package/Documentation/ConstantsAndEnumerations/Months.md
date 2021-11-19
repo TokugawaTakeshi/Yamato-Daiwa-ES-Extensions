@@ -22,6 +22,6 @@ enum Months {
 If you need lower case or capitalize first character, use dedicated functionality:
 
 ```typescript
-console.log(Months.january.toLowerCase()) // "january"
-console.log(capitalizeFirstCharacter(Months.january.toLowerCase())) // "January"
+console.log(Months.january.toLowerCase()); // "january"
+console.log(capitalizeFirstCharacter(Months.january.toLowerCase())); // "January"
 ```

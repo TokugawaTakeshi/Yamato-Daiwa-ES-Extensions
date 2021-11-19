@@ -271,9 +271,9 @@ type User = { ID: string; familyName: string; givenName: string; };
 function isUser(rawData: unknown): rawData is User {
   return typeof rawData === "object" &&
       rawData !== null &&
-      typeof(rawData.ID) === "string" &&
-      typeof(rawData.familyName) === "string" &&
-      typeof(rawData.givenName) === "string";
+      typeof((rawData as { ID: unknown; }).ID ) === "string" &&
+      typeof((rawData as { familyName: unknown; }).familyName) === "string" &&
+      typeof((rawData as { givenName: unknown; }).givenName) === "string";
 } 
 ```
 
@@ -291,8 +291,8 @@ type User = { ID: string; familyName: string; givenName: string; };
 
 function isUser(rawData: unknown): rawData is User {
   return isArbitraryObject(rawData) &&
-      typeof(rawData.title) === "string" &&
-      typeof(rawData.price) === "number";
+      typeof((rawData as { title: unknown }).title) === "string" &&
+      typeof((rawData as { price: unknown }).price) === "number";
 }
 
 const potentialUser: unknown = { title: "Shampoo", price: 1000 };

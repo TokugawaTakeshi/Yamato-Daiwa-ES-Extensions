@@ -41,6 +41,7 @@
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
-    "Lint": "eslint Source Tests"
+    "Lint": "eslint Source Tests",
+    "Realize alpha":  "npm publish --tag alpha"
   }
 }

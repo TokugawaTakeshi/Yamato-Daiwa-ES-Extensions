@@ -1,5 +1,4 @@
-import InvalidParameterValueErrorLocalization__English
-  from "./InvalidParameterValueErrorLocalization__English";
+import InvalidParameterValueErrorLocalization__English from "./InvalidParameterValueErrorLocalization__English";
 
 
 class InvalidParameterValueError extends Error {
