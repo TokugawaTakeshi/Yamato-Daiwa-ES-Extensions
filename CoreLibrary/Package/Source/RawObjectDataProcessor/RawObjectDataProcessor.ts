@@ -1174,97 +1174,119 @@ class RawObjectDataProcessor {
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
-    switch (targetValueSpecification.type) {
+    /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
+    * https://stackoverflow.com/q/69848208/4818123
+    * https://stackoverflow.com/q/69848689/4818123
+    *  */
 
-      case Number:
-      case RawObjectDataProcessor.ValuesTypesIDs.number: {
-        return this.processNumberValue({
-          targetValue__expectedToBeNumber: targetValue,
-          targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case String:
-      case RawObjectDataProcessor.ValuesTypesIDs.string: {
-        return this.processStringValue({
-          targetValue__expectedToBeString: targetValue,
-          targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case Boolean:
-      case RawObjectDataProcessor.ValuesTypesIDs.boolean: {
-        return this.processBooleanValue({
-          targetValue__expectedToBeBoolean: targetValue,
-          targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case Object:
-      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: {
-        return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
-          targetValue__expectedToBeObject: targetValue,
-          targetObjectTypeValueSpecification: targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case Array:
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: {
-        return this.processIndexedArrayTypeValue({
-          targetValue__expectedToBeIndexedArray: targetValue,
-          targetIndexedArrayTypeValueSpecification: targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case Map:
-      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: {
-        return this.processAssociativeArrayTypeValue({
-          targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
-          targetAssociativeArrayTypeValueSpecification: targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      case RawObjectDataProcessor.ValuesTypesIDs.oneOf: {
-        return this.processMultipleTypesAllowedValue({
-          targetValue,
-          targetValueSpecification,
-          parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
-      }
-
-      default: {
-
-        Logger.logError({
-          errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.DEFAULT_TITLE,
-          description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
-          occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
-              "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
-        });
-
-        return this.isValidationOnlyMode ? { isValidButValidationOnlyModeActive: true } : { isInvalid: true };
-      }
+    if (
+      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.number ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Number")
+    ) {
+      return this.processNumberValue({
+        targetValue__expectedToBeNumber: targetValue,
+        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
     }
+
+
+    if (
+      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.string ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "String")
+    ) {
+      return this.processStringValue({
+        targetValue__expectedToBeString: targetValue,
+        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    if (
+      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.boolean ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Boolean")
+    ) {
+      return this.processBooleanValue({
+        targetValue__expectedToBeBoolean: targetValue,
+        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    if (
+     targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Object")
+    ) {
+      return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
+        targetValue__expectedToBeObject: targetValue,
+        targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+            FixedKeyAndValuePairsObjectValueSpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    if (
+      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Array")
+    ) {
+      return this.processIndexedArrayTypeValue({
+        targetValue__expectedToBeIndexedArray: targetValue,
+        targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+            NestedUniformElementsIndexedArrayPropertySpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    if (
+      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues ||
+      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Map")
+    ) {
+      return this.processAssociativeArrayTypeValue({
+        targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
+        targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+            NestedUniformElementsAssociativeArrayPropertySpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    if (targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.oneOf) {
+      return this.processMultipleTypesAllowedValue({
+        targetValue,
+        targetValueSpecification,
+        parentObject,
+        targetValueBeforeFirstPreValidationModification,
+        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      });
+    }
+
+
+    Logger.logError({
+      errorType: InvalidParameterValueError.NAME,
+      title: InvalidParameterValueError.DEFAULT_TITLE,
+      description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
+      occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
+          "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
+    });
+
+
+    return this.isValidationOnlyMode ? { isValidButValidationOnlyModeActive: true } : { isInvalid: true };
   }
 
 

@@ -1,9 +1,9 @@
-# Months
+# MonthsNames
 
 Allows to refer to the month by name, not by number what usually confusing with numeration from 0.
 
 ```typescript
-enum Months {
+enum MonthsNames {
   january = "JANUARY",
   february = "FEBRUARY",
   march = "MARCH",
@@ -22,6 +22,6 @@ enum Months {
 If you need lower case or capitalize first character, use dedicated functionality:
 
 ```typescript
-console.log(Months.january.toLowerCase()); // "january"
-console.log(capitalizeFirstCharacter(Months.january.toLowerCase())); // "January"
+console.log(MonthsNames.january.toLowerCase()); // "january"
+console.log(capitalizeFirstCharacter(MonthsNames.january.toLowerCase())); // "January"
 ```
