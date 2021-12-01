@@ -499,16 +499,18 @@ class RawObjectDataProcessor {
 
         oneOnMorePropertiesAreInvalid = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeObject,
-          targetPropertyValueSpecification: targetObjectTypeValueSpecification,
-          customValidationDescription: customValidator.descriptionForLogging,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeObject,
+            targetPropertyValueSpecification: targetObjectTypeValueSpecification,
+            customValidationDescription: customValidator.descriptionForLogging,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          })
+        );
       }
     }
 
@@ -658,16 +660,16 @@ class RawObjectDataProcessor {
           element = preValidationModification(element);
         } catch (error: unknown) {
           this.registerValidationError(
-              this.validationErrorsMessagesBuilder.buildPreValidationModificationFailedErrorMessage({
-                targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-                targetPropertyValue: element,
-                targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification.element,
-                targetPropertyValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
-                mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                    mustLogElementAsItWasBeforeFirstPreValidationModification,
-                thrownError: error
-              })
+            this.validationErrorsMessagesBuilder.buildPreValidationModificationFailedErrorMessage({
+              targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+              targetPropertyValue: element,
+              targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification.element,
+              targetPropertyValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
+              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+                  mustLogElementAsItWasBeforeFirstPreValidationModification,
+              thrownError: error
+            })
           );
         }
       }
@@ -768,16 +770,18 @@ class RawObjectDataProcessor {
 
         oneOnMoreElementsAreInvalid = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeIndexedArray,
-          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          customValidationDescription: customValidator.descriptionForLogging,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeIndexedArray,
+            targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+            customValidationDescription: customValidator.descriptionForLogging,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          })
+        );
       }
     }
 
@@ -1125,16 +1129,18 @@ class RawObjectDataProcessor {
 
         oneOnMoreValuesAreInvalid = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          customValidationDescription: customValidator.descriptionForLogging,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+            customValidationDescription: customValidator.descriptionForLogging,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          })
+        );
       }
     }
 
@@ -1425,16 +1431,18 @@ class RawObjectDataProcessor {
       isNotUndefined(targetValueSpecification.maximalValue) &&
       targetValue__expectedToBeNumber > targetValueSpecification.maximalValue
     ) {
-      this.validationErrorsMessagesBuilder.buildNumericValueIsGreaterThanAllowedMaximumErrorMessage({
-        targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-        targetPropertyValue: targetValue__expectedToBeNumber,
-        targetPropertyValueSpecification: targetValueSpecification,
-        targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-        mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
-        allowedMaximum: targetValueSpecification.maximalValue
-      });
+      this.registerValidationError(
+        this.validationErrorsMessagesBuilder.buildNumericValueIsGreaterThanAllowedMaximumErrorMessage({
+          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeNumber,
+          targetPropertyValueSpecification: targetValueSpecification,
+          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          allowedMaximum: targetValueSpecification.maximalValue
+        })
+      );
       return { isInvalid: true };
     }
 
@@ -1454,16 +1462,18 @@ class RawObjectDataProcessor {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
-          customValidationDescription: customValidator.descriptionForLogging
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeNumber,
+            targetPropertyValueSpecification: targetValueSpecification,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            customValidationDescription: customValidator.descriptionForLogging
+          })
+        );
       }
     }
 
@@ -1638,16 +1648,18 @@ class RawObjectDataProcessor {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
-          customValidationDescription: customValidator.descriptionForLogging
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeString,
+            targetPropertyValueSpecification: targetValueSpecification,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            customValidationDescription: customValidator.descriptionForLogging
+          })
+        );
       }
     }
 
@@ -1740,16 +1752,18 @@ class RawObjectDataProcessor {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeBoolean,
-          targetPropertyValueSpecification: targetValueSpecification,
-          customValidationDescription: customValidator.descriptionForLogging,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-        });
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeBoolean,
+            targetPropertyValueSpecification: targetValueSpecification,
+            customValidationDescription: customValidator.descriptionForLogging,
+            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
+            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
+            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          })
+        );
       }
     }
 
@@ -2624,13 +2638,13 @@ namespace RawObjectDataProcessor {
     export type DataForMessagesBuilding = PropertyDataForMessagesBuilding & TextDataForErrorMessagesBuilding;
 
     export type ValuesTypes =
-        Exclude<ValuesTypesIDs, ValuesTypesIDs.oneOf> |
         NumberConstructor |
         StringConstructor |
         BooleanConstructor |
         ObjectConstructor |
         ArrayConstructor |
-        MapConstructor;
+        MapConstructor |
+        ValuesTypesIDs;
   }
 
   export class ValidationErrorsMessagesBuilder {

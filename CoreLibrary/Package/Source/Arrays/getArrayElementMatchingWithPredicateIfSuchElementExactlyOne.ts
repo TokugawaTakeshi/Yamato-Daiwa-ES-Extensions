@@ -23,11 +23,11 @@ export namespace GetArrayElementMatchingWithPredicateIfSuchElementExactlyOneOper
 }
 
 
-export function getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
+export default function getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null;
 
-export function getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
+export default function getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
   options: { throwErrorIfElementNotFoundOrMoreThan1: true; }

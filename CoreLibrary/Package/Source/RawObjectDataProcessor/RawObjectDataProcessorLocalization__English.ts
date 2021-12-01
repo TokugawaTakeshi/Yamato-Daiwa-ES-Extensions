@@ -20,6 +20,12 @@ const RawObjectDataProcessorLocalization__English: Localization = {
       specificMessagePart
     }: Localization.DataForMessagesBuilding
   ): string {
+
+    const propertyOrElementSpecification__stringified: string = stringifyAndFormatArbitraryValue({
+      ...targetPropertyValueSpecification,
+      type: this.valueType(targetPropertyValueSpecification.type)
+    });
+
     return `${title}` +
         `\n\n●　Property / element: '${targetPropertyDotSeparatedQualifiedName}'` +
         `${insertSubstring(
@@ -27,8 +33,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
           { modifier: (targetSubstring: string): string => ` (new name: ${targetSubstring})` }
         )}` +
         `\n${specificMessagePart}` +
-        "\n\n●　Property / element specification: \n" +
-            `${stringifyAndFormatArbitraryValue(targetPropertyValueSpecification)}` +
+        `\n\n●　Property / element specification: \n${propertyOrElementSpecification__stringified}` +
         `\n●　Actual value: ${stringifyAndFormatArbitraryValue(targetPropertyValue)}` +
         `${insertSubstringIf(
           "\n●　Value before first pre-validation modification: " + 
@@ -237,6 +242,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues:
 
         return "associative array of uniform type values";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "multiple alternatives allowed";
 
       default: return "";
     }
