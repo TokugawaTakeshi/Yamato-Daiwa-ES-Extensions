@@ -169,6 +169,81 @@ class RawObjectDataProcessor {
     RawObjectDataProcessor.defaultLocalization = newLocalization;
   }
 
+  /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
+    * https://stackoverflow.com/q/69848208/4818123
+    * https://stackoverflow.com/q/69848689/4818123
+    * [ Approach ] This method is public because it is required for the 'localization'.
+    *  */
+  public static getNormalizedValueTypeID(
+      valueType: NumberConstructor |
+          StringConstructor |
+          BooleanConstructor |
+          ObjectConstructor |
+          ArrayConstructor |
+          MapConstructor |
+          RawObjectDataProcessor.ValuesTypesIDs
+  ): RawObjectDataProcessor.ValuesTypesIDs {
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.number ||
+      (typeof valueType === "function" && valueType.name === "Number")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.number;
+    }
+
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.string ||
+      (typeof valueType === "function" && valueType.name === "String")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.string;
+    }
+
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.boolean ||
+      (typeof valueType === "function" && valueType.name === "Boolean")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.boolean;
+    }
+
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject ||
+      (typeof valueType === "function" && valueType.name === "Object")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject;
+    }
+
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements ||
+      (typeof valueType === "function" && valueType.name === "Array")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements;
+    }
+
+
+    if (
+      valueType === RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues ||
+      (typeof valueType === "function" && valueType.name === "Map")
+    ) {
+      return RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues;
+    }
+
+    if (valueType === RawObjectDataProcessor.ValuesTypesIDs.oneOf) {
+      return RawObjectDataProcessor.ValuesTypesIDs.oneOf;
+    }
+
+
+    /* [ Approach ] Except the bug case, this point reaching is possible only with invalid TypeScript. */
+    Logger.throwErrorAndLog({
+      errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
+      title: InvalidParameterValueError.DEFAULT_TITLE,
+      occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(parametersObject)"
+    });
+  }
+
 
   private constructor(
     parametersObject: {
@@ -1180,98 +1255,83 @@ class RawObjectDataProcessor {
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
-    /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
+    /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
     * https://stackoverflow.com/q/69848208/4818123
     * https://stackoverflow.com/q/69848689/4818123
     *  */
+    const targetValueTypeID: RawObjectDataProcessor.ValuesTypesIDs = RawObjectDataProcessor.
+        getNormalizedValueTypeID(targetValueSpecification.type);
 
-    if (
-      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.number ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Number")
-    ) {
-      return this.processNumberValue({
-        targetValue__expectedToBeNumber: targetValue,
-        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
+    switch (targetValueTypeID) {
+
+      case RawObjectDataProcessor.ValuesTypesIDs.number: {
+        return this.processNumberValue({
+          targetValue__expectedToBeNumber: targetValue,
+          targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      case RawObjectDataProcessor.ValuesTypesIDs.string: {
+        return this.processStringValue({
+          targetValue__expectedToBeString: targetValue,
+          targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      case RawObjectDataProcessor.ValuesTypesIDs.boolean: {
+        return this.processBooleanValue({
+          targetValue__expectedToBeBoolean: targetValue,
+          targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: {
+        return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
+          targetValue__expectedToBeObject: targetValue,
+          targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+              FixedKeyAndValuePairsObjectValueSpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: {
+        return this.processIndexedArrayTypeValue({
+          targetValue__expectedToBeIndexedArray: targetValue,
+          targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+              NestedUniformElementsIndexedArrayPropertySpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: {
+        return this.processAssociativeArrayTypeValue({
+          targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
+          targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
+              NestedUniformElementsAssociativeArrayPropertySpecification,
+          parentObject,
+          targetValueBeforeFirstPreValidationModification,
+          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        });
+      }
+
+      default: break;
     }
 
 
-    if (
-      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.string ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "String")
-    ) {
-      return this.processStringValue({
-        targetValue__expectedToBeString: targetValue,
-        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
-    }
-
-
-    if (
-      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.boolean ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Boolean")
-    ) {
-      return this.processBooleanValue({
-        targetValue__expectedToBeBoolean: targetValue,
-        targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
-    }
-
-
-    if (
-     targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Object")
-    ) {
-      return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
-        targetValue__expectedToBeObject: targetValue,
-        targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
-            FixedKeyAndValuePairsObjectValueSpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
-    }
-
-
-    if (
-      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Array")
-    ) {
-      return this.processIndexedArrayTypeValue({
-        targetValue__expectedToBeIndexedArray: targetValue,
-        targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
-            NestedUniformElementsIndexedArrayPropertySpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
-    }
-
-
-    if (
-      targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues ||
-      (typeof targetValueSpecification.type === "function" && targetValueSpecification.type.name === "Map")
-    ) {
-      return this.processAssociativeArrayTypeValue({
-        targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
-        targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
-            NestedUniformElementsAssociativeArrayPropertySpecification,
-        parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
-      });
-    }
-
-
+    /* [ Theory ] TypeScript will not understand the correct discriminated union if to check with condition vis switch/case. */
     if (targetValueSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.oneOf) {
       return this.processMultipleTypesAllowedValue({
         targetValue,
@@ -2654,7 +2714,7 @@ namespace RawObjectDataProcessor {
 
     public constructor(localization: Localization) {
       this.localization = localization;
-      this.buildErrorMessage = localization.errorMessageBasicTemplate;
+      this.buildErrorMessage = localization.errorMessageBasicTemplate.bind(this.localization);
     }
 
     public get rawDataIsNullErrorMessage(): string {

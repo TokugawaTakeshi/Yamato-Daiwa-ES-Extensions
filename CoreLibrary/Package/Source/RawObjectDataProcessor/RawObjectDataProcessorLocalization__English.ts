@@ -222,30 +222,32 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   /* === Value type ================================================================================================= */
   valueType(valueType: Localization.ValuesTypes): string {
 
-    switch (valueType) {
+    /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
+    * https://stackoverflow.com/q/69848208/4818123
+    * https://stackoverflow.com/q/69848689/4818123
+    *  */
+    const targetValueTypeID: RawObjectDataProcessor.ValuesTypesIDs = RawObjectDataProcessor.
+        getNormalizedValueTypeID(valueType);
 
-      case Number: case RawObjectDataProcessor.ValuesTypesIDs.number: return "number";
-      case String: case RawObjectDataProcessor.ValuesTypesIDs.string: return "string";
-      case Boolean: case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "boolean";
+    switch (targetValueTypeID) {
 
-      case Array:
+      case RawObjectDataProcessor.ValuesTypesIDs.number: return "number";
+      case RawObjectDataProcessor.ValuesTypesIDs.string: return "string";
+      case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "boolean";
+
       case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements:
-
         return "indexed array of uniform elements";
 
-      case Object:
       case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject:
-
         return "filed key and value pairs object";
 
-      case Map:
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues:
 
         return "associative array of uniform type values";
 
       case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "multiple alternatives allowed";
 
-      default: return "";
+      default: return "UNKNOWN";
     }
   },
 
