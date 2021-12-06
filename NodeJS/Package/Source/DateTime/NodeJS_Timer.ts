@@ -4,15 +4,15 @@ import Timeout = NodeJS.Timeout;
 
 export default class NodeJS_Timer extends Timer {
 
-  private timeout!: Timeout;
+  private nativeTimeout!: Timeout;
 
 
   public start(): void {
-    this.timeout = setTimeout(this.onElapsed.bind(this), secondsToMilliseconds(this.period__seconds));
+    this.nativeTimeout = setTimeout(this.onElapsed.bind(this), secondsToMilliseconds(this.period__seconds));
   }
 
   public stop(): void {
-    clearTimeout(this.timeout);
+    clearTimeout(this.nativeTimeout);
   }
 
 

@@ -21,6 +21,7 @@ export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getP
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
+export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
 export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
@@ -41,6 +42,7 @@ export {
 export { default as getIndexesOfArrayElementsWhichSatisfiesToPredicate }
     from "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
 export { default as getIndexOfArrayElementByPredicate } from "./Arrays/getIndexOfArrayElementByPredicate";
+export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 /* === Sets ========================================================================================================= */
 export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
