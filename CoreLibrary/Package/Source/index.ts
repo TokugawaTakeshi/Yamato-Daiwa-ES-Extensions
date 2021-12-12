@@ -26,10 +26,12 @@ export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsC
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
 export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
 export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
+export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings/replaceDoubleBackslashesWithForwardSlashes";
 export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
 export { default as trimSpaces } from "./Strings/trimSpaces";
+
 
 /* === Arrays ======================================================================================================= */
 export {

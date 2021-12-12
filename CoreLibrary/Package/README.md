@@ -116,6 +116,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 #### Date & Time
 
+* [`TimePoint`](Documentation/DateTime/TimePoint.md) 
+  The alternative to native `Date` allows to build the formatted date/time strings easily.
 * [`getDaysCountInSpecificMonth`](Documentation/DateTime/getDaysCountInSpecificMonth.md)
   Return days count in specified year and month.
 * [`millisecondsToSeconds`](Documentation/DateTime/millisecondsToSeconds.md)

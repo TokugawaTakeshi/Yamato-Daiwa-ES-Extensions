@@ -25,12 +25,12 @@ class TimePoint {
   public readonly monthNumber__numerationFrom1: number;
   public readonly monthNumber__numerationFrom1__2Digits: string;
 
+  public readonly dayOfMonth: number;
+
+  public readonly dayOfWeek: DaysOfWeek;
   public readonly dayOfWeekNumber__numerationFrom0AsSunday: number;
   public readonly dayOfWeekNumber__numerationFrom1AsSunday: number;
   public readonly dayOfWeekNumber__numerationFrom1AsSunday__2Digits: string;
-  public readonly dayOfWeek: DaysOfWeek;
-
-  public readonly dayOfMonth: number;
 
   public readonly hours__24Format: number;
   public readonly hours__24Format__2Digits: string;
@@ -140,7 +140,7 @@ class TimePoint {
   }
 
 
-  public get toISO8601String(): string {
+  public toISO8601String(): string {
     return this.nativeDateObject.toISOString();
   }
 }

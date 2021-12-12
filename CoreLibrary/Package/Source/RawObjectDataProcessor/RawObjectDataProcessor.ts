@@ -601,7 +601,19 @@ class RawObjectDataProcessor {
       const postValidationModification of RawObjectDataProcessor.
           getNormalizedPostValidationModifications(targetObjectTypeValueSpecification.postValidationModifications)
     ) {
-      processedValueWorkpiece = postValidationModification(targetValue__expectedToBeObject);
+      processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
+    }
+
+    if (isNonEmptyArray(targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications)) {
+      for (
+        const propertyKeyWhichWillBeDeleted of
+        targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications
+      ) {
+        /* [ ESLint muting rationale ] Each element of this array has been specified by user, so user must be aware of
+        *     potential side effects of properties deleting. */
+        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete */
+        delete processedValueWorkpiece[propertyKeyWhichWillBeDeleted];
+      }
     }
 
 
@@ -872,7 +884,7 @@ class RawObjectDataProcessor {
       const postValidationModification of RawObjectDataProcessor.
           getNormalizedPostValidationModifications(targetIndexedArrayTypeValueSpecification.postValidationModifications)
     ) {
-      processedValueWorkpiece = postValidationModification(targetValue__expectedToBeIndexedArray as ParsedJSON_Array);
+      processedValueWorkpiece = postValidationModification(processedValueWorkpiece as ParsedJSON_Array);
     }
 
 
@@ -1231,7 +1243,7 @@ class RawObjectDataProcessor {
       const postValidationModification of RawObjectDataProcessor.
           getNormalizedPostValidationModifications(targetAssociativeArrayTypeValueSpecification.postValidationModifications)
     ) {
-      processedValueWorkpiece = postValidationModification(targetValue__expectedToBeAssociativeArrayTypeObject);
+      processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
     }
 
 
@@ -1736,9 +1748,9 @@ class RawObjectDataProcessor {
     let processedValue: string = targetValue__expectedToBeString;
 
     for (
-        const postValidationModification of RawObjectDataProcessor.
-    getNormalizedPostValidationModifications(targetValueSpecification.postValidationModifications)
-        ) {
+      const postValidationModification of RawObjectDataProcessor.
+          getNormalizedPostValidationModifications(targetValueSpecification.postValidationModifications)
+    ) {
       processedValue = postValidationModification(processedValue);
     }
 
@@ -2122,8 +2134,7 @@ namespace RawObjectDataProcessor {
   export type PreValidationModification = (rawValue: unknown) => unknown;
 
   type FixedKeyAndValuePairsObjectTypeValueSpecification = {
-    readonly extendValidatedData?: (validData: ParsedJSON_Object) => void;
-    readonly propertiesWillBeDeletedAfterValidatedDataExtending?: Array<string>;
+    readonly propertiesWillBeDeletedAfterPostValidationModifications?: Array<string>;
   };
 
   type IndexedArrayTypeValueSpecification = {

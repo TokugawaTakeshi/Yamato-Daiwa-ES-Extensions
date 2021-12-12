@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.4.0-alpha.8",
+  "version": "1.4.0-alpha.13",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -42,6 +42,6 @@
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
     "Lint": "eslint Source Tests",
-    "Realize alpha":  "npm publish --tag alpha"
+    "Rebuild distributable and realize alpha":  "npm run \"Rebuild distributable\" && npm publish --tag alpha"
   }
 }
