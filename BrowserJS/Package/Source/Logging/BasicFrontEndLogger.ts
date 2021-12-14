@@ -51,6 +51,7 @@ abstract class BasicFrontEndLogger {
       throw errorLog.errorInstance;
     }
 
+
     const errorWillBeThrown: Error = new Error(errorLog.description);
     errorWillBeThrown.name = errorLog.errorType;
 
@@ -59,9 +60,7 @@ abstract class BasicFrontEndLogger {
 
   public static logError(errorLog: ErrorLog): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      errorLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
-    );
+    const badgeText: string = errorLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
 
     console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
@@ -93,9 +92,7 @@ abstract class BasicFrontEndLogger {
 
   public static logErrorLikeMessage(errorLikeLog: Log): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      errorLikeLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
-    );
+    const badgeText: string = errorLikeLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
 
     console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],

@@ -1,5 +1,5 @@
 export default function insertSubstring(
-  targetSubstring: string | null | undefined,
+  targetSubstring: string | number | null | undefined,
   options: {
     condition?: boolean;
     modifier?: (targetSubstring: string) => string;
@@ -10,9 +10,11 @@ export default function insertSubstring(
     return "";
   }
 
+
   if (options.condition === false) {
     return "";
   }
 
-  return typeof options.modifier === "undefined" ? targetSubstring : options.modifier(targetSubstring);
+
+  return typeof options.modifier === "undefined" ? targetSubstring.toString() : options.modifier(targetSubstring.toString());
 }

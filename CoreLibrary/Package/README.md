@@ -68,15 +68,18 @@ The tool for the unknown at advance external data (from HTTP request/response, f
 
 #### Strings
 
-All functions working with strings supports the [surrogate pairs](https://stackoverflow.com/questions/31986614/what-is-a-surrogate-pair).
+All functions working with strings are supporting the [surrogate pairs](https://stackoverflow.com/questions/31986614/what-is-a-surrogate-pair).
 If some function works incorrectly with surrogate pairs, it means the bug; please feel free to open issue in this case.
 
 * `areStringifiedDigitsOnly` Checks is string value consists exclusively from the digits.
 * `capitalizeFirstCharacter` Capitalizes first character of target string value.
+* [`EmailAddress`](Documentation/Strings/EmailAddress.md) 
+  Class working with email addresses. Currently, consists from validating function and regular expression of valid emails.
 * `getLastCharacter` Returns the last character of target string value.
 * [`getPositionsOfAllSubstringOccurrences`](Documentation/Strings/getPositionsOfAllSubstringOccurrences.md)
   Returns the positions of each occurrence of specified substring.
 * `removeAllSpecifiedCharacters` Removes specified characters from the string value.
+* [`removeLastCharacter`](Documentation/Strings/removeLastCharacter.md) Removes last character.
 * `removeNonDigitsCharacters` Removes all characters from the string excepts digits.
 * [`removeNthCharacter`](Documentation/Strings/removeNthCharacter.md)
   Removes the symbol in specified position from the string. Supports the surrogate pairs.
@@ -89,16 +92,22 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * [`splitString`](Documentation/Strings/splitString.md) Alternative of native `String.prototype.split()`
   supporting surrogate pairs.
 * `stringifyAndFormatArbitraryValue` Converts to readable string any type of data.
+* `replaceDoubleBackslashesWithForwardSlashes` Replaces double backslashes with forward slashes. 
+* [`trimSpaces`](Documentation/Strings/trimSpaces/trimSpaces.md) Trim prepended and/or appended space characters; unlike native
+ `String.prototype.trim` acts selectively on specified spaces kinds.
 
 #### Arrays
 
-* `getArrayElementWhichMustExistByPredicate` Returns the first satisfies to predicate array element. If no such element,
-  `UnexpectedEventError` will be thrown.
+* [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
+  Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will
+  be thrown or `null` will be returned (depending on dedicated option's value).
 * `getLastElementOfNonEmptyArray` Return the last element of array. If no such element, `UnexpectedEventError` will be thrown.
 * [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
   Returns the array of indexes of elements of array which are satisfies to predicate function.
 * [`getIndexOfArrayElementByPredicate`](Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
   Returns the index of array element matching with predicate of `null` if no such element.
+* [`twoDimensionalizeArray`](Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
+  with nested arrays of fixed elements count.
 
 #### Sets
 
@@ -120,6 +129,11 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   The alternative to native `Date` allows to build the formatted date/time strings easily.
 * [`getDaysCountInSpecificMonth`](Documentation/DateTime/getDaysCountInSpecificMonth.md)
   Return days count in specified year and month.
+* [`getMonthNameByNumber`](Documentation/DateTime/getMonthNameByNumber.md)
+  Converts the month number (from 0 or 1) to element of [MonthsNames](Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration. 
+* [`getMonthNumberByName`](Documentation/DateTime/getMonthNumberByName.md)
+  Converts the element of [MonthsNames](Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration to number of 
+  month (from 0 or 1)  
 * [`millisecondsToSeconds`](Documentation/DateTime/millisecondsToSeconds.md)
   Converts milliseconds amount to amount of seconds.
 * [`secondsToMilliseconds`](Documentation/DateTime/secondsToMilliseconds.md)
@@ -163,6 +177,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * `getRandomInteger` Returns random integer not less than specified `minimalValue` and more than `maximalValue`.
 * `getRandomLatinCharacter` Returns random latin character.
 * `getRandomObjectPropertyValue` Returns random object property value.
+* `getRandomSubarray` Returns the selection of elements of specified array; minimal and maximal elements count could be specified.
 * `getSpecificBooleanValueWithProbability` Returns specific boolean value with specified probability.
 
 #### Constants and enumerations

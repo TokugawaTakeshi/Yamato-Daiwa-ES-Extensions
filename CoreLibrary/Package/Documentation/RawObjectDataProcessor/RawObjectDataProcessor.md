@@ -460,6 +460,22 @@ It's important to distinct the **properties** and their **names** (**keys**) and
   without object context.
 
 
+## Disclaimer
+
+Currently,
+
+ * `RawObjectDataProcessor.ProcessingResult.processedData` is the object/array built from zero based on raw data - it is
+    NOT same object as raw data.
+ * All properties which has not been specified in second parameter will be included to 
+    `RawObjectDataProcessor.ProcessingResult.processedData`.
+
+For the retrieving of the data in frontend side via AJAX or retrieving the data from the file, basically it is not a problem.
+However, there are some cases when all properties must be kept.
+
+The adding of data processing without creating of new object is on plans. However, according to preliminary estimates,
+the volume of the code can increase by 2 times, so the priority of this task will depends on demand.
+
+
 ## Getting started
 
 The minimal code consists from:

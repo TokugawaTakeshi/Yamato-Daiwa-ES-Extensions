@@ -38,9 +38,19 @@ export default function trimSpaces(
     }
   }
 
-  return targetString.
-      replace(new RegExp(`^[${charactersSetExpression}]+`, "u"), "").
-      replace(new RegExp(`[${charactersSetExpression}]+$`, "u"), "");
+
+  let mutatingResult: string = targetString;
+
+  if (!skipLeadingOnes) {
+    mutatingResult = targetString.replace(new RegExp(`^[${charactersSetExpression}]+`, "u"), "");
+  }
+
+  if (!skipTrailingOnes) {
+    mutatingResult = targetString.replace(new RegExp(`[${charactersSetExpression}]+$`, "u"), "");
+  }
+
+
+  return mutatingResult;
 }
 
 

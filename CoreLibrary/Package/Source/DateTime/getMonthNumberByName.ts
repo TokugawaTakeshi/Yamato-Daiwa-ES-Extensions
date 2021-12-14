@@ -1,12 +1,29 @@
-/* [ ESLint muting rationale ] Here is all numbers are refers to months. */
+/* [ ESLint muting rationale ] Here are all numbers refers to months. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
+
+import Logger from "../Logging/Logger";
+import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default function getMonthNumberByName(
   parametersObject: { targetMonthName: MonthsNames; numerationFrom: number; }
 ): number {
+
+  const numerationFrom: number = parametersObject.numerationFrom;
+
+  if (numerationFrom !== 0 && numerationFrom !== 1) {
+    Logger.throwErrorAndLog({
+      errorInstance: new InvalidParameterValueError({
+        parameterName: "parametersObject.numerationFrom",
+        messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${numerationFrom}.`
+      }),
+      title: InvalidParameterValueError.DEFAULT_TITLE,
+      occurrenceLocation: "getMonthNumberByName(parametersObject)"
+    });
+  }
+
 
   const isNumerationFrom0: boolean = parametersObject.numerationFrom === 0;
 

@@ -6,14 +6,14 @@ import {
 } from "@yamato-daiwa/es-extensions";
 
 
-export function getExpectedToBeSingleElement(
+export default function getExpectedToBeSingleElement(
   parametersObject: {
     selector: string;
     context?: Element | Document;
   }
 ): Element;
 
-export function getExpectedToBeSingleElement<SpecificElement extends Element>(
+export default function getExpectedToBeSingleElement<SpecificElement extends Element>(
   parametersObject: {
     selector: string;
     context?: Element | Document;
@@ -32,7 +32,7 @@ export default function getExpectedToBeSingleElement<SpecificElement extends Ele
     context?: Element | Document;
     elementTypeChecker?: (element: Element) => element is SpecificElement;
   }
-): SpecificElement {
+): Element | SpecificElement {
 
   const targetElementSearchRequestMatch: Array<Element> = Array.from(context.querySelectorAll(selector));
 

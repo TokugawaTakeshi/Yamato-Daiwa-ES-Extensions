@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.4.0
+ * @yamato-daiwa/es-extensions v1.4
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
@@ -24,6 +24,7 @@ export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpec
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
+export { default as removeSpecificCharacterInLastPosition } from "./Strings/removeSpecificCharacterInLastPosition";
 export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
 export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
 export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings/replaceDoubleBackslashesWithForwardSlashes";
@@ -31,6 +32,7 @@ export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
 export { default as trimSpaces } from "./Strings/trimSpaces";
+export { SpaceCharacters } from "./Strings/CharactersAssets";
 
 
 /* === Arrays ======================================================================================================= */
@@ -88,6 +90,7 @@ export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "
 /* --- Objects ------------------------------------------------------------------------------------------------------ */
 export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
 export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
+export { default as isNonEmptyArbitraryObject } from "./TypeGuards/Objects/isNonEmptyArbitraryObject";
 export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
 export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
@@ -99,6 +102,7 @@ export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray"
 
 /* --- undefined & null --------------------------------------------------------------------------------------------- */
 export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
+export { default as isEitherUndefinedOrNull } from "./TypeGuards/Nullables/isEitherUndefinedOrNull";
 export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
 export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined";
 export { default as isNull } from "./TypeGuards/Nullables/isNull";
@@ -111,8 +115,14 @@ export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
 /* === Date & Time ================================================================================================== */
+export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
+export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
 export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
+export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
+export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNumber";
+export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
+export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
 export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
 export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
@@ -152,6 +162,12 @@ export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DaysOfWeek";
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
 export { default as HTTP_StatusCodes } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
 export { default as MonthsNames } from "./ConstantsAndEnumerations/MonthsNames";
+export {
+  HOURS_PER_STELLAR_DAY,
+  MINUTES_PER_HOUR,
+  SECONDS_PER_MINUTE,
+  MONTHS_PER_YEAR
+} from "./ConstantsAndEnumerations/DateTimeConstants";
 
 
 /* === Pagination =================================================================================================== */

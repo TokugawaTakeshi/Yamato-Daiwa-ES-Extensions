@@ -7,6 +7,7 @@ import MonthsNames from "../../ConstantsAndEnumerations/MonthsNames";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
 import isString from "../../TypeGuards/Strings/isString";
+import getMonthNameByNumber from "../getMonthNameByNumber";
 
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -83,21 +84,7 @@ class TimePoint {
     this.monthNumber__numerationFrom1 = this.monthNumber__numerationFrom0 + 1;
     this.monthNumber__numerationFrom1__2Digits = this.monthNumber__numerationFrom1.toString().padStart(2, "0");
 
-    switch (this.monthNumber__numerationFrom1) {
-      case 1: { this.monthName = MonthsNames.january; break; }
-      case 2: { this.monthName = MonthsNames.february; break; }
-      case 3: { this.monthName = MonthsNames.march; break; }
-      case 4: { this.monthName = MonthsNames.april; break; }
-      case 5: { this.monthName = MonthsNames.may; break; }
-      case 6: { this.monthName = MonthsNames.june; break; }
-      case 7: { this.monthName = MonthsNames.july; break; }
-      case 8: { this.monthName = MonthsNames.august; break; }
-      case 9: { this.monthName = MonthsNames.september; break; }
-      case 10: { this.monthName = MonthsNames.october; break; }
-      case 11: { this.monthName = MonthsNames.november; break; }
-      default: { this.monthName = MonthsNames.december; }
-
-    }
+    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationForm: 1 });
 
     this.dayOfMonth = normalizedDateTime.getDate();
 

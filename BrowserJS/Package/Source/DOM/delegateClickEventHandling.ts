@@ -1,15 +1,17 @@
 import { isNotNull } from "@yamato-daiwa/es-extensions";
 
 
-export default function delegateClickEventHandling(
+export default function delegateClickEventHandling<ClickTargetElement extends Element>(
   {
     clickTargetSelector,
+    clickTargetTypeChecker,
     container = document
   }: {
     clickTargetSelector: string;
-    container: HTMLElement | Document;
+    clickTargetTypeChecker: (element: Element) => element is ClickTargetElement;
+    container?: Element | Document;
   },
-  handler: (event: MouseEvent) => void
+  handler: (clickedElement: ClickTargetElement, event: MouseEvent) => void
 ): void {
 
   container.addEventListener("click", (event: Event): void => {
@@ -18,14 +20,21 @@ export default function delegateClickEventHandling(
       return;
     }
 
+
     for (
-        let targetParentNode: Element | null = event.target as Element;
-        isNotNull(targetParentNode) && targetParentNode !== event.currentTarget;
-        targetParentNode = targetParentNode.parentNode as Element
+      let parentElement: Element | null = event.target as Element;
+      isNotNull(parentElement) && parentElement !== event.currentTarget;
+      parentElement = parentElement.parentElement
     ) {
 
-      if (targetParentNode.matches(clickTargetSelector)) {
-        handler(event);
+      if (parentElement.matches(clickTargetSelector)) {
+
+        if (!clickTargetTypeChecker(parentElement)) {
+          console.error("error");
+          return;
+        }
+
+        handler(parentElement, event);
       }
     }
   }, false);
