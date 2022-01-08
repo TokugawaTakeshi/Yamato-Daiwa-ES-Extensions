@@ -51,6 +51,7 @@ abstract class BasicFrontEndLogger {
       throw errorLog.errorInstance;
     }
 
+
     const errorWillBeThrown: Error = new Error(errorLog.description);
     errorWillBeThrown.name = errorLog.errorType;
 
@@ -59,9 +60,7 @@ abstract class BasicFrontEndLogger {
 
   public static logError(errorLog: ErrorLog): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      errorLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
-    );
+    const badgeText: string = errorLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
 
     console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
@@ -93,9 +92,7 @@ abstract class BasicFrontEndLogger {
 
   public static logErrorLikeMessage(errorLikeLog: Log): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      errorLikeLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.error
-    );
+    const badgeText: string = errorLikeLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
 
     console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
@@ -137,9 +134,7 @@ abstract class BasicFrontEndLogger {
 
   public static logSuccess(successLog: SuccessLog): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      successLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.success
-    );
+    const badgeText: string = successLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success;
 
     console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "mediumseagreen", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
@@ -154,9 +149,7 @@ abstract class BasicFrontEndLogger {
 
   public static logInfo(infoLog: InfoLog): void {
 
-    const badgeText: string = substituteWhenUndefined(
-      infoLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.info
-    );
+    const badgeText: string = infoLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.info;
 
     console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
       [ ` ${badgeText} `, { background: "dodgerblue", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
@@ -177,12 +170,12 @@ abstract class BasicFrontEndLogger {
     formattedOutputData: BasicFrontEndLogger.FormattedOutputData
   ): Array<string> {
 
-    const outputContents: Array<string> = [];
+    const outputContent: Array<string> = [];
     const CSS_DeclarationsForEachContent: Array<string> = [];
 
     for (const singleFormattedOutputData of formattedOutputData) {
 
-      outputContents.push(`%c${singleFormattedOutputData[0]}`);
+      outputContent.push(`%c${singleFormattedOutputData[0]}`);
 
       let CSS_Declarations: string = "";
 
@@ -193,7 +186,7 @@ abstract class BasicFrontEndLogger {
       CSS_DeclarationsForEachContent.push(CSS_Declarations);
     }
 
-    return [ outputContents.join(""), ...CSS_DeclarationsForEachContent ];
+    return [ outputContent.join(""), ...CSS_DeclarationsForEachContent ];
   }
 }
 

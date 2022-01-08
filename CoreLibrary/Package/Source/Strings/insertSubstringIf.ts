@@ -1,3 +1,3 @@
-export default function insertSubstringIf(substring: string, condition: boolean): string {
-  return condition ? substring : "";
+export default function insertSubstringIf(substring: string | number, condition: boolean): string {
+  return condition ? substring.toString() : "";
 }

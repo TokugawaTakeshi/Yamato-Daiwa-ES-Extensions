@@ -19,9 +19,12 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 
 ## Documentation
+#### Functionality reference
 
 ### Logging
 
 * [📖 `BasicFrontEndLogger`](Documentation/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md)
   The implementation of `ILogger` interface for the `Logger` facade which could be used as the base of the custom implementation
   for the frontend side of the websites / web application.
+
+

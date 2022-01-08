@@ -271,9 +271,9 @@ type User = { ID: string; familyName: string; givenName: string; };
 function isUser(rawData: unknown): rawData is User {
   return typeof rawData === "object" &&
       rawData !== null &&
-      typeof(rawData.ID) === "string" &&
-      typeof(rawData.familyName) === "string" &&
-      typeof(rawData.givenName) === "string";
+      typeof((rawData as { ID: unknown; }).ID ) === "string" &&
+      typeof((rawData as { familyName: unknown; }).familyName) === "string" &&
+      typeof((rawData as { givenName: unknown; }).givenName) === "string";
 } 
 ```
 
@@ -291,8 +291,8 @@ type User = { ID: string; familyName: string; givenName: string; };
 
 function isUser(rawData: unknown): rawData is User {
   return isArbitraryObject(rawData) &&
-      typeof(rawData.title) === "string" &&
-      typeof(rawData.price) === "number";
+      typeof((rawData as { title: unknown }).title) === "string" &&
+      typeof((rawData as { price: unknown }).price) === "number";
 }
 
 const potentialUser: unknown = { title: "Shampoo", price: 1000 };
@@ -458,6 +458,22 @@ It's important to distinct the **properties** and their **names** (**keys**) and
     keys called **indexes** and values called **elements**.
 * The **value** could be a part of object's entry or the element of an array, but it also could exist on its own,
   without object context.
+
+
+## Disclaimer
+
+Currently,
+
+ * `RawObjectDataProcessor.ProcessingResult.processedData` is the object/array built from zero based on raw data - it is
+    NOT same object as raw data.
+ * All properties which has not been specified in second parameter will be included to 
+    `RawObjectDataProcessor.ProcessingResult.processedData`.
+
+For the retrieving of the data in frontend side via AJAX or retrieving the data from the file, basically it is not a problem.
+However, there are some cases when all properties must be kept.
+
+The adding of data processing without creating of new object is on plans. However, according to preliminary estimates,
+the volume of the code can increase by 2 times, so the priority of this task will depends on demand.
 
 
 ## Getting started
