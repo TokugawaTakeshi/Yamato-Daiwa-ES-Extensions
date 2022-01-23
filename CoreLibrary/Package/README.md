@@ -11,7 +11,6 @@ Helper functions and classes aimed to reduce the routine code. Build-in TypeScri
 
 ## Roadmap
 
-* [🛣️ Version 1.4 (2021-22 Winter sprint)](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/current)
 * [🛣️ Version 1.5 (2022 Spring sprint)](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/122-13)
 
 **Hint:** Set the unlabeled slider in the top right corner of the screen to `XL` to see the tags and descriptions.
