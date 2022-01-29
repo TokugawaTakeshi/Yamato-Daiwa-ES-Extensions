@@ -3,7 +3,6 @@ import Localization = RawObjectDataProcessor.Localization;
 
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 import insertSubstring from "../Strings/insertSubstring";
-import insertSubstringIf from "../Strings/insertSubstringIf";
 
 
 const RawObjectDataProcessorLocalization__English: Localization = {
@@ -14,8 +13,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
       targetPropertyNewName,
       targetPropertyValue,
       targetPropertyValueSpecification,
-      targetPropertyValueBeforeFirstPreValidationModification,
-      mustLogTargetPropertyValueBeforeFirstPreValidationModification,
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification,
       title,
       specificMessagePart
     }: Localization.DataForMessagesBuilding
@@ -35,11 +33,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
         `\n${specificMessagePart}` +
         `\n\n●　Property / element specification: \n${propertyOrElementSpecification__stringified}` +
         `\n●　Actual value: ${stringifyAndFormatArbitraryValue(targetPropertyValue)}` +
-        `${insertSubstringIf(
-          "\n●　Value before first pre-validation modification: " + 
-              `${stringifyAndFormatArbitraryValue(targetPropertyValueBeforeFirstPreValidationModification)}`,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification
-        )}`;
+        `${insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
+          modifier: (targetSubstring: string): string => `\n●　Value before first pre-validation modification: ${targetSubstring}`
+        })}`;
   },
 
   errorMessagesListItemHeadingTemplate(messageNumber: number): string { return `=== Error No. ${messageNumber} ==========`; },
