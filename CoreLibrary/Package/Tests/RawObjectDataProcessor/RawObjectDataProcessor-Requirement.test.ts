@@ -98,11 +98,7 @@ describe("RawObjectProcessor: requirement", (): void => {
             /* 〔 ESLint muting rationale 〕 Here is must be the undefined */
             /* eslint-disable-next-line no-undefined */
             targetPropertyValue: undefined,
-            targetPropertyValueSpecification: dataSpecification.properties[targetPropertyName],
-            /* 〔 ESLint muting rationale 〕 Here is must be the undefined */
-            /* eslint-disable-next-line no-undefined */
-            targetPropertyValueBeforeFirstPreValidationModification: undefined,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification: false
+            targetPropertyValueSpecification: dataSpecification.properties[targetPropertyName]
           })
         );
       });
@@ -208,11 +204,7 @@ describe("RawObjectProcessor: requirement", (): void => {
                 /* eslint-disable-next-line no-undefined */
                 targetPropertyValue: undefined,
                 targetPropertyValueSpecification: dataSpecification.properties[targetPropertyName],
-                requirementConditionDescription,
-                /* 〔 ESLint muting rationale 〕 Here is must be the undefined */
-                /* eslint-disable-next-line no-undefined */
-                targetPropertyValueBeforeFirstPreValidationModification: undefined,
-                mustLogTargetPropertyValueBeforeFirstPreValidationModification: false
+                requirementConditionDescription
               })
         );
       });

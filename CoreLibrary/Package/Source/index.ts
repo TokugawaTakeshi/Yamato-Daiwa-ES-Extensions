@@ -32,7 +32,12 @@ export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
 export { default as trimSpaces } from "./Strings/trimSpaces";
-export { SpaceCharacters } from "./Strings/CharactersAssets";
+export {
+  SpaceCharacters,
+  latinCharacters__lowercase,
+  latinCharacters__uppercase,
+  stringifiedDigits
+} from "./Strings/CharactersAssets";
 
 
 /* === Arrays ======================================================================================================= */
@@ -258,3 +263,5 @@ export { default as UnsupportedScenarioErrorLocalization__English }
 
 /* === Tools ======================================================================================================== */
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
+export { default as RawObjectDataProcessorLocalization__English } from
+    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";

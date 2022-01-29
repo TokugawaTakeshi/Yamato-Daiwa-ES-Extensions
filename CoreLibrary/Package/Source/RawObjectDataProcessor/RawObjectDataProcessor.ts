@@ -23,6 +23,7 @@ import isString from "../TypeGuards/Strings/isString";
 import isBoolean from "../TypeGuards/isBoolean";
 import isNonEmptyArray from "../TypeGuards/Arrays/isNonEmptyArray";
 import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenUndefined";
+import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -93,9 +94,7 @@ class RawObjectDataProcessor {
             ...validDataSpecification,
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject }
           },
-          parentObject: rawData,
-          targetValueBeforeFirstPreValidationModification: rawData,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification: false
+          parentObject: rawData
         });
         break;
       }
@@ -107,9 +106,7 @@ class RawObjectDataProcessor {
             ...validDataSpecification,
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements }
           },
-          parentObject: rawData,
-          targetValueBeforeFirstPreValidationModification: rawData,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification: false
+          parentObject: rawData
         });
         break;
       }
@@ -121,9 +118,7 @@ class RawObjectDataProcessor {
             ...validDataSpecification,
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues }
           },
-          parentObject: rawData,
-          targetValueBeforeFirstPreValidationModification: rawData,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification: false
+          parentObject: rawData
         });
       }
     }
@@ -266,14 +261,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeObject,
       targetObjectTypeValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeObject: unknown;
       targetObjectTypeValueSpecification: RawObjectDataProcessor.FixedKeyAndValuePairsObjectValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -286,9 +279,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeObject,
           targetPropertyValueSpecification: targetObjectTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -326,12 +317,13 @@ class RawObjectDataProcessor {
       }
 
       let childPropertyValue: unknown = targetValue__expectedToBeObject[childPropertyName];
-      const childPropertyValueBeforeFirstPreValidationModification: unknown = childPropertyValue;
-
+      let childPropertyStringifiedValueBeforeFirstPreValidationModification: string | undefined;
 
       const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> =
           RawObjectDataProcessor.getNormalizedPreValidationModifications(childPropertySpecification.preValidationModifications);
-      const mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification: boolean = preValidationModifications.length > 0;
+      if (preValidationModifications.length > 0) {
+        childPropertyStringifiedValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(childPropertyValue);
+      }
 
       for (const preValidationModification of preValidationModifications) {
         try {
@@ -343,9 +335,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: childPropertyValue,
               targetPropertyValueSpecification: childPropertySpecification,
-              targetPropertyValueBeforeFirstPreValidationModification: childPropertyValueBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification,
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  childPropertyStringifiedValueBeforeFirstPreValidationModification,
               thrownError: error
             })
           );
@@ -365,9 +356,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: childPropertyValue,
               targetPropertyValueSpecification: childPropertySpecification,
-              targetPropertyValueBeforeFirstPreValidationModification: childPropertyValueBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  childPropertyStringifiedValueBeforeFirstPreValidationModification
             })
           );
 
@@ -389,9 +379,8 @@ class RawObjectDataProcessor {
                   targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
                   targetPropertyValue: childPropertyValue,
                   targetPropertyValueSpecification: childPropertySpecification,
-                  targetPropertyValueBeforeFirstPreValidationModification: childPropertyValueBeforeFirstPreValidationModification,
-                  mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                      mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification,
+                  targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                      childPropertyStringifiedValueBeforeFirstPreValidationModification,
                   requirementConditionDescription: childPropertySpecification.requiredIf.descriptionForLogging
                 })
           );
@@ -451,9 +440,8 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: childPropertyValue,
             targetPropertyValueSpecification: childPropertySpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: childPropertyValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                childPropertyStringifiedValueBeforeFirstPreValidationModification
           }));
 
           continue;
@@ -521,9 +509,8 @@ class RawObjectDataProcessor {
             targetValue: childPropertyValue,
             targetValueSpecification: childPropertySpecification,
             parentObject,
-            targetValueBeforeFirstPreValidationModification: childPropertyValueBeforeFirstPreValidationModification,
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification:
-                mustLogChildPropertyValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                childPropertyStringifiedValueBeforeFirstPreValidationModification
           });
 
 
@@ -581,9 +568,7 @@ class RawObjectDataProcessor {
             targetPropertyValue: targetValue__expectedToBeObject,
             targetPropertyValueSpecification: targetObjectTypeValueSpecification,
             customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
           })
         );
       }
@@ -626,14 +611,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeIndexedArray,
       targetIndexedArrayTypeValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeIndexedArray: unknown;
       targetIndexedArrayTypeValueSpecification: RawObjectDataProcessor.UniformElementsIndexedArrayValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -644,9 +627,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -668,9 +649,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           minimalElementsCount: targetIndexedArrayTypeValueSpecification.minimalElementsCount,
           actualElementsCount: targetValue__expectedToBeIndexedArray.length
         })
@@ -691,9 +670,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           maximalElementsCount: targetIndexedArrayTypeValueSpecification.maximalElementsCount,
           actualElementsCount: targetValue__expectedToBeIndexedArray.length
         })
@@ -714,9 +691,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           exactElementsCount: targetIndexedArrayTypeValueSpecification.exactElementsCount,
           actualElementsCount: targetValue__expectedToBeIndexedArray.length
         })
@@ -736,11 +711,15 @@ class RawObjectDataProcessor {
 
       this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[currentObjectDepthLevel__beginWithZero] = index;
 
+      let element: unknown = _element;
+      let stringifiedElementValueBeforeFirstPreValidationModification: string | undefined;
+
       const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> = RawObjectDataProcessor.
           getNormalizedPreValidationModifications(targetIndexedArrayTypeValueSpecification.element.preValidationModifications);
-      const elementBeforeFirstPreValidationModification: unknown = _element;
-      const mustLogElementAsItWasBeforeFirstPreValidationModification: boolean = preValidationModifications.length > 0;
-      let element: unknown = _element;
+
+      if (preValidationModifications.length > 0) {
+        stringifiedElementValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(_element);
+      }
 
       for (const preValidationModification of preValidationModifications) {
         try {
@@ -752,9 +731,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: element,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification.element,
-              targetPropertyValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogElementAsItWasBeforeFirstPreValidationModification,
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedElementValueBeforeFirstPreValidationModification,
               thrownError: error
             })
           );
@@ -774,9 +752,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: targetValue__expectedToBeIndexedArray,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-              targetPropertyValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogElementAsItWasBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedElementValueBeforeFirstPreValidationModification
             })
           );
         }
@@ -797,9 +774,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: targetValue__expectedToBeIndexedArray,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-              targetPropertyValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogElementAsItWasBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedElementValueBeforeFirstPreValidationModification
             })
           );
         }
@@ -813,9 +789,8 @@ class RawObjectDataProcessor {
             targetValue: element,
             targetValueSpecification: targetIndexedArrayTypeValueSpecification.element,
             parentObject,
-            targetValueBeforeFirstPreValidationModification: elementBeforeFirstPreValidationModification,
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification:
-                mustLogElementAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                stringifiedElementValueBeforeFirstPreValidationModification
           });
 
 
@@ -864,9 +839,7 @@ class RawObjectDataProcessor {
             targetPropertyValue: targetValue__expectedToBeIndexedArray,
             targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
             customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
           })
         );
       }
@@ -897,14 +870,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeAssociativeArrayTypeObject,
       targetAssociativeArrayTypeValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeAssociativeArrayTypeObject: unknown;
       targetAssociativeArrayTypeValueSpecification: RawObjectDataProcessor.UniformElementsAssociativeArrayValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -917,9 +888,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
           })
       );
       return { isInvalid: true };
@@ -940,9 +909,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           minimalEntriesCount: targetAssociativeArrayTypeValueSpecification.minimalEntriesCount,
           actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
         })
@@ -962,9 +929,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           maximalEntriesCount: targetAssociativeArrayTypeValueSpecification.maximalEntriesCount,
           actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
         })
@@ -984,9 +949,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           exactEntriesCount: targetAssociativeArrayTypeValueSpecification.exactEntriesCount,
           actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
         })
@@ -1007,9 +970,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
             missingRequiredKeys
           })
         );
@@ -1036,9 +997,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
             requiredKeysAlternatives: targetAssociativeArrayTypeValueSpecification.oneOfKeysIsRequired
           })
         );
@@ -1064,9 +1023,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
             foundDisallowedKeys
           })
         );
@@ -1091,12 +1048,15 @@ class RawObjectDataProcessor {
       }
 
 
+      let value: unknown = _value;
+      let stringifiedValueBeforeFirstPreValidationModification: string | undefined;
+
       const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> = RawObjectDataProcessor.
           getNormalizedPreValidationModifications(targetAssociativeArrayTypeValueSpecification.value.preValidationModifications);
-      const valueBeforeFirstPreValidationModification: unknown = _value;
-      const mustLogCurrentAssociativeArrayEntireValueAsItWasBeforeFirstPreValidationModification: boolean =
-          preValidationModifications.length > 0;
-      let value: unknown = _value;
+
+      if (preValidationModifications.length > 0) {
+        stringifiedValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(value);
+      }
 
       for (const preValidationModification of preValidationModifications) {
         try {
@@ -1108,9 +1068,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: value,
               targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification.value,
-              targetPropertyValueBeforeFirstPreValidationModification: valueBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogCurrentAssociativeArrayEntireValueAsItWasBeforeFirstPreValidationModification,
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedValueBeforeFirstPreValidationModification,
               thrownError: error
             })
           );
@@ -1134,9 +1093,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
               targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogCurrentAssociativeArrayEntireValueAsItWasBeforeFirstPreValidationModification,
-              targetPropertyValueBeforeFirstPreValidationModification: valueBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedValueBeforeFirstPreValidationModification
             })
           );
         }
@@ -1156,9 +1114,8 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
               targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogCurrentAssociativeArrayEntireValueAsItWasBeforeFirstPreValidationModification,
-              targetPropertyValueBeforeFirstPreValidationModification: valueBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                  stringifiedValueBeforeFirstPreValidationModification
             })
           );
         }
@@ -1172,9 +1129,8 @@ class RawObjectDataProcessor {
             targetValue: value,
             targetValueSpecification: targetAssociativeArrayTypeValueSpecification.value,
             parentObject,
-            targetValueBeforeFirstPreValidationModification: valueBeforeFirstPreValidationModification,
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification:
-                mustLogCurrentAssociativeArrayEntireValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                stringifiedValueBeforeFirstPreValidationModification
           });
 
 
@@ -1223,9 +1179,7 @@ class RawObjectDataProcessor {
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
             customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
           })
         );
       }
@@ -1256,14 +1210,12 @@ class RawObjectDataProcessor {
       targetValue,
       targetValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue: NonNullable<unknown>;
       targetValueSpecification: RawObjectDataProcessor.CertainTypeValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -1281,8 +1233,7 @@ class RawObjectDataProcessor {
           targetValue__expectedToBeNumber: targetValue,
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1291,8 +1242,7 @@ class RawObjectDataProcessor {
           targetValue__expectedToBeString: targetValue,
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1301,8 +1251,7 @@ class RawObjectDataProcessor {
           targetValue__expectedToBeBoolean: targetValue,
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1312,8 +1261,7 @@ class RawObjectDataProcessor {
           targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               FixedKeyAndValuePairsObjectValueSpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1323,8 +1271,7 @@ class RawObjectDataProcessor {
           targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsIndexedArrayPropertySpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1334,8 +1281,7 @@ class RawObjectDataProcessor {
           targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsAssociativeArrayPropertySpecification,
           parentObject,
-          targetValueBeforeFirstPreValidationModification,
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         });
       }
 
@@ -1349,8 +1295,7 @@ class RawObjectDataProcessor {
         targetValue,
         targetValueSpecification,
         parentObject,
-        targetValueBeforeFirstPreValidationModification,
-        mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
       });
     }
 
@@ -1374,14 +1319,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeNumber,
       targetValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeNumber: unknown;
       targetValueSpecification: RawObjectDataProcessor.NumberValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -1392,9 +1335,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1449,9 +1390,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           expectedNumbersSet: targetValueSpecification.numbersSet
         })
       );
@@ -1469,9 +1408,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1490,9 +1427,7 @@ class RawObjectDataProcessor {
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
           requiredMinimum: targetValueSpecification.minimalValue,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1509,9 +1444,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           allowedMaximum: targetValueSpecification.maximalValue
         })
       );
@@ -1540,9 +1473,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeNumber,
             targetPropertyValueSpecification: targetValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
             customValidationDescription: customValidator.descriptionForLogging
           })
         );
@@ -1576,14 +1507,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeString,
       targetValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeString: unknown;
       targetValueSpecification: RawObjectDataProcessor.StringValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -1594,9 +1523,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1613,9 +1540,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1632,9 +1557,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-          mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           minimalCharactersCount: targetValueSpecification.minimalCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
         })
@@ -1653,9 +1576,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           maximalCharactersCount: targetValueSpecification.maximalCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
         })
@@ -1674,9 +1595,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           fixedCharactersCount: targetValueSpecification.fixedCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
         })
@@ -1695,9 +1614,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           regularExpression: targetValueSpecification.validValueRegularExpression
         })
       );
@@ -1726,9 +1643,7 @@ class RawObjectDataProcessor {
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeString,
             targetPropertyValueSpecification: targetValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
             customValidationDescription: customValidator.descriptionForLogging
           })
         );
@@ -1762,14 +1677,12 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeBoolean,
       targetValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue__expectedToBeBoolean: unknown;
       targetValueSpecification: RawObjectDataProcessor.BooleanValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -1780,9 +1693,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeBoolean,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
         })
       );
       return { isInvalid: true };
@@ -1799,9 +1710,7 @@ class RawObjectDataProcessor {
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeBoolean,
           targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-          mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-              mustLogTargetValueAsItWasBeforeFirstPreValidationModification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
           disallowedVariant: !(targetValueSpecification.trueOnly === true)
         })
       );
@@ -1831,9 +1740,7 @@ class RawObjectDataProcessor {
             targetPropertyValue: targetValue__expectedToBeBoolean,
             targetPropertyValueSpecification: targetValueSpecification,
             customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-            mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
           })
         );
       }
@@ -1867,14 +1774,12 @@ class RawObjectDataProcessor {
       targetValue,
       targetValueSpecification,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
       targetValue: Exclude<unknown, undefined | null>;
       targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification;
       parentObject: ArbitraryObject;
-      targetValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
 
@@ -1938,9 +1843,7 @@ class RawObjectDataProcessor {
               targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
               targetPropertyValue: targetValue,
               targetPropertyValueSpecification: targetValueSpecification,
-              targetPropertyValueBeforeFirstPreValidationModification: targetValueBeforeFirstPreValidationModification,
-              mustLogTargetPropertyValueBeforeFirstPreValidationModification:
-                  mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+              targetPropertyStringifiedValueBeforeFirstPreValidationModification
             }),
             occurrenceLocation: "RawObjectDataProcessor.processMultipleTypesAllowedValue(parametersObject)"
           });
@@ -1972,8 +1875,7 @@ class RawObjectDataProcessor {
       targetValue,
       targetValueSpecification: specificationForCurrentValueType,
       parentObject,
-      targetValueBeforeFirstPreValidationModification,
-      mustLogTargetValueAsItWasBeforeFirstPreValidationModification
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     });
   }
 
@@ -2697,8 +2599,7 @@ namespace RawObjectDataProcessor {
       targetPropertyNewName: string | null;
       targetPropertyValue: unknown;
       targetPropertyValueSpecification: CertainTypeValueSpecification;
-      targetPropertyValueBeforeFirstPreValidationModification: unknown;
-      mustLogTargetPropertyValueBeforeFirstPreValidationModification: boolean;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     };
 
     export type TextDataForErrorMessagesBuilding = {

@@ -94,8 +94,7 @@ describe("RawObjectProcessor: number property", (): void => {
             targetPropertyNewName: null,
             targetPropertyValue: targetPropertyInvalidValue,
             targetPropertyValueSpecification: targetValueSpecification,
-            targetPropertyValueBeforeFirstPreValidationModification: targetPropertyInvalidValue,
-            mustLogTargetPropertyValueBeforeFirstPreValidationModification: false
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification: targetPropertyInvalidValue
           })
         );
       });
