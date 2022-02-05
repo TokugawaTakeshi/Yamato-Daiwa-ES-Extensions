@@ -2306,7 +2306,7 @@ namespace RawObjectDataProcessor {
       };
 
 
-  /* --- Uniform element indexes array value/property --------------------------------------------------------------- */
+  /* --- Uniform element indexed array value/property --------------------------------------------------------------- */
   export type UniformElementsIndexedArrayValueSpecification =
       ValueSpecification__CommonParameters &
       IndexedArrayTypeValueSpecification &

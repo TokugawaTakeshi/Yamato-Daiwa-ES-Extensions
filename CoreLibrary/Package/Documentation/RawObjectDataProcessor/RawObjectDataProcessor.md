@@ -890,3 +890,382 @@ Intended to be used in the cases like:
 * The value must be either `false` or `null` (in this case `required: true;`, `nullable: true` option also must be specified)
 * The value must be either string or `false` (in this case, `RawObjectDataProcessor.ValuesTypesIDs.oneOf` is required instead of
   `Boolean`/`RawObjectDataProcessor.ValuesTypesIDs.boolean`). 
+
+
+#### Nested objects validation
+
+If the value has been specified as `Object`/`RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject`, it's 
+required to enumerate the specification of this nested object's properties:
+
+```typescript
+type ValidData = {
+  alpha1: {
+    alpha2: number;
+    bravo2: string;
+  };
+};
+
+const dataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "ValidData",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    alpha1: {
+      required: true,
+      type: Object,
+      // ↓ Valid nested object properties specification
+      properties: {
+        alpha2: {
+          required: true,
+          type: Number,
+          numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber
+        },
+        bravo2: {
+          required: true,
+          type: String
+        }
+      }
+    }
+  }
+};
+```
+
+
+#### Children indexed arrays validation
+
+If the value has been specified as `Array`/`RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements`, 
+it's required specify the `element` property:
+
+```typescript
+type ValidData = {
+  foo: Array<{ bar: string; baz: boolean; }>;
+};
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Example",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    foo: {
+      type: Array,
+      required: true,
+      // ↓ Valid array element specification
+      element: {
+        type: Object,
+        properties: {
+          bar: {
+            type: String,
+            required: true,
+            minimalCharactersCount: 5
+          },
+          baz: {
+            type: Boolean,
+            required: true
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+Also, below options are available.
+
+<dl>
+
+  <dt>minimalElementsCount</dt>
+  <dd>The integer representing required minimal elements count.</dd>
+
+  <dt>maximalElementsCount</dt>
+  <dd>The integer representing allowed maximal elements count.</dd>
+
+  <dt>exactElementsCount</dt>
+  <dd>The integer representing required exact elements count. Incompatible with two previous options.</dd>
+
+  <dt>allowUndefinedTypeElements</dt>
+  <dd>
+    Set this option to <code>true</code> to allow the empty array elements. Please note that this option still does not
+    allow the <code>null</code> elements.
+  </dd>
+
+  <dt>allowNullElements</dt>
+  <dd>Set this option to <code>true</code> to allow the <code>null</code> elements.</dd>
+
+</dl>
+
+
+##### Children associative arrays validation
+
+If the value has been specified as `Map`/`RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues`,
+it's required specify the `value` property:
+
+```typescript
+type ValidData = {
+  foo: { [key: string]: string; };
+};
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Example",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    foo: {
+      type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues,
+      required: true,
+      value: {
+        type: String,
+        minimalCharactersCount: 1
+      }
+    }
+  }
+};
+```
+
+Also, below options are available.
+
+<dl>
+
+  <dt>minimalEntriesCount</dt>
+  <dd>The integer representing required minimal entries (key and value pairs) count.</dd>
+
+  <dt>maximalEntriesCount</dt>
+  <dd>The integer representing allowed maximal entries (key and value pairs) count.</dd>
+
+  <dt>exactEntriesCount</dt>
+  <dd>The integer representing required exact entries (key and value pairs) count. Incompatible with two previous options.</dd>
+
+  <dt>requiredKeys</dt>
+  <dd>The array of string specifying the keys which respcetive values must present. </dd>
+
+  <dt>allowedKeys</dt>
+  <dd>The array of string specifying which keys are allowed. </dd>
+
+  <dt>keyRenamings</dt>
+  <dd>
+    The object of <code>{ [rawKey: string]: string; }</code> shape (actually the associative array, too) defining the new
+    names of specific keys.
+  </dd>
+
+  <dt>allowUndefinedTypeValues</dt>
+  <dd>
+    Set this option to <code>true</code> to allow the explicit undefined values. Please note that this option still does not
+    allow the <code>null</code> value.
+  </dd>
+
+  <dt>allowNullValues</dt>
+  <dd>Set this option to <code>true</code> to allow the <code>null</code> elements.</dd>
+  
+
+</dl>
+
+
+## Validation of fixed key and value pairs type objects
+### Properties requirement
+
+Each property must be...
+
+* either explicitly marked as required by `required: true`,
+* either marked as conditionally required by `requiredIf` (see [conditional requirement](#conditional-requirement) subsection),
+* either have default value by `defaultValue`
+* or explicitly marked as optional by `required: false`.
+
+Please note that **requirement conception in RawObjectDataProcessor is not related with `null` values**.
+
+```typescript
+type ValidData = {
+  foo: string;
+  hoge: string;
+} & (
+  {
+    bar: string;
+    baz: string;  
+  } | {
+    bar?: undefined;
+    baz?: string;
+  } 
+);
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Example",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    
+    // Required
+    foo: {
+      type: String,
+      required: true
+    },
+
+    // Optional
+    bar: {
+      type: String,
+      required: false
+    },
+
+    // Conditionally required
+    baz: {
+      type: String,
+      requiredIf: {
+        predicate: (rawData__currentObjectDepth: ArbitraryObject): boolean => isString(rawData__currentObjectDepth.bar),
+        descriptionForLogging: "'bar' is presents"
+      }
+    },
+    
+    // Has default value
+    hoge: {
+      type: String,
+      defaultValue: "ALPHA" 
+    }
+  }
+}
+```
+
+
+#### Conditional requirement
+
+Conditional requirement means that some property must present or could not be present conditionally.
+For example, in below type `swimmingPoolDepth__meters` must present if `hasSwimmingPool` is `true`:
+
+```typescript
+type Villa = {
+  floorsCount: number;
+  totalSquare__squareMeters: number;
+  hasSwimmingPool: boolean;
+  swimmingPoolDepth__meters?: number; 
+} 
+```
+
+From the viewpoint of TypeScript, `swimmingPoolDepth__meters` is not conditionally required.
+The conditional requirement declaration in TypeScript is limited. For this case, we can declare
+
+```typescript
+type Villa = {
+  floorsCount: number;
+  totalSquare__squareMeters: number;
+} & (
+  {
+    hasSwimmingPool: true;
+    swimmingPoolDepth__meters: number;
+  } | {
+    hasSwimmingPool?: false;
+  }    
+);
+```
+
+Please note that `|` is **not the exclusive OR** and **there is no exclusive OR** operation for type aliases.
+Sometimes it matters.
+
+To define the conditional requirement in `PropertiesSpecification`, you need to specify `requredIf` with two required
+options: `predicate` and `descriptionForLogging`:
+
+```typescript
+type PropertyRequirementCondition = {
+  readonly predicate: (rawData__currentObjectDepth: ArbitraryObject, rawData__full: ArbitraryObject) => boolean;
+  readonly descriptionForLogging: string;
+};
+```
+
+* If the `predicate` will return true, the property will be considered as required.
+* If you have nested objects and the condition should refer the parent objects, you will need the second parameter of
+  predicate, `rawData__full` because firstOne - `rawData__currentObjectDepth` - returns just object of current depth level.
+* In `descriptionForLogging`, define verbally when predicate returns `true` for clear logging. For the above example with
+  `Villa`, the `descriptionForLogging` could be like "'hasSwimmingPool' is true".
+
+```typescript
+type Villa = {
+  floorsCount: number;
+  totalSquare__squareMeters: number;
+} & (
+  {
+    hasSwimmingPool: true;
+    swimmingPoolDepth__meters: number;
+  } | {
+    hasSwimmingPool?: false;
+  }
+);
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Villa",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    hasSwimmingPool: {
+      type: Boolean,
+      required: false
+    },
+    baz: {
+      type: String,
+      requiredIf: {
+        predicate: (rawData__currentObjectDepth: ArbitraryObject): boolean => 
+            rawData__currentObjectDepth.hasSwimmingPool === true,
+        descriptionForLogging: "'hasSwimmingPool' is true"
+      }
+    },
+    // ...
+  }
+};
+```
+
+#### Nullability
+
+* If some property could be the `null`, specify `nullable: true`
+* If you want to replace `null` with some other value, specify: `nullSubstitution` with the same type as `type`.
+* If you want to replace `null` with `undefined`, specify `preValidationModifications: [ nullToUndefined ]`. In this case,
+  the property will be validated according the [property requirement conception](#properties-requirement).
+
+Please note than `required: false` does not allow the `null` values - `nullable: true` has been designed for this.
+
+```typescript
+type Sample = {
+  foo: string | null;
+  bar?: string | null;
+  baz?: string;
+};
+
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Sample",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    // ↓ 'null' is allowed while 'undefined' is not.
+    foo: {
+      type: String,
+      required: true,
+      nullable: true
+    },
+    // ↓ both 'null' and 'undefined' allowed
+    bar: {
+      type: String,
+      required: false,
+      nullable: true
+    },
+    // ↓ 'null' will be transformed to 'undefined' before validation
+    baz: {
+      preValidationModifications: nullToUndefined,
+      type: String,
+      required: false
+    }
+  }
+};
+```
+
+
+## Processing of fixed key and value pairs type objects
+### Properties renaming
+
+Specify `newName` to rename the property's key during processing.
+
+```typescript
+type Sample = {
+  alpha: string;
+};
+
+
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "Sample",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    foo: {
+      newName: "alpha",
+      type: String,
+      required: true,
+    }
+  }
+}
+```

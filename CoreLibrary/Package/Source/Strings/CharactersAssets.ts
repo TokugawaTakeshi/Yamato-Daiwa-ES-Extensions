@@ -1,10 +1,3 @@
-/** 〔理論〕 "/\s/.test(space)"を実行するとどちらでも"true"
- *  Objects.entries(allKindOfSpaces).forEach(([spaceName, space]) => {
- *    console.log(spaceName);
- *    console.log(/\s/.test(space));
- *  });
- * */
-
 export enum SpaceCharacters {
   regularSpace = "\u0020",
   noBreakSpace = "\u00A0",

@@ -49,20 +49,20 @@ export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
 
 The tool for the unknown at advance external data (from HTTP request/response, file, etc.) validation and processing.
 
-* [📖 Quick example](Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
-* [📖 Problem overview](Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview)
-* [📖 Theoretical minimum](Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum)
-* [📖 Getting started](Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
+* [📖 Quick example](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
+* [📖 Problem overview](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview)
+* [📖 Theoretical minimum](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum)
+* [📖 Getting started](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
 
 #### Numbers
 
-* [`formatNumberWith4KetaKanji`](Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md)
+* [`formatNumberWith4KetaKanji`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md)
   Formats number with 4-digits Kanji `万`, `億`, `兆`, `系` (CJK ideographic characters)
-* [`isStringifiedNonNegativeIntegerOfRegularNotation`](Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md)
+* [`isStringifiedNonNegativeIntegerOfRegularNotation`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md)
   Checks is the value of string contains the number of non-scientific notation.
-* [`separateEach3DigitsGroupWithComma`](Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md)
+* [`separateEach3DigitsGroupWithComma`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md)
   Formats the number separating each 3 digits group with comma
-* [`separateEach4DigitsGroupWithComma`](Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md)
+* [`separateEach4DigitsGroupWithComma`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md)
   Formats the number separating each 4 digits group with comma
 
 #### Strings
@@ -72,87 +72,87 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 * `areStringifiedDigitsOnly` Checks is string value consists exclusively from the digits.
 * `capitalizeFirstCharacter` Capitalizes first character of target string value.
-* [`EmailAddress`](Documentation/Strings/EmailAddress.md) 
+* [`EmailAddress`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md) 
   Class working with email addresses. Currently, consists from validating function and regular expression of valid emails.
 * `getLastCharacter` Returns the last character of target string value.
-* [`getPositionsOfAllSubstringOccurrences`](Documentation/Strings/getPositionsOfAllSubstringOccurrences.md)
+* [`getPositionsOfAllSubstringOccurrences`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md)
   Returns the positions of each occurrence of specified substring.
 * `removeAllSpecifiedCharacters` Removes specified characters from the string value.
-* [`removeLastCharacter`](Documentation/Strings/removeLastCharacter.md) Removes last character.
+* [`removeLastCharacter`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md) Removes last character.
 * `removeNonDigitsCharacters` Removes all characters from the string excepts digits.
-* [`removeNthCharacter`](Documentation/Strings/removeNthCharacter.md)
+* [`removeNthCharacter`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md)
   Removes the symbol in specified position from the string. Supports the surrogate pairs.
-* [`replace2OrMoreSpacesTo1`](Documentation/Strings/replace2OrMoreSpacesTo1.md) replaces 2 or more spaces to 1.
-* [`replaceBrHTML_TagToNewLineEscapeSequence`](Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md)
+* [`replace2OrMoreSpacesTo1`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md) replaces 2 or more spaces to 1.
+* [`replaceBrHTML_TagToNewLineEscapeSequence`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md)
   Replaces the "br" HTML tag to new line (line feed) escape sequence.
 * `insertSubstring` Insets nullable substring with optional condition and transformations.
 * `insertSubstringIf` Insets substring conditionally.
 * `reverseString` Reverses the characters sequence in string value.
-* [`splitString`](Documentation/Strings/splitString.md) Alternative of native `String.prototype.split()`
+* [`splitString`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/splitString.md) Alternative of native `String.prototype.split()`
   supporting surrogate pairs.
 * `stringifyAndFormatArbitraryValue` Converts to readable string any type of data.
 * `replaceDoubleBackslashesWithForwardSlashes` Replaces double backslashes with forward slashes. 
-* [`trimSpaces`](Documentation/Strings/trimSpaces/trimSpaces.md) Trim prepended and/or appended space characters; unlike native
+* [`trimSpaces`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md) Trim prepended and/or appended space characters; unlike native
  `String.prototype.trim` acts selectively on specified spaces kinds.
 
 #### Arrays
 
-* [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
+* [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
   Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will
   be thrown or `null` will be returned (depending on dedicated option's value).
 * `getLastElementOfNonEmptyArray` Return the last element of array. If no such element, `UnexpectedEventError` will be thrown.
-* [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
+* [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
   Returns the array of indexes of elements of array which are satisfies to predicate function.
-* [`getIndexOfArrayElementByPredicate`](Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
+* [`getIndexOfArrayElementByPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
   Returns the index of array element matching with predicate of `null` if no such element.
-* [`twoDimensionalizeArray`](Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
+* [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
   with nested arrays of fixed elements count.
 
 #### Sets
 
-* [`addMultipleElementsToSet`](Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md)
+* [`addMultipleElementsToSet`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md)
   Adds multiple elements to set.
 
 #### Maps
 
-* [`addMultiplePairsToMap`](Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md)
+* [`addMultiplePairsToMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md)
   Adds multiple elements to map.
-* [`createMapBasedOnOtherMap`](Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md)
+* [`createMapBasedOnOtherMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md)
   Creates map based on other map.
-* [`filterMap`](Documentation/Maps/filterMap/filterMap.md)
+* [`filterMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md)
   Filters map by specified predicate.
 
 #### Date & Time
 
-* [`TimePoint`](Documentation/DateTime/TimePoint.md) 
+* [`TimePoint`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) 
   The alternative to native `Date` allows to build the formatted date/time strings easily.
-* [`getDaysCountInSpecificMonth`](Documentation/DateTime/getDaysCountInSpecificMonth.md)
+* [`getDaysCountInSpecificMonth`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md)
   Return days count in specified year and month.
-* [`getMonthNameByNumber`](Documentation/DateTime/getMonthNameByNumber.md)
-  Converts the month number (from 0 or 1) to element of [MonthsNames](Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration. 
-* [`getMonthNumberByName`](Documentation/DateTime/getMonthNumberByName.md)
-  Converts the element of [MonthsNames](Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration to number of 
+* [`getMonthNameByNumber`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md)
+  Converts the month number (from 0 or 1) to element of [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration. 
+* [`getMonthNumberByName`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md)
+  Converts the element of [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration to number of 
   month (from 0 or 1)  
-* [`millisecondsToSeconds`](Documentation/DateTime/millisecondsToSeconds.md)
+* [`millisecondsToSeconds`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md)
   Converts milliseconds amount to amount of seconds.
-* [`secondsToMilliseconds`](Documentation/DateTime/secondsToMilliseconds.md)
+* [`secondsToMilliseconds`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md)
   Converts seconds amount to amount of milliseconds.
 
 #### Types
 
-* [`ParsedJSON` and related](Documentation/Types/ParsedJSON/ParsedJSON.md)
+* [`ParsedJSON` and related](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Types/ParsedJSON/ParsedJSON.md)
   The native object including the Array case which could be the result of JSON parsing.
-* [`InheritEnumerationKeys`](Documentation/Types/InheritEnumerationKeys.md)
+* [`InheritEnumerationKeys`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Types/InheritEnumerationKeys.md)
   Allows to create the object with same key as reference enumeration.
 * `PartialBy` Makes specified properties of base type optional.
 
 #### Type guards
 
-* [Numbers](Documentation/TypeGuards/Numbers/NumberTypeGuards.md)
-* [Strings](Documentation/TypeGuards/Strings/StringTypeGuards.md)
-* [Objects](Documentation/TypeGuards/Objects/ObjectTypeGuards.md)
-* [Arrays](Documentation/TypeGuards/Arrays/ArrayTypeGuards.md)
-* [Nullables](Documentation/TypeGuards/Others/OtherTypeGuards.md)
+* [Numbers](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Numbers/NumberTypeGuards.md)
+* [Strings](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Strings/StringTypeGuards.md)
+* [Objects](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Objects/ObjectTypeGuards.md)
+* [Arrays](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Arrays/ArrayTypeGuards.md)
+* [Nullables](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Others/OtherTypeGuards.md)
 
 #### Default value subsituters
 
@@ -181,21 +181,21 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 #### Constants and enumerations
 
-* [DaysOfWeek](Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
-* [HTTP_Methods](Documentation/ConstantsAndEnumerations/HTTP_Methods.md)
-* [HTTP_StatusCodes](Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
-* [MonthsNames](Documentation/ConstantsAndEnumerations/MonthsNames.md)
+* [DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/DaysOfWeek.md)
+* [HTTP_Methods](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/HTTP_Methods.md)
+* [HTTP_StatusCodes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/HTTP_StatusCodes.md)
+* [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/MonthsNames.md)
 
 #### Pagination
 
-* [`computeFirstItemNumberForSpecificPaginationPage`](Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
+* [`computeFirstItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
   Computes the first item number for specified pagination page.
-* [`computeLastItemNumberForSpecificPaginationPage`](Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
+* [`computeLastItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
   Computes the last item number for specified pagination page.
 
 #### Logging
 
-* [`Logger` facade](Documentation/Logging/Logger/Logger.md)
+* [`Logger` facade](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Logging/Logger/Logger.md)
   Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
 * Pre-made errors
   * `AlgorithmMismatchError` Recommended to throw in general cases when real behaviour of the program is not
