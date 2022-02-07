@@ -140,19 +140,19 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 #### Types
 
-* [`ParsedJSON` and related](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Types/ParsedJSON/ParsedJSON.md)
+* [`ParsedJSON` and related](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/ParsedJSON/ParsedJSON.md)
   The native object including the Array case which could be the result of JSON parsing.
-* [`InheritEnumerationKeys`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Types/InheritEnumerationKeys.md)
+* [`InheritEnumerationKeys`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/InheritEnumerationKeys.md)
   Allows to create the object with same key as reference enumeration.
 * `PartialBy` Makes specified properties of base type optional.
 
 #### Type guards
 
-* [Numbers](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Numbers/NumberTypeGuards.md)
-* [Strings](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Strings/StringTypeGuards.md)
-* [Objects](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Objects/ObjectTypeGuards.md)
-* [Arrays](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Arrays/ArrayTypeGuards.md)
-* [Nullables](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/TypeGuards/Others/OtherTypeGuards.md)
+* [Numbers](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Numbers/NumberTypeGuards.md)
+* [Strings](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Strings/StringTypeGuards.md)
+* [Objects](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Objects/ObjectTypeGuards.md)
+* [Arrays](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Arrays/ArrayTypeGuards.md)
+* [Nullables](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md)
 
 #### Default value subsituters
 
@@ -181,21 +181,21 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 #### Constants and enumerations
 
-* [DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/DaysOfWeek.md)
-* [HTTP_Methods](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/HTTP_Methods.md)
-* [HTTP_StatusCodes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/HTTP_StatusCodes.md)
-* [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/ConstantsAndEnumerations/MonthsNames.md)
+* [DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
+* [HTTP_Methods](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_Methods.md)
+* [HTTP_StatusCodes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
+* [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
 
 #### Pagination
 
-* [`computeFirstItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
+* [`computeFirstItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
   Computes the first item number for specified pagination page.
-* [`computeLastItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
+* [`computeLastItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
   Computes the last item number for specified pagination page.
 
 #### Logging
 
-* [`Logger` facade](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Logging/Logger/Logger.md)
+* [`Logger` facade](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md)
   Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
 * Pre-made errors
   * `AlgorithmMismatchError` Recommended to throw in general cases when real behaviour of the program is not
