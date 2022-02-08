@@ -14,7 +14,7 @@ export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): st
 
   if (isNonNullObject(rawEntity)) {
 
-    /* 〔 Theory 〕 If thrown entity is recursive error could occur. */
+    /* 〔 Theory 〕 If thrown entity is recursive, error could occur. */
     try {
 
       const stringifiedObjectTypeEntity: string = JSON.stringify(rawEntity, null, 2);

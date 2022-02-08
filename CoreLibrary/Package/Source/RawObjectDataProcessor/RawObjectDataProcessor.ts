@@ -22,7 +22,6 @@ import isDecimalFractionOfAnySign from "../TypeGuards/Numbers/isDecimalFractionO
 import isString from "../TypeGuards/Strings/isString";
 import isBoolean from "../TypeGuards/isBoolean";
 import isNonEmptyArray from "../TypeGuards/Arrays/isNonEmptyArray";
-import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenUndefined";
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
 import Logger from "../Logging/Logger";
@@ -52,8 +51,7 @@ class RawObjectDataProcessor {
     options: RawObjectDataProcessor.Options = {}
   ): RawObjectDataProcessor.ProcessingResult<ProcessedData> {
 
-    const localization: RawObjectDataProcessor.Localization =
-        substituteWhenUndefined(options.localization, RawObjectDataProcessor.defaultLocalization);
+    const localization: RawObjectDataProcessor.Localization = options.localization ?? RawObjectDataProcessor.defaultLocalization;
     const validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder =
         new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(localization);
 
@@ -91,10 +89,9 @@ class RawObjectDataProcessor {
         rawDataProcessingResult = dataHoldingSelfInstance.processFixedKeyAndValuePairsNonNullObjectTypeValue({
           targetValue__expectedToBeObject: rawData,
           targetObjectTypeValueSpecification: {
-            ...validDataSpecification,
-            ...{ type: RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject }
-          },
-          parentObject: rawData
+            ...{ type: RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject },
+            ...validDataSpecification
+          }
         });
         break;
       }
@@ -105,8 +102,7 @@ class RawObjectDataProcessor {
           targetIndexedArrayTypeValueSpecification: {
             ...validDataSpecification,
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements }
-          },
-          parentObject: rawData
+          }
         });
         break;
       }
@@ -117,8 +113,7 @@ class RawObjectDataProcessor {
           targetAssociativeArrayTypeValueSpecification: {
             ...validDataSpecification,
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues }
-          },
-          parentObject: rawData
+          }
         });
       }
     }
@@ -133,8 +128,8 @@ class RawObjectDataProcessor {
 
     let processedData: ProcessedData;
 
-    /* [ Theory ] While type aliases and interfaces are not existing for he JavaScript it's impossible to guarantee
-    *   programatically that some value has object-based type 'X'. Nothing left except believe the user that 'ProcessedData'
+    /* [ Theory ] While type aliases and interfaces are not existing for the JavaScript it's impossible to guarantee
+    *   programmatically that some value has object-based type 'X'. Nothing left except believe the user that 'ProcessedData'
     * is corresponding to 'validDataSpecification'. */
     if (isNotUndefined(options.postProcessing)) {
       processedData = options.postProcessing<InterimValidData, ProcessedData>(
@@ -155,7 +150,7 @@ class RawObjectDataProcessor {
   ): string {
     return messages.reduce(
       (accumulatingValue: string, message: string, index: number): string => `${accumulatingValue}\n\n` +
-          `${localization.errorMessagesListItemHeadingTemplate(index + 1)}\n` +
+          `${localization.buildErrorMessagesListItemHeading(index + 1)}\n` +
           `${message}`, ""
     );
   }
@@ -165,18 +160,18 @@ class RawObjectDataProcessor {
   }
 
   /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
-    * https://stackoverflow.com/q/69848208/4818123
-    * https://stackoverflow.com/q/69848689/4818123
-    * [ Approach ] This method is public because it is required for the 'localization'.
-    *  */
+   * https://stackoverflow.com/q/69848208/4818123
+   * https://stackoverflow.com/q/69848689/4818123
+   * [ Approach ] This method is public because it is required for the 'localization'.
+   *  */
   public static getNormalizedValueTypeID(
-      valueType: NumberConstructor |
-          StringConstructor |
-          BooleanConstructor |
-          ObjectConstructor |
-          ArrayConstructor |
-          MapConstructor |
-          RawObjectDataProcessor.ValuesTypesIDs
+    valueType: NumberConstructor |
+        StringConstructor |
+        BooleanConstructor |
+        ObjectConstructor |
+        ArrayConstructor |
+        MapConstructor |
+        RawObjectDataProcessor.ValuesTypesIDs
   ): RawObjectDataProcessor.ValuesTypesIDs {
 
     if (
@@ -226,16 +221,17 @@ class RawObjectDataProcessor {
       return RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues;
     }
 
+
     if (valueType === RawObjectDataProcessor.ValuesTypesIDs.oneOf) {
       return RawObjectDataProcessor.ValuesTypesIDs.oneOf;
     }
 
 
-    /* [ Approach ] Except the bug case, this point reaching is possible only with invalid TypeScript. */
+    /* [ Approach ] Except the bug case, the reaching of this point possible only with invalid TypeScript. */
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
       title: InvalidParameterValueError.DEFAULT_TITLE,
-      occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(parametersObject)"
+      occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });
   }
 
@@ -265,7 +261,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeObject: unknown;
       targetObjectTypeValueSpecification: RawObjectDataProcessor.FixedKeyAndValuePairsObjectValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -293,8 +289,7 @@ class RawObjectDataProcessor {
     const currentObjectDepthLevel__countFromZero: number =
         this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.length;
 
-
-    let oneOnMorePropertiesAreInvalid: boolean = false;
+    let areOneOnMorePropertiesInvalid: boolean = false;
 
     for (
       const [ childPropertyName, childPropertySpecification ] of
@@ -304,7 +299,6 @@ class RawObjectDataProcessor {
       this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[
         currentObjectDepthLevel__countFromZero
       ] = childPropertyName;
-
 
       let childPropertyFinalName: string;
 
@@ -321,6 +315,7 @@ class RawObjectDataProcessor {
 
       const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> =
           RawObjectDataProcessor.getNormalizedPreValidationModifications(childPropertySpecification.preValidationModifications);
+
       if (preValidationModifications.length > 0) {
         childPropertyStringifiedValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(childPropertyValue);
       }
@@ -348,7 +343,7 @@ class RawObjectDataProcessor {
 
         if (childPropertySpecification.required === true) {
 
-          oneOnMorePropertiesAreInvalid = true;
+          areOneOnMorePropertiesInvalid = true;
 
           this.registerValidationError(
             this.validationErrorsMessagesBuilder.buildRequiredPropertyIsMissingErrorMessage({
@@ -370,7 +365,7 @@ class RawObjectDataProcessor {
           childPropertySpecification.requiredIf.predicate(targetValue__expectedToBeObject, this.rawData)
         ) {
 
-          oneOnMorePropertiesAreInvalid = true;
+          areOneOnMorePropertiesInvalid = true;
 
           this.registerValidationError(
             this.validationErrorsMessagesBuilder.
@@ -411,10 +406,10 @@ class RawObjectDataProcessor {
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
               /* ※ Reserved for the future.
               *  The desired 'configurable', 'enumerable', 'writable' could be different with actual ones.
-              *  If 'configurable === false', the descriptions could not be changed
+              *  If 'configurable === false', the descriptors could not be changed
               *  1. If 'childPropertyName' and 'childPropertyFinalName' are different and
               *     'childPropertySpecification.leaveEvenIfRenamed !== true', and also property is not configurable,
-              *     the 'childPropertyName' could not be deleted (warning will be enough).
+              *     the 'childPropertyName' could not be deleted (warning should be enough, but data will become invalid).
               *  2. If property is not 'writable', default value could not be substituted.
               * */
             }
@@ -433,7 +428,7 @@ class RawObjectDataProcessor {
 
         if (childPropertySpecification.nullable !== true && isUndefined(childPropertySpecification.nullSubstitution)) {
 
-          oneOnMorePropertiesAreInvalid = true;
+          areOneOnMorePropertiesInvalid = true;
 
           this.registerValidationError(this.validationErrorsMessagesBuilder.buildNonNullableValueIsNullErrorMessage({
             targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -495,7 +490,8 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
-              /* ※ Reserved for the future. */
+              /* ※ Reserved for the future (no need to change the value itself, but the changing of descriptors could be
+               * requested). */
             }
           }
 
@@ -519,7 +515,7 @@ class RawObjectDataProcessor {
         case RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling: {
 
           if ("isInvalid" in childPropertyValueProcessingResult) {
-            oneOnMorePropertiesAreInvalid = true;
+            areOneOnMorePropertiesInvalid = true;
             continue;
           } else if ("isValidButValidationOnlyModeActive" in childPropertyValueProcessingResult) {
             continue;
@@ -540,7 +536,8 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
-          /* ※ Reserved for the future. */
+          /* ※ Reserved for the future.
+          * Basically no need to change value, but postValidationModification and/or descriptions changes could be requested. */
         }
       }
     }
@@ -556,10 +553,10 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeObject,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
-        oneOnMorePropertiesAreInvalid = true;
+        areOneOnMorePropertiesInvalid = true;
 
         this.registerValidationError(
           this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
@@ -574,8 +571,8 @@ class RawObjectDataProcessor {
       }
     }
 
-
-    if (oneOnMorePropertiesAreInvalid) {
+    
+    if (areOneOnMorePropertiesInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
       return { isValidButValidationOnlyModeActive: true };
@@ -591,13 +588,13 @@ class RawObjectDataProcessor {
 
     if (isNonEmptyArray(targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications)) {
       for (
-        const propertyKeyWhichWillBeDeleted of
+        const keyOfPropertyWhichWillBeDeleted of
         targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications
       ) {
         /* [ ESLint muting rationale ] Each element of this array has been specified by user, so user must be aware of
         *     potential side effects of properties deleting. */
         /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete */
-        delete processedValueWorkpiece[propertyKeyWhichWillBeDeleted];
+        delete processedValueWorkpiece[keyOfPropertyWhichWillBeDeleted];
       }
     }
 
@@ -615,7 +612,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeIndexedArray: unknown;
       targetIndexedArrayTypeValueSpecification: RawObjectDataProcessor.UniformElementsIndexedArrayValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -634,17 +631,17 @@ class RawObjectDataProcessor {
     }
 
 
-    let targetIndexedArrayTypeValueIsInvalid: boolean = false;
+    let isTargetIndexedArrayTypeValueInvalid: boolean = false;
 
     if (
       isNotUndefined(targetIndexedArrayTypeValueSpecification.minimalElementsCount) &&
       targetValue__expectedToBeIndexedArray.length < targetIndexedArrayTypeValueSpecification.minimalElementsCount
     ) {
 
-      targetIndexedArrayTypeValueIsInvalid = true;
+      isTargetIndexedArrayTypeValueInvalid = true;
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementCountIsLessThanRequiredMinimumErrorMessage({
+        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
@@ -662,10 +659,10 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeIndexedArray.length > targetIndexedArrayTypeValueSpecification.maximalElementsCount
     ) {
 
-      targetIndexedArrayTypeValueIsInvalid = true;
+      isTargetIndexedArrayTypeValueInvalid = true;
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementCountIsMoreThanAllowedMaximumErrorMessage({
+        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
@@ -683,10 +680,10 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeIndexedArray.length !== targetIndexedArrayTypeValueSpecification.exactElementsCount
     ) {
 
-      targetIndexedArrayTypeValueIsInvalid = true;
+      isTargetIndexedArrayTypeValueInvalid = true;
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementCountIsDoesNotMatchWithSpecifiedExactNumberErrorMessage({
+        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
@@ -702,23 +699,24 @@ class RawObjectDataProcessor {
     let processedValueWorkpiece: Array<unknown> =
         this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation ?
             targetValue__expectedToBeIndexedArray : [];
+
     const currentObjectDepthLevel__beginWithZero: number =
         this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.length;
 
-    let oneOnMoreElementsAreInvalid: boolean = false;
+    let areOneOnMoreElementsInvalid: boolean = false;
 
-    for (const [ index, _element ] of targetValue__expectedToBeIndexedArray.entries()) {
+    for (const [ index, rawElement ] of targetValue__expectedToBeIndexedArray.entries()) {
 
       this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[currentObjectDepthLevel__beginWithZero] = index;
 
-      let element: unknown = _element;
-      let stringifiedElementValueBeforeFirstPreValidationModification: string | undefined;
+      let element: unknown = rawElement;
+      let stringifiedElementBeforeFirstPreValidationModification: string | undefined;
 
       const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> = RawObjectDataProcessor.
           getNormalizedPreValidationModifications(targetIndexedArrayTypeValueSpecification.element.preValidationModifications);
 
       if (preValidationModifications.length > 0) {
-        stringifiedElementValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(_element);
+        stringifiedElementBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(rawElement);
       }
 
       for (const preValidationModification of preValidationModifications) {
@@ -732,7 +730,7 @@ class RawObjectDataProcessor {
               targetPropertyValue: element,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification.element,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedElementValueBeforeFirstPreValidationModification,
+                  stringifiedElementBeforeFirstPreValidationModification,
               thrownError: error
             })
           );
@@ -744,7 +742,7 @@ class RawObjectDataProcessor {
 
         if (targetIndexedArrayTypeValueSpecification.allowUndefinedTypeElements !== true) {
 
-          oneOnMoreElementsAreInvalid = true;
+          areOneOnMoreElementsInvalid = true;
 
           this.registerValidationError(
             this.validationErrorsMessagesBuilder.buildIndexedArrayDisallowedUndefinedElementErrorMessage({
@@ -753,7 +751,7 @@ class RawObjectDataProcessor {
               targetPropertyValue: targetValue__expectedToBeIndexedArray,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedElementValueBeforeFirstPreValidationModification
+                  stringifiedElementBeforeFirstPreValidationModification
             })
           );
         }
@@ -766,7 +764,7 @@ class RawObjectDataProcessor {
 
         if (targetIndexedArrayTypeValueSpecification.allowNullElements !== true) {
 
-          oneOnMoreElementsAreInvalid = true;
+          areOneOnMoreElementsInvalid = true;
 
           this.registerValidationError(
             this.validationErrorsMessagesBuilder.buildIndexedArrayDisallowedNullElementErrorMessage({
@@ -775,7 +773,7 @@ class RawObjectDataProcessor {
               targetPropertyValue: targetValue__expectedToBeIndexedArray,
               targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedElementValueBeforeFirstPreValidationModification
+                  stringifiedElementBeforeFirstPreValidationModification
             })
           );
         }
@@ -790,7 +788,7 @@ class RawObjectDataProcessor {
             targetValueSpecification: targetIndexedArrayTypeValueSpecification.element,
             parentObject,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                stringifiedElementValueBeforeFirstPreValidationModification
+                stringifiedElementBeforeFirstPreValidationModification
           });
 
 
@@ -799,7 +797,7 @@ class RawObjectDataProcessor {
         case RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling: {
 
           if ("isInvalid" in elementProcessingResult) {
-            oneOnMoreElementsAreInvalid = true;
+            areOneOnMoreElementsInvalid = true;
             continue;
           } else if ("isValidButValidationOnlyModeActive" in elementProcessingResult) {
             continue;
@@ -811,7 +809,8 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
-          /* ※ Reserved for the future. */
+          /* ※ Reserved for the future.
+          * Basically no need to change value, but postValidationModification could be requested. */
         }
       }
     }
@@ -827,10 +826,10 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeIndexedArray as ParsedJSON_Array,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
-        oneOnMoreElementsAreInvalid = true;
+        areOneOnMoreElementsInvalid = true;
 
         this.registerValidationError(
           this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
@@ -846,7 +845,7 @@ class RawObjectDataProcessor {
     }
 
 
-    if (targetIndexedArrayTypeValueIsInvalid || oneOnMoreElementsAreInvalid) {
+    if (isTargetIndexedArrayTypeValueInvalid || areOneOnMoreElementsInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
       return { isValidButValidationOnlyModeActive: true };
@@ -874,7 +873,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeAssociativeArrayTypeObject: unknown;
       targetAssociativeArrayTypeValueSpecification: RawObjectDataProcessor.UniformElementsAssociativeArrayValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -895,14 +894,16 @@ class RawObjectDataProcessor {
     }
 
 
-    let targetAssociativeArrayTypeValueIsInvalid: boolean = false;
+    let isTargetAssociativeArrayTypeValueInvalid: boolean = false;
 
     if (
       isNotUndefined(targetAssociativeArrayTypeValueSpecification.minimalEntriesCount) &&
       Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length <
             targetAssociativeArrayTypeValueSpecification.minimalEntriesCount
     ) {
-      targetAssociativeArrayTypeValueIsInvalid = true;
+
+      isTargetAssociativeArrayTypeValueInvalid = true;
+
       this.registerValidationError(
         this.validationErrorsMessagesBuilder.buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -922,7 +923,9 @@ class RawObjectDataProcessor {
       Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length >
           targetAssociativeArrayTypeValueSpecification.maximalEntriesCount
     ) {
-      targetAssociativeArrayTypeValueIsInvalid = true;
+
+      isTargetAssociativeArrayTypeValueInvalid = true;
+
       this.registerValidationError(
         this.validationErrorsMessagesBuilder.buildAssociativeArrayPairsCountIsMoreThanAllowedMaximumErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -942,7 +945,9 @@ class RawObjectDataProcessor {
       Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length !==
           targetAssociativeArrayTypeValueSpecification.exactEntriesCount
     ) {
-      targetAssociativeArrayTypeValueIsInvalid = true;
+
+      isTargetAssociativeArrayTypeValueInvalid = true;
+
       this.registerValidationError(
         this.validationErrorsMessagesBuilder.buildAssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -963,7 +968,9 @@ class RawObjectDataProcessor {
         filter((key: string): boolean => !Object.keys(targetValue__expectedToBeAssociativeArrayTypeObject).includes(key));
 
       if (missingRequiredKeys.length > 0) {
-        targetAssociativeArrayTypeValueIsInvalid = true;
+
+        isTargetAssociativeArrayTypeValueInvalid = true;
+
         this.registerValidationError(
           this.validationErrorsMessagesBuilder.buildRequiredKeysOfAssociativeArrayAreMissingErrorMessage({
             targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -990,7 +997,9 @@ class RawObjectDataProcessor {
       }
 
       if (noOneOfRequiredKeyAlternativeFound) {
-        targetAssociativeArrayTypeValueIsInvalid = true;
+
+        isTargetAssociativeArrayTypeValueInvalid = true;
+
         this.registerValidationError(
           this.validationErrorsMessagesBuilder.buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessage({
             targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -1016,7 +1025,9 @@ class RawObjectDataProcessor {
       }
 
       if (foundDisallowedKeys.length > 0) {
-        targetAssociativeArrayTypeValueIsInvalid = true;
+
+        isTargetAssociativeArrayTypeValueInvalid = true;
+
         this.registerValidationError(
           this.validationErrorsMessagesBuilder.buildDisallowedKeysFoundInAssociativeArrayErrorMessage({
             targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -1077,9 +1088,7 @@ class RawObjectDataProcessor {
       }
 
 
-      const keyFinalName: string = substituteWhenUndefined(
-        substituteWhenUndefined(targetAssociativeArrayTypeValueSpecification.keysRenamings, {})[key], key
-      );
+      const keyFinalName: string = (targetAssociativeArrayTypeValueSpecification.keysRenamings ?? {})[key] ?? key;
 
       if (isUndefined(value)) {
 
@@ -1167,7 +1176,7 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
         oneOnMoreValuesAreInvalid = true;
@@ -1186,7 +1195,7 @@ class RawObjectDataProcessor {
     }
 
 
-    if (targetAssociativeArrayTypeValueIsInvalid || oneOnMoreValuesAreInvalid) {
+    if (isTargetAssociativeArrayTypeValueInvalid || oneOnMoreValuesAreInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
       return { isValidButValidationOnlyModeActive: true };
@@ -1214,7 +1223,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue: NonNullable<unknown>;
       targetValueSpecification: RawObjectDataProcessor.CertainTypeValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -1323,7 +1332,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeNumber: unknown;
       targetValueSpecification: RawObjectDataProcessor.NumberValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -1462,7 +1471,7 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeNumber,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
         atLeastOneCustomValidationFailed = true;
@@ -1511,7 +1520,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeString: unknown;
       targetValueSpecification: RawObjectDataProcessor.StringValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -1632,7 +1641,7 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeString,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
         atLeastOneCustomValidationFailed = true;
@@ -1681,7 +1690,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue__expectedToBeBoolean: unknown;
       targetValueSpecification: RawObjectDataProcessor.BooleanValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -1728,7 +1737,7 @@ class RawObjectDataProcessor {
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeBoolean,
         rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject
+        rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
 
         atLeastOneCustomValidationFailed = true;
@@ -1778,7 +1787,7 @@ class RawObjectDataProcessor {
     }: {
       targetValue: Exclude<unknown, undefined | null>;
       targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification;
-      parentObject: ArbitraryObject;
+      parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }
   ): RawObjectDataProcessor.ValueProcessingResult {
@@ -2462,11 +2471,11 @@ namespace RawObjectDataProcessor {
 
     readonly errorMessageBasicTemplate: (payload: Localization.DataForMessagesBuilding) => string;
 
-    readonly errorMessagesListItemHeadingTemplate: (messageNumber: number) => string;
+    readonly buildErrorMessagesListItemHeading: (messageNumber: number) => string;
 
     readonly rawDataIsNullErrorMessage: string;
 
-    readonly rawDataIsNotObjectErrorMessageTemplate: (realType: string) => string;
+    readonly buildRawDataIsNotObjectErrorMessage: (realType: string) => string;
 
     readonly buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData: (
       payload: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
@@ -2483,7 +2492,7 @@ namespace RawObjectDataProcessor {
     readonly requiredPropertyIsMissingErrorMessageTextData: Localization.TextDataForErrorMessagesBuilding;
 
     readonly buildConditionallyRequiredPropertyIsMissingErrorMessageTextData: (
-      requirementConditionDescription: string
+      verbalRequirementCondition: string
     ) => Localization.TextDataForErrorMessagesBuilding;
 
 
@@ -2634,7 +2643,7 @@ namespace RawObjectDataProcessor {
     }
 
     public buildRawDataIsNotObjectErrorMessage(realType: string): string {
-      return this.localization.rawDataIsNotObjectErrorMessageTemplate(realType);
+      return this.localization.buildRawDataIsNotObjectErrorMessage(realType);
     }
 
     public buildValueTypeDoesNotMatchWithExpectedErrorMessage(
@@ -2690,7 +2699,7 @@ namespace RawObjectDataProcessor {
 
 
     /* === Indexed arrays =========================================================================================== */
-    public buildIndexedArrayElementCountIsLessThanRequiredMinimumErrorMessage(
+    public buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessage(
       payload: Localization.PropertyDataForMessagesBuilding & { minimalElementsCount: number; actualElementsCount: number; }
     ): string {
       return this.buildErrorMessage({
@@ -2702,7 +2711,7 @@ namespace RawObjectDataProcessor {
       });
     }
 
-    public buildIndexedArrayElementCountIsMoreThanAllowedMaximumErrorMessage(
+    public buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessage(
       payload: Localization.PropertyDataForMessagesBuilding & { maximalElementsCount: number; actualElementsCount: number; }
     ): string {
       return this.buildErrorMessage({
@@ -2714,7 +2723,7 @@ namespace RawObjectDataProcessor {
       });
     }
 
-    public buildIndexedArrayElementCountIsDoesNotMatchWithSpecifiedExactNumberErrorMessage(
+    public buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage(
       payload: Localization.PropertyDataForMessagesBuilding & { exactElementsCount: number; actualElementsCount: number; }
     ): string {
       return this.buildErrorMessage({

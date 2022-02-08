@@ -38,12 +38,12 @@ const RawObjectDataProcessorLocalization__English: Localization = {
         })}`;
   },
 
-  errorMessagesListItemHeadingTemplate(messageNumber: number): string { return `=== Error No. ${messageNumber} ==========`; },
+  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Error No. ${messageNumber} ==========`; },
 
-  rawDataIsNullErrorMessage: "The 'rawData' is 'null'.",
+  rawDataIsNullErrorMessage: "Raw data, the first parameter of 'RawObjectDataProcessor.process' is null.",
 
-  rawDataIsNotObjectErrorMessageTemplate: (actualType: string): string =>
-      `The 'rawData' is not an 'object' and actually has type '${actualType}'.`,
+  buildRawDataIsNotObjectErrorMessage: (actualType: string): string =>
+      `Raw data, the first parameter of 'RawObjectDataProcessor.process' an 'object' and actually has type '${actualType}'.`,
 
   buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
     {
@@ -58,17 +58,17 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Expected and actual value types mismatch",
-      specificMessagePart: `This value must have type '${this.valueType(targetPropertyValueSpecification.type)}' ` +
-          `while actually it's type is: '${typeof targetPropertyValue}'.`
+      specificMessagePart: `This value expected to have type '${this.valueType(targetPropertyValueSpecification.type)}' ` +
+          `while actually it's type is '${typeof targetPropertyValue}'.`
     };
   },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Pre-validation modification failed",
+      title: "Pre-validation caused the error",
       specificMessagePart: "Pre-validation modification of this value caused below error:\n" +
           `${stringifyAndFormatArbitraryValue(thrownError)}\n` +
-          "This pre-validation modification skipped."
+          "This pre-validation modification has been skipped."
     };
   },
 
@@ -76,16 +76,16 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   /* === Requirement =============================================================================================== */
   requiredPropertyIsMissingErrorMessageTextData: {
     title: "Required property is missing",
-    specificMessagePart: "This property has been marked as 'required' while actual value is 'undefined'."
+    specificMessagePart: "This property is 'undefined' while has been marked as required."
   },
 
   buildConditionallyRequiredPropertyIsMissingErrorMessageTextData(
-    requirementConditionDescription: string
+    verbalRequirementCondition: string
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Conditionally required property is missing",
       specificMessagePart: "This value is 'undefined' while requirement condition:\n" +
-          `"${requirementConditionDescription}"\nsatisfied.`
+          `"${verbalRequirementCondition}"\nsatisfied.`
     };
   },
 
@@ -102,9 +102,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { minimalElementsCount, actualElementsCount }: { minimalElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Indexed array elements count is less than required minimum",
-      specificMessagePart: `This array-type value has ${actualElementsCount} elements while at least ${minimalElementsCount} ` +
-          "elements required."
+      title: "Indexed array has less elements than expected minimum",
+      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while at least ` +
+          `${minimalElementsCount} expected.`
     };
   },
 
@@ -112,9 +112,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { maximalElementsCount, actualElementsCount }: { maximalElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Indexed array elements count is exceeding the allowed maximum",
-      specificMessagePart: `This array-type value has ${actualElementsCount} elements while maximum ${maximalElementsCount} ` +
-          "is allowed"
+      title: "Indexed array has more elements than expected maximum",
+      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while ` +
+          `maximally ${maximalElementsCount} expected.`
     };
   },
 
@@ -122,20 +122,20 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { exactElementsCount, actualElementsCount }: { exactElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Indexed array elements count does not match with specified exact number",
-      specificMessagePart: `This array-type must have exactly ${exactElementsCount} elements while actually has ` +
-          `${actualElementsCount} elements.`
+      title: "The count of elements of indexed array does not match with expected fixed value",
+      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while ` +
+          `exactly ${exactElementsCount} expected.`
     };
   },
 
   indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
-    title: "Indexed array disallowed undefined-type element",
+    title: "Disallowed undefined-type element of indexed array",
     specificMessagePart: "This indexed array element is 'undefined' while undefined-type elements has not been allowed " +
         "by valid element specification."
   },
 
   indexedArrayDisallowedNullElementErrorMessageTextData: {
-    title: "Indexed array disallowed null element",
+    title: "Disallowed null element of indexed array",
     specificMessagePart: "This indexed array element is 'null' while null elements has not been allowed by valid element " +
         "specification."
   },
@@ -146,9 +146,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { minimalEntriesCount, actualEntriesCount }: { minimalEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Associative array entries count is less than required minimum",
-      specificMessagePart: `This associative array-type value has ${actualEntriesCount} entries while at least ` +
-          `${minimalEntriesCount} entries required.`
+      title: "Associative array has less entries than expected minimum",
+      specificMessagePart: `This value of associative array type value has ${actualEntriesCount} entries while at least ` +
+          `${minimalEntriesCount} expected.`
     };
   },
 
@@ -156,9 +156,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { maximalEntriesCount, actualEntriesCount }: { maximalEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Associative array entries count is exceeding the allowed maximum",
-      specificMessagePart: `This associative array-type value has ${actualEntriesCount} entries while maximum ` +
-          `${maximalEntriesCount} entries is allowed`
+      title: "Associative array has more entries than expected maximum",
+      specificMessagePart: `This value of associative array-type value has ${actualEntriesCount} entries while maximally ` +
+          `${maximalEntriesCount} expected.`
     };
   },
 
@@ -166,9 +166,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     { exactEntriesCount, actualEntriesCount }: { exactEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Associative array entries count does not match with specified exact number",
-      specificMessagePart: `This associative array-type value must have exactly ${exactEntriesCount} entries while ` +
-          `actually has ${actualEntriesCount} entries.`
+      title: "The count of entries of associative array does not match with expected fixed value",
+      specificMessagePart: `This value of associative array-type value has ${exactEntriesCount} entries while ` +
+          `exactly ${actualEntriesCount} expected.`
     };
   },
 
@@ -178,7 +178,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Required key(s) of associative array are missing",
       specificMessagePart: "Below keys are missing but required for this associative array type value:\n" +
-          `${JSON.stringify(missingRequiredKeys, null, 2)}`
+          `${stringifyAndFormatArbitraryValue(missingRequiredKeys)}`
     };
   },
 
@@ -187,8 +187,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Required keys alternatives are missing",
-      specificMessagePart: "One of below keys must be in this associative array-type value, but actually none of those " +
-          `presents.\n${JSON.stringify(requiredKeysAlternatives, null, 2)}`
+      specificMessagePart: "One of below keys must present in this associative array-type value, but actually none of theme " +
+          `presents.\n${stringifyAndFormatArbitraryValue(requiredKeysAlternatives)}`
     };
   },
 
@@ -196,9 +196,9 @@ const RawObjectDataProcessorLocalization__English: Localization = {
       foundDisallowedKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Disallowed key(s) presents in associative array",
-      specificMessagePart: "Below keys presents in this associative array-type value while these keys are disallowed\n" +
-          `${JSON.stringify(foundDisallowedKeys, null, 2)}`
+      title: "Disallowed key(s) found in associative array",
+      specificMessagePart: "Below keys presents in this associative array type value while these keys are disallowed.\n" +
+          `${stringifyAndFormatArbitraryValue(foundDisallowedKeys)}`
     };
   },
 
@@ -369,7 +369,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Custom validation did not passed",
-      specificMessagePart: `The custom validation:\n ${customValidationDescription}\n did not passed for current value`
+      specificMessagePart: `This value did not passed the custom validation "${customValidationDescription}".`
     };
   }
 };

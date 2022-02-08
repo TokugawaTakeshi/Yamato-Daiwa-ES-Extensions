@@ -373,7 +373,7 @@ if (processingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
-    description: "The raw data is invalid:" +
+    description: "The raw data is invalid:\n" +
         `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
     occurrenceLocation: "upper scope"
   });
@@ -578,7 +578,7 @@ if (dataProcessingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
-    description: "The sample data is invalid:" +
+    description: "The sample data is invalid:\n" +
         `${RawObjectDataProcessor.formatValidationErrorsList(dataProcessingResult.validationErrorsMessages)}`,
     occurrenceLocation: "upper scope"
   });
@@ -1269,3 +1269,217 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   }
 }
 ```
+
+## API
+
+## Methods
+
+All public methods are static.
+
+### process
+
+Main method of the class representing most functionality.
+Processing the raw data (first argument) according it's specification (second parameter) and options (third parameter, optional).
+
+```
+process<ProcessedData extends ArbitraryObject, InterimValidData extends ArbitraryObject = ProcessedData>(
+  rawData: unknown,
+  validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification,
+  options: RawObjectDataProcessor.Options = {}
+): RawObjectDataProcessor.ProcessingResult<ProcessedData>
+```
+
+* Generic parameters
+  * **ProcessedData** - refers to desired type. Since **RawObjectDataProcessor** is for objects only, the **ProcessedData**
+    must be the subtype of **ArbitraryObject** (non-null object with any valid string keys and values of any type).
+  * **InterimValidData** - optional parameter actual only whe **postProcessing** property of third parameter of object-type
+    has been specified with the function.
+* Parameters
+  * **rawData** Unknown as advance data which usually being retrieved from external source like HTTP or file.
+  * **validDataSpecification** The object of type [**RawObjectDataProcessor.ObjectDataSpecification**](#rawobjectdataprocessorobjectdataspecification) 
+     describing what raw data should it be, and, optionally, some extra processings of one or more properties of raw data.
+     Must corresponding to specified **ProcessedData**, but TypeScript can not inspect is this really the case.
+  * **options** 
+    * **postProcessing** the function accepting the **InterimValidData** and returning **ProcessedData**, both of which
+      are generic parameters of the **process** method.
+    * **localization** the object of **RawObjectDataProcessor.Localization** type containing the function generating
+      the validation error messages.
+* **Returned value** is the object containing the processing result. The property **processedData** is available is
+  and only if property **rawDataIsInvalid** is truthy, same as **validationErrorsMessages** is available if and only if
+  property **rawDataIsInvalid** is falsy. So, you need to check **rawDataIsInvalid** before access to **processedData**
+  or **rawDataIsInvalid**.
+
+The section [getting-started](#getting-started) contains the example with most of above properties.
+
+    
+### formatValidationErrorsList
+
+```
+formatValidationErrorsList(
+  messages: Array<string>, localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
+): string
+```
+
+Formatting the validation errors messages which **RawObjectDataProcessor.ProcessingResult** contains when raw data is invalid.
+
+```typescript
+if (processingResult.rawDataIsInvalid) {
+  Logger.logError({
+    errorType: InvalidExternalDataError.NAME,
+    title: InvalidExternalDataError.DEFAULT_TITLE,
+    description: "The raw data is invalid:\n" +
+        `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
+    occurrenceLocation: "upper scope"
+  });
+}
+```
+
+### setDefaultLocalization
+
+```
+setDefaultLocalization(newLocalization: RawObjectDataProcessor.Localization): void
+```
+
+Changing the default language of errors messages.
+The **RawObjectDataProcessor.Localization** is pretty big object containing the text data and template functions for 
+each error message. 
+
+Officially, Japanese and Russian localization planning.
+You can create your ows localization object of **RawObjectDataProcessor.Localization** type.
+Check the [listing of English localization](../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English.ts)
+as reference.
+
+### getNormalizedValueTypeID
+
+```
+getNormalizedValueTypeID(
+  valueType: NumberConstructor |
+      StringConstructor |
+      BooleanConstructor |
+      ObjectConstructor |
+      ArrayConstructor |
+      MapConstructor |
+      RawObjectDataProcessor.ValuesTypesIDs
+): RawObjectDataProcessor.ValuesTypesIDs
+```
+
+The method exclusively for localization.
+Transforms **String** (the **StringConstructor**) to **RawObjectDataProcessor.ValuesTypesIDs.string**,
+**Number** (the **NumberConstructor**) to **RawObjectDataProcessor.ValuesTypesIDs.number** etc. and always returns the element
+of **RawObjectDataProcessor.ValuesTypesIDs** enumerations.
+
+Basically, the switch/case could detect **StringConstructor**, **NumberConstructor** etc., but under a certain combination 
+of conditions it does not work:
+
+* https://stackoverflow.com/q/69848208/4818123
+* https://stackoverflow.com/q/69848689/4818123
+
+So the transformations like **StringConstructor** to **RawObjectDataProcessor.ValuesTypesIDs.string** aare more complicated
+than just switch/case, that is what **getNormalizedValueTypeID** method is doing.
+
+
+## Types
+### RawObjectDataProcessor.ObjectDataSpecification
+
+The second parameter of `RawObjectDataProcessor.process` method.
+
+#### Properties
+##### nameForLogging
+
+Will be used in error message which will be generated if raw data is invalid.
+
+It should make sense which exactly data does not match with expected. For example:
+
+* If it is some data retrieved via HTTP, the name like **UsersListRetrieving.ResponseData** makes sense.
+  Although in this example Pascal case has been used, this name could be the normal text.
+* If it is the data from some configuration file, the name like **NNNConfigFile** (where NNN is the application name) 
+  makes sense. 
+
+```typescript
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  nameForLogging: "UsersListRetrieving.ResponseData",
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    /* Properties' specification goes here ... */
+  }
+}
+```
+
+##### Subtype and dependent properties
+
+Defines which subtype of object must be the raw data.
+Object-type data classification has been considered in [corresponding section](#object-type-data-classification)
+of [theoretical minimum](#theoretical-minimum) chapter.
+
+* If you have specified `subtype: ObjectSubtypes.fixedKeyAndValuePairsObject`, you must define `properties` property   
+  with specification of each property of target object (see [PropertiesSpecification and related - Object properties specification](#propertiesspecification-and-related---object-properties-specification)). 
+* If you have specified `subtype: ObjectSubtypes.indexedArray`, you must define `element` property with specification 
+  of target indexed array's element.
+* If you have specified `subtype: ObjectSubtypes.associativeArray`, you must define `value` property with specification
+  of target associative array's value.
+
+```typescript
+const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+  
+  nameForLogging: "UsersListRetrieving.ResponseData",
+  
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  properties: {
+    /* Properties' specification goes here ... */
+  },
+  
+  // OR
+  subtype: RawObjectDataProcessor.ObjectSubtypes.indexedArray,
+  element: {
+    /* Element's specification goes here ... */
+  },
+
+  // OR
+  subtype: RawObjectDataProcessor.ObjectSubtypes.associativeArray,
+  value: {
+    /* Values's specification goes here ... */
+  },
+}
+```
+
+### PropertiesSpecification and related - Object properties specification
+
+The **PropertiesSpecification** is the associative where key is a name of expected property:
+
+```typescript
+export type PropertiesSpecification = { readonly [propertyName: string]: CertainPropertySpecification; };
+```
+
+The **CertainPropertySpecification** is one of:
+
+* **NumberPropertySpecification**
+* **StringPropertySpecification**
+* **BooleanPropertySpecification**
+* **NestedObjectPropertySpecification**
+* **NestedUniformElementsIndexedArrayPropertySpecification**
+* **NestedUniformElementsAssociativeArrayPropertySpecification**
+* **MultipleTypesAllowedPropertySpecification**
+
+As has been explained in [Theoretical-minimum](#theoretical-minimum) chapter, the value could exist inside object as property,
+but also could be independent (until global scope). Thus, each of above extends the specification of respective value:
+
+* **NumberValueSpecification** - subset of **NumberPropertySpecification**
+* **StringValueSpecification** - subset of **StringPropertySpecification**
+* **BooleanValueSpecification** - subset of **BooleanPropertySpecification**
+* **FixedKeyAndValuePairsObjectValueSpecification** - subset of **NestedObjectPropertySpecification**
+* **UniformElementsIndexedArrayValueSpecification** - subset of **NestedUniformElementsIndexedArrayPropertySpecification**
+* **UniformElementsAssociativeArrayValueSpecification** - subset of **NestedUniformElementsAssociativeArrayPropertySpecification**
+* **MultipleTypesAllowedValueSpecification** - subset of **MultipleTypesAllowedPropertySpecification**
+
+
+### ProcessingResult - raw data processing result
+#### Generic parameter
+
+Even with first generic parameter of **process** method - the shape of valid and processed data.
+
+#### Properties
+
+* **rawDataIsInvalid** - boolean property reflects the result of validation of the raw data.
+* **processedData** - the validated and processed data. Presents (non-undefined) if and only if **rawDataIsInvalid** is **true**.
+* **validationErrorsMessages** - the array of validation errors messages. Presents (non-undefined) if and only if
+  **rawDataIsInvalid** is **false**.
