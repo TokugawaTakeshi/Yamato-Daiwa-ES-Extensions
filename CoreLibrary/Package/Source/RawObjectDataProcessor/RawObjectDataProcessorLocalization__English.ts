@@ -130,13 +130,13 @@ const RawObjectDataProcessorLocalization__English: Localization = {
 
   indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
     title: "Disallowed undefined-type element of indexed array",
-    specificMessagePart: "This indexed array element is 'undefined' while undefined-type elements has not been allowed " +
+    specificMessagePart: "This element of indexed array is 'undefined' while undefined-type elements has not been allowed " +
         "by valid element specification."
   },
 
   indexedArrayDisallowedNullElementErrorMessageTextData: {
     title: "Disallowed null element of indexed array",
-    specificMessagePart: "This indexed array element is 'null' while null elements has not been allowed by valid element " +
+    specificMessagePart: "This element of indexed array is 'null' while null elements has not been allowed by valid element " +
         "specification."
   },
 
@@ -203,14 +203,14 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   },
 
   associativeArrayDisallowedUndefinedValueErrorMessageTextData: {
-    title: "Associative array disallowed undefined-type value",
-    specificMessagePart: "This associative array element is 'undefined' while undefined-type values has not been allowed " +
+    title: "Disallowed undefined-type value of associative array",
+    specificMessagePart: "This value of associative array is 'undefined' while undefined-type values has not been allowed " +
         "by valid value specification."
   },
 
   associativeArrayDisallowedNullValueErrorMessageTextData: {
-    title: "Associative array disallowed null value",
-    specificMessagePart: "This associative array element is 'null' while null values has not been allowed by valid value " +
+    title: "Disallowed null value of associative array",
+    specificMessagePart: "This value of associative array is 'null' while null values has not been allowed by valid value " +
         "specification."
   },
 
@@ -268,12 +268,13 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Expected and actual numbers set mismatch",
-      specificMessagePart: `This numeric value is in not member of '${this.numbersSet(expectedNumberSet)}' set as required.`
+      specificMessagePart: "Contrary to expectations, this numeric value is in not member of " + 
+          `'${this.numbersSet(expectedNumberSet)}'`
     };
   },
 
   valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "Disallowed value alternative",
+    title: "Disallowed alternative of value",
     specificMessagePart: "This value is not among allowed alternatives."
   },
 
@@ -302,8 +303,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Minimal characters count fall short",
-      specificMessagePart: `This string value has ${realCharactersCount} characters while required minimal characters ` +
-          `count is ${minimalCharactersCount}.`
+      specificMessagePart: `This string value has ${realCharactersCount} characters while at least ` + 
+          `${minimalCharactersCount} required.`
     };
   },
 
@@ -312,8 +313,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Maximal characters count exceeding",
-      specificMessagePart: `This string value has ${realCharactersCount} characters while allowed maximal characters ` +
-          ` count is ${maximalCharactersCount}.`
+      specificMessagePart: `This string value has ${realCharactersCount} characters ${maximalCharactersCount} allowed ` +
+          "as maximum."
     };
   },
 
@@ -322,15 +323,14 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Fixed characters count mismatch",
-      specificMessagePart: `The value has ${realCharactersCount} character while must be exactly ${fixedCharactersCount} ` +
-          "characters."
+      specificMessagePart: `The value has ${realCharactersCount} characters exactly ${fixedCharactersCount} required.`
     };
   },
 
   buildRegularExpressionMismatchErrorMessageTextData(regularExpression: RegExp): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Regular expression mismatch",
-      specificMessagePart: `This value does not match with specified regular expression:\n ${regularExpression.toString()}`
+      specificMessagePart: `This string value does not match with specified regular expression:\n ${regularExpression.toString()}`
     };
   },
 
@@ -340,7 +340,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Disallowed boolean variant",
-      specificMessagePart: `This value is '${!disallowedVariant}' while only '${disallowedVariant}' allowed`
+      specificMessagePart: `This boolean value is '${!disallowedVariant}' while only '${disallowedVariant}' allowed.`
     };
   },
 
@@ -350,8 +350,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return "The 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (aliased as Object) and " +
         "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
         "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. Target value marked " +
-        "as invalid." +
-        `\n●　Value specification: \n${stringifyAndFormatArbitraryValue(targetValueSpecification)}`;
+        `as invalid. Please correct below specification:\n ${stringifyAndFormatArbitraryValue(targetValueSpecification)}`;
   },
 
   buildUnsupportedValueTypeErrorMessageTextData(
