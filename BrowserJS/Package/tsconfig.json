@@ -4,6 +4,7 @@
     "target": "ES2018",
     "module": "ES2020",
     "moduleResolution": "Node",
+    "esModuleInterop": true,
 
     "strict": true,
     "noUnusedLocals": true,

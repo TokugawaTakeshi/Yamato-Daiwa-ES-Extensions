@@ -1,4 +1,4 @@
-export default function createElements(HTML_Code: string): HTMLCollection {
+export default function createHTML_CollectionFromHTML_Code(HTML_Code: string): HTMLCollection {
 
   const container: Document = document.implementation.createHTMLDocument();
 

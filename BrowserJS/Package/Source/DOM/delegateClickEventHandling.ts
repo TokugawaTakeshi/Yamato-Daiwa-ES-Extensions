@@ -1,22 +1,78 @@
-import { isNotNull } from "@yamato-daiwa/es-extensions";
+import {
+  isNull,
+  isNotNull,
+  isUndefined,
+  Logger,
+  UnexpectedEventError, DOM_ElementRetrievingFailedError
+} from "@yamato-daiwa/es-extensions";
 
+
+export default function delegateClickEventHandling(
+  compoundParameter: {
+    eventTargetSelector: string;
+    delegatingContainerOrIt_sSelector: Element | Document | string;
+    handler: (clickedElement: Element, event: MouseEvent) => unknown;
+  }
+): void;
 
 export default function delegateClickEventHandling<ClickTargetElement extends Element>(
+  compoundParameter: {
+    eventTargetSelector: string;
+    delegatingContainerOrIt_sSelector: Element | Document | string;
+    eventTargetElementSubtype: new () => ClickTargetElement;
+    handler: (clickedElement: ClickTargetElement, event: MouseEvent) => unknown;
+  }
+): void;
+
+
+export default function delegateClickEventHandling<ClickTargetElement extends Element = Element>(
   {
-    clickTargetSelector,
-    clickTargetTypeChecker,
-    container = document
+    eventTargetSelector,
+    delegatingContainerOrIt_sSelector,
+    eventTargetElementSubtype,
+    handler
   }: {
-    clickTargetSelector: string;
-    clickTargetTypeChecker: (element: Element) => element is ClickTargetElement;
-    container?: Element | Document;
-  },
-  handler: (clickedElement: ClickTargetElement, event: MouseEvent) => void
+    eventTargetSelector: string;
+    delegatingContainerOrIt_sSelector: Element | Document | string;
+    eventTargetElementSubtype?: new () => ClickTargetElement;
+    handler: (clickedElement: ClickTargetElement | Element, event: MouseEvent) => unknown;
+  }
 ): void {
 
-  container.addEventListener("click", (event: Event): void => {
+  let delegatingContainer: Element | Document;
+
+  if (delegatingContainerOrIt_sSelector instanceof Element || delegatingContainerOrIt_sSelector instanceof Document) {
+    delegatingContainer = delegatingContainerOrIt_sSelector;
+  } else {
+
+    const potentialDelegatingContainer: Element | null = document.querySelector(delegatingContainerOrIt_sSelector);
+
+    if (isNull(potentialDelegatingContainer)) {
+      Logger.throwErrorAndLog({
+        errorInstance: new DOM_ElementRetrievingFailedError({
+          selector: delegatingContainerOrIt_sSelector
+        }),
+        title: UnexpectedEventError.DEFAULT_TITLE,
+        occurrenceLocation: "delegateClickEventHandling(compoundObject)"
+      });
+    }
+
+
+    delegatingContainer = potentialDelegatingContainer;
+  }
+
+
+  delegatingContainer.addEventListener("click", (event: Event): void => {
 
     if (!(event instanceof MouseEvent)) {
+      Logger.logError({
+        errorType: UnexpectedEventError.NAME,
+        title: UnexpectedEventError.DEFAULT_TITLE,
+        description: "We are sorry, but it is a bug. The event is not instance of 'MouseEvent'. " +
+            "Please consider the opening issue in https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append " +
+            "the reproducting example.",
+        occurrenceLocation: "delegateClickEventHandling(compoundParameters)"
+      });
       return;
     }
 
@@ -27,12 +83,24 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
       parentElement = parentElement.parentElement
     ) {
 
-      if (parentElement.matches(clickTargetSelector)) {
+      if (parentElement.matches(eventTargetSelector)) {
 
-        if (!clickTargetTypeChecker(parentElement)) {
-          console.error("error");
+        if (isUndefined(eventTargetElementSubtype)) {
+          handler(parentElement, event);
           return;
         }
+
+
+        if (!(parentElement instanceof eventTargetElementSubtype)) {
+          Logger.logError({
+            errorType: UnexpectedEventError.NAME,
+            title: UnexpectedEventError.DEFAULT_TITLE,
+            description: `Contrary to expectations, the event target is not instance of '${eventTargetElementSubtype.name}'.`,
+            occurrenceLocation: "delegateClickEventHandling(compoundParameters)"
+          });
+          return;
+        }
+
 
         handler(parentElement, event);
       }
