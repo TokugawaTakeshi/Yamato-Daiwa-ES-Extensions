@@ -23,6 +23,8 @@ Currently, below live templates are available:
 * [`TimePoint`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md)
 * The examples of functions usage (please note that you don't need to type the whole name of the function)
   * [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
+  * **dceh** - Live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/delegateClickEventHandling.md) function
+
 <!-- Plugin description end -->
 
 ## Installation

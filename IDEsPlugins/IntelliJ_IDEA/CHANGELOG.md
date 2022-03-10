@@ -7,9 +7,10 @@
 ### Added
 
 * [`TimePoint`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md)
-  Inserts the example of `TimePoint` class usage
+  Inserts the example of `TimePoint` class usage.
 * [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
   Inserts the example of same-name function usage.
+* **dceh** - Live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/delegateClickEventHandling.md) function 
 
 ### Changed
 

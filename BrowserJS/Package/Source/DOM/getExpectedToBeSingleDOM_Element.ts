@@ -6,33 +6,33 @@ import {
 } from "@yamato-daiwa/es-extensions";
 
 
-export default function getExpectedToBeSingleElement(
-  parametersObject: {
+export default function getExpectedToBeSingleDOM_Element(
+  compoundParameter: {
     selector: string;
     context?: Element | Document;
   }
 ): Element;
 
-export default function getExpectedToBeSingleElement<SpecificElement extends Element>(
-  parametersObject: {
+export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
+  compoundParameter: {
     selector: string;
     context?: Element | Document;
-    elementTypeChecker: (element: Element) => element is SpecificElement;
+    targetDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }
-): SpecificElement;
+): DOM_ElementSubtype;
 
 
-export default function getExpectedToBeSingleElement<SpecificElement extends Element>(
+export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   {
     selector,
     context = document,
-    elementTypeChecker
+    targetDOM_ElementSubtype
   }: {
     selector: string;
     context?: Element | Document;
-    elementTypeChecker?: (element: Element) => element is SpecificElement;
+    targetDOM_ElementSubtype?: new () => DOM_ElementSubtype;
   }
-): Element | SpecificElement {
+): Element | DOM_ElementSubtype {
 
   const targetElementSearchRequestMatch: Array<Element> = Array.from(context.querySelectorAll(selector));
 
@@ -40,7 +40,7 @@ export default function getExpectedToBeSingleElement<SpecificElement extends Ele
     Logger.throwErrorAndLog({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
       title: UnexpectedEventError.DEFAULT_TITLE,
-      occurrenceLocation: "getExpectedToBeSingleElement(parametersObject)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
@@ -49,28 +49,28 @@ export default function getExpectedToBeSingleElement<SpecificElement extends Ele
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
         `Contrary to expectations, ${targetElementSearchRequestMatch.length} elements has been found for the selector ` +
-        `"${selector}."`
+        `'${selector}'.`
       ),
       title: UnexpectedEventError.DEFAULT_TITLE,
-      occurrenceLocation: "getExpectedToBeSingleElement(parametersObject)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
 
-  if (isUndefined(elementTypeChecker)) {
+  if (isUndefined(targetDOM_ElementSubtype)) {
     return targetElementSearchRequestMatch[0];
   }
 
 
   const targetElement: Element = targetElementSearchRequestMatch[0];
 
-  if (!elementTypeChecker(targetElement)) {
+  if (!(targetElement instanceof targetDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        "The picked element subtype does match with expected one specified in 'elementTypeChecker'"
+        `The subtype of picked element  does match with expected subtype '${targetDOM_ElementSubtype.name}'.`
       ),
       title: UnexpectedEventError.DEFAULT_TITLE,
-      occurrenceLocation: "getExpectedToBeSingleElement(parametersObject)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
