@@ -27,6 +27,7 @@ class TimePoint {
   public readonly monthNumber__numerationFrom1__2Digits: string;
 
   public readonly dayOfMonth: number;
+  public readonly dayOfMonth__2Digits: string;
 
   public readonly dayOfWeek: DaysOfWeek;
   public readonly dayOfWeekNumber__numerationFrom0AsSunday: number;
@@ -87,6 +88,7 @@ class TimePoint {
     this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationForm: 1 });
 
     this.dayOfMonth = normalizedDateTime.getDate();
+    this.dayOfMonth__2Digits = this.dayOfMonth.toString().padStart(2, "0");
 
     this.dayOfWeekNumber__numerationFrom0AsSunday = normalizedDateTime.getDay();
     this.dayOfWeekNumber__numerationFrom1AsSunday = this.dayOfWeekNumber__numerationFrom0AsSunday + 1;
