@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions-nodejs v1.3.0-alpha.2
+ * @yamato-daiwa/es-extensions-nodejs v1.5
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
