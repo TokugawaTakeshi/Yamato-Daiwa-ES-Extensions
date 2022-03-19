@@ -34,6 +34,15 @@ export enum SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnico
   characterTabulation = "\\u{0009}"
 }
 
+export enum EscapeCharacters {
+  backspace = "\b",
+  formFeed = "\f",
+  newLine = "\n",
+  carriageReturn = "\r",
+  horizontalTabulator = "\t",
+  verticalTabulator = "\v"
+}
+
 export const latinCharacters__lowercase: Array<string> = "abcdefghijklmnopqrstuvwxyz".split("");
 export const latinCharacters__uppercase: Array<string> = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 

@@ -34,6 +34,7 @@ export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringify
 export { default as trimSpaces } from "./Strings/trimSpaces";
 export {
   SpaceCharacters,
+  EscapeCharacters,
   latinCharacters__lowercase,
   latinCharacters__uppercase,
   stringifiedDigits
@@ -65,6 +66,7 @@ export { default as filterMap } from "./Maps/filterMap";
 
 /* === Types ======================================================================================================== */
 export type { ArbitraryObject } from "./Types/ArbitraryObject";
+export type { ElementOfPseudoEnumeration } from "./Types/ElementOfPseudoEnumeration";
 export type { InheritEnumerationKeys } from "./Types/InheritEnumerationKeys";
 export type {
   ParsedJSON,
