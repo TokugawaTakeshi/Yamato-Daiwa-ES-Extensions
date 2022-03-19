@@ -5,3 +5,4 @@
  */
 
 export { default as NodeJS_Timer } from "./DateTime/NodeJS_Timer";
+export { default as ConsoleApplicationLogger } from "./ConsoleApplicationLogger";
