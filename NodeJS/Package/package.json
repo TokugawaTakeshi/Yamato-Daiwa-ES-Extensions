@@ -1,7 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs",
-  "private": "true",
-  "version": "1.5.0-alpha.0",
+  "version": "1.5.0-alpha.1",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for Node.js environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "nodejs",
@@ -34,8 +33,8 @@
     "del-cli": "4.0.1",
     "mocha": "9.2.2",
     "ts-node": "10.7.0",
-    "typescript": "4.4.3",
-    "yamato-daiwa_code_quality_management": "0.2.0"
+    "typescript": "4.6.2",
+    "yamato-daiwa_code_quality_management": "0.3.0"
   },
   "dependencies": {
     "@yamato-daiwa/es-extensions": "1.4.5",
@@ -46,6 +45,7 @@
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc",
-    "Lint": "eslint Source Tests"
+    "Lint": "eslint Source Tests",
+    "Rebuild distributable and realize alpha":  "npm run \"Rebuild distributable\" && npm publish --tag alpha"
   }
 }

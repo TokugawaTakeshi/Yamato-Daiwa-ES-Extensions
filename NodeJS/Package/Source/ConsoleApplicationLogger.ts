@@ -103,6 +103,12 @@ abstract class ConsoleApplicationLogger {
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
+      [
+        `${errorLog.occurrenceLocation}: `,
+        {
+          foregroundColor: { red: 231, green: 76, blue: 60 }
+        }
+      ],
       /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
        * type can/doest not be "matched" with function's parameter's types.
        * https://stackoverflow.com/a/67015118/4818123 */

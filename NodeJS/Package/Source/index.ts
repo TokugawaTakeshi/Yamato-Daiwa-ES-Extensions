@@ -6,3 +6,6 @@
 
 export { default as NodeJS_Timer } from "./DateTime/NodeJS_Timer";
 export { default as ConsoleApplicationLogger } from "./ConsoleApplicationLogger";
+export { default as ConsoleCommandsParser } from "./ConsoleCommandsParser/ConsoleCommandsParser";
+
+export { default as InvalidConsoleCommandError } from "./Logging/Errors/InvalidConsoleCommandError";
