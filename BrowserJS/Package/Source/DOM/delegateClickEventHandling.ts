@@ -53,7 +53,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
           selector: delegatingContainerOrIt_sSelector
         }),
         title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "delegateClickEventHandling(compoundObject)"
+        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
       });
     }
 
@@ -68,10 +68,10 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.DEFAULT_TITLE,
-        description: "We are sorry, but it is a bug. The event is not instance of 'MouseEvent'. " +
+        description: "We are sorry, but it is a bug. The event is not instance of 'MouseEvent'. We need to investigate it. " +
             "Please consider the opening issue in https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append " +
             "the reproducting example.",
-        occurrenceLocation: "delegateClickEventHandling(compoundParameters)"
+        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
       });
       return;
     }
@@ -96,7 +96,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
             errorType: UnexpectedEventError.NAME,
             title: UnexpectedEventError.DEFAULT_TITLE,
             description: `Contrary to expectations, the event target is not instance of '${eventTargetElementSubtype.name}'.`,
-            occurrenceLocation: "delegateClickEventHandling(compoundParameters)"
+            occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
           });
           return;
         }

@@ -67,7 +67,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   if (!(targetElement instanceof targetDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        `The subtype of picked element  does match with expected subtype '${targetDOM_ElementSubtype.name}'.`
+        `The subtype of picked element does match with expected subtype '${targetDOM_ElementSubtype.name}'.`
       ),
       title: UnexpectedEventError.DEFAULT_TITLE,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"

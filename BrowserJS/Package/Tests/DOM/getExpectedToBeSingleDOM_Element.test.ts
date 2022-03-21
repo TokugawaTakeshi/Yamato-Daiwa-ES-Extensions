@@ -14,7 +14,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
   it("Simplest example", (): void => {
 
     const sample: Element = createDOM_ElementFromHTML_Code(
-        "<div class='Container'><button type='button' class='Button'></button></div>"
+      "<div class='ActionBar'><button type='button' class='Button'></button></div>"
     );
 
     strictEqual(
@@ -28,7 +28,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
   it("targetDOM_ElementSubtype option checking", (): void => {
 
     const sample: Element = createDOM_ElementFromHTML_Code(
-      "<div class='Container'><button type='button' class='Button'></button></div>"
+      "<div class='ActionBar'><button type='button' class='Button'></button></div>"
     );
 
     strictEqual(
@@ -46,7 +46,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
     it("No such element", (): void => {
 
       const sample: Element = createDOM_ElementFromHTML_Code(
-        "<div class='Container'><button type='button' class='Button'></button></div>"
+        "<div class='ActionBar'><button type='button' class='Button'></button></div>"
       );
 
       throws(
@@ -66,7 +66,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
 
       const sample: Element = createDOM_ElementFromHTML_Code(
         `
-          <div class='Container'>
+          <div class='ActionBar'>
             <button type='button' class='Button'></button>
             <button type='button' class='Button'></button>
           </div>`
@@ -88,7 +88,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
     it("Expected and actual elements' subtypes mismatch", (): void => {
 
       const sample: Element = createDOM_ElementFromHTML_Code(
-          "<div class='Container'><button type='button' class='Button'></button></div>"
+          "<div class='ActionBar'><button type='button' class='Button'></button></div>"
       );
 
       throws(
