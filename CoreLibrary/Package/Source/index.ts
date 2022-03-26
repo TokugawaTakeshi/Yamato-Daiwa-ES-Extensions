@@ -52,6 +52,10 @@ export {
 export { default as getIndexesOfArrayElementsWhichSatisfiesToPredicate }
     from "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
 export { default as getIndexOfArrayElementByPredicate } from "./Arrays/getIndexOfArrayElementByPredicate";
+export {
+  default as removeArrayElementsByIndexes,
+  RemovingArrayElementsByIndexesOperation
+} from "./Arrays/removeArrayElementsByIndexes";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 /* === Sets ========================================================================================================= */
