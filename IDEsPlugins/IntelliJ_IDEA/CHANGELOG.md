@@ -6,10 +6,9 @@
 
 ### Added
 
-* [`TimePoint`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md)
-  Inserts the example of `TimePoint` class usage
-* [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
-  Inserts the example of same-name function usage.
+* <kbd>tp</kbd> - working example of the  [TimePoint](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) class usage.
+* <kbd>getArrayElementMatchingWithPredicateIfSuchElementExactlyOne</kbd> - working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
+* <kbd>raebi</kbd> - live template for [**removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md) function
 
 ### Changed
 

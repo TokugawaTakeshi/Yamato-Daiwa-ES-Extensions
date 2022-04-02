@@ -105,8 +105,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   Returns the array of indexes of elements of array which are satisfies to predicate function.
 * [`getIndexOfArrayElementByPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
   Returns the index of array element matching with predicate of `null` if no such element.
-* [`removeArrayElementsByIndexes`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes.md)
-  Removing the array elements by indexes; mutable removing or creating of new array based on initial one available.
+* [📖 **removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md)
+  Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of compound parameter.
 * [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
   with nested arrays of fixed elements count.
 
