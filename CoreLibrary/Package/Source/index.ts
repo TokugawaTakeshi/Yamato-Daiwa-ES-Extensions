@@ -56,6 +56,10 @@ export {
   default as removeArrayElementsByIndexes,
   RemovingArrayElementsByIndexesOperation
 } from "./Arrays/removeArrayElementsByIndexes";
+export {
+  default as removeArrayElementsByPredicates,
+  RemovingArrayElementsByPredicatedOperation
+} from "./Arrays/removeArrayElementsByPredicates";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 /* === Sets ========================================================================================================= */
@@ -164,7 +168,9 @@ export { default as getRandomInteger } from "./RandomValuesGenerators/getRandomI
 export { default as getRandomLatinCharacter } from "./RandomValuesGenerators/getRandomLatinCharacter";
 export { default as getRandomObjectPropertyValue } from "./RandomValuesGenerators/getRandomObjectPropertyValue";
 export { default as getRandomSubarray } from "./RandomValuesGenerators/getRandomSubarray";
-export { default as getSpecificBooleanValueWithProbability } from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
+export {
+  default as getSpecificBooleanValueWithProbability
+} from "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
 export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
 
 
@@ -207,8 +213,8 @@ export { default as AlgorithmMismatchErrorLocalization__English }
     from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization__English";
 export { default as ClassRedundantSubsequentInitializationError }
     from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
-export { default as ClassRedundantSubsequentInitializationErrorLocalization__English }
-    from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__English";
+export { default as ClassRedundantSubsequentInitializationErrorLocalization__English } from
+    "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__English";
 export { default as ClassRequiredInitializationHasNotBeenExecutedError }
     from "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
 export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English }
