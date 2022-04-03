@@ -4,7 +4,7 @@ import insertSubstring from "../../../Strings/insertSubstring";
 
 const InvalidParameterValueErrorLocalization__English: InvalidParameterValueError.Localization = {
   defaultTitle: "Invalid parameter value",
-  genericDescriptionPartTemplate:
+  generateMessage:
     (parametersObject: InvalidParameterValueError.Localization.GenericDescriptionPartTemplateParameters): string =>
         `The value of parameter '${parametersObject.parameterName}' is invalid.` +
         `${insertSubstring(parametersObject.messageSpecificPart, {

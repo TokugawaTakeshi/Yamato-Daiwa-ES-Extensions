@@ -25,7 +25,7 @@ class InvalidParameterValueError extends Error {
     if ("customMessage" in parametersObject) {
       this.message = parametersObject.customMessage;
     } else {
-      this.message = InvalidParameterValueError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = InvalidParameterValueError.localization.generateMessage(parametersObject);
     }
   }
 }
@@ -37,7 +37,7 @@ namespace InvalidParameterValueError {
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
+    readonly generateMessage: (
       parametersObject: Localization.GenericDescriptionPartTemplateParameters
     ) => string;
   };

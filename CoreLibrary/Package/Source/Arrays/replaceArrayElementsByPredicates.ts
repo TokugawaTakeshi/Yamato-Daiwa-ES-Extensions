@@ -52,7 +52,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
           Logger.logError({
             errorType: InvalidParameterValueError.NAME,
             title: InvalidParameterValueError.DEFAULT_TITLE,
-            description: InvalidParameterValueError.localization.genericDescriptionPartTemplate({
+            description: InvalidParameterValueError.localization.generateMessage({
               parameterName: "compoundParameter.replacements",
               messageSpecificPart: `The element with index ${indexOfElementWhichSatisfiedToCurrentPredicate} is satisfies ` +
                   "to multiple predicated therefore will be replaced more that one time."
