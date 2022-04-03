@@ -107,7 +107,7 @@ describe("removeArrayElementsByIndexes", (): void => {
         deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "charlie", "echo", "golf" ]);
       });
 
-      it("取り除かれた配列要素は予報と合っている", (): void => {
+      it("Removed element is matching with expected", (): void => {
         deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
       });
 

@@ -6,7 +6,7 @@ const InvalidParameterValueErrorLocalization__English: InvalidParameterValueErro
   defaultTitle: "Invalid parameter value",
   genericDescriptionPartTemplate:
     (parametersObject: InvalidParameterValueError.Localization.GenericDescriptionPartTemplateParameters): string =>
-        `The value of parameter ${parametersObject.parameterName} is invalid.` +
+        `The value of parameter '${parametersObject.parameterName}' is invalid.` +
         `${insertSubstring(parametersObject.messageSpecificPart, {
           modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
         })}`

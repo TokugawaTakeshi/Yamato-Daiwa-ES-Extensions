@@ -58,7 +58,7 @@ export {
 } from "./Arrays/removeArrayElementsByIndexes";
 export {
   default as removeArrayElementsByPredicates,
-  RemovingArrayElementsByPredicatedOperation
+  RemovingArrayElementsByPredicatesOperation
 } from "./Arrays/removeArrayElementsByPredicates";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 

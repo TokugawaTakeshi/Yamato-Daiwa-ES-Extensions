@@ -8,7 +8,7 @@ class InvalidParameterValueError extends Error {
     return InvalidParameterValueError.localization.defaultTitle;
   }
 
-  private static localization: InvalidParameterValueError.Localization = InvalidParameterValueErrorLocalization__English;
+  public static localization: InvalidParameterValueError.Localization = InvalidParameterValueErrorLocalization__English;
 
 
   public static setLocalization(localization: InvalidParameterValueError.Localization): void {

@@ -2,17 +2,17 @@ import removeArrayElementsByIndexes from "./removeArrayElementsByIndexes";
 import getIndexesOfArrayElementsWhichSatisfiesToPredicate from "./getIndexesOfArrayElementsWhichSatisfiesToPredicate";
 
 
-export namespace RemovingArrayElementsByPredicatedOperation {
+export namespace RemovingArrayElementsByPredicatesOperation {
 
   export type CompoundParameter<ArrayElement> = {
-    targetArray: Array<ArrayElement>;
-    predicates: (arrayElement: ArrayElement) => boolean;
-    mutably: boolean;
+    readonly targetArray: Array<ArrayElement>;
+    readonly predicates: (arrayElement: ArrayElement) => boolean;
+    readonly mutably: boolean;
   };
 
   export type Result<ArrayElement> = {
-    updatedArray: Array<ArrayElement>;
-    removedElements: Array<ArrayElement>;
+    readonly updatedArray: Array<ArrayElement>;
+    readonly removedElements: Array<ArrayElement>;
   };
 
   export function removeArrayElementsByPredicates<ArrayElement>(
@@ -47,4 +47,4 @@ export namespace RemovingArrayElementsByPredicatedOperation {
 }
 
 
-export default RemovingArrayElementsByPredicatedOperation.removeArrayElementsByPredicates;
+export default RemovingArrayElementsByPredicatesOperation.removeArrayElementsByPredicates;
