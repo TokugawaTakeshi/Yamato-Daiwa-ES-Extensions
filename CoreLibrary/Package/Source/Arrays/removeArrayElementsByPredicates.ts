@@ -15,6 +15,7 @@ export namespace RemovingArrayElementsByPredicatesOperation {
     readonly removedElements: Array<ArrayElement>;
   };
 
+
   export function removeArrayElementsByPredicates<ArrayElement>(
     compoundParameter: CompoundParameter<ArrayElement>
   ): Result<ArrayElement> {

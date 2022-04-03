@@ -60,6 +60,10 @@ export {
   default as removeArrayElementsByPredicates,
   RemovingArrayElementsByPredicatesOperation
 } from "./Arrays/removeArrayElementsByPredicates";
+export {
+  default as replaceArrayElementsByPredicates,
+  ReplacingArrayElementsByPredicatesOperation
+} from "./Arrays/replaceArrayElementsByPredicates";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 /* === Sets ========================================================================================================= */

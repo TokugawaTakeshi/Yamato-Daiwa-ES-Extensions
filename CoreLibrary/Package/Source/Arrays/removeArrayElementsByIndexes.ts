@@ -1,4 +1,5 @@
 import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
 
@@ -15,6 +16,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
     readonly updatedArray: Array<ArrayElement>;
     readonly removedElements: Array<ArrayElement>;
   };
+
 
   export function removeArrayElementsByIndexes<ArrayElement>(
     compoundParameter: CompoundParameter<ArrayElement>
