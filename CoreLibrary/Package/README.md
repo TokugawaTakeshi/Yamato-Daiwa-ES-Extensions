@@ -1,4 +1,4 @@
-# Yamato-Daiwa ES Extensions （YDEE）
+# Yamato-Daiwa ES Extensions [YDEE]
 
 [![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)]()
 [![No dependencies](https://img.shields.io/badge/Dependencies-No_dependencies-brightgreen.svg?style=flat)]()
@@ -9,13 +9,6 @@ Helper functions and classes aimed to reduce the routine code. Build-in TypeScri
 
 ![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/1423b0e4-c927-4855-8139-78a611826adc)
 
-## Roadmap
-
-* [🛣️ Version 1.5 (2022 Spring sprint)](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/122-13)
-
-**Hint:** Set the unlabeled slider in the top right corner of the screen to `XL` to see the tags and descriptions.
-
-![image](https://user-images.githubusercontent.com/41653501/141427403-ca6e9a61-880c-4b1c-bc66-2fdac2f6a491.png)
 
 ## ⚠️ Request to Stack Overflow users with `>=1500` reputation
 
