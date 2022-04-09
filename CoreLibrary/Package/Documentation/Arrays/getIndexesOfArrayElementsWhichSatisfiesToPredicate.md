@@ -23,6 +23,6 @@ getIndexesOfArrayElementsWhichSatisfiesToPredicate(
 ); // => Expected output: [ 2, 3 ]
 
 getIndexesOfArrayElementsWhichSatisfiesToPredicate(
-    sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
+  sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
 ); // => Expected output: []
 ```

@@ -4,12 +4,12 @@
 
 ```
 removeArrayElementsByIndexes<ArrayElement>(
-  compoundParameter: CompoundParameter<ArrayElement>
+  namedParameters: NamedParameters<ArrayElement>
 ): Result<ArrayElement>
 ```
 
 ```typescript
-export type CompoundParameter<ArrayElement> = {
+export type NamedParameters<ArrayElement> = {
   targetArray: Array<ArrayElement>;
   indexes: number | Array<number>;
   mutably: boolean;

@@ -30,10 +30,6 @@ describe("removeArrayElementsByIndexes", (): void => {
       it("Removed element is matching with expected", (): void => {
         deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
       });
-
-      it("Initial array has been mutated", (): void => {
-        deepStrictEqual(experimentalSample, [ "alpha", "bravo", "delta", "echo" ]);
-      });
     });
 
     describe("Immutable removing", (): void => {

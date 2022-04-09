@@ -6,7 +6,7 @@ import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/
 
 export namespace RemovingArrayElementsByIndexesOperation {
 
-  export type CompoundParameter<ArrayElement> = {
+  export type NamedParameters<ArrayElement> = {
     readonly targetArray: Array<ArrayElement>;
     readonly indexes: number | Array<number>;
     readonly mutably: boolean;
@@ -19,25 +19,25 @@ export namespace RemovingArrayElementsByIndexesOperation {
 
 
   export function removeArrayElementsByIndexes<ArrayElement>(
-    compoundParameter: CompoundParameter<ArrayElement>
+    namedParameters: NamedParameters<ArrayElement>
   ): Result<ArrayElement> {
 
     const {
       targetArray,
       mutably
-    }: CompoundParameter<ArrayElement> = compoundParameter;
+    }: NamedParameters<ArrayElement> = namedParameters;
 
     const initialElementsCount: number = targetArray.length;
     const indexesOfArrayElementsWhichWillBeRemoved__actualForArrayInInitialStateOnly: Array<number> =
-        typeof compoundParameter.indexes === "number" ?
-            [ compoundParameter.indexes ] :
-            compoundParameter.indexes.sort(
+        typeof namedParameters.indexes === "number" ?
+            [ namedParameters.indexes ] :
+            namedParameters.indexes.sort(
               (oneElement: number, otherElement: number): number => oneElement - otherElement
             );
 
     const removedArrayElements: Array<ArrayElement> = [];
     const indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly: Array<number> = [];
-    const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...compoundParameter.targetArray ];
+    const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...namedParameters.targetArray ];
 
 
     for (
@@ -51,12 +51,12 @@ export namespace RemovingArrayElementsByIndexesOperation {
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.DEFAULT_TITLE,
           description: InvalidParameterValueError.localization.generateMessage({
-            parameterName: "compoundParameter.indexes",
+            parameterName: "namedParameters.indexes",
             messageSpecificPart:
                 `The index ${String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)} ` +
                 "is not the non-negative integer therefore will be ignored."
           }),
-          occurrenceLocation: "removeArrayElementsByIndexes(compoundParameter)"
+          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
         });
 
         continue;
@@ -69,11 +69,11 @@ export namespace RemovingArrayElementsByIndexesOperation {
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.DEFAULT_TITLE,
           description: InvalidParameterValueError.localization.generateMessage({
-            parameterName: "compoundParameter.indexes",
+            parameterName: "namedParameters.indexes",
             messageSpecificPart: `The index ${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} ` +
                 "is greater than index of last element of target array therefore will be ignored."
           }),
-          occurrenceLocation: "removeArrayElementsByIndexes(compoundParameter)"
+          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
         });
 
         continue;
@@ -89,12 +89,12 @@ export namespace RemovingArrayElementsByIndexesOperation {
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.DEFAULT_TITLE,
           description: InvalidParameterValueError.localization.generateMessage({
-            parameterName: "compoundParameter.indexes",
+            parameterName: "namedParameters.indexes",
             messageSpecificPart: "Removing of element with index " +
                 `${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} has been demanded more ` +
                 "than one time."
           }),
-          occurrenceLocation: "removeArrayElementsByIndexes(compoundParameter)"
+          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
         });
 
         continue;
