@@ -23,7 +23,7 @@ export type Result<ArrayElement> = {
 ```
 
 Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of
-compound parameter. 
+named parameters object. 
 
 Note that in the cate of multiple predicates the searching is being executed *sequentially* for each predicate - the 
 concept of [logical disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) AKA "or" (bot not "exclusive or").

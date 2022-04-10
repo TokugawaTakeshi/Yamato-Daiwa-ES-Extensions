@@ -18,7 +18,7 @@ describe("removeArrayElementsByPredicates", (): void => {
 
       const experimentalSample: Array<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
-          removeArrayElementsByPredicates<string>({
+          removeArrayElementsByPredicates({
             targetArray: experimentalSample,
             predicates: predicate,
             mutably: true
@@ -41,7 +41,7 @@ describe("removeArrayElementsByPredicates", (): void => {
 
       const experimentalSample: Array<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
-          removeArrayElementsByPredicates<string>({
+          removeArrayElementsByPredicates({
             targetArray: experimentalSample,
             predicates: predicate,
             mutably: false
@@ -81,7 +81,7 @@ describe("removeArrayElementsByPredicates", (): void => {
 
       const experimentalSample: Array<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
-          removeArrayElementsByPredicates<string>({
+          removeArrayElementsByPredicates({
             targetArray: experimentalSample,
             predicates,
             mutably: true
@@ -111,7 +111,7 @@ describe("removeArrayElementsByPredicates", (): void => {
 
       const experimentalSample: Array<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
-          removeArrayElementsByPredicates<string>({
+          removeArrayElementsByPredicates({
             targetArray: experimentalSample,
             predicates,
             mutably: false

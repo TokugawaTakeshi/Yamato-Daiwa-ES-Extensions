@@ -22,7 +22,7 @@ export type Result<ArrayElement> = {
 ```
 
 Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of 
-compound parameter.
+named parameters object.
 
 ![](removeArrayElementsByIndexes-LiveTemplateDemo.gif)
 

@@ -88,22 +88,40 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * [`trimSpaces`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md) Trim prepended and/or appended space characters; unlike native
  `String.prototype.trim` acts selectively on specified spaces kinds.
 
+
 #### Arrays
+##### Elements retrieving
+
+* [📖 **getLastElementOfNonEmptyArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray.md)
+  Returns the last element of array. If array is empty, `UnexpectedEventError` will be thrown.
 
 * [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
   Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will
   be thrown or `null` will be returned (depending on dedicated option's value).
-* `getLastElementOfNonEmptyArray` Return the last element of array. If no such element, `UnexpectedEventError` will be thrown.
 * [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
   Returns the array of indexes of elements of array which are satisfies to predicate function.
 * [`getIndexOfArrayElementByPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
   Returns the index of array element matching with predicate of `null` if no such element.
+
+##### Elements replacing
+
+* [📖 **replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md)
+  Creates the copy of target array and replaces the elements by specified indexes. 
+* [📖 **replaceArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md)
+  Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated property of named parameters object.
+
+##### Elements removing
+
 * [📖 **removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md)
-  Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of compound parameter.
+  Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
 * [📖 **removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md)
-  Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of compound parameter.
+  Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
+
+##### Other
+
 * [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
   with nested arrays of fixed elements count.
+
 
 #### Sets
 
