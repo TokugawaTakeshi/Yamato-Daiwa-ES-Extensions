@@ -4,29 +4,30 @@ import getIndexesOfArrayElementsWhichSatisfiesToPredicate from "./getIndexesOfAr
 
 export namespace RemovingArrayElementsByPredicatesOperation {
 
-  export type CompoundParameter<ArrayElement> = {
+  export type NamedParameters<ArrayElement> = {
     readonly targetArray: Array<ArrayElement>;
-    readonly predicates: (arrayElement: ArrayElement) => boolean;
+    readonly predicates: (Array<(arrayElement: ArrayElement) => boolean>) | ((arrayElement: ArrayElement) => boolean);
     readonly mutably: boolean;
   };
 
   export type Result<ArrayElement> = {
     readonly updatedArray: Array<ArrayElement>;
     readonly removedElements: Array<ArrayElement>;
+    readonly indexedOfRemovedElements: Array<number>;
   };
 
 
   export function removeArrayElementsByPredicates<ArrayElement>(
-    compoundParameter: CompoundParameter<ArrayElement>
+    namedParameters: NamedParameters<ArrayElement>
   ): Result<ArrayElement> {
 
     const {
       targetArray,
       mutably
-    }: CompoundParameter<ArrayElement> = compoundParameter;
+    }: NamedParameters<ArrayElement> = namedParameters;
 
     const predicates: Array<(arrayElement: ArrayElement) => boolean> =
-        Array.isArray(compoundParameter.predicates) ? compoundParameter.predicates : [ compoundParameter.predicates ];
+        Array.isArray(namedParameters.predicates) ? namedParameters.predicates : [ namedParameters.predicates ];
 
     const indexesOfElementsWhichWillBeRemoved: Array<number> = [];
 
@@ -39,11 +40,15 @@ export namespace RemovingArrayElementsByPredicatesOperation {
     }
 
 
-    return removeArrayElementsByIndexes({
-      targetArray,
-      indexes: indexesOfElementsWhichWillBeRemoved,
-      mutably
-    });
+    return {
+      ...removeArrayElementsByIndexes({
+        targetArray,
+        indexes: indexesOfElementsWhichWillBeRemoved,
+        mutably
+      }),
+      indexedOfRemovedElements: indexesOfElementsWhichWillBeRemoved.
+          sort((oneElement: number, otherElement: number): number => oneElement - otherElement)
+    };
   }
 }
 

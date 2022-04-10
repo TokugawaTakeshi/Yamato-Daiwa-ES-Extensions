@@ -2,7 +2,7 @@
 
 ```
 twoDimensionalizeArray<ArrayElement>(
-  parametersObject: {
+  namedParameters: {
     targetFlatArray: Array<ArrayElement>;
     elementsPerNestedArray: number;
   }

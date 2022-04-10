@@ -67,7 +67,7 @@ console.log(
     indexes: 2,
     mutably: false
   }).updatedArray
-); // => 
+);
 ```
 
 will output:

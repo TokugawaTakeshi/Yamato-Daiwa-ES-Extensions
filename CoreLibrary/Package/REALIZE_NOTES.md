@@ -4,6 +4,8 @@
 
 * [📖 **removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md)
   Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of compound parameter.
+* [📖 **removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md)
+  Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of compound parameter.
 
 
 ## Breaking changes

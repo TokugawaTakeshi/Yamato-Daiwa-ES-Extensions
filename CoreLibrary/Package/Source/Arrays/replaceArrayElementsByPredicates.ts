@@ -6,7 +6,7 @@ import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/
 
 export namespace ReplacingArrayElementsByPredicatesOperation {
 
-  export type CompoundParameter<ArrayElement> = {
+  export type NamedParameters<ArrayElement> = {
     readonly targetArray: Array<ArrayElement>;
     readonly replacements: Replacement<ArrayElement> | Array<Replacement<ArrayElement>>;
     readonly mutably: boolean;
@@ -22,25 +22,25 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
 
 
   export type Result<ArrayElement> = {
-    updatedArray: Array<ArrayElement>;
-    indexesOfReplacedElements: Array<number>;
+    readonly updatedArray: Array<ArrayElement>;
+    readonly indexesOfReplacedElements: Array<number>;
   };
 
   export function replaceArrayElementsByPredicates<ArrayElement>(
-    compoundParameter: CompoundParameter<ArrayElement>
+    namedParameters: NamedParameters<ArrayElement>
   ): Result<ArrayElement> {
 
     const {
       targetArray,
       mutably
-    }: CompoundParameter<ArrayElement> = compoundParameter;
+    }: NamedParameters<ArrayElement> = namedParameters;
 
     const indexesOfElementsWhichWillBeRemovedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
     const indexedOfElementsWhichHasBeenAlreadyReplaced: Array<number> = [];
 
     for (
       const replacement of
-      [ ...Array.isArray(compoundParameter.replacements) ? compoundParameter.replacements : [ compoundParameter.replacements ] ]
+      [ ...Array.isArray(namedParameters.replacements) ? namedParameters.replacements : [ namedParameters.replacements ] ]
     ) {
 
       const indexesOfElementsWhichSatisfiedToCurrentPredicate: Array<number> =
@@ -53,11 +53,11 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
             errorType: InvalidParameterValueError.NAME,
             title: InvalidParameterValueError.DEFAULT_TITLE,
             description: InvalidParameterValueError.localization.generateMessage({
-              parameterName: "compoundParameter.replacements",
+              parameterName: "namedParameters.replacements",
               messageSpecificPart: `The element with index ${indexOfElementWhichSatisfiedToCurrentPredicate} is satisfies ` +
                   "to multiple predicated therefore will be replaced more that one time."
             }),
-            occurrenceLocation: "replaceArrayElementsByPredicates(compoundParameter)"
+            occurrenceLocation: "replaceArrayElementsByPredicates(namedParameters)"
           });
         } else {
           indexedOfElementsWhichHasBeenAlreadyReplaced.push(indexOfElementWhichSatisfiedToCurrentPredicate);
@@ -73,7 +73,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
     }
 
 
-    const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...compoundParameter.targetArray ];
+    const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...namedParameters.targetArray ];
 
     for (const [ targetElementIndex, newValue ] of indexesOfElementsWhichWillBeRemovedAndNewValuesMap) {
       workpiece[targetElementIndex] = newValue;
