@@ -43,8 +43,8 @@ export {
 
 /* === Arrays ======================================================================================================= */
 export { default as addElementsToArrayImmutably } from "./Arrays/addElementsToArrayImmutably";
-export { default as getArrayElementMatchingWithPredicateIfSuchElementExactlyOne } from
-    "./Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne";
+export { default as getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne } from
+      "./Arrays/getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne";
 export { default as getIndexesOfArrayElementsWhichSatisfiesToPredicate } from
     "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
 export { default as getIndexOfArrayElementByPredicate } from "./Arrays/getIndexOfArrayElementByPredicate";

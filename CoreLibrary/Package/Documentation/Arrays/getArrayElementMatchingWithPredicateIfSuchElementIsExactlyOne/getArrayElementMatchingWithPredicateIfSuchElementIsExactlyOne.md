@@ -1,14 +1,14 @@
-# `getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`
+# `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`
 
-[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementMatchingWithPredicateIfSuchElementExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
+getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null
 
-getArrayElementMatchingWithPredicateIfSuchElementExactlyOne<ArrayElement>(
+getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean,
   options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
@@ -28,15 +28,15 @@ If you want all matches with the predicate, not only first one, use the native m
 
 ### `Array.prototype.filter`
 
-Returns all matches with the predicate, not just first one as `getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`.
+Returns all matches with the predicate, not just first one as `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`.
 
 ### `Array.prototype.find`
 
-* Returns first match with predicate same as `getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`
+* Returns first match with predicate same as `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`
 * If there are multiple matches with the predicate, the subsequent matches will be ignored while
-  `getArrayElementMatchingWithPredicateIfSuchElementExactlyOne` will not return it.
+  `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne` will not return it.
 * If there is no element matching with the predicate, `undefined` will be returned. The behaviour of
-  `getArrayElementMatchingWithPredicateIfSuchElementExactlyOne` depends on third parameter (default is returning of `null`).
+  `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne` depends on third parameter (default is returning of `null`).
 
 
 ## Examples
@@ -51,7 +51,7 @@ const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "San
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementExactlyOne(
+  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
   )
 ); // => "St. Louis"
@@ -62,7 +62,7 @@ console.log(
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementExactlyOne(
+  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
   )
 ); // => null
@@ -73,7 +73,7 @@ console.log(
 ```typescript
 try {
 
-  const match: string = getArrayElementMatchingWithPredicateIfSuchElementExactlyOne(
+  const match: string = getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
     { throwErrorIfElementNotFoundOrMoreThan1: true }
@@ -92,7 +92,7 @@ try {
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementExactlyOne(
+  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
       sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
   ),
   null
@@ -104,7 +104,7 @@ console.log(
 ```typescript
 try {
   
-  const match: string = getArrayElementMatchingWithPredicateIfSuchElementExactlyOne(
+  const match: string = getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
     { throwErrorIfElementNotFoundOrMoreThan1: true }
