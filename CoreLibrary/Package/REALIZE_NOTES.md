@@ -19,8 +19,9 @@
 ## Breaking changes
 
 * The function **getArrayElementMatchingWithPredicateIfSuchElementExactlyOne** has been renamed to 
-  **getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne** ("is" has been added)
-  * Reason: grammatical issue
+  **getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**
+  * Reason: grammatical issue with "is" auxiliary verb and unification of "matching with predicate" and "satisfies the predicate"
+    to second one.
   * Migration: replacing to new name only.
 * The function **getIndexOfArrayElementByPredicate** has been renamed to **getIndexOfArrayElementIfSuchElementIsExactlyOne**
   and upgraded.

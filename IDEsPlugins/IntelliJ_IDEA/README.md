@@ -12,10 +12,11 @@
 * Functions
   * Arrays
     * <kbd>raebi</kbd> - live template for [**removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md) function
+    * <kbd>raebii</kbd> - live template for [**replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md) function
     * <kbd>raebp</kbd> - live template for [**removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md) function
     * Without abbreviations (please note that you don't need to type the whole name of the function)
-      * <kbd>getArrayElementMatchingWithPredicateIfSuchElementExactlyOne</kbd> - working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md) 
-    
+      * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> - working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
+      * <kbd>getIndexesOfArrayElementsWhichSatisfiesToPredicate</kbd> - live template for  [**getIndexesOfArrayElementsWhichSatisfiesToPredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md) function
 * [**RawObjectDataProcessor**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#rawobjectdataprocessor)
   * <kbd>prod</kbd>: working example with error handling
   

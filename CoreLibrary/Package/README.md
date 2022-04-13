@@ -92,16 +92,16 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 #### Arrays
 ##### Retrieving of elements
 
-* [📖 **getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne/getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne.md)
+* [📖 **getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
   Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or `null` will be returned (depending on dedicated option's value).
 * [📖 **getLastElementOfNonEmptyArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray.md)
-  Returns the last element of array. If array is empty, `UnexpectedEventError` will be thrown.
+  Returns the last element of array, herewith `UnexpectedEventError` will be thrown if target array is empty.
 
 ##### Retrieving of indexes 
 
-* [📖 **getIndexesOfArrayElementsWhichSatisfiesToPredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
+* [📖 **getIndexesOfArrayElementsWhichSatisfiesToPredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
   Returns the array of indexes of elements of array which are satisfies to predicate function.
-* [📖 **getIndexOfArrayElementByPredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
+* [📖 **getIndexOfArrayElementIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne.md)
   Returns the index of array element matching with predicate of `null` if no such element.
 
 ##### Replacing of elements

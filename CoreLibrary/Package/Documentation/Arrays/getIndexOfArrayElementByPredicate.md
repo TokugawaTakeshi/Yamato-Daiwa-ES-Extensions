@@ -1,7 +1,7 @@
-# `getIndexOfArrayElementByPredicate`: Retrieving of index of array element by predicate
+# `getIndexOfArrayElementIfSuchElementIsExactlyOne`: Retrieving of index of array element by predicate
 
 ```
-function getIndexOfArrayElementByPredicate<ArrayElement>(
+function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): number | null
 ```
@@ -16,6 +16,6 @@ const sample: Array<Product> = [
   { ID: 2, title: "BRAVO", price: 500 }
 ];
 
-getIndexOfArrayElementByPredicate(sample, (product: Product): boolean => product.ID === 2) // => 1
-getIndexOfArrayElementByPredicate(sample, (product: Product): boolean => product.ID === 3) // => null
+getIndexOfArrayElementIfSuchElementIsExactlyOne(sample, (product: Product): boolean => product.ID === 2) // => 1
+getIndexOfArrayElementIfSuchElementIsExactlyOne(sample, (product: Product): boolean => product.ID === 3) // => null
 ```

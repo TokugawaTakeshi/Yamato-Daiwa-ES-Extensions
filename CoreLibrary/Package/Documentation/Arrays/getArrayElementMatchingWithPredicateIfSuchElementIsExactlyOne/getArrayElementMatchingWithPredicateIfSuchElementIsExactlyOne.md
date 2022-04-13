@@ -1,14 +1,14 @@
-# `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`
+# `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`: Get array element satisfies with predicate if such element is exactly one
 
-[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
+getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null
 
-getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
+getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean,
   options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
@@ -23,20 +23,22 @@ getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
 If you want all matches with the predicate, not only first one, use the native method 
 [`Array.prototype.filter`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
+![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
+
 
 ## Comparing with native methods
 
 ### `Array.prototype.filter`
 
-Returns all matches with the predicate, not just first one as `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`.
+Returns all matches with the predicate, not just first one as `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`.
 
 ### `Array.prototype.find`
 
-* Returns first match with predicate same as `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne`
+* Returns first match with predicate same as `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`
 * If there are multiple matches with the predicate, the subsequent matches will be ignored while
-  `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne` will not return it.
+  `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` will not return it.
 * If there is no element matching with the predicate, `undefined` will be returned. The behaviour of
-  `getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne` depends on third parameter (default is returning of `null`).
+  `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` depends on third parameter (default is returning of `null`).
 
 
 ## Examples
@@ -51,7 +53,7 @@ const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "San
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
   )
 ); // => "St. Louis"
@@ -62,7 +64,7 @@ console.log(
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
   )
 ); // => null
@@ -73,7 +75,7 @@ console.log(
 ```typescript
 try {
 
-  const match: string = getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
+  const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
     { throwErrorIfElementNotFoundOrMoreThan1: true }
@@ -92,7 +94,7 @@ try {
 
 ```typescript
 console.log(
-  getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
       sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
   ),
   null
@@ -104,7 +106,7 @@ console.log(
 ```typescript
 try {
   
-  const match: string = getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(
+  const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
     { throwErrorIfElementNotFoundOrMoreThan1: true }
@@ -117,3 +119,15 @@ try {
   }
 }
 ```
+
+# Quick Inputting
+
+Use [Live templates](https://www.jetbrains.com/help/idea/using-live-templates.html#live_templates_types) functionality
+of [IntelliJ IDEA family IDEs](https://www.jetbrains.com/idea/) (including WebStorm sharpened for web development)
+to insert the example (available in [official YDEE plugin](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)):
+
+![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
+
+Because the abbreviation of `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` is too long (gaestpiseieo),
+the live template has been added with abbreviation even with function name. Please make sure that you are selecting
+the live template, not just function name from the suggested autocompletes.

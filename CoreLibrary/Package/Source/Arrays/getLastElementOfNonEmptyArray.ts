@@ -7,13 +7,14 @@ export default function getLastElementOfNonEmptyArray<ArrayElement>(targetArray:
   if (targetArray.length === 0) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        "The array is empty so it has not last element.. As it follows from the function name, the empty arrays are " +
-        "considering as error."
+        "The array is empty thus it has not last element. As it follows from the function name, the empty arrays are " +
+        "being considered as error."
       ),
       title: UnexpectedEventError.DEFAULT_TITLE,
       occurrenceLocation: "getLastElementOfNonEmptyArray(targetArray)"
     });
   }
+
 
   return targetArray[targetArray.length - 1];
 }

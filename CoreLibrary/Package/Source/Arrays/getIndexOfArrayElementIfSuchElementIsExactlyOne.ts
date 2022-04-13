@@ -1,4 +1,4 @@
-export default function getIndexOfArrayElementByPredicate<ArrayElement>(
+export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): number | null {
 

@@ -2,18 +2,18 @@ import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Logging/Errors/UnexpectedEvent/UnexpectedEventError";
 
 
-export default function getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null;
 
-export default function getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
   options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
 ): ArrayElement;
 
 
-export default function getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
   { throwErrorIfElementNotFoundOrMoreThan1 }: { throwErrorIfElementNotFoundOrMoreThan1?: true; } = {}
@@ -27,7 +27,7 @@ export default function getArrayElementMatchingWithPredicateIfSuchElementIsExact
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError("Array element satisfied to specified predicate not found."),
         title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
+        occurrenceLocation: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
       });
     }
 
@@ -44,7 +44,7 @@ export default function getArrayElementMatchingWithPredicateIfSuchElementIsExact
           "more matches case is being considered as unexpected event."
         ),
         title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "getArrayElementMatchingWithPredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
+        occurrenceLocation: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
       });
     }
 
