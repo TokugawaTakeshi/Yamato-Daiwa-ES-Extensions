@@ -99,8 +99,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 ##### Retrieving of indexes 
 
-* [📖 **getIndexesOfArrayElementsWhichSatisfiesToPredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
-  Returns the array of indexes of elements of array which are satisfies to predicate function.
+* [📖 **getIndexesOfArrayElementsWhichSatisfiesThePredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
+  Returns the array of indexes of array elements which are satisfies to predicate function.
 * [📖 **getIndexOfArrayElementIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne.md)
   Returns the index of array element matching with predicate of `null` if no such element.
 

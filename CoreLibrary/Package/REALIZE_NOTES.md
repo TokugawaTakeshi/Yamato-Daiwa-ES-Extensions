@@ -23,6 +23,10 @@
   * Reason: grammatical issue with "is" auxiliary verb and unification of "matching with predicate" and "satisfies the predicate"
     to second one.
   * Migration: replacing to new name only.
+* The function **getIndexesOfArrayElementsWhichSatisfiesToPredicate** has been renamed to
+  **getIndexesOfArrayElementsWhichSatisfiesThePredicate**
+  * Reason: idiomatic issue ("satisfies the N" is more correct than "satisfies to N")
+  * Migration: replacing to new name only.
 * The function **getIndexOfArrayElementByPredicate** has been renamed to **getIndexOfArrayElementIfSuchElementIsExactlyOne**
   and upgraded.
   * Reason: native analogue [**Array.prototype.findIndex**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
