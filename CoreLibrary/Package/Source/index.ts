@@ -42,11 +42,11 @@ export {
 
 
 /* === Arrays ======================================================================================================= */
-export { default as addElementsToArrayImmutably } from "./Arrays/addElementsToArrayImmutably";
+export { default as addElementsToArrayImmutably } from "./Arrays/addElementsToArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getIndexesOfArrayElementsWhichSatisfiesToPredicate } from
-    "./Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate";
+export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
+    "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
 export { default as getIndexOfArrayElementIfSuchElementIsExactlyOne } from
     "./Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne";
 export { default as getLastElementOfNonEmptyArray } from "./Arrays/getLastElementOfNonEmptyArray";

@@ -1,5 +1,5 @@
 import removeArrayElementsByIndexes from "./removeArrayElementsByIndexes";
-import getIndexesOfArrayElementsWhichSatisfiesToPredicate from "./getIndexesOfArrayElementsWhichSatisfiesToPredicate";
+import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfArrayElementsWhichSatisfiesThePredicate";
 
 
 export namespace RemovingArrayElementsByPredicatesOperation {
@@ -33,7 +33,7 @@ export namespace RemovingArrayElementsByPredicatesOperation {
 
     for (const predicate of predicates) {
       indexesOfElementsWhichWillBeRemoved.push(
-        ...getIndexesOfArrayElementsWhichSatisfiesToPredicate(
+        ...getIndexesOfArrayElementsWhichSatisfiesThePredicate(
           targetArray, predicate
         ).filter((index: number): boolean => !indexesOfElementsWhichWillBeRemoved.includes(index))
       );

@@ -1,4 +1,4 @@
-export default function getIndexesOfArrayElementsWhichSatisfiesToPredicate<ArrayElement>(
+export default function getIndexesOfArrayElementsWhichSatisfiesThePredicate<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): Array<number> {
 

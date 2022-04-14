@@ -1,4 +1,4 @@
-import getIndexesOfArrayElementsWhichSatisfiesToPredicate from "./getIndexesOfArrayElementsWhichSatisfiesToPredicate";
+import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfArrayElementsWhichSatisfiesThePredicate";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -44,7 +44,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
     ) {
 
       const indexesOfElementsWhichSatisfiedToCurrentPredicate: Array<number> =
-          getIndexesOfArrayElementsWhichSatisfiesToPredicate(targetArray, replacement.predicate);
+          getIndexesOfArrayElementsWhichSatisfiesThePredicate(targetArray, replacement.predicate);
 
       for (const indexOfElementWhichSatisfiedToCurrentPredicate of indexesOfElementsWhichSatisfiedToCurrentPredicate) {
 

@@ -1,4 +1,4 @@
-# `removeArrayElementsByIndexes` - Remove array elements by indexes
+# `removeArrayElementsByIndexes`: Remove array elements by indexes
 
 [![Official IntelliJ IDEA plugin live template](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-raebi-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 

@@ -113,8 +113,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 ##### Adding of elements
 
-* [📖 **addElementsToArrayImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md)
-  Creates the copy of target array and adds one or more elements to the start, end or specified position.
+* [📖 **addElementsToArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md)
+  Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.
 
 ##### Removing of elements
 

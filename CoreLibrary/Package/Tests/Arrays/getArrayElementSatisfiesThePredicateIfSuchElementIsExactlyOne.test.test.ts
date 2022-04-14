@@ -35,7 +35,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
           { throwErrorIfElementNotFoundOrMoreThan1: true }
         );
       },
-      { name: UnexpectedEventError.name }
+      UnexpectedEventError
     );
   });
 
@@ -56,7 +56,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
           { throwErrorIfElementNotFoundOrMoreThan1: true }
         );
       },
-      { name: UnexpectedEventError.name }
+      UnexpectedEventError
     );
   });
 });

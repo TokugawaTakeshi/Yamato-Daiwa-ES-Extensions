@@ -1,12 +1,12 @@
-# `getIndexesOfArrayElementsWhichSatisfiesToPredicate`: Retrieving of indexes of array elements which satisfied to predicate
+# `getIndexesOfArrayElementsWhichSatisfiesThePredicate`: Retrieving of indexes of array elements which satisfied to predicate
 
 ```
-getIndexesOfArrayElementsWhichSatisfiesToPredicate<ArrayElement>(
+getIndexesOfArrayElementsWhichSatisfiesThePredicate<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): Array<number>
 ```
 
-Returns the array of indexes of elements of array `targetArray` which are satisfies to `predicate` function.
+Returns the array of indexes of `targetArray`'s elements which are satisfies the `predicate` function.
 
 ```typescript
 type Product = { title: string; price: number; };
@@ -18,11 +18,11 @@ const sample1: Array<Product> = [
   { title: "DELTA", price: 1500 }
 ];
 
-getIndexesOfArrayElementsWhichSatisfiesToPredicate(
+getIndexesOfArrayElementsWhichSatisfiesThePredicate(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 500
 ); // => Expected output: [ 2, 3 ]
 
-getIndexesOfArrayElementsWhichSatisfiesToPredicate(
+getIndexesOfArrayElementsWhichSatisfiesThePredicate(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
 ); // => Expected output: []
 ```
