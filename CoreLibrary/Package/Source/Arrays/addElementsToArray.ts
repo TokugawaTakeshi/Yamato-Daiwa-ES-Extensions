@@ -1,8 +1,9 @@
-export default function addElementsToArrayImmutably<ArrayElement>(
+export default function addElementsToArray<ArrayElement>(
   namedParameters:
     {
       targetArray: Array<ArrayElement>;
       newElements: Array<ArrayElement>;
+      mutably: boolean;
     } &
     (
       { toStart: true; } |
@@ -12,7 +13,8 @@ export default function addElementsToArrayImmutably<ArrayElement>(
     )
 ): Array<ArrayElement> {
 
-  const workpiece: Array<ArrayElement> = [ ...namedParameters.targetArray ];
+  const workpiece: Array<ArrayElement> = namedParameters.mutably ?
+      namedParameters.targetArray : [ ...namedParameters.targetArray ];
 
   if ("toStart" in namedParameters) {
     workpiece.unshift(...namedParameters.newElements);
