@@ -25,11 +25,12 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
 
     if (throwErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
-        errorInstance: new UnexpectedEventError("Array element satisfied to specified predicate not found."),
+        errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
         title: UnexpectedEventError.DEFAULT_TITLE,
         occurrenceLocation: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
       });
     }
+
 
     return null;
   }
@@ -40,7 +41,7 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
     if (throwErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError(
-          "Array element satisfied to specified predicate not found. As is follows from the function name, two or " +
+          "There are multiple element satisfies the predicate. As is follows from the function name, two or " +
           "more matches case is being considered as unexpected event."
         ),
         title: UnexpectedEventError.DEFAULT_TITLE,

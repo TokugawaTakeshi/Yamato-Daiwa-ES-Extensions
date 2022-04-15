@@ -120,7 +120,8 @@ try {
 }
 ```
 
-# Quick Inputting
+
+## Quick inputting
 
 Use [Live templates](https://www.jetbrains.com/help/idea/using-live-templates.html#live_templates_types) functionality
 of [IntelliJ IDEA family IDEs](https://www.jetbrains.com/idea/) (including WebStorm sharpened for web development)
@@ -128,6 +129,9 @@ to insert the example (available in [official YDEE plugin](https://plugins.jetbr
 
 ![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
 
+It is recommended to copy the variable name containing array to clipboard preliminary - the identifier will be
+automatically substituted to required position.
+
 Because the abbreviation of `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` is too long (gaestpiseieo),
-the live template has been added with abbreviation even with function name. Please make sure that you are selecting
-the live template, not just function name from the suggested autocompletes.
+the live template has been added without abbreviation (however, you don't need to input whole function name).
+Please make sure that you are selecting the live template, not just function name from the suggested autocompletes.
