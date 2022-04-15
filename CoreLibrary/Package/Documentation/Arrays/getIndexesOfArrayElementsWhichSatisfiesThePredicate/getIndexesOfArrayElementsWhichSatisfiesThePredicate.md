@@ -31,7 +31,7 @@ getIndexesOfArrayElementsWhichSatisfiesThePredicate(
 ); // => Expected output: []
 ```
 
-## Quick Inputting
+## Quick inputting
 
 Use [Live templates](https://www.jetbrains.com/help/idea/using-live-templates.html#live_templates_types) functionality
 of [IntelliJ IDEA family IDEs](https://www.jetbrains.com/idea/) (including WebStorm sharpened for web development)
