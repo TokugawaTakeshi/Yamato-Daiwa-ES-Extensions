@@ -24,3 +24,12 @@ describe("getIndexesOfArrayElementsWhichSatisfiesThePredicate", (): void => {
     ), []);
   });
 });
+
+
+type Product = { title: string; price: number; };
+
+const products: Array<Product> = [ { title: "ALPHA", price: 100 }, { title: "BRAVO", price: 500 } ];
+
+getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+  products, (product: Product): boolean => product.price > 300
+)
