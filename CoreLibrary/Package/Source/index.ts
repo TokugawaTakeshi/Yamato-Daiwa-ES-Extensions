@@ -42,7 +42,7 @@ export {
 
 
 /* === Arrays ======================================================================================================= */
-export { default as addElementsToArrayImmutably } from "./Arrays/addElementsToArray";
+export { default as addElementsToArray } from "./Arrays/addElementsToArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from

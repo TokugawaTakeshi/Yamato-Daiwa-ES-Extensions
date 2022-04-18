@@ -1,4 +1,4 @@
-import { InvalidExternalDataError, insertSubstringIf } from "@yamato-daiwa/es-extensions";
+import { InvalidExternalDataError, insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 export const InvalidExternalDataErrorLocalization__Russian: InvalidExternalDataError.Localization = {
