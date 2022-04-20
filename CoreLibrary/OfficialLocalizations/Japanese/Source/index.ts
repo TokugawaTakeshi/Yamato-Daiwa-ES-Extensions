@@ -7,7 +7,7 @@ import AlgorithmMismatchErrorLocalization__Japanese
   from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization__Japanese";
 import localizeAlgorithmMismatchError from "./Logging/Errors/AlgorithmMismatch/localizeAlgorithmMismatchError";
 
-import ClassRedundantSubsequentInitializationErrorLocalization__Japanese
+import ClassRedundantSubsequentInitializationErrorLocalizationJapanese
   from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__Japanese";
 import localizeClassRedundantSubsequentInitializationError
   from "./Logging/Errors/ClassRedundantSubsequentInitialization/localizeClassRedundantSubsequentInitializationError";
@@ -19,6 +19,6 @@ export {
   LoggerLocalization__Japanese,
   AlgorithmMismatchErrorLocalization__Japanese,
   localizeAlgorithmMismatchError,
-  ClassRedundantSubsequentInitializationErrorLocalization__Japanese,
+  ClassRedundantSubsequentInitializationErrorLocalizationJapanese,
   localizeClassRedundantSubsequentInitializationError
 };

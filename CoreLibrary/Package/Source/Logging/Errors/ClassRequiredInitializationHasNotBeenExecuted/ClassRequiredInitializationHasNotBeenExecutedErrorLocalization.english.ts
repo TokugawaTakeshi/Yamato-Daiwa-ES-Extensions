@@ -5,13 +5,12 @@ const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
 
   defaultTitle: "Class required initialization has not been executed",
-  genericDescriptionPartTemplate:
+  generateDescription:
       (
-        parametersObject: ClassRequiredInitializationHasNotBeenExecutedError.Localization.
-            GenericDescriptionPartTemplateParameters
+        parametersObject: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
       ): string =>
-          `Class: ${parametersObject.className} required the initialization but initializing method ` +
-          `${parametersObject.initializingMethodName} has not been called.`
+          `Class '${parametersObject.className}' is required the initialization while initializing method ` +
+          `'${parametersObject.initializingMethodName}' has not been called.`
 };
 
 

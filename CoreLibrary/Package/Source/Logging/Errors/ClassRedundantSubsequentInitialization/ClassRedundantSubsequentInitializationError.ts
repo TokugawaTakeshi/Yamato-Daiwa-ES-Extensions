@@ -1,33 +1,24 @@
-import ClassRedundantSubsequentInitializationErrorLocalization__English
-  from "./ClassRedundantSubsequentInitializationErrorLocalization__English";
+import ClassRedundantSubsequentInitializationErrorLocalization__English from
+    "./ClassRedundantSubsequentInitializationErrorLocalization.english";
 
 
 class ClassRedundantSubsequentInitializationError extends Error {
 
-  public static readonly NAME: string = "RedundantSubsequentClassInitializationError";
-  public static get DEFAULT_TITLE(): string {
-    return ClassRedundantSubsequentInitializationError.localization.defaultTitle;
-  }
-
-  private static localization: ClassRedundantSubsequentInitializationError.Localization =
+  public static readonly NAME: string = "ClassRedundantSubsequentInitializationError";
+  public static localization: ClassRedundantSubsequentInitializationError.Localization =
       ClassRedundantSubsequentInitializationErrorLocalization__English;
 
 
-  public static setLocalization(localization: ClassRedundantSubsequentInitializationError.Localization): void {
-    ClassRedundantSubsequentInitializationError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: ClassRedundantSubsequentInitializationError.ConstructorParametersObject) {
+  public constructor(namedParameters: ClassRedundantSubsequentInitializationError.ConstructorNamedParameters) {
 
     super();
 
     this.name = ClassRedundantSubsequentInitializationError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = ClassRedundantSubsequentInitializationError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = ClassRedundantSubsequentInitializationError.localization.generateDescription(namedParameters);
     }
   }
 }
@@ -35,17 +26,17 @@ class ClassRedundantSubsequentInitializationError extends Error {
 
 namespace ClassRedundantSubsequentInitializationError {
 
-  export type ConstructorParametersObject = { customMessage: string; } | { className: string; };
+  export type ConstructorNamedParameters = { readonly customMessage: string; } | { readonly className: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
+    readonly generateDescription: (
+      namedParameters: Localization.DescriptionTemplateNamedParameters
     ) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = { className: string; };
+    export type DescriptionTemplateNamedParameters = { readonly className: string; };
   }
 }
 

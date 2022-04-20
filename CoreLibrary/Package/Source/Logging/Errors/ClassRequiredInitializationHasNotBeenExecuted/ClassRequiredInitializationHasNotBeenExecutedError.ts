@@ -1,35 +1,24 @@
-import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English
-  from "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English";
+import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English from
+    "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
 
 
 class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
 
   public static readonly NAME: string = "ClassRequiredInitializationHasNotBeenExecutedError";
-  public static get DEFAULT_TITLE(): string {
-    return ClassRequiredInitializationHasNotBeenExecutedError.localization.defaultTitle;
-  }
-
-  private static localization: ClassRequiredInitializationHasNotBeenExecutedError.Localization =
+  public static localization: ClassRequiredInitializationHasNotBeenExecutedError.Localization =
       ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English;
 
 
-  public static setLocalization(localization: ClassRequiredInitializationHasNotBeenExecutedError.Localization): void {
-    ClassRequiredInitializationHasNotBeenExecutedError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorParametersObject) {
+  public constructor(namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorParametersObject) {
 
     super();
 
     this.name = ClassRequiredInitializationHasNotBeenExecutedError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = ClassRequiredInitializationHasNotBeenExecutedError.localization.genericDescriptionPartTemplate(
-        parametersObject
-      );
+      this.message = ClassRequiredInitializationHasNotBeenExecutedError.localization.generateDescription(namedParameters);
     }
   }
 }
@@ -37,19 +26,19 @@ class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
 
 namespace ClassRequiredInitializationHasNotBeenExecutedError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
+    readonly generateDescription: (
+      namedParameters: Localization.DescriptionTemplateNamedParameters
     ) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
-      className: string;
-      initializingMethodName: string;
+    export type DescriptionTemplateNamedParameters = {
+      readonly className: string;
+      readonly initializingMethodName: string;
     };
   }
 }

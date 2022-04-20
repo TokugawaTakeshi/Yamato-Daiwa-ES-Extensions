@@ -5,12 +5,11 @@ const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
 
   defaultTitle: "クラス初期化が実行されず",
-  genericDescriptionPartTemplate:
+  generateDescription:
       (
-        parametersObject: ClassRequiredInitializationHasNotBeenExecutedError.Localization.
-            GenericDescriptionPartTemplateParameters
+        namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
       ): string =>
-          `クラス：「${parametersObject.className}」は初期化が要るが、初期化するメソッド:「${parametersObject.initializingMethodName}」` +
+          `クラス「${ namedParameters.className }」は初期化が要るが、初期化するメソッド「${ namedParameters.initializingMethodName }」` +
           "が呼び出されなかった。"
 };
 

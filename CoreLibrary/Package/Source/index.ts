@@ -207,15 +207,15 @@ export { default as LoggerLocalization__English } from "./Logging/LoggerLocaliza
 
 export { default as AlgorithmMismatchError } from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError";
 export { default as AlgorithmMismatchErrorLocalization__English } from
-    "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization__English";
+    "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.english";
 export { default as ClassRedundantSubsequentInitializationError } from
     "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
 export { default as ClassRedundantSubsequentInitializationErrorLocalization__English } from
-    "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__English";
+    "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization.english";
 export { default as ClassRequiredInitializationHasNotBeenExecutedError } from
     "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
 export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English } from
-    "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English";
+    "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
 export { default as ConfigFileNotFoundError } from "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundError";
 export { default as ConfigFileNotFoundErrorLocalization__English } from
     "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization__English";

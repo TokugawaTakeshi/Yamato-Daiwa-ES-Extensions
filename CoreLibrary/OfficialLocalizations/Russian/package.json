@@ -36,10 +36,10 @@
     "yamato-daiwa_code_quality_management": "0.4.1"
   },
   "dependencies": {
-    "@yamato-daiwa/es-extensions": "1.5.0-alpha.2"
+    "@yamato-daiwa/es-extensions": "1.5.0-alpha.3"
   },
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.5.0-alpha.2"
+    "@yamato-daiwa/es-extensions": "1.5.0-alpha.3"
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",

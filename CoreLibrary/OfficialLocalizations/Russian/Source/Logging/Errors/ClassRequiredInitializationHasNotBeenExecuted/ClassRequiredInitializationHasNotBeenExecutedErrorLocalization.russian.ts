@@ -5,13 +5,12 @@ const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Russian:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
 
   defaultTitle: "Обязательная инициализация класса не была выполнена",
-  genericDescriptionPartTemplate:
+  generateDescription:
       (
-          parametersObject: ClassRequiredInitializationHasNotBeenExecutedError.Localization.
-              GenericDescriptionPartTemplateParameters
+        namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
       ): string =>
-          `Класс ${parametersObject.className} требует инициализации, но инициализирующий метод ` +
-          `${parametersObject.initializingMethodName} не был вызван.`
+          `Класс '${namedParameters.className}' требует инициализации, но инициализирующий метод ` +
+          `'${namedParameters.initializingMethodName}' не был вызван.`
 };
 
 
