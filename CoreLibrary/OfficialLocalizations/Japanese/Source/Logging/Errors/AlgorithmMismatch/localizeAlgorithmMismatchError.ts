@@ -1,7 +1,7 @@
 import { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
-import AlgorithmMismatchErrorLocalization__Japanese from "./AlgorithmMismatchErrorLocalization__Japanese";
+import AlgorithmMismatchErrorLocalization__Japanese from "./AlgorithmMismatchErrorLocalization.japanese";
 
 
 export default function localizeAlgorithmMismatchError(): void {
-  AlgorithmMismatchError.setLocalization(AlgorithmMismatchErrorLocalization__Japanese)
+  AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Japanese;
 }
