@@ -22,6 +22,12 @@
   Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
 
 
+#### Errors
+
+All **localization** static fields of each pre-made error are public now.
+[//]: # (TODO)
+
+
 ## Breaking changes
 
 * The function **getArrayElementMatchingWithPredicateIfSuchElementExactlyOne** has been renamed to 
@@ -33,7 +39,7 @@
   **getIndexesOfArrayElementsWhichSatisfiesThePredicate**
   * Reason: idiomatic issue ("satisfies the N" is more correct than "satisfies to N")
   * Migration: replacing to new name only.
-* The function **getIndexOfArrayElementByPredicate** has been renamed to **getIndexOfArrayElementIfSuchElementIsExactlyOne**
+* The function **getIndexOfArrayElementByPredicate** has been renamed to **getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**
   and upgraded.
   * Reason: native analogue [**Array.prototype.findIndex**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
   * Migration
@@ -47,3 +53,6 @@
   * Reason: wrong name of function has been selected.  
   * Migration: Required only if you created the new localization of **InvalidParameterValueError**. Will be done by
     changing the key of dedicated property.
+* The public static getter **DEFAULT_TITLE** has been removed from each pre-made error.
+  * Reason: the default title could be retrieved as `ErrorClass.localization.defaultTitle` now.
+  * Migration: replace `ErrorClass.DEFAULT_TITLE` to `ErrorClass.localization.defaultTitle`.

@@ -47,8 +47,8 @@ export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOn
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
     "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
-export { default as getIndexOfArrayElementIfSuchElementIsExactlyOne } from
-    "./Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne";
+export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
+      "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getLastElementOfNonEmptyArray } from "./Arrays/getLastElementOfNonEmptyArray";
 export { default as removeArrayElementsByIndexes, RemovingArrayElementsByIndexesOperation } from
     "./Arrays/removeArrayElementsByIndexes";

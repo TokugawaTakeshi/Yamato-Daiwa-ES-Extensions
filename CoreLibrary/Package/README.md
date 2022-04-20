@@ -101,8 +101,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 * [📖 **getIndexesOfArrayElementsWhichSatisfiesThePredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
   Returns the array of indexes of array elements which are satisfies to predicate function.
-* [📖 **getIndexOfArrayElementIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne.md)
-  Returns the index of array element matching with predicate of `null` if no such element.
+* [📖 **getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
+  Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or `null` will be returned (depending on dedicated option's value).
 
 ##### Replacing of elements
 

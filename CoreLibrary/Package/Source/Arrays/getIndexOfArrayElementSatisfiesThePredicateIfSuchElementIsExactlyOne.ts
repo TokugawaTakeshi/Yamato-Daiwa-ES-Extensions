@@ -2,18 +2,18 @@ import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Logging/Errors/UnexpectedEvent/UnexpectedEventError";
 
 
-export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): number | null;
 
-export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
   options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
 ): number;
 
 
-export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayElement>(
+export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: Array<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
   { throwErrorIfElementNotFoundOrMoreThan1 }: { throwErrorIfElementNotFoundOrMoreThan1?: true; } = {}
@@ -33,7 +33,8 @@ export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayEle
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
         title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "getIndexOfArrayElementIfSuchElementIsExactlyOne(targetArray, predicate, options)"
+        occurrenceLocation: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" +
+            "(targetArray, predicate, options)"
       });
     }
 
@@ -51,7 +52,8 @@ export default function getIndexOfArrayElementIfSuchElementIsExactlyOne<ArrayEle
             "more matches case is being considered as unexpected event."
         ),
         title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "getIndexOfArrayElementIfSuchElementIsExactlyOne(targetArray, predicate, options)"
+        occurrenceLocation: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" +
+            "(targetArray, predicate, options)"
       });
     }
 
