@@ -19,7 +19,7 @@ export default function getMonthNumberByName(
         parameterName: "parametersObject.numerationFrom",
         messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${numerationFrom}.`
       }),
-      title: InvalidParameterValueError.DEFAULT_TITLE,
+      title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "getMonthNumberByName(parametersObject)"
     });
   }

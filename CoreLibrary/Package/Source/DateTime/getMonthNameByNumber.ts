@@ -22,7 +22,7 @@ export default function getMonthNameByNumber(
         parameterName: "parametersObject.numerationForm",
         messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${numerationForm}.`
       }),
-      title: InvalidParameterValueError.DEFAULT_TITLE,
+      title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "getMonthNameByNumber(parametersObject)"
     });
   }
@@ -42,7 +42,7 @@ export default function getMonthNameByNumber(
           parameterName: "parametersObject",
           messageSpecificPart: "The month number 0 is invalid the numeration is from 1."
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(parametersObject)"
       });
     }
@@ -75,7 +75,7 @@ export default function getMonthNameByNumber(
           parameterName: "parametersObject",
           messageSpecificPart: "The month number 12 is invalid the numeration is from 0."
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(parametersObject)"
       });
     }
@@ -91,7 +91,7 @@ export default function getMonthNameByNumber(
           messageSpecificPart: "The valid month number is the non-negative integer from 0 o 12 while actual value is " +
               `${targetMonthNumber}`
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(parametersObject)"
       });
     }

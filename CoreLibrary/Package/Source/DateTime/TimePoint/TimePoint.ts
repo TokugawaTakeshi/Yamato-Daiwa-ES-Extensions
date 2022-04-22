@@ -1,5 +1,5 @@
 /* [ ESLint muting rationale ]
-* There are too much numbers refers to month or day of week number in this class. */
+* There are too many numbers refers to month or day of week number in this class. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import DaysOfWeek from "../../ConstantsAndEnumerations/DaysOfWeek";
@@ -68,7 +68,7 @@ class TimePoint {
           errorInstance: new InvalidParameterValueError({
             customMessage: TimePoint.localization.errors.invalidRawDateTime
           }),
-          title: InvalidParameterValueError.DEFAULT_TITLE,
+          title: InvalidParameterValueError.localization.defaultTitle,
           occurrenceLocation: "TimePoint.constructor(parametersObject)"
         });
       }

@@ -32,7 +32,7 @@ export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElement
     if (throwErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
-        title: UnexpectedEventError.DEFAULT_TITLE,
+        title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" +
             "(targetArray, predicate, options)"
       });
@@ -51,7 +51,7 @@ export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElement
             "There are multiple element satisfies the predicate. As is follows from the function name, two or " +
             "more matches case is being considered as unexpected event."
         ),
-        title: UnexpectedEventError.DEFAULT_TITLE,
+        title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" +
             "(targetArray, predicate, options)"
       });

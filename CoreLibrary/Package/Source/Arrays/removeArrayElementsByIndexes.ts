@@ -49,7 +49,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
 
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.DEFAULT_TITLE,
+          title: InvalidParameterValueError.localization.defaultTitle,
           description: InvalidParameterValueError.localization.generateMessage({
             parameterName: "namedParameters.indexes",
             messageSpecificPart:
@@ -67,7 +67,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
 
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.DEFAULT_TITLE,
+          title: InvalidParameterValueError.localization.defaultTitle,
           description: InvalidParameterValueError.localization.generateMessage({
             parameterName: "namedParameters.indexes",
             messageSpecificPart: `The index ${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} ` +
@@ -87,7 +87,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
 
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.DEFAULT_TITLE,
+          title: InvalidParameterValueError.localization.defaultTitle,
           description: InvalidParameterValueError.localization.generateMessage({
             parameterName: "namedParameters.indexes",
             messageSpecificPart: "Removing of element with index " +

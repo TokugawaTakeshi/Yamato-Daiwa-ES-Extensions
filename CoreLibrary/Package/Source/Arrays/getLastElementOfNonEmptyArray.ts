@@ -10,7 +10,7 @@ export default function getLastElementOfNonEmptyArray<ArrayElement>(targetArray:
         "The array is empty thus it has not last element. As it follows from the function name, the empty arrays are " +
         "being considered as error."
       ),
-      title: UnexpectedEventError.DEFAULT_TITLE,
+      title: UnexpectedEventError.localization.defaultTitle,
       occurrenceLocation: "getLastElementOfNonEmptyArray(targetArray)"
     });
   }

@@ -230,7 +230,7 @@ class RawObjectDataProcessor {
     /* [ Approach ] Except the bug case, the reaching of this point possible only with invalid TypeScript. */
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
-      title: InvalidParameterValueError.DEFAULT_TITLE,
+      title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });
   }
@@ -1312,7 +1312,7 @@ class RawObjectDataProcessor {
 
     Logger.logError({
       errorType: InvalidParameterValueError.NAME,
-      title: InvalidParameterValueError.DEFAULT_TITLE,
+      title: InvalidParameterValueError.localization.defaultTitle,
       description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
       occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
           "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
@@ -1869,7 +1869,7 @@ class RawObjectDataProcessor {
 
           Logger.logError({
             errorType: InvalidParameterValueError.NAME,
-            title: InvalidParameterValueError.DEFAULT_TITLE,
+            title: InvalidParameterValueError.localization.defaultTitle,
             description: this.validationErrorsMessagesBuilder.buildIncompatibleValuesTypesAlternativesErrorDescription(
                 targetValueSpecification
             ),
@@ -1892,7 +1892,7 @@ class RawObjectDataProcessor {
 
       Logger.logError({
         errorType: InvalidParameterValueError.NAME,
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         description: this.validationErrorsMessagesBuilder.buildUnsupportedValueTypeErrorDescription({
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,

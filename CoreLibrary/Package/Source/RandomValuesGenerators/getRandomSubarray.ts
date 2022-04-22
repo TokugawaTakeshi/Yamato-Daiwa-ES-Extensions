@@ -50,7 +50,7 @@ export default function getRandomSubarray<ArrayElement>(
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getRandomSubarray(targetArray, options)"
       });
     }
@@ -63,7 +63,7 @@ export default function getRandomSubarray<ArrayElement>(
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getRandomSubarray(targetArray, options)"
       });
     }
@@ -84,7 +84,7 @@ export default function getRandomSubarray<ArrayElement>(
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMaximalElementsCountErrorMessage({ actualValue: options.maximalElementsCount })
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getRandomSubarray(targetArray, options)"
       });
     }
@@ -98,7 +98,7 @@ export default function getRandomSubarray<ArrayElement>(
             minimalElementsCount, maximalElementsCount: options.maximalElementsCount
           })
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getRandomSubarray(targetArray, options)"
       });
     }

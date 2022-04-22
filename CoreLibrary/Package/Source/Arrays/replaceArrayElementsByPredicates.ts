@@ -51,7 +51,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
         if (indexedOfElementsWhichHasBeenAlreadyReplaced.includes(indexOfElementWhichSatisfiedToCurrentPredicate)) {
           Logger.logError({
             errorType: InvalidParameterValueError.NAME,
-            title: InvalidParameterValueError.DEFAULT_TITLE,
+            title: InvalidParameterValueError.localization.defaultTitle,
             description: InvalidParameterValueError.localization.generateMessage({
               parameterName: "namedParameters.replacements",
               messageSpecificPart: `The element with index ${indexOfElementWhichSatisfiedToCurrentPredicate} is satisfies ` +
