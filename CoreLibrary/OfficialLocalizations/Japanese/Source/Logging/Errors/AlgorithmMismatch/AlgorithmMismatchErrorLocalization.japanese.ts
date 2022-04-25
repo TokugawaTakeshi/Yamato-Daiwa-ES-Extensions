@@ -1,4 +1,4 @@
-import { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
+import type { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
 
 
 const AlgorithmMismatchErrorLocalization__Japanese: AlgorithmMismatchError.Localization = {

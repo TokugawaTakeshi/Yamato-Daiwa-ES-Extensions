@@ -1,12 +1,7 @@
-import LoggerLocalization__Russian from "./Logging/LoggerLocalization__Russian";
-import AlgorithmMismatchErrorLocalization__Russian
-  from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError__Russian";
-import ClassRedundantSubsequentInitializationErrorLocalizationRussian
-  from "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization__Russian";
+// TODO Logger
 
 
-export {
-  LoggerLocalization__Russian,
-  AlgorithmMismatchErrorLocalization__Russian,
-  ClassRedundantSubsequentInitializationErrorLocalizationRussian
-};
+export { default as AlgorithmMismatchErrorLocalization__Japanese } from
+    "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.russian";
+export { default as localizeAlgorithmMismatchError } from "./Logging/Errors/AlgorithmMismatch/localizeAlgorithmMismatchError";
+
