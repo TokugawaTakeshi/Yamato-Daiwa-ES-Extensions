@@ -20,13 +20,20 @@ getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   * error will be thrown if `throwErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
   * otherwise `null` will be returned
 
+![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
+
 If you want all matches with the predicate, not only first one, use the native method 
 [`Array.prototype.filter`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
-![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
-
 
 ## Comparing with native methods
+
+Below native methods neither better nor worse than **getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**;
+which one to use is depending on which behavior you need if
+
+* will not be desired element in array
+* will be more than one matching with predicate.
+
 
 ### `Array.prototype.filter`
 
@@ -43,13 +50,13 @@ Returns all matches with the predicate, not just first one as `getArrayElementSa
 
 ## Examples
 
-Below example will use this sample array:
+Below examples will use this sample array:
 
 ```typescript
 const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
 ```
 
-### One match
+### One match (normal scenario)
 
 ```typescript
 console.log(
@@ -73,9 +80,11 @@ console.log(
 #### Throwing of the error
 
 ```typescript
+let match: string;
+
 try {
 
-  const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+  match = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
     { throwErrorIfElementNotFoundOrMoreThan1: true }

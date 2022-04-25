@@ -40,7 +40,8 @@ to insert the example (available in [official YDEE plugin](https://plugins.jetbr
 ![IntelliJ IDEA Live Template](getIndexesOfArrayElementsWhichSatisfiesThePredicate-LiveTemplateDemo.gif)
 
 It is recommended to copy the variable name containing array to clipboard preliminary - the identifier will be
-automatically substituted to required position.
+automatically substituted to required position. Then, use <kbd>Tab</kbd> key to move to next position at which
+specific code must be inputted.
 
 Because the abbreviation of `getIndexesOfArrayElementsWhichSatisfiesThePredicate` is too long (gioaewstp),
 the live template has been added without abbreviation (however, you don't need to input whole function name).
