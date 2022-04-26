@@ -1,31 +1,22 @@
-import ConfigFileNotFoundErrorLocalization__English from "./ConfigFileNotFoundErrorLocalization__English";
+import ConfigFileNotFoundErrorLocalization__English from "./ConfigFileNotFoundErrorLocalization.english";
 
 
 class ConfigFileNotFoundError extends Error {
 
   public static readonly NAME: string = "ConfigFileNotFoundError";
-  public static get DEFAULT_TITLE(): string {
-    return ConfigFileNotFoundError.localization.defaultTitle;
-  }
-
-  private static localization: ConfigFileNotFoundError.Localization = ConfigFileNotFoundErrorLocalization__English;
+  public static localization: ConfigFileNotFoundError.Localization = ConfigFileNotFoundErrorLocalization__English;
 
 
-  public static setLocalization(localization: ConfigFileNotFoundError.Localization): void {
-    ConfigFileNotFoundError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: ConfigFileNotFoundError.ConstructorParametersObject) {
+  public constructor(namedParameters: ConfigFileNotFoundError.ConstructorParametersObject) {
 
     super();
 
     this.name = ConfigFileNotFoundError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = ConfigFileNotFoundError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = ConfigFileNotFoundError.localization.generateDescription(namedParameters);
     }
   }
 }
@@ -33,19 +24,17 @@ class ConfigFileNotFoundError extends Error {
 
 namespace ConfigFileNotFoundError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
-    ) => string;
+    readonly generateDescription: (parametersObject: Localization.DescriptionTemplateNamedParameters) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
-      targetTechnologyName: string;
-      configFilePathOrMultipleOfThem: string | Array<string>;
+    export type DescriptionTemplateNamedParameters = {
+      readonly targetTechnologyName: string;
+      readonly configFilePathOrMultipleOfThem: string | Array<string>;
     };
   }
 }
