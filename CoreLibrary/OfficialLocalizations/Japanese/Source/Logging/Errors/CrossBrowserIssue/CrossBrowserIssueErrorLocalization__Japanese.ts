@@ -1,4 +1,4 @@
-import { CrossBrowserIssueError } from "@yamato-daiwa/es-extensions";
+import type { CrossBrowserIssueError } from "@yamato-daiwa/es-extensions";
 
 
 const CrossBrowserIssueErrorLocalization__Japanese: CrossBrowserIssueError.Localization = {

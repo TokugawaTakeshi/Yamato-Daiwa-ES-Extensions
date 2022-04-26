@@ -1,19 +1,10 @@
-import CrossBrowserIssueErrorLocalization__English from "./CrossBrowserIssueErrorLocalization__English";
+import CrossBrowserIssueErrorLocalization__English from "./CrossBrowserIssueErrorLocalization.english";
 
 
 class CrossBrowserIssueError extends Error {
 
   public static readonly NAME: string = "CrossBrowserIssueError";
-  public static get DEFAULT_TITLE(): string {
-    return CrossBrowserIssueError.localization.defaultTitle;
-  }
-
-  private static localization: CrossBrowserIssueError.Localization = CrossBrowserIssueErrorLocalization__English;
-
-
-  public static setLocalization(localization: CrossBrowserIssueError.Localization): void {
-    CrossBrowserIssueError.localization = localization;
-  }
+  public static localization: CrossBrowserIssueError.Localization = CrossBrowserIssueErrorLocalization__English;
 
 
   public constructor(message: string) {
