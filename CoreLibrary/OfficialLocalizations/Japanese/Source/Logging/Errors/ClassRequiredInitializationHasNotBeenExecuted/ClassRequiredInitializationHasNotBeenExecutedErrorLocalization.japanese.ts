@@ -1,4 +1,4 @@
-import { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato-daiwa/es-extensions";
+import type { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato-daiwa/es-extensions";
 
 
 const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese:
