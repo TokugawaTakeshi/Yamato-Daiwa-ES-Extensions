@@ -7,7 +7,7 @@ const ClassRedundantSubsequentInitializationErrorLocalizationEnglish:
   defaultTitle: "Class redundant subsequent initialization",
   generateDescription:
       (namedParameters: ClassRedundantSubsequentInitializationError.Localization.DescriptionTemplateNamedParameters): string =>
-          `Class: '${namedParameters.className}' must be initialized only one time.`
+          `Class '${namedParameters.className}' intended to be initialized only one time.`
 };
 
 

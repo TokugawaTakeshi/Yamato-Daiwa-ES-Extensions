@@ -30,9 +30,7 @@ namespace ClassRedundantSubsequentInitializationError {
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly generateDescription: (
-      namedParameters: Localization.DescriptionTemplateNamedParameters
-    ) => string;
+    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
   };
 
   export namespace Localization {
