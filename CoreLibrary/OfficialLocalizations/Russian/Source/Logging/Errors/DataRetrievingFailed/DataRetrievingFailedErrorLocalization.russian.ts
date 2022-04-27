@@ -5,7 +5,7 @@ const DataRetrievingFailedErrorLocalization__Russian: DataRetrievingFailedError.
   defaultTitle: "Ошибка при получении данных",
   generateDescription: (
     namedParameters: DataRetrievingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибка при получении данных '${namedParameters.mentionToData}' из внешнего источника.`
+  ): string => `Произошла ошибка при получении данных '${ namedParameters.mentionToData }' из внешнего источника.`
 };
 
 

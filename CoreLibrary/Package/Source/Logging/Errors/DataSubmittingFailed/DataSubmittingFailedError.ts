@@ -1,49 +1,40 @@
-import DataSubmittingFailedErrorLocalization__English from "./DataSubmittingFailedErrorLocalization__English";
+import DataSubmittingFailedErrorLocalization__English from "./DataSubmittingFailedErrorLocalization.english";
 
 
 class DataSubmittingFailedError extends Error {
 
   public static readonly NAME: string = "DataSubmittingFailedError";
-  public static get DEFAULT_TITLE(): string {
-    return DataSubmittingFailedError.localization.defaultTitle;
-  }
-
-  private static localization: DataSubmittingFailedError.Localization = DataSubmittingFailedErrorLocalization__English;
+  public static localization: DataSubmittingFailedError.Localization = DataSubmittingFailedErrorLocalization__English;
 
   public readonly typicalCause?: DataSubmittingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
-  public static setLocalization(localization: DataSubmittingFailedError.Localization): void {
-    DataSubmittingFailedError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: DataSubmittingFailedError.ConstructorParametersObject) {
+  public constructor(namedParameters: DataSubmittingFailedError.ConstructorNamedParameters) {
 
     super();
 
     this.name = DataSubmittingFailedError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = DataSubmittingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = DataSubmittingFailedError.localization.generateDescription(namedParameters);
     }
 
-    this.typicalCause = parametersObject.typicalCause;
-    this.additionalData = parametersObject.additionalData;
+    this.typicalCause = namedParameters.typicalCause;
+    this.additionalData = namedParameters.additionalData;
   }
 }
 
 
 namespace DataSubmittingFailedError {
 
-  export type ConstructorParametersObject =
-      (Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; }) &
+  export type ConstructorNamedParameters =
+      (Localization.DescriptionTemplateNamedParameters | { customMessage: string; }) &
       {
-        additionalData?: unknown;
-        typicalCause?: TypicalCauses;
+        readonly additionalData?: unknown;
+        readonly typicalCause?: TypicalCauses;
       };
 
   export enum TypicalCauses {
@@ -53,14 +44,12 @@ namespace DataSubmittingFailedError {
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
-    ) => string;
+    readonly generateDescription: (parametersObject: Localization.DescriptionTemplateNamedParameters) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
-      mentionToData: string;
+    export type DescriptionTemplateNamedParameters = {
+      readonly mentionToData: string;
     };
   }
 }
