@@ -9,7 +9,7 @@ class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
       ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English;
 
 
-  public constructor(namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorParametersObject) {
+  public constructor(namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorNamedParameters) {
 
     super();
 
@@ -26,7 +26,7 @@ class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
 
 namespace ClassRequiredInitializationHasNotBeenExecutedError {
 
-  export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;

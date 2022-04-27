@@ -7,7 +7,7 @@ class ConfigFileNotFoundError extends Error {
   public static localization: ConfigFileNotFoundError.Localization = ConfigFileNotFoundErrorLocalization__English;
 
 
-  public constructor(namedParameters: ConfigFileNotFoundError.ConstructorParametersObject) {
+  public constructor(namedParameters: ConfigFileNotFoundError.ConstructorNamedParameters) {
 
     super();
 
@@ -24,7 +24,7 @@ class ConfigFileNotFoundError extends Error {
 
 namespace ConfigFileNotFoundError {
 
-  export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
