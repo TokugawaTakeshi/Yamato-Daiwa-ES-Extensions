@@ -1,5 +1,5 @@
 import { ConfigFileNotFoundError } from "@yamato-daiwa/es-extensions";
-import ConfigFileNotFoundErrorLocalization__Russian from "./ConfigFileNotFoundErrorLocalization__Russian";
+import ConfigFileNotFoundErrorLocalization__Russian from "./ConfigFileNotFoundErrorLocalization.russian";
 
 
 export default function localizeConfigFileNotFoundError(): void {

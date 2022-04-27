@@ -1,5 +1,5 @@
 import { CrossBrowserIssueError } from "@yamato-daiwa/es-extensions";
-import CrossBrowserIssueErrorLocalization__Russian from "./CrossBrowserIssueErrorLocalization__Russian";
+import CrossBrowserIssueErrorLocalization__Russian from "./CrossBrowserIssueErrorLocalization.russian";
 
 
 export default function localizeConfigFileNotFoundError(): void {
