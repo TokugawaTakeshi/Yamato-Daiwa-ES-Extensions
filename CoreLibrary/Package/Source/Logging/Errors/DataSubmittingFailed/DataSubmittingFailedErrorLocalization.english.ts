@@ -4,8 +4,8 @@ import DataSubmittingFailedError from "./DataSubmittingFailedError";
 const DataSubmittingFailedErrorLocalization__English: DataSubmittingFailedError.Localization = {
   defaultTitle: "Data submitting failure",
   generateDescription: (
-    parametersObject: DataSubmittingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The error occurred during submitting of the data '${parametersObject.mentionToData}'.`
+    namedParameters: DataSubmittingFailedError.Localization.DescriptionTemplateNamedParameters
+  ): string => `The error occurred during submitting of the data '${namedParameters.mentionToData}'.`
 };
 
 

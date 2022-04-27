@@ -1,31 +1,22 @@
-import FileReadingFailedErrorLocalization__English from "./FileReadingFailedErrorLocalization__English";
+import FileReadingFailedErrorLocalization__English from "./FileReadingFailedErrorLocalization.english";
 
 
 class FileReadingFailedError extends Error {
 
   public static readonly NAME: string = "FileReadingFailure";
-  public static get DEFAULT_TITLE(): string {
-    return FileReadingFailedError.localization.defaultTitle;
-  }
-
-  private static localization: FileReadingFailedError.Localization = FileReadingFailedErrorLocalization__English;
+  public static localization: FileReadingFailedError.Localization = FileReadingFailedErrorLocalization__English;
 
 
-  public static setLocalization(localization: FileReadingFailedError.Localization): void {
-    FileReadingFailedError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: FileReadingFailedError.ConstructorParametersObject) {
+  public constructor(namedParameters: FileReadingFailedError.ConstructorNamedParameters) {
 
     super();
 
     this.name = FileReadingFailedError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = FileReadingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = FileReadingFailedError.localization.generateDescription(namedParameters);
     }
   }
 }
@@ -33,17 +24,15 @@ class FileReadingFailedError extends Error {
 
 namespace FileReadingFailedError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
-    ) => string;
+    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
+    export type DescriptionTemplateNamedParameters = {
       filePath: string;
     };
   }
