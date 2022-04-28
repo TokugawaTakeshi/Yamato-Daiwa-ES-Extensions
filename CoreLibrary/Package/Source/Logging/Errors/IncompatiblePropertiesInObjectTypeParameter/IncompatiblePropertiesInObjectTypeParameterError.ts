@@ -1,35 +1,24 @@
-import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English
-  from "./IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English";
+import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English from
+    "./IncompatiblePropertiesInObjectTypeParameterErrorLocalization.english";
 
 
 class IncompatiblePropertiesInObjectTypeParameterError extends Error {
 
   public static readonly NAME: string = "IncompatiblePropertiesError";
-  public static get DEFAULT_TITLE(): string {
-    return IncompatiblePropertiesInObjectTypeParameterError.localization.defaultTitle;
-  }
-
-  private static localization: IncompatiblePropertiesInObjectTypeParameterError.Localization =
+  public static localization: IncompatiblePropertiesInObjectTypeParameterError.Localization =
       IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English;
 
 
-  public static setLocalization(localization: IncompatiblePropertiesInObjectTypeParameterError.Localization): void {
-    IncompatiblePropertiesInObjectTypeParameterError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: IncompatiblePropertiesInObjectTypeParameterError.ConstructorParametersObject) {
+  public constructor(namedParameters: IncompatiblePropertiesInObjectTypeParameterError.ConstructorNamedParameters) {
 
     super();
 
     this.name = IncompatiblePropertiesInObjectTypeParameterError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = IncompatiblePropertiesInObjectTypeParameterError.localization.genericDescriptionPartTemplate(
-        parametersObject
-      );
+      this.message = IncompatiblePropertiesInObjectTypeParameterError.localization.generateDescription(namedParameters);
     }
   }
 }
@@ -37,20 +26,18 @@ class IncompatiblePropertiesInObjectTypeParameterError extends Error {
 
 namespace IncompatiblePropertiesInObjectTypeParameterError {
 
-  export type ConstructorParametersObject = { customMessage: string; } | Localization.GenericDescriptionPartTemplateParameters;
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
-    ) => string;
+    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
-      parameterName: string;
-      conflictingPropertyName: string;
-      incompatiblePropertiesNames: Array<string>;
+    export type DescriptionTemplateNamedParameters = {
+      readonly parameterName: string;
+      readonly conflictingPropertyName: string;
+      readonly incompatiblePropertiesNames: Array<string>;
     };
   }
 }
