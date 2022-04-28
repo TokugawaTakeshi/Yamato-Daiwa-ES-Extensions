@@ -1,22 +1,13 @@
-import FileWritingFailedErrorLocalization__English from "./FileWritingFailedErrorLocalization__English";
+import FileWritingFailedErrorLocalization__English from "./FileWritingFailedErrorLocalization.english";
 
 
 class FileWritingFailedError extends Error {
 
   public static readonly NAME: string = "FileWritingFailedError";
-  public static get DEFAULT_TITLE(): string {
-    return FileWritingFailedError.localization.defaultTitle;
-  }
-
-  private static localization: FileWritingFailedError.Localization = FileWritingFailedErrorLocalization__English;
+  public static localization: FileWritingFailedError.Localization = FileWritingFailedErrorLocalization__English;
 
 
-  public static setLocalization(localization: FileWritingFailedError.Localization): void {
-    FileWritingFailedError.localization = localization;
-  }
-
-
-  public constructor(parametersObject: FileWritingFailedError.ConstructorParametersObject) {
+  public constructor(parametersObject: FileWritingFailedError.ConstructorNamedParameters) {
 
     super();
 
@@ -25,7 +16,7 @@ class FileWritingFailedError extends Error {
     if ("customMessage" in parametersObject) {
       this.message = parametersObject.customMessage;
     } else {
-      this.message = FileWritingFailedError.localization.genericDescriptionPartTemplate(parametersObject);
+      this.message = FileWritingFailedError.localization.generateDescription(parametersObject);
     }
   }
 }
@@ -33,17 +24,17 @@ class FileWritingFailedError extends Error {
 
 namespace FileWritingFailedError {
 
-  export type ConstructorParametersObject = Localization.GenericDescriptionPartTemplateParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
 
   export type Localization = {
     readonly defaultTitle: string;
-    readonly genericDescriptionPartTemplate: (
-      parametersObject: Localization.GenericDescriptionPartTemplateParameters
+    readonly generateDescription: (
+      parametersObject: Localization.DescriptionTemplateNamedParameters
     ) => string;
   };
 
   export namespace Localization {
-    export type GenericDescriptionPartTemplateParameters = {
+    export type DescriptionTemplateNamedParameters = {
       filePath: string;
     };
   }
