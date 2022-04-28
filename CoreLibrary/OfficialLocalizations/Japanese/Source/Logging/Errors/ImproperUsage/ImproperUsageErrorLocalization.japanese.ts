@@ -1,4 +1,4 @@
-import { ImproperUsageError } from "@yamato-daiwa/es-extensions";
+import type { ImproperUsageError } from "@yamato-daiwa/es-extensions";
 
 
 const ImproperUsageErrorLocalization__Japanese: ImproperUsageError.Localization = {

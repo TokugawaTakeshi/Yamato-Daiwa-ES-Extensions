@@ -1,19 +1,10 @@
-import ImproperUsageErrorLocalization__English from "./ImproperUsageErrorLocalization__English";
+import ImproperUsageErrorLocalization__English from "./ImproperUsageErrorLocalization.english";
 
 
 class ImproperUsageError extends Error {
 
   public static readonly NAME: string = "ImproperUsageError";
-  public static get DEFAULT_TITLE(): string {
-    return ImproperUsageError.localization.defaultTitle;
-  }
-
-  private static localization: ImproperUsageError.Localization = ImproperUsageErrorLocalization__English;
-
-
-  public static setLocalization(localization: ImproperUsageError.Localization): void {
-    ImproperUsageError.localization = localization;
-  }
+  public static localization: ImproperUsageError.Localization = ImproperUsageErrorLocalization__English;
 
 
   public constructor(message: string) {
