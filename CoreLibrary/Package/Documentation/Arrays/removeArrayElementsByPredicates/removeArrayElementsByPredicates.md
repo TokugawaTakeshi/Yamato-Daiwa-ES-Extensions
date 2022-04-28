@@ -18,7 +18,7 @@ export type NamedParameters<ArrayElement> = {
 export type Result<ArrayElement> = {
   readonly updatedArray: Array<ArrayElement>;
   readonly removedElements: Array<ArrayElement>;
-  readonly indexedOfRemovedElements: Array<number>;
+  readonly indexesOfRemovedElements: Array<number>;
 };
 ```
 

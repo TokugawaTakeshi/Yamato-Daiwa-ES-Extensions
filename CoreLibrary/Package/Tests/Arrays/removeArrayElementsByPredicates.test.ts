@@ -33,7 +33,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexedOfRemovedElements, [ 3, 4 ]);
+        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
       });
     });
 
@@ -56,7 +56,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexedOfRemovedElements, [ 3, 4 ]);
+        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
       });
 
       it("Initial array has not been mutated", (): void => {
@@ -103,7 +103,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexedOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
+        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
       });
     });
 
@@ -132,7 +132,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexedOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
+        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
       });
 
       it("Initial array has not been mutated", (): void => {

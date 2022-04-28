@@ -13,7 +13,7 @@ export namespace RemovingArrayElementsByPredicatesOperation {
   export type Result<ArrayElement> = {
     readonly updatedArray: Array<ArrayElement>;
     readonly removedElements: Array<ArrayElement>;
-    readonly indexedOfRemovedElements: Array<number>;
+    readonly indexesOfRemovedElements: Array<number>;
   };
 
 
@@ -46,7 +46,7 @@ export namespace RemovingArrayElementsByPredicatesOperation {
         indexes: indexesOfElementsWhichWillBeRemoved,
         mutably
       }),
-      indexedOfRemovedElements: indexesOfElementsWhichWillBeRemoved.
+      indexesOfRemovedElements: indexesOfElementsWhichWillBeRemoved.
           sort((oneElement: number, otherElement: number): number => oneElement - otherElement)
     };
   }
