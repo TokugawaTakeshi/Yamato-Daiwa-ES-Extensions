@@ -11,6 +11,7 @@ Such functionality is demanded in some JavaScript frameworks which could not obs
 If you want to replace just one element, you can specify `index` and `newElement` at first level of named parameters object:
 
 
+
 ### Quick inputting
 
 Use [Live templates](https://www.jetbrains.com/help/idea/using-live-templates.html#live_templates_types) functionality
