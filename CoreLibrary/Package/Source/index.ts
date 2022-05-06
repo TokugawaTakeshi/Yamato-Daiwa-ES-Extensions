@@ -205,69 +205,71 @@ export type { ILogger } from "./Logging/ILogger";
 export { default as Logger } from "./Logging/Logger";
 export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization__English";
 
-export { default as AlgorithmMismatchError } from "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchError";
+
+/* === Errors ======================================================================================================= */
+export { default as AlgorithmMismatchError } from "./Errors/AlgorithmMismatch/AlgorithmMismatchError";
 export { default as AlgorithmMismatchErrorLocalization__English } from
-    "./Logging/Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.english";
+    "./Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.english";
 export { default as ClassRedundantSubsequentInitializationError } from
-    "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
+    "./Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
 export { default as ClassRedundantSubsequentInitializationErrorLocalization__English } from
-    "./Logging/Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization.english";
+    "./Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization.english";
 export { default as ClassRequiredInitializationHasNotBeenExecutedError } from
-    "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
+    "./Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
 export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English } from
-    "./Logging/Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
-export { default as ConfigFileNotFoundError } from "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundError";
+    "./Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
+export { default as ConfigFileNotFoundError } from "./Errors/ConfigFileNotFound/ConfigFileNotFoundError";
 export { default as ConfigFileNotFoundErrorLocalization__English } from
-    "./Logging/Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization.english";
-export { default as CrossBrowserIssueError } from "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueError";
+    "./Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization.english";
+export { default as CrossBrowserIssueError } from "./Errors/CrossBrowserIssue/CrossBrowserIssueError";
 export { default as CrossBrowserIssueErrorLocalization__English } from
-    "./Logging/Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization.english";
-export { default as DataRetrievingFailedError } from "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedError";
+    "./Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization.english";
+export { default as DataRetrievingFailedError } from "./Errors/DataRetrievingFailed/DataRetrievingFailedError";
 export { default as DataRetrievingFailedErrorLocalization__English } from
-    "./Logging/Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization.english";
-export { default as DataSubmittingFailedError } from "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedError";
+    "./Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization.english";
+export { default as DataSubmittingFailedError } from "./Errors/DataSubmittingFailed/DataSubmittingFailedError";
 export { default as DataSubmittingFailedErrorLocalization__English } from
-    "./Logging/Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization.english";
+    "./Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization.english";
 export { default as DOM_ElementRetrievingFailedError } from
-    "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedError";
+    "./Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedError";
 export { default as DOM_ElementRetrievingFailedErrorLocalization__English } from
-    "./Logging/Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization.english";
-export { default as FileReadingFailedError } from "./Logging/Errors/FileReadingFailed/FileReadingFailedError";
+    "./Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization.english";
+export { default as FileReadingFailedError } from "./Errors/FileReadingFailed/FileReadingFailedError";
 export { default as FileReadingFailedErrorLocalization__English } from
-    "./Logging/Errors/FileReadingFailed/FileReadingFailedErrorLocalization.english";
-export { default as FileWritingFailedError } from "./Logging/Errors/FileWritingFailed/FileWritingFailedError";
+    "./Errors/FileReadingFailed/FileReadingFailedErrorLocalization.english";
+export { default as FileWritingFailedError } from "./Errors/FileWritingFailed/FileWritingFailedError";
 export { default as FileWritingFailedErrorLocalization__English } from
-    "./Logging/Errors/FileWritingFailed/FileWritingFailedErrorLocalization.english";
-export { default as ImproperUsageError } from "./Logging/Errors/ImproperUsage/ImproperUsageError";
+    "./Errors/FileWritingFailed/FileWritingFailedErrorLocalization.english";
+export { default as ImproperUsageError } from "./Errors/ImproperUsage/ImproperUsageError";
 export { default as ImproperUsageErrorLocalization__English } from
-    "./Logging/Errors/ImproperUsage/ImproperUsageErrorLocalization.english";
+    "./Errors/ImproperUsage/ImproperUsageErrorLocalization.english";
 export { default as IncompatiblePropertiesInObjectTypeParameterError } from
-    "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
+    "./Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
 export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English } from
-    "./Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterErrorLocalization.english";
+    "./Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterErrorLocalization.english";
 export { default as InterProcessInteractionFailedError } from
-    "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
+    "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
 export { default as InterProcessInteractionFailedErrorLocalization__English } from
-    "./Logging/Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization.english";
-export { default as InvalidConfigError } from "./Logging/Errors/InvalidConfig/InvalidConfigError";
+    "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization.english";
+export { default as InvalidConfigError } from "./Errors/InvalidConfig/InvalidConfigError";
 export { default as InvalidConfigErrorLocalization__English } from
-    "./Logging/Errors/InvalidConfig/InvalidConfigErrorLocalization.english";
-export { default as InvalidExternalDataError } from "./Logging/Errors/InvalidExternalData/InvalidExternalDataError";
+    "./Errors/InvalidConfig/InvalidConfigErrorLocalization.english";
+export { default as InvalidExternalDataError } from "./Errors/InvalidExternalData/InvalidExternalDataError";
 export { default as InvalidExternalDataErrorLocalization__English } from
-    "./Logging/Errors/InvalidExternalData/InvalidExternalDataErrorLocalization.english";
-export { default as InvalidParameterValueError } from "./Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+    "./Errors/InvalidExternalData/InvalidExternalDataErrorLocalization.english";
+export { default as InvalidParameterValueError } from "./Errors/InvalidParameterValue/InvalidParameterValueError";
 export { default as InvalidParameterValueErrorLocalization__English } from
-    "./Logging/Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization.english";
+    "./Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization.english";
 export { default as ModuleDynamicLoadingFailedError } from
-    "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedError";
+    "./Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedError";
 export { default as ModuleDynamicLoadingFailedErrorLocalization__English } from
-    "./Logging/Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization.english";
-export { default as UnexpectedEventError } from "./Logging/Errors/UnexpectedEvent/UnexpectedEventError";
+    "./Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization.english";
+export { default as UnexpectedEventError } from "./Errors/UnexpectedEvent/UnexpectedEventError";
 export { default as UnexpectedEventErrorLocalization__English } from
-    "./Logging/Errors/UnexpectedEvent/UnexpectedEventErrorLocalization.english";
-export { default as UnsupportedScenarioError } from "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioError";
+    "./Errors/UnexpectedEvent/UnexpectedEventErrorLocalization.english";
+export { default as UnsupportedScenarioError } from "./Errors/UnsupportedScenario/UnsupportedScenarioError";
 export { default as UnsupportedScenarioErrorLocalization__English } from
-    "./Logging/Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
+    "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
 
 
 /* === Tools ======================================================================================================== */

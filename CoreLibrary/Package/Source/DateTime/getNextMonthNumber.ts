@@ -5,7 +5,7 @@ import getMonthNumberByName from "./getMonthNumberByName";
 
 
 export default function getNextMonthNumber(
-    parametersObject: {
+    namedParameters: {
       referenceYear: number;
     } & (
       (
@@ -20,19 +20,19 @@ export default function getNextMonthNumber(
 
   let referenceMonthNumber__numerationFrom1: number;
 
-  if ("referenceMonthNumber__numerationFrom1" in parametersObject) {
-    referenceMonthNumber__numerationFrom1 = parametersObject.referenceMonthNumber__numerationFrom1;
-  } else if ("referenceMonthNumber__numerationFrom0" in parametersObject) {
-    referenceMonthNumber__numerationFrom1 = parametersObject.referenceMonthNumber__numerationFrom0 + 1;
+  if ("referenceMonthNumber__numerationFrom1" in namedParameters) {
+    referenceMonthNumber__numerationFrom1 = namedParameters.referenceMonthNumber__numerationFrom1;
+  } else if ("referenceMonthNumber__numerationFrom0" in namedParameters) {
+    referenceMonthNumber__numerationFrom1 = namedParameters.referenceMonthNumber__numerationFrom0 + 1;
   } else {
     referenceMonthNumber__numerationFrom1 = getMonthNumberByName({
-      targetMonthName: parametersObject.referenceMonthName, numerationFrom: 1
+      targetMonthName: namedParameters.referenceMonthName, numerationFrom: 1
     });
   }
 
   const nextMonthNumber__numerationFrom1: number = referenceMonthNumber__numerationFrom1 === MONTHS_PER_YEAR ?
       1 : referenceMonthNumber__numerationFrom1 + 1;
 
-  return parametersObject.firstMonthNumberInRelationToReturnableValue === 1 ?
+  return namedParameters.firstMonthNumberInRelationToReturnableValue === 1 ?
       nextMonthNumber__numerationFrom1 : nextMonthNumber__numerationFrom1 - 1;
 }

@@ -26,23 +26,19 @@
     "Distributable"
   ],
   "devDependencies": {
-    "@types/mocha": "9.1.0",
+    "@types/mocha": "9.1.1",
     "@types/node": "16.11.26",
-    "@yamato-daiwa/style_guides": "0.0.0",
+    "@yamato-daiwa/style_guides": "0.0.2",
     "mocha": "9.2.2",
     "rimraf": "3.0.2",
     "ts-node": "10.7.0",
-    "typescript": "4.6.3",
-    "yamato-daiwa_code_quality_management": "0.4.1"
+    "typescript": "4.6.4"
   },
   "dependencies": {
-    "@yamato-daiwa/es-extensions": "1.5.0-alpha.4"
-  },
-  "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.5.0-alpha.4"
+    "@yamato-daiwa/es-extensions": "1.5.0-alpha.5"
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
-    "Lint": "eslint Source Tests"
+    "Lint": "eslint Source"
   }
 }

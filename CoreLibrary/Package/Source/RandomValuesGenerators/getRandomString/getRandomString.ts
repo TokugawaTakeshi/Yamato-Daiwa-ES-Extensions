@@ -9,9 +9,9 @@ import getRandomInteger from "../getRandomInteger";
 import getRandomArrayElement from "../getRandomArrayElement";
 
 import Logger from "../../Logging/Logger";
-import InvalidParameterValueError from "../../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
-import IncompatiblePropertiesInObjectTypeParameterError
-  from "../../Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
+import IncompatiblePropertiesInObjectTypeParameterError from
+    "../../Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
 
 import GetRandomStringOperationLocalization__English from "./GetRandomStringOperationLocalization__English";
 

@@ -25,7 +25,7 @@ import isNonEmptyArray from "../TypeGuards/Arrays/isNonEmptyArray";
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
 import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 class RawObjectDataProcessor {
@@ -571,7 +571,7 @@ class RawObjectDataProcessor {
       }
     }
 
-    
+
     if (areOneOnMorePropertiesInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {

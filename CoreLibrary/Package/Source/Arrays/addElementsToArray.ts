@@ -28,11 +28,10 @@ export default function addElementsToArray<ArrayElement>(
   }
 
 
-  const positionOfFirstNewElement__numerationFrom1: number = "toPosition__numerationFrom1" in namedParameters ?
-      namedParameters.toPosition__numerationFrom1 : namedParameters.toPosition__numerationFrom0 + 1;
+  const positionOfFirstNewElement__numerationFrom0: number = "toPosition__numerationFrom0" in namedParameters ?
+      namedParameters.toPosition__numerationFrom0 : namedParameters.toPosition__numerationFrom1 - 1;
 
-
-  workpiece.splice(positionOfFirstNewElement__numerationFrom1, 0, ...namedParameters.newElements);
+  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...namedParameters.newElements);
 
   return workpiece;
 }

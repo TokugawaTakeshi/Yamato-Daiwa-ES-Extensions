@@ -4,7 +4,7 @@
 import MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
 
 import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default function getMonthNumberByName(

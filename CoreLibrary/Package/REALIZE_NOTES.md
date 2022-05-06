@@ -28,6 +28,10 @@ All **localization** static fields of each pre-made error are public now.
 [//]: # (TODO)
 
 
+### Type guards
+
+* **isEitherUndefinedOrNull**
+
 ## Breaking changes
 
 * The function **getArrayElementMatchingWithPredicateIfSuchElementExactlyOne** has been renamed to 

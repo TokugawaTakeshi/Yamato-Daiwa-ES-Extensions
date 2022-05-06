@@ -9,11 +9,14 @@ removeArrayElementsByPredicates<ArrayElement>(
 ```
 
 ```typescript
-export type NamedParameters<ArrayElement> = {
-  readonly targetArray: Array<ArrayElement>;
-  readonly predicates: (Array<(arrayElement: ArrayElement) => boolean>) | ((arrayElement: ArrayElement) => boolean);
-  readonly mutably: boolean;
-};
+export type NamedParameters<ArrayElement> =
+  {
+    readonly targetArray: Array<ArrayElement>;
+    readonly mutably: boolean;
+  } & (
+    { readonly predicate: (arrayElement: ArrayElement) => boolean; } |
+    { readonly predicates: Array<(arrayElement: ArrayElement) => boolean>; }
+  );
 
 export type Result<ArrayElement> = {
   readonly updatedArray: Array<ArrayElement>;
@@ -22,10 +25,10 @@ export type Result<ArrayElement> = {
 };
 ```
 
-Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of
-named parameters object. 
+Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated 
+property of named parameters object. 
 
-Note that in the cate of multiple predicates the searching is being executed *sequentially* for each predicate - the 
+Note that in the case of multiple predicates the searching is being executed *sequentially* for each predicate - the 
 concept of [logical disjunction](https://en.wikipedia.org/wiki/Logical_disjunction) AKA "or" (bot not "exclusive or").
 If you want element will be removed only if it satisfies to all predicates, pass the single predicate including the
 logical expression with all conditions.
@@ -42,7 +45,7 @@ const sample: Array<string> = [ "a", "aa", "aaa", "aaaa", "aaaaa" ];
 console.log(
   removeArrayElementsByPredicates({
     targetArray: sample,
-    predicates: predicate,
+    predicate,
     mutably: true
   }).removedElements
 );

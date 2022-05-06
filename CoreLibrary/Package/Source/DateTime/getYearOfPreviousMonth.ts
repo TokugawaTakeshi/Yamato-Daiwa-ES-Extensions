@@ -1,5 +1,5 @@
 export default function getYearOfPreviousMonth(
-  parametersObject: {
+  namedParameters: {
     referenceYear: number;
   } & (
     { referenceMonthNumber__numerationFrom0: number; } |
@@ -7,8 +7,8 @@ export default function getYearOfPreviousMonth(
   )
 ): number {
 
-  const referenceMonthNumber__numerationFrom1: number = "referenceMonthNumber__numerationFrom1" in parametersObject ?
-      parametersObject.referenceMonthNumber__numerationFrom1 : parametersObject.referenceMonthNumber__numerationFrom0 + 1;
+  const referenceMonthNumber__numerationFrom1: number = "referenceMonthNumber__numerationFrom1" in namedParameters ?
+      namedParameters.referenceMonthNumber__numerationFrom1 : namedParameters.referenceMonthNumber__numerationFrom0 + 1;
 
-  return referenceMonthNumber__numerationFrom1 === 1 ? parametersObject.referenceYear - 1 : parametersObject.referenceYear;
+  return referenceMonthNumber__numerationFrom1 === 1 ? namedParameters.referenceYear - 1 : namedParameters.referenceYear;
 }

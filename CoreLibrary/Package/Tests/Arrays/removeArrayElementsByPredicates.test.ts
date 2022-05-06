@@ -20,7 +20,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
           removeArrayElementsByPredicates({
             targetArray: experimentalSample,
-            predicates: predicate,
+            predicate,
             mutably: true
           });
 
@@ -43,7 +43,7 @@ describe("removeArrayElementsByPredicates", (): void => {
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
           removeArrayElementsByPredicates({
             targetArray: experimentalSample,
-            predicates: predicate,
+            predicate,
             mutably: false
           });
 
@@ -87,7 +87,7 @@ describe("removeArrayElementsByPredicates", (): void => {
             mutably: true
           });
 
-      
+
       it("Updated array is matching with expected", (): void => {
         deepStrictEqual(
           removingArrayElementsByPredicatesOperationResult.updatedArray,

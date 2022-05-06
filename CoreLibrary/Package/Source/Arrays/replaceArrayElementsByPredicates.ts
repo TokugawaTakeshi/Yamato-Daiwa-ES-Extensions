@@ -1,25 +1,29 @@
 import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfArrayElementsWhichSatisfiesThePredicate";
 
 import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export namespace ReplacingArrayElementsByPredicatesOperation {
 
-  export type NamedParameters<ArrayElement> = {
-    readonly targetArray: Array<ArrayElement>;
-    readonly replacements: Replacement<ArrayElement> | Array<Replacement<ArrayElement>>;
-    readonly mutably: boolean;
-  };
+  export type NamedParameters<ArrayElement> =
+    {
+      readonly targetArray: Array<ArrayElement>;
+      readonly mutably: boolean;
+    } &
+    (
+      { readonly replacement: Replacement<ArrayElement>; } |
+      { readonly replacements: Array<Replacement<ArrayElement>>; }
+    );
 
   export type Replacement<ArrayElement> =
     {
       readonly predicate: (arrayElement: ArrayElement) => boolean;
-    } & (
+    } &
+    (
       { readonly newValue: ArrayElement; } |
       { readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
     );
-
 
   export type Result<ArrayElement> = {
     readonly updatedArray: Array<ArrayElement>;
@@ -35,12 +39,12 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
       mutably
     }: NamedParameters<ArrayElement> = namedParameters;
 
-    const indexesOfElementsWhichWillBeRemovedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
+    const indexesOfElementsWhichWillBeReplacedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
     const indexedOfElementsWhichHasBeenAlreadyReplaced: Array<number> = [];
 
     for (
       const replacement of
-      [ ...Array.isArray(namedParameters.replacements) ? namedParameters.replacements : [ namedParameters.replacements ] ]
+      [ ..."replacements" in namedParameters ? namedParameters.replacements : [ namedParameters.replacement ] ]
     ) {
 
       const indexesOfElementsWhichSatisfiedToCurrentPredicate: Array<number> =
@@ -52,7 +56,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
           Logger.logError({
             errorType: InvalidParameterValueError.NAME,
             title: InvalidParameterValueError.localization.defaultTitle,
-            description: InvalidParameterValueError.localization.generateMessage({
+            description: InvalidParameterValueError.localization.generateDescription({
               parameterName: "namedParameters.replacements",
               messageSpecificPart: `The element with index ${indexOfElementWhichSatisfiedToCurrentPredicate} is satisfies ` +
                   "to multiple predicated therefore will be replaced more that one time."
@@ -63,7 +67,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
           indexedOfElementsWhichHasBeenAlreadyReplaced.push(indexOfElementWhichSatisfiedToCurrentPredicate);
         }
 
-        indexesOfElementsWhichWillBeRemovedAndNewValuesMap.set(
+        indexesOfElementsWhichWillBeReplacedAndNewValuesMap.set(
           indexOfElementWhichSatisfiedToCurrentPredicate,
           "newValue" in replacement ?
               replacement.newValue :
@@ -75,7 +79,7 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
 
     const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...namedParameters.targetArray ];
 
-    for (const [ targetElementIndex, newValue ] of indexesOfElementsWhichWillBeRemovedAndNewValuesMap) {
+    for (const [ targetElementIndex, newValue ] of indexesOfElementsWhichWillBeReplacedAndNewValuesMap) {
       workpiece[targetElementIndex] = newValue;
     }
 

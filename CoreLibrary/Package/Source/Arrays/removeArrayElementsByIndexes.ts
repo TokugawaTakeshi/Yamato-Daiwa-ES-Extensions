@@ -1,7 +1,7 @@
 import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
 
 import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export namespace RemovingArrayElementsByIndexesOperation {
@@ -50,7 +50,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateMessage({
+          description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
             messageSpecificPart:
                 `The index ${String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)} ` +
@@ -68,7 +68,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateMessage({
+          description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
             messageSpecificPart: `The index ${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} ` +
                 "is greater than index of last element of target array therefore will be ignored."
@@ -88,7 +88,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
         Logger.logError({
           errorType: InvalidParameterValueError.NAME,
           title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateMessage({
+          description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
             messageSpecificPart: "Removing of element with index " +
                 `${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} has been demanded more ` +

@@ -10,7 +10,7 @@ import isString from "../../TypeGuards/Strings/isString";
 import getMonthNameByNumber from "../getMonthNameByNumber";
 
 import Logger from "../../Logging/Logger";
-import InvalidParameterValueError from "../../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 import TimePointLocalization__English from "./TimePointLocalization__English";
 

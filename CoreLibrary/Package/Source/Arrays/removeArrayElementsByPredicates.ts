@@ -4,11 +4,14 @@ import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfA
 
 export namespace RemovingArrayElementsByPredicatesOperation {
 
-  export type NamedParameters<ArrayElement> = {
-    readonly targetArray: Array<ArrayElement>;
-    readonly predicates: (Array<(arrayElement: ArrayElement) => boolean>) | ((arrayElement: ArrayElement) => boolean);
-    readonly mutably: boolean;
-  };
+  export type NamedParameters<ArrayElement> =
+    {
+      readonly targetArray: Array<ArrayElement>;
+      readonly mutably: boolean;
+    } & (
+      { readonly predicate: (arrayElement: ArrayElement) => boolean; } |
+      { readonly predicates: Array<(arrayElement: ArrayElement) => boolean>; }
+    );
 
   export type Result<ArrayElement> = {
     readonly updatedArray: Array<ArrayElement>;
@@ -26,12 +29,12 @@ export namespace RemovingArrayElementsByPredicatesOperation {
       mutably
     }: NamedParameters<ArrayElement> = namedParameters;
 
-    const predicates: Array<(arrayElement: ArrayElement) => boolean> =
-        Array.isArray(namedParameters.predicates) ? namedParameters.predicates : [ namedParameters.predicates ];
-
     const indexesOfElementsWhichWillBeRemoved: Array<number> = [];
 
-    for (const predicate of predicates) {
+    for (
+      const predicate of
+      [ ..."predicates" in namedParameters ? namedParameters.predicates : [ namedParameters.predicate ] ]
+    ) {
       indexesOfElementsWhichWillBeRemoved.push(
         ...getIndexesOfArrayElementsWhichSatisfiesThePredicate(
           targetArray, predicate

@@ -1,6 +1,6 @@
 import getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne from
     "../../Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-import UnexpectedEventError from "../../Source/Logging/Errors/UnexpectedEvent/UnexpectedEventError";
+import UnexpectedEventError from "../../Source/Errors/UnexpectedEvent/UnexpectedEventError";
 
 import { strictEqual, throws } from "assert";
 
