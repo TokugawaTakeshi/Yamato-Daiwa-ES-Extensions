@@ -5,7 +5,7 @@ const ModuleDynamicLoadingFailedErrorLocalization__Japanese: ModuleDynamicLoadin
   defaultTitle: "モジュール動的ロードに失敗",
   generateDescription: (
     namedParameters: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `モジュール「${ namedParameters.modulePath }」の動的ロード中不具合が発生した。`
+  ): string => `モジュール「${ namedParameters.modulePath }」の動的ロード中不具合が発生。`
 };
 
 

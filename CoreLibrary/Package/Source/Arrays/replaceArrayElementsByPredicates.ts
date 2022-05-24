@@ -12,14 +12,12 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
       readonly mutably: boolean;
     } &
     (
-      { readonly replacement: Replacement<ArrayElement>; } |
+      Replacement<ArrayElement> |
       { readonly replacements: Array<Replacement<ArrayElement>>; }
     );
 
   export type Replacement<ArrayElement> =
-    {
-      readonly predicate: (arrayElement: ArrayElement) => boolean;
-    } &
+    { readonly predicate: (arrayElement: ArrayElement) => boolean; } &
     (
       { readonly newValue: ArrayElement; } |
       { readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
@@ -42,10 +40,17 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
     const indexesOfElementsWhichWillBeReplacedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
     const indexedOfElementsWhichHasBeenAlreadyReplaced: Array<number> = [];
 
-    for (
-      const replacement of
-      [ ..."replacements" in namedParameters ? namedParameters.replacements : [ namedParameters.replacement ] ]
-    ) {
+    let replacements: Array<Replacement<ArrayElement>>;
+
+    if ("replacements" in namedParameters) {
+      replacements = namedParameters.replacements;
+    } else if ("newValue" in namedParameters) {
+      replacements = [ { predicate: namedParameters.predicate, newValue: namedParameters.newValue } ];
+    } else {
+      replacements = [ { predicate: namedParameters.predicate, replacer: namedParameters.replacer } ];
+    }
+
+    for (const replacement of replacements) {
 
       const indexesOfElementsWhichSatisfiedToCurrentPredicate: Array<number> =
           getIndexesOfArrayElementsWhichSatisfiesThePredicate(targetArray, replacement.predicate);

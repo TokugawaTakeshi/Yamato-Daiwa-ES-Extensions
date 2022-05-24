@@ -3,10 +3,10 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 
 const InvalidConfigErrorLocalization__English: InvalidConfigError.Localization = {
-  defaultTitle: "Invalid config",
+  defaultTitle: "Invalid configuration",
   generateDescription: (
     namedParameters: InvalidConfigError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The config of '${namedParameters.mentionToConfig}' is invalid.` +
+  ): string => `The configuration of '${namedParameters.mentionToConfig}' is invalid.` +
       `${insertSubstring(namedParameters.messageSpecificPart, {
         modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
       })}`

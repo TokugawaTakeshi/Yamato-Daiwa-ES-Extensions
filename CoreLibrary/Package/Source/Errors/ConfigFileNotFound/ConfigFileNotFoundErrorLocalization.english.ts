@@ -10,6 +10,7 @@ const ConfigFileNotFoundErrorLocalization__English: ConfigFileNotFoundError.Loca
           `${namedParameters.configFilePathOrMultipleOfThem.join(", ")}`;
     }
 
+
     return `The '${namedParameters.targetTechnologyName}' configuration file not found at ` +
         `'${namedParameters.configFilePathOrMultipleOfThem}'.`;
   }

@@ -6,7 +6,7 @@ const InvalidParameterValueErrorLocalization__Japanese: InvalidParameterValueErr
   defaultTitle: "引数不正値",
   generateDescription:
       (namedParameters: InvalidParameterValueError.Localization.DescriptionTemplateNamedParameters): string =>
-          `パラメーター「${namedParameters.parameterName}」の値は不備が有る。` +
+          `引数「${namedParameters.parameterName}」の値は不備が有る。` +
           `${ insertSubstring(namedParameters.messageSpecificPart, {
             modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
           }) }`

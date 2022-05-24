@@ -1,6 +1,6 @@
 import { IncompatiblePropertiesInObjectTypeParameterError } from "@yamato-daiwa/es-extensions";
 import IncompatiblePropertiesInObjectTypeParameterLocalizationJapanese from
-      "./IncompatiblePropertiesInObjectTypeParameterLocalization.russian";
+    "./IncompatiblePropertiesInObjectTypeParameterLocalization.russian";
 
 
 export default function localizeIncompatiblePropertiesInObjectTypeParameterError(): void {

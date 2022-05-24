@@ -1,5 +1,4 @@
-import InterProcessInteractionFailedErrorLocalization__English
-  from "./InterProcessInteractionFailedErrorLocalization.english";
+import InterProcessInteractionFailedErrorLocalization__English from "./InterProcessInteractionFailedErrorLocalization.english";
 
 
 class InterProcessInteractionFailedError extends Error {

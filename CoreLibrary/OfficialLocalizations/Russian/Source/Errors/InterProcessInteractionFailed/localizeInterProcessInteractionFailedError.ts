@@ -1,6 +1,5 @@
 import { InterProcessInteractionFailedError } from "@yamato-daiwa/es-extensions";
-import InterProcessInteractionFailedErrorLocalization__Russian from
-      "./InterProcessInteractionFailedErrorLocalization.russian";
+import InterProcessInteractionFailedErrorLocalization__Russian from "./InterProcessInteractionFailedErrorLocalization.russian";
 
 
 export default function localizeInterProcessInteractionFailedError(): void {

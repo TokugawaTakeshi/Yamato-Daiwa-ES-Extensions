@@ -85,7 +85,7 @@ class TimePoint {
     this.monthNumber__numerationFrom1 = this.monthNumber__numerationFrom0 + 1;
     this.monthNumber__numerationFrom1__2Digits = this.monthNumber__numerationFrom1.toString().padStart(2, "0");
 
-    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationForm: 1 });
+    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationFrom: 1 });
 
     this.dayOfMonth = normalizedDateTime.getDate();
     this.dayOfMonth__2Digits = this.dayOfMonth.toString().padStart(2, "0");

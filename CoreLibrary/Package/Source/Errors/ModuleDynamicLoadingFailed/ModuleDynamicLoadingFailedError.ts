@@ -1,5 +1,5 @@
-import ModuleDynamicLoadingFailedErrorLocalization__English
-  from "./ModuleDynamicLoadingFailedErrorLocalization.english";
+import ModuleDynamicLoadingFailedErrorLocalization__English from "./ModuleDynamicLoadingFailedErrorLocalization.english";
+
 
 class ModuleDynamicLoadingFailedError extends Error {
 

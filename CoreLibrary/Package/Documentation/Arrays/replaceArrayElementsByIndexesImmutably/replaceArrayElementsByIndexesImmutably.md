@@ -5,11 +5,84 @@
 Creates the copy of target array and replaces the elements by specified indexes.
 Such functionality is demanded in some JavaScript frameworks which could not observe the mutations of array.
 
+```
+replaceArrayElementsByIndexesImmutably<ArrayElement>(
+  namedParameters:
+      {
+        targetArray: Array<ArrayElement>;
+      } &
+      (
+        {
+          index: number;
+          newElement: ArrayElement;
+        } |
+        {
+          replacements: Array<{
+            index: number;
+            newElement: ArrayElement;
+          }>;
+        }
+      )
+): Array<ArrayElement>
+```
+
+![IntelliJ IDEA Live template demo](replaceArrayElementsByIndexesImmutably-LiveTemplateDemo.gif)
+
 
 ## Usage
 
 If you want to replace just one element, you can specify `index` and `newElement` at first level of named parameters object:
 
+```typescript
+type Product = { title: string; price: number; };
+
+const sampleArray: Array<Product> = [
+  { title: "ALPHA", price: 100 },
+  { title: "BRAVO", price: 500 },
+  { title: "CHARLIE", price: 1000 },
+  { title: "DELTA", price: 1500 }
+];
+
+console.log(replaceArrayElementsByIndexesImmutably({
+  targetArray: sampleArray,
+  index: 2,
+  newElement: { title: "GOLF", price: 2000 }
+}));
+```
+
+Output:
+
+```
+[
+  { title: "ALPHA", price: 100 },
+  { title: "BRAVO", price: 500 },
+  { title: "GOLF", price: 2000 },
+  { title: "DELTA", price: 1500 }
+]
+```
+
+If you want to replace the multiple element, specify `replacements` with array of replacements:
+
+```typescript
+console.log(replaceArrayElementsByIndexesImmutably({
+  targetArray: sampleArray,
+  replacements: [
+    { index: 2, newElement: { title: "GOLF", price: 2000 } },
+    { index: 3, newElement: { title: "HOTEL", price: 5000 } }
+  ]
+}))
+```
+
+Output:
+
+```
+[
+  { title: "ALPHA", price: 100 },
+  { title: "BRAVO", price: 500 },
+  { title: "GOLF", price: 2000 },
+  { title: "HOTEL", price: 5000 }
+]
+```
 
 
 ### Quick inputting

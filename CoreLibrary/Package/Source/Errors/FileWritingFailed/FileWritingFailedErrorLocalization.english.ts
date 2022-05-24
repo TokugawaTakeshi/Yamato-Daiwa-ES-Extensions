@@ -2,10 +2,10 @@ import FileWritingFailedError from "./FileWritingFailedError";
 
 
 const FileWritingFailedErrorLocalization__English: FileWritingFailedError.Localization = {
-  defaultTitle: "ファイル書き込み失敗",
+  defaultTitle: "Writing to file failure",
   generateDescription: (
     parametersObject: FileWritingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `ファイル「${parametersObject.filePath}」の書き込み中エラーが発生しました。`
+  ): string => `Failed to write the file with path '${parametersObject.filePath}'.`
 };
 
 

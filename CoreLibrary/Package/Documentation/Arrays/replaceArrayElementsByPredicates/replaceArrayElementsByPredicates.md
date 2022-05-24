@@ -13,14 +13,12 @@ export type NamedParameters<ArrayElement> =
     readonly mutably: boolean;
   } & 
   (
-    { readonly replacement: Replacement<ArrayElement>; } |
+    Replacement<ArrayElement> |
     { readonly replacements: Array<Replacement<ArrayElement>>; }
   );
 
 export type Replacement<ArrayElement> =
-  {
-    readonly predicate: (arrayElement: ArrayElement) => boolean;
-  } & 
+  { readonly predicate: (arrayElement: ArrayElement) => boolean; } &
   (
     { readonly newValue: ArrayElement; } |
     { readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
@@ -40,7 +38,7 @@ property of named parameters object.
 If target array has been copied to clipboard preliminarily, it will be immediately substituted.
 
 
-## Example
+## Examples
 
 ### Replace one element
 #### Mutably
@@ -50,10 +48,8 @@ const sample: Array<string> = [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO" ];
 
 replaceArrayElementsByPredicates({
   targetArray: experimentalSample,
-  replacement: {
-    predicate: (element: string): boolean => element.includes("O"),
-    newValue: "OOO!"
-  },
+  predicate: (element: string): boolean => element.includes("O"),
+  newValue: "OOO!",
   mutably: true
 });
 
@@ -67,10 +63,8 @@ const sample: Array<string> = [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO" ];
 
 const clonedAndUpdatedSample: Array<string> = replaceArrayElementsByPredicates({
   targetArray: experimentalSample,
-  replacement: {
-    predicate: (element: string): boolean => element.includes("O"),
-    newValue: "OOO!"
-  },
+  predicate: (element: string): boolean => element.includes("O"),
+  newValue: "OOO!",
   mutably: false
 })
 

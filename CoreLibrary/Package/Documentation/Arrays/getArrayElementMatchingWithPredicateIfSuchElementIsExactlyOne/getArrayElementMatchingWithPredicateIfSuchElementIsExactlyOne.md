@@ -32,7 +32,7 @@ Below native methods neither better nor worse than **getArrayElementSatisfiesThe
 which one to use is depending on which behavior you need if
 
 * will not be desired element in array
-* will be more than one matching with predicate.
+* will be more than one element satisfies the matching with predicate.
 
 
 ### `Array.prototype.filter`

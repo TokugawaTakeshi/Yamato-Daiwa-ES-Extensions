@@ -1,6 +1,6 @@
 import { ClassRedundantSubsequentInitializationError } from "@yamato-daiwa/es-extensions";
 import ClassRedundantSubsequentInitializationErrorLocalization__Japanese from
-      "./ClassRedundantSubsequentInitializationErrorLocalization.japanese";
+    "./ClassRedundantSubsequentInitializationErrorLocalization.japanese";
 
 
 export default function localizeClassRedundantSubsequentInitializationError(): void {

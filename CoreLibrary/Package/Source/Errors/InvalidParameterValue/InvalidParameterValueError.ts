@@ -7,16 +7,16 @@ class InvalidParameterValueError extends Error {
   public static localization: InvalidParameterValueError.Localization = InvalidParameterValueErrorLocalization__English;
 
 
-  public constructor(parametersObject: InvalidParameterValueError.ConstructorNamedParameters) {
+  public constructor(namedParameters: InvalidParameterValueError.ConstructorNamedParameters) {
 
     super();
 
     this.name = InvalidParameterValueError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
+    if ("customMessage" in namedParameters) {
+      this.message = namedParameters.customMessage;
     } else {
-      this.message = InvalidParameterValueError.localization.generateDescription(parametersObject);
+      this.message = InvalidParameterValueError.localization.generateDescription(namedParameters);
     }
   }
 }

@@ -1089,7 +1089,7 @@ class RawObjectDataProcessor {
       }
 
 
-      const keyFinalName: string = (targetAssociativeArrayTypeValueSpecification.keysRenamings ?? {})[key] ?? key;
+      const keyFinalName: string = targetAssociativeArrayTypeValueSpecification.keysRenamings?.[key] ?? key;
 
       if (isUndefined(value)) {
 

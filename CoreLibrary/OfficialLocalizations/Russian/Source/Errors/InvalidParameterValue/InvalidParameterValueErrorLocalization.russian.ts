@@ -3,7 +3,7 @@ import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 const InvalidParameterValueErrorLocalization__Russian: InvalidParameterValueError.Localization = {
-  defaultTitle: "Невалидное значение аргумента",
+  defaultTitle: "Невалидное значение параметра",
   generateDescription:
     (namedParameters: InvalidParameterValueError.Localization.DescriptionTemplateNamedParameters): string =>
         `Значение параметра '${namedParameters.parameterName}' невалидно.` +

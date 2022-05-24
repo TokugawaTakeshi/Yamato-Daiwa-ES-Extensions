@@ -2,8 +2,8 @@ import type { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato
 
 
 const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese:
-    ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
-
+    ClassRequiredInitializationHasNotBeenExecutedError.Localization =
+{
   defaultTitle: "クラス初期化が実行されず",
   generateDescription:
       (

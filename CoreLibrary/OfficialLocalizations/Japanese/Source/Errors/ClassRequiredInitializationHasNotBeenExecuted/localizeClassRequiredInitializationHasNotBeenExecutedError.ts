@@ -1,6 +1,6 @@
 import { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato-daiwa/es-extensions";
 import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese from
-      "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.japanese";
+    "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.japanese";
 
 
 export default function localizeClassRequiredInitializationHasNotBeenExecutedError(): void {

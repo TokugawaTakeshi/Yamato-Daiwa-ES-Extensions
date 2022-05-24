@@ -16,10 +16,8 @@ describe("replaceArrayElementsByPredicates", (): void => {
 
       replaceArrayElementsByPredicates({
         targetArray: experimentalSample,
-        replacement: {
-          predicate: (element: string): boolean => element.includes("O"),
-          newValue: "OOO!"
-        },
+        predicate: (element: string): boolean => element.includes("O"),
+        newValue: "OOO!",
         mutably: true
       });
 
@@ -38,10 +36,8 @@ describe("replaceArrayElementsByPredicates", (): void => {
 
       const updatedExperimentalSampleClone: Array<string> = replaceArrayElementsByPredicates({
         targetArray: experimentalSample,
-        replacement: {
-          predicate: (element: string): boolean => element.includes("O"),
-          newValue: "OOO!"
-        },
+        predicate: (element: string): boolean => element.includes("O"),
+        newValue: "OOO!",
         mutably: false
       }).updatedArray;
 

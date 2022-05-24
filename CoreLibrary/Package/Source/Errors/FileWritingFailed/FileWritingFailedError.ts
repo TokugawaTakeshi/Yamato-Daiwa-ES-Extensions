@@ -35,7 +35,7 @@ namespace FileWritingFailedError {
 
   export namespace Localization {
     export type DescriptionTemplateNamedParameters = {
-      filePath: string;
+      readonly filePath: string;
     };
   }
 }

@@ -25,7 +25,6 @@
 #### Errors
 
 All **localization** static fields of each pre-made error are public now.
-[//]: # (TODO)
 
 
 ### Type guards
@@ -60,3 +59,4 @@ All **localization** static fields of each pre-made error are public now.
 * The public static getter **DEFAULT_TITLE** has been removed from each pre-made error.
   * Reason: the default title could be retrieved as `ErrorClass.localization.defaultTitle` now.
   * Migration: replace `ErrorClass.DEFAULT_TITLE` to `ErrorClass.localization.defaultTitle`.
+* Fixed typo in property **numerationFrom** of object-type parameter of **getMonthNameByNumber**.
