@@ -1,5 +1,8 @@
 import isString from "../TypeGuards/Strings/isString";
 import isNonNullObject from "../TypeGuards/Objects/isNonNullObject";
+import isNumber from "../TypeGuards/Numbers/isNumber";
+import isBoolean from "../TypeGuards/isBoolean";
+import isEitherUndefinedOrNull from "../TypeGuards/Nullables/isEitherUndefinedOrNull";
 
 
 export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): string {
@@ -8,9 +11,16 @@ export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): st
     return rawEntity;
   }
 
+
+  if (isNumber(rawEntity) || isBoolean(rawEntity) || isEitherUndefinedOrNull(rawEntity)) {
+    return String(rawEntity);
+  }
+
+
   if (rawEntity instanceof Error) {
     return String(rawEntity);
   }
+
 
   if (isNonNullObject(rawEntity)) {
 
@@ -25,12 +35,14 @@ export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): st
         return "[]";
       }
 
+
       return stringifiedObjectTypeEntity;
 
     } catch {
       return String(rawEntity);
     }
   }
+
 
   return String(rawEntity);
 }

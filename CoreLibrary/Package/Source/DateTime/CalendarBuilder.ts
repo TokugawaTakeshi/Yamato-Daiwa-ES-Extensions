@@ -88,7 +88,7 @@ class CalendarBuilder {
 
     let dayForCurrentCell: number = 1;
     const cachedMonthName: MonthsNames = getMonthNameByNumber({
-      targetMonthNumber: this.targetMonthNumber__numerationFrom0, numerationForm: 0
+      targetMonthNumber: this.targetMonthNumber__numerationFrom0, numerationFrom: 0
     });
 
     for (
@@ -132,7 +132,7 @@ class CalendarBuilder {
         get month__numerationFrom1(): number { return this.month__numerationFrom0 + 1; },
         get monthName(): MonthsNames {
           return getMonthNameByNumber({
-            targetMonthNumber: this.month__numerationFrom0, numerationForm: 0
+            targetMonthNumber: this.month__numerationFrom0, numerationFrom: 0
           });
         },
         dayOfMonth: dayForCurrentCell
@@ -164,7 +164,7 @@ class CalendarBuilder {
         get month__numerationFrom1(): number { return this.month__numerationFrom0 + 1; },
         get monthName(): MonthsNames {
           return getMonthNameByNumber({
-            targetMonthNumber: this.month__numerationFrom0, numerationForm: 0
+            targetMonthNumber: this.month__numerationFrom0, numerationFrom: 0
           });
         },
         dayOfMonth: dayForCurrentCell

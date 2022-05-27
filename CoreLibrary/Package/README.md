@@ -1,21 +1,16 @@
-# Yamato-Daiwa ES Extensions （YDEE）
+# Yamato-Daiwa ES Extensions 〔YDEE〕
 
 [![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)]()
 [![No dependencies](https://img.shields.io/badge/Dependencies-No_dependencies-brightgreen.svg?style=flat)]()
 [![NPM Version](https://img.shields.io/npm/v/@yamato-daiwa/es-extensions)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
 [![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-Official_Plugin-088BF8.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
-Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety without `any` type.
+Helper functions and classes aimed to reduce the routine code. 
+Build-in TypeScript type safety without `any` type.
+Oriented to TypeScript users investing the time to quality including type-safety.
 
-![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/1423b0e4-c927-4855-8139-78a611826adc)
+![Hero image of @yamato-daiwa/es-extensions](https://user-images.githubusercontent.com/41653501/168199236-0895483f-e4f1-4d1f-b7a8-ab296e51a57d.png)
 
-## Roadmap
-
-* [🛣️ Version 1.5 (2022 Spring sprint)](https://yamato-daiwa.myjetbrains.com/youtrack/agiles/121-7/122-13)
-
-**Hint:** Set the unlabeled slider in the top right corner of the screen to `XL` to see the tags and descriptions.
-
-![image](https://user-images.githubusercontent.com/41653501/141427403-ca6e9a61-880c-4b1c-bc66-2fdac2f6a491.png)
 
 ## ⚠️ Request to Stack Overflow users with `>=1500` reputation
 
@@ -27,11 +22,29 @@ me to [tokugawa.takesi@gmail.com](mailto:tokugawa.takesi@gmail.com).
 * **Description**: Helper functions and classes aimed to reduce the routine code. Oriented to TypeScript users investing
   the time to type-safety.
 
+
 ## Installation
 
 ```
 npm i @yamato-daiwa/es-extensions -E
 ```
+
+
+## Notice about "Unpacked size" (displaying in npmjs.com)
+
+The displaying "Unpacked size" (for example, 633 kB for version 1.4.5 as in image below) is the 
+**total size of all built CommonJS amd ECMAScript modules**.
+
+![image](https://user-images.githubusercontent.com/41653501/168949802-72554886-39b0-43b1-9813-43f7c4405f69.png)
+
+ECMAScript modules are preferred for the browser JavaScript while CommonJS - for Node.js.
+
+For the websites and web applications where each kilobyte on count it is possible to automatically exclude the unused 
+functionality of "@yamato-daiwa/es-extensions" (and possibly other dependencies) from built JavaScript.
+The JavaScript bundlers like [Webpack](https://webpack.js.org) can exclude unused functionality under certain conditions.
+For the TypeScript and Webpack combination case, it is required to use ECMAScript modules for activate the
+[tree shaking](https://webpack.js.org/guides/tree-shaking/) (works on production mode).
+
 
 ## Documentation
 
@@ -54,97 +67,224 @@ The tool for the unknown at advance external data (from HTTP request/response, f
 * [📖 Theoretical minimum](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum)
 * [📖 Getting started](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
 
+
 #### Numbers
 
-* [`formatNumberWith4KetaKanji`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md)
-  Formats number with 4-digits Kanji `万`, `億`, `兆`, `系` (CJK ideographic characters)
-* [`isStringifiedNonNegativeIntegerOfRegularNotation`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md)
-  Checks is the value of string contains the number of non-scientific notation.
-* [`separateEach3DigitsGroupWithComma`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md)
-  Formats the number separating each 3 digits group with comma
-* [`separateEach4DigitsGroupWithComma`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md)
-  Formats the number separating each 4 digits group with comma
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md">formatNumberWith4KetaKanji</a></dt>
+  <dd>Formats number with 4-digits Kanji 万, 億, 兆, 系 (CJK ideographic characters)</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md">isStringifiedNonNegativeIntegerOfRegularNotation</a></dt>
+  <dd>Checks is the value of string contains the number of non-scientific notation.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md">separateEach3DigitsGroupWithComma</a></dt>
+  <dd>Formats the number separating each 3 digits group with comma</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md">separateEach4DigitsGroupWithComma</a></dt>
+  <dd>Formats the number separating each 4 digits group with comma</dd>
+
+</dl>
+
 
 #### Strings
 
 All functions working with strings are supporting the [surrogate pairs](https://stackoverflow.com/questions/31986614/what-is-a-surrogate-pair).
 If some function works incorrectly with surrogate pairs, it means the bug; please feel free to open issue in this case.
 
-* `areStringifiedDigitsOnly` Checks is string value consists exclusively from the digits.
-* `capitalizeFirstCharacter` Capitalizes first character of target string value.
-* [`EmailAddress`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md) 
-  Class working with email addresses. Currently, consists from validating function and regular expression of valid emails.
-* `getLastCharacter` Returns the last character of target string value.
-* [`getPositionsOfAllSubstringOccurrences`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md)
-  Returns the positions of each occurrence of specified substring.
-* `removeAllSpecifiedCharacters` Removes specified characters from the string value.
-* [`removeLastCharacter`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md) Removes last character.
-* `removeNonDigitsCharacters` Removes all characters from the string excepts digits.
-* [`removeNthCharacter`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md)
-  Removes the symbol in specified position from the string. Supports the surrogate pairs.
-* [`replace2OrMoreSpacesTo1`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md) replaces 2 or more spaces to 1.
-* [`replaceBrHTML_TagToNewLineEscapeSequence`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md)
-  Replaces the "br" HTML tag to new line (line feed) escape sequence.
-* `insertSubstring` Insets nullable substring with optional condition and transformations.
-* `insertSubstringIf` Insets substring conditionally.
-* `reverseString` Reverses the characters sequence in string value.
-* [`splitString`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/splitString.md) Alternative of native `String.prototype.split()`
-  supporting surrogate pairs.
-* `stringifyAndFormatArbitraryValue` Converts to readable string any type of data.
-* `replaceDoubleBackslashesWithForwardSlashes` Replaces double backslashes with forward slashes. 
-* [`trimSpaces`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md) Trim prepended and/or appended space characters; unlike native
- `String.prototype.trim` acts selectively on specified spaces kinds.
+<dl>
+
+  <dt>areStringifiedDigitsOnly</dt>
+  <dd>Checks is string value consists exclusively from the digits.</dd>
+
+  <dt>capitalizeFirstCharacter</dt>
+  <dd>Capitalizes first character of target string value.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md">EmailAddress</a></dt>
+  <dd>Class working with email addresses. Currently, consists from validating function and regular expression of valid emails.</dd>
+
+  <dt>getLastCharacter</dt>
+  <dd>Returns the last character of target string value.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md">getPositionsOfAllSubstringOccurrences</a></dt>
+  <dd>Returns the positions of each occurrence of specified substring.</dd>
+
+  <dt>removeAllSpecifiedCharacters</dt>
+  <dd>Removes specified characters from the string value.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md">removeLastCharacter</a></dt>
+  <dd>Removes last character.</dd>
+
+  <dt>removeNonDigitsCharacters</dt>
+  <dd>Removes all characters from the string excepts digits.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md">removeNthCharacter</a></dt>
+  <dd>Removes the symbol in specified position from the string. Supports the surrogate pairs.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md">replace2OrMoreSpacesTo1</a></dt>
+  <dd>Replaces 2 or more spaces to 1.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md">replaceBrHTML_TagToNewLineEscapeSequence</a></dt>
+  <dd>Replaces the "br" HTML tag to new line (line feed) escape sequence.</dd>
+
+  <dt>insertSubstring</dt>
+  <dd>Insets nullable substring with optional condition and transformations.</dd>
+
+  <dt>insertSubstringIf</dt>
+  <dd>Insets substring conditionally.</dd>
+
+  <dt>reverseString</dt>
+  <dd>Reverses the characters sequence in string value.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/splitString.md">splitString</a></dt>
+  <dd>Alternative of native <code>String.prototype.split()</code>; unlike it supports the UTF16 surrogate pairs.</dd>
+
+  <dt>stringifyAndFormatArbitraryValue</dt>
+  <dd>Converts to readable string any type of data.</dd>
+
+  <dt>replaceDoubleBackslashesWithForwardSlashes</dt>
+  <dd>Replaces double backslashes with forward slashes.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md">trimSpaces</a></dt>
+  <dd>Trims prepended and/or appended space characters; unlike native `String.prototype.trim` acts selectively on specified spaces kinds.</dd>
+ 
+</dl>
+
 
 #### Arrays
+##### Retrieving of elements
 
-* [`getArrayElementMatchingWithPredicateIfSuchElementExactlyOne`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementMatchingWithPredicateIfSuchElementExactlyOne.md)
-  Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will
-  be thrown or `null` will be returned (depending on dedicated option's value).
-* `getLastElementOfNonEmptyArray` Return the last element of array. If no such element, `UnexpectedEventError` will be thrown.
-* [`getIndexesOfArrayElementsWhichSatisfiesToPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesToPredicate.md)
-  Returns the array of indexes of elements of array which are satisfies to predicate function.
-* [`getIndexOfArrayElementByPredicate`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementByPredicate.md)
-  Returns the index of array element matching with predicate of `null` if no such element.
-* [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md) Converts flat array to 2-dimensional array
-  with nested arrays of fixed elements count.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
+  <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned (depending on dedicated option's value).</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray.md">getLastElementOfNonEmptyArray</a></dt>
+  <dd>Returns the last element of array, herewith <b>UnexpectedEventError</b> will be thrown if target array is empty.</dd>
+
+</dl>
+
+
+##### Retrieving of indexes 
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md">getIndexesOfArrayElementsWhichSatisfiesThePredicate</a></dt>
+  <dd>Returns the array of indexes of array elements which are satisfies to predicate function.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
+  <dd>Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or null will be returned (depending on dedicated option's value).</dd>
+
+</dl>
+
+
+##### Replacing of elements
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md">replaceArrayElementsByIndexesImmutably</a></dt>
+  <dd>Creates the copy of target array and replaces the elements by specified indexes.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md">replaceArrayElementsByPredicates</a></dt>
+  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated property of named parameters object.</dd>
+
+</dl>
+
+
+##### Adding of elements
+
+<dl>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md">addElementsToArray</a></dt>
+  <dd>Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.</dd>
+</dl>
+
+
+##### Removing of elements
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md">removeArrayElementsByIndexes</a></dt>
+  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of named parameters object.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md">removeArrayElementsByPredicates</a></dt>
+  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.</dd>
+
+</dl>
+
+
+##### Other
+
+<dl>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md">twoDimensionalizeArray</a></dt>
+  <dd>Converts flat array to 2-dimensional array with nested arrays of fixed elements count.</dd>
+</dl>
+
 
 #### Sets
 
-* [`addMultipleElementsToSet`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md)
-  Adds multiple elements to set.
+<dl>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md">addMultipleElementsToSet</a></dt>
+  <dd>Adds multiple elements to set.</dd>
+</dl>
+
+
 
 #### Maps
 
-* [`addMultiplePairsToMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md)
-  Adds multiple elements to map.
-* [`createMapBasedOnOtherMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md)
-  Creates map based on other map.
-* [`filterMap`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md)
-  Filters map by specified predicate.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md">addMultiplePairsToMap</a></dt>
+  <dd>Adds multiple elements to map.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md">createMapBasedOnOtherMap</a></dt>
+  <dd>Creates map based on other map.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md">filterMap</a></dt>
+  <dd>Filters map by specified predicate.</dd>
+
+</dl>
+
 
 #### Date & Time
 
-* [`TimePoint`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) 
-  The alternative to native `Date` allows to build the formatted date/time strings easily.
-* [`getDaysCountInSpecificMonth`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md)
-  Return days count in specified year and month.
-* [`getMonthNameByNumber`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md)
-  Converts the month number (from 0 or 1) to element of [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration. 
-* [`getMonthNumberByName`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md)
-  Converts the element of [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md) enumeration to number of 
-  month (from 0 or 1)  
-* [`millisecondsToSeconds`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md)
-  Converts milliseconds amount to amount of seconds.
-* [`secondsToMilliseconds`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md)
-  Converts seconds amount to amount of milliseconds.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md">TimePoint</a></dt>
+  <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">getDaysCountInSpecificMonth</a></dt>
+  <dd>Return days count in specified year and month.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md">getMonthNameByNumber</a></dt>
+  <dd>Converts the month number (from 0 or 1) to element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a> enumeration.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md">getMonthNumberByName</a></dt>
+  <dd>Converts the element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a> enumeration to number of month (from 0 or 1).</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md">millisecondsToSeconds</a></dt>
+  <dd>Converts milliseconds amount to amount of seconds.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md">secondsToMilliseconds</a></dt>
+  <dd>Converts seconds amount to amount of milliseconds.</dd>
+
+</dl>
+
 
 #### Types
 
-* [`ParsedJSON` and related](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/ParsedJSON/ParsedJSON.md)
-  The native object including the Array case which could be the result of JSON parsing.
-* [`InheritEnumerationKeys`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/InheritEnumerationKeys.md)
-  Allows to create the object with same key as reference enumeration.
-* `PartialBy` Makes specified properties of base type optional.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/ParsedJSON/ParsedJSON.md"><b>ParsedJSON</b> and related</a></dt>
+  <dd>The native object including the Array case which could be the result of JSON parsing.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Types/InheritEnumerationKeys.md">InheritEnumerationKeys</a></dt>
+  <dd>Allows to create the object with same key as reference enumeration.</dd>
+
+  <dt>PartialBy</dt>
+  <dd>Makes specified properties of base type optional.</dd>
+
+</dl>
+
 
 #### Type guards
 
@@ -154,30 +294,62 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * [Arrays](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Arrays/ArrayTypeGuards.md)
 * [Nullables](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md)
 
+
 #### Default value subsituters
 
-* `substituteWhenNull` Substitutes the second argument's value when first one is `null`
-* `substituteWhenUndefined` Substitutes the second argument's value when first one is `undefined`
+The [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+makes below functions redundant, but they still could be used in the environments with old ECMAScript versions.
+
+<dl>
+
+  <dt>substituteWhenNull</dt>
+  <dd>Substitutes the second argument's value when first one is null./dd>
+
+  <dt>substituteWhenUndefined</dt>
+  <dd>Substitutes the second argument's value when first one is <b>undefined</b>.</dd>
+
+</dl>
+
+
 
 #### Value transformers
 
-* `emptyStringToNull`
-* `nullToEmptyString`
-* `nullToUndefined`
-* `nullToZero`
-* `undefinedToEmptyArray`
-* `undefinedToEmptyString`
-* `undefinedToNull`
+* emptyStringToNull
+* nullToEmptyString
+* nullToUndefined
+* nullToZero
+* undefinedToEmptyArray
+* undefinedToEmptyString
+* undefinedToNull
+
 
 #### Random values generators
 
-* `getRandomArrayElement` Returns the random element of specified array.
-* `getRandomBoolean` Returns `true` or `false` randomly.
-* `getRandomInteger` Returns random integer not less than specified `minimalValue` and more than `maximalValue`.
-* `getRandomLatinCharacter` Returns random latin character.
-* `getRandomObjectPropertyValue` Returns random object property value.
-* `getRandomSubarray` Returns the selection of elements of specified array; minimal and maximal elements count could be specified.
-* `getSpecificBooleanValueWithProbability` Returns specific boolean value with specified probability.
+<dl>
+
+  <dt>getRandomArrayElement</dt>
+  <dd>Returns the random element of specified array.</dd>
+
+  <dt>getRandomBoolean</dt>
+  <dd>Returns "true" or "false" randomly.</dd>
+
+  <dt>getRandomInteger</dt>
+  <dd>Returns random integer not less than specified "minimalValue" and more than "maximalValue".</dd>
+
+  <dt>getRandomLatinCharacter</dt>
+  <dd>Returns random latin character.</dd>
+
+  <dt>getRandomObjectPropertyValue</dt>
+  <dd>Returns random object property value.</dd>
+
+  <dt>getRandomSubarray</dt>
+  <dd>Returns the selection of elements of specified array; minimal and maximal elements count could be specified.</dd>
+
+  <dt>getSpecificBooleanValueWithProbability</dt>
+  <dd>Returns specific boolean value with specified probability.</dd>
+
+</dl>
+
 
 #### Constants and enumerations
 
@@ -186,50 +358,91 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * [HTTP_StatusCodes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
 * [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
 
+
 #### Pagination
 
-* [`computeFirstItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md)
-  Computes the first item number for specified pagination page.
-* [`computeLastItemNumberForSpecificPaginationPage`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md)
-  Computes the last item number for specified pagination page.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md">computeFirstItemNumberForSpecificPaginationPage</a></dt>
+  <dd>Computes the first item number for specified pagination page.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md">computeLastItemNumberForSpecificPaginationPage</a></dt>
+  <dd>Computes the last item number for specified pagination page.</dd>
+
+</dl>
+
 
 #### Logging
 
-* [`Logger` facade](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md)
-  Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
-* Pre-made errors
-  * `AlgorithmMismatchError` Recommended to throw in general cases when real behaviour of the program is not
-    corresponding to desired.
-  * `ClassRedundantSubsequentInitializationError` Recommended to throw when the class intended to be a singleton
-    has been attempted to initialize twice.
-  * `ClassRequiredInitializationHasNotBeenExecutedError` Recommended to throw when the class besides the construction requires
-    the initialization, but the initialization has not been executed.
-  * `ConfigFileNotFoundError` Recommended to throw when some utility requires the config file bit it has not been found.
-  * `CrossBrowserIssueError` Recommended to throw when some processing could not be executed because of certain browsers's
-    limitations.
-  * `DataRetrievingFailedError`　Recommended to throw when the data retrieving from any external resource (server, database, etc.)
-    was failed.
-  * `DataSubmittingFailed` Recommended to throw when the data submitting to any external resource (server, database, etc.)
-    was failed.
-  * `DOM_ElementRetrievingFailedError` Recommended to throw when some requiring element retrieving from the DOM has been failed.
-  * `FileReadingFailedError` Recommended to throw when the file reading was not go as expected.
-  * `FileWritingFailed` Recommended to throw when the file writing was not go as expected.
-  * `ImproperUsageError` Recommended to throw when the cass/function has been attempted to use improperly. However, try to name the
-    function/methods such as it will be obvious how to use it and also limit the usage by TypeScript typing.
-  * `IncompatiblePropertiesInObjectTypeParameterError` Recommended to throw when in parameter `exampleParameter` of object
-    type one of properties `exampleParameter.propertyA` and `exampleParameter.propertyB` must be omitted but both
-    has been specified.
-  * `InterProcessInteractionFailedError` Recommended to throw when the interaction between NodeJS processed is not going as
-    expected. Could be actual for the Electron.js where the main process and render process exchanging by data.
-  * `InvalidConfigError` Recommended to throw when config validation was not passed. Append the validation errors messages to
-    `InvalidConfigError`'s message.
-  * `InvalidExternalDataError` Recommended to throw when the data from the external data source does not match with expected.
-    Append the validation errors messages to `InvalidExternalDataError`'s message.
-  * `InvalidParameterValueError` Recommended to throw when the parameter's does not fit to some limitations.
-    Although the TypeScript allows to define and check the parameter's type, this functionality will not be available
-    if the library will be used by JavaScript users. Also, is the parameter has limitations like smallest numerical value
-    or maximal characters count, `InvalidParameterValueError` has been developed for such cases.
-  * `ModuleDynamicLoadingFailedError` Recommended to throw when the module dynamical loading failed.
-  * `UnexpectedEventError` Recommended to throw when the probability of the occurrence of some `else if` branch is very small
-    and impossible for normal operation of the program.
-  * `UnsupportedScenarioError` Recommended to throw when occurred some scenario which the does not supports yet.
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a></dt>
+  <dd>Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.</dd>
+
+  <dt>Pre-made errors</dt>
+  <dd>
+    <dl>
+      <dt>AlgorithmMismatchError</dt>
+      <dd>Intended to be used in general cases when actual behaviour of does not mathcing with desired.</dd>
+      <dt>ClassRedundantSubsequentInitializationError</dt>
+      <dd>Intended to be used when the class developed as singleton has been attempted to initialize twice.</dd>
+      <dt>ClassRequiredInitializationHasNotBeenExecutedError</dt>
+      <dd>Intended to be used when the class besides the construction requires the initialization, but the initializing method has not been called.</dd>
+      <dt>ConfigFileNotFoundError</dt>
+      <dd>Intended to be used when some utility requires the config file, but it has not been found.</dd>
+      <dt>CrossBrowserIssueError</dt>
+      <dd>Recommended to be used when some processing could not be executed because of certain browsers's limitations.</dd>
+      <dt>DataRetrievingFailedError</dt>
+      <dd>Intended to be used when the data retrieving from any external resource (server, database, etc.) failed.</dd>
+      <dt>DataSubmittingFailed</dt>
+      <dd>Intended to be used when the data submitting to any external resource (server, database, etc.) failed.</dd>
+      <dt>DOM_ElementRetrievingFailedError</dt>
+      <dd>
+        Intended be used when some requiring element retrieving from the DOM has been failed.
+        It could be not only on client side but also on server side rendering or HTML code processing.
+      </dd>
+      <dt>FileReadingFailedError</dt>
+      <dd>Intended to be used when the file reading was not go as expected</dd>
+      <dt>ImproperUsageError</dt>
+      <dd>
+        Intended to be used when the cass/function has been attempted to use improperly. 
+        Herewith, try to name the function/methods such as it will be obvious how to use it and also limit the usage by TypeScript typing.
+      </dd>
+      <dt>IncompatiblePropertiesInObjectTypeParameterError</dt>
+      <dd>
+        Intended to be used when in parameter <b>exampleParameter</b> of object type one of properties 
+        <b>exampleParameter.propertyA</b> and <b>exampleParameter.propertyB</b> must be omitted but both has been specified.
+      </dd>
+      <dt>InterProcessInteractionFailedError</dt>
+      <dd>
+        Intended to be used when the interaction between NodeJS processed is not going as expected. 
+        Could be actual for the Electron.js where the main process and render process exchanging by data.
+      </dd>
+      <dt>InvalidConfigError</dt>
+      <dd>
+        Intended to be used when config validation was not passed.
+        Appending of the validation errors messages to <b>InvalidConfigError</b>'s message is strongly recommended.
+      </dd>
+      <dt>InvalidExternalDataError</dt>
+      <dd>
+        Intended to be used when the data from the external data source does not match with expected. 
+        Appending of the validation errors messages to <b>InvalidExternalDataError</b>'s message is strongly recommended.</dd>
+      <dt>InvalidParameterValueError</dt>
+      <dd>
+        Intended to be used when the parameter's does not fit to some limitations.
+        Although the TypeScript allows to define and check the parameter's type, this functionality will not be available
+        if the TypeScript is unavailable. Also, is the parameter has limitations like smallest numerical 
+        value or maximal characters count, <b>InvalidParameterValueError</b> has been developed for such cases.
+      </dd>
+      <dt>ModuleDynamicLoadingFailedError</dt>
+      <dd>Recommended to throw when the module dynamical loading failed. Actual for bundlers like Webpack.</dd>
+      <dt>UnexpectedEventError</dt>
+      <dd>
+        Intended to be used when the probability of the occurrence of some "else if" branch is very small and 
+        impossible for normal operation of the program.
+      </dd>
+      <dt>UnsupportedScenarioError</dt>
+      <dd>Intended to be used when occurred some scenario which is not supported yet.</dd>
+    </dl>
+  </dd>
+</dl>

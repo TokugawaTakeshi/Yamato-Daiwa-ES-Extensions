@@ -1,4 +1,4 @@
-# `@yamato-daiwa/es-extensions`専用日本語極地関連機能・日本語化
+# @yamato-daiwa/es-extensions専用日本語極地関連機能・日本語化
 
 ## 導入
 
