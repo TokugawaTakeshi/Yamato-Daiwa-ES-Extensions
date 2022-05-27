@@ -1,4 +1,4 @@
-extends: ./node_modules/yamato-daiwa_code_quality_management/ECMA_ScriptLogicLinting-YD-JD-UA-2-0--0.js
+extends: ./node_modules/@yamato-daiwa/style_guides/BasicPreset.js
 
 parserOptions:
 

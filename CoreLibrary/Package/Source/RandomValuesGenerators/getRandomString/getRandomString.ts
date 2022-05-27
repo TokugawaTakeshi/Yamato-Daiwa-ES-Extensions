@@ -9,16 +9,16 @@ import getRandomInteger from "../getRandomInteger";
 import getRandomArrayElement from "../getRandomArrayElement";
 
 import Logger from "../../Logging/Logger";
-import InvalidParameterValueError from "../../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
-import IncompatiblePropertiesInObjectTypeParameterError
-  from "../../Logging/Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
+import IncompatiblePropertiesInObjectTypeParameterError from
+    "../../Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
 
 import GetRandomStringOperationLocalization__English from "./GetRandomStringOperationLocalization__English";
 
 
 export class RandomStringsGenerator {
 
-  private static localization: RandomStringsGenerator.Localization = GetRandomStringOperationLocalization__English;
+  public static localization: RandomStringsGenerator.Localization = GetRandomStringOperationLocalization__English;
 
   private static readonly DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO: number = 2;
 
@@ -125,7 +125,7 @@ export class RandomStringsGenerator {
           conflictingPropertyName: "fixedCharactersCount__explicitlySpecified",
           incompatiblePropertiesNames: [ "minimalCharactersCount__explicitlySpecified" ]
         }),
-        title: IncompatiblePropertiesInObjectTypeParameterError.DEFAULT_TITLE,
+        title: IncompatiblePropertiesInObjectTypeParameterError.localization.defaultTitle,
         occurrenceLocation: "getRandomString(parametersObject)"
       });
     }
@@ -139,7 +139,7 @@ export class RandomStringsGenerator {
               minimalCharactersCount__explicitlySpecified
           )
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
       });
     }
@@ -168,7 +168,7 @@ export class RandomStringsGenerator {
           conflictingPropertyName: "fixedCharactersCount",
           incompatiblePropertiesNames: [ "maximalCharactersCount" ]
         }),
-        title: IncompatiblePropertiesInObjectTypeParameterError.DEFAULT_TITLE,
+        title: IncompatiblePropertiesInObjectTypeParameterError.localization.defaultTitle,
         occurrenceLocation: "getRandomString(parametersObject)"
       });
     }
@@ -191,7 +191,7 @@ export class RandomStringsGenerator {
                 parametersObject
               )
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
       });
 
@@ -205,7 +205,7 @@ export class RandomStringsGenerator {
                 minimalCharactersCount: parametersObject.minimalCharactersCount, maximalCharactersCount
               })
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
       });
     }
@@ -253,7 +253,7 @@ export class RandomStringsGenerator {
           parameterName: "parametersObject.allowedCharacters",
           customMessage: RandomStringsGenerator.localization.errors.noAllowedCharactersForRandomGeneration
         }),
-        title: InvalidParameterValueError.DEFAULT_TITLE,
+        title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
       });
     }
