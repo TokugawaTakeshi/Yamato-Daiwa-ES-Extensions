@@ -1,4 +1,4 @@
-# Yamato-Daiwa ES Extensions 〔YDEE〕
+# Yamato Daiwa ES Extensions 〔YDEE〕
 
 [![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)]()
 [![No dependencies](https://img.shields.io/badge/Dependencies-No_dependencies-brightgreen.svg?style=flat)]()

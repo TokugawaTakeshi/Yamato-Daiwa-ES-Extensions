@@ -1,3 +1,7 @@
+import type {
+  ArbitraryObject,
+  ParsedJSON
+} from "@yamato-daiwa/es-extensions";
 import {
   isUndefined,
   isNotUndefined,
@@ -9,14 +13,11 @@ import {
   isNegativeDecimalFraction,
   isDecimalFractionOfAnySign,
   isString,
-  ArbitraryObject,
-  ParsedJSON,
   Logger,
   RawObjectDataProcessor,
   InvalidExternalDataError
 } from "@yamato-daiwa/es-extensions";
-import InvalidConsoleCommandError from "../Logging/Errors/InvalidConsoleCommandError";
-
+import InvalidConsoleCommandError from "../Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
 import JSON5 from "json5";
 
 import ConsoleCommandsParserLocalization__English from "./ConsoleCommandsParserLocalization.english";
@@ -60,7 +61,7 @@ class ConsoleCommandsParser<
           messageSpecificPart: ConsoleCommandsParser.localization.
               generateArgumentsVectorIsNotArrayErrorMessage(argumentsVector)
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
+        title: InvalidConsoleCommandError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
@@ -76,7 +77,7 @@ class ConsoleCommandsParser<
               minimalElementsCount: ConsoleCommandsParser.MINIMAL_ARGUMENTS_IN_VALID_CONSOLE_COMMAND
             })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
+        title: InvalidConsoleCommandError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
@@ -121,7 +122,7 @@ class ConsoleCommandsParser<
           messageSpecificPart: ConsoleCommandsParser.localization.
               generateArgumentsVectorHasNonStringElementsErrorMessage(nonStringArguments)
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
+        title: InvalidConsoleCommandError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
@@ -173,8 +174,8 @@ class ConsoleCommandsParser<
             messageSpecificPart: ConsoleCommandsParser.localization.
                 generateNoDefaultCommandPhraseAvailableErrorMessage(helpReference)
           }),
-          title: InvalidConsoleCommandError.DEFAULT_TITLE,
-          occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
+          title: InvalidConsoleCommandError.localization.defaultTitle,
+          occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
         });
       }
 
@@ -190,8 +191,8 @@ class ConsoleCommandsParser<
             messageSpecificPart: ConsoleCommandsParser.localization.
                 generateNoDefaultCommandPhraseAvailableErrorMessage(helpReference)
           }),
-          title: InvalidConsoleCommandError.DEFAULT_TITLE,
-          occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
+          title: InvalidConsoleCommandError.localization.defaultTitle,
+          occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
         });
       }
 
@@ -210,8 +211,8 @@ class ConsoleCommandsParser<
               commandPhraseLikeArgument: firstConsciouslyInputtedArgument, helpReference
             })
           }),
-          title: InvalidConsoleCommandError.DEFAULT_TITLE,
-          occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
+          title: InvalidConsoleCommandError.localization.defaultTitle,
+          occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
         });
       }
 
@@ -239,8 +240,8 @@ class ConsoleCommandsParser<
               inputtedCommandPhrase: targetCommandPhrase, helpReference
             })
           }),
-          title: InvalidConsoleCommandError.DEFAULT_TITLE,
-          occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
+          title: InvalidConsoleCommandError.localization.defaultTitle,
+          occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
         });
       }
     }
@@ -268,13 +269,13 @@ class ConsoleCommandsParser<
     for (const [ optionKey, optionSpecification ] of Object.entries(this.targetCommandOptionsSpecification)) {
 
       const optionKey__withoutPrepended2NDashes: string = optionKey.startsWith("--") ? optionKey.slice(2) : optionKey;
-      const optionKey__withPrepended2NDashes: string = `--${optionKey__withoutPrepended2NDashes}`;
+      const optionKey__withPrepended2NDashes: string = `--${ optionKey__withoutPrepended2NDashes }`;
       const optionFinalName: string = optionSpecification.newName ?? optionKey__withoutPrepended2NDashes;
 
       let shortcut__withPrependedNDash: string | undefined;
       if (isNotUndefined(optionSpecification.shortcut)) {
         shortcut__withPrependedNDash = optionSpecification.shortcut.startsWith("-") ?
-            optionSpecification.shortcut : `-${optionSpecification.shortcut}`;
+            optionSpecification.shortcut : `-${ optionSpecification.shortcut }`;
       }
 
       const arrayIndexOfTargetOptionKey: number = this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.findIndex(
@@ -303,13 +304,13 @@ class ConsoleCommandsParser<
               messageSpecificPart: ConsoleCommandsParser.localization.generateRequiredOptionKeyIsMissingErrorMessage({
                 commandPhrase: this.targetCommandPhrase,
                 missingOptionKey: optionKey__withPrepended2NDashes,
-                commandHelpReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+                commandHelpReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
                   commandPhrase: this.targetCommandPhrase,
-                  commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
+                  commandOptionsSpecification: this.targetCommandOptionsSpecification
                 })
               })
             }),
-            title: InvalidConsoleCommandError.DEFAULT_TITLE,
+            title: InvalidConsoleCommandError.localization.defaultTitle,
             occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
           });
         }
@@ -323,6 +324,7 @@ class ConsoleCommandsParser<
           this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed[arrayIndexOfTargetOptionKey + 1];
 
       if (isUndefined(targetOptionPotentialValue)) {
+
         /* [ Theory ] Although the option could be optional, the value is expected to be specified because flag has been
         *     specified. */
         Logger.throwErrorAndLog({
@@ -330,12 +332,12 @@ class ConsoleCommandsParser<
             applicationName: this.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.generateNoValueFollowingTheKeyOfNonBooleanOptionErrorMessage({
               targetOptionKey: optionKey__withPrepended2NDashes,
-              commandHelpReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
-                commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
+              commandHelpReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
+                commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification
               })
             })
           }),
-          title: InvalidConsoleCommandError.DEFAULT_TITLE,
+          title: InvalidConsoleCommandError.localization.defaultTitle,
           occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
         });
       }
@@ -402,17 +404,20 @@ class ConsoleCommandsParser<
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.generateUnknownOptionsFoundForSpecificCommandErrorMessage({
             commandPhrase: this.targetCommandPhrase,
-            commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+            commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
               commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification
             })
           })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
+        title: InvalidConsoleCommandError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
       });
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+    * Because of TypeScript concept limitations, we can not guarantee that 'commandLineInterfaceSpecification' is
+    * corresponding to 'TargetCommandsAndOptionsCombinations'. */
     return parsedOptions as TargetCommandsAndOptionsCombinations;
   }
 
@@ -439,13 +444,13 @@ class ConsoleCommandsParser<
           messageSpecificPart: ConsoleCommandsParser.localization.generateOptionValueIsNotAmongAllowedAlternativesErrorMessage({
             targetOptionKey: optionKey__withPrepended2NDashes,
             actualOptionValue: targetOptionRawValue,
-            commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+            commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
               commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
             })
           })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
-        occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
+        title: InvalidConsoleCommandError.localization.defaultTitle,
+        occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
 
@@ -479,13 +484,13 @@ class ConsoleCommandsParser<
           messageSpecificPart: ConsoleCommandsParser.localization.generateUnparsableNumericOptionValueErrorMessage({
             targetOptionKey: optionKey__withPrepended2NDashes,
             actualOptionValue: targetOptionRawValue,
-            commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+            commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
               commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
             })
           })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
-        occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
+        title: InvalidConsoleCommandError.localization.defaultTitle,
+        occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
 
@@ -540,14 +545,14 @@ class ConsoleCommandsParser<
                 targetOptionKey: optionKey__withPrepended2NDashes,
                 expectedNumbersSet: numbersSet,
                 actualOptionValue: targetOptionRawValue,
-                commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+                commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
                   commandPhrase: this.targetCommandPhrase,
                   commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
                 })
             })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
-        occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
+        title: InvalidConsoleCommandError.localization.defaultTitle,
+        occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
 
@@ -561,14 +566,14 @@ class ConsoleCommandsParser<
                 targetOptionKey: optionKey__withPrepended2NDashes,
                 requiredMinimum: minimalValue,
                 actualOptionValue: targetOptionRawValue,
-                commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+                commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
                   commandPhrase: this.targetCommandPhrase,
                   commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
                 })
               })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
-        occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
+        title: InvalidConsoleCommandError.localization.defaultTitle,
+        occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
 
@@ -582,18 +587,18 @@ class ConsoleCommandsParser<
                 targetOptionKey: optionKey__withPrepended2NDashes,
                 allowedMaximum: maximalValue,
                 actualOptionValue: targetOptionRawValue,
-                commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+                commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
                   commandPhrase: this.targetCommandPhrase,
                   commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
                 })
               })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
-        occurrenceLocation: "ConsoleCommandsParser.parse(parametersObject) -> ..."
+        title: InvalidConsoleCommandError.localization.defaultTitle,
+        occurrenceLocation: "ConsoleCommandsParser.parse(argumentsVector, commandLineInterfaceSpecification)"
       });
     }
 
-    
+
     return targetOptionParsedValue;
   }
 
@@ -620,12 +625,12 @@ class ConsoleCommandsParser<
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.generateMalformedJSON5_OptionErrorMessage({
             targetOptionKey: optionKey__withPrepended2NDashes,
-            commandReference: ConsoleCommandsParser.generateSingleCommendHelpReference({
+            commandReference: ConsoleCommandsParser.generateSingleCommandHelpReference({
               commandPhrase: this.targetCommandPhrase, commandOptionsSpecification: this.targetCommandOptionsSpecification ?? {}
             })
           })
         }),
-        title: InvalidConsoleCommandError.DEFAULT_TITLE,
+        title: InvalidConsoleCommandError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
       });
     }
@@ -643,11 +648,15 @@ class ConsoleCommandsParser<
                 formatValidationErrorsList(validationResult.validationErrorsMessages)
           })
         }),
-        title: InvalidExternalDataError.DEFAULT_TITLE,
+        title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: "ConsoleCommandsParser.parse(arrayedConsoleCommand, commandLineInterfaceSpecification)"
       });
     }
 
+
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+    * Currently, 'RawObjectDataProcessor' does not accept the ParsedJSON; until it will not be fixed, the asserting is
+    * required here. */
     return validationResult.processedData as ParsedJSON;
   }
 
@@ -667,7 +676,7 @@ class ConsoleCommandsParser<
       accumulatingValue = "Has default command\n";
 
       for (const [ argumentName, argumentSpecification ] of Object.entries(commandLineInterfaceSpecification.defaultCommand)) {
-        accumulatingValue = `${argumentName}: ${argumentSpecification.type}\n`;
+        accumulatingValue = `${ argumentName }: ${ argumentSpecification.type }\n`;
       }
     }
 
@@ -676,7 +685,7 @@ class ConsoleCommandsParser<
 
       for (const [ commandPhrase, argumentsSpecification ] of Object.entries(commandLineInterfaceSpecification.commandPhrases)) {
 
-        accumulatingValue = `${accumulatingValue}${commandPhrase}:\n`;
+        accumulatingValue = `${ accumulatingValue }${ commandPhrase }:\n`;
 
         if (isUndefined(argumentsSpecification)) {
           continue;
@@ -684,7 +693,7 @@ class ConsoleCommandsParser<
 
 
         for (const [ argumentName, argumentSpecification ] of Object.entries(argumentsSpecification)) {
-          accumulatingValue = `${accumulatingValue}\n  ${argumentName}: ${argumentSpecification.type}`;
+          accumulatingValue = `${ accumulatingValue }\n  ${ argumentName }: ${ argumentSpecification.type }`;
         }
       }
     }
@@ -693,7 +702,7 @@ class ConsoleCommandsParser<
     return accumulatingValue;
   }
 
-  private static generateSingleCommendHelpReference(
+  private static generateSingleCommandHelpReference(
     {
       commandPhrase,
       commandOptionsSpecification
@@ -706,7 +715,7 @@ class ConsoleCommandsParser<
     let accumulatingValue: string = isNotUndefined(commandPhrase) ? commandPhrase : "(Default command)";
 
     for (const [ argumentName, argumentSpecification ] of Object.entries(commandOptionsSpecification)) {
-      accumulatingValue = `${accumulatingValue}:\n ${argumentName}: ${argumentSpecification.type}`;
+      accumulatingValue = `${ accumulatingValue }:\n ${ argumentName }: ${ argumentSpecification.type }`;
     }
 
     return accumulatingValue;

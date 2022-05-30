@@ -1,17 +1,21 @@
-import {
+/* eslint-disable no-console -- This class is wrapping the 'console' allowing to avoid of direct 'console' usage. */
+
+import type {
+  Logger,
   ErrorLog,
   ThrownErrorLog,
   InfoLog,
   SuccessLog,
   WarningLog,
-  Log,
-  Logger,
-  LoggerLocalization__English,
+  Log
+} from "@yamato-daiwa/es-extensions";
+import {
   stringifyAndFormatArbitraryValue,
   isArbitraryObject,
   isNonNegativeInteger,
   insertSubstringIf,
-  isNotUndefined
+  isNotUndefined,
+  LoggerLocalization__English
 } from "@yamato-daiwa/es-extensions";
 
 
@@ -29,18 +33,19 @@ abstract class ConsoleApplicationLogger {
 
     if ("errorInstance" in errorLog) {
 
-      errorLog.errorInstance.message = `${errorLog.title}\n${errorLog.errorInstance.message}` +
-          `\n\n${ConsoleApplicationLogger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
-          `${insertSubstringIf(
-              `\n\n${ConsoleApplicationLogger.localization.wrappableError}:` +
-              `\n${stringifyAndFormatArbitraryValue(errorLog.wrappableError)}`,
-              isNotUndefined(errorLog.wrappableError)
-          )}` +
-          `${insertSubstringIf(
-              `\n\n${ConsoleApplicationLogger.localization.appendedData}:` +
-              `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`,
+      errorLog.errorInstance.message = `${ errorLog.title }\n${ errorLog.errorInstance.message }` +
+          `\n\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
+          `${ insertSubstringIf(
+            `\n\n${ ConsoleApplicationLogger.localization.wrappableError }:` +
+            `\n${ stringifyAndFormatArbitraryValue(errorLog.wrappableError) }`,
+            isNotUndefined(errorLog.wrappableError)
+          ) }` +
+          `${ insertSubstringIf(
+              `\n\n${ ConsoleApplicationLogger.localization.appendedData }:` +
+              `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
               isNotUndefined(errorLog.additionalData)
-          )}` +
+          ) }` +
+
           /* Divider before stack trace */
           "\n";
 
@@ -62,7 +67,7 @@ abstract class ConsoleApplicationLogger {
   public static logError(errorLog: ErrorLog): void {
     console.error(...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
       [
-        ` ${errorLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error} `,
+        ` ${ errorLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error } `,
         {
           bold: true,
           foregroundColor: { red: 255, green: 255, blue: 255 },
@@ -70,74 +75,78 @@ abstract class ConsoleApplicationLogger {
         }
       ],
       [
-        ` ${errorLog.title}\n`,
+        ` ${ errorLog.title }\n`,
         {
           bold: true,
           foregroundColor: { red: 192, green: 57, blue: 43 }
         }
       ],
       [
-        `${errorLog.description}`,
+        `${ errorLog.description }`,
         {
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
       [
-        `\n\n${ConsoleApplicationLogger.localization.errorType}: `,
+        `\n\n${ ConsoleApplicationLogger.localization.errorType }: `,
         {
           bold: true,
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
       [
-        `${errorLog.errorType}`,
+        `${ errorLog.errorType }`,
         {
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
 
       [
-        `\n${ConsoleApplicationLogger.localization.occurrenceLocation}: `,
+        `\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: `,
         {
           bold: true,
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
       [
-        `${errorLog.occurrenceLocation}: `,
+        `${ errorLog.occurrenceLocation }`,
         {
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
-      /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * [ Theory ※ ] The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
        * type can/doest not be "matched" with function's parameter's types.
-       * https://stackoverflow.com/a/67015118/4818123 */
+       * https://stackoverflow.com/a/67015118/4818123
+      * */
       ...("caughtError" in errorLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.caughtError}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.caughtError }:`,
           {
             bold: true,
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
         ],
         [
-          errorLog.caughtError instanceof Error ? `\n${errorLog.caughtError.stack}` :
-          `\n${stringifyAndFormatArbitraryValue(errorLog.caughtError)}`,
+          errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` :
+          `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
           {
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
         ]
       ] : []) as ConsoleApplicationLogger.FormattedOutputData,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in errorLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.appendedData}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
           {
             bold: true,
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
         ],
         [
-          `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`,
+          `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
           {
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
@@ -149,7 +158,7 @@ abstract class ConsoleApplicationLogger {
   public static logErrorLikeMessage(errorLikeLog: Log): void {
     console.error(...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
       [
-        ` ${errorLikeLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error} `,
+        ` ${ errorLikeLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error } `,
         {
           bold: true,
           foregroundColor: { red: 255, green: 255, blue: 255 },
@@ -157,33 +166,31 @@ abstract class ConsoleApplicationLogger {
         }
       ],
       [
-        ` ${errorLikeLog.title}\n`,
+        ` ${ errorLikeLog.title }\n`,
         {
           bold: true,
           foregroundColor: { red: 192, green: 57, blue: 43 }
         }
       ],
       [
-        `${errorLikeLog.description}`,
+        `${ errorLikeLog.description }`,
         {
           foregroundColor: { red: 231, green: 76, blue: 60 }
         }
       ],
 
 
-      /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
-       * type can/doest not be "matched" with function's parameter's types.
-       * https://stackoverflow.com/a/67015118/4818123 */
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in errorLikeLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.appendedData}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
           {
             bold: true,
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
         ],
         [
-          `\n${stringifyAndFormatArbitraryValue(errorLikeLog.additionalData)}`,
+          `\n${ stringifyAndFormatArbitraryValue(errorLikeLog.additionalData) }`,
           {
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
@@ -195,7 +202,7 @@ abstract class ConsoleApplicationLogger {
   public static logWarning(warningLog: WarningLog): void {
     console.warn(...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
       [
-        ` ${warningLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.warning} `,
+        ` ${ warningLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.warning } `,
         {
           bold: true,
           foregroundColor: { red: 255, green: 255, blue: 255 },
@@ -203,43 +210,45 @@ abstract class ConsoleApplicationLogger {
         }
       ],
       [
-        ` ${warningLog.title}\n`,
+        ` ${ warningLog.title }\n`,
         {
           bold: true,
           foregroundColor: { red: 211, green: 84, blue: 0 }
         }
       ],
       [
-        `${warningLog.description}`,
+        `${ warningLog.description }`,
         {
           foregroundColor: { red: 230, green: 126, blue: 34 }
         }
       ],
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("occurrenceLocation" in warningLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.occurrenceLocation}: `,
+          `\n\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: `,
           {
             bold: true,
             foregroundColor: { red: 230, green: 126, blue: 34 }
           }
         ],
         [
-          `${warningLog.occurrenceLocation}`,
+          `${ warningLog.occurrenceLocation }`,
           {
             foregroundColor: { red: 230, green: 126, blue: 34 }
           }
         ]
       ] : []) as ConsoleApplicationLogger.FormattedOutputData,
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in warningLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.appendedData}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
           {
             "font-weight": "bold",
             foregroundColor: { red: 230, green: 126, blue: 34 }
           }
         ],
         [
-          `\n${stringifyAndFormatArbitraryValue(warningLog.additionalData)}`,
+          `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`,
           {
             foregroundColor: { red: 230, green: 126, blue: 34 }
           }
@@ -251,7 +260,7 @@ abstract class ConsoleApplicationLogger {
   public static logSuccess(successLog: SuccessLog): void {
     console.log(...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
       [
-        ` ${successLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.success} `,
+        ` ${ successLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.success } `,
         {
           bold: true,
           foregroundColor: { red: 255, green: 255, blue: 255 },
@@ -259,28 +268,29 @@ abstract class ConsoleApplicationLogger {
         }
       ],
       [
-        ` ${successLog.title}\n`,
+        ` ${ successLog.title }\n`,
         {
           bold: true,
           foregroundColor: { red: 39, green: 174, blue: 96 }
         }
       ],
       [
-        `${successLog.description}`,
+        `${ successLog.description }`,
         {
           foregroundColor: { red: 46, green: 204, blue: 113 }
         }
       ],
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in successLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.appendedData}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
           {
             bold: true,
             foregroundColor: { red: 46, green: 204, blue: 113 }
           }
         ],
         [
-          `\n${stringifyAndFormatArbitraryValue(successLog.additionalData)}`,
+          `\n${ stringifyAndFormatArbitraryValue(successLog.additionalData) }`,
           {
             foregroundColor: { red: 46, green: 204, blue: 113 }
           }
@@ -292,7 +302,7 @@ abstract class ConsoleApplicationLogger {
   public static logInfo(infoLog: InfoLog): void {
     console.log(...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
       [
-        ` ${infoLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.info} `,
+        ` ${ infoLog.customBadgeText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.info } `,
         {
           bold: true,
           foregroundColor: { red: 255, green: 255, blue: 255 },
@@ -300,28 +310,29 @@ abstract class ConsoleApplicationLogger {
         }
       ],
       [
-        ` ${infoLog.title}\n`,
+        ` ${ infoLog.title }\n`,
         {
           foregroundColor: { red: 41, green: 128, blue: 185 },
           bold: true
         }
       ],
       [
-        `${infoLog.description}`,
+        `${ infoLog.description }`,
         {
           foregroundColor: { red: 52, green: 152, blue: 219 }
         }
       ],
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in infoLog ? [
         [
-          `\n\n${ConsoleApplicationLogger.localization.appendedData}:`,
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
           {
             bold: true,
             foregroundColor: { red: 52, green: 152, blue: 219 }
           }
         ],
         [
-          `\n${stringifyAndFormatArbitraryValue(infoLog.additionalData)}`,
+          `\n${ stringifyAndFormatArbitraryValue(infoLog.additionalData) }`,
           {
             foregroundColor: { red: 52, green: 152, blue: 219 }
           }
@@ -331,11 +342,11 @@ abstract class ConsoleApplicationLogger {
   }
 
   public static highlightText(targetString: string): string {
-    return `\x1b[43m${targetString}\x1b[0m`;
+    return `\x1b[43m${ targetString }\x1b[0m`;
   }
 
-  // https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
-  // https://stackoverflow.com/a/33206814/4818123
+  /* https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
+     https://stackoverflow.com/a/33206814/4818123 */
   public static generateConsoleMethodParametersForFormattedOutput(
     formattedOutputData: ConsoleApplicationLogger.FormattedOutputData
   ): Array<string> {
@@ -351,42 +362,42 @@ abstract class ConsoleApplicationLogger {
 
       switch (formatting.foregroundColor) {
         case ConsoleApplicationLogger.FourBitColours.black: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[30m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[30m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.red: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[31m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[31m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.green: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[32m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[32m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.yellow: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[33m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[33m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.blue: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[34m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[34m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.magenta: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[35m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[35m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.cyan: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[36m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[36m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.white: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[37m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[37m`;
           break;
         }
 
         default: {
 
           if (ConsoleApplicationLogger.isRegGreenBlue(formatting.foregroundColor)) {
-            templateWithFormatting = `${templateWithFormatting}${
+            templateWithFormatting = `${ templateWithFormatting }${
               ConsoleApplicationLogger.generateRedGreenBlueForegroundColorControlSequence(formatting.foregroundColor)
             }`;
           }
@@ -396,42 +407,42 @@ abstract class ConsoleApplicationLogger {
 
       switch (formatting.backgroundColor) {
         case ConsoleApplicationLogger.FourBitColours.black: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[40m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[40m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.red: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[41m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[41m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.green: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[42m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[42m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.yellow: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[43m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[43m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.blue: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[44m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[44m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.magenta: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[45m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[45m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.cyan: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[46m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[46m`;
           break;
         }
         case ConsoleApplicationLogger.FourBitColours.white: {
-          templateWithFormatting = `${templateWithFormatting}\x1b[47m`;
+          templateWithFormatting = `${ templateWithFormatting }\x1b[47m`;
           break;
         }
 
         default: {
 
           if (ConsoleApplicationLogger.isRegGreenBlue(formatting.backgroundColor)) {
-            templateWithFormatting = `${templateWithFormatting}${
+            templateWithFormatting = `${ templateWithFormatting }${
               ConsoleApplicationLogger.generateRedGreenBlueBackgroundColorControlSequence(formatting.backgroundColor)
             }`;
           }
@@ -440,51 +451,51 @@ abstract class ConsoleApplicationLogger {
       }
 
       if (formatting.bold === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[1m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[1m`;
       }
 
       if (formatting.underlined === true || formatting.underscore === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[4m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[4m`;
       }
 
       if (formatting.bright === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[1m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[1m`;
       }
 
       if (formatting.dim === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[2m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[2m`;
       }
 
       if (formatting.blink === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[5m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[5m`;
       }
 
       if (formatting.reverse === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[7m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[7m`;
       }
 
       if (formatting.hidden === true) {
-        templateWithFormatting = `${templateWithFormatting}\x1b[8m`;
+        templateWithFormatting = `${ templateWithFormatting }\x1b[8m`;
       }
 
       logsTextings.push(singleFormattedOutputData[0]);
       templatesWithFormattings.push(templateWithFormatting);
     }
 
-    return [ `${templatesWithFormattings.join("%s\x1b[0m")}%s\x1b[0m` ].concat(logsTextings);
+    return [ `${ templatesWithFormattings.join("%s\x1b[0m") }%s\x1b[0m` ].concat(logsTextings);
   }
 
   /* [ Reference ]　https://note.affi-sapo-sv.com/nodejs-console-color-output.php */
   public static generateRedGreenBlueForegroundColorControlSequence(
     colorDefinition: ConsoleApplicationLogger.RedGreenBlue
   ): string {
-    return `\x1b[38;2;${colorDefinition.red};${colorDefinition.green};${colorDefinition.blue}m`;
+    return `\x1b[38;2;${ colorDefinition.red };${ colorDefinition.green };${ colorDefinition.blue }m`;
   }
 
   public static generateRedGreenBlueBackgroundColorControlSequence(
     colorDefinition: ConsoleApplicationLogger.RedGreenBlue
   ): string {
-    return `\x1b[48;2;${colorDefinition.red};${colorDefinition.green};${colorDefinition.blue}m`;
+    return `\x1b[48;2;${ colorDefinition.red };${ colorDefinition.green };${ colorDefinition.blue }m`;
   }
 }
 

@@ -1,11 +1,23 @@
-import {
-  Logger,
-  UnexpectedEventError
-} from "@yamato-daiwa/es-extensions";
+import { Logger, UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 import { ConsoleApplicationLogger } from "../../Source";
 
 
 Logger.setImplementation(ConsoleApplicationLogger);
+
+try {
+  throw new Error("Example error");
+} catch (error: unknown) {
+  Logger.throwErrorAndLog({
+    errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
+    title: UnexpectedEventError.localization.defaultTitle,
+    occurrenceLocation: "className.methodName(parametersObject)",
+    wrappableError: error,
+    additionalData: {
+      foo: null,
+      bar: "bravo"
+    }
+  });
+}
 
 
 try {
@@ -14,7 +26,7 @@ try {
 
   Logger.logError({
     errorType: UnexpectedEventError.NAME,
-    title: UnexpectedEventError.DEFAULT_TITLE,
+    title: UnexpectedEventError.localization.defaultTitle,
     description: "'foo' is 'null'. With correctly working validation it could not be.",
     occurrenceLocation: "className.methodName(parametersObject)",
 
@@ -29,7 +41,7 @@ try {
 
 
 Logger.logErrorLikeMessage({
-  title: UnexpectedEventError.DEFAULT_TITLE,
+  title: UnexpectedEventError.localization.defaultTitle,
   description: "'foo' is 'null'. With correctly working validation it could not be.",
   customBadgeText: "Exception",
   additionalData: {
@@ -38,9 +50,10 @@ Logger.logErrorLikeMessage({
   }
 });
 
+
 Logger.logWarning({
   customBadgeText: "Caution",
-  title: UnexpectedEventError.DEFAULT_TITLE,
+  title: UnexpectedEventError.localization.defaultTitle,
   occurrenceLocation: "className.methodName(parametersObject)",
   description: "'foo' is 'null'. With correctly working validation it could not be.",
   additionalData: {
@@ -48,6 +61,7 @@ Logger.logWarning({
     bar: "bravo"
   }
 });
+
 
 Logger.logSuccess({
   title: "Sign in success",
@@ -59,6 +73,7 @@ Logger.logSuccess({
   }
 });
 
+
 Logger.logInfo({
   customBadgeText: "Output",
   title: "Data logging",
@@ -68,18 +83,3 @@ Logger.logInfo({
     bar: "bravo"
   }
 });
-
-try {
-  throw new Error("Example error");
-} catch (error: unknown) {
-  Logger.throwErrorAndLog({
-    errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
-    title: UnexpectedEventError.DEFAULT_TITLE,
-    occurrenceLocation: "className.methodName(parametersObject)",
-    wrappableError: error,
-    additionalData: {
-      foo: null,
-      bar: "bravo"
-    }
-  });
-}

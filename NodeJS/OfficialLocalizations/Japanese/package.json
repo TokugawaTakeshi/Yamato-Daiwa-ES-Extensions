@@ -1,0 +1,45 @@
+{
+  "name": "@yamato-daiwa/es-extensions-nodejs-localization-japanese",
+  "version": "1.5.0",
+  "description": "Japanese localization for @yamato-daiwa/es-extensions-nodejs package.",
+  "keywords": [
+    "localization"
+  ],
+  "author": {
+    "name": "Takeshi Tokugawa",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git/issues",
+    "email": "tokugawa.takesi@gmail.com"
+  },
+  "main": "./Distributable/cjs/index.js",
+  "module": "./Distributable/esm/index.js",
+  "sideEffects": false,
+  "types": "./Distributable/esm/index.d.ts",
+  "files": [
+    "Distributable"
+  ],
+  "devDependencies": {
+    "@types/mocha": "9.1.1",
+    "@types/node": "16.11.26",
+    "@yamato-daiwa/style_guides": "0.0.2",
+    "mocha": "9.2.2",
+    "rimraf": "3.0.2",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.4"
+  },
+  "dependencies": {
+    "@yamato-daiwa/es-extensions": "1.5.0-alpha.6",
+    "@yamato-daiwa/es-extensions-nodejs": "1.5.0-alpha.3"
+  },
+  "scripts": {
+    "Rebuild distributable": "rimraf Distributable & tsc",
+    "Lint": "eslint Source"
+  }
+}

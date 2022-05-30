@@ -102,7 +102,7 @@ try {
 } catch (error: unknown) {
   Logger.throwErrorAndLog({
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
-    title: UnexpectedEventError.DEFAULT_TITLE,
+    title: UnexpectedEventError.localization.defaultTitle,
     occurrenceLocation: "className.methodName(parametersObject)",
     wrappableError: error,
     customBadgeText: "Exception",
@@ -169,7 +169,7 @@ try {
 
   Logger.logError({
     errorType: UnexpectedEventError.NAME,
-    title: UnexpectedEventError.DEFAULT_TITLE,
+    title: UnexpectedEventError.localization.defaultTitle,
     description: "'foo' is 'null'. With correctly working validation it could not be.",
     occurrenceLocation: "className.methodName(parametersObject)",
 
@@ -200,7 +200,7 @@ Logs the simple `Log` with red highlight. In the case of NodeJS, this log will b
 
 ```typescript
 Logger.logErrorLikeMessage({
-  title: UnexpectedEventError.DEFAULT_TITLE,
+  title: UnexpectedEventError.localization.defaultTitle,
   description: "'foo' is 'null'. With correctly working validation it could not be.",
   customBadgeText: "Exception",
   additionalData: {
@@ -226,7 +226,7 @@ logWarning(warningLog: WarningLog): void
 ```typescript
 Logger.logWarning({
   customBadgeText: "Caution",
-  title: UnexpectedEventError.DEFAULT_TITLE,
+  title: UnexpectedEventError.localization.defaultTitle,
   occurrenceLocation: "className.methodName(parametersObject)",
   description: "'foo' is 'null'. With correctly working validation it could not be.",
   additionalData: {
