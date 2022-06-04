@@ -18,12 +18,14 @@ export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCh
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
+export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringOnlySpecificCharacters";
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
+export { default as removeSpecificCharacter } from "./Strings/removeSpecificCharacter";
 export { default as removeSpecificCharacterInLastPosition } from "./Strings/removeSpecificCharacterInLastPosition";
 export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
 export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
@@ -276,3 +278,5 @@ export { default as UnsupportedScenarioErrorLocalization__English } from
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
 export { default as RawObjectDataProcessorLocalization__English } from
     "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
+export { default as convertUnknownToIntegerIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToIntegerIfPossible";
+export { default as convertUnknownToFloatIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToFloatIfPossible";

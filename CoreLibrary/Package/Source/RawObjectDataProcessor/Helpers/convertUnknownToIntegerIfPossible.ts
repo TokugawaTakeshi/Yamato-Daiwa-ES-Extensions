@@ -1,0 +1,15 @@
+import areStringifiedDigitsOnly from "../../Strings/areStringifiedDigitsOnly";
+import { isString } from "../../index";
+
+
+export default function convertUnknownToIntegerIfPossible(rawValue: unknown): unknown {
+
+  if (!isString(rawValue) || !areStringifiedDigitsOnly(rawValue)) {
+    return rawValue;
+  }
+
+
+  const parsedInteger: number = parseInt(rawValue, 10);
+
+  return isNaN(parsedInteger) ? rawValue : parsedInteger;
+}
