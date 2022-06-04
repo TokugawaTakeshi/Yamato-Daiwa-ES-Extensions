@@ -1,20 +1,21 @@
-## New functionality
-### Functions
-#### Arrays
-##### Replacing of elements
+## Core package
+### New functionality
+#### Functions
+##### Arrays
+###### Replacing of elements
 
 * [📖 **replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md)
   Creates the copy of target array and replaces the elements by specified indexes.
 * [📖 **replaceArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md)
   Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated property of named parameters object.
 
-##### Adding of elements
+###### Adding of elements
 
 * [📖 **addElementsToArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md)
   Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.
 
 
-##### Removing of elements
+###### Removing of elements
 
 * [📖 **removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md)
   Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
@@ -22,16 +23,16 @@
   Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
 
 
-#### Errors
+##### Errors
 
 All **localization** static fields of each pre-made error are public now.
 
 
-### Type guards
+#### Type guards
 
 * **isEitherUndefinedOrNull**
 
-## Breaking changes
+### Breaking changes
 
 * The function **getArrayElementMatchingWithPredicateIfSuchElementExactlyOne** has been renamed to 
   **getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne**
@@ -60,3 +61,16 @@ All **localization** static fields of each pre-made error are public now.
   * Reason: the default title could be retrieved as `ErrorClass.localization.defaultTitle` now.
   * Migration: replace `ErrorClass.DEFAULT_TITLE` to `ErrorClass.localization.defaultTitle`.
 * Fixed typo in property **numerationFrom** of object-type parameter of **getMonthNameByNumber**.
+
+
+## Node.js package
+### New functionality
+
+* [**ConsoleApplicationLogger**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md)
+  Provides Node.js environment compatible formatting for the **Logger** class.
+
+* [**ConsoleCommandsParser**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/NodeJS/Package/Documentation/ConsoleCommandsParser/ConsoleCommandsParser.md)
+  Provides parsing and validation of the console commands.
+
+* **InvalidConsoleCommandError** Intended to be thrown the inputted console command does not satisfy to valid schema.
+* **isErrnoException** Type guard which checks is value compatible with **NodeJS.ErrnoException** interface.

@@ -9,6 +9,7 @@
     "CoreLibrary/Package",
     "CoreLibrary/OfficialLocalizations/*",
     "BrowserJS/Package",
-    "NodeJS/Package"
+    "NodeJS/Package",
+    "NodeJS/OfficialLocalizations/*"
   ]
 }

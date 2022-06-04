@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+
+    "removeComments": true,
+
+    "outDir": "Distributable/",
+    "declaration": true
+  },
+
+  "include": [ "Source/**/*" ]
+}
