@@ -187,7 +187,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Required keys alternatives are missing",
-      specificMessagePart: "One of below keys must present in this associative array-type value, but actually none of theme " +
+      specificMessagePart: "One of below keys must present in this associative array-type value, but actually none of them " +
           `presents.\n${stringifyAndFormatArbitraryValue(requiredKeysAlternatives)}`
     };
   },
@@ -242,8 +242,6 @@ const RawObjectDataProcessorLocalization__English: Localization = {
         return "associative array of uniform type values";
 
       case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "multiple alternatives allowed";
-
-      default: return "UNKNOWN";
     }
   },
 
@@ -268,7 +266,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Expected and actual numbers set mismatch",
-      specificMessagePart: "Contrary to expectations, this numeric value is in not member of " + 
+      specificMessagePart: "Contrary to expectations, this numeric value is in not member of " +
           `'${this.numbersSet(expectedNumberSet)}'`
     };
   },
@@ -303,7 +301,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Minimal characters count fall short",
-      specificMessagePart: `This string value has ${realCharactersCount} characters while at least ` + 
+      specificMessagePart: `This string value has ${realCharactersCount} characters while at least ` +
           `${minimalCharactersCount} required.`
     };
   },
@@ -340,7 +338,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Disallowed boolean variant",
-      specificMessagePart: `This boolean value is '${!disallowedVariant}' while only '${disallowedVariant}' allowed.`
+      specificMessagePart: `This boolean value is '${disallowedVariant}' while only '${!disallowedVariant}' allowed.`
     };
   },
 
