@@ -12,7 +12,7 @@ import createHTML_CollectionFromHTML_Code from "./createHTML_CollectionFromHTML_
 export default function createDOM_ElementFromHTML_Code(HTML_Code: string): Element;
 
 export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extends Element>(
-  compoundParameter: {
+  namedParameters: {
     HTML_Code: string;
     rootDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }
@@ -20,17 +20,17 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
 
 
 export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extends Element>(
-  HTML_CodeOrCompoundParameter: string | { HTML_Code: string; rootDOM_ElementSubtype?: new () => DOM_ElementSubtype; }
+  HTML_CodeOrNamedParameters: string | { HTML_Code: string; rootDOM_ElementSubtype?: new () => DOM_ElementSubtype; }
 ): Element | DOM_ElementSubtype {
 
   let HTML_Code: string;
   let rootDOM_ElementSubtype: (new () => DOM_ElementSubtype) | undefined;
 
-  if (isString(HTML_CodeOrCompoundParameter)) {
-    HTML_Code = HTML_CodeOrCompoundParameter;
+  if (isString(HTML_CodeOrNamedParameters)) {
+    HTML_Code = HTML_CodeOrNamedParameters;
   } else {
-    HTML_Code = HTML_CodeOrCompoundParameter.HTML_Code;
-    rootDOM_ElementSubtype = HTML_CodeOrCompoundParameter.rootDOM_ElementSubtype;
+    HTML_Code = HTML_CodeOrNamedParameters.HTML_Code;
+    rootDOM_ElementSubtype = HTML_CodeOrNamedParameters.rootDOM_ElementSubtype;
   }
 
 
@@ -40,10 +40,10 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         customMessage: "Unable to create the single DOM element because below HTML code does not include the root element " +
-            `which must be first and only. \n${HTML_Code}`
+            `which must be first and only. \n${ HTML_Code }`
       }),
-      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrCompoundParameter)",
-      title: ImproperUsageError.DEFAULT_TITLE
+      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrNamedParameters)",
+      title: ImproperUsageError.localization.defaultTitle
     });
   }
 
@@ -52,10 +52,10 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
     Logger.throwErrorAndLog({
       errorInstance: new ImproperUsageError(
         "Unable to create the single DOM element because below HTML code has multiple root elements. If you want to support " +
-        `multiple root elements scenario, use 'createHTML_CollectionFromHTML_Code' function instead.\n${HTML_Code}`
+        `multiple root elements scenario, use 'createHTML_CollectionFromHTML_Code' function instead.\n${ HTML_Code }`
       ),
-      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrCompoundParameter)",
-      title: ImproperUsageError.DEFAULT_TITLE
+      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrNamedParameters)",
+      title: ImproperUsageError.localization.defaultTitle
     });
   }
 
@@ -69,9 +69,9 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
 
   if (!(rootDOM_Element instanceof rootDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
-      errorInstance: new UnexpectedEventError(`The created DOM element is not instance of '${rootDOM_ElementSubtype.name}'.`),
-      title: UnexpectedEventError.DEFAULT_TITLE,
-      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrCompoundParameter)"
+      errorInstance: new UnexpectedEventError(`The created DOM element is not instance of '${ rootDOM_ElementSubtype.name }'.`),
+      title: UnexpectedEventError.localization.defaultTitle,
+      occurrenceLocation: "createDOM_ElementFromHTML_Code(HTML_CodeOrNamedParameters)"
     });
   }
 

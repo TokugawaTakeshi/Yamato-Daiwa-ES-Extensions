@@ -22,7 +22,9 @@ delegateClickEventHandling<ClickTargetElement extends Element>(
 ```
 
 Provides the delegating of click event functionality, the optimization measure 
-(see more [event delegation pattern](https://javascript.info/event-delegation)). 
+(see more about [event delegation pattern](https://javascript.info/event-delegation)). 
+
+![](delegateClickEventHandling-LiveTemplateDemo.gif)
 
 
 ## Usage
@@ -58,23 +60,26 @@ delegateClickEventHandling<HTMLButtonElement>({
 
 ## Errors
 
-### Thrown
-#### DOM_ElementRetrievingFailedError
+This function does not throw any errors, just make the log and prevents the handler execution if something going wrong.
 
-Will be thrown if there are no element corresponding to selector specified in **delegatingContainerOrIt_sSelector**
+### DOM_ElementRetrievingFailedError
+
+Will be logged if there are no element corresponding to selector specified in **delegatingContainerOrIt_sSelector**
 property of compound parameter.
 
 
-### Logging only
-#### UnexpectedEventError
+### UnexpectedEventError
 
-Will be logged if element corresponding to **eventTargetSelector** is not instance of specified in
-**eventTargetElementSubtype** class. The handler will not be executed for preventing of other errors.
+Will be logged if:
 
-Also, with an extremely low probability, it could be the casting 
-(of [**Event** interface](https://developer.mozilla.org/en-US/docs/Web/API/Event)
-to [**MouseEvent**](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)) error - if it will happen,
-it is required to investigate it so please consider the opening the issue with reproducing example.
+* Target event is no the mouse event. Currently, it is unclear for us how this error could occur, but for the valid
+  TypeScript we must check is `event` in ` delegatingContainer.addEventListener("click", (event: Event): void => {})`
+  the instance of `MouseEvent` and if no - terminate the function execution.
+* `event.target` is not the instance of [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement).
+   Actually, except `EventTarget` it could be [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document),
+   [Window](https://developer.mozilla.org/en-US/docs/Web/API/Window) and ever something element, but currently it is
+   unclear for us which other targets could be in this click event delegating case.
+* Event target is not instance of specified `eventTargetElementSubtype`.
 
 
 ## Comparison with native implementation
@@ -94,4 +99,4 @@ document.addEventListener(eventName, function(e) {
 }, false);
 ```
 
-The **yamato-daiwa/es-extensions** implementation is improved above one.
+The **yamato-daiwa/es-extensions** implementation is deeply improved above one.

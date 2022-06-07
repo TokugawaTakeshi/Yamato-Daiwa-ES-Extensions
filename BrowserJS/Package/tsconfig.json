@@ -17,5 +17,10 @@
     "declaration": true
   },
 
-  "include": [ "Source/**/*" ]
+  "include": [ "Source/**/*" ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

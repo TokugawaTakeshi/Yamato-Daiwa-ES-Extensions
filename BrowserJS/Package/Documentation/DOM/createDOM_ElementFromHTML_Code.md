@@ -1,10 +1,13 @@
 # createDOM_ElementFromHTML_Code
 
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-cdefhc-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
+
 ```
 createDOM_ElementFromHTML_Code(HTML_Code: string): Element;
 
 createDOM_ElementFromHTML_Code<DOM_ElementSubtype extends Element>(
-  compoundParameter: {
+  namedParameters: {
     HTML_Code: string;
     rootDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }
@@ -15,6 +18,8 @@ Creates the DOM element ([Element](https://developer.mozilla.org/en-US/docs/Web/
 HTML code, herewith is must be exactly one root element. If you have more than one root element or not sure that it will
 only one single root element, use [createHTML_CollectionFromHTML_Code](createHTML_CollectionFromHTML_Code.md)
 function instead.
+
+![](createDOM_ElementFromHTML_Code-LiveTemplateDemo.gif)
 
 
 ## Usage
@@ -35,6 +40,7 @@ const newDivElement: HTMLDivElement = createDOM_ElementFromHTML_Code({
   rootDOM_ElementSubtype: HTMLDivElement
 })
 ```
+
 
 ## Errors
 
@@ -70,6 +76,7 @@ createDOM_ElementFromHTML_Code({
   rootDOM_ElementSubtype: HTMLInputElement
 });
 ```
+
 
 ## Comparison with native methods
 

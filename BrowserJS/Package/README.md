@@ -19,24 +19,31 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 
 ## Documentation
-#### Functionality reference
 
 ### DOM manipulation
 
-* [**createDOM_ElementFromHTML_Code**](Documentation/DOM/createDOM_ElementFromHTML_Code.md) Creates the DOM element 
-  ([Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)) or it's inheritor from HTML code, herewith is must  
-  be exactly one root element.
-* [**createHTML_CollectionFromHTML_Code**](Documentation/DOM/createHTML_CollectionFromHTML_Code.md) Creates the 
-  [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) from HTML code passed as parameter.
+<dl>
 
-#### Events handling
+  <dt><a href="Documentation/DOM/createDOM_ElementFromHTML_Code.md">createDOM_ElementFromHTML_Code</a></dt>
+  <dd>Creates the DOM element (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a>) or it's inheritor from HTML code, herewith is must be exactly one root element.</dd>
 
-* [**delegateClickEventHandling**](Documentation/DOM/delegateClickEventHandling.md) Create just one click event listener
-  while allowing to handle the click on arbitrary large number of elements what is the optimization measures.
+  <dt><a href="Documentation/DOM/createHTML_CollectionFromHTML_Code.md">createHTML_CollectionFromHTML_Code</a></dt>
+  <dd>Creates the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> from HTML code passed as parameter.</dd>
+
+</dl>
+  
+
+### Events handling
+
+<dl>
+  <dt><a href="Documentation/DOM/delegateClickEventHandling.md">delegateClickEventHandling</a></dt>
+  <dd>Create just one click event listener while allowing to handle the click on arbitrary large number of elements what is the optimization measures.</dd>
+</dl>
 
 
 ### Logging
 
-* [📖 `BasicFrontEndLogger`](Documentation/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md)
-  The implementation of `ILogger` interface for the `Logger` facade which could be used as the base of the custom implementation
-  for the frontend side of the websites / web application.
+<dl>
+  <dt><a href="Documentation/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md">BasicFrontEndLogger</a></dt>
+  <dd>The implementation of ILogger interface for the <b>Logger</b> facade which could be used as the base of the custom implementation for the frontend side of the websites / web application.</dd>
+</dl>

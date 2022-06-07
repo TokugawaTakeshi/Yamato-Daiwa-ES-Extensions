@@ -3,12 +3,13 @@ import {
   isNotNull,
   isUndefined,
   Logger,
-  UnexpectedEventError, DOM_ElementRetrievingFailedError
+  UnexpectedEventError,
+  DOM_ElementRetrievingFailedError
 } from "@yamato-daiwa/es-extensions";
 
 
 export default function delegateClickEventHandling(
-  compoundParameter: {
+  namedParameters: {
     eventTargetSelector: string;
     delegatingContainerOrIt_sSelector: Element | Document | string;
     handler: (clickedElement: Element, event: MouseEvent) => unknown;
@@ -16,7 +17,7 @@ export default function delegateClickEventHandling(
 ): void;
 
 export default function delegateClickEventHandling<ClickTargetElement extends Element>(
-  compoundParameter: {
+  namedParameters: {
     eventTargetSelector: string;
     delegatingContainerOrIt_sSelector: Element | Document | string;
     eventTargetElementSubtype: new () => ClickTargetElement;
@@ -48,13 +49,16 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
     const potentialDelegatingContainer: Element | null = document.querySelector(delegatingContainerOrIt_sSelector);
 
     if (isNull(potentialDelegatingContainer)) {
-      Logger.throwErrorAndLog({
-        errorInstance: new DOM_ElementRetrievingFailedError({
+
+      Logger.logError({
+        errorType: DOM_ElementRetrievingFailedError.NAME,
+        title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
+        description: DOM_ElementRetrievingFailedError.localization.generateDescription({
           selector: delegatingContainerOrIt_sSelector
         }),
-        title: UnexpectedEventError.DEFAULT_TITLE,
-        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
       });
+      return;
     }
 
 
@@ -67,18 +71,32 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
     if (!(event instanceof MouseEvent)) {
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
-        title: UnexpectedEventError.DEFAULT_TITLE,
-        description: "We are sorry, but it is a bug. The event is not instance of 'MouseEvent'. We need to investigate it. " +
+        title: UnexpectedEventError.localization.defaultTitle,
+        description: "We are sorry, but it is a bug. The event is not an instance of 'MouseEvent'. We need to investigate it. " +
             "Please consider the opening issue in https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append " +
-            "the reproducting example.",
-        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+            "the reproducing example.",
+        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
+      });
+      return;
+    }
+
+
+    /* [ Theory ] The "event.target" has type "EventTarget" while ".parentElement" property has type "HTMLElement"  */
+    if (!(event.target instanceof HTMLElement)) {
+      Logger.logError({
+        errorType: UnexpectedEventError.NAME,
+        title: UnexpectedEventError.localization.defaultTitle,
+        description: "We are sorry, but it is a bug. The event target is not an instance of 'HTMLElement'. " +
+            "We need to investigate it. Please consider the opening issue in " +
+            "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append the reproducing example.",
+        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
       });
       return;
     }
 
 
     for (
-      let parentElement: Element | null = event.target as Element;
+      let parentElement: HTMLElement | null = event.target;
       isNotNull(parentElement) && parentElement !== event.currentTarget;
       parentElement = parentElement.parentElement
     ) {
@@ -94,9 +112,9 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
         if (!(parentElement instanceof eventTargetElementSubtype)) {
           Logger.logError({
             errorType: UnexpectedEventError.NAME,
-            title: UnexpectedEventError.DEFAULT_TITLE,
-            description: `Contrary to expectations, the event target is not instance of '${eventTargetElementSubtype.name}'.`,
-            occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+            title: UnexpectedEventError.localization.defaultTitle,
+            description: `Contrary to expectations, the event target is not instance of '${ eventTargetElementSubtype.name }'.`,
+            occurrenceLocation: "delegateClickEventHandling(namedParameters)"
           });
           return;
         }

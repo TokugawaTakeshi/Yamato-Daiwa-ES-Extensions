@@ -39,7 +39,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   if (targetElementSearchRequestMatch.length === 0) {
     Logger.throwErrorAndLog({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
-      title: UnexpectedEventError.DEFAULT_TITLE,
+      title: UnexpectedEventError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
@@ -48,10 +48,10 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   if (targetElementSearchRequestMatch.length > 1) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        `Contrary to expectations, ${targetElementSearchRequestMatch.length} elements has been found for the selector ` +
-        `'${selector}'.`
+        `Contrary to expectations, ${ targetElementSearchRequestMatch.length } elements has been found for the selector ` +
+        `'${ selector }'.`
       ),
-      title: UnexpectedEventError.DEFAULT_TITLE,
+      title: UnexpectedEventError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
@@ -67,9 +67,9 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   if (!(targetElement instanceof targetDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        `The subtype of picked element does match with expected subtype '${targetDOM_ElementSubtype.name}'.`
+        `The subtype of picked element does match with expected subtype '${ targetDOM_ElementSubtype.name }'.`
       ),
-      title: UnexpectedEventError.DEFAULT_TITLE,
+      title: UnexpectedEventError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
