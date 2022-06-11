@@ -1,5 +1,11 @@
-extends: ./node_modules/yamato-daiwa_code_quality_management/ECMA_ScriptLogicLinting-YD-JD-UA-2-0--0.js
+extends: ./node_modules/@yamato-daiwa/style_guides/BasicPreset.js
 
 parserOptions:
 
   project: "./tsconfig.test.json"
+
+
+rules:
+
+  # The Node.js version limitations is not applicable to this package for BrowserJS
+  node/no-unsupported-features/es-syntax: off

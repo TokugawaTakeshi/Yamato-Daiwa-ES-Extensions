@@ -1,5 +1,5 @@
 /* [ ESLint muting rationale ]
-* There are too much numbers refers to month or day of week number in this class. */
+* There are too many numbers refers to month or day of week number in this class. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import DaysOfWeek from "../../ConstantsAndEnumerations/DaysOfWeek";
@@ -10,7 +10,7 @@ import isString from "../../TypeGuards/Strings/isString";
 import getMonthNameByNumber from "../getMonthNameByNumber";
 
 import Logger from "../../Logging/Logger";
-import InvalidParameterValueError from "../../Logging/Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 import TimePointLocalization__English from "./TimePointLocalization__English";
 
@@ -69,7 +69,7 @@ class TimePoint {
           errorInstance: new InvalidParameterValueError({
             customMessage: TimePoint.localization.errors.invalidRawDateTime
           }),
-          title: InvalidParameterValueError.DEFAULT_TITLE,
+          title: InvalidParameterValueError.localization.defaultTitle,
           occurrenceLocation: "TimePoint.constructor(parametersObject)"
         });
       }
@@ -85,7 +85,7 @@ class TimePoint {
     this.monthNumber__numerationFrom1 = this.monthNumber__numerationFrom0 + 1;
     this.monthNumber__numerationFrom1__2Digits = this.monthNumber__numerationFrom1.toString().padStart(2, "0");
 
-    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationForm: 1 });
+    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationFrom: 1 });
 
     this.dayOfMonth = normalizedDateTime.getDate();
     this.dayOfMonth__2Digits = this.dayOfMonth.toString().padStart(2, "0");

@@ -4,6 +4,7 @@
     "target": "ES2018",
     "module": "ES2020",
     "moduleResolution": "Node",
+    "esModuleInterop": true,
 
     "strict": true,
     "noUnusedLocals": true,
@@ -16,5 +17,10 @@
     "declaration": true
   },
 
-  "include": [ "Source/**/*" ]
+  "include": [ "Source/**/*" ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

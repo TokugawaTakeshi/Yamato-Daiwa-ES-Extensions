@@ -1,7 +1,7 @@
-import { Logger } from "@yamato-daiwa/es-extensions";
+import type { Logger } from "@yamato-daiwa/es-extensions";
 
 
-const LoggerLocalization__Japanese: Logger.Localization = {
+const LoggerLocalization__Russian: Logger.Localization = {
 
   badgesDefaultTitles: {
     error: "Ошибка",
@@ -18,4 +18,4 @@ const LoggerLocalization__Japanese: Logger.Localization = {
 };
 
 
-export default LoggerLocalization__Japanese;
+export default LoggerLocalization__Russian;

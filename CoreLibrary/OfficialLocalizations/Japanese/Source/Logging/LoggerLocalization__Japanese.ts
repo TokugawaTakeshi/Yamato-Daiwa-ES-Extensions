@@ -1,4 +1,4 @@
-import { Logger } from "@yamato-daiwa/es-extensions";
+import type { Logger } from "@yamato-daiwa/es-extensions";
 
 
 const LoggerLocalization__Japanese: Logger.Localization = {

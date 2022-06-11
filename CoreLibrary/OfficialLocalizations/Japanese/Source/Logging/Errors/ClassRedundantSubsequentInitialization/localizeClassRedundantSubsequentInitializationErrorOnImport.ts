@@ -1,3 +1,0 @@
-import localizeClassRedundantSubsequentInitializationError from "./localizeClassRedundantSubsequentInitializationError";
-
-localizeClassRedundantSubsequentInitializationError()

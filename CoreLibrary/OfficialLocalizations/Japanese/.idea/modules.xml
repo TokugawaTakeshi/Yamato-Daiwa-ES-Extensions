@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Yamato-Daiwa ES Extensions - Japanese Localization.iml" filepath="$PROJECT_DIR$/.idea/Yamato-Daiwa ES Extensions - Japanese Localization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Main.iml" filepath="$PROJECT_DIR$/.idea/Main.iml" />
     </modules>
   </component>
 </project>
