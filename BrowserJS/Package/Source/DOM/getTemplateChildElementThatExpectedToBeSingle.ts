@@ -9,17 +9,17 @@ export default function getTemplateChildElementThatExpectedToBeSingle(templateEl
     Logger.throwErrorAndLog({
       errorInstance: new ImproperUsageError("Target template element is empty."),
       occurrenceLocation: "getTemplateChildElementThatExpectedToBeSingle(parametersObject)",
-      title: ImproperUsageError.DEFAULT_TITLE
+      title: ImproperUsageError.localization.defaultTitle
     });
   }
 
   if (childrenNodes.length > 1) {
     Logger.throwErrorAndLog({
       errorInstance: new ImproperUsageError(
-        `Can not return single template's child element because it has multiple children:\n${templateElement.outerHTML}`
+        `Can not return single template's child element because it has multiple children:\n${ templateElement.outerHTML }`
       ),
       occurrenceLocation: "getTemplateChildElementThatExpectedToBeSingle(parametersObject)",
-      title: ImproperUsageError.DEFAULT_TITLE
+      title: ImproperUsageError.localization.defaultTitle
     });
   }
 
