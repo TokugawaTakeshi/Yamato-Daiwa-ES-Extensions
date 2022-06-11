@@ -278,5 +278,6 @@ export { default as UnsupportedScenarioErrorLocalization__English } from
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
 export { default as RawObjectDataProcessorLocalization__English } from
     "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
+export { default as convertUnknownToNumberIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToNumberIfPossible";
 export { default as convertUnknownToIntegerIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToIntegerIfPossible";
 export { default as convertUnknownToFloatIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToFloatIfPossible";
