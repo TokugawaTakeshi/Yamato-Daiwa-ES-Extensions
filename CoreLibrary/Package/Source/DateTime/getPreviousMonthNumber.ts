@@ -5,17 +5,17 @@ import getMonthNumberByName from "./getMonthNumberByName";
 
 
 export default function getPreviousMonthNumber(
-  namedParameters: {
-    referenceYear: number;
-  } & (
-    (
-      { referenceMonthNumber__numerationFrom0: number; } |
-      { referenceMonthNumber__numerationFrom1: number; }
-    ) |
-    { referenceMonthName: MonthsNames; }
-  ) & {
-    firstMonthNumberInRelationToReturnableValue: 0 | 1;
-  }
+  namedParameters:
+    Readonly<
+      (
+        (
+          { referenceMonthNumber__numerationFrom0: number; } |
+          { referenceMonthNumber__numerationFrom1: number; }
+        ) |
+        { referenceMonthName: MonthsNames; }
+      ) &
+      { firstMonthNumberInRelationToReturnableValue: 0 | 1; }
+    >
 ): number {
 
   let referenceMonthNumber__numerationFrom1: number;

@@ -1,7 +1,7 @@
 import removeArrayElementsByIndexes from "../Arrays/removeArrayElementsByIndexes";
 
 
-export default function removeSpecificCharacter(
+export default function removeSpecificCharacterFromCertainPosition(
   namedParameters:
     {
       targetString: string;

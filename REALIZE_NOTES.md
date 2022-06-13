@@ -23,6 +23,37 @@
   Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.
 
 
+##### Date and time
+
+<dl>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getNextMonthNumber.md">getNextMonthNumber</a></dt>
+  <dd>Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+  
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md">getPreviousMonthNumber</a></dt>
+  <dd>Returns previous month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+  
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfNextMonth.md">getYearOfNextMonth</a></dt>
+  <dd>Returns the year of next month in relation to specified year and month.</dd>
+  
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfPreviousMonth.md">getYearOfPreviousMonth</a></dt>
+  <dd>Returns the year of previous month in relation to specified year and month.</dd>
+</dl>
+
+##### Pre-validation modifiers for RawObjectDataProcessor
+
+* **convertPotentialStringToFloatIfPossible** - Tries to convert the string to float; returns the number in success case otherwise the initial value.
+* **convertPotentialStringToIntegerIfPossible** - Tries to convert the string to integer; returns the number in success case otherwise the initial value.
+* **convertPotentialStringToNumberIfPossible** - Tries to convert the string to integer or float (depending on decimal part separator presence); returns the number in success case otherwise the initial value.
+
+
+#### Constants and enumerations
+
+* **HOURS_PER_STELLAR_DAY** - Has value **24**; intended to be used to avoid the magic numbers in computings.
+* **MINUTES_PER_HOUR** - Has value **60**; intended to be used to avoid the magic numbers in computings.
+* **SECONDS_PER_MINUTE** - Has value **60**; intended to be used to avoid the magic numbers in computings.
+* **MONTHS_PER_YEAR** - Has value **12**; intended to be used to avoid the magic numbers in computings.
+
+
 ##### Errors
 
 All **localization** static fields of each pre-made error are public now.

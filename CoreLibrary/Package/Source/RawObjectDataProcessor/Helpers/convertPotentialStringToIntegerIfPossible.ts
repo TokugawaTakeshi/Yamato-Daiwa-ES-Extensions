@@ -2,7 +2,7 @@ import areStringifiedDigitsOnly from "../../Strings/areStringifiedDigitsOnly";
 import { isString } from "../../index";
 
 
-export default function convertUnknownToIntegerIfPossible(rawValue: unknown): unknown {
+export default function convertPotentialStringToIntegerIfPossible(rawValue: unknown): unknown {
 
   if (!isString(rawValue) || !areStringifiedDigitsOnly(rawValue)) {
     return rawValue;

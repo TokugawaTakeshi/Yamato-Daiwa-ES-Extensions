@@ -88,7 +88,6 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
       workpiece[targetElementIndex] = newValue;
     }
 
-
     return {
       updatedArray: workpiece,
       indexesOfReplacedElements: indexedOfElementsWhichHasBeenAlreadyReplaced

@@ -25,8 +25,7 @@ export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpec
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
-export { default as removeSpecificCharacter } from "./Strings/removeSpecificCharacter";
-export { default as removeSpecificCharacterInLastPosition } from "./Strings/removeSpecificCharacterInLastPosition";
+export { default as removeSpecificCharacterFromCertainPosition } from "./Strings/removeSpecificCharacterFromCertainPosition";
 export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
 export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
 export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings/replaceDoubleBackslashesWithForwardSlashes";
@@ -174,7 +173,7 @@ export { default as removeRandomArrayElement } from "./RandomValuesGenerators/re
 
 
 /* === Constants and enumerations =================================================================================== */
-export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DaysOfWeek";
+export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
 export { default as HTTP_StatusCodes } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
 export { default as MonthsNames } from "./ConstantsAndEnumerations/MonthsNames";
@@ -278,6 +277,9 @@ export { default as UnsupportedScenarioErrorLocalization__English } from
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
 export { default as RawObjectDataProcessorLocalization__English } from
     "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
-export { default as convertUnknownToNumberIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToNumberIfPossible";
-export { default as convertUnknownToIntegerIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToIntegerIfPossible";
-export { default as convertUnknownToFloatIfPossible } from "./RawObjectDataProcessor/Helpers/convertUnknownToFloatIfPossible";
+export { default as convertPotentialStringToNumberIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToNumberIfPossible";
+export { default as convertPotentialStringToIntegerIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToIntegerIfPossible";
+export { default as convertPotentialStringToFloatIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";

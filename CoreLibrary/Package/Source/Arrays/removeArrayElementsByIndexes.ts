@@ -100,6 +100,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
         continue;
       }
 
+
       removedArrayElements.push(
         workpiece.splice(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly, 1)[0]
       );

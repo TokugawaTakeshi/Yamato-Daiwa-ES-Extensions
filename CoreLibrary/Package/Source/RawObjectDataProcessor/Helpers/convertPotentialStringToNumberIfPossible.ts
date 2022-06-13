@@ -2,7 +2,7 @@ import { isString } from "../../index";
 import hasStringOnlySpecificCharacters from "../../Strings/hasStringOnlySpecificCharacters";
 
 
-export default function convertUnknownToNumberIfPossible(rawValue: unknown): unknown {
+export default function convertPotentialStringToNumberIfPossible(rawValue: unknown): unknown {
 
   if (!isString(rawValue) || !hasStringOnlySpecificCharacters(rawValue, { digits: true, other: "." })) {
     return rawValue;

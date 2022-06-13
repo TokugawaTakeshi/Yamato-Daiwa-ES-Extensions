@@ -53,12 +53,10 @@ class CalendarBuilder {
     });
 
     this.previousMonthNumber__numerationFrom0 = getPreviousMonthNumber({
-      referenceYear: this.targetYear,
       referenceMonthNumber__numerationFrom0: this.targetMonthNumber__numerationFrom0,
       firstMonthNumberInRelationToReturnableValue: 0
     });
     this.nextMonthNumber__numerationFrom0 = getNextMonthNumber({
-      referenceYear: this.targetYear,
       referenceMonthNumber__numerationFrom0: this.targetMonthNumber__numerationFrom0,
       firstMonthNumberInRelationToReturnableValue: 0
     });
@@ -74,7 +72,6 @@ class CalendarBuilder {
     this.daysInPreviousMonth = getDaysCountInSpecificMonth({
       year: this.yearOfPreviousMonth,
       monthNumber__numerationFrom0: getPreviousMonthNumber({
-        referenceYear: this.targetYear,
         referenceMonthNumber__numerationFrom0: this.targetMonthNumber__numerationFrom0,
         firstMonthNumberInRelationToReturnableValue: 0
       })

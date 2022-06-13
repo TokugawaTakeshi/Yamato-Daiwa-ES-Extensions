@@ -2,7 +2,7 @@
 * There are too many numbers refers to month or day of week number in this class. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import DaysOfWeek from "../../ConstantsAndEnumerations/DaysOfWeek";
+import DaysOfWeek from "../../ConstantsAndEnumerations/DateTime/DaysOfWeek";
 import MonthsNames from "../../ConstantsAndEnumerations/MonthsNames";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
