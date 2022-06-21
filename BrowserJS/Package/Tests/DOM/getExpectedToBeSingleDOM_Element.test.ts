@@ -4,7 +4,7 @@ import createDOM_ElementFromHTML_Code from "../../Source/DOM/createDOM_ElementFr
 import { strictEqual, throws } from "assert";
 import provideMockBrowserEnvironment from "jsdom-global";
 
-import { DOM_ElementRetrievingFailedError, UnexpectedEventError } from "@yamato-daiwa/es-extensions";
+import { DOM_ElementRetrievingFailedError } from "@yamato-daiwa/es-extensions";
 
 
 describe("getExpectedToBeSingleDOM_Element", (): void => {
@@ -35,7 +35,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
       getExpectedToBeSingleDOM_Element({
         selector: ".Button",
         context: sample,
-        targetDOM_ElementSubtype: HTMLButtonElement
+        expectedDOM_ElementSubtype: HTMLButtonElement
       }) instanceof HTMLButtonElement, true
     );
   });
@@ -62,29 +62,6 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
       );
     });
 
-    it("Multiple elements found", (): void => {
-
-      const sample: Element = createDOM_ElementFromHTML_Code(
-        `
-          <div class='ActionBar'>
-            <button type='button' class='Button'></button>
-            <button type='button' class='Button'></button>
-          </div>`
-      );
-
-      throws(
-        (): void => {
-          getExpectedToBeSingleDOM_Element({
-            selector: ".InputField",
-            context: sample
-          });
-        },
-        {
-          name: UnexpectedEventError.NAME
-        }
-      );
-    });
-
     it("Expected and actual elements' subtypes mismatch", (): void => {
 
       const sample: Element = createDOM_ElementFromHTML_Code(
@@ -96,7 +73,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
           getExpectedToBeSingleDOM_Element({
             selector: ".Button",
             context: sample,
-            targetDOM_ElementSubtype: HTMLInputElement
+            expectedDOM_ElementSubtype: HTMLInputElement
           });
         },
         {

@@ -8,11 +8,20 @@
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
     "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
+export { default as roundToSpecifiedNearestDecimalPlaceValue } from "./Numbers/roundToSpecifiedNearestDecimalPlaceValue";
 export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separateEach3DigitsGroupWithComma";
 export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
 
 
 /* === Strings ====================================================================================================== */
+export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
+export { default as latinCharacters__lowercase } from "./Strings/CharactersAssets/latinCharacters__lowercase";
+export { default as latinCharacters__uppercase } from "./Strings/CharactersAssets/latinCharacters__uppercase";
+export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceCharacters";
+export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag } from
+    "./Strings/CharactersAssets/SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag";
+export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringifiedDigits";
+
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as EmailAddress } from "./Strings/EmailAddress";
@@ -33,13 +42,6 @@ export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
 export { default as trimSpaces } from "./Strings/trimSpaces";
-export {
-  SpaceCharacters,
-  EscapeCharacters,
-  latinCharacters__lowercase,
-  latinCharacters__uppercase,
-  stringifiedDigits
-} from "./Strings/CharactersAssets";
 
 
 /* === Arrays ======================================================================================================= */
@@ -177,12 +179,10 @@ export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysO
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
 export { default as HTTP_StatusCodes } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
 export { default as MonthsNames } from "./ConstantsAndEnumerations/MonthsNames";
-export {
-  HOURS_PER_STELLAR_DAY,
-  MINUTES_PER_HOUR,
-  SECONDS_PER_MINUTE,
-  MONTHS_PER_YEAR
-} from "./ConstantsAndEnumerations/DateTimeConstants";
+export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
+export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
+export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
+export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
 
 
 /* === Pagination =================================================================================================== */

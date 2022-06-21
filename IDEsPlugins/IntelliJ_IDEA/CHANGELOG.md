@@ -6,6 +6,7 @@
 
 ### Added
 
+* <kbd>removeSpecificCharacterFromCertainPosition</kbd> - live template for [removeSpecificCharacterFromCertainPosition](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md) function 
 * <kbd>aeta</kbd> - live template for [addElementsToArray](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
 * <kbd>cdefhc</kbd> - live template for [createDOM_ElementFromHTML_Code](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md) function
 * <kbd>tp</kbd> - working example of the  [TimePoint](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) class usage.
@@ -16,6 +17,8 @@
 * <kbd>raebii</kbd> - live template for [**replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md) function
 * <kbd>rmaebp</kbd> - live template for [**removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md) function
 * <kbd>dceh</kbd> - Live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/delegateClickEventHandling.md) function
+* <kbd>getExpectedToBeSingleDOM_Element</kbd> - example of [getExpectedToBeSingleDOM_Element](#) function
+* <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> - example of [getExpectedToBeSingleChildOfTemplateElement](#) function
 
 ### Changed
 

@@ -19,9 +19,13 @@
       * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> - inserts working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
       * <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> - live template for  [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
       * <kbd>getIndexOfArrayElementIfSuchElementIsExactlyOne</kbd> - live template for  [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementIfSuchElementIsExactlyOne/getIndexOfArrayElementIfSuchElementIsExactlyOne.md)
+  * Strings
+    * <kbd>removeSpecificCharacterFromCertainPosition</kbd> - live template for [removeSpecificCharacterFromCertainPosition](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md) function 
   * BrowserJS
     * <kbd>cdefhc</kbd> - live template for [createDOM_ElementFromHTML_Code](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md) function
     * <kbd>dceh</kbd> - live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DOM/delegateClickEventHandling.md) function
+    * <kbd>getExpectedToBeSingleDOM_Element</kbd> - example of [getExpectedToBeSingleDOM_Element](#) function
+    * <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> - example of [getExpectedToBeSingleChildOfTemplateElement](#) function
 
 * [**RawObjectDataProcessor**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#rawobjectdataprocessor)
   * <kbd>prod</kbd>: working example with error handling

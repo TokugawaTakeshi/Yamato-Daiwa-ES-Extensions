@@ -1,13 +1,15 @@
-import { MONTHS_PER_YEAR } from "../ConstantsAndEnumerations/DateTimeConstants";
+import MONTHS_PER_YEAR from "../ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
 
 
 export default function getYearOfNextMonth(
-  namedParameters: {
-    referenceYear: number;
-  } & (
-    { referenceMonthNumber__numerationFrom0: number; } |
-    { referenceMonthNumber__numerationFrom1: number; }
-  )
+  namedParameters:
+      Readonly<
+        { referenceYear: number; } &
+        (
+          { referenceMonthNumber__numerationFrom0: number; } |
+          { referenceMonthNumber__numerationFrom1: number; }
+        )
+      >
 ): number {
 
   const referenceMonthNumber__numerationFrom1: number = "referenceMonthNumber__numerationFrom1" in namedParameters ?

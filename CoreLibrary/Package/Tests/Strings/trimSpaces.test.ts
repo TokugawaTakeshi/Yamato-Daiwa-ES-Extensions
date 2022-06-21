@@ -1,5 +1,5 @@
 import trimSpaces from "../../Source/Strings/trimSpaces";
-import { SpaceCharacters } from "../../Source/Strings/CharactersAssets";
+import { SpaceCharacters } from "../../Source";
 import { strictEqual } from "assert";
 
 

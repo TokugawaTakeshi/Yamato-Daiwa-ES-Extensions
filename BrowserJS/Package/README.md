@@ -30,6 +30,12 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
   <dt><a href="Documentation/DOM/createHTML_CollectionFromHTML_Code.md">createHTML_CollectionFromHTML_Code</a></dt>
   <dd>Creates the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> from HTML code passed as parameter.</dd>
 
+  <dt><a href="Documentation/DOM/getExpectedToBeSingleChildOfTemplateElement.md">getExpectedToBeSingleChildOfTemplateElement</a></dt>
+  <dd>Retrieves the child (of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> type or specified subtype) of <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template element</a> if this child is exactly one, otherwise throws the error.</dd>
+
+  <dt><a href="Documentation/DOM/getExpectedToBeSingleDOM_Element.md">getExpectedToBeSingleDOM_Element</a></dt>
+  <dd>Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context, otherwise throws the error.</dd>
+  
 </dl>
   
 
@@ -45,5 +51,5 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 <dl>
   <dt><a href="Documentation/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md">BasicFrontEndLogger</a></dt>
-  <dd>The implementation of ILogger interface for the <b>Logger</b> facade which could be used as the base of the custom implementation for the frontend side of the websites / web application.</dd>
+  <dd>The implementation of ILogger interface for the <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a> which could be used as the base of the custom implementation for the frontend side of the websites / web application.</dd>
 </dl>

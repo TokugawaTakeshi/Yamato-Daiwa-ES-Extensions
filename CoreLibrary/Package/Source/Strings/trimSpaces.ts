@@ -1,4 +1,4 @@
-import { SpaceCharacters } from "./CharactersAssets";
+import SpaceCharacters from "./CharactersAssets/SpaceCharacters";
 import isUndefined from "../TypeGuards/Nullables/isUndefined";
 
 

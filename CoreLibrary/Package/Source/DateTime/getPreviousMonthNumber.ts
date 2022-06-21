@@ -1,5 +1,5 @@
 import MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
-import { MONTHS_PER_YEAR } from "../ConstantsAndEnumerations/DateTimeConstants";
+import MONTHS_PER_YEAR from "../ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
 
 import getMonthNumberByName from "./getMonthNumberByName";
 

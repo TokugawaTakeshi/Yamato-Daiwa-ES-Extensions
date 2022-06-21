@@ -1,4 +1,4 @@
-# `filterMap`: Filer map
+# `filterMap`: Filter map
 
 ```
 filterMap<Key, Value>(

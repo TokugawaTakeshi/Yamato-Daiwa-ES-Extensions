@@ -6,7 +6,7 @@
 delegateClickEventHandling(
   compoundParameter: {
     eventTargetSelector: string;
-    delegatingContainerOrIt_sSelector: Element | Document | string;
+    delegatingContainerOrItsSelector: Element | Document | string;
     handler: (clickedElement: Element, event: MouseEvent) => unknown;
   }
 ): void;
@@ -14,7 +14,7 @@ delegateClickEventHandling(
 delegateClickEventHandling<ClickTargetElement extends Element>(
   compoundParameter: {
     eventTargetSelector: string;
-    delegatingContainerOrIt_sSelector: Element | Document | string;
+    delegatingContainerOrItsSelector: Element | Document | string;
     eventTargetElementSubtype: new () => ClickTargetElement;
     handler: (clickedElement: ClickTargetElement, event: MouseEvent) => unknown;
   }
@@ -35,7 +35,7 @@ with ".Button" class inside ".List" will be clicked:
 ```typescript
 delegateClickEventHandling({
   eventTargetSelector: ".Button",
-  delegatingContainerOrIt_sSelector: ".List",
+  delegatingContainerOrItsSelector: ".List",
   handler: (clickedElement: Element, event: MouseEvent): void => {
     console.log("clicked")
   } 
@@ -49,7 +49,7 @@ specify it via **eventTargetElementSubtype** parameter:
 ```typescript
 delegateClickEventHandling<HTMLButtonElement>({
   eventTargetSelector: ".Button",
-  delegatingContainerOrIt_sSelector: ".List",
+  delegatingContainerOrItsSelector: ".List",
   eventTargetElementSubtype: HTMLButtonElement,
   handler: (clickedElement: HTMLButtonElement, event: MouseEvent): void => {
     clickedElement.blur(); // Now you can use the methods of HTMLButtonElement instance
@@ -64,7 +64,7 @@ This function does not throw any errors, just make the log and prevents the hand
 
 ### DOM_ElementRetrievingFailedError
 
-Will be logged if there are no element corresponding to selector specified in **delegatingContainerOrIt_sSelector**
+Will be logged if there are no element corresponding to selector specified in **delegatingContainerOrItsSelector**
 property of compound parameter.
 
 

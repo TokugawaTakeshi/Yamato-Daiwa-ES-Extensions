@@ -1,7 +1,7 @@
 # `ParsedJSON`, `ParsedJSON_Object`, `ParsedJSON_Array`, `ParsedJSON_NestedProperty`
 
 <div style="border: 1px solid red; padding: 12px 14px">
-  ⚠ Be sure that you are understanding the difference between <code>JSON</code> which is the <code>string</code> and native 
+  ⚠ Make sure that you are understanding the difference between <code>JSON</code> which is the <code>string</code> and native 
   JavaScript object which <code>ParsedJSON</code> is`.
 </div>
 

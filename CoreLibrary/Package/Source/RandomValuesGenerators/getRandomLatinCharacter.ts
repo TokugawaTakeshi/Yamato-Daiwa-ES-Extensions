@@ -1,4 +1,5 @@
-import { latinCharacters__uppercase, latinCharacters__lowercase } from "../Strings/CharactersAssets";
+import latinCharacters__uppercase from "../Strings/CharactersAssets/latinCharacters__uppercase";
+import latinCharacters__lowercase from "../Strings/CharactersAssets/latinCharacters__lowercase";
 
 import getRandomBoolean from "./getRandomBoolean";
 import getRandomArrayElement from "./getRandomArrayElement";

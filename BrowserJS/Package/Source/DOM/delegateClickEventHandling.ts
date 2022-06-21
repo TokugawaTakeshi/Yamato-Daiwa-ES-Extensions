@@ -9,44 +9,44 @@ import {
 
 
 export default function delegateClickEventHandling(
-  namedParameters: {
+  namedParameters: Readonly<{
     eventTargetSelector: string;
-    delegatingContainerOrIt_sSelector: Element | Document | string;
+    delegatingContainerOrItsSelector: Element | Document | string;
     handler: (clickedElement: Element, event: MouseEvent) => unknown;
-  }
+  }>
 ): void;
 
 export default function delegateClickEventHandling<ClickTargetElement extends Element>(
-  namedParameters: {
+  namedParameters: Readonly<{
     eventTargetSelector: string;
-    delegatingContainerOrIt_sSelector: Element | Document | string;
+    delegatingContainerOrItsSelector: Element | Document | string;
     eventTargetElementSubtype: new () => ClickTargetElement;
     handler: (clickedElement: ClickTargetElement, event: MouseEvent) => unknown;
-  }
+  }>
 ): void;
 
 
 export default function delegateClickEventHandling<ClickTargetElement extends Element = Element>(
   {
     eventTargetSelector,
-    delegatingContainerOrIt_sSelector,
+    delegatingContainerOrItsSelector,
     eventTargetElementSubtype,
     handler
-  }: {
+  }: Readonly<{
     eventTargetSelector: string;
-    delegatingContainerOrIt_sSelector: Element | Document | string;
+    delegatingContainerOrItsSelector: Element | Document | string;
     eventTargetElementSubtype?: new () => ClickTargetElement;
     handler: (clickedElement: ClickTargetElement | Element, event: MouseEvent) => unknown;
-  }
+  }>
 ): void {
 
   let delegatingContainer: Element | Document;
 
-  if (delegatingContainerOrIt_sSelector instanceof Element || delegatingContainerOrIt_sSelector instanceof Document) {
-    delegatingContainer = delegatingContainerOrIt_sSelector;
+  if (delegatingContainerOrItsSelector instanceof Element || delegatingContainerOrItsSelector instanceof Document) {
+    delegatingContainer = delegatingContainerOrItsSelector;
   } else {
 
-    const potentialDelegatingContainer: Element | null = document.querySelector(delegatingContainerOrIt_sSelector);
+    const potentialDelegatingContainer: Element | null = document.querySelector(delegatingContainerOrItsSelector);
 
     if (isNull(potentialDelegatingContainer)) {
 
@@ -54,7 +54,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
         errorType: DOM_ElementRetrievingFailedError.NAME,
         title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
         description: DOM_ElementRetrievingFailedError.localization.generateDescription({
-          selector: delegatingContainerOrIt_sSelector
+          selector: delegatingContainerOrItsSelector
         }),
         occurrenceLocation: "delegateClickEventHandling(namedParameters)"
       });

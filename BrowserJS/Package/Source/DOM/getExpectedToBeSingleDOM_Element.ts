@@ -7,18 +7,18 @@ import {
 
 
 export default function getExpectedToBeSingleDOM_Element(
-  compoundParameter: {
+  namedParameters: Readonly<{
     selector: string;
     context?: Element | Document;
-  }
+  }>
 ): Element;
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
-  compoundParameter: {
+  namedParameters: Readonly<{
     selector: string;
     context?: Element | Document;
-    targetDOM_ElementSubtype: new () => DOM_ElementSubtype;
-  }
+    expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
+  }>
 ): DOM_ElementSubtype;
 
 
@@ -26,51 +26,49 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   {
     selector,
     context = document,
-    targetDOM_ElementSubtype
-  }: {
+    expectedDOM_ElementSubtype
+  }: Readonly<{
     selector: string;
     context?: Element | Document;
-    targetDOM_ElementSubtype?: new () => DOM_ElementSubtype;
-  }
+    expectedDOM_ElementSubtype?: new () => DOM_ElementSubtype;
+  }>
 ): Element | DOM_ElementSubtype {
 
-  const targetElementSearchRequestMatch: Array<Element> = Array.from(context.querySelectorAll(selector));
+  const targetElementSearchResults: Array<Element> = Array.from(context.querySelectorAll(selector));
 
-  if (targetElementSearchRequestMatch.length === 0) {
+  if (targetElementSearchResults.length === 0) {
     Logger.throwErrorAndLog({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
       title: UnexpectedEventError.localization.defaultTitle,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
     });
   }
 
 
-  if (targetElementSearchRequestMatch.length > 1) {
-    Logger.throwErrorAndLog({
-      errorInstance: new UnexpectedEventError(
-        `Contrary to expectations, ${ targetElementSearchRequestMatch.length } elements has been found for the selector ` +
-        `'${ selector }'.`
-      ),
+  if (targetElementSearchResults.length > 1) {
+    Logger.logError({
+      errorType: UnexpectedEventError.NAME,
       title: UnexpectedEventError.localization.defaultTitle,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
+      description: `Contrary to expectations, ${ targetElementSearchResults.length } elements has been found for the selector ` +
+          `'${ selector }'. First one will be picked`,
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
     });
   }
 
-
-  if (isUndefined(targetDOM_ElementSubtype)) {
-    return targetElementSearchRequestMatch[0];
+  if (isUndefined(expectedDOM_ElementSubtype)) {
+    return targetElementSearchResults[0];
   }
 
 
-  const targetElement: Element = targetElementSearchRequestMatch[0];
+  const targetElement: Element = targetElementSearchResults[0];
 
-  if (!(targetElement instanceof targetDOM_ElementSubtype)) {
+  if (!(targetElement instanceof expectedDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        `The subtype of picked element does match with expected subtype '${ targetDOM_ElementSubtype.name }'.`
+        `Contrary to expectations, the picked element in not instance of '${ expectedDOM_ElementSubtype.name }'.`
       ),
       title: UnexpectedEventError.localization.defaultTitle,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
     });
   }
 

@@ -6,6 +6,7 @@ export default function getPositionsOfAllSubstringOccurrences(targetString: stri
     return [];
   }
 
+
   const indexesOfAllSubstringOccurrences: Array<number> = [];
 
   do {

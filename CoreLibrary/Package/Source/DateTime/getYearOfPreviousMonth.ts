@@ -1,10 +1,12 @@
 export default function getYearOfPreviousMonth(
-  namedParameters: {
-    referenceYear: number;
-  } & (
-    { referenceMonthNumber__numerationFrom0: number; } |
-    { referenceMonthNumber__numerationFrom1: number; }
-  )
+  namedParameters:
+      Readonly<
+        { referenceYear: number; } &
+        (
+          { referenceMonthNumber__numerationFrom0: number; } |
+          { referenceMonthNumber__numerationFrom1: number; }
+        )
+      >
 ): number {
 
   const referenceMonthNumber__numerationFrom1: number = "referenceMonthNumber__numerationFrom1" in namedParameters ?

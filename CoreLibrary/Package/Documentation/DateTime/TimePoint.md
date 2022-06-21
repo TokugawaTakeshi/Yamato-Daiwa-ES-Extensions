@@ -46,7 +46,7 @@ class TimePoint{
 
 ## Example
 
-You will get belo example inputted once use `tp` (the abbreviation of "Time Point") Live Template for 
+You will get below example inputted once use `tp` (the abbreviation of "Time Point") Live Template for 
 IntelliJ IDEA family IDEs.
 
 ```typescript

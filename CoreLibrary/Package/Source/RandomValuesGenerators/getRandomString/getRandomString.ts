@@ -1,4 +1,6 @@
-import { latinCharacters__lowercase, latinCharacters__uppercase, stringifiedDigits } from "../../Strings/CharactersAssets";
+import latinCharacters__lowercase from "../../Strings/CharactersAssets/latinCharacters__lowercase";
+import latinCharacters__uppercase from "../../Strings/CharactersAssets/latinCharacters__uppercase";
+import stringifiedDigits from "../../Strings/CharactersAssets/stringifiedDigits";
 
 import isString from "../../TypeGuards/Strings/isString";
 import isUndefined from "../../TypeGuards/Nullables/isUndefined";

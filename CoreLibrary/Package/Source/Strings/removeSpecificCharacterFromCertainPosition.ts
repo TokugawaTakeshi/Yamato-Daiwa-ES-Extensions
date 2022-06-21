@@ -3,16 +3,18 @@ import removeArrayElementsByIndexes from "../Arrays/removeArrayElementsByIndexes
 
 export default function removeSpecificCharacterFromCertainPosition(
   namedParameters:
-    {
-      targetString: string;
-      targetCharacter: string;
-    } &
-    (
-      { atFirstPosition: true; } |
-      { atLastPosition: true; } |
-      { atPosition__numerationFrom0: number; } |
-      { atPosition__numerationFrom1: number; }
-    )
+      Readonly<
+        {
+          targetString: string;
+          targetCharacter: string;
+        } &
+        (
+          { fromFirstPosition: true; } |
+          { fromLastPosition: true; } |
+          { fromPosition__numerationFrom0: number; } |
+          { fromPosition__numerationFrom1: number; }
+        )
+      >
 ): string {
 
   /* [ Theory ]　'split', 'slice', 'substr', 'substring' methods (of String.prototype) are not support
@@ -20,14 +22,14 @@ export default function removeSpecificCharacterFromCertainPosition(
   const charactersSequence: Array<string> = Array.from(namedParameters.targetString);
   let indexOfTargetCharacterInSequence: number;
 
-  if ("atFirstPosition" in namedParameters) {
+  if ("fromFirstPosition" in namedParameters) {
     indexOfTargetCharacterInSequence = 0;
-  } else if ("atLastPosition" in namedParameters) {
+  } else if ("fromLastPosition" in namedParameters) {
     indexOfTargetCharacterInSequence = charactersSequence.length - 1;
-  } else if ("atPosition__numerationFrom0" in namedParameters) {
-    indexOfTargetCharacterInSequence = namedParameters.atPosition__numerationFrom0;
+  } else if ("fromPosition__numerationFrom0" in namedParameters) {
+    indexOfTargetCharacterInSequence = namedParameters.fromPosition__numerationFrom0;
   } else {
-    indexOfTargetCharacterInSequence = namedParameters.atPosition__numerationFrom1 - 1;
+    indexOfTargetCharacterInSequence = namedParameters.fromPosition__numerationFrom1 - 1;
   }
 
 
