@@ -1,4 +1,4 @@
-# Yamato-Daiwa ES-Extensions [YDEE]
+# Yamato-Daiwa ES-Extensions 〔YDEE〕
 
 ![Hero image of @yamato-daiwa/es-extensions](https://user-images.githubusercontent.com/41653501/168199236-0895483f-e4f1-4d1f-b7a8-ab296e51a57d.png)
 

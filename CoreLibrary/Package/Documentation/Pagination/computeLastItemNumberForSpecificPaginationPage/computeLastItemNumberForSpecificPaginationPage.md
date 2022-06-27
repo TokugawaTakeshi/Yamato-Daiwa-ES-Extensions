@@ -1,14 +1,13 @@
 # `computeLastItemNumberForSpecificPaginationPage`: Compute last item number for specific pagination page
 
 ```
-export default function computeLastItemNumberForSpecificPaginationPage(
-  parametersObject: {
+computeLastItemNumberForSpecificPaginationPage(
+  namedParameters: {
     currentPageNumber: number;
     itemsCountPerPage: number;
     totalItemsCount: number;
   }
 ): number
-}
 ```
 
 To compute it independently on first item number for specific pagination page, it's required to know below parameters:

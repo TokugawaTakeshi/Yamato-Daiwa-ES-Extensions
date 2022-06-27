@@ -24,7 +24,7 @@ export default function splitToPaginationCollection<Element>(
   };
 
   let elementStartingPositionForCurrentPage: number = 0;
-  let elementEndingPositionForCurrentPage: number = elementStartingPositionForCurrentPage + options.itemsCountPerPaginationPage;
+  let elementEndingPositionForCurrentPage: number = options.itemsCountPerPaginationPage;
 
   const lastPageNumber: number = options.pagesNumerationFrom === 0 ? pagesCount : pagesCount + 1;
 

@@ -1,8 +1,8 @@
 # `computeFirstItemNumberForSpecificPaginationPage`: Compute first item number for specific pagination page
 
 ```
-function computeFirstItemNumberForSpecificPaginationPage(
-  parametersObject: {
+computeFirstItemNumberForSpecificPaginationPage(
+  namedParameters: {
     currentPageNumber: number;
     itemsCountPerPage: number;
   }

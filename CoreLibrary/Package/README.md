@@ -169,7 +169,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/splitString.md">splitString</a></dt>
   <dd>Alternative of native <code>String.prototype.split()</code>; unlike it supports the UTF16 surrogate pairs.</dd>
 
-  <dt>stringifyAndFormatArbitraryValue</dt>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue">stringifyAndFormatArbitraryValue</a></dt>
   <dd>Converts to readable string any type of data.</dd>
 
   <dt>replaceDoubleBackslashesWithForwardSlashes</dt>
