@@ -1,4 +1,4 @@
-`getExpectedToBeSingleDOM_Element` - get expected to be single DOM element
+# `getExpectedToBeSingleDOM_Element` - get expected to be single DOM element
 
 Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context, 
 otherwise throws the error.

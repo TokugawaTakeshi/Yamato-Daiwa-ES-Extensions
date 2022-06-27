@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-browserjs",
-  "version": "1.5.2",
+  "version": "1.5.4",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -15,7 +15,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/BrowserJS/Package"
+    "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
   },
   "bugs": {
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git/issues",
