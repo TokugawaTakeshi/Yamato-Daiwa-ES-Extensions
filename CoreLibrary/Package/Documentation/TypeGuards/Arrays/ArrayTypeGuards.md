@@ -9,7 +9,7 @@ some additional checks and returns `false` when some check has not been passed:
 
 ```
 isArrayOfCertainTypeElements<ArrayElementType>(
-    potentialArray: unknown, elementTypeGuard: (element: unknown) => element is ArrayElementType
+  potentialArray: unknown, elementTypeGuard: (element: unknown) => element is ArrayElementType
 ): potentialArray is Array<ArrayElementType>
 ```
 

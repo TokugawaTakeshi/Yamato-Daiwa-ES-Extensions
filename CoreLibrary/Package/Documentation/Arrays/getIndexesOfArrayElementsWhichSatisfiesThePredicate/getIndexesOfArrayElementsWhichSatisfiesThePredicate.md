@@ -1,4 +1,4 @@
-# `getIndexesOfArrayElementsWhichSatisfiesThePredicate`: Retrieving of indexes of array elements which satisfied to predicate
+# `getIndexesOfArrayElementsWhichSatisfiesThePredicate`: Retrieving of indexes of array elements which satisfies to predicate
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexesOfArrayElementsWhichSatisfiesThePredicate-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 

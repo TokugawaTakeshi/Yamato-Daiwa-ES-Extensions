@@ -1,4 +1,4 @@
-# `DaysOfWeek`
+# `DaysOfWeek` enumeration
 
 Allows to refer to the day of week by name, not by number what usually confusing with numeration from 0 (and also,
 first day of week is location dependent).

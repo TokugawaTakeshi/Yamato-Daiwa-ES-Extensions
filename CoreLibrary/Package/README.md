@@ -40,8 +40,8 @@ The displaying "Unpacked size" (for example, 633 kB for version 1.4.5 as in imag
 ECMAScript modules are preferred for the browser JavaScript while CommonJS - for Node.js.
 
 For the websites and web applications where each kilobyte on count it is possible to automatically exclude the unused 
-functionality of "@yamato-daiwa/es-extensions" (and possibly other dependencies) from built JavaScript.
-The JavaScript bundlers like [Webpack](https://webpack.js.org) can exclude unused functionality under certain conditions.
+functionality of **@yamato-daiwa/es-extensions** (and possibly other dependencies) from built JavaScript.
+The JavaScript bundlers like [Webpack](https://webpack.js.org) can exclude the unused functionality under certain conditions.
 For the TypeScript and Webpack combination case, it is required to use ECMAScript modules to activate the
 [tree shaking](https://webpack.js.org/guides/tree-shaking/) functionality (works on production mode).
 
@@ -50,7 +50,7 @@ For the TypeScript and Webpack combination case, it is required to use ECMAScrip
 
 ### Get functionality
 
-All available functionality could be imported from `"@yamato-daiwa/es-extensions"`:
+All available functionality could be imported from `@yamato-daiwa/es-extensions`:
 
 ```typescript
 export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
@@ -60,7 +60,7 @@ export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
 
 #### RawObjectDataProcessor
 
-The tool for the unknown at advance external data (from HTTP request/response, file, etc.) validation and processing.
+The tool for the validation and processing of unknown at advance external data (from HTTP requests/responses, files, etc.).
 
 * [📖 Quick example](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
 * [📖 Problem overview](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview)
@@ -68,22 +68,22 @@ The tool for the unknown at advance external data (from HTTP request/response, f
 * [📖 Getting started](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
 
 
-##### Additional pre-validation modifiers
+##### Pre-made pre-validation modifiers
 
 Intended to be used when some property is expected to be the string but also expected to be a valid number if to parse it.
 
 <dl>
 
   <dt>convertPotentialStringToFloatIfPossible</dt>
-  <dd>Tries to convert the string to float; returns the number in success case otherwise the initial value.</dd>
+  <dd>Tries to convert the string to decimal fraction; returns the number in success case otherwise returns the initial value.</dd>
 
   <dt>convertPotentialStringToIntegerIfPossible</dt>
-  <dd>Tries to convert the string to integer; returns the number in success case otherwise the initial value.</dd>
+  <dd>Tries to convert the string to integer; returns the number in success case otherwise returns the initial value.</dd>
 
   <dt>convertPotentialStringToNumberIfPossible</dt>
   <dd>
-    Tries to convert the string to integer or float (depending on decimal part separator presence); 
-    returns the number in success case otherwise the initial value.
+    Tries to convert the string to integer or decimal fraction (depending on decimal part separator presence); 
+    returns the number in success case otherwise returns the initial value.
   </dd>
 
 </dl>
@@ -100,7 +100,7 @@ Intended to be used when some property is expected to be the string but also exp
   <dd>Checks is the value of string contains the number of non-scientific notation.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundToSpecifiedNearestDecimalPlaceValue.md">roundToSpecifiedNearestDecimalPlaceValue</a></dt>
-  <dd>Rounds the number until specific decimal place (tens, hundreds, thousands, etc.).</dd>
+  <dd>Rounds the number to specific decimal place (tens, hundreds, thousands, etc.).</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md">separateEach3DigitsGroupWithComma</a></dt>
   <dd>Formats the number separating each 3 digits group with comma</dd>
@@ -134,7 +134,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>Returns the positions of each occurrence of specified substring.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/hasStringOnlySpecificCharacters.md">hasStringOnlySpecificCharacters</a></dt>
-  <dd>Check does string including specified characters only without regular expression</dd>
+  <dd>Checks does string including specified characters only without regular expression</dd>
 
   <dt>removeAllSpecifiedCharacters</dt>
   <dd>Removes specified characters from the string value.</dd>
@@ -143,13 +143,13 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>Removes last character.</dd>
 
   <dt>removeNonDigitsCharacters</dt>
-  <dd>Removes all characters from the string excepts digits.</dd>
+  <dd>Removes all characters from the string except digits.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md">removeNthCharacter</a></dt>
   <dd>Removes the character in specified position from the string. Supports the surrogate pairs.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md">removeSpecificCharacterFromCertainPosition</a></dt>
-  <dd>Remove specific character from specific position.</dd>
+  <dd>Removes specific character from the specific position.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md">replace2OrMoreSpacesTo1</a></dt>
   <dd>Replaces 2 or more spaces to 1.</dd>
@@ -169,14 +169,14 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/splitString.md">splitString</a></dt>
   <dd>Alternative of native <code>String.prototype.split()</code>; unlike it supports the UTF16 surrogate pairs.</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue">stringifyAndFormatArbitraryValue</a></dt>
-  <dd>Converts to readable string any type of data.</dd>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue/stringifyAndFormatArbitraryValue.md">stringifyAndFormatArbitraryValue</a></dt>
+  <dd>Converts to readable string and formats if possible any type of data.</dd>
 
   <dt>replaceDoubleBackslashesWithForwardSlashes</dt>
   <dd>Replaces double backslashes with forward slashes.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md">trimSpaces</a></dt>
-  <dd>Trims prepended and/or appended space characters; unlike native `String.prototype.trim` acts selectively on specified spaces kinds.</dd>
+  <dd>Trims prepended and/or appended space characters; unlike native <code>String.prototype.trim()</code> acts selectively on specified spaces kinds.</dd>
  
 </dl>
 
@@ -187,7 +187,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 <dl>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned (depending on dedicated option's value).</dd>
+  <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray.md">getLastElementOfNonEmptyArray</a></dt>
   <dd>Returns the last element of array, herewith <b>UnexpectedEventError</b> will be thrown if target array is empty.</dd>
@@ -203,7 +203,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>Returns the array of indexes of array elements which are satisfies to predicate function.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or null will be returned (depending on dedicated option's value).</dd>
+  <dd>Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
 
 </dl>
 
@@ -216,7 +216,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>Creates the copy of target array and replaces the elements by specified indexes.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md">replaceArrayElementsByPredicates</a></dt>
-  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated property of named parameters object.</dd>
+  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated option.</dd>
 
 </dl>
 
@@ -234,10 +234,10 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 <dl>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md">removeArrayElementsByIndexes</a></dt>
-  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated property of named parameters object.</dd>
+  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated option.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md">removeArrayElementsByPredicates</a></dt>
-  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated property of named parameters object.</dd>
+  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated option.</dd>
 
 </dl>
 
@@ -264,7 +264,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 <dl>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md">addMultiplePairsToMap</a></dt>
-  <dd>Adds multiple elements to map.</dd>
+  <dd>Adds multiple entries to map.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md">createMapBasedOnOtherMap</a></dt>
   <dd>Creates map based on other map.</dd>
@@ -283,7 +283,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">getDaysCountInSpecificMonth</a></dt>
-  <dd>Return days count in specified year and month.</dd>
+  <dd>Returns days count in specified year and month.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md">getMonthNameByNumber</a></dt>
   <dd>Converts the month number (from 0 or 1) to element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a> enumeration.</dd>
@@ -320,7 +320,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dd>The native object including the Array case which could be the result of JSON parsing.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Types/InheritEnumerationKeys.md">InheritEnumerationKeys</a></dt>
-  <dd>Allows to create the object with same key as reference enumeration.</dd>
+  <dd>Allows to create the object with same keys as reference enumeration.</dd>
 
   <dt>PartialBy</dt>
   <dd>Makes specified properties of base type optional.</dd>
@@ -345,7 +345,7 @@ makes below functions redundant, but they still could be used in the environment
 <dl>
 
   <dt>substituteWhenNull</dt>
-  <dd>Substitutes the second argument's value when first one is null./dd>
+  <dd>Substitutes the second argument's value when first one is null.</dd>
 
   <dt>substituteWhenUndefined</dt>
   <dd>Substitutes the second argument's value when first one is <b>undefined</b>.</dd>
@@ -376,7 +376,7 @@ makes below functions redundant, but they still could be used in the environment
   <dd>Returns "true" or "false" randomly.</dd>
 
   <dt>getRandomInteger</dt>
-  <dd>Returns random integer not less than specified "minimalValue" and more than "maximalValue".</dd>
+  <dd>Returns random integer not less than specified **minimalValue** and more than **maximalValue**.</dd>
 
   <dt>getRandomLatinCharacter</dt>
   <dd>Returns random latin character.</dd>
@@ -418,7 +418,7 @@ makes below functions redundant, but they still could be used in the environment
   <dd>Has value <b>12</b>; intended to be used to avoid the magic numbers in computings.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md">DaysOfWeek</a></dt>
-  <dd>The enumeration Allows to refer to the day of week by name, not by number what usually confusing with numeration from 0 (and also, first day of week is location dependent).</dd>
+  <dd>The enumeration allows to refer to the day of week by name, not by number what usually confusing with numeration from 0 (and also, first day of week is location dependent).</dd>
 
 </dl>
 
@@ -447,29 +447,29 @@ makes below functions redundant, but they still could be used in the environment
   <dd>
     <dl>
       <dt>AlgorithmMismatchError</dt>
-      <dd>Intended to be used in general cases when actual behaviour of does not mathcing with desired.</dd>
+      <dd>Intended to be used in general cases when actual behaviour does not match with desired.</dd>
       <dt>ClassRedundantSubsequentInitializationError</dt>
       <dd>Intended to be used when the class developed as singleton has been attempted to initialize twice.</dd>
       <dt>ClassRequiredInitializationHasNotBeenExecutedError</dt>
-      <dd>Intended to be used when the class besides the construction requires the initialization, but the initializing method has not been called.</dd>
+      <dd>Intended to be used when the class besides the construction requires the initialization but the initializing method has not been called.</dd>
       <dt>ConfigFileNotFoundError</dt>
-      <dd>Intended to be used when some utility requires the config file, but it has not been found.</dd>
+      <dd>Intended to be used when some utility requires the config file but it has not been found.</dd>
       <dt>CrossBrowserIssueError</dt>
-      <dd>Recommended to be used when some processing could not be executed because of certain browsers's limitations.</dd>
+      <dd>Intended to be used when some processing could not be executed because of certain browsers's limitations.</dd>
       <dt>DataRetrievingFailedError</dt>
-      <dd>Intended to be used when the data retrieving from any external resource (server, database, etc.) failed.</dd>
+      <dd>Intended to be used when the data retrieving from some external resource (server, database, file, etc.) failed.</dd>
       <dt>DataSubmittingFailed</dt>
       <dd>Intended to be used when the data submitting to any external resource (server, database, etc.) failed.</dd>
       <dt>DOM_ElementRetrievingFailedError</dt>
       <dd>
-        Intended be used when some requiring element retrieving from the DOM has been failed.
-        It could be not only on client side but also on server side rendering or HTML code processing.
+        Intended be used when some element retrieving from the DOM has been failed.
+        It could occur not only on client side but also on server side, during rendering or HTML code processing.
       </dd>
       <dt>FileReadingFailedError</dt>
       <dd>Intended to be used when the file reading was not go as expected</dd>
       <dt>ImproperUsageError</dt>
       <dd>
-        Intended to be used when the cass/function has been attempted to use improperly. 
+        Intended to be used when the class/function has been attempted to use improperly. 
         Herewith, try to name the function/methods such as it will be obvious how to use it and also limit the usage by TypeScript typing.
       </dd>
       <dt>IncompatiblePropertiesInObjectTypeParameterError</dt>
@@ -480,7 +480,7 @@ makes below functions redundant, but they still could be used in the environment
       <dt>InterProcessInteractionFailedError</dt>
       <dd>
         Intended to be used when the interaction between NodeJS processed is not going as expected. 
-        Could be actual for the Electron.js where the main process and render process exchanging by data.
+        Could be actual, for example, for the Electron.js where the main process and render process are exchanges by data.
       </dd>
       <dt>InvalidConfigError</dt>
       <dd>
@@ -494,8 +494,8 @@ makes below functions redundant, but they still could be used in the environment
       <dt>InvalidParameterValueError</dt>
       <dd>
         Intended to be used when the parameter's does not fit to some limitations.
-        Although the TypeScript allows to define and check the parameter's type, this functionality will not be available
-        if the TypeScript is unavailable. Also, is the parameter has limitations like smallest numerical 
+        Although the TypeScript allows to define and check the parameter's type, no type check will not be executed
+        once TypeScript will be compiled to JavaScript. Also, is the parameter has limitations like smallest numerical 
         value or maximal characters count, <b>InvalidParameterValueError</b> has been developed for such cases.
       </dd>
       <dt>ModuleDynamicLoadingFailedError</dt>

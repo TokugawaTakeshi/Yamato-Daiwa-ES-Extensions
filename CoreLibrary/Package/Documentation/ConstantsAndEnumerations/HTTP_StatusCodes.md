@@ -1,4 +1,4 @@
-# HTTP_StatusCodes enumerate
+# HTTP_StatusCodes enumeration
 
 ```typescript
 console.log(HTTP_StatusCodes.continue); // 100

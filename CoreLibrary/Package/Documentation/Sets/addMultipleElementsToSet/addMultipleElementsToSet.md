@@ -1,4 +1,4 @@
-# `addMultipleElementsToSet`: Add multiple element to set
+# `addMultipleElementsToSet`: Add multiple elements to set
 
 ```
 addMultipleElementsToSet<SetElement>(targetSet: Set<SetElement>, newElements: Array<SetElement>): Set<SetElement>

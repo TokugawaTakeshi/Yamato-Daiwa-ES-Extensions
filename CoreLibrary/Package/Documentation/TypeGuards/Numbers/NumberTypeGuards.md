@@ -11,6 +11,4 @@ some additional checks and returns `false` when some check has not been passed:
 * `isNegativeIntegerOrZero(potentialInteger: unknown): potentialInteger is number`
 * `isPositiveDecimalFraction(potentialDecimalFraction: unknown): potentialDecimalFraction is number`
 
-<div style="border: 1px solid red; padding: 12px 14px"> 
-  ⚠ In the Math, the `0` is a positive number so both "positive" and "non-negative" includes `0`.
-</div>
+> :warning: **Warning:** In the Math, the `0` is a positive number so both "positive" and "non-negative" includes `0`.

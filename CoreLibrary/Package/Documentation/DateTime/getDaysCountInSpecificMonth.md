@@ -11,7 +11,7 @@ getDaysCountInSpecificMonth(
 ): number
 ```
 
-Return days count in specified year and month.
+Returns days count in specified year and month.
 The numeration of months could begin from `0` (`parametersObject.monthNumber__numerationFrom0`) or `1`
 (`parametersObject.monthNumber__numerationFrom1`);
 

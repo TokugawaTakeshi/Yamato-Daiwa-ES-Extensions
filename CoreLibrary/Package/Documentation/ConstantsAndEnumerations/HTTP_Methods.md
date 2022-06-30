@@ -1,4 +1,4 @@
-# HTTP_Methods enumerate
+# HTTP_Methods enumeration
 
 ```typescript
 console.log(HTTP_Methods.get); // "GET"

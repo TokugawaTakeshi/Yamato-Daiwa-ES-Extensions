@@ -27,16 +27,16 @@ console.log(
 ); // => 2022
 
 console.log(
-    getYearOfPreviousMonth({
-      referenceYear: 2022,
-      referenceMonthNumber__numerationFrom0: 0
-    })
+  getYearOfPreviousMonth({
+    referenceYear: 2022,
+    referenceMonthNumber__numerationFrom0: 0
+  })
 ); // => 2021
 
 console.log(
-    getYearOfPreviousMonth({
-      referenceYear: 2022,
-      referenceMonthNumber__numerationFrom1: 1
-    })
+  getYearOfPreviousMonth({
+    referenceYear: 2022,
+    referenceMonthNumber__numerationFrom1: 1
+  })
 ); // => 2021
 ```
