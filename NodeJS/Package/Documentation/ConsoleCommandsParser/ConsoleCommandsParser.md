@@ -2,7 +2,7 @@
 
 ## Minimal theory
 
-* There is no official terminology - just more or less established convention.
+* There is no official terminology concerning the console command anatomy - just more or less established convention.
 * At last `process.argv` (shorthand for the "arguments vector", the [convention inherited from C++](https://stackoverflow.com/questions/3024197/what-does-int-argc-char-argv-mean))
   is the array of strings. What to do with them - the author of application is deciding.
 

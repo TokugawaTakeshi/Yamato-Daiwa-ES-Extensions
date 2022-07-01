@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs",
-  "version": "1.5.0-alpha.6",
+  "version": "1.5.0",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for Node.js environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "nodejs",
@@ -30,14 +30,14 @@
     "@types/json5": "0.0.30",
     "@types/mocha": "9.1.1",
     "@types/node": "16.10.2",
-    "@yamato-daiwa/style_guides": "0.0.13",
+    "@yamato-daiwa/style_guides": "0.0.14",
     "mocha": "10.0.0",
     "rimraf": "3.0.2",
     "ts-node": "10.8.1",
     "typescript": "4.7.4"
   },
   "dependencies": {
-    "@yamato-daiwa/es-extensions": "1.5.0",
+    "@yamato-daiwa/es-extensions": "1.5.1",
     "json5": "2.2.1"
   },
   "peerDependencies": {
