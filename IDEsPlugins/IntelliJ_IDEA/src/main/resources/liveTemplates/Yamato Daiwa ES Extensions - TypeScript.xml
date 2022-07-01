@@ -1,0 +1,162 @@
+<templateSet group="Yamato Daiwa ES Extensions - TypeScript">
+  <template name="teal" value="Logger.throwErrorAndLog({&#10;  &#10;  errorInstance: new UnexpectedEventError(&quot;$END$&quot;),&#10;  // OR:&#10;  errorType: UnexpectedEventError.NAME,&#10;  description: &quot;&quot;,&#10;  &#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  wrappableError: error&#10;});" description="Logger.throwErrorAndLog()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="li" value="Logger.logInfo({&#10;  title: &quot;$TITLE$&quot;,&#10;  description: &quot;$DESCRIPTION$&quot;&#10;});" description="Logger.logInfo()" toReformat="false" toShortenFQNames="true">
+    <variable name="TITLE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DESCRIPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="le" value="Logger.logError({&#10;  errorType: UnexpectedEventError.NAME,&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  caughtError: error&#10;});" description="Logger.logError()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="lelm" value="Logger.logErrorLikeMessage({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;'foo' is 'null'. With correctly working validation it could not be.&quot;,&#10;  customBadgeText: &quot;Exception&quot;&#10;});" description="Logger.logErrorLikeMessage()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="lw" value="Logger.logWarning({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;&#10;});" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ls" value="Logger.logSuccess({&#10;  title: &quot;Sign in success&quot;,&#10;  description: &quot;$END$&quot;&#10;});" description="Logger.logSuccess()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="rodp" value="type ValidData = {&#10;  foo: number;&#10;  bar: string;&#10;  baz: boolean;&#10;  quux: {&#10;    alpha: number;&#10;    bravo: &quot;PLATINUM&quot; | &quot;GOLD&quot; | &quot;SILVER&quot;;&#10;  };&#10;};&#10;&#10;const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {&#10;  nameForLogging: &quot;Example&quot;,&#10;  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,&#10;  properties: {&#10;    foo: {&#10;      type: Number,&#10;      required: true,&#10;      numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger&#10;    },&#10;    bar: {&#10;      type: String,&#10;      required: true,&#10;      minimalCharactersCount: 5&#10;    },&#10;    baz: {&#10;      type: Boolean,&#10;      required: true&#10;    },&#10;    quux: {&#10;      type: Object,&#10;      required: true,&#10;      properties: {&#10;        alpha: {&#10;          type: Number,&#10;          required: true,&#10;          numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,&#10;          minimalValue: 3&#10;        },&#10;        bravo: {&#10;          type: String,&#10;          required: true,&#10;          minimalCharactersCount: 5,&#10;          allowedAlternatives: [ &quot;PLATINUM&quot;, &quot;GOLD&quot;, &quot;SILVER&quot; ]&#10;        }&#10;      }&#10;    }&#10;  }&#10;};&#10;&#10;const dataSample: unknown = {&#10;  foo: 5,&#10;  bar: &quot;beekeeper&quot;,&#10;  baz: true,&#10;  quux: {&#10;    alpha: 5,&#10;    bravo: &quot;PLATINUM&quot;&#10;  }&#10;};&#10;&#10;&#10;const dataSampleProcessingResult: RawObjectDataProcessor.ProcessingResult&lt;ValidData&gt; = RawObjectDataProcessor.&#10;    process(dataSample, validDataSpecification);&#10;&#10;if (dataSampleProcessingResult.rawDataIsInvalid) {&#10;  Logger.logError({&#10;    errorType: InvalidExternalDataError.NAME,&#10;    title: InvalidExternalDataError.DEFAULT_TITLE,&#10;    description: &quot;The dataSample is invalid:&quot; +&#10;        `${RawObjectDataProcessor.formatValidationErrorsList(dataSample1ProcessingResult.validationErrorsMessages)}`,&#10;    occurrenceLocation: &quot;upper scope&quot;&#10;  });&#10;}" description="`RawObjectDataProcessor.process()` example (fixed key and value pairs type object case)" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="tp" value="const normalizedDateTime: TimePoint = new TimePoint($PARAMETER$);&#10;&#10;console.log(&#10;&#10;  `Year: ${normalizedDateTime.year}\n\n` +&#10;&#10;  &quot;Month:\n&quot; +&#10;  `                                             Name: ${normalizedDateTime.monthName}\n` +&#10;  `                       Number (numeration from 0): ${normalizedDateTime.monthNumber__numerationFrom0}\n` +&#10;  `                       Number (numeration from 1): ${normalizedDateTime.monthNumber__numerationFrom1}\n` +&#10;  `Month number (numeration from 1, always 2 digits): ${normalizedDateTime.monthNumber__numerationFrom1__2Digits}\n\n` +&#10;&#10;  `Day of month: ${normalizedDateTime.dayOfMonth}\n\n` +&#10;&#10;  &quot;Day of week:\n&quot; +&#10;  `                                                 Name: ${normalizedDateTime.dayOfWeek}\n` +&#10;  `                 Number (numeration from 0 as Sunday): ${normalizedDateTime.dayOfWeekNumber__numerationFrom0AsSunday}\n` +&#10;  `                 Number (numeration from 1 as Sunday): ${normalizedDateTime.dayOfWeekNumber__numerationFrom1AsSunday}\n` +&#10;  `Number (numeration from 1 as Sunday, always 2 digits): ${normalizedDateTime.dayOfWeekNumber__numerationFrom1AsSunday__2Digits}\n\n` +&#10;&#10;  &quot;Hours: \n&quot; +&#10;  `                     12 hours format: ${normalizedDateTime.hours__12Format} ${normalizedDateTime.isBeforeMidday ? &quot;AM&quot; : &quot;PM&quot;}\n` +&#10;  `                     24 hours format: ${normalizedDateTime.hours__24Format}\n` +&#10;  `   24 hours format (always 2 digits): ${normalizedDateTime.hours__24Format__2Digits}\n\n` +&#10;&#10;  `Minutes: ${normalizedDateTime.minutes}` +&#10;  `Minutes (always 2 digits): ${normalizedDateTime.minutes__2Digits}\n\n` +&#10;&#10;  `Seconds: ${normalizedDateTime.seconds}` +&#10;  `Seconds (always 2 digits): ${normalizedDateTime.seconds__2Digits}\n\n` +&#10;&#10;  `Milliseconds: ${normalizedDateTime.milliseconds}\n\n` +&#10;&#10;  `ISO 8614 string: ${normalizedDateTime.toISO8601String()}`&#10;);&#10;" description="`TimePoint`" toReformat="false" toShortenFQNames="true">
+    <variable name="PARAMETER" expression="clipboard()" defaultValue="&quot;Date.now()&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="$END$const sample: Array&lt;string&gt; = [ &quot;Saint Paul&quot;, &quot;Santa Barbara&quot;, &quot;St. Louis&quot;, &quot;Santa Monica&quot; ];&#10;&#10;// Null if element not found of more than one matches&#10;const nullableResult: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  sample, (arrayElement: string): boolean =&gt; arrayElement.startsWith(&quot;St.&quot;)&#10;);&#10;&#10;// Throw error if element not found of more than one matches&#10;getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  sample,&#10;  (arrayElement: string): boolean =&gt; arrayElement.startsWith(&quot;Santa&quot;),&#10;  { throwErrorIfElementNotFoundOrMoreThan1: true }&#10;);&#10;// === END OF AUTOMATICALLY INSERTED CODE ==============================================================================" description="Inserts the examples for eponymous function" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="sps" value="{&#10;  type: $PROPERTY_ACCESS$.TYPE,&#10;  required: $PROPERTY_ACCESS$.REQUIRED,&#10;  minimalCharactersCount: $PROPERTY_ACCESS$.MINIMAL_CHARACTERS_COUNT,&#10;  maximalCharactersCount: $PROPERTY_ACCESS$.MAXIMAL_CHARACTERS_COUNT,&#10;  // OR&#10;  allowedAlternatives: $PROPERTY_ACCESS$.ALLOWED_VALUES&#10;}" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
+    <variable name="PROPERTY_ACCESS" expression="clipboard()" defaultValue="ExampleEntity.EXAMPLE_PROPERTY" alwaysStopAt="true" />
+    <context>
+      <option name="TS_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="dceh" value="// Simple case&#10;delegateClickEventHandling({&#10;  eventTargetSelector: &quot;$SELECTOR$&quot;,&#10;  delegatingContainerOrItsSelector: &quot;$CONTAINER$&quot;,&#10;  handler: (clickedElement: Element, event: MouseEvent): void =&gt; {&#10;    // TODO Implement the handler&#10;    $END$&#10;  }&#10;});&#10;&#10;// Specific subtype of Element&#10;// TODO Replace &quot;HTMLButtonElement&quot; if you need other subtype&#10;delegateClickEventHandling&lt;HTMLButtonElement&gt;({&#10;  eventTargetSelector: &quot;$SELECTOR$&quot;,&#10;  delegatingContainerOrItsSelector: &quot;$CONTAINER$&quot;,&#10;  eventTargetElementSubtype: HTMLButtonElement,&#10;  handler: (clickedElement: HTMLButtonElement, event: MouseEvent): void =&gt; {&#10;    // TODO Implement the handler&#10;  }&#10;});&#10;// === END OF AUTOMATICALLY GENERATED CODE =============================================================================" description="`delegateClickEventHandling` function" toReformat="false" toShortenFQNames="true">
+    <variable name="SELECTOR" expression="" defaultValue="&quot;.Card-Button&quot;" alwaysStopAt="true" />
+    <variable name="CONTAINER" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getExpectedToBeSingleDOM_Element" value="// Get the instance of Element&#10;const targetElement: Element = getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  context: $CONTEXT$&#10;});&#10;&#10;// Get the instance of specified in 'targetDOM_ElementSubtype' Element's subtype &#10;const targetElement: $DOM_ELEMENT_SUBTYPE$ = getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  context: $CONTEXT$,&#10;  expectedDOM_ElementSubtype: $DOM_ELEMENT_SUBTYPE$&#10;});&#10;// === END OF AUTOMATICALLY INSERTED CODE ==============================================================================" description="Inserts examples for `getExpectedToBeSingleDOM_Element` function" toReformat="false" toShortenFQNames="true">
+    <variable name="SELECTOR" expression="" defaultValue="&quot;\&quot;.Button\&quot;&quot;" alwaysStopAt="true" />
+    <variable name="CONTEXT" expression="" defaultValue="&quot;createDOM_ElementFromHTML_Code(\&quot;&lt;div class='ActionBar'&gt;&lt;button type='button' class='Button'&gt;&lt;/button&gt;&lt;/div&gt;\&quot;)&quot;" alwaysStopAt="true" />
+    <variable name="DOM_ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLButtonElement&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="raebi" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;});" description="`removeArrayElementsByIndexes` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;A\&quot;, \&quot;B\&quot;, \&quot;C\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="INDEXES" expression="" defaultValue="&quot;[ 2, 3 ]&quot;" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="rmaebp" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;});&#10;" description="`removeArrayElementsByPredicates` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="BOOLEAN_EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getIndexesOfArrayElementsWhichSatisfiesThePredicate" value="getIndexesOfArrayElementsWhichSatisfiesThePredicate(&#10;  $TARGET_ARRAY$, ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$&#10;)" description="`getIndexesOfArrayElementsWhichSatisfiesThePredicate` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$, &#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$,&#10;  { throwErrorIfElementNotFoundOrMoreThan1: true } // TODO Remove it if you need to be returned 'null' when desired element in not one &#10;)" description="`getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="raebii" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;});&#10;" description="`replaceArrayElementsByIndexesImmutably` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  // TODO Leave one, delete remain    &#10;  toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;})" description="`addElementsToArray` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_ELEMENTS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="rpaebp" value="replaceArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  &#10;  // === Replacing of one element&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  &#10;  newValue: $NEW_VALUE$,&#10;  // or&#10;  replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$,&#10;&#10;  // === Replacing of multiple elements&#10;  replacements: [&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    },&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    }&#10;  ],&#10;  &#10;  &#10;  mutably: $MUTABLY$&#10;});&#10;" description="`replaceArrayElementsByPredicates` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="BOOLEAN_EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="REPLACEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="cdefhc" value="// Returns &quot;Element&quot;: &#10;createDOM_ElementFromHTML_Code($HTML_CODE$);&#10;&#10;// Returns specific subtype of &quot;Element&quot;:&#10;createDOM_ElementFromHTML_Code&lt;$ELEMENT_SUBTYPE$&gt;({&#10;  HTML_Code: $HTML_CODE$,&#10;  rootDOM_ElementSubtype: $ELEMENT_SUBTYPE$&#10;});&#10;// === END OF AUTOMATICALLY GENERATED CODE =============================================================================" description="createDOM_ElementFromHTML_Code" toReformat="false" toShortenFQNames="true">
+    <variable name="HTML_CODE" expression="" defaultValue="&quot;\&quot;&lt;p&gt;Example&lt;/p&gt;\&quot;&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLParagraphElement&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="rscfcp" value="removeSpecificCharacterFromCertainPosition({&#10;  targetString: $TARGET_STRING$,&#10;  targetCharacter: $TARGET_CHARACTER$,&#10;  // TODO leave only one of below parameters&#10;  fromFirstPosition: true,&#10;  fromLastPosition: true,&#10;  fromPosition__numerationFrom0: $POSITION_NUMBER$,&#10;  fromPosition__numerationFrom1: $POSITION_NUMBER$&#10;})&#10;" description="`removeSpecificCharacterFromCertainPosition` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_STRING" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TARGET_CHARACTER" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="POSITION_NUMBER" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getExpectedToBeSingleChildOfTemplateElement" value="getExpectedToBeSingleChildOfTemplateElement($TEMPLATE_ELEMENT$)&#10;&#10;// or&#10;&#10;getExpectedToBeSingleChildOfTemplateElement($TEMPLATE_ELEMENT_SELECTOR$)&#10;&#10;// or&#10;getExpectedToBeSingleChildOfTemplateElement({&#10;  templateElement: $TEMPLATE_ELEMENT$,&#10;  // or&#10;  templateElementSelector: $TEMPLATE_ELEMENT_SELECTOR$,&#10;  context: $CONTEXT$, // optional&#10;  &#10;  expectedChildElementSubtype: $EXPECTED_CHILD_ELEMENT_SUBTYPE$ // optional&#10;})&#10;// === END OF AUTOMATICALLY INSERTED CODE ==============================================================================" description="Inserts examples for `getExpectedToBeSingleChildOfTemplateElement` function" toReformat="false" toShortenFQNames="true">
+    <variable name="TEMPLATE_ELEMENT" expression="" defaultValue="&quot;templateElement&quot;" alwaysStopAt="true" />
+    <variable name="TEMPLATE_ELEMENT_SELECTOR" expression="" defaultValue="&quot;templateElementSelector&quot;" alwaysStopAt="true" />
+    <variable name="CONTEXT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPECTED_CHILD_ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLElement&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+    </context>
+  </template>
+</templateSet>

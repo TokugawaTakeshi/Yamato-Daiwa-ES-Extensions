@@ -1,5 +1,7 @@
 # `getExpectedToBeSingleDOM_Element` - get expected to be single DOM element
 
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getExpectedToBeSingleDOM_Element-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
 Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context, 
 otherwise throws the error.
 

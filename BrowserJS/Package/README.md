@@ -25,7 +25,7 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 <dl>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md">createDOM_ElementFromHTML_Code</a></dt>
-  <dd>Creates the DOM element (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a>) or it's inheritor from HTML code, herewith is must be exactly one root element.</dd>
+  <dd>Creates the DOM element (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a>) or it's inheritor from HTML code, herewith it must be exactly one root element.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createHTML_CollectionFromHTML_Code.md">createHTML_CollectionFromHTML_Code</a></dt>
   <dd>Creates the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection">HTMLCollection</a> from HTML code passed as parameter.</dd>
@@ -43,7 +43,7 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 <dl>
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/delegateClickEventHandling.md">delegateClickEventHandling</a></dt>
-  <dd>Create just one click event listener while allowing to handle the click on arbitrary large number of elements what is the optimization measures.</dd>
+  <dd>Creates just one click event listener while allowing to handle the click of arbitrary large number of elements what is the optimization measures.</dd>
 </dl>
 
 
@@ -51,5 +51,5 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 <dl>
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/Logging/BasicFrontEndLogger/BasicFrontEndLogger.md">BasicFrontEndLogger</a></dt>
-  <dd>The implementation of ILogger interface for the <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a> which could be used as the base of the custom implementation for the frontend side of the websites / web application.</dd>
+  <dd>The implementation of <b>ILogger</b> interface for the <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a> which could be used as the base of the custom implementation for the frontend side of the websites / web application.</dd>
 </dl>

@@ -15,7 +15,7 @@ createDOM_ElementFromHTML_Code<DOM_ElementSubtype extends Element>(
 ```
 
 Creates the DOM element ([Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)) or it's inheritor from 
-HTML code, herewith is must be exactly one root element. If you have more than one root element or not sure that it will
+HTML code, herewith it must be exactly one root element. If you have more than one root element or not sure that it will
 only one single root element, use [createHTML_CollectionFromHTML_Code](createHTML_CollectionFromHTML_Code.md)
 function instead.
 
