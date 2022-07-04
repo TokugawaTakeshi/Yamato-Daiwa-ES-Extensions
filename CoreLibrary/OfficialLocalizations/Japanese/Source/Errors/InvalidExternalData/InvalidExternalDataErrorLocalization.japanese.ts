@@ -6,9 +6,9 @@ export const InvalidExternalDataErrorLocalization__Japanese: InvalidExternalData
   defaultTitle: "外部から取得されたデータは仕様と合っていない",
   generateDescription:
       (namedParameters: InvalidExternalDataError.Localization.DescriptionTemplateNamedParameters): string =>
-          `「${namedParameters.mentionToExpectedData}」は期待された構成と合っていない。` +
+          `「${ namedParameters.mentionToExpectedData }」は期待された構成と合っていない。` +
           `${ insertSubstring(namedParameters.messageSpecificPart, {
-            modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
+            modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
           }) }`
 };
 
