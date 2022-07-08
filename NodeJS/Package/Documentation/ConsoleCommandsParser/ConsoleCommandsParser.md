@@ -56,7 +56,7 @@ namespace ApplicationConsoleLineInterface {
 
   export enum CommandPhrases {
     buildProject = "build",
-    deployProject = "deployProject"
+    deployProject = "deploy"
   }
 
   export const specification: ConsoleCommandsParser.CommandLineInterfaceSpecification = {
@@ -79,7 +79,8 @@ namespace ApplicationConsoleLineInterface {
           type: ConsoleCommandsParser.ParametersTypes.string,
           required: false
         }
-      }
+      },
+      [CommandPhrases.deployProject]: {} // No arguments
     }
   };
 

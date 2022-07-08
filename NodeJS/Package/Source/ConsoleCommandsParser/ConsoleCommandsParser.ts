@@ -15,7 +15,7 @@ import {
   isString,
   Logger,
   RawObjectDataProcessor,
-  InvalidExternalDataError
+  InvalidExternalDataError, insertSubstring
 } from "@yamato-daiwa/es-extensions";
 import InvalidConsoleCommandError from "../Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
 import JSON5 from "json5";
@@ -138,6 +138,57 @@ class ConsoleCommandsParser<
       phrase: dataHoldingSelfInstance.targetCommandPhrase,
       ...dataHoldingSelfInstance.getParsedOptionsAndParameters()
     };
+  }
+
+  public static generateFullHelpReference(
+    commandLineInterfaceSpecification: ConsoleCommandsParser.CommandLineInterfaceSpecification
+  ): string {
+
+    let accumulatingValue: string =
+        `=== The CLI of ${ commandLineInterfaceSpecification.applicationName } application ====================`;
+
+    if (isNotUndefined(commandLineInterfaceSpecification.defaultCommand)) {
+
+      accumulatingValue = "\nHas default command\n";
+
+      for (const [ argumentName, argumentSpecification ] of Object.entries(commandLineInterfaceSpecification.defaultCommand)) {
+        accumulatingValue = `${ argumentName }: ${ argumentSpecification.type }\n`;
+      }
+    }
+
+
+    if (isNotUndefined(commandLineInterfaceSpecification.commandPhrases)) {
+
+      accumulatingValue = `${ accumulatingValue }\n=== Command phrases`;
+
+      for (const [ commandPhrase, argumentsSpecification ] of Object.entries(commandLineInterfaceSpecification.commandPhrases)) {
+
+        accumulatingValue = `${ accumulatingValue }\n\n` +
+            `■ ${ commandPhrase }\n`;
+
+        if (isUndefined(argumentsSpecification)) {
+          continue;
+        }
+
+
+        accumulatingValue = `${ accumulatingValue }\n --- Arguments`;
+
+        for (const [ argumentName, argumentSpecification ] of Object.entries(argumentsSpecification)) {
+          accumulatingValue = `${ accumulatingValue }\n` +
+              `  --${ argumentName }:` +
+              `${
+                  insertSubstring(argumentSpecification.shortcut, {
+                    modifier: (shortcut: string): string => `\n    Shortcut: -${ shortcut }`
+                  })
+              }` +
+              `\n    Type: ${ argumentSpecification.type }` +
+              `${ "required" in argumentSpecification ? `\n    Is required: ${ argumentSpecification.required }` : "" }`;
+        }
+      }
+    }
+
+
+    return accumulatingValue;
   }
 
   public static setLocalization(newLocalization: ConsoleCommandsParser.Localization): void {
@@ -663,43 +714,6 @@ class ConsoleCommandsParser<
 
   private static isCommandArgumentTheOption(consoleCommandArgument: string): boolean {
     return consoleCommandArgument.startsWith("-");
-  }
-
-  private static generateFullHelpReference(
-    commandLineInterfaceSpecification: ConsoleCommandsParser.CommandLineInterfaceSpecification
-  ): string {
-
-    let accumulatingValue: string = "";
-
-    if (isNotUndefined(commandLineInterfaceSpecification.defaultCommand)) {
-
-      accumulatingValue = "Has default command\n";
-
-      for (const [ argumentName, argumentSpecification ] of Object.entries(commandLineInterfaceSpecification.defaultCommand)) {
-        accumulatingValue = `${ argumentName }: ${ argumentSpecification.type }\n`;
-      }
-    }
-
-
-    if (isNotUndefined(commandLineInterfaceSpecification.commandPhrases)) {
-
-      for (const [ commandPhrase, argumentsSpecification ] of Object.entries(commandLineInterfaceSpecification.commandPhrases)) {
-
-        accumulatingValue = `${ accumulatingValue }${ commandPhrase }:\n`;
-
-        if (isUndefined(argumentsSpecification)) {
-          continue;
-        }
-
-
-        for (const [ argumentName, argumentSpecification ] of Object.entries(argumentsSpecification)) {
-          accumulatingValue = `${ accumulatingValue }\n  ${ argumentName }: ${ argumentSpecification.type }`;
-        }
-      }
-    }
-
-
-    return accumulatingValue;
   }
 
   private static generateSingleCommandHelpReference(

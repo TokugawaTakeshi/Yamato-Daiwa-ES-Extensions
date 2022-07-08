@@ -4,13 +4,13 @@ export default abstract class Timer {
   protected readonly onElapsed: () => unknown;
 
   public constructor(
-      parametersObject: {
-        period__seconds: number;
-        onElapsed: () => unknown;
-      }
+    namedParameters: {
+      period__seconds: number;
+      onElapsed: () => unknown;
+    }
   ) {
-    this.period__seconds = parametersObject.period__seconds;
-    this.onElapsed = parametersObject.onElapsed;
+    this.period__seconds = namedParameters.period__seconds;
+    this.onElapsed = namedParameters.onElapsed;
   }
 
 
