@@ -12,4 +12,6 @@ export { default as InvalidConsoleCommandError } from "./Errors/InvalidConsoleCo
 export { default as InterProcessInteractionFailedError } from
     "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
 
+export { default as ImprovedPath } from "./ImprovedPath/ImprovedPath";
+
 export { default as isErrnoException } from "./isErrnoException";
