@@ -18,7 +18,7 @@ So neither forward not backslashes could be safely used on Windows in all cases.
 ### `buildAbsolutePath`: Build absolute path
 
 ```
-buildAbsolutePath(pathSegments: Array<string>, options?: { forwardSlashOnlySeparators?: boolean; }): string
+(pathSegments: Array<string>, options?: { forwardSlashOnlySeparators?: boolean; }) => string
 ```
 
 The behaviour is similar to native [`Path.resolve()`](https://nodejs.org/api/path.html#path_path_resolve_paths) 
@@ -40,10 +40,10 @@ console.log(ImprovedPath.buildAbsolutePath(pathSegments, { forwardSlashOnlySepar
 ```
 
 
-### `parse` Path parsing
+### `parsePath` Path parsing
 
 ```
-parsePath(targetPath: string, options?: { forwardSlashOnlySeparators?: boolean; }): ImprovedPath.ParsedPath
+(targetPath: string, options?: { forwardSlashOnlySeparators?: boolean; }) => ImprovedPath.ParsedPath
 ```
 
 ```typescript

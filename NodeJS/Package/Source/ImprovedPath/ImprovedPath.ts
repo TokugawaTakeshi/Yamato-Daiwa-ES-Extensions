@@ -318,6 +318,16 @@ abstract class ImprovedPath {
 
 namespace ImprovedPath {
 
+  export class ParsedPath {
+
+    public readonly root?: string;
+
+    public getRootWhichExpectedBeDefined(): string {
+      // TODO 再開点
+    }
+
+  }
+
   export type ParsedPath = {
 
     readonly root?: string;

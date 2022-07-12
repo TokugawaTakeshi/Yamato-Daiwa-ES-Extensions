@@ -1,6 +1,6 @@
 import Path from "path";
 import ImprovedPath from "../../Source/ImprovedPath/ImprovedPath";
-import { deepEqual, equal } from "assert";
+import { deepEqual, strictEqual } from "assert";
 
 
 describe("ImprovedPath", (): void => {
@@ -14,47 +14,47 @@ describe("ImprovedPath", (): void => {
     });
 
     it("With 'forwardSlashOnlySeparators' using forward slashes", (): void => {
-      equal(ImprovedPath.buildAbsolutePath(pathSegments, { forwardSlashOnlySeparators: true }), "D:/foo/bar/baz");
+      strictEqual(ImprovedPath.buildAbsolutePath(pathSegments, { forwardSlashOnlySeparators: true }), "D:/foo/bar/baz");
     });
 
   });
 
-  // describe("parsePath", (): void => {
-  //
-  //   const unixLikeAbsoluteSamplePath: string = "/home/user/dir/file.txt";
-  //   const windowsLikeAbsoluteSamplePath: string = "C:\\path\\dir\\file.txt";
-  //   const unixLikeRelativeSamplePath: string = "home/user/dir/file.txt";
-  //   const windowsLikeRelativeSamplePath: string = "path\\dir\\file.txt";
-  //
-  //   it("root & getRootWhichExpectedBeDefined", (): void => {
-  //
-  //     Assert.strictEqual(ImprovedPath.parsePath(unixLikeAbsoluteSamplePath).root, "/");
-  //     Assert.strictEqual(
-  //       Path.parse(unixLikeAbsoluteSamplePath).root,
-  //       ImprovedPath.parsePath(unixLikeAbsoluteSamplePath).root
-  //     );
-  //
-  //     Assert.strictEqual(ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath).root, "C:\\");
-  //     Assert.strictEqual(
-  //       Path.parse(windowsLikeAbsoluteSamplePath).root,
-  //       ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath).root
-  //     );
-  //     Assert.strictEqual(ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath, {
-  //       forwardSlashOnlySeparators: true
-  //     }).root, "C:/");
-  //
-  //     Assert.strictEqual(Path.parse(unixLikeRelativeSamplePath).root, "");
-  //     Assert.isUndefined(ImprovedPath.parsePath(unixLikeRelativeSamplePath).root);
-  //     expect((): void => {
-  //       ImprovedPath.parsePath(unixLikeRelativeSamplePath).getRootWhichExpectedBeDefined();
-  //     }).to.throw(UnexpectedEventError);
-  //
-  //     Assert.strictEqual(Path.parse(windowsLikeRelativeSamplePath).root, "");
-  //     Assert.isUndefined(ImprovedPath.parsePath(windowsLikeRelativeSamplePath).root);
-  //     expect((): void => {
-  //       ImprovedPath.parsePath(windowsLikeRelativeSamplePath).getRootWhichExpectedBeDefined();
-  //     }).to.throw(UnexpectedEventError);
-  //   });
+  describe("parsePath", (): void => {
+
+    const unixLikeAbsoluteSamplePath: string = "/home/user/dir/file.txt";
+    // const windowsLikeAbsoluteSamplePath: string = "C:\\path\\dir\\file.txt";
+    // const unixLikeRelativeSamplePath: string = "home/user/dir/file.txt";
+    // const windowsLikeRelativeSamplePath: string = "path\\dir\\file.txt";
+
+    it("root & getRootWhichExpectedBeDefined", (): void => {
+
+      strictEqual(ImprovedPath.parsePath(unixLikeAbsoluteSamplePath).root, "/");
+      strictEqual(
+        Path.parse(unixLikeAbsoluteSamplePath).root,
+        ImprovedPath.parsePath(unixLikeAbsoluteSamplePath).root
+      );
+
+      // Assert.strictEqual(ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath).root, "C:\\");
+      // Assert.strictEqual(
+      //   Path.parse(windowsLikeAbsoluteSamplePath).root,
+      //   ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath).root
+      // );
+      // Assert.strictEqual(ImprovedPath.parsePath(windowsLikeAbsoluteSamplePath, {
+      //   forwardSlashOnlySeparators: true
+      // }).root, "C:/");
+      //
+      // Assert.strictEqual(Path.parse(unixLikeRelativeSamplePath).root, "");
+      // Assert.isUndefined(ImprovedPath.parsePath(unixLikeRelativeSamplePath).root);
+      // expect((): void => {
+      //   ImprovedPath.parsePath(unixLikeRelativeSamplePath).getRootWhichExpectedBeDefined();
+      // }).to.throw(UnexpectedEventError);
+      //
+      // Assert.strictEqual(Path.parse(windowsLikeRelativeSamplePath).root, "");
+      // Assert.isUndefined(ImprovedPath.parsePath(windowsLikeRelativeSamplePath).root);
+      // expect((): void => {
+      //   ImprovedPath.parsePath(windowsLikeRelativeSamplePath).getRootWhichExpectedBeDefined();
+      // }).to.throw(UnexpectedEventError);
+    });
 
     // it("directory & getDirectoryWhichExpectedBeDefined", (): void => {
     //
