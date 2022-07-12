@@ -26,18 +26,18 @@ namespace InvalidConsoleCommandError {
 
   export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (
-      parametersObject: Localization.DescriptionTemplateNamedParameters
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (
+      namedParameters: Localization.DescriptionTemplateNamedParameters
     ) => string;
-  };
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly applicationName: string;
-      readonly messageSpecificPart?: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      applicationName: string;
+      messageSpecificPart?: string;
+    }>;
   }
 }
 
