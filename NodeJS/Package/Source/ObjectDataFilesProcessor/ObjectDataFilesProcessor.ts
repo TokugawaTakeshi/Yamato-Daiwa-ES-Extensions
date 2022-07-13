@@ -36,9 +36,10 @@ class ObjectDataFilesProcessor {
       dataSchema = namedParameters.schema;
     } else {
 
-      const fileNameLastExtension: string = Path.extname(filePath);
+      const fileNameLastExtensionWithLeadingPeriod: string = Path.extname(filePath);
 
-      if (fileNameLastExtension.length === 0) {
+
+      if (fileNameLastExtensionWithLeadingPeriod.length === 0) {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidParameterValueError({
             parameterName: "namedParameters.filePath",
@@ -53,15 +54,15 @@ class ObjectDataFilesProcessor {
       }
 
 
-      switch (fileNameLastExtension) {
+      switch (fileNameLastExtensionWithLeadingPeriod) {
 
-        case "json": {
+        case ".json": {
           dataSchema = ObjectDataFilesProcessor.SupportedSchemas.JSON;
           break;
         }
 
-        case "yaml":
-        case "yml": {
+        case ".yaml":
+        case ".yml": {
           dataSchema = ObjectDataFilesProcessor.SupportedSchemas.YAML;
           break;
         }
@@ -77,8 +78,8 @@ class ObjectDataFilesProcessor {
             errorInstance: new InvalidParameterValueError({
               parameterName: "namedParameters.filePath",
               messageSpecificPart: `Target file '${ namedParameters.filePath }' has unsupported filename extension ` +
-                  `'${ fileNameLastExtension }'. If this file including the data of known for 'ObjectDataFilesProcessor' ` +
-                  "schema, specify 'namedParameters.dataSchema' with desired element of " +
+                  `'${ fileNameLastExtensionWithLeadingPeriod }'. If this file including the data of known for ` +
+                  "'ObjectDataFilesProcessor' schema, specify 'namedParameters.dataSchema' with desired element of " +
                   "'ObjectDataFilesProcessor.SupportedSchemas' enumeration"
             }),
             title: InvalidParameterValueError.localization.defaultTitle,
