@@ -1,0 +1,18 @@
+.MainLayout
+
+  display flex
+  flex-direction column
+
+  fillBodyVertically({ verticalScrolling: false })
+
+
+  &-UpperFixedContentSlot
+
+    flex-shrink 0
+
+
+  &-ScrollableContent
+
+    overflow-y scroll
+
+    flex-shrink 1
