@@ -4,7 +4,7 @@ enum HTTP_StatusCodes {
   switchingProtocols = 101,
 
   OK = 200,
-  created = 200,
+  created = 201,
   nonAuthoritativeInformation = 203,
   noContent = 204,
   resetContent = 205,
