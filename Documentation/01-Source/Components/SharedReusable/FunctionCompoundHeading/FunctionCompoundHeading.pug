@@ -1,0 +1,13 @@
+mixin FunctionCompoundHeading(propertiesObject)
+
+  -
+    const {
+      headingElementTag = "div",
+      functionName,
+      functionNameLocalizedInterpretation,
+    } = propertiesObject
+
+
+  #{headingElementTag}.FunctionCompoundHeading&attributes(attributes)
+    code.FunctionCompoundHeading-FunctionName= functionName
+    span.FunctionCompoundHeading-FunctionNameLocalizedInterpretation= functionNameLocalizedInterpretation
