@@ -7,10 +7,10 @@ export type PaginationCollection<Element> = {
 
 export default function splitToPaginationCollection<Element>(
   flatArray: Array<Element>,
-  options: {
+  options: Readonly<{
     itemsCountPerPaginationPage: number;
     pagesNumerationFrom: 0 | 1;
-  }
+  }>
 ): PaginationCollection<Element> {
 
   const pagesCount: number = Math.ceil(flatArray.length / options.itemsCountPerPaginationPage);

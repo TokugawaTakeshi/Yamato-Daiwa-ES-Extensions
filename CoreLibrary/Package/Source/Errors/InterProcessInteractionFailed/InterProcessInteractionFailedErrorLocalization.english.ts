@@ -1,4 +1,4 @@
-import InterProcessInteractionFailedError from "./InterProcessInteractionFailedError";
+import type InterProcessInteractionFailedError from "./InterProcessInteractionFailedError";
 
 
 const InterProcessInteractionFailedErrorLocalization__English: InterProcessInteractionFailedError.Localization = {

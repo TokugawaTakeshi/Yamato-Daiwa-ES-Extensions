@@ -26,19 +26,19 @@ class IncompatiblePropertiesInObjectTypeParameterError extends Error {
 
 namespace IncompatiblePropertiesInObjectTypeParameterError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly parameterName: string;
-      readonly conflictingPropertyName: string;
-      readonly incompatiblePropertiesNames: Array<string>;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      parameterName: string;
+      conflictingPropertyName: string;
+      incompatiblePropertiesNames: Array<string>;
+    }>;
   }
 }
 

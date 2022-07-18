@@ -31,27 +31,24 @@ class DataRetrievingFailedError extends Error {
 namespace DataRetrievingFailedError {
 
   export type ConstructorNamedParameters =
-      (Localization.DescriptionTemplateNamedParameters | { customMessage: string; }) &
-      {
-        readonly additionalData?: unknown;
-        readonly typicalCause?: TypicalCauses;
-      };
+      (Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>) &
+      Readonly<{
+        additionalData?: unknown;
+        typicalCause?: TypicalCauses;
+      }>;
 
   export enum TypicalCauses {
     notFound = "NOT_FOUND",
     notEnoughPermissions = "NOT_ENOUGH_PERMISSIONS"
   }
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
-
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly mentionToData: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{ mentionToData: string; }>;
   }
 }
 
