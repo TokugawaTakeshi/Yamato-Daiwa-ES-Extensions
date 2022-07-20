@@ -1,0 +1,102 @@
+extends ../../../Components/SharedSingletons/Layouts/Main/MainLayout.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_TITLE = "areStringifiedDigitsOnly";
+    HTML_PageMetaData.author = "Yamato Daiwa";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles" ];
+
+
+block append Data
+
+  -
+
+    const StaticLinks = {
+      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
+    }
+
+
+block append Requirements
+
+  include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+
+
+block append DynamicContent
+
+  main
+
+    article
+
+      +ProgrammaticEntityHeading({
+        headingElementTag: "h1",
+        entityName: "areStringifiedDigitsOnly",
+        entityLocalizedInterpretation: "Stringified digits only check"
+      })
+
+      +CallableExpressionScheme({
+        technicalName: "areStringifiedDigitsOnly",
+        localizedDescriptiveHeading: "文字列化しな数字のみか確認",
+        parametersSpecification: [
+          {
+            localizedName: "数字しか含めていない推測の文字列",
+            type: "string",
+            required: true,
+            genericTechnicalName: "potentialStringifiedDigits"
+          }
+        ],
+        returnValue: "boolean"
+      })
+
+
+      //-
+
+
+        p.PrototypeArticle-Paragraph.
+          #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字は文字列化した#[+Term--YDID 数字]（要するに数字の順番）に成っているか、確認する。
+
+        +AttentionBox({
+          decoration: AttentionBox.DecorativeVariations.importantInfo
+        })
+          .AttentionBox-Heading 数と数字の順番の違いを知る
+
+          p.AttentionBox-Paragraph.
+            マスコミ等で#[+Term--YDID 数字]と#[+Term--YDID 数]が物凄く一緒にされるが、#[+Keyword--YDID 根本的な]違いがあるがあるのだ。
+            #[+DefinableTerm--YDID 数字]は#[+ImportantEntity--YDID 0]から#[+ImportantEntity--YDID 9]迄の文字であり、
+              #[+ImportantEntity--YDID 10個]しか存在していない。関数名に出る#[+ImportantEntity--YDID digits]
+              （単数：#[+ImportantEntity--YDID digit]）は直訳通り#[+Term--YDID 数字]を意味する。
+
+          p.AttentionBox-Paragraph.
+            #[+ImportantEntity--YDID 2桁以上]のは#[+Term--YDID 数字]#[+Keyphrase--YDID ではなく]、#[+Term--YDID 数]である。
+            尚#[+SecondaryEntity--YDID 0123]や#[+SecondaryEntity--YDID 0056]の様に#[+SecondaryEntity--YDID 0]から始まるのも、
+              #[+Term--YDID 数]#[+Keyword--YDID ではなく]、只の#[+DefinableTerm--YDID 数字の順番]であり、#[+Keyword--YDID 数学的な]意味は無い。
+
+        +ImprovedList({ type: ImprovedList.Types.unordered })
+          +ImprovedListItem.
+            #[a.PrototypeArticle-Link(href=StaticLinks.napierConstant target="_blank" rel="nofollow") ネイピア数]は
+            数字だと#[+Keyword--YDID 見做されない]。
+          +ImprovedListItem #[+Term--YDID 全角数字]は対象外。
+          +ImprovedListItem.
+            #[+ImportantEntity__Code--YDID isStringifiedNonNegativeIntegerOfRegularNotation]と違って、
+            先に行く#[+ImportantEntity__Code--YDID 0]（#[+Term--YDID 数字の順番]）が妥当としている。
+
+
+        +CodeViewer.PrototypeArticle-CodeViewer
+          +CodeViewerListing({ codeLanguageNotationByPrismJS: PrismJS.SupportedLanguagesNotations.TypeScript }).
+            import { areStringifiedDigitsOnly } from "hikari-es-extensions";
+
+            console.log(areStringifiedDigitsOnly("123")); // 数字しか含めていないので「true」
+            console.log(areStringifiedDigitsOnly("032")); // 此の関数の場合先に行く"0"は妥当とされているので、「true」
+            console.log(areStringifiedDigitsOnly("03e")); // 「e」はネイピア数？何方にせよ、関数名通り数字だけではない場合、「false」
+            console.log(areStringifiedDigitsOnly("ab1")); // 数字だけではないので「false」
+
+
+        h2.PrototypeArticle-Heading2 利用事例
+
+        p.PrototypeArticle-Paragraph.
+          #[+Keyword--YDID 入力フィールディング]のに利用し、数に成っているとは限らない#[+Term--YDID 数字の順番]を入力してほしい
+          （#[+SecondaryEntity--YDID JANコード]や其の外のコード）時に最適。

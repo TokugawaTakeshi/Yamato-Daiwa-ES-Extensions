@@ -1,0 +1,20 @@
+{
+  "private": "true",
+  "scripts": {
+    "Incremental development building": "rimraf 02-DevelopmentBuild & yda build --mode DEVELOPMENT",
+    "Production building": "rimraf 03-ProductionBuild & yda build --mode PRODUCTION"
+  },
+  "dependencies": {
+    "@yamato-daiwa/backend": "0.1.5",
+    "@yamato-daiwa/es-extensions": "1.5.2",
+    "@yamato-daiwa/es-extensions-browserjs": "1.5.4",
+    "@yamato-daiwa/es-extensions-nodejs": "1.5.1",
+    "@yamato-daiwa/frontend": "1.0.4",
+    "@yamato-daiwa/frontend-documenting-kit": "../../YamatoDaiwaFrontend/DocumentingKit/Package"
+  },
+  "devDependencies": {
+    "@yamato-daiwa/automation": "0.0.7",
+    "@yamato-daiwa/style_guides": "0.0.17",
+    "rimraf": "3.0.2"
+  }
+}

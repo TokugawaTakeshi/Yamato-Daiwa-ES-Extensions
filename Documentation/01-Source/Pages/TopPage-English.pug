@@ -1,0 +1,24 @@
+extends ../../node_modules/@yamato-daiwa/frontend/PagesTemplates/RegularWebPage.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = "Top page | YDEE - Yamato Daiwa ES Extensions";
+
+    FAVICON_URI = "@MustBeInRoot/favicon.ico"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Pages/TopPage" ];
+
+
+block append PageContent
+
+  h1 Yamato Daiwa ES Extensions
+
+  h2 Strings
+
+  ul
+
+    li: a(href="Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly-English.html") areStringifiedDigitsOnly
