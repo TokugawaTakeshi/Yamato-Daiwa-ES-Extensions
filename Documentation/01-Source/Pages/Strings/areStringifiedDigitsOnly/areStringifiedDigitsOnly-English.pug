@@ -23,27 +23,38 @@ block append Data
 block append Requirements
 
   include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../Components/SharedReusable/FunctionCompoundHeading/FunctionCompoundHeading.pug
+  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
 
 
 block append DynamicContent
 
-  main.PrototypeArticlePage
+  main
 
-    article.PrototypeArticle
+    article
 
-      +FunctionCompoundHeading({
+      +ProgrammaticEntityHeading({
         headingElementTag: "h1",
-        functionName: "areStringifiedDigitsOnly",
-        functionNameLocalizedInterpretation: "Stringified digits only check"
-      }).PrototypeArticle-FunctionCompoundHeading
+        entityName: "areStringifiedDigitsOnly",
+        entityLocalizedInterpretation: "Stringified digits only check"
+      })
+
+      +CallableExpressionScheme({
+        technicalName: "areStringifiedDigitsOnly",
+        localizedDescriptiveHeading: "文字列化しな数字のみか確認",
+        parametersSpecification: [
+          {
+            localizedName: "数字しか含めていない推測の文字列",
+            type: "string",
+            required: true,
+            genericTechnicalName: "potentialStringifiedDigits"
+          }
+        ],
+        returnValue: "boolean"
+      })
 
 
       //-
 
-        +AreStringifiedDigitsOnlyFunctionAbstract({
-          noFunctionNameLocalizedInterpretation: true
-        }).PrototypeArticle-FunctionAbstract
 
         p.PrototypeArticle-Paragraph.
           #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字は文字列化した#[+Term--YDID 数字]（要するに数字の順番）に成っているか、確認する。

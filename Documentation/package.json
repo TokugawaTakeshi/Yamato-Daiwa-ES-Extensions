@@ -9,7 +9,8 @@
     "@yamato-daiwa/es-extensions": "1.5.2",
     "@yamato-daiwa/es-extensions-browserjs": "1.5.4",
     "@yamato-daiwa/es-extensions-nodejs": "1.5.1",
-    "@yamato-daiwa/frontend": "1.0.4"
+    "@yamato-daiwa/frontend": "1.0.4",
+    "@yamato-daiwa/frontend-documenting-kit": "../../YamatoDaiwaFrontend/DocumentingKit/Package"
   },
   "devDependencies": {
     "@yamato-daiwa/automation": "0.0.7",
