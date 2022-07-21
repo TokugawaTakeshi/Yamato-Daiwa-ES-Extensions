@@ -2,8 +2,8 @@
 /* eslint-disable max-classes-per-file */
 /* eslint max-depth: [ "error", 6 ] */
 
-import { ArbitraryObject } from "../Types/ArbitraryObject";
-import { ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
+import type { ArbitraryObject } from "../Types/ArbitraryObject";
+import type { ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
 import RawObjectDataProcessorLocalization__English from "./RawObjectDataProcessorLocalization__English";
 
@@ -132,10 +132,13 @@ class RawObjectDataProcessor {
     *   programmatically that some value has object-based type 'X'. Nothing left except believe the user that 'ProcessedData'
     * is corresponding to 'validDataSpecification'. */
     if (isNotUndefined(options.postProcessing)) {
-      processedData = options.postProcessing<InterimValidData, ProcessedData>(
-        rawDataProcessingResult.processedValue as InterimValidData
-      );
+      processedData = options.
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+          * See the "Problem overview" section of the official documentation */
+          postProcessing<InterimValidData, ProcessedData>(rawDataProcessingResult.processedValue as InterimValidData);
     } else {
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * See the "Problem overview" section of the official documentation */
       processedData = rawDataProcessingResult.processedValue as ProcessedData;
     }
 
@@ -149,9 +152,9 @@ class RawObjectDataProcessor {
     messages: Array<string>, localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
   ): string {
     return messages.reduce(
-      (accumulatingValue: string, message: string, index: number): string => `${accumulatingValue}\n\n` +
-          `${localization.buildErrorMessagesListItemHeading(index + 1)}\n` +
-          `${message}`, ""
+      (accumulatingValue: string, message: string, index: number): string => `${ accumulatingValue }\n\n` +
+          `${ localization.buildErrorMessagesListItemHeading(index + 1) }\n` +
+          `${ message }`, ""
     );
   }
 
@@ -404,6 +407,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future.
               *  The desired 'configurable', 'enumerable', 'writable' could be different with actual ones.
               *  If 'configurable === false', the descriptors could not be changed
@@ -463,6 +467,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future. */
             }
           }
@@ -490,6 +495,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future (no need to change the value itself, but the changing of descriptors could be
                * requested). */
             }
@@ -536,6 +542,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification and/or descriptions changes could be requested. */
         }
@@ -591,9 +598,10 @@ class RawObjectDataProcessor {
         const keyOfPropertyWhichWillBeDeleted of
         targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications
       ) {
-        /* [ ESLint muting rationale ] Each element of this array has been specified by user, so user must be aware of
-        *     potential side effects of properties deleting. */
-        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete */
+        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete --
+         * Each element of this array has been specified by user, so user must be aware of potential side effects of
+         * properties deleting.
+        *  */
         delete processedValueWorkpiece[keyOfPropertyWhichWillBeDeleted];
       }
     }
@@ -809,6 +817,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification could be requested. */
         }
@@ -1161,6 +1170,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification could be requested. */
         }
@@ -1313,7 +1323,7 @@ class RawObjectDataProcessor {
     Logger.logError({
       errorType: InvalidParameterValueError.NAME,
       title: InvalidParameterValueError.localization.defaultTitle,
-      description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
+      description: `The specified value type '${ targetValueSpecification.type.toString() }' is not supported.`,
       occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
           "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
     });
@@ -2074,20 +2084,16 @@ namespace RawObjectDataProcessor {
     readonly propertiesWillBeDeletedAfterPostValidationModifications?: Array<string>;
   };
 
-  type IndexedArrayTypeValueSpecification = {
-    // readonly nonObjectElementsMustDiffer?: boolean;
-    // readonly uniquePropertiesOfObjectTypeElements?: Array<string>;
-  } & (
-    {
-      readonly minimalElementsCount?: number;
-      readonly maximalElementsCount?: number;
-      readonly exactElementsCount?: undefined;
-    } | {
-      readonly exactElementsCount?: number;
-      readonly minimalElementsCount?: undefined;
-      readonly maximalElementsCount?: undefined;
-    }
-  );
+  type IndexedArrayTypeValueSpecification =
+      {
+        readonly minimalElementsCount?: number;
+        readonly maximalElementsCount?: number;
+        readonly exactElementsCount?: undefined;
+      } | {
+        readonly exactElementsCount?: number;
+        readonly minimalElementsCount?: undefined;
+        readonly maximalElementsCount?: undefined;
+      };
 
   type AssociativeArrayTypeValueSpecification = {
     readonly requiredKeys?: Array<string>;
@@ -2107,9 +2113,9 @@ namespace RawObjectDataProcessor {
 
   export enum ValuesTypesIDs {
     number = "NUMBER",
-    /* 〔 ESLint muting rationale 〕 This rule is not desired for object keys, but there no option allows to disable it for
-     *   the object properties.  */
-    /* eslint-disable-next-line id-denylist */
+    /* eslint-disable-next-line id-denylist --
+     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties.
+     *  */
     string = "STRING",
     boolean = "BOOLEAN",
     fixedKeyAndValuePairsObject = "FIXED_KEY_AND_VALUE_PAIRS_OBJECT",
@@ -2167,44 +2173,40 @@ namespace RawObjectDataProcessor {
       NumberValueSpecification &
       (
         {
+
           readonly required: true;
+
           /* [ Theory ] Required to forbid ... and prevent
           * TS2339: Property '〇〇' does not exist on type '□□'
-          * See https://stackoverflow.com/a/59133061/4818123
-          * Below this theory will be referred as 〔※〕. */
+          * See https://stackoverflow.com/a/59133061/4818123  */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: number;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: number;
-        // readonly invalidValueSubstitution?: number;
       };
 
 
   /* --- String value/property -------------------------------------------------------------------------------------- */
   export type StringValueSpecification = ValueSpecification__CommonParameters & {
-    /* 〔 ESLint muting rationale 〕 This rule is not desired for object keys, but there no option allows to disable it for
-     *   the object properties.  */
-    /* eslint-disable-next-line id-denylist */
+    /* eslint-disable-next-line id-denylist --
+     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties. */
     readonly type: ValuesTypesIDs.string | StringConstructor;
     readonly allowedAlternatives?: Array<string>;
     readonly minimalCharactersCount?: number;
@@ -2221,32 +2223,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: string;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: string;
-        // readonly invalidValueSubstitution?: string;
       };
 
 
@@ -2265,32 +2262,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: boolean;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: boolean;
-        // readonly invalidValueSubstitution?: boolean;
       };
 
 

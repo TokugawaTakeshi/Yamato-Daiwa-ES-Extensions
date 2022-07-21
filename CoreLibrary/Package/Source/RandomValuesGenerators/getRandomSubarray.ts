@@ -9,22 +9,22 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 export namespace GetRandomSubarrayOperation {
 
-  export type Localization = {
-    generateInvalidMinimalElementsCountErrorMessage: (parametersObject: { actualValue: number; }) => string;
-    generateInvalidMaximalElementsCountErrorMessage: (parametersObject: { actualValue: number; }) => string;
+  export type Localization = Readonly<{
+    generateInvalidMinimalElementsCountErrorMessage: (namedParameters: Readonly<{ actualValue: number; }>) => string;
+    generateInvalidMaximalElementsCountErrorMessage: (namedParameters: Readonly<{ actualValue: number; }>) => string;
     generateMaximalElementCountIsSmallerThanMinimal:
-        (parametersObject: { minimalElementsCount: number; maximalElementsCount: number; }) => string;
-  };
+        (namedParameters: Readonly<{ minimalElementsCount: number; maximalElementsCount: number; }>) => string;
+  }>;
 
   export const Localization__English: Localization = {
     generateInvalidMinimalElementsCountErrorMessage: ({ actualValue }: { actualValue: number; }): string =>
-        `The minimal elements count must the non-negative integer while it's actual value is ${actualValue}.`,
+        `The minimal elements count must the non-negative integer while it's actual value is ${ actualValue }.`,
     generateInvalidMaximalElementsCountErrorMessage: ({ actualValue }: { actualValue: number; }): string =>
-        `The maximal elements count must the non-negative integer while it's actual value is ${actualValue}.`,
+        `The maximal elements count must the non-negative integer while it's actual value is ${ actualValue }.`,
     generateMaximalElementCountIsSmallerThanMinimal: (
       { minimalElementsCount, maximalElementsCount }: { minimalElementsCount: number; maximalElementsCount: number; }
-    ): string => `The maximal elements count (${maximalElementsCount}) is smaller than minimal elements count ` +
-        `(${minimalElementsCount}).`
+    ): string => `The maximal elements count (${ maximalElementsCount }) is smaller than minimal elements count ` +
+        `(${ minimalElementsCount }).`
   };
 
   export let localization: Localization = Localization__English;
