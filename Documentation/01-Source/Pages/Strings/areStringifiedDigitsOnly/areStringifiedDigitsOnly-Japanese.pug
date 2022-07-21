@@ -31,20 +31,20 @@ block append DynamicContent
 
   main
 
-    article.Article.DocumentationPage-Article
+    article
 
       +ProgrammaticEntityHeading({
         headingElementTag: "h1",
         entityName: "areStringifiedDigitsOnly",
-        entityLocalizedInterpretation: "Stringified digits only check"
+        entityLocalizedInterpretation: "文字列化しな数字のみか確認"
       })
 
       +CallableExpressionScheme({
         technicalName: "areStringifiedDigitsOnly",
-        localizedDescriptiveHeading: "Stringified digits only check",
+        localizedDescriptiveHeading: "目標的文字列",
         parametersSpecification: [
           {
-            localizedName: "Target string",
+            localizedName: "数字しか含めていない推測の文字列",
             type: "string",
             required: true,
             genericTechnicalName: "targetString"
@@ -53,7 +53,8 @@ block append DynamicContent
         returnedValue: "boolean"
       }).Article-CallableExpressionScheme
 
-      p.Article-Paragraph Checks does target #[+Term--YDID string] includes only #[+Term--YDID digit characters].
+      p.Article-Paragraph.
+        #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字は文字列化した#[+Term--YDID 数字]（要するに数字の順番）に成っているか、確認する。
 
       //-
 

@@ -8,7 +8,19 @@ InitialGlobalCSS_Rules()
 
 
 @require "../../Components/SharedSingletons/Layouts/Main/MainLayout.styl"
+@require "../../Components/SharedSingletons/Header/Header.styl"
 
+provideTypography(overridings: {
+  CSS_NamespacePrefix: "Article"
+})
+provideYamatoDaiwaInformationDesignClasses()
 
 provideProgrammaticEntityHeadingComponentStyles()
 provideCallableExpressionSchemeAndRelatedComponentStyles()
+
+
+.DocumentationPage
+
+  &-Article
+
+    margin-top 24px
