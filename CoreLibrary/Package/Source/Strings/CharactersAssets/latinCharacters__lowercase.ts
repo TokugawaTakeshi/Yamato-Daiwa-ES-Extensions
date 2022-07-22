@@ -27,4 +27,5 @@ const latinCharacters__lowercase: Array<string> = [
   "z"
 ];
 
+
 export default latinCharacters__lowercase;

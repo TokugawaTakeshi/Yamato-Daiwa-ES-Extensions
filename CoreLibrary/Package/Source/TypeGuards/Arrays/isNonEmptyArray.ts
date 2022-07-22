@@ -4,5 +4,6 @@ export default function isNonEmptyArray(potentialArray: unknown): potentialArray
     return false;
   }
 
+
   return potentialArray.length > 0;
 }
