@@ -4,5 +4,6 @@ export default function isNegativeInteger(potentialInteger: unknown): potentialI
     return false;
   }
 
+
   return Number.isInteger(potentialInteger) && potentialInteger < 0;
 }

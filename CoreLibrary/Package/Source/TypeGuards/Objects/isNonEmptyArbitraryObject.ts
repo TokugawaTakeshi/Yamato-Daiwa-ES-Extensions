@@ -1,4 +1,4 @@
-import { ArbitraryObject } from "../../Types/ArbitraryObject";
+import type { ArbitraryObject } from "../../Types/ArbitraryObject";
 
 
 export default function isNonEmptyArbitraryObject(potentialObject: unknown): potentialObject is ArbitraryObject {

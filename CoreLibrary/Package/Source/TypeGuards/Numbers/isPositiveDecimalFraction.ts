@@ -4,5 +4,6 @@ export default function isPositiveDecimalFraction(potentialDecimalFraction: unkn
     return false;
   }
 
+
   return /^\d+\.\d+$/u.test(potentialDecimalFraction.toString());
 }

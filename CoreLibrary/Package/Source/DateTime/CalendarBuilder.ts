@@ -81,7 +81,7 @@ class CalendarBuilder {
         this.daysInTargetMonth - 1;
   }
 
-  private fillMatrixByDaysOfTargetMonth(): CalendarBuilder {
+  private fillMatrixByDaysOfTargetMonth(): this {
 
     let dayForCurrentCell: number = 1;
     const cachedMonthName: MonthsNames = getMonthNameByNumber({
@@ -108,7 +108,7 @@ class CalendarBuilder {
     return this;
   }
 
-  private fillMatrixByDaysOfPreviousMonth(): CalendarBuilder {
+  private fillMatrixByDaysOfPreviousMonth(): this {
 
     if (this.numberOfFirstDayOfTargetMonthInWeek__numerationFrom0AsSunday === 0) {
       return this;

@@ -1,7 +1,8 @@
-import { ArbitraryObject, RawObjectDataProcessor, undefinedToEmptyArray } from "../../Source";
+import { RawObjectDataProcessor, undefinedToEmptyArray } from "../../Source";
+import type { ArbitraryObject } from "../../Source";
 import { deepEqual, notDeepEqual, strictEqual } from "assert";
-import RawObjectDataProcessorLocalization__English
-  from "../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
+import RawObjectDataProcessorLocalization__English from
+    "../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
 
 
 describe("RawObjectProcessor: requirement", (): void => {
@@ -93,10 +94,10 @@ describe("RawObjectProcessor: requirement", (): void => {
         strictEqual(
           undefinedToEmptyArray(validationErrorsMessages)[0],
           validationErrorsMessagesBuilder.buildRequiredPropertyIsMissingErrorMessage({
-            targetPropertyDotSeparatedQualifiedName: `${dataNameForLogging}.${targetPropertyName}`,
+            targetPropertyDotSeparatedQualifiedName: `${ dataNameForLogging }.${ targetPropertyName }`,
             targetPropertyNewName: null,
-            /* 〔 ESLint muting rationale 〕 Here is must be the undefined */
-            /* eslint-disable-next-line no-undefined */
+            /* eslint-disable-next-line no-undefined -- It could be omitted, but the explicit 'undefined' is better
+            *    for readability of the tests for this case. */
             targetPropertyValue: undefined,
             targetPropertyValueSpecification: dataSpecification.properties[targetPropertyName]
           })
@@ -198,10 +199,10 @@ describe("RawObjectProcessor: requirement", (): void => {
           undefinedToEmptyArray(validationErrorsMessages)[0],
           validationErrorsMessagesBuilder.
               buildConditionallyRequiredPropertyIsMissingWhileRequirementConditionSatisfiedErrorMessage({
-                targetPropertyDotSeparatedQualifiedName: `${dataNameForLogging}.${targetPropertyName}`,
+                targetPropertyDotSeparatedQualifiedName: `${ dataNameForLogging }.${ targetPropertyName }`,
                 targetPropertyNewName: null,
-                /* 〔 ESLint muting rationale 〕 Here is must be the undefined */
-                /* eslint-disable-next-line no-undefined */
+                /* eslint-disable-next-line no-undefined -- It could be omitted, but the explicit 'undefined' is better
+                 *    for readability of the tests for this case. */
                 targetPropertyValue: undefined,
                 targetPropertyValueSpecification: dataSpecification.properties[targetPropertyName],
                 requirementConditionDescription

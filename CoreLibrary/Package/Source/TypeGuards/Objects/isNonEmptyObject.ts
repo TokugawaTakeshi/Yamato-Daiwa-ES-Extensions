@@ -4,5 +4,6 @@ export default function isNonEmptyObject(potentialObject: unknown): potentialObj
     return false;
   }
 
-  return Object.entries(potentialObject as { [key: string]: unknown; }).length > 0;
+
+  return Object.entries(potentialObject).length > 0;
 }
