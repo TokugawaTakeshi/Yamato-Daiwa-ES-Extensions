@@ -1,4 +1,4 @@
-import TimePoint from "./TimePoint";
+import type TimePoint from "./TimePoint";
 
 
 const TimePointLocalization__English: TimePoint.Localization = {

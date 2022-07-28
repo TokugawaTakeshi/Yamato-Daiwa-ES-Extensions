@@ -2,10 +2,10 @@ export default function twoDimensionalizeArray<ArrayElement>(
   {
     targetFlatArray,
     elementsPerNestedArray
-  }: {
+  }: Readonly<{
     targetFlatArray: Array<ArrayElement>;
     elementsPerNestedArray: number;
-  }
+  }>
 ): Array<Array<ArrayElement>> {
 
   const twoDimensionalArray: Array<Array<ArrayElement>> = [];

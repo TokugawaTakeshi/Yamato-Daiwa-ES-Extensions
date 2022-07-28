@@ -14,12 +14,13 @@ export default function formatNumberWith4KetaKanji(targetNumber: number | bigint
     return targetNumber__stringified;
   }
 
+
   if (isNegative) {
     targetNumber__stringified = targetNumber__stringified.substring(1);
   }
 
   if (!isUndefined(decimalPart__stringified)) {
-    targetNumber__stringified = targetNumber__stringified.replace(`.${decimalPart__stringified}`, "");
+    targetNumber__stringified = targetNumber__stringified.replace(`.${ decimalPart__stringified }`, "");
   }
 
   const targetNumber__reversed: string = reverseString(targetNumber__stringified);
@@ -47,12 +48,12 @@ export default function formatNumberWith4KetaKanji(targetNumber: number | bigint
       substr(REMAIN_DIGITS_START_POSITION__BEGINNING_FROM_0));
 
 
-  return `${isNegative ? "-" : ""}` +
-      `${remainDigits.length > 0 ? `${remainDigits}` : ""}` +
-      `${keis__japaneseCalculus.length > 0 ? `${keis__japaneseCalculus}京` : ""}` +
-      `${tyous__japaneseCalculus.length > 0 ? `${tyous__japaneseCalculus}兆` : ""}` +
-      `${okus__japaneseCalculus.length > 0 ? `${okus__japaneseCalculus}億` : ""}` +
-      `${mans__japaneseCalculus.length > 0 ? `${mans__japaneseCalculus}万` : ""}` +
-      `${lastFourDigits}` +
-      `${isUndefined(decimalPart__stringified) ? "" : `.${decimalPart__stringified}`}`;
+  return `${ isNegative ? "-" : "" }` +
+      `${ remainDigits.length > 0 ? `${ remainDigits }` : "" }` +
+      `${ keis__japaneseCalculus.length > 0 ? `${ keis__japaneseCalculus }京` : "" }` +
+      `${ tyous__japaneseCalculus.length > 0 ? `${ tyous__japaneseCalculus }兆` : "" }` +
+      `${ okus__japaneseCalculus.length > 0 ? `${ okus__japaneseCalculus }億` : "" }` +
+      `${ mans__japaneseCalculus.length > 0 ? `${ mans__japaneseCalculus }万` : "" }` +
+      `${ lastFourDigits }` +
+      `${ isUndefined(decimalPart__stringified) ? "" : `.${ decimalPart__stringified }` }`;
 }

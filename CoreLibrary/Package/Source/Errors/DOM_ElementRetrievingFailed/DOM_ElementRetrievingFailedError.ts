@@ -1,5 +1,4 @@
-import DOM_ElementRetrievingFailedErrorLocalization__English
-  from "./DOM_ElementRetrievingFailedErrorLocalization.english";
+import DOM_ElementRetrievingFailedErrorLocalization__English from "./DOM_ElementRetrievingFailedErrorLocalization.english";
 
 
 class DOM_ElementRetrievingFailedError extends Error {
@@ -26,19 +25,15 @@ class DOM_ElementRetrievingFailedError extends Error {
 
 namespace DOM_ElementRetrievingFailedError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (
-      namedParameters: Localization.DescriptionTemplateNamedParameters
-    ) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly selector: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{ selector: string; }>;
   }
 }
 

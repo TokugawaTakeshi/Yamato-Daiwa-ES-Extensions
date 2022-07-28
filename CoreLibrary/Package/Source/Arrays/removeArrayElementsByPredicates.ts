@@ -5,19 +5,19 @@ import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfA
 export namespace RemovingArrayElementsByPredicatesOperation {
 
   export type NamedParameters<ArrayElement> =
-    {
-      readonly targetArray: Array<ArrayElement>;
-      readonly mutably: boolean;
-    } & (
-      { readonly predicate: (arrayElement: ArrayElement) => boolean; } |
-      { readonly predicates: Array<(arrayElement: ArrayElement) => boolean>; }
+    Readonly<{
+      targetArray: Array<ArrayElement>;
+      mutably: boolean;
+    }> & (
+      Readonly<{ predicate: (arrayElement: ArrayElement) => boolean; }> |
+      Readonly<{ predicates: Array<(arrayElement: ArrayElement) => boolean>; }>
     );
 
-  export type Result<ArrayElement> = {
-    readonly updatedArray: Array<ArrayElement>;
-    readonly removedElements: Array<ArrayElement>;
-    readonly indexesOfRemovedElements: Array<number>;
-  };
+  export type Result<ArrayElement> = Readonly<{
+    updatedArray: Array<ArrayElement>;
+    removedElements: Array<ArrayElement>;
+    indexesOfRemovedElements: Array<number>;
+  }>;
 
 
   export function removeArrayElementsByPredicates<ArrayElement>(

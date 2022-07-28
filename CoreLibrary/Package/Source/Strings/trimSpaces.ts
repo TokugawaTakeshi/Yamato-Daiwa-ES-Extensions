@@ -2,10 +2,7 @@ import SpaceCharacters from "./CharactersAssets/SpaceCharacters";
 import isUndefined from "../TypeGuards/Nullables/isUndefined";
 
 
-export default function trimSpaces(
-  targetString: string,
-  options: TrimSpacesOperation.Options = {}
-): string {
+export default function trimSpaces(targetString: string, options: TrimSpacesOperation.Options = {}): string {
 
   const {
     skipLeadingOnes = false,
@@ -32,7 +29,7 @@ export default function trimSpaces(
 
       const UTF_16_CODE_POINT_RADIX: number = 16;
       const UTF_16_CODE_POINT_MAXIMAL_SYMBOLS_IN_REGULAR_EXPRESSION: number = 4;
-      charactersSetExpression = `${charactersSetExpression}\\u{${
+      charactersSetExpression = `${ charactersSetExpression }\\u{${
         UTF16CodePoint.toString(UTF_16_CODE_POINT_RADIX).padStart(UTF_16_CODE_POINT_MAXIMAL_SYMBOLS_IN_REGULAR_EXPRESSION, "0")
       }}`;
     }
@@ -42,11 +39,11 @@ export default function trimSpaces(
   let mutatingResult: string = targetString;
 
   if (!skipLeadingOnes) {
-    mutatingResult = targetString.replace(new RegExp(`^[${charactersSetExpression}]+`, "u"), "");
+    mutatingResult = targetString.replace(new RegExp(`^[${ charactersSetExpression }]+`, "u"), "");
   }
 
   if (!skipTrailingOnes) {
-    mutatingResult = targetString.replace(new RegExp(`[${charactersSetExpression}]+$`, "u"), "");
+    mutatingResult = targetString.replace(new RegExp(`[${ charactersSetExpression }]+$`, "u"), "");
   }
 
 
@@ -56,10 +53,10 @@ export default function trimSpaces(
 
 export namespace TrimSpacesOperation {
 
-  export type Options = {
+  export type Options = Readonly<{
     skipLeadingOnes?: boolean;
     skipTrailingOnes?: boolean;
     targetSpacesKinds?: Array<SpaceCharacters>;
     excludeKinds?: Array<SpaceCharacters>;
-  };
+  }>;
 }

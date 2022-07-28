@@ -27,4 +27,5 @@ const latinCharacters__uppercase: Array<string> = [
   "Z"
 ];
 
+
 export default latinCharacters__uppercase;

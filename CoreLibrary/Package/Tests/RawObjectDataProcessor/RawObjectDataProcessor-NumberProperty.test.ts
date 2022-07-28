@@ -90,7 +90,7 @@ describe("RawObjectProcessor: number property", (): void => {
         strictEqual(
           undefinedToEmptyArray(validationErrorsMessages)[0],
           validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
-            targetPropertyDotSeparatedQualifiedName: `${dataNameForLogging}.${targetPropertyName}`,
+            targetPropertyDotSeparatedQualifiedName: `${ dataNameForLogging }.${ targetPropertyName }`,
             targetPropertyNewName: null,
             targetPropertyValue: targetPropertyInvalidValue,
             targetPropertyValueSpecification: targetValueSpecification,

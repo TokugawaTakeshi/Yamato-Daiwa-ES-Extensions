@@ -1,4 +1,4 @@
-import InvalidExternalDataError from "./InvalidExternalDataError";
+import type InvalidExternalDataError from "./InvalidExternalDataError";
 import insertSubstring from "../../Strings/insertSubstring";
 
 
@@ -6,10 +6,10 @@ export const InvalidExternalDataErrorLocalization__English: InvalidExternalDataE
   defaultTitle: "Invalid external data",
   generateDescription: (
     namedParameters: InvalidExternalDataError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The data '${namedParameters.mentionToExpectedData}' does not match with expected.` +
-      `${insertSubstring(namedParameters.messageSpecificPart, {
-        modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
-      })}`
+  ): string => `The data '${ namedParameters.mentionToExpectedData }' does not match with expected.` +
+      `${ insertSubstring(namedParameters.messageSpecificPart, {
+        modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
+      }) }`
 };
 
 

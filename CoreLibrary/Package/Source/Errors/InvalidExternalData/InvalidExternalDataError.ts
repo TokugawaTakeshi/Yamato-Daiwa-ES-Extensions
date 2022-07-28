@@ -24,18 +24,18 @@ class InvalidExternalDataError extends Error {
 
 namespace InvalidExternalDataError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly mentionToExpectedData: string;
-      readonly messageSpecificPart?: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      mentionToExpectedData: string;
+      messageSpecificPart?: string;
+    }>;
   }
 }
 

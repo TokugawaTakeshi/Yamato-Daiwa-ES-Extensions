@@ -3,7 +3,8 @@ export default abstract class Timer {
   protected readonly period__seconds: number;
   protected readonly onElapsed: () => unknown;
 
-  public constructor(
+
+  protected constructor(
     namedParameters: {
       period__seconds: number;
       onElapsed: () => unknown;
