@@ -6,16 +6,16 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 export namespace RemovingArrayElementsByIndexesOperation {
 
-  export type NamedParameters<ArrayElement> = {
-    readonly targetArray: Array<ArrayElement>;
-    readonly indexes: number | Array<number>;
-    readonly mutably: boolean;
-  };
+  export type NamedParameters<ArrayElement> = Readonly<{
+    targetArray: Array<ArrayElement>;
+    indexes: number | Array<number>;
+    mutably: boolean;
+  }>;
 
-  export type Result<ArrayElement> = {
-    readonly updatedArray: Array<ArrayElement>;
-    readonly removedElements: Array<ArrayElement>;
-  };
+  export type Result<ArrayElement> = Readonly<{
+    updatedArray: Array<ArrayElement>;
+    removedElements: Array<ArrayElement>;
+  }>;
 
 
   export function removeArrayElementsByIndexes<ArrayElement>(
@@ -53,7 +53,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
           description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
             messageSpecificPart:
-                `The index ${String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)} ` +
+                `The index ${ String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly) } ` +
                 "is not the non-negative integer therefore will be ignored."
           }),
           occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
@@ -70,7 +70,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
           title: InvalidParameterValueError.localization.defaultTitle,
           description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
-            messageSpecificPart: `The index ${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} ` +
+            messageSpecificPart: `The index ${ indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly } ` +
                 "is greater than index of last element of target array therefore will be ignored."
           }),
           occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
@@ -91,7 +91,7 @@ export namespace RemovingArrayElementsByIndexesOperation {
           description: InvalidParameterValueError.localization.generateDescription({
             parameterName: "namedParameters.indexes",
             messageSpecificPart: "Removing of element with index " +
-                `${indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly} has been demanded more ` +
+                `${ indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly } has been demanded more ` +
                 "than one time."
           }),
           occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"

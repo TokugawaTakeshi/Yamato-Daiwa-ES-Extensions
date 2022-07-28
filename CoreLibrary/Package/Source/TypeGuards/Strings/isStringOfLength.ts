@@ -3,29 +3,29 @@ import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
 
 export namespace IsStringOfLengthCheckingOperation {
 
-  export type Options__ExactCharactersCountCase = {
+  export type Options__ExactCharactersCountCase = Readonly<{
     exactCharactersCount: number;
     minimalCharactersCount?: undefined;
     maximalCharactersCount?: undefined;
-  };
+  }>;
 
-  export type Options__MinimalCharactersCountCase = {
+  export type Options__MinimalCharactersCountCase = Readonly<{
     minimalCharactersCount: number;
     maximalCharactersCount?: undefined;
     exactCharactersCount?: undefined;
-  };
+  }>;
 
-  export type Options__MaximalCharactersCountCase = {
+  export type Options__MaximalCharactersCountCase = Readonly<{
     maximalCharactersCount: number;
     minimalCharactersCount?: undefined;
     exactCharactersCount?: undefined;
-  };
+  }>;
 
-  export type Options__MinimalAndMaximalCharactersCountCase = {
+  export type Options__MinimalAndMaximalCharactersCountCase = Readonly<{
     minimalCharactersCount: number;
     maximalCharactersCount: number;
     exactCharactersCount?: undefined;
-  };
+  }>;
 
   export type Options =
       Options__ExactCharactersCountCase |

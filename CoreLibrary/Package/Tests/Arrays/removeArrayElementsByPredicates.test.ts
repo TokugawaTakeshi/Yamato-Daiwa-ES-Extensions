@@ -1,4 +1,5 @@
-import { removeArrayElementsByPredicates, RemovingArrayElementsByPredicatesOperation } from "../../Source";
+import { removeArrayElementsByPredicates } from "../../Source";
+import type { RemovingArrayElementsByPredicatesOperation } from "../../Source";
 import { deepStrictEqual } from "assert";
 
 

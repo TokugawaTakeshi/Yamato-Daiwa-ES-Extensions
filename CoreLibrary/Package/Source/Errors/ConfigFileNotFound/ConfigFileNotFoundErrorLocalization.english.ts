@@ -1,4 +1,4 @@
-import ConfigFileNotFoundError from "./ConfigFileNotFoundError";
+import type ConfigFileNotFoundError from "./ConfigFileNotFoundError";
 
 
 const ConfigFileNotFoundErrorLocalization__English: ConfigFileNotFoundError.Localization = {
@@ -6,13 +6,13 @@ const ConfigFileNotFoundErrorLocalization__English: ConfigFileNotFoundError.Loca
   generateDescription(namedParameters: ConfigFileNotFoundError.Localization.DescriptionTemplateNamedParameters): string {
 
     if (Array.isArray(namedParameters.configFilePathOrMultipleOfThem)) {
-      return `None of below '${namedParameters.targetTechnologyName}' configuration files found.\n` +
-          `${namedParameters.configFilePathOrMultipleOfThem.join(", ")}`;
+      return `None of below '${ namedParameters.targetTechnologyName }' configuration files found.\n` +
+          `${ namedParameters.configFilePathOrMultipleOfThem.join(", ") }`;
     }
 
 
-    return `The '${namedParameters.targetTechnologyName}' configuration file not found at ` +
-        `'${namedParameters.configFilePathOrMultipleOfThem}'.`;
+    return `The '${ namedParameters.targetTechnologyName }' configuration file not found at ` +
+        `'${ namedParameters.configFilePathOrMultipleOfThem }'.`;
   }
 };
 

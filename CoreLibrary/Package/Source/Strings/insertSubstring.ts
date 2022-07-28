@@ -1,9 +1,9 @@
 export default function insertSubstring(
   targetSubstring: string | number | null | undefined,
-  options: {
+  options: Readonly<{
     condition?: boolean;
     modifier?: (targetSubstring: string) => string;
-  } = {}
+  }> = {}
 ): string {
 
   if (typeof targetSubstring === "undefined" || targetSubstring === null) {

@@ -18,9 +18,7 @@ class UnexpectedEventError extends Error {
 
 
 namespace UnexpectedEventError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 

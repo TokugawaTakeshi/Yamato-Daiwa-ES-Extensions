@@ -24,26 +24,27 @@ const RawObjectDataProcessorLocalization__English: Localization = {
       type: this.valueType(targetPropertyValueSpecification.type)
     });
 
-    return `${title}` +
-        `\n\n●　Property / element: '${targetPropertyDotSeparatedQualifiedName}'` +
-        `${insertSubstring(
+    return `${ title }` +
+        `\n\n●　Property / element: '${ targetPropertyDotSeparatedQualifiedName }'` +
+        `${ insertSubstring(
           targetPropertyNewName, 
-          { modifier: (targetSubstring: string): string => ` (new name: ${targetSubstring})` }
-        )}` +
-        `\n${specificMessagePart}` +
-        `\n\n●　Property / element specification: \n${propertyOrElementSpecification__stringified}` +
-        `\n●　Actual value: ${stringifyAndFormatArbitraryValue(targetPropertyValue)}` +
-        `${insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
-          modifier: (targetSubstring: string): string => `\n●　Value before first pre-validation modification: ${targetSubstring}`
-        })}`;
+          { modifier: (targetSubstring: string): string => ` (new name: ${ targetSubstring })` }
+        ) }` +
+        `\n${ specificMessagePart }` +
+        `\n\n●　Property / element specification: \n${ propertyOrElementSpecification__stringified }` +
+        `\n●　Actual value: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
+        `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
+          modifier: (targetSubstring: string): string => 
+              `\n●　Value before first pre-validation modification: ${ targetSubstring }`
+        }) }`;
   },
 
-  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Error No. ${messageNumber} ==========`; },
+  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Error No. ${ messageNumber } ==========`; },
 
   rawDataIsNullErrorMessage: "Raw data, the first parameter of 'RawObjectDataProcessor.process' is null.",
 
   buildRawDataIsNotObjectErrorMessage: (actualType: string): string =>
-      `Raw data, the first parameter of 'RawObjectDataProcessor.process' an 'object' and actually has type '${actualType}'.`,
+      `Raw data, the first parameter of 'RawObjectDataProcessor.process' an 'object' and actually has type '${ actualType }'.`,
 
   buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
     {
@@ -58,8 +59,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Expected and actual value types mismatch",
-      specificMessagePart: `This value expected to have type '${this.valueType(targetPropertyValueSpecification.type)}' ` +
-          `while actually it's type is '${typeof targetPropertyValue}'.`
+      specificMessagePart: `This value expected to have type '${ this.valueType(targetPropertyValueSpecification.type) }' ` +
+          `while actually it's type is '${ typeof targetPropertyValue }'.`
     };
   },
 
@@ -67,7 +68,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Pre-validation caused the error",
       specificMessagePart: "Pre-validation modification of this value caused below error:\n" +
-          `${stringifyAndFormatArbitraryValue(thrownError)}\n` +
+          `${ stringifyAndFormatArbitraryValue(thrownError) }\n` +
           "This pre-validation modification has been skipped."
     };
   },
@@ -85,7 +86,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Conditionally required property is missing",
       specificMessagePart: "This value is 'undefined' while requirement condition:\n" +
-          `"${verbalRequirementCondition}"\nsatisfied.`
+          `"${ verbalRequirementCondition }"\nsatisfied.`
     };
   },
 
@@ -103,8 +104,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Indexed array has less elements than expected minimum",
-      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while at least ` +
-          `${minimalElementsCount} expected.`
+      specificMessagePart: `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
+          `${ minimalElementsCount } expected.`
     };
   },
 
@@ -113,8 +114,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Indexed array has more elements than expected maximum",
-      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while ` +
-          `maximally ${maximalElementsCount} expected.`
+      specificMessagePart: `This value of indexed array type has ${ actualElementsCount } elements while ` +
+          `maximally ${ maximalElementsCount } expected.`
     };
   },
 
@@ -123,8 +124,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "The count of elements of indexed array does not match with expected fixed value",
-      specificMessagePart: `This value of indexed array type has ${actualElementsCount} elements while ` +
-          `exactly ${exactElementsCount} expected.`
+      specificMessagePart: `This value of indexed array type has ${ actualElementsCount } elements while ` +
+          `exactly ${ exactElementsCount } expected.`
     };
   },
 
@@ -147,8 +148,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Associative array has less entries than expected minimum",
-      specificMessagePart: `This value of associative array type value has ${actualEntriesCount} entries while at least ` +
-          `${minimalEntriesCount} expected.`
+      specificMessagePart: `This value of associative array type value has ${ actualEntriesCount } entries while at least ` +
+          `${ minimalEntriesCount } expected.`
     };
   },
 
@@ -157,8 +158,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Associative array has more entries than expected maximum",
-      specificMessagePart: `This value of associative array-type value has ${actualEntriesCount} entries while maximally ` +
-          `${maximalEntriesCount} expected.`
+      specificMessagePart: `This value of associative array-type value has ${ actualEntriesCount } entries while maximally ` +
+          `${ maximalEntriesCount } expected.`
     };
   },
 
@@ -167,8 +168,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "The count of entries of associative array does not match with expected fixed value",
-      specificMessagePart: `This value of associative array-type value has ${exactEntriesCount} entries while ` +
-          `exactly ${actualEntriesCount} expected.`
+      specificMessagePart: `This value of associative array-type value has ${ exactEntriesCount } entries while ` +
+          `exactly ${ actualEntriesCount } expected.`
     };
   },
 
@@ -178,7 +179,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Required key(s) of associative array are missing",
       specificMessagePart: "Below keys are missing but required for this associative array type value:\n" +
-          `${stringifyAndFormatArbitraryValue(missingRequiredKeys)}`
+          `${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
     };
   },
 
@@ -188,7 +189,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Required keys alternatives are missing",
       specificMessagePart: "One of below keys must present in this associative array-type value, but actually none of them " +
-          `presents.\n${stringifyAndFormatArbitraryValue(requiredKeysAlternatives)}`
+          `presents.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
     };
   },
 
@@ -198,7 +199,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Disallowed key(s) found in associative array",
       specificMessagePart: "Below keys presents in this associative array type value while these keys are disallowed.\n" +
-          `${stringifyAndFormatArbitraryValue(foundDisallowedKeys)}`
+          `${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
     };
   },
 
@@ -267,7 +268,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return {
       title: "Expected and actual numbers set mismatch",
       specificMessagePart: "Contrary to expectations, this numeric value is in not member of " +
-          `'${this.numbersSet(expectedNumberSet)}'`
+          `'${ this.numbersSet(expectedNumberSet) }'`
     };
   },
 
@@ -281,7 +282,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Minimal value fall short",
-      specificMessagePart: `This value is smaller than required minimal value ${requiredMinimum}.`
+      specificMessagePart: `This value is smaller than required minimal value ${ requiredMinimum }.`
     };
   },
 
@@ -290,7 +291,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Maximal numeric value exceeding",
-      specificMessagePart: `This value is greater than required maximal value ${allowedMaximum}.`
+      specificMessagePart: `This value is greater than required maximal value ${ allowedMaximum }.`
     };
   },
 
@@ -301,8 +302,8 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Minimal characters count fall short",
-      specificMessagePart: `This string value has ${realCharactersCount} characters while at least ` +
-          `${minimalCharactersCount} required.`
+      specificMessagePart: `This string value has ${ realCharactersCount } characters while at least ` +
+          `${ minimalCharactersCount } required.`
     };
   },
 
@@ -311,7 +312,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Maximal characters count exceeding",
-      specificMessagePart: `This string value has ${realCharactersCount} characters ${maximalCharactersCount} allowed ` +
+      specificMessagePart: `This string value has ${ realCharactersCount } characters ${ maximalCharactersCount } allowed ` +
           "as maximum."
     };
   },
@@ -321,14 +322,15 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Fixed characters count mismatch",
-      specificMessagePart: `The value has ${realCharactersCount} characters exactly ${fixedCharactersCount} required.`
+      specificMessagePart: `The value has ${ realCharactersCount } characters exactly ${ fixedCharactersCount } required.`
     };
   },
 
   buildRegularExpressionMismatchErrorMessageTextData(regularExpression: RegExp): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Regular expression mismatch",
-      specificMessagePart: `This string value does not match with specified regular expression:\n ${regularExpression.toString()}`
+      specificMessagePart: "This string value does not match with specified regular expression:\n " +
+          `${ regularExpression.toString() }`
     };
   },
 
@@ -338,7 +340,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Disallowed boolean variant",
-      specificMessagePart: `This boolean value is '${disallowedVariant}' while only '${!disallowedVariant}' allowed.`
+      specificMessagePart: `This boolean value is '${ disallowedVariant }' while only '${ !disallowedVariant }' allowed.`
     };
   },
 
@@ -348,7 +350,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     return "The 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (aliased as Object) and " +
         "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
         "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. Target value marked " +
-        `as invalid. Please correct below specification:\n ${stringifyAndFormatArbitraryValue(targetValueSpecification)}`;
+        `as invalid. Please correct below specification:\n ${ stringifyAndFormatArbitraryValue(targetValueSpecification) }`;
   },
 
   buildUnsupportedValueTypeErrorMessageTextData(
@@ -356,7 +358,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Unsupported value type",
-      specificMessagePart: `This value has type ${typeof propertyDataForMessagesBuilding.targetPropertyValue} which is ` +
+      specificMessagePart: `This value has type ${ typeof propertyDataForMessagesBuilding.targetPropertyValue } which is ` +
           "not a valid parsed JSON"
     };
   },
@@ -366,7 +368,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Custom validation did not passed",
-      specificMessagePart: `This value did not passed the custom validation "${customValidationDescription}".`
+      specificMessagePart: `This value did not passed the custom validation "${ customValidationDescription }".`
     };
   }
 };

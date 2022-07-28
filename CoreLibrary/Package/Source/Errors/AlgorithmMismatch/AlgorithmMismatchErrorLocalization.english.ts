@@ -1,4 +1,4 @@
-import AlgorithmMismatchError from "./AlgorithmMismatchError";
+import type AlgorithmMismatchError from "./AlgorithmMismatchError";
 
 
 const AlgorithmMismatchErrorLocalization__English: AlgorithmMismatchError.Localization = {

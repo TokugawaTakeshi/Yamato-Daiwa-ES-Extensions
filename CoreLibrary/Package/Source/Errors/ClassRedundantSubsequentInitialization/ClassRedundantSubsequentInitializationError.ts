@@ -26,15 +26,15 @@ class ClassRedundantSubsequentInitializationError extends Error {
 
 namespace ClassRedundantSubsequentInitializationError {
 
-  export type ConstructorNamedParameters = { readonly customMessage: string; } | { readonly className: string; };
+  export type ConstructorNamedParameters = Readonly<{ customMessage: string; }> | Readonly<{ className: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = { readonly className: string; };
+    export type DescriptionTemplateNamedParameters = Readonly<{ className: string; }>;
   }
 }
 

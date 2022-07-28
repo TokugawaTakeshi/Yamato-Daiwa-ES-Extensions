@@ -66,7 +66,7 @@ describe("replaceArrayElementsByPredicates", (): void => {
           },
           {
             predicate: (element: string): boolean => element.includes("I"),
-            replacer: (currentValueOfElement: string): string => `${currentValueOfElement.replace("I", "III")}!!!`
+            replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
           }
         ],
         mutably: true
@@ -94,7 +94,7 @@ describe("replaceArrayElementsByPredicates", (): void => {
           },
           {
             predicate: (element: string): boolean => element.includes("I"),
-            replacer: (currentValueOfElement: string): string => `${currentValueOfElement.replace("I", "III")}!!!`
+            replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
           }
         ],
         mutably: false

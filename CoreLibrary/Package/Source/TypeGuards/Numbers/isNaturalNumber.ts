@@ -4,5 +4,6 @@ export default function isNaturalNumber(potentialNaturalNumber: unknown): potent
     return false;
   }
 
+
   return Number.isInteger(potentialNaturalNumber) && potentialNaturalNumber > 0;
 }

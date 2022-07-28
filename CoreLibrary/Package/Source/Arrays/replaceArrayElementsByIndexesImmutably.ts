@@ -1,19 +1,17 @@
 export default function replaceArrayElementsByIndexesImmutably<ArrayElement>(
   namedParameters:
-      {
-        targetArray: Array<ArrayElement>;
-      } &
+      Readonly<{ targetArray: Array<ArrayElement>; }> &
       (
-        {
+        Readonly<{
           index: number;
           newElement: ArrayElement;
-        } |
-        {
+        }> |
+        Readonly<{
           replacements: Array<{
             index: number;
             newElement: ArrayElement;
           }>;
-        }
+        }>
       )
 ): Array<ArrayElement> {
 

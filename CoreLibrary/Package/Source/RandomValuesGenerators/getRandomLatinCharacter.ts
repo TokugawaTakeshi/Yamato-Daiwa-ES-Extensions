@@ -21,5 +21,6 @@ export default function getRandomLatinCharacter(
     return getRandomArrayElement(latinCharacters__lowercase);
   }
 
+
   return getRandomArrayElement(getRandomBoolean() ? latinCharacters__uppercase : latinCharacters__lowercase);
 }

@@ -1,16 +1,16 @@
-import { Log, ErrorLog, InfoLog, SuccessLog, ThrownErrorLog, WarningLog } from "./Logs";
+import type { Log, ErrorLog, InfoLog, SuccessLog, ThrownErrorLog, WarningLog } from "./Logs";
 
 
 export interface ILogger {
 
-  throwErrorAndLog: <CustomError extends Error = Error>(errorLog: ThrownErrorLog<CustomError>) => never;
-  logError: (errorLog: ErrorLog) => void;
-  logErrorLikeMessage: (errorLikeLog: Log) => void;
+  readonly throwErrorAndLog: <CustomError extends Error = Error>(errorLog: ThrownErrorLog<CustomError>) => never;
+  readonly logError: (errorLog: ErrorLog) => void;
+  readonly logErrorLikeMessage: (errorLikeLog: Log) => void;
 
-  logWarning: (warningLog: WarningLog) => void;
+  readonly logWarning: (warningLog: WarningLog) => void;
 
-  logSuccess: (successLog: SuccessLog) => void;
-  logInfo: (infoLog: InfoLog) => void;
+  readonly logSuccess: (successLog: SuccessLog) => void;
+  readonly logInfo: (infoLog: InfoLog) => void;
 
-  highlightText: (targetString: string) => string;
+  readonly highlightText: (targetString: string) => string;
 }

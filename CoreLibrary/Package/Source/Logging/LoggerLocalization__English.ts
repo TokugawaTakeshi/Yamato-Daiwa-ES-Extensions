@@ -1,4 +1,4 @@
-import Logger from "./Logger";
+import type Logger from "./Logger";
 
 
 const LoggerLocalization__English: Logger.Localization = {

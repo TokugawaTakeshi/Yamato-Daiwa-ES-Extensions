@@ -7,10 +7,5 @@ export default function getSpecificBooleanValueWithProbability(
     probability__percents: number;
   }
 ): boolean {
-
-  if (value) {
-    return Math.random() < (probability__percents / 100);
-  }
-
-  return Math.random() >= (probability__percents / 100);
+  return value ? Math.random() < (probability__percents / 100) : Math.random() >= (probability__percents / 100);
 }

@@ -20,7 +20,7 @@ export default function getMonthNameByNumber(
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         parameterName: "namedParameters.numerationFrom",
-        messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${numerationFrom}.`
+        messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${ numerationFrom }.`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "getMonthNameByNumber(namedParameters)"
@@ -89,7 +89,7 @@ export default function getMonthNameByNumber(
         errorInstance: new InvalidParameterValueError({
           parameterName: "namedParameters.targetMonthNumber",
           messageSpecificPart: "The valid month number is the non-negative integer from 0 o 12 while actual value is " +
-              `${targetMonthNumber}`
+              `${ targetMonthNumber }`
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(namedParameters)"

@@ -83,7 +83,7 @@ export type {
   ParsedJSON_Array,
   ParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
-export { PartialBy } from "./Types/PartialBy";
+export type { PartialBy } from "./Types/PartialBy";
 
 
 /* === Type guards ================================================================================================== */

@@ -11,7 +11,7 @@ describe("trimSpaces", (): void => {
   it("Native 'trim' does not remove the zero-width space", (): void => {
 
     const testStringWithLeadingAndTrailingSpaces: string =
-        `${SpaceCharacters.zeroWidthSpace}${stringSampleWithNonSpaceCharactersOnly}`;
+        `${ SpaceCharacters.zeroWidthSpace }${ stringSampleWithNonSpaceCharactersOnly }`;
 
     strictEqual(testStringWithLeadingAndTrailingSpaces.length, testStringWithLeadingAndTrailingSpaces.trim().length);
   });
@@ -20,7 +20,8 @@ describe("trimSpaces", (): void => {
     Object.entries(SpaceCharacters).forEach(([ , spaceCharacter ]: [ string, string ]): void => {
 
       const testStringWithLeadingAndTrailingSpaces: string =
-          `${spaceCharacter}${spaceCharacter}${stringSampleWithNonSpaceCharactersOnly}${spaceCharacter}${spaceCharacter}`;
+          `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +
+          `${ spaceCharacter }${ spaceCharacter }`;
 
       strictEqual(trimSpaces(testStringWithLeadingAndTrailingSpaces).length, nonSpaceCharactersCountInSample);
     });
@@ -30,7 +31,8 @@ describe("trimSpaces", (): void => {
     Object.entries(SpaceCharacters).forEach(([ , spaceCharacter ]: [ string, string ]): void => {
 
       const testStringWithLeadingAndTrailingSpaces: string =
-          `${spaceCharacter}${spaceCharacter}${stringSampleWithNonSpaceCharactersOnly}${spaceCharacter}${spaceCharacter}`;
+          `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +
+          `${ spaceCharacter }${ spaceCharacter }`;
       const trimmedString: string = trimSpaces(
           testStringWithLeadingAndTrailingSpaces,
           { excludeKinds: [ SpaceCharacters.ideographicSpace ] }

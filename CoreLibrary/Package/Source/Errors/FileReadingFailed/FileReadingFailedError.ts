@@ -24,17 +24,15 @@ class FileReadingFailedError extends Error {
 
 namespace FileReadingFailedError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly filePath: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{ filePath: string; }>;
   }
 }
 

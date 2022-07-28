@@ -18,9 +18,7 @@ class UnsupportedScenarioError extends Error {
 
 
 namespace UnsupportedScenarioError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 

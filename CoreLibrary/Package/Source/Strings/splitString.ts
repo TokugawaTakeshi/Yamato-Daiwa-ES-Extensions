@@ -4,5 +4,6 @@ export default function splitString(targetString: string, separator: string | Re
     return Array.from(targetString);
   }
 
+
   return targetString.split(separator);
 }

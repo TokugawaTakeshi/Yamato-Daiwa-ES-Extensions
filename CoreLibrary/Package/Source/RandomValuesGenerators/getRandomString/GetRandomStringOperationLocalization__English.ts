@@ -1,30 +1,34 @@
-import { RandomStringsGenerator } from "./getRandomString";
+import type { RandomStringsGenerator } from "./getRandomString";
 
 
 const GetRandomStringOperationLocalization__English: RandomStringsGenerator.Localization = {
   errors: {
-    minimalCharactersCountMustBeGreaterThan0: (realValue: number): string =>
-      `The 'minimalCharactersCount' property must be greater than 0 while really it's ${realValue}`,
+    minimalCharactersCountMustBeGreaterThan0: (actualValue: number): string =>
+      `The 'minimalCharactersCount' property must be greater than 0 while really it's ${ actualValue }`,
     sumOfCharactersCountOfAffixesAndMinimalRandomlyGeneratedCharactersCountIsExceedsMaximalCharactersCount: (
-      parametersObject: RandomStringsGenerator.MaximalCharactersCountComputing.ParametersObject
+      namedParameters: RandomStringsGenerator.MaximalCharactersCountComputing.ParametersObject
     ): string =>
         "The sum of characters count of 'prefix', 'infix' and 'postfix' and also 'minimalRandomlyGeneratedCharactersCount' are " +
         "exceeds the 'maximalCharactersCount':\n" +
-        `                          prefix.length: ${parametersObject.prefix.length}` +
-        `                           infix.length: ${parametersObject.infix.length}` +
-        `                         postfix.length: ${parametersObject.postfix.length}` +
-        `minimalRandomlyGeneratedCharactersCount: ${parametersObject.minimalRandomlyGeneratedCharactersCount}` +
+        `                          prefix.length: ${ namedParameters.prefix.length }` +
+        `                           infix.length: ${ namedParameters.infix.length }` +
+        `                         postfix.length: ${ namedParameters.postfix.length }` +
+        `minimalRandomlyGeneratedCharactersCount: ${ namedParameters.minimalRandomlyGeneratedCharactersCount }` +
         `                               SUBTOTAL: ${
-          parametersObject.prefix.length + 
-          parametersObject.infix.length +
-          parametersObject.postfix.length +
-          parametersObject.minimalRandomlyGeneratedCharactersCount    
+          namedParameters.prefix.length + 
+          namedParameters.infix.length +
+          namedParameters.postfix.length +
+          namedParameters.minimalRandomlyGeneratedCharactersCount    
         }` +
-        `                 maximalCharactersCount: ${parametersObject.maximalCharactersCount}`,
+        `                 maximalCharactersCount: ${ namedParameters.maximalCharactersCount }`,
     explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount: (
-      { minimalCharactersCount, maximalCharactersCount }: { minimalCharactersCount: number; maximalCharactersCount: number; }
-    ): string => `The explicitly specified minimal characters count (${minimalCharactersCount}) exceeds the maximal characters ` +
-        `count ${maximalCharactersCount}`,
+      {
+        minimalCharactersCount,
+        maximalCharactersCount
+      }: Readonly<{ minimalCharactersCount: number; maximalCharactersCount: number; }>
+    ): string =>
+        `The explicitly specified minimal characters count (${ minimalCharactersCount }) exceeds the maximal characters ` +
+        `count ${ maximalCharactersCount }`,
     noAllowedCharactersForRandomGeneration: "No characters for the random string generation has been allowed allowed." +
       "Check the 'parametersObject.allowedCharacters' and satisfy at least on of below conditions:\n" +
       "  * Set 'latinUppercase' property to true\n" +

@@ -1,4 +1,4 @@
-import CrossBrowserIssueError from "./CrossBrowserIssueError";
+import type CrossBrowserIssueError from "./CrossBrowserIssueError";
 
 
 const CrossBrowserIssueErrorLocalization__English: CrossBrowserIssueError.Localization = {
