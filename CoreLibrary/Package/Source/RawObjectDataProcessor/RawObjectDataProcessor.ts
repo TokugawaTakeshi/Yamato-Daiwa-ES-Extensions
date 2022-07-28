@@ -607,6 +607,10 @@ class RawObjectDataProcessor {
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+    * Above validations are like type guard for the 'ParsedJSON_NestedProperty'.
+    * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+    * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_NestedProperty };
   }
 
@@ -833,6 +837,10 @@ class RawObjectDataProcessor {
     ) {
 
       if (!customValidator.validationFunction({
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+         * Above validations are like type guard for the 'ParsedJSON_Array'.
+         * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+         * the best that possible with current limitations. */
         currentPropertyValue: targetValue__expectedToBeIndexedArray as ParsedJSON_Array,
         rawData__full: this.rawData,
         rawData__currentObjectDepth: parentObject ?? this.rawData
@@ -865,10 +873,18 @@ class RawObjectDataProcessor {
       const postValidationModification of RawObjectDataProcessor.
           getNormalizedPostValidationModifications(targetIndexedArrayTypeValueSpecification.postValidationModifications)
     ) {
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * Above validations are like type guard for the 'ParsedJSON_Array'.
+       * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+       * the best that possible with current limitations. */
       processedValueWorkpiece = postValidationModification(processedValueWorkpiece as ParsedJSON_Array);
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+     * Above validations are like type guard for the 'ParsedJSON_Array'.
+     * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+     * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Array };
   }
 
@@ -1222,6 +1238,10 @@ class RawObjectDataProcessor {
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+     * Above validations are like type guard for the 'ParsedJSON_Object'.
+     * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+     * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Object };
   }
 
@@ -1251,6 +1271,9 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.number: {
         return this.processNumberValue({
           targetValue__expectedToBeNumber: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※※
+          * TypeScript can not see the relation between 'targetValueTypeID' and specific type of 'targetValueSpecification'.
+          * It is not certain that nothing possible to do, but there is no short and clean solution. */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1260,6 +1283,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.string: {
         return this.processStringValue({
           targetValue__expectedToBeString: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1269,6 +1293,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: {
         return this.processBooleanValue({
           targetValue__expectedToBeBoolean: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1278,6 +1303,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: {
         return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
           targetValue__expectedToBeObject: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               FixedKeyAndValuePairsObjectValueSpecification,
           parentObject,
@@ -1288,6 +1314,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: {
         return this.processIndexedArrayTypeValue({
           targetValue__expectedToBeIndexedArray: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsIndexedArrayPropertySpecification,
           parentObject,
@@ -1298,6 +1325,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: {
         return this.processAssociativeArrayTypeValue({
           targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsAssociativeArrayPropertySpecification,
           parentObject,
@@ -1969,7 +1997,6 @@ class RawObjectDataProcessor {
 namespace RawObjectDataProcessor {
 
   export type Options = {
-    // processingApproach: ProcessingApproaches;
     postProcessing?: <InterimValidData, ProcessedData>(interimData: InterimValidData) => ProcessedData;
     localization?: Localization;
   };
@@ -2304,32 +2331,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_Object;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Object;
-        // readonly invalidValueSubstitution?: ParsedJSON_Object;
       };
 
 
@@ -2355,32 +2377,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_Array;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Array;
-        // readonly invalidValueSubstitution?: ParsedJSON_Array;
       };
 
 
@@ -2407,32 +2424,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_NestedProperty;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Object;
-        // readonly invalidValueSubstitution?: ParsedJSON_Object;
         readonly postValidationModifications?:
             (validValue: ArbitraryObject) => ArbitraryObject | Array<(validValue: ArbitraryObject) => ArbitraryObject>;
       };
@@ -2444,7 +2456,6 @@ namespace RawObjectDataProcessor {
       {
         readonly type: ValuesTypesIDs.oneOf;
         readonly alternatives: Array<CertainTypeValueSpecification>;
-        // readonly invalidValueSubstitution?: ParsedJSON_NestedProperty;
         readonly nullSubstitution?: ParsedJSON_NestedProperty;
         readonly customValidators?: CustomValidator<ParsedJSON_NestedProperty>
             | Array<CustomValidator<ParsedJSON_NestedProperty>>;
@@ -2460,25 +2471,21 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_NestedProperty;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
