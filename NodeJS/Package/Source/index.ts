@@ -8,8 +8,17 @@ export { default as NodeJS_Timer } from "./DateTime/NodeJS_Timer";
 export { default as ConsoleApplicationLogger } from "./ConsoleApplicationLogger";
 export { default as ConsoleCommandsParser } from "./ConsoleCommandsParser/ConsoleCommandsParser";
 
+export { default as DesiredFileActuallyIsDirectoryError } from
+    "./Errors/DesiredFileActuallyIsDirectoryError/DesiredFileActuallyIsDirectoryError";
+export { default as DesiredFileActuallyIsDirectoryErrorLocalization__English } from
+    "./Errors/DesiredFileActuallyIsDirectoryError/DesiredFileActuallyIsDirectoryErrorLocalization.english";
+export { default as FileNotFoundError } from "./Errors/FileNotFoundError/FileNotFoundError";
+export { default as FileNotFoundErrorLocalization__English } from
+    "./Errors/FileNotFoundError/FileNotFoundErrorLocalization.english";
 export { default as InvalidConsoleCommandError } from "./Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
 export { default as InterProcessInteractionFailedError } from
     "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
+
+export { default as ObjectDataFilesProcessor } from "./ObjectDataFilesProcessor/ObjectDataFilesProcessor";
 
 export { default as isErrnoException } from "./isErrnoException";

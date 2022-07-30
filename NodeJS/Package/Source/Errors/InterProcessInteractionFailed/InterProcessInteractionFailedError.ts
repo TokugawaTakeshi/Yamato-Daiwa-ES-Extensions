@@ -19,9 +19,7 @@ class InterProcessInteractionFailedError extends Error {
 
 
 namespace InterProcessInteractionFailedError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 
