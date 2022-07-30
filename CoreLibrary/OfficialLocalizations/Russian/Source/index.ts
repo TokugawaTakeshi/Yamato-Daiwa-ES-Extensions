@@ -1,96 +1,53 @@
-export { default as RawObjectDataProcessorLocalization__Russian } from
-    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization.russian";
+/*!
+ * @yamato-daiwa/es-extensions-localization-russian v0.0
+ * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * Released under the MIT License.
+ */
+
+
+export { default as RawObjectDataProcessorLocalization__Russian } from "./RawObjectDataProcessorLocalization.russian";
 
 
 /* === Логирование ================================================================================================== */
-export { default as LoggerLocalization__Russian } from "./Logging/LoggerLocalization__Russian";
-export { default as localizeLogger } from "./Logging/localizeLogger";
+export { default as LoggerLocalization__Russian } from "./LoggerLocalization__Russian";
 
 
 /* === Классы ошибок ================================================================================================ */
 export { default as AlgorithmMismatchErrorLocalization__Russian } from
-    "./Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.russian";
-export { default as localizeAlgorithmMismatchError } from "./Errors/AlgorithmMismatch/localizeAlgorithmMismatchError";
-
+    "./Errors/AlgorithmMismatchErrorLocalization.russian";
 export { default as ClassRedundantSubsequentInitializationErrorLocalization__Russian } from
-    "./Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization.russian";
-export { default as localizeClassRedundantSubsequentInitializationError } from
-    "./Errors/ClassRedundantSubsequentInitialization/localizeClassRedundantSubsequentInitializationError";
-
+    "./Errors/ClassRedundantSubsequentInitializationErrorLocalization.russian";
 export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Russian } from
-    "./Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.russian";
-export { default as localizeClassRequiredInitializationHasNotBeenExecutedError } from
-    "./Errors/ClassRequiredInitializationHasNotBeenExecuted/localizeClassRequiredInitializationHasNotBeenExecutedError";
-
+    "./Errors/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.russian";
 export { default as ConfigFileNotFoundErrorLocalization__Russian } from
-    "./Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization.russian";
-export { default as localizeConfigFileNotFoundError } from "./Errors/ConfigFileNotFound/localizeConfigFileNotFoundError";
-
+    "./Errors/ConfigFileNotFoundErrorLocalization.russian";
 export { default as CrossBrowserIssueErrorLocalization__Russian } from
-    "./Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization.russian";
-export { default as localizeCrossBrowserIssueError } from "./Errors/CrossBrowserIssue/localizeCrossBrowserIssueError";
-
+    "./Errors/CrossBrowserIssueErrorLocalization.russian";
 export { default as DataRetrievingFailedErrorLocalization__Russian } from
-    "./Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization.russian";
-export { default as localizeDataRetrievingFailedError } from
-    "./Errors/DataRetrievingFailed/localizeDataRetrievingFailedError";
-
+    "./Errors/DataRetrievingFailedErrorLocalization.russian";
 export { default as DataSubmittingFailedErrorLocalization__Russian } from
-    "./Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization.russian";
-export { default as localizeDataSubmittingFailedError } from
-    "./Errors/DataSubmittingFailed/localizeDataSubmittingFailedError";
-
+    "./Errors/DataSubmittingFailedErrorLocalization.russian";
 export { default as DOM_ElementRetrievingFailedErrorLocalization__Russian } from
-    "./Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization.russian";
-export { default as localizeDOM_ElementRetrievingFailedError } from
-    "./Errors/DOM_ElementRetrievingFailed/localizeDOM_ElementRetrievingFailedError";
-
+    "./Errors/DOM_ElementRetrievingFailedErrorLocalization.russian";
 export { default as FileReadingFailedErrorLocalization__Russian } from
-    "./Errors/FileReadingFailed/FileReadingFailedErrorLocalization.russian";
-export { default as localizeFileReadingFailedError } from "./Errors/FileReadingFailed/localizeFileReadingFailedError";
-
+    "./Errors/FileReadingFailedErrorLocalization.russian";
 export { default as FileWritingFailedErrorLocalization__Russian } from
-    "./Errors/FileWritingFailed/FileWritingFailedErrorLocalization.russian";
-export { default as localizeFileWritingFailedError } from "./Errors/FileWritingFailed/localizeFileWritingFailedError";
-
+    "./Errors/FileWritingFailedErrorLocalization.russian";
 export { default as ImproperUsageErrorLocalization__Russian } from
-    "./Errors/ImproperUsage/ImproperUsageErrorLocalization.russian";
-export { default as localizeImproperUsageError } from "./Errors/ImproperUsage/localizeImproperUsageError";
-
+    "./Errors/ImproperUsageErrorLocalization.russian";
 export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Russian } from
-    "./Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterLocalization.russian";
-export { default as localizeIncompatiblePropertiesInObjectTypeParameterError } from
-    "./Errors/IncompatiblePropertiesInObjectTypeParameter/localizeIncompatiblePropertiesInObjectTypeParameterError";
-
+    "./Errors/IncompatiblePropertiesInObjectTypeParameterLocalization.russian";
 export { default as InterProcessInteractionFailedErrorLocalization__Russian } from
-    "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization.russian";
-export { default as localizeInterProcessInteractionFailedError } from
-    "./Errors/InterProcessInteractionFailed/localizeInterProcessInteractionFailedError";
-
+    "./Errors/InterProcessInteractionFailedErrorLocalization.russian";
 export { default as InvalidConfigErrorLocalization__Russian } from
-    "./Errors/InvalidConfig/InvalidConfigErrorLocalization.russian";
-export { default as localizeInvalidConfigError } from "./Errors/InvalidConfig/localizeInvalidConfigError";
-
+    "./Errors/InvalidConfigErrorLocalization.russian";
 export { default as InvalidExternalDataErrorLocalization__Russian } from
-    "./Errors/InvalidExternalData/InvalidExternalDataErrorLocalization.russian";
-export { default as localizeInvalidExternalDataError } from
-    "./Errors/InvalidExternalData/localizeInvalidExternalDataError";
-
+    "./Errors/InvalidExternalDataErrorLocalization.russian";
 export { default as InvalidParameterValueErrorLocalization__Russian } from
-    "./Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization.russian";
-export { default as localizeInvalidParameterValueError } from
-    "./Errors/InvalidParameterValue/localizeInvalidParameterValueError";
-
+    "./Errors/InvalidParameterValueErrorLocalization.russian";
 export { default as ModuleDynamicLoadingFailedErrorLocalization__Russian } from
-    "./Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization.russian";
-export { default as localizeModuleDynamicLoadingFailedError } from
-    "./Errors/ModuleDynamicLoadingFailed/localizeModuleDynamicLoadingFailedError";
-
+    "./Errors/ModuleDynamicLoadingFailedErrorLocalization.russian";
 export { default as UnexpectedEventErrorLocalization__Russian } from
-    "./Errors/UnexpectedEvent/UnexpectedEventErrorLocalization.russian";
-export { default as localizeUnexpectedEventError } from "./Errors/UnexpectedEvent/localizeUnexpectedEventError";
-
+    "./Errors/UnexpectedEventErrorLocalization.russian";
 export { default as UnsupportedScenarioErrorLocalization__Russian } from
-    "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.russian";
-export { default as localizeUnsupportedScenarioErrorError } from
-    "./Errors/UnsupportedScenario/localizeUnsupportedScenarioError";
+    "./Errors/UnsupportedScenarioErrorLocalization.russian";

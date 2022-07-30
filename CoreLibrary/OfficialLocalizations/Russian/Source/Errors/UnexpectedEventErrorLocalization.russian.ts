@@ -1,4 +1,4 @@
-import { UnexpectedEventError } from "@yamato-daiwa/es-extensions";
+import type { UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 
 
 const UnexpectedEventErrorLocalization__Russian: UnexpectedEventError.Localization = {

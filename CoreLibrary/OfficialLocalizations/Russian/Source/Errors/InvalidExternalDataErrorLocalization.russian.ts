@@ -6,9 +6,9 @@ export const InvalidExternalDataErrorLocalization__Russian: InvalidExternalDataE
   defaultTitle: "Внешние данные не соответствуют ожидаемым",
   generateDescription:
       (namedParameters: InvalidExternalDataError.Localization.DescriptionTemplateNamedParameters): string =>
-          `Внешние данные '${namedParameters.mentionToExpectedData}' не соответствуют ожидаемым.` +
+          `Внешние данные '${ namedParameters.mentionToExpectedData }' не соответствуют ожидаемым.` +
           `${ insertSubstring(namedParameters.messageSpecificPart, {
-            modifier: (messageSpecificPart: string): string => `\n${messageSpecificPart}`
+            modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
           }) }`
 };
 

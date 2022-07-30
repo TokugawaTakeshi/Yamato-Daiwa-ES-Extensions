@@ -25,18 +25,18 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
       type: this.valueType(targetPropertyValueSpecification.type)
     });
 
-    return `${title}` +
+    return `${ title }` +
         `\n\n●　Свойство / элемент: '${ targetPropertyDotSeparatedQualifiedName }'` +
         `${ insertSubstring(
           targetPropertyNewName,
           { modifier: (targetSubstring: string): string => ` (новое имя: ${ targetSubstring })` }
         ) }` +
-        `\n${specificMessagePart}` +
+        `\n${ specificMessagePart }` +
         `\n\n●　Спецификация свойства / элемента: \n${ propertyOrElementSpecification__stringified }` +
         `\n●　Действительное значение: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
         `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
           modifier: (targetSubstring: string): string => 
-              `\n●　Значение свойства перед первой превалидационной модификацией: ${targetSubstring}`
+              `\n●　Значение свойства перед первой предвалидационной модификацией: ${ targetSubstring }`
         }) }`;
   },
 
@@ -45,7 +45,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   rawDataIsNullErrorMessage: "Первый параметр 'RawObjectDataProcessor.process' имеет значение null.",
 
   buildRawDataIsNotObjectErrorMessage: (actualType: string): string =>
-      `Первый параметр 'RawObjectDataProcessor.process' не является объектом (object) имеет тип ${actualType}.`,
+      `Первый параметр 'RawObjectDataProcessor.process' не является объектом (object) имеет и тип '${ actualType }'.`,
 
   buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
     {
@@ -53,23 +53,24 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
       targetPropertyValueSpecification
     }: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
       targetPropertyValueSpecification: Exclude<
-          RawObjectDataProcessor.CertainTypeValueSpecification,
-          RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
-          >;
+        RawObjectDataProcessor.CertainTypeValueSpecification,
+        RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
+      >;
     }
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Несоответствие ожидаемого и реального типов значения",
-      specificMessagePart: `Ожидалось, что это значение будет иметь тип '${　this.valueType(targetPropertyValueSpecification.type　)}, ' ` +
-          `но на самом деле оно имеет тип '${typeof targetPropertyValue}'.`
+      specificMessagePart:
+          `Ожидалось, что это значение будет иметь тип '${ this.valueType(targetPropertyValueSpecification.type) }, ' ` +
+          `в то время как на самом деле оно имеет тип '${ typeof targetPropertyValue }'.`
     };
   },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Предвалидационная модификация повлекла ошибку",
-      specificMessagePart: "Предвалидационная модификация стала причиной следующей ошибки:\n" +
-          `${stringifyAndFormatArbitraryValue(thrownError)}\n` +
+      specificMessagePart: "Предвалидационная модификация повлекла за собой возникновение ошибки:\n" +
+          `${ stringifyAndFormatArbitraryValue(thrownError) }\n` +
           "Эта предвалидационная модификация будет проигнорирована."
     };
   },
@@ -78,7 +79,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   /* === Обязательность свойств ===================================================================================== */
   requiredPropertyIsMissingErrorMessageTextData: {
     title: "Отсутствие обязательного свойства",
-    specificMessagePart: "Данное свойство имеет значение 'undefined', хотя помечено как обязательное"
+    specificMessagePart: "Данное свойство имеет значение 'undefined', хотя помечено как обязательное."
   },
 
   buildConditionallyRequiredPropertyIsMissingErrorMessageTextData(
@@ -87,7 +88,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     return {
       title: "Отсутствие условно обязательно свойства",
       specificMessagePart: "Данное свойство имеет значение 'undefined', хотя условие:\n" +
-          `'${verbalRequirementCondition}'\n при котором оно обязательно, выполнено.`
+          `'${ verbalRequirementCondition }'\n при котором оно обязательно, выполнено.`
     };
   },
 
@@ -95,130 +96,130 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   /* === Тип данных null ============================================================================================ */
   nonNullableValueIsNullErrorMessageTextData: {
     title: "Запрещённое null-значение",
-    specificMessagePart: "Это значение - 'null', хотя такой вариант не был разрешён спецификацией."
+    specificMessagePart: "Это значение - null, хотя такой вариант не был разрешён спецификацией."
   },
 
 
   /* === Индексные массивы ========================================================================================== */
   buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalElementsCount, actualElementsCount }: { minimalElementsCount: number; actualElementsCount: number; }
+    { minimalElementsCount, actualElementsCount }: Readonly<{ minimalElementsCount: number; actualElementsCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Количество элементов нумерованного массива не достигает минимально ожидаемого значения",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${actualElementsCount} элементов, ` +
-          `хотя ожидалось не менее ${minimalElementsCount}.`
+      title: "Количество элементов нумерованного массива не достигает минимального ожидаемого значения",
+      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
+          `хотя ожидалось не менее ${ minimalElementsCount }.`
     };
   },
 
   buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalElementsCount, actualElementsCount }: { maximalElementsCount: number; actualElementsCount: number; }
+    { maximalElementsCount, actualElementsCount }: Readonly<{ maximalElementsCount: number; actualElementsCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Количество элементов нумерованного массива превышает максимальное ожидаемое значение",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${actualElementsCount} элементов, ` +
-          `хотя ожидалось не более ${maximalElementsCount}.`
+      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
+          `хотя ожидалось не более ${ maximalElementsCount }.`
     };
   },
 
   buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactElementsCount, actualElementsCount }: { exactElementsCount: number; actualElementsCount: number; }
+    { exactElementsCount, actualElementsCount }: Readonly<{ exactElementsCount: number; actualElementsCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Количество элементов нумерованного массива отлично от ожидаемого фиксированного значения",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${actualElementsCount} элементов, ` +
-          `хотя ожидалось ${exactElementsCount}.`
+      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
+          `хотя ожидалось ровно ${ exactElementsCount }.`
     };
   },
 
   indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
     title: "Запрещённый пустой (undefined) элемент нумерованного массива",
     specificMessagePart: "Это значение типа 'нумерованный массив' имеет пустой ('undefined') элемент, хотя" +
-        "хотя таковые не были разрешены описанием валидных данных."
+        "хотя таковые не были разрешены спецификацией валидных данных."
   },
 
   indexedArrayDisallowedNullElementErrorMessageTextData: {
     title: "Запрещённый пустой (null) элемент нумерованного массива",
     specificMessagePart: "Это значение типа 'нумерованный массив' имеет пустой ('null') элемент, хотя" +
-        "хотя таковые не были разрешены описанием валидных данных."
+        "хотя таковые не были разрешены спецификацией валидных данных."
   },
 
 
-  /* === Associative arrays ========================================================================================= */
+  /* === Ассоциативные массивы ====================================================================================== */
   buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalEntriesCount, actualEntriesCount }: { minimalEntriesCount: number; actualEntriesCount: number; }
+    { minimalEntriesCount, actualEntriesCount }: Readonly<{ minimalEntriesCount: number; actualEntriesCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Associative array has less entries than expected minimum",
-      specificMessagePart: `This value of associative array type value has ${actualEntriesCount} entries while at least ` +
-          `${minimalEntriesCount} expected.`
+      title: "Количество вхождений ассоциативного массива не достигает минимального ожидаемого значения",
+      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
+          `хотя ожидалось не менее ${ minimalEntriesCount }.`
     };
   },
 
   buildAssociativeArrayEntriesCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalEntriesCount, actualEntriesCount }: { maximalEntriesCount: number; actualEntriesCount: number; }
+    { maximalEntriesCount, actualEntriesCount }: Readonly<{ maximalEntriesCount: number; actualEntriesCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Associative array has more entries than expected maximum",
-      specificMessagePart: `This value of associative array-type value has ${actualEntriesCount} entries while maximally ` +
-          `${maximalEntriesCount} expected.`
+      title: "Количество вхождений ассоциативного массива превышает максимальное ожидаемое значение",
+      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
+          `хотя ожидалось не более ${ maximalEntriesCount }.`
     };
   },
 
   buildAssociativeArrayEntriesCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactEntriesCount, actualEntriesCount }: { exactEntriesCount: number; actualEntriesCount: number; }
+    { exactEntriesCount, actualEntriesCount }: Readonly<{ exactEntriesCount: number; actualEntriesCount: number; }>
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "The count of entries of associative array does not match with expected fixed value",
-      specificMessagePart: `This value of associative array-type value has ${exactEntriesCount} entries while ` +
-          `exactly ${actualEntriesCount} expected.`
+      title: "Количество вхождений ассоциативного массива отлично от ожидаемого фиксированного значения",
+      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
+          `хотя ожидалось ровно ${ exactEntriesCount }.`
     };
   },
 
   buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      missingRequiredKeys: Array<string>
+    missingRequiredKeys: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Отсутствуют обязательные ключи ассоциативного массива",
-      specificMessagePart: "Следующие ключи ассоциативного массива отсутствуют несмотря на то, что помечены как обязательные:\n" +
-          `${stringifyAndFormatArbitraryValue(missingRequiredKeys)}`
+      title: "Отсутствуют объявленные обязательными ключи ассоциативного массива",
+      specificMessagePart: "Следующие ключи этого ассоциативного массива отсутствуют несмотря на то, что помечены как " +
+          `обязательные:\n ${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
     };
   },
 
   buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      requiredKeysAlternatives: Array<string>
+    requiredKeysAlternatives: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Отсутствуют альтернативно обязательные ключи",
-      specificMessagePart: "One of below keys must present in this associative array-type value, but actually none of them " +
-          `presents.\n${stringifyAndFormatArbitraryValue(requiredKeysAlternatives)}`
+      specificMessagePart: "Один из следующих ключей обязан присутствовать в этом ассоциативном массиве, хотя на самом " +
+          `деле ни одного из них нет.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
     };
   },
 
   buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData(
-      foundDisallowedKeys: Array<string>
+    foundDisallowedKeys: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Запрещённые ключи ассоциативного массива",
       specificMessagePart: "Нижеследующие ключи присутствуют в этом значении типа 'ассоциативный массив', хотя они были " +
-          `запрещены.\n${stringifyAndFormatArbitraryValue(foundDisallowedKeys)}`
+          `запрещены.\n${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
     };
   },
 
   associativeArrayDisallowedUndefinedValueErrorMessageTextData: {
-    title: "Не разрешённые значения ассоциативного массива типа 'явный undefined'",
-    specificMessagePart: "Это значение ассоциативного массива имеет тип 'undefined', хотя подобные значение не были разрешены."
+    title: "Неразрешённые значения ассоциативного массива типа 'undefined'",
+    specificMessagePart: "Это значение ассоциативного массива имеет тип 'undefined', хотя такие значение не были разрешены."
   },
 
   associativeArrayDisallowedNullValueErrorMessageTextData: {
-    title: "Не разрешённые значения ассоциативного массива типа 'null'",
-    specificMessagePart: "Это значение ассоциативного массива имеет тип 'null', хотя подобные значение не были разрешены."
+    title: "Неразрешённые значения ассоциативного массива типа 'null'",
+    specificMessagePart: "Это значение ассоциативного массива имеет тип 'null', хотя такие значение не были разрешены."
   },
 
 
-  /* === 値の型 ====================================================================================================== */
+  /* === Типы значений ============================================================================================== */
   valueType(valueType: Localization.ValuesTypes): string {
 
-    /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
+    /* [ Теория ] Обычно блок switch/case включающий конструкторы Number, String и т. д. работает, однако есть редкие исключения.
      * https://stackoverflow.com/q/69848208/4818123
      * https://stackoverflow.com/q/69848689/4818123
      *  */
@@ -239,9 +240,9 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
 
   numbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
     switch (numberSet) {
-      case RawObjectDataProcessor.NumbersSets.naturalNumber: return "Натуральное число";
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "Неотрицательное целое число";
-      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "Отрицательное целое число";
+      case RawObjectDataProcessor.NumbersSets.naturalNumber: return "Натуральные числа";
+      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "Неотрицательные целые числа";
+      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "Отрицательный целый числа";
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "Отрицательное целое число или ноль";
       case RawObjectDataProcessor.NumbersSets.anyInteger: return "Целое число любого знака";
       case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "Положительная десятичная дробь";
@@ -252,13 +253,14 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   },
 
 
-  /* === 数型値 ====================================================================================================== */
+  /* === Числовые значения ========================================================================================== */
   buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData(
     expectedNumberSet: RawObjectDataProcessor.NumbersSets
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "Несоответствие реального типа данных ожидаемому",
-      specificMessagePart: `Вопреки ожиданиям, данное значение не принадлежит тпу ${ this.numbersSet(expectedNumberSet) }.`
+      title: "Несоответствие реального подмножества чисел данных ожидаемому",
+      specificMessagePart: "Вопреки ожиданиям, данное значение не принадлежит множеству " +
+          `'${ this.numbersSet(expectedNumberSet) }'.`
     };
   },
 
@@ -272,7 +274,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Нехватка до наименьшего разрешённого значения",
-      specificMessagePart: `Это значение не достигает наименьшего разрешённого ${ requiredMinimum }.`
+      specificMessagePart: `Это числовое значение не достигает минимально разрешённого ${ requiredMinimum }.`
     };
   },
 
@@ -281,38 +283,38 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Превышение максимально разрешённого значения",
-      specificMessagePart: `Это значение превышает максимально разрешённое ${ allowedMaximum }.`
+      specificMessagePart: `Это числовое значение превышает максимально разрешённое ${ allowedMaximum }.`
     };
   },
 
 
-  /* === 文字列型値 =================================================================================================== */
+  /* === Строковые значения ========================================================================================== */
   buildCharactersCountIsLessThanRequiredErrorMessageTextData(
-    { minimalCharactersCount, realCharactersCount }: { minimalCharactersCount: number; realCharactersCount: number; }
+    { minimalCharactersCount, realCharactersCount }: Readonly<{ minimalCharactersCount: number; realCharactersCount: number; }>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Нехватка количества символов",
-      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов в то время как минимум ` +
-          `${ minimalCharactersCount } требуется`
+      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов, в то время как требуется минимум ` +
+          `${ minimalCharactersCount }.`
     };
   },
 
   buildCharactersCountIsMoreThanAllowedErrorMessageTextData(
-    { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
+    { maximalCharactersCount, realCharactersCount }: Readonly<{ maximalCharactersCount: number; realCharactersCount: number; }>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Превышение максимального количества символов",
-      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов в то время как максимум ` +
-          `${ maximalCharactersCount } позволено.`
+      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов, в то время как позволено ` +
+          `максимум ${ maximalCharactersCount }.`
     };
   },
 
   buildCharactersCountDoesNotMatchWithSpecifiedErrorMessageTextData(
-    { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
+    { fixedCharactersCount, realCharactersCount }: Readonly<{ fixedCharactersCount: number; realCharactersCount: number; }>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Несоответствие требуемому фиксированному числу символов",
-      specificMessagePart: `Эта строка имеет ${ realCharactersCount } символов в то время как требуется ровно ` +
+      specificMessagePart: `Эта строка имеет ${ realCharactersCount } символов, в то время как требуется ровно ` +
           `${ fixedCharactersCount }.`
     };
   },
@@ -324,13 +326,14 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     };
   },
 
-  /* === 其の他 ====================================================================================================== */
+
+  /* === Другое ====================================================================================================== */
   buildDisallowedBooleanValueVariantErrorMessageTextData(
     disallowedVariant: boolean
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Неразрешённый вариант булевского значения",
-      specificMessagePart: `Позволено только ${ !disallowedVariant }, но не ${disallowedVariant}.`
+      specificMessagePart: `Позволено только ${ !disallowedVariant }, но не ${ disallowedVariant }.`
     };
   },
 
@@ -338,18 +341,19 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
   ): string {
     return "Значения типа 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (алиас: 'Object'）и" +
-        "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（алиас: Map）не могут быть указанны одновременно " +
-        "'ValuesTypesIDs.oneOf', потому как точки зрения ECMAScript имеют тип 'object'. Значение помечено как невалидное.\n" +
+        "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（алиас: Map）не могут быть указанны одновременно как варианты " +
+        "'ValuesTypesIDs.oneOf', потому как точки зрения ECMAScript оба имеют тип 'object'. Значение помечено как невалидное.\n" +
         `${ stringifyAndFormatArbitraryValue(targetValueSpecification) }`;
   },
 
   buildUnsupportedValueTypeErrorMessageTextData(
-      propertyDataForMessagesBuilding: RawObjectDataProcessor.Localization.PropertyDataForMessagesBuilding
+    propertyDataForMessagesBuilding: RawObjectDataProcessor.Localization.PropertyDataForMessagesBuilding
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Неизвестное значение",
       specificMessagePart: `Это значение типа ${ typeof propertyDataForMessagesBuilding.targetPropertyValue } не может ` +
-          `быть получено путём преобразования из JSON в нативный ECMAScript объект.`
+          "быть получено путём преобразования из JSON в нативный ECMAScript объект, а RawObjectDataProcessor поддерживает " +
+          "только данные, совместимые с форматом JSON."
     };
   },
 
@@ -359,10 +363,10 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Пользовательская валидация не пройдена",
-      specificMessagePart: `Это значение не прошло пользовательскую валидацию "${customValidationDescription}".`
+      specificMessagePart: `Это значение не прошло пользовательскую валидацию '${ customValidationDescription }'.`
     };
   }
-}
+};
 
 
 export default RawObjectDataProcessorLocalization__Russian;

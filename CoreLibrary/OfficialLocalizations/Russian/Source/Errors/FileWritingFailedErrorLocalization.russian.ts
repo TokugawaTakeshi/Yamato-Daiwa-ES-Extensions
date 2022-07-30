@@ -5,7 +5,7 @@ const FileWritingFailedErrorLocalization__Russian: FileWritingFailedError.Locali
   defaultTitle: "Ошибка при записи файла",
   generateDescription: (
     namedParameters: FileWritingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибки при записи файла пути\n: '${ namedParameters.filePath }'`
+  ): string => `Произошла ошибки при записи файла по пути\n: '${ namedParameters.filePath }'`
 };
 
 

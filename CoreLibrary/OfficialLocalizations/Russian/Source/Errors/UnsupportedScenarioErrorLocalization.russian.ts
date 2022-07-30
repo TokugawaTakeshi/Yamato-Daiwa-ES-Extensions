@@ -1,4 +1,4 @@
-import { UnsupportedScenarioError } from "@yamato-daiwa/es-extensions";
+import type { UnsupportedScenarioError } from "@yamato-daiwa/es-extensions";
 
 
 const UnsupportedScenarioErrorLocalization__Russian: UnsupportedScenarioError.Localization = {

@@ -1,4 +1,4 @@
-import { DataSubmittingFailedError } from "@yamato-daiwa/es-extensions";
+import type { DataSubmittingFailedError } from "@yamato-daiwa/es-extensions";
 
 
 const DataSubmittingFailedErrorLocalization__Russian: DataSubmittingFailedError.Localization = {
