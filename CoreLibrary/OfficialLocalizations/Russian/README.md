@@ -2,9 +2,9 @@
 
 ## Установка
 
-**@yamato-daiwa/es-extensions-localization-russian** является одноранговой зависимостью (peer dependency) по отношению к 
-**@yamato-daiwa/es-extensions**. Версии должны совпадать с точностью до минорной (число между двумя точками). Например,
-версия 1.5.0 пакета локализации **@yamato-daiwa/es-extensions-localization-russian** совместима с версиями
+**@yamato-daiwa/es-extensions-localization-russian** является одноранговой зависимостью ([peer dependency](https://nodejs.org/en/blog/npm/peer-dependencies/)) 
+по отношению к **@yamato-daiwa/es-extensions**. Версии должны совпадать с точностью до минорной (число между двумя точками). 
+Например, версия 1.5.0 пакета локализации **@yamato-daiwa/es-extensions-localization-russian** совместима с версиями
 **@yamato-daiwa/es-extensions** от **1.5.0** до любой, меньшей **1.6.0**.
 
 ```
@@ -54,7 +54,6 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
 );
 ```
 
-
 Для локализации на всё время выполнения приложения необходимо вызывать метод `setDefaultLocalization`:
 
 ```typescript
@@ -85,7 +84,7 @@ Logger.setLocalization(LoggerLocalization__Russian);
 
 ### Локализация классов ошибок
 
-Объект, содержащий данные локализации, имеет имя согласно схеме
+Объект, содержащий данные локализации конкретного класса ошибки, имеет имя согласно схеме
 
 ```
 [ имя класса ошибки ]Lozalization__Russian
@@ -95,7 +94,7 @@ Logger.setLocalization(LoggerLocalization__Russian);
 Имена всех доступных классов ошибок можно посмотреть в 
 [официальной документации](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/README.md#logging).
 
-Импортированный объект локализации следует присвоить открытому статическому полю соответствующего класса ошибки.
+Импортированный объект локализации следует присвоить открытому статическому полю **localization** соответствующего класса ошибки.
 Например, для **AlgorithmMismatchError** это будет: 
 
 ```typescript

@@ -219,7 +219,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
   /* === Типы значений ============================================================================================== */
   valueType(valueType: Localization.ValuesTypes): string {
 
-    /* [ Теория ] Обычно блок switch/case включающий конструкторы Number, String и т. д. работает, однако есть редкие исключения.
+    /* [ Теория ] Обычно блок switch/case нормально работает с конструкторами типа Number, String, однако есть редкие исключения.
      * https://stackoverflow.com/q/69848208/4818123
      * https://stackoverflow.com/q/69848689/4818123
      *  */

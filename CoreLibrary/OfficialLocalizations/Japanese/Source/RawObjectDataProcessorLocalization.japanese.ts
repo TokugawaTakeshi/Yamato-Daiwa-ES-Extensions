@@ -208,7 +208,7 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   /* === 値の型 ====================================================================================================== */
   valueType(valueType: Localization.ValuesTypes): string {
 
-    /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
+    /* [ 理論 ] 基本的に「switch/case」ブロットで「Number」や「String」のようなコンストラクタを正常に処理しているが、出来ない例外もある。
      * https://stackoverflow.com/q/69848208/4818123
      * https://stackoverflow.com/q/69848689/4818123
      *  */
