@@ -10,10 +10,10 @@ const LoggerLocalization__Japanese: Logger.Localization = {
     info: "通知"
   },
 
-  errorType: "エラー類",
-  occurrenceLocation: "発限局",
+  errorType: "エラー種類",
+  occurrenceLocation: "エラー発生場所",
   caughtError: "捕獲エラー",
-  wrappableError: "包装されたエラー",
+  wrappableError: "ラップされたエラー",
   appendedData: "追加データ"
 };
 

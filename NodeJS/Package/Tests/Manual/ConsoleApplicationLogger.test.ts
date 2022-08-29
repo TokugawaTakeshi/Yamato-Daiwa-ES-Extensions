@@ -83,3 +83,13 @@ Logger.logInfo({
     bar: "bravo"
   }
 });
+
+
+Logger.logError({
+  errorType: UnexpectedEventError.NAME,
+  title: UnexpectedEventError.localization.defaultTitle,
+  description: "'foo' is 'null'. With correctly working validation it could" +
+      `${ ConsoleApplicationLogger.highlightText(" not ") }be.`,
+  occurrenceLocation: "className.methodName(parametersObject)",
+  customBadgeText: "Exception"
+});

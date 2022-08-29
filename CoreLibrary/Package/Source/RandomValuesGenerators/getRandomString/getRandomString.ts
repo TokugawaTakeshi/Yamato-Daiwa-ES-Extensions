@@ -1,5 +1,5 @@
-import latinCharacters__lowercase from "../../Strings/CharactersAssets/latinCharacters__lowercase";
-import latinCharacters__uppercase from "../../Strings/CharactersAssets/latinCharacters__uppercase";
+import lowercaseLatinCharacters from "../../Strings/CharactersAssets/lowercaseLatinCharacters";
+import uppercaseLatinCharacters from "../../Strings/CharactersAssets/uppercaseLatinCharacters";
 import stringifiedDigits from "../../Strings/CharactersAssets/stringifiedDigits";
 
 import isString from "../../TypeGuards/Strings/isString";
@@ -136,6 +136,7 @@ export class RandomStringsGenerator {
     if (minimalCharactersCount__explicitlySpecified < 0) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 1,
           parameterName: "parametersObject.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.minimalCharactersCountMustBeGreaterThan0(
               minimalCharactersCount__explicitlySpecified
@@ -187,6 +188,7 @@ export class RandomStringsGenerator {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 1,
           parameterName: "namedParameters.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.
               sumOfCharactersCountOfAffixesAndMinimalRandomlyGeneratedCharactersCountIsExceedsMaximalCharactersCount(
@@ -202,6 +204,7 @@ export class RandomStringsGenerator {
       /* [ Theory ] The case when the 'minimalCharactersCount' has been explicitly specified.  */
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 1,
           parameterName: "namedParameters.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.
               explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount({
@@ -227,11 +230,11 @@ export class RandomStringsGenerator {
     const charactersForRandomStringGeneration: Array<string> = [];
 
     if (allowedCharacters.latinUppercase === true) {
-      charactersForRandomStringGeneration.push(...latinCharacters__uppercase);
+      charactersForRandomStringGeneration.push(...uppercaseLatinCharacters);
     }
 
     if (allowedCharacters.latinLowercase === true) {
-      charactersForRandomStringGeneration.push(...latinCharacters__lowercase);
+      charactersForRandomStringGeneration.push(...lowercaseLatinCharacters);
     }
 
     if (allowedCharacters.digits === true) {

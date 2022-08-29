@@ -4,11 +4,11 @@ import type { IncompatiblePropertiesInObjectTypeParameterError } from "@yamato-d
 const IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Japanese:
     IncompatiblePropertiesInObjectTypeParameterError.Localization =
     {
-      defaultTitle: "オブジェクト型引数に於ける非相互的プロパティ",
+      defaultTitle: "オブジェクト型引数の非互換プロパティ",
       generateDescription: (
         namedParameters: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateNamedParameters
-      ): string => `オブジェクト型引数「${ namedParameters.parameterName }」に於いてプロパティ「${ namedParameters.conflictingPropertyName }」 ` +
-          "は下記のプロパティとの日相互。" +
+      ): string => `オブジェクト型引数「${ namedParameters.parameterName }」のプロパティ「${ namedParameters.conflictingPropertyName }」 ` +
+          "は、下記のプロパティと互換性が無い。" +
           `${ namedParameters.incompatiblePropertiesNames.reduce((accumulatingString: string, propertyName: string): string =>
               `${ accumulatingString }\n- ${ propertyName }`, "") }`
     };
