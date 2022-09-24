@@ -2,8 +2,10 @@ extension:
 
   - ts
 
-spec: "Tests/**/*.test.ts"
+spec: "**/*.test.ts"
 
 require:
 
   - ts-node/register
+
+#loader: ts-node/esm

@@ -4,10 +4,10 @@ import type { ClassRedundantSubsequentInitializationError } from "@yamato-daiwa/
 const ClassRedundantSubsequentInitializationErrorLocalization__Japanese:
     ClassRedundantSubsequentInitializationError.Localization =
 {
-  defaultTitle: "クラスの不要な再初期化",
+  defaultTitle: "クラスの不要再初期化",
   generateDescription:
       (namedParameters: ClassRedundantSubsequentInitializationError.Localization.DescriptionTemplateNamedParameters): string =>
-          `クラス「${ namedParameters.className }」の初期化は、最初の一度しか認められていない。`
+          `クラス「${ namedParameters.className }」は一度切りの初期化型のクラスである。`
 };
 
 

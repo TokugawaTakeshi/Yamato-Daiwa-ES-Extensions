@@ -2,7 +2,7 @@ import type { UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 
 
 const UnexpectedEventErrorLocalization__Japanese: UnexpectedEventError.Localization = {
-  defaultTitle: "想定外のエラー発生"
+  defaultTitle: "予想外の状態発生"
 };
 
 

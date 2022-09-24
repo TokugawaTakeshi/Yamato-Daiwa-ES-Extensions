@@ -1,8 +1,8 @@
 import isString from "../TypeGuards/Strings/isString";
 import splitString from "./splitString";
 import addMultipleElementsToSet from "../Sets/addMultipleElementsToSet";
-import lowercaseLatinCharacters from "./CharactersAssets/lowercaseLatinCharacters";
-import uppercaseLatinCharacters from "./CharactersAssets/uppercaseLatinCharacters";
+import latinCharacters__lowercase from "./CharactersAssets/latinCharacters__lowercase";
+import latinCharacters__uppercase from "./CharactersAssets/latinCharacters__uppercase";
 import stringifiedDigits from "./CharactersAssets/stringifiedDigits";
 
 
@@ -35,11 +35,11 @@ export default function hasStringOnlySpecificCharacters(
   } else {
 
     if (characters.latinUppercase === true) {
-      addMultipleElementsToSet(allowedCharactersSet, uppercaseLatinCharacters);
+      addMultipleElementsToSet(allowedCharactersSet, latinCharacters__uppercase);
     }
 
     if (characters.latinLowercase === true) {
-      addMultipleElementsToSet(allowedCharactersSet, lowercaseLatinCharacters);
+      addMultipleElementsToSet(allowedCharactersSet, latinCharacters__lowercase);
     }
 
     if (characters.digits === true) {

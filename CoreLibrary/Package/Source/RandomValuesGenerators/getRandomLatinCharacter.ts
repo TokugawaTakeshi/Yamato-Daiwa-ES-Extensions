@@ -1,5 +1,5 @@
-import uppercaseLatinCharacters from "../Strings/CharactersAssets/uppercaseLatinCharacters";
-import lowercaseLatinCharacters from "../Strings/CharactersAssets/lowercaseLatinCharacters";
+import latinCharacters__uppercase from "../Strings/CharactersAssets/latinCharacters__uppercase";
+import latinCharacters__lowercase from "../Strings/CharactersAssets/latinCharacters__lowercase";
 
 import getRandomBoolean from "./getRandomBoolean";
 import getRandomArrayElement from "./getRandomArrayElement";
@@ -16,11 +16,11 @@ export default function getRandomLatinCharacter(
 ): string {
 
   if (capital) {
-    return getRandomArrayElement(uppercaseLatinCharacters);
+    return getRandomArrayElement(latinCharacters__uppercase);
   } else if (lowercase) {
-    return getRandomArrayElement(lowercaseLatinCharacters);
+    return getRandomArrayElement(latinCharacters__lowercase);
   }
 
 
-  return getRandomArrayElement(getRandomBoolean() ? uppercaseLatinCharacters : lowercaseLatinCharacters);
+  return getRandomArrayElement(getRandomBoolean() ? latinCharacters__uppercase : latinCharacters__lowercase);
 }

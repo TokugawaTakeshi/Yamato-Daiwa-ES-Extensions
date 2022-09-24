@@ -3,10 +3,10 @@ import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 export const InvalidExternalDataErrorLocalization__Japanese: InvalidExternalDataError.Localization = {
-  defaultTitle: "外部取得データの仕様不整合",
+  defaultTitle: "外部から取得されたデータは仕様と合っていない",
   generateDescription:
       (namedParameters: InvalidExternalDataError.Localization.DescriptionTemplateNamedParameters): string =>
-          `「${ namedParameters.mentionToExpectedData }」は、仕様上期待される構成になっていない。` +
+          `「${ namedParameters.mentionToExpectedData }」は期待された構成と合っていない。` +
           `${ insertSubstring(namedParameters.messageSpecificPart, {
             modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
           }) }`

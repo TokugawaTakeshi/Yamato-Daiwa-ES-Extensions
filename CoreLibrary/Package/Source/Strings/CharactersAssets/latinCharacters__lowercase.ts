@@ -1,4 +1,4 @@
-const lowercaseLatinCharacters: Array<string> = [
+const latinCharacters__lowercase: Array<string> = [
   "a",
   "b",
   "c",
@@ -28,4 +28,4 @@ const lowercaseLatinCharacters: Array<string> = [
 ];
 
 
-export default lowercaseLatinCharacters;
+export default latinCharacters__lowercase;

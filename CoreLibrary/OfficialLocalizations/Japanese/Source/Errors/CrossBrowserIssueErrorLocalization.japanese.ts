@@ -2,7 +2,7 @@ import type { CrossBrowserIssueError } from "@yamato-daiwa/es-extensions";
 
 
 const CrossBrowserIssueErrorLocalization__Japanese: CrossBrowserIssueError.Localization = {
-  defaultTitle: "多種ブラウザー同時対応の問題"
+  defaultTitle: "多ブラウザー対応関連問題"
 };
 
 

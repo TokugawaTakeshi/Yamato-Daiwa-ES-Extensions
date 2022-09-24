@@ -342,7 +342,7 @@ abstract class ConsoleApplicationLogger {
   }
 
   public static highlightText(targetString: string): string {
-    return `\x1b[43m${ targetString }\x1b[49m`;
+    return `\x1b[43m${ targetString }\x1b[0m`;
   }
 
   /* https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences

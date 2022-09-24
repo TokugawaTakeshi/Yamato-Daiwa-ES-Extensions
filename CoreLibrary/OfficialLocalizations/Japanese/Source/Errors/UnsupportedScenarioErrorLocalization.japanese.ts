@@ -2,7 +2,7 @@ import type { UnsupportedScenarioError } from "@yamato-daiwa/es-extensions";
 
 
 const UnsupportedScenarioErrorLocalization__Japanese: UnsupportedScenarioError.Localization = {
-  defaultTitle: "サポート非対応の事態発生"
+  defaultTitle: "対応されていない状態発生"
 };
 
 

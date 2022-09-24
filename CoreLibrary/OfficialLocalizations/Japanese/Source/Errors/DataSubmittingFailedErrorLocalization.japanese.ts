@@ -5,7 +5,7 @@ const DataSubmittingFailedErrorLocalization__Japanese: DataSubmittingFailedError
   defaultTitle: "データ送信失敗",
   generateDescription: (
     namedParameters: DataSubmittingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `データ「${ namedParameters.mentionToData }」の送信中に不具合発生。`
+  ): string => `データ「${ namedParameters.mentionToData }」の送信中に不具合が発生。`
 };
 
 

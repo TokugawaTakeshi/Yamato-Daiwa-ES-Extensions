@@ -36,16 +36,16 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
         `\n●　実際値: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
         `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
           modifier: (targetSubstring: string): string =>
-              `\n●　妥当性確認の前段階処理で変更される以前の初期値： ${ targetSubstring }`
+              `\n●　前妥当性確認の最初の変更の前の値： ${ targetSubstring }`
         }) }`;
   },
 
-  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== ${ messageNumber }エラー名 ==========`; },
+  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== ${ messageNumber }エラー目 ==========`; },
 
-  rawDataIsNullErrorMessage: "'RawObjectDataProcessor.process'の第一引数である生データがnullになっている。",
+  rawDataIsNullErrorMessage: "'RawObjectDataProcessor.process'の第一引数である生データはnullとなっている。",
 
   buildRawDataIsNotObjectErrorMessage: (actualType: string): string =>
-      `'RawObjectDataProcessor.process'の第一引数である生データが'object'ではなく、'${ actualType }'になっている。`,
+      `'RawObjectDataProcessor.process'の第一引数である生データ'object'ではなく、'${ actualType }'である。`,
 
   buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
     {
@@ -59,18 +59,18 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     }
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "期待される値の型と実際の値の型が合っていない",
-      specificMessagePart: `この値は'${ this.valueType(targetPropertyValueSpecification.type) }型が期待されるが、' ` +
-          `実際の値は'${ typeof targetPropertyValue }'となっている.`
+      title: "期待値の型と実際値の型が合わず",
+      specificMessagePart: `この値は'${ this.valueType(targetPropertyValueSpecification.type) }型だと期待された、' ` +
+          `事実上'${ typeof targetPropertyValue }'となっている.`
     };
   },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "妥当性確認の前段階処理のエラー",
-      specificMessagePart: "この値の妥当性確認の前段階処理で、何らかのエラーが発生した。\n" +
+      title: "前妥当性確認の変形はエラーを起こした",
+      specificMessagePart: "この値の前妥当性確認の変形は下記のエラーを起こした。\n" +
           `${ stringifyAndFormatArbitraryValue(thrownError) }\n` +
-          "この値の妥当性確認の前段階処理は正常に行われなかった。"
+          "この値の前妥当性確認の変形は飛ばされた。"
     };
   },
 
@@ -78,23 +78,23 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   /* === 必須・任意 ==================================================================================================== */
   requiredPropertyIsMissingErrorMessageTextData: {
     title: "必須プロパティ不在",
-    specificMessagePart: "このプロパティの値は必須であるが、'undefined'になっている。"
+    specificMessagePart: "このプロパティの値は'undefined'になっているが、必須として指定された。"
   },
 
   buildConditionallyRequiredPropertyIsMissingErrorMessageTextData(
     verbalRequirementCondition: string
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "必須条件プロパティの未定義",
-      specificMessagePart: `このプロパティは\n'${ verbalRequirementCondition }'\nの条件指定により定義が必須だが、'undefined'になっている。`
+      title: "条件的に必須プロパティ不在",
+      specificMessagePart: `このプロパティの値は'undefined'になっているが、\n'${ verbalRequirementCondition }'\nという必須性の条件が満たされている。`
     };
   },
 
 
-  /* === nullの可否 ================================================================================================== */
+  /* === ヌール可 ===================================================================================================== */
   nonNullableValueIsNullErrorMessageTextData: {
-    title: "許可されていない'null'",
-    specificMessagePart: "この値は、許可されていない'null'になっている。"
+    title: "'null'禁止の値は'null'である",
+    specificMessagePart: "この値は仕様に'null'が許可されていないが、事実上'null'になっている。"
   },
 
 
@@ -103,8 +103,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { minimalElementsCount, actualElementsCount }: { minimalElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "指数配列要素数の最低条件未満",
-      specificMessagePart: `この指数配列は最低${ minimalElementsCount }以上の要素数が必要だが、${ actualElementsCount }しかない。`
+      title: "指数配列の要素数は期待最小要素数と合わず",
+      specificMessagePart: `この指数配列型の値は${ actualElementsCount }要素があるが少なくとも${ minimalElementsCount }が期待された。`
     };
   },
 
@@ -112,8 +112,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { maximalElementsCount, actualElementsCount }: { maximalElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "指数配列要素数の最大条件超過",
-      specificMessagePart: `この指数配列は最大${ maximalElementsCount }以下の要素数に収めなくてはならないが、${ actualElementsCount }もある。`
+      title: "指数配列の要素数は期待最大要素数と合わず",
+      specificMessagePart: `この指数配列型の値は${ actualElementsCount }要素があるが最大${ maximalElementsCount }が期待された。`
     };
   },
 
@@ -121,28 +121,28 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { exactElementsCount, actualElementsCount }: { exactElementsCount: number; actualElementsCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "指数配列要素数の指定条件不整合",
-      specificMessagePart: `この指数配列は要素数が${ exactElementsCount }でなくてはならないが、${ actualElementsCount }になっている。`
+      title: "指数配列の要素数は期待固定要素数と合わず",
+      specificMessagePart: `この指数配列型の値は${ actualElementsCount }要素があるがちょうど${ exactElementsCount }が期待された。`
     };
   },
 
   indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
-    title: "許可されていない undefined の存在",
-    specificMessagePart: "この指数配列には、許可されていない'undefined'要素が存在している。"
+    title: "指数配列の許可されていないundefined型要素",
+    specificMessagePart: "此の指数配列型は'undefined'要素が発見されたが、'undefined'型の要素は許可されていない。"
   },
 
   indexedArrayDisallowedNullElementErrorMessageTextData: {
-    title: "許可されていない null の存在",
-    specificMessagePart: "この指数配列には、許可されていない'null'要素が存在している。"
+    title: "指数配列の許可されていないnull要素",
+    specificMessagePart: "此の指数配列型は'null'要素が発見されたが、'null'の要素は許可されていない。"
   },
 
-  /* === 連想配列 ==================================================================================================== */
+  /* === Associative arrays ========================================================================================= */
   buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData(
     { minimalEntriesCount, actualEntriesCount }: { minimalEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "必要最小数に満たない組数",
-      specificMessagePart: `この連想配列は${ actualEntriesCount }組のキー・値で構成されているが、最低${ minimalEntriesCount }組以上必要である。`
+      title: "連想配列の両数は最小減に達さず",
+      specificMessagePart: `此の連想配列型の値は${ actualEntriesCount }両を持っているが、少なくとも${ minimalEntriesCount }が期待。`
     };
   },
 
@@ -150,8 +150,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { maximalEntriesCount, actualEntriesCount }: { maximalEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "最大数を超過している組数",
-      specificMessagePart: `この連想配列は${ actualEntriesCount }組のキー・値で構成されているが、最大${ maximalEntriesCount }組以下でなくてはならない。`
+      title: "連想配列の両数は最大数を超えている",
+      specificMessagePart: `此の連想配列型の値は${ actualEntriesCount }両を持っているが、最大${ maximalEntriesCount }が期待。`
     };
   },
 
@@ -159,8 +159,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { exactEntriesCount, actualEntriesCount }: { exactEntriesCount: number; actualEntriesCount: number; }
   ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "指定条件と一致しない組数",
-      specificMessagePart: `この連想配列は正確に${ exactEntriesCount }組のキー・値でなくてはいけないが、実際は${ actualEntriesCount }組で構成されている。`
+      title: "連想配列の両数は期待固定数と合わず",
+      specificMessagePart: `此の連想配列型の値は${ exactEntriesCount } 両を持っているが、丁度${ actualEntriesCount } が期待。`
     };
   },
 
@@ -168,8 +168,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
       missingRequiredKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "必須キーの未定義",
-      specificMessagePart: "下記の必須キーが定義されていない。\n" +
+      title: "連想配列の必須キーが欠けている",
+      specificMessagePart: "下記のキーが必須にも関わらす、欠けている\n" +
           `${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
     };
   },
@@ -178,8 +178,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
       requiredKeysAlternatives: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "選択式必須キーの未定義",
-      specificMessagePart: "下記のいずれかの必須キーが定義されていない。" +
+      title: "選択的に必要なキーが欠けている",
+      specificMessagePart: "下記のキーの中からいずれかの奴が存在しなければいけないが、どちらも無い。" +
           `presents.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
     };
   },
@@ -188,27 +188,27 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
       foundDisallowedKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "禁止キーの使用",
-      specificMessagePart: "この連想配列で、下記の使用禁止キーが発見された。\n" +
+      title: "連想配列の禁止キーが発見",
+      specificMessagePart: "下記のキーが禁じられているにもかかわらず発見された\n" +
           `${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
     };
   },
 
   associativeArrayDisallowedUndefinedValueErrorMessageTextData: {
-    title: "禁止されている「undefined」型の存在",
-    specificMessagePart: "この連想配列に、禁止されている「undefined」型の値が含まれている。"
+    title: "連想配列の禁じられている「undefined」型の値発見",
+    specificMessagePart: "この連想配列の値は明示的「undefined」（無値のキー）になっているが、この様な値は許可されていない。"
   },
 
   associativeArrayDisallowedNullValueErrorMessageTextData: {
-    title: "禁止されている「null」型の存在",
-    specificMessagePart: "この連想配列に。禁止されている「null」型の値が含まれている。"
+    title: "連想配列の禁じられている「null」型の値発見",
+    specificMessagePart: "この連想配列の値は「null」になっているが、この様な値は許可されていない。"
   },
 
 
   /* === 値の型 ====================================================================================================== */
   valueType(valueType: Localization.ValuesTypes): string {
 
-    /* [ 理論 ] 基本的に「switch/case」文で「Number」や「String」のようなコンストラクタを正常処理しているが、処理不可能な例外もある。
+    /* [ 理論 ] 基本的に「switch/case」ブロットで「Number」や「String」のようなコンストラクタを正常に処理しているが、出来ない例外もある。
      * https://stackoverflow.com/q/69848208/4818123
      * https://stackoverflow.com/q/69848689/4818123
      *  */
@@ -219,9 +219,9 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
       case RawObjectDataProcessor.ValuesTypesIDs.number: return "数";
       case RawObjectDataProcessor.ValuesTypesIDs.string: return "文字列";
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "ブーリアン";
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: return "同一要素の指数配列";
-      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: return "固定キーと値のオブジェクト";
-      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: return "同一要素の連想配列";
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: return "一様要素の指数配列";
+      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: return "固定キー・値両のオブジェクト";
+      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: return "一様要素の連想配列";
       case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "複数型可";
     }
   },
@@ -229,31 +229,31 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   numbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
     switch (numberSet) {
       case RawObjectDataProcessor.NumbersSets.naturalNumber: return "自然数";
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "正の整数";
-      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "負の整数";
-      case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "負の整数・0";
-      case RawObjectDataProcessor.NumbersSets.anyInteger: return "正負不問の整数";
-      case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "正の小数";
-      case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: return "負の小数";
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: return "正負不問の小数";
+      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "非負整数";
+      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "負号整数";
+      case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "負号整数・零";
+      case RawObjectDataProcessor.NumbersSets.anyInteger: return "陽負不問整数";
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "陽号小数";
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: return "負号小数";
+      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: return "陽負不問小数";
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "実数";
     }
   },
 
 
-  /* === 数値型の値 ====================================================================================================== */
+  /* === 数型値 ====================================================================================================== */
   buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData(
     expectedNumberSet: RawObjectDataProcessor.NumbersSets
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "期待される集合に属さない数値",
-      specificMessagePart: `この数値型の値は「${ this.numbersSet(expectedNumberSet) }」集合に属していない。`
+      title: "予実数集合不一致",
+      specificMessagePart: `期待に反してこの数型の値は「${ this.numbersSet(expectedNumberSet) }」集合に所属していない。`
     };
   },
 
   valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "許可されていない選択肢",
-    specificMessagePart: "この値は、許可されている選択肢の中に含まれていない。"
+    title: "許可されていない選択的値",
+    specificMessagePart: "この値は許可されている選択肢の中には無い。"
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -261,7 +261,7 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "最小値未満",
-      specificMessagePart: `この値は最小値${ requiredMinimum }を満たしていない。`
+      specificMessagePart: `この値は最小値${ requiredMinimum }に達さず。`
     };
   },
 
@@ -269,19 +269,19 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     allowedMaximum: number
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "最大値超過",
-      specificMessagePart: `この値は最大値${ allowedMaximum }を超過している。`
+      title: "最大値超え",
+      specificMessagePart: `この値は許可されている最大値 ${ allowedMaximum } を超えている。`
     };
   },
 
 
-  /* === 文字列型の値 =================================================================================================== */
+  /* === 文字列型値 =================================================================================================== */
   buildCharactersCountIsLessThanRequiredErrorMessageTextData(
     { minimalCharactersCount, realCharactersCount }: { minimalCharactersCount: number; realCharactersCount: number; }
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "最低文字数未満",
-      specificMessagePart: `この文字列型の値は${ realCharactersCount }文字であるが、最低${ minimalCharactersCount }文字が必要。`
+      title: "最小文字数未満",
+      specificMessagePart: `この文字列型値は ${ realCharactersCount } 文字を持っているが、最少${ minimalCharactersCount } が必要。`
     };
   },
 
@@ -289,8 +289,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "最大文字数超過",
-      specificMessagePart: `この文字列型の値は${ realCharactersCount } 文字であるが、最大${ maximalCharactersCount }文字以下でなくてはならない。`
+      title: "最大文字数超え",
+      specificMessagePart: `この文字列型値は ${ realCharactersCount } 文字を持っているが、最大 ${ maximalCharactersCount } が許可されている。`
     };
   },
 
@@ -298,15 +298,15 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "指定文字数との不一致",
-      specificMessagePart: `この文字列型の値は${ realCharactersCount }文字であるが、正確に${ fixedCharactersCount }文字でなくてはならない。`
+      title: "定められた固定文字数との不一致",
+      specificMessagePart: `この文字列型値は ${ realCharactersCount } 文字を持っているが、丁度 ${ fixedCharactersCount } が必要。`
     };
   },
 
   buildRegularExpressionMismatchErrorMessageTextData(regularExpression: RegExp): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "正規表現を満たしていない",
-      specificMessagePart: `この値は、次の正規表現を満たしていない。\n ${ regularExpression.toString() }`
+      title: "正規表現に満たされてない",
+      specificMessagePart: `この値は次の正規表現に満たされていない\n ${ regularExpression.toString() }`
     };
   },
 
@@ -316,16 +316,16 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "許可されていないブリアン選択肢",
-      specificMessagePart: `このブリアン型の値は「${ disallowedVariant }」であるが、「${ !disallowedVariant }」のみ許可されている。`
+      specificMessagePart: `このブリアン型の値は「${ disallowedVariant }」になっているが、「${ !disallowedVariant }」のみ許可.`
     };
   },
 
   buildIncompatibleValuesTypesAlternativesErrorDescription(
     targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
   ): string {
-    return "値の型「ValuesTypesIDs.fixedKeyAndValuePairsObject」（エイリアスは「Object」）と" +
-        "「ValuesTypesIDs.associativeArrayOfUniformTypeValues」（エイリアスは「Map」）は、「ValuesTypesIDs.oneOf」の非相互的選択肢。" +
-        "ECMAScript上、両方は「object」であり不正値として指示。" +
+    return "値の型「ValuesTypesIDs.fixedKeyAndValuePairsObject」（アリアスは「Object」）と" +
+        "「ValuesTypesIDs.associativeArrayOfUniformTypeValues」（アリアスは「Map」）は「ValuesTypesIDs.oneOf」の非相互的選択肢。" +
+        "ECMAScript上、両方は「object」である。当値は不正値として指示。" +
         `当値の仕様を御確認下さい。\n ${ stringifyAndFormatArbitraryValue(targetValueSpecification) }`;
   },
 
@@ -333,8 +333,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     propertyDataForMessagesBuilding: RawObjectDataProcessor.Localization.PropertyDataForMessagesBuilding
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "不明値の型",
-      specificMessagePart: `この値の ${ typeof propertyDataForMessagesBuilding.targetPropertyValue } 型は妥当処理されたJSONになっていない。`
+      title: "不明値の方",
+      specificMessagePart: `当値の${ typeof propertyDataForMessagesBuilding.targetPropertyValue } 型は妥当処理されたJSONになっていない。`
     };
   },
 
@@ -342,8 +342,8 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     customValidationDescription: string
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
-      title: "カスタム妥当性確認の不適合",
-      specificMessagePart: `この値は、カスタム妥当性確認「${ customValidationDescription }」に適合しない。`
+      title: "カスタム妥当性確認は陰性",
+      specificMessagePart: `この値はカスタム妥当性確認「${ customValidationDescription }」に落ちた。`
     };
   }
 };

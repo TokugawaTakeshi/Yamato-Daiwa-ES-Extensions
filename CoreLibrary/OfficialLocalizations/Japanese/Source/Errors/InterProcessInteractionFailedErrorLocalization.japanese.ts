@@ -2,7 +2,7 @@ import type { InterProcessInteractionFailedError } from "@yamato-daiwa/es-extens
 
 
 const InterProcessInteractionFailedErrorLocalization__Japanese: InterProcessInteractionFailedError.Localization = {
-  defaultTitle: "プロセス間のデータ交換失敗"
+  defaultTitle: "プロセスの間データ交換失敗"
 };
 
 

@@ -2,10 +2,10 @@ import type { DOM_ElementRetrievingFailedError } from "@yamato-daiwa/es-extensio
 
 
 const DOM_ElementRetrievingFailedErrorLocalization__Japanese: DOM_ElementRetrievingFailedError.Localization = {
-  defaultTitle: "DOM要素未発見",
+  defaultTitle: "DOM要素が発見されず",
   generateDescription: (
     namedParameters: DOM_ElementRetrievingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `セレクター「${ namedParameters.selector }」の要素が発見出来なかった。`
+  ): string => `セレクター「${ namedParameters.selector }」の要素が見つからなかった。`
 };
 
 

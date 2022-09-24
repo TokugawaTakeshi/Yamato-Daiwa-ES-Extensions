@@ -1,4 +1,4 @@
-const uppercaseLatinCharacters: Array<string> = [
+const latinCharacters__uppercase: Array<string> = [
   "A",
   "B",
   "C",
@@ -28,4 +28,4 @@ const uppercaseLatinCharacters: Array<string> = [
 ];
 
 
-export default uppercaseLatinCharacters;
+export default latinCharacters__uppercase;
