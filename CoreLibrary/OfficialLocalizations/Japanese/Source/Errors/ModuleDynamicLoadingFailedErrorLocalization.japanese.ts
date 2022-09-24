@@ -2,10 +2,10 @@ import type { ModuleDynamicLoadingFailedError } from "@yamato-daiwa/es-extension
 
 
 const ModuleDynamicLoadingFailedErrorLocalization__Japanese: ModuleDynamicLoadingFailedError.Localization = {
-  defaultTitle: "モジュール動的ロードに失敗",
+  defaultTitle: "モジュールの動的ロード失敗",
   generateDescription: (
     namedParameters: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `モジュール「${ namedParameters.modulePath }」の動的ロード中不具合が発生。`
+  ): string => `モジュール「${ namedParameters.modulePath }」の動的ロード中に不具合発生。`
 };
 
 
