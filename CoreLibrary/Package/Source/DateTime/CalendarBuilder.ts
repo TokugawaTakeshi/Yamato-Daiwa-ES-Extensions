@@ -1,4 +1,4 @@
-import type MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
+import type MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
 import getDaysCountInSpecificMonth from "./getDaysCountInSpecificMonth";
 import getMonthNameByNumber from "./getMonthNameByNumber";

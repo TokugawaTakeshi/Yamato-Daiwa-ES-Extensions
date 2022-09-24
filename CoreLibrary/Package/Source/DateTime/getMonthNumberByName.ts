@@ -1,7 +1,7 @@
 /* [ ESLint muting rationale ] Here are all numbers refers to months. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
+import MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -16,6 +16,7 @@ export default function getMonthNumberByName(
   if (numerationFrom !== 0 && numerationFrom !== 1) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
+        parameterNumber: 1,
         parameterName: "namedParameters.numerationFrom",
         messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${ numerationFrom }.`
       }),

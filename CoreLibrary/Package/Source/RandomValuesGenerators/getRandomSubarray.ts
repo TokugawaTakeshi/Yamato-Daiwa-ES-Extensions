@@ -46,6 +46,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (!Number.isInteger(options.minimalElementsCount)) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
@@ -59,6 +60,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.minimalElementsCount < 0) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
@@ -80,6 +82,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (!Number.isInteger(options.maximalElementsCount)) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.maximalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMaximalElementsCountErrorMessage({ actualValue: options.maximalElementsCount })
@@ -93,6 +96,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.maximalElementsCount < minimalElementsCount) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.generateMaximalElementCountIsSmallerThanMinimal({
             minimalElementsCount, maximalElementsCount: options.maximalElementsCount

@@ -9,7 +9,7 @@ import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenU
 import insertSubstringIf from "../Strings/insertSubstringIf";
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
-import LoggerLocalization__English from "./LoggerLocalization__English";
+import LoggerLocalization__English from "./LoggerLocalization.english";
 
 
 abstract class Logger {

@@ -4,7 +4,7 @@ import createDOM_ElementFromHTML_Code from "../../Source/DOM/createDOM_ElementFr
 import { strictEqual, throws } from "assert";
 import provideMockBrowserEnvironment from "jsdom-global";
 
-import { DOM_ElementRetrievingFailedError } from "@yamato-daiwa/es-extensions";
+import { DOM_ElementRetrievingFailedError, UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 
 
 describe("getExpectedToBeSingleDOM_Element", (): void => {
@@ -77,7 +77,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
           });
         },
         {
-          name: DOM_ElementRetrievingFailedError.NAME
+          name: UnexpectedEventError.NAME
         }
       );
     });

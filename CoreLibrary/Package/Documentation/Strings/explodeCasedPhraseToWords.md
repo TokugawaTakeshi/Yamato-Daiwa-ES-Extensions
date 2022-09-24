@@ -13,7 +13,7 @@ returns the array of them. Currently, 26 latin characters of English alphabet ar
 
 ```typescript
 console.log(explodeCasedPhraseToWords("Waltz bad nymph for quick jigs vex"));
-// => [ "Waltz", "bad", "nymph", "for", "quick", "jigs", "vex" ]
+// -> [ "Waltz", "bad", "nymph", "for", "quick", "jigs", "vex" ]
 ```
 
 
@@ -21,13 +21,13 @@ console.log(explodeCasedPhraseToWords("Waltz bad nymph for quick jigs vex"));
 
 ```typescript
 console.log(explodeCasedPhraseToWords("ExperimentalSample"));
-// => [ "Experimental", "Sample" ]
+// -> [ "Experimental", "Sample" ]
 
 console.log(explodeCasedPhraseToWords("HTMLContent"));
-// => [ "HTML", "Content" ]
+// -> [ "HTML", "Content" ]
 
 console.log(explodeCasedPhraseToWords("IAmATeapot"));
-// => [ "I", "Am", "A", "Teapot" ]
+// -> [ "I", "Am", "A", "Teapot" ]
 ```
 
 
@@ -35,10 +35,10 @@ console.log(explodeCasedPhraseToWords("IAmATeapot"));
 
 ```typescript
 console.log(explodeCasedPhraseToWords("experimentalSample"));
-// => [ "experimental", "Sample" ]
+// -> [ "experimental", "Sample" ]
 
 console.log(explodeCasedPhraseToWords("iAmATeapot"));
-// => [ "i", "Am", "A", "Teapot" ]
+// -> [ "i", "Am", "A", "Teapot" ]
 ```
 
 
@@ -46,7 +46,7 @@ console.log(explodeCasedPhraseToWords("iAmATeapot"));
 
 ```typescript
 console.log(explodeCasedPhraseToWords("I-am-The-tasty-Kebab"));
-// => [ "I", "am", "The", "tasty", "Kebab" ]
+// -> [ "I", "am", "The", "tasty", "Kebab" ]
 ```
 
 
@@ -54,7 +54,7 @@ console.log(explodeCasedPhraseToWords("I-am-The-tasty-Kebab"));
 
 ```typescript
 console.log(explodeCasedPhraseToWords("I_AM_A_SNAKE"));
-// => [ "I", "AM", "A", "SNAKE" ]
+// -> [ "I", "AM", "A", "SNAKE" ]
 ```
 
 

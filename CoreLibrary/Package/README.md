@@ -475,6 +475,9 @@ makes below functions redundant, but they still could be used in the environment
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a></dt>
   <dd>Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.</dd>
 
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder.md">PoliteErrorsMessagesBuilder</a></dt>
+  <dd>Building the polite error message with standard idioms, requesting to report the issue with appended technical details and polite explanations.</dd>
+
   <dt>Pre-made errors</dt>
   <dd>
     <dl>

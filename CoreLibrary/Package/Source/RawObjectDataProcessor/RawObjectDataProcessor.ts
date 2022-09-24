@@ -232,7 +232,7 @@ class RawObjectDataProcessor {
 
     /* [ Approach ] Except the bug case, the reaching of this point possible only with invalid TypeScript. */
     Logger.throwErrorAndLog({
-      errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
+      errorInstance: new InvalidParameterValueError({ parameterNumber: 1, parameterName: "valueType" }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });

@@ -33,6 +33,7 @@ namespace InvalidParameterValueError {
 
   export namespace Localization {
     export type DescriptionTemplateNamedParameters = Readonly<{
+      parameterNumber: number;
       parameterName: string;
       messageSpecificPart?: string;
     }>;

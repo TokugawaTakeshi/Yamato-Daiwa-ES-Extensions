@@ -194,7 +194,7 @@ export {
   ClientErrorsHTTP_StatusCodes,
   ServerErrorsHTTP_StatusCodes
 } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
-export { default as MonthsNames } from "./ConstantsAndEnumerations/MonthsNames";
+export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
 export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
 export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
 export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
@@ -209,6 +209,13 @@ export { default as computeLastItemNumberForSpecificPaginationPage } from
 export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
 export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
 
+
+/* === PoliteErrorsMessageBuilder =================================================================================== */
+export { default as PoliteErrorsMessagesBuilder } from "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
+export { default as PoliteErrorsMessagesBuilder__English } from
+    "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilderLocalization.english";
+
+
 /* === Logging ====================================================================================================== */
 export type {
   Log,
@@ -220,7 +227,7 @@ export type {
 } from "./Logging/Logs";
 export type { ILogger } from "./Logging/ILogger";
 export { default as Logger } from "./Logging/Logger";
-export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization__English";
+export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization.english";
 
 
 /* === Errors ======================================================================================================= */

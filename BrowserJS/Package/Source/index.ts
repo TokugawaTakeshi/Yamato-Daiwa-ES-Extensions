@@ -5,6 +5,7 @@
  */
 
 /* === DOM ==================================================================================================================== */
+export { default as cloneDOM_Element } from "./DOM/cloneDOM_Element";
 export { default as createDOM_ElementFromHTML_Code } from "./DOM/createDOM_ElementFromHTML_Code";
 export { default as createHTML_CollectionFromHTML_Code } from "./DOM/createHTML_CollectionFromHTML_Code";
 export { default as delegateClickEventHandling } from "./DOM/delegateClickEventHandling";
