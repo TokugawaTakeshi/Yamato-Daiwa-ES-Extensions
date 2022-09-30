@@ -18,9 +18,7 @@ class AlgorithmMismatchError extends Error {
 
 
 namespace AlgorithmMismatchError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 

@@ -1,11 +1,11 @@
-import ModuleDynamicLoadingFailedError from "./ModuleDynamicLoadingFailedError";
+import type ModuleDynamicLoadingFailedError from "./ModuleDynamicLoadingFailedError";
 
 
 const ModuleDynamicLoadingFailedErrorLocalization__English: ModuleDynamicLoadingFailedError.Localization = {
   defaultTitle: "Module dynamic loading failure",
   generateDescription: (
-    parametersObject: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The dynamic loading of module '${parametersObject.modulePath}' failed.`
+    namedParameters: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
+  ): string => `The dynamic loading of module '${ namedParameters.modulePath }' failed.`
 };
 
 

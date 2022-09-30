@@ -2,8 +2,8 @@
 /* eslint-disable max-classes-per-file */
 /* eslint max-depth: [ "error", 6 ] */
 
-import { ArbitraryObject } from "../Types/ArbitraryObject";
-import { ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
+import type { ArbitraryObject } from "../Types/ArbitraryObject";
+import type { ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
 import RawObjectDataProcessorLocalization__English from "./RawObjectDataProcessorLocalization__English";
 
@@ -132,10 +132,13 @@ class RawObjectDataProcessor {
     *   programmatically that some value has object-based type 'X'. Nothing left except believe the user that 'ProcessedData'
     * is corresponding to 'validDataSpecification'. */
     if (isNotUndefined(options.postProcessing)) {
-      processedData = options.postProcessing<InterimValidData, ProcessedData>(
-        rawDataProcessingResult.processedValue as InterimValidData
-      );
+      processedData = options.
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+          * See the "Problem overview" section of the official documentation */
+          postProcessing<InterimValidData, ProcessedData>(rawDataProcessingResult.processedValue as InterimValidData);
     } else {
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * See the "Problem overview" section of the official documentation */
       processedData = rawDataProcessingResult.processedValue as ProcessedData;
     }
 
@@ -149,9 +152,9 @@ class RawObjectDataProcessor {
     messages: Array<string>, localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
   ): string {
     return messages.reduce(
-      (accumulatingValue: string, message: string, index: number): string => `${accumulatingValue}\n\n` +
-          `${localization.buildErrorMessagesListItemHeading(index + 1)}\n` +
-          `${message}`, ""
+      (accumulatingValue: string, message: string, index: number): string => `${ accumulatingValue }\n\n` +
+          `${ localization.buildErrorMessagesListItemHeading(index + 1) }\n` +
+          `${ message }`, ""
     );
   }
 
@@ -229,7 +232,7 @@ class RawObjectDataProcessor {
 
     /* [ Approach ] Except the bug case, the reaching of this point possible only with invalid TypeScript. */
     Logger.throwErrorAndLog({
-      errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
+      errorInstance: new InvalidParameterValueError({ parameterNumber: 1, parameterName: "valueType" }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });
@@ -404,6 +407,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future.
               *  The desired 'configurable', 'enumerable', 'writable' could be different with actual ones.
               *  If 'configurable === false', the descriptors could not be changed
@@ -463,6 +467,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future. */
             }
           }
@@ -490,6 +495,7 @@ class RawObjectDataProcessor {
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
               /* ※ Reserved for the future (no need to change the value itself, but the changing of descriptors could be
                * requested). */
             }
@@ -536,6 +542,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification and/or descriptions changes could be requested. */
         }
@@ -591,14 +598,19 @@ class RawObjectDataProcessor {
         const keyOfPropertyWhichWillBeDeleted of
         targetObjectTypeValueSpecification.propertiesWillBeDeletedAfterPostValidationModifications
       ) {
-        /* [ ESLint muting rationale ] Each element of this array has been specified by user, so user must be aware of
-        *     potential side effects of properties deleting. */
-        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete */
+        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete --
+         * Each element of this array has been specified by user, so user must be aware of potential side effects of
+         * properties deleting.
+        *  */
         delete processedValueWorkpiece[keyOfPropertyWhichWillBeDeleted];
       }
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+    * Above validations are like type guard for the 'ParsedJSON_NestedProperty'.
+    * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+    * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_NestedProperty };
   }
 
@@ -809,6 +821,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification could be requested. */
         }
@@ -824,6 +837,10 @@ class RawObjectDataProcessor {
     ) {
 
       if (!customValidator.validationFunction({
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+         * Above validations are like type guard for the 'ParsedJSON_Array'.
+         * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+         * the best that possible with current limitations. */
         currentPropertyValue: targetValue__expectedToBeIndexedArray as ParsedJSON_Array,
         rawData__full: this.rawData,
         rawData__currentObjectDepth: parentObject ?? this.rawData
@@ -856,10 +873,18 @@ class RawObjectDataProcessor {
       const postValidationModification of RawObjectDataProcessor.
           getNormalizedPostValidationModifications(targetIndexedArrayTypeValueSpecification.postValidationModifications)
     ) {
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * Above validations are like type guard for the 'ParsedJSON_Array'.
+       * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+       * the best that possible with current limitations. */
       processedValueWorkpiece = postValidationModification(processedValueWorkpiece as ParsedJSON_Array);
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+     * Above validations are like type guard for the 'ParsedJSON_Array'.
+     * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+     * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Array };
   }
 
@@ -1161,6 +1186,7 @@ class RawObjectDataProcessor {
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
+
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification could be requested. */
         }
@@ -1212,6 +1238,10 @@ class RawObjectDataProcessor {
     }
 
 
+    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+     * Above validations are like type guard for the 'ParsedJSON_Object'.
+     * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
+     * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Object };
   }
 
@@ -1241,6 +1271,9 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.number: {
         return this.processNumberValue({
           targetValue__expectedToBeNumber: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※※
+          * TypeScript can not see the relation between 'targetValueTypeID' and specific type of 'targetValueSpecification'.
+          * It is not certain that nothing possible to do, but there is no short and clean solution. */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.NumberPropertySpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1250,6 +1283,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.string: {
         return this.processStringValue({
           targetValue__expectedToBeString: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.StringValueSpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1259,6 +1293,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: {
         return this.processBooleanValue({
           targetValue__expectedToBeBoolean: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetValueSpecification: targetValueSpecification as RawObjectDataProcessor.BooleanValueSpecification,
           parentObject,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1268,6 +1303,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: {
         return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
           targetValue__expectedToBeObject: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               FixedKeyAndValuePairsObjectValueSpecification,
           parentObject,
@@ -1278,6 +1314,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: {
         return this.processIndexedArrayTypeValue({
           targetValue__expectedToBeIndexedArray: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetIndexedArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsIndexedArrayPropertySpecification,
           parentObject,
@@ -1288,6 +1325,7 @@ class RawObjectDataProcessor {
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues: {
         return this.processAssociativeArrayTypeValue({
           targetValue__expectedToBeAssociativeArrayTypeObject: targetValue,
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetAssociativeArrayTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               NestedUniformElementsAssociativeArrayPropertySpecification,
           parentObject,
@@ -1313,7 +1351,7 @@ class RawObjectDataProcessor {
     Logger.logError({
       errorType: InvalidParameterValueError.NAME,
       title: InvalidParameterValueError.localization.defaultTitle,
-      description: `The specified value type '${targetValueSpecification.type.toString()}' is not supported.`,
+      description: `The specified value type '${ targetValueSpecification.type.toString() }' is not supported.`,
       occurrenceLocation: "RawObjectDataProcessor.process(rawData, validDataSpecification, options)" +
           "-> processSingleNeitherUndefinedNorNullValue(parametersObject)"
     });
@@ -1959,7 +1997,6 @@ class RawObjectDataProcessor {
 namespace RawObjectDataProcessor {
 
   export type Options = {
-    // processingApproach: ProcessingApproaches;
     postProcessing?: <InterimValidData, ProcessedData>(interimData: InterimValidData) => ProcessedData;
     localization?: Localization;
   };
@@ -2074,20 +2111,16 @@ namespace RawObjectDataProcessor {
     readonly propertiesWillBeDeletedAfterPostValidationModifications?: Array<string>;
   };
 
-  type IndexedArrayTypeValueSpecification = {
-    // readonly nonObjectElementsMustDiffer?: boolean;
-    // readonly uniquePropertiesOfObjectTypeElements?: Array<string>;
-  } & (
-    {
-      readonly minimalElementsCount?: number;
-      readonly maximalElementsCount?: number;
-      readonly exactElementsCount?: undefined;
-    } | {
-      readonly exactElementsCount?: number;
-      readonly minimalElementsCount?: undefined;
-      readonly maximalElementsCount?: undefined;
-    }
-  );
+  type IndexedArrayTypeValueSpecification =
+      {
+        readonly minimalElementsCount?: number;
+        readonly maximalElementsCount?: number;
+        readonly exactElementsCount?: undefined;
+      } | {
+        readonly exactElementsCount?: number;
+        readonly minimalElementsCount?: undefined;
+        readonly maximalElementsCount?: undefined;
+      };
 
   type AssociativeArrayTypeValueSpecification = {
     readonly requiredKeys?: Array<string>;
@@ -2107,9 +2140,9 @@ namespace RawObjectDataProcessor {
 
   export enum ValuesTypesIDs {
     number = "NUMBER",
-    /* 〔 ESLint muting rationale 〕 This rule is not desired for object keys, but there no option allows to disable it for
-     *   the object properties.  */
-    /* eslint-disable-next-line id-denylist */
+    /* eslint-disable-next-line id-denylist --
+     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties.
+     *  */
     string = "STRING",
     boolean = "BOOLEAN",
     fixedKeyAndValuePairsObject = "FIXED_KEY_AND_VALUE_PAIRS_OBJECT",
@@ -2167,44 +2200,40 @@ namespace RawObjectDataProcessor {
       NumberValueSpecification &
       (
         {
+
           readonly required: true;
+
           /* [ Theory ] Required to forbid ... and prevent
           * TS2339: Property '〇〇' does not exist on type '□□'
-          * See https://stackoverflow.com/a/59133061/4818123
-          * Below this theory will be referred as 〔※〕. */
+          * See https://stackoverflow.com/a/59133061/4818123  */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: number;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: number;
-        // readonly invalidValueSubstitution?: number;
       };
 
 
   /* --- String value/property -------------------------------------------------------------------------------------- */
   export type StringValueSpecification = ValueSpecification__CommonParameters & {
-    /* 〔 ESLint muting rationale 〕 This rule is not desired for object keys, but there no option allows to disable it for
-     *   the object properties.  */
-    /* eslint-disable-next-line id-denylist */
+    /* eslint-disable-next-line id-denylist --
+     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties. */
     readonly type: ValuesTypesIDs.string | StringConstructor;
     readonly allowedAlternatives?: Array<string>;
     readonly minimalCharactersCount?: number;
@@ -2221,32 +2250,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: string;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: string;
-        // readonly invalidValueSubstitution?: string;
       };
 
 
@@ -2265,32 +2289,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: boolean;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: boolean;
-        // readonly invalidValueSubstitution?: boolean;
       };
 
 
@@ -2312,32 +2331,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_Object;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Object;
-        // readonly invalidValueSubstitution?: ParsedJSON_Object;
       };
 
 
@@ -2363,32 +2377,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_Array;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Array;
-        // readonly invalidValueSubstitution?: ParsedJSON_Array;
       };
 
 
@@ -2415,32 +2424,27 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_NestedProperty;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }
       ) &
       {
         readonly nullSubstitution?: ParsedJSON_Object;
-        // readonly invalidValueSubstitution?: ParsedJSON_Object;
         readonly postValidationModifications?:
             (validValue: ArbitraryObject) => ArbitraryObject | Array<(validValue: ArbitraryObject) => ArbitraryObject>;
       };
@@ -2452,7 +2456,6 @@ namespace RawObjectDataProcessor {
       {
         readonly type: ValuesTypesIDs.oneOf;
         readonly alternatives: Array<CertainTypeValueSpecification>;
-        // readonly invalidValueSubstitution?: ParsedJSON_NestedProperty;
         readonly nullSubstitution?: ParsedJSON_NestedProperty;
         readonly customValidators?: CustomValidator<ParsedJSON_NestedProperty>
             | Array<CustomValidator<ParsedJSON_NestedProperty>>;
@@ -2468,25 +2471,21 @@ namespace RawObjectDataProcessor {
       (
         {
           readonly required: true;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly requiredIf: PropertyRequirementCondition;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly defaultValue?: undefined;
         } |
         {
           readonly defaultValue: ParsedJSON_NestedProperty;
-          /* 〔※〕 */
           readonly required?: undefined;
           readonly requiredIf?: undefined;
         } |
         {
           readonly required: false;
-          /* 〔※〕 */
           readonly defaultValue?: undefined;
           readonly requiredIf?: undefined;
         }

@@ -7,26 +7,26 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 export namespace ReplacingArrayElementsByPredicatesOperation {
 
   export type NamedParameters<ArrayElement> =
-    {
-      readonly targetArray: Array<ArrayElement>;
-      readonly mutably: boolean;
-    } &
+    Readonly<{
+      targetArray: Array<ArrayElement>;
+      mutably: boolean;
+    }> &
     (
       Replacement<ArrayElement> |
-      { readonly replacements: Array<Replacement<ArrayElement>>; }
+      Readonly<{ replacements: Array<Replacement<ArrayElement>>; }>
     );
 
   export type Replacement<ArrayElement> =
-    { readonly predicate: (arrayElement: ArrayElement) => boolean; } &
+    Readonly<{ predicate: (arrayElement: ArrayElement) => boolean; }> &
     (
-      { readonly newValue: ArrayElement; } |
-      { readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
+      Readonly<{ readonly newValue: ArrayElement; }> |
+      Readonly<{ readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }>
     );
 
-  export type Result<ArrayElement> = {
-    readonly updatedArray: Array<ArrayElement>;
-    readonly indexesOfReplacedElements: Array<number>;
-  };
+  export type Result<ArrayElement> = Readonly<{
+    updatedArray: Array<ArrayElement>;
+    indexesOfReplacedElements: Array<number>;
+  }>;
 
   export function replaceArrayElementsByPredicates<ArrayElement>(
     namedParameters: NamedParameters<ArrayElement>
@@ -62,8 +62,9 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
             errorType: InvalidParameterValueError.NAME,
             title: InvalidParameterValueError.localization.defaultTitle,
             description: InvalidParameterValueError.localization.generateDescription({
+              parameterNumber: 1,
               parameterName: "namedParameters.replacements",
-              messageSpecificPart: `The element with index ${indexOfElementWhichSatisfiedToCurrentPredicate} is satisfies ` +
+              messageSpecificPart: `The element with index ${ indexOfElementWhichSatisfiedToCurrentPredicate } is satisfies ` +
                   "to multiple predicated therefore will be replaced more that one time."
             }),
             occurrenceLocation: "replaceArrayElementsByPredicates(namedParameters)"

@@ -3,6 +3,7 @@
 
     "target": "ES2018",
     "moduleResolution": "Node",
+    "esModuleInterop": true,
 
     "strict": true,
     "noUnusedLocals": true,

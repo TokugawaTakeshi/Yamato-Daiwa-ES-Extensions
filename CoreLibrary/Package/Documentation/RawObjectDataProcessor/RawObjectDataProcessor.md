@@ -1344,7 +1344,7 @@ Changing the default language of errors messages.
 The **RawObjectDataProcessor.Localization** is pretty big object containing the text data and template functions for 
 each error message. 
 
-Officially, Japanese and Russian localization planning.
+Officially, Japanese and Russian localization are available.
 You can create your ows localization object of **RawObjectDataProcessor.Localization** type.
 Check the [listing of English localization](../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English.ts)
 as reference.

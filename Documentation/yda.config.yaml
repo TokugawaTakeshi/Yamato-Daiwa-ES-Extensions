@@ -1,0 +1,79 @@
+projectBuilding:
+
+  # === Markup =========================================================================================================
+  markupProcessing:
+
+    entryPointsGroups:
+
+      All:
+
+        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/Pages
+
+        partialsRecognition:
+          partialsNamesPrefixes: "_"
+          prefixesOfSubdirectoriesWithPartials: "_"
+
+        buildingModeDependent:
+          DEVELOPMENT:
+            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          PRODUCTION:
+            outputBaseDirectoryRelativePath: 03-ProductionBuild
+
+
+  # === Styles =========================================================================================================
+  stylesProcessing:
+
+    entryPointsGroups:
+
+      Shared:
+
+        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/SharedAssets/Styles
+
+        partialsRecognition:
+          partialsNamesPrefixes: "_"
+          prefixesOfSubdirectoriesWithPartials: "_"
+
+        buildingModeDependent:
+          DEVELOPMENT:
+            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          PRODUCTION:
+            outputBaseDirectoryRelativePath: 03-ProductionBuild
+
+      Pages:
+
+        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/Pages
+
+        partialsRecognition:
+          partialsNamesPrefixes: "_"
+          prefixesOfSubdirectoriesWithPartials: "_"
+
+        buildingModeDependent:
+          DEVELOPMENT:
+            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          PRODUCTION:
+            outputBaseDirectoryRelativePath: 03-ProductionBuild
+
+
+  # === Images =========================================================================================================
+  imagesProcessing:
+
+    assetsGroups:
+
+      MustBeInRoot:
+
+        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInRoot
+
+        buildingModeDependent:
+          DEVELOPMENT:
+            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          PRODUCTION:
+            outputBaseDirectoryRelativePath: 03-ProductionBuild
+
+
+  # === Development server =============================================================================================
+  browserLiveReloading:
+
+    StylesAndComponentsTesting:
+
+      targetFilesRootDirectoryRelativePath: 02-DevelopmentBuild
+      customStartingFilenameWithExtension: TopPage-English.html

@@ -1,4 +1,4 @@
-import UnexpectedEventError from "./UnexpectedEventError";
+import type UnexpectedEventError from "./UnexpectedEventError";
 
 
 const UnexpectedEventErrorLocalization__English: UnexpectedEventError.Localization = {

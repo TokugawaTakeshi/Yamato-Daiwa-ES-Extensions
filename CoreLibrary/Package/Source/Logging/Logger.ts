@@ -1,5 +1,7 @@
-import { Log, ErrorLog, ThrownErrorLog, WarningLog, InfoLog, SuccessLog } from "./Logs";
-import { ILogger } from "./ILogger";
+/* eslint-disable no-console -- This class using native "console" because of its specialization. */
+
+import type { Log, ErrorLog, ThrownErrorLog, WarningLog, InfoLog, SuccessLog } from "./Logs";
+import type { ILogger } from "./ILogger";
 
 import isNotNull from "../TypeGuards/Nullables/isNotNull";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
@@ -7,7 +9,7 @@ import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenU
 import insertSubstringIf from "../Strings/insertSubstringIf";
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
-import LoggerLocalization__English from "./LoggerLocalization__English";
+import LoggerLocalization__English from "./LoggerLocalization.english";
 
 
 abstract class Logger {
@@ -34,18 +36,22 @@ abstract class Logger {
 
     if ("errorInstance" in errorLog) {
 
-      errorLog.errorInstance.message = `${errorLog.title}\n${errorLog.errorInstance.message}` +
-          `\n\n${Logger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
-          `${insertSubstringIf(
-            `\n\n${Logger.localization.wrappableError}:` +
-            `\n${stringifyAndFormatArbitraryValue(errorLog.wrappableError)}`,
+      errorLog.errorInstance.message = `${ errorLog.title }\n${ errorLog.errorInstance.message }` +
+
+          `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
+
+          `${ insertSubstringIf(
+            `\n\n${ Logger.localization.wrappableError }:` +
+            `\n${ stringifyAndFormatArbitraryValue(errorLog.wrappableError) }`,
             isNotUndefined(errorLog.wrappableError)
-          )}` +
-          `${insertSubstringIf(
-            `\n\n${Logger.localization.appendedData}:` +
-            `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`,
+          ) }` +
+
+          `${ insertSubstringIf(
+            `\n\n${ Logger.localization.appendedData }:` +
+            `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
             isNotUndefined(errorLog.additionalData)
-          )}` +
+          ) }` +
+
           /* Divider before stack trace */
           "\n";
 
@@ -71,22 +77,22 @@ abstract class Logger {
     }
 
     console.error(
-      `[ ${substituteWhenUndefined(errorLog.customBadgeText, Logger.localization.badgesDefaultTitles.error)} ] ` +
-      `${errorLog.title}\n` +
-      `${errorLog.description}` +
-      `\n\n${Logger.localization.errorType}: ${errorLog.errorType}` +
-      `\n${Logger.localization.occurrenceLocation}: ${errorLog.occurrenceLocation}` +
-      `${insertSubstringIf(
-        `\n\n${Logger.localization.caughtError}:` + 
-        `\n${stringifyAndFormatArbitraryValue(errorLog.caughtError)}` +
-        `${errorLog.caughtError instanceof Error ? `\n${errorLog.caughtError.stack}` : ""}`, 
+      `[ ${ substituteWhenUndefined(errorLog.customBadgeText, Logger.localization.badgesDefaultTitles.error) } ] ` +
+      `${ errorLog.title }\n` +
+      `${ errorLog.description }` +
+      `\n\n${ Logger.localization.errorType }: ${ errorLog.errorType }` +
+      `\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
+      `${ insertSubstringIf(
+        `\n\n${ Logger.localization.caughtError }:` + 
+        `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }` +
+        `${ errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` : "" }`, 
         isNotUndefined(errorLog.caughtError)
-      )}` +
-      `${insertSubstringIf(
-        `\n\n${Logger.localization.appendedData}:` + 
-        `\n${stringifyAndFormatArbitraryValue(errorLog.additionalData)}`,
+      ) }` +
+      `${ insertSubstringIf(
+        `\n\n${ Logger.localization.appendedData }:` + 
+        `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
         isNotUndefined(errorLog.additionalData)
-      )}`
+      ) }`
     );
   }
 
@@ -108,17 +114,17 @@ abstract class Logger {
     }
 
     console.warn(
-      `[ ${substituteWhenUndefined(warningLog.customBadgeText, Logger.localization.badgesDefaultTitles.warning)} ] ` +
-      `${warningLog.title}\n` +
-      `${warningLog.description}` +
-      `\n\n${insertSubstringIf(
-        `${Logger.localization.occurrenceLocation}: ${warningLog.occurrenceLocation}`,
+      `[ ${ substituteWhenUndefined(warningLog.customBadgeText, Logger.localization.badgesDefaultTitles.warning) } ] ` +
+      `${ warningLog.title }\n` +
+      `${ warningLog.description }` +
+      `\n\n${ insertSubstringIf(
+        `${ Logger.localization.occurrenceLocation }: ${ warningLog.occurrenceLocation }`,
         isNotUndefined(warningLog.occurrenceLocation)
-      )}` +
-      `\n\n${insertSubstringIf(
-          `${Logger.localization.appendedData}: ${stringifyAndFormatArbitraryValue(warningLog.additionalData)}`,
+      ) }` +
+      `\n\n${ insertSubstringIf(
+          `${ Logger.localization.appendedData }: ${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`,
           isNotUndefined(warningLog.additionalData)
-      )}`
+      ) }`
     );
   }
 
@@ -153,34 +159,34 @@ abstract class Logger {
 
 
   private static formatGenericLog(genericLog: Log, defaultBadgeText: string): string {
-    return `[ ${substituteWhenUndefined(genericLog.customBadgeText, defaultBadgeText)} ] ` +
-        `${genericLog.title}\n` +
-        `${genericLog.description}` +
-        `\n\n${insertSubstringIf(
-          `${Logger.localization.appendedData}: ${stringifyAndFormatArbitraryValue(genericLog.additionalData)}`,
+    return `[ ${ substituteWhenUndefined(genericLog.customBadgeText, defaultBadgeText) } ] ` +
+        `${ genericLog.title }\n` +
+        `${ genericLog.description }` +
+        `\n\n${ insertSubstringIf(
+          `${ Logger.localization.appendedData }: ${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`,
           isNotUndefined(genericLog.additionalData)
-        )}`;
+        ) }`;
   }
 }
 
 
 namespace Logger {
 
-  export type Localization = {
+  export type Localization = Readonly<{
 
-    badgesDefaultTitles: {
+    badgesDefaultTitles: Readonly<{
       error: string;
       warning: string;
       info: string;
       success: string;
-    };
+    }>;
 
     errorType: string;
     occurrenceLocation: string;
     caughtError: string;
     wrappableError: string;
     appendedData: string;
-  };
+  }>;
 }
 
 

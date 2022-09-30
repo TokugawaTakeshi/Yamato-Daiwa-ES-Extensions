@@ -1,4 +1,4 @@
-import UnsupportedScenarioError from "./UnsupportedScenarioError";
+import type UnsupportedScenarioError from "./UnsupportedScenarioError";
 
 
 const UnsupportedScenarioErrorLocalization__English: UnsupportedScenarioError.Localization = {

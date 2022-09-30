@@ -24,18 +24,19 @@ class ConfigFileNotFoundError extends Error {
 
 namespace ConfigFileNotFoundError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (parametersObject: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly targetTechnologyName: string;
-      readonly configFilePathOrMultipleOfThem: string | Array<string>;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      targetTechnologyName: string;
+      configFilePathOrMultipleOfThem: string | Array<string>;
+      messageSpecificPart?: string;
+    }>;
   }
 }
 

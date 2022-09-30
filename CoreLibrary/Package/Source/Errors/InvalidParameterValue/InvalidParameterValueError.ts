@@ -24,18 +24,19 @@ class InvalidParameterValueError extends Error {
 
 namespace InvalidParameterValueError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { customMessage: string; };
+  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly parameterName: string;
-      readonly messageSpecificPart?: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      parameterNumber: number;
+      parameterName: string;
+      messageSpecificPart?: string;
+    }>;
   }
 }
 

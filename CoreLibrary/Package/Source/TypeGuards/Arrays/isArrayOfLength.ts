@@ -3,29 +3,29 @@ import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
 
 export namespace IsArrayOfLengthCheckingOperation {
 
-  export type Options__ExactElementsCountCase = {
+  export type Options__ExactElementsCountCase = Readonly<{
     exactElementsCount: number;
     minimalElementsCount?: undefined;
     maximalElementsCount?: undefined;
-  };
+  }>;
 
-  export type Options__MinimalElementsCountCase = {
+  export type Options__MinimalElementsCountCase = Readonly<{
     minimalElementsCount: number;
     maximalElementsCount?: undefined;
     exactElementsCount?: undefined;
-  };
+  }>;
 
-  export type Options__MaximalElementsCountCase = {
+  export type Options__MaximalElementsCountCase = Readonly<{
     maximalElementsCount: number;
     minimalElementsCount?: undefined;
     exactElementsCount?: undefined;
-  };
+  }>;
 
-  export type Options__MinimalAndMaximalElementsCountCase = {
+  export type Options__MinimalAndMaximalElementsCountCase = Readonly<{
     minimalElementsCount: number;
     maximalElementsCount: number;
     exactElementsCount?: undefined;
-  };
+  }>;
 
   export type Options =
       Options__ExactElementsCountCase |
@@ -42,21 +42,26 @@ export namespace IsArrayOfLengthCheckingOperation {
       return false;
     }
 
+
     if (isNonNegativeInteger(options.exactElementsCount)) {
       return potentialArray.length === options.exactElementsCount;
     }
+
 
     if (isNonNegativeInteger(options.minimalElementsCount) && isNonNegativeInteger(options.maximalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount && potentialArray.length <= options.maximalElementsCount;
     }
 
+
     if (isNonNegativeInteger(options.minimalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount;
     }
 
+
     if (isNonNegativeInteger(options.maximalElementsCount)) {
       return potentialArray.length <= options.maximalElementsCount;
     }
+
 
     return false;
   }

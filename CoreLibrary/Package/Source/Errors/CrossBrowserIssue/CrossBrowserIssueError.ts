@@ -18,9 +18,7 @@ class CrossBrowserIssueError extends Error {
 
 
 namespace CrossBrowserIssueError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 

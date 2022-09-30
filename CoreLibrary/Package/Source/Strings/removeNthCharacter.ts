@@ -1,5 +1,5 @@
 export default function removeNthCharacter(
-  targetString: string, options: { targetCharacterNumber: number; numerationFrom: 0 | 1; }
+  targetString: string, options: Readonly<{ targetCharacterNumber: number; numerationFrom: 0 | 1; }>
 ): string {
 
   /* [ Theory ]　'split', 'slice', 'substr', 'substring' methods (of String.prototype) are not support

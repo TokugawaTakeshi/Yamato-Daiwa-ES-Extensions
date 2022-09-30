@@ -1,62 +1,65 @@
-import { Logger, ImproperUsageError, UnexpectedEventError, isString } from "@yamato-daiwa/es-extensions";
+import {
+  Logger,
+  ImproperUsageError,
+  UnexpectedEventError,
+  isString,
+  isNotUndefined,
+  isUndefined
+} from "@yamato-daiwa/es-extensions";
 import getExpectedToBeSingleDOM_Element from "./getExpectedToBeSingleDOM_Element";
 
 
+export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementSubtype extends Element>(
+    namedParameters: Readonly<
+      (
+        { templateElement: HTMLTemplateElement; } |
+        { templateElementSelector: string; }
+      ) &
+      {
+        expectedChildElementSubtype: new () => DOM_ElementSubtype;
+        context?: Element | Document;
+        mustReplaceTemplateElementOnceDoneWith?: Node;
+        mustRemoveTemplateElementOnceDone?: boolean;
+      }
+    >
+): DOM_ElementSubtype;
+
 export default function getExpectedToBeSingleChildOfTemplateElement(
-  templateElementOrItsSelector: HTMLTemplateElement | string
+    namedParameters: Readonly<
+      (
+        { templateElement: HTMLTemplateElement; } |
+        { templateElementSelector: string; }
+      ) &
+      {
+        context?: Element | Document;
+        mustReplaceTemplateElementOnceDoneWith?: Node;
+        mustRemoveTemplateElementOnceDone?: boolean;
+      }
+    >
 ): Element;
+
 
 export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementSubtype extends Element>(
   namedParameters: Readonly<
-    (
-      { templateElement: HTMLTemplateElement; } |
-      { templateElementSelector: string; }
-    ) & {
-      expectedChildElementSubtype: new () => DOM_ElementSubtype;
-      context?: Element | Document;
-    }
-  >
-): DOM_ElementSubtype;
-
-
-export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementSubtype extends Element>(
-  polymorphicParameter: HTMLTemplateElement | string | Readonly<
       (
         { templateElement: HTMLTemplateElement; } |
         { templateElementSelector: string; }
         ) & {
-          expectedChildElementSubtype: new () => DOM_ElementSubtype;
+          expectedChildElementSubtype?: new () => DOM_ElementSubtype;
           context?: Element | Document;
+          mustReplaceTemplateElementOnceDoneWith?: Node;
+          mustRemoveTemplateElementOnceDone?: boolean;
         }
       >
 ): Element | DOM_ElementSubtype {
 
-  let templateElement: HTMLTemplateElement;
-
-  if (polymorphicParameter instanceof HTMLTemplateElement) {
-
-    templateElement = polymorphicParameter;
-
-  } else if (isString(polymorphicParameter)) {
-
-    templateElement = getExpectedToBeSingleDOM_Element({
-      selector: polymorphicParameter,
-      expectedDOM_ElementSubtype: HTMLTemplateElement
-    });
-
-  } else if ("templateElement" in polymorphicParameter) {
-
-    templateElement = polymorphicParameter.templateElement;
-
-  } else {
-
-    templateElement = getExpectedToBeSingleDOM_Element({
-      selector: polymorphicParameter.templateElementSelector,
-      expectedDOM_ElementSubtype: HTMLTemplateElement,
-      context: polymorphicParameter.context
-    });
-  }
-
+  const templateElement: HTMLTemplateElement = "templateElement" in namedParameters ?
+      namedParameters.templateElement :
+      getExpectedToBeSingleDOM_Element({
+        selector: namedParameters.templateElementSelector,
+        expectedDOM_ElementSubtype: HTMLTemplateElement,
+        context: namedParameters.context
+      });
 
   const childrenNodes: HTMLCollection = templateElement.content.children;
 
@@ -80,7 +83,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
   }
 
 
-  if (!isString(polymorphicParameter) && !("expectedChildElementSubtype" in polymorphicParameter)) {
+  if (isUndefined(namedParameters.expectedChildElementSubtype)) {
     return childrenNodes[0];
   }
 
@@ -88,19 +91,25 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
   const directChildOfTemplateElement: Element | null = childrenNodes[0];
 
   if (
-    !isString(polymorphicParameter) &&
-    !(directChildOfTemplateElement instanceof polymorphicParameter.expectedChildElementSubtype)
+    !isString(namedParameters) &&
+    !(directChildOfTemplateElement instanceof namedParameters.expectedChildElementSubtype)
   ) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
         "Contrary to expectations, the child of 'template' element is not instance of " +
-        `'${ polymorphicParameter.expectedChildElementSubtype.name }'.`
+        `'${ namedParameters.expectedChildElementSubtype.name }'.`
       ),
       occurrenceLocation: "getExpectedToBeSingleChildOfTemplateElement(templateElement | namedParameters)",
       title: ImproperUsageError.localization.defaultTitle
     });
   }
 
+
+  if (isNotUndefined(namedParameters.mustReplaceTemplateElementOnceDoneWith)) {
+    templateElement.replaceWith(namedParameters.mustReplaceTemplateElementOnceDoneWith);
+  } else if (namedParameters.mustRemoveTemplateElementOnceDone === true) {
+    templateElement.remove();
+  }
 
   return directChildOfTemplateElement;
 }

@@ -26,18 +26,19 @@ class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
 
 namespace ClassRequiredInitializationHasNotBeenExecutedError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
+  export type ConstructorNamedParameters =
+      Localization.DescriptionTemplateNamedParameters | Readonly<{ readonly customMessage: string; }>;
 
-  export type Localization = {
-    readonly defaultTitle: string;
-    readonly generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
-  };
+  export type Localization = Readonly<{
+    defaultTitle: string;
+    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+  }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = {
-      readonly className: string;
-      readonly initializingMethodName: string;
-    };
+    export type DescriptionTemplateNamedParameters = Readonly<{
+      className: string;
+      initializingMethodName: string;
+    }>;
   }
 }
 

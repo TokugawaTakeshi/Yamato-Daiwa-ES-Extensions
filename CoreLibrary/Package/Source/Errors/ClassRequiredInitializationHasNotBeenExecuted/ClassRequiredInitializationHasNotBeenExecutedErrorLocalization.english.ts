@@ -1,4 +1,4 @@
-import ClassRequiredInitializationHasNotBeenExecutedError from "./ClassRequiredInitializationHasNotBeenExecutedError";
+import type ClassRequiredInitializationHasNotBeenExecutedError from "./ClassRequiredInitializationHasNotBeenExecutedError";
 
 
 const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English:
@@ -9,8 +9,8 @@ const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English:
       (
         namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
       ): string =>
-          `Class '${namedParameters.className}' is required the initialization while initializing method ` +
-          `'${namedParameters.initializingMethodName}' has not been called.`
+          `Class '${ namedParameters.className }' is required the initialization while initializing method ` +
+          `'${ namedParameters.initializingMethodName }' has not been called.`
 };
 
 

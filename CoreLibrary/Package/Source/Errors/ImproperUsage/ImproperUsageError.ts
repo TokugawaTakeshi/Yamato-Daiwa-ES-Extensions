@@ -18,9 +18,7 @@ class ImproperUsageError extends Error {
 
 
 namespace ImproperUsageError {
-  export type Localization = {
-    readonly defaultTitle: string;
-  };
+  export type Localization = Readonly<{ defaultTitle: string; }>;
 }
 
 

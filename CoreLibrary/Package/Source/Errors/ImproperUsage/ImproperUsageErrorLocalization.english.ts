@@ -1,9 +1,7 @@
-import ImproperUsageError from "./ImproperUsageError";
+import type ImproperUsageError from "./ImproperUsageError";
 
 
-const ImproperUsageErrorLocalization__English: ImproperUsageError.Localization = {
-  defaultTitle: "Improper usage"
-};
+const ImproperUsageErrorLocalization__English: ImproperUsageError.Localization = { defaultTitle: "Improper usage" };
 
 
 export default ImproperUsageErrorLocalization__English;

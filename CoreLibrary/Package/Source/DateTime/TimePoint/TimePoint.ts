@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import DaysOfWeek from "../../ConstantsAndEnumerations/DateTime/DaysOfWeek";
-import MonthsNames from "../../ConstantsAndEnumerations/MonthsNames";
+import type MonthsNames from "../../ConstantsAndEnumerations/DateTime/MonthsNames";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
 import isString from "../../TypeGuards/Strings/isString";
@@ -70,7 +70,7 @@ class TimePoint {
             customMessage: TimePoint.localization.errors.invalidRawDateTime
           }),
           title: InvalidParameterValueError.localization.defaultTitle,
-          occurrenceLocation: "TimePoint.constructor(parametersObject)"
+          occurrenceLocation: "TimePoint.constructor(rawDateTime)"
         });
       }
 
@@ -136,9 +136,9 @@ class TimePoint {
 
 
 namespace TimePoint {
-  export type Localization = {
-    errors: { invalidRawDateTime: string; };
-  };
+  export type Localization = Readonly<{
+    errors: Readonly<{ invalidRawDateTime: string; }>;
+  }>;
 }
 
 

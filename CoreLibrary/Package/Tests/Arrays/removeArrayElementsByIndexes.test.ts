@@ -1,4 +1,6 @@
-import { removeArrayElementsByIndexes, RemovingArrayElementsByIndexesOperation } from "../../Source";
+import { removeArrayElementsByIndexes } from "../../Source";
+import type { RemovingArrayElementsByIndexesOperation } from "../../Source";
+
 import { deepStrictEqual } from "assert";
 
 

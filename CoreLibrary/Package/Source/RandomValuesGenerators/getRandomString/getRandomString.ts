@@ -1,5 +1,5 @@
-import latinCharacters__lowercase from "../../Strings/CharactersAssets/latinCharacters__lowercase";
-import latinCharacters__uppercase from "../../Strings/CharactersAssets/latinCharacters__uppercase";
+import lowercaseLatinCharacters from "../../Strings/CharactersAssets/lowercaseLatinCharacters";
+import uppercaseLatinCharacters from "../../Strings/CharactersAssets/uppercaseLatinCharacters";
 import stringifiedDigits from "../../Strings/CharactersAssets/stringifiedDigits";
 
 import isString from "../../TypeGuards/Strings/isString";
@@ -25,36 +25,36 @@ export class RandomStringsGenerator {
   private static readonly DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO: number = 2;
 
 
-  public static getRandomString(parametersObject: RandomStringsGenerator.ParametersObject): string {
+  public static getRandomString(namedParameters: RandomStringsGenerator.ParametersObject): string {
 
-    const prefix: string = undefinedToEmptyString(parametersObject.prefix);
-    const infix: string = undefinedToEmptyString(parametersObject.infix);
-    const postfix: string = undefinedToEmptyString(parametersObject.postfix);
+    const prefix: string = undefinedToEmptyString(namedParameters.prefix);
+    const infix: string = undefinedToEmptyString(namedParameters.infix);
+    const postfix: string = undefinedToEmptyString(namedParameters.postfix);
     const prefixInfixAndPostfixTotalCharactersCount: number = prefix.length + infix.length + postfix.length;
 
     let randomlyGeneratedCharactersCount: number;
 
 
-    if (isUndefined(parametersObject.fixedCharactersCount)) {
+    if (isUndefined(namedParameters.fixedCharactersCount)) {
 
       const minimalCharactersCount: number = RandomStringsGenerator.getMinimalCharactersCount({
         prefixInfixAndPostfixTotalCharactersCount,
-        minimalCharactersCount__explicitlySpecified: parametersObject.minimalCharactersCount,
-        fixedCharactersCount__explicitlySpecified: parametersObject.fixedCharactersCount,
-        minimalRandomlyGeneratedCharactersCount__explicitlySpecified: parametersObject.minimalRandomlyGeneratedCharactersCount
+        minimalCharactersCount__explicitlySpecified: namedParameters.minimalCharactersCount,
+        fixedCharactersCount__explicitlySpecified: namedParameters.fixedCharactersCount,
+        minimalRandomlyGeneratedCharactersCount__explicitlySpecified: namedParameters.minimalRandomlyGeneratedCharactersCount
       });
 
       /* 〔 Theory 〕 As default, if user specified { prefix: "MOCK" } and  { minimalCharactersCount: 4 }, "getRandomString"
        *    could return "MOCK" only. */
       const minimalRandomlyGeneratedCharactersCount: number =
           prefixInfixAndPostfixTotalCharactersCount +
-              substituteWhenUndefined(parametersObject.minimalRandomlyGeneratedCharactersCount, 0) <=
+              substituteWhenUndefined(namedParameters.minimalRandomlyGeneratedCharactersCount, 0) <=
               minimalCharactersCount ?
                   minimalCharactersCount - prefixInfixAndPostfixTotalCharactersCount :
-                  substituteWhenUndefined(parametersObject.minimalRandomlyGeneratedCharactersCount, 0);
+                  substituteWhenUndefined(namedParameters.minimalRandomlyGeneratedCharactersCount, 0);
 
       const maximalCharactersCount: number = RandomStringsGenerator.getMaximalCharactersCont({
-        ...parametersObject,
+        ...namedParameters,
         ...{ minimalCharactersCount, prefix, infix, postfix, minimalRandomlyGeneratedCharactersCount }
       });
 
@@ -67,22 +67,22 @@ export class RandomStringsGenerator {
 
     } else {
 
-      randomlyGeneratedCharactersCount = parametersObject.fixedCharactersCount -
+      randomlyGeneratedCharactersCount = namedParameters.fixedCharactersCount -
           prefixInfixAndPostfixTotalCharactersCount -
-          substituteWhenUndefined(parametersObject.minimalRandomlyGeneratedCharactersCount, 0);
+          substituteWhenUndefined(namedParameters.minimalRandomlyGeneratedCharactersCount, 0);
     }
 
 
     let randomString: string = "";
     const characters: Array<string> = RandomStringsGenerator.
-        getCharactersForRandomStringGeneration(parametersObject.allowedCharacters);
+        getCharactersForRandomStringGeneration(namedParameters.allowedCharacters);
 
     for (
         let loopCounter: number = randomString.length;
         loopCounter < randomlyGeneratedCharactersCount;
         loopCounter++
     ) {
-      randomString = `${randomString}${getRandomArrayElement(characters)}`;
+      randomString = `${ randomString }${ getRandomArrayElement(characters) }`;
     }
 
     if (infix.length > 0) {
@@ -94,10 +94,10 @@ export class RandomStringsGenerator {
       const randomString__firstPart: string = randomString.slice(0, randomStringSlicingPosition);
       const randomString__secondPart: string = randomString.slice(randomStringSlicingPosition);
 
-      randomString = `${randomString__firstPart}${infix}${randomString__secondPart}`;
+      randomString = `${ randomString__firstPart }${ infix }${ randomString__secondPart }`;
     }
 
-    return `${prefix}${randomString}${postfix}`;
+    return `${ prefix }${ randomString }${ postfix }`;
   }
 
   public static setLocalization(localization: RandomStringsGenerator.Localization): void {
@@ -111,7 +111,7 @@ export class RandomStringsGenerator {
       minimalCharactersCount__explicitlySpecified,
       fixedCharactersCount__explicitlySpecified,
       minimalRandomlyGeneratedCharactersCount__explicitlySpecified
-    }: RandomStringsGenerator.MinimalCharactersCountComputing.ParametersObject
+    }: RandomStringsGenerator.MinimalCharactersCountComputing.NamedParameters
   ): number {
 
     if (isUndefined(minimalCharactersCount__explicitlySpecified)) {
@@ -136,6 +136,7 @@ export class RandomStringsGenerator {
     if (minimalCharactersCount__explicitlySpecified < 0) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 1,
           parameterName: "parametersObject.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.minimalCharactersCountMustBeGreaterThan0(
               minimalCharactersCount__explicitlySpecified
@@ -156,59 +157,62 @@ export class RandomStringsGenerator {
   }
 
   private static getMaximalCharactersCont(
-    parametersObject: RandomStringsGenerator.MaximalCharactersCountComputing.ParametersObject
+    namedParameters: RandomStringsGenerator.MaximalCharactersCountComputing.ParametersObject
   ): number {
 
-    if (isUndefined(parametersObject.maximalCharactersCount)) {
-      return RandomStringsGenerator.DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO * parametersObject.minimalCharactersCount;
+    if (isUndefined(namedParameters.maximalCharactersCount)) {
+      return RandomStringsGenerator.DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO * namedParameters.minimalCharactersCount;
     }
 
-    if (isNotUndefined(parametersObject.fixedCharactersCount)) {
+    if (isNotUndefined(namedParameters.fixedCharactersCount)) {
       Logger.throwErrorAndLog({
         errorInstance: new IncompatiblePropertiesInObjectTypeParameterError({
-          parameterName: "parametersObject",
+          parameterName: "namedParameters",
           conflictingPropertyName: "fixedCharactersCount",
           incompatiblePropertiesNames: [ "maximalCharactersCount" ]
         }),
         title: IncompatiblePropertiesInObjectTypeParameterError.localization.defaultTitle,
-        occurrenceLocation: "getRandomString(parametersObject)"
+        occurrenceLocation: "getRandomString(namedParameters)"
       });
     }
 
-    const maximalCharactersCount: number = parametersObject.maximalCharactersCount;
+    const maximalCharactersCount: number = namedParameters.maximalCharactersCount;
 
     if (
-      parametersObject.prefix.length +
-      parametersObject.infix.length +
-      parametersObject.postfix.length +
-      parametersObject.minimalRandomlyGeneratedCharactersCount >
+      namedParameters.prefix.length +
+      namedParameters.infix.length +
+      namedParameters.postfix.length +
+      namedParameters.minimalRandomlyGeneratedCharactersCount >
       maximalCharactersCount
     ) {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
-          parameterName: "parametersObject.minimalCharactersCount",
+          parameterNumber: 1,
+          parameterName: "namedParameters.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.
               sumOfCharactersCountOfAffixesAndMinimalRandomlyGeneratedCharactersCountIsExceedsMaximalCharactersCount(
-                parametersObject
+                namedParameters
               )
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
+        occurrenceLocation: "RandomStringsGenerator.getRandomString(namedParameters)"
       });
 
-    } else if (parametersObject.minimalCharactersCount > maximalCharactersCount) {
+    } else if (namedParameters.minimalCharactersCount > maximalCharactersCount) {
+
       /* [ Theory ] The case when the 'minimalCharactersCount' has been explicitly specified.  */
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
-          parameterName: "parametersObject.minimalCharactersCount",
+          parameterNumber: 1,
+          parameterName: "namedParameters.minimalCharactersCount",
           messageSpecificPart: RandomStringsGenerator.localization.errors.
               explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount({
-                minimalCharactersCount: parametersObject.minimalCharactersCount, maximalCharactersCount
+                minimalCharactersCount: namedParameters.minimalCharactersCount, maximalCharactersCount
               })
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "RandomStringsGenerator.getRandomString(parametersObject)"
+        occurrenceLocation: "RandomStringsGenerator.getRandomString(namedParameters)"
       });
     }
 
@@ -226,11 +230,11 @@ export class RandomStringsGenerator {
     const charactersForRandomStringGeneration: Array<string> = [];
 
     if (allowedCharacters.latinUppercase === true) {
-      charactersForRandomStringGeneration.push(...latinCharacters__uppercase);
+      charactersForRandomStringGeneration.push(...uppercaseLatinCharacters);
     }
 
     if (allowedCharacters.latinLowercase === true) {
-      charactersForRandomStringGeneration.push(...latinCharacters__lowercase);
+      charactersForRandomStringGeneration.push(...lowercaseLatinCharacters);
     }
 
     if (allowedCharacters.digits === true) {
@@ -267,7 +271,7 @@ export class RandomStringsGenerator {
 
 export namespace RandomStringsGenerator {
 
-  export type ParametersObject = {
+  export type ParametersObject = Readonly<{
     prefix?: string;
     infix?: string;
     postfix?: string;
@@ -276,51 +280,51 @@ export namespace RandomStringsGenerator {
     minimalCharactersCount?: number;
     maximalCharactersCount?: number;
     allowedCharacters?: ParametersObject.AllowedCharacters;
-  };
+  }>;
 
   export namespace ParametersObject {
 
-    export type AllowedCharacters = {
+    export type AllowedCharacters = Readonly<{
       latinUppercase?: boolean;
       latinLowercase?: boolean;
       digits?: boolean;
       other?: Array<string> | string;
-    };
+    }>;
   }
 
   export namespace MinimalCharactersCountComputing {
-    export type ParametersObject = {
+    export type NamedParameters = Readonly<{
       prefixInfixAndPostfixTotalCharactersCount: number;
       minimalCharactersCount__explicitlySpecified?: number;
       fixedCharactersCount__explicitlySpecified?: number;
       minimalRandomlyGeneratedCharactersCount__explicitlySpecified?: number;
-    };
+    }>;
   }
 
   export namespace MaximalCharactersCountComputing {
     export type ParametersObject =
         RandomStringsGenerator.ParametersObject &
-        {
+        Readonly<{
           minimalCharactersCount: number;
           prefix: string;
           infix: string;
           postfix: string;
           minimalRandomlyGeneratedCharactersCount: number;
-        };
+        }>;
   }
 
-  export type Localization = {
-    errors: {
-      minimalCharactersCountMustBeGreaterThan0: (realValue: number) => string;
+  export type Localization = Readonly<{
+    errors: Readonly<{
+      minimalCharactersCountMustBeGreaterThan0: (actualValue: number) => string;
       sumOfCharactersCountOfAffixesAndMinimalRandomlyGeneratedCharactersCountIsExceedsMaximalCharactersCount: (
-        parametersObject: MaximalCharactersCountComputing.ParametersObject
+        namedParameters: MaximalCharactersCountComputing.ParametersObject
       ) => string;
       explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount: (
-        parametersObject: { minimalCharactersCount: number; maximalCharactersCount: number; }
+        namedParameters: Readonly<{ minimalCharactersCount: number; maximalCharactersCount: number; }>
       ) => string;
       noAllowedCharactersForRandomGeneration: string;
-    };
-  };
+    }>;
+  }>;
 }
 
 

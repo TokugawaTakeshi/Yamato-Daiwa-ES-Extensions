@@ -15,8 +15,8 @@ export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separate
 
 /* === Strings ====================================================================================================== */
 export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
-export { default as latinCharacters__lowercase } from "./Strings/CharactersAssets/latinCharacters__lowercase";
-export { default as latinCharacters__uppercase } from "./Strings/CharactersAssets/latinCharacters__uppercase";
+export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
+export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
 export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceCharacters";
 export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag } from
     "./Strings/CharactersAssets/SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag";
@@ -25,11 +25,13 @@ export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringi
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as EmailAddress } from "./Strings/EmailAddress";
+export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
 export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringOnlySpecificCharacters";
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
+export { default as isIPv4AddressLiesInRange } from "./Strings/isIPv4AddressLiesInRange";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
@@ -41,7 +43,14 @@ export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings
 export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
+export { default as toLowerCamelCase } from "./Strings/toLowerCamelCase";
+export { default as toScreamingSnakeCase } from "./Strings/toScreamingSnakeCase";
+export { default as toUpperCamelCase } from "./Strings/toUpperCamelCase";
 export { default as trimSpaces } from "./Strings/trimSpaces";
+
+
+/* === Objects ======================================================================================================= */
+export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
 
 
 /* === Arrays ======================================================================================================= */
@@ -83,7 +92,7 @@ export type {
   ParsedJSON_Array,
   ParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
-export { PartialBy } from "./Types/PartialBy";
+export type { PartialBy } from "./Types/PartialBy";
 
 
 /* === Type guards ================================================================================================== */
@@ -177,8 +186,15 @@ export { default as removeRandomArrayElement } from "./RandomValuesGenerators/re
 /* === Constants and enumerations =================================================================================== */
 export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
-export { default as HTTP_StatusCodes } from "./ConstantsAndEnumerations/HTTP_StatusCodes";
-export { default as MonthsNames } from "./ConstantsAndEnumerations/MonthsNames";
+export {
+  HTTP_StatusCodes,
+  InformationalResponsesHTTP_StatusCodes,
+  SuccessfulResponsesHTTP_StatusCodes,
+  RedirectionResponsesHTTP_StatusCodes,
+  ClientErrorsHTTP_StatusCodes,
+  ServerErrorsHTTP_StatusCodes
+} from "./ConstantsAndEnumerations/HTTP_StatusCodes";
+export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
 export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
 export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
 export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
@@ -193,6 +209,13 @@ export { default as computeLastItemNumberForSpecificPaginationPage } from
 export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
 export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
 
+
+/* === PoliteErrorsMessageBuilder =================================================================================== */
+export { default as PoliteErrorsMessagesBuilder } from "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
+export { default as PoliteErrorsMessagesBuilder__English } from
+    "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilderLocalization.english";
+
+
 /* === Logging ====================================================================================================== */
 export type {
   Log,
@@ -204,7 +227,7 @@ export type {
 } from "./Logging/Logs";
 export type { ILogger } from "./Logging/ILogger";
 export { default as Logger } from "./Logging/Logger";
-export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization__English";
+export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization.english";
 
 
 /* === Errors ======================================================================================================= */

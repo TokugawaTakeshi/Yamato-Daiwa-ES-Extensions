@@ -1,4 +1,4 @@
-import MonthsNames from "../ConstantsAndEnumerations/MonthsNames";
+import type MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
 import getDaysCountInSpecificMonth from "./getDaysCountInSpecificMonth";
 import getMonthNameByNumber from "./getMonthNameByNumber";
@@ -29,9 +29,9 @@ class CalendarBuilder {
 
 
   public static generateDataFor42DaysMatrix(
-    parametersObject: CalendarBuilder.ParametersObject
+    namedParameters: CalendarBuilder.ParametersObject
   ): Array<CalendarBuilder.CalendarCellData> {
-    return new CalendarBuilder(parametersObject).
+    return new CalendarBuilder(namedParameters).
         fillMatrixByDaysOfTargetMonth().
         fillMatrixByDaysOfPreviousMonth().
         fillMatrixDyDaysOfNextMonth().
@@ -81,7 +81,7 @@ class CalendarBuilder {
         this.daysInTargetMonth - 1;
   }
 
-  private fillMatrixByDaysOfTargetMonth(): CalendarBuilder {
+  private fillMatrixByDaysOfTargetMonth(): this {
 
     let dayForCurrentCell: number = 1;
     const cachedMonthName: MonthsNames = getMonthNameByNumber({
@@ -108,7 +108,7 @@ class CalendarBuilder {
     return this;
   }
 
-  private fillMatrixByDaysOfPreviousMonth(): CalendarBuilder {
+  private fillMatrixByDaysOfPreviousMonth(): this {
 
     if (this.numberOfFirstDayOfTargetMonthInWeek__numerationFrom0AsSunday === 0) {
       return this;
@@ -140,7 +140,7 @@ class CalendarBuilder {
     return this;
   }
 
-  private fillMatrixDyDaysOfNextMonth(): CalendarBuilder {
+  private fillMatrixDyDaysOfNextMonth(): this {
 
     if (isNotUndefined(this.dataFor42DaysMatrix[CalendarBuilder.CELLS_IN_MATRIX - 1])) {
       return this;
@@ -176,20 +176,20 @@ class CalendarBuilder {
 
 namespace CalendarBuilder {
 
-  export type CalendarCellData = {
-    readonly year: number;
-    readonly month__numerationFrom0: number;
-    readonly month__numerationFrom1: number;
-    readonly monthName: MonthsNames;
-    readonly dayOfMonth: number;
-  };
+  export type CalendarCellData = Readonly<{
+    year: number;
+    month__numerationFrom0: number;
+    month__numerationFrom1: number;
+    monthName: MonthsNames;
+    dayOfMonth: number;
+  }>;
 
-  export type ParametersObject = {
-    targetYear: number;
-  } & (
-    { targetMonthNumber__numerationFrom0: number; } |
-    { targetMonthNumber__numerationFrom1: number; }
-  );
+  export type ParametersObject =
+    Readonly<{ targetYear: number; }> &
+    (
+      Readonly<{ targetMonthNumber__numerationFrom0: number; }> |
+      Readonly<{ targetMonthNumber__numerationFrom1: number; }>
+    );
 }
 
 
