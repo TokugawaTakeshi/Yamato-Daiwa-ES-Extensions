@@ -31,6 +31,9 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md">ConsoleApplicationLogger</a></dt>
   <dd>The implementation of <b>ILogger</b> interface for <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md">Logger</a> facade and Node.js environment.</dd>
 
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ObjectDataFilesProcessor/ObjectDataFilesProcessor.md">ObjectDataFilesProcessor</a></dt>
+  <dd>Parses, validates and do other processings with data from ".json", ".y(a)ml" and ".env" files.</dd>
+
   <dt>isErrnoException</dt>
   <dd>Type guard which checks is value compatible with <b>NodeJS.ErrnoException</b> interface.</dd>
 
@@ -41,11 +44,11 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt>InterProcessInteractionFailedError</dt>
-  <dd>
-    Intended to be used when the interaction between NodeJS processes is not going as expected. 
-    Could be actual, for example, for the Electron.js where the main process and render process are exchanging by the data.
-  </dd>
+  <dt>DesiredFileActuallyIsDirectoryError</dt>
+  <dd>Intended to be thrown when the path refers to directory while expected to be referred to file.</dd>
+  
+  <dt>FileNotFoundError</dt>
+  <dd>Intended to be thrown when the file expected to be exist was not found.</dd>
 
   <dt>InvalidConsoleCommandError</dt>
   <dd>Intended to be thrown the inputted console command does not satisfy to valid schema.</dd>

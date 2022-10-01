@@ -1,7 +1,10 @@
+/* --- Native utils ------------------------------------------------------------------------------------------------- */
 import FileSystem from "fs";
+import Path from "path";
 import YAML from "yamljs";
 import DotEnv from "dotenv";
 
+/* --- YDEE core ---------------------------------------------------------------------------------------------------- */
 import {
   Logger,
   InvalidParameterValueError,
@@ -12,21 +15,21 @@ import {
 } from "@yamato-daiwa/es-extensions";
 import type { ArbitraryObject } from "@yamato-daiwa/es-extensions";
 
+/* --- YDEE Node.js ------------------------------------------------------------------------------------------------- */
 import isErrnoException from "../isErrnoException";
 import FileNotFoundError from "../Errors/FileNotFoundError/FileNotFoundError";
 import DesiredFileActuallyIsDirectoryError from
     "../Errors/DesiredFileActuallyIsDirectoryError/DesiredFileActuallyIsDirectoryError";
-import * as Path from "path";
 
 
 class ObjectDataFilesProcessor {
 
   public static processFile<ValidData extends ArbitraryObject>(
-    namedParameters: {
+    namedParameters: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
       schema?: ObjectDataFilesProcessor.SupportedSchemas;
-    }
+    }>
   ): ValidData {
 
     const filePath: string = namedParameters.filePath;
@@ -43,6 +46,7 @@ class ObjectDataFilesProcessor {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidParameterValueError({
             parameterName: "namedParameters.filePath",
+            parameterNumber: 1,
             messageSpecificPart: "Unable to decide the data parsing algorithm because target file " +
                 `'${ namedParameters.filePath }' has no explicit filename extension. If it is intentional, ` +
                 "specify 'namedParameters.dataSchema' with desired element of 'ObjectDataFilesProcessor.SupportedSchemas'" +
@@ -77,6 +81,7 @@ class ObjectDataFilesProcessor {
           Logger.throwErrorAndLog({
             errorInstance: new InvalidParameterValueError({
               parameterName: "namedParameters.filePath",
+              parameterNumber: 1,
               messageSpecificPart: `Target file '${ namedParameters.filePath }' has unsupported filename extension ` +
                   `'${ fileNameLastExtensionWithLeadingPeriod }'. If this file including the data of known for ` +
                   "'ObjectDataFilesProcessor' schema, specify 'namedParameters.dataSchema' with desired element of " +

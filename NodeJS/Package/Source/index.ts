@@ -16,8 +16,8 @@ export { default as FileNotFoundError } from "./Errors/FileNotFoundError/FileNot
 export { default as FileNotFoundErrorLocalization__English } from
     "./Errors/FileNotFoundError/FileNotFoundErrorLocalization.english";
 export { default as InvalidConsoleCommandError } from "./Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
-export { default as InterProcessInteractionFailedError } from
-    "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
+export { default as InvalidConsoleCommandErrorLocalization__English } from
+    "./Errors/InvalidConsoleCommand/InvalidConsoleCommandErrorLocalization.english";
 
 export { default as ObjectDataFilesProcessor } from "./ObjectDataFilesProcessor/ObjectDataFilesProcessor";
 

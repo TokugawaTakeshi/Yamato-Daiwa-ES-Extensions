@@ -80,3 +80,38 @@ Below elements has been renamed according [mdn web docs](https://developer.mozil
 ##### Errors classes
 
 * `parameterNumber` property has been added to object-type parameter of default message template
+
+
+## Node.js package
+
+### New functionality
+
+#### Utils
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ObjectDataFilesProcessor/ObjectDataFilesProcessor.md">ObjectDataFilesProcessor</a></dt>
+  <dd>Parses, validates and do other processings with data from ".json", ".y(a)ml" and ".env" files.</dd>
+
+</dl>
+
+
+
+
+#### Errors classes
+
+<dl>
+
+  <dt>DesiredFileActuallyIsDirectoryError</dt>
+  <dd>Intended to be thrown when the path refers to directory while expected to be referred to file.</dd>
+
+  <dt>FileNotFoundError</dt>
+  <dd>Intended to be thrown when the file expected to be exist was not found.</dd>
+
+</dl>
+
+
+
+### Breaking changes
+
+* **InterProcessInteractionFailedError** has been removed but left in main package.
