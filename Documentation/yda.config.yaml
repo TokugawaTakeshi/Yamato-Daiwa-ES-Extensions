@@ -1,5 +1,12 @@
 projectBuilding:
 
+  commonSettings:
+
+    publicDirectoriesRelativePaths:
+
+      PRODUCTION: 03-ProductionBuild
+
+
   # === Markup =========================================================================================================
   markupProcessing:
 
@@ -76,4 +83,3 @@ projectBuilding:
     StylesAndComponentsTesting:
 
       targetFilesRootDirectoryRelativePath: 02-DevelopmentBuild
-      customStartingFilenameWithExtension: TopPage-English.html
