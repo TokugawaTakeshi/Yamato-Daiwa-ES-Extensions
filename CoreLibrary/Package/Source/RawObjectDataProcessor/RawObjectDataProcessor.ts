@@ -1253,7 +1253,7 @@ class RawObjectDataProcessor {
       parentObject,
       targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
-      targetValue: NonNullable<unknown>;
+      targetValue: Exclude<unknown, undefined | null>;
       targetValueSpecification: RawObjectDataProcessor.CertainTypeValueSpecification;
       parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
