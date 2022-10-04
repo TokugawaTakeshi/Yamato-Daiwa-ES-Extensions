@@ -1,0 +1,49 @@
+provideComponentsPositionalRelationship(
+  ("Article-CallableExpressionScheme" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 12px }
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-ProgrammaticEntityHeading" { retireFromTarget: 12px })
+  })\
+  \
+  ("Article-AttentionBox" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 10px, pushComponentFromSelf: 12px }
+        }
+      }
+    }
+  })\
+  \
+  ("Article-ImprovedList" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {}
+      }
+    },
+    withOtherComponents:\
+        ("Article-AttentionBox" { retireFromTarget: 12px })
+  })\
+  \
+  ("Article-ImprovedList" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          heading2: { retireFromComponent: 16px }
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-ImprovedList" { retireFromTarget: 12px })
+  })
+)

@@ -2,4 +2,4 @@ extends: ./node_modules/@yamato-daiwa/style_guides/BasicPreset.js
 
 parserOptions:
 
-  project: "./tsconfig.test.json"
+  project: "./tsconfig.eslint.json"

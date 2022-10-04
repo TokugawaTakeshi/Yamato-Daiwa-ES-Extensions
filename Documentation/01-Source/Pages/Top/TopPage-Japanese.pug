@@ -1,0 +1,22 @@
+extends ../../Layouts/Minimal/MinimalLayout.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = "トップ | YDEE - やまとダイワ拡張機能";
+
+    FAVICON_URI = "@MustBeInRoot/favicon.ico"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+
+
+block append Requirements
+
+  include ../../Components/Components.pug
+
+
+block append SpecificContent
+

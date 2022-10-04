@@ -11,9 +11,10 @@ import {
   FileReadingFailedError,
   InvalidExternalDataError,
   RawObjectDataProcessor,
-  isNotUndefined
+  isNotUndefined,
+  isUndefined
 } from "@yamato-daiwa/es-extensions";
-import type { ArbitraryObject } from "@yamato-daiwa/es-extensions";
+import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 
 /* --- YDEE Node.js ------------------------------------------------------------------------------------------------- */
 import isErrnoException from "../isErrnoException";
@@ -24,13 +25,28 @@ import DesiredFileActuallyIsDirectoryError from
 
 class ObjectDataFilesProcessor {
 
-  public static processFile<ValidData extends ArbitraryObject>(
+  public static processFile<ValidData extends ParsedJSON>(
     namedParameters: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
       schema?: ObjectDataFilesProcessor.SupportedSchemas;
     }>
-  ): ValidData {
+  ): ValidData;
+
+  public static processFile(
+    namedParameters: Readonly<{
+      filePath: string;
+      schema?: ObjectDataFilesProcessor.SupportedSchemas;
+    }>
+  ): unknown;
+
+  public static processFile<ValidData extends ParsedJSON>(
+    namedParameters: Readonly<{
+      filePath: string;
+      validDataSpecification?: RawObjectDataProcessor.ObjectDataSpecification;
+      schema?: ObjectDataFilesProcessor.SupportedSchemas;
+    }>
+  ): ValidData | unknown {
 
     const filePath: string = namedParameters.filePath;
     let dataSchema: ObjectDataFilesProcessor.SupportedSchemas;
@@ -40,7 +56,6 @@ class ObjectDataFilesProcessor {
     } else {
 
       const fileNameLastExtensionWithLeadingPeriod: string = Path.extname(filePath);
-
 
       if (fileNameLastExtensionWithLeadingPeriod.length === 0) {
         Logger.throwErrorAndLog({
@@ -168,6 +183,11 @@ class ObjectDataFilesProcessor {
         occurrenceLocation: "ObjectDataFilesProcessor.processFile(namedParameters)",
         wrappableError: error
       });
+    }
+
+
+    if (isUndefined(namedParameters.validDataSpecification)) {
+      return parsedData;
     }
 
 

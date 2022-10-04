@@ -1,7 +1,4 @@
-import type {
-  ArbitraryObject,
-  ParsedJSON
-} from "@yamato-daiwa/es-extensions";
+import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 import {
   isUndefined,
   isNotUndefined,
@@ -687,8 +684,8 @@ class ConsoleCommandsParser<
     }
 
 
-    const validationResult: RawObjectDataProcessor.ProcessingResult<ArbitraryObject> = RawObjectDataProcessor.
-        process<ArbitraryObject>(targetParameterParsedValue, optionSpecification.validValueSpecification);
+    const validationResult: RawObjectDataProcessor.ProcessingResult<ParsedJSON> = RawObjectDataProcessor.
+        process<ParsedJSON>(targetParameterParsedValue, optionSpecification.validValueSpecification);
 
     if (validationResult.rawDataIsInvalid) {
       Logger.throwErrorAndLog({
@@ -705,10 +702,7 @@ class ConsoleCommandsParser<
     }
 
 
-    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-    * Currently, 'RawObjectDataProcessor' does not accept the ParsedJSON; until it will not be fixed, the asserting is
-    * required here. */
-    return validationResult.processedData as ParsedJSON;
+    return validationResult.processedData;
   }
 
 

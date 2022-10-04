@@ -3,13 +3,19 @@
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-aeta-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-addElementsToArray<ArrayElement>(
+(
   namedParameters:
-      {
-        targetArray: Array<ArrayElement>;
-        newElements: Array<ArrayElement>;
-        mutably: boolean;
-      } &
+      (
+        {
+          mutably: true;
+          targetArray: Array<ArrayElement>;
+        } |
+        {
+          mutably: false;
+          targetArray: ReadonlyArray<ArrayElement>;
+        }
+      ) &
+      { newElements: ReadonlyArray<ArrayElement>; } &
       (
         { toStart: true; } |
         { toEnd: true; } |
@@ -173,7 +179,7 @@ addElementsToArray({
 console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -204,7 +210,7 @@ console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "N
 console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -236,7 +242,7 @@ addElementsToArray({
 console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -267,7 +273,7 @@ console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "N
 console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -293,6 +299,6 @@ quick input:
 
 ![IntelliJ IDEA Live Template](addElementsToArray-LiveTemplateDemo.gif)
 
-It is recommended to copy the variable name containing array to clipboard preliminary - the identifier will be
-automatically substituted to required position. Then, use <kbd>Tab</kbd> key to move to next position at which
-specific code must be inputted.
+Copy the variable name containing array to clipboard preliminary - the identifier will be automatically substituted to 
+  required position. 
+Then, use <kbd>Tab</kbd> key to move to next position at which specific code must be inputted.

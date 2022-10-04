@@ -3,20 +3,20 @@ import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError
 
 
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
+  targetArray: ReadonlyArray<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null;
 
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>,
+  targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
+  options: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1: true; }>
 ): ArrayElement;
 
 
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>,
+  targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  { throwErrorIfElementNotFoundOrMoreThan1 }: { throwErrorIfElementNotFoundOrMoreThan1?: true; } = {}
+  { throwErrorIfElementNotFoundOrMoreThan1 }: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
 ): ArrayElement | null {
 
   const allElementsMatchingWithPredicate: Array<ArrayElement> = targetArray.filter(predicate);

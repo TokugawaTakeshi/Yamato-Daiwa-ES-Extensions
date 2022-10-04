@@ -3,7 +3,7 @@
 /* eslint max-depth: [ "error", 6 ] */
 
 import type { ArbitraryObject } from "../Types/ArbitraryObject";
-import type { ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
+import type { ReadonlyParsedJSON, ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
 import RawObjectDataProcessorLocalization__English from "./RawObjectDataProcessorLocalization__English";
 
@@ -45,7 +45,7 @@ class RawObjectDataProcessor {
   private rawDataIsInvalid: boolean = false;
 
 
-  public static process<ProcessedData extends ArbitraryObject, InterimValidData extends ArbitraryObject = ProcessedData>(
+  public static process<ProcessedData extends ReadonlyParsedJSON, InterimValidData extends ReadonlyParsedJSON = ProcessedData>(
     rawData: unknown,
     validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification,
     options: RawObjectDataProcessor.Options = {}

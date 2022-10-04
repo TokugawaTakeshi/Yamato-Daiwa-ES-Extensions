@@ -1,0 +1,78 @@
+{
+  "01-Source/Components/Components.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.055Z"
+  },
+  "01-Source/Pages/index.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.060Z"
+  },
+  "01-Source/Layouts/Minimal/MinimalLayout.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.057Z"
+  },
+  "01-Source/Layouts/TwoColumns/TwoColumnsLayout.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.058Z"
+  },
+  "01-Source/Pages/Top/TopPage-Japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T01:08:38.577Z"
+  },
+  "01-Source/Pages/Top/TopPage-Russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T01:08:38.538Z"
+  },
+  "01-Source/Pages/Top/_TopPage-English.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T01:08:38.569Z"
+  },
+  "01-Source/Components/SharedSingletons/DrawerMenu/DrawerMenu.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.056Z"
+  },
+  "01-Source/Components/SharedSingletons/Footer/Footer.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.056Z"
+  },
+  "01-Source/Components/SharedSingletons/Header/Header.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.057Z"
+  },
+  "01-Source/Pages/CoreLibrary/areStringifiedDigitsOnly/areStringifiedDigitsOnly-English.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-10-13T02:02:22.770Z"
+  },
+  "01-Source/Pages/CoreLibrary/areStringifiedDigitsOnly/areStringifiedDigitsOnly-Japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-10-13T02:02:22.764Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly-English.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T01:08:38.517Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly-Japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T01:15:09.862Z"
+  },
+  "01-Source/Pages/_CommonRequirements.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.059Z"
+  },
+  "01-Source/Pages/_CommonRequirements/HTML_PageMetadata.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.060Z"
+  },
+  "node_modules/@yamato-daiwa/frontend/Components.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-10-24T01:04:04.950Z"
+  },
+  "node_modules/@yamato-daiwa/frontend/Functionality.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-10-16T04:23:32.715Z"
+  },
+  "node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-10-14T02:07:48.428Z"
+  }
+}

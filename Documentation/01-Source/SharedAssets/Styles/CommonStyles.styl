@@ -1,23 +1,24 @@
 @require "../../../node_modules/@yamato-daiwa/frontend/Functionality.styl"
-@require "../../../node_modules/@yamato-daiwa/frontend/Components.styl"
-@require "../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.styl"
 
 
 CrossBrowserStylesReset()
 InitialGlobalCSS_Rules()
 
 
-@require "../../Components/SharedSingletons/Layouts/Main/MainLayout.styl"
-@require "../../Components/SharedSingletons/Header/Header.styl"
+@require "../../Layouts/Minimal/MinimalLayout.styl"
+@require "../../Layouts/TwoColumns/TwoColumnsLayout.styl"
 
-provideTypography(overridings: {
-  CSS_NamespacePrefix: "Article"
-})
 
+articleTypography = deeplyCloneAndOverrideObject(TypographyDefaultDefinition, { CSS_NamespacePrefix: "Article" })
+provideTypography(articleTypography)
 provideYamatoDaiwaInformationDesignClasses()
 
-provideProgrammaticEntityHeadingComponentStyles()
-provideCallableExpressionSchemeAndRelatedComponentStyles()
+
+@require "../../Components/Components.styl"
+
+
+@require "_Partials/PositionalRelationship.styl"
+
 
 
 .DocumentationPage

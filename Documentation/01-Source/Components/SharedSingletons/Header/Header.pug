@@ -1,3 +1,18 @@
 mixin Header
 
-  header.Header
+  header.Header&attributes(attributes)
+
+    a.Header-LogoAndTitleLink(
+      href="index.html"
+    )
+
+      img.Header-Logo(
+        src="@Shared/Icons/YDEE_Icon__White.svg"
+        alt="The icon of Yamato Daiwa ES Extensions libraries"
+      )
+
+      .Header-Title
+        span.Header-Title-Company Yamato Daiwa
+        span.Header-Title-LibraryName ES Extensions
+
+    .Header-DummyDropDownList English

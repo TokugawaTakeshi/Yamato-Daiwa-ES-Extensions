@@ -1,0 +1,48 @@
+.TwoColumnsLayout
+
+  SPECIFIC_CONTENT_MAXIMAL_WIDTH = 3*NARROWEST_SCREEN_WIDTH_UNIT
+  SIDEBAR_CONTENT_WIDTH = 200px
+  FURTHEST_COLUMN_WIDTH = "calc((100% - %s)/2)" % SPECIFIC_CONTENT_MAXIMAL_WIDTH
+
+
+  display grid
+  grid-template-columns FURTHEST_COLUMN_WIDTH SIDEBAR_CONTENT_WIDTH minmax(0, 1fr) FURTHEST_COLUMN_WIDTH
+  grid-template-rows auto 1fr auto
+
+  fillBodyVertically({ verticalScrolling: false })
+
+
+  &-UpperFixedContent
+
+    grid-column 1/-1
+
+    background: TemporaryHighlighting.red.o10
+
+
+  &-Sidebar
+
+    overflow-y auto
+
+    grid-column 2
+
+    background: TemporaryHighlighting.orange.o10
+
+
+  &-SpecificContent
+
+    //max-width 3*NARROWEST_SCREEN_WIDTH_UNIT
+
+    Paddings({
+      top: 6px,
+      horizontalSymmetric: 16px,
+      bottom: 32px
+    })
+
+    overflow-y auto
+
+
+  &-BottomFixedContent
+
+    grid-column 1/-1
+
+    background: TemporaryHighlighting.green.o10

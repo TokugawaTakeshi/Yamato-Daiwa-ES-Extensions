@@ -2,7 +2,7 @@ extension:
 
   - ts
 
-spec: "Tests/**/*.test.ts"
+spec: "Tests/Automated/**/*.test.ts"
 
 require:
 

@@ -1,16 +1,24 @@
 export default function addElementsToArray<ArrayElement>(
   namedParameters:
-    {
-      targetArray: Array<ArrayElement>;
-      newElements: Array<ArrayElement>;
-      mutably: boolean;
-    } &
-    (
-      { toStart: true; } |
-      { toEnd: true; } |
-      { toPosition__numerationFrom0: number; } |
-      { toPosition__numerationFrom1: number; }
-    )
+      Readonly<
+        { newElements: ReadonlyArray<ArrayElement>; } &
+        (
+          {
+            mutably: true;
+            targetArray: Array<ArrayElement>;
+          } |
+          {
+            mutably: false;
+            targetArray: ReadonlyArray<ArrayElement>;
+          }
+        ) &
+        (
+          { toStart: true; } |
+          { toEnd: true; } |
+          { toPosition__numerationFrom0: number; } |
+          { toPosition__numerationFrom1: number; }
+        )
+      >
 ): Array<ArrayElement> {
 
   const workpiece: Array<ArrayElement> = namedParameters.mutably ?
@@ -34,4 +42,5 @@ export default function addElementsToArray<ArrayElement>(
   workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...namedParameters.newElements);
 
   return workpiece;
+
 }

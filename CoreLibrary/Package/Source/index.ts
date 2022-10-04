@@ -60,7 +60,8 @@ export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOn
 export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
     "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-      "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+    "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
 export { default as getLastElementOfNonEmptyArray } from "./Arrays/getLastElementOfNonEmptyArray";
 export { default as removeArrayElementsByIndexes, RemovingArrayElementsByIndexesOperation } from
     "./Arrays/removeArrayElementsByIndexes";
@@ -90,7 +91,11 @@ export type {
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
-  ParsedJSON_NestedProperty
+  ParsedJSON_NestedProperty,
+  ReadonlyParsedJSON,
+  ReadonlyParsedJSON_Object,
+  ReadonlyParsedJSON_Array,
+  ReadonlyParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
 export type { PartialBy } from "./Types/PartialBy";
 
@@ -208,12 +213,13 @@ export { default as computeLastItemNumberForSpecificPaginationPage } from
     "./Pagination/computeLastItemNumberForSpecificPaginationPage";
 export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
 export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
+export { default as PromisesQueue } from "./Promises/PromisesQueue";
 
 
 /* === PoliteErrorsMessageBuilder =================================================================================== */
-export { default as PoliteErrorsMessagesBuilder } from "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
+export { default as PoliteErrorsMessagesBuilder } from "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
 export { default as PoliteErrorsMessagesBuilder__English } from
-    "./PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilderLocalization.english";
+    "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilderLocalization.english";
 
 
 /* === Logging ====================================================================================================== */
