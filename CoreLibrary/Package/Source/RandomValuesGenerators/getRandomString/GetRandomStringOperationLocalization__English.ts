@@ -10,16 +10,16 @@ const GetRandomStringOperationLocalization__English: RandomStringsGenerator.Loca
     ): string =>
         "The sum of characters count of 'prefix', 'infix' and 'postfix' and also 'minimalRandomlyGeneratedCharactersCount' are " +
         "exceeds the 'maximalCharactersCount':\n" +
-        `                          prefix.length: ${ namedParameters.prefix.length }` +
-        `                           infix.length: ${ namedParameters.infix.length }` +
-        `                         postfix.length: ${ namedParameters.postfix.length }` +
-        `minimalRandomlyGeneratedCharactersCount: ${ namedParameters.minimalRandomlyGeneratedCharactersCount }` +
+        `                          prefix.length: ${ namedParameters.prefix.length }\n` +
+        `                           infix.length: ${ namedParameters.infix.length }\n` +
+        `                         postfix.length: ${ namedParameters.postfix.length }\n` +
+        `minimalRandomlyGeneratedCharactersCount: ${ namedParameters.minimalRandomlyGeneratedCharactersCount }\n` +
         `                               SUBTOTAL: ${
           namedParameters.prefix.length + 
           namedParameters.infix.length +
           namedParameters.postfix.length +
           namedParameters.minimalRandomlyGeneratedCharactersCount    
-        }` +
+        }\n` +
         `                 maximalCharactersCount: ${ namedParameters.maximalCharactersCount }`,
     explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount: (
       {
