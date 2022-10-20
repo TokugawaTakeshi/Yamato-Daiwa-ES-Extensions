@@ -81,7 +81,11 @@ export type {
   ParsedJSON,
   ParsedJSON_Object,
   ParsedJSON_Array,
-  ParsedJSON_NestedProperty
+  ParsedJSON_NestedProperty,
+  ReadonlyParsedJSON,
+  ReadonlyParsedJSON_Object,
+  ReadonlyParsedJSON_Array,
+  ReadonlyParsedJSON_NestedProperty
 } from "./Types/ParsedJSON";
 export type { PartialBy } from "./Types/PartialBy";
 
