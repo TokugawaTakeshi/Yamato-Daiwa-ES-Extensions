@@ -1,8 +1,6 @@
 export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;
 
-export type ParsedJSON_Object = {
-  [key: string]: ParsedJSON_NestedProperty;
-};
+export type ParsedJSON_Object = { [key: string]: ParsedJSON_NestedProperty; };
 
 export type ParsedJSON_Array = Array<ParsedJSON_NestedProperty>;
 
@@ -19,4 +17,20 @@ export type ParsedJSON_NestedProperty =
     | null
     | ParsedJSON_Object
     | ParsedJSON_Array
+    | undefined;
+
+
+export type ReadonlyParsedJSON = ReadonlyParsedJSON_Object | ReadonlyParsedJSON_Array;
+
+export type ReadonlyParsedJSON_Object = Readonly<{ [key: string]: ReadonlyParsedJSON_NestedProperty; }>;
+
+export type ReadonlyParsedJSON_Array = ReadonlyArray<ReadonlyParsedJSON_NestedProperty>;
+
+export type ReadonlyParsedJSON_NestedProperty =
+    | number
+    | string
+    | boolean
+    | null
+    | ReadonlyParsedJSON_Object
+    | ReadonlyParsedJSON_Array
     | undefined;
