@@ -222,10 +222,11 @@ The common concept is:
   `BasicFrontEndLogger`.
   
 You can implement the `FrontEndLogger` as:
-* Class with static methods only as in example below. In this case it must me compatible with `ILogger` interface.
-* Class with non-static methods. It's recommended to specify `implements ILogger` but anyway compatibly will be checked
-  by TypeScript when calling `Logger.setImplementation`.
-* Plain ECMAScript object.
+* The class implementing `ILogger` interface. 
+  It is the most right Object-Oriented Programming way, however it you will not use the
+  non-static class members in the methods, you will be complained by IDE and/or ESLint.
+* The class with static methods only as in example below. In this case it must me compatible with `ILogger` interface.
+* Plain ECMAScript object with `FrontEndLogger` type.
 
 Below example implemented by the first approach to avoid warning messages like "Expected the usage of 'this' in 
 non-static method".
@@ -234,17 +235,16 @@ You also need to initialize the Sentry. It's possible to add the initialization 
 for example, in the entry point of your application.
 
 ```typescript
-import {
-  Logger,
+import { stringifyAndFormatArbitraryValue } from "@yamato-daiwa/es-extensions";
+import type {
   ThrownErrorLog,
   ErrorLog,
   Log,
   WarningLog,
   SuccessLog,
-  InfoLog,
-  stringifyAndFormatUnknownAtAdvanceEntity
-} from "hikari-es-extensions";
-import { BasicFrontEndLogger } from "hikari-es-extensions/BrowserJS";
+  InfoLog  
+} from "@yamato-daiwa/es-extensions";
+import { BasicFrontEndLogger } from "@yamato-daiwa/es-extensions-browserjs";
 import * as Sentry from "@sentry/browser";
 
 
@@ -256,6 +256,7 @@ abstract class FrontEndLogger {
       BasicFrontEndLogger.throwErrorAndLog(errorLog);
     }
 
+    
     Sentry.captureException(errorLog);
 
     if ("errorInstance" in errorLog) {
@@ -285,10 +286,11 @@ abstract class FrontEndLogger {
       BasicFrontEndLogger.logError(errorLog);
       return;
     }
+    
 
     /* 〔 ✏ 〕 Plain "JSON.stringify()" could cause the other error if the "errorLog.caughtError" or "errorLog.additionalData"
     *     are circular. */
-    Sentry.captureMessage(stringifyAndFormatUnknownAtAdvanceEntity(errorLog), Sentry.Severity.Error);
+    Sentry.captureMessage(stringifyAndFormatArbitraryValue(errorLog), Sentry.Severity.Error);
   }
 
   public static logErrorLikeMessage(errorLikeLog: Log): void {
@@ -297,8 +299,9 @@ abstract class FrontEndLogger {
       BasicFrontEndLogger.logErrorLikeMessage(errorLikeLog);
       return;
     }
+    
 
-    Sentry.captureMessage(stringifyAndFormatUnknownAtAdvanceEntity(errorLikeLog), Sentry.Severity.Error);
+    Sentry.captureMessage(stringifyAndFormatArbitraryValue(errorLikeLog), Sentry.Severity.Error);
   }
 
   public static logWarning(warningLog: WarningLog): void {
@@ -306,8 +309,9 @@ abstract class FrontEndLogger {
     if (!__IS_PRODUCTION_BUILDING_MODE__) {
       BasicFrontEndLogger.logWarning(warningLog);
     }
+    
 
-    Sentry.captureMessage(stringifyAndFormatUnknownAtAdvanceEntity(warningLog), Sentry.Severity.Warning);
+    Sentry.captureMessage(stringifyAndFormatArbitraryValue(warningLog), Sentry.Severity.Warning);
   }
 
   public static logSuccess(successLog: SuccessLog): void {
@@ -315,8 +319,9 @@ abstract class FrontEndLogger {
     if (!__IS_PRODUCTION_BUILDING_MODE__) {
       BasicFrontEndLogger.logSuccess(successLog);
     }
+    
 
-    Sentry.captureMessage(stringifyAndFormatUnknownAtAdvanceEntity(successLog), Sentry.Severity.Log);
+    Sentry.captureMessage(stringifyAndFormatArbitraryValue(successLog), Sentry.Severity.Log);
   }
 
   public static logInfo(infoLog: InfoLog): void {
@@ -325,8 +330,9 @@ abstract class FrontEndLogger {
       BasicFrontEndLogger.logSuccess(infoLog);
     }
 
-    Sentry.captureMessage(stringifyAndFormatUnknownAtAdvanceEntity(infoLog), Sentry.Severity.Info);
+    Sentry.captureMessage(stringifyAndFormatArbitraryValue(infoLog), Sentry.Severity.Info);
   }
+  
 
   public static highlightText(targetString: string): string {
     return BasicFrontEndLogger.highlightText(targetString);
