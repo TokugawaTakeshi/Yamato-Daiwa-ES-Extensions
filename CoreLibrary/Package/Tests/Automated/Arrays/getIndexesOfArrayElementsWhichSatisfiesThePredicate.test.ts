@@ -1,5 +1,5 @@
 import { getIndexesOfArrayElementsWhichSatisfiesThePredicate } from "../../../Source";
-import { deepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("getIndexesOfArrayElementsWhichSatisfiesThePredicate", (): void => {
@@ -15,12 +15,20 @@ describe("getIndexesOfArrayElementsWhichSatisfiesThePredicate", (): void => {
 
   it("Works as intended", (): void => {
 
-    deepStrictEqual(getIndexesOfArrayElementsWhichSatisfiesThePredicate(
-      sample, (arrayElement: Product): boolean => arrayElement.price > 500
-    ), [ 2, 3 ]);
+    Assert.deepStrictEqual(
+      getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+        sample, (arrayElement: Product): boolean => arrayElement.price > 500
+      ),
+      [ 2, 3 ]
+    );
 
-    deepStrictEqual(getIndexesOfArrayElementsWhichSatisfiesThePredicate(
-      sample, (arrayElement: Product): boolean => arrayElement.price > 1500
-    ), []);
+    Assert.deepStrictEqual(
+      getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+        sample, (arrayElement: Product): boolean => arrayElement.price > 1500
+      ),
+      []
+    );
+
   });
+
 });

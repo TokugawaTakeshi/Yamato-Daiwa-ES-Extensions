@@ -299,6 +299,6 @@ quick input:
 
 ![IntelliJ IDEA Live Template](addElementsToArray-LiveTemplateDemo.gif)
 
-Copy the variable name containing array to clipboard preliminary - the identifier will be automatically substituted to 
-  required position. 
+Copy the variable name which containing the array to clipboard preliminary - the identifier will be automatically
+  substituted to required position. 
 Then, use <kbd>Tab</kbd> key to move to next position at which specific code must be inputted.

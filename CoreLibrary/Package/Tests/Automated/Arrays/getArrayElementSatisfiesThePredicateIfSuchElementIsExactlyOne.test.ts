@@ -2,8 +2,7 @@ import {
   UnexpectedEventError,
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
 } from "../../../Source";
-
-import { strictEqual, throws } from "assert";
+import Assert from "assert";
 
 
 describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): void => {
@@ -11,7 +10,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
   const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
 
   it("One match", (): void => {
-    strictEqual(
+    Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
         sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
       ),
@@ -21,43 +20,46 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
 
   it("More than one match", (): void => {
 
-    strictEqual(
+    Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
         sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
       ),
       null
     );
 
-    throws(
+    Assert.throws(
       (): void => {
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample,
           (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { throwErrorIfElementNotFoundOrMoreThan1: true }
+          { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
         );
       },
       UnexpectedEventError
     );
+
   });
 
   it("No matches", (): void => {
 
-    strictEqual(
+    Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
         sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
       ),
       null
     );
 
-    throws(
+    Assert.throws(
       (): void => {
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample,
           (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { throwErrorIfElementNotFoundOrMoreThan1: true }
+          { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
         );
       },
       UnexpectedEventError
     );
+
   });
+
 });

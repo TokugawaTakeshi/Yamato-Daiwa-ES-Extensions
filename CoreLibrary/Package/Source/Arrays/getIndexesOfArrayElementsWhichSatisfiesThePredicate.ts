@@ -1,5 +1,5 @@
 export default function getIndexesOfArrayElementsWhichSatisfiesThePredicate<ArrayElement>(
-  targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
+  targetArray: ReadonlyArray<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): Array<number> {
 
   const indexesOfElementsWhichSatisfiesToPredicate: Array<number> = [];
@@ -11,4 +11,5 @@ export default function getIndexesOfArrayElementsWhichSatisfiesThePredicate<Arra
   });
 
   return indexesOfElementsWhichSatisfiesToPredicate;
+
 }

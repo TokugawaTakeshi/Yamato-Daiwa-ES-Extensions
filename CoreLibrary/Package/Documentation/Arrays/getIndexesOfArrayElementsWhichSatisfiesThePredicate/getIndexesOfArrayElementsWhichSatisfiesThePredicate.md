@@ -3,7 +3,7 @@
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexesOfArrayElementsWhichSatisfiesThePredicate-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getIndexesOfArrayElementsWhichSatisfiesThePredicate<ArrayElement>(
+<ArrayElement>(
   targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
 ): Array<number>
 ```
@@ -30,6 +30,7 @@ getIndexesOfArrayElementsWhichSatisfiesThePredicate(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
 ); // => Expected output: []
 ```
+
 
 ## Quick inputting
 

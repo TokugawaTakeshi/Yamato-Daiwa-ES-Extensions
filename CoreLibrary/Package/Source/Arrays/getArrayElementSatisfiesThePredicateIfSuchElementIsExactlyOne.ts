@@ -9,21 +9,21 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1: true; }>
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1: true; }>
 ): ArrayElement;
 
 
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  { throwErrorIfElementNotFoundOrMoreThan1 }: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
+  { mustThrowErrorIfElementNotFoundOrMoreThan1 }: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
 ): ArrayElement | null {
 
   const allElementsMatchingWithPredicate: Array<ArrayElement> = targetArray.filter(predicate);
 
   if (allElementsMatchingWithPredicate.length === 0) {
 
-    if (throwErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
         title: UnexpectedEventError.localization.defaultTitle,
@@ -33,12 +33,13 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
 
 
     return null;
+
   }
 
 
   if (allElementsMatchingWithPredicate.length > 1) {
 
-    if (throwErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError(
           "There are multiple element satisfies the predicate. As is follows from the function name, two or " +
@@ -49,9 +50,12 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
       });
     }
 
+
     return null;
+
   }
 
 
   return allElementsMatchingWithPredicate[0];
+
 }

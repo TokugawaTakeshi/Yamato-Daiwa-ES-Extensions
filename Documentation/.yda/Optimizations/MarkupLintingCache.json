@@ -1,7 +1,7 @@
 {
   "01-Source/Components/Components.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.055Z"
+    "modificationDatetime__ISO_8601": "2022-11-09T06:28:48.191Z"
   },
   "01-Source/Pages/index.pug": {
     "issues": [],
@@ -13,7 +13,7 @@
   },
   "01-Source/Layouts/TwoColumns/TwoColumnsLayout.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.058Z"
+    "modificationDatetime__ISO_8601": "2022-11-09T06:26:21.282Z"
   },
   "01-Source/Pages/Top/TopPage-Japanese.pug": {
     "issues": [],
@@ -53,7 +53,7 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly-Japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-11-03T01:15:09.862Z"
+    "modificationDatetime__ISO_8601": "2022-11-09T06:19:18.087Z"
   },
   "01-Source/Pages/_CommonRequirements.pug": {
     "issues": [],
@@ -61,7 +61,7 @@
   },
   "01-Source/Pages/_CommonRequirements/HTML_PageMetadata.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-11-03T00:54:58.060Z"
+    "modificationDatetime__ISO_8601": "2022-11-09T06:24:15.764Z"
   },
   "node_modules/@yamato-daiwa/frontend/Components.pug": {
     "issues": [],
@@ -73,6 +73,42 @@
   },
   "node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-10-14T02:07:48.428Z"
+    "modificationDatetime__ISO_8601": "2022-11-05T02:32:53.559Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T06:32:03.736Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T06:31:34.798Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T06:32:03.725Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:23:27.335Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:25:57.246Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:30:51.112Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:30:51.203Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:29:33.966Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2022-11-09T07:30:51.190Z"
   }
 }

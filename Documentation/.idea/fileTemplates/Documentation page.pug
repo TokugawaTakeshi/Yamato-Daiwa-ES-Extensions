@@ -1,0 +1,65 @@
+//- TODO Edit path
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Data
+
+  //- TODO Edit or remove
+  -
+
+    const StaticLinks = {
+      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
+    }
+
+
+block append Requirements
+
+  //- TODO Edit paths
+  include ../../../../_CommonRequirements.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+
+block append Metadata
+
+  //- TODO Edit
+
+  -
+
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    HTML_PAGE_LANGUAGE = "ja"
+    HTML_PageMetaData = {
+      description: "The areStringifiedDigitsOnly() function checks does target string includes only digit characters.",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+
+block append SpecificContent
+
+  article.Article.DocumentationPage-Article
+
+    +ProgrammaticEntityHeading({
+      headingElementTag: "h1",
+      entityName: "areStringifiedDigitsOnly",
+      entityLocalizedInterpretation: "Stringified digits only check"
+    }).Article-ProgrammaticEntityHeading
+
+    +CallableExpressionScheme({
+      technicalName: "areStringifiedDigitsOnly",
+      localizedDescriptiveHeading: "Stringified digits only check",
+      parametersSpecification: [
+        {
+          localizedName: "Target string",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    }).Article-CallableExpressionScheme

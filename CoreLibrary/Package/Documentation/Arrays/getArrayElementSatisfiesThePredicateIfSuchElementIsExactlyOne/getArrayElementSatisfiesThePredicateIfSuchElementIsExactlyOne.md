@@ -3,21 +3,21 @@
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
+<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null
 
-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
+<ArrayElement>(
   targetArray: Array<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
+  options: { mustThrowErrorIfElementNotFoundOrMoreThan1: true; }
 ): ArrayElement
 ```
 
 * Returns the element matching with the `predicate` is such element is exactly one in `targetArray`.
 * If the element matching with the `predicate` is not presents or there are multiple matches with the predicate,
-  * error will be thrown if `throwErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
+  * error will be thrown if `mustThrowErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
   * otherwise `null` will be returned
 
 ![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
@@ -87,7 +87,7 @@ try {
   match = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error: unknown) {
@@ -118,7 +118,7 @@ try {
   const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error: unknown) {
