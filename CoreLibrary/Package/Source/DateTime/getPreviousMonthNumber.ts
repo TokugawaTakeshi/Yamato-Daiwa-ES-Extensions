@@ -6,16 +6,16 @@ import getMonthNumberByName from "./getMonthNumberByName";
 
 export default function getPreviousMonthNumber(
   namedParameters:
-    Readonly<
-      (
+      Readonly<
         (
-          { referenceMonthNumber__numerationFrom0: number; } |
-          { referenceMonthNumber__numerationFrom1: number; }
-        ) |
-        { referenceMonthName: MonthsNames; }
-      ) &
-      { firstMonthNumberInRelationToReturnableValue: 0 | 1; }
-    >
+          (
+            { referenceMonthNumber__numerationFrom0: number; } |
+            { referenceMonthNumber__numerationFrom1: number; }
+          ) |
+          { referenceMonthName: MonthsNames; }
+        ) &
+        { firstMonthNumberInRelationToReturnableValue: 0 | 1; }
+      >
 ): number {
 
   let referenceMonthNumber__numerationFrom1: number;
@@ -35,4 +35,5 @@ export default function getPreviousMonthNumber(
 
   return namedParameters.firstMonthNumberInRelationToReturnableValue === 1 ?
       previousMonthNumber__numerationFrom1 : previousMonthNumber__numerationFrom1 - 1;
+
 }

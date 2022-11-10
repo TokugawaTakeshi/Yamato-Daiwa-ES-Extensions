@@ -1,5 +1,5 @@
-# HTTP_StatusCodes enumeration
-## All
+# HTTP Status codes enumerations
+## `HTTP_StatusCodes` - All HTTP status codes
 
 The enumeration **HTTP_StatusCodes** contains all HTTP status code documented in 
 [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
@@ -81,7 +81,7 @@ console.log(HTTP_StatusCodes.networkAuthenticationRequired) // 511
 
 ## Subsets
 
-### Information responses
+### `InformationalResponsesHTTP_StatusCodes` - Information responses
 
 ```typescript
 console.log(InformationalResponsesHTTP_StatusCodes.continue) // 100
@@ -93,7 +93,7 @@ console.log(InformationalResponsesHTTP_StatusCodes.earlyHints) // 103
 [📖 More about information responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#information_responses)
 
 
-### Successful responses
+### `SuccessfulResponsesHTTP_StatusCodes` - Successful responses
 
 ```typescript
 console.log(SuccessfulResponsesHTTP_StatusCodes.OK) // 200
@@ -111,7 +111,7 @@ console.log(SuccessfulResponsesHTTP_StatusCodes.IM_Used) // 226
 [📖 More about successful responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#successful_responses)
 
 
-### Redirection messages
+### `RedirectionResponsesHTTP_StatusCodes` - Redirection messages
 
 ```typescript
 console.log(RedirectionResponsesHTTP_StatusCodes.multipleChoices) // 300
@@ -128,7 +128,7 @@ console.log(RedirectionResponsesHTTP_StatusCodes.permanentRedirect) // 308
 [📖 More about redirection messages](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages)
 
 
-### Client error responses
+### `ClientErrorsHTTP_StatusCodes` - Client error responses
 
 ```typescript
 console.log(ClientErrorsHTTP_StatusCodes.badRequest) // 400
@@ -165,7 +165,7 @@ console.log(ClientErrorsHTTP_StatusCodes.unavailableForLegalReasons) // 451
 [📖 More about client error responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses)
 
 
-### Server error responses
+### `ServerErrorsHTTP_StatusCodes` - Server error responses
 
 ```typescript
 console.log(ServerErrorsHTTP_StatusCodes.internalServerError) // 500

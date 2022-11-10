@@ -1,17 +1,17 @@
-# `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`: Get array element satisfies with predicate if such element is exactly one
+# `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` - Get array element satisfies with predicate if such element is exactly one
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
 <ArrayElement>(
-  targetArray: Array<ArrayElement>, 
+  targetArray: ReadonlyArray<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null
 
 <ArrayElement>(
-  targetArray: Array<ArrayElement>, 
+  targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: { mustThrowErrorIfElementNotFoundOrMoreThan1: true; }
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1: true; }>
 ): ArrayElement
 ```
 
@@ -63,7 +63,7 @@ console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
   )
-); // => "St. Louis"
+); // -> "St. Louis"
 ```
 
 ### More than one match
@@ -74,7 +74,7 @@ console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
   )
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error
@@ -107,7 +107,7 @@ console.log(
       sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
   ),
   null
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error

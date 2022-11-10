@@ -1,0 +1,185 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
+    HTML_PageMetaData = {
+      // TODO テンプレート化
+      description: "Функция addElementsToArray библиотеки 'Yamato Daiwa ECMAScript extentions' (сокращённо: YDEE)" +
+          "добавляет новые элементы в начало, конец или указанную позицию массива; возможно мутирующее или немутирующее " +
+          "добавление.",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray")
+
+    const externalURIs = {
+      nativeUnshiftMethod: "https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift",
+      intelliJ_IDEA_LiveTemplates: "https://www.jetbrains.com/help/idea/using-live-templates.html",
+      intelliJ_IDEA: "https://www.jetbrains.com/ru-ru/idea/features/",
+      officialIntelliJ_IDEA_Plugin: "https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions"
+    };
+
+
+block append SpecificContent
+
+  article.Article.DocumentationPage-Article
+
+    +ProgrammaticEntityHeading({
+      entityName: "addElementsToArray",
+      entityLocalizedInterpretation: "Добавить элементы в массив"
+    }).Article-ProgrammaticEntityHeading
+
+    +CodeViewer--YDF({
+      title: "Сигнатура"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+      }): :html_special_characters_to_html_entities
+        (
+          sourceDataAndOptions:
+              Readonly<
+                { newElements: ReadonlyArray<ArrayElement>; } &
+                (
+                  {
+                    mutably: true;
+                    targetArray: Array<ArrayElement>;
+                  } |
+                  {
+                    mutably: false;
+                    targetArray: ReadonlyArray<ArrayElement>;
+                  }
+                ) &
+                (
+                  { toStart: true; } |
+                  { toEnd: true; } |
+                  { toPosition__numerationFrom0: number; } |
+                  { toPosition__numerationFrom1: number; }
+                )
+              >
+        ): Array<ArrayElement>
+
+    p.Article-Paragraph.
+      Добавляет новые элементы в начало, конец или указанную позицию массива.
+      Добавление может быть мутирующим или нет - в зависимости от соответствующей опции.
+
+
+    h2.Article-Heading2 Примеры
+    h3.Article-Heading3 Добавление одного элемента в начало массива
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            Добавляем элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] в начало массива.
+            Опция #[+ImportantEntity__Code--YDID mutably] сделана обязательной не случайно: инженер обязан чётко понимать,
+              что он делает.
+            Поскольку в данном примере установлено значение #[+SecondaryEntity__Code--YDID true], то исходный массив
+              изменится, а результат будет:
+              #[+SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]].
+
+          +AttentionBox--YDF({
+            decoration: AttentionBox__YDF.DecorativeVariations.warning,
+            hasPrependedSVG_Icon: true
+          }).Article-AttentionBox.
+            При таком варианте использования целевой массив #[+Keyword--YDID не] может иметь тип
+              #[+ImportantEntity__Code--YDID ReadonlyArray], поскольку функция будет изменять его.
+
+          p.Article-Paragraph.
+            Такое использование функции близко к нативному методу
+            #[+Link--YDF({ unendorsedExternalURI: externalURIs.nativeUnshiftMethod }) unshift]
+            Разница в том, что #[+ImportantEntity--YDID addElementsToArray] возвращает обновлённый массив, а не его
+              количество элементов, как #[+ImportantEntity--YDID unshift].
+            Впрочем, если нужно количество элементов нового массива, то можно тут же обратиться к свойству
+              #[+ImportantEntity__Code--YDID length] у возвращаемого значения без создания новой переменной.
+
+          p.Article-Paragraph.
+            К тому же, в отличие от #[+ImportantEntity--YDID unshift], при знании базового английского полностью очевидно,
+              что делает #[+ImportantEntity--YDID addElementsToArray], куда добавляет элементы и что произойдёт с исходным
+              массивом.
+            Да, пример #[+ImportantEntity--YDID addElementsToArray] набирать на клавиатуре дальше, чем
+              #[+ImportantEntity--YDID unshift], но кристально прозрачная понятность кода важнее, чем его начальная скорость
+              ввода.
+            К сожалению, многих программистов, особенно начинающих это не убедит, потому что человеческая психология
+              между сиюминутной выгодой и большей выгодой в будущем склонна выбирать первое.
+            В программировании эта склонность во многом ответственная за код, который быстро становится невозможно
+              поддерживать.
+
+          p.Article-Paragraph.
+            Что касается скорости ввода, то функциональность
+            #[+Link--YDF({ anchor: "QUICK_INPUT--SECTION" }) Live template]
+            для семейства IDE IntelliJ IDEA решает эту проблему.
+
+    h3.Article-Heading3#QUICK_INPUT--SECTION Быстрый ввод в семействе IDE IntelliJ IDEA
+
+    p.Article-Paragraph.
+      Использование
+        #[+Link--YDF({ unendorsedExternalURI: externalURIs.intelliJ_IDEA_LiveTemplates }) Live template-ов]
+        семейства интегрированных сред разработки
+      #[+Link--YDF({ unendorsedExternalURI: externalURIs.intelliJ_IDEA_LiveTemplates }) IntelliJ IDEA]
+        позволяет ввести выражение вызова функции быстро.
+      Для этого потребуется установить
+        #[+Link--YDF({ unendorsedExternalURI: externalURIs.intelliJ_IDEA_LiveTemplates }) официальный плагин]
+        библиотеки.
+
+    h4.Article-Heading4 Пошаговое описание процесса использования шаблона
+
+    ol.Article-OrderedList
+
+      li.
+        Скопируйте в буфер обмен имя переменной или выражение, в которой содержится целевой массив.
+        Пожалуйста, сформируйте привычку делать это перед тем, как вызывать Live Template, чтобы плагин смог
+          автоматически заполнить свойство #[+ImportantEntity__Code--YDID targetArray] первого и единственного параметра.
+
+      li
+        | Начните набирать #[+ImportantEntity--YDID addElementsToArray].
+        | Подсветится 2 варианта автодополнения:
+
+        ol.Article-OrderedList
+
+          li.
+            Иконка с буквой "f" - это просто автодополнение имени функции; стандартная функциональность среды разработки.
+
+          li.
+            Иконка с клише - это как раз нужный шаблон. Нажмите #[+ImportantEntity--YDID Enter].
+            У данного шаблона существует алиас - #[+ImportantEntity__Code--YDID aeta].
+            Хотя он и состоит из первых букв слов, образующих имя функции, его нужно запоминать, а потому основной
+              Live template совпадает с именем функции.

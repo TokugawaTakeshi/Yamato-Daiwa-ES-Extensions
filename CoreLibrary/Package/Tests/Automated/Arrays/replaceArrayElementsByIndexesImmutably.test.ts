@@ -1,5 +1,5 @@
 import { replaceArrayElementsByIndexesImmutably } from "../../../Source";
-import { deepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("replaceArrayElementsByIndexesImmutably", (): void => {
@@ -15,7 +15,7 @@ describe("replaceArrayElementsByIndexesImmutably", (): void => {
 
   it("One replacement", (): void => {
 
-    deepStrictEqual(
+    Assert.deepStrictEqual(
       replaceArrayElementsByIndexesImmutably({
         targetArray: sampleArray,
         index: 2,
@@ -28,11 +28,12 @@ describe("replaceArrayElementsByIndexesImmutably", (): void => {
         { title: "DELTA", price: 1500 }
       ]
     );
+
   });
 
   it("Multiple replacements", (): void => {
 
-    deepStrictEqual(
+    Assert.deepStrictEqual(
       replaceArrayElementsByIndexesImmutably({
         targetArray: sampleArray,
         replacements: [
@@ -47,5 +48,7 @@ describe("replaceArrayElementsByIndexesImmutably", (): void => {
         { title: "HOTEL", price: 5000 }
       ]
     );
+
   });
+
 });

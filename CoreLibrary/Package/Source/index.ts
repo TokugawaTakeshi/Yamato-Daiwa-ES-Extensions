@@ -1,17 +1,96 @@
 /*!
- * @yamato-daiwa/es-extensions v1.5
+ * @yamato-daiwa/es-extensions v1.6
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
+
+/* === Arrays ======================================================================================================= */
+export { default as addElementsToArray } from "./Arrays/addElementsToArray";
+export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
+    "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
+    "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
+export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
+    "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
+export { default as removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from
+    "./Arrays/removeArrayElementsByIndexes";
+export { default as removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from
+    "./Arrays/removeArrayElementsByPredicates";
+export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
+export { default as replaceArrayElementsByPredicates, type ReplacingArrayElementsByPredicatesOperation } from
+    "./Arrays/replaceArrayElementsByPredicates";
+export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
+
+
+/* === Constants and enumerations =================================================================================== */
+/* --- Date & Time -------------------------------------------------------------------------------------------------- */
+export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
+export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
+export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
+export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
+export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
+export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
+
+/* --- Date & Time -------------------------------------------------------------------------------------------------- */
+export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP/HTTP_Methods";
+export {
+  HTTP_StatusCodes,
+  InformationalResponsesHTTP_StatusCodes,
+  SuccessfulResponsesHTTP_StatusCodes,
+  RedirectionResponsesHTTP_StatusCodes,
+  ClientErrorsHTTP_StatusCodes,
+  ServerErrorsHTTP_StatusCodes
+} from "./ConstantsAndEnumerations/HTTP/HTTP_StatusCodes";
+
+/* --- Other -------------------------------------------------------------------------------------------------------- */
+export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
+
+
+/* === Data mocking ================================================================================================= */
+export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelpler/MockGatewayHelper";
+
+
+/* === Date & Time ================================================================================================== */
+export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
+export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
+export { default as doesTimeIntervalsOverlaps } from "./DateTime/doesTimeIntervalsOverlaps";
+export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
+export { default as getDaysCountOfPeriod } from "./DateTime/getDaysCountOfPeriod";
+export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";
+export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
+export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
+export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
+export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNumber";
+export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
+export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
+export { default as hasDateCome } from "./DateTime/hasDateCome";
+export { default as hasTimeCome } from "./DateTime/hasTimeCome";
+export { default as isEarlierThan } from "./DateTime/isEarlierThan";
+export { default as isLaterThan } from "./DateTime/isLaterThan";
+export { default as isNotEarlierThan } from "./DateTime/isNotEarlierThan";
+export { default as isNotLaterThan } from "./DateTime/isNotLaterThan";
+// === TODO 未校閲 ======================================================================================================
+export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
+export { default as isValidISO8601DateAndPossiblyTimeDefinition } from "./DateTime/isValidISO8601DateAndPossiblyTimeDefinition";
+export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
+export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
+export { default as shiftDateBySpecificDaysCount } from "./DateTime/shiftDateBySpecificDaysCount";
+export { default as TimePoint } from "./DateTime/TimePoint/TimePoint";
+export { default as Timer } from "./DateTime/Timer";
+// === TODO 整理 ========================================================================================================
 /* === Numbers ====================================================================================================== */
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
+export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
     "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
+export { default as roundDownToSpecificIntegerPlaceValue } from "./Numbers/roundDownToSpecificIntegerPlaceValue";
+export { default as roundToSpecificNearestIntegerPlaceValue } from "./Numbers/roundToSpecificNearestIntegerPlaceValue";
 export { default as roundToSpecifiedNearestDecimalPlaceValue } from "./Numbers/roundToSpecifiedNearestDecimalPlaceValue";
+export { default as roundUpToSpecificIntegerPlaceValue } from "./Numbers/roundUpToSpecificIntegerPlaceValue";
 export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separateEach3DigitsGroupWithComma";
 export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
-
 
 /* === Strings ====================================================================================================== */
 export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
@@ -21,11 +100,12 @@ export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceChar
 export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag } from
     "./Strings/CharactersAssets/SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag";
 export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringifiedDigits";
-
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
+export { default as extractSubstring } from "./Strings/extractSubstring";
+export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEnglishAbbreviatedOrdinalNumber";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
 export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringOnlySpecificCharacters";
@@ -51,27 +131,6 @@ export { default as trimSpaces } from "./Strings/trimSpaces";
 
 /* === Objects ======================================================================================================= */
 export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
-
-
-/* === Arrays ======================================================================================================= */
-export { default as addElementsToArray } from "./Arrays/addElementsToArray";
-export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
-    "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
-export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
-export { default as getLastElementOfNonEmptyArray } from "./Arrays/getLastElementOfNonEmptyArray";
-export { default as removeArrayElementsByIndexes, RemovingArrayElementsByIndexesOperation } from
-    "./Arrays/removeArrayElementsByIndexes";
-export { default as removeArrayElementsByPredicates, RemovingArrayElementsByPredicatesOperation } from
-    "./Arrays/removeArrayElementsByPredicates";
-export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
-export { default as replaceArrayElementsByPredicates, ReplacingArrayElementsByPredicatesOperation } from
-    "./Arrays/replaceArrayElementsByPredicates";
-export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
-
 
 /* === Sets ========================================================================================================= */
 export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
@@ -144,22 +203,6 @@ export { default as isElementOfEnumeration } from "./TypeGuards/isElementOfEnume
 export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
-/* === Date & Time ================================================================================================== */
-export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
-export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
-export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
-export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
-export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
-export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNumber";
-export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
-export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
-export { default as hasTimeCome } from "./DateTime/hasTimeCome";
-export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
-export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
-export { default as TimePoint } from "./DateTime/TimePoint/TimePoint";
-export { default as Timer } from "./DateTime/Timer";
-
-
 /* === Value transformers =========================================================================================== */
 export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
 export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
@@ -186,24 +229,6 @@ export { default as getRandomSubarray } from "./RandomValuesGenerators/getRandom
 export { default as getSpecificBooleanValueWithProbability } from
     "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
 export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
-
-
-/* === Constants and enumerations =================================================================================== */
-export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
-export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP_Methods";
-export {
-  HTTP_StatusCodes,
-  InformationalResponsesHTTP_StatusCodes,
-  SuccessfulResponsesHTTP_StatusCodes,
-  RedirectionResponsesHTTP_StatusCodes,
-  ClientErrorsHTTP_StatusCodes,
-  ServerErrorsHTTP_StatusCodes
-} from "./ConstantsAndEnumerations/HTTP_StatusCodes";
-export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
-export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
-export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
-export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
-export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
 
 
 /* === Pagination =================================================================================================== */

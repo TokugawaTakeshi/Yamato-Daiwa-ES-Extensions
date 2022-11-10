@@ -21,14 +21,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has been mutated", (): void => {
+      it("Initial array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -45,14 +45,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -73,14 +73,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -97,14 +97,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -125,14 +125,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -149,14 +149,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -177,14 +177,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
     });
@@ -200,14 +200,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -236,7 +236,7 @@ describe("addElementsToArray", (): void => {
         );
       });
 
-      it("Initial array has been mutated", (): void => {
+      it("Initial array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -253,14 +253,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -281,14 +281,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
     });
@@ -304,14 +304,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -332,14 +332,14 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -356,14 +356,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      it("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -391,7 +391,7 @@ describe("addElementsToArray", (): void => {
         );
       });
 
-      it("Array has been mutated", (): void => {
+      it("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -415,7 +415,7 @@ describe("addElementsToArray", (): void => {
         );
       });
 
-      it("Initial array has not been mutated", (): void => {
+      it("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 

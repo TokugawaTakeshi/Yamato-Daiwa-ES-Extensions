@@ -1,12 +1,12 @@
 import { getPreviousMonthNumber, MonthsNames } from "../../../Source";
-import { strictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("getPreviousMonthNumber", (): void => {
 
   describe("By number from 0 of reference month number", (): void => {
 
-    it("Returned month if from 0", (): void => {
+    it("Returned month number is from 0", (): void => {
 
       type ExperimentalSample = Readonly<{
         currentMonthNumber__numerationFrom0: number;
@@ -29,14 +29,18 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthNumber__numerationFrom0: sample.currentMonthNumber__numerationFrom0,
-          firstMonthNumberInRelationToReturnableValue: 0
-        }), sample.previousMonthNumber__numerationFrom0);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthNumber__numerationFrom0: sample.currentMonthNumber__numerationFrom0,
+            firstMonthNumberInRelationToReturnableValue: 0
+          }),
+          sample.previousMonthNumber__numerationFrom0
+        );
       }
+
     });
 
-    it("Returned month if from 1", (): void => {
+    it("Returned month number is from 1", (): void => {
 
       type ExperimentalSample = Readonly<{
         currentMonthNumber__numerationFrom0: number;
@@ -59,17 +63,22 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthNumber__numerationFrom0: sample.currentMonthNumber__numerationFrom0,
-          firstMonthNumberInRelationToReturnableValue: 1
-        }), sample.previousMonthNumber__numerationFrom1);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthNumber__numerationFrom0: sample.currentMonthNumber__numerationFrom0,
+            firstMonthNumberInRelationToReturnableValue: 1
+          }),
+          sample.previousMonthNumber__numerationFrom1
+        );
       }
+
     });
+
   });
 
   describe("By number from 1 of reference month number", (): void => {
 
-    it("Returned month if from 0", (): void => {
+    it("Returned month number is from 0", (): void => {
 
       type ExperimentalSample = Readonly<{
         currentMonthNumber__numerationFrom1: number;
@@ -92,14 +101,18 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthNumber__numerationFrom1: sample.currentMonthNumber__numerationFrom1,
-          firstMonthNumberInRelationToReturnableValue: 0
-        }), sample.previousMonthNumber__numerationFrom0);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthNumber__numerationFrom1: sample.currentMonthNumber__numerationFrom1,
+            firstMonthNumberInRelationToReturnableValue: 0
+          }),
+          sample.previousMonthNumber__numerationFrom0
+        );
       }
+
     });
 
-    it("Returned month if from 1", (): void => {
+    it("Returned month number is from 1", (): void => {
 
       type ExperimentalSample = Readonly<{
         currentMonthNumber__numerationFrom1: number;
@@ -122,17 +135,22 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthNumber__numerationFrom1: sample.currentMonthNumber__numerationFrom1,
-          firstMonthNumberInRelationToReturnableValue: 1
-        }), sample.nextMonthNumber__numerationFrom1);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthNumber__numerationFrom1: sample.currentMonthNumber__numerationFrom1,
+            firstMonthNumberInRelationToReturnableValue: 1
+          }),
+          sample.nextMonthNumber__numerationFrom1
+        );
       }
+
     });
+
   });
 
   describe("By month name", (): void => {
 
-    it("Returned month if from 0", (): void => {
+    it("Returned month number is from 0", (): void => {
 
       type ExperimentalSample = Readonly<{
         monthName: MonthsNames;
@@ -155,14 +173,18 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthName: sample.monthName,
-          firstMonthNumberInRelationToReturnableValue: 0
-        }), sample.previousMonthNumber__numerationFrom0);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthName: sample.monthName,
+            firstMonthNumberInRelationToReturnableValue: 0
+          }),
+          sample.previousMonthNumber__numerationFrom0
+        );
       }
+
     });
 
-    it("Returned month if from 1", (): void => {
+    it("Returned month number is from 1", (): void => {
 
       type ExperimentalSample = Readonly<{
         monthName: MonthsNames;
@@ -185,11 +207,17 @@ describe("getPreviousMonthNumber", (): void => {
       ];
 
       for (const sample of experimentalSample) {
-        strictEqual(getPreviousMonthNumber({
-          referenceMonthName: sample.monthName,
-          firstMonthNumberInRelationToReturnableValue: 1
-        }), sample.previousMonthNumber__numerationFrom1);
+        Assert.strictEqual(
+          getPreviousMonthNumber({
+            referenceMonthName: sample.monthName,
+            firstMonthNumberInRelationToReturnableValue: 1
+          }),
+          sample.previousMonthNumber__numerationFrom1
+        );
       }
+
     });
+
   });
+
 });

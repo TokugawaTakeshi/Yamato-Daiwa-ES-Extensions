@@ -110,3 +110,83 @@ AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Japane
 ```
 
 の様に記述して割り当てる。
+
+
+## 追加機能
+### 定数・列挙
+#### 日時
+##### `JapaneseDaysOfWeek`列挙
+
+曜日の名前を含む列挙。
+キーは[DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
+  列挙のキーと一致。
+
+```typescript
+console.log(JapaneseDaysOfWeek.sunday); // -> "日曜日"
+console.log(JapaneseDaysOfWeek.monday); // -> "月曜日"
+console.log(JapaneseDaysOfWeek.tuesday); // -> "火曜日"
+console.log(JapaneseDaysOfWeek.wednesday); // -> "水曜日"
+console.log(JapaneseDaysOfWeek.thursday); // -> "木曜日"
+console.log(JapaneseDaysOfWeek.friday); // -> "金曜日"
+console.log(JapaneseDaysOfWeek.saturday); // -> "土曜日"
+```
+
+
+##### `AbbreviatedJapaneseDaysOfWeek`列挙
+
+各曜日の名前の最初の文字を含む列挙。
+キーは[DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
+  列挙のキーと一致。
+
+```typescript
+console.log(AbbreviatedJapaneseDaysOfWeek.sunday); // -> "日"
+console.log(AbbreviatedJapaneseDaysOfWeek.monday); // -> "月"
+console.log(AbbreviatedJapaneseDaysOfWeek.tuesday); // -> "火"
+console.log(AbbreviatedJapaneseDaysOfWeek.wednesday); // -> "水"
+console.log(AbbreviatedJapaneseDaysOfWeek.thursday); // -> "木"
+console.log(AbbreviatedJapaneseDaysOfWeek.friday); // -> "金"
+console.log(AbbreviatedJapaneseDaysOfWeek.saturday); // -> "土"
+```
+
+
+##### `JapaneseMonthsNames`列挙
+
+日本語の月名。
+キーは[MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
+  列挙のキーと一致。
+
+```typescript
+console.log(JapaneseMonthsNames.january); // -> "１月"
+console.log(JapaneseMonthsNames.february); // -> "２月"
+console.log(JapaneseMonthsNames.march); // -> "３月"
+console.log(JapaneseMonthsNames.april); // -> "４月"
+console.log(JapaneseMonthsNames.may); // -> "５月"
+console.log(JapaneseMonthsNames.june); // -> "６月"
+console.log(JapaneseMonthsNames.july); // -> "７月"
+console.log(JapaneseMonthsNames.august); // -> "８月"
+console.log(JapaneseMonthsNames.september); // -> "９月"
+console.log(JapaneseMonthsNames.october); // -> "１０月"
+console.log(JapaneseMonthsNames.november); // -> "１１月"
+console.log(JapaneseMonthsNames.december); // -> "１２月"
+```
+
+##### `JapaneseTraditionalMonthsNames`列挙
+
+日本語の伝統的月名。
+キーは[MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
+列挙のキーと一致。
+
+```typescript
+console.log(JapaneseTraditionalMonthsNames.january); // -> "睦月"
+console.log(JapaneseTraditionalMonthsNames.february); // -> "如月"
+console.log(JapaneseTraditionalMonthsNames.march); // -> "弥生"
+console.log(JapaneseTraditionalMonthsNames.april); // -> "卯月"
+console.log(JapaneseTraditionalMonthsNames.may); // -> "皐月"
+console.log(JapaneseTraditionalMonthsNames.june); // -> "水無月"
+console.log(JapaneseTraditionalMonthsNames.july); // -> "文月"
+console.log(JapaneseTraditionalMonthsNames.august); // -> "葉月"
+console.log(JapaneseTraditionalMonthsNames.september); // -> "長月"
+console.log(JapaneseTraditionalMonthsNames.october); // -> "神無月"
+console.log(JapaneseTraditionalMonthsNames.november); // -> "霜月"
+console.log(JapaneseTraditionalMonthsNames.december); // -> "師走"
+```

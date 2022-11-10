@@ -1,10 +1,10 @@
 # `getNextMonthNumber` - get next month number
 
 Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both 
-parameter and returned value.
+  parameter and returned value.
 
 ```
-getNextMonthNumber(
+(
   namedParameters:
       Readonly<
         (
@@ -38,22 +38,22 @@ parameter.
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom0: 5,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 6
+})); // -> 6
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom0: 5,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 7
+})); // -> 7
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom0: 11,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 0
+})); // -> 0
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom0: 11,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 1
+})); // -> 1
 ```
 
 ### With `referenceMonthNumber__numerationFrom1` option
@@ -62,22 +62,22 @@ console.log(getNextMonthNumber({
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom1: 5,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 5
+})); // -> 5
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom1: 5,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 6
+})); // -> 6
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom1: 12,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 0
+})); // -> 0
 
 console.log(getNextMonthNumber({
   referenceMonthNumber__numerationFrom1: 12,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 1
+})); // -> 1
 ```
 
 ### With `referenceMonthName` option
@@ -86,20 +86,20 @@ console.log(getNextMonthNumber({
 console.log(getNextMonthNumber({
   monthName: MonthsNames.may,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 5
+})); // -> 5
 
 console.log(getNextMonthNumber({
   monthName: MonthsNames.may,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 6
+})); // -> 6
 
 console.log(getNextMonthNumber({
   monthName: MonthsNames.december,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 0
+})); // -> 0
 
 console.log(getNextMonthNumber({
   monthName: MonthsNames.december,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 1
+})); // -> 1
 ```

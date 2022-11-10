@@ -2,6 +2,21 @@
 
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
+
+
+## [0.0.4] 
+
+### Added 
+
+* <kbd>addElementsToArray</kbd> The copy of Live template for [<kbd>aeta</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md).
+    From this version, the <kbd>aeta</kbd> is the alias for <kbd>addElementsToArray</kbd>.  
+
+### Change
+
+* <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**. 
+* <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**. 
+
+
 ## [0.0.3]
 
 ### Added

@@ -1,6 +1,6 @@
 import { removeArrayElementsByPredicates } from "../../../Source";
 import type { RemovingArrayElementsByPredicatesOperation } from "../../../Source";
-import { deepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("removeArrayElementsByPredicates", (): void => {
@@ -26,21 +26,22 @@ describe("removeArrayElementsByPredicates", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.updatedArray, [ "a", "aa", "aaa" ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.updatedArray, [ "a", "aa", "aaa" ]);
       });
 
       it("Removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.removedElements, [ "aaaa", "aaaaa" ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.removedElements, [ "aaaa", "aaaaa" ]);
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
       });
+
     });
 
     describe("Immutable removing", (): void => {
 
-      const experimentalSample: Array<string> = getSampleArray();
+      const experimentalSample: ReadonlyArray<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
           removeArrayElementsByPredicates({
             targetArray: experimentalSample,
@@ -49,21 +50,23 @@ describe("removeArrayElementsByPredicates", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.updatedArray, [ "a", "aa", "aaa" ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.updatedArray, [ "a", "aa", "aaa" ]);
       });
 
       it("Removed element is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.removedElements, [ "aaaa", "aaaaa" ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.removedElements, [ "aaaa", "aaaaa" ]);
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 3, 4 ]);
       });
 
       it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getSampleArray());
+        Assert.deepStrictEqual(experimentalSample, getSampleArray());
       });
+
     });
+
   });
 
   describe("Multiple predicates", (): void => {
@@ -90,27 +93,28 @@ describe("removeArrayElementsByPredicates", (): void => {
 
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(
+        Assert.deepStrictEqual(
           removingArrayElementsByPredicatesOperationResult.updatedArray,
           [ "bravo", "himalayas", "yokosuka" ]
         );
       });
 
       it("Removed elements are matching with expected", (): void => {
-        deepStrictEqual(
+        Assert.deepStrictEqual(
           removingArrayElementsByPredicatesOperationResult.removedElements,
           [ "alt", "ctrl", "alpha", "alps", "atsugi" ]
         );
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
       });
+
     });
 
     describe("Immutable removing", (): void => {
 
-      const experimentalSample: Array<string> = getSampleArray();
+      const experimentalSample: ReadonlyArray<string> = getSampleArray();
       const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
           removeArrayElementsByPredicates({
             targetArray: experimentalSample,
@@ -119,26 +123,29 @@ describe("removeArrayElementsByPredicates", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(
+        Assert.deepStrictEqual(
             removingArrayElementsByPredicatesOperationResult.updatedArray,
             [ "bravo", "himalayas", "yokosuka" ]
         );
       });
 
       it("Removed elements are matching with expected", (): void => {
-        deepStrictEqual(
+        Assert.deepStrictEqual(
             removingArrayElementsByPredicatesOperationResult.removedElements,
             [ "alt", "ctrl", "alpha", "alps", "atsugi" ]
         );
       });
 
       it("Indexed of removed elements are matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
+        Assert.deepStrictEqual(removingArrayElementsByPredicatesOperationResult.indexesOfRemovedElements, [ 0, 1, 2, 4, 6 ]);
       });
 
       it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getSampleArray());
+        Assert.deepStrictEqual(experimentalSample, getSampleArray());
       });
+
     });
+
   });
+
 });

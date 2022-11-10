@@ -1,5 +1,5 @@
 import { replaceArrayElementsByPredicates } from "../../../Source";
-import { deepStrictEqual, notDeepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("replaceArrayElementsByPredicates", (): void => {
@@ -22,12 +22,13 @@ describe("replaceArrayElementsByPredicates", (): void => {
       });
 
       it("Updated array matching with expected", (): void => {
-        deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
+        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
       });
 
       it("Initial array has been mutated", (): void => {
-        notDeepStrictEqual(experimentalSample, getInitialSampleArray());
+        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
+
     });
 
     describe("Immutably", (): void => {
@@ -42,13 +43,15 @@ describe("replaceArrayElementsByPredicates", (): void => {
       }).updatedArray;
 
       it("Updated array matching with expected", (): void => {
-        deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
+        Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
       });
 
       it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getInitialSampleArray());
+        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
+
     });
+
   });
 
   describe("Multiple replacements", (): void => {
@@ -73,12 +76,13 @@ describe("replaceArrayElementsByPredicates", (): void => {
       });
 
       it("Updated array matching with expected", (): void => {
-        deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
+        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
       });
 
       it("Initial array has been mutated", (): void => {
-        notDeepStrictEqual(experimentalSample, getInitialSampleArray());
+        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
+
     });
 
     describe("Immutably", (): void => {
@@ -101,12 +105,15 @@ describe("replaceArrayElementsByPredicates", (): void => {
       }).updatedArray;
 
       it("Updated array matching with expected", (): void => {
-        deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
+        Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
       });
 
       it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getInitialSampleArray());
+        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
+
     });
+
   });
+
 });

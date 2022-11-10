@@ -1,0 +1,101 @@
+-
+
+  const LanguageDropDownList = {
+
+    supportedLanguages: {
+      english: "ENGLISH",
+      japanese: "JAPANESE",
+      russian: "RUSSIAN"
+    },
+
+    links: {},
+    setLinks(links) {
+      this.links = links;
+    },
+
+    localization: {
+      accessibilityGuidance: "Select the language"
+    },
+
+    counterForID_Generating: 0,
+    generateID() {
+      this.counterForID_Generating++;
+      return `LANGUAGE_DROP_DOWN_LIST-${ this.counterForID_Generating }`;
+    }
+
+  }
+
+
+mixin LanguageDropDownList()
+
+  -
+
+    const isExpanded = false;
+
+    const COMPONENT_ID = LanguageDropDownList.generateID();
+    const LISTBOX_ID = `${ COMPONENT_ID }-LIST_BOX`
+
+
+  .LanguageDropDownList&attributes(attributes)
+
+    //-
+       aria-labelledby="combo1-label"
+       id="combo1"
+
+    .LanguageDropDownList-CurrentlySelectedOption(
+      role="combobox"
+      tabindex="0"
+      aria-controls= LISTBOX_ID
+      aria-expanded= isExpanded ? "true" : "false"
+      aria-haspopup="listbox"
+    )
+      span.LanguageDropDownList-CurrentlySelectedOption-Flag
+      span.LanguageDropDownList-Label
+
+        case HTML_PAGE_LANGUAGE
+
+          when "en"
+
+            | English
+
+          when "ja"
+
+            | 日本語
+
+          when "ru"
+
+            | Русский
+
+    //- aria-labelledby="combo1-label"
+    .LanguageDropDownList-ListBox(
+      id= LISTBOX_ID
+      role="listbox"
+      tabindex="-1"
+    )
+
+      //- <div  id="combo1-0" aria-selected="false">Choose a Fruit</div>
+
+      each link, language in LanguageDropDownList.links
+
+        .LanguageDropDownList-Option(
+          role="option"
+        )
+
+          span.LanguageDropDownList-Option-Flag
+          a.LanguageDropDownList-Option-Link(
+            href= link
+          )
+
+            case language
+
+              when LanguageDropDownList.supportedLanguages.english
+
+                | English
+
+              when LanguageDropDownList.supportedLanguages.japanese
+
+                | 日本語
+
+              when LanguageDropDownList.supportedLanguages.russian
+
+                | Русский

@@ -1,0 +1,52 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
+
+    HTML_PageMetaData = {
+      description: "The function 'addElementsToArray' of Yamato Daiwa ECMAScript Extensions package (also known as 'YDEE') " +
+          "adds elements to start, end, or specified position of array; mutable or non-mutable adding is available.",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray")
+
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]:
+          "@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese",
+      [LanguageDropDownList.supportedLanguages.russian]:
+          "@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian"
+    });
+
+
+block append SpecificContent
+
+  article.Article.DocumentationPage-Article
+
+    +ProgrammaticEntityHeading({
+      entityName: "addElementsToArray",
+      entityLocalizedInterpretation: "Add elements to array"
+    }).Article-ProgrammaticEntityHeading

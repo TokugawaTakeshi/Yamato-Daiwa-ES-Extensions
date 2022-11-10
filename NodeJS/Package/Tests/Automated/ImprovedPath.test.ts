@@ -315,17 +315,17 @@ describe("ImprovedPath", (): void => {
       {
         title: "Extension without file name but with directory has been recognized correctly",
         experimentalSample: "directory/.env",
-        expectedOutput: "directory/.env"
+        expectedOutput: ".env"
       },
       {
         title: "Double extension without file name but with directory has been recognized correctly",
         experimentalSample: "directory/.env.local",
-        expectedOutput: "directory/.env.local"
+        expectedOutput: ".env.local"
       },
       {
         title: "File name with double extension and directory has been recognized correctly",
         experimentalSample: "directory/fileName.env.local",
-        expectedOutput: "directory/fileName.env.local"
+        expectedOutput: "fileName.env.local"
       }
     ];
 
@@ -360,7 +360,7 @@ describe("ImprovedPath", (): void => {
         (): void => {
           ImprovedPath.extractFileNameWithExtensionFromPath({
             targetPath: experimentalSample,
-            mustThrowErrorIfLastPathSegmentHasNoDots: false
+            mustThrowErrorIfLastPathSegmentHasNoDots: true
           });
         },
         UnexpectedEventError
@@ -403,6 +403,11 @@ describe("ImprovedPath", (): void => {
         title: "File name with double extension and directory has been recognized correctly",
         experimentalSample: "directory/fileName.env.local",
         expectedOutput: "fileName"
+      },
+      {
+        title: "Empty path",
+        experimentalSample: "",
+        expectedOutput: null
       }
     ];
 
@@ -410,15 +415,153 @@ describe("ImprovedPath", (): void => {
 
       it(test.title, (): void => {
         Assert.strictEqual(
-            ImprovedPath.extractFileNameWithExtensionFromPath({
-              targetPath: test.experimentalSample,
-              mustThrowErrorIfLastPathSegmentHasNoDots: false
-            }),
-            test.expectedOutput
+          ImprovedPath.extractFileNameWithoutExtensionFromPath({
+            targetPath: test.experimentalSample,
+            mustThrowErrorIfLastPathSegmentHasNoDots: false
+          }),
+          test.expectedOutput
         );
       });
 
     }
+
+  });
+
+  describe("extractDirectoryFromFilePath", (): void => {
+
+    it("Root only path has been recognized correctly", (): void => {
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: "/",
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        ""
+      );
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: "C:\\",
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        ""
+      );
+
+    });
+
+    it("Path with leading dot at last segment has been processed correctly", (): void => {
+
+      const samplePath: string = "path/to/file/.env";
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: true,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to/file/.env"
+      );
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to/file"
+      );
+
+    });
+
+    it("Path with non-leading dot at last segment has been processed correctly", (): void => {
+
+      const samplePath: string = "path/to/file/sample.ts";
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to/file"
+      );
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: true,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to/file/sample.ts"
+      );
+
+    });
+
+    it("Path without dot at last segment has been processed correctly", (): void => {
+
+      const samplePath: string = "path/to/Dockerfile";
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to"
+      );
+
+      Assert.strictEqual(
+        ImprovedPath.extractDirectoryFromFilePath({
+          targetPath: samplePath,
+          ambiguitiesResolution: {
+            mustConsiderLastSegmentStartingWithDotAsDirectory: false,
+            mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+          },
+          alwaysForwardSlashSeparators: true,
+          rootDirectoryNotation: ""
+        }),
+        "path/to/Dockerfile"
+      );
+
+    });
 
   });
 

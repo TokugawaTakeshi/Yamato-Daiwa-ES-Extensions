@@ -6,119 +6,114 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 export namespace RemovingArrayElementsByIndexesOperation {
 
-  export type NamedParameters<ArrayElement> = Readonly<{
-    targetArray: Array<ArrayElement>;
-    indexes: number | Array<number>;
-    mutably: boolean;
-  }>;
+  export type SourceData<ArrayElement> = Readonly<
+    (
+      {
+        mutably: true;
+        targetArray: Array<ArrayElement>;
+      } |
+      {
+        mutably: false;
+        targetArray: ReadonlyArray<ArrayElement>;
+      }
+    ) &
+    { indexes: number | ReadonlyArray<number>; }
+  >;
 
   export type Result<ArrayElement> = Readonly<{
     updatedArray: Array<ArrayElement>;
     removedElements: Array<ArrayElement>;
   }>;
 
+}
 
-  export function removeArrayElementsByIndexes<ArrayElement>(
-    namedParameters: NamedParameters<ArrayElement>
-  ): Result<ArrayElement> {
+export default function removeArrayElementsByIndexes<ArrayElement>(
+  sourceData: RemovingArrayElementsByIndexesOperation.SourceData<ArrayElement>
+): RemovingArrayElementsByIndexesOperation.Result<ArrayElement> {
 
-    const {
-      targetArray,
-      mutably
-    }: NamedParameters<ArrayElement> = namedParameters;
+  const {
+    targetArray,
+    mutably
+  }: RemovingArrayElementsByIndexesOperation.SourceData<ArrayElement> = sourceData;
 
-    const initialElementsCount: number = targetArray.length;
-    const indexesOfArrayElementsWhichWillBeRemoved__actualForArrayInInitialStateOnly: Array<number> =
-        typeof namedParameters.indexes === "number" ?
-            [ namedParameters.indexes ] :
-            namedParameters.indexes.sort(
-              (oneElement: number, otherElement: number): number => oneElement - otherElement
-            );
+  const initialElementsCount: number = targetArray.length;
+  const indexesOfArrayElementsWhichWillBeRemoved__fromLast__actualForArrayInInitialStateOnly: ReadonlyArray<number> =
+      typeof sourceData.indexes === "number" ?
+          [ sourceData.indexes ] :
+          [ ...sourceData.indexes ].sort(
+            (oneElement: number, otherElement: number): number => oneElement - otherElement
+          ).reverse();
 
-    const removedArrayElements: Array<ArrayElement> = [];
-    const indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly: Array<number> = [];
-    const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...namedParameters.targetArray ];
-
-
-    for (
-      const indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly of
-      indexesOfArrayElementsWhichWillBeRemoved__actualForArrayInInitialStateOnly.reverse()
-    ) {
-
-      if (!isNonNegativeInteger(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)) {
-
-        Logger.logError({
-          errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateDescription({
-            parameterNumber: 1,
-            parameterName: "namedParameters.indexes",
-            messageSpecificPart:
-                `The index ${ String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly) } ` +
-                "is not the non-negative integer therefore will be ignored."
-          }),
-          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
-        });
-
-        continue;
-      }
+  const removedArrayElements: Array<ArrayElement> = [];
+  const indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly: Array<number> = [];
+  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...sourceData.targetArray ];
 
 
-      if (indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly >= initialElementsCount) {
+  for (
+    const indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly of
+    indexesOfArrayElementsWhichWillBeRemoved__fromLast__actualForArrayInInitialStateOnly
+  ) {
 
-        Logger.logError({
-          errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateDescription({
-            parameterNumber: 1,
-            parameterName: "namedParameters.indexes",
-            messageSpecificPart: `The index ${ indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly } ` +
-                "is greater than index of last element of target array therefore will be ignored."
-          }),
-          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
-        });
+    if (!isNonNegativeInteger(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)) {
 
-        continue;
-      }
+      Logger.logError({
+        errorType: InvalidParameterValueError.NAME,
+        title: InvalidParameterValueError.localization.defaultTitle,
+        description: InvalidParameterValueError.localization.generateDescription({
+          parameterNumber: 1,
+          parameterName: "sourceData.indexes",
+          messageSpecificPart:
+              `The index ${ String(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly) } ` +
+              "is not the non-negative integer therefore will be ignored."
+        }),
+        occurrenceLocation: "removeArrayElementsByIndexes(sourceData)"
+      });
 
+      continue;
 
-      if (
-        indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly.
-            includes(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)
-      ) {
-
-        Logger.logError({
-          errorType: InvalidParameterValueError.NAME,
-          title: InvalidParameterValueError.localization.defaultTitle,
-          description: InvalidParameterValueError.localization.generateDescription({
-            parameterNumber: 1,
-            parameterName: "namedParameters.indexes",
-            messageSpecificPart: "Removing of element with index " +
-                `${ indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly } has been demanded more ` +
-                "than one time."
-          }),
-          occurrenceLocation: "removeArrayElementsByIndexes(namedParameters)"
-        });
-
-        continue;
-      }
-
-
-      removedArrayElements.push(
-        workpiece.splice(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly, 1)[0]
-      );
-
-      indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly.
-          push(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly);
     }
 
 
-    return {
-      updatedArray: workpiece,
-      removedElements: removedArrayElements.reverse()
-    };
+    if (indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly >= initialElementsCount) {
+
+      Logger.logError({
+        errorType: InvalidParameterValueError.NAME,
+        title: InvalidParameterValueError.localization.defaultTitle,
+        description: InvalidParameterValueError.localization.generateDescription({
+          parameterNumber: 1,
+          parameterName: "sourceData.indexes",
+          messageSpecificPart: `The index ${ indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly } ` +
+              "is greater than index of last element of target array therefore will be ignored."
+        }),
+        occurrenceLocation: "removeArrayElementsByIndexes(sourceData)"
+      });
+
+      continue;
+
+    }
+
+
+    if (
+      indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly.
+          includes(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)
+    ) {
+      continue;
+    }
+
+
+    removedArrayElements.push(
+      workpiece.splice(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly, 1)[0]
+    );
+
+    indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly.
+        push(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly);
+
   }
+
+
+  return {
+    updatedArray: workpiece,
+    removedElements: removedArrayElements.reverse()
+  };
+
 }
-
-
-export default RemovingArrayElementsByIndexesOperation.removeArrayElementsByIndexes;

@@ -3,31 +3,38 @@
 [![Official IntelliJ IDEA plugin live template](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-rpaebp-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-replaceArrayElementsByPredicates<ArrayElement>(namedParameters: NamedParameters<ArrayElement>): Result<ArrayElement>
+<ArrayElement>(sourceData: SourceData<ArrayElement>): Result<ArrayElement>
 ```
 
 ```typescript
-export type NamedParameters<ArrayElement> = 
-  {
-    readonly targetArray: Array<ArrayElement>;
-    readonly mutably: boolean;
-  } & 
-  (
-    Replacement<ArrayElement> |
-    { readonly replacements: Array<Replacement<ArrayElement>>; }
-  );
+export type SourceData<ArrayElement> =
+    Readonly<(
+      {
+        mutably: true;
+        targetArray: Array<ArrayElement>;
+      } |
+      {
+        mutably: false;
+        targetArray: ReadonlyArray<ArrayElement>;
+      }
+    )> &
+    (
+      Replacement<ArrayElement> |
+      Readonly<{ replacements: ReadonlyArray<Replacement<ArrayElement>>; }>
+    );
 
-export type Replacement<ArrayElement> =
-  { readonly predicate: (arrayElement: ArrayElement) => boolean; } &
+export type Replacement<ArrayElement> = Readonly<
+  { predicate: (arrayElement: ArrayElement) => boolean; } &
   (
-    { readonly newValue: ArrayElement; } |
-    { readonly replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
-  );
+    { newValue: ArrayElement; } |
+    { replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
+  )
+>;
 
-export type Result<ArrayElement> = {
-  readonly updatedArray: Array<ArrayElement>;
-  readonly indexesOfReplacedElements: Array<number>;
-};
+export type Result<ArrayElement> = Readonly<{
+  updatedArray: Array<ArrayElement>;
+  indexesOfReplacedElements: Array<number>;
+}>;
 ```
 
 Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated

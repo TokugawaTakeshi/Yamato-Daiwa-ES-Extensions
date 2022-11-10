@@ -1,0 +1,74 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Data
+
+  -
+
+    const StaticLinks = {
+      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
+    }
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    HTML_PageMetaData = {
+      description: "The function 'areStringifiedDigitsOnly' of Yamato Daiwa ECMAScript Extensions package (also known as 'YDEE') " +
+          "checks does target string includes only digit characters.",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug",
+      [LanguageDropDownList.supportedLanguages.russian]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.russian.pug"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      headingElementTag: "h1",
+      entityName: "areStringifiedDigitsOnly",
+      entityLocalizedInterpretation: "Stringified digits only check"
+    }).Article-ProgrammaticEntityHeading
+
+    +CallableExpressionScheme({
+      technicalName: "areStringifiedDigitsOnly",
+      localizedDescriptiveHeading: "Stringified digits only check",
+      parametersSpecification: [
+        {
+          localizedName: "Target string",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    }).Article-CallableExpressionScheme
+
+    p.Article-Paragraph Checks does target #[+Term--YDID string] includes only #[+Term--YDID digit characters].

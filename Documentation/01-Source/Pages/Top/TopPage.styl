@@ -2,10 +2,6 @@
 @require "../../../node_modules/@yamato-daiwa/frontend/Components.styl"
 
 
-CrossBrowserStylesReset()
-InitialGlobalCSS_Rules()
-
-
 .TopPage
 
   MAXIMAL_CONTENT_WIDTH = 920px
@@ -57,24 +53,88 @@ InitialGlobalCSS_Rules()
 
       font-family Arial Black, Arial Bold, Gadget, sans-serif
       font-weight bold
-      color steelblue
+      color: MaterialDesignColors.blue.P900
 
 
       &-FirstLine
 
         font-size 24px
 
-        background transparent
-
 
       &-SecondLine
 
-        background transparent
+        font-size 32px
 
-        font-size 36px
+        margin-top 4px
 
 
+  // -------------------------------------------------------------------------------------------------------------------
   &-ShortDescription
 
-    MultiLineTextElementOverflowSafetyWithoutExtraSpaceCausedByLineHeight({ fontSize: 20px, lineSpacing: 6px })
-    color darkslateblue
+    &-Heading
+
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 20px, lineSpacing: 6px })
+      text-align center
+
+      font-weight bold
+      color: MaterialDesignColors.blue.P900
+
+      margin-top 12px
+
+
+    &-Paragraph
+
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 16px, lineSpacing: 4px })
+      text-align center
+
+      font-weight bold
+      color: MaterialDesignColors.blue.P900
+
+      margin-top 12px
+
+
+    &-UnorderedList
+
+      UnorderedList--YDF()
+
+
+      li
+
+        applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 14px, lineSpacing: 4px })
+        list-style-type "■ "
+
+
+  &-Heading2
+
+    applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 20px, lineSpacing: 4px })
+    color: MaterialDesignColors.blue.P900
+
+
+  &-ImageAndLibraryHeadingGroup
+
+    display grid
+    grid-template-rows auto 1fr
+    grid-template-columns auto minmax(0, 1fr)
+    column-gap 12px
+    row-gap 4px
+
+
+    &-Image
+
+      width 64px
+      height 64px
+      border-radius 8px
+      background deepskyblue
+
+      grid-row span 2
+
+
+    &-Heading
+
+      MultiLineTextElementOverflowSafetyWithoutExtraSpaceCausedByLineHeight({ fontSize: 36px, lineSpacing: 4px })
+      color steelblue
+
+
+    &-NPM_Name
+
+      MultiLineTextElementOverflowSafetyWithoutExtraSpaceCausedByLineHeight({ fontSize: 14px, lineSpacing: 2px })

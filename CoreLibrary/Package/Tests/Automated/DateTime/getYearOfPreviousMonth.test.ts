@@ -1,5 +1,5 @@
-import { strictEqual } from "assert";
 import { getYearOfPreviousMonth } from "../../../Source";
+import Assert from "assert";
 
 
 describe("getYearOfPreviousMonth", (): void => {
@@ -31,7 +31,7 @@ describe("getYearOfPreviousMonth", (): void => {
 
     for (const experimentalSample of experimentalSamples) {
 
-      strictEqual(
+      Assert.strictEqual(
         getYearOfPreviousMonth({
           referenceYear,
           referenceMonthNumber__numerationFrom0: experimentalSample.monthNumber__numerationFrom0
@@ -39,13 +39,16 @@ describe("getYearOfPreviousMonth", (): void => {
         experimentalSample.yearOfPreviousMonth
       );
 
-      strictEqual(
+      Assert.strictEqual(
         getYearOfPreviousMonth({
           referenceYear,
           referenceMonthNumber__numerationFrom1: experimentalSample.monthNumber__numerationFrom1
         }),
         experimentalSample.yearOfPreviousMonth
       );
+
     }
+
   });
+
 });

@@ -1,14 +1,11 @@
-/* [ ESLint muting rationale ] Here are all numbers refers to months. */
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 import MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
 
-import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import Logger from "../Logging/Logger";
 
 
 export default function getMonthNumberByName(
-  namedParameters: { targetMonthName: MonthsNames; numerationFrom: number; }
+  namedParameters: Readonly<{ targetMonthName: MonthsNames; numerationFrom: number; }>
 ): number {
 
   const numerationFrom: number = namedParameters.numerationFrom;
@@ -29,8 +26,12 @@ export default function getMonthNumberByName(
   const isNumerationFrom0: boolean = namedParameters.numerationFrom === 0;
 
   switch (namedParameters.targetMonthName) {
+
     case MonthsNames.january: return isNumerationFrom0 ? 0 : 1;
     case MonthsNames.february: return isNumerationFrom0 ? 1 : 2;
+
+    /* eslint-disable @typescript-eslint/no-magic-numbers --
+     * Here are all numbers refers to months what it obvious from the switch/case declaration. */
     case MonthsNames.march: return isNumerationFrom0 ? 2 : 3;
     case MonthsNames.april: return isNumerationFrom0 ? 3 : 4;
     case MonthsNames.may: return isNumerationFrom0 ? 4 : 5;
@@ -41,5 +42,8 @@ export default function getMonthNumberByName(
     case MonthsNames.october: return isNumerationFrom0 ? 9 : 10;
     case MonthsNames.november: return isNumerationFrom0 ? 10 : 11;
     case MonthsNames.december: return isNumerationFrom0 ? 11 : 12;
+    /* eslint-enable @typescript-eslint/no-magic-numbers */
+
   }
+
 }
