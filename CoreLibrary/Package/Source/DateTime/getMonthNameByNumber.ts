@@ -1,20 +1,17 @@
-/* [ ESLint muting rationale ] Here are all numbers refers to months. */
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
 import MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
+
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../Logging/Logger";
 
 
 export default function getMonthNameByNumber(
-  namedParameters: { targetMonthNumber: number; numerationFrom: number; }
+  namedParameters: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
 ): MonthsNames {
 
   const {
     targetMonthNumber,
     numerationFrom
-  }: { targetMonthNumber: number; numerationFrom: number; } = namedParameters;
-
+  }: Readonly<{ targetMonthNumber: number; numerationFrom: number; }> = namedParameters;
 
   if (numerationFrom !== 0 && numerationFrom !== 1) {
     Logger.throwErrorAndLog({
@@ -42,18 +39,20 @@ export default function getMonthNameByNumber(
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "namedParameters",
-          messageSpecificPart: "The month number 0 is invalid the numeration is from 1."
+          messageSpecificPart: "The month number 0 is invalid if the numeration is from 1."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(namedParameters)"
       });
+
     }
 
-
-    /* [ ESLint muting rationale ] The @typescript-eslint does not see "never" return type (checked for v.5.3.0) */
-    /* eslint-disable-next-line no-fallthrough */
+    /* eslint-disable-next-line no-fallthrough --
+     * The @typescript-eslint does not see the "never" type from previous case (checked for v 5.46.0) */
     case 1: return numerationFrom === 1 ? MonthsNames.january : MonthsNames.february;
 
+    /* eslint-disable @typescript-eslint/no-magic-numbers --
+     * Here are all numbers refers to months what it obvious from the switch/case declaration. */
     case 2: return numerationFrom === 1 ? MonthsNames.february : MonthsNames.march;
     case 3: return numerationFrom === 1 ? MonthsNames.march : MonthsNames.april;
     case 4: return numerationFrom === 1 ? MonthsNames.april : MonthsNames.may;
@@ -76,28 +75,31 @@ export default function getMonthNameByNumber(
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "namedParameters",
-          messageSpecificPart: "The month number 12 is invalid the numeration is from 0."
+          messageSpecificPart: "The month number 12 is invalid if the numeration is from 0."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(namedParameters)"
       });
+
     }
+    /* eslint-enable @typescript-eslint/no-magic-numbers */
 
-
-    /* [ ESLint muting rationale ] The @typescript-eslint does not see "never" return type (checked for v.5.3.0) */
-    /* eslint-disable-next-line no-fallthrough */
+    /* eslint-disable-next-line no-fallthrough --
+     * The @typescript-eslint does not see the "never" type from previous case (checked for v 5.46.0) */
     default: {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "namedParameters.targetMonthNumber",
-          messageSpecificPart: "The valid month number is the non-negative integer from 0 o 12 while actual value is " +
-              `${ targetMonthNumber }`
+          messageSpecificPart: "The valid month number must be the non-negative integer from 0 to 11 or from 1 to 12 " +
+              `(depending on "numerationFrom" option) while actual value is ${ targetMonthNumber }.`
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "getMonthNameByNumber(namedParameters)"
       });
     }
+
   }
+
 }

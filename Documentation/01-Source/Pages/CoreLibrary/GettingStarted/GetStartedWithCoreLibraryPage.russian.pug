@@ -1,0 +1,41 @@
+extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../Components/Components.pug
+
+  include ../../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Начало использования");
+    HTML_PageMetaData = {
+      description: "", // TODO
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+
+block append SpecificContent
+
+  article.Article.DocumentationPage-Article
+
+    h1.Article-Heading1 Начало использования
+    h2.Article-Heading2#Installation--SECTION Установка
+    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Об объёме дистибутива
+    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Предупреждение об использовании без TypeScript
+    h2.Article-Heading2#ImportingOfFunctionality--SECTION Импорт функциональности

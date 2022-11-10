@@ -1,0 +1,252 @@
+# `DateWithoutTime` class
+
+Intended to be used instead of [TimePoint](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) 
+  and native [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) when the time 
+  (hours, minutes, seconds, milliseconds) does not matter.
+
+```mermaid
+classDiagram
+class DateWithoutTime{
+
+    +number year
+  
+    +MonthNames monthName
+    +number monthNumber__numerationFrom0
+    +number monthNumber__numerationFrom1
+    +string monthNumber__numerationFrom1__2Digits
+  
+    +number dayOfMonth
+    +string dayOfMonth__2Digits
+  
+    +DaysOfWeek dayOfWeek
+    +number dayOfWeekNumber__numerationFrom0AsSunday
+    +number dayOfWeekNumber__numerationFrom1AsSunday
+    +string dayOfWeekNumber__numerationFrom1AsSunday__2Digits
+  
+    +Date copyOfNativeDateObject
+  
+    +setAltogether(object dateDefinition, object options) DateWithoutTime
+    +setLastDayOfSpecificMonthAndYear(object dateDefinition, object options) DateWithoutTime
+    +shiftBySpecificDaysCount(object namedParameters) DateWithoutTime
+    +format(Function formatter) string
+    +toISO8601String() string
+    +toLocalString() string
+    +clone() DateWithoutTime
+    
+}
+```
+
+
+## Minimal theory
+### Year/month dependent dates
+
+The days count in each month is not equal. Basically, it is 30 or 31, but February has 29 days for the 
+[leap year](https://en.wikipedia.org/wiki/Leap_year) and 28 - for non-leap year (actual for Gregorian calendar).
+
+It means we could not set day of month to 31 when want to set to last day of the specific month because it could be not 31.
+
+
+### Disadvantages of the native `Date`
+
+#### Inaccurate name
+
+Although the native object is being called `Date`, it includes the time definition until milliseconds.
+The most correct names for this object should be the `DateAndTime` or `TimePoint` (the second one has been used in this library).
+
+
+#### Zero-based months numeration
+
+Although there is the "in the programming, the numeration of months is 0-based" convention, it is the stumbling block
+for many programmer and not only the juniors.
+In YDEE, all functionality working with dates forces the programmer to comprehend from 0 or 1 the numeration starts
+(however, both options available).
+
+
+#### The construction with magic numbers
+
+It is the fundamental disadvantage of position-based parameters.
+Some developers believe position-based parameters are cleaner, hover it is the huge maintainability impact because
+  to understand the meaning of these parameters the checking of documentation could required herewith it is dangerous
+  to count on human's memory.
+
+```typescript
+new Date(2022, 10, 12, 2, 45, 34, 302)
+```
+
+## Constructor
+
+```
+(rawDateTime: Date | DateWithoutTime.DateDefinition | string | number): DateWithoutTime 
+```
+
+Supports 4 types of valid values:
+
+1. Native `Date` object
+2. Object-type definition:
+
+```typescript
+type DateDefinition =
+    {
+      year: number;
+      dayOfMonth: number;
+    } & MonthDefinition;
+
+type MonthDefinition =
+    { monthName: MonthsNames; } |
+    { monthNumber__numerationFrom0: number; } |
+    { monthNumber__numerationFrom1: number; };
+```
+
+3. [ISO8601 string](https://en.wikipedia.org/wiki/ISO_8601)
+4. Milliseconds amount since the [epoch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps).
+
+* Once instance of `DateWithoutTime` has been created, hours, minutes, seconds and milliseconds passed via constructor
+  will be lost. If you are not all right with it, `DateWithoutTime` is not for your case.
+* Regardless to passed parameter's type `InvalidParameterValueError` will be thrown if specified date is invalid.
+
+
+### Examples
+
+```typescript
+const dateWithoutTime: DateWithoutTime = new DateWithoutTime("08 January 2013");
+
+console.log(dateWithoutTime.year); // -> 2013
+console.log(dateWithoutTime.monthNumber__numerationFrom0); // -> 0
+console.log(dateWithoutTime.monthNumber__numerationFrom1); // -> 1
+console.log(dateWithoutTime.monthNumber__numerationFrom1__2Digits); // -> "01"
+console.log(dateWithoutTime.monthName); // -> "JANUARY"
+console.log(dateWithoutTime.dayOfMonth); // -> 8
+console.log(dateWithoutTime.dayOfMonth__2Digits); // -> "08"
+```
+
+[//]: # (TODO 他の例)
+
+
+## Getters
+
+This class has no the public fields.
+The protected fields could be accessed only to circumvent the TypeScript.
+
+The names of all getters has been selected such as no additional explanation required.
+If it not such as, please feel free to open issue with "Unclear naming" category.
+
+|                                    Name | Type   | Example for 8 Jan 2013 | Example for 1 Dec 2014 |
+|----------------------------------------:|--------|------------------------|------------------------|
+|                                  `year` | number | `2013`                 | `2014`                 |
+|          `monthNumber__numerationFrom0` | number | `0`                    | `11`                   |
+|          `monthNumber__numerationFrom1` | number | `1`                    | `12`                   |
+| `monthNumber__numerationFrom1__2Digits` | string | `"01"`                 | `"12"`                 |
+|                             `monthName` | string | `"JANUARY"`            | `"DECEMBER"`           |
+|                            `dayOfMonth` | number | `8`                    | `1`                    |
+|                   `dayOfMonth__2Digits` | string | `08`                   | `"01"`                 |
+
+
+### `copyOfNativeDateObject`
+
+The `DateWithoutTime` is using the native `Date` object internally.
+It could be accessed only to circumvent the TypeScript.
+
+Even if create the getter for this native `Date` object, it will be the [reference to original instance](https://javascript.info/object-copy) 
+  and changing of it will cause the misalignment inside the associated instance of `DateWithoutTime`.
+To avoid it, only copy of native `Date` has been made accessible legally - via `copyOfNativeDateObject` getter.
+
+
+## Methods
+### The date changing
+#### `setAltogether`
+
+```
+(
+  dateDefinition: Readonly<DateWithoutTime.DateDefinition>,
+  options?: Readonly<{ immutably?: true; }>
+): DateWithoutTime
+```
+
+Specify the year, month and day of month at once.
+
+* Using this method, you must be sure that specified day of month does not exceed the last day of target year and month,
+  otherwise the `InvalidParameterValueError` could be thrown. If you want to specify last day of specific year and month,
+  use the [`setLastDayOfSpecificMonthAndYear`](#setlastdayofspecificmonthandyear) method instead.
+* The returned value will be the current self instance if the second parameter is not specified.  
+  With the second parameter, the new instance of `DateWithoutTime` will be created that is demanded in some frameworks like React. 
+
+
+[//]: # (TODO テスト・例)
+
+
+#### `setLastDayOfSpecificMonthAndYear`
+
+```
+(
+  dateDefinition: Readonly<Omit<DateWithoutTime.DateDefinition, "dayOfMonth">>,
+  options?: Readonly<{ immutably?: true; }>
+): DateWithoutTime
+```
+
+Set the last day of specified year and month.
+
+The returned value will be the current self instance if the second parameter is not specified.
+With the second parameter, the new instance of `DateWithoutTime` will be created that is demanded in some frameworks like React.
+
+[//]: # (TODO テスト・例)
+
+
+
+#### `shiftBySpecificDaysCount`
+
+```
+(
+  namedParameters: Readonly<
+    { daysCount: number; } &
+    (
+      {
+        toFuture: true;
+        toPast?: undefined;
+      } |
+      {
+        toPast: true;
+        toFuture?: undefined;
+      }
+    ) &
+    { immutably?: true; }
+  >
+): DateWithoutTime
+```
+
+Rewinds date to past or forwards it to future by specified days count.
+
+[//]: # (TODO テスト・例)
+
+
+#### `toISO8601String`
+
+
+#### `toLocalString`
+
+
+
+### Formatting
+
+#### `format`
+
+```
+(formatter: (selfInstance: DateWithoutTime) => string): string
+```
+
+This method allows to get formatted date and time wihtout storing of the `DateTime` instance to variable.
+For example,
+
+
+could be refactored as:
+
+
+
+#### `toISO8601String`
+
+
+#### `toLocalString`
+
+
+### Other
+
+#### `getCopyOfNativeDateObject`

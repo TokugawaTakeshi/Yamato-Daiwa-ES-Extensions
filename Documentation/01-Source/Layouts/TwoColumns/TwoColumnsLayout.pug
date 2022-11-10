@@ -7,12 +7,14 @@ block append PageContent
 
     .TwoColumnsLayout-UpperFixedContent
 
-      +Header
+      +Header.TwoColumnsLayout-Header
 
       block UpperFixedContentSlot
 
 
     .TwoColumnsLayout-Sidebar
+
+      +CompactTableOfContents(localizedRouting)
 
       block Sidebar
 
@@ -26,5 +28,5 @@ block append PageContent
 
       block BottomContentSlot
 
-      +Footer
+      +Footer.TwoColumnsLayout-Footer
 

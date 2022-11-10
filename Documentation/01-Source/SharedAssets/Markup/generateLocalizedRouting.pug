@@ -1,0 +1,84 @@
+-
+
+  function generateLocalizedRouting(localization) {
+
+    return {
+
+      top: {
+        tableOfContentTitle: localization.topPage.tableOfContentTitle,
+        URI: localization.topPage.URI
+      },
+
+      coreLibrary: {
+
+        tableOfContentTitle: localization.coreLibrary.tableOfContentTitle,
+
+        children: {
+
+          gettingStarted: {
+
+            tableOfContentTitle: localization.coreLibrary.gettingStarted.tableOfContentTitle,
+            URI: `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }`,
+
+            children: {
+
+              installation: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.installation.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#Installation--SECTION` }
+              },
+
+              distributiveVolumeNotice: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.distributiveVolumeNotice.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#DistributiveVolumeNotice--SECTION` }
+              },
+
+              nonTypeScriptUsageWarning: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.nonTypeScriptUsageWarning.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#NonTypeScriptUsageWarning--SECTION` }
+              },
+
+              importingOfFunctionality: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.importingOfFunctionality.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#ImportingOfFunctionality--SECTION` }
+              }
+
+            }
+
+          },
+
+          functionality: {
+
+            tableOfContentTitle: localization.coreLibrary.functionality.tableOfContentTitle,
+
+            children: {
+
+              arrays: {
+
+                tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.tableOfContentTitle,
+
+                children: {
+
+                  addElementsToArray: {
+
+                    tableOfContentTitle:localization.coreLibrary.functionality.children.arrays.addElementsToArray.tableOfContentTitle,
+                    get URI() {
+                      return `@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.${ localization.fileNameLocalizationExtensions }.pug`
+                    }
+
+                  }
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    };
+
+  }

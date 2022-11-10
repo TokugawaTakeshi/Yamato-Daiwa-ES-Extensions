@@ -4,7 +4,7 @@ Returns previous month number in relation to specified year and month number; nu
 parameter and returned value.
 
 ```
-getPreviousMonthNumber(
+(
   namedParameters:
       Readonly<
         (
@@ -38,22 +38,22 @@ parameter.
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom0: 5,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 4
+})); // -> 4
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom0: 5,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 5
+})); // -> 5
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom0: 0,
   firstMonthNumberInRelationToReturnableValue: 11
-})); // => 0
+})); // -> 0
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom0: 0,
   firstMonthNumberInRelationToReturnableValue: 12
-})); // => 1
+})); // -> 1
 ```
 
 ### With `referenceMonthNumber__numerationFrom1` option
@@ -62,22 +62,22 @@ console.log(getPreviousMonthNumber({
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom1: 5,
   firstMonthNumberInRelationToReturnableValue: 3
-})); // => 5
+})); // -> 5
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom1: 5,
   firstMonthNumberInRelationToReturnableValue: 4
-})); // => 6
+})); // -> 6
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom1: 12,
   firstMonthNumberInRelationToReturnableValue: 10
-})); // => 0
+})); // -> 0
 
 console.log(getPreviousMonthNumber({
   referenceMonthNumber__numerationFrom1: 12,
   firstMonthNumberInRelationToReturnableValue: 11
-})); // => 1
+})); // -> 1
 ```
 
 ### With `referenceMonthName` option
@@ -86,20 +86,20 @@ console.log(getPreviousMonthNumber({
 console.log(getPreviousMonthNumber({
   monthName: MonthsNames.may,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 3
+})); // -> 3
 
 console.log(getPreviousMonthNumber({
   monthName: MonthsNames.may,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 4
+})); // -> 4
 
 console.log(getPreviousMonthNumber({
   monthName: MonthsNames.january,
   firstMonthNumberInRelationToReturnableValue: 0
-})); // => 11
+})); // -> 11
 
 console.log(getPreviousMonthNumber({
   monthName: MonthsNames.january,
   firstMonthNumberInRelationToReturnableValue: 1
-})); // => 12
+})); // -> 12
 ```

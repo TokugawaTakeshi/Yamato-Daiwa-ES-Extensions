@@ -1,0 +1,42 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
+    HTML_PageMetaData = {
+      description: "",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray")
+
+
+block append SpecificContent
+
+  article.Article.DocumentationPage-Article
+
+    +ProgrammaticEntityHeading({
+      entityName: "addElementsToArray",
+      entityLocalizedInterpretation: "配列に要素を追加する"
+    }).Article-ProgrammaticEntityHeading

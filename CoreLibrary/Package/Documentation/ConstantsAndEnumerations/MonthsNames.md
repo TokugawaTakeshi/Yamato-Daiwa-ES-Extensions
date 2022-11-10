@@ -1,4 +1,4 @@
-# MonthsNames enumeration
+# `MonthsNames` enumeration
 
 Allows to refer to the month by name, not by number what usually confusing with numeration from 0.
 

@@ -1,22 +1,23 @@
-# `getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`: Get index of array element is such element is exactly one
+# `getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` - Get index of array element is such element is exactly one
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
+<ArrayElement>(
+  targetArray: ReadonlyArray<ArrayElement>, 
+  predicate: (arrayElement: ArrayElement) => boolean
 ): number | null;
 
-getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>,
+<ArrayElement>(
+  targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
+  options: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1: true; }>
 ): number;
 ```
 
 * Returns the index of array element matching with the `predicate` is such element is exactly one in `targetArray`.
 * If the element matching with the `predicate` is not presents or there are multiple matches with the predicate,
-  * **UnexpectedEventError** error will be thrown if `throwErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
+  * **UnexpectedEventError** error will be thrown if `mustThrowErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
   * otherwise `null` will be returned
 
 If multiple elements matching with the predicate are being expected in **targetArray** and you want indexes of all of them,
@@ -59,7 +60,7 @@ console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.ID === 2
   )
-); // => 1
+); // -> 1
 ```
 
 ### More than one match
@@ -70,7 +71,7 @@ console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.price > 50
   )
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error
@@ -83,7 +84,7 @@ try {
   indexOfDesiredElement = getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (product: Product): boolean => product.price > 50,
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error) {
@@ -101,7 +102,7 @@ console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.ID === 3
   )
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error
@@ -114,7 +115,7 @@ try {
   indexOfDesiredElement = getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (product: Product): boolean => product.ID === 3,
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error) {

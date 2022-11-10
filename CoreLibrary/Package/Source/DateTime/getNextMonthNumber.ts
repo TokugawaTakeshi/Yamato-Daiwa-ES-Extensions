@@ -35,4 +35,5 @@ export default function getNextMonthNumber(
 
   return namedParameters.firstMonthNumberInRelationToReturnableValue === 1 ?
       nextMonthNumber__numerationFrom1 : nextMonthNumber__numerationFrom1 - 1;
+
 }

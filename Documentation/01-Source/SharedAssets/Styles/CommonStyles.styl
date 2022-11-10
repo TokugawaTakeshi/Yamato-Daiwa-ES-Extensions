@@ -1,4 +1,6 @@
 @require "../../../node_modules/@yamato-daiwa/frontend/Functionality.styl"
+@require "../../../node_modules/@yamato-daiwa/frontend/Components.styl"
+// ↑ 現在 provideComponentsPositionalRelationshipの為だけ要る
 
 
 CrossBrowserStylesReset()
@@ -9,7 +11,7 @@ InitialGlobalCSS_Rules()
 @require "../../Layouts/TwoColumns/TwoColumnsLayout.styl"
 
 
-articleTypography = deeplyCloneAndOverrideObject(TypographyDefaultDefinition, { CSS_NamespacePrefix: "Article" })
+articleTypography = deeplyCloneAndOverrideObject(YDF_TypographyDefaultDefinitions, { CSS_NamespacePrefix: "Article" })
 provideTypography(articleTypography)
 provideYamatoDaiwaInformationDesignClasses()
 
@@ -23,6 +25,4 @@ provideYamatoDaiwaInformationDesignClasses()
 
 .DocumentationPage
 
-  &-Article
-
-    margin-top 24px
+  // ...

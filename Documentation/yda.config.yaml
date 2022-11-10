@@ -118,3 +118,5 @@ projectBuilding:
         localServer:
 
           rootDirectoryRelativePath: 02-LocalDevelopmentBuild
+
+        openInBrowsers: chrome

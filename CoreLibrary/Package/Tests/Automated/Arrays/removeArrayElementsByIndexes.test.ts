@@ -1,7 +1,7 @@
 import { removeArrayElementsByIndexes } from "../../../Source";
 import type { RemovingArrayElementsByIndexesOperation } from "../../../Source";
 
-import { deepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("removeArrayElementsByIndexes", (): void => {
@@ -26,12 +26,13 @@ describe("removeArrayElementsByIndexes", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
       });
 
       it("Removed element is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
       });
+
     });
 
     describe("Immutable removing", (): void => {
@@ -45,17 +46,19 @@ describe("removeArrayElementsByIndexes", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
       });
 
       it("Removed element is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
       });
 
-      it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getSampleArray());
+      it("Initial array has not mutated", (): void => {
+        Assert.deepStrictEqual(experimentalSample, getSampleArray());
       });
+
     });
+
   });
 
 
@@ -79,16 +82,20 @@ describe("removeArrayElementsByIndexes", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "charlie", "echo", "golf" ]);
+        Assert.deepStrictEqual(
+          removingArrayElementsByIndexesOperationResult.updatedArray,
+          [ "alpha", "charlie", "echo", "golf" ]
+        );
       });
 
       it("Removed element is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
       });
 
-      it("Initial array has been mutated", (): void => {
-        deepStrictEqual(experimentalSample, [ "alpha", "charlie", "echo", "golf" ]);
+      it("Initial array has mutated", (): void => {
+        Assert.deepStrictEqual(experimentalSample, [ "alpha", "charlie", "echo", "golf" ]);
       });
+
     });
 
     describe("Immutable removing", (): void => {
@@ -102,16 +109,22 @@ describe("removeArrayElementsByIndexes", (): void => {
           });
 
       it("Updated array is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "charlie", "echo", "golf" ]);
+        Assert.deepStrictEqual(
+          removingArrayElementsByIndexesOperationResult.updatedArray,
+          [ "alpha", "charlie", "echo", "golf" ]
+        );
       });
 
       it("Removed element is matching with expected", (): void => {
-        deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
+        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
       });
 
-      it("Initial array has not been mutated", (): void => {
-        deepStrictEqual(experimentalSample, getSampleArray());
+      it("Initial array has not mutated", (): void => {
+        Assert.deepStrictEqual(experimentalSample, getSampleArray());
       });
+
     });
+
   });
+
 });

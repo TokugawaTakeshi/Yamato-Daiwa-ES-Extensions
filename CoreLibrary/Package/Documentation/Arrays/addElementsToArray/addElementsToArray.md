@@ -1,27 +1,29 @@
-# `addElementsToArray`: Add elements to array
+# `addElementsToArray` - Add elements to array
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-aeta-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
 (
   namedParameters:
-      (
-        {
-          mutably: true;
-          targetArray: Array<ArrayElement>;
-        } |
-        {
-          mutably: false;
-          targetArray: ReadonlyArray<ArrayElement>;
-        }
-      ) &
-      { newElements: ReadonlyArray<ArrayElement>; } &
-      (
-        { toStart: true; } |
-        { toEnd: true; } |
-        { toPosition__numerationFrom0: number; } |
-        { toPosition__numerationFrom1: number; }
-      )
+      Readonly<
+        { newElements: ReadonlyArray<ArrayElement>; } &
+        (
+          {
+            mutably: true;
+            targetArray: Array<ArrayElement>;
+          } |
+          {
+            mutably: false;
+            targetArray: ReadonlyArray<ArrayElement>;
+          }
+        ) &
+        (
+          { toStart: true; } |
+          { toEnd: true; } |
+          { toPosition__numerationFrom0: number; } |
+          { toPosition__numerationFrom1: number; }
+        )
+      >
 ): Array<ArrayElement> {
 ```
 
@@ -45,7 +47,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -60,8 +62,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Add multiple elements to start
@@ -77,7 +79,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -92,8 +94,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -110,7 +112,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
 ```
 
 #### Immutably
@@ -125,8 +127,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Add multiple elements to end
@@ -143,7 +145,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -158,8 +160,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -176,7 +178,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 Or if to specify the position from 1, the equivalent will be:
@@ -191,7 +193,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Immutably
@@ -206,8 +208,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 Or if to specify the position from 1, the equivalent will be:
@@ -222,8 +224,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -239,7 +241,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 Or if to specify the position from 1, the equivalent will be:
@@ -254,7 +256,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Immutably
@@ -269,8 +271,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 Or if to specify the position from 1, the equivalent will be:
@@ -285,8 +287,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 

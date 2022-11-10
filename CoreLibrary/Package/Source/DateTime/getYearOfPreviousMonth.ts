@@ -13,4 +13,5 @@ export default function getYearOfPreviousMonth(
       namedParameters.referenceMonthNumber__numerationFrom1 : namedParameters.referenceMonthNumber__numerationFrom0 + 1;
 
   return referenceMonthNumber__numerationFrom1 === 1 ? namedParameters.referenceYear - 1 : namedParameters.referenceYear;
+
 }

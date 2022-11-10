@@ -1,0 +1,138 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Data
+
+  -
+
+    const StaticLinks = {
+      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
+    }
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    // TODO YDEEへの参照を確保する
+    HTML_PageMetaData = {
+      description: "「areStringifiedDigitsOnly()」関数は、引数の文字列が数字のみであるかどうかを確認し、ブール値を返す。",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug",
+      [LanguageDropDownList.supportedLanguages.russian]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.russian.pug"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      headingElementTag: "h1",
+      entityName: "areStringifiedDigitsOnly",
+      entityLocalizedInterpretation: "文字列化した数字のみかどうかを確認"
+    }).Article-ProgrammaticEntityHeading
+
+    +CallableExpressionScheme({
+      technicalName: "areStringifiedDigitsOnly",
+      localizedDescriptiveHeading: "確認対象の文字列",
+      parametersSpecification: [
+        {
+          localizedName: "数字のみと推測される文字列",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    }).Article-CallableExpressionScheme
+
+    p.Article-Paragraph.
+      #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字が文字列化した#[+Term--YDID 数字]かどうか確認する。
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox
+
+      h2.Article-Heading2 数と数字の違いを知る
+
+      p.Article-Paragraph.
+        マスコミ等で#[+Term--YDID 数字]と#[+Term--YDID 数]が同一視される事例が多いが、これらは#[+Keyword--YDID 根本的に]異なるものなのだ。
+        #[+DefinableTerm--YDID 数字]は#[+ImportantEntity--YDID 0]から#[+ImportantEntity--YDID 9]迄の#[+Term--YDID 文字]であり、
+          #[+ImportantEntity--YDID 10個]しか存在していない。
+        関数名に登場する#[+ImportantEntity--YDID digits]（単数：#[+ImportantEntity--YDID digit]）は、直訳通り#[+Term--YDID 数字]を意味する。
+
+      p.Article-Paragraph.
+        #[+ImportantEntity--YDID 2桁以上]になってくると、其れは#[+Term--YDID 数字]#[+Keyphrase--YDID ではなく]#[+Term--YDID 数]となる。
+        尚#[+SecondaryEntity--YDID 0123]や#[+SecondaryEntity--YDID 0056]の様に#[+SecondaryEntity--YDID 0]から始まっていても、
+          #[+Term--YDID 数]#[+Keyword--YDID ではなく]単なる#[+DefinableTerm--YDID 数字の羅列]であり、
+          #[+Keyword--YDID 数学的な]意味は#[+Keyword__Contrast--YDID 無い]。
+
+    +ImprovedList--YDF({ type: ImprovedList__YDF.Types.unordered }).Article-ImprovedList
+      +ImprovedList-Item--YDF.
+        #[a.PrototypeArticle-Link(href=StaticLinks.napierConstant target="_blank" rel="nofollow") ネイピア数]は
+          #[+Term--YDID 数字]とは#[+Keyword--YDID 見做されない]。
+      +ImprovedList-Item--YDF #[+Term--YDID 全角数字]は#[+Keyword--YDID 対象外]。
+      +ImprovedList-Item--YDF.
+        #[+ImportantEntity__Code--YDID isStringifiedNonNegativeIntegerOfRegularNotation]とは異なり、
+          一桁目に#[+ImportantEntity__Code--YDID 0]（#[+Term--YDID がある数字の並び]）は妥当としている。
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF.
+          import { areStringifiedDigitsOnly } from "@yamato-daiwa/es-extensions";
+
+          console.log(areStringifiedDigitsOnly("123"));
+        +CodeViewer-Explanation--YDF.
+          #[+Term--YDID 数字]以外を含めていないので、返値は#[+SecondaryEntity__Code--YDID true]。
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("032"));
+        +CodeViewer-Explanation--YDF.
+          #[+Keyphrase--YDID 此の関数の場合]、一桁目が#[+SecondaryEntity__Code--YDID 0]であっても#[+Keyword--YDID 妥当]とされているので、
+          #[+SecondaryEntity__Code--YDID true]。
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("03e"));
+        +CodeViewer-Explanation--YDF.
+          #[+SecondaryEntity__Code--YDID e]は#[+Term--YDID ネイピア数]か？何方にせよ関数名が示す通り、数字だけでない場合は
+          返値#[+SecondaryEntity__Code--YDID false]。
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("ab1"));
+        +CodeViewer-Explanation--YDF.
+          #[+Term--YDID 数字]以外が含まれるので、返値は#[+SecondaryEntity__Code--YDID false]。
+
+
+    h2.Article-Heading2 利用事例
+
+    p.Article-Paragraph.
+      #[+Term--YDID 誤入力]対策。
+      数とは限らない#[+Term--YDID 数字の羅列]を入力させたい時に、数字以外の文字が含まれると変更キャンセル。
+      （#[+SecondaryEntity--YDID JANコード]や其の外のコード）時に最適。

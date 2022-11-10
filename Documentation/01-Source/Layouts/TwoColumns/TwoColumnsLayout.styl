@@ -1,12 +1,12 @@
 .TwoColumnsLayout
 
-  SPECIFIC_CONTENT_MAXIMAL_WIDTH = 3*NARROWEST_SCREEN_WIDTH_UNIT
-  SIDEBAR_CONTENT_WIDTH = 200px
-  FURTHEST_COLUMN_WIDTH = "calc((100% - %s)/2)" % SPECIFIC_CONTENT_MAXIMAL_WIDTH
+  SPECIFIC_CONTENT_OUTER_MAXIMAL_WIDTH = 3*NARROWEST_SCREEN_WIDTH_UNIT
+  SIDEBAR_CONTENT_FIXED_OUTER_WIDTH = 200px
+  SIDE_EMPTY_COLUMNS_WIDTH = "calc((100% - %s)/2)" % SPECIFIC_CONTENT_OUTER_MAXIMAL_WIDTH
 
 
   display grid
-  grid-template-columns FURTHEST_COLUMN_WIDTH SIDEBAR_CONTENT_WIDTH minmax(0, 1fr) FURTHEST_COLUMN_WIDTH
+  grid-template-columns SIDE_EMPTY_COLUMNS_WIDTH SIDEBAR_CONTENT_FIXED_OUTER_WIDTH minmax(0, 1fr) SIDE_EMPTY_COLUMNS_WIDTH
   grid-template-rows auto 1fr auto
 
   fillBodyVertically({ verticalScrolling: false })
@@ -16,24 +16,24 @@
 
     grid-column 1/-1
 
-    background: TemporaryHighlighting.red.o10
-
 
   &-Sidebar
+
+    Paddings({
+      top: 10px,
+      horizontalSymmetric: 6px,
+      bottom: 32px
+    })
 
     overflow-y auto
 
     grid-column 2
 
-    background: TemporaryHighlighting.orange.o10
-
 
   &-SpecificContent
 
-    //max-width 3*NARROWEST_SCREEN_WIDTH_UNIT
-
     Paddings({
-      top: 6px,
+      top: 10px,
       horizontalSymmetric: 16px,
       bottom: 32px
     })
@@ -44,5 +44,3 @@
   &-BottomFixedContent
 
     grid-column 1/-1
-
-    background: TemporaryHighlighting.green.o10

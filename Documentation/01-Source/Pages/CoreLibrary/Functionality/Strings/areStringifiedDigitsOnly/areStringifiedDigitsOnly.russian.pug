@@ -1,0 +1,96 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Data
+
+  -
+
+    const StaticLinks = {
+      napierConstant: "https://ru.wikipedia.org/wiki/E_(%D1%87%D0%B8%D1%81%D0%BB%D0%BE)"
+    }
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../../../../Components/Components.pug
+
+  include ../../../../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    // TODO YDEEへの参照を確保する
+    HTML_PageMetaData = {
+      description: "Функция 'areStringifiedDigitsOnly()' проверяет, содержит ли передаваемая через параметр строка " +
+        "только цифры, и если да, то возвращает логическое значение 'true'.",
+      author: HTML_PAGE_AUTHOR
+    }
+
+    FAVICON_URI = "@MustBeInRoot/favicon"
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug",
+      [LanguageDropDownList.supportedLanguages.japanese]:
+          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      headingElementTag: "h1",
+      entityName: "areStringifiedDigitsOnly",
+      entityLocalizedInterpretation: "Только ли цифры содержатся в строке"
+    }).Article-ProgrammaticEntityHeading
+
+    +CallableExpressionScheme({
+      technicalName: "areStringifiedDigitsOnly",
+      localizedDescriptiveHeading: "Только ли цифры содержатся в строке",
+      parametersSpecification: [
+        {
+          localizedName: "Целевая строка",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    }).Article-CallableExpressionScheme
+
+    p.Article-Paragraph.
+      Проверяет, только лишь #[+Term--YDID цифры] содержит целевое строчное значение.
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox
+
+      h2.Article-Heading2 Цифры, числа, последовательности цифр
+
+      p.Article-Paragraph.
+        Хотя в средствах массовой информации #[+Term--YDID "числа"] называют #[+Term--YDID "цифрами"],
+          #[+Keyphrase--YDID с точки зрения математики] это два #[+Keyword--YDID разных] термина.
+        #[+DefinableTerm--YDID Цифры] - это #[+Keyword--YDID набор] из десяти #[+Term--YDID символов] от #[+ImportantEntity--YDID 0]
+          до #[+ImportantEntity--YDID 9].
+        Хотя #[+Term--YDID числа] от от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9] и #[+Keyword--YDID совпадают]
+          с #[+Term--YDID цифрами], двузначные числа (от #[+ImportantEntity--YDID 10]), отрицательные числа,
+          дробные числа и так далее - это всё именно #[+Term--YDID числа], а #[+Keyword--YDID не] цифры.
+
+      p.Article-Paragraph.
+        Также, #[+Keyword--YDID последовательности] #[+Term--YDID цифр], начинающиеся с нуля, #[+Term--YDID числами]
+          #[+Keyword--YDID не] являются - это, собственно, просто #[+Term--YDID последовательность цифр].

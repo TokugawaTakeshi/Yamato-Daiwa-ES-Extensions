@@ -15,10 +15,17 @@ block append Data
 block append Requirements
 
   //- TODO Edit paths
-  include ../../../../_CommonRequirements.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
-  include ../../../../../Components/Components.pug
+  include ../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../Components/Components.pug
+
+  //- TODO Select one delete remain: 
+  include ../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
+  include ../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+  include ../../SharedAssets/Markup/Localizations/RussianLocalization.pug
 
 
 block append Metadata
@@ -27,8 +34,8 @@ block append Metadata
 
   -
 
-    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
     HTML_PAGE_LANGUAGE = "ja"
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
     HTML_PageMetaData = {
       description: "The areStringifiedDigitsOnly() function checks does target string includes only digit characters.",
       author: HTML_PAGE_AUTHOR

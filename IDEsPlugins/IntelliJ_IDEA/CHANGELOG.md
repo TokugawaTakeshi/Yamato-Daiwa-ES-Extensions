@@ -2,6 +2,14 @@
 
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
+## [0.0.4] 
+
+### Change
+
+* <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**. 
+* <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**. 
+
+
 ## [0.0.3]
 
 ### Added

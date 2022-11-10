@@ -1,20 +1,25 @@
-# `removeArrayElementsByIndexes`: Remove array elements by indexes
+# `removeArrayElementsByIndexes` - Remove array elements by indexes
 
 [![Official IntelliJ IDEA plugin live template](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-raebi-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-removeArrayElementsByIndexes<ArrayElement>(
-  namedParameters: NamedParameters<ArrayElement>
-): Result<ArrayElement>
+<ArrayElement>(
+  namedParameters: 
+      (
+        {
+          mutably: true;
+          targetArray: Array<ArrayElement>;
+        } |
+        {
+          mutably: false;
+          targetArray: ReadonlyArray<ArrayElement>;
+        }
+      ) &
+      { indexes: number | ReadonlyArray<number>; }
+): RemovingArrayElementsByIndexesOperation.Result<ArrayElement>
 ```
 
 ```typescript
-export type NamedParameters<ArrayElement> = {
-  targetArray: Array<ArrayElement>;
-  indexes: number | Array<number>;
-  mutably: boolean;
-};
-
 export type Result<ArrayElement> = {
   updatedArray: Array<ArrayElement>;
   removedElements: Array<ArrayElement>;
@@ -25,6 +30,7 @@ Removes array elements by indexes, herewith the removing could be mutable or not
 named parameters object.
 
 ![](removeArrayElementsByIndexes-LiveTemplateDemo.gif)
+
 
 ## Usage
 ### Mutable removing
@@ -76,7 +82,7 @@ will output:
 [ "alpha", "charlie" ]
 ```
 
-but does not affect to initial array.
+and does not affect to initial array.
 
 
 ## Quick inputting
@@ -87,4 +93,5 @@ to input the function calling expression quickly (available in [official YDEE pl
 
 ![](removeArrayElementsByIndexes-LiveTemplateDemo.gif)
 
-If target array has been copied to clipboard preliminarily, it will be immediately substituted.
+Before inputting of live template abbreviation, copy to clipboard the variable/field including the array - it will be
+immediately substituted to generated expression.

@@ -1,0 +1,30 @@
+mixin CompactTableOfContents(localizedRouting)
+
+  if localizedRouting
+
+    ul.CompactTableOfContents&attributes(attributes)
+
+      each metadata in localizedRouting
+
+        li.CompactTableOfContents-Item
+
+          if metadata.children
+
+            button.CompactTableOfContents-Item-CollapsingToggle(
+              type="button"
+              aria-label="Collapse"
+            ): +Triangle__Upward__Circled__Filled--YDF_Icon.CompactTableOfContents-Item-CollapsingToggle-Icon
+
+          if metadata.URI
+
+            a.CompactTableOfContents-Item-Link(
+              href= metadata.URI
+            )= metadata.tableOfContentTitle
+
+          else
+
+            span.CompactTableOfContents-Item-Title= metadata.tableOfContentTitle
+
+          if metadata.children
+
+            +CompactTableOfContents(metadata.children)

@@ -1,5 +1,5 @@
 import { getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne, UnexpectedEventError } from "../../../Source";
-import { strictEqual, throws } from "assert";
+import Assert from "assert";
 
 
 describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): void => {
@@ -13,8 +13,8 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
 
   describe("Normal scenarios", (): void => {
 
-    it("Retrieving of existing element", (): void => {
-      strictEqual(
+    it("Retrieving of index of existing element", (): void => {
+      Assert.strictEqual(
         getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample, (product: Product): boolean => product.ID === 2
         ),
@@ -22,8 +22,8 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
       );
     });
 
-    it("Null for non-exiting element", (): void => {
-      strictEqual(
+    it("Retrieving of null for non-exiting element", (): void => {
+      Assert.strictEqual(
         getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample, (product: Product): boolean => product.ID === 3
         ),
@@ -31,21 +31,22 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
       );
     });
 
-    it("Null for more that one element satisfies to predicate", (): void => {
-      strictEqual(
+    it("Retrieving of null for more that one elements satisfies the predicate", (): void => {
+      Assert.strictEqual(
         getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample, (product: Product): boolean => product.price > 50
         ),
         null
       );
     });
+
   });
 
 
   describe("Errored scenarios", (): void => {
 
-    it("Null for non-exiting element", (): void => {
-      throws(
+    it("Throwing of the error for non-exiting element", (): void => {
+      Assert.throws(
         (): void => {
           getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
@@ -57,8 +58,8 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
       );
     });
 
-    it("Null for more that one element satisfies to predicate", (): void => {
-      throws(
+    it("Throwing of the error for more that one elements satisfies to predicate", (): void => {
+      Assert.throws(
         (): void => {
           getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
               sample,
@@ -69,5 +70,7 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
         UnexpectedEventError
       );
     });
+
   });
+
 });

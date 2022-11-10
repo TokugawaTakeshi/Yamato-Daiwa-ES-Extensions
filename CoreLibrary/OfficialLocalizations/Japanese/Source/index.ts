@@ -1,11 +1,12 @@
 /*!
- * @yamato-daiwa/es-extensions-localization-japanese v1.5
+ * @yamato-daiwa/es-extensions-localization-japanese v1.6
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
 
 /* === 定数・列挙 ===================================================================================================== */
+export { default as AbbreviatedJapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/AbbreviatedJapaneseDaysOfWeek";
 export { default as JapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/JapaneseDaysOfWeek";
 export { default as JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseTraditionalMonthsNames";
 export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";

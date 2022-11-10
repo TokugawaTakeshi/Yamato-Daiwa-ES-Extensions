@@ -17,4 +17,5 @@ export default function getYearOfNextMonth(
 
   return referenceMonthNumber__numerationFrom1 === MONTHS_PER_YEAR ?
       namedParameters.referenceYear + 1 : namedParameters.referenceYear;
+
 }

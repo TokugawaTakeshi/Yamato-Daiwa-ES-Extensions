@@ -31,19 +31,25 @@ provideComponentsPositionalRelationship(
       }
     },
     withOtherComponents:\
-        ("Article-AttentionBox" { retireFromTarget: 12px })
+        ("Article-AttentionBox" { retireFromTarget: 12px })\
+        ("Article-ImprovedList" { retireFromTarget: 12px })
   })\
   \
-  ("Article-ImprovedList" {
+  ("Article-CodeViewer" {
     withTypography: {
       article: {
         typographyDefinition: articleTypography,
         spacingDefinitions: {
-          heading2: { retireFromComponent: 16px }
+          heading2: { retireFromComponent: 16px },
+          heading3: { pushComponentFromSelf: 12px },
+          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px },
+          descriptionList: { pushComponentFromSelf: 16px }
         }
       }
     },
     withOtherComponents:\
-        ("Article-ImprovedList" { retireFromTarget: 12px })
+        ("Article-ProgrammaticEntityHeading" { retireFromTarget: 12px })\
+        ("Article-ImprovedList" { retireFromTarget: 10px })\
+        ("Article-CodeViewer" { retireFromTarget: 8px })
   })
 )

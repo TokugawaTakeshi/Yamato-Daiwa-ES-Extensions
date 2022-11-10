@@ -1,0 +1,35 @@
+extends ../../Layouts/Minimal/MinimalLayout.pug
+
+
+block append Requirements
+
+  include ../../SharedAssets/Markup/HTML_PageMetadata.pug
+  include ../../SharedAssets/Markup/generateLocalizedRouting.pug
+
+  include ../../../node_modules/@yamato-daiwa/frontend/Components.pug
+  include ../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+  include ../../Components/Components.pug
+
+  include ../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = "トップ | YDEE - やまとダイワ拡張機能";
+
+    FAVICON_URI = "@MustBeInRoot/favicon.ico";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "@All/index",
+      [LanguageDropDownList.supportedLanguages.russian]: "@All/Top/TopPage.russian"
+    });
+
+
+
+block append SpecificContent
+

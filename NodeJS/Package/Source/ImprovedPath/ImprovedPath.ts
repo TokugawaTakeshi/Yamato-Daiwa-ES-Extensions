@@ -4,10 +4,12 @@ import Path from "path";
 
 import {
   replaceDoubleBackslashesWithForwardSlashes,
+  getLastElementOfArray,
   stringifyAndFormatArbitraryValue,
   splitString,
   isNull,
   isUndefined,
+  removeNthCharacter,
   Logger,
   InvalidParameterValueError,
   UnexpectedEventError
@@ -37,6 +39,7 @@ abstract class ImprovedPath {
       });
 
     }
+
   }
 
   public static buildAbsolutePathFromCurrentWorkingDirectory(
@@ -80,6 +83,7 @@ abstract class ImprovedPath {
       });
 
     }
+
   }
 
   public static computeRelativePath(namedParameters: Readonly<{
@@ -108,6 +112,7 @@ abstract class ImprovedPath {
     return namedParameters.alwaysForwardSlashSeparators === true ?
         replaceDoubleBackslashesWithForwardSlashes(operationingSystemDependentRelativePath) :
         operationingSystemDependentRelativePath;
+
   }
 
 
@@ -135,6 +140,7 @@ abstract class ImprovedPath {
       rawPath: targetPath,
       nativeParsedPath
     });
+
   }
 
   public static replacePathSeparatorsToForwardSlashes(targetPath: string): string {
@@ -151,6 +157,7 @@ abstract class ImprovedPath {
       ...normalizedPath.startsWith("/") ? [ "/" ] : [],
       ...splitString(normalizedPath, "/").filter((pathSegment: string): boolean => pathSegment.length > 0)
     ];
+
   }
 
   public static doesPathEndWithFileNameExtension(
@@ -177,7 +184,183 @@ abstract class ImprovedPath {
 
 
     return true;
+
   }
+
+
+  public static extractFileNameWithExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: false; }>
+  ): string | null;
+
+  public static extractFileNameWithExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: true; }>
+  ): string;
+
+  public static extractFileNameWithExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: boolean; }>
+  ): string | null {
+
+    const fileNameWithExtension: string = Path.basename(namedParameters.targetPath);
+
+    if (fileNameWithExtension.includes(".")) {
+      return fileNameWithExtension;
+    }
+
+
+    if (namedParameters.mustThrowErrorIfLastPathSegmentHasNoDots) {
+
+      Logger.throwErrorAndLog({
+        errorInstance: new UnexpectedEventError(
+          `Contrary to expectations, the last segment of '${ namedParameters.targetPath }' does not look like the ` +
+          "file name with extension."
+        ),
+        title: UnexpectedEventError.localization.defaultTitle,
+        occurrenceLocation: "ImprovedPath.extractFileNameWithExtensionFromPath(namedParameters)"
+      });
+
+    }
+
+
+    return null;
+
+  }
+
+
+  public static extractFileNameWithoutExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: false; }>
+  ): string | null;
+
+  public static extractFileNameWithoutExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: true; }>
+  ): string;
+
+  public static extractFileNameWithoutExtensionFromPath(
+    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: boolean; }>
+  ): string | null {
+
+    let targetPathExplodedToSegments: ReadonlyArray<string> = ImprovedPath.explodePathToSegments(namedParameters.targetPath);
+
+    /* [ Theory ] Currently even empty string path will be exploded to [ "." ] */
+    if (targetPathExplodedToSegments.length > 1 && targetPathExplodedToSegments[0] === ".") {
+      targetPathExplodedToSegments = [ "" ];
+    }
+
+    const lastPathSegment: string = getLastElementOfArray(targetPathExplodedToSegments, { mustThrowErrorIfArrayIsEmpty: true });
+    const dotSeparatedSubsegmentsOfLastSegment: ReadonlyArray<string> = splitString(lastPathSegment, ".");
+
+    if (dotSeparatedSubsegmentsOfLastSegment[0].length > 0) {
+      return dotSeparatedSubsegmentsOfLastSegment[0];
+    }
+
+
+    if (namedParameters.mustThrowErrorIfLastPathSegmentHasNoDots) {
+      Logger.throwErrorAndLog({
+        errorInstance: new UnexpectedEventError(
+          `Contrary to expectations, the last segment of '${ namedParameters.targetPath }' does not look like the ` +
+          "file name with extension."
+        ),
+        title: UnexpectedEventError.localization.defaultTitle,
+        occurrenceLocation: "ImprovedPath.extractFileNameWithoutExtensionFromPath(namedParameters)"
+      });
+    }
+
+
+    return null;
+
+  }
+
+
+  public static extractDirectoryFromFilePath(
+    namedParameters: Readonly<{
+      targetPath: string;
+      ambiguitiesResolution: Readonly<{
+        mustConsiderLastSegmentStartingWithDotAsDirectory: boolean;
+        mustConsiderLastSegmentWithNonLeadingDotAsDirectory: boolean;
+        mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: boolean;
+      }>;
+
+      alwaysForwardSlashSeparators?: boolean;
+      rootDirectoryNotation: string;
+    }>
+  ): string {
+
+    const targetPath: string = ImprovedPath.replacePathSeparatorsToForwardSlashes(namedParameters.targetPath);
+
+    let targetPathWithoutRoot: string;
+
+    if (targetPath.startsWith("/")) {
+
+      /* 〔 Theory 〕 UNIX-like absolute path starting from forward slash. Example: "/home/user/dir/file.txt" */
+      targetPathWithoutRoot = removeNthCharacter(targetPath, { numerationFrom: 1, targetCharacterNumber: 1 });
+
+    } else if (Path.isAbsolute(targetPath)) {
+
+      /* 〔 Theory 〕 Windows-like absolute path starting from drive. Example: "C:\\path\\dir\\file.txt" */
+      targetPathWithoutRoot = targetPath.replace(/^[A-Z]:\//u, "");
+
+    } else {
+      targetPathWithoutRoot = targetPath;
+    }
+
+
+    /* 〔 Theory 〕 With current implementation, the empty string will be exploded to [ "." ]  */
+    const pathSegments: Array<string> = ImprovedPath.explodePathToSegments(targetPathWithoutRoot);
+
+    if (pathSegments.length === 1 && pathSegments[0] === ".") {
+      return namedParameters.rootDirectoryNotation;
+    }
+
+
+    const lastPathSegment: string = getLastElementOfArray(pathSegments, { mustThrowErrorIfArrayIsEmpty: true });
+
+    if (lastPathSegment.startsWith(".")) {
+
+      if (namedParameters.ambiguitiesResolution.mustConsiderLastSegmentStartingWithDotAsDirectory) {
+        return namedParameters.alwaysForwardSlashSeparators === true ?
+            targetPathWithoutRoot : Path.normalize(targetPathWithoutRoot);
+      }
+
+
+      return ImprovedPath.joinPathSegments(
+        pathSegments.slice(0, -1),
+        { alwaysForwardSlashSeparators: namedParameters.alwaysForwardSlashSeparators === true }
+      );
+
+    }
+
+
+    if (lastPathSegment.includes(".")) {
+
+      if (namedParameters.ambiguitiesResolution.mustConsiderLastSegmentWithNonLeadingDotAsDirectory) {
+        return namedParameters.alwaysForwardSlashSeparators === true ?
+            targetPathWithoutRoot : Path.normalize(targetPathWithoutRoot);
+      }
+
+
+      return ImprovedPath.joinPathSegments(
+        pathSegments.slice(0, -1),
+        { alwaysForwardSlashSeparators: namedParameters.alwaysForwardSlashSeparators === true }
+      );
+
+    }
+
+
+    if (namedParameters.ambiguitiesResolution.mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension) {
+      return ImprovedPath.joinPathSegments(
+        pathSegments.slice(0, -1),
+        { alwaysForwardSlashSeparators: namedParameters.alwaysForwardSlashSeparators === true }
+      );
+    }
+
+
+    return namedParameters.alwaysForwardSlashSeparators === true ?
+        targetPathWithoutRoot : Path.normalize(targetPathWithoutRoot);
+
+  }
+
+
+  /* === File name extensions ======================================================================================= */
+
 }
 
 
@@ -257,6 +440,7 @@ namespace ImprovedPath {
 
 
       return root;
+
     }
 
 
@@ -286,6 +470,7 @@ namespace ImprovedPath {
 
 
       return directory;
+
     }
 
     public get directoryExplodedToPathSegments(): ReadonlyArray<string> {

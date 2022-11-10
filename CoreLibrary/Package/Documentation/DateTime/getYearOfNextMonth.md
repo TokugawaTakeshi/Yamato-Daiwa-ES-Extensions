@@ -1,10 +1,10 @@
 # `getYearOfNextMonth` - get year of next month
 
 Returns the year of next month in relation to specified year and month number (from 0 or 1).
-Except December case, the returned year will be even with specified parameter one.
+Except December case, the returned year will be even with specified one.
 
 ```
-getYearOfNextMonth(
+(
   namedParameters:
       Readonly<
         { referenceYear: number; } &
@@ -16,6 +16,7 @@ getYearOfNextMonth(
 ): number
 ```
 
+
 ## Examples
 
 ```typescript
@@ -24,19 +25,19 @@ console.log(
     referenceYear: 2022,
     referenceMonthNumber__numerationFrom0: 5
   })
-); // => 2022
+); // -> 2022
 
 console.log(
   getYearOfNextMonth({
     referenceYear: 2022,
     referenceMonthNumber__numerationFrom0: 11
   })
-); // => 2023
+); // -> 2023
 
 console.log(
   getYearOfNextMonth({
     referenceYear: 2022,
     referenceMonthNumber__numerationFrom1: 12
   })
-); // => 2023
+); // -> 2023
 ```
