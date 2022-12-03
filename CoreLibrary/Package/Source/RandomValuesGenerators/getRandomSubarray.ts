@@ -32,6 +32,7 @@ export namespace GetRandomSubarrayOperation {
   export function setLocalization(newLocalization: Localization): void {
     localization = newLocalization;
   }
+
 }
 
 export default function getRandomSubarray<ArrayElement>(
@@ -68,9 +69,23 @@ export default function getRandomSubarray<ArrayElement>(
       });
     }
 
+    if (options.minimalElementsCount >= targetArray.length) {
+      Logger.throwErrorAndLog({
+        errorInstance: new InvalidParameterValueError({
+          parameterName: "options.minimalElementsCount",
+          messageSpecificPart: "The minimal element's count of subarray must be less than elements count of initial array."
+        }),
+        title: InvalidParameterValueError.localization.defaultTitle,
+        occurrenceLocation: "getRandomSubarray(targetArray, options)"
+      });
+    }
+
     minimalElementsCount = options.minimalElementsCount;
+
   } else {
+
     minimalElementsCount = 1;
+
   }
 
   let maximalElementsCount: number;
@@ -103,9 +118,23 @@ export default function getRandomSubarray<ArrayElement>(
       });
     }
 
+    if (options.maximalElementsCount > targetArray.length) {
+      Logger.throwErrorAndLog({
+        errorInstance: new InvalidParameterValueError({
+          parameterName: "options.maximalElementsCount",
+          messageSpecificPart: "The maximal elements count of subarray could not exceed the elements count of initial array."
+        }),
+        title: InvalidParameterValueError.localization.defaultTitle,
+        occurrenceLocation: "getRandomSubarray(targetArray, options)"
+      });
+    }
+
     maximalElementsCount = options.maximalElementsCount;
+
   } else {
-    maximalElementsCount = 2 * minimalElementsCount;
+
+    maximalElementsCount = targetArray.length > 1 ? targetArray.length - 1 : 1;
+
   }
 
   const elementsCountInResultSubarray: number = getRandomInteger({
@@ -126,4 +155,5 @@ export default function getRandomSubarray<ArrayElement>(
   }
 
   return resultSubarray;
+
 }
