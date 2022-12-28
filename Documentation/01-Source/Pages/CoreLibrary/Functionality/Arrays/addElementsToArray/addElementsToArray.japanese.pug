@@ -3,33 +3,35 @@ extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../../../Components/Components.pug
-
-  include ../../../../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja"
+    HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
     HTML_PageMetaData = {
-      description: "",
+      description: MetaDescriptionTemplates.function({
+        functionName: "addElementsToArray",
+        whatFunctionDoes: "目標的配列の最初位置、最終位置もしくは指数で指定された位置に新規要素を追加する。初期配列を変更するか、新しい配列を作る事も指定可能。"
+      }),
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
-    FAVICON_URI = "@MustBeInRoot/favicon"
+    FAVICON_URI = "@MustBeInRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray")
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./addElementsToArray.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./addElementsToArray.russian.html"
+    });
 
 
 block append SpecificContent

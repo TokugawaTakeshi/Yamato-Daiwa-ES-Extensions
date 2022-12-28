@@ -3,14 +3,8 @@ extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../Components/Components.pug
-
-  include ../../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+  include ../../../SharedAssets/Markup/Assets.japanese.pug
 
 
 block append Metadata
@@ -20,7 +14,7 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ja"
     HTML_PAGE_TITLE = buildHTML_PageTitle("利用開始");
     HTML_PageMetaData = {
-      description: "", // TODO
+      description: "「Yamato Daiwa ECMAScript extensions」ライブラリの利用開始の案内。導入、容量、TypeScript無しの利用関連注意事項、機能のインポート",
       author: HTML_PAGE_AUTHOR
     }
 
@@ -28,6 +22,13 @@ block append Metadata
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./GetStartedWithCoreLibraryPage.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+    });
 
 
 block append SpecificContent

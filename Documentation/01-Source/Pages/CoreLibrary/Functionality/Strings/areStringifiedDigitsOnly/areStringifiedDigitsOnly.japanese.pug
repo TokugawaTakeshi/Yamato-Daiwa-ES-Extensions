@@ -1,49 +1,34 @@
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
-block append Data
-
-  -
-
-    const StaticLinks = {
-      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
-    }
-
-
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../../../Components/Components.pug
-
-  include ../../../../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja"
+    HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
-    // TODO YDEEへの参照を確保する
     HTML_PageMetaData = {
-      description: "「areStringifiedDigitsOnly()」関数は、引数の文字列が数字のみであるかどうかを確認し、ブール値を返す。",
+      description: MetaDescriptionTemplates.function({
+        functionName: "areStringifiedDigitsOnly",
+        whatFunctionDoes: "引数の文字列が数字のみであるかどうかを確認し、ブール値を返す"
+      }),
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
-    FAVICON_URI = "@MustBeInRoot/favicon"
+    FAVICON_URI = "@MustBeInRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]:
-          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug",
-      [LanguageDropDownList.supportedLanguages.russian]:
-          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.russian.pug"
+      [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.pug",
+      [LanguageDropDownList.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.pug"
     });
 
 
@@ -95,7 +80,7 @@ block append SpecificContent
 
     +ImprovedList--YDF({ type: ImprovedList__YDF.Types.unordered }).Article-ImprovedList
       +ImprovedList-Item--YDF.
-        #[a.PrototypeArticle-Link(href=StaticLinks.napierConstant target="_blank" rel="nofollow") ネイピア数]は
+        #[a.PrototypeArticle-Link(href=sharedExternalLinks.wikipedia.math.euler_sNumber target="_blank" rel="nofollow") ネイピア数]は
           #[+Term--YDID 数字]とは#[+Keyword--YDID 見做されない]。
       +ImprovedList-Item--YDF #[+Term--YDID 全角数字]は#[+Keyword--YDID 対象外]。
       +ImprovedList-Item--YDF.

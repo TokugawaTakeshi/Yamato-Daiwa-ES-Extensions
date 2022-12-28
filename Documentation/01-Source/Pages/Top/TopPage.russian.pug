@@ -3,14 +3,8 @@ extends ../../Layouts/Minimal/MinimalLayout.pug
 
 block append Requirements
 
-  include ../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../Components/Components.pug
-
-  include ../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+  include ../../SharedAssets/Markup/Assets.russian.pug
 
 
 block append Metadata
@@ -18,15 +12,22 @@ block append Metadata
   -
 
     HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = "Главная страница | YDEE - Yamato Daiwa ES Extensions";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страницы");
+    HTML_PageMetaData = {
+      description: "Библиотека &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;) - " +
+          `набор вспомогательной функциональности для высококачественной разработки на языке TypeScript.`,
+      author: HTML_PAGE_AUTHOR
+    };
 
     FAVICON_URI = "@MustBeInRoot/favicon.ico"
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
 
+    RoutingEmulator.setCurrentRoute("top");
+
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "@All/index",
-      [LanguageDropDownList.supportedLanguages.japanese]: "@All/Top/TopPage.japanese",
+      [LanguageDropDownList.supportedLanguages.english]: "./index.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./Top/TopPage.japanese.html"
     });
 
 

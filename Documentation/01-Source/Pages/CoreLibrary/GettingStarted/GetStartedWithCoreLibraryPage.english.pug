@@ -3,24 +3,20 @@ extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../Components/Components.pug
-
-  include ../../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
+  include ../../../SharedAssets/Markup/Assets.english.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en"
+    HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Getting started");
     HTML_PageMetaData = {
-      description: "", // TODO
+      description: "Getting started with &quot;Yamato-Daiwa ECMAScript extensionsYamato-Daiwa ECMAScript extensions " +
+        "(abbreviation: YDEE) library: installation, distributive volume notice, warning about usage wihtout TypeScript, " +
+        "dependencies importing",
       author: HTML_PAGE_AUTHOR
     }
 
@@ -28,6 +24,13 @@ block append Metadata
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+    });
 
 
 block append SpecificContent

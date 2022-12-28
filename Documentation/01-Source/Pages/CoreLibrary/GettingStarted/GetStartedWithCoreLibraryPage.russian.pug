@@ -3,31 +3,39 @@ extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../Components/Components.pug
-
-  include ../../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+  include ../../../SharedAssets/Markup/Assets.russian.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru"
+    HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Начало использования");
     HTML_PageMetaData = {
-      description: "", // TODO
+      description: "Начало работы с библиотекой &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;):, " +
+        `установка, заметка об объёме дистибутива, предупреждение об использовании без TypeScript, импорт зависимостей.`,
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
     FAVICON_URI = "@MustBeInRoot/favicon"
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./GetStartedWithCoreLibraryPage.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html"
+    });
+
+    const externalLinks = {
+      stackOverflow: {
+        parametersValidationInTypeScript: "https://ru.stackoverflow.com/q/1464837/193415"
+      }
+    };
 
 
 block append SpecificContent
@@ -36,6 +44,103 @@ block append SpecificContent
 
     h1.Article-Heading1 Начало использования
     h2.Article-Heading2#Installation--SECTION Установка
+
+    p.Article-Paragraph.
+      Установка стандартная, с помощью #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm].
+
+    +CodeViewer--YDF({
+      title: "Консольная команда"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+      }) npm i @yamato-daiwa/es-extensions -E
+
     h2.Article-Heading2#DistributiveVolumeNotice--SECTION Об объёме дистибутива
+
+    p.Article-Paragraph.
+      На #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link странице @yamato-daiwa/es-extensions ]
+        официального сайта #[+ImportantEntity--YDID npm] можно видеть объём пакета ("Unpacked Size").
+      Например, для версии #[+SecondaryEntity--YDID 1.5.8] это 698 килобайт:
+
+    //- TODO Добавить картинку
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
+    }).Article-AttentionBox.
+      Это #[+Keyword--YDID не] объём, на который увеличится Ваша библиотека после подключения пакета.
+
+    p.Article-Paragraph.
+      Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальные для браузерных приложений)
+        и #[+Term--YDID CommonJS-модулей] (оптимальны для Node.js приложений).
+      Для Node.js приложений объём в несколько сотен килобайт незначителен.
+      Что касается браузерных приложений, то здесь важно обеспечить устранение неиспользуемой функциональности из
+        #[+Term--YDID продакшен-сборки] с помощью сборщика проектов.
+      В #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack] эта функциональность называется
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link Tree shaking]
+        и для её активации в режиме продакшен необходимо в
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) настойках TypeScript]
+        указать тип модулей группы #[+ImportantEntity--YDID ES].
+      Другое условие - наличие #[+ImportantEntity__Code--YDID sideEffects: false] в #[+ImportantEntity--YDID package.json]
+        зависимости - со стороны #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] выполнено.
+
+    p.Article-Paragraph.
+      Если Вы используете другой сборщик проектов, называющий себя конкурентом #[+SecondaryEntity--YDID Webpack],
+        то он также обязан поддерживать аналогичную функциональность.
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+      hasPrependedSVG_Icon: true
+    }).Article-Paragraph.
+      Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, большая часть
+        #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
+        (а не #[+Term--YDID классов], хотя #[+Term--YDID классов] тоже немного имеется).
+      В случае, если одни функции используют другие, в сборку также войдут эти #[+Term--YDID транзитивные зависимости],
+        но даже так оптимизация будет очень хорошей, если используется меньшая часть возможностей библиотеки.
+
     h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Предупреждение об использовании без TypeScript
+
+    p.Article-Paragraph.
+      Библиотека разрабатывается в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript].
+      При отсутствии ошибок компиляции TypeScript, вероятность возникновения проблем с библиотекой крайне низка.
+      Тем не менее, ожидаются пользователи JavaScript, которые захотят использовать данную библиотеку.
+
+    p.Article-Paragraph.
+      Компилируя исходный код в JavaScript, TypeScript не добавляет никакой новой функциональности, в частности
+        не добавляется валидация параметров функций и методов.
+      Поэтому, если бы была задача поддерживать JavaScript, то необходимо провести тщательную валидацию всех входных
+        параметров и подробно логировать все нарушения.
+      Это может показаться парой строчкой кода, но на самом деле объём функций таким образом может вырасти #[+Keyword--YDID в разы],
+        и #[+Keyphrase--YDID это не преувеличение]
+        (см. #[+Link--YDF({ unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript }) конкретный пример]).
+
+    p.Article-Paragraph.
+      После сбора информации было принято решение отказаться от исчерпывающей валидации параметров.
+      Основной причиной является резкое увеличение объёма библиотеки и транзитивных зависимостей для каждой функции в
+        несколько раз, что значимо для браузерных приложений, где каждый килобайт на счету.
+      Это значит, что при использовании JavaScript и наличии ошибок коде (в основном это неверный тип в параметров)
+        возможно возникновение ошибок выполнения JavaScript, однако из сообщения об ошибке это не будет очевидно.
+
+
     h2.Article-Heading2#ImportingOfFunctionality--SECTION Импорт функциональности
+
+    p.Article-Paragraph.
+      После того, как пакет установлен, становится возможным импорт любых функций, классов и т. д., упомянутых в данной
+        документации.
+      Способ импорта - стандартный.
+      Для сборщиков проекта или рантаймов, поддерживающих кличевое слово #[+ImportantEntity__Code--YDID import] это, например,
+
+    +CodeViewer--YDF({
+      title: "Пример импортов из @yamato-daiwa/es-extensions"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";
+
+
+    h2.Article-Heading Официальный IntelliJ IDEA плагин
+
+    p.Article-Paragraph.
+      Для более быстрого ввода выражений в интегрированных средах разработки семейства IntelliJ IDEA рекомендуется
+        использовать официальный плагин.
+      Плагин включает в себя LiveTemplate-ы - последовательности клавиш, генерирующие шаблоны кода, который остаётся
+        только немного подправить.

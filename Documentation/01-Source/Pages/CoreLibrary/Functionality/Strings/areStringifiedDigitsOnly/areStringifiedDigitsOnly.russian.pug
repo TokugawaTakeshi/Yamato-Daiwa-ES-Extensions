@@ -1,25 +1,10 @@
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
-block append Data
-
-  -
-
-    const StaticLinks = {
-      napierConstant: "https://ru.wikipedia.org/wiki/E_(%D1%87%D0%B8%D1%81%D0%BB%D0%BE)"
-    }
-
-
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../../../Components/Components.pug
-
-  include ../../../../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+  include ../../../../../SharedAssets/Markup/Assets.russian.pug
 
 
 block append Metadata
@@ -28,23 +13,23 @@ block append Metadata
 
     HTML_PAGE_LANGUAGE = "ru"
     HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
-    // TODO YDEEへの参照を確保する
     HTML_PageMetaData = {
-      description: "Функция 'areStringifiedDigitsOnly()' проверяет, содержит ли передаваемая через параметр строка " +
-        "только цифры, и если да, то возвращает логическое значение 'true'.",
+      description: MetaDescriptionTemplates.function({
+        functionName: "areStringifiedDigitsOnly",
+        whatFunctionDoes: "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
+                "то возвращает логическое значение &quot;истина&quot;."
+      }),
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
-    FAVICON_URI = "@MustBeInRoot/favicon"
+    FAVICON_URI = "@MustBeInRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]:
-          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug",
-      [LanguageDropDownList.supportedLanguages.japanese]:
-          "@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug"
+      [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./areStringifiedDigitsOnly.japanese.html"
     });
 
 
@@ -73,7 +58,12 @@ block append SpecificContent
     }).Article-CallableExpressionScheme
 
     p.Article-Paragraph.
-      Проверяет, только лишь #[+Term--YDID цифры] содержит целевое строчное значение.
+      Проверяет, #[+Keyword--YDID только лишь] #[+Term--YDID цифры] содержит целевое строчное значение.
+
+    p.Article-Paragraph.
+      Конечно, ту же проверку сделать и с помощью регулярного выражения (причём в данном случае оно будет предельно простым),
+        но всё же регулярные выражения - это низкоуровневое API, а цель библиотеки - сделать код высокоуровневым,
+        в котором в идеале путём последовательных вызовов функций и методов классов лишь говорится, что делать.
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,

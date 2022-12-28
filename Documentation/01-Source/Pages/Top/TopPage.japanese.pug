@@ -3,14 +3,8 @@ extends ../../Layouts/Minimal/MinimalLayout.pug
 
 block append Requirements
 
-  include ../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../Components/Components.pug
-
-  include ../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
+  include ../../SharedAssets/Markup/Assets.japanese.pug
 
 
 block append Metadata
@@ -18,18 +12,23 @@ block append Metadata
   -
 
     HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = "トップ | YDEE - やまとダイワ拡張機能";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("トップ");
+    HTML_PageMetaData = {
+      description: "", // TODO
+      author: HTML_PAGE_AUTHOR
+    };
 
     FAVICON_URI = "@MustBeInRoot/favicon.ico";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
 
+    RoutingEmulator.setCurrentRoute("top");
+
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "@All/index",
-      [LanguageDropDownList.supportedLanguages.russian]: "@All/Top/TopPage.russian"
+      [LanguageDropDownList.supportedLanguages.english]: "./index.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./Top/TopPage.russian.html"
     });
 
 
 
 block append SpecificContent
-

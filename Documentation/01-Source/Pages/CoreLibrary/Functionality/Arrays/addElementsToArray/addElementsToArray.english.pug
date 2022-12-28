@@ -3,14 +3,8 @@ extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../../../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../../../../Components/Components.pug
-
-  include ../../../../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
+  include ../../../../../SharedAssets/Markup/Assets.english.pug
 
 
 block append Metadata
@@ -19,26 +13,25 @@ block append Metadata
 
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
-
     HTML_PageMetaData = {
-      description: "The function 'addElementsToArray' of Yamato Daiwa ECMAScript Extensions package (also known as 'YDEE') " +
-          "adds elements to start, end, or specified position of array; mutable or non-mutable adding is available.",
+      description: MetaDescriptionTemplates.function({
+        functionName: "addElementsToArray",
+        whatFunctionDoes: "adds elements to start, end, or specified position of target array; " +
+                "mutable or non-mutable adding is available."
+      }),
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
-    FAVICON_URI = "@MustBeInRoot/favicon"
+    FAVICON_URI = "@MustBeInRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray")
-
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]:
-          "@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese",
-      [LanguageDropDownList.supportedLanguages.russian]:
-          "@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian"
+      [LanguageDropDownList.supportedLanguages.japanese]: "./addElementsToArray.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./addElementsToArray.russian.html"
     });
 
 

@@ -2,49 +2,43 @@
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
-block append Data
-
-  //- TODO Edit or remove
-  -
-
-    const StaticLinks = {
-      napierConstant: "https://ja.wikipedia.org/wiki/%E3%83%8D%E3%82%A4%E3%83%94%E3%82%A2%E6%95%B0"
-    }
-
-
 block append Requirements
 
   //- TODO Edit paths
-  include ../../SharedAssets/Markup/HTML_PageMetadata.pug
-  include ../../SharedAssets/Markup/generateLocalizedRouting.pug
-
-  include ../../../node_modules/@yamato-daiwa/frontend/Components.pug
-  include ../../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
   include ../../Components/Components.pug
-
-  //- TODO Select one delete remain: 
-  include ../../SharedAssets/Markup/Localizations/EnglishLocalization.pug
-  include ../../SharedAssets/Markup/Localizations/JapaneseLocalization.pug
-  include ../../SharedAssets/Markup/Localizations/RussianLocalization.pug
+  //- TODO Select one delete remain:
+  include ../../SharedAssets/Markup/Assets.english.pug
+  include ../../SharedAssets/Markup/Assets.japanese.pug
+  include ../../SharedAssets/Markup/Assets.russian.pug
 
 
 block append Metadata
 
-  //- TODO Edit
-
   -
 
-    HTML_PAGE_LANGUAGE = "ja"
-    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("${NAME}");
     HTML_PageMetaData = {
-      description: "The areStringifiedDigitsOnly() function checks does target string includes only digit characters.",
+      description: MetaDescriptionTemplates.function({
+        functionName: ${NAME},
+        whatFunctionDoes: "makes the the magic" // TODO Edit
+      }),
       author: HTML_PAGE_AUTHOR
-    }
+    };
 
-    FAVICON_URI = "@MustBeInRoot/favicon"
+    FAVICON_URI = "@MustBeInRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
+    
+    RoutingEmulator.setCurrentRoute("${ROUTE}");
+    
+    // TODO Remove current locale (it will be added as default, no need to define it explicitly)
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./${NAME}.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./${NAME}.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./${NAME}.russian.html",
+    });
 
 
 block append SpecificContent
@@ -53,12 +47,12 @@ block append SpecificContent
 
     +ProgrammaticEntityHeading({
       headingElementTag: "h1",
-      entityName: "areStringifiedDigitsOnly",
+      entityName: "${NAME}",
       entityLocalizedInterpretation: "Stringified digits only check"
     }).Article-ProgrammaticEntityHeading
 
     +CallableExpressionScheme({
-      technicalName: "areStringifiedDigitsOnly",
+      technicalName: "${NAME}",
       localizedDescriptiveHeading: "Stringified digits only check",
       parametersSpecification: [
         {
@@ -70,3 +64,13 @@ block append SpecificContent
       ],
       returnedValue: "boolean"
     }).Article-CallableExpressionScheme
+    
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log("OK");
+
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            This code outputs "OK" to console.
