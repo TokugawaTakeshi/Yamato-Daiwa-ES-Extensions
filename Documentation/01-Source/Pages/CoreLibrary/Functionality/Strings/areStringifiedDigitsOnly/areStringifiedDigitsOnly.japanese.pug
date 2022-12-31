@@ -26,9 +26,11 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
+
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.pug",
-      [LanguageDropDownList.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.pug"
+      [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.html"
     });
 
 
@@ -36,14 +38,9 @@ block append SpecificContent
 
   article
 
-    +ProgrammaticEntityHeading({
-      headingElementTag: "h1",
-      entityName: "areStringifiedDigitsOnly",
-      entityLocalizedInterpretation: "文字列化した数字のみかどうかを確認"
-    }).Article-ProgrammaticEntityHeading
-
     +CallableExpressionScheme({
       technicalName: "areStringifiedDigitsOnly",
+      headingTag: "h1",
       localizedDescriptiveHeading: "確認対象の文字列",
       parametersSpecification: [
         {

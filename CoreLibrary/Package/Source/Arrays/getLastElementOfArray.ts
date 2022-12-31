@@ -7,7 +7,7 @@ export default function getLastElementOfArray<ArrayElement>(targetArray: Readonl
 
 export default function getLastElementOfArray<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
-  { mustThrowErrorIfArrayIsEmpty }: Readonly<{ mustThrowErrorIfArrayIsEmpty: true; }>
+  options: Readonly<{ mustThrowErrorIfArrayIsEmpty: true; }>
 ): ArrayElement;
 
 

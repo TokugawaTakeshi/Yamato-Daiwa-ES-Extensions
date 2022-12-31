@@ -26,7 +26,7 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addElementsToArray");
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray");
 
     LanguageDropDownList.setLinks({
       [LanguageDropDownList.supportedLanguages.english]: "./addElementsToArray.english.html",
@@ -40,5 +40,5 @@ block append SpecificContent
 
     +ProgrammaticEntityHeading({
       entityName: "addElementsToArray",
-      entityLocalizedInterpretation: "配列に要素を追加する"
+      entityLocalizedInterpretation: "配列に要素（複数可）を追加する"
     }).Article-ProgrammaticEntityHeading

@@ -26,8 +26,11 @@ export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArr
 
 /* === Constants and enumerations =================================================================================== */
 /* --- Date & Time -------------------------------------------------------------------------------------------------- */
+export { default as CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING } from
+    "./ConstantsAndEnumerations/DateTime/CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING";
 export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
 export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
+export { default as MAXIMAL_DAYS_AT_MONTH } from "./ConstantsAndEnumerations/DateTime/MAXIMAL_DAYS_IN_MONTH";
 export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
 export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
 export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";

@@ -16,16 +16,16 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  { mustThrowErrorIfElementNotFoundOrMoreThan1 }: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
 ): ArrayElement | null {
 
   const allElementsMatchingWithPredicate: Array<ArrayElement> = targetArray.filter(predicate);
 
   if (allElementsMatchingWithPredicate.length === 0) {
 
-    if (mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (options.mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
-        errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
+        errorInstance: new UnexpectedEventError("Array element satisfies the specified predicate not found."),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(targetArray, predicate, options)"
       });
@@ -39,7 +39,7 @@ export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExact
 
   if (allElementsMatchingWithPredicate.length > 1) {
 
-    if (mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (options.mustThrowErrorIfElementNotFoundOrMoreThan1 === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError(
           "There are multiple elements satisfies the predicate. As it follows from the function name, two or more " +

@@ -15,7 +15,11 @@ block append Metadata
     HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страницы");
     HTML_PageMetaData = {
       description: "Библиотека &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;) - " +
-          `набор вспомогательной функциональности для высококачественной разработки на языке TypeScript.`,
+          "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
+          "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
+          "&quot;RawObjectDataProcessor&quot; для валидации и постобработки структур данных. " +
+          "Имена функций, параметров и так далее спроектированы так, чтобы при знании базового английского код был " +
+          "понятным и очевидным без обращения к документации.",
       author: HTML_PAGE_AUTHOR
     };
 
@@ -26,8 +30,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./index.html",
-      [LanguageDropDownList.supportedLanguages.japanese]: "./Top/TopPage.japanese.html"
+      [LanguageDropDownList.supportedLanguages.english]: "./../index.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./TopPage.japanese.html"
     });
 
 
@@ -49,139 +53,101 @@ block append SpecificContent
     p.TopPage-ShortDescription-Heading.
       Богатые функциональностью библиотеки для высококачественной разработке на языке TypeScript
 
-    p.TopPage-ShortDescription-Paragraph.
-      Подходят для TypeScript-разработчиков, которые готовы вкладывать время в качественный код для лёгкости
-        в постобслуживании.
-      Приведённые ниже достоинства касаются всех библиотек семейства.
-
-    ul.TopPage-ShortDescription-UnorderedList
-      li Все параметры, возвращаемые значения и т. д. тщательно аннотированы; тип any ни разу не использован.
-      li.
-        Все названия функций, классов и т. д. проектировались так, что при переводе с английского суть
-        кристально чисто ясна без документации
-      li Исключены ситуации, когда смысл параметра непонятен по его позиции и значению в виде литерала
-      li При продакшен-сборке Webpack-ом неиспользуемая функциональность может быть исключена
-
-
-    h2.TopPage-Heading2 Экосистема
-
-    p.Paragraph.
-      Экосистема Yamato Daiwa ES Extensions включает в себя основной пакет, который может быть использован
-      все зависимости от среды выполнения кода, функциональность для браузерной среды и NodeJS, а также локализации.
-
-    //- TODO Картинка
-
-    .TopPage-ImageAndLibraryHeadingGroup
-      .TopPage-ImageAndLibraryHeadingGroup-Image
-      h3.TopPage-ImageAndLibraryHeadingGroup-Heading Главный пакет
-      .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions
-
-    p.Paragraph.
-      Большой набор функциональности общего назначения.
-      Содержит как простые функции для работы со строками, массивами т. д., так и мощные утилитарные классы
-      для анализа произвольных данных, генерации вежливых сообщений об ошибках и другие.
-
-    p.Paragraph.
-      Рекомендовано для любых решений, реализуемых на языке TypeScript.
-
-
-    h4 Содержание
-
-    +CompactTableOfContents(localizedRouting.coreLibrary.children)
+    +CompactTableOfContents(localizedRouting).TopPage-TableOfContents
 
     //-
-      nav
+      p.TopPage-ShortDescription-Paragraph.
+        Подходят для TypeScript-разработчиков, которые готовы вкладывать время в качественный код для лёгкости
+          в постобслуживании.
+        Приведённые ниже достоинства касаются всех библиотек семейства.
 
-        ul
-          li Проблематика и мотивация
-          li Методология
-          li Начало работы
-            ul
-              li Установка
-              li Замечание об объёме данных дистрибутива
-              li Предупреждение об использовании без TypeScript-а
-              li Импорт зависимостей
-          li Исключение неиспользованной функциональности из сборки
-          li Функциональность
-            ul
-              li Работа с числами
-              li Работа со строками
-              li Работа с массивами
-              li Работа с коллекциями типа "набор"
-              li Работа с коллекциями типа "карта"
-              li Работа с датой и временем
-              li Новые TypeScript-типы
-              li Защитники TypeScript-типов
-              li Подстановщики значений по умолчанию
-              li Преобразователи значений
-              li Генераторы случайных значений
-              li Константы и перечисления
-              li Работа с пагинацией
-              li Логирование
-              li Готовые классы ошибок
-              li RawObjectDataProcessor - процессор объектоподобных значений
-          li Русская локализация
-            ul
-              li Локализованная функциональность
-              li Новая функциональность
-          li Другие локализации
-            ul
-              li Японская
-
-    //- TODO Картинка
-
-    .TopPage-ImageAndLibraryHeadingGroup
-      .TopPage-ImageAndLibraryHeadingGroup-Image
-      h3.TopPage-ImageAndLibraryHeadingGroup-Heading Пакет для клиентской разработки
-      .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions-browserjs
-
-    p.
-      Функциональность для браузерной разработки.
-      Отличная замена JQuery для тех, кому нужна жёсткая типизация.
-
-    p.
-      Рекомендовано для разработки веб-сайтов, где использование JavaScript фреймворков с клиентским рендерингом
-      (React, Vue и т. д.) нерационально из-за малого количества логики, а также для разработки веб-приложений
-      без использования фреймворков.
-
-    ul
-      li Начало работы
-        ul
-          li Установка
-          li Замечание об объёме данных дистрибутива
-          li Импорт зависимостей
-      li Исключение неиспользованной функциональности из сборки
-      li Функциональность
-        ul
-          li Работа с DOM
-          li Обработка событий
-          li Логирование
+      ul.TopPage-ShortDescription-UnorderedList
+        li Все параметры, возвращаемые значения и т. д. тщательно аннотированы; тип any ни разу не использован.
+        li.
+          Все названия функций, классов и т. д. проектировались так, что при переводе с английского суть
+          кристально чисто ясна без документации
+        li Исключены ситуации, когда смысл параметра непонятен по его позиции и значению в виде литерала
+        li При продакшен-сборке Webpack-ом неиспользуемая функциональность может быть исключена
 
 
-    .TopPage-ImageAndLibraryHeadingGroup
-      .TopPage-ImageAndLibraryHeadingGroup-Image
-      h3.TopPage-ImageAndLibraryHeadingGroup-Heading Пакет для Node.js
-      .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions-nodejs
+      h2.TopPage-Heading2 Экосистема
 
-    p.
-      Функциональность общего назначения для разработки на Node.js серверной части приложений, консольных и других утилит.
+      p.Paragraph.
+        Экосистема Yamato Daiwa ES Extensions включает в себя основной пакет, который может быть использован
+        все зависимости от среды выполнения кода, функциональность для браузерной среды и NodeJS, а также локализации.
 
-    p.
-      Рекомендовано для разработки любых программных продуктов на Node.js в дополнение к основному пакету библиотеки.
+      //- TODO Картинка
 
-    ul
-      li Начало работы
-        ul
-          li Установка
-          li Импорт зависимостей
-      li Функциональность
-        ul
-          li Утилиты
-          li Готовые классы ошибок
-      li Русская локализация
-        ul
-          li Локализованная функциональность
-          li Новая функциональность
-      li Другие локализации
-        ul
-          li Японская
+      .TopPage-ImageAndLibraryHeadingGroup
+        .TopPage-ImageAndLibraryHeadingGroup-Image
+        h3.TopPage-ImageAndLibraryHeadingGroup-Heading Главный пакет
+        .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions
+
+      p.Paragraph.
+        Большой набор функциональности общего назначения.
+        Содержит как простые функции для работы со строками, массивами т. д., так и мощные утилитарные классы
+        для анализа произвольных данных, генерации вежливых сообщений об ошибках и другие.
+
+      p.Paragraph.
+        Рекомендовано для любых решений, реализуемых на языке TypeScript.
+
+
+      h4 Содержание
+
+      //- TODO Картинка
+
+      .TopPage-ImageAndLibraryHeadingGroup
+        .TopPage-ImageAndLibraryHeadingGroup-Image
+        h3.TopPage-ImageAndLibraryHeadingGroup-Heading Пакет для клиентской разработки
+        .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions-browserjs
+
+      p.
+        Функциональность для браузерной разработки.
+        Отличная замена JQuery для тех, кому нужна жёсткая типизация.
+
+      p.
+        Рекомендовано для разработки веб-сайтов, где использование JavaScript фреймворков с клиентским рендерингом
+        (React, Vue и т. д.) нерационально из-за малого количества логики, а также для разработки веб-приложений
+        без использования фреймворков.
+
+      ul
+        li Начало работы
+          ul
+            li Установка
+            li Замечание об объёме данных дистрибутива
+            li Импорт зависимостей
+        li Исключение неиспользованной функциональности из сборки
+        li Функциональность
+          ul
+            li Работа с DOM
+            li Обработка событий
+            li Логирование
+
+
+      .TopPage-ImageAndLibraryHeadingGroup
+        .TopPage-ImageAndLibraryHeadingGroup-Image
+        h3.TopPage-ImageAndLibraryHeadingGroup-Heading Пакет для Node.js
+        .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions-nodejs
+
+      p.
+        Функциональность общего назначения для разработки на Node.js серверной части приложений, консольных и других утилит.
+
+      p.
+        Рекомендовано для разработки любых программных продуктов на Node.js в дополнение к основному пакету библиотеки.
+
+      ul
+        li Начало работы
+          ul
+            li Установка
+            li Импорт зависимостей
+        li Функциональность
+          ul
+            li Утилиты
+            li Готовые классы ошибок
+        li Русская локализация
+          ul
+            li Локализованная функциональность
+            li Новая функциональность
+        li Другие локализации
+          ul
+            li Японская
