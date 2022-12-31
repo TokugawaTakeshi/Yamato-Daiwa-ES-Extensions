@@ -52,17 +52,42 @@
 
             children: {
 
+              strings: {
+
+                tableOfContentTitle: localization.coreLibrary.functionality.children.strings.tableOfContentTitle,
+
+                children: {
+
+                  areStringifiedDigitsOnly: {
+
+                    tableOfContentTitle: "areStringifiedDigitsOnly",
+                    get URI() { return `@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.${ localization.fileNameLocalizationExtensions }` }
+
+                  }
+
+                }
+
+              },
+
               arrays: {
 
                 tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.tableOfContentTitle,
 
                 children: {
 
-                  addElementsToArray: {
+                  addingOfElements: {
 
-                    tableOfContentTitle:localization.coreLibrary.functionality.children.arrays.addElementsToArray.tableOfContentTitle,
-                    get URI() {
-                      return `@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.${ localization.fileNameLocalizationExtensions }.pug`
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.addingOfElements.tableOfContentTitle,
+
+                    children: {
+
+                      addElementsToArray: {
+
+                        tableOfContentTitle: "addElementsToArray",
+                        get URI() { return `@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.${ localization.fileNameLocalizationExtensions }.pug` }
+
+                      }
+
                     }
 
                   }

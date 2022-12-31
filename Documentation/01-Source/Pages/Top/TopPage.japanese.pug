@@ -14,7 +14,9 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("トップ");
     HTML_PageMetaData = {
-      description: "", // TODO
+      description: "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）はTypeScript言語での高品質開発専用の補助機能のライブラリである。" +
+          "多数の特殊化した簡単な関数も、豊富な機能なクラス（例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」）を含む。" +
+          "関数名や引数名は和訳すれば説明書が無くても、コードな何をしているか完全に明かになっている様に設計された。",
       author: HTML_PAGE_AUTHOR
     };
 
@@ -25,8 +27,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./index.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./Top/TopPage.russian.html"
+      [LanguageDropDownList.supportedLanguages.english]: "./../index.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./TopPage.russian.html"
     });
 
 

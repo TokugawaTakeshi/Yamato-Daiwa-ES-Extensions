@@ -11,7 +11,7 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru"
+    HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
@@ -26,6 +26,8 @@ block append Metadata
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 
     LanguageDropDownList.setLinks({
       [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.html",
@@ -61,9 +63,10 @@ block append SpecificContent
       Проверяет, #[+Keyword--YDID только лишь] #[+Term--YDID цифры] содержит целевое строчное значение.
 
     p.Article-Paragraph.
-      Конечно, ту же проверку сделать и с помощью регулярного выражения (причём в данном случае оно будет предельно простым),
-        но всё же регулярные выражения - это низкоуровневое API, а цель библиотеки - сделать код высокоуровневым,
-        в котором в идеале путём последовательных вызовов функций и методов классов лишь говорится, что делать.
+      Конечно, ту же проверку сделать и с помощью #[+Term--YDID регулярного выражения] (причём в данном случае оно будет
+        предельно простым), но всё же #[+Term--YDID регулярные выражения] - это #[+Keyphrase--YDID низкоуровневый] интерфейс,
+        а цель библиотеки - сделать код высокоуровневым, в котором в идеале путём последовательных вызовов функций и
+        методов классов с содержательными и однозначными имени лишь говорится, что делать.
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,
@@ -79,8 +82,41 @@ block append SpecificContent
           до #[+ImportantEntity--YDID 9].
         Хотя #[+Term--YDID числа] от от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9] и #[+Keyword--YDID совпадают]
           с #[+Term--YDID цифрами], двузначные числа (от #[+ImportantEntity--YDID 10]), отрицательные числа,
-          дробные числа и так далее - это всё именно #[+Term--YDID числа], а #[+Keyword--YDID не] цифры.
+          дробные числа и так далее - это всё #[+Keyword--YDID именно] #[+Term--YDID числа], а #[+Keyword--YDID не] цифры.
 
       p.Article-Paragraph.
         Также, #[+Keyword--YDID последовательности] #[+Term--YDID цифр], начинающиеся с нуля, #[+Term--YDID числами]
           #[+Keyword--YDID не] являются - это, собственно, просто #[+Term--YDID последовательность цифр].
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF.
+          import { areStringifiedDigitsOnly } from "@yamato-daiwa/es-extensions";
+
+          console.log(areStringifiedDigitsOnly("123"));
+        +CodeViewer-Explanation--YDF.
+          Данная строка включает в себя #[+Keyword--YDID только] цифры, а потому вызов функции вернёт
+            #[+SecondaryEntity__Code--YDID true].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("032"));
+        +CodeViewer-Explanation--YDF.
+          Хотя содержимое строки - #[+SecondaryEntity__Code--YDID 032] - это #[+Keyword--YDID не] число,
+            #[+Term--YDID последовательностью цифр] оно является, а потому возвращаемым значение будет #[+SecondaryEntity__Code--YDID true].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("03e"));
+        +CodeViewer-Explanation--YDF.
+          Что такое #[+SecondaryEntity__Code--YDID e] в данный строке?
+          #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.wikipedia.math.euler_sNumber" }).Article-Link Число Эйлера]?
+          Как бы то ни было, #[+ImportantEntity__Code--YDID areStringifiedDigitsOnly] возвращает #[+ImportantEntity__Code--YDID true]
+            #[+Keyphrase--YDID тогда и только тогда], когда строка содержит #[+Keyword--YDID только] #[+Term--YDID цифры]
+            (что очевидно и #[+Keyphrase--YDID должно быть] очевидно из названия функции),
+            потому в данном случае будет возвращено значение #[+SecondaryEntity__Code--YDID false].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("ab1"));
+        +CodeViewer-Explanation--YDF.
+          В данном случае, разумеется, будет возвращено #[+SecondaryEntity__Code--YDID false], потому что строка
+            содержит буквенные символы.

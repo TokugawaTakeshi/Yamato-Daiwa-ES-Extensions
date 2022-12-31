@@ -26,6 +26,8 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
+
     LanguageDropDownList.setLinks({
       [LanguageDropDownList.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.pug",
       [LanguageDropDownList.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.pug"

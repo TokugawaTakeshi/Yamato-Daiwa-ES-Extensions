@@ -14,7 +14,11 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Top page");
     HTML_PageMetaData = {
-      description: "", // TODO
+      description: "The &quot;Yamato-Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is the library " +
+        "for high quality development on TypeScript language. Including the large number of simple utility functions, " +
+        "and also the powerful classes, for example the &quot;RawObjectDataProcessor&quot; for the validation and " +
+        "postprocessing of object-type data. The function names, parameter etc. has been designed such as no documentation " +
+        "required to understand what the code doing.",
       author: HTML_PAGE_AUTHOR
     };
 
@@ -25,8 +29,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./TopPage.japanese.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./TopPage.russian.html"
+      [LanguageDropDownList.supportedLanguages.japanese]: "./Top/TopPage.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./Top/TopPage.russian.html"
     });
 
 
@@ -45,20 +49,7 @@ block append SpecificContent
         span.TopPage-ImageAndTopHeadingGroup-Heading-FirstLine Yamato Daiwa
         span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
 
-    p.TopPage-ShortDescription.
+    p.TopPage-ShortDescription-Heading.
       The reach utility libraries for type for high-quality TypeScript-based development.
 
-    +CompactTableOfContents(localizedRouting.coreLibrary.children)
-
-
-    h2.TopPage-Heading2 Ecosystem
-
-    p.
-      The ecosystem is including the core package, the functionality for BrowserJS, NodeJS and
-      also the localizations.
-
-
-    .TopPage-ImageAndLibraryHeadingGroup
-      .TopPage-ImageAndLibraryHeadingGroup-Image
-      h3.TopPage-ImageAndLibraryHeadingGroup-Heading CorePackage
-      .TopPage-ImageAndLibraryHeadingGroup-NPM_Name @yamato-daiwa/es-extensions
+    +CompactTableOfContents(localizedRouting).TopPage-TableOfContents
