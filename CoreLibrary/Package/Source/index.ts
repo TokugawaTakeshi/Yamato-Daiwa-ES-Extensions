@@ -52,7 +52,8 @@ export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumeratio
 
 
 /* === Data mocking ================================================================================================= */
-export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelpler/MockGatewayHelper";
+export { default as DataMocking } from "./DataMocking/DataMocking";
+export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelper";
 
 
 /* === Date & Time ================================================================================================== */
