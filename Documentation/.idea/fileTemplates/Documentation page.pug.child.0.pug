@@ -1,24 +1,24 @@
-//- TODO Edit path
+//- TODO Указать правильный путь
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  //- TODO Edit paths
+  //- TODO Указать правильный путь
   include ../../Components/Components.pug
-  include ../../SharedAssets/Markup/Assets.english.pug
+  include ../../SharedAssets/Markup/Assets.russian.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}");
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
-        whatFunctionDoes: "the special street magic" // TODO Edit
+        whatFunctionDoes: "особую, уличную магию" // TODO Редактировать
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -31,8 +31,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("${ROUTE}");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html",
+      [LanguageDropDownList.supportedLanguages.english]: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html"
     });
 
 
@@ -40,11 +40,11 @@ block append SpecificContent
 
   article
 
-    // TODO Edit
+    // TODO Редактировать
     +CallableExpressionScheme({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",
-      localizedDescriptiveHeading: "Makes the special, street magic",
+      localizedDescriptiveHeading: "Делает особую, уличную магию",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -64,4 +64,4 @@ block append SpecificContent
 
         +CodeViewer-Explanation--YDF
           p.Article-Paragraph.
-            This code outputs "OK" to console (thanks, cap).
+            Выводит "OK" в консоль (спасибо, кэп).

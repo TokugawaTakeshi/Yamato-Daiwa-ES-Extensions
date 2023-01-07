@@ -199,7 +199,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 #### Objects
 
 <dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Objects/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getObjectPropertySafely.md">getObjectPropertySafely</a></dt>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Objects/getObjectPropertySafely/getObjectPropertySafely.md">getObjectPropertySafely</a></dt>
   <dd>
     Works as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">optional chaining</a> but could be used for any fully-qualified name and returns value which being considered as <code>unknown</code>. 
     Intended to be used when the schema of value is not known enough (for example, because of lack of TypeScript type definition).

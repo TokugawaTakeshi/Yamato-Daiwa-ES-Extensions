@@ -135,7 +135,6 @@ export enum ClientErrorsHTTP_StatusCodes {
   unavailableForLegalReasons = 451
 }
 
-
 export enum ServerErrorsHTTP_StatusCodes {
   internalServerError = 500,
   notImplemented = 501,

@@ -4,7 +4,7 @@
 ```mermaid
 classDiagram
 class PoliteErrorsMessagesBuilder{
-  +buildMessage(object PoliteErrorsMessagesBuilder.NamedParameters)$ string
+  +buildMessage(object PoliteErrorsMessagesBuilder.SourceData)$ string
   +setDefaultLocalization(PoliteErrorsMessagesBuilder.Localization newLocalization)$ typeof PoliteErrorsMessagesBuilder
   +setDefaultBugTrackerURI(string bugTrackerURI)$ typeof PoliteErrorsMessagesBuilder
   +setTechnicalDetailsOnlyModeIf(boolean condition)$ typeof PoliteErrorsMessagesBuilder

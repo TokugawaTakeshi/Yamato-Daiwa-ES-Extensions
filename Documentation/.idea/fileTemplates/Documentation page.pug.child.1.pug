@@ -1,24 +1,24 @@
-//- TODO Edit path
+//- TODO パスを編集
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  //- TODO Edit paths
+  //- TODO パスを編集
   include ../../Components/Components.pug
-  include ../../SharedAssets/Markup/Assets.english.pug
+  include ../../SharedAssets/Markup/Assets.japanese.pug
 
 
 block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}");
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
-        whatFunctionDoes: "the special street magic" // TODO Edit
+        whatFunctionDoes: "特別なストリートの魔法" // TODO 編集
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -31,7 +31,7 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("${ROUTE}");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
+      [LanguageDropDownList.supportedLanguages.english]: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
       [LanguageDropDownList.supportedLanguages.russian]: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html",
     });
 
@@ -40,11 +40,11 @@ block append SpecificContent
 
   article
 
-    // TODO Edit
+    // TODO 編集
     +CallableExpressionScheme({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",
-      localizedDescriptiveHeading: "Makes the special, street magic",
+      localizedDescriptiveHeading: "特別なストリートの魔法をする",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -64,4 +64,4 @@ block append SpecificContent
 
         +CodeViewer-Explanation--YDF
           p.Article-Paragraph.
-            This code outputs "OK" to console (thanks, cap).
+            "OK"をコンソールに取得させる（キャプテン・オブヴィアス、ありがとう）。

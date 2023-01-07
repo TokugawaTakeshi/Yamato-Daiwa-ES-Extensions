@@ -1,12 +1,10 @@
-//- TODO Edit path
 extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  //- TODO Edit paths
-  include ../../Components/Components.pug
-  include ../../SharedAssets/Markup/Assets.english.pug
+  include ../../../../../Components/Components.pug
+  include ../../../../../SharedAssets/Markup/Assets.english.pug
 
 
 block append Metadata
@@ -14,11 +12,12 @@ block append Metadata
   -
 
     HTML_PAGE_LANGUAGE = "en";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}");
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
-        functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
-        whatFunctionDoes: "the special street magic" // TODO Edit
+        functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+        whatFunctionDoes: "Returns the element of specified array matching with the predicate if such element is exactly one, " +
+            "otherwise error will be thrown or null will be returned depending on dedicated option's value."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -28,11 +27,11 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("${ROUTE}");
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
     });
 
 
@@ -42,7 +41,7 @@ block append SpecificContent
 
     // TODO Edit
     +CallableExpressionScheme({
-      technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
+      technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
       headingTag: "h1",
       localizedDescriptiveHeading: "Makes the special, street magic",
       parametersSpecification: [
