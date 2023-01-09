@@ -1,11 +1,11 @@
-import Logger from "../../Logging/Logger";
-import DataRetrievingFailedError from "../../Errors/DataRetrievingFailed/DataRetrievingFailedError";
-import DataSubmittingFailedError from "../../Errors/DataSubmittingFailed/DataSubmittingFailedError";
+import Logger from "../Logging/Logger";
+import DataRetrievingFailedError from "../Errors/DataRetrievingFailed/DataRetrievingFailedError";
+import DataSubmittingFailedError from "../Errors/DataSubmittingFailed/DataSubmittingFailedError";
 
-import getRandomInteger from "../../RandomValuesGenerators/getRandomInteger";
-import secondsToMilliseconds from "../../DateTime/secondsToMilliseconds";
-import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
-import insertSubstringIf from "../../Strings/insertSubstringIf";
+import getRandomInteger from "../RandomValuesGenerators/getRandomInteger";
+import secondsToMilliseconds from "../DateTime/secondsToMilliseconds";
+import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
+import insertSubstringIf from "../Strings/insertSubstringIf";
 
 
 abstract class MockGatewayHelper {
@@ -13,19 +13,23 @@ abstract class MockGatewayHelper {
   private static readonly MINIMAL_PENDING_PERIOD__SECONDS: number = 1;
   private static readonly MAXIMAL_PENDING_PERIOD__SECONDS: number = 2;
 
-
   public static async simulateDataRetrieving<RequestParameters, ResponseData>(
-    requestParameters: RequestParameters,
-    getResponseData: () => ResponseData,
-    {
+    dataRetrievingSimulationConfiguration: MockGatewayHelper.
+        DataRetrievingSimulationConfiguration<RequestParameters, ResponseData>
+  ): Promise<ResponseData> {
+
+    const {
+      requestParameters,
+      getResponseData,
       minimalPendingPeriod__seconds = MockGatewayHelper.MINIMAL_PENDING_PERIOD__SECONDS,
       maximalPendingPeriod__seconds = MockGatewayHelper.MAXIMAL_PENDING_PERIOD__SECONDS,
       mustSimulateError = false,
       mustLogResponseData = false,
       gatewayName,
       transactionName
-    }: MockGatewayHelper.SimulationOptions
-  ): Promise<ResponseData> {
+    }: MockGatewayHelper.DataRetrievingSimulationConfiguration<
+      RequestParameters, ResponseData
+    > = dataRetrievingSimulationConfiguration;
 
     return new Promise<ResponseData>(
       (resolve: (responseData: ResponseData) => void, reject: (error: Error) => void): void => {
@@ -76,17 +80,22 @@ abstract class MockGatewayHelper {
   }
 
   public static async simulateDataSubmitting<RequestData, ResponseData>(
-    requestData: RequestData,
-    getResponseData: () => ResponseData,
-    {
+    dataSubmittingSimulationConfiguration: MockGatewayHelper.
+        DataSubmittingSimulationConfiguration<RequestData, ResponseData>
+  ): Promise<ResponseData> {
+
+    const {
+      requestData,
+      getResponseData,
       minimalPendingPeriod__seconds = MockGatewayHelper.MINIMAL_PENDING_PERIOD__SECONDS,
       maximalPendingPeriod__seconds = MockGatewayHelper.MAXIMAL_PENDING_PERIOD__SECONDS,
       mustSimulateError = false,
       mustLogResponseData = false,
       gatewayName,
       transactionName
-    }: MockGatewayHelper.SimulationOptions
-  ): Promise<ResponseData> {
+    }: MockGatewayHelper.DataSubmittingSimulationConfiguration<
+      RequestData, ResponseData
+    > = dataSubmittingSimulationConfiguration;
 
     return new Promise<ResponseData>(
       (resolve: (responseData: ResponseData) => void, reject: (error: Error) => void): void => {
@@ -138,6 +147,20 @@ abstract class MockGatewayHelper {
 
 
 namespace MockGatewayHelper {
+
+  export type DataRetrievingSimulationConfiguration<RequestParameters, ResponseData> =
+      Readonly<{
+        requestParameters: RequestParameters;
+        getResponseData: () => ResponseData;
+      }> &
+      SimulationOptions;
+
+  export type DataSubmittingSimulationConfiguration<RequestData, ResponseData> =
+      Readonly<{
+        requestData: RequestData;
+        getResponseData: () => ResponseData;
+      }> &
+      SimulationOptions;
 
   export type SimulationOptions = Readonly<{
     minimalPendingPeriod__seconds?: number;
