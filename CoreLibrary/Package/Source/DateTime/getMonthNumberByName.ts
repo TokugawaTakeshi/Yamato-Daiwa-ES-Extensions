@@ -5,27 +5,27 @@ import Logger from "../Logging/Logger";
 
 
 export default function getMonthNumberByName(
-  namedParameters: Readonly<{ targetMonthName: MonthsNames; numerationFrom: number; }>
+  sourceData: Readonly<{ targetMonthName: MonthsNames; numerationFrom: number; }>
 ): number {
 
-  const numerationFrom: number = namedParameters.numerationFrom;
+  const numerationFrom: number = sourceData.numerationFrom;
 
   if (numerationFrom !== 0 && numerationFrom !== 1) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
-        parameterName: "namedParameters.numerationFrom",
+        parameterName: "sourceData.numerationFrom",
         messageSpecificPart: `Supported month numerations are from 0 or 1 while actual value is ${ numerationFrom }.`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "getMonthNumberByName(namedParameters)"
+      occurrenceLocation: "getMonthNumberByName(sourceData)"
     });
   }
 
 
-  const isNumerationFrom0: boolean = namedParameters.numerationFrom === 0;
+  const isNumerationFrom0: boolean = sourceData.numerationFrom === 0;
 
-  switch (namedParameters.targetMonthName) {
+  switch (sourceData.targetMonthName) {
 
     case MonthsNames.january: return isNumerationFrom0 ? 0 : 1;
     case MonthsNames.february: return isNumerationFrom0 ? 1 : 2;

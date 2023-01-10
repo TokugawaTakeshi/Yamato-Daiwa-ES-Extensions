@@ -8,14 +8,14 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 
 export default function getDaysCountOfPeriod(
-  namedParameters: Readonly<{
+  sourceData: Readonly<{
     datesOrTimeMoments: [ Date | string, Date | string ];
     mustCountIncompleteDay: boolean;
   }>
 ): number {
 
-  const normalizedFirstDate: Date = new Date(namedParameters.datesOrTimeMoments[0]);
-  const normalizedSecondDate: Date = new Date(namedParameters.datesOrTimeMoments[1]);
+  const normalizedFirstDate: Date = new Date(sourceData.datesOrTimeMoments[0]);
+  const normalizedSecondDate: Date = new Date(sourceData.datesOrTimeMoments[1]);
 
   for (const [ index, dateOrTimeMoment ] of [ normalizedFirstDate, normalizedSecondDate ].entries()) {
 
@@ -23,12 +23,12 @@ export default function getDaysCountOfPeriod(
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
-          parameterName: "namedParameters",
+          parameterName: "sourceData",
           messageSpecificPart: `The ${ index === 0 ? "first" : "second" } date / time point is not valid native Date ` +
               "or ISO8601 definition."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "getDaysCountOfPeriod(namedParameters)"
+        occurrenceLocation: "getDaysCountOfPeriod(sourceData)"
       });
     }
 
@@ -46,7 +46,7 @@ export default function getDaysCountOfPeriod(
   }
 
 
-  return namedParameters.mustCountIncompleteDay ?
+  return sourceData.mustCountIncompleteDay ?
       Math.ceil(daysCount__couldBeFractional) :
       Math.floor(daysCount__couldBeFractional);
 

@@ -280,6 +280,91 @@ describe("DateWithoutTime", (): void => {
 
     });
 
+    describe("setLastDayOfSpecificMonthAndYear", (): void => {
+
+      describe("mutably", (): void => {
+
+        it("Month has been defined by name", (): void => {
+
+          const initialInstance: DateWithoutTime = new DateWithoutTime({
+            year: 2022,
+            monthName: MonthsNames.august,
+            dayOfMonth: 1
+          });
+
+          initialInstance.setLastDayOfSpecificMonthAndYear({
+            year: 2023,
+            monthName: MonthsNames.january
+          });
+
+          it("Updating was as expected", (): void => {
+            Assert.strictEqual(initialInstance.year, 2023);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom0, 0);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1, 1);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1__2Digits, "01");
+            Assert.strictEqual(initialInstance.monthName, MonthsNames.january);
+            Assert.strictEqual(initialInstance.dayOfMonth, 15);
+            Assert.strictEqual(initialInstance.dayOfMonth__2Digits, "15");
+          });
+
+        });
+
+        it("Month number has been defined from 0", (): void => {
+
+          const initialInstance: DateWithoutTime = new DateWithoutTime({
+            year: 2022,
+            monthName: MonthsNames.august,
+            dayOfMonth: 1
+          });
+
+          initialInstance.setAltogether({
+            year: 2023,
+            monthNumber__numerationFrom0: 0,
+            dayOfMonth: 15
+          });
+
+          it("Updating was as expected", (): void => {
+            Assert.strictEqual(initialInstance.year, 2023);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom0, 0);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1, 1);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1__2Digits, "01");
+            Assert.strictEqual(initialInstance.monthName, MonthsNames.january);
+            Assert.strictEqual(initialInstance.dayOfMonth, 15);
+            Assert.strictEqual(initialInstance.dayOfMonth__2Digits, "15");
+          });
+
+        });
+
+        it("Month number has been defined from 1", (): void => {
+
+          const initialInstance: DateWithoutTime = new DateWithoutTime({
+            year: 2022,
+            monthName: MonthsNames.august,
+            dayOfMonth: 1
+          });
+
+          initialInstance.setAltogether({
+            year: 2023,
+            monthNumber__numerationFrom1: 1,
+            dayOfMonth: 15
+          });
+
+          it("Updating was as expected", (): void => {
+            Assert.strictEqual(initialInstance.year, 2023);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom0, 0);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1, 1);
+            Assert.strictEqual(initialInstance.monthNumber__numerationFrom1__2Digits, "01");
+            Assert.strictEqual(initialInstance.monthName, MonthsNames.january);
+            Assert.strictEqual(initialInstance.dayOfMonth, 15);
+            Assert.strictEqual(initialInstance.dayOfMonth__2Digits, "15");
+          });
+
+        });
+
+      });
+
+    });
+
   });
 
 });

@@ -9,7 +9,7 @@
 * <kbd>addElementsToArray</kbd> The copy of the live template for [<kbd>aeta</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md).
   From this version, the <kbd>aeta</kbd> is the alias for <kbd>addElementsToArray</kbd>.
 * <kbd>getIndexesOfArrayElementsWhichSatisfiesThePredicate</kbd> - The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
-* <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [getLastElementOfArray](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
+* <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [`getLastElementOfArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
 * <kbd>removeArrayElementsByIndexes</kbd> The copy of the live template for [<kbd>raebi</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md).
   From this version, the <kbd>raebi</kbd> is the alias for <kbd>removeArrayElementsByIndexes</kbd>.
 * <kdb>replaceArrayElementsByIndexesImmutably</kbd> The copy of the live template for [<kbd>raebii</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md).
@@ -18,7 +18,7 @@
   From this version, the <kbd>rmaebp</kbd> is the alias for <kbd>removeArrayElementsByPredicates</kbd>.
 * <kbd>replaceArrayElementsByPredicates</kbd> The copy of the live template for [<kbd>rpaebp</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md).
   From this version, the <kbd>rpaebp</kbd> is the alias for <kbd>replaceArrayElementsByPredicates</kbd>.
-* <kbd>twoDimensionalizeArray</kbd>, <kbd>tda</kbd> The live template and it's alias respectively for the [**twoDimensionalizeArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
+* <kbd>twoDimensionalizeArray</kbd>, <kbd>tda</kbd> The live template and it's alias respectively for the [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
 
 ### Change
 

@@ -1,5 +1,5 @@
 export default function getDaysCountInSpecificMonth(
-  namedParameters: Readonly<
+  sourceData: Readonly<
     { year: number; } &
     (
       { monthNumber__numerationFrom0: number; } |
@@ -8,9 +8,9 @@ export default function getDaysCountInSpecificMonth(
   >
 ): number {
 
-  const targetMonthNumber__numerationFrom1: number = "monthNumber__numerationFrom1" in namedParameters ?
-      namedParameters.monthNumber__numerationFrom1 : namedParameters.monthNumber__numerationFrom0 + 1;
+  const targetMonthNumber__numerationFrom1: number = "monthNumber__numerationFrom1" in sourceData ?
+      sourceData.monthNumber__numerationFrom1 : sourceData.monthNumber__numerationFrom0 + 1;
 
-  return new Date(namedParameters.year, targetMonthNumber__numerationFrom1, 0).getDate();
+  return new Date(sourceData.year, targetMonthNumber__numerationFrom1, 0).getDate();
 
 }

@@ -85,17 +85,19 @@ class DateWithoutTime {
 
   }
 
+  /* [ TypeScript bug ] The annotation `Readonly<Omit<DateWithoutTime.DateDefinition, "dayOfMonth">>` causes TS2345 error. */
   public setLastDayOfSpecificMonthAndYear(
-    dateDefinition: Readonly<Omit<DateWithoutTime.DateDefinition, "dayOfMonth">>,
+    dateDefinition: Readonly<
+      { year: number; } &
+      (
+        { monthName: MonthsNames; } |
+        { monthNumber__numerationFrom0: number; } |
+        { monthNumber__numerationFrom1: number; }
+      )
+    >,
     options: Readonly<{ immutably?: true; }> = {}
   ): DateWithoutTime {
 
-    /* The parameter of `setLastDayOfSpecificMonthAndYear` is the superset parameter of `getMonthNumberFrom0ByMonthDefinition`.
-     * Additionally, the TypeScript error message is strange:
-     * `TS2345: Argument of type 'Readonly  >' is not assignable to parameter of type 'Readonly '.`
-     * Looks like the bug, but the TypeScript team is too bureaucratic what takes away the desire to cooperate by opening
-     *  the issues. */
-    /* @ts-ignore: TS2345 See above ("@ts-ignore" comment does not support the multiline mode) */
     const newMonthNumber__numerationFrom0: number = DateWithoutTime.getMonthNumberFrom0ByMonthDefinition(dateDefinition);
 
     const updatedNativeDateObject: Date = new Date(
@@ -160,7 +162,7 @@ class DateWithoutTime {
     return getISO8601StringWithoutTimePart(this._nativeDateObject);
   }
 
-  public toLocalString(): string {
+  public toLocaleString(): string {
     return this._nativeDateObject.toLocaleDateString();
   }
 

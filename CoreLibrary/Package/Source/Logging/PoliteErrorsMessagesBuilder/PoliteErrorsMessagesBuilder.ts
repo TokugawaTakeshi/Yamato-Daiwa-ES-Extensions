@@ -11,19 +11,20 @@ abstract class PoliteErrorsMessagesBuilder {
   private static defaultBugTrackerURI: string | undefined;
 
 
-  public static buildMessage(namedParameters: PoliteErrorsMessagesBuilder.NamedParameters): string {
+  public static buildMessage(sourceData: PoliteErrorsMessagesBuilder.SourceData): string {
 
-    const isTechnicalsDetailOnlyMode: boolean = namedParameters.isTechnicalsDetailOnlyMode ??
+    const isTechnicalsDetailOnlyMode: boolean = sourceData.isTechnicalsDetailOnlyMode ??
         PoliteErrorsMessagesBuilder.isTechnicalsDetailOnlyMode;
 
     if (isTechnicalsDetailOnlyMode) {
-      return namedParameters.technicalDetails;
+      return sourceData.technicalDetails;
     }
 
 
-    const localization: PoliteErrorsMessagesBuilder.Localization = namedParameters.
+    const localization: PoliteErrorsMessagesBuilder.Localization = sourceData.
         localization ?? PoliteErrorsMessagesBuilder.localization;
-    const bugTackerURI: string | undefined = namedParameters.bugTrackerURI ??
+
+    const bugTackerURI: string | undefined = sourceData.bugTrackerURI ??
         PoliteErrorsMessagesBuilder.defaultBugTrackerURI;
 
     return `\n${ localization.introduction }` +
@@ -40,11 +41,12 @@ abstract class PoliteErrorsMessagesBuilder {
 
         `\n\n${ localization.whatHappened.heading }` +
         `\n${ localization.whatHappened.introduction }` +
-        `\n${ namedParameters.politeExplanation }` +
+        `\n${ sourceData.politeExplanation }` +
 
         `\n\n${ localization.technicalDetails.heading }` +
         `\n${ localization.technicalDetails.introduction }` +
-        `\n${ namedParameters.technicalDetails }`;
+        `\n${ sourceData.technicalDetails }`;
+
   }
 
   public static setDefaultLocalization(
@@ -66,13 +68,15 @@ abstract class PoliteErrorsMessagesBuilder {
     }
 
     return PoliteErrorsMessagesBuilder;
+
   }
+
 }
 
 
 namespace PoliteErrorsMessagesBuilder {
 
-  export type NamedParameters = Readonly<{
+  export type SourceData = Readonly<{
     technicalDetails: string;
     politeExplanation: string;
     bugTrackerURI?: string;
@@ -92,6 +96,7 @@ namespace PoliteErrorsMessagesBuilder {
       introduction: string;
     }>;
   }>;
+
 }
 
 
