@@ -57,6 +57,14 @@ export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelper";
 
 
 /* === Date & Time ================================================================================================== */
+/* --- Comparison --------------------------------------------------------------------------------------------------- */
+export { default as DateTimeComparison } from "./DateTime/Comparison/DateTimeComparison";
+export { default as isEarlierThan } from "./DateTime/Comparison/isEarlierThan";
+export { default as isLaterThan } from "./DateTime/Comparison/isLaterThan";
+export { default as isNotEarlierThan } from "./DateTime/Comparison/isNotEarlierThan";
+export { default as isNotLaterThan } from "./DateTime/Comparison/isNotLaterThan";
+
+/* --- Other -------------------------------------------------------------------------------------------------------- */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
 export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
 export { default as doesTimeIntervalsOverlaps } from "./DateTime/doesTimeIntervalsOverlaps";

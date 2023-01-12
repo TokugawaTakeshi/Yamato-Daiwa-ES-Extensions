@@ -159,7 +159,10 @@ class DateWithoutTime {
   }
 
   public toISO8601String(): string {
-    return getISO8601StringWithoutTimePart(this._nativeDateObject);
+    return getISO8601StringWithoutTimePart({
+      nativeDateInstance: this._nativeDateObject,
+      mustAssociateOutputWithLocalDate: false
+    });
   }
 
   public toLocaleString(): string {

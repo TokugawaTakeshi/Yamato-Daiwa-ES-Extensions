@@ -66,7 +66,7 @@ In YDEE, all functionality working with dates forces the programmer to comprehen
 
 It is the fundamental disadvantage of position-based parameters.
 Some developers believe position-based parameters are cleaner, hover it is the huge maintainability impact because
-  to understand the meaning of these parameters the checking of documentation could required herewith it is dangerous
+  to understand the meaning of these parameters the checking of documentation could require herewith it is dangerous
   to count on human's memory.
 
 ```typescript

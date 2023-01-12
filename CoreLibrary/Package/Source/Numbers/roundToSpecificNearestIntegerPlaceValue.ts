@@ -1,9 +1,9 @@
 export default function roundToSpecificNearestIntegerPlaceValue(
-    namedParameters: Readonly<{
-      targetNumber: number;
-      trailingZerosCount: number;
-    }>
+  sourceData: Readonly<{
+    targetNumber: number;
+    trailingZerosCount: number;
+  }>
 ): number {
-  const coefficient: number = 10 * namedParameters.trailingZerosCount;
-  return Math.round(namedParameters.targetNumber / coefficient) * coefficient;
+  const coefficient: number = 10 * sourceData.trailingZerosCount;
+  return Math.round(sourceData.targetNumber / coefficient) * coefficient;
 }
