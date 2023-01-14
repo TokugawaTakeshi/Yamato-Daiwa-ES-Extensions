@@ -52,5 +52,17 @@ provideComponentsPositionalRelationship(
         ("Article-ImprovedList" { retireFromTarget: 10px })\
         ("Article-CodeViewer" { retireFromTarget: 8px })\
         ("Article-AttentionBox" { retireFromTarget: 12px })
+  })\
+  ("Article-SingleImageViewer" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px },
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-AttentionBox" { retireFromTarget: 12px })
   })
 )

@@ -107,6 +107,15 @@ projectBuilding:
           PRODUCTION:
             outputTopDirectoryRelativePath: 03-ProductionBuild/images
 
+      AssociatedWithPages:
+
+        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+
 
   # === Development server =============================================================================================
   browserLiveReloading:

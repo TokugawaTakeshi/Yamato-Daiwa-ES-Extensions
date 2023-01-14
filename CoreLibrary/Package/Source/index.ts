@@ -51,25 +51,10 @@ export {
 export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
 
 
-/* === Data mocking ================================================================================================= */
-export { default as DataMocking } from "./DataMocking/DataMocking";
-export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelper";
-
-
 /* === Date & Time ================================================================================================== */
-/* --- Comparison --------------------------------------------------------------------------------------------------- */
-export { default as DateTimeComparison } from "./DateTime/Comparison/DateTimeComparison";
-export { default as isEarlierThan } from "./DateTime/Comparison/isEarlierThan";
-export { default as isLaterThan } from "./DateTime/Comparison/isLaterThan";
-export { default as isNotEarlierThan } from "./DateTime/Comparison/isNotEarlierThan";
-export { default as isNotLaterThan } from "./DateTime/Comparison/isNotLaterThan";
-
 /* --- Other -------------------------------------------------------------------------------------------------------- */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
-export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
-export { default as doesTimeIntervalsOverlaps } from "./DateTime/doesTimeIntervalsOverlaps";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
-export { default as getDaysCountOfPeriod } from "./DateTime/getDaysCountOfPeriod";
 export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";
 export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
 export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
@@ -79,10 +64,6 @@ export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
 export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
 export { default as hasDateCome } from "./DateTime/hasDateCome";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
-export { default as isEarlierThan } from "./DateTime/isEarlierThan";
-export { default as isLaterThan } from "./DateTime/isLaterThan";
-export { default as isNotEarlierThan } from "./DateTime/isNotEarlierThan";
-export { default as isNotLaterThan } from "./DateTime/isNotLaterThan";
 // === TODO 未校閲 ======================================================================================================
 export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
 export { default as isValidISO8601DateAndPossiblyTimeDefinition } from "./DateTime/isValidISO8601DateAndPossiblyTimeDefinition";
@@ -105,6 +86,20 @@ export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separate
 export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
 
 /* === Strings ====================================================================================================== */
+/* --- Regular expressions ------------------------------------------------------------------------------------------ */
+export { default as getMatchingWithFirstRegularExpressionCapturingGroup } from
+    "./Strings/RegularExpressions/getMatchingWithFirstRegularExpressionCapturingGroup";
+
+/* --- URI ---------------------------------------------------------------------------------------------------------- */
+/* --- Files and directories --- */
+export { default as appendLastFileNameExtension } from "./Strings/URI/FilesAndDirectories/appendLastFileNameExtension";
+
+/* --- Rest --- */
+export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
+export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
+export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
+
+/* --- Rest ---------------------------------------------------------------------------------------------------------- */
 export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
 export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
 export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
@@ -116,6 +111,10 @@ export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDig
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
+export {
+  default as extractMatchingsWithRegularExpression,
+  type ExtractingOfMatchingsWithRegularExpression
+} from "./Strings/extractMatchingsWithRegularExpression";
 export { default as extractSubstring } from "./Strings/extractSubstring";
 export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEnglishAbbreviatedOrdinalNumber";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";

@@ -43,6 +43,7 @@ block append SpecificContent
   article
 
     h1.Article-Heading1 Начало использования
+
     h2.Article-Heading2#Installation--SECTION Установка
 
     p.Article-Paragraph.
@@ -50,20 +51,27 @@ block append SpecificContent
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm].
 
     +CodeViewer--YDF({
-      title: "Консольная команда"
+      title: "Консольная команда установки пакета"
     }).Article-CodeViewer
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
       }) npm i @yamato-daiwa/es-extensions -E
 
+
     h2.Article-Heading2#DistributiveVolumeNotice--SECTION Об объёме дистибутива
 
     p.Article-Paragraph.
-      На #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link странице @yamato-daiwa/es-extensions ]
-        официального сайта #[+ImportantEntity--YDID npm] можно видеть объём пакета ("Unpacked Size").
+      На #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link странице @yamato-daiwa/es-extensions]
+        #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link официального сайта npm]
+        можно видеть объём пакета ("Unpacked Size").
       Например, для версии #[+SecondaryEntity--YDID 1.5.8] это было 698 килобайт:
 
-    //- TODO① Добавить картинку
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
+      imageAlternateText: "Пример отображения объёма дистрибутива пакета на официальном сайте пакетного менеджера npm. " +
+          "Важно, что отображающийся объём не всегда соответствует тому объёму, на который увеличится приложение, " +
+          "использующее данный пакет."
+    }).Article-SingleImageViewer
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
@@ -71,9 +79,9 @@ block append SpecificContent
       Это #[+Keyword--YDID не] объём, на который увеличится Ваша библиотека после подключения пакета.
 
     p.Article-Paragraph.
-      Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальные для браузерных приложений)
+      Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальны для браузерных приложений)
         и #[+Term--YDID CommonJS-модулей] (оптимальны для Node.js приложений).
-      Один из этих видом модулей будет проигнорирован.
+      Таким образом, в зависимости от используемого типа модулей, значительная часть файлов будут проигнорированы.
 
     p.Article-Paragraph.
       Объём в несколько сотен килобайт для Node.js незначителен.
