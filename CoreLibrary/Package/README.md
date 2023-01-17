@@ -305,9 +305,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md">TimePoint</a></dt>
-  <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
-
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">getDaysCountInSpecificMonth</a></dt>
   <dd>Returns days count in specified year and month.</dd>
 

@@ -121,7 +121,7 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T01:31:11.146Z"
+    "modificationDatetime__ISO_8601": "2023-01-18T03:34:23.033Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug": {
     "issues": [],
@@ -281,11 +281,11 @@
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:16:27.689Z"
+    "modificationDatetime__ISO_8601": "2023-01-15T02:36:07.029Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:25:52.786Z"
+    "modificationDatetime__ISO_8601": "2023-01-15T02:31:19.208Z"
   },
   "01-Source/SharedAssets/Markup/Assets.english.pug": {
     "issues": [],

@@ -1,5 +1,5 @@
 export default function shiftDateBySpecificDaysCount(
-  namedParameters: Readonly<
+  sourceData: Readonly<
     {
       initialDate: Date;
       dayCount: number;
@@ -11,14 +11,14 @@ export default function shiftDateBySpecificDaysCount(
   >
 ): Date {
 
-  const mutableInitialDate: Date = new Date(namedParameters.initialDate);
+  const mutableInitialDate: Date = new Date(sourceData.initialDate);
 
   return new Date(
-      mutableInitialDate.setDate(
-          "toFuture" in namedParameters ?
-              mutableInitialDate.getDate() + namedParameters.dayCount :
-              mutableInitialDate.getDate() - namedParameters.dayCount
-      )
+    mutableInitialDate.setDate(
+      "toFuture" in sourceData ?
+          mutableInitialDate.getDate() + sourceData.dayCount :
+          mutableInitialDate.getDate() - sourceData.dayCount
+    )
   );
 
 }

@@ -129,9 +129,14 @@ class TimePoint {
   }
 
 
+  public format(formatter: (selfInstance: TimePoint) => string): string {
+    return formatter(this);
+  }
+
   public toISO8601String(): string {
     return this.nativeDateObject.toISOString();
   }
+
 }
 
 

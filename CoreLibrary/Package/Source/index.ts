@@ -55,15 +55,15 @@ export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumeratio
 /* --- Other -------------------------------------------------------------------------------------------------------- */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
-export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";
 export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
 export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
 export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
 export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNumber";
 export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
 export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
-export { default as hasDateCome } from "./DateTime/hasDateCome";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
+export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
+export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
 // === TODO 未校閲 ======================================================================================================
 export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
 export { default as isValidISO8601DateAndPossiblyTimeDefinition } from "./DateTime/isValidISO8601DateAndPossiblyTimeDefinition";

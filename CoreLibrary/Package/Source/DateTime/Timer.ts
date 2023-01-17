@@ -7,13 +7,13 @@ abstract class Timer {
 
 
   protected constructor(
-    namedParameters: Readonly<{
+    compoundParameter: Readonly<{
       period__seconds: number;
       onElapsed?: (outcome: Timer.Outcomes) => void;
     }>
   ) {
-    this.period__seconds = namedParameters.period__seconds;
-    this.onElapsed = namedParameters.onElapsed;
+    this.period__seconds = compoundParameter.period__seconds;
+    this.onElapsed = compoundParameter.onElapsed;
   }
 
 
@@ -39,6 +39,7 @@ namespace Timer {
     promise = "PROMISE",
     callback = "CALLBACK"
   }
+
 }
 
 
