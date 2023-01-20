@@ -1,5 +1,5 @@
-import extractMatchingsWithRegularExpression from "../../extractMatchingsWithRegularExpression";
-import type { ExtractingOfMatchingsWithRegularExpression } from "../../extractMatchingsWithRegularExpression";
+import extractMatchingsWithRegularExpression from "../../RegularExpressions/extractMatchingsWithRegularExpression";
+import type { ExtractingOfMatchingsWithRegularExpression } from "../../RegularExpressions/extractMatchingsWithRegularExpression";
 import insertSubstringIf from "../../insertSubstringIf";
 import nullToEmptyString from "../../../ValueTransformers/nullToEmptyString";
 

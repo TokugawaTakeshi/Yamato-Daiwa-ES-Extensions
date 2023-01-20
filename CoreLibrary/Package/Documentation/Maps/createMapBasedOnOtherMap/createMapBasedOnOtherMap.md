@@ -1,8 +1,8 @@
-# `createMapBasedOnOtherMap`: Create map based on other map
+# `createMapBasedOnOtherMap` - Create map based on other map
 
 ```
-createMapBasedOnOtherMap<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(
-  inputMap: Map<InputMapKey, InputMapValue>,
+<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(
+  inputMap: ReadonlyMap<InputMapKey, InputMapValue>,
   transformer: (inputMapKey: InputMapKey, inputMapValue: InputMapValue) => [ OutputMapKey, OutputMapValue ]
 ): Map<OutputMapKey, OutputMapValue>
 ```

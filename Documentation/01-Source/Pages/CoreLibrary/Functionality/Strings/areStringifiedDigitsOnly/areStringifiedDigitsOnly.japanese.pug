@@ -16,12 +16,12 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "areStringifiedDigitsOnly",
-        whatFunctionDoes: "引数の文字列が数字のみであるかどうかを確認し、ブール値を返す"
+        whatFunctionDoes: "対象文字列が数字のみかどうかを確認して真/偽を返す。"
       }),
       author: HTML_PAGE_AUTHOR
     };
 
-    FAVICON_URI = "@MustBeInRoot/favicon";
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
@@ -41,7 +41,7 @@ block append SpecificContent
     +CallableExpressionScheme({
       technicalName: "areStringifiedDigitsOnly",
       headingTag: "h1",
-      localizedDescriptiveHeading: "確認対象の文字列",
+      localizedDescriptiveHeading: "文字列化した数字のみであるか",
       parametersSpecification: [
         {
           localizedName: "数字のみと推測される文字列",
@@ -55,6 +55,12 @@ block append SpecificContent
 
     p.Article-Paragraph.
       #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字が文字列化した#[+Term--YDID 数字]かどうか確認する。
+
+    p.Article-Paragraph.
+      無論、#[+Term--YDID 正規表現]を使う事でも同じ処理を簡単に出来るだろう。
+      しかし#[+Term--YDID 正規表現]は「多機能だが暗号の様な見た目なので理解し難い」のがネックだ。
+      このライブラリの目的は、高級言語の様に「人間に理解しやすい処理方法」を提供する事である。
+      理想としては用途を必要最小限に絞り込み、一義的な名称の関数やクラスメソッドを順番に呼び出す様なコードが、箇条書きの様に読みやすくなる事だ。
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,
@@ -77,7 +83,7 @@ block append SpecificContent
 
     +ImprovedList--YDF({ type: ImprovedList__YDF.Types.unordered }).Article-ImprovedList
       +ImprovedList-Item--YDF.
-        #[a.PrototypeArticle-Link(href=sharedExternalLinks.wikipedia.math.euler_sNumber target="_blank" rel="nofollow") ネイピア数]は
+        #[a.Article-Link(href=sharedExternalLinks.wikipedia.math.euler_sNumber target="_blank" rel="nofollow") ネイピア数]は
           #[+Term--YDID 数字]とは#[+Keyword--YDID 見做されない]。
       +ImprovedList-Item--YDF #[+Term--YDID 全角数字]は#[+Keyword--YDID 対象外]。
       +ImprovedList-Item--YDF.

@@ -16,7 +16,7 @@ describe("getObjectPropertySafely", (): void => {
 
     /* eslint-disable @typescript-eslint/no-unsafe-member-access -- We need to check does target function work as native
     *   optional chaining - it is valid JavaScript but not TypeScript. */
-    // @ts-expect-error: In this case, the usage of ts-expect is obeying to guidelines (testing)
+    // @ts-expect-error: TS2339 In this case, the usage of ts-expect is obeying to guidelines (testing)
     strictEqual(experimentalSample?.alpha1?.alpha1_1, "ALPHA");
     /* eslint-enable @typescript-eslint/no-unsafe-member-access */
 
@@ -28,7 +28,7 @@ describe("getObjectPropertySafely", (): void => {
 
     /* eslint-disable @typescript-eslint/no-unsafe-member-access -- We need to check does target function work as native
      *   optional chaining - it is valid JavaScript but not TypeScript. */
-    // @ts-expect-error: In this case, the usage of ts-expect is obeying to guidelines (testing)
+    // @ts-expect-error: TS2339 In this case, the usage of ts-expect is obeying to guidelines (testing)
     strictEqual(isUndefined(experimentalSample?.bravo1?.bravo1_1), true);
     /* eslint-enable @typescript-eslint/no-unsafe-member-access */
     strictEqual(isUndefined(getObjectPropertySafely(experimentalSample, "bravo1.bravo1_1")), true);

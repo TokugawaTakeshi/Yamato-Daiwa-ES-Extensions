@@ -87,9 +87,9 @@ projectBuilding:
 
     assetsGroups:
 
-      MustBeInRoot:
+      MustBeInPublicRoot:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInRoot
+        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInPublicRoot
 
         buildingModeDependent:
           LOCAL_DEVELOPMENT:

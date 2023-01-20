@@ -4,6 +4,14 @@ export default function roundDownToSpecificIntegerPlaceValue(
     trailingZerosCount: number;
   }>
 ): number {
-  const coefficient: number = 10 * sourceData.trailingZerosCount;
+
+  const digitsCountInTargetNumber: number = sourceData.targetNumber.toString().length;
+
+  const trailingZerosCount: number = sourceData.trailingZerosCount < digitsCountInTargetNumber ?
+      sourceData.trailingZerosCount : digitsCountInTargetNumber - 1;
+
+  const coefficient: number = Math.pow(10, trailingZerosCount);
+
   return Math.floor(sourceData.targetNumber / coefficient) * coefficient;
+
 }

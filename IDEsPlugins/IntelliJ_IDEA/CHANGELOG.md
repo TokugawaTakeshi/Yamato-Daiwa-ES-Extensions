@@ -22,6 +22,7 @@
 
 ### Change
 
+* Drop the support for IntelliJ IDEA 2021.X
 * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**.
 * <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**.
 

@@ -17,12 +17,12 @@ block append Metadata
       description: MetaDescriptionTemplates.function({
         functionName: "areStringifiedDigitsOnly",
         whatFunctionDoes: "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
-                "то возвращает логическое значение &quot;истина&quot;."
+          "то возвращает логическое значение &quot;истина&quot;."
       }),
       author: HTML_PAGE_AUTHOR
     };
 
-    FAVICON_URI = "@MustBeInRoot/favicon";
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
@@ -55,13 +55,14 @@ block append SpecificContent
     }).Article-CallableExpressionScheme
 
     p.Article-Paragraph.
-      Проверяет, #[+Keyword--YDID только лишь] #[+Term--YDID цифры] содержит целевое строчное значение.
+      Проверяет, #[+Keyword--YDID только ли] #[+Term--YDID цифры] содержит целевое строчное значение.
 
     p.Article-Paragraph.
       Конечно, ту же проверку сделать и с помощью #[+Term--YDID регулярного выражения] (причём в данном случае оно будет
         предельно простым), но всё же #[+Term--YDID регулярные выражения] - это #[+Keyword--YDID низкоуровневый] интерфейс,
-        а цель библиотеки - сделать код высокоуровневым, в котором в идеале путём последовательных вызовов функций и
-        методов классов с содержательными и однозначными именами лишь говорится, что делать.
+        а цель библиотеки - сделать код высокоуровневым, чтобы он идеале представлял собой последовательный вызов
+        узкоспециализированных функций и методов классов #[+Keyphrase--YDID с содержательными и однозначными именами],
+        а потому легко читался как список действий.
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,
@@ -76,12 +77,12 @@ block append SpecificContent
         #[+DefinableTerm--YDID Цифры] - это #[+Keyword--YDID набор] из #[+Keyword__Contrast--YDID десяти]
           #[+Term--YDID символов] от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9].
         Хотя #[+Term--YDID числа] от от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9] и #[+Keyword--YDID совпадают]
-          с #[+Term--YDID цифрами], двузначные числа (от #[+ImportantEntity--YDID 10]), отрицательные числа,
+          с #[+Term--YDID цифрами], двузначные числа и числа с бо&#x301;льшим количеством знаков, отрицательные числа,
           дробные числа и так далее - это всё #[+Keyword--YDID именно] #[+Term--YDID числа], а #[+Keyword--YDID не] цифры.
 
       p.Article-Paragraph.
-        Также, #[+Keyword--YDID последовательности] #[+Term--YDID цифр], начинающиеся с нуля, #[+Term--YDID числами]
-          #[+Keyword--YDID не] являются - это, собственно, просто #[+Term--YDID последовательности цифр].
+        Также, #[+Keyword--YDID последовательности] #[+Term--YDID цифр] #[+Keyphrase--YDID начинающиеся с нуля],
+        #[+Term--YDID числами] #[+Keyword--YDID не] являются - это, собственно, просто #[+Term--YDID последовательности цифр].
 
     +CodeViewer--YDF.Article-CodeViewer
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })

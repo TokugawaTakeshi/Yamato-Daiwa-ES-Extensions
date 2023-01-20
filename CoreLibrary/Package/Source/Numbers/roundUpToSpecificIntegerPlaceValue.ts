@@ -1,9 +1,17 @@
 export default function roundUpToSpecificIntegerPlaceValue(
-    namedParameters: Readonly<{
-      targetNumber: number;
-      trailingZerosCount: number;
-    }>
+  sourceData: Readonly<{
+    targetNumber: number;
+    trailingZerosCount: number;
+  }>
 ): number {
-  const coefficient: number = 10 * namedParameters.trailingZerosCount;
-  return Math.ceil(namedParameters.targetNumber / coefficient) * coefficient;
+
+  const digitsCountInTargetNumber: number = sourceData.targetNumber.toString().length;
+
+  const trailingZerosCount: number = sourceData.trailingZerosCount < digitsCountInTargetNumber ?
+      sourceData.trailingZerosCount : digitsCountInTargetNumber - 1;
+
+  const coefficient: number = Math.pow(10, trailingZerosCount);
+
+  return Math.ceil(sourceData.targetNumber / coefficient) * coefficient;
+
 }

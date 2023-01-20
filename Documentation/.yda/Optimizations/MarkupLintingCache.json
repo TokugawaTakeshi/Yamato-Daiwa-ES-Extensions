@@ -1,19 +1,19 @@
 {
   "01-Source/Components/Components.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T01:32:23.631Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.329Z"
   },
   "01-Source/Pages/index.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-03T02:18:52.150Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.360Z"
   },
   "01-Source/Layouts/Minimal/MinimalLayout.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-03T02:18:52.147Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.335Z"
   },
   "01-Source/Layouts/TwoColumns/TwoColumnsLayout.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-17T02:17:32.777Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.335Z"
   },
   "01-Source/Pages/Top/TopPage-Japanese.pug": {
     "issues": [],
@@ -29,15 +29,15 @@
   },
   "01-Source/Components/SharedSingletons/DrawerMenu/DrawerMenu.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-03T02:18:52.146Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.333Z"
   },
   "01-Source/Components/SharedSingletons/Footer/Footer.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-03T02:18:52.146Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.333Z"
   },
   "01-Source/Components/SharedSingletons/Header/Header.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-18T03:26:47.893Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.334Z"
   },
   "01-Source/Pages/CoreLibrary/areStringifiedDigitsOnly/areStringifiedDigitsOnly-English.pug": {
     "issues": [],
@@ -77,27 +77,27 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-07T03:11:27.266Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.490Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-07T03:11:27.235Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.490Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-07T03:11:27.246Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.491Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-09T01:42:27.181Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.492Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-09T01:42:27.220Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.492Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-09T02:24:06.323Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.493Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.english.pug": {
     "issues": [],
@@ -113,19 +113,19 @@
   },
   "01-Source/Pages/Top/TopPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T02:16:57.081Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.497Z"
   },
   "01-Source/Pages/Top/_TopPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T03:47:09.463Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.498Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-18T03:34:23.033Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.494Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-01T01:14:27.761Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.495Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
     "issues": [],
@@ -141,11 +141,11 @@
   },
   "01-Source/Pages/Top/TopPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T03:45:45.384Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.498Z"
   },
   "01-Source/Components/SharedReusable/CompactTableOfContents/CompactTableOfContents.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-24T02:43:32.558Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.331Z"
   },
   "01-Source/Pages/_CommonRequirements/generateLocalizedRouting.pug": {
     "issues": [],
@@ -153,11 +153,11 @@
   },
   "01-Source/SharedAssets/Markup/generateLocalizedRouting.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:06:09.741Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.499Z"
   },
   "01-Source/SharedAssets/Markup/HTML_PageMetadata.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-10T01:57:31.783Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.364Z"
   },
   "01-Source/SharedAssets/Markup/Localization/Localization.english.pug": {
     "issues": [],
@@ -217,27 +217,27 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/English/RoutingLocalization.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:05:11.257Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.364Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/ComponentsLocalization.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-10T01:53:04.429Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.366Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/RoutingLocalization.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:05:11.219Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.367Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/ComponentsLocalization.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-10T01:53:04.405Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.365Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/RoutingLocalization.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:05:11.283Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.365Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-06T00:32:43.004Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.495Z"
   },
   "node_modules/@yamato-daiwa/frontend-localization-japanese/Components.pug": {
     "issues": [],
@@ -261,7 +261,7 @@
   },
   "01-Source/Components/SharedReusable/Controls/LanguageDropDownList/LanguageDropDownList.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-22T01:03:35.739Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.332Z"
   },
   "01-Source/Pages/CoreLibrary/CoreLibrary.english.pug": {
     "issues": [],
@@ -277,31 +277,31 @@
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:16:34.354Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.496Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:36:07.029Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.496Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-15T02:31:19.208Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:25:17.497Z"
   },
   "01-Source/SharedAssets/Markup/Assets.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T03:13:21.513Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.363Z"
   },
   "01-Source/SharedAssets/Markup/Assets.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T03:13:21.496Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.363Z"
   },
   "01-Source/SharedAssets/Markup/Assets.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T03:13:21.505Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.363Z"
   },
   "01-Source/SharedAssets/Markup/generateSharedExternalLinks.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T01:47:04.460Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.382Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/ExternalLinksLocalizaiton.english.pug": {
     "issues": [],
@@ -309,7 +309,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/English/MetaDescriptionTemplates.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T01:17:36.637Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.364Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/ExternalLinksLocalizaiton.russian.pug": {
     "issues": [],
@@ -317,7 +317,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/MetaDescriptionTemplates.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T01:17:36.644Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.366Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/ExternalLinksLocalizaiton.japanese.pug": {
     "issues": [],
@@ -325,18 +325,18 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/MetaDescriptionTemplates.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-31T01:17:36.630Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.365Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/SharedExternalLinksLocalizaiton.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T01:44:12.336Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.365Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/SharedExternalLinksLocalizaiton.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T01:45:51.764Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.367Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/SharedExternalLinksLocalizaiton.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2022-12-30T01:44:04.531Z"
+    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.366Z"
   }
 }

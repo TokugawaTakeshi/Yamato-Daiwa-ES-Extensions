@@ -126,7 +126,7 @@ console.log(RussianDaysOfWeek.saturday); // -> "СУББОТА"
 
 ##### Перечисление `RussianMonthsNames`
 
-Перечисление, содержащее сокращённые русские названия месяцев.
+Перечисление, содержащее русские названия месяцев.
 Ключи перечисления совпадают с ключами [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md).
 
 ```typescript

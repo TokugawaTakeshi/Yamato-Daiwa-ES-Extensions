@@ -1,5 +1,5 @@
 export default function createMapBasedOnOtherMap<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(
-  initialMap: Map<InputMapKey, InputMapValue>,
+  initialMap: ReadonlyMap<InputMapKey, InputMapValue>,
   transformer: (inputMapKey: InputMapKey, inputMapValue: InputMapValue) => [ OutputMapKey, OutputMapValue ]
 ): Map<OutputMapKey, OutputMapValue> {
 
@@ -12,4 +12,5 @@ export default function createMapBasedOnOtherMap<InputMapKey, InputMapValue, Out
   );
 
   return outputMap;
+
 }

@@ -1,6 +1,6 @@
 # `millisecondsToSeconds` - convert amount of milliseconds to amount of seconds
 
-Convert amount of milliseconds to amount of seconds.
+Converts amount of milliseconds to amount of seconds.
 
 ```
 (millisecondsAmount: number): number

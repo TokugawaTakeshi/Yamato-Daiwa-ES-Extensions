@@ -4,6 +4,14 @@ export default function roundToSpecificNearestIntegerPlaceValue(
     trailingZerosCount: number;
   }>
 ): number {
-  const coefficient: number = 10 * sourceData.trailingZerosCount;
+
+  const digitsCountInTargetNumber: number = sourceData.targetNumber.toString().length;
+
+  const trailingZerosCount: number = sourceData.trailingZerosCount < digitsCountInTargetNumber ?
+      sourceData.trailingZerosCount : digitsCountInTargetNumber - 1;
+
+  const coefficient: number = Math.pow(10, trailingZerosCount);
+
   return Math.round(sourceData.targetNumber / coefficient) * coefficient;
+
 }

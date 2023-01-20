@@ -1,8 +1,8 @@
-# `filterMap`: Filter map
+# `filterMap` - Filter map
 
 ```
-filterMap<Key, Value>(
-  targetMap: Map<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
+<Key, Value>(
+  targetMap: ReadonlyMap<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
 ): Map<Key, Value> 
 ```
 
