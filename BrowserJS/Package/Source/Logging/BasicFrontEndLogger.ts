@@ -78,7 +78,8 @@ abstract class BasicFrontEndLogger {
       [ `\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "red" } ],
       [ `${ errorLog.occurrenceLocation }`, { color: "red" } ],
 
-      /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※
+       * The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
        * type can/doest not be "matched" with function's parameter's types.
        * https://stackoverflow.com/a/67015118/4818123 */
       ...("caughtError" in errorLog ? [
@@ -89,6 +90,8 @@ abstract class BasicFrontEndLogger {
           { color: "red" }
         ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData,
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in errorLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
         [ `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`, { color: "red" } ]
@@ -105,9 +108,7 @@ abstract class BasicFrontEndLogger {
       [ ` ${ errorLikeLog.title }\n`, { color: "red", "font-weight": "bold" } ],
       [ `${ errorLikeLog.description }`, { color: "red" } ],
 
-      /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
-       * type can/doest not be "matched" with function's parameter's types.
-       * https://stackoverflow.com/a/67015118/4818123 */
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in errorLikeLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
         [ `\n${ stringifyAndFormatArbitraryValue(errorLikeLog.additionalData) }`, { color: "red" } ]
@@ -126,13 +127,13 @@ abstract class BasicFrontEndLogger {
       [ ` ${ warningLog.title }\n`, { color: "orange", "font-weight": "bold" } ],
       [ `${ warningLog.description }`, { color: "orange" } ],
 
-      /* 〔 Theory 〕 The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
-       * type can/doest not be "matched" with function's parameter's types.
-       * https://stackoverflow.com/a/67015118/4818123 */
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("occurrenceLocation" in warningLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "orange" } ],
         [ `${ warningLog.occurrenceLocation }`, { color: "orange" } ]
       ] : []) as BasicFrontEndLogger.FormattedOutputData,
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in warningLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "orange" } ],
         [ `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`, { color: "orange" } ]
@@ -148,6 +149,7 @@ abstract class BasicFrontEndLogger {
       [ ` ${ badgeText } `, { background: "mediumseagreen", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
       [ ` ${ successLog.title }\n`, { color: "mediumseagreen", "font-weight": "bold" } ],
       [ `${ successLog.description }`, { color: "mediumseagreen" } ],
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in successLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "mediumseagreen" } ],
         [ `\n${ stringifyAndFormatArbitraryValue(successLog.additionalData) }`, { color: "mediumseagreen" } ]
@@ -163,6 +165,7 @@ abstract class BasicFrontEndLogger {
       [ ` ${ badgeText } `, { background: "dodgerblue", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
       [ ` ${ infoLog.title }\n`, { color: "dodgerblue", "font-weight": "bold" } ],
       [ `${ infoLog.description }`, { color: "dodgerblue" } ],
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
       ...("additionalData" in infoLog ? [
         [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "dodgerblue" } ],
         [ `\n${ stringifyAndFormatArbitraryValue(infoLog.additionalData) }`, { color: "dodgerblue" } ]
