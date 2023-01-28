@@ -1,7 +1,7 @@
 # getObjectPropertySafely
 
 ```
-getObjectPropertySafely(
+(
   targetObject: unknown,
   dotSeparatedOrArrayedPathToTargetProperty: Array<string> | string
 ): unknown 
