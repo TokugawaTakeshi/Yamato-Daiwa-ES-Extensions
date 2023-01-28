@@ -1,4 +1,4 @@
-# `roundDownToSpecificIntegerPlaceValue` - Rounds down the number to specific integer place value
+# `roundDownToSpecificIntegerPlaceValue` - Round down the number to specific integer place value
 
 ```
 (sourceData: Readonly<{ targetNumber: number; trailingZerosCount: number; }>): number
