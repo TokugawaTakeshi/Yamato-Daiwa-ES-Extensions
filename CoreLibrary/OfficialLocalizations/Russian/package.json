@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.6.0-alpha.1",
+  "version": "1.6.0",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -26,17 +26,17 @@
     "Distributable"
   ],
   "devDependencies": {
-    "@types/mocha": "10.0.0",
-    "@types/node": "16.11.26",
-    "@yamato-daiwa/es-extensions": "1.6.0-alpha.5",
-    "@yamato-daiwa/style_guides": "0.0.23",
-    "mocha": "10.0.0",
-    "rimraf": "3.0.2",
+    "@types/mocha": "10.0.1",
+    "@types/node": "18.11.18",
+    "@yamato-daiwa/es-extensions": "1.6.0",
+    "@yamato-daiwa/style_guides": "0.0.38",
+    "mocha": "10.2.0",
+    "rimraf": "4.1.2",
     "ts-node": "10.9.1",
-    "typescript": "4.8.4"
+    "typescript": "4.9.4"
   },
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": ">=1.6.0-alpha.5 <1.7.0"
+    "@yamato-daiwa/es-extensions": "^1.6.0"
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
