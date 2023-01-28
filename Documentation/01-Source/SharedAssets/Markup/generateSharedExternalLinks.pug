@@ -1,0 +1,41 @@
+-
+
+  function generateSharedExternalLinks(localization) {
+
+    return {
+
+      mdn: {
+        array: {
+          unshift: localization.mdn.array.unshift
+        }
+      },
+
+      typescript: {
+        configurationReference: "https://www.typescriptlang.org/tsconfig"
+      },
+
+      npm: {
+        top: "https://www.npmjs.com",
+        YDES_Extensions: "https://www.npmjs.com/package/@yamato-daiwa/es-extensions"
+      },
+
+      webpack: {
+        top: "https://webpack.js.org/",
+        treeShaking: "https://webpack.js.org/guides/tree-shaking/"
+      },
+
+      wikipedia: {
+        math: {
+          euler_sNumber: localization.wikipedia.math.euler_sNumber
+        }
+      },
+
+      jetBrains: {
+        intelliJ_IDEA_FamilyIDEs: "https://www.jetbrains.com/products/#type=ide",
+        liveTemplates: localization.jetBrains.liveTemplates,
+        YDEE_Plugin: "https://plugins.jetbrains.com/plugin/17677-yamato-daiwa-frontend"
+      }
+
+    };
+
+  }

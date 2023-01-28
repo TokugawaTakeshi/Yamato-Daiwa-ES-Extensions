@@ -40,6 +40,7 @@ class TimePoint{
     +Date nativeDateObject
   
     +toISO8601String() void
+    +format(Function formatter) string
     +setLocalization()$ void
 }
 ```
@@ -86,6 +87,25 @@ console.log(
   `ISO 8614 string: ${normalizedDateTime.toISO8601String()}`
 );
 ```
+
+To get above formatted output, there is not need to create store the instance to the variable - there is the `format` method:
+
+```typescript
+new TimePoint(Date.now()).format(
+  (selfInstance: TimePoint): string =>
+
+      `Year: ${selfInstance.year}\n\n` +
+
+      "Month:\n" +
+      `                                             Name: ${selfInstance.monthName}\n` +
+      `                       Number (numeration from 0): ${selfInstance.monthNumber__numerationFrom0}\n` +
+      `                       Number (numeration from 1): ${selfInstance.monthNumber__numerationFrom1}\n` +
+      `Month number (numeration from 1, always 2 digits): ${selfInstance.monthNumber__numerationFrom1__2Digits}`
+      
+      // And so on.
+);
+```
+
 
 ## About class name
 

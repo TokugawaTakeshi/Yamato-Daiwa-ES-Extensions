@@ -1,0 +1,67 @@
+//- TODO パスを編集
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  //- TODO パスを編集
+  include ../../Components/Components.pug
+  include ../../SharedAssets/Markup/Assets.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
+        whatFunctionDoes: "特別なストリートの魔法" // TODO 編集
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("${ROUTE}");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html",
+    });
+
+
+block append SpecificContent
+
+  article
+
+    // TODO 編集
+    +CallableExpressionScheme({
+      technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
+      headingTag: "h1",
+      localizedDescriptiveHeading: "特別なストリートの魔法をする",
+      parametersSpecification: [
+        {
+          localizedName: "Target string",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    }).Article-CallableExpressionScheme
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log("OK");
+
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            "OK"をコンソールに取得させる（キャプテン・オブヴィアス、ありがとう）。

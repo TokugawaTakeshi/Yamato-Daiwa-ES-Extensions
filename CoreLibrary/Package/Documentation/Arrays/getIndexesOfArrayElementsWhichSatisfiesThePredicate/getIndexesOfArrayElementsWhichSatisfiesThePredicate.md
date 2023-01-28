@@ -1,10 +1,11 @@
-# `getIndexesOfArrayElementsWhichSatisfiesThePredicate`: Retrieving of indexes of array elements which satisfies to predicate
+# `getIndexesOfArrayElementsWhichSatisfiesThePredicate` - Retrieving of indexes of array elements which satisfies to predicate
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexesOfArrayElementsWhichSatisfiesThePredicate-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getIndexesOfArrayElementsWhichSatisfiesThePredicate<ArrayElement>(
-  targetArray: Array<ArrayElement>, predicate: (arrayElement: ArrayElement) => boolean
+<ArrayElement>(
+  targetArray: ReadonlyArray<ArrayElement>, 
+  predicate: (arrayElement: ArrayElement) => boolean
 ): Array<number>
 ```
 
@@ -24,12 +25,13 @@ const sample1: Array<Product> = [
 
 getIndexesOfArrayElementsWhichSatisfiesThePredicate(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 500
-); // => Expected output: [ 2, 3 ]
+); // -> Expected output: [ 2, 3 ]
 
 getIndexesOfArrayElementsWhichSatisfiesThePredicate(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
-); // => Expected output: []
+); // -> Expected output: []
 ```
+
 
 ## Quick inputting
 

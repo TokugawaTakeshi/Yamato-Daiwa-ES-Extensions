@@ -1,0 +1,108 @@
+@require "../../../node_modules/@yamato-daiwa/frontend/Functionality.styl"
+@require "../../../node_modules/@yamato-daiwa/frontend/Components.styl"
+
+
+.TopPage
+
+  MAXIMAL_CONTENT_WIDTH = 920px
+  MINIMAL_SIDE_SYMMETRIC_PADDINGS__WIDE_SCREENS = 20px
+
+  wideScreensConfigurationMinimalWidth = MAXIMAL_CONTENT_WIDTH + 2*MINIMAL_SIDE_SYMMETRIC_PADDINGS__WIDE_SCREENS
+
+  WideScreensConfiguration()
+    @media (min-width: wideScreensConfigurationMinimalWidth)
+      {block}
+
+  NarrowScreensConfiguration()
+    @media (max-width: wideScreensConfigurationMinimalWidth - 1)
+      {block}
+
+
+  +WideScreensConfiguration()
+
+    CenteredContentWithComputedHorizontalPaddings({ contentWidth: MAXIMAL_CONTENT_WIDTH })
+
+
+  +NarrowScreensConfiguration()
+
+    Paddings({ horizontalSymmetric: 12px })
+
+
+  &-ImageAndTopHeadingGroup
+
+    display grid
+    grid-template-columns auto minmax(0, 1fr)
+    column-gap 12px
+    align-items center
+
+    width fit-content
+    centerHorizontallyWithoutWrapper({ targetElementType: HorizontalCenteringWithoutWrapper.TargetElementTypes.block })
+
+    margin-top 12px
+
+
+    &-Image
+
+      width 64px
+
+
+    &-Heading
+
+      display flex
+      flex-direction column
+
+      font-family Arial Black, Arial Bold, Gadget, sans-serif
+      font-weight bold
+      color: MaterialDesignColors.blue.P900
+
+
+      &-FirstLine
+
+        font-size 24px
+
+
+      &-SecondLine
+
+        font-size 32px
+
+        margin-top 4px
+
+
+  &-ShortDescription
+
+    &-Heading
+
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 20px, lineSpacing: 6px })
+      text-align center
+
+      font-weight bold
+      color: MaterialDesignColors.blue.P900
+
+      margin-top 12px
+
+
+    &-Paragraph
+
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 16px, lineSpacing: 4px })
+      text-align center
+
+      font-weight bold
+      color: MaterialDesignColors.blue.P900
+
+      margin-top 12px
+
+
+    &-UnorderedList
+
+      UnorderedList--YDF()
+
+
+      li
+
+        applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 14px, lineSpacing: 4px })
+        list-style-type "■ "
+
+
+  &-TableOfContents
+
+    margin-top 24px

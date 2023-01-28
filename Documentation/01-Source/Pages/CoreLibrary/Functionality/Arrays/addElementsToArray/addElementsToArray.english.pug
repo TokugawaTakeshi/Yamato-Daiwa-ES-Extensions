@@ -1,0 +1,45 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../Components/Components.pug
+  include ../../../../../SharedAssets/Markup/Assets.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "addElementsToArray",
+        whatFunctionDoes: "adds elements to start, end, or specified position of target array; " +
+          "mutable or non-mutable adding is available."
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]: "./addElementsToArray.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./addElementsToArray.russian.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      entityName: "addElementsToArray",
+      entityLocalizedInterpretation: "Add elements to array"
+    }).Article-ProgrammaticEntityHeading

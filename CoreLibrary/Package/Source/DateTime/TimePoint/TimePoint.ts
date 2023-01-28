@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import DaysOfWeek from "../../ConstantsAndEnumerations/DateTime/DaysOfWeek";
-import type MonthsNames from "../../ConstantsAndEnumerations/MonthsNames";
+import type MonthsNames from "../../ConstantsAndEnumerations/DateTime/MonthsNames";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
 import isString from "../../TypeGuards/Strings/isString";
@@ -129,9 +129,14 @@ class TimePoint {
   }
 
 
+  public format(formatter: (selfInstance: TimePoint) => string): string {
+    return formatter(this);
+  }
+
   public toISO8601String(): string {
     return this.nativeDateObject.toISOString();
   }
+
 }
 
 

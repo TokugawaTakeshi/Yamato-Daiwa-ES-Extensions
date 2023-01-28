@@ -32,7 +32,6 @@ export namespace GetRandomSubarrayOperation {
   export function setLocalization(newLocalization: Localization): void {
     localization = newLocalization;
   }
-
 }
 
 export default function getRandomSubarray<ArrayElement>(
@@ -47,6 +46,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (!Number.isInteger(options.minimalElementsCount)) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
@@ -60,6 +60,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.minimalElementsCount < 0) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
@@ -72,6 +73,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.minimalElementsCount >= targetArray.length) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: "The minimal element's count of subarray must be less than elements count of initial array."
         }),
@@ -95,6 +97,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (!Number.isInteger(options.maximalElementsCount)) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.maximalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.
               generateInvalidMaximalElementsCountErrorMessage({ actualValue: options.maximalElementsCount })
@@ -108,6 +111,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.maximalElementsCount < minimalElementsCount) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
           messageSpecificPart: GetRandomSubarrayOperation.localization.generateMaximalElementCountIsSmallerThanMinimal({
             minimalElementsCount, maximalElementsCount: options.maximalElementsCount
@@ -121,6 +125,7 @@ export default function getRandomSubarray<ArrayElement>(
     if (options.maximalElementsCount > targetArray.length) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
+          parameterNumber: 2,
           parameterName: "options.maximalElementsCount",
           messageSpecificPart: "The maximal elements count of subarray could not exceed the elements count of initial array."
         }),

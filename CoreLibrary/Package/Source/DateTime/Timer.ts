@@ -1,21 +1,46 @@
-export default abstract class Timer {
+abstract class Timer {
 
   protected readonly period__seconds: number;
-  protected readonly onElapsed: () => unknown;
+  protected readonly onElapsed?: (outcome: Timer.Outcomes) => void;
+
+  protected mustStop: boolean = false;
 
 
   protected constructor(
-    namedParameters: {
+    compoundParameter: Readonly<{
       period__seconds: number;
-      onElapsed: () => unknown;
-    }
+      onElapsed?: (outcome: Timer.Outcomes) => void;
+    }>
   ) {
-    this.period__seconds = namedParameters.period__seconds;
-    this.onElapsed = namedParameters.onElapsed;
+    this.period__seconds = compoundParameter.period__seconds;
+    this.onElapsed = compoundParameter.onElapsed;
   }
 
 
-  public abstract start(): void;
-  public abstract stop(): void;
-  public abstract restart(): void;
+  public abstract countDown(
+    namedParameters?: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.promise; }>
+  ): Promise<Timer.Outcomes>;
+
+  public abstract countDown(
+    namedParameters: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+  ): void;
+
 }
+
+
+namespace Timer {
+
+  export enum Outcomes {
+    elapsed = "ELAPSED",
+    stopped = "STOPPED"
+  }
+
+  export enum AsynchronousCompletions {
+    promise = "PROMISE",
+    callback = "CALLBACK"
+  }
+
+}
+
+
+export default Timer;

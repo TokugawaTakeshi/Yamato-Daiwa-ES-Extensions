@@ -3,7 +3,7 @@
 /* eslint max-depth: [ "error", 6 ] */
 
 import type { ArbitraryObject } from "../Types/ArbitraryObject";
-import type { ReadonlyParsedJSON, ParsedJSON_Object, ParsedJSON_Array, ParsedJSON_NestedProperty } from "../Types/ParsedJSON";
+import type { ReadonlyParsedJSON, ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
 import RawObjectDataProcessorLocalization__English from "./RawObjectDataProcessorLocalization__English";
 
@@ -232,7 +232,7 @@ class RawObjectDataProcessor {
 
     /* [ Approach ] Except the bug case, the reaching of this point possible only with invalid TypeScript. */
     Logger.throwErrorAndLog({
-      errorInstance: new InvalidParameterValueError({ parameterName: "valueType" }),
+      errorInstance: new InvalidParameterValueError({ parameterNumber: 1, parameterName: "valueType" }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });
@@ -1253,7 +1253,7 @@ class RawObjectDataProcessor {
       parentObject,
       targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: {
-      targetValue: NonNullable<unknown>;
+      targetValue: Exclude<unknown, undefined | null>;
       targetValueSpecification: RawObjectDataProcessor.CertainTypeValueSpecification;
       parentObject?: ArbitraryObject;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;

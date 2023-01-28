@@ -1,11 +1,14 @@
-# `twoDimensionalizeArray`
+# `twoDimensionalizeArray` - convert flat array to two dimensional array
+
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-twoDimensionalizeArray-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template_(alias)-tda-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-twoDimensionalizeArray<ArrayElement>(
-  namedParameters: {
-    targetFlatArray: Array<ArrayElement>;
-    elementsPerNestedArray: number;
-  }
+<ArrayElement>(
+  sourceData: Readonly<{
+    targetFlatArray: ReadonlyArray<ArrayElement>;
+    elementsCountPerNestedArray: number;
+  }>
 ): Array<Array<ArrayElement>> {
 ```
 
@@ -29,7 +32,7 @@ In this case, both nested array will be complete.
 ];
 
 const twoDimensionalArray: Array<Array<string>> = twoDimensionalizeArray({
-  targetFlatArray: sampleFlatArray, elementsPerNestedArray: 3
+  targetFlatArray: sampleFlatArray, elementsCountPerNestedArray: 3
 });
 
 console.log(twoDimensionalArray.length); // => 2 (two nested arrays)

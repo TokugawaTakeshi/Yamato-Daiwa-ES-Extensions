@@ -6,7 +6,8 @@ const InvalidParameterValueErrorLocalization__Russian: InvalidParameterValueErro
   defaultTitle: "Невалидное значение параметра",
   generateDescription:
       (namedParameters: InvalidParameterValueError.Localization.DescriptionTemplateNamedParameters): string =>
-          `Значение параметра '${ namedParameters.parameterName }' невалидно.` +
+          `Значение параметра №${ namedParameters.parameterNumber } (общее название: '${ namedParameters.parameterName }') ` +
+          "невалидно." +
           `${ insertSubstring(namedParameters.messageSpecificPart, {
             modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
           }) }`

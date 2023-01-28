@@ -1,0 +1,32 @@
+extends ../../../node_modules/@yamato-daiwa/frontend/PagesTemplates/RegularWebPage.pug
+
+
+block append PageContent
+
+  .TwoColumnsLayout
+
+    .TwoColumnsLayout-UpperFixedContent
+
+      +Header.TwoColumnsLayout-Header
+
+      block UpperFixedContentSlot
+
+
+    .TwoColumnsLayout-Sidebar
+
+      +CompactTableOfContents(localizedRouting)
+
+      block Sidebar
+
+
+    main.TwoColumnsLayout-SpecificContent
+
+      block SpecificContent
+
+
+    .TwoColumnsLayout-BottomFixedContent
+
+      block BottomContentSlot
+
+      +Footer.TwoColumnsLayout-Footer
+

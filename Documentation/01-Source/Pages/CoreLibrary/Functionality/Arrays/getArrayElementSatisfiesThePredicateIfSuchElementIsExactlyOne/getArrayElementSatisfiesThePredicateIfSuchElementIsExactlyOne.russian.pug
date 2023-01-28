@@ -1,0 +1,188 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../Components/Components.pug
+  include ../../../../../SharedAssets/Markup/Assets.russian.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+        whatFunctionDoes: "возвращает элемент массива когда он и только он один удовлетворяет указанному предикату, " +
+            "в противном случае либо возвращает null, либо бросает ошибку."
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      entityName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      entityLocalizedInterpretation: "Взять удовлетворяющий предикату элемент массива если такой элемент ровно один"
+    }).Article-ProgrammaticEntityHeading
+
+    +CodeViewer--YDF({
+      title: "Сигнатура"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+      }): :html_special_characters_to_html_entities
+        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
+          targetArray: Array<ArrayElement>,
+          predicate: (arrayElement: ArrayElement) => boolean
+        ): ArrayElement | null
+
+        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
+          targetArray: Array<ArrayElement>,
+          predicate: (arrayElement: ArrayElement) => boolean,
+          options: { mustThrowErrorIfElementNotFoundOrMoreThan1: true; }
+        ): ArrayElement
+
+    p.Article-Paragraph.
+      Возвращает элемент массива удовлетворяющий указанному предикату тогда только и только тогда, когда такой элемент
+        ровно один.
+      Если же такого элемента нет, либо их два и больше то:
+
+    ul.Article-List
+      li.
+        Будет выброшено исключение, если указана опция mustThrowErrorIfElementNotFoundOrMoreThan1: true третьим параметром
+        TypeScript при этом будет верить, что если значение было возвращено, то это не null, а то, что указано параметром
+          обобщения
+      li.
+        Если такая опция не указана, то будет возвращён null.
+        При это предстоит самостоятельно проверить значение на Null
+
+
+    h2.Article-Heading2 Сравнение с нативными методами
+
+    p.Article-Paragraph.
+      Сравниваемые ниже нативные методы не лучше и не хуже функции
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne];
+        что именно использовать - зависит от того, какое поведение требуется с случаях, когда:
+
+    ul.Article-List
+      li Нет ни одного элемента, удовлетворяющего предикату.
+      li Два и более элементов, удовлетворяющих предикату.
+
+    h3.Article-Heading3 Array.prototype.find
+
+    ul.Article-List
+      li.
+        Общего с #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] у этого
+          метода то, что оба ищут первое совпадение с предикатом.
+      li.
+        Если удовлетворяющих предикату элементов нет, #[+ImportantEntity__Code--YDID Array.prototype.find] возвращает
+          #[+ImportantEntity__Code--YDID undefined].
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] возвращает
+          #[+ImportantEntity__Code--YDID null] либо бросает ошибку - в зависимости от наличия третьего параметра.
+        Если выбран вариант с бросанием ошибки, то TypeScript не будет требовать проверки на #[+ImportantEntity__Code--YDID null].
+      li.
+        Если удовлетворяющих предикату элементов два и больше, то #[+ImportantEntity__Code--YDID Array.prototype.find]
+          возвращает первый, а остальные игнорирован.
+        Именно эта особенность стала основным мотивом к созданию
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne], потому что
+          часто нам надо не просто получить элемент по предикату, но и убедиться, что он уникальный.
+        Поэтому, #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] никогда
+          не возвращает элемент, если не только он один удовлетворяет предикату.
+
+
+
+    h3.Article-Heading3 Array.prototype.filter
+
+    p.Article-Paragraph.
+      Данный метод предназначен не для доступа к конкретному элементу массива, а для получения выборки из исходного массива.
+      Другими словами, этот метод массива возвращает тоже массив.
+
+    p.Article-Paragraph.
+      Этот метод возвращает все элементы, удовлетворяющие предикату, а не только первый.
+
+    p.Article-Paragraph.
+      Если же элементов, удовлетворяющих предикату, нет, то будет возвращён пустой массив.
+      Попытка доступа к любому элементу массива никак не будет замечена TypeScript-ом, даже если он пустой.
+      А при обращении к пустому элементу массива будет возвращён undefined.
+
+
+    h2.Article-Heading2 Примеры
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            Возьмём в качестве опытного образца этот массив в названиями американских городов.
+            Два их них начинаются с "Santa", три из них - с "Sa", а вот с "St." - только один.
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(
+            getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+            )
+          );
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            Будет возвращён третий элемент, потому что согласно предикату, нам нужен элемент, который начинается с "St.",
+              а такой элемент только один.
+
+          p.Article-Paragraph.
+            Это знаем мы в данном примере, но не TypeScript, потому такое использовании функции требует ручную проверку на null.
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(
+            getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
+            )
+          );
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            Будет возвращён null, потому что элементов, удовлетворяющих предикату - два, а не один.
+            В название функции чёрным по белому сказано, что взятие элемента произойдёт только тогда, тогда предикату
+              удовлетворяет ровно один, а в нашем случае - два.
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          let match: string;
+
+          try {
+
+            match = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample,
+              (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+              { throwErrorIfElementNotFoundOrMoreThan1: true }
+            );
+
+          } catch (error: unknown) {
+
+            if (error instanceof UnexpectedEventError) {
+              console.error("Что!? Я ожидал только один!");
+            }
+          }
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            Использование функции в таком варианте (с третьим параметром) допускается только тогда, когда Вы уверены,
+              что элемент, удовлетворяющий предикату, ровно один, при иного при нормальном функционировании быть не может.
+            Перехватывать данное исключение или нет - решайте сами в зависимости от типа приложения, при этом TypeScript
+              в данном случае будет верить, что если взятие элемента произошло, то это не null.

@@ -1,0 +1,80 @@
+extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../Components/Components.pug
+  include ../../../SharedAssets/Markup/Assets.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("利用開始");
+    HTML_PageMetaData = {
+      description: "「Yamato Daiwa ECMAScript extensions」ライブラリの利用開始の案内。導入、容量、TypeScript無しの利用関連注意事項、機能のインポート",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./GetStartedWithCoreLibraryPage.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 利用開始
+
+    h2.Article-Heading2#Installation--SECTION 導入
+
+    p.Article-Paragraph.
+      導入手順は#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm]
+        #[+Term--YDID パッケージマネージャー]にとって標準えある。
+
+    +CodeViewer--YDF({
+      title: "パッケージを導入するコンソールコマンド"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+      }) npm i @yamato-daiwa/es-extensions -E
+
+
+    h2.Article-Heading2#DistributiveVolumeNotice--SECTION 配布容量関連注目
+
+    p.Article-Paragraph.
+      #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト]の
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link @yamato-daiwa/es-extensionsのページ]
+        でсが表示されている。
+      例えば、バージョン#[+SecondaryEntity--YDID 1.5.8]の場合698キロバイトであった。
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
+      imageAlternateText: "「npm」の公式さいてにおいてパッケージの配布の容量の表示例。" +
+          "大事な事は、当パッケージを導入しても、対象アプリケーションが表示されている容量で増えるとは限らない。"
+    }).Article-SingleImageViewer
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox.
+      それは#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]を導入すればアプリケーションに加わる容量#[+Keyword--YDID ではない]。
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID 過半数の]容量は#[+Term--YDID ECMAScriptモジュール]（ブラウザーのアプリケーションにとって最適）と#[+Term--YDID CommonJSモジュール]
+        （Node.jsのアプリケーションにとって最適）に占められている。
+      この様に、利用されているモジュールにより、多数のファイルが単に無視されるのだ。
+
+    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION 非TypeScript利用関連注意事項
+    h2.Article-Heading2#ImportingOfFunctionality--SECTION 機能のインポート

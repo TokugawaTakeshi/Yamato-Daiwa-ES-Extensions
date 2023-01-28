@@ -1,23 +1,23 @@
-# `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`: Get array element satisfies with predicate if such element is exactly one
+# `getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` - Get array element satisfies with predicate if such element is exactly one
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>, 
+<ArrayElement>(
+  targetArray: ReadonlyArray<ArrayElement>, 
   predicate: (arrayElement: ArrayElement) => boolean
 ): ArrayElement | null
 
-getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
-  targetArray: Array<ArrayElement>, 
+<ArrayElement>(
+  targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: { throwErrorIfElementNotFoundOrMoreThan1: true; }
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1: true; }>
 ): ArrayElement
 ```
 
 * Returns the element matching with the `predicate` is such element is exactly one in `targetArray`.
 * If the element matching with the `predicate` is not presents or there are multiple matches with the predicate,
-  * error will be thrown if `throwErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
+  * error will be thrown if `mustThrowErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
   * otherwise `null` will be returned
 
 ![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
@@ -63,7 +63,7 @@ console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
   )
-); // => "St. Louis"
+); // -> "St. Louis"
 ```
 
 ### More than one match
@@ -74,7 +74,7 @@ console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
   )
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error
@@ -87,7 +87,7 @@ try {
   match = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error: unknown) {
@@ -107,7 +107,7 @@ console.log(
       sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
   ),
   null
-); // => null
+); // -> null
 ```
 
 #### Throwing of the error
@@ -118,7 +118,7 @@ try {
   const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { throwErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
   );
   
 } catch (error: unknown) {

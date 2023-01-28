@@ -1,5 +1,5 @@
 export default function filterMap<Key, Value>(
-  targetMap: Map<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
+  targetMap: ReadonlyMap<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
 ): Map<Key, Value> {
 
   const filteredMap: Map<Key, Value> = new Map<Key, Value>();
@@ -11,4 +11,5 @@ export default function filterMap<Key, Value>(
   });
 
   return filteredMap;
+
 }

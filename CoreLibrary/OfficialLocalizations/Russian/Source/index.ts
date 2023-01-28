@@ -1,15 +1,21 @@
 /*!
- * @yamato-daiwa/es-extensions-localization-russian v1.5
+ * @yamato-daiwa/es-extensions-localization-russian v1.6
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
 
+/* === Константы и перечисления ===================================================================================== */
+export { default as RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/RussianDaysOfWeek";
+export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
+
+/* === Обработка внешних данных типа "объект" ======================================================================= */
 export { default as RawObjectDataProcessorLocalization__Russian } from "./RawObjectDataProcessorLocalization.russian";
 
 
 /* === Логирование ================================================================================================== */
-export { default as LoggerLocalization__Russian } from "./LoggerLocalization__Russian";
+export { default as LoggerLocalization__Russian } from "./LoggerLocalization.russian";
+export { default as PoliteErrorsMessagesBuilder__Japanese } from "./PoliteErrorsMessagesBuilderLocalization.russian";
 
 
 /* === Классы ошибок ================================================================================================ */

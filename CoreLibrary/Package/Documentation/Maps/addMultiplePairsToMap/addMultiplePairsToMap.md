@@ -1,5 +1,5 @@
-# `addMultiplePairsToMap`: Add multiple pairs to map
+# `addMultiplePairsToMap` - Add multiple pairs to map
 
 ```
-addMultiplePairsToMap<Key, Value>(targetMap: Map<Key, Value>, newPairs: Map<Key, Value> | Array<[Key, Value]> ): Map<Key, Value>
+<Key, Value>(targetMap: Map<Key, Value>, newPairs: ReadonlyMap<Key, Value> | ReadonlyArray<[Key, Value]> ): Map<Key, Value>
 ```

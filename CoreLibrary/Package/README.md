@@ -96,11 +96,23 @@ Intended to be used when some property is expected to be the string but also exp
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md">formatNumberWith4KetaKanji</a></dt>
   <dd>Formats number with 4-digits Kanji 万, 億, 兆, 系 (CJK ideographic characters)</dd>
 
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/getArithmeticMean.md">getArithmeticMean</a></dt>
+  <dd>Computed the arithmetic mean of arbitrary quantity of number.</dd>
+
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md">isStringifiedNonNegativeIntegerOfRegularNotation</a></dt>
   <dd>Checks is the value of string contains the number of non-scientific notation.</dd>
 
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundDownToSpecificIntegerPlaceValuemd">roundDownToSpecificIntegerPlaceValue</a></dt>
+  <dd>Rounds up the number to specific nearest integer place value.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecificNearestIntegerPlaceValue.md">roundToSpecificNearestIntegerPlaceValue</a></dt>
+  <dd>Rounds the number to specific nearest integer place value.</dd>
+
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundToSpecifiedNearestDecimalPlaceValue.md">roundToSpecifiedNearestDecimalPlaceValue</a></dt>
   <dd>Rounds the number to specific decimal place (tens, hundreds, thousands, etc.).</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundUpToSpecificIntegerPlaceValue.md">roundUpToSpecificIntegerPlaceValue</a></dt>
+  <dd>Rounds the number to specific nearest integer place value.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md">separateEach3DigitsGroupWithComma</a></dt>
   <dd>Formats the number separating each 3 digits group with comma</dd>
@@ -126,6 +138,9 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md">EmailAddress</a></dt>
   <dd>Class working with email addresses. Currently, consists from validating function and regular expression of valid emails.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/explodeCasedPhraseToWords.md">explodeCasedPhraseToWords</a></dt>
+  <dd>Explodes the string containing grammatically normal or cased (camel case, snake case, etc.) expression to words and returns the array of them. Currently, 26 latin characters of English alphabet are supported.</dd>
 
   <dt>getLastCharacter</dt>
   <dd>Returns the last character of target string value.</dd>
@@ -162,6 +177,9 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
   <dt>insertSubstringIf</dt>
   <dd>Insets substring conditionally.</dd>
+  
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/isIPv4AddressLiesInRange.md">isIPv4AddressLiesInRange</a></dt>
+  <dd>Check does specified IP address lies in specific range.</dd>
 
   <dt>reverseString</dt>
   <dd>Reverses the characters sequence in string value.</dd>
@@ -175,9 +193,29 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt>replaceDoubleBackslashesWithForwardSlashes</dt>
   <dd>Replaces double backslashes with forward slashes.</dd>
 
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toLowerCamelCase.md">toLowerCamelCase</a></dt>
+  <dd>Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to (lower) camel case. Currently, 26 latin characters of English alphabet are supported.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toScreamingSnakeCase.md">toScreamingSnakeCase</a></dt>
+  <dd>Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to screaming snake case. Currently, 26 latin characters of English alphabet are supported.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toUpperCamelCase.md">toUpperCamelCase</a></dt>
+  <dd>Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to upper camel case AKA Pascal case. Currently, 26 latin characters of English alphabet are supported.</dd>
+
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md">trimSpaces</a></dt>
   <dd>Trims prepended and/or appended space characters; unlike native <code>String.prototype.trim()</code> acts selectively on specified spaces kinds.</dd>
  
+</dl>
+
+
+#### Objects
+
+<dl>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Objects/getObjectPropertySafely/getObjectPropertySafely.md">getObjectPropertySafely</a></dt>
+  <dd>
+    Works as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">optional chaining</a> but could be used for any fully-qualified name and returns value which being considered as <code>unknown</code>. 
+    Intended to be used when the schema of value is not known enough (for example, because of lack of TypeScript type definition).
+  </dd>
 </dl>
 
 
@@ -189,8 +227,8 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
   <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfNonEmptyArray/getLastElementOfNonEmptyArray.md">getLastElementOfNonEmptyArray</a></dt>
-  <dd>Returns the last element of array, herewith <b>UnexpectedEventError</b> will be thrown if target array is empty.</dd>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray.md">getLastElementOfArray</a></dt>
+  <dd>Returns the last element of array, herewith depending on dedicated parameter either <b>UnexpectedEventError</b> will be thrown of null will be returned if target array is empty.</dd>
 
 </dl>
 
@@ -279,9 +317,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md">TimePoint</a></dt>
-  <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
-
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">getDaysCountInSpecificMonth</a></dt>
   <dd>Returns days count in specified year and month.</dd>
 
@@ -308,6 +343,9 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md">secondsToMilliseconds</a></dt>
   <dd>Converts seconds amount to amount of milliseconds.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md">TimePoint</a></dt>
+  <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
 
 </dl>
 
@@ -395,32 +433,66 @@ makes below functions redundant, but they still could be used in the environment
 
 #### Constants and enumerations
 
-* [DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
-* [HTTP_Methods](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_Methods.md)
-* [HTTP_StatusCodes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
-* [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
-
-
 ##### Date and time
 
 <dl>
 
-  <dt>HOURS_PER_STELLAR_DAY</dt>
-  <dd>Has value <b>24</b>; intended to be used to avoid the magic numbers in computings.</dd>
-
-  <dt>MINUTES_PER_HOUR</dt>
-  <dd>Has value <b>60</b>; intended to be used to avoid the magic numbers in computings.</dd>
-
-  <dt>SECONDS_PER_MINUTE</dt>
-  <dd>Has value <b>60</b>; intended to be used to avoid the magic numbers in computings.</dd>
-
-  <dt>MONTHS_PER_YEAR</dt>
-  <dd>Has value <b>12</b>; intended to be used to avoid the magic numbers in computings.</dd>
+  <dt>CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING</dt>
+  <dd>
+    The character count represents the date without time in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601 string</a>. 
+    Has value <b>10</b>; for example, in the <code>2013-03-10T02:00:00Z</code> case the first 10 characters will be <code>2013-03-10</code>.
+    If you need to extract this date part from ISO8601 string (not just know the characters count), use <a href="Documentation/DateTime/getISO8601StringWithoutTimePart.md"><code>getISO8601StringWithoutTimePart</code></a> function.
+  </dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md">DaysOfWeek</a></dt>
-  <dd>The enumeration allows to refer to the day of week by name, not by number what usually confusing with numeration from 0 (and also, first day of week is location dependent).</dd>
+  <dd>Allows to refer to the day of week by name, not by number what usually confusing with numeration from 0 (and also, first day of week is location dependent).</dd>
+
+  <dt>HOURS_PER_STELLAR_DAY</dt>
+  <dd>
+    Has value <b>24</b>. 
+    Everyone may know it but the meaning of this constant is avoiding of the <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">magic numbers</a> in the code.
+  </dd>
+
+  <dt>MAXIMAL_DAYS_IN_MONTH</dt>
+  <dd>
+    Has value <b>31</b>. 
+    Everyone may know it but the meaning of this constant is avoiding of the <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">magic numbers</a> in the code.
+  </dd>
+
+  <dt>MINUTES_PER_HOUR</dt>
+  <dd>
+    Has value <b>60</b>. 
+    Everyone may know it but the meaning of this constant is avoiding of the <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">magic numbers</a> in the code.
+  </dd>
+
+  <dt>MONTHS_PER_YEAR</dt>
+  <dd>
+    Has value <b>12</b>. 
+    Everyone may know it but the meaning of this constant is avoiding of the <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">magic numbers</a> in the code.
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a></dt>
+  <dd>Allows to refer to the month by name, not by number what usually confusing with numeration from 0.</dd>
+
+  <dt>SECONDS_PER_MINUTE</dt>
+  <dd>
+    Has value <b>60</b>. 
+    Everyone may know it but the meaning of this constant is avoiding of the <a href="https://en.wikipedia.org/wiki/Magic_number_(programming)">magic numbers</a> in the code.
+  </dd>
 
 </dl>
+
+
+##### HTTP
+
+* [HTTP_Methods](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_Methods.md)
+* [HTTP Status codes](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md)
+  * [All](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#http_statuscodes---all-http-status-codes)
+  * [Information responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#informationalresponseshttp_statuscodes---information-responses)
+  * [Successful responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#successfulresponseshttp_statuscodes---successful-responses)
+  * [Redirection messages](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#redirectionresponseshttp_statuscodes---redirection-messages)
+  * [Client error responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#clienterrorshttp_statuscodes---client-error-responses)
+  * [Server error responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#servererrorshttp_statuscodes---server-error-responses)
 
 
 #### Pagination

@@ -1,23 +1,31 @@
 # `removeArrayElementsByPredicates`: Remove array elements by predicates
 
-[![Official IntelliJ IDEA plugin live template](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-rmaebp-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-removeArrayElementsByPredicates-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template_(alias)-rmaebp-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
 
 ```
-removeArrayElementsByPredicates<ArrayElement>(
-  namedParameters: NamedParameters<ArrayElement>
-): Result<ArrayElement>
+<ArrayElement>(
+  sourceData: Readonly<
+    (
+      {
+        mutably: true;
+        targetArray: Array<ArrayElement>;
+      } |
+      {
+        mutably: false;
+        targetArray: ReadonlyArray<ArrayElement>;
+      }
+    ) &
+    (
+      { predicate: (arrayElement: ArrayElement) => boolean; } |
+      { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
+    )
+  >;
+): RemovingArrayElementsByPredicatesOperation.Result<ArrayElement>
 ```
 
 ```typescript
-export type NamedParameters<ArrayElement> =
-  {
-    readonly targetArray: Array<ArrayElement>;
-    readonly mutably: boolean;
-  } & (
-    { readonly predicate: (arrayElement: ArrayElement) => boolean; } |
-    { readonly predicates: Array<(arrayElement: ArrayElement) => boolean>; }
-  );
-
 export type Result<ArrayElement> = {
   readonly updatedArray: Array<ArrayElement>;
   readonly removedElements: Array<ArrayElement>;

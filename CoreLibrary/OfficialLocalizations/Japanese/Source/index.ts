@@ -1,15 +1,24 @@
 /*!
- * @yamato-daiwa/es-extensions-localization-japanese v1.5
+ * @yamato-daiwa/es-extensions-localization-japanese v1.6
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
 
+/* === 定数・列挙 ===================================================================================================== */
+export { default as AbbreviatedJapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/AbbreviatedJapaneseDaysOfWeek";
+export { default as JapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/JapaneseDaysOfWeek";
+export { default as JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseTraditionalMonthsNames";
+export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";
+
+
+/* === 生オブジェクト系データ処理 =========================================================================================== */
 export { default as RawObjectDataProcessorLocalization__Japanese } from "./RawObjectDataProcessorLocalization.japanese";
 
 
 /* === ログ =========================================================================================================== */
-export { default as LoggerLocalization__Japanese } from "./LoggerLocalization__Japanese";
+export { default as LoggerLocalization__Japanese } from "./LoggerLocalization.japanese";
+export { default as PoliteErrorsMessagesBuilder__Japanese } from "./PoliteErrorsMessagesBuilderLocalization.japanese";
 
 
 /* === エラークラス ====================================================================================================== */

@@ -1,0 +1,243 @@
+-
+
+  function generateLocalizedRouting(localization) {
+
+    return {
+
+      top: {
+        tableOfContentTitle: localization.topPage.tableOfContentTitle,
+        URI: localization.topPage.URI
+      },
+
+      coreLibrary: {
+
+        tableOfContentTitle: localization.coreLibrary.tableOfContentTitle,
+
+        children: {
+
+          gettingStarted: {
+
+            tableOfContentTitle: localization.coreLibrary.gettingStarted.tableOfContentTitle,
+            URI: `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }`,
+
+            children: {
+
+              installation: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.installation.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#Installation--SECTION` }
+              },
+
+              distributiveVolumeNotice: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.distributiveVolumeNotice.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#DistributiveVolumeNotice--SECTION` }
+              },
+
+              nonTypeScriptUsageWarning: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.nonTypeScriptUsageWarning.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#NonTypeScriptUsageWarning--SECTION` }
+              },
+
+              importingOfFunctionality: {
+                tableOfContentTitle: localization.coreLibrary.gettingStarted.sections.importingOfFunctionality.tableOfContentTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#ImportingOfFunctionality--SECTION` }
+              }
+
+            }
+
+          },
+
+          functionality: {
+
+            tableOfContentTitle: localization.coreLibrary.functionality.tableOfContentTitle,
+
+            children: {
+
+              strings: {
+
+                tableOfContentTitle: localization.coreLibrary.functionality.children.strings.tableOfContentTitle,
+
+                children: {
+
+                  areStringifiedDigitsOnly: {
+
+                    tableOfContentTitle: "<code>areStringifiedDigitsOnly</code>",
+                    get URI() { return `@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.${ localization.fileNameLocalizationExtensions }` }
+
+                  }
+
+                }
+
+              },
+
+              arrays: {
+
+                tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.tableOfContentTitle,
+
+                children: {
+
+                  retrievingOfElements: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.retrievingOfElements.tableOfContentTitle,
+
+                    children: {
+
+                      getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
+                        tableOfContentTitle: "<code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
+                      },
+
+                      getLastElementOfArray: {
+                        tableOfContentTitle: "<code>getLastElementOfArray</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md"
+                      }
+                    }
+
+                  },
+
+                  retrievingOfIndexes: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.retrievingOfIndexes.tableOfContentTitle,
+
+                    children: {
+
+                      getIndexesOfArrayElementsWhichSatisfiesThePredicate: {
+                        tableOfContentTitle: "<code>getIndexesOfArrayElementsWhichSatisfiesThePredicate</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md"
+                      },
+
+                      getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
+                        tableOfContentTitle: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
+                        URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`
+                      }
+
+                    }
+
+                  },
+
+                  addingOfElements: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.addingOfElements.tableOfContentTitle,
+
+                    children: {
+
+                      addElementsToArray: {
+                        tableOfContentTitle: "<code>addElementsToArray</code>",
+                        get URI() { return `@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.${ localization.fileNameLocalizationExtensions }.pug` }
+                      }
+
+                    }
+
+                  },
+
+                  removingOfElements: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.removingOfElements.tableOfContentTitle,
+
+                    children: {
+
+                      removeArrayElementsByIndexes: {
+                        tableOfContentTitle: "<code>removeArrayElementsByIndexes</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md"
+                      },
+
+                      removeArrayElementsByPredicates: {
+                        tableOfContentTitle: "<code>removeArrayElementsByPredicates</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md"
+                      }
+
+                    }
+
+                  },
+
+                  other: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.arrays.other.tableOfContentTitle,
+
+                    children: {
+
+                      removeArrayElementsByIndexes: {
+                        tableOfContentTitle: "<code>twoDimensionalizeArray</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md"
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              },
+
+              constantsAndEnumerations: {
+
+                tableOfContentTitle: localization.coreLibrary.functionality.children.constantsAndEnumerations.tableOfContentTitle,
+
+                children: {
+
+                  dateTime: {
+
+                    tableOfContentTitle: localization.coreLibrary.functionality.children.constantsAndEnumerations.dateTime.tableOfContentTitle,
+
+                    children: {
+
+                      CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING: {
+                        tableOfContentTitle: "<code>CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING</code>",
+                        URI: "#"
+                      },
+
+                      DaysOfWeek: {
+                        tableOfContentTitle: "<code>DaysOfWeek</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md"
+                      },
+
+                      HOURS_PER_STELLAR_DAY: {
+                        tableOfContentTitle: "<code>HOURS_PER_STELLAR_DAY</code>",
+                        URI: "#"
+                      },
+
+                      MAXIMAL_DAYS_IN_MONTH: {
+                        tableOfContentTitle: "<code>MAXIMAL_DAYS_IN_MONTH</code>",
+                        URI: "#"
+                      },
+
+                      MINUTES_PER_HOUR: {
+                        tableOfContentTitle: "<code>MINUTES_PER_HOUR</code>",
+                        URI: "#"
+                      },
+
+                      MONTHS_PER_YEAR: {
+                        tableOfContentTitle: "<code>MONTHS_PER_YEAR</code>",
+                        URI: "#"
+                      },
+
+                      MonthsNames: {
+                        tableOfContentTitle: "<code>MonthsNames</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"
+                      },
+
+                      SECONDS_PER_MINUTE: {
+                        tableOfContentTitle: "<code>SECONDS_PER_MINUTE</code>",
+                        URI: "#"
+                      }
+
+                    }
+
+                  }
+
+                  // TODO 再開点 HTTP
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    };
+
+  }

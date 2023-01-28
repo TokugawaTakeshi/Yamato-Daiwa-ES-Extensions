@@ -1,28 +1,30 @@
-# `replaceArrayElementsByIndexesImmutably`: Replace array elements by indexes immutably
+# `replaceArrayElementsByIndexesImmutably` - Replace array elements by indexes immutably
 
-[![Official IntelliJ IDEA plugin live template](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-raebii-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-replaceArrayElementsByIndexesImmutably-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template_(alias)-raebii-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
 
 Creates the copy of target array and replaces the elements by specified indexes.
 Such functionality is demanded in some JavaScript frameworks which could not observe the mutations of array.
 
 ```
-replaceArrayElementsByIndexesImmutably<ArrayElement>(
-  namedParameters:
-      {
-        targetArray: Array<ArrayElement>;
-      } &
-      (
-        {
-          index: number;
-          newElement: ArrayElement;
-        } |
-        {
-          replacements: Array<{
+<ArrayElement>(
+  sourceData:
+      Readonly<
+        { targetArray: ReadonlyArray<ArrayElement>; } &
+        (
+          {
             index: number;
             newElement: ArrayElement;
-          }>;
-        }
-      )
+          } |
+          {
+            replacements: ReadonlyArray<{
+              index: number;
+              newElement: ArrayElement;
+            }>;
+          }
+        )
+      >
 ): Array<ArrayElement>
 ```
 

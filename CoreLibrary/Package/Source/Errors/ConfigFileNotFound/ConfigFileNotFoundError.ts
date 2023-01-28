@@ -35,6 +35,7 @@ namespace ConfigFileNotFoundError {
     export type DescriptionTemplateNamedParameters = Readonly<{
       targetTechnologyName: string;
       configFilePathOrMultipleOfThem: string | Array<string>;
+      messageSpecificPart?: string;
     }>;
   }
 }

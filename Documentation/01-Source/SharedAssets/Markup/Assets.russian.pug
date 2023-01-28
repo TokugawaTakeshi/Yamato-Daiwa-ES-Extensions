@@ -1,0 +1,16 @@
+include HTML_PageMetadata.pug
+include generateLocalizedRouting.pug
+include generateSharedExternalLinks.pug
+
+include Localizations/Russian/ComponentsLocalization.russian.pug
+include Localizations/Russian/MetaDescriptionTemplates.russian.pug
+include Localizations/Russian/RoutingLocalization.russian.pug
+include Localizations/Russian/SharedExternalLinksLocalizaiton.russian.pug
+
+
+-
+
+  const localizedRouting = generateLocalizedRouting(routingRussianLocalization);
+  RoutingEmulator.initialize(localizedRouting);
+
+  const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksRussianLocalization);

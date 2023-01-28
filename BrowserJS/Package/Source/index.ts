@@ -1,10 +1,15 @@
 /*!
- * @yamato-daiwa/es-extensions-browserjs v1.5
+ * @yamato-daiwa/es-extensions-browserjs v1.6
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
+/* === DateTime =============================================================================================================== */
+export { default as BrowserJS_Timer } from "./DateTime/BrowserJS_Timer";
+
 /* === DOM ==================================================================================================================== */
+export { default as addLeftClickEventHandler } from "./DOM/addLeftClickEventHandler";
+export { default as cloneDOM_Element } from "./DOM/cloneDOM_Element";
 export { default as createDOM_ElementFromHTML_Code } from "./DOM/createDOM_ElementFromHTML_Code";
 export { default as createHTML_CollectionFromHTML_Code } from "./DOM/createHTML_CollectionFromHTML_Code";
 export { default as delegateClickEventHandling } from "./DOM/delegateClickEventHandling";

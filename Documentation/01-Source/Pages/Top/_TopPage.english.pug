@@ -1,0 +1,55 @@
+extends ../../Layouts/Minimal/MinimalLayout.pug
+
+
+block append Requirements
+
+  include ../../Components/Components.pug
+  include ../../SharedAssets/Markup/Assets.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Top page");
+    HTML_PageMetaData = {
+      description: "The &quot;Yamato-Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is the library " +
+        "for high quality development on TypeScript language. Including the large number of simple utility functions, " +
+        "and also the powerful classes, for example the &quot;RawObjectDataProcessor&quot; for the validation and " +
+        "postprocessing of object-type data. The function names, parameter etc. has been designed such as no documentation " +
+        "required to understand what the code doing.",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+
+    RoutingEmulator.setCurrentRoute("top");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]: "./Top/TopPage.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./Top/TopPage.russian.html"
+    });
+
+
+block append SpecificContent
+
+  main.TopPage
+
+    .TopPage-ImageAndTopHeadingGroup
+
+      img.TopPage-ImageAndTopHeadingGroup-Image(
+        src="@Shared/Icons/YDEE_Icon.svg"
+        alt="The icon of Yamato Daiwa ES Extensions libraries"
+      )
+
+      h1.TopPage-ImageAndTopHeadingGroup-Heading
+        span.TopPage-ImageAndTopHeadingGroup-Heading-FirstLine Yamato Daiwa
+        span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
+
+    p.TopPage-ShortDescription-Heading.
+      The reach utility libraries for type for high-quality TypeScript-based development.
+
+    +CompactTableOfContents(localizedRouting).TopPage-TableOfContents

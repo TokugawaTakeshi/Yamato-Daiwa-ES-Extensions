@@ -1282,7 +1282,7 @@ Main method of the class representing most functionality.
 Processing the raw data (first argument) according it's specification (second parameter) and options (third parameter, optional).
 
 ```
-process<ProcessedData extends ArbitraryObject, InterimValidData extends ArbitraryObject = ProcessedData>(
+process<ProcessedData extends ReadonlyParsedJSON, InterimValidData extends ReadonlyParsedJSON = ProcessedData>(
   rawData: unknown,
   validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification,
   options: RawObjectDataProcessor.Options = {}
@@ -1291,7 +1291,7 @@ process<ProcessedData extends ArbitraryObject, InterimValidData extends Arbitrar
 
 * Generic parameters
   * **ProcessedData** - refers to desired type. Since **RawObjectDataProcessor** is for objects only, the **ProcessedData**
-    must be the subtype of **ArbitraryObject** (non-null object with any valid string keys and values of any type).
+    must be the subtype of [**ReadonlyParsedJSON**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Types/ParsedJSON/ParsedJSON.md).
   * **InterimValidData** - optional parameter actual only whe **postProcessing** property of third parameter of object-type
     has been specified with the function.
 * Parameters
@@ -1344,7 +1344,7 @@ Changing the default language of errors messages.
 The **RawObjectDataProcessor.Localization** is pretty big object containing the text data and template functions for 
 each error message. 
 
-Officially, Japanese and Russian localization planning.
+Officially, Japanese and Russian localization are available.
 You can create your ows localization object of **RawObjectDataProcessor.Localization** type.
 Check the [listing of English localization](../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English.ts)
 as reference.

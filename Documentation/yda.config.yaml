@@ -1,5 +1,13 @@
 projectBuilding:
 
+  commonSettings:
+
+    publicDirectoriesRelativePaths:
+
+      LOCAL_DEVELOPMENT: 02-LocalDevelopmentBuild
+      PRODUCTION: 03-ProductionBuild
+
+
   # === Markup =========================================================================================================
   markupProcessing:
 
@@ -7,17 +15,17 @@ projectBuilding:
 
       All:
 
-        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/Pages
+        topDirectoryRelativePath: 01-Source/Pages
 
         partialsRecognition:
-          partialsNamesPrefixes: "_"
-          prefixesOfSubdirectoriesWithPartials: "_"
+          excludeFilesWithPrefixes: "_"
+          excludeSubdirectoriesWithPrefixes: "_"
 
         buildingModeDependent:
-          DEVELOPMENT:
-            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
           PRODUCTION:
-            outputBaseDirectoryRelativePath: 03-ProductionBuild
+            outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
   # === Styles =========================================================================================================
@@ -27,31 +35,51 @@ projectBuilding:
 
       Shared:
 
-        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/SharedAssets/Styles
+        topDirectoryRelativePath: 01-Source/SharedAssets/Styles
 
         partialsRecognition:
-          partialsNamesPrefixes: "_"
-          prefixesOfSubdirectoriesWithPartials: "_"
+          excludeFilesWithPrefixes: "_"
+          excludeSubdirectoriesWithPrefixes: "_"
 
         buildingModeDependent:
-          DEVELOPMENT:
-            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
           PRODUCTION:
-            outputBaseDirectoryRelativePath: 03-ProductionBuild
+            outputTopDirectoryRelativePath: 03-ProductionBuild
 
       Pages:
 
-        entryPointsSourceFilesTopDirectoryOrSingleFileRelativePath: 01-Source/Pages
+        topDirectoryRelativePath: 01-Source/Pages
 
         partialsRecognition:
-          partialsNamesPrefixes: "_"
-          prefixesOfSubdirectoriesWithPartials: "_"
+          excludeFilesWithPrefixes: "_"
+          excludeSubdirectoriesWithPrefixes: "_"
 
         buildingModeDependent:
-          DEVELOPMENT:
-            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
           PRODUCTION:
-            outputBaseDirectoryRelativePath: 03-ProductionBuild
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+
+
+  # === Logic =========================================================================================================
+  ECMA_ScriptLogicProcessing:
+
+    entryPointsGroups:
+
+      Common:
+
+        singleEntryPointRelativePath: 01-Source/SharedAssets/Scripts/Common.ts
+
+        targetRuntime:
+          type: BROWSER
+
+        associatedMarkupEntryPointsGroupID_ForModulesDynamicLoadingWithoutDevelopmentServer: All
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
   # === Images =========================================================================================================
@@ -59,21 +87,45 @@ projectBuilding:
 
     assetsGroups:
 
-      MustBeInRoot:
+      MustBeInPublicRoot:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInRoot
+        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInPublicRoot
 
         buildingModeDependent:
-          DEVELOPMENT:
-            outputBaseDirectoryRelativePath: 02-DevelopmentBuild
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
           PRODUCTION:
-            outputBaseDirectoryRelativePath: 03-ProductionBuild
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+
+      Shared:
+
+        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/Images
+
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/images
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild/images
+
+      AssociatedWithPages:
+
+        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
   # === Development server =============================================================================================
   browserLiveReloading:
 
-    StylesAndComponentsTesting:
+    setups:
 
-      targetFilesRootDirectoryRelativePath: 02-DevelopmentBuild
-      customStartingFilenameWithExtension: TopPage-English.html
+      StylesAndComponentsTesting:
+
+        localServer:
+
+          rootDirectoryRelativePath: 02-LocalDevelopmentBuild
+
+        openInBrowsers: chrome

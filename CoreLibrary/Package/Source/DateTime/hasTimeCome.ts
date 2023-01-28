@@ -1,7 +1,3 @@
-export default function hasTimeCome(dateTime: Date | string): boolean {
-
-  const dateTime__unified: Date = typeof dateTime === "string" ? new Date(dateTime) : dateTime;
-  const currentDateTime: Date = new Date();
-
-  return dateTime__unified.getTime() - currentDateTime.getTime() <= 0;
+export default function hasTimeCome(targetDateTime: Date | string): boolean {
+  return new Date(targetDateTime).getTime() - new Date().getTime() <= 0;
 }

@@ -2,10 +2,10 @@
 
 <div style="border: 1px solid red; padding: 12px 14px">
   ⚠ Make sure that you are understanding the difference between <code>JSON</code> which is the <code>string</code> and native 
-  JavaScript object which <code>ParsedJSON</code> is`.
+  JavaScript object which <code>ParsedJSON</code> is.
 </div>
 
-`ParsedJSON` could be the the `ParsedJSON_Object` or `ParsedJSON_Array`:
+`ParsedJSON` could be the `ParsedJSON_Object` or `ParsedJSON_Array`:
 
 ```typescript
 export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;

@@ -2,8 +2,7 @@ extension:
 
   - ts
 
-spec: "**/*.test.ts"
-#loader: ts-node/esm
+spec: "Tests/Automated/**/*.test.ts"
 
 require:
 

@@ -1,37 +1,46 @@
 export default function addElementsToArray<ArrayElement>(
-  namedParameters:
-    {
-      targetArray: Array<ArrayElement>;
-      newElements: Array<ArrayElement>;
-      mutably: boolean;
-    } &
-    (
-      { toStart: true; } |
-      { toEnd: true; } |
-      { toPosition__numerationFrom0: number; } |
-      { toPosition__numerationFrom1: number; }
-    )
+  sourceData:
+      Readonly<
+        { newElements: ReadonlyArray<ArrayElement>; } &
+        (
+          {
+            mutably: true;
+            targetArray: Array<ArrayElement>;
+          } |
+          {
+            mutably: false;
+            targetArray: ReadonlyArray<ArrayElement>;
+          }
+        ) &
+        (
+          { toStart: true; } |
+          { toEnd: true; } |
+          { toPosition__numerationFrom0: number; } |
+          { toPosition__numerationFrom1: number; }
+        )
+      >
 ): Array<ArrayElement> {
 
-  const workpiece: Array<ArrayElement> = namedParameters.mutably ?
-      namedParameters.targetArray : [ ...namedParameters.targetArray ];
+  const workpiece: Array<ArrayElement> = sourceData.mutably ?
+      sourceData.targetArray : [ ...sourceData.targetArray ];
 
-  if ("toStart" in namedParameters) {
-    workpiece.unshift(...namedParameters.newElements);
+  if ("toStart" in sourceData) {
+    workpiece.unshift(...sourceData.newElements);
     return workpiece;
   }
 
 
-  if ("toEnd" in namedParameters) {
-    workpiece.push(...namedParameters.newElements);
+  if ("toEnd" in sourceData) {
+    workpiece.push(...sourceData.newElements);
     return workpiece;
   }
 
 
-  const positionOfFirstNewElement__numerationFrom0: number = "toPosition__numerationFrom0" in namedParameters ?
-      namedParameters.toPosition__numerationFrom0 : namedParameters.toPosition__numerationFrom1 - 1;
+  const positionOfFirstNewElement__numerationFrom0: number = "toPosition__numerationFrom0" in sourceData ?
+      sourceData.toPosition__numerationFrom0 : sourceData.toPosition__numerationFrom1 - 1;
 
-  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...namedParameters.newElements);
+  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...sourceData.newElements);
 
   return workpiece;
+
 }

@@ -1,22 +1,31 @@
-# `addElementsToArray`: Add elements to array
+# `addElementsToArray` - Add elements to array
 
-[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-aeta-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-addElementsToArray-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template_(alias)-aeta-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-addElementsToArray<ArrayElement>(
-  namedParameters:
-      {
-        targetArray: Array<ArrayElement>;
-        newElements: Array<ArrayElement>;
-        mutably: boolean;
-      } &
-      (
-        { toStart: true; } |
-        { toEnd: true; } |
-        { toPosition__numerationFrom0: number; } |
-        { toPosition__numerationFrom1: number; }
-      )
-): Array<ArrayElement> {
+(
+  sourceData:
+      Readonly<
+        { newElements: ReadonlyArray<ArrayElement>; } &
+        (
+          {
+            mutably: true;
+            targetArray: Array<ArrayElement>;
+          } |
+          {
+            mutably: false;
+            targetArray: ReadonlyArray<ArrayElement>;
+          }
+        ) &
+        (
+          { toStart: true; } |
+          { toEnd: true; } |
+          { toPosition__numerationFrom0: number; } |
+          { toPosition__numerationFrom1: number; }
+        )
+      >
+): Array<ArrayElement>
 ```
 
 Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable 
@@ -39,7 +48,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -54,8 +63,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Add multiple elements to start
@@ -71,7 +80,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -86,8 +95,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -104,7 +113,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
 ```
 
 #### Immutably
@@ -119,8 +128,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Add multiple elements to end
@@ -137,7 +146,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
 ```
 
 #### Immutably
@@ -152,8 +161,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -170,10 +179,10 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -185,7 +194,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Immutably
@@ -200,11 +209,11 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -216,8 +225,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -233,10 +242,10 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -248,7 +257,7 @@ addElementsToArray({
   mutably: true
 });
 
-console.log(sampleArray);  // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray);  // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 ### Immutably
@@ -263,11 +272,11 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
-Or if to specify the position from 1, the equivalent will be
+Or if to specify the position from 1, the equivalent will be:
 
 ```typescript
 const sampleArray: Array<string> = [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -279,8 +288,8 @@ const updatedCopyOfSampleArray: Array<string> = addElementsToArray({
   mutably: false
 });
 
-console.log(updatedCopyOfSampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
-console.log(sampleArray); // => [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(updatedCopyOfSampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+console.log(sampleArray); // -> [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
 ```
 
 
@@ -293,6 +302,6 @@ quick input:
 
 ![IntelliJ IDEA Live Template](addElementsToArray-LiveTemplateDemo.gif)
 
-It is recommended to copy the variable name containing array to clipboard preliminary - the identifier will be
-automatically substituted to required position. Then, use <kbd>Tab</kbd> key to move to next position at which
-specific code must be inputted.
+Copy the variable name which containing the array to clipboard preliminary - the identifier will be automatically
+  substituted to required position. 
+Then, use <kbd>Tab</kbd> key to move to next position at which specific code must be inputted.

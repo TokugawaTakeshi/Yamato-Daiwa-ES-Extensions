@@ -4,13 +4,13 @@ import type { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato
 const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization =
 {
-  defaultTitle: "クラス初期化が実行されず",
+  defaultTitle: "クラスが初期化されていない",
   generateDescription:
       (
         namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
       ): string =>
-          `クラス「${ namedParameters.className }」は初期化が要るが、初期化するメソッド「${ namedParameters.initializingMethodName }」` +
-          "が呼び出されなかった。"
+          `クラス「${ namedParameters.className }」で、必要な初期化メソッド「${ namedParameters.initializingMethodName }」` +
+          "が呼び出されていない。"
 };
 
 

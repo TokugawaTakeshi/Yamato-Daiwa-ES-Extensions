@@ -21,7 +21,7 @@ npm i @yamato-daiwa/es-extensions-localization-russian @yamato-daiwa/es-extensio
 См. "доступная функциональность" ниже о том, как и что из библиотеки **@yamato-daiwa/es-extensions** можно локализовать.
 
 
-## Доступная функциональность
+## Локализованная функциональность основного пакета
 
 ### Локализация класса RawObjectDataProcessor
 
@@ -102,4 +102,44 @@ import { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
 import { AlgorithmMismatchErrorLocalization__Russian } from "@yamato-daiwa/es-extensions-localization-russian";
 
 AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Russian;
+```
+
+
+## Дополнительная функциональность
+### Константы и перечисления
+#### Дата и время
+##### Перечисление `RussianDaysOfWeek`
+
+Перечисление, содержащее русские названия дней недели.
+Ключи перечисления совпадают с ключами [DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md).
+
+```typescript
+console.log(RussianDaysOfWeek.sunday); // -> "ВОСКРЕСЕНЬЕ"
+console.log(RussianDaysOfWeek.monday); // -> "ПОНЕДЕЛЬНИК"
+console.log(RussianDaysOfWeek.tuesday); // -> "ВТОРНИК"
+console.log(RussianDaysOfWeek.wednesday); // -> "СРЕДА"
+console.log(RussianDaysOfWeek.thursday); // -> "ЧЕТВЕРГ"
+console.log(RussianDaysOfWeek.friday); // -> "ПЯТНИЦА"
+console.log(RussianDaysOfWeek.saturday); // -> "СУББОТА"
+```
+
+
+##### Перечисление `RussianMonthsNames`
+
+Перечисление, содержащее русские названия месяцев.
+Ключи перечисления совпадают с ключами [MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md).
+
+```typescript
+console.log(RussianMonthsNames.january); // -> "ЯНВАРЬ"
+console.log(RussianMonthsNames.february); // -> "ФЕВРАЛЬ"
+console.log(RussianMonthsNames.march); // -> "МАРТ"
+console.log(RussianMonthsNames.april); // -> "АПРЕЛЬ"
+console.log(RussianMonthsNames.may); // -> "МАЙ"
+console.log(RussianMonthsNames.june); // -> "ИЮНЬ"
+console.log(RussianMonthsNames.july); // -> "ИЮЛЬ"
+console.log(RussianMonthsNames.august); // -> "АВГУСТ"
+console.log(RussianMonthsNames.september); // -> "СЕНТЯБРЬ"
+console.log(RussianMonthsNames.october); // -> "ОКТЯБРЬ"
+console.log(RussianMonthsNames.november); // -> "НОЯБРЬ"
+console.log(RussianMonthsNames.december); // -> "ДЕКАБРЬ"
 ```

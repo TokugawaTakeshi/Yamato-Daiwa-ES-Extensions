@@ -1,0 +1,68 @@
+provideComponentsPositionalRelationship(
+  ("Article-CallableExpressionScheme" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 12px }
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-ProgrammaticEntityHeading" { retireFromTarget: 12px })
+  })\
+  \
+  ("Article-AttentionBox" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 10px, pushComponentFromSelf: 12px }
+        }
+      }
+    }
+  })\
+  \
+  ("Article-ImprovedList" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {}
+      }
+    },
+    withOtherComponents:\
+        ("Article-AttentionBox" { retireFromTarget: 12px })\
+        ("Article-ImprovedList" { retireFromTarget: 12px })
+  })\
+  \
+  ("Article-CodeViewer" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          heading2: { retireFromComponent: 16px },
+          heading3: { pushComponentFromSelf: 12px },
+          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px },
+          descriptionList: { pushComponentFromSelf: 16px }
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-ProgrammaticEntityHeading" { retireFromTarget: 12px })\
+        ("Article-ImprovedList" { retireFromTarget: 10px })\
+        ("Article-CodeViewer" { retireFromTarget: 8px })\
+        ("Article-AttentionBox" { retireFromTarget: 12px })
+  })\
+  ("Article-SingleImageViewer" {
+    withTypography: {
+      article: {
+        typographyDefinition: articleTypography,
+        spacingDefinitions: {
+          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px },
+        }
+      }
+    },
+    withOtherComponents:\
+        ("Article-AttentionBox" { retireFromTarget: 12px })
+  })
+)

@@ -1,10 +1,10 @@
 # `getYearOfPreviousMonth` - get year of previous month
 
 Returns the year of previous month in relation to specified year and month number (from 0 or 1).
-Except January case, the returned year will be even with specified parameter one.
+Except January case, the returned year will be even with specified one.
 
 ```
-getYearOfPreviousMonth(
+(
   namedParameters:
       Readonly<
         { referenceYear: number; } &
@@ -15,6 +15,7 @@ getYearOfPreviousMonth(
       >
 ): number
 ```
+
 
 ## Examples
 

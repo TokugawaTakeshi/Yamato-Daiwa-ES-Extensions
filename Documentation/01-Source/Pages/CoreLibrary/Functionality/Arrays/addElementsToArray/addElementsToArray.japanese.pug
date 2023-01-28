@@ -1,0 +1,44 @@
+extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../Components/Components.pug
+  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "addElementsToArray",
+        whatFunctionDoes: "目標的配列の最初位置、最終位置もしくは指数で指定された位置に新規要素を追加する。初期配列を変更するか、新しい配列を作る事も指定可能。"
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.english]: "./addElementsToArray.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./addElementsToArray.russian.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +ProgrammaticEntityHeading({
+      entityName: "addElementsToArray",
+      entityLocalizedInterpretation: "配列に要素（複数可）を追加する"
+    }).Article-ProgrammaticEntityHeading

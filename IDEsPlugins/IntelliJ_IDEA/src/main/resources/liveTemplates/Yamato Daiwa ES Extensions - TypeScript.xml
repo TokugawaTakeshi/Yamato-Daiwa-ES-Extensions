@@ -1,5 +1,5 @@
 <templateSet group="Yamato Daiwa ES Extensions - TypeScript">
-  <template name="teal" value="Logger.throwErrorAndLog({&#10;  &#10;  errorInstance: new UnexpectedEventError(&quot;$END$&quot;),&#10;  // OR:&#10;  errorType: UnexpectedEventError.NAME,&#10;  description: &quot;&quot;,&#10;  &#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  wrappableError: error&#10;});" description="Logger.throwErrorAndLog()" toReformat="false" toShortenFQNames="true">
+  <template name="teal" value="Logger.throwErrorAndLog({&#10;  &#10;  errorInstance: new UnexpectedEventError(&quot;$END$&quot;),&#10;  // OR:&#10;  errorType: UnexpectedEventError.NAME,&#10;  description: &quot;&quot;,&#10;  &#10;  title: UnexpectedEventError.localization.defaultTitle,&#10;  occurrenceLocation: &quot;className.methodName(compoundParameter)&quot;,&#10;  wrappableError: error&#10;});" description="Logger.throwErrorAndLog()" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="TS_STATEMENT" value="true" />
     </context>
@@ -11,7 +11,7 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="le" value="Logger.logError({&#10;  errorType: UnexpectedEventError.NAME,&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;,&#10;  caughtError: error&#10;});" description="Logger.logError()" toReformat="false" toShortenFQNames="true">
+  <template name="le" value="Logger.logError({&#10;  errorType: UnexpectedEventError.NAME,&#10;  title: UnexpectedEventError.localization.defaultTitle,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(compoundParameter)&quot;,&#10;  caughtError: error&#10;});" description="Logger.logError()" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="TS_STATEMENT" value="true" />
     </context>
@@ -21,7 +21,7 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="lw" value="Logger.logWarning({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(parametersObject)&quot;&#10;});" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
+  <template name="lw" value="Logger.logWarning({&#10;  title: UnexpectedEventError.DEFAULT_TITLE,&#10;  description: &quot;$END$&quot;,&#10;  occurrenceLocation: &quot;className.methodName(compoundParameter)&quot;&#10;});" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="TS_STATEMENT" value="true" />
     </context>
@@ -42,7 +42,10 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="$END$const sample: Array&lt;string&gt; = [ &quot;Saint Paul&quot;, &quot;Santa Barbara&quot;, &quot;St. Louis&quot;, &quot;Santa Monica&quot; ];&#10;&#10;// Null if element not found of more than one matches&#10;const nullableResult: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  sample, (arrayElement: string): boolean =&gt; arrayElement.startsWith(&quot;St.&quot;)&#10;);&#10;&#10;// Throw error if element not found of more than one matches&#10;getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  sample,&#10;  (arrayElement: string): boolean =&gt; arrayElement.startsWith(&quot;Santa&quot;),&#10;  { throwErrorIfElementNotFoundOrMoreThan1: true }&#10;);&#10;// === END OF AUTOMATICALLY INSERTED CODE ==============================================================================" description="Inserts the examples for eponymous function" toReformat="false" toShortenFQNames="true">
+  <template name="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$,&#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $ARRAY_ELEMENT$$END$,&#10;  // TODO Remove next line if you want to be returned 'null' when target element is not exatctly one instead of the throwing of error&#10;  { mustThrowErrorIfElementNotFoundOrMoreThan1: true }&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
     </context>
@@ -68,7 +71,7 @@
       <option name="JS_EXPRESSION" value="true" />
     </context>
   </template>
-  <template name="raebi" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;});" description="`removeArrayElementsByIndexes` function" toReformat="false" toShortenFQNames="true">
+  <template name="raebi" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByIndexes } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="The alias of  `removeArrayElementsByIndexes`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;A\&quot;, \&quot;B\&quot;, \&quot;C\&quot; ]&quot;" alwaysStopAt="true" />
     <variable name="INDEXES" expression="" defaultValue="&quot;[ 2, 3 ]&quot;" alwaysStopAt="true" />
     <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
@@ -77,7 +80,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="rmaebp" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;});&#10;" description="`removeArrayElementsByPredicates` function" toReformat="false" toShortenFQNames="true">
+  <template name="rmaebp" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="The alias of  `removeArrayElementsByPredicates`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
     <variable name="ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
     <variable name="ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
@@ -88,7 +91,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getIndexesOfArrayElementsWhichSatisfiesThePredicate" value="getIndexesOfArrayElementsWhichSatisfiesThePredicate(&#10;  $TARGET_ARRAY$, ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$&#10;)" description="`getIndexesOfArrayElementsWhichSatisfiesThePredicate` function" toReformat="false" toShortenFQNames="true">
+  <template name="getIndexesOfArrayElementsWhichSatisfiesThePredicate" value="getIndexesOfArrayElementsWhichSatisfiesThePredicate(&#10;  $TARGET_ARRAY$, ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getIndexesOfArrayElementsWhichSatisfiesThePredicate } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <variable name="ARRAY_ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
     <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
@@ -96,7 +99,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$, &#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$,&#10;  { throwErrorIfElementNotFoundOrMoreThan1: true } // TODO Remove it if you need to be returned 'null' when desired element in not one &#10;)" description="`getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne` function" toReformat="false" toShortenFQNames="true">
+  <template name="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$, &#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$,&#10;  // TODO Remove it if you need to be returned 'null' when desired element is not exatly one&#10;  { mustThrowErrorIfElementNotFoundOrMoreThan1: true } &#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <variable name="ARRAY_ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
     <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
@@ -104,7 +107,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="raebii" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;});&#10;" description="`replaceArrayElementsByIndexesImmutably` function" toReformat="false" toShortenFQNames="true">
+  <template name="raebii" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByIndexesImmutably } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="The alias of  `replaceArrayElementsByIndexesImmutably`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
     <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="NEW_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
@@ -113,7 +116,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  // TODO Leave one, delete remain    &#10;  toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;})" description="`addElementsToArray` function" toReformat="false" toShortenFQNames="true">
+  <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `addElementsToArray`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <variable name="NEW_ELEMENTS" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
@@ -122,7 +125,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="rpaebp" value="replaceArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  &#10;  // === Replacing of one element&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  &#10;  newValue: $NEW_VALUE$,&#10;  // or&#10;  replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$,&#10;&#10;  // === Replacing of multiple elements&#10;  replacements: [&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    },&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    }&#10;  ],&#10;  &#10;  &#10;  mutably: $MUTABLY$&#10;});&#10;" description="`replaceArrayElementsByPredicates` function" toReformat="false" toShortenFQNames="true">
+  <template name="rpaebp" value="replaceArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  &#10;  // === Replacing of one element&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  &#10;  newValue: $NEW_VALUE$,&#10;  // or&#10;  replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$,&#10;&#10;  // === Replacing of multiple elements&#10;  replacements: [&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    },&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    }&#10;  ],&#10;  &#10;  &#10;  mutably: $MUTABLY$&#10;  &#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="The alias of  `replaceArrayElementsByPredicates`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
     <variable name="ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
     <variable name="ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
@@ -157,6 +160,74 @@
     <variable name="EXPECTED_CHILD_ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLElement&quot;" alwaysStopAt="true" />
     <context>
       <option name="JS_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="addElementsToArray" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_ELEMENTS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="removeArrayElementsByIndexes" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByIndexes } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;A\&quot;, \&quot;B\&quot;, \&quot;C\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="INDEXES" expression="" defaultValue="&quot;[ 2, 3 ]&quot;" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="replaceArrayElementsByIndexesImmutably" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByIndexesImmutably } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="INDEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="NEW_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="getLastElementOfArray" value="getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true; }$END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)&#10;" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gleoa" value="getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true; }$END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)&#10;" description="The alias of  `getLastElementOfArray`" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="removeArrayElementsByPredicates" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="&quot;[ \&quot;alt\&quot;, \&quot;alpha\&quot;, \&quot;bravo\&quot; ]&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT" expression="" defaultValue="&quot;element&quot;" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="BOOLEAN_EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="twoDimensionalizeArray" value="twoDimensionalizeArray&lt;$ARRAY_ELEMENT_TYPE$&gt;({&#10;  targetFlatArray: $TARGET_FLAT_ARRAY$,&#10;  elementsCountPerNestedArray: $ELEMENTS_COUNT_PER_NESTED_ARRAY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { twoDimensionalizeArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TARGET_FLAT_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENTS_COUNT_PER_NESTED_ARRAY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="tda" value="twoDimensionalizeArray&lt;$ARRAY_ELEMENT_TYPE$&gt;({&#10;  targetFlatArray: $TARGET_FLAT_ARRAY$,&#10;  elementsCountPerNestedArray: $ELEMENTS_COUNT_PER_NESTED_ARRAY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { twoDimensionalizeArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `twoDimensionalizeArray`" toReformat="false" toShortenFQNames="true">
+    <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="TARGET_FLAT_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENTS_COUNT_PER_NESTED_ARRAY" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
 </templateSet>

@@ -1,0 +1,44 @@
+extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../Components/Components.pug
+  include ../../../SharedAssets/Markup/Assets.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Getting started");
+    HTML_PageMetaData = {
+      description: "Getting started with &quot;Yamato-Daiwa ECMAScript extensionsYamato-Daiwa ECMAScript extensions " +
+        "(abbreviation: YDEE) library: installation, distributive volume notice, warning about usage wihtout TypeScript, " +
+        "dependencies importing",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+
+    LanguageDropDownList.setLinks({
+      [LanguageDropDownList.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
+      [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 Getting started
+    h2.Article-Heading2#Installation--SECTION Installation
+    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Distributive volume notice
+    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Non TypeScript usage warning
+    h2.Article-Heading2#ImportingOfFunctionality--SECTION Importing of the functionality

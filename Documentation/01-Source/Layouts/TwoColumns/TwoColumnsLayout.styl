@@ -1,0 +1,53 @@
+.TwoColumnsLayout
+
+  SPECIFIC_CONTENT_OUTER_MAXIMAL_WIDTH = 4*NARROWEST_SCREEN_WIDTH_UNIT
+  SIDEBAR_CONTENT_FIXED_OUTER_WIDTH = 400px
+  SIDE_EMPTY_COLUMNS_WIDTH = "calc((100% - %s)/2)" % SPECIFIC_CONTENT_OUTER_MAXIMAL_WIDTH
+
+
+  @media not print
+
+    display grid
+    grid-template-columns SIDE_EMPTY_COLUMNS_WIDTH SIDEBAR_CONTENT_FIXED_OUTER_WIDTH minmax(0, 1fr) SIDE_EMPTY_COLUMNS_WIDTH
+    grid-template-rows auto 1fr auto
+
+    fillBodyVertically({ verticalScrolling: false })
+
+
+  &-UpperFixedContent
+
+    grid-column 1/-1
+
+
+  &-Sidebar
+
+    Paddings({
+      top: 10px,
+      horizontalSymmetric: 6px,
+      bottom: 32px
+    })
+
+    overflow-y auto
+
+    grid-column 2
+
+
+    @media print
+
+      display none
+
+
+  &-SpecificContent
+
+    Paddings({
+      top: 10px,
+      horizontalSymmetric: 16px,
+      bottom: 32px
+    })
+
+    overflow-y auto
+
+
+  &-BottomFixedContent
+
+    grid-column 1/-1
