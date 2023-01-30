@@ -1,7 +1,7 @@
 # toScreamingSnakeCase
 
 ```
-toScreamingSnakeCase(targetString: string): string
+(targetString: string): string
 ```
 
 Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to [screaming snake case](https://en.wikipedia.org/wiki/Snake_case). 

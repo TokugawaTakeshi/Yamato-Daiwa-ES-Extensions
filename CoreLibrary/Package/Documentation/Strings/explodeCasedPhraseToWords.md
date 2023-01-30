@@ -1,7 +1,7 @@
 # `explodeCasedPhraseToWords`
 
 ```
-explodeCasedPhraseToWords(targetString: string): Array<string>
+(targetString: string): Array<string>
 ```
 
 Explodes the string containing grammatically normal or cased (camel case, snake case, etc.) expression to words and 

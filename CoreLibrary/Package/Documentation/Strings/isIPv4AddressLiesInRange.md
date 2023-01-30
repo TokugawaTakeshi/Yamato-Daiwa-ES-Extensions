@@ -1,7 +1,7 @@
 # isIPv4AddressLiesInRange
 
 ```
-isIPv4AddressLiesInRange(
+(
   namedParameters: {
     comparedIP_Address: string;
     minimalIP_Address: string;

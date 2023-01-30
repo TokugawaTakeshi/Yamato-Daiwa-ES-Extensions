@@ -1,7 +1,7 @@
 # toUpperCamelCase
 
 ```
-toLowerCamelCase(targetString: string): string
+(targetString: string): string
 ```
 
 Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to upper [camel case](https://en.wikipedia.org/wiki/Camel_case) AKA Pascal case. 

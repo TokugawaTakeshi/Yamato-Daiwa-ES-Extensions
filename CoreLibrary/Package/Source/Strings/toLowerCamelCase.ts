@@ -34,4 +34,5 @@ export default function toLowerCamelCase(targetString: string): string {
   }
 
   return accumulatingResult;
+
 }

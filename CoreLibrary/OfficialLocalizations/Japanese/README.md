@@ -114,7 +114,7 @@ AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Japane
 
 ## 追加機能
 ### 定数・列挙
-#### 日時
+#### 日時（曜日、月）
 ##### `JapaneseDaysOfWeek`列挙
 
 曜日の名前を含む列挙。
@@ -134,7 +134,7 @@ console.log(JapaneseDaysOfWeek.saturday); // -> "土曜日"
 
 ##### `AbbreviatedJapaneseDaysOfWeek`列挙
 
-各曜日の名前の最初の文字を含む列挙。
+各曜日の頭文字を含む列挙。
 キーは[DaysOfWeek](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md)
   列挙のキーと一致。
 
@@ -151,7 +151,7 @@ console.log(AbbreviatedJapaneseDaysOfWeek.saturday); // -> "土"
 
 ##### `JapaneseMonthsNames`列挙
 
-日本語の月名。
+日本語でアラビア数字を用いる一般月名。
 キーは[MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
   列挙のキーと一致。
 
@@ -172,7 +172,7 @@ console.log(JapaneseMonthsNames.december); // -> "１２月"
 
 ##### `JapaneseTraditionalMonthsNames`列挙
 
-日本語の伝統的月名。
+日本語の伝統的な月名である旧暦の月名。
 キーは[MonthsNames](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md)
 列挙のキーと一致。
 

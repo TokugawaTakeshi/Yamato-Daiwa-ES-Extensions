@@ -1,7 +1,7 @@
 # toLowerCamelCase
 
 ```
-toLowerCamelCase(targetString: string): string
+(targetString: string): string
 ```
 
 Converts the string containing grammatically normal or cased (camel case, snake case, etc.) expression to (lower) [camel case](https://en.wikipedia.org/wiki/Camel_case). 
