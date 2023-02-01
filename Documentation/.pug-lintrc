@@ -1,3 +1,3 @@
 {
-  "extends": "./node_modules/@yamato-daiwa/style_guides/Markup-BasicPreset.js"
+  "extends": "./node_modules/@yamato-daiwa/style_guides/Markup.js"
 }

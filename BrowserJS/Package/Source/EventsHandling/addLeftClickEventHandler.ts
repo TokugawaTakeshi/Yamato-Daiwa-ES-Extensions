@@ -20,7 +20,7 @@ export default function addLeftClickEventHandler(
       )
     ) &
     {
-      handler: (...parameters: ReadonlyArray<unknown>) => unknown;
+      handler: (leftClickEvent: MouseEvent) => unknown;
       mustInvokeBeforeChildren_sHandlers?: boolean;
     }
   >
@@ -104,7 +104,7 @@ export default function addLeftClickEventHandler(
       }
 
 
-      compoundParameter.handler();
+      compoundParameter.handler(event);
 
     /* [ Reference ] https://stackoverflow.com/q/7398290/4818123 */
     }, compoundParameter.mustInvokeBeforeChildren_sHandlers ?? false);

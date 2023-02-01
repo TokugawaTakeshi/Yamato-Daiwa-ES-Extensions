@@ -1,1 +1,1 @@
-extends: ./node_modules/@yamato-daiwa/style_guides/BasicPreset.js
+extends: ./node_modules/@yamato-daiwa/style_guides/ECMAScript.js

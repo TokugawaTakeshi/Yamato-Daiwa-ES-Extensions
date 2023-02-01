@@ -42,8 +42,19 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 ### Events handling
 
 <dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/delegateClickEventHandling.md">delegateClickEventHandling</a></dt>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/EventsHandling/addLeftClickEventHandler.md">addLeftClickEventHandler</a></dt>
+  <dd>
+    Adds on mouse left click event handler. 
+    The main difference with native analogues is <code>addLeftClickEventHandler</code> provides the instance of 
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MouseEvent</a>, 
+      not <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event">generic <code>Event</code></a> 
+      that is critical for TypeScript.
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/EventsHandling/addLeftClickEventHandler.md">delegateClickEventHandling</a></dt>
   <dd>Creates just one click event listener while allowing to handle the click of arbitrary large number of elements what is the optimization measures.</dd>
+
 </dl>
 
 
