@@ -1,5 +1,5 @@
 export default function cloneDOM_Element<DOM_ElementSubtype extends Element = Element>(
-  compoundObject: Readonly<{
+  compoundParameter: Readonly<{
     targetElement: DOM_ElementSubtype;
     mustCopyAllChildren: boolean;
   }>
@@ -9,6 +9,6 @@ export default function cloneDOM_Element<DOM_ElementSubtype extends Element = El
   * "cloneNode" method returns the appropriate inheritor of "Node" but TypeScript does not provide the generic parameters.
   * In this case, the YDEE takes the responsibility for type assertion.
   * Relates issue: https://github.com/microsoft/TypeScript/issues/283 */
-  return compoundObject.targetElement.cloneNode(compoundObject.mustCopyAllChildren) as DOM_ElementSubtype;
+  return compoundParameter.targetElement.cloneNode(compoundParameter.mustCopyAllChildren) as DOM_ElementSubtype;
 
 }

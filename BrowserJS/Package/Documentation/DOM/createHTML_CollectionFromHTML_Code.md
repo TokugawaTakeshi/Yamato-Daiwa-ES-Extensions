@@ -1,11 +1,11 @@
 # createHTML_CollectionFromHTML_Code
 
 ```
-createHTML_CollectionFromHTML_Code(HTML_Code: string): HTMLCollection
+(HTML_Code: string): HTMLCollection
 ```
 
 Creates the [HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection) from HTML code passed
-as parameter.
+  as parameter.
 
 ```typescript
 import createHTML_CollectionFromHTML_Code from "./createHTML_CollectionFromHTML_Code";

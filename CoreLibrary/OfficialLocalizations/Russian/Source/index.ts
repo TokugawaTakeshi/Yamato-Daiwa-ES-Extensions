@@ -9,13 +9,18 @@
 export { default as RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/RussianDaysOfWeek";
 export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
 
+
+/* === Мокинг данных ================================================================================================ */
+export { default as MockGatewayHelperLocalization__Russian } from "./DataMocking/MockGatewayHelperLocalization.russian";
+
+
 /* === Обработка внешних данных типа "объект" ======================================================================= */
 export { default as RawObjectDataProcessorLocalization__Russian } from "./RawObjectDataProcessorLocalization.russian";
 
 
 /* === Логирование ================================================================================================== */
 export { default as LoggerLocalization__Russian } from "./LoggerLocalization.russian";
-export { default as PoliteErrorsMessagesBuilder__Japanese } from "./PoliteErrorsMessagesBuilderLocalization.russian";
+export { default as PoliteErrorsMessagesBuilder__Russian } from "./PoliteErrorsMessagesBuilderLocalization.russian";
 
 
 /* === Классы ошибок ================================================================================================ */

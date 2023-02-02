@@ -49,6 +49,7 @@ mixin LanguageDropDownList()
       aria-expanded= isExpanded ? "true" : "false"
       aria-haspopup="listbox"
     )
+
       span.LanguageDropDownList-CurrentlySelectedOption-Flag
       span.LanguageDropDownList-Label
 
@@ -81,7 +82,6 @@ mixin LanguageDropDownList()
           role="option"
         )
 
-          span.LanguageDropDownList-Option-Flag
           a.LanguageDropDownList-Option-Link(
             href= link
           )

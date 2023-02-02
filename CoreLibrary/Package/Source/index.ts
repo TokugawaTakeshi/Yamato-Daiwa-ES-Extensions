@@ -51,6 +51,13 @@ export {
 export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
 
 
+/* === Data mocking ================================================================================================= */
+export { default as DataMocking } from "./DataMocking/DataMocking";
+export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelpler/MockGatewayHelper";
+export { default as MockGatewayHelperLocalization__English } from
+    "./DataMocking/MockGatewayHelpler/MockGatewayHelperLocalization.english";
+
+
 /* === Date & Time ================================================================================================== */
 /* --- Other -------------------------------------------------------------------------------------------------------- */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";

@@ -1,8 +1,11 @@
 # `cloneDOM_Element` - clone DOM element
 
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-cloneDOM_Element-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
+
 ```
 <DOM_ElementSubtype extends Element = Element>(
-  compoundObject: Readonly<{
+  compoundParameter: Readonly<{
     targetElement: DOM_ElementSubtype;
     mustCopyAllChildren: boolean;
   }>

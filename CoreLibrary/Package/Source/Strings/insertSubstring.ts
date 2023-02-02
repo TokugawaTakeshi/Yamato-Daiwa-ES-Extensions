@@ -17,4 +17,5 @@ export default function insertSubstring(
 
 
   return typeof options.modifier === "undefined" ? targetSubstring.toString() : options.modifier(targetSubstring.toString());
+
 }

@@ -3,11 +3,7 @@ import createDOM_ElementFromHTML_Code from "../../../Source/DOM/createDOM_Elemen
 import Assert from "assert";
 import provideMockBrowserEnvironment from "jsdom-global";
 
-import {
-  InvalidParameterValueError,
-  ImproperUsageError,
-  UnexpectedEventError
-} from "@yamato-daiwa/es-extensions";
+import { InvalidParameterValueError, ImproperUsageError } from "@yamato-daiwa/es-extensions";
 
 
 describe("createDOM_ElementFromHTML_Code", (): void => {
@@ -69,9 +65,11 @@ describe("createDOM_ElementFromHTML_Code", (): void => {
           });
         },
         {
-          name: UnexpectedEventError.NAME
+          name: InvalidParameterValueError.NAME
         }
       );
     });
+
   });
+
 });

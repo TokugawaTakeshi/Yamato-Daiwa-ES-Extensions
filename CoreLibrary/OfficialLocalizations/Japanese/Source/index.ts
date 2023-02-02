@@ -12,6 +12,10 @@ export { default as JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumera
 export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";
 
 
+/* === データモキング ==================================================================================================== */
+export { default as MockGatewayHelperLocalization__Japanese } from "./DataMocking/MockGatewayHelperLocalization.japanese";
+
+
 /* === 生オブジェクト系データ処理 =========================================================================================== */
 export { default as RawObjectDataProcessorLocalization__Japanese } from "./RawObjectDataProcessorLocalization.japanese";
 

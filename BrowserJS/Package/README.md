@@ -28,7 +28,7 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
   <dd>
     Clones DOM element herewith tells TypeScript that cloned element has same subtype of the 
     <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> as initial instance 
-    (it is natural, however the TypeScript typing for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode">`Node.cloneNode()`</a> 
+    (it is natural, however the TypeScript typing for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode"><code>Node.cloneNode()</code></a> 
     has <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> as returned value type; 
     it is the <a href="https://github.com/microsoft/TypeScript/issues/283">TypeScript issue</a>.
   </dd>
