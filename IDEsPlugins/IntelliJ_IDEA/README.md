@@ -46,6 +46,9 @@
 * Date and time
   * <kbd>tp</kbd> Inserts working example of the [TimePoint](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) class usage
 
+* BrowserJS
+  * <kbd>addLeftClickEventHandler</kbd>, <kbd>alceh</kbd> The live template and it's alias respectively for the [**addLeftClickEventHandler**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/EventsHandling/addLeftClickEventHandler.md) function
+
 <!-- Plugin description end -->
 
 

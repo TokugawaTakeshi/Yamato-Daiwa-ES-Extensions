@@ -20,9 +20,18 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 
 ## Documentation
 
-### DOM manipulation
+### DOM manipulations
 
 <dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/cloneDOM_Element.md">cloneDOM_Element</a></dt>
+  <dd>
+    Clones DOM element herewith tells TypeScript that cloned element has same subtype of the 
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> as initial instance 
+    (it is natural, however the TypeScript typing for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode">`Node.cloneNode()`</a> 
+    has <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> as returned value type; 
+    it is the <a href="https://github.com/microsoft/TypeScript/issues/283">TypeScript issue</a>.
+  </dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md">createDOM_ElementFromHTML_Code</a></dt>
   <dd>Creates the DOM element (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a>) or it's inheritor from HTML code, herewith it must be exactly one root element.</dd>
@@ -37,7 +46,7 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
   <dd>Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context, otherwise throws the error.</dd>
   
 </dl>
-  
+
 
 ### Events handling
 
