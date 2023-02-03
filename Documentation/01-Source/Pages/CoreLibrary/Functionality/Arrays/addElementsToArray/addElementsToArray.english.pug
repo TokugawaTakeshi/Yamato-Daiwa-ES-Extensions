@@ -3,8 +3,8 @@ extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../../../Components/Components.pug
   include ../../../../../SharedAssets/Markup/Assets.english.pug
+  include ../../../../../Components/Components.english.pug
 
 
 block append Metadata
@@ -27,7 +27,9 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray");
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray"
+    );
 
     LanguageDropDownList.setLinks({
       [LanguageDropDownList.supportedLanguages.japanese]: "./addElementsToArray.japanese.html",

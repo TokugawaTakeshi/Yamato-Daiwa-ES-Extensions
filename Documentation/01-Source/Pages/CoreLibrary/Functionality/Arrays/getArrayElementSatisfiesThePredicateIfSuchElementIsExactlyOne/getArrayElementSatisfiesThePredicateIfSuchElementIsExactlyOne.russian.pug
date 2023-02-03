@@ -3,8 +3,8 @@ extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../../../Components/Components.pug
   include ../../../../../SharedAssets/Markup/Assets.russian.pug
+  include ../../../../../Components/Components.russian.pug
 
 
 block append Metadata
@@ -27,11 +27,16 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
-      [LanguageDropDownList.supportedLanguages.japanese]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html"
+      [LanguageDropDownList.supportedLanguages.english]:
+          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
+      [LanguageDropDownList.supportedLanguages.japanese]:
+          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html"
     });
 
 

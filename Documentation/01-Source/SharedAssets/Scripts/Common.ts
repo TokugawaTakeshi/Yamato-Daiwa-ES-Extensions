@@ -1,3 +1,3 @@
-import { CodeViewer } from "@yamato-daiwa/frontend/Components";
+import { CodeViewer } from "@yamato-daiwa/frontend";
 
 CodeViewer.initializeAllInstances();

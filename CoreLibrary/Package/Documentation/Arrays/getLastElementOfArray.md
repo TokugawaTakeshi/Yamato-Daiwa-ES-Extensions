@@ -1,4 +1,4 @@
-# `getLastElementOfArray` - get last element of empty array
+# `getLastElementOfArray` - get last element of array
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getLastElementOfArray-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template_(alias)-gleoa-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)

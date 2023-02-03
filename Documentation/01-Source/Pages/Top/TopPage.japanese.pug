@@ -3,7 +3,7 @@ extends ../../Layouts/Minimal/MinimalLayout.pug
 
 block append Requirements
 
-  include ../../Components/Components.pug
+  include ../../Components/Components.japanese.pug
   include ../../SharedAssets/Markup/Assets.japanese.pug
 
 
@@ -14,9 +14,9 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("トップ");
     HTML_PageMetaData = {
-      description: "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）はTypeScript言語での高品質開発専用の補助機能のライブラリである。" +
-          "多数の特殊化した簡単な関数も、豊富な機能なクラス（例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」）を含む。" +
-          "関数名や引数名は和訳すれば説明書が無くても、コードな何をしているか完全に明かになっている様に設計された。",
+      description: "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）は、TypeScript言語での高品質開発を補助するための専用ライブラリである。" +
+          "多数の特殊化した簡単な関数も、例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」等、豊富な機能クラスを含んでいる。" +
+          "関数名や引数名を和訳すれば、説明書を見ずともコードの動作が判る様に設計されている。",
       author: HTML_PAGE_AUTHOR
     };
 
@@ -32,5 +32,32 @@ block append Metadata
     });
 
 
-
 block append SpecificContent
+
+  main.TopPage
+
+    .TopPage-ImageAndTopHeadingGroup
+
+      img.TopPage-ImageAndTopHeadingGroup-Image(
+        src="@Shared/Icons/YDEE_Icon.svg"
+        alt="「Yamato Daiwa ES Extensions」ライブラリの共通のロゴタイプ"
+      )
+
+      h1.TopPage-ImageAndTopHeadingGroup-Heading
+        span.TopPage-ImageAndTopHeadingGroup-Heading-FirstLine Yamato Daiwa
+        span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
+
+    p.TopPage-ShortDescription-Heading.
+      TypeScriptでの高品質開発専用豊富なライブラリ群
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.warning,
+      hasPrependedSVG_Icon: true
+    }).TopPage-Disclaimer.
+
+      説明書（ウェブサイト）は現在開発中です。
+      準備中のページにアクセスしようとした場合は、当ライブラリの「GitHubリポジトリの一時的なMarkdown英語の説明書」にリダイレクトさせていただきます。
+      高品質な資料の作製には開発よりも多くの時間を要しますが、新規機能の追加がライブラリに必要な為、そちらの作業を優先的に行っています。
+      何卒御了承下さい。
+
+    +CompactTableOfContents(localizedRouting).TopPage-TableOfContents

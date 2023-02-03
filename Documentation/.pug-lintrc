@@ -1,3 +1,4 @@
 {
-  "extends": "./node_modules/@yamato-daiwa/style_guides/Markup.js"
+  "extends": "./node_modules/@yamato-daiwa/style_guides/Markup.js",
+  "excludeFiles": [ "node_modules/**" ]
 }

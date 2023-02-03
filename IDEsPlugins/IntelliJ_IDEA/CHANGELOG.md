@@ -2,7 +2,8 @@
 
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
-## [0.0.4]
+
+## [0.0.5]
 
 ### Added
 
@@ -25,6 +26,7 @@
 * Drop the support for IntelliJ IDEA 2021.X
 * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**.
 * <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**.
+
 
 ## [0.0.3]
 
@@ -50,6 +52,7 @@
 * Support for build **2022.X**
 * Drop support for build **2020.X**
 * Live template <kbd>prod</kbd> has been renamed to <kbd>rodp</kbd>
+
 
 ## [0.0.2]
 

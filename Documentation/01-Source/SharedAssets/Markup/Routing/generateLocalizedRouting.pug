@@ -1,0 +1,1454 @@
+-
+
+  function generateLocalizedRouting(localization) {
+
+    const localizedRouting = {
+
+      top: {
+        tableOfContentsTitle: localization.topPage.tableOfContentsTitle,
+        URI: localization.topPage.URI
+      },
+
+      coreLibrary: {
+
+        tableOfContentsTitle: localization.coreLibrary.tableOfContentsTitle,
+
+        children: {
+
+          gettingStarted: {
+
+            tableOfContentsTitle: localization.coreLibrary.gettingStarted.tableOfContentsTitle,
+            URI: `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }`,
+
+            children: {
+
+              installation: {
+                tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.installation.tableOfContentsTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#Installation--SECTION` }
+              },
+
+              distributiveVolumeNotice: {
+                tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.distributiveVolumeNotice.tableOfContentsTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#DistributiveVolumeNotice--SECTION` }
+              },
+
+              nonTypeScriptUsageWarning: {
+                tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.nonTypeScriptUsageWarning.tableOfContentsTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#NonTypeScriptUsageWarning--SECTION` }
+              },
+
+              importingOfFunctionality: {
+                tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.importingOfFunctionality.tableOfContentsTitle,
+                get URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#ImportingOfFunctionality--SECTION` }
+              }
+
+            }
+
+          },
+
+          functionality: {
+
+            tableOfContentsTitle: localization.coreLibrary.functionality.tableOfContentsTitle,
+
+            children: {
+
+              arrays: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.arrays.tableOfContentsTitle,
+
+                children: {
+
+                  retrievingOfElements: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.arrays.retrievingOfElements.tableOfContentsTitle,
+
+                    children: {
+
+                      getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
+                        tableOfContentsTitle: "<code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
+                      },
+
+                      getLastElementOfArray: {
+                        tableOfContentsTitle: "<code>getLastElementOfArray</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray.md"
+                      }
+                    }
+
+                  },
+
+                  retrievingOfIndexes: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.arrays.retrievingOfIndexes.tableOfContentsTitle,
+
+                    children: {
+
+                      getIndexesOfArrayElementsWhichSatisfiesThePredicate: {
+                        tableOfContentsTitle: "<code>getIndexesOfArrayElementsWhichSatisfiesThePredicate</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md"
+                      },
+
+                      getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
+                        tableOfContentsTitle: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
+                        URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`
+                      }
+
+                    }
+
+                  },
+
+                  addingOfElements: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.arrays.addingOfElements.tableOfContentsTitle,
+
+                    children: {
+
+                      addElementsToArray: {
+                        tableOfContentsTitle: "<code>addElementsToArray</code>",
+                        get URI() { return `@All/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.${ localization.fileNameLocalizationExtensions }.pug` }
+                      }
+
+                    }
+
+                  },
+
+                  removingOfElements: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.arrays.removingOfElements.tableOfContentsTitle,
+
+                    children: {
+
+                      removeArrayElementsByIndexes: {
+                        tableOfContentsTitle: "<code>removeArrayElementsByIndexes</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md"
+                      },
+
+                      removeArrayElementsByPredicates: {
+                        tableOfContentsTitle: "<code>removeArrayElementsByPredicates</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md"
+                      }
+
+                    }
+
+                  },
+
+                  other: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.arrays.other.tableOfContentsTitle,
+
+                    children: {
+
+                      removeArrayElementsByIndexes: {
+                        tableOfContentsTitle: "<code>twoDimensionalizeArray</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md"
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              },
+
+              constantsAndEnumerations: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.constantsAndEnumerations.tableOfContentsTitle,
+
+                children: {
+
+                  dateTime: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.constantsAndEnumerations.dateTime.tableOfContentsTitle,
+
+                    children: {
+
+                      CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING: {
+                        tableOfContentsTitle: "<code>CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING</code>",
+                        URI: "#"
+                      },
+
+                      DaysOfWeek: {
+                        tableOfContentsTitle: "<code>DaysOfWeek</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md"
+                      },
+
+                      HOURS_PER_STELLAR_DAY: {
+                        tableOfContentsTitle: "<code>HOURS_PER_STELLAR_DAY</code>",
+                        URI: "#"
+                      },
+
+                      MAXIMAL_DAYS_IN_MONTH: {
+                        tableOfContentsTitle: "<code>MAXIMAL_DAYS_IN_MONTH</code>",
+                        URI: "#"
+                      },
+
+                      MINUTES_PER_HOUR: {
+                        tableOfContentsTitle: "<code>MINUTES_PER_HOUR</code>",
+                        URI: "#"
+                      },
+
+                      MONTHS_PER_YEAR: {
+                        tableOfContentsTitle: "<code>MONTHS_PER_YEAR</code>",
+                        URI: "#"
+                      },
+
+                      MonthsNames: {
+                        tableOfContentsTitle: "<code>MonthsNames</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"
+                      },
+
+                      SECONDS_PER_MINUTE: {
+                        tableOfContentsTitle: "<code>SECONDS_PER_MINUTE</code>",
+                        URI: "#"
+                      }
+
+                    }
+
+                  },
+
+                  HTTP: {
+
+                    tableOfContentsTitle: "HTTP",
+
+                    children: {
+
+                      HTTP_Methods: {
+                        tableOfContentsTitle: "<code>HTTP_Methods</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_Methods.md"
+                      },
+
+                      HTTP_StatusCodes: {
+
+                        tableOfContentsTitle: localization.coreLibrary.functionality.constantsAndEnumerations.HTTP.HTTP_StatusCodes.tableOfContentsTitle,
+
+                        children: {
+
+                          all: {
+                            tableOfContentsTitle: "All (<code>HTTP_StatusCodes</code>)",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#http_statuscodes---all-http-status-codes"
+                          },
+
+                          InformationalResponsesHTTP_StatusCodes: {
+                            tableOfContentsTitle: "<code>InformationalResponsesHTTP_StatusCodes</code>",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#informationalresponseshttp_statuscodes---information-responses"
+                          },
+
+                          SuccessfulResponsesHTTP_StatusCodes: {
+                            tableOfContentsTitle: "<code>SuccessfulResponsesHTTP_StatusCodes</code>",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#successfulresponseshttp_statuscodes---successful-responses"
+                          },
+
+                          RedirectionResponsesHTTP_StatusCodes: {
+                            tableOfContentsTitle: "<code>RedirectionResponsesHTTP_StatusCodes</code>",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#redirectionresponseshttp_statuscodes---redirection-messages"
+                          },
+
+                          ClientErrorsHTTP_StatusCodes: {
+                            tableOfContentsTitle: "<code>ClientErrorsHTTP_StatusCodes</code>",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#clienterrorshttp_statuscodes---client-error-responses"
+                          },
+
+                          ServerErrorsHTTP_StatusCodes: {
+                            tableOfContentsTitle: "<code>ServerErrorsHTTP_StatusCodes</code>",
+                            URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#servererrorshttp_statuscodes---server-error-responses"
+                          }
+
+                        }
+
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              },
+
+              dataMocking: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.dataMocking.tableOfContentsTitle,
+
+                children: {
+
+                  guide: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.dataMocking.guide.tableOfContentsTitle,
+                    URI: "#"
+                  },
+
+                  DataMockingClass: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.dataMocking.DataMockingClass.tableOfContentsTitle,
+                    URI: "#"
+                  },
+
+                  MockGatewayHelper: {
+                    tableOfContentsTitle: "<code>MockGatewayHelper</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              dateTime: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.dateTime.tableOfContentsTitle,
+
+                children: {
+
+                  comparison: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.dateTime.comparison.tableOfContentsTitle,
+
+                    isEarlierThan: {
+                      tableOfContentsTitle: "<code>isEarlierThan</code>",
+                      URI: "#"
+                    },
+
+                    isLaterThan: {
+                      tableOfContentsTitle: "<code>isLaterThan</code>",
+                      URI: "#"
+                    },
+
+                    isNotEarlierThan: {
+                      tableOfContentsTitle: "<code>isNotEarlierThan</code>",
+                      URI: "#"
+                    },
+
+                    isNotLaterThan: {
+                      tableOfContentsTitle: "<code>isNotLaterThan</code>",
+                      URI: "#"
+                    }
+
+                  },
+
+                  other: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.dateTime.other.tableOfContentsTitle,
+
+                    children: {
+
+                      CalendarBuilder: {
+                        tableOfContentsTitle: "<code>CalendarBuilder</code>",
+                        URI: "#"
+                      },
+
+                      DateWithoutTime: {
+                        tableOfContentsTitle: "<code>DateWithoutTime</code>",
+                        URI: "#"
+                      },
+
+                      doesTimeIntervalsOverlaps: {
+                        tableOfContentsTitle: "<code>doesTimeIntervalsOverlaps</code>",
+                        URI: "#"
+                      },
+
+                      getDaysCountInSpecificMonth: {
+                        tableOfContentsTitle: "<code>getDaysCountInSpecificMonth</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md"
+                      },
+
+                      getDaysCountOfPeriod: {
+                        tableOfContentsTitle: "<code>getDaysCountOfPeriod</code>",
+                        URI: "#"
+                      },
+
+                      getISO8601StringWithoutTimePart: {
+                        tableOfContentsTitle: "<code>getISO8601StringWithoutTimePart</code>",
+                        URI: "#"
+                      },
+
+                      getMonthNameByNumber: {
+                        tableOfContentsTitle: "<code>getMonthNameByNumber</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md"
+                      },
+
+                      getMonthNumberByName: {
+                        tableOfContentsTitle: "<code>getMonthNumberByName</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md"
+                      },
+
+                      getNextMonthNumber: {
+                        tableOfContentsTitle: "<code>getNextMonthNumber</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getNextMonthNumber.md"
+                      },
+
+                      getPreviousMonthNumber: {
+                        tableOfContentsTitle: "<code>getPreviousMonthNumber</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md"
+                      },
+
+                      getPreviousMonthNumber: {
+                        tableOfContentsTitle: "<code>getPreviousMonthNumber</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md"
+                      },
+
+                      getYearOfNextMonth: {
+                        tableOfContentsTitle: "<code>getYearOfNextMonth</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfNextMonth.md"
+                      },
+
+                      getYearOfPreviousMonth: {
+                        tableOfContentsTitle: "<code>getYearOfPreviousMonth</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfPreviousMonth.md"
+                      },
+
+                      millisecondsToSeconds: {
+                        tableOfContentsTitle: "<code>millisecondsToSeconds</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md"
+                      },
+
+                      secondsToMilliseconds: {
+                        tableOfContentsTitle: "<code>secondsToMilliseconds</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md"
+                      },
+
+                      TimePoint: {
+                        tableOfContentsTitle: "<code>TimePoint</code>",
+                        URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md"
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              },
+
+              defaultValueSubstituters: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.defaultValueSubstituters.tableOfContentsTitle,
+
+                children: {
+
+                  substituteWhenNull: {
+                    tableOfContentsTitle: "<code>substituteWhenNull</code>",
+                    URI: "#"
+                  },
+
+                  substituteWhenUndefined: {
+                    tableOfContentsTitle: "<code>substituteWhenUndefined</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              errors: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.errors.tableOfContentsTitle,
+                URI: `#`,
+
+                children: {
+
+                  AlgorithmMismatchError: {
+                    tableOfContentsTitle: "<code>AlgorithmMismatchError</code>",
+                    URI: "#"
+                  },
+
+                  ClassRedundantSubsequentInitializationError: {
+                    tableOfContentsTitle: "<code>ClassRedundantSubsequentInitializationError</code>",
+                    URI: "#"
+                  },
+
+                  ClassRequiredInitializationHasNotBeenExecutedError: {
+                    tableOfContentsTitle: "<code>ClassRequiredInitializationHasNotBeenExecutedError</code>",
+                    URI: "#"
+                  },
+
+                  ConfigFileNotFoundError: {
+                    tableOfContentsTitle: "<code>ConfigFileNotFoundError</code>",
+                    URI: "#"
+                  },
+
+                  CrossBrowserIssueError: {
+                    tableOfContentsTitle: "<code>CrossBrowserIssueError</code>",
+                    URI: "#"
+                  },
+
+                  DataRetrievingFailedError: {
+                    tableOfContentsTitle: "<code>DataRetrievingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  DataSubmittingFailedError: {
+                    tableOfContentsTitle: "<code>DataSubmittingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  DOM_ElementRetrievingFailedError: {
+                    tableOfContentsTitle: "<code>DOM_ElementRetrievingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  FileReadingFailedError: {
+                    tableOfContentsTitle: "<code>FileReadingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  FileWritingFailedError: {
+                    tableOfContentsTitle: "<code>FileWritingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  ImproperUsageError: {
+                    tableOfContentsTitle: "<code>ImproperUsageError</code>",
+                    URI: "#"
+                  },
+
+                  IncompatiblePropertiesInObjectTypeParameterError: {
+                    tableOfContentsTitle: "<code>IncompatiblePropertiesInObjectTypeParameterError</code>",
+                    URI: "#"
+                  },
+
+                  InterProcessInteractionFailedError: {
+                    tableOfContentsTitle: "<code>InterProcessInteractionFailedError</code>",
+                    URI: "#"
+                  },
+
+                  InvalidConfigError: {
+                    tableOfContentsTitle: "<code>InvalidConfigError</code>",
+                    URI: "#"
+                  },
+
+                  InvalidExternalDataError: {
+                    tableOfContentsTitle: "<code>InvalidExternalDataError</code>",
+                    URI: "#"
+                  },
+
+                  InvalidParameterValueError: {
+                    tableOfContentsTitle: "<code>InvalidParameterValueError</code>",
+                    URI: "#"
+                  },
+
+                  ModuleDynamicLoadingFailedError: {
+                    tableOfContentsTitle: "<code>ModuleDynamicLoadingFailedError</code>",
+                    URI: "#"
+                  },
+
+                  UnexpectedEventError: {
+                    tableOfContentsTitle: "<code>UnexpectedEventError</code>",
+                    URI: "#"
+                  },
+
+                  UnsupportedScenarioError: {
+                    tableOfContentsTitle: "<code>UnsupportedScenarioError</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              logging: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.logging.tableOfContentsTitle,
+                URI: "#",
+
+                children: {
+
+                  loggerFacade: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.logging.loggerFacade.tableOfContentsTitle,
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"
+                  },
+
+                  loggerInterface: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.logging.loggerInterface.tableOfContentsTitle,
+                    URI: "#"
+                  },
+
+                  relatedTypes: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.logging.relatedTypes.tableOfContentsTitle,
+                    URI: "#"
+                  },
+
+                  PoliteErrorsMessagesBuilder: {
+                    tableOfContentsTitle: "<code>PoliteErrorsMessagesBuilder</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              maps: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.maps.tableOfContentsTitle,
+
+                children: {
+
+                  addMultiplePairsToMap: {
+                    tableOfContentsTitle: "<code>addMultiplePairsToMap</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md"
+                  },
+
+                  createMapBasedOnOtherMap: {
+                    tableOfContentsTitle: "<code>createMapBasedOnOtherMap</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md"
+                  },
+
+                  filterMap: {
+                    tableOfContentsTitle: "<code>filterMap</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md"
+                  }
+
+                }
+
+              },
+
+              numbers: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.numbers.tableOfContentsTitle,
+
+                children: {
+
+                  formatNumberWith4KetaKanji: {
+                    tableOfContentsTitle: "<code>formatNumberWith4KetaKanji</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md"
+                  },
+
+                  getArithmeticMean: {
+                    tableOfContentsTitle: "<code>getArithmeticMean</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/getArithmeticMean.md"
+                  },
+
+                  isStringifiedNonNegativeIntegerOfRegularNotation: {
+                    tableOfContentsTitle: "<code>isStringifiedNonNegativeIntegerOfRegularNotation</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md"
+                  },
+
+                  roundDownToSpecificIntegerPlaceValue: {
+                    tableOfContentsTitle: "<code>roundDownToSpecificIntegerPlaceValue</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundDownToSpecificIntegerPlaceValue.md"
+                  },
+
+                  roundToSpecificNearestIntegerPlaceValue: {
+                    tableOfContentsTitle: "<code>roundToSpecificNearestIntegerPlaceValue</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecificNearestIntegerPlaceValue.md"
+                  },
+
+                  roundToSpecifiedNearestDecimalPlaceValue: {
+                    tableOfContentsTitle: "<code>roundToSpecifiedNearestDecimalPlaceValue</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundToSpecifiedNearestDecimalPlaceValue.md"
+                  },
+
+                  roundUpToSpecificIntegerPlaceValue: {
+                    tableOfContentsTitle: "<code>roundUpToSpecificIntegerPlaceValue</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundUpToSpecificIntegerPlaceValue.md"
+                  },
+
+                  separateEach3DigitsGroupWithComma: {
+                    tableOfContentsTitle: "<code>separateEach3DigitsGroupWithComma</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md"
+                  },
+
+                  separateEach4DigitsGroupWithComma: {
+                    tableOfContentsTitle: "<code>separateEach4DigitsGroupWithComma</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md"
+                  }
+
+                }
+
+              },
+
+              objects: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.objects.tableOfContentsTitle,
+
+                children: {
+
+                  getObjectPropertySafely: {
+                    tableOfContentsTitle: "<code>getObjectPropertySafely</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Objects/getObjectPropertySafely.md"
+                  }
+
+                }
+
+              },
+
+              pagination: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.pagination.tableOfContentsTitle,
+
+                computeFirstItemNumberForSpecificPaginationPage: {
+                  tableOfContentsTitle: "<code>computeFirstItemNumberForSpecificPaginationPage</code>",
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md"
+                },
+
+                computeLastItemNumberForSpecificPaginationPage: {
+                  tableOfContentsTitle: "<code>computeLastItemNumberForSpecificPaginationPage</code>",
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md"
+                },
+
+                PaginationCollection: {
+                  tableOfContentsTitle: "<code>PaginationCollection</code>",
+                  URI: "#"
+                },
+
+                splitToPaginationCollection: {
+                  tableOfContentsTitle: "<code>splitToPaginationCollection</code>",
+                  URI: "#"
+                }
+
+              },
+
+              promises: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.promises.tableOfContentsTitle,
+
+                children: {
+
+                  PromisesQueue: {
+                    tableOfContentsTitle: "<code>PromisesQueue</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              randomValuesGenerators: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.randomValuesGenerators.tableOfContentsTitle,
+
+                children: {
+
+                  getRandomArrayElement: {
+                    tableOfContentsTitle: "<code>getRandomArrayElement</code>",
+                    URI: "#"
+                  },
+
+                  getRandomBoolean: {
+                    tableOfContentsTitle: "<code>getRandomBoolean</code>",
+                    URI: "#"
+                  },
+
+                  getRandomInteger: {
+                    tableOfContentsTitle: "<code>getRandomInteger</code>",
+                    URI: "#"
+                  },
+
+                  getRandomLatinCharacter: {
+                    tableOfContentsTitle: "<code>getRandomLatinCharacter</code>",
+                    URI: "#"
+                  },
+
+                  getRandomObjectPropertyValue: {
+                    tableOfContentsTitle: "<code>getRandomObjectPropertyValue</code>",
+                    URI: "#"
+                  },
+
+                  getRandomString: {
+                    tableOfContentsTitle: "<code>getRandomString</code>",
+                    URI: "#"
+                  },
+
+                  getRandomSubarray: {
+                    tableOfContentsTitle: "<code>getRandomSubarray</code>",
+                    URI: "#"
+                  },
+
+                  getSpecificBooleanValueWithProbability: {
+                    tableOfContentsTitle: "<code>getSpecificBooleanValueWithProbability</code>",
+                    URI: "#"
+                  },
+
+                  removeRandomArrayElement: {
+                    tableOfContentsTitle: "<code>removeRandomArrayElement</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              RawObjectDataProcessor: {
+
+                tableOfContentsTitle: "<code>RawObjectDataProcessor</code>",
+                URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md",
+
+                children: {
+
+                  quickExample: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.quickExample.tableOfContentsTitle,
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example"
+                  },
+
+                  problemOverview: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.problemOverview.tableOfContentsTitle,
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview"
+                  },
+
+                  theoreticalMinimum: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.theoreticalMinimum.tableOfContentsTitle,
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum"
+                  },
+
+                  gettingStarted: {
+                    tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.gettingStarted.tableOfContentsTitle,
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started"
+                  },
+
+                  helpers: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.helpers.tableOfContentsTitle,
+                    URI: "#",
+
+                    children: {
+
+                      convertPotentialStringToFloatIfPossible: {
+                        tableOfContentsTitle: "<code>convertPotentialStringToFloatIfPossible</code>",
+                        URI: "#"
+                      },
+
+                      convertPotentialStringToIntegerIfPossible: {
+                        tableOfContentsTitle: "<code>convertPotentialStringToIntegerIfPossible</code>",
+                        URI: "#"
+                      },
+
+                      convertPotentialStringToNumberIfPossible: {
+                        tableOfContentsTitle: "<code>convertPotentialStringToNumberIfPossible</code>",
+                        URI: "#"
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              },
+
+              sets: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.sets.tableOfContentsTitle,
+
+                children: {
+
+                  addMultipleElementsToSet: {
+                    tableOfContentsTitle: "<code>addMultipleElementsToSet</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md"
+                  }
+
+                }
+
+              },
+
+              strings: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.strings.tableOfContentsTitle,
+
+                children: {
+
+                  charactersAssets: {
+
+                    tableOfContentsTitle: localization.coreLibrary.functionality.strings.charactersAssets.tableOfContentsTitle,
+                    URI: "#",
+
+                    children: {
+
+                      EscapeCharacters: {
+                        tableOfContentsTitle: "<code>EscapeCharacters</code>",
+                        URI: "#"
+                      },
+
+                      lowercaseLatinCharacters: {
+                        tableOfContentsTitle: "<code>lowercaseLatinCharacters</code>",
+                        URI: "#"
+                      },
+
+                      SpaceCharacters: {
+                        tableOfContentsTitle: "<code>SpaceCharacters</code>",
+                        URI: "#"
+                      },
+
+                      SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag: {
+                        tableOfContentsTitle: "<code>SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag</code>",
+                        URI: "#"
+                      },
+
+                      stringifiedDigits: {
+                        tableOfContentsTitle: "<code>stringifiedDigits</code>",
+                        URI: "#"
+                      },
+
+                      uppercaseLatinCharacters: {
+                        tableOfContentsTitle: "<code>uppercaseLatinCharacters</code>",
+                        URI: "#"
+                      }
+
+                    }
+
+                  }
+
+                },
+
+                regularExpressions: {
+
+                  tableOfContentsTitle: localization.coreLibrary.functionality.strings.charactersAssets.tableOfContentsTitle,
+                  URI: "#",
+
+                  children: {
+
+                    extractMatchingsWithRegularExpression: {
+                      tableOfContentsTitle: "<code>extractMatchingsWithRegularExpression</code>",
+                      URI: "#"
+                    },
+
+                    getMatchingWithFirstRegularExpressionCapturingGroup: {
+                      tableOfContentsTitle: "<code>getMatchingWithFirstRegularExpressionCapturingGroup</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                _URI: {
+
+                  tableOfContentsTitle: "URI",
+
+                  children: {
+
+                    appendFragmentToURI: {
+                      tableOfContentsTitle: "<code>appendFragmentToURI</code>",
+                      URI: "#"
+                    },
+
+                    getURI_Fragment: {
+                      tableOfContentsTitle: "<code>getURI_Fragment</code>",
+                      URI: "#"
+                    },
+
+                    getURI_PartWithoutFragment: {
+                      tableOfContentsTitle: "<code>getURI_PartWithoutFragment</code>",
+                      URI: "#"
+                    },
+
+                    filesAndDirectories: {
+
+                      tableOfContentsTitle: localization.coreLibrary.functionality.strings.URI.filesAndDirectories.tableOfContentsTitle,
+
+                      children: {
+
+                        appendLastFileNameExtension: {
+
+                          tableOfContentsTitle: {
+
+                            tableOfContentsTitle: "<code>appendLastFileNameExtension</code>",
+                            URI: "#"
+
+                          }
+
+                        }
+
+                      }
+
+                    }
+
+                  }
+
+                },
+
+                other: {
+
+                  areStringifiedDigitsOnly: {
+                    tableOfContentsTitle: "<code>areStringifiedDigitsOnly</code>",
+                    get URI() { return `@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.${ localization.fileNameLocalizationExtensions }` }
+                  },
+
+                  capitalizeFirstCharacter: {
+                    tableOfContentsTitle: "<code>capitalizeFirstCharacter</code>",
+                    URI: "#"
+                  },
+
+                  EmailAddress: {
+                    tableOfContentsTitle: "<code>EmailAddress</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md"
+                  },
+
+                  explodeCasedPhraseToWords: {
+                    tableOfContentsTitle: "<code>explodeCasedPhraseToWords</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/explodeCasedPhraseToWords.md"
+                  },
+
+                  getEnglishAbbreviatedOrdinalNumber: {
+                    tableOfContentsTitle: "<code>getEnglishAbbreviatedOrdinalNumber</code>",
+                    URI: "#"
+                  },
+
+                  getLastCharacter: {
+                    tableOfContentsTitle: "<code>getLastCharacter</code>",
+                    URI: "#"
+                  },
+
+                  getPositionsOfAllSubstringOccurrences: {
+                    tableOfContentsTitle: "<code>getPositionsOfAllSubstringOccurrences</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md"
+                  },
+
+                  hasStringOnlySpecificCharacters: {
+                    tableOfContentsTitle: "<code>hasStringOnlySpecificCharacters</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/hasStringOnlySpecificCharacters.md"
+                  },
+
+                  insertSubstring: {
+                    tableOfContentsTitle: "<code>insertSubstring</code>",
+                    URI: "#"
+                  },
+
+                  insertSubstringIf: {
+                    tableOfContentsTitle: "<code>insertSubstringIf</code>",
+                    URI: "#"
+                  },
+
+                  isIPv4AddressLiesInRange: {
+                    tableOfContentsTitle: "<code>isIPv4AddressLiesInRange</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/isIPv4AddressLiesInRange.md"
+                  },
+
+                  removeAllSpecifiedCharacters: {
+                    tableOfContentsTitle: "<code>removeAllSpecifiedCharacters</code>",
+                    URI: "#"
+                  },
+
+                  removeLastCharacter: {
+                    tableOfContentsTitle: "<code>removeLastCharacter</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md"
+                  },
+
+                  removeNonDigitsCharacters: {
+                    tableOfContentsTitle: "<code>removeNonDigitsCharacters</code>",
+                    URI: "#"
+                  },
+
+                  removeNthCharacter: {
+                    tableOfContentsTitle: "<code>removeNthCharacter</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md"
+                  },
+
+                  removeSpecificCharacterFromCertainPosition: {
+                    tableOfContentsTitle: "<code>removeSpecificCharacterFromCertainPosition</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md"
+                  },
+
+                  replace2OrMoreSpacesTo1: {
+                    tableOfContentsTitle: "<code>replace2OrMoreSpacesTo1</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md"
+                  },
+
+                  replaceBrHTML_TagToNewLineEscapeSequence: {
+                    tableOfContentsTitle: "<code>replaceBrHTML_TagToNewLineEscapeSequence</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md"
+                  },
+
+                  replaceDoubleBackslashesWithForwardSlashes: {
+                    tableOfContentsTitle: "<code>replaceDoubleBackslashesWithForwardSlashes</code>",
+                    URI: "#"
+                  },
+
+                  reverseString: {
+                    tableOfContentsTitle: "<code>reverseString</code>",
+                    URI: "#"
+                  },
+
+                  splitString: {
+                    tableOfContentsTitle: "<code>splitString</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/splitString.md"
+                  },
+
+                  stringifyAndFormatArbitraryValue: {
+                    tableOfContentsTitle: "<code>stringifyAndFormatArbitraryValue</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue/stringifyAndFormatArbitraryValue.md"
+                  },
+
+                  toLowerCamelCase: {
+                    tableOfContentsTitle: "<code>toLowerCamelCase</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toLowerCamelCase.md"
+                  },
+
+                  toScreamingSnakeCase: {
+                    tableOfContentsTitle: "<code>toScreamingSnakeCase</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toScreamingSnakeCase.md"
+                  },
+
+                  toUpperCamelCase: {
+                    tableOfContentsTitle: "<code>toUpperCamelCase</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toUpperCamelCase.md"
+                  },
+
+                  trimSpaces: {
+                    tableOfContentsTitle: "<code>trimSpaces</code>",
+                    URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md"
+                  }
+
+                }
+
+              },
+
+              typeGuards: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.tableOfContentsTitle,
+
+                arrays: {
+
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.arrays.tableOfContentsTitle,
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Arrays/ArrayTypeGuards.md",
+
+                  children: {
+
+                    isArrayOfCertainTypeElements: {
+                      tableOfContentsTitle: "<code>isArrayOfCertainTypeElements</code>",
+                      URI: "#"
+                    },
+
+                    isArrayOfLength: {
+                      tableOfContentsTitle: "<code>isArrayOfLength</code>",
+                      URI: "#"
+                    },
+
+                    isEmptyArray: {
+                      tableOfContentsTitle: "<code>isEmptyArray</code>",
+                      URI: "#"
+                    },
+
+                    isNonEmptyArray: {
+                      tableOfContentsTitle: "<code>isNonEmptyArray</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                nullables: {
+
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.nullables.tableOfContentsTitle,
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Nullables/NullableTypeGuards.md",
+
+                  children: {
+
+                    isEitherUndefinedOrNull: {
+                      tableOfContentsTitle: "<code>isEitherUndefinedOrNull</code>",
+                      URI: "#"
+                    },
+
+                    isNeitherUndefinedNorNull: {
+                      tableOfContentsTitle: "<code>isNeitherUndefinedNorNull</code>",
+                      URI: "#"
+                    },
+
+                    isNotNull: {
+                      tableOfContentsTitle: "<code>isNotNull</code>",
+                      URI: "#"
+                    },
+
+                    isNotUndefined: {
+                      tableOfContentsTitle: "<code>isNotUndefined</code>",
+                      URI: "#"
+                    },
+
+                    isNull: {
+                      tableOfContentsTitle: "<code>isNull</code>",
+                      URI: "#"
+                    },
+
+                    isUndefined: {
+                      tableOfContentsTitle: "<code>isUndefined</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                numbers: {
+
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.numbers.tableOfContentsTitle,
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Numbers/NumberTypeGuards.md",
+
+                  children: {
+
+                    isDecimalFractionOfAnySign: {
+                      tableOfContentsTitle: "<code>isDecimalFractionOfAnySign</code>",
+                      URI: "#"
+                    },
+
+                    isNaturalNumber: {
+                      tableOfContentsTitle: "<code>isNaturalNumber</code>",
+                      URI: "#"
+                    },
+
+                    isNegativeDecimalFraction: {
+                      tableOfContentsTitle: "<code>isNegativeDecimalFraction</code>",
+                      URI: "#"
+                    },
+
+                    isNegativeInteger: {
+                      tableOfContentsTitle: "<code>isNegativeInteger</code>",
+                      URI: "#"
+                    },
+
+                    isNegativeIntegerOrZero: {
+                      tableOfContentsTitle: "<code>isNegativeIntegerOrZero</code>",
+                      URI: "#"
+                    },
+
+                    isNonNegativeInteger: {
+                      tableOfContentsTitle: "<code>isNonNegativeInteger</code>",
+                      URI: "#"
+                    },
+
+                    isNumber: {
+                      tableOfContentsTitle: "<code>isNumber</code>",
+                      URI: "#"
+                    },
+
+                    isPositiveDecimalFraction: {
+                      tableOfContentsTitle: "<code>isPositiveDecimalFraction</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                objects: {
+
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.objects,
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Objects/ObjectTypeGuards.md",
+
+                  children: {
+
+                    isArbitraryObject: {
+                      tableOfContentsTitle: "<code>isArbitraryObject</code>",
+                      URI: "#"
+                    },
+
+                    isEmptyObject: {
+                      tableOfContentsTitle: "<code>isEmptyObject</code>",
+                      URI: "#"
+                    },
+
+                    isNonEmptyArbitraryObject: {
+                      tableOfContentsTitle: "<code>isNonEmptyArbitraryObject</code>",
+                      URI: "#"
+                    },
+
+                    isNonEmptyObject: {
+                      tableOfContentsTitle: "<code>isNonEmptyObject</code>",
+                      URI: "#"
+                    },
+
+                    isNonNullObject: {
+                      tableOfContentsTitle: "<code>isNonNullObject</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                strings: {
+
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Strings/StringTypeGuards.md",
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.strings.tableOfContentsTitle,
+
+                  children: {
+
+                    isEmptyString: {
+                      tableOfContentsTitle: "<code>isEmptyString</code>",
+                      URI: "#"
+                    },
+
+                    isNonEmptyString: {
+                      tableOfContentsTitle: "<code>isNonEmptyString</code>",
+                      URI: "#"
+                    },
+
+                    isString: {
+                      tableOfContentsTitle: "<code>isString</code>",
+                      URI: "#"
+                    },
+
+                    isStringOfLength: {
+                      tableOfContentsTitle: "<code>isStringOfLength</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                },
+
+                other: {
+
+                  URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md",
+                  tableOfContentsTitle: localization.coreLibrary.functionality.typeGuards.others.tableOfContentsTitle,
+
+                  children: {
+
+                    isBoolean: {
+                      tableOfContentsTitle: "<code>isBoolean</code>",
+                      URI: "#"
+                    },
+
+                    isElementOfEnumeration: {
+                      tableOfContentsTitle: "<code>isElementOfEnumeration</code>",
+                      URI: "#"
+                    },
+
+                    isFunctionLike: {
+                      tableOfContentsTitle: "<code>isFunctionLike</code>",
+                      URI: "#"
+                    }
+
+                  }
+
+                }
+
+              },
+
+              types: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.types.tableOfContentsTitle,
+
+                children: {
+
+                  ArbitraryObject: {
+                    tableOfContentsTitle: "<code>ArbitraryObject</code>",
+                    URI: "#"
+                  },
+
+                  ElementOfPseudoEnumeration: {
+                    tableOfContentsTitle: "<code>ElementOfPseudoEnumeration</code>",
+                    URI: "#"
+                  },
+
+                  InheritEnumerationKeys: {
+                    tableOfContentsTitle: "<code>InheritEnumerationKeys</code>",
+                    URI: "#"
+                  },
+
+                  ParsedJSON_AndRelated: {
+                    tableOfContentsTitle: "<code>ParsedJSON</code> and related",
+                    URI: "#"
+                  },
+
+                  PartialBy: {
+                    tableOfContentsTitle: "<code>PartialBy</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              },
+
+              valueTransformers: {
+
+                tableOfContentsTitle: localization.coreLibrary.functionality.valueTransformers.tableOfContentsTitle,
+
+                children: {
+
+                  emptyStringToNull: {
+                    tableOfContentsTitle: "<code>emptyStringToNull</code>",
+                    URI: "#"
+                  },
+
+                  nullToEmptyString: {
+                    tableOfContentsTitle: "<code>nullToEmptyString</code>",
+                    URI: "#"
+                  },
+
+                  nullToUndefined: {
+                    tableOfContentsTitle: "<code>nullToUndefined</code>",
+                    URI: "#"
+                  },
+
+                  nullToZero: {
+                    tableOfContentsTitle: "<code>nullToZero</code>",
+                    URI: "#"
+                  },
+
+                  undefinedToEmptyArray: {
+                    tableOfContentsTitle: "<code>undefinedToEmptyArray</code>",
+                    URI: "#"
+                  },
+
+                  undefinedToEmptyString: {
+                    tableOfContentsTitle: "<code>undefinedToEmptyString</code>",
+                    URI: "#"
+                  },
+
+                  undefinedToNull: {
+                    tableOfContentsTitle: "<code>undefinedToNull</code>",
+                    URI: "#"
+                  }
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+      },
+
+      browserJS: {
+
+        tableOfContentsTitle: localization.browserJS.tableOfContentsTitle,
+
+        children: {
+
+          DOM_Manipulations: {
+
+            cloneDOM_Element: {
+
+              tableOfContentsTitle: "<code>cloneDOM_Element</code>",
+              URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/cloneDOM_Element.md"
+
+            }
+
+          }
+
+        }
+
+      },
+
+      nodeJS: {
+
+        tableOfContentsTitle: "Node.js",
+
+        children: {
+
+          utils: {
+
+            tableOfContentsTitle: localization.NodeJS.utils.tableOfContentsTitle,
+
+            children: {
+
+              ConsoleCommandsParser: {
+
+                tableOfContentsTitle: "<code>ConsoleCommandsParser</code>",
+                URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ConsoleCommandsParser/ConsoleCommandsParser.md"
+
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    };
+
+    return localizedRouting;
+
+  }

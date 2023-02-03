@@ -3,8 +3,8 @@ extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../../../Components/Components.pug
   include ../../../../../SharedAssets/Markup/Assets.japanese.pug
+  include ../../../../../Components/Components.japanese.pug
 
 
 block append Metadata
@@ -16,7 +16,7 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-        whatFunctionDoes: "特別なストリートの魔法" // TODO 編集
+        whatFunctionDoes: "特別なストリートの魔法"
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -26,11 +26,16 @@ block append Metadata
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
 
     LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+      [LanguageDropDownList.supportedLanguages.english]:
+          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
+      [LanguageDropDownList.supportedLanguages.russian]:
+          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
     });
 
 
@@ -38,7 +43,6 @@ block append SpecificContent
 
   article
 
-    // TODO 編集
     +CallableExpressionScheme({
       technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
       headingTag: "h1",

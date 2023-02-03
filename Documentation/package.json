@@ -13,6 +13,7 @@
     "@yamato-daiwa/frontend-documenting-kit": "../../YamatoDaiwaFrontend/DocumentingKit/Package",
     "@yamato-daiwa/frontend-documenting_kit-localization-japanese": "../../YamatoDaiwaFrontend/DocumentingKit/OfficialLocalizations/Japanese",
     "@yamato-daiwa/frontend-documenting_kit-localization-russian": "../../YamatoDaiwaFrontend/DocumentingKit/OfficialLocalizations/Russian",
+    "@yamato-daiwa/programming_documentation": "../../YamatoDaiwaProgrammingDocumentation",
     "prismjs": "1.29.0"
   },
   "devDependencies": {

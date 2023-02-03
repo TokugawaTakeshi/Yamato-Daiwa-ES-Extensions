@@ -230,4 +230,26 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="addLeftClickEventHandler" value="addLeftClickEventHandler({&#10;&#10;  targetElement: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;&#10;  // &lt; === OR ==============================================&#10;  targetElementSelector: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;  // &lt; --- Leave one, delete remain ------------------------&#10;  mustApplyToAllMatchingsWithSelector: true,&#10;  mustIgnoreSubsequentMatchingsWithSelector: true,&#10;  mustExpectExactlyOneMatchingWithSelector: true,&#10;  // &gt; -----------------------------------------------------&#10;  // &gt; =====================================================&#10;&#10;  handler: (): void =&gt; { console.log(&quot;Clicked&quot;); },&#10;  mustInvokeBeforeChildren_sHandlers: true // false as default  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ELEMENT_OR_ITS_SELECTOR" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="alceh" value="addLeftClickEventHandler({&#10;&#10;  targetElement: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;&#10;  // &lt; === OR ==============================================&#10;  targetElementSelector: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;  // &lt; --- Leave one, delete remain ------------------------&#10;  mustApplyToAllMatchingsWithSelector: true,&#10;  mustIgnoreSubsequentMatchingsWithSelector: true,&#10;  mustExpectExactlyOneMatchingWithSelector: true,&#10;  // &gt; -----------------------------------------------------&#10;  // &gt; =====================================================&#10;&#10;  handler: (): void =&gt; { console.log(&quot;Clicked&quot;); },&#10;  mustInvokeBeforeChildren_sHandlers: true // false as default  &#10;})" description="The alias of  `addLeftClickEventHandler`" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ELEMENT_OR_ITS_SELECTOR" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="cloneDOM_Element" value="cloneDOM_Element({&#10;  targetElement: $TARGET_ELEMENT$,&#10;  mustCopyAllChildren: $MUST_COPY_ALL_CHILDREN$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+    <variable name="TARGET_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="MUST_COPY_ALL_CHILDREN" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="&quot;true&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>

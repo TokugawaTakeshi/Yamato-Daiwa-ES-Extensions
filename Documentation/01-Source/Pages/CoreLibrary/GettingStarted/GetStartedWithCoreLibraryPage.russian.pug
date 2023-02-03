@@ -3,8 +3,8 @@ extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../Components/Components.pug
   include ../../../SharedAssets/Markup/Assets.russian.pug
+  include ../../../Components/Components.russian.pug
 
 
 block append Metadata
@@ -47,7 +47,7 @@ block append SpecificContent
     h2.Article-Heading2#Installation--SECTION Установка
 
     p.Article-Paragraph.
-      Процедура установки стандартная, с помощью пакетного менеджера
+      Процедура установки стандартная, с помощью #[+Term--YDID пакетного менеджера]
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm].
 
     +CodeViewer--YDF({
@@ -69,44 +69,44 @@ block append SpecificContent
     +SingleImageViewer--YDF({
       imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
       imageAlternateText: "Пример отображения объёма дистрибутива пакета на официальном сайте пакетного менеджера npm. " +
-          "Важно, что отображающийся объём не всегда соответствует тому объёму, на который увеличится приложение, " +
+          "Важно, что отображающийся объём не всегда соответствует тому объёму, на который после сборки увеличится приложение, " +
           "использующее данный пакет."
     }).Article-SingleImageViewer
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
     }).Article-AttentionBox.
-      Это #[+Keyword--YDID не] объём, на который увеличится Ваша библиотека после подключения пакета.
+      Это #[+Keyword--YDID не] объём, на который увеличится Ваше приложение после подключения пакета и сборки приложения.
 
     p.Article-Paragraph.
       Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальны для браузерных приложений)
-        и #[+Term--YDID CommonJS-модулей] (оптимальны для Node.js приложений).
-      Таким образом, в зависимости от используемого типа модулей, значительная часть файлов будут проигнорированы.
+        и #[+Term--YDID CommonJS-модулей] (актуальные по умолчанию для Node.js приложений).
+      Таким образом, какой бы тип модулей из этих двух не использовался, значительная часть файлов будут проигнорирована.
 
     p.Article-Paragraph.
-      Объём в несколько сотен килобайт для Node.js незначителен.
+      Объём в несколько сотен килобайт для серверных и консольных Node.js-приложений незначителен в большинстве случаев.
       Что касается браузерных приложений, то здесь важно обеспечить устранение неиспользуемой функциональности из
         #[+Term--YDID продакшен-сборки] с помощью сборщика проектов.
-      В #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack] эта функциональность называется
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link Tree shaking]
-        и для её активации в режиме продакшен необходимо в
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) настойках TypeScript]
-        указать тип модулей группы #[+ImportantEntity--YDID ES].
-      Второе условие срабатывание этой функциональности - наличие
-        #[+ImportantEntity__Code--YDID sideEffects: false] в #[+ImportantEntity--YDID package.json]
-        зависимости - со стороны #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] выполнено.
 
     p.Article-Paragraph.
+      В #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack] эта функциональность
+        называется　#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link Tree shaking].
+      Для её активации в режиме продакшен необходимо в
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) настойках TypeScript]
+        указать тип модулей группы #[+ImportantEntity--YDID ES].
+      Второе условие срабатывания этой функциональности - наличие
+        #[+ImportantEntity__Code--YDID sideEffects: false] в #[+ImportantEntity--YDID package.json]
+        зависимости - со стороны #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] выполнено.
       Если Вы используете другой сборщик проектов, называющий себя конкурентом #[+SecondaryEntity--YDID Webpack],
         то он также обязан поддерживать аналогичную функциональность.
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
-    }).Article-Paragraph.
+    }).Article-AttentionBox.
       Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, большая часть
         #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
-        (а не #[+Term--YDID классов], хотя #[+Term--YDID классов] тоже немного имеется).
+        (а не #[+Term--YDID классов], хотя #[+Term--YDID классы] тоже имеются).
       В случае, если одни функции используют другие, в сборку также войдут эти #[+Term--YDID транзитивные зависимости],
         но даже при таком раскладе оптимизация будет очень хорошей, особенно используется меньшая часть возможностей библиотеки.
 
@@ -114,29 +114,34 @@ block append SpecificContent
 
     p.Article-Paragraph.
       Библиотека разрабатывается в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript].
-      Связано это прежде всего с отношением главного разработчика к #[+ImportantEntity--YDID JavaScript]: он считает
-        его игрушечным языком, непригодным для коммерческой разработки сайтов и приложений, однако к
-        #[+ImportantEntity__Code--YDID TypeScript] отношение совсем иное - за полноценное объектно-ориентированное
-        программирование, прекрасную гибкость и совместимость в Node.js.
+      Связано это прежде всего с отношением главного разработчика к #[+ImportantEntity--YDID JavaScript]: он считает, что
+        данный язык непригоден для #[+Keyword--YDID высококачественной] #[+Keyword__Contrast--YDID коммерческой]
+        разработки сайтов и приложений.
+      Однако к #[+ImportantEntity__Code--YDID TypeScript] отношение #[+Keyphrase--YDID совсем иное] -
+        из-за #[+Keyword--YDID полноценного] #[+Term--YDID объектно-ориентированного программирования], крайне гибкой
+        типизации и возможности транспайлинга не только в браузерный JavaScript, но и в #[+ImportantEntity--YDID Node.js].
+
+    p.Article-Paragraph.
       #[+Keyphrase--YDID При отсутствии ошибок компиляции #[+ImportantEntity--YDID TypeScript]] вероятность возникновения
-        проблем с библиотекой низка.
+        проблем с данной библиотекой низка.
       Тем не менее, ожидаются пользователи #[+ImportantEntity--YDID JavaScript], которые захотят использовать данную библиотеку.
 
     p.Article-Paragraph.
       Транспилируя исходный код в #[+ImportantEntity--YDID JavaScript], транспайлер #[+ImportantEntity--YDID TypeScript]
-        #[+Keyword--YDID не] добавляет #[+Keyword--YDID никакой] новой функциональности, в частности не добавляется
-        валидация параметров функций и методов.
+        #[+Keyword--YDID не] добавляет #[+Keyword--YDID никакой] новой функциональности, в частности
+        #[+Keyphrase--YDID не добавляется валидация параметров функций/методов] в соответствии с указанными в исходном
+        #[+ImportantEntity--YDID TypeScript] коде типами.
       Поэтому, если бы была задача поддерживать #[+ImportantEntity--YDID JavaScript], то необходимо было провести
         тщательную валидацию всех входных параметров и подробно логировать все нарушения.
-      Это может показаться парой новый строк кода, но на самом деле объём функций таким образом может вырасти #[+Keyword--YDID в разы],
-        и #[+Keyphrase--YDID это не преувеличение]
+      На первый взгляд это может показаться незначительным увеличением кода, но на самом деле объём функций таким образом
+        может вырасти #[+Keyword--YDID в разы], и #[+Keyphrase--YDID это не преувеличение]
         (см. #[+Link--YDF({ unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript }).Article-Link конкретный пример]).
 
     p.Article-Paragraph.
-      После сбора информации было принято решение отказаться от исчерпывающей валидации параметров.
+      После сбора информации было принято решение отказаться от реализации исчерпывающей валидации параметров.
       Основной причиной является резкое увеличение объёма библиотеки и транзитивных зависимостей большинства модулей в
         несколько раз, #[+Keyphrase--YDID что критично для браузерных приложений], где каждый килобайт на счету.
-      Это значит, что при использовании #[+ImportantEntity--YDID JavaScript] и наличии ошибок в коде, связанных с неверным
+      Это значит, что при использовании #[+ImportantEntity--YDID JavaScript] и наличии в коде ошибок, связанных с неверным
         типом параметра возможно возникновение ошибок выполнения #[+ImportantEntity--YDID JavaScript],
         однако #[+Keyphrase--YDID из сообщения об ошибке это не будет очевидно], а потому возникновение ошибки
         может быть ошибочно расценено как баг библиотеки.
@@ -148,7 +153,8 @@ block append SpecificContent
       После того, как пакет установлен, становится возможным импорт любых функций, классов и т. д., упомянутых в данной
         документации.
       Способ импорта - стандартный.
-      Для сборщиков проекта или рантаймов, поддерживающих кличевое слово #[+ImportantEntity__Code--YDID import] это, например,
+      Для сборщиков проекта или рантаймов, поддерживающих ключевое слово #[+ImportantEntity__Code--YDID import] это будет,
+        например,
 
     +CodeViewer--YDF({
       title: "Пример импортов из @yamato-daiwa/es-extensions"
@@ -156,16 +162,3 @@ block append SpecificContent
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";
-
-
-    h2.Article-Heading2 Официальный IntelliJ IDEA плагин
-
-    p.Article-Paragraph.
-      Для более быстрого ввода выражений в интегрированных средах разработки семейства IntelliJ IDEA рекомендуется
-        использовать официальный плагин.
-      Плагин включает в себя LiveTemplate-ы - аналог сочетаний клавиш, только вместо одновременного нажатия клавиш
-        набирается последовательность с отображением подсказки, и далее генерируется шаблоны кода, который остаётся
-        только доработать.
-
-    p.Article-Paragraph.
-      На страницах настоящей документации указано, какой Live Template соответствует той или иной функции (если он есть).

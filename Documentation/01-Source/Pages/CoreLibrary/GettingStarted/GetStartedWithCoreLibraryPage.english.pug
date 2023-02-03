@@ -3,8 +3,8 @@ extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
 
 block append Requirements
 
-  include ../../../Components/Components.pug
   include ../../../SharedAssets/Markup/Assets.english.pug
+  include ../../../Components/Components.english.pug
 
 
 block append Metadata
@@ -31,6 +31,12 @@ block append Metadata
       [LanguageDropDownList.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
       [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
     });
+
+    const externalLinks = {
+      stackOverflow: {
+        parametersValidationInTypeScript: "https://stackoverflow.com/q/73410742/4818123"
+      }
+    };
 
 
 block append SpecificContent

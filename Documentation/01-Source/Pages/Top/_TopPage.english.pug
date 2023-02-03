@@ -3,7 +3,7 @@ extends ../../Layouts/Minimal/MinimalLayout.pug
 
 block append Requirements
 
-  include ../../Components/Components.pug
+  include ../../Components/Components.english.pug
   include ../../SharedAssets/Markup/Assets.english.pug
 
 
@@ -14,11 +14,11 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Top page");
     HTML_PageMetaData = {
-      description: "The &quot;Yamato-Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is the library " +
-        "for high quality development on TypeScript language. Including the large number of simple utility functions, " +
-        "and also the powerful classes, for example the &quot;RawObjectDataProcessor&quot; for the validation and " +
-        "postprocessing of object-type data. The function names, parameter etc. has been designed such as no documentation " +
-        "required to understand what the code doing.",
+      description: "&quot;Yamato-Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is a library " +
+        "for high-quality development in the TypeScript language. It includes a large number of simple utility functions " +
+        "and powerful classes, such as the &quot;RawObjectDataProcessor&quot; for the validation and " +
+        "postprocessing of object-type data. The function names, parameters, etc. have been designed so that you " +
+        "don't need documentation to understand what the code is doing.",
       author: HTML_PAGE_AUTHOR
     };
 
@@ -50,6 +50,17 @@ block append SpecificContent
         span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
 
     p.TopPage-ShortDescription-Heading.
-      The reach utility libraries for type for high-quality TypeScript-based development.
+      The reach utility libraries for types in high-quality TypeScript-based development.
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.warning,
+      hasPrependedSVG_Icon: true
+    }).TopPage-Disclaimer.
+
+      This documentation site is under development.
+      Until the specific pages are ready, you will be redirected to temporary markdown documentation of the official
+        GitHub repository.
+      Please understand that high-quality documentation requires more time than library development, and the top priority
+        of library development is new functionality.
 
     +CompactTableOfContents(localizedRouting).TopPage-TableOfContents
