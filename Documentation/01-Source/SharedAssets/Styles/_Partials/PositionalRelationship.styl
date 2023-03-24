@@ -58,11 +58,11 @@ provideComponentsPositionalRelationship(
       article: {
         typographyDefinition: articleTypography,
         spacingDefinitions: {
-          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px },
+          paragraph: { retireFromComponent: 8px, pushComponentFromSelf: 12px }
         }
       }
     },
     withOtherComponents:\
-        ("Article-AttentionBox" { retireFromTarget: 12px })
+        ("Article-AttentionBox" { retireFromTarget: 12px, pushTargetFromSelf: 16px })
   })
 )

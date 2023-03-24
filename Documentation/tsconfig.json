@@ -11,14 +11,16 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "experimentalDecorators": true,
 
     "baseUrl": "./",
-    "paths": {}
+    "paths": {},
+
   },
+
   "ts-node": {
     "require": [
       "tsconfig-paths/register"
     ]
   }
+
 }

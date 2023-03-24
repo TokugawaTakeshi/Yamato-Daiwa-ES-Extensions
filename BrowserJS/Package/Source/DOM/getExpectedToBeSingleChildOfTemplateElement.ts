@@ -11,14 +11,18 @@ import getExpectedToBeSingleDOM_Element from "./getExpectedToBeSingleDOM_Element
 export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<
     (
-      { templateElement: HTMLTemplateElement; } |
-      { templateElementSelector: string; }
+      {
+        templateElement: HTMLTemplateElement;
+      } |
+      {
+        templateElementSelector: string;
+        context?: Element | Document;
+      }
     ) &
     {
       expectedChildElementSubtype: new () => DOM_ElementSubtype;
-      context?: Element | Document;
       mustReplaceTemplateElementOnceDoneWith?: Node;
-      mustRemoveTemplateElementOnceDone?: boolean;
+      mustRemoveTemplateElementOnceDone?: true;
     }
   >
 ): DOM_ElementSubtype;
@@ -26,13 +30,17 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
 export default function getExpectedToBeSingleChildOfTemplateElement(
   compoundParameter: Readonly<
     (
-      { templateElement: HTMLTemplateElement; } |
-      { templateElementSelector: string; }
+      {
+        templateElement: HTMLTemplateElement;
+      } |
+      {
+        templateElementSelector: string;
+        context?: Element | Document;
+      }
     ) &
     {
-      context?: Element | Document;
       mustReplaceTemplateElementOnceDoneWith?: Node;
-      mustRemoveTemplateElementOnceDone?: boolean;
+      mustRemoveTemplateElementOnceDone?: true;
     }
   >
 ): Element;
@@ -48,7 +56,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
       expectedChildElementSubtype?: new () => DOM_ElementSubtype;
       context?: Element | Document;
       mustReplaceTemplateElementOnceDoneWith?: Node;
-      mustRemoveTemplateElementOnceDone?: boolean;
+      mustRemoveTemplateElementOnceDone?: true;
     }
   >
 ): Element | DOM_ElementSubtype {

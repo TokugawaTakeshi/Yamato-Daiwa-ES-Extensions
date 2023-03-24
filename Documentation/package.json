@@ -5,8 +5,8 @@
     "Production building": "rimraf 03-ProductionBuild & yda build --mode PRODUCTION"
   },
   "dependencies": {
-    "@yamato-daiwa/es-extensions": "1.6.1",
-    "@yamato-daiwa/es-extensions-browserjs": "1.6.0",
+    "@yamato-daiwa/es-extensions": "1.6.2",
+    "@yamato-daiwa/es-extensions-browserjs": "1.6.3",
     "@yamato-daiwa/frontend": "../../YamatoDaiwaFrontend/CoreLibrary/Package",
     "@yamato-daiwa/frontend-localization-japanese": "../../YamatoDaiwaFrontend/CoreLibrary/OfficialLocalizations/Japanese",
     "@yamato-daiwa/frontend-localization-russian": "../../YamatoDaiwaFrontend/CoreLibrary/OfficialLocalizations/Russian",
@@ -17,8 +17,8 @@
     "prismjs": "1.29.0"
   },
   "devDependencies": {
-    "@yamato-daiwa/automation": "../../YamatoDaiwaAutomation/MainPackage",
-    "@yamato-daiwa/style_guides": "0.0.38",
-    "rimraf": "4.1.2"
+    "@yamato-daiwa/automation": "0.3.0-alpha.0",
+    "@yamato-daiwa/style_guides": "0.0.47",
+    "rimraf": "4.4.1"
   }
 }

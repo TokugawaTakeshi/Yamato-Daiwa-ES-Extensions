@@ -194,6 +194,8 @@ export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_Part
 export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
 
 /* --- Rest ---------------------------------------------------------------------------------------------------------- */
+export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
+    "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
 export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
 export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
 export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";

@@ -1,7 +1,7 @@
 import Path from "path";
 import Assert from "assert";
 
-import ImprovedPath from "../../Source/ImprovedPath/ImprovedPath";
+import { ImprovedPath } from "../../Source";
 import { UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 
 

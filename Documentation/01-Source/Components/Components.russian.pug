@@ -1,7 +1,7 @@
 include _Components.common.pug
 
-include ../../node_modules/@yamato-daiwa/frontend-documenting_kit-localization-russian/Components.pug
 include ../../node_modules/@yamato-daiwa/frontend-localization-russian/Components.pug
+include ../../node_modules/@yamato-daiwa/frontend-documenting_kit-localization-russian/Components.pug
 
 
 -
@@ -10,3 +10,7 @@ include ../../node_modules/@yamato-daiwa/frontend-localization-russian/Component
   CodeViewer__YDF.localization = CodeViewerYDF_ComponentRussianLocalization;
 
   ParameterMetadata__YDF.localization = ParameterMetadataYDF_ComponentRussianLocalization;
+
+  Header__YDPD.setIconAlternatingText(
+    "Иконка библиотек &quot;Yamato Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;)."
+  );

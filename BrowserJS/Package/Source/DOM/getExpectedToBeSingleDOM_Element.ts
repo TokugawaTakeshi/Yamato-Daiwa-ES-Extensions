@@ -39,7 +39,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
   if (targetElementSearchResults.length === 0) {
     Logger.throwErrorAndLog({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
-      title: UnexpectedEventError.localization.defaultTitle,
+      title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
     });
   }
@@ -74,4 +74,5 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
 
 
   return targetElement;
+
 }

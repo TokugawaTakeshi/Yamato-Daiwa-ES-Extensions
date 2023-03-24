@@ -20,6 +20,7 @@ export { default as InvalidConsoleCommandErrorLocalization__English } from
     "./Errors/InvalidConsoleCommand/InvalidConsoleCommandErrorLocalization.english";
 
 export { default as ImprovedPath } from "./ImprovedPath/ImprovedPath";
+export { default as ImprovedGlob } from "./ImprovedGlob";
 
 export { default as ObjectDataFilesProcessor } from "./ObjectDataFilesProcessor/ObjectDataFilesProcessor";
 
