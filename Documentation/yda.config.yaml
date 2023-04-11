@@ -51,6 +51,16 @@ projectBuilding:
           PRODUCTION:
             outputTopDirectoryRelativePath: 03-ProductionBuild
 
+      Layouts:
+
+        topDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
+
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT:
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+
       Pages:
 
         topDirectoryRelativePath: 01-Source/Pages

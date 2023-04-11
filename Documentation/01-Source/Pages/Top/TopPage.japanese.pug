@@ -1,4 +1,4 @@
-extends ../../Layouts/Minimal/MinimalLayout.pug
+extends ../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/Minimal/MinimalLayout.pug
 
 
 block append Requirements
@@ -22,7 +22,7 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
