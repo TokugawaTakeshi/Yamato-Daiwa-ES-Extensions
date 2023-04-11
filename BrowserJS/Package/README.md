@@ -61,7 +61,7 @@ npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
       that is critical for TypeScript.
   </dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/EventsHandling/delegateClickEventHandling.ts.md">delegateClickEventHandling</a></dt>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/EventsHandling/delegateClickEventHandling.md">delegateClickEventHandling</a></dt>
   <dd>Creates just one click event listener while allowing to handle the click of arbitrary large number of elements what is the optimization measures.</dd>
 
 </dl>
