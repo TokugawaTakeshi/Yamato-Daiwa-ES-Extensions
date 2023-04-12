@@ -13,21 +13,21 @@ export default class BrowserJS_Timer extends Timer {
 
 
   public constructor(
-    namedParameters: Readonly<{
+    compoundParameter: Readonly<{
       period__seconds: number;
       onElapsed?: (outcome: Timer.Outcomes) => void;
     }>
   ) {
-    super(namedParameters);
+    super(compoundParameter);
   }
 
 
   public countDown(
-    namedParameters?: Readonly<{ asynchronousCompletion?: Timer.AsynchronousCompletions.promise; }>
+    compoundParameter?: Readonly<{ asynchronousCompletion?: Timer.AsynchronousCompletions.promise; }>
   ): Promise<Timer.Outcomes>;
 
   public countDown(
-    namedParameters: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+    compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
   ): void;
 
   /* eslint-disable-next-line @typescript-eslint/promise-function-async --
@@ -83,4 +83,5 @@ export default class BrowserJS_Timer extends Timer {
           });
         });
   }
+
 }

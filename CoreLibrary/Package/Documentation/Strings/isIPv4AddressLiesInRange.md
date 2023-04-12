@@ -2,7 +2,7 @@
 
 ```
 (
-  namedParameters: {
+  compoundParameter: {
     comparedIP_Address: string;
     minimalIP_Address: string;
     maximalIP_Address: string;
@@ -47,4 +47,3 @@ Server.initializeAndStart({
 ```
 
 Thanks to it, the `http://localhost:80/` will work same as `http://127.0.0.1:80/`.
-

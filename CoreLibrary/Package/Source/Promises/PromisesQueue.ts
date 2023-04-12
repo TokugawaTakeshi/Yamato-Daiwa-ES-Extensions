@@ -28,7 +28,7 @@ class PromisesQueue {
 
 
   public async startExecutionIfHasNotStartedYet(
-    namedParameters: Readonly<{ behaviourOnSomePromiseFailed: PromisesQueue.BEHAVIOUR_ON_SOME_PROMISE_FAILED; }>
+    compoundParameter: Readonly<{ behaviourOnSomePromiseFailed: PromisesQueue.BEHAVIOUR_ON_SOME_PROMISE_FAILED; }>
   ): Promise<void> {
 
     if (this.isExecutingNow) {
@@ -48,7 +48,7 @@ class PromisesQueue {
 
       } catch (error: unknown) {
 
-        switch (namedParameters.behaviourOnSomePromiseFailed) {
+        switch (compoundParameter.behaviourOnSomePromiseFailed) {
 
           case PromisesQueue.BEHAVIOUR_ON_SOME_PROMISE_FAILED.throwingTheError: {
             throw error;
@@ -61,7 +61,7 @@ class PromisesQueue {
               errorType: "AsynchronousProcessingFailedError",
               title: "Asynchronous processing failed error",
               description: "The error occurred during execution of one of promised.",
-              occurrenceLocation: "promisesQueue.startExecutionIfHasNotStartedYet(namedParameters)",
+              occurrenceLocation: "promisesQueue.startExecutionIfHasNotStartedYet(compoundParameter)",
               caughtError: error
             });
 
@@ -92,14 +92,14 @@ class PromisesQueue {
 
 
   public async addFunctionAndStartExecutionIfHasNotStartedYet(
-    namedParameters: Readonly<{
+    compoundParameter: Readonly<{
       newAsynchronousFunction: (...parameters: ReadonlyArray<unknown>) => Promise<void>;
       behaviourOnSomePromiseFailed: PromisesQueue.BEHAVIOUR_ON_SOME_PROMISE_FAILED;
     }>
   ): Promise<void> {
-    this.addFunctionToQueue(namedParameters.newAsynchronousFunction);
+    this.addFunctionToQueue(compoundParameter.newAsynchronousFunction);
     return this.startExecutionIfHasNotStartedYet({
-      behaviourOnSomePromiseFailed: namedParameters.behaviourOnSomePromiseFailed
+      behaviourOnSomePromiseFailed: compoundParameter.behaviourOnSomePromiseFailed
     });
   }
 

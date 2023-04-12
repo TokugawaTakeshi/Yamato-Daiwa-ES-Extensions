@@ -14,7 +14,7 @@ export default function explodeCasedPhraseToWords(targetString: string): Array<s
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "targetString",
-        customMessage: `The first and only parameter must be a string while actually is has type '${ typeof targetString }'.`
+        customMessage: `The first and only parameter must be a string while actually is has type "${ typeof targetString }".`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "explodeToWords(targetString)"
@@ -36,6 +36,7 @@ export default function explodeCasedPhraseToWords(targetString: string): Array<s
       }
 
       continue;
+
     }
 
 
@@ -73,10 +74,12 @@ export default function explodeCasedPhraseToWords(targetString: string): Array<s
     }
 
     currentWord = `${ currentWord }${ currentCharacter }`;
+
   }
 
 
   words.push(currentWord);
 
   return words;
+
 }

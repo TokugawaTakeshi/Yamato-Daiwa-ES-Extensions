@@ -34,6 +34,7 @@ export default function getObjectPropertySafely(
     });
 
     return;
+
   }
 
 
@@ -69,6 +70,7 @@ export default function getObjectPropertySafely(
     } else {
       return;
     }
+
   }
 
 
@@ -76,4 +78,5 @@ export default function getObjectPropertySafely(
   * TypeScript could not see that this function will return value once `isLastDepthLevel` become truthy.
   * If no bugs, `isLastDepthLevel` inevitably will become truthy because the requested property is in certain depth level. */
   return;
+
 }

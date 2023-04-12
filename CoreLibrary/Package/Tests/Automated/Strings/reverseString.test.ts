@@ -1,14 +1,15 @@
 import { reverseString } from "../../../Source";
-import { deepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("reverseString", (): void => {
 
   it("Basic functionality", (): void => {
-    deepStrictEqual("ABC", reverseString("CBA"));
+    Assert.deepStrictEqual("ABC", reverseString("CBA"));
   });
 
   it("Surrogate pairs support", (): void => {
-    deepStrictEqual("𝟙𝟚𝟛", reverseString("𝟛𝟚𝟙"));
+    Assert.deepStrictEqual("𝟙𝟚𝟛", reverseString("𝟛𝟚𝟙"));
   });
+
 });

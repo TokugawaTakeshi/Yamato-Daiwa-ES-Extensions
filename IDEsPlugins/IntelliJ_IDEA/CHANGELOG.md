@@ -3,6 +3,27 @@
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
 
+## [0.0.6]
+
+### Added
+
+* Add <kbd>createDOM_ElementFromHTML_Code</kbd> live template.
+* Add <kbd>delegateClickEventHandling</kbd> live template.
+
+### Changed
+
+* Support IntelliJ Platform **2023.1**
+* Update <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> live template.
+* Update <kbd>getExpectedToBeSingleDOM_Element</kbd> live template.
+
+
+
+### Removed
+
+* <kbd>cdefhc</kbd> has been renamed to <kbd>createDOM_ElementFromHTML_Code</kbd>.
+* <kbd>dceh</kbd> has been renamed to <kbd>delegateClickEventHandling</kbd>.
+
+
 ## [0.0.5]
 
 ### Added
@@ -21,7 +42,7 @@
   From this version, the <kbd>rpaebp</kbd> is the alias for <kbd>replaceArrayElementsByPredicates</kbd>.
 * <kbd>twoDimensionalizeArray</kbd>, <kbd>tda</kbd> The live template and it's alias respectively for the [`twoDimensionalizeArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
 
-### Change
+### Changed
 
 * Drop the support for IntelliJ IDEA 2021.X
 * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd>: Has been updated for **@yamato-daiwa/es-extensions** of version **1.6.x**.

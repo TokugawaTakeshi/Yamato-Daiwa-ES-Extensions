@@ -1,5 +1,5 @@
-import Assert from "assert";
 import { getMatchingWithFirstRegularExpressionCapturingGroup, UnexpectedEventError } from "../../../../Source";
+import Assert from "assert";
 
 
 describe("getMatchingWithFirstRegularExpressionCapturingGroup", (): void => {

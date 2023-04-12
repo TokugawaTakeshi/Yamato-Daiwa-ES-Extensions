@@ -32,6 +32,7 @@ export default function trimSpaces(targetString: string, options: TrimSpacesOper
       charactersSetExpression = `${ charactersSetExpression }\\u{${
         UTF16CodePoint.toString(UTF_16_CODE_POINT_RADIX).padStart(UTF_16_CODE_POINT_MAXIMAL_SYMBOLS_IN_REGULAR_EXPRESSION, "0")
       }}`;
+
     }
   }
 
@@ -48,6 +49,7 @@ export default function trimSpaces(targetString: string, options: TrimSpacesOper
 
 
   return mutatingResult;
+
 }
 
 
@@ -59,4 +61,5 @@ export namespace TrimSpacesOperation {
     targetSpacesKinds?: Array<SpaceCharacters>;
     excludeKinds?: Array<SpaceCharacters>;
   }>;
+
 }

@@ -23,4 +23,5 @@ export default function toScreamingSnakeCase(targetString: string): string {
   return explodeCasedPhraseToWords(targetString).
       map((word: string): string => word.toUpperCase()).
       join("_");
+
 }

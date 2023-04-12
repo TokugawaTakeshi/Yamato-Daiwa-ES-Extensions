@@ -4,12 +4,13 @@ import {
   isUndefined,
   Logger,
   UnexpectedEventError,
-  DOM_ElementRetrievingFailedError
+  DOM_ElementRetrievingFailedError,
+  PoliteErrorsMessagesBuilder
 } from "@yamato-daiwa/es-extensions";
 
 
 export default function delegateClickEventHandling(
-  namedParameters: Readonly<{
+  compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
     handler: (clickedElement: Element, event: MouseEvent) => unknown;
@@ -17,7 +18,7 @@ export default function delegateClickEventHandling(
 ): void;
 
 export default function delegateClickEventHandling<ClickTargetElement extends Element>(
-  namedParameters: Readonly<{
+  compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
     eventTargetElementSubtype: new () => ClickTargetElement;
@@ -43,7 +44,9 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
   let delegatingContainer: Element | Document;
 
   if (delegatingContainerOrItsSelector instanceof Element || delegatingContainerOrItsSelector instanceof Document) {
+
     delegatingContainer = delegatingContainerOrItsSelector;
+
   } else {
 
     const potentialDelegatingContainer: Element | null = document.querySelector(delegatingContainerOrItsSelector);
@@ -56,9 +59,11 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
         description: DOM_ElementRetrievingFailedError.localization.generateDescription({
           selector: delegatingContainerOrItsSelector
         }),
-        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
+        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
       });
+
       return;
+
     }
 
 
@@ -69,29 +74,45 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
   delegatingContainer.addEventListener("click", (event: Event): void => {
 
     if (!(event instanceof MouseEvent)) {
+
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,
-        description: "We are sorry, but it is a bug. The event is not an instance of 'MouseEvent'. We need to investigate it. " +
-            "Please consider the opening issue in https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append " +
-            "the reproducing example.",
-        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
+        description: PoliteErrorsMessagesBuilder.buildMessage({
+          technicalDetails: "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of " +
+              "\"MouseEvent\"",
+          politeExplanation: "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
+              "the first parameter of the callback, will be the instance of \"MouseEvent\". The TypeScript types definitions " +
+              "does not provide the overload for each type of event, so the \"event\" has been annotated just as \"Event\". " +
+              "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
+              "combination of circumstances it is not such as."
+        }),
+        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
       });
+
       return;
+
     }
 
 
     /* [ Theory ] The "event.target" has type "EventTarget" while ".parentElement" property has type "HTMLElement"  */
     if (!(event.target instanceof HTMLElement)) {
+
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,
-        description: "We are sorry, but it is a bug. The event target is not an instance of 'HTMLElement'. " +
-            "We need to investigate it. Please consider the opening issue in " +
-            "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/issues and append the reproducing example.",
-        occurrenceLocation: "delegateClickEventHandling(namedParameters)"
+        description: PoliteErrorsMessagesBuilder.buildMessage({
+          technicalDetails: "The \"event.target\" is not the instance of \"HTMLElement\".",
+          politeExplanation: "To reach the container to which the click event has been delegated by valid TypeScript," +
+              "we had to check is \"event.target\" the instance of \"HTMLElement\". Theoretically, the \"event.target\" " +
+              "has type \"EventTarget\" while \".parentElement\" property has type \"HTMLElement\", however this bug " +
+              "occurrence indicates the presence of exceptions which we need to investigate."
+        }),
+        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
       });
+
       return;
+
     }
 
 
@@ -110,13 +131,16 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
 
 
         if (!(parentElement instanceof eventTargetElementSubtype)) {
+
           Logger.logError({
             errorType: UnexpectedEventError.NAME,
             title: UnexpectedEventError.localization.defaultTitle,
             description: `Contrary to expectations, the event target is not instance of '${ eventTargetElementSubtype.name }'.`,
-            occurrenceLocation: "delegateClickEventHandling(namedParameters)"
+            occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
           });
+
           return;
+
         }
 
 

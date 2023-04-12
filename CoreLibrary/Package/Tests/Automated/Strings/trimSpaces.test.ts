@@ -1,5 +1,5 @@
 import { trimSpaces, SpaceCharacters } from "../../../Source";
-import { strictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("trimSpaces", (): void => {
@@ -12,7 +12,8 @@ describe("trimSpaces", (): void => {
     const testStringWithLeadingAndTrailingSpaces: string =
         `${ SpaceCharacters.zeroWidthSpace }${ stringSampleWithNonSpaceCharactersOnly }`;
 
-    strictEqual(testStringWithLeadingAndTrailingSpaces.length, testStringWithLeadingAndTrailingSpaces.trim().length);
+    Assert.strictEqual(testStringWithLeadingAndTrailingSpaces.length, testStringWithLeadingAndTrailingSpaces.trim().length);
+
   });
 
   it("'trimSpaces' remove all leading and trailing spaces", (): void => {
@@ -22,7 +23,8 @@ describe("trimSpaces", (): void => {
           `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +
           `${ spaceCharacter }${ spaceCharacter }`;
 
-      strictEqual(trimSpaces(testStringWithLeadingAndTrailingSpaces).length, nonSpaceCharactersCountInSample);
+      Assert.strictEqual(trimSpaces(testStringWithLeadingAndTrailingSpaces).length, nonSpaceCharactersCountInSample);
+
     });
   });
 
@@ -38,10 +40,13 @@ describe("trimSpaces", (): void => {
       );
 
       if (spaceCharacter === SpaceCharacters.ideographicSpace) {
-        strictEqual(trimmedString.length, testStringWithLeadingAndTrailingSpaces.length);
+        Assert.strictEqual(trimmedString.length, testStringWithLeadingAndTrailingSpaces.length);
       } else {
-        strictEqual(trimmedString.length, nonSpaceCharactersCountInSample);
+        Assert.strictEqual(trimmedString.length, nonSpaceCharactersCountInSample);
       }
+
     });
+
   });
+
 });

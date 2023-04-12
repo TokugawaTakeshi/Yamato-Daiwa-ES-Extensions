@@ -6,4 +6,5 @@ export default function removeNonDigitsCharacters(targetString: string): string 
       split("").
       filter((character: string): boolean => /\d/u.test(character)).
       join("");
+
 }

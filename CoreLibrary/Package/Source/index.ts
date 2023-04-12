@@ -166,6 +166,12 @@ export { default as Logger } from "./Logging/Logger";
 export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization.english";
 
 
+/* === Maps ========================================================================================================= */
+export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
+export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
+export { default as filterMap } from "./Maps/filterMap";
+
+
 /* === Numbers ====================================================================================================== */
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
 export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
@@ -179,38 +185,92 @@ export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separate
 export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
 
 
+/* === Objects ======================================================================================================= */
+export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
+
+
+/* === Pagination =================================================================================================== */
+export { default as computeFirstItemNumberForSpecificPaginationPage } from
+    "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
+export { default as computeLastItemNumberForSpecificPaginationPage } from
+    "./Pagination/computeLastItemNumberForSpecificPaginationPage";
+export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
+export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
+
+
+/* === Promises queue =============================================================================================== */
+export { default as PromisesQueue } from "./Promises/PromisesQueue";
+
+
+/* === Random values generators =================================================================================== */
+export {
+  default as getRandomString,
+  RandomStringsGenerator
+} from "./RandomValuesGenerators/getRandomString/getRandomString";
+export { default as getRandomArrayElement } from "./RandomValuesGenerators/getRandomArrayElement";
+export { default as getRandomBoolean } from "./RandomValuesGenerators/getRandomBoolean";
+export { default as getRandomInteger } from "./RandomValuesGenerators/getRandomInteger";
+export { default as getRandomLatinCharacter } from "./RandomValuesGenerators/getRandomLatinCharacter";
+export { default as getRandomObjectPropertyValue } from "./RandomValuesGenerators/getRandomObjectPropertyValue";
+export { default as getRandomSubarray } from "./RandomValuesGenerators/getRandomSubarray";
+export { default as getSpecificBooleanValueWithProbability } from
+    "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
+export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
+
+
+/* === Raw object data processor ==================================================================================== */
+export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
+export { default as RawObjectDataProcessorLocalization__English } from
+    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
+export { default as convertPotentialStringToNumberIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToNumberIfPossible";
+export { default as convertPotentialStringToIntegerIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToIntegerIfPossible";
+export { default as convertPotentialStringToFloatIfPossible } from
+    "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";
+
+
+/* === Sets ========================================================================================================= */
+export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
+export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
+
+
 /* === Strings ====================================================================================================== */
+/* --- Characters assets -------------------------------------------------------------------------------------------- */
+export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
+export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
+export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceCharacters";
+export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag } from
+    "./Strings/CharactersAssets/SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag";
+export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringifiedDigits";
+export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
+
 /* --- Regular expressions ------------------------------------------------------------------------------------------ */
 export { default as getMatchingWithFirstRegularExpressionCapturingGroup } from
     "./Strings/RegularExpressions/getMatchingWithFirstRegularExpressionCapturingGroup";
+export {
+  default as extractMatchingsWithRegularExpression,
+  type ExtractingOfMatchingsWithRegularExpression
+} from "./Strings/RegularExpressions/extractMatchingsWithRegularExpression";
 
 /* --- URI ---------------------------------------------------------------------------------------------------------- */
 /* --- Files and directories --- */
 export { default as appendLastFileNameExtension } from "./Strings/URI/FilesAndDirectories/appendLastFileNameExtension";
+export { default as extractAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/extractAllFileNameExtensions";
+export { default as extractLastExtensionOfFileName } from "./Strings/URI/FilesAndDirectories/extractLastExtensionOfFileName";
 
 /* --- Rest --- */
 export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
 export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
 export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
 
-/* --- Rest ---------------------------------------------------------------------------------------------------------- */
+/* --- Rest --------------------------------------------------------------------------------------------------------- */
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
-export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
-export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
-export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
-export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceCharacters";
-export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag } from
-    "./Strings/CharactersAssets/SpaceCharactersStringifiedHexCharactersForRegularExpressionWithUnicodeFlag";
-export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringifiedDigits";
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
-export {
-  default as extractMatchingsWithRegularExpression,
-  type ExtractingOfMatchingsWithRegularExpression
-} from "./Strings/RegularExpressions/extractMatchingsWithRegularExpression";
 export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEnglishAbbreviatedOrdinalNumber";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
@@ -235,18 +295,48 @@ export { default as toUpperCamelCase } from "./Strings/toUpperCamelCase";
 export { default as trimSpaces } from "./Strings/trimSpaces";
 
 
-/* === Objects ======================================================================================================= */
-export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
+/* === Type guards ================================================================================================== */
+/* --- Arrays ------------------------------------------------------------------------------------------------------- */
+export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
+export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
+export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
+export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
 
+/* --- Nullables ---------------------------------------------------------------------------------------------------- */
+export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
+export { default as isEitherUndefinedOrNull } from "./TypeGuards/Nullables/isEitherUndefinedOrNull";
+export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
+export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined";
+export { default as isNull } from "./TypeGuards/Nullables/isNull";
+export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 
-/* === Sets ========================================================================================================= */
-export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
+/* --- Numbers ------------------------------------------------------------------------------------------------------ */
+export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
+export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
+export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
+export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInteger";
+export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
+export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegativeInteger";
+export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
+export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
 
+/* --- Objects ------------------------------------------------------------------------------------------------------ */
+export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
+export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
+export { default as isNonEmptyArbitraryObject } from "./TypeGuards/Objects/isNonEmptyArbitraryObject";
+export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
+export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
-/* === Maps ========================================================================================================= */
-export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
-export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
-export { default as filterMap } from "./Maps/filterMap";
+/* --- Strings ------------------------------------------------------------------------------------------------------ */
+export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
+export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
+export { default as isString } from "./TypeGuards/Strings/isString";
+export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
+
+/* --- Others ------------------------------------------------------------------------------------------------------- */
+export { default as isBoolean } from "./TypeGuards/isBoolean";
+export { default as isElementOfEnumeration } from "./TypeGuards/isElementOfEnumeration";
+export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
 /* === Types ======================================================================================================== */
@@ -266,50 +356,6 @@ export type {
 export type { PartialBy } from "./Types/PartialBy";
 
 
-/* === Type guards ================================================================================================== */
-/* --- Numbers ------------------------------------------------------------------------------------------------------ */
-export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
-export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
-export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInteger";
-export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
-export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegativeInteger";
-export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
-export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
-
-/* --- Strings ------------------------------------------------------------------------------------------------------ */
-export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
-export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
-export { default as isString } from "./TypeGuards/Strings/isString";
-export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
-
-/* --- Objects ------------------------------------------------------------------------------------------------------ */
-export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
-export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
-export { default as isNonEmptyArbitraryObject } from "./TypeGuards/Objects/isNonEmptyArbitraryObject";
-export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
-export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
-
-/* --- Arrays ------------------------------------------------------------------------------------------------------- */
-export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
-export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
-export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
-export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
-
-/* --- undefined & null --------------------------------------------------------------------------------------------- */
-export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
-export { default as isEitherUndefinedOrNull } from "./TypeGuards/Nullables/isEitherUndefinedOrNull";
-export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
-export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined";
-export { default as isNull } from "./TypeGuards/Nullables/isNull";
-export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
-
-/* --- Others ------------------------------------------------------------------------------------------------------- */
-export { default as isBoolean } from "./TypeGuards/isBoolean";
-export { default as isElementOfEnumeration } from "./TypeGuards/isElementOfEnumeration";
-export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
-
-
 /* === Value transformers =========================================================================================== */
 export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
 export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
@@ -318,37 +364,3 @@ export { default as nullToZero } from "./ValueTransformers/nullToZero";
 export { default as undefinedToEmptyArray } from "./ValueTransformers/undefinedToEmptyArray";
 export { default as undefinedToEmptyString } from "./ValueTransformers/undefinedToEmptyString";
 export { default as undefinedToNull } from "./ValueTransformers/undefinedToNull";
-
-/* === Random values generators =================================================================================== */
-export { default as getRandomString, RandomStringsGenerator } from "./RandomValuesGenerators/getRandomString/getRandomString";
-export { default as getRandomArrayElement } from "./RandomValuesGenerators/getRandomArrayElement";
-export { default as getRandomBoolean } from "./RandomValuesGenerators/getRandomBoolean";
-export { default as getRandomInteger } from "./RandomValuesGenerators/getRandomInteger";
-export { default as getRandomLatinCharacter } from "./RandomValuesGenerators/getRandomLatinCharacter";
-export { default as getRandomObjectPropertyValue } from "./RandomValuesGenerators/getRandomObjectPropertyValue";
-export { default as getRandomSubarray } from "./RandomValuesGenerators/getRandomSubarray";
-export { default as getSpecificBooleanValueWithProbability } from
-    "./RandomValuesGenerators/getSpecificBooleanValueWithProbability";
-export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
-
-
-/* === Pagination =================================================================================================== */
-export { default as computeFirstItemNumberForSpecificPaginationPage } from
-    "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
-export { default as computeLastItemNumberForSpecificPaginationPage } from
-    "./Pagination/computeLastItemNumberForSpecificPaginationPage";
-export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
-export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
-export { default as PromisesQueue } from "./Promises/PromisesQueue";
-
-
-/* === Tools ======================================================================================================== */
-export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
-export { default as RawObjectDataProcessorLocalization__English } from
-    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
-export { default as convertPotentialStringToNumberIfPossible } from
-    "./RawObjectDataProcessor/Helpers/convertPotentialStringToNumberIfPossible";
-export { default as convertPotentialStringToIntegerIfPossible } from
-    "./RawObjectDataProcessor/Helpers/convertPotentialStringToIntegerIfPossible";
-export { default as convertPotentialStringToFloatIfPossible } from
-    "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";

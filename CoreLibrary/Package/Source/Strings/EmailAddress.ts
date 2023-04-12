@@ -6,4 +6,5 @@ export default abstract class EmailAddress {
   public static isValid(potentialEmail: string): boolean {
     return EmailAddress.VALID_PATTERN.test(potentialEmail);
   }
+
 }

@@ -13,4 +13,5 @@ export default function removeNthCharacter(
   }
 
   return charactersSequence.join("");
+
 }

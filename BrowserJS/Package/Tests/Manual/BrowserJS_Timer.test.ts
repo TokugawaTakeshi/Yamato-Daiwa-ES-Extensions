@@ -6,11 +6,14 @@ import provideMockBrowserEnvironment from "jsdom-global";
 
 provideMockBrowserEnvironment();
 
+
 const sampleTimer: Timer = new BrowserJS_Timer({
   period__seconds: 3
 });
 
-sampleTimer.countDown().
+
+sampleTimer.
+    countDown().
     then((outcome: Timer.Outcomes): void => {
       Logger.logInfo({
         title: "Timer elapsed",

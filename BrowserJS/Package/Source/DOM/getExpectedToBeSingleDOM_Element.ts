@@ -7,14 +7,14 @@ import {
 
 
 export default function getExpectedToBeSingleDOM_Element(
-  namedParameters: Readonly<{
+  compoundParameter: Readonly<{
     selector: string;
     context?: Element | Document;
   }>
 ): Element;
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
-  namedParameters: Readonly<{
+  compoundParameter: Readonly<{
     selector: string;
     context?: Element | Document;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
@@ -40,7 +40,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
     Logger.throwErrorAndLog({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
       title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
@@ -50,8 +50,8 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
       errorType: UnexpectedEventError.NAME,
       title: UnexpectedEventError.localization.defaultTitle,
       description: `Contrary to expectations, ${ targetElementSearchResults.length } elements has been found for the selector ` +
-          `'${ selector }'. First one will be picked`,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
+          `'${ selector }'. First one only will be picked.`,
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
@@ -68,7 +68,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
         `Contrary to expectations, the picked element in not instance of '${ expectedDOM_ElementSubtype.name }'.`
       ),
       title: UnexpectedEventError.localization.defaultTitle,
-      occurrenceLocation: "getExpectedToBeSingleDOM_Element(namedParameters)"
+      occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 

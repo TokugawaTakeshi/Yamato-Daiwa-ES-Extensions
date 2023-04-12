@@ -47,7 +47,6 @@ export default function extractMatchingsWithRegularExpression(
   }> = {}
 ): ExtractingOfMatchingsWithRegularExpression.Result {
 
-
   const searchingResults: RegExpMatchArray | null = regularExpression.exec(targetString);
 
   if (isNull(searchingResults)) {

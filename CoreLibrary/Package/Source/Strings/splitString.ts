@@ -6,4 +6,5 @@ export default function splitString(targetString: string, separator: string | Re
 
 
   return targetString.split(separator);
+
 }

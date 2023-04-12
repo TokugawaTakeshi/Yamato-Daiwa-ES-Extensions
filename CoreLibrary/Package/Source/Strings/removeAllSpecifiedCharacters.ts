@@ -11,4 +11,5 @@ export default function removeAllSpecifiedCharacters(
   }
 
   return targetString.replace(new RegExp(`[${ charactersWhichWillBeRemoved__normalized }]`, "gu"), "");
+
 }

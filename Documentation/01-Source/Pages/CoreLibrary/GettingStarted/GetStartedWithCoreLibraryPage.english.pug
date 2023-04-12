@@ -1,4 +1,4 @@
-extends ../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
@@ -14,22 +14,22 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Getting started");
     HTML_PageMetaData = {
-      description: "Getting started with &quot;Yamato-Daiwa ECMAScript extensionsYamato-Daiwa ECMAScript extensions " +
-        "(abbreviation: YDEE) library: installation, distributive volume notice, warning about usage wihtout TypeScript, " +
-        "dependencies importing",
+     description: "This document provides information on starting use of Yamato Daiwa ECMAScript extensions." +
+        "It also provides information on installation methods, installation size, precautions for users who have no experience with TypeScript, and information about importing the functionality of this package.",
       author: HTML_PAGE_AUTHOR
+
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
 
-    LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+    LanguageDropDownList__YDF_DK.setLinks({
+      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
+      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
     });
 
     const externalLinks = {
@@ -43,8 +43,127 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Getting started
+    h1.Article-Heading1 Starting Use
+
     h2.Article-Heading2#Installation--SECTION Installation
-    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Distributive volume notice
-    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Non TypeScript usage warning
-    h2.Article-Heading2#ImportingOfFunctionality--SECTION Importing of the functionality
+
+    p.Article-Paragraph.
+      The normal installation method is to execute from the
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm]
+        #[+Term--YDID package manager].
+
+    +CodeViewer--YDF({
+      title: "Console command for installing the package"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+      }) npm i @yamato-daiwa/es-extensions -E
+
+
+    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Information About Distribution Size
+
+    p.Article-Paragraph.
+      #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm official site]
+      On #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link @yamato-daiwa/es-extensions page],
+        the uncompressed size (“Unpacked Size”) of the package is displayed.
+      For example, version #[+SecondaryEntity--YDID 1.5.8] is 698 kilobytes in size.
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
+      imageAlternateText: "Example of distribution size listed on the npm official site. " +
+          "Please note that, following installation of the package and configuration of the application in question, " +
+          "the size of the application will not increase by exactly the amount displayed on the official site of this package.",
+      aspectRatio: [ 668, 819 ]
+    }).Article-SingleImageViewer
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox.
+      This is because the value #[+Keyword--YDID is not] the amount of data added to the application following configuration,
+        with the installation of #[+ImportantEntity--YDID @yamato-daiwa/es-extensions].
+
+    p.Article-Paragraph.
+      The #[+Keyword--YDID majority] of the volume is for the #[+Term--YDID ECMAScript module]
+        (optimized for browser applications) and #[+Term--YDID CommonJS module] (requirement of Node.js).
+      Regardless of which of the above modules you select, the majority of the files will be ignored.
+
+    p.Article-Paragraph.
+      In the case of a server/console Node.js application, this will increase the size by about several thousand kilobytes,
+        but that is not a major issue.
+      However, in the case of a #[+Term--YDID browser application], it is important that you use a
+        #[+Term__Contrast--YDID project configuration method] to exclude functionality not used in the library from
+        the #[+Term--YDID production build].
+
+
+    p.Article-Paragraph.
+      In the case of #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack],
+        the functionality is called
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link “tree shaking”].
+      To enable this in the production build mode, you need to specify #[+ImportantEntity--YDID ES type] modules in the
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) TypeScript configuration].
+      The second requirement, which is specifying #[+ImportantEntity__Code--YDID sideEffects: false] in
+        #[+ImportantEntity--YDID package.json] (which has a dependency), is satisfied by
+        #[+ImportantEntity--YDID @yamato-daiwa/es-extensions].
+      When using a #[+Term--YDID project configuration method] that conflicts with #[+ImportantEntity--YDID Webpack],
+        you need to exclude similar functionality that you will not use.
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+      hasPrependedSVG_Icon: true
+    }).Article-Paragraph.
+      In order to exclude as many unneeded libraries as possible, the majority of the functionality of
+        #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] is implemented with #[+Term--YDID functions] and
+        #[+Keyword--YDID not] #[+Term--YDID classes] (limited #[+Term--YDID class] functionality).
+      Also, when #[+Keyword--YDID other] functions are used, those #[+Term--YDID transitive dependencies] are also
+        included in the structure, but there is still substantial optimization.
+      This is particularly true when only a small portion of the library is used.
+
+
+    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Precautions for Non-Users of TypeScript
+
+    p.Article-Paragraph.
+      Our library was developed #[+Keyword--YDID primarily for the goal of] assisting users of
+        #[+ImportantEntity--YDID TypeScript].
+      This has to do with how developers see the #[+ImportantEntity__Code--YDID JavaScript] language.
+      The reason is that the JavaScript language is not intended for high-quality development of practical industrial
+        applications, websites, and the like.
+      However, #[+ImportantEntity--YDID TypeScript] is completely different.
+      It supports complete #[+Term--YDID object-orientated programming] and extremely flexible #[+Term--YDID typing].
+      Its #[+Term--YDID transpiling] to either browser-specific JavaScript or #[+ImportantEntity--YDID Node.js]
+        #[+Keyword--YDID fundamentally] changes the workflow.
+
+    p.Article-Paragraph.
+      If there are no #[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript] compiler errors], you can probably use
+        this library without any problems.
+      This library is also designed for users of #[+ImportantEntity--YDID JavaScript].
+
+    p.Article-Paragraph.
+      When source code is converted into #[+ImportantEntity--YDID JavaScript], the #[+ImportantEntity--YDID TypeScript]
+        #[+Term--YDID transpiler] #[+Keyword--YDID does not] add anything to the new functionality.
+      In particular, #[+Keyphrase--YDID type-checking is performed for arguments of functions and methods specified in #[+ImportantEntity--YDID TypeScript] source code, but this does not happen in JavaScript].
+      Solving this issue in #[+ImportantEntity--YDID JavaScript] required sufficient measures for checking the types of
+        arguments of functions and methods.
+      At first glance, you might think that implementing these checks does not increase the amount of code by a lot.
+      However, in reality, #[+Keyphrase--YDID it is no exaggeration to say that this increases the amount of code in functions and the like several hundred percent.]
+      （#[+Link--YDF({ unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript }).Article-Link Referencing Specific Examples])。
+
+    p.Article-Paragraph.
+      Collection and analysis of various types of information showed that type checks are not implemented following completion of arguments.
+      The primary reason is that the number of kilobytes needs to be decreased as much as possible due to concerns regarding a sudden increase in the total size of the library or in the #[+Term--YDID transitive dependencies] of a large number of functions and the like.
+        This is an unavoidable problem for browser applications.
+      Therefore, when using this library in #[+ImportantEntity--YDID TypeScript] instead of #[+ImportantEntity--YDID JavaScript], it is highly likely that errors caused by type inconsistencies will occur. There may be cases where the error message does not indicate the cause of the error, thereby leading users to incorrectly assume that it is a problem with the library.
+
+
+    h2.Article-Heading2#ImportingOfFunctionality--SECTION Importing functionality
+
+    p.Article-Paragraph.
+      After installing this package, you can import the functions and classes described on the documentation page.
+      An example of a runtime or project configuration method using the #[+ImportantEntity__Code--YDID import] #[+Term--YDID keyword] is shown below.
+
+    +CodeViewer--YDF({
+      title: "Example of importing from ”@yamato-daiwa/es-extensions”"
+    }).Article-CodeViewer
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

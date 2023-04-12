@@ -28,12 +28,12 @@ block append Metadata
     scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute(
-      "coreLibrary.children.functionality.children.arrays.children.addingOfElements.children.addElementsToArray"
+      "coreLibrary.functionality.arrays.addingOfElements.addElementsToArray"
     );
 
-    LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./addElementsToArray.english.html",
-      [LanguageDropDownList.supportedLanguages.japanese]: "./addElementsToArray.japanese.html"
+    LanguageDropDownList__YDF_DK.setLinks({
+      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./addElementsToArray.english.html",
+      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./addElementsToArray.japanese.html"
     });
 
 
@@ -77,7 +77,9 @@ block append SpecificContent
 
     p.Article-Paragraph.
       Добавляет новые элементы в начало, конец или указанную позицию #[+Term--YDID массива].
-      Добавление может быть мутирующим или нет - в зависимости от соответствующей опции.
+      Добавление может быть мутирующим или нет - в зависимости от соответствующей опции, при этом в случае
+        #[+Term--YDID немутирующего добавления] заменяется лишь прежний контейнер на новый, а копирование
+        элементов #[+Keyword--YDID не] осуществляется.
 
 
     h2.Article-Heading2 Примеры
@@ -85,16 +87,16 @@ block append SpecificContent
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
-    }).
-
+    }).Article-AttentionBox.
       Поскольку многие читают эту страницу выборочно, то приведённые ниже объяснения содержат повторения.
 
     h3.Article-Heading3 Добавление одного элемента в начало массива
 
-    +CodeViewer--YDF.Article-CodeViewer
-      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+    h4.Article-Heading4 Мутирующее добавление
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -108,53 +110,59 @@ block append SpecificContent
           });
 
           console.log(sampleArray);
-        +CodeViewer-Explanation--YDF
 
-          p.Article-Paragraph.
-            Добавляем элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] в начало массива строк.
-            Опция #[+ImportantEntity__Code--YDID mutably] сделана обязательной не случайно: инженер обязан чётко понимать,
-              что он делает.
-            Поскольку в данном примере установлено значение #[+SecondaryEntity__Code--YDID true], то исходный массив
-              изменится, а результат будет:
-              #[+SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &#93;].
 
-          +AttentionBox--YDF({
-            decoration: AttentionBox__YDF.DecorativeVariations.warning,
-            hasPrependedSVG_Icon: true
-          }).Article-AttentionBox.
-            При таком варианте использования целевой массив #[+Keyword--YDID не] может иметь тип
-              #[+ImportantEntity__Code--YDID ReadonlyArray], поскольку функция будет менять этот массив.
+    p.Article-Paragraph.
+      Добавляем элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] в начало массива строк.
+      Опция #[+ImportantEntity__Code--YDID mutably] сделана обязательной не случайно: программист
+        #[+Keyword--YDID обязан] чётко понимать, что он делает.
+      Поскольку в данном примере установлено значение #[+SecondaryEntity__Code--YDID true], то исходный массив
+        изменится и в результате будет:
+        #[+SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
 
-          p.Article-Paragraph.
-            Такое использование функции близко к нативному методу
-              #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.unshift }).Article-Link unshift].
-            Разница в том, что #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID всегда]&nbsp;возвращает
-              #[+Keyword__Contrast--YDID обновлённый] массив, а не его количество элементов, как
-              #[+ImportantEntity__Code--YDID unshift].
-            Впрочем, если нужно количество элементов нового массива, то можно тут же обратиться к свойству
-              #[+ImportantEntity__Code--YDID length] у возвращаемого значения без создания новой переменной.
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.warning,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox.
+      При таком варианте использования целевой массив (#[+ImportantEntity__Code--YDID targetArray])
+        #[+Keyword--YDID не] может иметь тип #[+ImportantEntity__Code--YDID ReadonlyArray],
+        поскольку функция будет менять этот массив.
 
-          p.Article-Paragraph.
-            К тому же, в отличие от #[+ImportantEntity__Code--YDID unshift], при знании базового английского полностью очевидно,
-              что делает #[+ImportantEntity__Code--YDID addElementsToArray], куда добавляет элементы и что произойдёт с исходным
-              массивом.
-            Да, вызов #[+ImportantEntity__Code--YDID addElementsToArray] набирать на клавиатуре дальше, чем
-              #[+ImportantEntity__Code--YDID unshift], но кристально прозрачная понятность кода а значит его
-              поддерживаемость гораздо важнее, чем скорость ввода начального варианта этого кода.
+    p.Article-Paragraph.
+      Такое использование функции близко к нативному методу
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.unshift }).Article-Link unshift].
+      Разница в том, что #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID всегда]&nbsp;возвращает
+        #[+Keyword__Contrast--YDID обновлённый] массив, а не его количество элементов, как
+        #[+ImportantEntity__Code--YDID unshift].
+      Впрочем, если нужно количество элементов нового массива, то можно тут же обратиться к свойству
+        #[+ImportantEntity__Code--YDID length] у возвращаемого значения без создания новой переменной.
 
-            К сожалению, многих программистов, особенно начинающих это не убедит, потому что человеческая психология
-              между сиюминутной выгодой и #[+Keyword--YDID большей] выгодой в будущем склонна выбирать первое.
-            В программировании эта склонность во многом ответственная за код, который быстро становится крайне трудно
-              поддерживать.
+    p.Article-Paragraph.
+      К тому же, в отличие от #[+ImportantEntity__Code--YDID unshift], при знании базового английского полностью очевидно,
+        что делает #[+ImportantEntity__Code--YDID addElementsToArray], куда добавляет элементы и что произойдёт с исходным
+        массивом.
+      Да, вызов #[+ImportantEntity__Code--YDID addElementsToArray] набирать на клавиатуре дальше, чем
+        #[+ImportantEntity__Code--YDID unshift], но кристально прозрачная понятность кода а значит его
+        поддерживаемость гораздо важнее, чем скорость ввода начального варианта этого кода.
 
-          p.Article-Paragraph.
-            Что касается скорости ввода, то функциональность
-              #[+Link--YDF({ anchor: "QUICK_INPUT--SECTION" }).Article-Link Live template]
-              для семейства
-              #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IDE IntelliJ IDEA]
-              решает эту проблему.
+      К сожалению, многих программистов, особенно начинающих это не убедит, потому что человеческая психология
+        между сиюминутной выгодой и большей выгодой в будущем склонна выбирать первое.
+      В программировании эта склонность во многом ответственна за код, который быстро становится крайне трудно
+        поддерживать.
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+    p.Article-Paragraph.
+      Что касается скорости ввода, то функциональность
+        #[+Link--YDF({ anchor: "QUICK_INPUT--SECTION" }).Article-Link Live template]
+        для семейства
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IDE IntelliJ IDEA]
+        решает эту проблему.
+
+
+    h4.Article-Heading4 Немутирующее добавление
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -169,34 +177,230 @@ block append SpecificContent
 
           console.log(sampleArray);
           console.log(updatedSampleArray);
-        +CodeViewer-Explanation--YDF
 
-          p.Article-Paragraph.
+    p.Article-Paragraph.
 
-            А теперь немутирующее добавление: будет создан новый массив на основе старого, и затем уже будет добавлен
-              новый элемент.
-            Таким образом, исходный массив #[+SecondaryEntity__Code--YDID sampleArray] останется неизменным, а новый
-              #[+SecondaryEntity__Code--YDID updatedSampleArray] будет иметь значение
-              #[+SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &#93;].
+      А теперь немутирующее добавление: будет создан новый массив на основе старого, и затем уже будет добавлен
+        новый элемент.
+      Таким образом, исходный массив #[+SecondaryEntity__Code--YDID sampleArray] останется неизменным, а новый
+        (#[+SecondaryEntity__Code--YDID updatedSampleArray]) будет иметь значение
+        #[+SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
 
-          p.Article-Paragraph.
+    p.Article-Paragraph.
 
-            Подобные выкрутасы затребованы в основном фронтенд-фрейворками такими как React, разработчики которых возлагают
-              на пользователей рутину по созданию нового объекта состояния на основе старого.
-            #[+ImportantEntity__Code--YDID addElementsToArray] написать более понятный код, а если требуется добавить
-              один или больше элементов на промежуточные позиции массива, то код будет ещё и значительно проще.
+      Подобные выкрутасы затребованы в основном фронтенд-фрейворками такими как React, разработчики которых возлагают
+        на пользователей рутину по созданию нового объекта состояния на основе старого.
+      #[+ImportantEntity__Code--YDID addElementsToArray] позволяет написать более понятный код, а если требуется добавить
+        один или больше элементов на промежуточные позиции массива, то код будет ещё и значительно проще.
 
-          p.Article-Paragraph.
+    p.Article-Paragraph.
 
-            Однако, полную ("глубокую") копию массива эта функция #[+Keyword--YDID не] делает.
-            Начнём с того, что в общем случае полную сделать #[+Keyword--YDID невозможно] - #[+Term--YDID замыкания] и
-              добавленные в #[+ImportantEntity--YDID ES2022] #[+Term--YDID закрытые поля] #[+Keyword--YDID не] могут
-              быть скопированы, а значит функция для глубокого копирования #[+Keyword--YDID произвольного] объекта
-              #[+Keyword__Contrast--YDID не] может быть разработана.
-            Конкретно в случае с добавлением нового элемента в массив это не критично даже в React, чего нельзя сказать
-              про изменение элемента типа "объект" в массиве - придётся создавать как так и новый массив, так и новый элемент.
+      Однако, полную ("глубокую") копию массива эта функция #[+Keyword--YDID не] делает.
+      Начнём с того, что #[+Keyphrase--YDID в общем случае] полную глубокую сделать #[+Keyword--YDID невозможно] -
+        например, #[+Term--YDID замыкания] и добавленные в #[+ImportantEntity--YDID ES2022]
+        #[+Term--YDID закрытые поля] #[+Keyword--YDID не] могут быть скопированы, а значит функция для глубокого
+        копирования #[+Keyword--YDID произвольного] объекта #[+Keyword__Contrast--YDID не] может быть разработана.
+      Конкретно в случае с добавлением нового элемента в массив это не критично даже в React, чего нельзя сказать
+        про изменение элемента типа "объект" в массиве - придётся создавать как так и новый массив, так и новый элемент.
 
-        //- TODO Следующий пример
+
+    h3.Article-Heading3 Добавление одного элемента в конец массива
+
+    h4.Article-Heading4 Мутирующее добавление
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    p.Article-Paragraph.
+      Добавляем элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] в конец массива строк.
+      Опция #[+ImportantEntity__Code--YDID mutably] сделана обязательной не случайно: программист
+        #[+Keyword--YDID обязан] чётко понимать, что он делает.
+      Поскольку в данном примере установлено значение #[+SecondaryEntity__Code--YDID true], то исходный массив
+        изменится и в результате будет:
+        #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" &rsqb; ].
+
+    +AttentionBox--YDF({
+      decoration: AttentionBox__YDF.DecorativeVariations.warning,
+      hasPrependedSVG_Icon: true
+    }).Article-AttentionBox.
+      При таком варианте использования целевой массив (#[+ImportantEntity__Code--YDID targetArray])
+        #[+Keyword--YDID не] может иметь тип #[+ImportantEntity__Code--YDID ReadonlyArray],
+        поскольку функция будет менять этот массив.
+
+    p.Article-Paragraph.
+      Такое использование функции близко к нативному методу
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.push }).Article-Link push].
+      Разница в том, что #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID всегда]&nbsp;возвращает
+        #[+Keyword__Contrast--YDID обновлённый] массив, а не его количество элементов, как
+        #[+ImportantEntity__Code--YDID push].
+      Впрочем, если нужно количество элементов нового массива, то можно тут же обратиться к свойству
+        #[+ImportantEntity__Code--YDID length] у возвращаемого значения без создания новой переменной.
+
+    p.Article-Paragraph.
+      К тому же, в отличие от #[+ImportantEntity__Code--YDID push], при знании базового английского полностью очевидно,
+        что делает #[+ImportantEntity__Code--YDID addElementsToArray], куда добавляет элементы и что произойдёт с исходным
+        массивом.
+      Да, вызов #[+ImportantEntity__Code--YDID addElementsToArray] набирать на клавиатуре дальше, чем
+        #[+ImportantEntity__Code--YDID push], но кристально прозрачная понятность кода а значит его
+        поддерживаемость гораздо важнее, чем скорость ввода начального варианта этого кода.
+
+      К сожалению, многих программистов, особенно начинающих это не убедит, потому что человеческая психология
+        между сиюминутной выгодой и большей выгодой в будущем склонна выбирать первое.
+      В программировании эта склонность во многом ответственна за код, который быстро становится крайне трудно
+        поддерживать.
+
+    p.Article-Paragraph.
+      Что касается скорости ввода, то функциональность
+        #[+Link--YDF({ anchor: "QUICK_INPUT--SECTION" }).Article-Link Live template]
+        для семейства
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IDE IntelliJ IDEA]
+        решает эту проблему.
+
+
+    h4.Article-Heading4 Немутирующее добавление
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    p.Article-Paragraph.
+
+      А теперь немутирующее добавление: будет создан новый массив на основе старого, и затем уже будет добавлен
+        новый элемент.
+      Таким образом, исходный массив #[+SecondaryEntity__Code--YDID sampleArray] останется неизменным, а новый
+        (#[+SecondaryEntity__Code--YDID updatedSampleArray]) будет иметь значение
+        #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" "NEW_ELEMENT-1", &rsqb; ].
+
+    p.Article-Paragraph.
+
+      Подобные выкрутасы затребованы в основном фронтенд-фрейворками такими как React, разработчики которых возлагают
+        на пользователей рутину по созданию нового объекта состояния на основе старого.
+      #[+ImportantEntity__Code--YDID addElementsToArray] позволяет написать более понятный код, а если требуется добавить
+        один или больше элементов на промежуточные позиции массива, то код будет ещё и значительно проще.
+
+    p.Article-Paragraph.
+
+      Однако, полную ("глубокую") копию массива эта функция #[+Keyword--YDID не] делает.
+      Начнём с того, что #[+Keyphrase--YDID в общем случае] полную глубокую сделать #[+Keyword--YDID невозможно] -
+        например, #[+Term--YDID замыкания] и добавленные в #[+ImportantEntity--YDID ES2022]
+        #[+Term--YDID закрытые поля] #[+Keyword--YDID не] могут быть скопированы, а значит функция для глубокого
+        копирования #[+Keyword--YDID произвольного] объекта #[+Keyword__Contrast--YDID не] может быть разработана.
+      Конкретно в случае с добавлением нового элемента в массив это не критично даже в React, чего нельзя сказать
+        про изменение элемента типа "объект" в массиве - придётся создавать как так и новый массив, так и новый элемент.
+
+
+    h3.Article-Heading3 Добавление одного элемента в позицию (нумерация с 0)
+
+    h4.Article-Heading4 Мутирующее добавление
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    p.Article-Paragraph.
+      Добавляем новый элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] на 1-ую позицию #[+Keyphrase--YDID при счёте с 0].
+      Так как изначально в массиве два элемента, то теперь новый элемент окажется ровно между ними и обновлённый массив будет
+      #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
+
+    p.Article-Paragraph.
+      Сделать то же самое без использования библиотеки можно с помощью метода
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], но:
+
+    ul.Article-UnorderedList
+
+      li.
+        Этот метод рассчитан в первую очередь на #[+Keyword--YDID удаление] элементов из массива.
+        Если нам нужно только добавить новые элементы ничего не удаляя, то нам будут мешаться второй параметр
+          (в данном случае он должен иметь значение 0).
+
+      li.
+        Он сложноват для чтения - неочевидно, какие параметры за что отвечают.
+        Один параметры обозначают индекс элемента, другой - количество элементов, а далее и вовсе идут сами элементы.
+
+
+    h4.Article-Heading4 Немутирующее добавление
+
+    +CodeViewer--YDF.Article-CodeViewer
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+
+    p.Article-Paragraph.
+      При #[+ImportantEntity__Code--YDID mutably: false] будет создан новый массив на основе старого.
+      В данном примере, после создания нового массив на 1-ую позицию #[+Keyphrase--YDID при счёте с 0] будет добавлен
+        новый элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"], в результате чего новый массив будет
+      #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
+
+    p.Article-Paragraph.
+      До недавнего времени нативного аналога не было, потому приходилось:
+
+    ul.Article-UnorderedList
+      li Создавать новый массив
+      li Копировать в него элементы старого
+      li Вызывать метод #[+ImportantEntity__Code--YDID splice] у нового массива
+
+    p.Article-Paragraph.
+      Собственно, именно это #[+ImportantEntity__Code--YDID addElementsToArray] и делает за Вас.
+
+    p.Article-Paragraph.
+      В #[+ImportantEntity--YDID 2023] подоспел метод #[+ImportantEntity__Code--YDID toSpliced], который создаёт новый
+        массив.
+      На момент весны 2023, он поддерживался не всеми популярными браузерами.
+      Так или иначе, необходимость запоминать, что означают параметры #[+ImportantEntity__Code--YDID splice] и
+        #[+ImportantEntity__Code--YDID toSpliced] оставляют актуальным #[+ImportantEntity__Code--YDID addElementsToArray].
 
 
     h3.Article-Heading3#QUICK_INPUT--SECTION Быстрый ввод в семействе IDE IntelliJ IDEA

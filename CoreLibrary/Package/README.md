@@ -12,17 +12,6 @@ Oriented to TypeScript users investing the time to quality including type-safety
 ![Hero image of @yamato-daiwa/es-extensions](https://user-images.githubusercontent.com/41653501/168199236-0895483f-e4f1-4d1f-b7a8-ab296e51a57d.png)
 
 
-## ⚠️ Request to Stack Overflow users with `>=1500` reputation
-
-[My account](https://stackoverflow.com/users/4818123/takeshi-tokugawa-yd) has not enough reputation to create the tag
-for `@yamato-daiwa/es-extensions` and start to answer the related questions. Please create it instead of me and notify
-me to [tokugawa.takesi@gmail.com](mailto:tokugawa.takesi@gmail.com).
-
-* **Tag name**: `@yamato-daiwa/es-extensions`
-* **Description**: Helper functions and classes aimed to reduce the routine code. Oriented to TypeScript users investing
-  the time to type-safety.
-
-
 ## Installation
 
 ```

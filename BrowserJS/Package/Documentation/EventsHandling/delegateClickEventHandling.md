@@ -3,22 +3,22 @@
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-dceh-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
-delegateClickEventHandling(
-  compoundParameter: {
+(
+  compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
     handler: (clickedElement: Element, event: MouseEvent) => unknown;
-  }
-): void;
+  }>
+): void
 
-delegateClickEventHandling<ClickTargetElement extends Element>(
-  compoundParameter: {
+<ClickTargetElement extends Element>(
+  compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
     eventTargetElementSubtype: new () => ClickTargetElement;
     handler: (clickedElement: ClickTargetElement, event: MouseEvent) => unknown;
-  }
-): void;
+  }>
+): void
 ```
 
 Provides the delegating of click event functionality, the optimization measure 
@@ -61,6 +61,7 @@ delegateClickEventHandling<HTMLButtonElement>({
 ## Errors
 
 This function does not throw any errors, just make the log and prevents the handler execution if something going wrong.
+
 
 ### DOM_ElementRetrievingFailedError
 

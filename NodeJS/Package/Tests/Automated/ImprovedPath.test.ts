@@ -439,10 +439,9 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
-        ""
+        "/"
       );
 
       Assert.strictEqual(
@@ -453,10 +452,9 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
-        ""
+        "C:/"
       );
 
     });
@@ -473,8 +471,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to/file/.env"
       );
@@ -487,8 +484,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to/file"
       );
@@ -507,8 +503,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to/file"
       );
@@ -521,8 +516,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: true,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to/file/sample.ts"
       );
@@ -541,8 +535,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to"
       );
@@ -555,8 +548,7 @@ describe("ImprovedPath", (): void => {
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
             mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
           },
-          alwaysForwardSlashSeparators: true,
-          rootDirectoryNotation: ""
+          alwaysForwardSlashSeparators: true
         }),
         "path/to/Dockerfile"
       );

@@ -1,4 +1,3 @@
-import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 import {
   isUndefined,
   isNotUndefined,
@@ -10,10 +9,12 @@ import {
   isNegativeDecimalFraction,
   isDecimalFractionOfAnySign,
   isString,
+  insertSubstring,
   Logger,
   RawObjectDataProcessor,
-  InvalidExternalDataError, insertSubstring
+  InvalidExternalDataError
 } from "@yamato-daiwa/es-extensions";
+import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 import InvalidConsoleCommandError from "../Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
 import JSON5 from "json5";
 
@@ -24,22 +25,22 @@ class ConsoleCommandsParser<
   TargetCommandsAndOptionsCombinations extends ConsoleCommandsParser.GeneralizedCommandsAndOptionsCombinations
 > {
 
-  private static readonly MINIMAL_ARGUMENTS_IN_VALID_CONSOLE_COMMAND: number = 2;
+  public static localization: ConsoleCommandsParser.Localization = ConsoleCommandsParserLocalization__English;
 
-  private static localization: ConsoleCommandsParser.Localization = ConsoleCommandsParserLocalization__English;
+  private static readonly MINIMAL_ARGUMENTS_COUNT_IN_VALID_CONSOLE_COMMAND: number = 2;
 
   private readonly applicationName: string;
   private readonly targetCommandPhrase?: string;
 
-  private readonly targetCommandOptions?: Array<string | undefined>;
-  private readonly targetCommandOptions__eachOneWillBeRemovedOnceProcessed: Array<string | undefined> = [];
+  private readonly targetCommandOptions?: ReadonlyArray<string | undefined>;
+  private readonly targetCommandOptionsHasNotBeenProcessedYet: Array<string | undefined> = [];
   private readonly targetCommandOptionsSpecification?: ConsoleCommandsParser.CommandOptionsSpecification;
 
 
   /* [ Expected type ] Array<string>
    * [ Valid example ]
    * [ 'C:\\Program Files\\nodejs\\node.exe',
-   *   'C:\\Users\\tokugawa\\AppData\\Roaming\\npm\\node_modules\\hikari-automation-upgrade\\bin\\hikari-automation',
+   *   'C:\\Users\\tokugawa\\AppData\\Roaming\\npm\\node_modules\\hikari-automation\\bin\\hikari-automation',
    *   'build_project',
    *   '--mode',
    *   'production' ]
@@ -64,14 +65,14 @@ class ConsoleCommandsParser<
     }
 
 
-    if (argumentsVector.length < ConsoleCommandsParser.MINIMAL_ARGUMENTS_IN_VALID_CONSOLE_COMMAND) {
+    if (argumentsVector.length < ConsoleCommandsParser.MINIMAL_ARGUMENTS_COUNT_IN_VALID_CONSOLE_COMMAND) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.
             generateArgumentsVectorHasNotEnoughElementsErrorMessage({
               arrayedConsoleCommand: argumentsVector,
-              minimalElementsCount: ConsoleCommandsParser.MINIMAL_ARGUMENTS_IN_VALID_CONSOLE_COMMAND
+              minimalElementsCount: ConsoleCommandsParser.MINIMAL_ARGUMENTS_COUNT_IN_VALID_CONSOLE_COMMAND
             })
         }),
         title: InvalidConsoleCommandError.localization.defaultTitle,
@@ -135,6 +136,7 @@ class ConsoleCommandsParser<
       phrase: dataHoldingSelfInstance.targetCommandPhrase,
       ...dataHoldingSelfInstance.getParsedOptionsAndParameters()
     };
+
   }
 
   public static generateFullHelpReference(
@@ -156,30 +158,30 @@ class ConsoleCommandsParser<
 
     if (isNotUndefined(commandLineInterfaceSpecification.commandPhrases)) {
 
-      accumulatingValue = `${ accumulatingValue }\n=== Command phrases`;
+      accumulatingValue = `${ accumulatingValue }\n*** Command phrases`;
 
       for (const [ commandPhrase, argumentsSpecification ] of Object.entries(commandLineInterfaceSpecification.commandPhrases)) {
 
         accumulatingValue = `${ accumulatingValue }\n\n` +
-            `■ ${ commandPhrase }\n`;
+            `● ${ commandPhrase }\n`;
 
-        if (isUndefined(argumentsSpecification)) {
+        if (isUndefined(argumentsSpecification) || Object.keys(argumentsSpecification).length === 0) {
           continue;
         }
 
 
-        accumulatingValue = `${ accumulatingValue }\n --- Arguments`;
+        accumulatingValue = `${ accumulatingValue }\n  ◯ Arguments`;
 
         for (const [ argumentName, argumentSpecification ] of Object.entries(argumentsSpecification)) {
-          accumulatingValue = `${ accumulatingValue }\n` +
-              `  --${ argumentName }:` +
+          accumulatingValue = `${ accumulatingValue }\n\n` +
+              `    --${ argumentName }` +
               `${
                   insertSubstring(argumentSpecification.shortcut, {
-                    modifier: (shortcut: string): string => `\n    Shortcut: -${ shortcut }`
+                    modifier: (shortcut: string): string => `\n      Shortcut: -${ shortcut }`
                   })
               }` +
-              `\n    Type: ${ argumentSpecification.type }` +
-              `${ "required" in argumentSpecification ? `\n    Is required: ${ argumentSpecification.required }` : "" }`;
+              `\n      Type: ${ argumentSpecification.type }` +
+              `${ "required" in argumentSpecification ? `\n      Is required: ${ argumentSpecification.required }` : "" }`;
         }
       }
     }
@@ -188,19 +190,15 @@ class ConsoleCommandsParser<
     return accumulatingValue;
   }
 
-  public static setLocalization(newLocalization: ConsoleCommandsParser.Localization): void {
-    ConsoleCommandsParser.localization = newLocalization;
-  }
-
 
   private constructor(
     {
       commandLineInterfaceSpecification,
       consciouslyInputtedArguments
-    }: {
+    }: Readonly<{
       commandLineInterfaceSpecification: ConsoleCommandsParser.CommandLineInterfaceSpecification;
-      consciouslyInputtedArguments: Array<string | undefined>;
-    }
+      consciouslyInputtedArguments: ReadonlyArray<string | undefined>;
+    }>
   ) {
 
     const helpReference: string = ConsoleCommandsParser.generateFullHelpReference(commandLineInterfaceSpecification);
@@ -312,7 +310,7 @@ class ConsoleCommandsParser<
 
 
     const parsedOptions: ConsoleCommandsParser.GeneralizedCommandsAndOptionsCombinations = {};
-    this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.push(...this.targetCommandOptions ?? []);
+    this.targetCommandOptionsHasNotBeenProcessedYet.push(...this.targetCommandOptions ?? []);
 
     for (const [ optionKey, optionSpecification ] of Object.entries(this.targetCommandOptionsSpecification)) {
 
@@ -326,7 +324,7 @@ class ConsoleCommandsParser<
             optionSpecification.shortcut : `-${ optionSpecification.shortcut }`;
       }
 
-      const arrayIndexOfTargetOptionKey: number = this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.findIndex(
+      const arrayIndexOfTargetOptionKey: number = this.targetCommandOptionsHasNotBeenProcessedYet.findIndex(
           (commandOption: string | undefined): boolean =>
               commandOption === optionKey__withPrepended2NDashes || commandOption === shortcut__withPrependedNDash
       );
@@ -334,7 +332,7 @@ class ConsoleCommandsParser<
       if (optionSpecification.type === ConsoleCommandsParser.ParametersTypes.boolean) {
 
         if (arrayIndexOfTargetOptionKey !== -1) {
-          this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.splice(arrayIndexOfTargetOptionKey, 1);
+          this.targetCommandOptionsHasNotBeenProcessedYet.splice(arrayIndexOfTargetOptionKey, 1);
         }
 
         parsedOptions[optionFinalName] = arrayIndexOfTargetOptionKey !== -1;
@@ -369,7 +367,7 @@ class ConsoleCommandsParser<
 
 
       const targetOptionPotentialValue: string | undefined =
-          this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed[arrayIndexOfTargetOptionKey + 1];
+          this.targetCommandOptionsHasNotBeenProcessedYet[arrayIndexOfTargetOptionKey + 1];
 
       if (isUndefined(targetOptionPotentialValue)) {
 
@@ -443,10 +441,10 @@ class ConsoleCommandsParser<
         }
       }
 
-      this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.splice(arrayIndexOfTargetOptionKey, 2);
+      this.targetCommandOptionsHasNotBeenProcessedYet.splice(arrayIndexOfTargetOptionKey, 2);
     }
 
-    if (this.targetCommandOptions__eachOneWillBeRemovedOnceProcessed.length > 0) {
+    if (this.targetCommandOptionsHasNotBeenProcessedYet.length > 0) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
@@ -734,25 +732,26 @@ class ConsoleCommandsParser<
 namespace ConsoleCommandsParser {
 
   export type ParsedCommand<TargetCommandsAndOptionsCombinations extends GeneralizedCommandsAndOptionsCombinations> =
-    {
+    Readonly<{
       NodeJS_InterpreterAbsolutePath: string;
       executableFileAbsolutePath: string;
       phrase?: string;
-    } & TargetCommandsAndOptionsCombinations;
+    }> &
+    TargetCommandsAndOptionsCombinations;
 
   export type GeneralizedCommandsAndOptionsCombinations = {
     [name: string]: string | number | boolean | ParsedJSON;
   };
 
-  export type CommandLineInterfaceSpecification = {
+  export type CommandLineInterfaceSpecification = Readonly<{
     applicationName: string;
     defaultCommand?: CommandOptionsSpecification;
-    commandPhrases?: {
+    commandPhrases?: Readonly<{
       [commandPhrase: string]: CommandOptionsSpecification | undefined;
-    };
-  };
+    }>;
+  }>;
 
-  export type CommandOptionsSpecification = { [optionKey: string]: OptionSpecification; };
+  export type CommandOptionsSpecification = Readonly<{ [optionKey: string]: OptionSpecification; }>;
 
   export type OptionSpecification =
       StringOptionSpecification |

@@ -1,5 +1,5 @@
-import Assert from "assert";
 import { appendLastFileNameExtension } from "../../../../../Source";
+import Assert from "assert";
 
 
 describe("appendLastFileNameExtension", (): void => {

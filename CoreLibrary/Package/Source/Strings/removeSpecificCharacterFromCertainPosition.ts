@@ -2,7 +2,7 @@ import removeArrayElementsByIndexes from "../Arrays/removeArrayElementsByIndexes
 
 
 export default function removeSpecificCharacterFromCertainPosition(
-  namedParameters:
+  sourceData:
       Readonly<
         {
           targetString: string;
@@ -19,22 +19,22 @@ export default function removeSpecificCharacterFromCertainPosition(
 
   /* [ Theory ]　'split', 'slice', 'substr', 'substring' methods (of String.prototype) are not support
    *   the UTF16 surrogate pairs. */
-  const charactersSequence: Array<string> = Array.from(namedParameters.targetString);
+  const charactersSequence: Array<string> = Array.from(sourceData.targetString);
   let indexOfTargetCharacterInSequence: number;
 
-  if ("fromFirstPosition" in namedParameters) {
+  if ("fromFirstPosition" in sourceData) {
     indexOfTargetCharacterInSequence = 0;
-  } else if ("fromLastPosition" in namedParameters) {
+  } else if ("fromLastPosition" in sourceData) {
     indexOfTargetCharacterInSequence = charactersSequence.length - 1;
-  } else if ("fromPosition__numerationFrom0" in namedParameters) {
-    indexOfTargetCharacterInSequence = namedParameters.fromPosition__numerationFrom0;
+  } else if ("fromPosition__numerationFrom0" in sourceData) {
+    indexOfTargetCharacterInSequence = sourceData.fromPosition__numerationFrom0;
   } else {
-    indexOfTargetCharacterInSequence = namedParameters.fromPosition__numerationFrom1 - 1;
+    indexOfTargetCharacterInSequence = sourceData.fromPosition__numerationFrom1 - 1;
   }
 
 
-  if (charactersSequence[indexOfTargetCharacterInSequence] !== namedParameters.targetCharacter) {
-    return namedParameters.targetString;
+  if (charactersSequence[indexOfTargetCharacterInSequence] !== sourceData.targetCharacter) {
+    return sourceData.targetString;
   }
 
 
@@ -43,4 +43,5 @@ export default function removeSpecificCharacterFromCertainPosition(
     indexes: indexOfTargetCharacterInSequence,
     mutably: true
   }).updatedArray.join("");
+
 }

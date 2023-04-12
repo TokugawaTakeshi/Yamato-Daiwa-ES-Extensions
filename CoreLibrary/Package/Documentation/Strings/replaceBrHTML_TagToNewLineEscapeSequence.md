@@ -1,7 +1,7 @@
 # replaceBrHTML_TagToNewLineEscapeSequence: Replacing of "br" HTML tag to new line (line feed) escape sequence
 
 ```
-replaceBrHTML_TagToNewLineEscapeSequence(targetString: string): string
+(targetString: string): string
 ```
 
 

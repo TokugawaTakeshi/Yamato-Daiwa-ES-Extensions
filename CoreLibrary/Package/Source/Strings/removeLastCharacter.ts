@@ -7,4 +7,5 @@ export default function removeLastCharacter(targetString: string): string {
   charactersSequence.pop();
 
   return charactersSequence.join("");
+
 }

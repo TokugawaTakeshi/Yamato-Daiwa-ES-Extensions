@@ -21,6 +21,7 @@ export { default as InvalidConsoleCommandErrorLocalization__English } from
 
 export { default as ImprovedPath } from "./ImprovedPath/ImprovedPath";
 export { default as ImprovedGlob } from "./ImprovedGlob";
+export { default as ImprovedSynchronousFileSystem } from "./ImprovedSynchronousFileSystem";
 
 export { default as ObjectDataFilesProcessor } from "./ObjectDataFilesProcessor/ObjectDataFilesProcessor";
 

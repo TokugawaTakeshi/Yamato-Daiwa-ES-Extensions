@@ -1,5 +1,5 @@
 import { splitString } from "../../../Source";
-import { deepStrictEqual, notDeepStrictEqual } from "assert";
+import Assert from "assert";
 
 
 describe("splitString", (): void => {
@@ -8,8 +8,10 @@ describe("splitString", (): void => {
 
     const sample: string = "😀😃😁😆";
 
-    deepStrictEqual(splitString(sample, ""), [ "😀", "😃", "😁", "😆" ]);
+    Assert.deepStrictEqual(splitString(sample, ""), [ "😀", "😃", "😁", "😆" ]);
 
-    notDeepStrictEqual(splitString(sample, ""), sample.split(""));
+    Assert.notDeepStrictEqual(splitString(sample, ""), sample.split(""));
+
   });
+
 });

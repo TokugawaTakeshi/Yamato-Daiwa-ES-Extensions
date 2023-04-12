@@ -77,27 +77,27 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.074Z"
+    "modificationDatetime__ISO_8601": "2023-04-18T03:34:47.285Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:39.969Z"
+    "modificationDatetime__ISO_8601": "2023-04-18T03:34:47.308Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.090Z"
+    "modificationDatetime__ISO_8601": "2023-05-01T08:08:22.462Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.043Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:16:40.167Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:39.981Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:16:40.157Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.149Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.209Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.english.pug": {
     "issues": [],
@@ -113,19 +113,19 @@
   },
   "01-Source/Pages/Top/TopPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:23:37.824Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.213Z"
   },
   "01-Source/Pages/Top/_TopPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:51:05.028Z"
+    "modificationDatetime__ISO_8601": "2023-04-17T03:58:51.077Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.053Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:16:40.184Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.023Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:16:40.136Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
     "issues": [],
@@ -141,7 +141,7 @@
   },
   "01-Source/Pages/Top/TopPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:23:37.844Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.214Z"
   },
   "01-Source/Components/SharedReusable/CompactTableOfContents/CompactTableOfContents.pug": {
     "issues": [],
@@ -237,7 +237,7 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:39.945Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:16:40.146Z"
   },
   "node_modules/@yamato-daiwa/frontend-localization-japanese/Components.pug": {
     "issues": [],
@@ -277,15 +277,15 @@
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.034Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.211Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.104Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.212Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-10T06:18:40.062Z"
+    "modificationDatetime__ISO_8601": "2023-04-13T04:29:19.213Z"
   },
   "01-Source/SharedAssets/Markup/Assets.english.pug": {
     "issues": [],
@@ -329,15 +329,15 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/English/SharedExternalLinksLocalizaiton.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.365Z"
+    "modificationDatetime__ISO_8601": "2023-05-01T07:54:04.511Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/SharedExternalLinksLocalizaiton.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.367Z"
+    "modificationDatetime__ISO_8601": "2023-05-01T07:55:38.516Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/SharedExternalLinksLocalizaiton.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-01-22T02:15:47.366Z"
+    "modificationDatetime__ISO_8601": "2023-05-01T07:54:21.116Z"
   },
   "01-Source/SharedAssets/Markup/CountriesFlags/GreatBritanFlag2x3.pug": {
     "issues": [],
@@ -357,11 +357,11 @@
   },
   "01-Source/Components/Components.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-11T02:39:09.912Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:42:30.365Z"
   },
   "01-Source/Components/Components.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-04-11T02:40:01.232Z"
+    "modificationDatetime__ISO_8601": "2023-04-24T02:42:30.358Z"
   },
   "01-Source/Components/_Components.common.pug": {
     "issues": [],

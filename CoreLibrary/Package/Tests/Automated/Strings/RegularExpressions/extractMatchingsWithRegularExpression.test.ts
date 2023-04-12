@@ -1,5 +1,5 @@
-import Assert from "assert";
 import { extractMatchingsWithRegularExpression, UnexpectedEventError } from "../../../../Source";
+import Assert from "assert";
 
 
 describe("extractMatchingsWithRegularExpression.test", (): void => {
@@ -81,6 +81,5 @@ describe("extractMatchingsWithRegularExpression.test", (): void => {
     });
 
   });
-
 
 });

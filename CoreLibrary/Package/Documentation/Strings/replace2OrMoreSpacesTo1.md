@@ -1,7 +1,7 @@
 # `replace2OrMoreSpacesTo1`: Replacing 2 or more spaces to 1 in the strings 
 
 ```
-replace2OrMoreSpacesTo1(targetString: string): string
+(targetString: string): string
 ```
 
 ## Problem

@@ -1,25 +1,24 @@
 # `getExpectedToBeSingleDOM_Element` - get expected to be single DOM element
 
-[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getExpectedToBeSingleDOM_Element-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getExpectedToBeSingleDOM__Element-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
-Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context, 
-otherwise throws the error.
+Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context.
 
 ```
-getExpectedToBeSingleDOM_Element(
-  namedParameters: Readonly<{
+(
+  compoundParameter: Readonly<{
     selector: string;
     context?: Element | Document;
   }>
-): Element;
+): Element
 
-getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
-  namedParameters: Readonly<{
+<DOM_ElementSubtype extends Element>(
+  compoundParameter: Readonly<{
     selector: string;
     context?: Element | Document;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }>
-): DOM_ElementSubtype;
+): DOM_ElementSubtype
 ```
 
 

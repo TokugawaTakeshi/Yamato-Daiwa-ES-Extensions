@@ -22,4 +22,5 @@ export default function toUpperCamelCase(targetString: string): string {
 
 
   return capitalizeFirstCharacter(toLowerCamelCase(targetString));
+
 }

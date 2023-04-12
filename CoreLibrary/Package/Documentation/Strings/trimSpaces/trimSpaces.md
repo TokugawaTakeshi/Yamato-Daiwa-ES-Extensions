@@ -1,7 +1,8 @@
+
 # `trimSpaces`
 
 ```
-trimSpaces(
+(
   targetString: string,
   options: {
     skipLeadingOnes?: boolean;
@@ -74,8 +75,8 @@ In below example, the ideographic characters will be kept:
 
 ```typescript
 console.log(trimSpaces(
-    "　試験　",
-    { excludeKinds: [ SpaceCharacters.ideographicSpace ] }
+  "　試験　",
+  { excludeKinds: [ SpaceCharacters.ideographicSpace ] }
 ).length); // => 4
 ```
 
