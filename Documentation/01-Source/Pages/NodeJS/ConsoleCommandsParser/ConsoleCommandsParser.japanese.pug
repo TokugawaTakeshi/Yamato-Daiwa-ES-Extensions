@@ -1,0 +1,38 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/Assets.japanese.pug
+  include ../../../Components/Components.russian.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("ConsoleCommandsParser");
+    HTML_PageMetaData = {
+      description: "",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("localizedRouting.nodeJS.utils.ConsoleCommandsParser");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./ConsoleCommandsParser.english.html",
+      russian: "./ConsoleCommandsParser.russian.html"
+    });
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 ConsoleCommandsParser

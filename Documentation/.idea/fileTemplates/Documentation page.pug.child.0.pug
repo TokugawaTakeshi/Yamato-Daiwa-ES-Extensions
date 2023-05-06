@@ -1,12 +1,12 @@
 //- TODO Указать правильный путь
-extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
   //- TODO Указать правильный путь
-  include ../../Components/Components.pug
   include ../../SharedAssets/Markup/Assets.russian.pug
+  include ../../Components/Components.russian.pug
 
 
 block append Metadata
@@ -23,16 +23,16 @@ block append Metadata
       author: HTML_PAGE_AUTHOR
     };
 
-    FAVICON_URI = "@MustBeInRoot/favicon";
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
     scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("${ROUTE}");
 
-    LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.english]: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
-      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html"
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
+      japanese: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html"
     });
 
 
@@ -41,7 +41,7 @@ block append SpecificContent
   article
 
     // TODO Редактировать
-    +CallableExpressionScheme({
+    +CallableExpressionScheme--YDF_DK({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",
       localizedDescriptiveHeading: "Делает особую, уличную магию",
@@ -54,9 +54,9 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities

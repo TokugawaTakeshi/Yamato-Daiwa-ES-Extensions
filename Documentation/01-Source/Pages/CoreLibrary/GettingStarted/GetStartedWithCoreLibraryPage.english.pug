@@ -28,8 +28,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+      japanese: "./GetStartedWithCoreLibraryPage.japanese.html",
+      russian: "./GetStartedWithCoreLibraryPage.russian.html"
     });
 
     const externalLinks = {
@@ -45,7 +45,9 @@ block append SpecificContent
 
     h1.Article-Heading1 Starting Use
 
-    h2.Article-Heading2#Installation--SECTION Installation
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
+    ) Installation
 
     p.Article-Paragraph.
       The normal installation method is to execute from the
@@ -54,13 +56,15 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "Console command for installing the package"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Information About Distribution Size
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
+    ) Information About Distribution Size
 
     p.Article-Paragraph.
       #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm official site]
@@ -79,7 +83,7 @@ block append SpecificContent
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
-    }).Article-AttentionBox.
+    }).
       This is because the value #[+Keyword--YDID is not] the amount of data added to the application following configuration,
         with the installation of #[+ImportantEntity--YDID @yamato-daiwa/es-extensions].
 
@@ -120,7 +124,9 @@ block append SpecificContent
       This is particularly true when only a small portion of the library is used.
 
 
-    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Precautions for Non-Users of TypeScript
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
+    ) Precautions for Non-Users of TypeScript
 
     p.Article-Paragraph.
       Our library was developed #[+Keyword--YDID primarily for the goal of] assisting users of
@@ -155,7 +161,9 @@ block append SpecificContent
       Therefore, when using this library in #[+ImportantEntity--YDID TypeScript] instead of #[+ImportantEntity--YDID JavaScript], it is highly likely that errors caused by type inconsistencies will occur. There may be cases where the error message does not indicate the cause of the error, thereby leading users to incorrectly assume that it is a problem with the library.
 
 
-    h2.Article-Heading2#ImportingOfFunctionality--SECTION Importing functionality
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingOfFunctionality.$anchor
+    ) Importing functionality
 
     p.Article-Paragraph.
       After installing this package, you can import the functions and classes described on the documentation page.
@@ -163,7 +171,7 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "Example of importing from ”@yamato-daiwa/es-extensions”"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

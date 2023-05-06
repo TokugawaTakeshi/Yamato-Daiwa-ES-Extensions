@@ -116,10 +116,11 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `addElementsToArray`" toReformat="false" toShortenFQNames="true">
+  <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: $POSITION$,&#10;  toPosition__numerationFrom1: $POSITION$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `addElementsToArray`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <variable name="NEW_ELEMENTS" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="POSITION" expression="" defaultValue="&quot;1&quot;" alwaysStopAt="true" />
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
@@ -159,10 +160,11 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="addElementsToArray" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: 0,&#10;  toPosition__numerationFrom1: 0&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="addElementsToArray" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: $POSITION$,&#10;  toPosition__numerationFrom1: $POSITION$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <variable name="NEW_ELEMENTS" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="POSITION" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
@@ -186,13 +188,15 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getLastElementOfArray" value="getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true; }$END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)&#10;" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="getLastElementOfArray" value="getLastElementOfArray($TARGET_ARRAY$, { mustThrowErrorIfArrayIsEmpty: true })$END$&#10;// TODO Remove the second parameter if you need to be returned null instead of throwing of error when array is empty&#10;/* &#10;&#10;// Multiline version&#10;getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // TODO Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true }&#10;)&#10;&#10;// TODO Import if has not imported yet&#10;// import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;*/" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
+      <option name="JS_CLASS_MEMBER_EXPRESSION" value="false" />
+      <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="gleoa" value="getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true; }$END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)&#10;" description="The alias of  `getLastElementOfArray`" toReformat="false" toShortenFQNames="true">
+  <template name="gleoa" value="getLastElementOfArray($TARGET_ARRAY$, { mustThrowErrorIfArrayIsEmpty: true })$END$&#10;// TODO Remove the second parameter if you need to be returned null instead of throwing of error when array is empty&#10;/* &#10;&#10;// Multiline version&#10;getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // TODO Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true }&#10;)&#10;&#10;// TODO Import if has not imported yet&#10;// import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;*/" description="The alias of  `getLastElementOfArray`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />

@@ -7,7 +7,7 @@
 ```
 <ArrayElement>(targetArray: ReadonlyArray<ArrayElement>): ArrayElement | null
 
-getLastElementOfArray<ArrayElement>(
+<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   options: Readonly<{ mustThrowErrorIfArrayIsEmpty: true; }>
 ): ArrayElement

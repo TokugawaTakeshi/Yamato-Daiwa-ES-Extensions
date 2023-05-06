@@ -29,8 +29,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./areStringifiedDigitsOnly.japanese.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.html"
+      japanese: "./areStringifiedDigitsOnly.japanese.html",
+      russian: "./areStringifiedDigitsOnly.russian.html"
     });
 
 
@@ -51,7 +51,7 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
     p.Article-Paragraph.
       Checks whether #[+Keyword--YDID all] characters in the #[+Keyword--YDID string] #[+Term--YDID argument] are
@@ -60,7 +60,7 @@ block append SpecificContent
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
-    }).Article-AttentionBox
+    })
 
       h2.Article-Heading2 Understanding the difference between digits and numbers
 
@@ -90,7 +90,7 @@ block append SpecificContent
         Unlike the function #[+ImportantEntity__Code--YDID isStringifiedNonNegativeIntegerOfRegularNotation],
           this function is appropriate for strings that can begin with any number of 0s.
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF.

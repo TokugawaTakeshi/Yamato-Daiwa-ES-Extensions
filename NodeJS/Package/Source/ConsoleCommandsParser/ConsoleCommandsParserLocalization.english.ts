@@ -1,153 +1,246 @@
 import ConsoleCommandsParser from "./ConsoleCommandsParser";
-import type { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
-import {
-  RawObjectDataProcessorLocalization__English,
-  isNotUndefined,
-  stringifyAndFormatArbitraryValue
-} from "@yamato-daiwa/es-extensions";
+import { RawObjectDataProcessorLocalization__English, isNotUndefined } from "@yamato-daiwa/es-extensions";
+
 
 import Localization = ConsoleCommandsParser.Localization;
+import ErrorsMessages = Localization.ErrorsMessages;
 
 
-const ConsoleCommandsParserLocalization__English: ConsoleCommandsParser.Localization = {
+const consoleCommandsParserLocalization__english: Localization = {
 
-  generateArgumentsVectorIsNotArrayErrorMessage: (argumentsVector: unknown): string =>
-      "Expected that the arguments vector will be an array while actually it did not pass 'Array.isArray()' check and" +
-      `has the value:\n${ stringifyAndFormatArbitraryValue(argumentsVector) }`,
+  helpReference: {
 
-  generateArgumentsVectorHasNotEnoughElementsErrorMessage: ({
-   minimalElementsCount, arrayedConsoleCommand
-  }: Localization.RawArgumentsVectorHasNotEnoughElementsErrorMessageParameters): string =>
-      `The valid arguments vector must be an array of at least ${ minimalElementsCount } elements while actually is has ` +
-      `${ arrayedConsoleCommand.length } elements and value:\n${ stringifyAndFormatArbitraryValue(arrayedConsoleCommand) }`,
+    defaultCommand: "Default command",
 
-  generateArgumentsVectorHasNonStringElementsErrorMessage: (nonStringElements: Array<unknown>): string =>
-      "The valid arguments vector must be an array of the strings while below arguments are not strings:\n" +
-      `${ stringifyAndFormatArbitraryValue(nonStringElements) }`,
+    options: "Options",
 
-  generateNoDefaultCommandPhraseAvailableErrorMessage: (helpReference: string): string =>
-      "This application has not the default command. Please specify explicitly one of mentioned below command phrases:\n" +
-      `${ helpReference }`,
+    shortcut: "Shortcut",
 
-  generateFirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailableErrorMessage: ({
-    commandPhraseLikeArgument, helpReference
-  }: Localization.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailableErrorMessageParameters): string =>
-      `'${ commandPhraseLikeArgument }' seems like the command phrase while no command phrases available for this ` +
-      `application:\n${ helpReference }`,
+    type: "Type",
 
-  generateUnknownCommandPhraseErrorMessage: (
-    { inputtedCommandPhrase, helpReference }: Localization.UnknownCommandPhraseErrorMessageParameters
-  ): string => `The command phrase '${ inputtedCommandPhrase }' is unknown. ` +
-      `Please input one of below available command phrases:\n${ helpReference }`,
+    isRequired: "Is required",
 
-  generateUnknownOptionsFoundForSpecificCommandErrorMessage: (
-    { commandPhrase, commandReference }: Localization.UnknownOptionsFoundForSpecificCommandErrorMessageParameters
-  ): string => "Below options are unknown for the " +
-      `"${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }".` +
-      `Please check the  reference for this command:\n${ commandReference }`,
+    yes: "Yes",
 
-  generateInvalidOptionTypeErrorMessage: ({ optionName }: { optionName: string; }): string =>
-      `Invalid type has been specified for the option '${ optionName }'.`,
+    no: "No",
 
-  generateRequiredOptionKeyIsMissingErrorMessage: (
-    {
-      missingOptionKey,
-      commandPhrase,
-      commandHelpReference
-    }: Localization.RequiredOptionKeyIsMissingErrorMessageParameters
-  ): string =>
-      `The option '${ missingOptionKey }' is required for the ` +
-      `${ isNotUndefined(commandPhrase) ? `command '${ commandPhrase }'` : "default command" }.` +
-      `Please check the reference for this command:\n${ commandHelpReference }`,
+    allowedAlternatives: "Allowed alternatives",
 
-  generateNoValueFollowingTheKeyOfNonBooleanOptionErrorMessage: (
-    {
-      targetOptionKey,
-      commandHelpReference
-    }: Localization.NoValueFollowingTheKeyOfNonBooleanOptionErrorMessageParameters
-  ): string =>
-      `No value following the key '${ targetOptionKey }' of non-boolean option has been specified.` +
-      `Please check the reference for this command:\n${ commandHelpReference }`,
+    numbersSet: {
+      key: "Numbers set",
+      generateValue: RawObjectDataProcessorLocalization__English.numbersSet
+    },
 
-  generateOptionValueIsNotAmongAllowedAlternativesErrorMessage: (
-    {
-      targetOptionKey,
-      actualOptionValue,
-      commandReference
-    }: Localization.OptionValueIsNotAmongAllowedAlternativesErrorMessageParameters
-  ): string =>
-      `The value '${ actualOptionValue }' of the option '${ targetOptionKey }' is not among allowed alternatives. ` +
+    minimalValue: "Minimal value",
+
+    maximalValue: "Maximal value",
+
+    objectTypeValuePropertiesSpecification: "Properties specification"
+
+  },
+
+  generateCheckTheCommandReferenceAsking: (commandReference: string): string =>
       `Please check the reference for this command:\n${ commandReference }`,
 
-  generateUnparsableNumericOptionValueErrorMessage: (
-    {
-      actualOptionValue,
-      targetOptionKey,
-      commandReference
-    }: Localization.UnparsableNumericOptionValueErrorMessageErrorMessageParameters
-  ): string =>
-      `The value '${ actualOptionValue }' of the option '${ targetOptionKey }' is not valid numeric value.` +
-      `Please check the reference for this command:\n${ commandReference }`,
+  errorsMessages: {
 
-  generateReadableNumbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
-    return RawObjectDataProcessorLocalization__English.numbersSet(numberSet);
-  },
+    argumentsVectorIsNotArray: {
+      generate: (
+        { stringifiedActualValueOfArgumentsVector }: ErrorsMessages.ArgumentsVectorIsNotArray.TemplateParameters
+      ): string =>
+          "Expected that the arguments vector be an array while actually it is not and actually has the value:\n" +
+            `${ stringifiedActualValueOfArgumentsVector }`
+    },
 
-  generatedNumericOptionValueIsNotBelongToExpectedNumbersSetErrorMessage(
-    {
-      targetOptionKey,
-      expectedNumbersSet,
-      actualOptionValue,
-      commandReference
-    }: Localization.NumericOptionValueIsNotBelongToExpectedNumbersSetErrorMessageParameters
-  ): string {
-    return `The value '${ actualOptionValue }' of the option '${ targetOptionKey }' is not is in not member of ` +
-        `'${ this.generateReadableNumbersSet(expectedNumbersSet) }' set as required. ` +
-        `Please check the reference for target command:\n${ commandReference }`;
-  },
+    argumentsVectorHasNotEnoughElements: {
+      generate: (
+        {
+          minimalElementsCountInArgumentsVector,
+          actualElementsCountInArgumentsVector,
+          stringifiedArgumentsVector
+        }: ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateParameters
+      ): string =>
+          `The valid arguments vector must be an array of at least ${ minimalElementsCountInArgumentsVector } elements ` +
+            `while actually is has ${ actualElementsCountInArgumentsVector } elements and value:\n` +
+            `${ stringifiedArgumentsVector }`
+    },
 
-  generateNumericValueIsSmallerThanRequiredMinimumErrorMessage(
-    {
-      targetOptionKey,
-      requiredMinimum,
-      actualOptionValue,
-      commandReference
-    }: Localization.NumericValueIsSmallerThanRequiredMinimumErrorMessageParameters
-  ): string {
-    return `The value '${ actualOptionValue }' of the option '${ targetOptionKey }' is less than required minimal value ` +
-        `${ requiredMinimum } set as required.\n Please check the reference for this target command:\n${ commandReference }`;
-  },
+    argumentsVectorHasNonStringElements: {
+      generate: (
+        { stringifiedFormattedNonStringArguments }: ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateParameters
+      ): string =>
+          "The valid arguments vector must be an array of the strings while below arguments are not strings:\n" +
+            `${ stringifiedFormattedNonStringArguments }`
+    },
 
-  generateNumericValueIsGreaterThanAllowedMaximumErrorMessage(
-    {
-      targetOptionKey,
-      allowedMaximum,
-      actualOptionValue,
-      commandReference
-    }: Localization.NumericValueIsGreaterThanAllowedMaximumErrorMessageParameters
-  ): string {
-    return `The value '${ actualOptionValue }' of the option '${ targetOptionKey }' is greater that allowed maximal value ` +
-        `${ allowedMaximum }. \n Please check the reference for target command:\n${ commandReference }`;
-  },
+    noDefaultCommandPhraseAvailable: {
+      generate: (templateParameters: ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateParameters): string =>
+          "This application has no the default command. " +
+          "Please specify explicitly one of mentioned below command phrases.\n" +
+          `${ templateParameters.helpReference }`
+    },
 
-  generateMalformedJSON5_OptionErrorMessage: (
-    {
-      targetOptionKey,
-      commandReference
-    }: Localization.MalformedJSON5_OptionErrorMessageParameters
-  ): string =>
-      `The value of the option '${ targetOptionKey }' is not valid JSON5.` +
-      `Please check the reference for this command:\n${ commandReference }`,
+    firstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable: {
+      generate: (
+        {
+          commandPhraseLikeArgument,
+          helpReference
+        }: ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.TemplateParameters
+    ): string =>
+        `"${ commandPhraseLikeArgument }" seems like the command phrase while there is only the default command available ` +
+          "for this application:\n" +
+          `${ helpReference }`
+    },
 
-  generateJSON5_OptionDoesNotMatchWithValidDataSchemaErrorMessage: (
-    {
-      targetOptionKey,
-      formattedValidationErrorsMessages
-    }: Localization.JSON5_OptionDoesNotMatchWithValidDataSchemaErrorMessageParameters
-  ): string =>
-      `The JSON5-type value of the option '${ targetOptionKey }' does not match with valid data schema:\n` +
-      `${ formattedValidationErrorsMessages }`
+    unknownCommandPhrase: {
+      generate: (
+        { inputtedCommandPhrase, helpReference }: ErrorsMessages.UnknownCommandPhrase.TemplateParameters
+      ): string =>
+          `The command phrase "${ inputtedCommandPhrase }" is unknown. ` +
+          "Please input one of below available command phrases:" +
+            `\n${ helpReference }`
+    },
+
+    requiredOptionKeyIsMissing: {
+      generate: (
+        {
+          missingOptionKey,
+          commandPhrase,
+          commandHelpReference
+        }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateParameters
+      ): string =>
+          `The option "${ missingOptionKey }" is required for the ` +
+            `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }. ` +
+            `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    noValueFollowingTheKeyOfNonBooleanOption: {
+      generate: (
+        {
+          targetOptionKey,
+          commandHelpReference
+        }: ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateParameters
+      ): string =>
+          `No value following the key "${ targetOptionKey }" of non-boolean option has been specified. ` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    invalidCommandOptionTypeAtSpecification: {
+      generate: ({ optionName, typeName }: ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateParameters): string =>
+          "Most likely, it is the bug from the side of the console application. " +
+          `The type "${ typeName }" specified for the option "${ optionName }" in the console command specification ` +
+            " is invalid. " +
+          "It is possible only when the console application has been written by JavaScript or the TypeScript type checking " +
+            "has been disabled. " +
+          "There is nothing you must to correct; however it is recommended to report about this issue to the developers " +
+            "of this application."
+    },
+
+    unknownOptionsFoundForSpecificCommand: {
+      generate: (
+        {
+          commandPhrase,
+          formattedUnknownOptions,
+          commandHelpReference
+        }: ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateParameters
+      ): string =>
+          "Below options are unknown for the " +
+            `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }:\n` +
+          `${ formattedUnknownOptions }\n` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    optionValueIsNotAmongAllowedAlternatives: {
+      generate: (
+        {
+          targetOptionKey,
+          actualOptionValue,
+          commandHelpReference
+        }: ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateParameters
+      ): string =>
+          `The value "${ actualOptionValue }" of the option "${ targetOptionKey }" is not among allowed alternatives. ` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    unparsableNumericOptionValue: {
+      generate: (
+        {
+          actualOptionValue,
+          targetOptionKey,
+          commandHelpReference
+        }: ErrorsMessages.UnparsableNumericOptionValue.TemplateParameters
+      ): string =>
+          `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not the valid numeric value.\n` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    numericOptionValueIsNotBelongToExpectedNumbersSet: {
+      generate: (
+        {
+          targetOptionKey,
+          expectedNumbersSet,
+          actualOptionValue,
+          commandHelpReference
+        }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateParameters
+      ): string =>
+          `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not belong to ` +
+            `"${ RawObjectDataProcessorLocalization__English.numbersSet(expectedNumbersSet) }" numbers set.\n` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    numericValueIsSmallerThanRequiredMinimum: {
+      generate: (
+        {
+          targetOptionKey,
+          requiredMinimum,
+          actualOptionValue,
+          commandHelpReference
+        }: ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateParameters
+      ): string =>
+          `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is smaller than required ` +
+            `minimal value ${ requiredMinimum }.\n` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    numericValueIsGreaterThanAllowedMaximum: {
+      generate: (
+        {
+          targetOptionKey,
+          allowedMaximum,
+          actualOptionValue,
+          commandHelpReference
+        }: ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateParameters
+      ): string =>
+         `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is greater that allowed ` +
+            `maximal value ${ allowedMaximum }.\n` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    malformedJSON5_Option: {
+      generate: (
+        {
+          targetOptionKey,
+          commandHelpReference
+        }: ErrorsMessages.MalformedJSON5_Option.TemplateParameters
+      ): string =>
+          `The value of the option "${ targetOptionKey }" is not valid JSON5 string. ` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+    },
+
+    JSON5_OptionDoesNotMatchWithValidDataSchema: {
+      generate: (
+        {
+          targetOptionKey,
+          formattedValidationErrorsMessages
+        }: ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateParameters
+      ): string =>
+          `The JSON5-type value of the option "${ targetOptionKey }" does not match with valid data schema:\n` +
+          `${ formattedValidationErrorsMessages }`
+    }
+
+  }
+
 };
 
 
-export default ConsoleCommandsParserLocalization__English;
+export default consoleCommandsParserLocalization__english;

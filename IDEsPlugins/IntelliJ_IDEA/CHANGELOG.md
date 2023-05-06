@@ -12,10 +12,11 @@
 
 ### Changed
 
-* Support IntelliJ Platform **2023.1**
+* Support IntelliJ Platform **2023.2**
+* Update <kbd>addElementsToArray</kbd> live template <kbd>aeta</kbd>.
 * Update <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> live template.
 * Update <kbd>getExpectedToBeSingleDOM_Element</kbd> live template.
-
+* Fixed mistakes and improve <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [`getLastElementOfArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
 
 
 ### Removed

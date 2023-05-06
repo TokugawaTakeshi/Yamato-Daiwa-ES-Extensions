@@ -1,44 +1,51 @@
-import FileNotFoundErrorLocalization__English from "./FileNotFoundErrorLocalization.english";
+import fileNotFoundErrorLocalization__english from "./FileNotFoundErrorLocalization.english";
 
 
 class FileNotFoundError extends Error {
 
   public static readonly NAME: string = "FileNotFoundError";
-  public static localization: FileNotFoundError.Localization = FileNotFoundErrorLocalization__English;
+
+  public static localization: FileNotFoundError.Localization = fileNotFoundErrorLocalization__english;
 
 
-  public constructor(namedParameters: FileNotFoundError.ConstructorNamedParameters) {
+  public constructor(constructorParameter: FileNotFoundError.ConstructorParameter) {
 
     super();
 
     this.name = FileNotFoundError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = FileNotFoundError.localization.genericDescription(namedParameters);
-    }
+    this.message =
+        "customMessage" in constructorParameter ?
+            constructorParameter.customMessage :
+            `${ FileNotFoundError.localization.generateDescriptionCommonPart(constructorParameter) }` +
+                `${ constructorParameter.messageSpecificPart ?? "" }`;
+
   }
+
 }
 
 
 namespace FileNotFoundError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
+  export type ConstructorParameter = Readonly<
+    {
+      filePath: string;
+      messageSpecificPart?: string;
+    } |
+    { customMessage: string; }
+  >;
 
   export type Localization = Readonly<{
-    readonly defaultTitle: string;
-    readonly genericDescription: (
-      namedParameters: Localization.DescriptionTemplateNamedParameters
-    ) => string;
+    defaultTitle: string;
+    generateDescriptionCommonPart: (templateVariables: Localization.CommonDescription.TemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
-      filePath: string;
-      messageSpecificPart?: string;
-    }>;
+    export namespace CommonDescription {
+      export type TemplateVariables = Readonly<{ filePath: string; }>;
+    }
   }
+
 }
 
 

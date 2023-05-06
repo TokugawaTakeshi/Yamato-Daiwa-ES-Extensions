@@ -31,8 +31,8 @@ block append Metadata
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./addElementsToArray.english.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./addElementsToArray.russian.html"
+      english: "./addElementsToArray.english.html",
+      russian: "./addElementsToArray.russian.html"
     });
 
 
@@ -40,7 +40,142 @@ block append SpecificContent
 
   article
 
-    +ProgrammaticEntityHeading({
-      entityName: "addElementsToArray",
-      entityLocalizedInterpretation: "配列に要素（複数可）を追加する"
-    }).Article-ProgrammaticEntityHeading
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "addElementsToArray",
+      headingTag: "h1",
+      localizedDescriptiveHeading: "配列に要素を追加する",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          genericTechnicalName: "sourceData",
+          localizedName: "入力データ",
+          type: "SourceData",
+          required: true
+        }
+      ],
+      returnedValue: "Array&lt;ArrayElement&gt;"
+    })(lang="ru")
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceData",
+        localizedDescriptiveHeading: "入力データ",
+        propertiesSpecification: {
+          $intersection: [
+            {
+              newElements: {
+                localizedInterpretation: "新規要素",
+                type: "ReadonlyArray&lt;ArrayElement&gt;",
+                required: true
+              }
+            },
+            [
+              {
+                mutably: {
+                  localizedInterpretation: "変異有無",
+                  type: "boolean (trueのみ)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "目標的配列",
+                  type: "Array",
+                  required: true
+                }
+              },
+              {
+                mutably: {
+                  localizedInterpretation: "変異有無",
+                  type: "boolean (falseのみ)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "目標的配列",
+                  type: "ReadonlyArray",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                toStart: {
+                  localizedInterpretation: "開始へ",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              },
+              {
+                toEnd: {
+                  localizedInterpretation: "終わりへ",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom0: {
+                  localizedInterpretation: "特定位置へ（０からの計算）",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom1: {
+                  localizedInterpretation: "特定位置へ（１からの計算）",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              }
+            ]
+          ]
+        }
+      }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
+
+
+    p.Article-Paragraph.
+      #[+Term--YDID 指数配列]の最初に位置か、最後の位置か、番号で指定された位置に新規要素を追加する。
+      専用の#[+Term--YDID オプション]に依り、#[+Term--YDID 変異]を起こす追加も可能で、#[+Keyword--YDID 新規]#[+Term--YDID 配列]
+        を作る追加も可能（但し、#[+Keyword--YDID 完全な]複製が行わず、#[+Keyword--YDID 一般的に]複製可能な訳では#[+Keyword--YDID ない]）。
+
+
+    h2.Article-Heading2 解説付きの例の揃い
+
+    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+      当ページの選択的に読んでいる型が多いので、下記重要な部分は繰り返しが有る。
+
+
+    h3.Article-Heading3 配列の最初に位置に単一の要素を追加
+
+    h4.Article-Heading4 変異有り
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+
+    mixin AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment(properties)
+
+      -
+
+        const {
+          newElementsCount,
+          toEnd,
+          similarNativeMethod
+        } = properties;
+
+        const similarNativeMethodName = toEnd ? "push" : "unshift";
+        const similarNativeMethodReferenceURI = toEnd ? sharedExternalLinks.mdn.array.push : sharedExternalLinks.mdn.array.unshift;
+
+
+      p.Article-Paragraph
+
+        | 要素 #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]

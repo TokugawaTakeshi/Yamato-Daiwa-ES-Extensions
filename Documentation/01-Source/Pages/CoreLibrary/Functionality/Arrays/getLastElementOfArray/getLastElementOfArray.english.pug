@@ -1,0 +1,99 @@
+extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/Assets.english.pug
+  include ../../../../../Components/Components.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getLastElementOfArray");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "getLastElementOfArray",
+        whatFunctionDoes: "Returns last element of array. When there is not such element, depending on presence or absence" +
+            "of the second parameter, the null will be returned or exception will be thrown."
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: "./getLastElementOfArray.japanese.html",
+      russian: "./getLastElementOfArray.russian.html",
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getLastElementOfArray",
+      headingTag: "h1",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「null」が返される",
+          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "Array&lt;ArrayElement&gt;",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「UnexpectedEventError」例外が投げられる",
+          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ]
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        propertiesSpecification: {
+          mustThrowErrorIfArrayIsEmpty: {
+            type: "Boolean （true only）",
+            required: true
+          }
+        }
+      })
+
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log("OK");
+
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            This code outputs "OK" to console (thanks, cap).

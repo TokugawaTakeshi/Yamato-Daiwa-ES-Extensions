@@ -1,0 +1,184 @@
+extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
+  include ../../../../../Components/Components.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getLastElementOfArray");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "getLastElementOfArray",
+        whatFunctionDoes: "配列の最後の要素を返す。この要素が無い場合、２引数目の有無に依り「null」が返されるが、例外が投げられる。"
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./getLastElementOfArray.english.html",
+      russian: "./getLastElementOfArray.russian.html",
+    });
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getLastElementOfArray",
+      headingTag: "h1",
+      localizedDescriptiveHeading: "配列の最後の要素を取得",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「null」が返される",
+          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "目標的配列",
+              type: "Array&lt;ArrayElement&gt;",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「UnexpectedEventError」例外が投げられる",
+          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "目標的配列",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              localizedName: "オプション",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ]
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        localizedDescriptiveHeading: "オプション",
+        propertiesSpecification: {
+          mustThrowErrorIfArrayIsEmpty: {
+            localizedInterpretation: "配列が空の場合エラーを投げなければならないか",
+            type: "boolean （trueのみ）",
+            required: true
+          }
+        }
+      })
+
+    p.Article-Paragraph.
+      指数配列の最後の要素を返す（此の要素が存在している時）。
+
+    p.Article-Paragraph.
+      配列が空だと、
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+ImportantEntity--YDID ２引数目]は#[+ImportantEntity__Code--YDID { mustThrowErrorIfArrayIsEmpty: true }]が指定された場合、
+          #[+ImportantEntity__Code--YDID UnexpectedEventError]#[+Term--YDID 例外]が投げられる。
+        但し、#[+Term--YDID 配列]の要素の中に#[+Keyword--YDID 明示的な]#[+ImportantEntity__Code--YDID undefined]や
+          #[+ImportantEntity__Code--YDID null]が無い場合、#[+Term--YDID 関数]がエラーが起きる事無く実行し終わった場合、
+          #[+ImportantEntity--YDID TypeScript]が返す値が#[+ImportantEntity__Code--YDID 非undefined]且つ
+          #[+ImportantEntity__Code--YDID 非null]と信用。
+
+      li.
+        #[+ImportantEntity--YDID ２引数目]は指定されていない場合、#[+ImportantEntity__Code--YDID null]が返される。
+        この場合、#[+ImportantEntity__Code--YDID TypeScript]が厳しく設定してある場合、#[+Term--YDID 配列]の要素を使う前に、
+          #[+Term--YDID 非null確認]がさせられる。
+
+
+    h2.Article-Heading2 例
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const sample: Array<string> = [ "alpha", "bravo", "charlie" ];
+
+          const lastElementOfSample: string | null = getLastElementOfArray(sample);
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            此の場合#[+SecondaryEntity__Code--YDID lastElementOfSample]は#[+SecondaryEntity__Code--YDID "charlie"]値に成る。
+            上記の零だと、#[+SecondaryEntity__Code--YDID sample]配列の値を事前に知っているが、実践上普通そうではないので、空配列の可能性は有るので、
+              関数は#[+SecondaryEntity__Code--YDID null]を返す事もあり、文字列として#[+SecondaryEntity__Code--YDID lastElementOfSample]
+              を使う前に、#[+ImportantEntity--YDID TypeScript]に此れは#[+ImportantEntity__Code--YDID null]でないと証明しなければいけない.
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const notNullLastElementOfSample: string = getLastElementOfArray(sample, { mustThrowErrorIfArrayIsEmpty: true });
+        +CodeViewer-Explanation--YDF
+          p.Article-Paragraph.
+            貴方の場合なら、空配列が絶対に有り得ないと言う自信が有れば、#[+ImportantEntity--YDID 2引数目]を指定すれば
+              #[+ImportantEntity--YDID TypeScript]は#[+Term--YDID 非null確認]をさせない。
+            だが、事実上配列が空に成った場合、#[+ImportantEntity--YDID UnexpectedEventError]が投げられる。
+            此の例外を処理したいなら#[+ImportantEntity__Code--YDID try/catch]と他に#[+ImportantEntity--YDID ２引数目]無しで関数
+              を呼び出す事が出来る。
+          p.Article-Paragraph.
+            #[+ImportantEntity--YDID 2引数目]単にオブジェクト型に成っている訳ではなく、仮に只の#[+Term--YDID ブール引数]だとしたら、
+              #[+SecondaryEntity__Code--YDID getLastElementOfArray(sample, true);]だけで此の引数は何をしているか、不明だった。
+            高級の#[+Term--YDID 結合開発環境]はヒントを表示はしているが,品質が高いコードはどんなエディターにでもヒントが表示されてなくもはっきりでなければいけない。
+
+
+    h3.Article-Heading3 IntelliJ IDEA属結合開発環境での高速入力
+
+    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          対象#[+Term--YDID 配列]を保持している変数か、#[+Term--YDID 配列]自体をクリップボードにコピーしてください。
+          此の行動を、#[+ImportantEntity--YDID getLastElementOfArray]の#[+Term--YDID ライブテンプレート]を呼び出す前に実行する癖を作ってもらえたら、
+            開発環境は自動的に#[+ImportantEntity--YDID 1引数目]を必要な表現で埋められる様に成る。
+
+        li
+          | #[+ImportantEntity--YDID addElementsToArray]と言う当#[+Term--YDID 関数]名を入力して初めて下さい。
+          | 下記のオートコンプリートの選択肢が表示される。
+
+          ol.Article-OrderedList
+
+            li.
+              重なっている異色の３個の円板は単に関数名のオートコンプリートで、結合開発環境の標準機能である。
+              #[+ImportantEntity--YDID Enter]を押すと、関数名が最後迄入力され、当#[+Term--YDID 関数]がインポートされていない場合
+                自動的に#[+Term--YDID インポート宣言]が追加される。
+              悪くはないが、自動化の余裕がまだまだ有るのだ。
+
+            li.
+              印鑑アイコンは望ましい項目。
+              #[+ImportantEntity--YDID Enter]を押すと、コードの原型が自動入力され、#[+ImportantEntity--YDID 1引数目]は自動的に
+                埋められた上で選択される。
+              上記の手順通り操作を行った場合、自動入力された#[+ImportantEntity--YDID 1引数目]を変える必要は無いので、
+                もう一度#[+ImportantEntity--YDID Enter]を押して下さい。
+
+          li 原型の不要な部分を削除して下さい。
+
+      p.Article-Paragraph.
+        #[+ImportantEntity__Code--YDID gleoa]と言う#[+ImportantEntity__Code--YDID getLastElementOfArray]の各言葉の
+          最初の文字から成り立っている当#[+Term--YDID ライブテンプレート]の#[+Keyword--YDID アリアス]を使っても良いが、沢山使わないと覚えられない欠点。

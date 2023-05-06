@@ -33,10 +33,8 @@ block append Metadata
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]:
-          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]:
-          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+      japanese: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html",
+      russian: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
     });
 
 
@@ -57,9 +55,9 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities

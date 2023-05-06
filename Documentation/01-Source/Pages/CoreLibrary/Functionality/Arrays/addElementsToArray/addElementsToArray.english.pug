@@ -32,8 +32,8 @@ block append Metadata
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./addElementsToArray.japanese.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./addElementsToArray.russian.html"
+      japanese: "./addElementsToArray.japanese.html",
+      russian: "./addElementsToArray.russian.html"
     });
 
 
@@ -41,7 +41,77 @@ block append SpecificContent
 
   article
 
-    +ProgrammaticEntityHeading({
-      entityName: "addElementsToArray",
-      entityLocalizedInterpretation: "Add elements to array"
-    }).Article-ProgrammaticEntityHeading
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "addElementsToArray",
+      headingTag: "h1",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          genericTechnicalName: "sourceData",
+          type: "SourceData",
+          required: true
+        }
+      ],
+      returnedValue: "Array&lt;ArrayElement&gt;"
+    })(lang="ru")
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceData",
+        propertiesSpecification: {
+          $intersection: [
+            {
+              newElements: {
+                type: "ReadonlyArray&lt;ArrayElement&gt;",
+                required: true
+              }
+            },
+            [
+              {
+                mutably: {
+                  type: "boolean (true only)",
+                  required: true
+                },
+                targetArray: {
+                  type: "Array",
+                  required: true
+                }
+              },
+              {
+                mutably: {
+                  type: "boolean (false only)",
+                  required: true
+                },
+                targetArray: {
+                  type: "ReadonlyArray",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                toStart: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              },
+              {
+                toEnd: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom0: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom1: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              }
+            ]
+          ]
+        }
+      }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem

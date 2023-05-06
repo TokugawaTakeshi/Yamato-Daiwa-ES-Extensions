@@ -4,7 +4,6 @@ import InvalidConsoleCommandErrorLocalization__English from "./InvalidConsoleCom
 class InvalidConsoleCommandError extends Error {
 
   public static readonly NAME: string = "InvalidConsoleCommandError";
-  public static localization: InvalidConsoleCommandError.Localization = InvalidConsoleCommandErrorLocalization__English;
 
 
   public constructor(parametersObject: InvalidConsoleCommandError.ConstructorParametersObject) {
@@ -13,12 +12,14 @@ class InvalidConsoleCommandError extends Error {
 
     this.name = InvalidConsoleCommandError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
-    } else {
-      this.message = InvalidConsoleCommandError.localization.generateDescription(parametersObject);
-    }
+    this.message =
+        "customMessage" in constructorParameter ?
+            constructorParameter.customMessage :
+            `${ InvalidConsoleCommandError.localization.generateDescriptionCommonPart(constructorParameter) }` +
+                `${ constructorParameter.messageSpecificPart ?? "" }`;
+
   }
+
 }
 
 
@@ -34,11 +35,11 @@ namespace InvalidConsoleCommandError {
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
-      applicationName: string;
-      messageSpecificPart?: string;
-    }>;
+    export namespace CommonDescription {
+      export type TemplateParameters = Readonly<{ applicationName: string; }>;
+    }
   }
+
 }
 
 

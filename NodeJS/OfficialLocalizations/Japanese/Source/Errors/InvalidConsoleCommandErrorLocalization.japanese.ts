@@ -1,16 +1,12 @@
 import type { InvalidConsoleCommandError } from "@yamato-daiwa/es-extensions-nodejs";
-import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
-const InvalidConsoleCommandErrorLocalization__Japanese: InvalidConsoleCommandError.Localization = {
+const invalidConsoleCommandErrorLocalization__japanese: InvalidConsoleCommandError.Localization = {
   defaultTitle: "不正コンソルコマンド",
-  generateDescription:
-    (namedParameters: InvalidConsoleCommandError.Localization.DescriptionTemplateNamedParameters): string =>
-        `アプリケーション「${ namedParameters.applicationName }」のコマンドは不備がある。` +
-        `${ insertSubstring(namedParameters.messageSpecificPart, {
-          modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-        }) }`
+  generateDescriptionCommonPart:
+      ({ applicationName }: InvalidConsoleCommandError.Localization.CommonDescription.TemplateParameters): string =>
+          `アプリケーション「${ applicationName }」のコマンドは不備がある。`
 };
 
 
-export default InvalidConsoleCommandErrorLocalization__Japanese;
+export default invalidConsoleCommandErrorLocalization__japanese;

@@ -20,26 +20,42 @@
             $tableOfContentsTitle: localization.coreLibrary.gettingStarted.tableOfContentsTitle,
             $URI: `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }`,
 
-            $children: {
+            $sectioning: {
 
               installation: {
                 $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.installation.tableOfContentsTitle,
-                get $URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#Installation--SECTION` }
+                $anchor: "Installation--SECTION",
+                get $URI() {
+                  return "@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage." +
+                      `${ localization.fileNameLocalizationExtensions }#${ this.$anchor }`;
+                }
               },
 
               distributiveVolumeNotice: {
                 $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.distributiveVolumeNotice.tableOfContentsTitle,
-                get $URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#DistributiveVolumeNotice--SECTION` }
+                $anchor: "DistributiveVolumeNotice--SECTION",
+                get $URI() {
+                  return "@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage." +
+                      `${ localization.fileNameLocalizationExtensions }#${ this.$anchor }`;
+                }
               },
 
               nonTypeScriptUsageWarning: {
                 $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.nonTypeScriptUsageWarning.tableOfContentsTitle,
-                get $URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#NonTypeScriptUsageWarning--SECTION` }
+                $anchor: "NonTypeScriptUsageWarning--SECTION",
+                get $URI() {
+                  return "@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage." +
+                      `${ localization.fileNameLocalizationExtensions }#${ this.$anchor }`;
+                }
               },
 
               importingOfFunctionality: {
                 $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.importingOfFunctionality.tableOfContentsTitle,
-                get $URI() { return `@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.${ localization.fileNameLocalizationExtensions }#ImportingOfFunctionality--SECTION` }
+                $anchor: "ImportingOfFunctionality--SECTION",
+                get $URI() {
+                  return "@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage." +
+                      `${ localization.fileNameLocalizationExtensions }#${ this.$anchor }`;
+                }
               }
 
             }
@@ -66,12 +82,12 @@
 
                       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
                         $tableOfContentsTitle: "<code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
-                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
+                        $URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`
                       },
 
                       getLastElementOfArray: {
                         $tableOfContentsTitle: "<code>getLastElementOfArray</code>",
-                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray.md"
+                        $URI: `@All/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.${ localization.fileNameLocalizationExtensions }`
                       }
                     }
 
@@ -1495,17 +1511,17 @@
 
               ConsoleCommandsParser: {
                 $tableOfContentsTitle: "<code>ConsoleCommandsParser</code>",
-                $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ConsoleCommandsParser/ConsoleCommandsParser.md"
+                $URI: `@All/NodeJS/ConsoleCommandsParser/ConsoleCommandsParser.${ localization.fileNameLocalizationExtensions }.pug`
               },
 
               ConsoleApplicationLogger: {
                 $tableOfContentsTitle: "<code>ConsoleApplicationLogger</code>",
-                $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md"
+                $URI: `@All/NodeJS/ConsoleCommandsParser.${ localization.fileNameLocalizationExtensions }.pug`
               },
 
               ObjectDataFilesProcessor: {
                 $tableOfContentsTitle: "<code>ObjectDataFilesProcessor</code>",
-                $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ObjectDataFilesProcessor/ObjectDataFilesProcessor.md"
+                $URI: `@All/NodeJS/ObjectDataFilesProcessor/ObjectDataFilesProcessor.${ localization.fileNameLocalizationExtensions }.pug`
               }
 
             }

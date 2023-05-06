@@ -14,7 +14,7 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Начало использования");
     HTML_PageMetaData = {
-      description: "Начало работы с библиотекой &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;):, " +
+      description: "Начало работы с библиотекой &quot;Yamato Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;):, " +
         `установка, заметка об объёме дистибутива, предупреждение об использовании без TypeScript, импорт зависимостей.`,
       author: HTML_PAGE_AUTHOR
     };
@@ -27,8 +27,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./GetStartedWithCoreLibraryPage.english.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./GetStartedWithCoreLibraryPage.japanese.html"
+      english: "./GetStartedWithCoreLibraryPage.english.html",
+      japanese: "./GetStartedWithCoreLibraryPage.japanese.html"
     });
 
     const externalLinks = {
@@ -44,7 +44,9 @@ block append SpecificContent
 
     h1.Article-Heading1 Начало использования
 
-    h2.Article-Heading2#Installation--SECTION Установка
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
+    ) Установка
 
     p.Article-Paragraph.
       Процедура установки стандартная, с помощью #[+Term--YDID пакетного менеджера]
@@ -52,13 +54,15 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "Консольная команда установки пакета"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    h2.Article-Heading2#DistributiveVolumeNotice--SECTION Об объёме дистибутива
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
+    ) Об объёме дистибутива
 
     p.Article-Paragraph.
       На #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link странице @yamato-daiwa/es-extensions]
@@ -75,7 +79,7 @@ block append SpecificContent
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
-    }).Article-AttentionBox.
+    }).
       Это #[+Keyword--YDID не] объём, на который увеличится Ваше приложение после подключения пакета и сборки приложения.
 
     p.Article-Paragraph.
@@ -103,14 +107,16 @@ block append SpecificContent
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
-    }).Article-AttentionBox.
+    }).
       Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, большая часть
         #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
         (а не #[+Term--YDID классов], хотя #[+Term--YDID классы] тоже имеются).
       В случае, если одни функции используют другие, в сборку также войдут эти #[+Term--YDID транзитивные зависимости],
         но даже при таком раскладе оптимизация будет очень хорошей, особенно используется меньшая часть возможностей библиотеки.
 
-    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION Предупреждение об использовании без TypeScript
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
+    ) Предупреждение об использовании без TypeScript
 
     p.Article-Paragraph.
       Библиотека разрабатывается в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript].
@@ -147,7 +153,9 @@ block append SpecificContent
         может быть ошибочно расценено как баг библиотеки.
 
 
-    h2.Article-Heading2#ImportingOfFunctionality--SECTION Импорт функциональности
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingOfFunctionality.$anchor
+    ) Импорт функциональности
 
     p.Article-Paragraph.
       После того, как пакет установлен, становится возможным импорт любых функций, классов и т. д., упомянутых в данной
@@ -158,7 +166,7 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "Пример импортов из @yamato-daiwa/es-extensions"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

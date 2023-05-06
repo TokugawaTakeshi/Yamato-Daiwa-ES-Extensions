@@ -23,12 +23,13 @@ block append Metadata
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./../index.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./TopPage.russian.html"
+      english: "./../index.html",
+      russian: "./TopPage.russian.html"
     });
 
 

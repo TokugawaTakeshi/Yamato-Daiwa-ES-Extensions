@@ -44,7 +44,7 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt>DesiredFileActuallyIsDirectoryError</dt>
+  <dt>PathRefersToDirectoryNotFileError</dt>
   <dd>Intended to be thrown when the path refers to directory while expected to be referred to file.</dd>
   
   <dt>FileNotFoundError</dt>

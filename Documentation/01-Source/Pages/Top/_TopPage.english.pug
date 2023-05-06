@@ -14,7 +14,7 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Top page");
     HTML_PageMetaData = {
-      description: "&quot;Yamato-Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is a library " +
+      description: "&quot;Yamato Daiwa ECMAScript extensions&quot; (abbreviation: &quot;YDEE&quot;) is a library " +
         "for high-quality development in the TypeScript language. It includes a large number of simple utility functions " +
         "and powerful classes, such as the &quot;RawObjectDataProcessor&quot; for the validation and " +
         "postprocessing of object-type data. The function names, parameters, etc. have been designed so that you don't " +
@@ -25,12 +25,13 @@ block append Metadata
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./Top/TopPage.japanese.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./Top/TopPage.russian.html"
+      japanese: "./Top/TopPage.japanese.html",
+      russian: "./Top/TopPage.russian.html"
     });
 
 

@@ -12,9 +12,9 @@ block append Metadata
   -
 
     HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страницы");
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страница");
     HTML_PageMetaData = {
-      description: "Библиотека &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;) - " +
+      description: "Библиотека &quot;Yamato Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;) - " +
           "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
           "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
           "&quot;RawObjectDataProcessor&quot; для валидации и постобработки структур данных. " +
@@ -26,12 +26,13 @@ block append Metadata
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico"
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./../index.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./TopPage.japanese.html"
+      english: "./../index.html",
+      japanese: "./TopPage.japanese.html"
     });
 
 
@@ -51,7 +52,7 @@ block append SpecificContent
         span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
 
     p.TopPage-ShortDescription-Heading.
-      Богатые функциональностью библиотеки для высококачественной разработке на языке TypeScript
+      Богатые функциональностью библиотеки для высококачественной разработки на языке TypeScript
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.warning,
