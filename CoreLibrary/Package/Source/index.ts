@@ -5,8 +5,16 @@
  */
 
 
-/* === Arrays ======================================================================================================= */
+/* === AJAX ======================================================================================================== */
+export { default as AJAX_Service } from "./AJAX/AJAX_Service";
+export { default as FetchAPI_Service } from "./AJAX/FetchAPI_Service";
+export { default as serializeURI_QueryParameters } from "./AJAX/serializeURI_QueryParameters";
+export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryParametersSerializer";
+
+/* === Arrays ====================================================================================================== */
 export { default as addElementsToArray } from "./Arrays/addElementsToArray";
+export { default as createArrayOfNatualNumbers } from "./Arrays/createArrayOfNatualNumbers";
+export { default as cropArray } from "./Arrays/cropArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
@@ -194,8 +202,8 @@ export { default as computeFirstItemNumberForSpecificPaginationPage } from
     "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
 export { default as computeLastItemNumberForSpecificPaginationPage } from
     "./Pagination/computeLastItemNumberForSpecificPaginationPage";
-export { default as splitToPaginationCollection } from "./Pagination/splitToPaginationCollection";
-export type { PaginationCollection } from "./Pagination/splitToPaginationCollection";
+export { default as getItemsOfPaginationPage } from "./Pagination/getItemsOfPaginationPage";
+export { default as PaginationCollection } from "./Pagination/PaginationCollection";
 
 
 /* === Promises queue =============================================================================================== */
@@ -269,6 +277,7 @@ export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
+export { default as cropString } from "./Strings/cropString";
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
 export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEnglishAbbreviatedOrdinalNumber";

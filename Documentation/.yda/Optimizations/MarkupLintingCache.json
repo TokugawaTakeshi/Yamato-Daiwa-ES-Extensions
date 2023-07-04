@@ -33,7 +33,7 @@
   },
   "01-Source/SharedAssets/Markup/_generateLocalizedRouting.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.404Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.888Z"
   },
   "01-Source/SharedAssets/Markup/_generateSharedExternalLinks.pug": {
     "issues": [],
@@ -93,15 +93,15 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/MetaDescriptionTemplates.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.400Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.869Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/ReausableFragments.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.400Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:16:11.403Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/RoutingLocalization.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.401Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.878Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/SharedExternalLinksLocalizaiton.japanese.pug": {
     "issues": [],
@@ -109,7 +109,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/English/MetaDescriptionTemplates.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.398Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.864Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/ReausableFragments.english.pug": {
     "issues": [],
@@ -117,7 +117,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/English/RoutingLocalization.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.399Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.868Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/SharedExternalLinksLocalizaiton.english.pug": {
     "issues": [],
@@ -125,7 +125,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/MetaDescriptionTemplates.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.402Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.879Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/ReausableFragments.russian.pug": {
     "issues": [],
@@ -133,7 +133,7 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/RoutingLocalization.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-07-28T03:43:25.403Z"
+    "modificationDatetime__ISO_8601": "2023-07-31T02:15:04.882Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/SharedExternalLinksLocalizaiton.russian.pug": {
     "issues": [],
@@ -250,5 +250,53 @@
   "01-Source/SharedAssets/Markup/ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug": {
     "issues": [],
     "modificationDatetime__ISO_8601": "2023-07-30T02:42:28.878Z"
+  },
+  "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:25:34.972Z"
+  },
+  "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:25:34.960Z"
+  },
+  "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:26:25.908Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:23:27.754Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:24:25.385Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:24:25.397Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:21:53.055Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:21:53.067Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:21:53.009Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.english.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:22:44.659Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.japanese.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:23:27.774Z"
+  },
+  "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.russian.pug": {
+    "issues": [],
+    "modificationDatetime__ISO_8601": "2023-07-31T02:21:53.033Z"
   }
 }

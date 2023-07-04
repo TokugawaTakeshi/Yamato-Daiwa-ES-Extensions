@@ -1,0 +1,100 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("v1d7");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "@Common" ];
+
+    RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./v1d7.english.html",
+      japanese: "./v1d7.japanese.html"
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 Версия 1.7
+
+    h2.Article-Heading2 Основной пакет (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 Новая функциональность
+
+    h4.Article-Heading4 Работа с массивами
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            arrays.$children.
+            other.$children.
+            createArrayOfNatualNumbers.$URI
+      }).Article-Link createArrayOfNatualNumbers
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            arrays.$children.
+            removingOfElements.$children.
+            cropArray.$URI
+      }).Article-Link cropArray
+
+
+    h4.Article-Heading4 Пагинация
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            pagination.$children.
+            PaginationCollection.$URI
+      }).Article-Link getItemsOfPaginationPage
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            pagination.$children.
+            PaginationCollection.$URI
+      }).Article-Link PaginationCollection
+
+
+    h4.Article-Heading4 Строки
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.strings.$children.other.cropString.$URI
+      }).Article-Link cropString
+
+
+    h3.Article-Heading3 Критические изменения
