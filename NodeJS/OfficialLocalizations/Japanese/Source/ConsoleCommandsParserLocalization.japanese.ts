@@ -10,7 +10,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
 
   helpReference: {
 
-    defaultCommand: "規定コマンド",
+    defaultCommandPhrase__parenthetical: "（規定コマンド）",
 
     options: "オプションら",
 
@@ -46,7 +46,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
 
     argumentsVectorIsNotArray: {
       generate: (
-        { stringifiedActualValueOfArgumentsVector }: ErrorsMessages.ArgumentsVectorIsNotArray.TemplateParameters
+        { stringifiedActualValueOfArgumentsVector }: ErrorsMessages.ArgumentsVectorIsNotArray.TemplateVariables
       ): string =>
           "アーギュメント・ベクトルは配列型になると期待されたが、事実上配列にはなっていなく、値は次の通り。\n" +
             `${ stringifiedActualValueOfArgumentsVector }`
@@ -58,7 +58,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           minimalElementsCountInArgumentsVector,
           actualElementsCountInArgumentsVector,
           stringifiedArgumentsVector
-        }: ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateParameters
+        }: ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateVariables
       ): string =>
           `妥当なアーギュメント・ベクトルは最低${ minimalElementsCountInArgumentsVector }要素の配列でなければいけないが、` +
             `事実上${ actualElementsCountInArgumentsVector }要素を持ち、値は下記の通り。\n${ stringifiedArgumentsVector }`
@@ -66,17 +66,28 @@ const consoleCommandsParserLocalization__japanese: Localization = {
 
     argumentsVectorHasNonStringElements: {
       generate: (
-        { stringifiedFormattedNonStringArguments }: ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateParameters
+        { stringifiedFormattedNonStringArguments }: ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateVariables
       ): string =>
           "アーギュメントのベクトルは文字列の配列ではなければいけないが、下記の要素は文字列になっていない。\n" +
             `${ stringifiedFormattedNonStringArguments }`
     },
 
+    moreThanOneCommandPhrasesMarkedAsDefault: {
+      generate: (
+        { formattedListOfCommandsPhrasesMarkedAsDefault }: ErrorsMessages.MoreThanOneCommandPhrasesMarkedAsDefault.
+            TemplateVariables
+      ): string =>
+          "２以上のコマンドフレーズは規定として指示された。" +
+          "貴方は当コンソールアプリケーションの開発者の場合、フラグ「default」下記のコマンドのどちらか一つに残しておいて下さい。\n" +
+            `${ formattedListOfCommandsPhrasesMarkedAsDefault }\n` +
+          "貴方は当コンソールアプリケーションの利用者の場合、開発側にこの問題について通報をご検討下さい。"
+    },
+
     noDefaultCommandPhraseAvailable: {
-      generate: (templateParameters: ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateParameters): string =>
+      generate: (templateVariables: ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateVariables): string =>
           "このアプリケーションは規定のコマンドはない。" +
           "下記のコマンドフレーズをの中からいずれかのコマンドを明示的にしてして下さい。\n" +
-          `${ templateParameters.helpReference }`
+          `${ templateVariables.helpReference }`
     },
 
     firstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable: {
@@ -84,7 +95,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         {
           commandPhraseLikeArgument,
           helpReference
-        }: ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.TemplateParameters
+        }: ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.TemplateVariables
     ): string =>
         `「${ commandPhraseLikeArgument }」はコマンドをフレーズそうに見えるが、当アプリケーションは規定コマンドのみ提供。\n` +
         `${ helpReference }`
@@ -92,7 +103,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
 
     unknownCommandPhrase: {
       generate: (
-        { inputtedCommandPhrase, helpReference }: ErrorsMessages.UnknownCommandPhrase.TemplateParameters
+        { inputtedCommandPhrase, helpReference }: ErrorsMessages.UnknownCommandPhrase.TemplateVariables
       ): string =>
           `コマンドフレーズ「${ inputtedCommandPhrase }」は不明です。` +
           "下記のコマンドフレーズの中からいずれかのを入力してください。\n" +
@@ -105,7 +116,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           missingOptionKey,
           commandPhrase,
           commandHelpReference
-        }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateParameters
+        }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
       ): string =>
           `${ isNotUndefined(commandPhrase) ? `コマンドフレーズ「${ commandPhrase }」` : "規定コマンド" }` +
             `にとってオプション「${ missingOptionKey }」は必須のなっています。` +
@@ -117,14 +128,14 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         {
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateParameters
+        }: ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateVariables
       ): string =>
           `非ブールのオプション「${ targetOptionKey }」に該当している値が指定されませんでした。` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 
     invalidCommandOptionTypeAtSpecification: {
-      generate: ({ optionName, typeName }: ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateParameters): string =>
+      generate: ({ optionName, typeName }: ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateVariables): string =>
           "コンソールアプリケーション側のバグの可能性が高いです。" +
           `コンソールコマンドの仕様において、オプション「${ optionName }」に「${ typeName }」という不正型が指定してあります。` +
           "コンソールアプリケーションがJavaScriptで書かれた為この間違いに気付かなかったか、TypeScriptの型確認が無効に設定された。" +
@@ -137,7 +148,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           commandPhrase,
           formattedUnknownOptions,
           commandHelpReference
-        }: ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateParameters
+        }: ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateVariables
       ): string => "下記のオプションは" +
           `${ isNotUndefined(commandPhrase) ? `コマンド「${ commandPhrase }」` : "規定コマンド" }にとって不明なのだ。\n` +
           `${ formattedUnknownOptions }\n` +
@@ -150,7 +161,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           targetOptionKey,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateParameters
+        }: ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateVariables
       ): string =>
           `オプション「${ targetOptionKey }」の値は「${ actualOptionValue }」は可能な選択肢に所属していない。\n` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -162,7 +173,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           actualOptionValue,
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.UnparsableNumericOptionValue.TemplateParameters
+        }: ErrorsMessages.UnparsableNumericOptionValue.TemplateVariables
       ): string =>
           `数型の「${ targetOptionKey }」オプションの「${ actualOptionValue }」値は妥当な数にはなっていない。\n` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -175,7 +186,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           expectedNumbersSet,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateParameters
+        }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `数型の「${ targetOptionKey }」オプションの「${ actualOptionValue }」値は数集合` +
             `「${ RawObjectDataProcessorLocalization__Japanese.numbersSet(expectedNumbersSet) }」に所属していない。\n` +
@@ -189,7 +200,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           requiredMinimum,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateParameters
+        }: ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
       ): string =>
           `数字型の「${ targetOptionKey }」オプションの値「${ actualOptionValue }」は必要な最小限「${ requiredMinimum }」より小さくなっている。\n` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -202,7 +213,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
           allowedMaximum,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateParameters
+        }: ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
       ): string =>
           `数字型の「${ targetOptionKey }」オプションの値「${ actualOptionValue }」は許可されている最大限「${ allowedMaximum }」を超えている。\n` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -213,7 +224,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         {
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.MalformedJSON5_Option.TemplateParameters
+        }: ErrorsMessages.MalformedJSON5_Option.TemplateVariables
       ): string =>
           `オプションの「${ targetOptionKey }"」の値は妥当なJSON5形式の文字列になっていない。` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -224,7 +235,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         {
           targetOptionKey,
           formattedValidationErrorsMessages
-        }: ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateParameters
+        }: ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateVariables
       ): string =>
           `JSON5形式のオプション「${ targetOptionKey }」は不備があります。\n` +
           `${ formattedValidationErrorsMessages }`

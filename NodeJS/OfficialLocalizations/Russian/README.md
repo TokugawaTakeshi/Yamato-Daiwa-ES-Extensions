@@ -112,8 +112,8 @@ FileNotFoundError.localization = fileNotFoundErrorLocalization__english;
   русификации представлены в таблице ниже.
 
 
-| Класс ошибки                        | Объект русификации                                       |
-|-------------------------------------|----------------------------------------------------------|
-| DesiredFileActuallyIsDirectoryError | desiredFileActuallyIsDirectoryErrorLocalization__russian |
-| FileNotFoundError                   | fileNotFoundErrorLocalization__russian                   |
-| InvalidConsoleCommandError          | invalidConsoleCommandErrorLocalization__russian          |
+| Класс ошибки                      | Объект русификации                                     |
+|-----------------------------------|--------------------------------------------------------|
+| FileNotFoundError                 | fileNotFoundErrorLocalization__russian                 |
+| InvalidConsoleCommandError        | invalidConsoleCommandErrorLocalization__russian        |
+| PathRefersToDirectoryNotFileError | PathRefersToDirectoryNotFileErrorLocalization__russian |

@@ -1,4 +1,5 @@
 import FileSystem, { constants as FileSystemConstants } from "fs";
+import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
 import { isNotNull, Logger } from "@yamato-daiwa/es-extensions";
 
@@ -79,9 +80,15 @@ export default class ImprovedFileSystem {
 
         if (mustThrowErrorIfTargetDirectoryExists) {
 
-          // TODO
+          Logger.throwErrorAndLog({
+            errorType: "DirectoryAlreadyExistsError",
+            title: "Directory already exists",
+            description: `The directory "${ targetPath }" is already exists.`,
+            occurrenceLocation: "ImprovedFileSystem.createDirectory(compoundParameter)"
+          });
 
         }
+
 
         return;
 
@@ -92,7 +99,35 @@ export default class ImprovedFileSystem {
 
     }
 
-    // TODO
+
+    return ImprovedFileSystem.isFileOrDirectoryExists({ targetPath, synchronously: false }).
+
+      then(
+
+        async (isTargetDirectoryAlreadyExists: boolean): Promise<void> => {
+
+          if (isTargetDirectoryAlreadyExists) {
+
+            if (mustThrowErrorIfTargetDirectoryExists) {
+
+              Logger.throwErrorAndLog({
+                errorType: "DirectoryAlreadyExistsError",
+                title: "Directory already exists",
+                description: `The directory "${ targetPath }" is already exists.`,
+                occurrenceLocation: "ImprovedFileSystem.createDirectory(compoundParameter)"
+              });
+
+            }
+
+            return;
+
+          }
+
+
+          await PromisfiedFileSystem.mkdir(targetPath, { recursive: true });
+
+        }
+      );
 
   }
 

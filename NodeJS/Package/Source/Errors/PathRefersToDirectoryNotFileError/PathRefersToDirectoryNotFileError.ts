@@ -1,4 +1,5 @@
 import pathRefersToDirectoryNotFileErrorLocalization__english from "./PathRefersToDirectoryNotFileErrorLocalization.english";
+import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 class PathRefersToDirectoryNotFileError extends Error {
@@ -19,7 +20,12 @@ class PathRefersToDirectoryNotFileError extends Error {
         "customMessage" in constructorParameter ?
             constructorParameter.customMessage :
             `${ PathRefersToDirectoryNotFileError.localization.genericDescription(constructorParameter) }` +
-                `${ constructorParameter.messageSpecificPart ?? "" }`;
+                `${
+                  insertSubstring(
+                    constructorParameter.messageSpecificPart,
+                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                  )
+                }`;
 
   }
 

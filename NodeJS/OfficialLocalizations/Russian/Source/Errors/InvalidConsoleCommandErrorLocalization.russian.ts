@@ -4,7 +4,7 @@ import type { InvalidConsoleCommandError } from "@yamato-daiwa/es-extensions-nod
 const invalidConsoleCommandErrorLocalization__russian: InvalidConsoleCommandError.Localization = {
   defaultTitle: "Невалидная консольная команда",
   generateDescriptionCommonPart:
-      ({ applicationName }: InvalidConsoleCommandError.Localization.CommonDescription.TemplateParameters): string =>
+      ({ applicationName }: InvalidConsoleCommandError.Localization.CommonDescription.TemplateVariables): string =>
           `Команда приложения "${ applicationName }" невалидна. `
 };
 

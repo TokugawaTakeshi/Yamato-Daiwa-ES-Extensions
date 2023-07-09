@@ -6,7 +6,7 @@ import Localization = ObjectDataFilesProcessor.Localization;
 const objectDataFilesProcessorLocalization__russian: Localization = {
 
   generateUnableToDecideDataParsingAlgorithmErrorMessage: (
-    { filePath }: Localization.UnableToDecideDataParsingAlgorithmErrorMessage.TemplateParameters
+    { filePath }: Localization.UnableToDecideDataParsingAlgorithmErrorMessage.TemplateVariables
   ): string =>
       `Невозможно определить алгоритм обработки данных потому что имя целевого файла "${ filePath }" ` +
         "не имеет расширения. " +
@@ -14,7 +14,7 @@ const objectDataFilesProcessorLocalization__russian: Localization = {
         "перечисления \"ObjectDataFilesProcessor.SupportedSchemas\".",
 
   generateUnsupportedFileNameExtension: (
-    { filePath, fileNameLastExtensionWithoutLeadingDot }: Localization.UnsupportedFileNameExtensionErrorMessage.TemplateParameters
+    { filePath, fileNameLastExtensionWithoutLeadingDot }: Localization.UnsupportedFileNameExtensionErrorMessage.TemplateVariables
   ): string =>
       `Имя целевого файла "${ filePath }" имеет неподдерживаемое расширение "${ fileNameLastExtensionWithoutLeadingDot }". ` +
       "Если это намеренно и данный файл содержит в себе поддерживаемые \"ObjectDataFilesProcessor\" данные, " +

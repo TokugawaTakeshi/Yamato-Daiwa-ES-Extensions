@@ -7,6 +7,7 @@ import {
   InvalidExternalDataError,
   Logger,
   stringifyAndFormatArbitraryValue,
+  insertSubstring,
   isNaturalNumber,
   isNegativeInteger,
   isNonNegativeInteger,
@@ -45,6 +46,7 @@ class ConsoleCommandsParser<
   private readonly applicationName: string;
   private readonly targetCommandPhrase: string;
   private readonly targetCommandPhraseDescription?: string;
+  private readonly isTargetCommandPhraseDefault: boolean;
 
   private readonly targetCommandOptions?: ReadonlyArray<string | undefined>;
   private readonly targetCommandOptionsWhichHasNotBeenProcessedYet: Array<string | undefined> = [];
@@ -159,7 +161,7 @@ class ConsoleCommandsParser<
       NodeJS_InterpreterAbsolutePath,
       executableFileAbsolutePath,
       phrase: dataHoldingSelfInstance.targetCommandPhrase,
-      ...dataHoldingSelfInstance.getParsedOptionsAndParameters()
+      ...dataHoldingSelfInstance.parseOptionsAndParameters()
     };
 
   }
@@ -176,22 +178,22 @@ class ConsoleCommandsParser<
       textSegments.push(commandLineInterfaceSpecification.applicationDescription);
     }
 
-    if (isNotUndefined(commandLineInterfaceSpecification.commandPhrases)) {
 
-      const commandPhrasesReferences: Array<string> = [];
+    const commandPhrasesReferences: Array<string> = [];
 
-      for (
-        const [ commandPhrase, commandPhraseSpecification ] of
-            Object.entries(commandLineInterfaceSpecification.commandPhrases)
-      ) {
-        commandPhrasesReferences.push(
-          this.generateSingleCommandPhraseHelpReference({ commandPhrase, commandPhraseSpecification })
-        );
-      }
-
-      textSegments.push("\n\n", commandPhrasesReferences.join("\n\n"));
-
+    for (
+      const [ commandPhrase, commandPhraseSpecification ] of
+          Object.entries(commandLineInterfaceSpecification.commandPhrases)
+    ) {
+      commandPhrasesReferences.push(
+        this.generateSingleCommandPhraseHelpReference({
+          commandPhrase,
+          commandPhraseSpecification: { ...commandPhraseSpecification, isDefault: commandPhraseSpecification.isDefault === true }
+        })
+      );
     }
+
+    textSegments.push("\n\n", commandPhrasesReferences.join("\n\n"));
 
     return textSegments.join("");
 
@@ -211,13 +213,25 @@ class ConsoleCommandsParser<
 
     const helpReference: string = ConsoleCommandsParser.generateFullHelpReference(commandLineInterfaceSpecification);
     const firstConsciouslyInputtedArgument: string | undefined = consciouslyInputtedArguments[0];
-    const defaultCommandSpecification: ConsoleCommandsParser.CommandPhraseSpecification | undefined =
-      Object.values(commandLineInterfaceSpecification.commandPhrases).find(
-        (commandPhraseSpecification: ConsoleCommandsParser.CommandPhraseSpecification): boolean =>
-            commandPhraseSpecification.isDefault === true
-    );
 
-    let targetCommandPhrase: string | undefined;
+    let defaultCommandPhrase: Readonly<{
+      name: string;
+      specification: ConsoleCommandsParser.CommandPhraseSpecification;
+    }> | undefined;
+
+    for (
+      const [ commandPhrase, commandPhraseSpecification ] of
+          Object.entries(commandLineInterfaceSpecification.commandPhrases)
+    ) {
+
+      if (commandPhraseSpecification.isDefault === true) {
+        defaultCommandPhrase = { name: commandPhrase, specification: commandPhraseSpecification };
+        break;
+      }
+
+    }
+
+    let targetCommandPhrase: string;
     let targetCommandPhraseDescription: string | undefined;
     let targetCommandOptions: Array<string | undefined> | undefined;
     let optionsSpecificationForRecognizedCommandPhrase: ConsoleCommandsParser.CommandOptionsSpecification | undefined;
@@ -227,7 +241,7 @@ class ConsoleCommandsParser<
     *   and "webpack". This truthy conditions also means that there no subsequent arguments. */
     if (isUndefined(firstConsciouslyInputtedArgument)) {
 
-      if (isUndefined(defaultCommandSpecification)) {
+      if (isUndefined(defaultCommandPhrase)) {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
@@ -239,13 +253,13 @@ class ConsoleCommandsParser<
         });
       }
 
-
-      targetCommandPhraseDescription = defaultCommandSpecification.description;
-      optionsSpecificationForRecognizedCommandPhrase = defaultCommandSpecification.options ?? {};
+      targetCommandPhrase = defaultCommandPhrase.name;
+      targetCommandPhraseDescription = defaultCommandPhrase.specification.description;
+      optionsSpecificationForRecognizedCommandPhrase = defaultCommandPhrase.specification.options ?? {};
 
     } else if (ConsoleCommandsParser.isCommandArgumentTheOption(firstConsciouslyInputtedArgument)) {
 
-      if (isUndefined(defaultCommandSpecification)) {
+      if (isUndefined(defaultCommandPhrase)) {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
@@ -258,9 +272,10 @@ class ConsoleCommandsParser<
       }
 
 
+      targetCommandPhrase = defaultCommandPhrase.name;
+      targetCommandPhraseDescription = defaultCommandPhrase.specification.description;
+      optionsSpecificationForRecognizedCommandPhrase = defaultCommandPhrase.specification.options ?? {};
       targetCommandOptions = [ ...consciouslyInputtedArguments ];
-      targetCommandPhraseDescription = defaultCommandSpecification.description;
-      optionsSpecificationForRecognizedCommandPhrase = defaultCommandSpecification.options ?? {};
 
     } else {
 
@@ -314,6 +329,7 @@ class ConsoleCommandsParser<
     this.applicationName = commandLineInterfaceSpecification.applicationName;
     this.targetCommandPhrase = targetCommandPhrase;
     this.targetCommandPhraseDescription = targetCommandPhraseDescription;
+    this.isTargetCommandPhraseDefault = this.targetCommandPhrase === defaultCommandPhrase?.name;
     this.targetCommandOptions = targetCommandOptions;
     this.targetCommandOptionsSpecification = optionsSpecificationForRecognizedCommandPhrase;
 
@@ -322,7 +338,7 @@ class ConsoleCommandsParser<
 
   /* ━━━ Private methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* ─── Parsing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
-  private getParsedOptionsAndParameters(): TargetCommandsAndOptionsCombinations {
+  private parseOptionsAndParameters(): TargetCommandsAndOptionsCombinations {
 
     if (isUndefined(this.targetCommandOptionsSpecification)) {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
@@ -378,6 +394,7 @@ class ConsoleCommandsParser<
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
                   commandPhraseSpecification: {
+                    isDefault: this.isTargetCommandPhraseDefault,
                     description: this.targetCommandPhraseDescription,
                     options: this.targetCommandOptionsSpecification
                   }
@@ -409,7 +426,12 @@ class ConsoleCommandsParser<
                 noValueFollowingTheKeyOfNonBooleanOption.generate({
                   targetOptionKey: optionKeyWithLeading2NDashes,
                   commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
-                    commandPhrase: this.targetCommandPhrase, commandPhraseSpecification: this.targetCommandOptionsSpecification
+                    commandPhrase: this.targetCommandPhrase,
+                    commandPhraseSpecification: {
+                      isDefault: this.isTargetCommandPhraseDefault,
+                      description: this.targetCommandPhraseDescription,
+                      options: this.targetCommandOptionsSpecification
+                    }
                   })
                 })
           }),
@@ -488,7 +510,12 @@ class ConsoleCommandsParser<
             commandPhrase: this.targetCommandPhrase,
             formattedUnknownOptions: stringifyAndFormatArbitraryValue(this.targetCommandOptionsWhichHasNotBeenProcessedYet),
             commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
-              commandPhrase: this.targetCommandPhrase, commandPhraseSpecification: this.targetCommandOptionsSpecification
+              commandPhrase: this.targetCommandPhrase,
+              commandPhraseSpecification: {
+                isDefault: this.isTargetCommandPhraseDefault,
+                description: this.targetCommandPhraseDescription,
+                options: this.targetCommandOptionsSpecification
+              }
             })
           })
         }),
@@ -529,7 +556,11 @@ class ConsoleCommandsParser<
                 actualOptionValue: targetOptionRawValue,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
-                  commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+                  commandPhraseSpecification: {
+                    isDefault: this.isTargetCommandPhraseDefault,
+                    description: this.targetCommandPhraseDescription,
+                    options: this.targetCommandOptionsSpecification
+                  }
                 })
               })
         }),
@@ -570,7 +601,12 @@ class ConsoleCommandsParser<
             targetOptionKey: optionKeyWithLeading2NDashes,
             actualOptionValue: targetOptionRawValue,
             commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
-              commandPhrase: this.targetCommandPhrase, commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+              commandPhrase: this.targetCommandPhrase,
+              commandPhraseSpecification: {
+                isDefault: this.isTargetCommandPhraseDefault,
+                description: this.targetCommandPhraseDescription,
+                options: this.targetCommandOptionsSpecification
+              }
             })
           })
         }),
@@ -632,7 +668,11 @@ class ConsoleCommandsParser<
                 actualOptionValue: targetOptionRawValue,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
-                  commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+                  commandPhraseSpecification: {
+                    isDefault: this.isTargetCommandPhraseDefault,
+                    description: this.targetCommandPhraseDescription,
+                    options: this.targetCommandOptionsSpecification
+                  }
                 })
             })
         }),
@@ -653,7 +693,11 @@ class ConsoleCommandsParser<
                 actualOptionValue: targetOptionRawValue,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
-                  commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+                  commandPhraseSpecification: {
+                    isDefault: this.isTargetCommandPhraseDefault,
+                    description: this.targetCommandPhraseDescription,
+                    options: this.targetCommandOptionsSpecification
+                  }
                 })
               })
         }),
@@ -674,7 +718,11 @@ class ConsoleCommandsParser<
                 actualOptionValue: targetOptionRawValue,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
-                  commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+                  commandPhraseSpecification: {
+                    isDefault: this.isTargetCommandPhraseDefault,
+                    description: this.targetCommandPhraseDescription,
+                    options: this.targetCommandOptionsSpecification
+                  }
                 })
               })
         }),
@@ -712,7 +760,12 @@ class ConsoleCommandsParser<
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.malformedJSON5_Option.generate({
             targetOptionKey: optionKeyWithLeading2NDashes,
             commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
-              commandPhrase: this.targetCommandPhrase, commandPhraseSpecification: this.targetCommandOptionsSpecification ?? {}
+              commandPhrase: this.targetCommandPhrase,
+              commandPhraseSpecification: {
+                isDefault: this.isTargetCommandPhraseDefault,
+                description: this.targetCommandPhraseDescription,
+                options: this.targetCommandOptionsSpecification
+              }
             })
           })
         }),
@@ -757,14 +810,24 @@ class ConsoleCommandsParser<
       commandPhraseSpecification
     }: Readonly<{
       commandPhrase: string;
-      commandPhraseSpecification: ConsoleCommandsParser.CommandPhraseSpecification;
+      commandPhraseSpecification:
+          ConsoleCommandsParser.CommandPhraseSpecification &
+          Required<Pick<ConsoleCommandsParser.CommandPhraseSpecification, "isDefault">>;
     }>
   ): string {
 
     const indentationCoordinator: IndentationCoordinator = new IndentationCoordinator();
 
     const textSegments: Array<string> = [
-      `● ${ commandPhrase ?? ConsoleCommandsParser.localization.helpReference.defaultCommand }\n`
+      `● ${ commandPhrase }${
+        insertSubstring(
+          ConsoleCommandsParser.localization.helpReference.defaultCommandPhrase__parenthetical,
+          {
+            condition: commandPhraseSpecification.isDefault,
+            modifier: (defaultCommandPhrase__parenthetical: string): string => ` ${ defaultCommandPhrase__parenthetical }`
+          }
+        ) 
+      }\n`
     ];
 
     if (isNonEmptyString(commandPhraseSpecification.description)) {
@@ -931,20 +994,47 @@ class ConsoleCommandsParser<
 
   }
 
+
   /* ─── Other ────────────────────────────────────────────────────────────────────────────────────────────────────── */
   private static validateCommandLineInterfaceSpecification(
     commandLineInterfaceSpecification: ConsoleCommandsParser.CommandLineInterfaceSpecification
   ): void {
 
+    const specificationsOfCommandsMarkedAsDefault: {
+      [commandPhrase: string]: ConsoleCommandsParser.CommandPhraseSpecification;
+    } = Object.entries(commandLineInterfaceSpecification.commandPhrases).
+        reduce(
+          (
+            _specificationsOfCommandsMarkedAsDefault: {
+              [commandPhrase: string]: ConsoleCommandsParser.CommandPhraseSpecification;
+            },
+            [ commandPhrase, commandPhraseSpecification ]: [ string, ConsoleCommandsParser.CommandPhraseSpecification ]
+           ): { [commandPhrase: string]: ConsoleCommandsParser.CommandPhraseSpecification; } => {
+
+            if (commandPhraseSpecification.isDefault === true) {
+              _specificationsOfCommandsMarkedAsDefault[commandPhrase] = commandPhraseSpecification;
+            }
+
+            return _specificationsOfCommandsMarkedAsDefault;
+
+          },
+          {}
+        );
+
     if (
-      Object.values(commandLineInterfaceSpecification.commandPhrases).
-          filter(
-            (commandPhraseSpecification: ConsoleCommandsParser.CommandPhraseSpecification): boolean =>
-                commandPhraseSpecification.isDefault === true
-          ).
-          length > 1
+      Object.entries(specificationsOfCommandsMarkedAsDefault).length > 1
     ) {
-      // TODO
+      Logger.throwErrorAndLog({
+        errorType: "InvalidConsoleCommandSpecification",
+        title: "Invalid console command specification",
+        description: ConsoleCommandsParser.localization.errorsMessages.moreThanOneCommandPhrasesMarkedAsDefault.generate({
+          formattedListOfCommandsPhrasesMarkedAsDefault: Object.
+              keys(specificationsOfCommandsMarkedAsDefault).
+              map((commandPhrase: string): string => `● ${ commandPhrase }`).
+              join("\n")
+        }),
+        occurrenceLocation: "ConsoleCommandsParser.validateCommandLineInterfaceSpecification(commandLineInterfaceSpecification)"
+      });
     }
 
   }
@@ -1055,102 +1145,108 @@ namespace ConsoleCommandsParser {
 
       argumentsVectorIsNotArray: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.ArgumentsVectorIsNotArray.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.ArgumentsVectorIsNotArray.TemplateVariables
         ) => string;
       }>;
 
       argumentsVectorHasNotEnoughElements: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateVariables
         ) => string;
       }>;
 
       argumentsVectorHasNonStringElements: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateVariables
+        ) => string;
+      }>;
+
+      moreThanOneCommandPhrasesMarkedAsDefault: Readonly<{
+        generate: (
+          templateVariables: Localization.ErrorsMessages.MoreThanOneCommandPhrasesMarkedAsDefault.TemplateVariables
         ) => string;
       }>;
 
       noDefaultCommandPhraseAvailable: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateVariables
         ) => string;
       }>;
 
       firstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.
-              TemplateParameters
+          templateVariables: Localization.ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.
+              TemplateVariables
         ) => string;
       }>;
 
       unknownCommandPhrase: Readonly<{
-        generate: (templateParameters: Localization.ErrorsMessages.UnknownCommandPhrase.TemplateParameters) => string;
+        generate: (templateVariables: Localization.ErrorsMessages.UnknownCommandPhrase.TemplateVariables) => string;
       }>;
 
       requiredOptionKeyIsMissing: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.RequiredOptionKeyIsMissing.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
         ) => string;
       }>;
 
       noValueFollowingTheKeyOfNonBooleanOption: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateVariables
         ) => string;
       }>;
 
       invalidCommandOptionTypeAtSpecification: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateVariables
         ) => string;
       }>;
 
       unknownOptionsFoundForSpecificCommand: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateVariables
         ) => string;
       }>;
 
       optionValueIsNotAmongAllowedAlternatives: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateVariables
         ) => string;
       }>;
 
       unparsableNumericOptionValue: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.UnparsableNumericOptionValue.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.UnparsableNumericOptionValue.TemplateVariables
         ) => string;
       }>;
 
       numericOptionValueIsNotBelongToExpectedNumbersSet: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
         ) => string;
       }>;
 
       numericValueIsSmallerThanRequiredMinimum: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
         ) => string;
       }>;
 
       numericValueIsGreaterThanAllowedMaximum: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
         ) => string;
       }>;
 
       malformedJSON5_Option: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.MalformedJSON5_Option.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.MalformedJSON5_Option.TemplateVariables
         ) => string;
       }>;
 
       JSON5_OptionDoesNotMatchWithValidDataSchema: Readonly<{
         generate: (
-          templateParameters: Localization.ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateParameters
+          templateVariables: Localization.ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateVariables
         ) => string;
       }>;
 
@@ -1162,7 +1258,7 @@ namespace ConsoleCommandsParser {
 
     export type HelpReference = Readonly<{
 
-      defaultCommand: string;
+      defaultCommandPhrase__parenthetical: string;
 
       options: string;
 
@@ -1195,11 +1291,11 @@ namespace ConsoleCommandsParser {
     export namespace ErrorsMessages {
 
       export namespace ArgumentsVectorIsNotArray {
-        export type TemplateParameters = Readonly<{ stringifiedActualValueOfArgumentsVector: string; }>;
+        export type TemplateVariables = Readonly<{ stringifiedActualValueOfArgumentsVector: string; }>;
       }
 
       export namespace RawArgumentsVectorHasNotEnoughElements {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           minimalElementsCountInArgumentsVector: number;
           actualElementsCountInArgumentsVector: number;
           stringifiedArgumentsVector: string;
@@ -1207,31 +1303,37 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace ArgumentsVectorHasNonStringElements {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           stringifiedFormattedNonStringArguments: string;
         }>;
       }
 
+      export namespace MoreThanOneCommandPhrasesMarkedAsDefault {
+        export type TemplateVariables = Readonly<{
+          formattedListOfCommandsPhrasesMarkedAsDefault: string;
+        }>;
+      }
+
       export namespace NoDefaultCommandPhraseAvailable {
-        export type TemplateParameters = Readonly<{ helpReference: string; }>;
+        export type TemplateVariables = Readonly<{ helpReference: string; }>;
       }
 
       export namespace FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           commandPhraseLikeArgument: string;
           helpReference: string;
         }>;
       }
 
       export namespace UnknownCommandPhrase {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           inputtedCommandPhrase: string;
           helpReference: string;
         }>;
       }
 
       export namespace UnknownOptionsFoundForSpecificCommand {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           commandPhrase?: string;
           formattedUnknownOptions: string;
           commandHelpReference: string;
@@ -1239,14 +1341,14 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace InvalidCommandOptionTypeAtSpecification {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           optionName: string;
           typeName: string;
         }>;
       }
 
       export namespace RequiredOptionKeyIsMissing {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           commandPhrase?: string;
           missingOptionKey: string;
           commandHelpReference: string;
@@ -1254,14 +1356,14 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace NoValueFollowingTheKeyOfNonBooleanOption {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           commandHelpReference: string;
         }>;
       }
 
       export namespace OptionValueIsNotAmongAllowedAlternatives {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           actualOptionValue: string;
           commandHelpReference: string;
@@ -1269,7 +1371,7 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace UnparsableNumericOptionValue {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           actualOptionValue: string;
           commandHelpReference: string;
@@ -1277,7 +1379,7 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace NumericOptionValueIsNotBelongToExpectedNumbersSet {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           expectedNumbersSet: RawObjectDataProcessor.NumbersSets;
           actualOptionValue: string;
@@ -1286,7 +1388,7 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace NumericValueIsSmallerThanRequiredMinimum {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           requiredMinimum: number;
           actualOptionValue: string;
@@ -1295,7 +1397,7 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace NumericValueIsGreaterThanAllowedMaximum {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           allowedMaximum: number;
           actualOptionValue: string;
@@ -1304,14 +1406,14 @@ namespace ConsoleCommandsParser {
       }
 
       export namespace MalformedJSON5_Option {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           commandHelpReference: string;
         }>;
       }
 
       export namespace JSON5_OptionDoesNotMatchWithValidDataSchema {
-        export type TemplateParameters = Readonly<{
+        export type TemplateVariables = Readonly<{
           targetOptionKey: string;
           formattedValidationErrorsMessages: string;
         }>;

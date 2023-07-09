@@ -10,7 +10,7 @@ const consoleCommandsParserLocalization__english: Localization = {
 
   helpReference: {
 
-    defaultCommand: "Default command",
+    defaultCommandPhrase__parenthetical: "(default command phrase)",
 
     options: "Options",
 
@@ -46,7 +46,7 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     argumentsVectorIsNotArray: {
       generate: (
-        { stringifiedActualValueOfArgumentsVector }: ErrorsMessages.ArgumentsVectorIsNotArray.TemplateParameters
+        { stringifiedActualValueOfArgumentsVector }: ErrorsMessages.ArgumentsVectorIsNotArray.TemplateVariables
       ): string =>
           "Expected that the arguments vector be an array while actually it is not and actually has the value:\n" +
             `${ stringifiedActualValueOfArgumentsVector }`
@@ -58,7 +58,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           minimalElementsCountInArgumentsVector,
           actualElementsCountInArgumentsVector,
           stringifiedArgumentsVector
-        }: ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateParameters
+        }: ErrorsMessages.RawArgumentsVectorHasNotEnoughElements.TemplateVariables
       ): string =>
           `The valid arguments vector must be an array of at least ${ minimalElementsCountInArgumentsVector } elements ` +
             `while actually is has ${ actualElementsCountInArgumentsVector } elements and value:\n` +
@@ -67,17 +67,31 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     argumentsVectorHasNonStringElements: {
       generate: (
-        { stringifiedFormattedNonStringArguments }: ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateParameters
+        { stringifiedFormattedNonStringArguments }: ErrorsMessages.ArgumentsVectorHasNonStringElements.TemplateVariables
       ): string =>
           "The valid arguments vector must be an array of the strings while below arguments are not strings:\n" +
             `${ stringifiedFormattedNonStringArguments }`
     },
 
+    moreThanOneCommandPhrasesMarkedAsDefault: {
+      generate: (
+        { formattedListOfCommandsPhrasesMarkedAsDefault }: ErrorsMessages.MoreThanOneCommandPhrasesMarkedAsDefault.
+            TemplateVariables
+      ): string =>
+          "More than one commands phrases has been marked as default. " +
+          "If you are the developer of the this console application, leave the \"default\" flag only on one of below " +
+            "command phrases:\n" +
+            `${ formattedListOfCommandsPhrasesMarkedAsDefault }\n` +
+          "If you are the user of this console application, please consider the reporting about this issue to the " +
+            "developers."
+    },
+
+
     noDefaultCommandPhraseAvailable: {
-      generate: (templateParameters: ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateParameters): string =>
+      generate: (templateVariables: ErrorsMessages.NoDefaultCommandPhraseAvailable.TemplateVariables): string =>
           "This application has no the default command. " +
           "Please specify explicitly one of mentioned below command phrases.\n" +
-          `${ templateParameters.helpReference }`
+          `${ templateVariables.helpReference }`
     },
 
     firstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable: {
@@ -85,7 +99,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           commandPhraseLikeArgument,
           helpReference
-        }: ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.TemplateParameters
+        }: ErrorsMessages.FirstParameterLooksLikeCommandPhraseWhileNoCommandPhrasesAvailable.TemplateVariables
     ): string =>
         `"${ commandPhraseLikeArgument }" seems like the command phrase while there is only the default command available ` +
           "for this application:\n" +
@@ -94,7 +108,7 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     unknownCommandPhrase: {
       generate: (
-        { inputtedCommandPhrase, helpReference }: ErrorsMessages.UnknownCommandPhrase.TemplateParameters
+        { inputtedCommandPhrase, helpReference }: ErrorsMessages.UnknownCommandPhrase.TemplateVariables
       ): string =>
           `The command phrase "${ inputtedCommandPhrase }" is unknown. ` +
           "Please input one of below available command phrases:" +
@@ -107,7 +121,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           missingOptionKey,
           commandPhrase,
           commandHelpReference
-        }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateParameters
+        }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
       ): string =>
           `The option "${ missingOptionKey }" is required for the ` +
             `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }. ` +
@@ -119,14 +133,14 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateParameters
+        }: ErrorsMessages.NoValueFollowingTheKeyOfNonBooleanOption.TemplateVariables
       ): string =>
           `No value following the key "${ targetOptionKey }" of non-boolean option has been specified. ` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 
     invalidCommandOptionTypeAtSpecification: {
-      generate: ({ optionName, typeName }: ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateParameters): string =>
+      generate: ({ optionName, typeName }: ErrorsMessages.InvalidCommandOptionTypeAtSpecification.TemplateVariables): string =>
           "Most likely, it is the bug from the side of the console application. " +
           `The type "${ typeName }" specified for the option "${ optionName }" in the console command specification ` +
             " is invalid. " +
@@ -142,7 +156,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           commandPhrase,
           formattedUnknownOptions,
           commandHelpReference
-        }: ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateParameters
+        }: ErrorsMessages.UnknownOptionsFoundForSpecificCommand.TemplateVariables
       ): string =>
           "Below options are unknown for the " +
             `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }:\n` +
@@ -156,7 +170,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           targetOptionKey,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateParameters
+        }: ErrorsMessages.OptionValueIsNotAmongAllowedAlternatives.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the option "${ targetOptionKey }" is not among allowed alternatives. ` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -168,7 +182,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           actualOptionValue,
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.UnparsableNumericOptionValue.TemplateParameters
+        }: ErrorsMessages.UnparsableNumericOptionValue.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not the valid numeric value.\n` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -181,7 +195,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           expectedNumbersSet,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateParameters
+        }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not belong to ` +
             `"${ RawObjectDataProcessorLocalization__English.numbersSet(expectedNumbersSet) }" numbers set.\n` +
@@ -195,7 +209,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           requiredMinimum,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateParameters
+        }: ErrorsMessages.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is smaller than required ` +
             `minimal value ${ requiredMinimum }.\n` +
@@ -209,7 +223,7 @@ const consoleCommandsParserLocalization__english: Localization = {
           allowedMaximum,
           actualOptionValue,
           commandHelpReference
-        }: ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateParameters
+        }: ErrorsMessages.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
       ): string =>
          `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is greater that allowed ` +
             `maximal value ${ allowedMaximum }.\n` +
@@ -221,7 +235,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           targetOptionKey,
           commandHelpReference
-        }: ErrorsMessages.MalformedJSON5_Option.TemplateParameters
+        }: ErrorsMessages.MalformedJSON5_Option.TemplateVariables
       ): string =>
           `The value of the option "${ targetOptionKey }" is not valid JSON5 string. ` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
@@ -232,7 +246,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           targetOptionKey,
           formattedValidationErrorsMessages
-        }: ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateParameters
+        }: ErrorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.TemplateVariables
       ): string =>
           `The JSON5-type value of the option "${ targetOptionKey }" does not match with valid data schema:\n` +
           `${ formattedValidationErrorsMessages }`

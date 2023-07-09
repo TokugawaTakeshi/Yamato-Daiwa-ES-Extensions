@@ -5,33 +5,35 @@ import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
 
 
 /* [ Execution ]
+ * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts
+ * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test --optionalStringOption sample
  */
 namespace ApplicationConsoleLineInterface {
 
   export enum CommandPhrases {
-    default = "default",
     buildProject = "build",
+    packProject = "pack",
     deployProject = "deploy",
     help = "help"
   }
 
   export type SupportedCommandsAndParametersCombinations =
-      DefaultCommand |
       BuildProjectConsoleCommand |
+      PackProjectConsoleCommand |
       DeployProjectConsoleCommand |
-      HelpCommand;
+      HelpConsoleCommand;
 
-  export type DefaultCommand = {
-    phrase: CommandPhrases.default;
+  export type BuildProjectConsoleCommand = {
+    phrase: CommandPhrases.buildProject;
     requiredStringOption: string;
     optionalStringOption?: string;
   };
 
-  export type BuildProjectConsoleCommand = {
-    phrase: CommandPhrases.buildProject;
+  export type PackProjectConsoleCommand = {
+    phrase: CommandPhrases.packProject;
     enumerationLikeStringOption?: "FOO" | "BAR" | "BAZ";
     numericOption?: number;
     limitedNumericOption?: number;
@@ -43,7 +45,7 @@ namespace ApplicationConsoleLineInterface {
     JSON5_Option?: Readonly<{ foo: string; bar?: number; }>;
   };
 
-  export type HelpCommand = {
+  export type HelpConsoleCommand = {
     phrase: CommandPhrases.help;
   };
 
@@ -53,27 +55,28 @@ namespace ApplicationConsoleLineInterface {
     applicationName: "Example task manager",
     applicationDescription: "Executes various tasks.",
 
-    defaultCommand: {
-      description: "Incrementally builds the project",
-      options: {
-        requiredStringOption: {
-          description: "Example required string option",
-          type: ConsoleCommandsParser.ParametersTypes.string,
-          required: true,
-          shortcut: "a"
-        },
-        optionalStringOption: {
-          description: "Example optional string option",
-          type: ConsoleCommandsParser.ParametersTypes.string,
-          required: false
-        }
-      }
-    },
-
     commandPhrases: {
 
       [CommandPhrases.buildProject]: {
+        isDefault: true,
         description: "Builds the project for specified mode.",
+        options: {
+          requiredStringOption: {
+            description: "Example required string option",
+            type: ConsoleCommandsParser.ParametersTypes.string,
+            required: true,
+            shortcut: "a"
+          },
+          optionalStringOption: {
+            description: "Example optional string option",
+            type: ConsoleCommandsParser.ParametersTypes.string,
+            required: false
+          }
+        }
+      },
+
+      [CommandPhrases.packProject]: {
+        description: "Create the deployable pack of the project",
         options: {
           enumerationLikeStringOption: {
             description: "Example enumeration like string option",
@@ -153,28 +156,28 @@ switch (parsedConsoleCommand.phrase) {
 
   case ApplicationConsoleLineInterface.CommandPhrases.buildProject: {
     console.log("Build project", parsedConsoleCommand);
-    console.log(parsedConsoleCommand.enumerationLikeStringOption);
-    console.log(parsedConsoleCommand.numericOption);
-    console.log(parsedConsoleCommand.limitedNumericOption);
+    console.log("requiredStringOption", parsedConsoleCommand.requiredStringOption);
+    console.log("optionalStringOption", parsedConsoleCommand.optionalStringOption);
+    break;
+  }
+
+  case ApplicationConsoleLineInterface.CommandPhrases.packProject: {
+    console.log("Pack project", parsedConsoleCommand);
+    console.log("enumerationLikeStringOption", parsedConsoleCommand.enumerationLikeStringOption);
+    console.log("numericOption", parsedConsoleCommand.numericOption);
+    console.log("limitedNumericOption", parsedConsoleCommand.limitedNumericOption);
     break;
   }
 
   case ApplicationConsoleLineInterface.CommandPhrases.deployProject: {
     console.log("Deploy project", parsedConsoleCommand);
-    console.log(parsedConsoleCommand.booleanOption);
-    console.log(parsedConsoleCommand.JSON5_Option);
+    console.log("booleanOption", parsedConsoleCommand.booleanOption);
+    console.log("JSON5_Option", parsedConsoleCommand.JSON5_Option);
     break;
   }
 
   case ApplicationConsoleLineInterface.CommandPhrases.help: {
     console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
-    break;
-  }
-
-  default: {
-    console.log("Default command", parsedConsoleCommand);
-    console.log(parsedConsoleCommand.requiredStringOption);
-    console.log(parsedConsoleCommand.optionalStringOption);
   }
 
 }

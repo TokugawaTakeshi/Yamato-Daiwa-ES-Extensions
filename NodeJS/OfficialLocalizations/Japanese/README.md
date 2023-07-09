@@ -106,8 +106,8 @@ FileNotFoundError.localization = fileNotFoundErrorLocalization__english;
 
 **@yamato-daiwa/es-extensions-nodejs**に提供される全クラスと該当してりる日本語化のオブジェクトは下記の表示に一覧化。
 
-| エラークラス                              | 日本語化のオブジェクト                                               |
-|-------------------------------------|-----------------------------------------------------------|
-| DesiredFileActuallyIsDirectoryError | desiredFileActuallyIsDirectoryErrorLocalization__japanese |
-| FileNotFoundError                   | fileNotFoundErrorLocalization__japanese                   |
-| InvalidConsoleCommandError          | invalidConsoleCommandErrorLocalization__japanese          |
+| エラークラス                            | 日本語化のオブジェクト                                             |
+|-----------------------------------|---------------------------------------------------------|
+| FileNotFoundError                 | fileNotFoundErrorLocalization__japanese                 |
+| InvalidConsoleCommandError        | invalidConsoleCommandErrorLocalization__japanese        |
+| PathRefersToDirectoryNotFileError | pathRefersToDirectoryNotFileErrorLocalization__japanese |

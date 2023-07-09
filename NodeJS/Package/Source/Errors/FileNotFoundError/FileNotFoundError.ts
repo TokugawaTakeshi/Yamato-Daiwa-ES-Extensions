@@ -1,4 +1,5 @@
 import fileNotFoundErrorLocalization__english from "./FileNotFoundErrorLocalization.english";
+import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 class FileNotFoundError extends Error {
@@ -18,7 +19,12 @@ class FileNotFoundError extends Error {
         "customMessage" in constructorParameter ?
             constructorParameter.customMessage :
             `${ FileNotFoundError.localization.generateDescriptionCommonPart(constructorParameter) }` +
-                `${ constructorParameter.messageSpecificPart ?? "" }`;
+                `${
+                  insertSubstring(
+                    constructorParameter.messageSpecificPart,
+                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                  )
+                }`;
 
   }
 
