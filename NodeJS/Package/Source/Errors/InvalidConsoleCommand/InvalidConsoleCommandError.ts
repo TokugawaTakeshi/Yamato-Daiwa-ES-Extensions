@@ -22,7 +22,7 @@ class InvalidConsoleCommandError extends Error {
                 `${ 
                   insertSubstring(
                     constructorParameter.messageSpecificPart,
-                      { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
                   )
                 }`;
 

@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.english.pug
-  include ../../../../../Components/Components.english.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -16,8 +16,9 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "addElementsToArray",
-        whatFunctionDoes: "adds elements to start, end, or specified position of target array; " +
-          "mutable or non-mutable adding is available."
+        whatFunctionDoes:
+          "adds elements to start, end, or specified position of target array. " +
+          "Mutable or non-mutable adding (however without deep copying) is available."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -35,6 +36,13 @@ block append Metadata
       japanese: "./addElementsToArray.japanese.html",
       russian: "./addElementsToArray.russian.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -115,3 +123,103 @@ block append SpecificContent
           ]
         }
       }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
+
+    p.Article-Paragraph.
+      Adds the new #[+Term--YDID elements] to start, end or specified position of the #[+Term--YDID indexed array].
+      #[+Keyword--YDID Both] changing of the initial #[+Term--YDID array] (#[+DefinableTerm--YDID mutable adding]) and
+        creating of the new one based on initial one #[+Keyword--YDID before] adding of the new #[+Term--YDID elements]
+        (#[+DefinableTerm--YDID immutable adding]) available depending on the corresponding #[+Term--YDID option].
+      Herewith in the #[+Keyword--YDID immutable] adding case just new container is being created while
+        the #[+Term--YDID deep copying] of each element is #[+Keyword--YDID not]&nbsp;being executed
+        (and could #[+Keyword--YDID not]&nbsp;be executed for the #[+Keyword--YDID arbitrary] #[+Term--YDID object]).
+
+
+    h2.Article-Heading2 Examples
+
+    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+      Because this content is being frequently read selectively, the important points has been repeated multiple times.
+
+
+    h3.Article-Heading3 Adding of one element to the start of array
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    mixin AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment(properties)
+
+      -
+
+        const {
+          newElementsCount,
+          toEnd,
+          similarNativeMethod
+        } = properties;
+
+        const similarNativeMethodName = toEnd ? "push" : "unshift";
+        const similarNativeMethodReferenceURI = toEnd ? sharedExternalLinks.mdn.array.push : sharedExternalLinks.mdn.array.unshift;
+
+
+      p.Article-Paragraph
+
+        | Adding of element#{ newElementsCount === 1 ? "" : "s" } #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        if newElementsCount > 1
+          | and #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        |   to the #[+Keyword--YDID #{ toEnd ? "end" : "start" } ] of the #[+Term--YDID array] of
+        |   #[+Term__Contrast--YDID strings].
+        | The #[+ImportantEntity__Code--YDID mutably] #[+Term--YDID option] has been made #[+Keyword--YDID required]
+        |   #[+Keyword__Contrast--YDID not]&nbsp;without reason: the programmer #[+Keyword--YDID must] clearly realize,
+        |   what he is doing.
+        | Because in this example the value #[+SecondaryEntity__Code--YDID true] has been set, the #[+Keyword--YDID initial]
+        |   #[+Term--YDID array] #[+Keyword__Contrast--YDID will] change and become to:
+        |
+        if newElementsCount === 1
+          if toEnd
+            +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+          else
+            +SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          if toEnd
+            +SecondaryEntity__Code--YDID
+              | [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+          else
+            +SecondaryEntity__Code--YDID
+              | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | .
+
+      +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+        With such usage, the target #[+Term--YDID array] could #[+Keyword--YDID not]&nbsp;have the type
+          #[+ImportantEntity__Code--YDID ReadonlyArray], because the function will change this #[+Term--YDID array].
+
+      //- ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      p.Article-Paragraph
+        | Thus usage of the #[+Term--YDID function] is close with the #[+Term__Contrast--YDID native method]
+        |
+        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
+        | .
+        | The difference is the #[+ImportantEntity__Code--YDID addElementsToArray] is #[+Keyword--YDID always]&nbsp;returns
+        |   the #[+Keyword__Contrast--YDID updated] #[+Term--YDID array], #[+Keyword--YDID not]&nbsp;the count ot its elements
+        |   as #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }].
+        | Nevertheless, if the elements count of the #[+Keyword--YDID new] #[+Term--YDID array] required, it is possible
+        |   to access to the #[+ImportantEntity__Code--YDID length] #[+Term--YDID property] of the
+        |   #[+Term--YDID returned value] without defining of the new #[+Term--YDID variable].
+
+      //- TODO 再開点
+
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })

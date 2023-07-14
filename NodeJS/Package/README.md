@@ -25,13 +25,13 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ConsoleCommandsParser/ConsoleCommandsParser.md">ConsoleCommandsParser</a></dt>
-  <dd>Parsing and validating of CLI commands</dd>
-
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md">ConsoleApplicationLogger</a></dt>
   <dd>The implementation of <b>ILogger</b> interface for <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md">Logger</a> facade and Node.js environment.</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/Documentation/ObjectDataFilesProcessor/ObjectDataFilesProcessor.md">ObjectDataFilesProcessor</a></dt>
+  <dt><a href=https://ee.yamato-daiwa.com/NodeJS/ConsoleCommandsParser/ConsoleCommandsParser.english.html">ConsoleCommandsParser</a></dt>
+  <dd>Parsing and validating of CLI commands</dd>
+
+  <dt><a href=https://ee.yamato-daiwa.com/NodeJS/ObjectDataFilesProcessor/ObjectDataFilesProcessor.english.html">ObjectDataFilesProcessor</a></dt>
   <dd>Parses, validates and do other processings with data from ".json", ".y(a)ml" and ".env" files.</dd>
 
   <dt>isErrnoException</dt>
@@ -44,13 +44,13 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt>PathRefersToDirectoryNotFileError</dt>
-  <dd>Intended to be thrown when the path refers to directory while expected to be referred to file.</dd>
-  
-  <dt>FileNotFoundError</dt>
-  <dd>Intended to be thrown when the file expected to be exist was not found.</dd>
+  <dt><a href=https://ee.yamato-daiwa.com/NodeJS/ErrorsClasses/DesiredFileActuallyIsDirectoryError/DesiredFileActuallyIsDirectoryError.english.html">PathRefersToDirectoryNotFileError</a></dt>
+  <dd>Intended to be thrown when the path must refer to the file, while actually refers to the directory.</dd>
 
-  <dt>InvalidConsoleCommandError</dt>
-  <dd>Intended to be thrown the inputted console command does not satisfy to valid schema.</dd>
+  <dt><a href=https://ee.yamato-daiwa.com/NodeJS/ErrorsClasses/FileNotFoundError/FileNotFoundError.english.html">FileNotFoundError</a></dt>
+  <dd>Intended to be thrown when the file which expected to exist was not found.</dd>
+  
+  <dt><a href="https://ee.yamato-daiwa.com/NodeJS/ErrorsClasses/InvalidConsoleCommandError/InvalidConsoleCommandError.english.html">InvalidConsoleCommand</a></dt>
+  <dd>Intended to be thrown when the inputted console commands does not match with the manual.</dd>
   
 </dl>

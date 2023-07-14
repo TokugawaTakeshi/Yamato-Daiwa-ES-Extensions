@@ -3,8 +3,8 @@ extends ../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/Mi
 
 block append Requirements
 
-  include ../../Components/Components.russian.pug
-  include ../../SharedAssets/Markup/Assets.russian.pug
+  include ../../SharedComponents/SharedComponents.russian.pug
+  include ../../SharedAssets/Markup/SharedAssets.russian.pug
 
 
 block append Metadata
@@ -34,6 +34,13 @@ block append Metadata
       english: "./../index.html",
       japanese: "./TopPage.japanese.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent

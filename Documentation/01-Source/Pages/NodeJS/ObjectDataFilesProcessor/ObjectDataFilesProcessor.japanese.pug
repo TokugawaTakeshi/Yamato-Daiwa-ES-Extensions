@@ -3,8 +3,8 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../Components/Components.russian.pug
+  include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -29,6 +29,13 @@ block append Metadata
       english: "./ObjectDataFilesProcessor.english.html",
       russian: "./ObjectDataFilesProcessor.russian.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent

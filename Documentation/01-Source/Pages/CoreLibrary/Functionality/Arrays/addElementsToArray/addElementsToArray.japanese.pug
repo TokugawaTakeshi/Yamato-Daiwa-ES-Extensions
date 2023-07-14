@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../../../Components/Components.japanese.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -16,7 +16,9 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "addElementsToArray",
-        whatFunctionDoes: "目標的配列の最初位置、最終位置もしくは指数で指定された位置に新規要素を追加する。初期配列を変更するか、新しい配列を作る事も指定可能。"
+        whatFunctionDoes:
+            "目標的配列の最初位置、最終位置もしくは指数で指定された位置に新規要素を追加する。" +
+            "初期配列を変更するか、新しい配列を作る事も指定可能（但し、深いコピーは不可能）。"
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -34,6 +36,13 @@ block append Metadata
       english: "./addElementsToArray.english.html",
       russian: "./addElementsToArray.russian.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -130,19 +139,22 @@ block append SpecificContent
 
     p.Article-Paragraph.
       #[+Term--YDID 指数配列]の最初に位置か、最後の位置か、番号で指定された位置に新規要素を追加する。
-      専用の#[+Term--YDID オプション]に依り、#[+Term--YDID 変異]を起こす追加も可能で、#[+Keyword--YDID 新規]#[+Term--YDID 配列]
-        を作る追加も可能（但し、#[+Keyword--YDID 完全な]複製が行わず、#[+Keyword--YDID 一般的に]複製可能な訳では#[+Keyword--YDID ない]）。
+      専用の#[+Term--YDID オプション]に依り、元の配列の変化（変異を伴う追加）、元の配列から新規配列の制作（変異を伴わない追加）、#[+Keyword--YDID 両方]
+        可能である。
+      但し、#[+Term--YDID 変異]を起こさない変化の場合、#[+Term--YDID 配列]のコンテナーが置き換えるが、#[+Term--YDID ディープコピー]
+        （#[+Term--YDID オブジェクト系型]の#[+Term__Contrast--YDID 要素]の#[+Keyword--YDID 完全に]独立なコピー）は作成されず、
+        そもそも#[+Keyword--YDID 何れでの]場合作成可能な訳では#[+Keyword--YDID ない]。
 
 
-    h2.Article-Heading2 解説付きの例の揃い
+    h2.Article-Heading2 例
 
     +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
-      当ページの選択的に読んでいる型が多いので、下記重要な部分は繰り返しが有る。
+      当ページの選択的に読んでいる方が多いので、下記に重要な部分は繰り返しが有る。
 
 
     h3.Article-Heading3 配列の最初に位置に単一の要素を追加
 
-    h4.Article-Heading4 変異有り
+    h4.Article-Heading4 変異を起こす追加
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
@@ -178,4 +190,33 @@ block append SpecificContent
 
       p.Article-Paragraph
 
-        | 要素 #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        | #[+Term--YDID 文字列の]#[+Term__Contrast--YDID 配列]に#[+Term--YDID 要素]
+        | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        if newElementsCount > 1
+          | と#[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        | を追加します。
+        | #[+ImportantEntity__Code--YDID mutably]#[+Term--YDID オプション]は理由も無く必須にされた訳では#[+Keyword--YDID なく]、
+        |   プログラマーは何をしているか、はっきり意識する専門上の#[+Keyword--YDID 義務]です。
+        | 此の例の場合#[+SecondaryEntity__Code--YDID true]値が指定してあるので、,#[+Keyword--YDID 元の]#[+Term--YDID 配列]が
+        |   #[+Keyword--YDID 変わり]、
+        if newElementsCount === 1
+          if toEnd
+            +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+          else
+            +SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          if toEnd
+            +SecondaryEntity__Code--YDID
+              | [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+          else
+            +SecondaryEntity__Code--YDID
+              | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | に成る.
+
+      +AttentionBox--YDF({
+        decoration: AttentionBox__YDF.DecorativeVariations.warning,
+        hasPrependedSVG_Icon: true
+      }).
+        此の使い方だと、#[+Keyword--YDID 元の]#[+Term--YDID 配列](#[+ImportantEntity__Code--YDID targetArray])の変化が起きる為、
+          #[+ImportantEntity__Code--YDID ReadonlyArray]型が許可#[+Keyword--YDID されていない]。
+      //- ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

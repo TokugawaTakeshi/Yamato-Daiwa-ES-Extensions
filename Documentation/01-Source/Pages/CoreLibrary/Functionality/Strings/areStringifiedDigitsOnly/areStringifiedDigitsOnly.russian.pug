@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.russian.pug
-  include ../../../../../Components/Components.japanese.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -33,6 +33,13 @@ block append Metadata
       english: "./areStringifiedDigitsOnly.english.html",
       japanese: "./areStringifiedDigitsOnly.japanese.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent

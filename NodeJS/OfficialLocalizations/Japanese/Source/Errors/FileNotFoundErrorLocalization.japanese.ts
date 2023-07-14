@@ -1,7 +1,7 @@
 import type { FileNotFoundError } from "@yamato-daiwa/es-extensions-nodejs";
 
 
-const fileNotFoundErrorLocalization__russian: FileNotFoundError.Localization = {
+const fileNotFoundErrorLocalization__japanese: FileNotFoundError.Localization = {
   defaultTitle: "ファイルが見つからなかった",
   generateDescriptionCommonPart:
       ({ filePath }: FileNotFoundError.Localization.CommonDescription.TemplateVariables): string =>
@@ -9,4 +9,4 @@ const fileNotFoundErrorLocalization__russian: FileNotFoundError.Localization = {
 };
 
 
-export default fileNotFoundErrorLocalization__russian;
+export default fileNotFoundErrorLocalization__japanese;

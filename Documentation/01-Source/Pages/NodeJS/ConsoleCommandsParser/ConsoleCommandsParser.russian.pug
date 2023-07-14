@@ -3,8 +3,8 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/Assets.russian.pug
-  include ../../../Components/Components.russian.pug
+  include ../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -35,6 +35,13 @@ block append Metadata
     });
 
 
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
 block append SpecificContent
 
   article
@@ -47,7 +54,6 @@ block append SpecificContent
         а также для генерации справочного текста по использованию консольных команд.
 
     h2.Article-Heading2 Демо
-
 
     h2.Article-Heading2 Минимальные теоретические знания
 
@@ -191,6 +197,7 @@ block append SpecificContent
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }): :html_special_characters_to_html_entities
         export enum CommandPhrases {
+          default = "default",
           buildProject = "build",
           deployProject = "deploy",
           help = "help"
@@ -205,6 +212,7 @@ block append SpecificContent
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }): :html_special_characters_to_html_entities
         export type DefaultCommand = {
+          phrase: CommandPhrases.default;
           requiredStringOption: string;
           optionalStringOption?: string;
         };
@@ -319,7 +327,7 @@ block append SpecificContent
         #[+Term--YDID командной фразы].
 
 
-    h2.Article-Heading2 Пошаговое описания процесса создания консольного интерфейса
+    h2.Article-Heading2 Пошаговое руководство по созданию консольного интерфейса
 
     h3.Article-Heading3 Шаг 1: Определение начального набора командных фраз и опций
 

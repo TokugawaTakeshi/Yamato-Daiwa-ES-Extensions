@@ -8,11 +8,7 @@
     "@yamato-daiwa/es-extensions": "1.6.2",
     "@yamato-daiwa/es-extensions-browserjs": "1.6.3",
     "@yamato-daiwa/frontend": "../../YamatoDaiwaFrontend/CoreLibrary/Package",
-    "@yamato-daiwa/frontend-localization-japanese": "../../YamatoDaiwaFrontend/CoreLibrary/OfficialLocalizations/Japanese",
-    "@yamato-daiwa/frontend-localization-russian": "../../YamatoDaiwaFrontend/CoreLibrary/OfficialLocalizations/Russian",
     "@yamato-daiwa/frontend-documenting-kit": "../../YamatoDaiwaFrontend/DocumentingKit/Package",
-    "@yamato-daiwa/frontend-documenting_kit-localization-japanese": "../../YamatoDaiwaFrontend/DocumentingKit/OfficialLocalizations/Japanese",
-    "@yamato-daiwa/frontend-documenting_kit-localization-russian": "../../YamatoDaiwaFrontend/DocumentingKit/OfficialLocalizations/Russian",
     "@yamato-daiwa/programming_documentation": "../../YamatoDaiwaProgrammingDocumentation",
     "prismjs": "1.29.0"
   },

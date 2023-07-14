@@ -3,8 +3,8 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../Components/Components.japanese.pug
+  include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -36,6 +36,13 @@ block append Metadata
         parametersValidationInTypeScript: "https://stackoverflow.com/q/73410742/4818123"
       }
     };
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent

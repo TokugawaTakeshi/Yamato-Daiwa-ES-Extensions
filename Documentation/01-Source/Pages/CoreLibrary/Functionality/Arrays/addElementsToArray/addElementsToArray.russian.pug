@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.russian.pug
-  include ../../../../../Components/Components.russian.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -16,8 +16,9 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "addElementsToArray",
-        whatFunctionDoes: "добавляет новые элементы в начало, конец или указанную позицию массива; возможно как изменение " +
-          "начального массива, так и создание нового на основе старого."
+        whatFunctionDoes:
+          "добавляет новые элементы в начало, конец или указанную позицию массива. " +
+          "Возможно как изменение начального массива, так и создание нового на основе старого (но без глубокого копирования)."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -35,6 +36,13 @@ block append Metadata
       english: "./addElementsToArray.english.html",
       japanese: "./addElementsToArray.japanese.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -130,13 +138,15 @@ block append SpecificContent
 
     p.Article-Paragraph.
       Добавляет новые #[+Term--YDID элементы] в начало, конец или указанную позицию #[+Term--YDID индексного массива].
-      Добавление может быть #[+Term--YDID мутирующим] или нет - в зависимости от соответствующей #[+Term--YDID опции],
-      при этом в случае #[+Keyword--YDID немутирующего] добавления заменяется лишь прежний контейнер на новый,
-        а #[+Term--YDID глубокое копирование] элементов #[+Keyword--YDID не] осуществляется
-        (и в общем случае не может быть осуществлено).
+      Возможно как изменение исходного #[+Term--YDID массива] (#[+DefinableTerm--YDID мутирующее добавление]),
+        #[+Keyword--YDID так и] создание нового на основе исходного #[+Keyword--YDID перед] добавлением #[+Term--YDID элементов]
+         (#[+DefinableTerm--YDID немутирующее добавление]) — в зависимости от соответствующей #[+Term--YDID опции].
+      При этом, в случае #[+Keyword--YDID немутирующего] добавления лишь заменяется прежний контейнер на новый,
+        а #[+Term--YDID глубокое копирование] элементов #[+Keyword--YDID не]&nbsp;осуществляется
+        (и #[+Keyword--YDID не]&nbsp;может быть осуществлено для #[+Keyword--YDID произвользованого] #[+Term--YDID объекта]).
 
 
-    h2.Article-Heading2 Сборник примеров с подробным разбором
+    h2.Article-Heading2 Примеры
 
     +AttentionBox--YDF({　decoration: AttentionBox__YDF.DecorativeVariations.guidance,　hasPrependedSVG_Icon: true　}).
       Поскольку многие читают эту страницу выборочно, то приведённые ниже объяснения содержат повторения
@@ -204,14 +214,11 @@ block append SpecificContent
               | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         | .
 
-      +AttentionBox--YDF({
-        decoration: AttentionBox__YDF.DecorativeVariations.warning,
-        hasPrependedSVG_Icon: true
-      }).
+      +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
         При таком варианте использования целевой #[+Term--YDID массив] (#[+ImportantEntity__Code--YDID targetArray])
           #[+Keyword--YDID не]&nbsp;может иметь тип #[+ImportantEntity__Code--YDID ReadonlyArray],
-          поскольку функция будет производить манипуляции на этим #[+Term--YDID массивом].
-
+          поскольку функция будет вносить изменения в этот #[+Term--YDID массив].
+      //- ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       p.Article-Paragraph
         | Такое использование #[+Term--YDID функции] близко к #[+Term__Contrast--YDID нативному методу]
         |

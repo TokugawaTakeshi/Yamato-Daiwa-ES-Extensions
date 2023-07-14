@@ -1,7 +1,7 @@
 import FileSystem, { constants as FileSystemConstants } from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
-import { isNotNull, Logger } from "@yamato-daiwa/es-extensions";
+import { isNull, Logger } from "@yamato-daiwa/es-extensions";
 
 
 export default class ImprovedFileSystem {
@@ -33,7 +33,7 @@ export default class ImprovedFileSystem {
       FileSystem.access(
         targetPath,
         FileSystemConstants.F_OK,
-        (error: NodeJS.ErrnoException | null): void => { resolve(isNotNull(error)); }
+        (error: NodeJS.ErrnoException | null): void => { resolve(isNull(error)); }
       );
 
     });

@@ -1516,7 +1516,9 @@
 
               ConsoleApplicationLogger: {
                 $tableOfContentsTitle: "<code>ConsoleApplicationLogger</code>",
-                $URI: `@All/NodeJS/ConsoleCommandsParser.${ localization.fileNameLocalizationExtensions }.pug`
+                $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/" +
+                    "Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md"
+                // $URI: `@All/NodeJS/ConsoleApplicationLogger.${ localization.fileNameLocalizationExtensions }.pug`
               },
 
               ObjectDataFilesProcessor: {
@@ -1528,29 +1530,33 @@
 
           },
 
-          // preMadeErrors: {
-          //
-          //   $tableOfContentsTitle: localization.NodeJS.preMadeErrors.tableOfContentsTitle,
-          //
-          //   $children: {
-          //
-          //     DesiredFileActuallyIsDirectoryError: {
-          //       $tableOfContentsTitle: "<code>DesiredFileActuallyIsDirectoryError</code>",
-          //       $URI: "#"
-          //     },
-          //
-          //     FileNotFoundError: {
-          //       $tableOfContentsTitle: "<code>FileNotFoundError</code>",
-          //       $URI: "#"
-          //     },
-          //     InvalidConsoleCommandError: {
-          //       $tableOfContentsTitle: "<code>InvalidConsoleCommandError</code>",
-          //       $URI: "#"
-          //     }
-          //
-          //   }
-          //
-          // },
+          errorsClasses: {
+
+            $tableOfContentsTitle: localization.NodeJS.errorsClasses.tableOfContentsTitle,
+
+            $children: {
+
+              DesiredFileActuallyIsDirectoryError: {
+                $tableOfContentsTitle: "<code>DesiredFileActuallyIsDirectoryError</code>",
+                $URI: "@All/NodeJS/ErrorsClasses/DesiredFileActuallyIsDirectoryError/" +
+                    `DesiredFileActuallyIsDirectoryError.${ localization.fileNameLocalizationExtensions }.pug`
+              },
+
+              FileNotFoundError: {
+                $tableOfContentsTitle: "<code>FileNotFoundError</code>",
+                $URI: "@All/NodeJS/ErrorsClasses/FileNotFoundError/" +
+                    `FileNotFoundError.${ localization.fileNameLocalizationExtensions }.pug`
+              },
+
+              InvalidConsoleCommandError: {
+                $tableOfContentsTitle: "<code>InvalidConsoleCommandError</code>",
+                $URI: "@All/NodeJS/ErrorsClasses/InvalidConsoleCommandError/" +
+                    `InvalidConsoleCommandError.${ localization.fileNameLocalizationExtensions }.pug`
+              }
+
+            }
+
+          },
 
           // other: {
           //

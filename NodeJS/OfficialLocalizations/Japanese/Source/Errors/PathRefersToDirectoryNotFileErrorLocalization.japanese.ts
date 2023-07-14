@@ -1,7 +1,7 @@
 import type { PathRefersToDirectoryNotFileError } from "@yamato-daiwa/es-extensions-nodejs";
 
 
-const pathRefersToDirectoryNotFileErrorLocalization__russian: PathRefersToDirectoryNotFileError.Localization = {
+const pathRefersToDirectoryNotFileErrorLocalization__japanese: PathRefersToDirectoryNotFileError.Localization = {
   defaultTitle: "対象パスはファイルではなくディレクトリと関連",
   genericDescription:
       ({ targetPath }: PathRefersToDirectoryNotFileError.Localization.CommonDescription.TemplateVariables): string =>
@@ -9,4 +9,4 @@ const pathRefersToDirectoryNotFileErrorLocalization__russian: PathRefersToDirect
 };
 
 
-export default pathRefersToDirectoryNotFileErrorLocalization__russian;
+export default pathRefersToDirectoryNotFileErrorLocalization__japanese;

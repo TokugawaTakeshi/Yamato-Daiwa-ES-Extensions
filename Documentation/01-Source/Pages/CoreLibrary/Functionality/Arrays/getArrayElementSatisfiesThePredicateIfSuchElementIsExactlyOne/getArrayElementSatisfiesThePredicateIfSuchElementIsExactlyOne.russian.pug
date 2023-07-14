@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.russian.pug
-  include ../../../../../Components/Components.russian.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -39,14 +39,21 @@ block append Metadata
     });
 
 
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
 block append SpecificContent
 
   article
 
-    +ProgrammaticEntityHeading({
-      entityName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-      entityLocalizedInterpretation: "Взять удовлетворяющий предикату элемент массива если такой элемент ровно один"
-    })
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      localizedDescriptiveHeading: "Получить элемент массива удовлетворяющего предикату если такой элемент ровно 1",
+      signatures: [
 
         {
           localizedDescriptiveHeading: "Если искомого элемента нет либо таковых больше 1, то будет возвращён null",
