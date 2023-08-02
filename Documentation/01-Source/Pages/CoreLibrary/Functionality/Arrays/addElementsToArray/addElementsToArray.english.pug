@@ -17,8 +17,8 @@ block append Metadata
       description: MetaDescriptionTemplates.function({
         functionName: "addElementsToArray",
         whatFunctionDoes:
-          "adds elements to start, end, or specified position of target array. " +
-          "Mutable or non-mutable adding (however without deep copying) is available."
+            "adds elements to start, end, or specified position of target array. " +
+            "Mutable or non-mutable adding (however without deep copying) is available."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -49,80 +49,83 @@ block append SpecificContent
 
   article
 
-    +CallableExpressionScheme--YDF_DK({
-      technicalName: "addElementsToArray",
-      headingTag: "h1",
-      genericParameters: [ "ArrayElement" ],
-      parametersSpecification: [
-        {
-          genericTechnicalName: "sourceData",
-          type: "SourceData",
-          required: true
-        }
-      ],
-      returnedValue: "Array&lt;ArrayElement&gt;"
-    })(lang="ru")
-      +ObjectTypeAbstract--YDF_DK({
-        typeName: "SourceData",
-        propertiesSpecification: {
-          $intersection: [
-            {
-              newElements: {
-                type: "ReadonlyArray&lt;ArrayElement&gt;",
-                required: true
-              }
-            },
-            [
+    h1.Article-Heading1 addElementsToArray
+
+    //-
+      +CallableExpressionScheme--YDF_DK({
+        technicalName: "addElementsToArray",
+        headingTag: "h1",
+        genericParameters: [ "ArrayElement" ],
+        parametersSpecification: [
+          {
+            genericTechnicalName: "sourceData",
+            type: "SourceData",
+            required: true
+          }
+        ],
+        returnedValue: "Array&lt;ArrayElement&gt;"
+      })
+        +ObjectTypeAbstract--YDF_DK({
+          typeName: "SourceData",
+          propertiesSpecification: {
+            $intersection: [
               {
-                mutably: {
-                  type: "boolean (true only)",
+                newElements: {
+                  type: "ReadonlyArray&lt;ArrayElement&gt;",
                   required: true
+                }
+              },
+              [
+                {
+                  mutably: {
+                    type: "boolean (true only)",
+                    required: true
+                  },
+                  targetArray: {
+                    type: "Array",
+                    required: true
+                  }
                 },
-                targetArray: {
-                  type: "Array",
-                  required: true
+                {
+                  mutably: {
+                    type: "boolean (false only)",
+                    required: true
+                  },
+                  targetArray: {
+                    type: "ReadonlyArray",
+                    required: true
+                  }
                 }
-              },
-              {
-                mutably: {
-                  type: "boolean (false only)",
-                  required: true
+              ],
+              [
+                {
+                  toStart: {
+                    type: "boolean (true only)",
+                    required: true
+                  }
                 },
-                targetArray: {
-                  type: "ReadonlyArray",
-                  required: true
+                {
+                  toEnd: {
+                    type: "boolean (true only)",
+                    required: true
+                  }
+                },
+                {
+                  toPosition__numerationFrom0: {
+                    type: "boolean (true only)",
+                    required: true
+                  }
+                },
+                {
+                  toPosition__numerationFrom1: {
+                    type: "boolean (true only)",
+                    required: true
+                  }
                 }
-              }
-            ],
-            [
-              {
-                toStart: {
-                  type: "boolean (true only)",
-                  required: true
-                }
-              },
-              {
-                toEnd: {
-                  type: "boolean (true only)",
-                  required: true
-                }
-              },
-              {
-                toPosition__numerationFrom0: {
-                  type: "boolean (true only)",
-                  required: true
-                }
-              },
-              {
-                toPosition__numerationFrom1: {
-                  type: "boolean (true only)",
-                  required: true
-                }
-              }
+              ]
             ]
-          ]
-        }
-      }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
+          }
+        }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
 
     p.Article-Paragraph.
       Adds the new #[+Term--YDID elements] to start, end or specified position of the #[+Term--YDID indexed array].
@@ -206,20 +209,621 @@ block append SpecificContent
         With such usage, the target #[+Term--YDID array] could #[+Keyword--YDID not]&nbsp;have the type
           #[+ImportantEntity__Code--YDID ReadonlyArray], because the function will change this #[+Term--YDID array].
 
-      //- ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       p.Article-Paragraph
-        | Thus usage of the #[+Term--YDID function] is close with the #[+Term__Contrast--YDID native method]
+        | This usage of the #[+Term--YDID function] is close with the #[+Term__Contrast--YDID native method]
         |
         +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
         | .
         | The difference is the #[+ImportantEntity__Code--YDID addElementsToArray] is #[+Keyword--YDID always]&nbsp;returns
-        |   the #[+Keyword__Contrast--YDID updated] #[+Term--YDID array], #[+Keyword--YDID not]&nbsp;the count ot its elements
-        |   as #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }].
+        |   the #[+Keyword__Contrast--YDID updated] #[+Term--YDID array], #[+Keyword--YDID not]&nbsp;the count ot its
+        |   elements as #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }] does.
         | Nevertheless, if the elements count of the #[+Keyword--YDID new] #[+Term--YDID array] required, it is possible
         |   to access to the #[+ImportantEntity__Code--YDID length] #[+Term--YDID property] of the
         |   #[+Term--YDID returned value] without defining of the new #[+Term--YDID variable].
 
-      //- TODO 再開点
+      p.Article-Paragraph.
+        In addition unlike #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }] it is completely obvious
+          what #[+ImportantEntity__Code--YDID addElementsToArray] does, where adding the elements and will
+          #[+Keyword--YDID initial] #[+Term--YDID array] change or no.
+        Well, the inputting of the calling of the #[+ImportantEntity__Code--YDID addElementsToArray] takes more time than
+          #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }], however the crystal clearness of the code thus
+          #[+Keyphrase--YDID its maintainability is much important than inputting of the #[+Keyword--YDID initial] code].
+        Unfortunately, it does not convince many programmers especially the ones of the juniors grade, because the
+          human's psychology prefers the momentary profit to the future greater profit.
+        In the development of the web-sites and the software such feature is the cause of the cause of code which
+          hard to maintain which makes the web-sites and software loss-making.
+
+      p.Article-Paragraph
+        | As for the inputting speed, the modern #[+Term--YDID Integrated Development Environments] (#[+Term--YDID IDEs])
+        |   solves such problems well.
+        | In particular, for the
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
+        }).Article-Link IntelliJ IDEA family IDEs
+        |
+        |   the
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
+        }).Article-Link official YDEE plugin
+        |   is being supported which includes the
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
+        }).Article-Link templates for quick inputted (so-called "Live templates")
+        |   among them the one for #[+ImportantEntity__Code--YDID addElementsToArray].
 
 
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+
+    mixin NoticeAboutOneLevelCopying
+
+      p.Article-Paragraph.
+        However, this #[+Term--YDID function] #[+Keyword--YDID not] creating the #[+Keyword--YDID full] ("deep")
+          #[+Term--YDID copy] of the #[+Term--YDID array].
+        First of all, #[+Keyphrase--YDID generally] it is #[+Keyword--YDID impossible] to create the #[+Keyword--YDID deep]
+          #[+Term--YDID copy] of the #[+Keyword__Contrast--YDID arbitrary] #[+Term__Contrast--YDID object]
+          (#[+Keyphrase--YDID in the ECMAScript-languages], the #[+ImportantEntity--YDID Array] is the
+          #[+Keyword--YDID superset] of the #[+Term--YDID object]).
+        For example, the #[+Term--YDID closures] and added in #[+ImportantEntity--YDID ES2022]
+          #[+Term--YDID private fields] could #[+Keyword--YDID not] be copied, thus the #[+Term--YDID fuction] for the
+          deep copying of the #[+Keyword--YDID arbitrary] #[+Term--YDID object] could #[+Keyword--YDID not] be developed.
+        #[+Keyphrase--YDID In the case of adding of the elements to the #[+Term--YDID array]] it is #[+Keyword--YDID not]&nbsp;
+          critical even in #[+SecondaryEntity--YDID React], what can not be said about changing of the properties of the
+          object-type array #[+Term--YDID elements]: both new #[+Term--YDID array] itself and the new element based
+          on the previous one #[+Keyword--YDID need] to be created.
+
+
+    mixin AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment(properties)
+
+      -
+
+        const { newElementsCount, toEnd } = properties;
+
+      p.Article-Paragraph
+        | In the case of the #[+Keyword--YDID immutable] adding of the elements #[+Keyword--YDID new] #[+Term--YDID array]
+        |   based on the previous one will be created, then specified element#{ newElementsCount > 1 ? "s" : "" }
+        |   will be added to the #[+Keyword--YDID new] one.
+        | This way the #[+Keyword--YDID initial] #[+Term--YDID array] #[+SecondaryEntity__Code--YDID sampleArray] will
+        |   #[+Keyword--YDID not] mutate while the #[+Term__Contrast--YDID new] one
+        |   (#[+SecondaryEntity__Code--YDID updatedSampleArray]) will have the value
+        |
+        if newElementsCount === 1
+          if toEnd
+            +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+          else
+            +SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          if toEnd
+            +SecondaryEntity__Code--YDID
+              | [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+          else
+            +SecondaryEntity__Code--YDID
+              | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | .
+
+      p.Article-Paragraph.
+        Such anti-intuitive manipulations are demanded mainly in the #[+Term--YDID frontend frameworks], developers of
+          some of them (e. g. #[+SecondaryEntity--YDID React]) assigns to the users the routines of creating of
+          new #[+Term--YDID state object] based on the outdated one.
+        #[+ImportantEntity__Code--YDID addElementsToArray] allows to write more clear code, in particular when it is
+          required to add one or more elements to the #[+Keyword--YDID intermediate] positions of the #[+Term--YDID array],
+          the code will be more simple.
+
+      +NoticeAboutOneLevelCopying
+
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: false })
+
+
+    h3.Article-Heading3 Adding of one element to the end of array
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: true })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: true })
+
+
+    h3.Article-Heading3 Adding of one element to the specific position of array (numeration from 0)
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    mixin AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment(properties)
+
+      - const { numerationFrom, newElementsCount } = properties
+
+      p.Article-Paragraph
+        | Adding the new
+        |
+        if newElementsCount === 1
+          | element #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        else
+          | elements #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] and #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        |
+        |   to #[+SecondaryEntity--YDID #{ numerationFrom === 0 ? "1st" : "2nd" }] position
+        |   (#[+Keyphrase--YDID counting from #[+SecondaryEntity--YDID #{ numerationFrom }]]).
+        | Because the #[+Keyword--YDID initially] #[+Term--YDID array] had #[+SecondaryEntity--YDID 2] elements,
+        |   the new element#{ newElementsCount === 1 ? "" : "s" } will be between them and the #[+Keyword--YDID updated]
+        |#[+Term--YDID array] will be:
+        |
+        if newElementsCount === 1
+          +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | .
+
+      p.Article-Paragraph.
+        The same thing could be done without libraries by the native #[+Term--YDID method]
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], but:
+
+      ul.Article-UnorderedList
+
+        li.
+          This method designed primarily for the #[+Keyword--YDID deleting] of the elements from the #[+Term--YDID array].
+          If we need #[+Keyword--YDID only] #[+Keyword__Contrast--YDID add] new element #[+Keyphrase--YDID wihtout deleting],
+            the #[+ImportantEntity--YDID 2nd] #[+Term--YDID parameter] will get in the way
+            (in such use case of this #[+Term--YDID method] it must be #[+SecondaryEntity--YDID 0]).
+
+        li.
+          It a little had to memorize: the purpose of each #[+Term--YDID parameter] is #[+Keyword--YDID not] obvious.
+          One parameter is the #[+Term--YDID index] of element, another one is the #[+Keyword--YDID quantity] of elements,
+            and the the elements themself.
+
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    mixin AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment(properties)
+
+      - const { numerationFrom, newElementsCount } = properties
+
+      p.Article-Paragraph
+        | With #[+ImportantEntity__Code--YDID mutably: false] the #[+Keyword--YDID new] #[+Term--YDID array] based on
+        |   initial one, then all manipulation will be executed with #[+Keyword--YDID new] one.
+        | In this example, after creating of #[+Keyword--YDID new] #[+Term--YDID array] the
+        if newElementsCount === 1
+          | element #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        else
+          | elements #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] and
+          | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        |   will be added to position #[+SecondaryEntity--YDID #{ numerationFrom + 1 }]
+        |   #[+Keyphrase--YDID with counting from #[+SecondaryEntity--YDID #{ numerationFrom }]].
+        | As result the #[+Keyword--YDID new] #[+Term--YDID array] will be:
+        |
+        if newElementsCount === 1
+          | #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
+        else
+          | #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
+
+      +NoticeAboutOneLevelCopying
+
+      p.Article-Paragraph.
+        Until recently, wihtout usage of the third-party libraries same manipulation could not be done with single
+          expression, so it was required to:
+
+      ol.Article-OrderedList
+        li create the new #[+Term--YDID array]
+        li copy the elements to this new #[+Term--YDID array]
+        li call the method #[+ImportantEntity__Code--YDID splice] of the #[+Keyword--YDID new] #[+Term--YDID array]
+
+      p.Article-Paragraph.
+        Well, these routines is exactly what #[+ImportantEntity__Code--YDID addElementsToArray] does instead of you when
+          #[+ImportantEntity__Code--YDID mutable] option has #[+ImportantEntity__Code--YDID false] value.
+
+      p.Article-Paragraph.
+        In #[+ImportantEntity--YDID 2023], the #[+ImportantEntity__Code--YDID toSpliced] method has been developed, which
+          does same things as #[+ImportantEntity__Code--YDID splice], but #[+Keyword--YDID preliminary] created the
+          #[+Keyword__Contrast--YDID new] #[+Term--YDID array] based on initial one.
+        For the #[+ImportantEntity--YDID spring of 2023], it has been supported by #[+Keyword--YDID not] all popular browsers,
+          and in #[+ImportantEntity--YDID Node.js] this method has become available from version #[+ImportantEntity--YDID 20].
+        Anyway, it still required to memorize what #[+Term--YDID parameters] of #[+ImportantEntity__Code--YDID splice]
+          and #[+ImportantEntity__Code--YDID toSpliced] means, thus the #[+ImportantEntity__Code--YDID addElementsToArray]
+          is sill actual and removing of this #[+Term--YDID function] from library because of appearance of
+          #[+ImportantEntity__Code--YDID toSpliced] #[+Keyword--YDID not] planning.
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
+
+
+    h3.Article-Heading3 Adding of one element to the specific position of array (numeration from 0)
+
+    p.Article-Paragraph.
+      Although in the programming the counting from  #[+ImportantEntity--YDID 0] is standardized, it frequently
+        confuses thus could the source of mistakes.
+      This problem was the motivation for adding of the #[+ImportantEntity__Code--YDID toPosition__numerationFrom1]
+        option which could be specified #[+Keyphrase--YDID instead of]
+        #[+ImportantEntity__Code--YDID toPosition__numerationFrom0].
+
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 2,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 2,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 1 })
+
+
+    h3.Article-Heading3 Adding of multiple element to the start of array
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: false })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toStart: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: false })
+
+
+    h3.Article-Heading3 Adding of multiple element to the end of array
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toEnd: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: true })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toEnd: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: true })
+
+
+    h3.Article-Heading3 Adding of multiple element to specific position (numeration from 0)
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
+
+
+    h3.Article-Heading3 Adding of multiple element to specific position (numeration from 1)
+
+    h4.Article-Heading4 Mutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 2,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    h4.Article-Heading4 Immutable adding
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :html_special_characters_to_html_entities
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate",
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          Copy to the #[+Term--YDID variable] name containing the #[+Term--YDID массив] array or
+            #[+Term--YDID array expression] itself to the clipboard.
+          To make possible for the #[+Term--YDID IDE] to fill by the correct value the position of sole
+            #[+Term--YDID parameter], please shape the habit to do this copying each time before input the
+            #[+Term--YDID Live template] of the #[+ImportantEntity--YDID addElementsToArray] #[+Term--YDID function].
+
+        li
+
+          | Begin to input the #[+Term--YDID function] name (#[+ImportantEntity--YDID addElementsToArray]).
+          | It will be #[+ImportantEntity--YDID 2] autocompletes:
+
+          ol.Article-OrderedList
+
+            li.
+              Circled icon with the letter: it is the autocompletion of the #[+Term--YDID function] name, the
+                #[+Keyword--YDID standard] functionality of the #[+Term--YDID IDE].
+              If to press the #[+ImportantEntity--YDID Enter] key, the full #[+Term--YDID function] name will be inputted
+                and also the function #[+Term--YDID import] declaration will be inserted if required.
+              Not bad, but the better automation is possible.
+
+            li.
+              The icon with the cliche: it is the template we need.
+              Press #[+ImportantEntity--YDID Enter] again.
+              The code template will be inserted herewith the value of the #[+ImportantEntity__Code--YDID targetArray]
+                property will be filled with the clipboard content and selected by the cursor.
+              If to follow this manual no need to edit the inserted value, so exit the
+                #[+ImportantEntity__Code--YDID targetArray] property editing mode by pressing the
+                #[+ImportantEntity--YDID Enter] agan.
+
+        li.
+          Fill the value of #[+ImportantEntity__Code--YDID newElements] by the plain typing.
+          Once finish, press the #[+ImportantEntity--YDID Enter].
+          If the unwanted (for this time) autocomplete will interfere you, press #[+ImportantEntity--YDID Esc] first.
+
+        li.
+          It will be suggested to select the value of the #[+ImportantEntity--YDID mutably] property be the dropdown list.
+          The #[+ImportantEntity__Code--YDID true] value is pre-selected: if you need this, proceed to next step
+            by the pressing of #[+ImportantEntity--YDID Enter].
+          Otherwise, using the down arrow key, select option #[+ImportantEntity__Code--YDID false] option first.
+
+        li.
+          It will be suggested to input the value of #[+ImportantEntity__Code--YDID toPosition__numerationFrom0] property.
+          Once input, the value of #[+ImportantEntity__Code--YDID toPosition__numerationFrom1] will be filled too,
+            however #[+Keyphrase--YDID at least on of these two] must be deleted.
+          If you need one of these option, input the numeric value of name of desired variable.
+          Anyway, once done, press the #[+ImportantEntity__Code--YDID Enter].
+
+        li.
+          Delete the unnecessary code.
+          Among #[+ImportantEntity__Code--YDID toStart], #[+ImportantEntity__Code--YDID toEnd],
+            #[+ImportantEntity__Code--YDID toPosition__numerationFrom0] and
+            #[+ImportantEntity__Code--YDID toPosition__numerationFrom1] #[+Keyword--YDID only]
+            #[+Keyword__Contrast--YDID one] must left.
+
+      p.Article-Paragraph.
+        You can use the #[+Keyword--YDID alias] of this #[+Term--YDID LiveTemplate] — #[+ImportantEntity__Code--YDID aeta],
+          which consists from first letters of all words of the function name.
+        However, the disadvantage os such aliases is harder to memorize, while to get the autocomplete of
+          #[+ImportantEntity--YDID addElementsToArray] it is enough to remember from which letters function name begins.

@@ -17,8 +17,8 @@ block append Metadata
       description: MetaDescriptionTemplates.function({
         functionName: "addElementsToArray",
         whatFunctionDoes:
-          "добавляет новые элементы в начало, конец или указанную позицию массива. " +
-          "Возможно как изменение начального массива, так и создание нового на основе старого (но без глубокого копирования)."
+            "добавляет новые элементы в начало, конец или указанную позицию массива. " +
+            "Возможно как изменение начального массива, так и создание нового на основе старого (но без глубокого копирования)."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -49,92 +49,95 @@ block append SpecificContent
 
   article
 
-    +CallableExpressionScheme--YDF_DK({
-      technicalName: "addElementsToArray",
-      headingTag: "h1",
-      localizedDescriptiveHeading: "Добавить элементов в массив",
-      genericParameters: [ "ArrayElement" ],
-      parametersSpecification: [
-        {
-          genericTechnicalName: "sourceData",
-          localizedName: "Входные данные",
-          type: "SourceData",
-          required: true
-        }
-      ],
-      returnedValue: "Array&lt;ArrayElement&gt;"
-    })(lang="ru")
-      +ObjectTypeAbstract--YDF_DK({
-        typeName: "SourceData",
-        localizedDescriptiveHeading: "Входные данные",
-        propertiesSpecification: {
-          $intersection: [
-            {
-              newElements: {
-                localizedInterpretation: "Новые элементы",
-                type: "ReadonlyArray&lt;ArrayElement&gt;",
-                required: true
-              }
-            },
-            [
+    h1.Article-Heading1 addElementsToArray
+
+    //-
+      +CallableExpressionScheme--YDF_DK({
+        technicalName: "addElementsToArray",
+        headingTag: "h1",
+        localizedDescriptiveHeading: "Добавить элементов в массив",
+        genericParameters: [ "ArrayElement" ],
+        parametersSpecification: [
+          {
+            genericTechnicalName: "sourceData",
+            localizedName: "Входные данные",
+            type: "SourceData",
+            required: true
+          }
+        ],
+        returnedValue: "Array&lt;ArrayElement&gt;"
+      })
+        +ObjectTypeAbstract--YDF_DK({
+          typeName: "SourceData",
+          localizedDescriptiveHeading: "Входные данные",
+          propertiesSpecification: {
+            $intersection: [
               {
-                mutably: {
-                  localizedInterpretation: "Мутабельно",
-                  type: "boolean (только true)",
+                newElements: {
+                  localizedInterpretation: "Новые элементы",
+                  type: "ReadonlyArray&lt;ArrayElement&gt;",
                   required: true
+                }
+              },
+              [
+                {
+                  mutably: {
+                    localizedInterpretation: "Мутабельно",
+                    type: "boolean (только true)",
+                    required: true
+                  },
+                  targetArray: {
+                    localizedInterpretation: "Целевой массив",
+                    type: "Array",
+                    required: true
+                  }
                 },
-                targetArray: {
-                  localizedInterpretation: "Целевой массив",
-                  type: "Array",
-                  required: true
+                {
+                  mutably: {
+                    localizedInterpretation: "Мутабельно",
+                    type: "boolean (только false)",
+                    required: true
+                  },
+                  targetArray: {
+                    localizedInterpretation: "Целевой массив",
+                    type: "ReadonlyArray",
+                    required: true
+                  }
                 }
-              },
-              {
-                mutably: {
-                  localizedInterpretation: "Мутабельно",
-                  type: "boolean (только false)",
-                  required: true
+              ],
+              [
+                {
+                  toStart: {
+                    localizedInterpretation: "В начало",
+                    type: "boolean (только true)",
+                    required: true
+                  }
                 },
-                targetArray: {
-                  localizedInterpretation: "Целевой массив",
-                  type: "ReadonlyArray",
-                  required: true
+                {
+                  toEnd: {
+                    localizedInterpretation: "В конец",
+                    type: "boolean (только true)",
+                    required: true
+                  }
+                },
+                {
+                  toPosition__numerationFrom0: {
+                    localizedInterpretation: "На конкретную позицию (счёт с 0)",
+                    type: "boolean (только true)",
+                    required: true
+                  }
+                },
+                {
+                  toPosition__numerationFrom1: {
+                    localizedInterpretation: "На конкретную позицию (счёт с 1)",
+                    type: "boolean (только true)",
+                    required: true
+                  }
                 }
-              }
-            ],
-            [
-              {
-                toStart: {
-                  localizedInterpretation: "В начало",
-                  type: "boolean (только true)",
-                  required: true
-                }
-              },
-              {
-                toEnd: {
-                  localizedInterpretation: "В конец",
-                  type: "boolean (только true)",
-                  required: true
-                }
-              },
-              {
-                toPosition__numerationFrom0: {
-                  localizedInterpretation: "На конкретную позицию (счёт с 0)",
-                  type: "boolean (только true)",
-                  required: true
-                }
-              },
-              {
-                toPosition__numerationFrom1: {
-                  localizedInterpretation: "На конкретную позицию (счёт с 1)",
-                  type: "boolean (только true)",
-                  required: true
-                }
-              }
+              ]
             ]
-          ]
-        }
-      }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
+          }
+        }).CallableExpressionScheme--YDF_DK-AppendixGridFlow-FullWidthItem
 
     p.Article-Paragraph.
       Добавляет новые #[+Term--YDID элементы] в начало, конец или указанную позицию #[+Term--YDID индексного массива].
@@ -218,15 +221,14 @@ block append SpecificContent
         При таком варианте использования целевой #[+Term--YDID массив] (#[+ImportantEntity__Code--YDID targetArray])
           #[+Keyword--YDID не]&nbsp;может иметь тип #[+ImportantEntity__Code--YDID ReadonlyArray],
           поскольку функция будет вносить изменения в этот #[+Term--YDID массив].
-      //- ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       p.Article-Paragraph
         | Такое использование #[+Term--YDID функции] близко к #[+Term__Contrast--YDID нативному методу]
         |
         +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
         | .
         | Разница в том, что #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID всегда]&nbsp;возвращает
-        |   #[+Keyword__Contrast--YDID обновлённый] #[+Term--YDID массив], а #[+Keyword--YDID не]&nbsp;его количество элементов,
-        |   как #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }].
+        |   #[+Keyword__Contrast--YDID обновлённый] #[+Term--YDID массив], а #[+Keyword--YDID не]&nbsp;его количество
+        |   элементов, как #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }].
         | Впрочем, если нужно количество элементов #[+Keyword--YDID нового] #[+Term--YDID массива], то можно обратиться
         |   к #[+Term--YDID свойству] #[+ImportantEntity__Code--YDID length] у #[+Term--YDID возвращаемого значения]
         |   без определения новой #[+Term--YDID переменной].
@@ -234,24 +236,32 @@ block append SpecificContent
       p.Article-Paragraph.
         К тому же в отличие от #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }] при знании базового английского
           полностью очевидно, что делает #[+ImportantEntity__Code--YDID addElementsToArray], куда добавляет элементы и
-          произойдёт ли что-то с #[+Keyword--YDID исходным] #[+Term--YDID массивом].
+          произойдёт ли что-то с #[+Keyword--YDID исходным] #[+Term--YDID массивом] или нет.
         Да, вызов #[+ImportantEntity__Code--YDID addElementsToArray] набирать на клавиатуре дольше, чем
           #[+ImportantEntity__Code--YDID #{ similarNativeMethodName }], но кристально прозрачная понятность кода а значит его
           #[+Keyphrase--YDID поддерживаемость гораздо важнее, чем скорость ввода #[+Keyword--YDID начального] кода].
         К сожалению, многих программистов (особенно начинающих) это не&nbsp;убеждает, потому что человеческая психология
-          между сиюминутной выгодой и большей выгодой в будущем склонна выбирать первое.
-        В программировании эта склонность во многом ответственна за код, который быстро становится крайне трудно
-          поддерживать, что делает разрабатываемые сайты и приложения убыточными.
+          предпочитает сиюминутную выгоду большей выгоде будущем.
+        В разработке сайтов и программного обеспечения эта склонность во многом ответственна за код, который быстро
+          становится крайне трудно поддерживать, что делает разрабатываемые сайты и приложения убыточными.
 
-      p.Article-Paragraph.
-        Что касается скорости ввода, то современные #[+Term--YDID интегрированные среды разработки] позволяют эти
-          проблемы решить.
-        В частности для
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IDE IntelliJ IDEA]
-          поддерживается
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin }).Article-Link IDE плагин] с
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates }).Article-Link IDE шаблонами быстрого ввода],
-          в том числе и для #[+ImportantEntity__Code--YDID addElementsToArray].
+      p.Article-Paragraph
+        | Что касается скорости ввода, то современные #[+Term--YDID интегрированные среды разработки] позволяют эти
+        |   проблемы решить.
+        | В частности для
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
+        }).Article-Link интегрированных сред разработки семейства IntelliJ IDEA
+        |
+        |   поддерживается
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
+        }).Article-Link официальный плагин YDEE
+        |   , включающий в себя
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
+        }).Article-Link шаблоны быстрого ввода
+        | , в том числе и для #[+ImportantEntity__Code--YDID addElementsToArray].
 
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })
 
@@ -277,6 +287,25 @@ block append SpecificContent
           console.log(updatedSampleArray);
 
 
+    mixin NoticeAboutOneLevelCopying
+
+      p.Article-Paragraph.
+        Однако, #[+Keyword--YDID полную] («глубокую») #[+Term--YDID копию] #[+Term--YDID массива] эта #[+Term--YDID функция]
+          #[+Keyword--YDID не]&nbsp;делает.
+        Начнём с того, что #[+Keyphrase--YDID в общем случае] #[+Keyword--YDID полную] #[+Term--YDID копию]
+          #[+Keyword__Contrast--YDID произвольного] #[+Term__Contrast--YDID объекта] (а #[+ImportantEntity--YDID Array]
+          — это #[+Keyword--YDID частный случай] #[+Term--YDID объекта] #[+Keyphrase--YDID в ECMAScript-языках]) сделать
+          #[+Keyword--YDID невозможно].
+        Например, #[+Term--YDID замыкания] и добавленные в #[+ImportantEntity--YDID ES2022]
+          #[+Term--YDID закрытые поля] #[+Keyword--YDID не]&nbsp;могут быть скопированы, а значит #[+Term--YDID функция] для
+          глубокого копирования #[+Keyword--YDID произвольного] #[+Term--YDID объекта]
+          #[+Keyword__Contrast--YDID не]&nbsp;может быть разработана.
+        #[+Keyphrase--YDID В случае с добавлением новых элементов в #[+Term--YDID массив]] это #[+Keyword--YDID не]&nbsp;
+          критично даже в #[+SecondaryEntity--YDID React], чего нельзя сказать про изменение свойств элемента типа
+          «объект» в #[+Term--YDID массиве] — придётся создавать как новый #[+Term--YDID массив], так и новый элемент
+          на основе старого.
+
+
     mixin AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment(properties)
 
       -
@@ -285,8 +314,13 @@ block append SpecificContent
 
       p.Article-Paragraph
         | В случае #[+Keyword--YDID немутирующего] добавления элементов будет создан #[+Keyword--YDID новый]
-        |   #[+Term--YDID массив] на основе старого, и только затем в #[+Keyword--YDID новый] будет добавлен указанный элемент.
-        | Таким образом, #[+Keyword--YDID исходный] массив #[+SecondaryEntity__Code--YDID sampleArray] останется
+        |   #[+Term--YDID массив] на основе старого, и только затем в #[+Keyword--YDID новый]
+        if newElementsCount === 1
+          | будет добавлен указанный элемент
+        else
+          | будут добавлены указанные элементы
+        | .
+        | Таким образом, #[+Keyword--YDID исходный] #[+Term--YDID массив] #[+SecondaryEntity__Code--YDID sampleArray] останется
         |   #[+Keyword--YDID неизменным], а #[+Term__Contrast--YDID новый] (#[+SecondaryEntity__Code--YDID updatedSampleArray])
         |   будет иметь значение
         |
@@ -312,19 +346,7 @@ block append SpecificContent
           один или больше элементов на #[+Keyword--YDID промежуточные] позиции #[+Term--YDID массива], то код будет
           ещё и значительно проще.
 
-      p.Article-Paragraph.
-        Однако, #[+Keyword--YDID полную] ("глубокую") #[+Term--YDID копию] #[+Term--YDID массива] эта функция
-          #[+Keyword--YDID не]&nbsp;делает.
-        Начнём с того, что #[+Keyphrase--YDID в общем случае] #[+Keyword--YDID полную] #[+Term--YDID копию] сделать
-          #[+Keyword--YDID невозможно].
-        Например, #[+Term--YDID замыкания] и добавленные в #[+ImportantEntity--YDID ES2022]
-          #[+Term--YDID закрытые поля] #[+Keyword--YDID не]&nbsp;могут быть скопированы, а значит #[+Term--YDID функция] для
-          глубокого копирования #[+Keyword--YDID произвольного] #[+Term--YDID объекта]
-          #[+Keyword__Contrast--YDID не]&nbsp;может быть разработана.
-        #[+Keyphrase--YDID В случае с добавлением нового элемента в #[+Term--YDID массив]] это #[+Keyword--YDID не]&nbsp;
-          критично даже в #[+SecondaryEntity--YDID React], чего нельзя сказать про изменение свойств элемента типа
-          "объект" в #[+Term--YDID массиве] - придётся создавать как новый #[+Term--YDID массив], так и новый элемент
-          на основе старого.
+      +NoticeAboutOneLevelCopying
 
 
     +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: false })
@@ -398,6 +420,7 @@ block append SpecificContent
 
           console.log(sampleArray);
 
+
     mixin AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment(properties)
 
       - const { numerationFrom, newElementsCount } = properties
@@ -412,9 +435,10 @@ block append SpecificContent
         |
         |   на #[+SecondaryEntity--YDID #{ numerationFrom === 0 ? "1-ую" : "2-ую" }] позицию
         |   #[+Keyphrase--YDID при счёте с #[+SecondaryEntity--YDID #{ numerationFrom }]].
-        | Так как изначально в #[+Term--YDID массиве] #[+SecondaryEntity--YDID 2] элемента, то
-        | #[+Keyword--YDID новы#{ newElementsCount === 1 ? "й" : "е" }] элемент#{ newElementsCount === 1 ? "" : "ы" }
-        |   #{ newElementsCount === 1 ? "окажется" : "окажутся" } ровно между ними и обновлённый #[+Term--YDID массив] будет:
+        | Так как #[+Keyword--YDID изначально] в #[+Term--YDID массиве] #[+SecondaryEntity--YDID 2] элемента, то
+        |   #[+Keyword--YDID новы#{ newElementsCount === 1 ? "й" : "е" }] элемент#{ newElementsCount === 1 ? "" : "ы" }
+        |   #{ newElementsCount === 1 ? "окажется" : "окажутся" } ровно между ними и #[+Keyword--YDID обновлённый]
+        |   #[+Term--YDID массив] будет:
         |
         if newElementsCount === 1
           +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
@@ -422,23 +446,22 @@ block append SpecificContent
           +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         | .
 
-
       p.Article-Paragraph.
-        Сделать то же самое без использования библиотеки можно с помощью #[+Term--YDID метода]
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], но:
+        Сделать то же самое без использования библиотек можно с помощью нативного #[+Term--YDID метода]
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], но:
 
       ul.Article-UnorderedList
 
         li.
           Этот метод рассчитан в первую очередь на #[+Keyword--YDID удаление] элементов из #[+Term--YDID массива].
           Если нам нужно #[+Keyword--YDID только] #[+Keyword__Contrast--YDID добавить] новые элементы
-            #[+Keyphrase--YDID ничего не&nbsp;удаляя], то нам будут мешаться #[+ImportantEntity--YDID 2-ой] параметр
-            (при таком варианте использования #[+Term--YDID метода] он #[+Keyword--YDID должен] иметь значение
-            #[+SecondaryEntity--YDID 0]).
+            #[+Keyphrase--YDID ничего не&nbsp;удаляя], то нам будут мешаться #[+ImportantEntity--YDID 2-ой]
+            #[+Term--YDID параметр] (при таком варианте использования этого #[+Term--YDID метода] он #[+Keyword--YDID должен]
+            иметь значение #[+SecondaryEntity--YDID 0]).
 
         li.
-          Он сложноват для чтения и запоминания - неочевидно, какие #[+Term--YDID параметры] за что отвечают.
-          Один параметр обозначают #[+Term--YDID индекс] элемента, другой - #[+Keyword--YDID количество] элементов,
+          Он сложноват для чтения и запоминания: неочевидно, какие #[+Term--YDID параметры] за что отвечают.
+          Один параметр обозначают #[+Term--YDID индекс] элемента, другой — #[+Keyword--YDID количество] элементов,
             а далее и вовсе идут новые элементы.
 
     +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
@@ -470,14 +493,15 @@ block append SpecificContent
 
       p.Article-Paragraph
         | При #[+ImportantEntity__Code--YDID mutably: false] будет создан #[+Keyword--YDID новый]
-        |   #[+Term--YDID массив] на основе старого, а дальнейшие манипуляции будут проводиться с #[+Keyword--YDID новым].
-        | В данном примере, после создания нового #[+Term--YDID массива] на позицию #[+SecondaryEntity--YDID #{ numerationFrom + 1 }]
+        |   #[+Term--YDID массив] на основе исходого, а дальнейшие манипуляции будут проводиться с #[+Keyword--YDID новым].
+        | В данном примере, после создания #[+Keyword--YDID нового] #[+Term--YDID массива] на позицию
+        |   #[+SecondaryEntity--YDID #{ numerationFrom + 1 }]
         |   #[+Keyphrase--YDID при счёте с #[+SecondaryEntity--YDID #{ numerationFrom }]]
         |
         if newElementsCount === 1
-          | будет добавлен новый элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+          | будет добавлен элемент #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
         else
-          | будут добавлены новые элементы #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] и
+          | будут добавлены элементы #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"] и
           | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
         | , в результате чего #[+Keyword--YDID новый] #[+Term--YDID массив] будет:
         |
@@ -486,9 +510,11 @@ block append SpecificContent
         else
           | #[+SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" &rsqb; ].
 
+      +NoticeAboutOneLevelCopying
+
       p.Article-Paragraph.
-        До недавнего времени нативного аналога #[+Keyword--YDID не] было, потому для достижения такого же эффекта без
-          использования сторонних библиотек приходилось:
+        До недавнего времени без использования библиотек проделать все эти манипуляции в одного выражение было
+          невозможно, потому для достижения такого же эффекта приходилось:
 
       ol.Article-OrderedList
         li Создавать новый #[+Term--YDID массив]
@@ -496,13 +522,13 @@ block append SpecificContent
         li Вызывать метод #[+ImportantEntity__Code--YDID splice] у #[+Keyword--YDID нового] #[+Term--YDID массива]
 
       p.Article-Paragraph.
-        Собственно, именно эти рутины #[+ImportantEntity__Code--YDID addElementsToArray] и делает за Вас при соответствующих
-          опциях.
+        Собственно, именно эти рутины #[+ImportantEntity__Code--YDID addElementsToArray] и делает за Вас при
+          #[+ImportantEntity__Code--YDID mutable: false].
 
       p.Article-Paragraph.
         В #[+ImportantEntity--YDID 2023] году введён метод #[+ImportantEntity__Code--YDID toSpliced], который делает
           всё то же, что и #[+ImportantEntity__Code--YDID splice], но при этом #[+Keyword--YDID предварительно] создаёт
-          #[+Keyword__Contrast--YDID новый] #[+Term--YDID массив].
+          #[+Keyword__Contrast--YDID новый] #[+Term--YDID массив] на основе исходного.
         На момент #[+ImportantEntity--YDID весны 2023], он поддерживался #[+Keyword--YDID не] всеми популярными браузерами,
           а в #[+ImportantEntity--YDID Node.js] данный метод появился в версии #[+ImportantEntity--YDID 20].
         Так или иначе, необходимость запоминать, что означают #[+Term--YDID параметры] #[+ImportantEntity__Code--YDID splice] и
@@ -519,7 +545,9 @@ block append SpecificContent
       Хотя в программировании и стандартизирован счёт с #[+ImportantEntity--YDID 0], зачастую он запутывает,
         а потому является источником ошибок.
       Этой проблеме и обязано наличие опции #[+ImportantEntity__Code--YDID toPosition__numerationFrom1], которая, как
-        следует из перевода, позволяет указать позицию при счёте с #[+ImportantEntity--YDID 1].
+        следует из перевода, позволяет указать позицию при счёте с #[+ImportantEntity--YDID 1] и должна быть указана
+        #[+Keyword--YDID вместо] #[+ImportantEntity__Code--YDID toPosition__numerationFrom0].
+
 
     h4.Article-Heading4 Мутирующее добавление
 
@@ -759,32 +787,34 @@ block append SpecificContent
       ol.Article-OrderedList
 
         li.
-          Скопируйте в буфер обмен имя переменной, содержащей #[+Term--YDID массив], либо само
+          Скопируйте в буфер обмен имя #[+Term--YDID переменной], содержащей #[+Term--YDID массив], либо само
             #[+Term--YDID выражение массива].
-          Пожалуйста, сформируйте привычку делать это перед тем, как вызывать #[+Term--YDID Live template] функции
-            #[+ImportantEntity--YDID addElementsToArray], чтобы среда разработки смогла автоматически заполнить первый
-            #[+Term--YDID параметр] нужным значением.
+          Чтобы #[+Term--YDID среда разработки] смогла автоматически заполнить позицию единственного #[+Term--YDID параметра]
+            нужным значением, сформируйте привычку делать это копирование перед тем, как начинать вводить
+            #[+Term--YDID Live template] #[+Term__Contrast--YDID функции] #[+ImportantEntity--YDID addElementsToArray].
 
         li
-          | Начните набирать имя функции &mdash; #[+ImportantEntity--YDID addElementsToArray].
+
+          | Начните набирать имя #[+Term--YDID функции] — #[+ImportantEntity--YDID addElementsToArray].
           | Подсветится #[+ImportantEntity--YDID 2] варианта автодополнения:
 
           ol.Article-OrderedList
 
             li.
-              Круглая иконка с буквой - это просто автодополнение имени функции; стандартная функциональность среды разработки.
-              Нажатие на #[+ImportantEntity--YDID Enter] введёт полное имя функции, а также добавить код объявления
-                импорта этой функции, если такового пока нет.
+              Круглая иконка с буквой — это просто автодополнение имени #[+Term--YDID функции]; #[+Keyword--YDID стандартная]
+                функциональность #[+Term--YDID среды разработки].
+              Нажатие на #[+ImportantEntity--YDID Enter] введёт полное имя #[+Term--YDID функции], а также при необходимости
+                объявления #[+Term--YDID импорта] этой #[+Term__Contrast--YDID функции].
               Неплохо, однако это не предел, до которого можно частично автоматизировать процесс.
 
             li.
-              Иконка с клише - это как раз нужный шаблон.
+              Иконка с клише — это как раз нужный шаблон.
               Нажмите #[+ImportantEntity--YDID Enter].
               Произойдёт вставка шаблона кода, при этом значение свойства #[+ImportantEntity__Code--YDID targetArray]
                 будет автоматически выделено и заполнено содержимым буфера обмена.
-              Поскольку при следовании данному алгоритму менять подставленное значение
-                #[+ImportantEntity__Code--YDID targetArray] на другое не требуется, то нажмите
-                #[+ImportantEntity--YDID Enter] ещё раз.
+              Поскольку при следовании данному руководству менять подставленное значение
+                #[+ImportantEntity__Code--YDID targetArray] на другое не требуется, выйдете из режима редактирования
+                свойства #[+ImportantEntity__Code--YDID targetArray], нажав #[+ImportantEntity--YDID Enter] ещё раз.
 
         li.
           Заполните значение #[+ImportantEntity__Code--YDID newElements] простым вводом символов.
@@ -793,15 +823,15 @@ block append SpecificContent
             #[+ImportantEntity--YDID Esc].
 
         li.
-          Будет предложено выбрать значение параметра #[+ImportantEntity--YDID mutably] из выпадающего списка.
-          По умолчанию выбрано значение #[+ImportantEntity__Code--YDID true] - если Вам оно и нужно, то сразу нажимайте
+          Будет предложено выбрать значение свойства #[+ImportantEntity--YDID mutably] из выпадающего списка.
+          По умолчанию выбрано значение #[+ImportantEntity__Code--YDID true] — если Вам оно и нужно, то сразу нажимайте
             #[+ImportantEntity--YDID Enter], в противном случае предварительно клавишей со стрелкой вниз выберете
             опцию #[+ImportantEntity__Code--YDID false].
 
         li.
-          Будет преложено введи значение опции #[+ImportantEntity__Code--YDID toPosition__numerationFrom0].
+          Будет преложено введи значение свойства #[+ImportantEntity__Code--YDID toPosition__numerationFrom0].
           Одновременно с ним, будет введено и значение #[+ImportantEntity__Code--YDID toPosition__numerationFrom1],
-            однако #[+Keyphrase--YDID как минимум одно из] этих свойств всё равно потребуется удалить.
+            однако #[+Keyphrase--YDID как минимум одно из]&nbsp;этих свойств всё равно потребуется удалить.
           Если Вам нужна одна из этих опций, то введите нужное числовое значение или имя нужной переменной.
           В любом случае, когда закончите этот шаг, нажмите #[+ImportantEntity__Code--YDID Enter].
 
@@ -813,6 +843,7 @@ block append SpecificContent
             #[+Keyword__Contrast--YDID одно].
 
       p.Article-Paragraph.
-        Вы можете использовать #[+Keyword--YDID алиас] этого #[+Term--YDID LiveTemplate-а] -
+        Вы можете использовать #[+Keyword--YDID алиас] этого #[+Term--YDID LiveTemplate-а] —
           #[+ImportantEntity__Code--YDID aeta], состоящий из первых букв всех слов, которые включает в себя имя функции.
-        Однако недостаток таких алиасов в том, что их приходится запоминать.
+        Однако недостаток таких алиасов в том, что их приходится запоминать, а для того, чтобы получить подсказку
+          #[+ImportantEntity--YDID addElementsToArray], достаточно лишь помнить, с чего начинается это имя функции.
