@@ -15,6 +15,7 @@ export { default as getExpectedToBeSingleDOM_Element } from "./DOM/getExpectedTo
 export { default as getExpectedToBeSingleChildOfTemplateElement } from "./DOM/getExpectedToBeSingleChildOfTemplateElement";
 
 /* === Events handling ======================================================================================================== */
+export { default as addInputEventHandler } from "./EventsHandling/addInputEventHandler";
 export { default as addLeftClickEventHandler } from "./EventsHandling/addLeftClickEventHandler";
 export { default as delegateClickEventHandling } from "./EventsHandling/delegateClickEventHandling";
 

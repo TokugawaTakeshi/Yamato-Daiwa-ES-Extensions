@@ -207,7 +207,7 @@ abstract class ObjectDataFilesProcessor {
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-          wrappableError: error
+          innerError: error
         });
       }
 
@@ -261,7 +261,7 @@ abstract class ObjectDataFilesProcessor {
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-          wrappableError: error
+          innerError: error
         });
       }
 
@@ -370,7 +370,7 @@ abstract class ObjectDataFilesProcessor {
         errorInstance: new InvalidExternalDataError({ mentionToExpectedData: filePathForLogging }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-        wrappableError: error
+        innerError: error
       });
     }
 

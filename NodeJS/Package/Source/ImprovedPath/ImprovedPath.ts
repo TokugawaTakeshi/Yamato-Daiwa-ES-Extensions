@@ -34,7 +34,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.joinPathSegments(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -78,7 +78,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -103,7 +103,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "namedParameters", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.computeRelativePath(namedParameters)",
-        wrappableError: error
+        innerError: error
       });
 
     }

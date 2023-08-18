@@ -6,7 +6,7 @@ import {
 } from "@yamato-daiwa/es-extensions";
 
 
-export default function addLeftClickEventHandler(
+export default function addInputEventHandler(
   compoundParameter: Readonly<
     (
       { targetElement: Element; } |
@@ -20,8 +20,7 @@ export default function addLeftClickEventHandler(
       )
     ) &
     {
-      handler: (leftClickEvent: MouseEvent) => unknown;
-      mustInvokeBeforeChildren_sHandlers?: boolean;
+      handler: (inputEvent: InputEvent) => unknown;
     }
   >
 ): void {
@@ -80,19 +79,19 @@ export default function addLeftClickEventHandler(
 
   for (const targetElement of targetElements) {
 
-    targetElement.addEventListener("click", (event: Event): void => {
+    targetElement.addEventListener("input", (event: Event): void => {
 
-      if (!(event instanceof MouseEvent)) {
+      if (!(event instanceof InputEvent)) {
 
         Logger.logError({
           errorType: UnexpectedEventError.NAME,
           title: UnexpectedEventError.localization.defaultTitle,
           description: PoliteErrorsMessagesBuilder.buildMessage({
             technicalDetails:
-                "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"MouseEvent\"",
+                "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"InputEvent\"",
             politeExplanation:
-                "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
-                  "the first parameter of the callback, will be the instance of \"MouseEvent\". " +
+                "Using native addEventListener(\"input\") we did expected that the subtype of \"event\", " +
+                  "the first parameter of the callback, will be the instance of \"InputEvent\". " +
                 "The TypeScript types definitions does not provide the overload for each type of event, so the \"event\" " +
                   "has been annotated just as \"Event\". " +
                 "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
@@ -108,8 +107,7 @@ export default function addLeftClickEventHandler(
 
       compoundParameter.handler(event);
 
-    /* [ Reference ] https://stackoverflow.com/q/7398290/4818123 */
-    }, compoundParameter.mustInvokeBeforeChildren_sHandlers ?? false);
+    });
 
   }
 

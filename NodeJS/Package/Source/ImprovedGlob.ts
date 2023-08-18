@@ -112,7 +112,7 @@ export default class ImprovedGlob {
         targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
         trailingCharacter: "/"
       }),
-      "**/**",
+      "**/*",
       ...isNonEmptyArray(compoundParameter.fileNamesExtensions) ?
           [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.fileNamesExtensions) ] : []
     ].join("");
@@ -125,15 +125,15 @@ export default class ImprovedGlob {
         targetString: replaceDoubleBackslashesWithForwardSlashes(targetDirectoryPath),
         trailingCharacter: "/"
       }),
-      "**/**"
+      "**/*"
     ].join("");
   }
 
   /* [ Theory ] '_**.@(pug)' is the valid alternative of '@(_)**.@(pug)' but only when excluding prefix is single while
    *     we need to scale the solution to arbitrary number of prefixes. */
-  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_)**.@(pug)
-  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_|--)**.@(pug)
-  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_)**.@(pug|haml)
+  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_)*.@(pug)
+  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_|--)*.@(pug)
+  // [ Output example ] !D:/Project/ExampleProject/Source/Open/Pages/**/@(_)*.@(pug|haml)
   public static buildExcludingOfFilesWithSpecificPrefixesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
@@ -174,14 +174,13 @@ export default class ImprovedGlob {
         trailingCharacter: "/"
       }),
       "**/",
-      `@(${ compoundParameter.filesNamesPrefixes.join("|") })**`,
+      `@(${ compoundParameter.filesNamesPrefixes.join("|") })*`,
       `${ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) }`
     ].join("");
 
   }
 
-  // [ Output Example ] !Open/Pages/@(_|--|test)**/**/**.@(pug|haml)
-  // [ Output Example ] !Open/Pages/@(_)**/**/**.@(pug|haml)
+  // [ Output Example ] Pages/**/@(_)*/**/*.@(styl|stylus)
   public static buildExcludingOfFilesInSubdirectoriesWithSpecificPrefixesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
@@ -210,14 +209,14 @@ export default class ImprovedGlob {
         trailingCharacter: "/"
       }),
       "**/",
-      `@(${ compoundParameter.subdirectoriesPrefixes.join("|") })**/**/**`,
+      `@(${ compoundParameter.subdirectoriesPrefixes.join("|") })*/**/*`,
       ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
           `${ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) }` : []
     ].join("");
 
   }
 
-  // [ Output example ] !Open/Pages/@(subdir1|subdir2)**/**.@(pug|haml)
+  // [ Output example ] !Pages/**/@(Content|Components)/**/*.@(styl|stylus)'
   public static buildExcludingOfFilesInSpecificSubdirectoriesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
@@ -244,7 +243,7 @@ export default class ImprovedGlob {
         targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
         trailingCharacter: "/"
       }),
-      `@(${ compoundParameter.subdirectoriesNames.join("|") })/**/**`,
+      `**/@(${ compoundParameter.subdirectoriesNames.join("|") })/**/*`,
       ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
           `${ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) }` : []
     ].join("");

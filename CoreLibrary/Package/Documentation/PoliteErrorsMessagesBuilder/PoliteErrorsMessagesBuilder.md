@@ -152,7 +152,7 @@ try {
           " of conditions."
     }),
     occurrenceLocation: "markupSourceCodeLinter.lint()",
-    wrappableError: error
+    innerError: error
   });
 
 }

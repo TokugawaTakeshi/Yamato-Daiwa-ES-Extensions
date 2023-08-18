@@ -1,21 +1,22 @@
 import type Logger from "./Logger";
 
 
-const LoggerLocalization__English: Logger.Localization = {
+const loggerLocalization__english: Logger.Localization = {
 
   badgesDefaultTitles: {
-   error: "Error",
-   warning: "Warning",
-   success: "Success",
-   info: "Info"
+    error: "Error",
+    warning: "Warning",
+    success: "Success",
+    info: "Info",
+    generic: "Common"
   },
 
   errorType: "Error type",
   occurrenceLocation: "Occurrence location",
   caughtError: "Caught error",
-  wrappableError: "Wrappable error",
+  innerError: "Wrappable error",
   appendedData: "Appended data"
 };
 
 
-export default LoggerLocalization__English;
+export default loggerLocalization__english;

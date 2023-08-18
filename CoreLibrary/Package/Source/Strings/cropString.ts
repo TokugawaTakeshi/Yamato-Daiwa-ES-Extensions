@@ -59,7 +59,7 @@ export default function cropString(
   if (isNonNegativeInteger(compoundParameter.startingCharacterNumber__numerationFrom0)) {
     startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.startingCharacterNumber__numerationFrom1)) {
-    startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom1;
+    startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom1 - 1;
   } else if (compoundParameter.fromStart === true) {
     startingCharacterNumber__numerationFrom0 = 0;
   } else {
@@ -85,7 +85,7 @@ export default function cropString(
   if (isNonNegativeInteger(compoundParameter.endingCharacterNumber__numerationFrom0)) {
     endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.endingCharacterNumber__numerationFrom1)) {
-    endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom1;
+    endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom1 - 1;
   } else if (isNaturalNumber(compoundParameter.charactersCount)) {
     endingCharacterNumber__numerationFrom1 = startingCharacterNumber__numerationFrom0 + compoundParameter.charactersCount;
   } else if (compoundParameter.untilEnd === true) {
@@ -131,7 +131,7 @@ export default function cropString(
 
   /* [ Theory ] Such method is more safe that `String.prototype.substring` because of the UTF-16 surrogate paris. */
   return Array.from(targetString).
-      slice(startingCharacterNumber__numerationFrom0, endingCharacterNumber__numerationFrom1).
+      slice(startingCharacterNumber__numerationFrom0, endingCharacterNumber__numerationFrom1 + 1).
       join("");
 
 }

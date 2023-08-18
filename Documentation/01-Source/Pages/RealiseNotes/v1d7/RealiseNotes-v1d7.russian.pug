@@ -88,7 +88,7 @@ block append SpecificContent
       }).Article-Link PaginationCollection
 
 
-    h4.Article-Heading4 Строки
+    h4.Article-Heading4 Работа со строками
 
     ul.Article-UnorderedList
 
@@ -97,4 +97,215 @@ block append SpecificContent
       }).Article-Link cropString
 
 
+    h4.Article-Heading4 Файлы
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.files.$children.encodeFileToBase64.$URI
+      }).Article-Link encodeFileToBase64
+
+
+    h3.Article-Heading3 Улучшение прежней функциональности
+
+    h4.Article-Heading4 Логирование
+
+    h6.Article-Heading6 Метод #[code throwErrorAndLog] интерфейса #[code ILogger] теперь опциональный
+
+    p.Article-Paragraph.
+      Если фасад #[+ImportantEntity--YDID Logger] не найдёт реализации метода #[+ImportantEntity__Code--YDID throwErrorAndLog],
+        то отработает его реализация по умолчанию.
+      Решение сделать этот метод опциональным у интерфейса обусловлено тем, что при бросании ошибки возможности форматирования
+        могут быть ограничены, а часто и вовсе не требуется, потому реализация этого метода может быть один в один
+        как у фасада #[+ImportantEntity--YDID Logger].
+      В то же время, реализовать этот метод всё ещё может потребоваться, если Вы хотите скрыть сообщение об ошибке
+        (поле #[+ImportantEntity__Code--YDID message] #[+Term--YDID нативного класса] #[+ImportantEntity--YDID Error]).
+
+
+    h5.Article-Heading5 Тип #[code Log] и его расширения
+
+    p.Article-Paragraph.
+      Напомним, что объектные типы, являющиеся расширениями #[+Term--YDID Log]:
+
+    ul.Article-UnorderedList
+      li #[+ImportantEntity__Code--YDID ErrorLog]
+      li #[+ImportantEntity__Code--YDID ThrownErrorLog]
+      li #[+ImportantEntity__Code--YDID WarningLog]
+
+    p.Article-Paragraph.
+      Кроме того, на момент этой версии #[+ImportantEntity__Code--YDID SuccessLog] и #[+ImportantEntity__Code--YDID InfoLog]
+        полностью совпадают с #[+Term--YDID Log].
+
+    ul.Article-UnorderedList
+
+      li.
+        Добавлено опциональное булевское свойство #[+ImportantEntity__Code--YDID compactLayout], которое при значении
+          #[+ImportantEntity__Code--YDID true] должно убирать переход на новую строку между заголовком
+          (#[+ImportantEntity__Code--YDID title]) и описанием (#[+ImportantEntity__Code--YDID description]),
+          но это зависит от конкретной реализации логгера.
+
+
+      li.
+        Добавлено опциональное булевское свойство #[+ImportantEntity__Code--YDID mustOutputIf], которое при значении
+          #[+ImportantEntity__Code--YDID false] должно отменять вывод в консоль, но это зависит от конкретной реализации
+          логгера.
+
+
     h3.Article-Heading3 Критические изменения
+
+    h4.Article-Heading4 Логирование
+
+    h5.Article-Heading5 Тип #[code Log] и его расширения
+
+    h6.Article-Heading6 Замена #[code customBadgeText] на объектное полиморфное свойство #[code badge]
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd Намерение сделать эту броскую надпись с цветным фоном опциональной, так как иногда она лишняя
+
+      dt Миграция
+      dd.
+        Если Вы ранее использовали свойство #[+ImportantEntity__Code--YDID customBadgeText], то замените его на свойство типа
+          #[+Term--YDID «объект»] со дочерним свойством #[+ImportantEntity__Code--YDID customText].
+        Например, для #[+SecondaryEntity__Code--YDID { customBadgeText: "FAILURE", /* ... */ }] это будет
+          #[+SecondaryEntity__Code--YDID { badge: { customText: "FAILURE", /* ... */ } }].
+        Если же Вы ранее свойство #[+ImportantEntity__Code--YDID customBadgeText] не использовали, то никаких действие
+          #[+Keyword--YDID не]&nbsp;требуется.
+
+    h6.Article-Heading6 Переименование свойства #[code wrappableError] на #[code innerError] в типе #[+ImportantEntity__Code--YDID ThrownErrorLog]
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Слово «wrappable» некорректно семантически.
+        Имея окончание «-able», оно означает «...которая может быть обёрнута» по отношению к ошибке, однако реальный
+          смысл — «...которая будет обёрнута».
+        В ходе консультации по английскому языку было сказано, что в два слова этот смысл не передать.
+        Тогда словосочетание «Inner error» («внутренняя ошибки») было заимствовано из языка #[+ImportantEntity--YDID C#].
+
+      dt Миграция
+      dd.
+        Используя соответствующую функциональность текстового редактора или интегрированной среды разработки,
+          замените #[+SecondaryEntity__Code--YDID wrappableError:] на #[+SecondaryEntity__Code--YDID innerError:].
+        Например, в интегрированных средах разработки семейства IntelliJ IDEA такая функциональность вызывается с
+          помощью сочетания клавиш #[+SecondaryEntity--YDID Ctrl + Shift + R].
+        Если строка #[+SecondaryEntity__Code--YDID wrappableError:] используется где-то ещё, то безопаснее заменять
+          по одному за раз.
+
+    h5.Article-Heading5 Фасад #[code Logger] и интерфейс #[code ILogger]
+
+    h6.Article-Heading6 Добавление метода #[code logGeneric]
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Возникла потребность в логе общего назначения, который, в отличие от #[+ImportantEntity__Code--YDID logInfo],
+          должен выводиться в терминал ахроматическим цветом (белым, чёрным, оттенками серого).
+
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd У вас есть своя собственная реализация интерфейса #[+ImportantEntity__Code--YDID ILogger]
+
+      dt Миграция
+      dd.
+        Реализуйте метод #[+ImportantEntity__Code--YDID logInfo] в вашей #[+Term--YDID реализации] интерфейса
+          #[+Term__Contrast--YDID ILogger].
+        Параметром является объект типа #[+ImportantEntity__Code--YDID Log], возвращаемое значение отсутствует.
+        Вы, конечно, можете реализовать метод как хотите, но согласно назначению метода, форматирование должно быть
+          максимально простым, с использованием ахроматических цветов (чёрный, белый, оттенки серого).
+
+    h6.Article-Heading6 Переименование #[code LoggerLocalization__English] в #[code loggerLocalization__english]
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Устоялась схема именования объектов локализации.
+        Согласно ней, в основе лежит нижний верблюжий регистр　(lower camel case), а через двойное подчёркивание
+          присоединяется имя локализации с маленькой буквы.
+
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd Вы обращались напрямую к переменной LoggerLocalization__English
+
+      dt Миграция
+      dd.
+        Используя соответствующую функциональность текстового редактора или интегрированной среды разработки,
+          замените #[+SecondaryEntity__Code--YDID LoggerLocalization__English] на
+          #[+SecondaryEntity__Code--YDID loggerLocalization__english:].
+        Например, в интегрированных средах разработки семейства IntelliJ IDEA такая функциональность вызывается с
+          помощью сочетания клавиш #[+SecondaryEntity--YDID Ctrl + Shift + R].
+
+    h6.Article-Heading6 Изменения в типе #[code Logger.Localization]
+
+    p.Article-Paragraph.
+      В #[+ImportantEntity__Code--YDID Localization.badgesDefaultTitles] было добавлено строковое свойство
+        #[+ImportantEntity__Code--YDID generic], а #[+ImportantEntity__Code--YDID wrappableError] было переименовано
+        в #[+ImportantEntity__Code--YDID innerError].
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Вследствие вышеописанных изменений потребовалось модифицировать локализацию.
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd У Вас есть собственная локализация типа #[+ImportantEntity__Code--YDID Logger.Localization]
+
+      dt Миграция
+      dd
+        ol.Article-OrderedList
+          li.
+            Добавьте в #[+ImportantEntity__Code--YDID badgesDefaultTitles] Вашего объекта локализации строчное свойство
+              #[+ImportantEntity__Code--YDID generic] на нужном языке со смыслом «общее».
+          li.
+            Переименуйте в Вашем объекте свойство #[+ImportantEntity__Code--YDID wrappableError] и
+              #[+ImportantEntity__Code--YDID innerError] и все ссылки на него.
+            Хорошие интегрированные среды разработки имеют функциональность, позволяющих сделать такое переименование
+              за раз.
+            Например, в интегрированных средах разработки семейства IntelliJ IDEA такая функциональность вызывается с
+              помощью сочетания клавиш #[+SecondaryEntity--YDID Shift + F6] после помещения курсора на нужный
+              идентификатор.
+
+
+    h2.Article-Heading2 Браузерный JavaScript (@yamato-daiwa/es-extensions-browserjs)
+
+    h3.Article-Heading3 Новая функциональность
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.browserJS.$children.eventsHandling.$children.addInputEventHandler.$URI
+      }).Article-Link addInputEventHandler
+
+
+    h3.Article-Heading3 Улучшение прежней функциональности
+
+    h4.Article-Heading4 Работа с DOM
+
+    h5.Article-Heading5.
+      Изменение типа свойства #[code context] у единственного параметра функции #[code getExpectedToBeSingleDOM_Element]
+
+    p.Article-Paragraph.
+      Теперь свойство #[+ImportantEntity__Code--YDID context] имеет тип #[+ImportantEntity__Code--YDID ParentNode],
+        благодаря чему значение теперь может не только тип, производный от #[+ImportantEntity__Code--YDID Document] или
+        #[+ImportantEntity__Code--YDID Element], но и, например, #[+ImportantEntity__Code--YDID DocumentFragment].
+
+    h3.Article-Heading3 Критические изменения
+
+    h4.Article-Heading4 Логирование
+
+    p.Article-Paragraph.
+      Все описанные выше изменения основного пакета в интерфейсе #[+ImportantEntity--YDID ILogger], фасаде
+        #[+ImportantEntity--YDID Logger] связанных типах отражены на классе #[+ImportantEntity--YDID BasicFrontEndLogger].
+
+
+
+    h2.Article-Heading2 Node.js (@yamato-daiwa/es-extensions-nodejs)
+
+    p.Article-Paragraph.
+      Все описанные выше изменения основного пакета в интерфейсе #[+ImportantEntity--YDID ILogger], фасаде
+        #[+ImportantEntity--YDID Logger] связанных типах отражены на классе #[+ImportantEntity--YDID ConsoleApplicationLogger].

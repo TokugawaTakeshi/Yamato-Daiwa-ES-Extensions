@@ -171,7 +171,7 @@ export type {
 } from "./Logging/Logs";
 export type { ILogger } from "./Logging/ILogger";
 export { default as Logger } from "./Logging/Logger";
-export { default as LoggerLocalization__English } from "./Logging/LoggerLocalization.english";
+export { default as loggerLocalization__english } from "./Logging/LoggerLocalization.english";
 
 
 /* === Maps ========================================================================================================= */
@@ -260,6 +260,10 @@ export {
   default as extractMatchingsWithRegularExpression,
   type ExtractingOfMatchingsWithRegularExpression
 } from "./Strings/RegularExpressions/extractMatchingsWithRegularExpression";
+export {
+  default as replaceMatchesWithRegularExpressionToDynamicValue,
+  type ReplacingOfMatchesWithRegularExpressionToDynamicValue
+} from "./Strings/RegularExpressions/replaceMatchesWithRegularExpressionToDynamicValue";
 
 /* --- URI ---------------------------------------------------------------------------------------------------------- */
 /* --- Files and directories --- */

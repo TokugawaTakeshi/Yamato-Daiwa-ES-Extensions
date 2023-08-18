@@ -26,7 +26,7 @@ export default class FetchAPI_Service extends AJAX_Service {
         }),
         title: DataRetrievingFailedError.localization.defaultTitle,
         occurrenceLocation: "FetchAPI_Service.retrieveRawData(namedParameters)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -64,7 +64,7 @@ export default class FetchAPI_Service extends AJAX_Service {
         }),
         title: DataRetrievingFailedError.localization.defaultTitle,
         occurrenceLocation: "FetchAPI_Service.retrieveRawData(namedParameters)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -88,7 +88,7 @@ export default class FetchAPI_Service extends AJAX_Service {
         }),
         title: DataRetrievingFailedError.localization.defaultTitle,
         occurrenceLocation: "FetchAPI_Service.decodeJSON_Data(compoundParameter)",
-        wrappableError: error
+        innerError: error
       });
     }
 

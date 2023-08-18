@@ -5,17 +5,17 @@ import type { ILogger } from "./ILogger";
 
 import isNotNull from "../TypeGuards/Nullables/isNotNull";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
-import substituteWhenUndefined from "../DefaultValueSubstituters/substituteWhenUndefined";
-import insertSubstringIf from "../Strings/insertSubstringIf";
+import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
-import LoggerLocalization__English from "./LoggerLocalization.english";
+import loggerLocalization__english from "./LoggerLocalization.english";
 
 
 abstract class Logger {
 
   private static implementation: ILogger | null = null;
-  private static localization: Logger.Localization = LoggerLocalization__English;
+  private static localization: Logger.Localization = loggerLocalization__english;
+
 
   public static setImplementation(implementation: ILogger): typeof Logger {
     Logger.implementation = implementation;
@@ -30,46 +30,69 @@ abstract class Logger {
 
   public static throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
 
-    if (isNotNull(Logger.implementation)) {
+    if (isNotNull(Logger.implementation) && isNotUndefined(Logger.implementation.throwErrorAndLog)) {
       return Logger.implementation.throwErrorAndLog(errorLog);
     }
 
+
     if ("errorInstance" in errorLog) {
 
-      errorLog.errorInstance.message = `${ errorLog.title }\n${ errorLog.errorInstance.message }` +
+      errorLog.errorInstance.message = [
 
-          `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
+        `${ errorLog.title }`,
+        ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
+        `${ errorLog.errorInstance.message }` +
 
-          `${ insertSubstringIf(
-            `\n\n${ Logger.localization.wrappableError }:` +
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.wrappableError) }`,
-            isNotUndefined(errorLog.wrappableError)
-          ) }` +
+        `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
 
-          `${ insertSubstringIf(
-            `\n\n${ Logger.localization.appendedData }:` +
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
-            isNotUndefined(errorLog.additionalData)
-          ) }` +
+        ...isNotUndefined(errorLog.innerError) ?
+            [
+              `\n\n${ Logger.localization.innerError }:` +
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.innerError) }` +
+                `${ 
+                  errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack) ? 
+                    `\n${ errorLog.innerError.stack }` : 
+                    ""
+                }`
+            ] :
+            [ ],
 
-          /* Divider before stack trace */
-          "\n";
+        ...isNotUndefined(errorLog.additionalData) ?
+            [
+              `\n\n${ Logger.localization.appendedData }:` +
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`
+            ] :
+            [ ],
 
-      /* 〔 ESLint muting rationale 〕 In this case the 'errorInstance' is the instance of 'Error' or it's inheritor.
-      *    Although '@typescript-eslint' considers the throwing of is as a violation, this scenario has not been mentioned
-      *    in incorrect code example of 'no-throw-literal' rule documentation.
-      *    https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md */
-      /* eslint-disable-next-line @typescript-eslint/no-throw-literal */
+        /* Divider before stack trace */
+        "\n"
+
+      ].join("");
+
+      /* eslint-disable-next-line @typescript-eslint/no-throw-literal --
+      *  In this case the `errorInstance` is the instance of `Error` or its inheritor.
+      *  Although `@typescript-eslint` considers the throwing of it as the violation, this scenario has not been mentioned
+      *    in incorrect code example of `no-throw-literal` rule documentation.
+      *    https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
+      *  */
       throw errorLog.errorInstance;
+
     }
+
 
     const errorWillBeThrown: Error = new Error(errorLog.description);
     errorWillBeThrown.name = errorLog.errorType;
 
     throw errorWillBeThrown;
+
   }
 
   public static logError(errorLog: ErrorLog): void {
+
+    if (errorLog.mustOutputIf === false) {
+      return;
+    }
+
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logError(errorLog);
@@ -77,26 +100,46 @@ abstract class Logger {
     }
 
     console.error(
-      `[ ${ substituteWhenUndefined(errorLog.customBadgeText, Logger.localization.badgesDefaultTitles.error) } ] ` +
-      `${ errorLog.title }\n` +
-      `${ errorLog.description }` +
-      `\n\n${ Logger.localization.errorType }: ${ errorLog.errorType }` +
-      `\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
-      `${ insertSubstringIf(
-        `\n\n${ Logger.localization.caughtError }:` + 
-        `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }` +
-        `${ errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` : "" }`, 
-        isNotUndefined(errorLog.caughtError)
-      ) }` +
-      `${ insertSubstringIf(
-        `\n\n${ Logger.localization.appendedData }:` + 
-        `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
-        isNotUndefined(errorLog.additionalData)
-      ) }`
+      [
+
+        ...errorLog.badge === false ?
+            [ ] :
+            [ `[ ${ errorLog.badge?.customText ?? Logger.localization.badgesDefaultTitles.error } ] ` ],
+
+        errorLog.title,
+        ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
+        errorLog.description,
+
+        `\n\n${ Logger.localization.errorType }: ${ errorLog.errorType }`,
+        `\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
+
+        ...isNotUndefined(errorLog.caughtError) ?
+            [
+              `\n\n${ Logger.localization.caughtError }:` +
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }` +
+                `${ errorLog.caughtError instanceof Error && isNonEmptyString(errorLog.caughtError.stack) ? 
+                    `\n${ errorLog.caughtError.stack }` : "" }`
+            ] :
+            [ ],
+
+        ...isNotUndefined(errorLog.additionalData) ?
+            [
+              `\n\n${ Logger.localization.appendedData }:` +
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`
+            ] :
+            [ ]
+
+      ].join("")
     );
+
   }
 
   public static logErrorLikeMessage(errorLikeLog: Log): void {
+
+    if (errorLikeLog.mustOutputIf === false) {
+      return;
+    }
+
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logErrorLikeMessage(errorLikeLog);
@@ -104,9 +147,15 @@ abstract class Logger {
     }
 
     console.error(Logger.formatGenericLog(errorLikeLog, Logger.localization.badgesDefaultTitles.error));
+
   }
 
   public static logWarning(warningLog: WarningLog): void {
+
+    if (warningLog.mustOutputIf === false) {
+      return;
+    }
+
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logWarning(warningLog);
@@ -114,58 +163,103 @@ abstract class Logger {
     }
 
     console.warn(
-      `[ ${ substituteWhenUndefined(warningLog.customBadgeText, Logger.localization.badgesDefaultTitles.warning) } ] ` +
-      `${ warningLog.title }\n` +
-      `${ warningLog.description }` +
-      `\n\n${ insertSubstringIf(
-        `${ Logger.localization.occurrenceLocation }: ${ warningLog.occurrenceLocation }`,
-        isNotUndefined(warningLog.occurrenceLocation)
-      ) }` +
-      `\n\n${ insertSubstringIf(
-          `${ Logger.localization.appendedData }: ${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`,
-          isNotUndefined(warningLog.additionalData)
-      ) }`
+      [
+
+      ...warningLog.badge === false ?
+          [ ] :
+          [ `[ ${ warningLog.badge?.customText ?? Logger.localization.badgesDefaultTitles.error } ] ` ],
+
+        warningLog.title,
+        ...warningLog.compactLayout === true ? [ " " ] : [ "\n" ],
+        warningLog.description,
+
+        `\n${ Logger.localization.occurrenceLocation }: ${ warningLog.occurrenceLocation }`,
+
+        ...isNotUndefined(warningLog.additionalData) ?
+          [
+            `\n\n${ Logger.localization.appendedData }:` +
+              `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`
+          ] :
+          [ ]
+
+      ].join("")
     );
+
   }
 
   public static logInfo(infoLog: InfoLog): void {
+
+    if (infoLog.mustOutputIf === false) {
+      return;
+    }
+
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logInfo(infoLog);
       return;
     }
 
+
     console.info(Logger.formatGenericLog(infoLog, Logger.localization.badgesDefaultTitles.info));
+
   }
 
   public static logSuccess(successLog: SuccessLog): void {
+
+    if (successLog.mustOutputIf === false) {
+      return;
+    }
+
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logSuccess(successLog);
       return;
     }
 
+
     console.info(Logger.formatGenericLog(successLog, Logger.localization.badgesDefaultTitles.success));
+
+  }
+
+  public static logGeneric(genericLog: Log): void {
+
+    if (genericLog.mustOutputIf === false) {
+      return;
+    }
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logGeneric(genericLog);
+      return;
+    }
+
+
+    console.log(Logger.formatGenericLog(genericLog, Logger.localization.badgesDefaultTitles.generic));
+
+
   }
 
   public static highlightText(targetString: string): string {
-
-    if (isNotNull(Logger.implementation)) {
-      return Logger.implementation.highlightText(targetString);
-    }
-
-    return targetString;
+    return isNotNull(Logger.implementation) ? Logger.implementation.highlightText(targetString) : targetString;
   }
 
 
   private static formatGenericLog(genericLog: Log, defaultBadgeText: string): string {
-    return `[ ${ substituteWhenUndefined(genericLog.customBadgeText, defaultBadgeText) } ] ` +
-        `${ genericLog.title }\n` +
-        `${ genericLog.description }` +
-        `\n\n${ insertSubstringIf(
-          `${ Logger.localization.appendedData }: ${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`,
-          isNotUndefined(genericLog.additionalData)
-        ) }`;
+    return [
+
+      ...genericLog.badge === false ? [ ] : [ `[ ${ genericLog.badge?.customText ?? defaultBadgeText } ] ` ],
+
+      genericLog.title,
+      ...genericLog.compactLayout === true ? [ " " ] : [ "\n" ],
+      genericLog.description,
+
+      ...isNotUndefined(genericLog.additionalData) ?
+            [
+              `\n\n${ Logger.localization.appendedData }:` +
+                `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`
+            ] :
+            [ ]
+
+    ].join("");
   }
 }
 
@@ -179,14 +273,17 @@ namespace Logger {
       warning: string;
       info: string;
       success: string;
+      generic: string;
     }>;
 
     errorType: string;
     occurrenceLocation: string;
     caughtError: string;
-    wrappableError: string;
+    innerError: string;
     appendedData: string;
+
   }>;
+
 }
 
 
