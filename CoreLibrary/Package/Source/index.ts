@@ -154,6 +154,9 @@ export { default as UnsupportedScenarioErrorLocalization__English } from
     "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
 
 
+/* === Files ======================================================================================================= */
+export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
+
 /* === Logging ====================================================================================================== */
 /* --- PoliteErrorsMessageBuilder ----------------------------------------------------------------------------------- */
 export { default as PoliteErrorsMessagesBuilder } from "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
