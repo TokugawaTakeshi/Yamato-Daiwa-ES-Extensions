@@ -52,7 +52,7 @@
     "node": ">=10.4.0"
   },
   "scripts": {
-    "Rebuild distributable": "rimraf Distributable & tsc",
+    "Rebuild distributable": "rimraf Distributable && tsc",
     "Lint": "eslint Source Tests",
     "Rebuild distributable and realize alpha": "npm run \"Rebuild distributable\" && npm publish --tag alpha"
   }

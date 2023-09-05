@@ -1,5 +1,5 @@
 import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
-import { isNotUndefined } from "@yamato-daiwa/es-extensions";
+import { isNotUndefined, insertSubstringIf } from "@yamato-daiwa/es-extensions";
 import { RawObjectDataProcessorLocalization__Japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
 
 import Localization = ConsoleCommandsParser.Localization;
@@ -115,10 +115,11 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         {
           missingOptionKey,
           commandPhrase,
+          isDefaultCommandPhrase,
           commandHelpReference
         }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
       ): string =>
-          `${ isNotUndefined(commandPhrase) ? `コマンドフレーズ「${ commandPhrase }」` : "規定コマンド" }` +
+          `コマンドフレーズ「${ commandPhrase }」${ insertSubstringIf("（規定コマンドフレーズ）", isDefaultCommandPhrase) }` +
             `にとってオプション「${ missingOptionKey }」は必須のなっています。` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },

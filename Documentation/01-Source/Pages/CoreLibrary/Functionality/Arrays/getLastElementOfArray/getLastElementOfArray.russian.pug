@@ -16,9 +16,10 @@ block append Metadata
     HTML_PageMetaData = {
       description: MetaDescriptionTemplates.function({
         functionName: "getLastElementOfArray",
-        whatFunctionDoes: "Возвращает последний элемент массива. " +
-            "В случае, когда его нет, будет либо возвращён null, либо брошено исключение - в зависимости от наличия " +
-            "или отсутствия второго параметра."
+        whatFunctionDoes:
+            "возвращает последний элемент массива, когда он есть. " +
+            "Если же массив пустой, будет либо возвращён null, либо брошено исключение — в зависимости от наличия " +
+              "или отсутствия второго параметра."
       }),
       author: HTML_PAGE_AUTHOR
     };
@@ -26,7 +27,7 @@ block append Metadata
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
 
@@ -49,18 +50,17 @@ block append SpecificContent
 
     +CallableExpressionScheme--YDF_DK({
       technicalName: "getLastElementOfArray",
-      headingTag: "h1",
       localizedDescriptiveHeading: "Взять последний элемент массива",
       signatures: [
 
         {
           localizedDescriptiveHeading: "Если массив пустой, то будет возвращён null",
-          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          genericParameters: [ "ArrayElement" ],
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "Array&lt;ArrayElement&gt;",
+              type: "Array<ArrayElement>",
               required: true
             }
           ],
@@ -69,12 +69,12 @@ block append SpecificContent
 
         {
           localizedDescriptiveHeading: "Если массив пустой, то будет брошено исключение UnexpectedEventError",
-          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          genericParameters: [ "ArrayElement" ],
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "Array<ArrayElement>",
               required: true
             },
             {
@@ -87,7 +87,8 @@ block append SpecificContent
           returnedValue: "ArrayElement"
         }
 
-      ]
+      ],
+      headingTag: "h1"
     })
       +ObjectTypeAbstract--YDF_DK({
         typeName: "Options",
@@ -102,10 +103,9 @@ block append SpecificContent
       })
 
     p.Article-Paragraph.
-      Возвращает #[+Keyword--YDID последний] элемент #[+Term--YDID индексного массива] (когда такой имеется).
-
-    p.Article-Paragraph.
-      Если #[+Term--YDID массив] пустой то:
+      Возвращает #[+Keyword--YDID последний] #[+Term--YDID элемент] #[+Term__Contrast--YDID индексного массива]
+        #[+Keyphrase--YDID когда этот #[+Term--YDID массив] #[+Keyword--YDID не]&nbsp;пустой].
+      Если же #[+Term--YDID массив] пустой то:
 
     ul.Article-UnorderedList
 
@@ -113,16 +113,22 @@ block append SpecificContent
         Будет брошено #[+Term--YDID исключение] #[+ImportantEntity__Code--YDID UnexpectedEventError], если указан
           #[+ImportantEntity--YDID 2-ой] #[+Term--YDID параметр] со значением
           #[+ImportantEntity__Code--YDID { mustThrowErrorIfArrayIsEmpty: true }].
-        При этом #[+ImportantEntity--YDID TypeScript] будет считать, что если #[+Term--YDID функция] отработает без ошибки
-          и среди элементов #[+Term--YDID массива]&nbsp;нет явных #[+ImportantEntity__Code--YDID null] и/или
-          #[+ImportantEntity__Code--YDID undefined], то возвращаемое значение #[+Keyword--YDID не] может быть
-          #[+ImportantEntity__Code--YDID null]/#[+ImportantEntity__Code--YDID undefined].
+        При этом #[+ImportantEntity--YDID TypeScript] будет считать, что если #[+Term--YDID функция] отработает без
+          ошибок, а указанный явно или неявно #[+Term--YDID тип] #[+Term__Contrast--YDID элементов]
+          #[+Keyword--YDID не]&nbsp;может принимать значения #[+ImportantEntity__Code--YDID null] и/или
+          #[+ImportantEntity__Code--YDID undefined], то возвращаемое значение тоже #[+Keyword--YDID не]&nbsp;может
+          быть #[+ImportantEntity__Code--YDID null] или #[+ImportantEntity__Code--YDID undefined].
 
       li.
         Будет возвращён #[+ImportantEntity__Code--YDID null], если #[+ImportantEntity--YDID 2-ого] #[+Term--YDID параметра]
-          не указано.
+          #[+Keyword--YDID не]&nbsp;указано.
         В этом случае при строгих настройках #[+ImportantEntity__Code--YDID TypeScript] обяжет проверить возвращаемое
           значение на #[+ImportantEntity__Code--YDID null], прежде чем использовать его.
+
+    p.Article-Paragraph.
+      Данная #[+Term--YDID функция] #[+Keyword--YDID не]&nbsp;просто заменяет #[+Term--YDID выражения] типа
+        #[+SecondaryEntity__Code--YDID targetArray&lsqb;targetArray.length - 1&rsqb;], но и позволяет
+        #[+Keyword--YDID гарантировать], что #[+Keyword--YDID последний] #[+Term--YDID элемент массива] существует.
 
 
     h2.Article-Heading2 Примеры
@@ -134,31 +140,55 @@ block append SpecificContent
           const sample: Array<string> = [ "alpha", "bravo", "charlie" ];
 
           const lastElementOfSample: string | null = getLastElementOfArray(sample);
+        +CodeViewer-Explanation--YDF.
+          В данном случае #[+SecondaryEntity__Code--YDID lastElementOfSample] будет иметь значение
+            #[+SecondaryEntity__Code--YDID "charlie"].
+          В этом синтетическом примере мы #[+Keyword--YDID заранее] знаем значение всех #[+Term--YDID элементов массива]
+            #[+SecondaryEntity__Code--YDID sample], чего на практике почти не&nbsp;бывает, поэтому
+            возвращаемое значение может быть #[+ImportantEntity__Code--YDID null].
+          Другими словами, предполагается, что #[+Term--YDID массив] может быть пустым все зависимости от того, знаем
+            мы об этом заранее или нет (на практике обычно не&nbsp;знаем).
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(lastElementOfSample.length);
         +CodeViewer-Explanation--YDF
+
           p.Article-Paragraph.
-            В данном случае #[+SecondaryEntity__Code--YDID lastElementOfSample] будет иметь значение
-              #[+SecondaryEntity__Code--YDID "charlie"].
-            Здесь мы заранее знаем значение массива #[+SecondaryEntity__Code--YDID sample], но на практике
-              так не будет, поэтому возможен частный случай пустого массива.
-            Именно поэтому функция может вернуть #[+SecondaryEntity__Code--YDID null], и прежде чем пользоваться
-              значением #[+SecondaryEntity__Code--YDID lastElementOfSample] как строкой, придётся доказать
-              #[+ImportantEntity--YDID TypeScript]-у, что оно не является #[+ImportantEntity__Code--YDID null].
+            Возникнет ошибка #[+ImportantEntity--YDID TypeScript] #[+ImportantEntity--YDID TS18047]
+              «'lastElementOfSample' is possibly 'null'», потому что #[+Term--YDID свойство]
+              #[+ImportantEntity__Code--YDID length] имеется у #[+Term--YDID строкового типа] (и #[+Term--YDID массивов]),
+              а #[+Term__Contrast--YDID константа] #[+SecondaryEntity__Code--YDID lastElementOfSample],
+              возможно, имеет значение #[+ImportantEntity__Code--YDID null].
+
+          p.Article-Paragraph.
+            Прежде, чем вызывать у #[+SecondaryEntity__Code--YDID lastElementOfSample] какие-либо #[+Term--YDID строчные]
+              #[+Term--YDID свойства] и/или #[+Term--YDID методы] (в частности, #[+SecondaryEntity__Code--YDID length])
+              #[+Keyword--YDID необходимо] доказать #[+ImportantEntity--YDID TypeScript-y], что значение
+              #[+SecondaryEntity__Code--YDID lastElementOfSample]
+              #[+Keyword--YDID не]&nbsp;является #[+ImportantEntity__Code--YDID null].
+            Сделать это можно, например, с помощью #[+Term--YDID условной конструкции]
+              #[+SecondaryEntity__Code--YDID if (lastElementOfSample !== null) {/* ... */}] —
+              тогда в пределах #[+Term--YDID if-блока] #[+ImportantEntity--YDID TypeScript] будет считать данное значение
+              #[+Keyword--YDID не]&nbsp;являющимся #[+ImportantEntity__Code--YDID null].
+            Есть и другие решения, но чего #[+Keyword--YDID категорически] #[+Keyword__Contrast--YDID не]&nbsp;должен делать
+              программист, заявляющий владением языком #[+ImportantEntity--YDID TypeScript] — это использовать
+              выражения типа #[+SecondaryEntity__Code--YDID lastElementOfSample!.length], так как это большая трещина в качестве кода.
+            К тому же, обычно использование подобной функциональности имеет массовый
+              характер, сопровождающийся применением типа #[+ImportantEntity__Code--YDID any] и других послаблений,
+              #[+Keyphrase--YDID сводящих на нет смысл использования языка #[+ImportantEntity--YDID TypeScript]].
 
         +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
           const notNullLastElementOfSample: string = getLastElementOfArray(sample, { mustThrowErrorIfArrayIsEmpty: true });
-        +CodeViewer-Explanation--YDF
-          p.Article-Paragraph.
-            Если Вы на сто процентов уверены, что в Вашем случае массив не может быть пустым, то #[+ImportantEntity--YDID 2-ой]
-              #[+Term--YDID параметр] заверит в этом #[+ImportantEntity--YDID TypeScript].
-            Если массив всё же окажется пустым, то будет выброшено исключение #[+ImportantEntity--YDID UnexpectedEventError].
-            Если Вы хотите обработать это исключение, то вместо #[+ImportantEntity__Code--YDID try/catch] можно
-              вызвать функцию без #[+ImportantEntity--YDID 2-го] параметра.
-          p.Article-Paragraph.
-            #[+ImportantEntity--YDID 2-ой] #[+Term--YDID параметр] не случайно является #[+Term--YDID объектом].
-            Если бы это был просто #[+Term--YDID булевский параметр], то из
-              #[+SecondaryEntity__Code--YDID getLastElementOfArray(sample, true);] было бы непонятно, за что он отвечает.
-            Хотя продвинутые #[+Term--YDID интегрированные среды разработки] отображают подсказки, качественный код
-              #[+Keyword--YDID должен] быть ясен без этих подсказок и при чтении из #[+Keyword--YDID любого] редактора.
+        +CodeViewer-Explanation--YDF.
+          #[+Keyphrase--YDID В данном случае, когда у нас есть #[+ImportantEntity--YDID 2-ой] #[+Term--YDID параметр]],
+            мы можем аннотировать тип #[+Term--YDID константы] #[+SecondaryEntity__Code--YDID notNullLastElementOfSample]
+            как #[+SecondaryEntity__Code--YDID string], а&nbsp;#[+Keyword--YDID не]&nbsp;
+            #[+SecondaryEntity__Code--YDID string | null], так как вместо возврата #[+ImportantEntity__Code--YDID null]
+            в случае пустого #[+Term--YDID массива] будет выброшено #[+Term--YDID исключение]
+            #[+ImportantEntity__Code--YDID UnexpectedEventError].
+          Разумеется, Вы можете обработать это #[+Term--YDID исключение] с помощью #[+ImportantEntity__Code--YDID try/catch],
+            но #[+Keyphrase--YDID в общем случае] это #[+Keyword--YDID не]&nbsp;даст никакого преимущества перед
+            рассмотренной выше проверкой на #[+ImportantEntity__Code--YDID null].
 
 
     +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
@@ -170,34 +200,57 @@ block append SpecificContent
         li.
           Скопируйте в буфер обмен имя переменной, содержащей #[+Term--YDID массив], либо само
             #[+Term--YDID выражение массива].
-          Пожалуйста, сформируйте привычку делать это каждый раз перед тем, как вызывать #[+Term--YDID Live template]
-            функции #[+ImportantEntity--YDID getLastElementOfArray], чтобы среда разработки смогла автоматически заполнить первый
-            #[+Term--YDID параметр] нужным значением.
+          Чтобы #[+Term--YDID среда разработки] смогла автоматически заполнить позицию первого #[+Term--YDID параметра]
+             нужным значением, сформируйте привычку делать это копирование перед тем, как начинать вводить
+             #[+Term--YDID Live template] #[+Term__Contrast--YDID функции] #[+ImportantEntity--YDID getLastElementOfArray].
 
         li
-          | Начните набирать имя функции &mdash; #[+ImportantEntity--YDID addElementsToArray].
+          | Начните набирать имя #[+Term--YDID функции] — #[+ImportantEntity--YDID addElementsToArray].
           | Подсветится #[+ImportantEntity--YDID 2] варианта автодополнения:
 
           ol.Article-OrderedList
 
             li.
-              Иконка тремя наложенных друг на друга разноцветными кругами - это просто автодополнение имени функции;
-                стандартная функциональность среды разработки.
-              Нажатие на #[+ImportantEntity--YDID Enter] введёт полное имя функции, а также добавит код объявления
-                импорта этой функции, если такового пока нет.
-              Неплохо, однако это не предел, до которого можно частично автоматизировать процесс.
+              Иконка тремя наложенных друг на друга разноцветными кругами - это просто автодополнение имени
+                #[+Term--YDID функции]; #[+Keyword--YDID стандартная] функциональность #[+Term--YDID среды разработки].
+              Нажатие на #[+ImportantEntity--YDID Enter] введёт полное имя #[+Term--YDID функции], а также при необходимости
+                объявления #[+Term--YDID импорта] этой #[+Term__Contrast--YDID функции].
+              Неплохо, однако это не&nbsp;предел, до которого можно частично автоматизировать процесс.
 
             li.
-              Иконка с клише - это как раз нужный шаблон.
+              Иконка с клише — это как раз нужный шаблон.
               Нажмите #[+ImportantEntity--YDID Enter].
-              Произойдёт вставка шаблона кода, при этом значение первого параметра будет автоматически выделено и
-                заполнено содержимым буфера обмена.
-              Поскольку при следовании данному алгоритму менять подставленное значение
-                этого параметра на другое не требуется, то нажмите #[+ImportantEntity--YDID Enter] ещё раз.
+              Произойдёт вставка шаблона кода, при этом #[+Keyword--YDID первого] #[+Term--YDID параметра]
+                #[+ImportantEntity__Code--YDID targetArray] будет автоматически выделено и заполнено содержимым буфера
+                обмена.
+              Поскольку при следовании данному руководству менять подставленное значение параметра
+                на другое не&nbsp;требуется, выйдете из режима редактирования #[+Term--YDID параметра], нажав
+                #[+ImportantEntity--YDID Enter] ещё раз.
+
 
         li Удалите лишний код.
 
       p.Article-Paragraph.
-        Вы можете использовать алиас этого #[+Term--YDID LiveTemplate-а] - #[+ImportantEntity__Code--YDID gleoa],
-          состоящий из первых букв всех слов, которые включают в себя имя функции.
-        Однако недостаток таких алиасов в том, что их приходится запоминать.
+        Вы можете использовать #[+Keyword--YDID алиас] этого #[+Term--YDID LiveTemplate-а] —
+          #[+ImportantEntity__Code--YDID gleoa], состоящий из первых букв всех слов, которые включает в себя имя
+          #[+Term--YDID функции].
+        Однако недостаток таких алиасов в том, что их приходится запоминать, а для того, чтобы получить подсказку
+          #[+ImportantEntity--YDID getLastElementOfArray], достаточно лишь помнить, с чего начинается это имя
+          #[+Term--YDID функции].
+
+
+    h2.Article-Heading2 Внешние ссылки
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Source/Arrays/getLastElementOfArray.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Tests/Automated/Arrays/getLastElementOfArray.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

@@ -3,8 +3,8 @@ extends ../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/Mi
 
 block append Requirements
 
-  include ../../SharedComponents/SharedComponents.english.pug
   include ../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -27,7 +27,7 @@ block append Metadata
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
 
     styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("top");
 

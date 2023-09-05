@@ -1,0 +1,354 @@
+extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ja";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+        whatFunctionDoes: "プレディケートに満たしているのは唯一な要素の場合、この要素を返す、さもなくば３番目の引数に応じて「null」を返すかエラーを投げる。"
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
+      russian: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      localizedDescriptiveHeading: "プレディケートに満たしている要素が丁度１なら此の要素を取得する",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "プレディケートにに満たしている要素が無いか、２以上の場合「null」が返される",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "対象配列",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "プレディケート",
+              type: "Predicate",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "プレディケートにに満たしている要素が無いか、２以上の場合エラーを投げる",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "対象配列",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "プレディケート",
+              type: "(arrayElement: string) =&gt; boolean",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              localizedName: "オプション",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        localizedDescriptiveHeading: "オプション",
+        propertiesSpecification: {
+          mustThrowErrorIfElementNotFoundOrMoreThan1: {
+            localizedInterpretation: "対象要素が見つかっていないか検索結果が２以上の場合エラーを投げなければいけないか",
+            type: "boolean （trueのみ）",
+            required: true
+          }
+        }
+      })
+
+
+    p.Article-Paragraph.
+      #[+Term--YDID プレディケート]（#[+Term__Contrast--YDID 真偽値]を返す#[+Term--YDID 関数]）に満たしている#[+Term--YDID 配列]の
+        要素は#[+Keyword--YDID 丁度]#[+ImportantEntity__Code--YDID 一個]の時此の要素を返す。
+      此の様な要素が無いか、#[+ImportantEntity--YDID ２個以上]の場合、
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+ImportantEntity--YDID ３引数目]の値として
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]
+          が渡された場合、エラーが投げられる。
+        だが、関数がエラー無しで実行を終わらせた場合、#[+ImportantEntity--YDID TypeScript]は返された値が#[+ImportantEntity__Code--YDID null]
+          #[+Keyword--YDID ではなく]、#[+Term--YDID ジェネリック引数]で指定された（#[+Keyphrase--YDID 此の場合だと]#[+Keyword--YDID 常に]
+          #[+Keyword__Contrast--YDID 暗黙的]）型であると信じてくれる。
+
+      li.
+        #[+ImportantEntity--YDID ３引数目]は#[+Keyword--YDID 渡されなかった]場合、#[+ImportantEntity__Code--YDID null]が返される。
+        但し、返された値を#[+Term--YDID ジェネリック引数]で指定された値として利用するには、#[+Term--YDID 非null確認]が必要に成るのだ。
+
+
+    h2.Article-Heading2 例
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
+        +CodeViewer-Explanation--YDF.
+          見本として米国の市名を含めている#[+Term--YDID 配列]を使っているおこう。
+          これ等の中に#[+SecondaryEntity--YDID 2件]が#[+SecondaryEntity__Code--YDID 「Santa」]から始まり、
+            #[+SecondaryEntity--YDID 3件]が#[+SecondaryEntity__Code--YDID 「Sa」]から始まりるが、#[+SecondaryEntity--YDID 「St.」]
+            から始まっているのは#[+SecondaryEntity--YDID 1件]#[+Keyword--YDID のみ]。
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+          );
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            #[+Term--YDID プレディケート]依ると#[+SecondaryEntity--YDID 「St.」]から始まる奴が必要で、#[+Keyphrase--YDID 上記の例の場合]
+              此の条件に満たしている#[+Keyword--YDID 丁度]#[+SecondaryEntity--YDID 1個]が有るので、#[+SecondaryEntity--YDID ３引数目]
+              の要素は返される。
+
+          p.Article-Paragraph.
+            だが#[+Keyphrase--YDID 実践の時]#[+Term--YDID 配列]の中身が#[+Keyphrase--YDID 事前に知られていない]のだ。
+            此の様に#[+SecondaryEntity--YDID 「St.」]から始まる要素が#[+Keyphrase--YDID 期待されても実際に]1個存在している訳では
+              #[+Keyword--YDID なく]、そもそも存在している訳もは#[+Keyword--YDID ない]。
+            其れで、此の#[+Term--YDID 引数]の組み合わせだと、#[+ImportantEntity--YDID null]が返される可能性が有る。
+
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(targetCityName.length);
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            #[+ImportantEntity--YDID TypeScript]はエラー#[+ImportantEntity--YDID TS18047]（「'targetCityName' is possibly 'null'」）
+              を投げる。
+            原因は#[+ImportantEntity__Code--YDID length]プロパティは文字列（と配列）には存在しているが、
+              #[+SecondaryEntity__Code--YDID targetCityName]は#[+ImportantEntity__Code--YDID null]に成っている可能性有り。
+
+          p.Article-Paragraph.
+            #[+SecondaryEntity__Code--YDID length]を含めて文字列のプロパティやメソッドを呼び出す前に、
+              #[+SecondaryEntity__Code--YDID targetCityName]は#[+Keyword--YDID 非]#[+ImportantEntity__Code--YDID null]と
+              保証しなくてはならない。
+            一つの方法は#[+SecondaryEntity__Code--YDID if (targetCityName !== null) {}]の様に条件文を使う事、此の場合
+              条件文内値は#[+Keyword--YDID 非]#[+ImportantEntity__Code--YDID null]と#[+ImportantEntity--YDID TypeScript]が
+              信じてくれる。
+            他の解決も有るば、#[+ImportantEntity--YDID TypeScript]が出来ると発言しているエンジニアが#[+Keyword--YDID 絶対に]
+              使っては成らない表現は#[+SecondaryEntity__Code--YDID targetCityName!.length]。
+            コードの品質に大きな亀裂だから。
+            普通は此の様な機能を使っているエンジニアは#[+ImportantEntity__Code--YDID any]型も幅引く使い、
+             其の他の#[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]の利用の有意義さを無くしている]和らぎ機能を用いている事が多い。
+
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(
+            getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
+            )
+          );
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            #[+Term--YDID プレディケート]に満たされている要素が#[+SecondaryEntity--YDID 2個]なので、#[+SecondaryEntity--YDID null]が返される
+              のだ。
+            #[+Term--YDID 関数]名翻訳をした方にとって驚きが有るべきではないが、せっかく説明書を読んでくださっているので、翻訳は「～要素が丁度１」を含める
+              と繰り返しておこう。
+
+          p.Article-Paragraph.
+            #[+Term--YDID プレディケート]に満たされている要素が#[+SecondaryEntity--YDID 1個]のみで、其れ以外に成る事は無いと言う信が有る場合、
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]を
+              #[+ImportantEntity--YDID 3個目]の#[+Term--YDID 引数]として渡す事が出来る。
+            結果として、#[+ImportantEntity--YDID TypeScript]が#[+Term--YDID 非null確認]は求めないが、期待に反して
+              #[+Term--YDID プレディケート]に満たしている要素数は丁度1個では&nbsp;#[+Keyword--YDID なく]成った場合、
+              #[+ImportantEntity__Code--YDID UnexpectedEventError]が投げられる（此れの可能性が思われる依り高い）。
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample,
+            (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+          );
+        +CodeViewer-Explanation--YDF.
+          #[+Keyphrase--YDID #[+ImportantEntity--YDID 3個目]の#[+Term--YDID 引数]を指定した此の場合]、
+            #[+SecondaryEntity__Code--YDID matching]の型を#[+SecondaryEntity__Code--YDID string | null]では#[+Keyword--YDID なく]、
+            #[+SecondaryEntity__Code--YDID string]が指定出来る。
+          #[+Term--YDID プレディケート]に満たされている要素が無かった場合か、此の様な要素が2個以上の場合、#[+ImportantEntity__Code--YDID null]
+            が返されるのでは#[+Keyword--YDID なく]、#[+ImportantEntity__Code--YDID UnexpectedEventError]が投げられる。
+          無論、此の例外を#[+ImportantEntity__Code--YDID try/catch]で処理出来るが、#[+Keyphrase--YDID 一般だと]
+            上に考察された#[+Term--YDID 非null確認]の使い方に比べて利点は特に無い。
+
+
+    h2.Article-Heading2 ネイティブメソッドとの比較
+
+    p.Article-Paragraph.
+      下記#[+Keyword--YDID ネイティブ]#[+Term--YDID メソッド]は
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]#[+Term--YDID 関数]
+        より良くも無く悪くも無い。
+      何を使えば良いか、下記の状況に於いて望ましい振る舞いに依る。
+
+    ul.Article-UnorderedList
+      li.
+        #[+Term__Contrast--YDID プレディケート]に満たしている#[+Term__Contrast--YDID 配列要素]は一個も無い
+      li.
+        #[+Term__Contrast--YDID プレディケート]に満たしている#[+Term__Contrast--YDID 配列要素]は#[+ImportantEntity--YDID ２以上]有る
+
+    h3.Article-Heading3 Array.prototype.find
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]との
+          #[+Keyword--YDID 共通点]は、両方が#[+Term__Contrast--YDID プレディケート]に満たしている#[+Term--YDID 要素]を探している事。
+
+      li.
+        #[+Term__Contrast--YDID プレディケート]に満たしている#[+Term--YDID 要素]が#[+Keyword--YDID 無い]場合、
+          #[+ImportantEntity__Code--YDID Array.prototype.find]は#[+ImportantEntity__Code--YDID undefined]を返しているが、
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]は
+          #[+ImportantEntity--YDID 第３引数]に依り#[+ImportantEntity__Code--YDID null]を返しているか、エラーを投げている。
+        但しエラーの投擲が選ばれた場合、#[+ImportantEntity--YDID TypeScript]は#[+Term--YDID 非null確認]を求めない。
+        #[+ImportantEntity__Code--YDID Array.prototype.find]の場合#[+Term--YDID 非undefined確認]が必要に成る事の為こそ
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]を使いたく成る事が多い。
+
+      li.
+        #[+Term__Contrast--YDID プレディケート]に満たしている#[+Term--YDID 要素]が#[+Keyword--YDID 2以上]の場合、
+          #[+ImportantEntity__Code--YDID Array.prototype.find]は#[+Keyword--YDID 一個目]を返し、残っている奴を
+          #[+Keyword__Contrast--YDID 無視]。
+        此れに対して、#[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]は
+          #[+Term__Contrast--YDID プレディケート]に満たしている#[+Term--YDID 要素]を見つけてから、同じ#[+Term__Contrast--YDID プレディケート]
+          に満たしている他の要素が無いか、確認し、有った場合どれの要素でも#[+Keyword--YDID 返さない]。
+        #[+Term--YDID 配列要素]の単の取得と他に、此の#[+Term--YDID 配列要素]は他の#[+Term__Contrast--YDID 要素]と違う特性が有るか
+          （例えば唯一の識別子）、確認したい時に便利。
+
+    h3.Article-Heading3 Array.prototype.filter
+
+    p.Article-Paragraph.
+      此の#[+Term--YDID メソッド]は、#[+Term--YDID 配列]の特定の#[+Keyword--YDID 単一]#[+Term--YDID 要素]を取得する為では
+        #[+Keyword--YDID なく]、元の#[+Term--YDID 配列]からの標本を取得する為。
+      此の様に、此の#[+Term--YDID 配列]の#[+Term__Contrast--YDID メソッド]が返していているの#[+Keyword--YDID も]#[+Term--YDID 配列]、
+        即ち#[+Term--YDID プレディケート]に満たしている#[+Keyword--YDID 全]#[+Term--YDID 要素]の#[+Term__Contrast--YDID 配列]。
+
+    p.Article-Paragraph.
+      #[+Term--YDID プレディケート]に満たしている#[+Term__Contrast--YDID 要素]が無い場合、#[+Keyword--YDID 空]#[+Term--YDID 配列]
+        が返される。
+      此の#[+Term--YDID 配列]の何れ#[+Keyword--YDID でも]の#[+Term--YDID 要素]（1番目、詰まり#[+Term--YDID 指数]
+        #[+ImportantEntity--YDID 0]の個）にアクセスしてみても、#[+ImportantEntity__Code--YDID undefined]が返される。
+      #[+ImportantEntity--YDID TypeScript]そして其の他の多数の#[+Term--YDID 静的型付け]のプログラミング言語が此れに就いて
+        警報#[+Keyword--YDID しない]（例えば、#[+SecondaryEntity__Code--YDID Array&lg;string&gt;]又は
+        #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;]は文字通り「#[+Keyword--YDID 無限]数の#[+Term--YDID 文字列]の
+        #[+Term__Contrast--YDID 要素]の#[+Term--YDID 配列]」を意味しているが、事実上#[+Keyword--YDID 何れでもの]#[+Term--YDID 配列]
+        #[+Keyword--YDID 有限]で、空に成っている事も有る）。
+
+
+    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          #[+Term--YDID 配列]を含む#[+Term--YDID 変数]の名前か、#[+Term--YDID 配列表現]をクリップボードにコピーして下さい。
+          #[+Term--YDID 結合開発環境]がの#[+ImportantEntity__Code--YDID 1]#[+Term--YDID 引数]目の位置に正しい値が入れられる様に、
+            #[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]#[+Term--YDID 関数]
+            の#[+Term--YDID Live template]を入力し始める前に此れを事前にクリップボードにコピーする習慣を作って下さい。
+
+        li
+
+          | #[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]#[+Term--YDID 関数]の
+          |   名前を入力し始めて下さい。
+          | オートコンプリートが下記の#[+ImportantEntity--YDID 2件]が表示される。
+
+          ol.Article-OrderedList
+
+            li.
+              アルファベット文字入りの丸に囲まれているアイコン：#[+Term--YDID 関数]の名前のオートコンプリートで、#[+Term--YDID 結合開発環境]の
+                #[+Keyword--YDID 規定]機能である。
+              #[+ImportantEntity--YDID Enter]を押すと、#[+Term--YDID 関数]の名前が入力され、必要に応じて#[+Term--YDID インポート]の
+                宣言も追加される。
+              悪くはないが、更成る自動化が可能。
+
+            li.
+              版のアイコン：我々が必要なテンプレート。
+              #[+ImportantEntity--YDID Enter]を一度押すと、テンプレートのコードが入力され、#[+ImportantEntity__Code--YDID 1]
+                #[+Term--YDID 引数]目の位置はクリップボードの内容に埋められ、カーソルに依り選択される。
+              当説明に従えば、貼り付けされた値を必要が無いので、#[+ImportantEntity__Code--YDID 1]#[+Term--YDID 引数]の編集を終了するには
+                もう一度#[+ImportantEntity--YDID Enter]を押下。
+
+        li.
+          #[+Term--YDID プレディケート]（#[+Term--YDID アロー関数]である）の#[+Term--YDID 引数]の名前を入力して下さい。
+          当#[+Term--YDID 引数]は#[+Term__Contrast--YDID 配列]の#[+Term--YDID 要素]だが、「element」依り幅狭い名前を付ける推薦。
+          入力が終わったら、#[+ImportantEntity--YDID Tab]を押して下さい。
+          今回は不要なオートコンプリートが邪魔した場合、先に#[+ImportantEntity--YDID Esc]を押す事。
+
+        li.
+          #[+Term--YDID プレディケート]の#[+Term__Contrast--YDID 引数]の名前を入寮し#[+ImportantEntity__Code--YDID Enter]を押して下さい。
+
+        li 余計なコードを削除しておこう。
+
+
+    h2.Article-Heading2 外部リンク
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "ソースコード"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "テストコード"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

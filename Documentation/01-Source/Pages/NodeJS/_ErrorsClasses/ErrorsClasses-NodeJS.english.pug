@@ -1,0 +1,62 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Errors classes");
+    HTML_PageMetaData = {
+      description: "",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("nodeJS.errorsClasses.DesiredFileActuallyIsDirectoryError");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: "./DesiredFileActuallyIsDirectoryError.japanese.html",
+      russian: "./DesiredFileActuallyIsDirectoryError.russian.html"
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  - const sectioning = localizedRouting.nodeJS.$children.errorsClasses.$sectioning;
+
+  article
+
+    h1 Errors classes
+
+    //- ─── DesiredFileActuallyIsDirectoryError ────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.DesiredFileActuallyIsDirectoryError.$anchor
+    )= sectioning.DesiredFileActuallyIsDirectoryError.$tableOfContentsTitle
+
+    //- ─── FileNotFoundError ──────────────────────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.FileNotFoundError.$anchor
+    )= sectioning.FileNotFoundError.$tableOfContentsTitle
+
+    //- ─── InvalidConsoleCommandError ─────────────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.InvalidConsoleCommandError.$anchor
+    )= sectioning.InvalidConsoleCommandError.$tableOfContentsTitle

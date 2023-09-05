@@ -1,5 +1,5 @@
 import ConsoleCommandsParser from "./ConsoleCommandsParser";
-import { RawObjectDataProcessorLocalization__English, isNotUndefined } from "@yamato-daiwa/es-extensions";
+import { RawObjectDataProcessorLocalization__English, isNotUndefined, insertSubstringIf } from "@yamato-daiwa/es-extensions";
 
 
 import Localization = ConsoleCommandsParser.Localization;
@@ -120,12 +120,13 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           missingOptionKey,
           commandPhrase,
+          isDefaultCommandPhrase,
           commandHelpReference
         }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
       ): string =>
-          `The option "${ missingOptionKey }" is required for the ` +
-            `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }. ` +
-            `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+          `The option "${ missingOptionKey }" is required for the command "${ commandPhrase }"` +
+            `${ insertSubstringIf(" (default command phrase)", isDefaultCommandPhrase) }. ` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 
     noValueFollowingTheKeyOfNonBooleanOption: {

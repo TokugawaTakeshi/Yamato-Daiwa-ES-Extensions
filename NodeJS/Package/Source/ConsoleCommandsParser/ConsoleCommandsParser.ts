@@ -390,6 +390,7 @@ class ConsoleCommandsParser<
               applicationName: this.applicationName,
               messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.requiredOptionKeyIsMissing.generate({
                 commandPhrase: this.targetCommandPhrase,
+                isDefaultCommandPhrase: this.isTargetCommandPhraseDefault,
                 missingOptionKey: optionKeyWithLeading2NDashes,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
@@ -776,7 +777,14 @@ class ConsoleCommandsParser<
 
 
     const validationResult: RawObjectDataProcessor.ProcessingResult<ParsedJSON> = RawObjectDataProcessor.
-        process<ParsedJSON>(targetParameterParsedValue, optionSpecification.validValueSpecification);
+        process<ParsedJSON>(
+          targetParameterParsedValue,
+          {
+            nameForLogging: optionKeyWithLeading2NDashes,
+            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+            properties: optionSpecification.validValueSpecification
+          }
+        );
 
     if (validationResult.rawDataIsInvalid) {
       Logger.throwErrorAndLog({
@@ -1120,7 +1128,7 @@ namespace ConsoleCommandsParser {
         type: ParametersTypes.JSON5;
         required: boolean;
         newName?: string;
-        validValueSpecification: RawObjectDataProcessor.FixedKeyAndValuesTypeObjectDataSpecification;
+        validValueSpecification: RawObjectDataProcessor.PropertiesSpecification;
     }>;
 
   export enum ParametersTypes {
@@ -1349,7 +1357,8 @@ namespace ConsoleCommandsParser {
 
       export namespace RequiredOptionKeyIsMissing {
         export type TemplateVariables = Readonly<{
-          commandPhrase?: string;
+          commandPhrase: string;
+          isDefaultCommandPhrase: boolean;
           missingOptionKey: string;
           commandHelpReference: string;
         }>;

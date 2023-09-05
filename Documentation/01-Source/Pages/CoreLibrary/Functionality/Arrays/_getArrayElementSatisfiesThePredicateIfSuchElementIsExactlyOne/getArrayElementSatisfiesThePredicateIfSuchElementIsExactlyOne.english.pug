@@ -1,0 +1,380 @@
+extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "en";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+        whatFunctionDoes:
+            "returns the element of specified array matching with the predicate if such element is exactly one, " +
+              "otherwise error will be thrown or null will be returned depending on dedicated option's value."
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html",
+      russian: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "If elements satisfying the predicate are 0 or more that 1, null will be returned",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              type: "(arrayElement: string) =&gt; boolean",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "If elements satisfying the predicate are 0 or more that 1, error will be thrown",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              type: "(arrayElement: string) =&gt; boolean",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        propertiesSpecification: {
+          mustThrowErrorIfElementNotFoundOrMoreThan1: {
+            type: "boolean (true only)",
+            required: true
+          }
+        }
+      })
+
+    p.Article-Paragraph.
+      Return the element of #[+Term--YDID array] satisfying to specified #[+Term--YDID predicate]
+        (the #[+Term--YDID function], returns the #[+Term--YDID boolean value]) #[+Keyphrase--YDID if and only if]
+        such element is #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one].
+      If there is not such element, or such element is #[+ImportantEntity--YDID 2] #[+Keyword--YDID or]
+        #[+Keyword__Contrast--YDID more],
+
+    ul.Article-UnorderedList
+
+      li.
+        The #[+Term--YDID error] will be thrown if
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]
+          has been specified as #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter].
+        In this case, #[+ImportantEntity--YDID TypeScript] will believe that if the function has been executed successfully,
+          the returned function has #[+Keyword--YDID non-null] value of the type specified
+          (#[+Keyphrase--YDID is this case] #[+Keyword--YDID usually] #[+Keyword__Contrast--YDID implicitly]) via
+           #[+Term--YDID generic parameter].
+
+      li.
+        If the #[+ImportantEntity--YDID 3rd] parameter has&nbsp;not&nbsp;been specified, #[+ImportantEntity__Code--YDID null]
+          will be returned.
+        Herewith, to use the returned value as the value of type specified via #[+Term--YDID generic parameter],
+          the #[+Term--YDID non-null check] will required first.
+
+
+    h2.Article-Heading2 Example
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
+        +CodeViewer-Explanation--YDF.
+          Let us use the above #[+Term--YDID array] with names of cities of USA as sample.
+          #[+SecondaryEntity--YDID 2] of them starts from #[+SecondaryEntity__Code--YDID "Santa"],
+            #[+SecondaryEntity--YDID 3] of them from #[+SecondaryEntity__Code--YDID "Sa"], but #[+Keyword--YDID only]
+            #[+SecondaryEntity--YDID 1] starts with #[+SecondaryEntity--YDID "St."].
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+          );
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            #[+SecondaryEntity--YDID 3rd] element will be returned, because according to the #[+Term--YDID predicate] we
+              need the element begins from #[+SecondaryEntity--YDID «St.»], and #[+Keyphrase--YDID in this case] such element is
+              #[+Keyword--YDID only] #[+SecondaryEntity--YDID 1].
+
+          p.Article-Paragraph.
+            However #[+Keyphrase--YDID on practice] the content of the #[+Term--YDID array] will be
+              #[+Keyphrase--YDID unknown at advance].
+            So the string element which begins from #[+SecondaryEntity--YDID "St."],
+              must&nbsp;#[+Keyword--YDID not] be single, and anyway must&nbsp;#[+Keyword--YDID not] be
+              #[+Keyphrase--YDID even if expected], so with #[+Keyphrase--YDID current combinations of the parameters]
+              of the #[+Term--YDID function] the #[+ImportantEntity--YDID null] could be returned.
+
+          +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+            const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+            );
+
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(targetCityName.length);
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            The #[+ImportantEntity--YDID TypeScript] error #[+ImportantEntity--YDID TS18047]
+              "'targetCityName' is possibly 'null'" will occur because the #[+ImportantEntity__Code--YDID length] property
+              is actual for strings (and arrays) while the #[+SecondaryEntity__Code--YDID targetCityName] variable is
+              probably #[+ImportantEntity__Code--YDID null].
+
+          p.Article-Paragraph.
+            Before calling the string's properties and methods including #[+SecondaryEntity__Code--YDID length] it is
+              require to prove to #[+ImportantEntity--YDID TypeScript] that the value of
+              #[+SecondaryEntity__Code--YDID targetCityName] is #[+Keyword--YDID not]&nbsp;#[+ImportantEntity__Code--YDID null].
+            One way to do is the condition statement like #[+SecondaryEntity__Code--YDID if (targetCityName !== null) {}],
+              in this case inside the #[+Term--YDID if-block] #[+ImportantEntity--YDID TypeScript] will believe that
+              this value is #[+Keyword--YDID not]&nbsp;#[+ImportantEntity__Code--YDID null].
+            There are another solutions but what engineer mastering the #[+ImportantEntity--YDID TypeScript]
+              #[+Keyword--YDID definitely] must #[+Keyword__Contrast--YDID not]&nbsp;to&nbsp;do is usage of the
+              expressions like #[+SecondaryEntity__Code--YDID targetCityName!.length], because it is the serious crack
+              in the code quality.
+            Usually, the usage of such functionality is mass and most commonly going with with usage of
+              #[+ImportantEntity__Code--YDID any] type and other indulgences
+              #[+Keyphrase--YDID denying the meaning of the usage of the #[+ImportantEntity--YDID TypeScript]].
+
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          console.log(
+            getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+              sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
+            )
+          );
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            In this case #[+ImportantEntity__Code--YDID null] will be returned, because there are #[+SecondaryEntity--YDID 2]
+             elements satisfying the #[+Term--YDID predicate], #[+Keyword--YDID not]&nbsp;#[+SecondaryEntity__Code--YDID 1].
+            The function name has been selected such as it must not be the surprise.
+
+          p.Article-Paragraph.
+            What if you are sure that the elements satisfying the #[+Term--YDID predicate] will be only
+              #[+SecondaryEntity--YDID 1] and it can not be any other way?
+            In this case, you can pass
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] as
+              #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter].
+            As result, the #[+ImportantEntity--YDID TypeScript] will not require the #[+Term--YDID non-null check],
+              but if contrary to expectations the elements satisfying the #[+Term--YDID predicate]
+              will&nbsp;#[+Keyword--YDID not]&nbsp;be exactly one, the #[+ImportantEntity__Code--YDID UnexpectedEventError]
+              will be thrown (the probability of this event in higher that than it seems).
+
+        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+          const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample,
+            (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+          );
+        +CodeViewer-Explanation--YDF.
+          #[+Keyphrase--YDID In this case when we have the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter]],
+            we can the annotate the type of #[+SecondaryEntity__Code--YDID matching] as
+            #[+SecondaryEntity__Code--YDID string], #[+Keyword--YDID not]&nbsp;as
+            #[+SecondaryEntity__Code--YDID string | null], because instead of returning of the
+            #[+ImportantEntity__Code--YDID null] the #[+ImportantEntity__Code--YDID UnexpectedEventError] will the thrown
+            if there is not element satisfying the #[+Term--YDID predicate] or such elements are 2 or more.
+          Of course you can handle this exception by #[+ImportantEntity__Code--YDID try/catch], by #[+Keyword--YDID generally]
+            there is #[+Keyword--YDID no]&nbsp;advantage to do this instead of considered above #[+Term--YDID non-null check].
+
+
+    h2.Article-Heading2 Comparison with native methods
+
+    p.Article-Paragraph.
+      Following #[+Keyword--YDID native] #[+Term--YDID methods] neither&nbsp;better nor&nbsp;worse than the
+        #[+Term--YDID function] #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne];
+        what to use is depending on which behaviour requires when:
+
+    ul.Article-UnorderedList
+      li There is #[+Keyword--YDID no] #[+Term--YDID array element] satisfying the #[+Term--YDID predicate]
+      li.
+        There are #[+ImportantEntity--YDID 2] #[+Keyword--YDID or] #[+Keyword__Contrast--YDID more]
+          #[+Term--YDID array elements] satisfying the #[+Term__Contrast--YDID predicate].
+
+    h3.Article-Heading3 Array.prototype.find
+
+    ul.Article-UnorderedList
+
+      li.
+        The common part of this #[+Term--YDID native method] with
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] is
+          #[+Keyword--YDID both] finds the #[+Keyword__Contrast--YDID first] matching with the
+          #[+Term--YDID predicate].
+
+      li.
+        If there are #[+Keyword--YDID no] #[+Term--YDID elements] satisfying the #[+Term--YDID predicate],
+          #[+ImportantEntity__Code--YDID Array.prototype.find] returns #[+ImportantEntity__Code--YDID undefined] while
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] #[+Keyword--YDID either]
+          returns #[+ImportantEntity__Code--YDID null] #[+Keyword--YDID or] throws the #[+Term--YDID error]
+          depending on presence or absence of the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter].
+        If #[+Term--YDID error] throwing has been selected, #[+ImportantEntity--YDID TypeScript] will&nbsp;#[+Keyword--YDID not]
+          require the #[+Term--YDID non-null check].
+        Namely this feature could encourage to use the
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne], because with
+          #[+ImportantEntity__Code--YDID Array.prototype.find], #[+Term--YDID non-undefined] is #[+Keyword--YDID required].
+
+      li.
+        If there are #[+ImportantEntity--YDID 2] #[+Keyword--YDID or] #[+Keyword__Contrast--YDID more] #[+Term--YDID elements]
+          satisfying the predicate, #[+ImportantEntity__Code--YDID Array.prototype.find] return the #[+Keyword--YDID first]
+          one #[+Keyword--YDID ignoring] remain ones.
+        In contrast to this, once
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]　will find
+          the #[+Term--YDID element] satisfying the #[+Term--YDID predicate], it will also check are there are more
+          #[+Term--YDID elements] satisfying the same #[+Term--YDID predicate], and if yes, #[+Keyword--YDID none]
+          of #[+Term--YDID elements] will be returned.
+        This feature could be useful when besides retrieving of the #[+Term--YDID array element] be the
+          #[+Term__Contrast--YDID predicate] it required to make sure that this element has something different with
+          other ones, for example, has the unique identifier.
+
+    h3.Article-Heading3 Array.prototype.filter
+
+    p.Article-Paragraph.
+      This method has been designed for the retrieving of the #[+Term--YDID subarray], #[+Keyword--YDID not] for the
+        retrieving of the specific #[+Term--YDID element].
+      Thus, this #[+Term--YDID array] method returns the #[+Term--YDID array] #[+Keyword--YDID too],
+        of the #[+Term--YDID elements] satisfying the #[+Term--YDID predicate], #[+Keyword--YDID not] the
+        specific #[+Term--YDID element].
+
+    p.Article-Paragraph.
+      If there are #[+Keyword--YDID no] #[+Term--YDID elements] satisfying the #[+Term--YDID predicate],
+        the #[+Keyword--YDID empty] #[+Term--YDID array] will be returned.
+      If to try to access to any #[+Term--YDID element] of this #[+Term__Contrast--YDID array] (including the first
+        one that is with #[+Term--YDID index] #[+ImportantEntity--YDID 0]) the #[+ImportantEntity__Code--YDID undefined]
+        will be returned what will&nbsp;#[+Keyword--YDID not]&nbsp;be warned by the #[+ImportantEntity--YDID TypeScript]
+        (and, actually, by many other programming languages with static typing).
+      For example, #[+SecondaryEntity__Code--YDID Array&lg;string&gt;] or #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;]
+        actually means the "#[+Term--YDID array] of the #[+Keyword--YDID infinite] number of #[+Term--YDID string]
+        #[+Term__Contrast--YDID elements]" while #[+Keyphrase--YDID in real] #[+Keyword--YDID any] #[+Term--YDID array]
+        is #[+Keyword--YDID finite] and sometimes could be empty.
+
+
+    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          Copy to the #[+Term--YDID variable] name containing the #[+Term--YDID array] or #[+Term--YDID array expression]
+            itself to the clipboard.
+          To make possible for the #[+Term--YDID IDE] to fill by the correct value the position of
+            #[+ImportantEntity--YDID 1st] #[+Term--YDID parameter], please shape the habit to do this copying each time
+             before input the #[+Term--YDID Live template] of the
+            #[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] #[+Term--YDID function].
+
+        li
+
+          | Begin to input the #[+Term--YDID function] name
+          |   (#[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]).
+          | It will be #[+ImportantEntity--YDID 2] autocompletes:
+
+          ol.Article-OrderedList
+
+            li.
+              Circled icon with the letter: it is the autocompletion of the #[+Term--YDID function] name, the
+                #[+Keyword--YDID standard] functionality of the #[+Term--YDID IDE].
+              If to press the #[+ImportantEntity--YDID Enter] key, the full #[+Term--YDID function] name will be inputted
+                and also the function #[+Term--YDID import] declaration will be inserted if required.
+              Not bad, but the better automation is possible.
+
+            li.
+              The icon with the cliche: it is the template we need.
+              Press #[+ImportantEntity--YDID Enter] again.
+              The code template will be inserted herewith the value of the #[+ImportantEntity--YDID 1st]
+                #[+Term--YDID parameter] will be filled with the clipboard content and selected by the cursor.
+              If to follow this manual no&nbsp;need to edit the inserted value, so exit the
+                #[+ImportantEntity__Code--YDID targetArray] property editing mode by pressing the
+                #[+ImportantEntity--YDID Enter] agan.
+
+        li.
+          Input the name of the #[+Term--YDID parameter] of the #[+Term__Contrast--YDID predicate] that is the
+            #[+Term--YDID arrow function].
+          This parameter is the #[+Term--YDID element] of the target #[+Term__Contrast--YDID array],
+            however it is recommended to give the more exact name than "element".
+          Once inputting done, press #[+ImportantEntity--YDID Tab].
+          If the unnecessary this time autocomplete will interfere, press the #[+ImportantEntity--YDID Esc] first.
+
+        li.
+          Input the type of the #[+Term--YDID parameter] of the #[+Term__Contrast--YDID predicate], then
+            press the #[+ImportantEntity__Code--YDID Enter].
+
+        li Delete the unnecessary code
+
+
+    h2.Article-Heading2 External links
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

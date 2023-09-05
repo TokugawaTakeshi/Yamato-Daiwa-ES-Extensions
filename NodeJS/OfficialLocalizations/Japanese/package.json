@@ -34,7 +34,7 @@
     "@types/node": "16.11.62",
     "@yamato-daiwa/es-extensions": "1.6.0",
     "@yamato-daiwa/es-extensions-localization-japanese": "1.6.0",
-    "@yamato-daiwa/es-extensions-nodejs": "1.6.0-alpha.12",
+    "@yamato-daiwa/es-extensions-nodejs": "1.6.0-rc.1",
     "@yamato-daiwa/style_guides": "0.0.49",
     "mocha": "10.2.0",
     "rimraf": "5.0.1",

@@ -19,7 +19,7 @@ projectBuilding:
 
       All:
 
-        topDirectoryRelativePath: 01-Source/Pages
+        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
         partialsRecognition:
           excludeFilesWithPrefixes: "_"
@@ -39,7 +39,7 @@ projectBuilding:
 
       Shared:
 
-        topDirectoryRelativePath: 01-Source/SharedAssets/Styles
+        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/Styles
 
         partialsRecognition:
           excludeFilesWithPrefixes: "_"
@@ -53,7 +53,7 @@ projectBuilding:
 
       Layouts:
 
-        topDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
+        sourceFilesTopDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
 
         buildingModeDependent:
           LOCAL_DEVELOPMENT:
@@ -63,7 +63,7 @@ projectBuilding:
 
       Pages:
 
-        topDirectoryRelativePath: 01-Source/Pages
+        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
         partialsRecognition:
           excludeFilesWithPrefixes: "_"
@@ -83,7 +83,7 @@ projectBuilding:
 
       Common:
 
-        singleEntryPointRelativePath: 01-Source/SharedAssets/Scripts/Common.ts
+        singleEntryPointSourceFileRelativePath: 01-Source/SharedAssets/Scripts/Common.ts
 
         targetRuntime:
           type: BROWSER

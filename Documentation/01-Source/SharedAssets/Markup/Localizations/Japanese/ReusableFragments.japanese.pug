@@ -1,0 +1,31 @@
+mixin IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance(properties)
+
+  - const { imageURI } = properties
+
+
+  h2.Article-Heading2 「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力
+
+  +SingleImageViewer--YDF({
+    imageURI: imageURI,
+    imageAlternateText: "「Live template」機能を使用したIntelliJ IDEAファミリー統合開発環境での高速入力"
+  })
+
+  p.Article-Paragraph
+    +Link--YDF({
+      unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
+    }).Article-Link 「IntelliJ IDEA」ファミリー
+    |   の#[+Term--YDID 統合開発環境]の
+    +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates }).Article-Link Live templates
+    |   機能利用の恩恵に依り、#[+Term--YDID 関数呼び出し表現]等の入力速度が向上する。
+    | #[+ImportantEntity--YDID YDEE]の#[+Term--YDID ライブテンプレート]を取得するには、当ライブラリの
+    +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin }).Article-Link 正式プラグイン
+    |   を導入する必要が有る。
+
+
+  h3.Article-Heading3 Live Templateの利用手順
+
+  p.Article-Paragraph.
+    #[+Term--YDID ライブテンプレート]を使った事が無い場合でも、充実した内容の手順書が下記にある為、心配は無用である。
+    #[+Term--YDID ライブテンプレート]に慣れてしまえば、（キーボードのショートカット利用と同じ様な習慣）僅か数秒程度で下記の操作を行える。
+
+  block

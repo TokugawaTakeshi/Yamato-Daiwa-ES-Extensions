@@ -49,8 +49,8 @@
                 }
               },
 
-              importingOfFunctionality: {
-                $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.importingOfFunctionality.tableOfContentsTitle,
+              importingFunctionality: {
+                $tableOfContentsTitle: localization.coreLibrary.gettingStarted.sections.importingFunctionality.tableOfContentsTitle,
                 $anchor: "ImportingOfFunctionality--SECTION",
                 get $URI() {
                   return "@All/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage." +
@@ -82,7 +82,8 @@
 
                       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
                         $tableOfContentsTitle: "<code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
-                        $URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`
+                        // $URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`,
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
                       },
 
                       getLastElementOfArray: {
@@ -106,7 +107,7 @@
 
                       getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne: {
                         $tableOfContentsTitle: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>",
-                        $URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ localization.fileNameLocalizationExtensions }`
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
                       }
 
                     }
@@ -562,7 +563,6 @@
               logging: {
 
                 $tableOfContentsTitle: localization.coreLibrary.functionality.logging.tableOfContentsTitle,
-                $URI: "#",
 
                 $children: {
 
@@ -689,25 +689,29 @@
 
                 $tableOfContentsTitle: localization.coreLibrary.functionality.pagination.tableOfContentsTitle,
 
-                computeFirstItemNumberForSpecificPaginationPage: {
-                  $tableOfContentsTitle: "<code>computeFirstItemNumberForSpecificPaginationPage</code>",
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md"
-                },
+                $children: {
 
-                computeLastItemNumberForSpecificPaginationPage: {
-                  $tableOfContentsTitle: "<code>computeLastItemNumberForSpecificPaginationPage</code>",
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md"
+                  computeFirstItemNumberForSpecificPaginationPage: {
+                    $tableOfContentsTitle: "<code>computeFirstItemNumberForSpecificPaginationPage</code>",
+                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md"
+                  },
+
+                  computeLastItemNumberForSpecificPaginationPage: {
+                    $tableOfContentsTitle: "<code>computeLastItemNumberForSpecificPaginationPage</code>",
+                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md"
+                  }
+
+                  // PaginationCollection: {
+                  //   $tableOfContentsTitle: "<code>PaginationCollection</code>",
+                  //   $URI: "#"
+                  // },
+                  //
+                  // splitToPaginationCollection: {
+                  //   $tableOfContentsTitle: "<code>splitToPaginationCollection</code>",
+                  //   $URI: "#"
+                  // }
+
                 }
-
-                // PaginationCollection: {
-                //   $tableOfContentsTitle: "<code>PaginationCollection</code>",
-                //   $URI: "#"
-                // },
-                //
-                // splitToPaginationCollection: {
-                //   $tableOfContentsTitle: "<code>splitToPaginationCollection</code>",
-                //   $URI: "#"
-                // }
 
               },
 
@@ -786,7 +790,7 @@
                 $tableOfContentsTitle: "<code>RawObjectDataProcessor</code>",
                 $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md",
 
-                $children: {
+                $sectioning: {
 
                   quickExample: {
                     $tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.quickExample.tableOfContentsTitle,
@@ -806,6 +810,38 @@
                   gettingStarted: {
                     $tableOfContentsTitle: localization.coreLibrary.functionality.rawObjectDataProcessor.gettingStarted.tableOfContentsTitle,
                     $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started"
+                  },
+
+                  API: {
+
+                    $tableOfContentsTitle: "API",
+                    $anchor: "API--SECTION",
+                    get $URI() {
+                      return `${ localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$URI }#${ this.$anchor }`
+                    },
+
+                    $children: {
+
+                      types: {
+
+                        $tableOfContentsTitle: "Types",
+                        $children: {
+
+                          PropertiesSpecification: {
+
+                            $tableOfContentsTitle: "<code>PropertiesSpecification</code>",
+                            $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+                                "CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md" +
+                                "#propertiesspecification-and-related---object-properties-specification"
+
+                          }
+
+                        }
+
+                      }
+
+                    }
+
                   }
 
                   // helpers: {
@@ -900,205 +936,211 @@
                   //
                   // }
 
-                },
-
-                // regularExpressions: {
-                //
-                //   $tableOfContentsTitle: localization.coreLibrary.functionality.strings.charactersAssets.tableOfContentsTitle,
-                //   $URI: "#",
-                //
-                //   $children: {
-                //
-                //     extractMatchingsWithRegularExpression: {
-                //       $tableOfContentsTitle: "<code>extractMatchingsWithRegularExpression</code>",
-                //       $URI: "#"
-                //     },
-                //
-                //     getMatchingWithFirstRegularExpressionCapturingGroup: {
-                //       $tableOfContentsTitle: "<code>getMatchingWithFirstRegularExpressionCapturingGroup</code>",
-                //       $URI: "#"
-                //     }
-                //
-                //   }
-                //
-                // },
-
-                // _TEMP: {
-                //
-                //   $tableOfContentsTitle: "URI",
-                //
-                //   $children: {
-                //
-                //     appendFragmentTo$URI: {
-                //       $tableOfContentsTitle: "<code>appendFragmentToURI</code>",
-                //       $URI: "#"
-                //     },
-                //
-                //     getURI_Fragment: {
-                //       $tableOfContentsTitle: "<code>getURI_Fragment</code>",
-                //       $URI: "#"
-                //     },
-                //
-                //     getURI_PartWithoutFragment: {
-                //       $tableOfContentsTitle: "<code>getURI_PartWithoutFragment</code>",
-                //       $URI: "#"
-                //     },
-                //
-                //     filesAndDirectories: {
-                //
-                //       $tableOfContentsTitle: localization.coreLibrary.functionality.strings.URI.filesAndDirectories.tableOfContentsTitle,
-                //
-                //       $children: {
-                //
-                //         appendLastFileNameExtension: {
-                //
-                //           $tableOfContentsTitle: {
-                //
-                //             $tableOfContentsTitle: "<code>appendLastFileNameExtension</code>",
-                //             $URI: "#"
-                //
-                //           }
-                //
-                //         }
-                //
-                //       }
-                //
-                //     }
-                //
-                //   }
-                //
-                // },
-
-                other: {
-
-                  areStringifiedDigitsOnly: {
-                    $tableOfContentsTitle: "<code>areStringifiedDigitsOnly</code>",
-                    get $URI() { return `@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.${ localization.fileNameLocalizationExtensions }` }
-                  },
-
-                  // capitalizeFirstCharacter: {
-                  //   $tableOfContentsTitle: "<code>capitalizeFirstCharacter</code>",
-                  //   $URI: "#"
-                  // },
-
-                  EmailAddress: {
-                    $tableOfContentsTitle: "<code>EmailAddress</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md"
-                  },
-
-                  explodeCasedPhraseToWords: {
-                    $tableOfContentsTitle: "<code>explodeCasedPhraseToWords</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/explodeCasedPhraseToWords.md"
-                  },
-
-                  // getEnglishAbbreviatedOrdinalNumber: {
-                  //   $tableOfContentsTitle: "<code>getEnglishAbbreviatedOrdinalNumber</code>",
-                  //   $URI: "#"
-                  // },
+                  // regularExpressions: {
                   //
-                  // getLastCharacter: {
-                  //   $tableOfContentsTitle: "<code>getLastCharacter</code>",
-                  //   $URI: "#"
-                  // },
-
-                  getPositionsOfAllSubstringOccurrences: {
-                    $tableOfContentsTitle: "<code>getPositionsOfAllSubstringOccurrences</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md"
-                  },
-
-                  hasStringOnlySpecificCharacters: {
-                    $tableOfContentsTitle: "<code>hasStringOnlySpecificCharacters</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/hasStringOnlySpecificCharacters.md"
-                  },
-
-                  // insertSubstring: {
-                  //   $tableOfContentsTitle: "<code>insertSubstring</code>",
-                  //   $URI: "#"
-                  // },
+                  //   $tableOfContentsTitle: localization.coreLibrary.functionality.strings.charactersAssets.tableOfContentsTitle,
+                  //   $URI: "#",
                   //
-                  // insertSubstringIf: {
-                  //   $tableOfContentsTitle: "<code>insertSubstringIf</code>",
-                  //   $URI: "#"
-                  // },
-
-                  isIPv4AddressLiesInRange: {
-                    $tableOfContentsTitle: "<code>isIPv4AddressLiesInRange</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/isIPv4AddressLiesInRange.md"
-                  },
-
-                  // removeAllSpecifiedCharacters: {
-                  //   $tableOfContentsTitle: "<code>removeAllSpecifiedCharacters</code>",
-                  //   $URI: "#"
-                  // },
-
-                  // removeLastCharacter: {
-                  //   $tableOfContentsTitle: "<code>removeLastCharacter</code>",
-                  //   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md"
-                  // },
-
-                  removeNonDigitsCharacters: {
-                    $tableOfContentsTitle: "<code>removeNonDigitsCharacters</code>",
-                    $URI: "#"
-                  },
-
-                  removeNthCharacter: {
-                    $tableOfContentsTitle: "<code>removeNthCharacter</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md"
-                  },
-
-                  removeSpecificCharacterFromCertainPosition: {
-                    $tableOfContentsTitle: "<code>removeSpecificCharacterFromCertainPosition</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md"
-                  },
-
-                  replace2OrMoreSpacesTo1: {
-                    $tableOfContentsTitle: "<code>replace2OrMoreSpacesTo1</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md"
-                  },
-
-                  replaceBrHTML_TagToNewLineEscapeSequence: {
-                    $tableOfContentsTitle: "<code>replaceBrHTML_TagToNewLineEscapeSequence</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md"
-                  },
-
-                  // replaceDoubleBackslashesWithForwardSlashes: {
-                  //   $tableOfContentsTitle: "<code>replaceDoubleBackslashesWithForwardSlashes</code>",
-                  //   $URI: "#"
-                  // },
+                  //   $children: {
                   //
-                  // reverseString: {
-                  //   $tableOfContentsTitle: "<code>reverseString</code>",
-                  //   $URI: "#"
+                  //     extractMatchingsWithRegularExpression: {
+                  //       $tableOfContentsTitle: "<code>extractMatchingsWithRegularExpression</code>",
+                  //       $URI: "#"
+                  //     },
+                  //
+                  //     getMatchingWithFirstRegularExpressionCapturingGroup: {
+                  //       $tableOfContentsTitle: "<code>getMatchingWithFirstRegularExpressionCapturingGroup</code>",
+                  //       $URI: "#"
+                  //     }
+                  //
+                  //   }
+                  //
                   // },
 
-                  splitString: {
-                    $tableOfContentsTitle: "<code>splitString</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/splitString.md"
-                  },
+                  // URI: {
+                  //
+                  //   $tableOfContentsTitle: "URI",
+                  //
+                  //   $children: {
+                  //
+                  //     appendFragmentTo$URI: {
+                  //       $tableOfContentsTitle: "<code>appendFragmentToURI</code>",
+                  //       $URI: "#"
+                  //     },
+                  //
+                  //     getURI_Fragment: {
+                  //       $tableOfContentsTitle: "<code>getURI_Fragment</code>",
+                  //       $URI: "#"
+                  //     },
+                  //
+                  //     getURI_PartWithoutFragment: {
+                  //       $tableOfContentsTitle: "<code>getURI_PartWithoutFragment</code>",
+                  //       $URI: "#"
+                  //     },
+                  //
+                  //     filesAndDirectories: {
+                  //
+                  //       $tableOfContentsTitle: localization.coreLibrary.functionality.strings.URI.filesAndDirectories.tableOfContentsTitle,
+                  //
+                  //       $children: {
+                  //
+                  //         appendLastFileNameExtension: {
+                  //
+                  //           $tableOfContentsTitle: {
+                  //
+                  //             $tableOfContentsTitle: "<code>appendLastFileNameExtension</code>",
+                  //             $URI: "#"
+                  //
+                  //           }
+                  //
+                  //         }
+                  //
+                  //       }
+                  //
+                  //     }
+                  //
+                  //   }
+                  //
+                  // },
 
-                  stringifyAndFormatArbitraryValue: {
-                    $tableOfContentsTitle: "<code>stringifyAndFormatArbitraryValue</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue/stringifyAndFormatArbitraryValue.md"
-                  },
+                  other: {
 
-                  toLowerCamelCase: {
-                    $tableOfContentsTitle: "<code>toLowerCamelCase</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toLowerCamelCase.md"
-                  },
+                    $tableOfContentsTitle: localization.coreLibrary.functionality.strings.other.tableOfContentsTitle,
 
-                  toScreamingSnakeCase: {
-                    $tableOfContentsTitle: "<code>toScreamingSnakeCase</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toScreamingSnakeCase.md"
-                  },
+                    $children: {
 
-                  toUpperCamelCase: {
-                    $tableOfContentsTitle: "<code>toUpperCamelCase</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toUpperCamelCase.md"
-                  },
+                      // areStringifiedDigitsOnly: {
+                      //   $tableOfContentsTitle: "<code>areStringifiedDigitsOnly</code>",
+                      //   get $URI() { return `@All/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.${ localization.fileNameLocalizationExtensions }` }
+                      // },
 
-                  trimSpaces: {
-                    $tableOfContentsTitle: "<code>trimSpaces</code>",
-                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md"
+                      // capitalizeFirstCharacter: {
+                      //   $tableOfContentsTitle: "<code>capitalizeFirstCharacter</code>",
+                      //   $URI: "#"
+                      // },
+
+                      EmailAddress: {
+                        $tableOfContentsTitle: "<code>EmailAddress</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/EmailAddress.md"
+                      },
+
+                      explodeCasedPhraseToWords: {
+                        $tableOfContentsTitle: "<code>explodeCasedPhraseToWords</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/explodeCasedPhraseToWords.md"
+                      },
+
+                      // getEnglishAbbreviatedOrdinalNumber: {
+                      //   $tableOfContentsTitle: "<code>getEnglishAbbreviatedOrdinalNumber</code>",
+                      //   $URI: "#"
+                      // },
+                      //
+                      // getLastCharacter: {
+                      //   $tableOfContentsTitle: "<code>getLastCharacter</code>",
+                      //   $URI: "#"
+                      // },
+
+                      getPositionsOfAllSubstringOccurrences: {
+                        $tableOfContentsTitle: "<code>getPositionsOfAllSubstringOccurrences</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/getPositionsOfAllSubstringOccurrences.md"
+                      },
+
+                      hasStringOnlySpecificCharacters: {
+                        $tableOfContentsTitle: "<code>hasStringOnlySpecificCharacters</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/hasStringOnlySpecificCharacters.md"
+                      },
+
+                      // insertSubstring: {
+                      //   $tableOfContentsTitle: "<code>insertSubstring</code>",
+                      //   $URI: "#"
+                      // },
+                      //
+                      // insertSubstringIf: {
+                      //   $tableOfContentsTitle: "<code>insertSubstringIf</code>",
+                      //   $URI: "#"
+                      // },
+
+                      isIPv4AddressLiesInRange: {
+                        $tableOfContentsTitle: "<code>isIPv4AddressLiesInRange</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/isIPv4AddressLiesInRange.md"
+                      },
+
+                      // removeAllSpecifiedCharacters: {
+                      //   $tableOfContentsTitle: "<code>removeAllSpecifiedCharacters</code>",
+                      //   $URI: "#"
+                      // },
+
+                      // removeLastCharacter: {
+                      //   $tableOfContentsTitle: "<code>removeLastCharacter</code>",
+                      //   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeLastCharacter.md"
+                      // },
+
+                      // removeNonDigitsCharacters: {
+                      //   $tableOfContentsTitle: "<code>removeNonDigitsCharacters</code>",
+                      //   $URI: "#"
+                      // },
+
+                      removeNthCharacter: {
+                        $tableOfContentsTitle: "<code>removeNthCharacter</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeNthCharacter.md"
+                      },
+
+                      removeSpecificCharacterFromCertainPosition: {
+                        $tableOfContentsTitle: "<code>removeSpecificCharacterFromCertainPosition</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md"
+                      },
+
+                      replace2OrMoreSpacesTo1: {
+                        $tableOfContentsTitle: "<code>replace2OrMoreSpacesTo1</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replace2OrMoreSpacesTo1.md"
+                      },
+
+                      replaceBrHTML_TagToNewLineEscapeSequence: {
+                        $tableOfContentsTitle: "<code>replaceBrHTML_TagToNewLineEscapeSequence</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/replaceBrHTML_TagToNewLineEscapeSequence.md"
+                      },
+
+                      // replaceDoubleBackslashesWithForwardSlashes: {
+                      //   $tableOfContentsTitle: "<code>replaceDoubleBackslashesWithForwardSlashes</code>",
+                      //   $URI: "#"
+                      // },
+                      //
+                      // reverseString: {
+                      //   $tableOfContentsTitle: "<code>reverseString</code>",
+                      //   $URI: "#"
+                      // },
+
+                      splitString: {
+                        $tableOfContentsTitle: "<code>splitString</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/splitString.md"
+                      },
+
+                      stringifyAndFormatArbitraryValue: {
+                        $tableOfContentsTitle: "<code>stringifyAndFormatArbitraryValue</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/stringifyAndFormatArbitraryValue/stringifyAndFormatArbitraryValue.md"
+                      },
+
+                      toLowerCamelCase: {
+                        $tableOfContentsTitle: "<code>toLowerCamelCase</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toLowerCamelCase.md"
+                      },
+
+                      toScreamingSnakeCase: {
+                        $tableOfContentsTitle: "<code>toScreamingSnakeCase</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toScreamingSnakeCase.md"
+                      },
+
+                      toUpperCamelCase: {
+                        $tableOfContentsTitle: "<code>toUpperCamelCase</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/toUpperCamelCase.md"
+                      },
+
+                      trimSpaces: {
+                        $tableOfContentsTitle: "<code>trimSpaces</code>",
+                        $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md"
+                      }
+
+                    }
+
                   }
 
                 }
@@ -1327,40 +1369,40 @@
               //
               // },
 
-              // types: {
-              //
-              //   $tableOfContentsTitle: localization.coreLibrary.functionality.types.tableOfContentsTitle,
-              //
-              //   $children: {
-              //
-              //     ArbitraryObject: {
-              //       $tableOfContentsTitle: "<code>ArbitraryObject</code>",
-              //       $URI: "#"
-              //     },
-              //
-              //     ElementOfPseudoEnumeration: {
-              //       $tableOfContentsTitle: "<code>ElementOfPseudoEnumeration</code>",
-              //       $URI: "#"
-              //     },
-              //
-              //     InheritEnumerationKeys: {
-              //       $tableOfContentsTitle: "<code>InheritEnumerationKeys</code>",
-              //       $URI: "#"
-              //     },
-              //
-              //     ParsedJSON_AndRelated: {
-              //       $tableOfContentsTitle: "<code>ParsedJSON</code> and related",
-              //       $URI: "#"
-              //     },
-              //
-              //     PartialBy: {
-              //       $tableOfContentsTitle: "<code>PartialBy</code>",
-              //       $URI: "#"
-              //     }
-              //
-              //   }
-              //
-              // },
+              types: {
+
+                $tableOfContentsTitle: localization.coreLibrary.functionality.types.tableOfContentsTitle,
+
+                $children: {
+
+                  // ArbitraryObject: {
+                  //   $tableOfContentsTitle: "<code>ArbitraryObject</code>",
+                  //   $URI: "#"
+                  // },
+                  //
+                  // ElementOfPseudoEnumeration: {
+                  //   $tableOfContentsTitle: "<code>ElementOfPseudoEnumeration</code>",
+                  //   $URI: "#"
+                  // },
+
+                  InheritEnumerationKeys: {
+                    $tableOfContentsTitle: "<code>InheritEnumerationKeys</code>",
+                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Types/InheritEnumerationKeys.md"
+                  },
+
+                  ParsedJSON_AndRelated: {
+                    $tableOfContentsTitle: "<code>ParsedJSON</code> and related",
+                    $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Types/ParsedJSON/ParsedJSON.md"
+                  },
+
+                  // PartialBy: {
+                  //   $tableOfContentsTitle: "<code>PartialBy</code>",
+                  //   $URI: "#"
+                  // }
+
+                }
+
+              },
 
               // valueTransformers: {
               //
@@ -1509,54 +1551,55 @@
 
             $children: {
 
-              ConsoleCommandsParser: {
-                $tableOfContentsTitle: "<code>ConsoleCommandsParser</code>",
-                $URI: `@All/NodeJS/ConsoleCommandsParser/ConsoleCommandsParser.${ localization.fileNameLocalizationExtensions }.pug`
-              },
+              // ConsoleCommandsParser: {
+              //   $tableOfContentsTitle: "<code>ConsoleCommandsParser</code>",
+              //   $URI: `@All/NodeJS/ConsoleCommandsParser/ConsoleCommandsParser.${ localization.fileNameLocalizationExtensions }.pug`
+              // },
 
               ConsoleApplicationLogger: {
                 $tableOfContentsTitle: "<code>ConsoleApplicationLogger</code>",
                 $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/NodeJS/Package/" +
                     "Documentation/Logging/ConsoleApplicationLogger/ConsoleApplicationLogger.md"
                 // $URI: `@All/NodeJS/ConsoleApplicationLogger.${ localization.fileNameLocalizationExtensions }.pug`
-              },
-
-              ObjectDataFilesProcessor: {
-                $tableOfContentsTitle: "<code>ObjectDataFilesProcessor</code>",
-                $URI: `@All/NodeJS/ObjectDataFilesProcessor/ObjectDataFilesProcessor.${ localization.fileNameLocalizationExtensions }.pug`
               }
+
+              // ObjectDataFilesProcessor: {
+              //   $tableOfContentsTitle: "<code>ObjectDataFilesProcessor</code>",
+              //   $URI: `@All/NodeJS/ObjectDataFilesProcessor/ObjectDataFilesProcessor.${ localization.fileNameLocalizationExtensions }.pug`
+              // }
 
             }
 
           },
 
-          errorsClasses: {
-
-            $tableOfContentsTitle: localization.NodeJS.errorsClasses.tableOfContentsTitle,
-
-            $children: {
-
-              DesiredFileActuallyIsDirectoryError: {
-                $tableOfContentsTitle: "<code>DesiredFileActuallyIsDirectoryError</code>",
-                $URI: "@All/NodeJS/ErrorsClasses/DesiredFileActuallyIsDirectoryError/" +
-                    `DesiredFileActuallyIsDirectoryError.${ localization.fileNameLocalizationExtensions }.pug`
-              },
-
-              FileNotFoundError: {
-                $tableOfContentsTitle: "<code>FileNotFoundError</code>",
-                $URI: "@All/NodeJS/ErrorsClasses/FileNotFoundError/" +
-                    `FileNotFoundError.${ localization.fileNameLocalizationExtensions }.pug`
-              },
-
-              InvalidConsoleCommandError: {
-                $tableOfContentsTitle: "<code>InvalidConsoleCommandError</code>",
-                $URI: "@All/NodeJS/ErrorsClasses/InvalidConsoleCommandError/" +
-                    `InvalidConsoleCommandError.${ localization.fileNameLocalizationExtensions }.pug`
-              }
-
-            }
-
-          },
+          // errorsClasses: {
+          //
+          //   $tableOfContentsTitle: localization.NodeJS.errorsClasses.tableOfContentsTitle,
+          //   $URI: `@All/NodeJS/ErrorsClasses/ErrorsClasses-NodeJS.${ localization.fileNameLocalizationExtensions }`,
+          //
+          //   $sectioning: {
+          //
+          //     DesiredFileActuallyIsDirectoryError: {
+          //       $tableOfContentsTitle: "<code>DesiredFileActuallyIsDirectoryError</code>",
+          //       $anchor: "DesiredFileActuallyIsDirectoryError--SECTION",
+          //       get $URI() { return `${ localization.nodeJS.$children.errorsClasses.$URI }#${ this.$anchor }`; }
+          //     },
+          //
+          //     FileNotFoundError: {
+          //       $tableOfContentsTitle: "<code>FileNotFoundError</code>",
+          //       $anchor: "FileNotFoundError--SECTION",
+          //       get $URI() { return `${ localization.nodeJS.$children.errorsClasses.$URI }#${ this.$anchor }`; }
+          //     },
+          //
+          //     InvalidConsoleCommandError: {
+          //       $tableOfContentsTitle: "<code>InvalidConsoleCommandError</code>",
+          //       $anchor: "InvalidConsoleCommandError--SECTION",
+          //       get $URI() { return `${ localization.nodeJS.$children.errorsClasses.$URI }#${ this.$anchor }`; }
+          //     }
+          //
+          //   }
+          //
+          // },
 
           // other: {
           //
