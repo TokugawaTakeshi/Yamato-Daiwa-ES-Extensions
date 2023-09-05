@@ -48,7 +48,7 @@ block append SpecificContent
 
     h3.Article-Heading3 新規機能
 
-    h4.Article-Heading4 配列
+    h4.Article-Heading4 配列の弄り
 
     ul.Article-UnorderedList
 
@@ -88,7 +88,7 @@ block append SpecificContent
       }).Article-Link PaginationCollection
 
 
-    h4.Article-Heading4 文字列
+    h4.Article-Heading4 文字列の弄り
 
     ul.Article-UnorderedList
 
@@ -97,4 +97,116 @@ block append SpecificContent
       }).Article-Link cropString
 
 
+    h4.Article-Heading4 ファイルの弄り
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.files.$children.encodeFileToBase64.$URI
+      }).Article-Link encodeFileToBase64
+
+
     h3.Article-Heading3 以前のコードの修正が必要になる恐れ有りの変化
+
+    h4.Article-Heading4 ロギング
+
+    h5.Article-Heading5 #[code ILogger]インターフェースの#[code throwErrorAndLog]メソッドの任意化
+
+    p.Article-Paragraph.
+      今から、#[+ImportantEntity--YDID Logger]#[+Term--YDID ファサード]が#[+ImportantEntity__Code--YDID throwErrorAndLog]
+        #[+Term--YDID メソッド]の実装を見つからなかった場合、此の#[+Term--YDID メソッド]の規定の実装が実行される。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID Logger]#[+Term--YDID クラスは]#[+Keyword__Contrast--YDID 静的メソッド]#[+Keyword--YDID のみ]が有る
+        と思い出した上で、#[+ImportantEntity__Code--YDID setImplementation]#[+Term--YDID メソッド]で#[code ILogger]
+        #[+Term--YDID インターフェース]の実装を渡すと、#[+Keyphrase--YDID 規定振る舞いの変わりに]#[+ImportantEntity--YDID Logger]
+        #[+Term--YDID クラス]の#[+Term--YDID 静的メソッド]は此の実装の#[+Keyword--YDID 同名]の#[+Term--YDID メソッド]を呼び出す事に成る。
+
+    p.Article-Paragraph.
+      任意にされた理由としては、エラーの投擲の際、フォーマットする機能が限られた事が普通で、規定のフォーマットが十分な場合も多いので、
+        #[+ImportantEntity__Code--YDID throwErrorAndLog]#[+Term--YDID メソッド]の実装が必須だとしたら、
+        #[+ImportantEntity--YDID Logger]#[+Term--YDID クラス]での#[+ImportantEntity__Code--YDID throwErrorAndLog]の実装と
+        完全に一致している事が多い。
+      とはいえ、当メソッドの実装が必要な場合も有り、例えばエラーメッセージ（#[+ImportantEntity--YDID Error]と言う#[+Term--YDID ネイティブクラス]）
+        の#[+ImportantEntity__Code--YDID message]#[+Term--YDID フィルド]）を納品モードに於いてブラウザーの開発者専用ツールが使用出来る
+        ブラウザーアプリケーションの利用者から隠したい時。
+
+
+    h5.Article-Heading5 ファサード#[code Logger]の#[code throwErrorAndLog]メソッドに於けるログの詳細度改善
+
+    p.Article-Paragraph.
+      今後#[+ImportantEntity__Code--YDID throwErrorAndLog]#[+Term--YDID メソッド]（#[+Keyphrase--YDID 規定実装]）の
+        #[+ImportantEntity__Code--YDID ThrownErrorLog]と言う#[+Term--YDID オブジェクト型]の#[+Term--YDID 引数]の
+        #[+Term__Contrast--YDID プロパティ]#[+ImportantEntity__Code--YDID title]、
+        #[+ImportantEntity__Code--YDID occurrenceLocation]、#[+ImportantEntity__Code--YDID innerError]（指定された場合）と
+        #[+ImportantEntity__Code--YDID additionalData]（指定された場合）が#[+ImportantEntity__Code--YDID errorInstance]
+        #[+Term--YDID プロパティ]が定義された時だけでなく、代わりに#[+ImportantEntity__Code--YDID errorType]と
+        #[+ImportantEntity__Code--YDID description]#[+Term--YDID プロパティ]が定義された時にもメッセージが生成される様に成る。
+      #[+Keyword--YDID 二つ目]の場合、#[+ImportantEntity__Code--YDID Error]#[+Term--YDID オブジェクト]が作られ、
+        #[+ImportantEntity__Code--YDID throw]で投げられる前に生成されたメッセージが#[+ImportantEntity__Code--YDID message]
+        #[+Term--YDID プロパティ]に保存される。
+
+
+    h5.Article-Heading5 #[code Log]型及び此れの拡大型
+
+    p.Article-Paragraph.
+      #[+Term--YDID オブジェクト系]の#[+Term--YDID Log]#[+Term--YDID 型]は下記の#[+Term--YDID 拡大型]を持っていると思い出させておこう。
+
+    ul.Article-UnorderedList
+      li #[+ImportantEntity__Code--YDID ErrorLog]
+      li #[+ImportantEntity__Code--YDID ThrownErrorLog]
+      li #[+ImportantEntity__Code--YDID WarningLog]
+
+    p.Article-Paragraph.
+      尚、#[+Keyphrase--YDID 現在のバージョンなら]#[+ImportantEntity__Code--YDID SuccessLog]と#[+ImportantEntity__Code--YDID InfoLog]
+        型は#[+Keyword--YDID 完全に]#[+Term--YDID Log]#[+Term--YDID 型]と#[+Keyword__Contrast--YDID 一致]。
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+ImportantEntity__Code--YDID compactLayout]と言う#[+Keyword--YDID 任意]#[+Term--YDID 真偽型]の
+          #[+Term__Contrast--YDID プロパティ]が追加された。
+        #[+ImportantEntity__Code--YDID true]に成っている時、見出し(#[+ImportantEntity__Code--YDID title]#[+Term--YDID プロパティ])ろ
+          記述(#[+ImportantEntity__Code--YDID description]#[+Term--YDID 型])の間に開業を無くすと期待されるが、
+          #[+Keyphrase--YDID 実際の振る舞いはロガーの実装に依る]。
+
+      li.
+        #[+ImportantEntity__Code--YDID mustOutputIf]と言う#[+Keyword--YDID 任意]#[+Term--YDID 真偽型]の
+          #[+Term__Contrast--YDID プロパティ]が追加された。
+        #[+ImportantEntity__Code--YDID false]に成っている時、出力が発生しないと期待さが、
+          #[+Keyphrase--YDID 実際の振る舞いはロガーの実装に依る]。
+        但し、ロガーが#[+ImportantEntity--YDID Logger]#[+Term--YDID ファサード]を介して使われている場合、
+          #[+ImportantEntity__Code--YDID ILogger]#[+Term--YDID ファサード]の特定実装を関係無く、
+          #[+ImportantEntity__Code--YDID mustOutputIf]が#[+ImportantEntity__Code--YDID false]に成っている時、出力が発生しない。
+
+
+    h3.Article-Heading3 破壊的変更
+
+    h4.Article-Heading4 配列の弄り
+
+    h5.Article-Heading5 #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]の３引数目の名前変更
+
+    p.Article-Paragraph.
+      #[+Term--YDID オブジェクト型]の#[+ImportantEntity--YDID 第３]#[+Term__Contrast--YDID 引数]目
+        #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]#[+Term--YDID プロパティ]は
+        #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に名前が変更された。
+
+    dl.Article-DescriptionList
+
+      dt 理由
+      dd.
+        以前の名前が迷わせる、即ち「or more than1」を「#[+Keyword--YDID 元の]配列に１個以上の要素がなくては成らない」と#[+Keyword--YDID 勘違い]しがち。
+        今の「or matches are multiple」は、プレディケートに満たされている#[+Term--YDID 要素]は１個以上の要素がなくては成らないともっと明確に伝える様に成った。
+
+      dt 貴方のコードが編集が必要に成る条件
+      dd.
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]の際、
+          #[+ImportantEntity--YDID ３引数目]が参照されている所が有る。
+
+      dt 対策
+      dd.
+        コードエディター又は#[+Term--YDID 結合開発環境]の適切な機能を使って、プロジェクトの前ファイルに
+          #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]を
+          #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に置き換えて下さい。
+        例えば、#[+SecondaryEntity--YDID IntelliJ IDEA ファミリー]#[+Term--YDID 結合開発環境]の場合、此の機能は
+          #[+SecondaryEntity--YDID Ctrl + Shift + R]ショートカットに呼び出される。

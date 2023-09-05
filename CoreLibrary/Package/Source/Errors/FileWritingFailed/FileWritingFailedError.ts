@@ -1,39 +1,43 @@
-import FileWritingFailedErrorLocalization__English from "./FileWritingFailedErrorLocalization.english";
+import fileWritingFailedErrorLocalization__english from "./FileWritingFailedErrorLocalization.english";
 
 
 class FileWritingFailedError extends Error {
 
   public static readonly NAME: string = "FileWritingFailedError";
-  public static localization: FileWritingFailedError.Localization = FileWritingFailedErrorLocalization__English;
+
+  public static localization: FileWritingFailedError.Localization = fileWritingFailedErrorLocalization__english;
 
 
-  public constructor(namedParameters: FileWritingFailedError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: FileWritingFailedError.ConstructorParameter) {
 
     super();
 
     this.name = FileWritingFailedError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = FileWritingFailedError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        FileWritingFailedError.localization.generateDescription(compoundParameter);
+
   }
+
 }
 
 
 namespace FileWritingFailedError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
+  export type ConstructorParameter =
+      Localization.DescriptionTemplateVariables |
+      Readonly<{ customMessage: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{ filePath: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{ filePath: string; }>;
   }
+
 }
 
 

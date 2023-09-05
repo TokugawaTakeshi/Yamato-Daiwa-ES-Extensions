@@ -1,17 +1,18 @@
 /*!
- * @yamato-daiwa/es-extensions v1.6
+ * @yamato-daiwa/es-extensions v1.7
  * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
  * Released under the MIT License.
  */
 
 
-/* === AJAX ======================================================================================================== */
+/* ━━━ AJAX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as AJAX_Service } from "./AJAX/AJAX_Service";
 export { default as FetchAPI_Service } from "./AJAX/FetchAPI_Service";
 export { default as serializeURI_QueryParameters } from "./AJAX/serializeURI_QueryParameters";
 export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryParametersSerializer";
 
-/* === Arrays ====================================================================================================== */
+
+/* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addElementsToArray } from "./Arrays/addElementsToArray";
 export { default as createArrayOfNatualNumbers } from "./Arrays/createArrayOfNatualNumbers";
 export { default as cropArray } from "./Arrays/cropArray";
@@ -32,8 +33,8 @@ export { default as replaceArrayElementsByPredicates, type ReplacingArrayElement
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 
-/* === Constants and enumerations =================================================================================== */
-/* --- Date & Time -------------------------------------------------------------------------------------------------- */
+/* ━━━ Constants and enumerations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ─── Date & Time ────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING } from
     "./ConstantsAndEnumerations/DateTime/CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING";
 export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
@@ -44,7 +45,7 @@ export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/
 export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
 export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
 
-/* --- Date & Time -------------------------------------------------------------------------------------------------- */
+/* ─── HTTP ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP/HTTP_Methods";
 export {
   HTTP_StatusCodes,
@@ -55,19 +56,18 @@ export {
   ServerErrorsHTTP_StatusCodes
 } from "./ConstantsAndEnumerations/HTTP/HTTP_StatusCodes";
 
-/* --- Other -------------------------------------------------------------------------------------------------------- */
+/* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
 
 
-/* === Data mocking ================================================================================================= */
+/* ━━━ Data mocking ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as DataMocking } from "./DataMocking/DataMocking";
 export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelpler/MockGatewayHelper";
 export { default as MockGatewayHelperLocalization__English } from
     "./DataMocking/MockGatewayHelpler/MockGatewayHelperLocalization.english";
 
 
-/* === Date & Time ================================================================================================== */
-/* --- Other -------------------------------------------------------------------------------------------------------- */
+/* ━━━ Date & Time ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
 export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
@@ -83,87 +83,87 @@ export { default as TimePoint } from "./DateTime/TimePoint/TimePoint";
 export { default as Timer } from "./DateTime/Timer";
 
 
-/* === Default value substituters =================================================================================== */
+/* ━━━ Default value substituters ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as substituteWhenNull } from "./DefaultValueSubstituters/substituteWhenNull";
 export { default as substituteWhenUndefined } from "./DefaultValueSubstituters/substituteWhenUndefined";
 
 
-/* === Errors ======================================================================================================= */
+/* ━━━ Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as AlgorithmMismatchError } from "./Errors/AlgorithmMismatch/AlgorithmMismatchError";
-export { default as AlgorithmMismatchErrorLocalization__English } from
+export { default as algorithmMismatchErrorLocalization__english } from
     "./Errors/AlgorithmMismatch/AlgorithmMismatchErrorLocalization.english";
 export { default as ClassRedundantSubsequentInitializationError } from
     "./Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationError";
-export { default as ClassRedundantSubsequentInitializationErrorLocalization__English } from
+export { default as classRedundantSubsequentInitializationErrorLocalization__english } from
     "./Errors/ClassRedundantSubsequentInitialization/ClassRedundantSubsequentInitializationErrorLocalization.english";
 export { default as ClassRequiredInitializationHasNotBeenExecutedError } from
     "./Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedError";
-export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English } from
+export { default as classRequiredInitializationHasNotBeenExecutedErrorLocalization__english } from
     "./Errors/ClassRequiredInitializationHasNotBeenExecuted/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
 export { default as ConfigFileNotFoundError } from "./Errors/ConfigFileNotFound/ConfigFileNotFoundError";
-export { default as ConfigFileNotFoundErrorLocalization__English } from
+export { default as configFileNotFoundErrorLocalization__english } from
     "./Errors/ConfigFileNotFound/ConfigFileNotFoundErrorLocalization.english";
 export { default as CrossBrowserIssueError } from "./Errors/CrossBrowserIssue/CrossBrowserIssueError";
-export { default as CrossBrowserIssueErrorLocalization__English } from
+export { default as crossBrowserIssueErrorLocalization__english } from
     "./Errors/CrossBrowserIssue/CrossBrowserIssueErrorLocalization.english";
 export { default as DataRetrievingFailedError } from "./Errors/DataRetrievingFailed/DataRetrievingFailedError";
-export { default as DataRetrievingFailedErrorLocalization__English } from
+export { default as dataRetrievingFailedErrorLocalization__english } from
     "./Errors/DataRetrievingFailed/DataRetrievingFailedErrorLocalization.english";
 export { default as DataSubmittingFailedError } from "./Errors/DataSubmittingFailed/DataSubmittingFailedError";
-export { default as DataSubmittingFailedErrorLocalization__English } from
+export { default as dataSubmittingFailedErrorLocalization__english } from
     "./Errors/DataSubmittingFailed/DataSubmittingFailedErrorLocalization.english";
 export { default as DOM_ElementRetrievingFailedError } from
     "./Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedError";
-export { default as DOM_ElementRetrievingFailedErrorLocalization__English } from
+export { default as DOM_ElementRetrievingFailedErrorLocalization__english } from
     "./Errors/DOM_ElementRetrievingFailed/DOM_ElementRetrievingFailedErrorLocalization.english";
 export { default as FileReadingFailedError } from "./Errors/FileReadingFailed/FileReadingFailedError";
-export { default as FileReadingFailedErrorLocalization__English } from
+export { default as fileReadingFailedErrorLocalization__english } from
     "./Errors/FileReadingFailed/FileReadingFailedErrorLocalization.english";
 export { default as FileWritingFailedError } from "./Errors/FileWritingFailed/FileWritingFailedError";
-export { default as FileWritingFailedErrorLocalization__English } from
+export { default as fileWritingFailedErrorLocalization__english } from
     "./Errors/FileWritingFailed/FileWritingFailedErrorLocalization.english";
 export { default as ImproperUsageError } from "./Errors/ImproperUsage/ImproperUsageError";
-export { default as ImproperUsageErrorLocalization__English } from
+export { default as improperUsageErrorLocalization__english } from
     "./Errors/ImproperUsage/ImproperUsageErrorLocalization.english";
 export { default as IncompatiblePropertiesInObjectTypeParameterError } from
     "./Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
-export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English } from
+export { default as incompatiblePropertiesInObjectTypeParameterErrorLocalization__english } from
     "./Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterErrorLocalization.english";
 export { default as InterProcessInteractionFailedError } from
     "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedError";
-export { default as InterProcessInteractionFailedErrorLocalization__English } from
+export { default as interProcessInteractionFailedErrorLocalization__english } from
     "./Errors/InterProcessInteractionFailed/InterProcessInteractionFailedErrorLocalization.english";
 export { default as InvalidConfigError } from "./Errors/InvalidConfig/InvalidConfigError";
-export { default as InvalidConfigErrorLocalization__English } from
+export { default as invalidConfigErrorLocalization__english } from
     "./Errors/InvalidConfig/InvalidConfigErrorLocalization.english";
 export { default as InvalidExternalDataError } from "./Errors/InvalidExternalData/InvalidExternalDataError";
-export { default as InvalidExternalDataErrorLocalization__English } from
+export { default as invalidExternalDataErrorLocalization__english } from
     "./Errors/InvalidExternalData/InvalidExternalDataErrorLocalization.english";
 export { default as InvalidParameterValueError } from "./Errors/InvalidParameterValue/InvalidParameterValueError";
-export { default as InvalidParameterValueErrorLocalization__English } from
+export { default as invalidParameterValueErrorLocalization__english } from
     "./Errors/InvalidParameterValue/InvalidParameterValueErrorLocalization.english";
 export { default as ModuleDynamicLoadingFailedError } from
     "./Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedError";
-export { default as ModuleDynamicLoadingFailedErrorLocalization__English } from
+export { default as moduleDynamicLoadingFailedErrorLocalization__english } from
     "./Errors/ModuleDynamicLoadingFailed/ModuleDynamicLoadingFailedErrorLocalization.english";
 export { default as UnexpectedEventError } from "./Errors/UnexpectedEvent/UnexpectedEventError";
-export { default as UnexpectedEventErrorLocalization__English } from
+export { default as unexpectedEventErrorLocalization__english } from
     "./Errors/UnexpectedEvent/UnexpectedEventErrorLocalization.english";
 export { default as UnsupportedScenarioError } from "./Errors/UnsupportedScenario/UnsupportedScenarioError";
-export { default as UnsupportedScenarioErrorLocalization__English } from
+export { default as unsupportedScenarioErrorLocalization__english } from
     "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
 
 
-/* === Files ======================================================================================================= */
+/* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
 
-/* === Logging ====================================================================================================== */
-/* --- PoliteErrorsMessageBuilder ----------------------------------------------------------------------------------- */
+/* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */
 export { default as PoliteErrorsMessagesBuilder } from "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
 export { default as PoliteErrorsMessagesBuilder__English } from
       "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilderLocalization.english";
 
-/* --- Rest --------------------------------------------------------------------------------------------------------- */
+/* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export type {
   Log,
   ErrorLog,
@@ -177,13 +177,13 @@ export { default as Logger } from "./Logging/Logger";
 export { default as loggerLocalization__english } from "./Logging/LoggerLocalization.english";
 
 
-/* === Maps ========================================================================================================= */
+/* ━━━ Maps ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
 
 
-/* === Numbers ====================================================================================================== */
+/* ━━━ Numbers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
 export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
@@ -196,11 +196,11 @@ export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separate
 export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
 
 
-/* === Objects ======================================================================================================= */
+/* ━━━ Objects ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
 
 
-/* === Pagination =================================================================================================== */
+/* ━━━ Pagination ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as computeFirstItemNumberForSpecificPaginationPage } from
     "./Pagination/computeFirstItemNumberForSpecificPaginationPage";
 export { default as computeLastItemNumberForSpecificPaginationPage } from
@@ -209,11 +209,11 @@ export { default as getItemsOfPaginationPage } from "./Pagination/getItemsOfPagi
 export { default as PaginationCollection } from "./Pagination/PaginationCollection";
 
 
-/* === Promises queue =============================================================================================== */
+/* ━━━ Promises ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as PromisesQueue } from "./Promises/PromisesQueue";
 
 
-/* === Random values generators =================================================================================== */
+/* ━━━ Random values generators ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export {
   default as getRandomString,
   RandomStringsGenerator
@@ -229,7 +229,7 @@ export { default as getSpecificBooleanValueWithProbability } from
 export { default as removeRandomArrayElement } from "./RandomValuesGenerators/removeRandomArrayElement";
 
 
-/* === Raw object data processor ==================================================================================== */
+/* ━━━ Raw object data processor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
 export { default as RawObjectDataProcessorLocalization__English } from
     "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
@@ -241,13 +241,13 @@ export { default as convertPotentialStringToFloatIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";
 
 
-/* === Sets ========================================================================================================= */
+/* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
 export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
 
 
-/* === Strings ====================================================================================================== */
-/* --- Characters assets -------------------------------------------------------------------------------------------- */
+/* ━━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ─── Characters assets ──────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as EscapeCharacters } from "./Strings/CharactersAssets/EscapeCharacters";
 export { default as lowercaseLatinCharacters } from "./Strings/CharactersAssets/lowercaseLatinCharacters";
 export { default as SpaceCharacters } from "./Strings/CharactersAssets/SpaceCharacters";
@@ -256,7 +256,8 @@ export { default as SpaceCharactersStringifiedHexCharactersForRegularExpressionW
 export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringifiedDigits";
 export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
 
-/* --- Regular expressions ------------------------------------------------------------------------------------------ */
+
+/* ─── Regular expressions ────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getMatchingWithFirstRegularExpressionCapturingGroup } from
     "./Strings/RegularExpressions/getMatchingWithFirstRegularExpressionCapturingGroup";
 export {
@@ -268,18 +269,22 @@ export {
   type ReplacingOfMatchesWithRegularExpressionToDynamicValue
 } from "./Strings/RegularExpressions/replaceMatchesWithRegularExpressionToDynamicValue";
 
-/* --- URI ---------------------------------------------------------------------------------------------------------- */
-/* --- Files and directories --- */
+
+/* ─── URI ────────────────────────────────────────────────────────────────────────────────────────────────────────── */
+/* --- Files and directories ---------------------------------------------------------------------------------------- */
 export { default as appendLastFileNameExtension } from "./Strings/URI/FilesAndDirectories/appendLastFileNameExtension";
 export { default as extractAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/extractAllFileNameExtensions";
 export { default as extractLastExtensionOfFileName } from "./Strings/URI/FilesAndDirectories/extractLastExtensionOfFileName";
+export { default as removeAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/removeAllFileNameExtensions";
 
-/* --- Rest --- */
+/* --- Rest --------------------------------------------------------------------------------------------------------- */
 export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
 export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
 export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
+export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/removeSpecificSegmentsFromURI_Path";
+export { default as explodeURI_PathToSegments } from "./Strings/URI/explodeURI_PathToSegments";
 
-/* --- Rest --------------------------------------------------------------------------------------------------------- */
+/* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
 export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
@@ -311,14 +316,14 @@ export { default as toUpperCamelCase } from "./Strings/toUpperCamelCase";
 export { default as trimSpaces } from "./Strings/trimSpaces";
 
 
-/* === Type guards ================================================================================================== */
-/* --- Arrays ------------------------------------------------------------------------------------------------------- */
+/* ━━━ Type guards ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ─── Arrays ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
 export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
 export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
 export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
 
-/* --- Nullables ---------------------------------------------------------------------------------------------------- */
+/* ─── Nullables ──────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
 export { default as isEitherUndefinedOrNull } from "./TypeGuards/Nullables/isEitherUndefinedOrNull";
 export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
@@ -326,7 +331,7 @@ export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined
 export { default as isNull } from "./TypeGuards/Nullables/isNull";
 export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 
-/* --- Numbers ------------------------------------------------------------------------------------------------------ */
+/* ─── Numbers ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
 export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
@@ -336,26 +341,26 @@ export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegat
 export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
 export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
 
-/* --- Objects ------------------------------------------------------------------------------------------------------ */
+/* ─── Objects ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
 export { default as isEmptyObject } from "./TypeGuards/Objects/isEmptyObject";
 export { default as isNonEmptyArbitraryObject } from "./TypeGuards/Objects/isNonEmptyArbitraryObject";
 export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
 export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
-/* --- Strings ------------------------------------------------------------------------------------------------------ */
+/* ─── Strings ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
 export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
 export { default as isString } from "./TypeGuards/Strings/isString";
 export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
 
-/* --- Others ------------------------------------------------------------------------------------------------------- */
+/* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isBoolean } from "./TypeGuards/isBoolean";
 export { default as isElementOfEnumeration } from "./TypeGuards/isElementOfEnumeration";
 export { default as isFunctionLike } from "./TypeGuards/isFunctionLike";
 
 
-/* === Types ======================================================================================================== */
+/* ━━━ Types ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export type { ArbitraryObject } from "./Types/ArbitraryObject";
 export type { ElementOfPseudoEnumeration } from "./Types/ElementOfPseudoEnumeration";
 export type { InheritEnumerationKeys } from "./Types/InheritEnumerationKeys";
@@ -367,12 +372,13 @@ export type {
   ReadonlyParsedJSON,
   ReadonlyParsedJSON_Object,
   ReadonlyParsedJSON_Array,
-  ReadonlyParsedJSON_NestedProperty
+  ReadonlyParsedJSON_NestedProperty,
+  PossiblyReadonlyParsedJSON
 } from "./Types/ParsedJSON";
 export type { PartialBy } from "./Types/PartialBy";
 
 
-/* === Value transformers =========================================================================================== */
+/* ━━━ Value transformers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
 export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
 export { default as nullToUndefined } from "./ValueTransformers/nullToUndefined";

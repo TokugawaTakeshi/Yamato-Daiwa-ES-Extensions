@@ -7,13 +7,17 @@
 
 ### Added
 
+* Add <kbd>cropArray</kbd> live template and its alias <kbd>ca</kbd> for [cropArray](https://ydee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.english.html) function.
+
+* [//]: # (TODO ==================================================================================================================)
 * Add <kbd>createDOM_ElementFromHTML_Code</kbd> live template.
 * Add <kbd>delegateClickEventHandling</kbd> live template.
 
 ### Changed
 
 * Support IntelliJ Platform **2023.2**
-* Update <kbd>addElementsToArray</kbd> live template <kbd>aeta</kbd>.
+* Update <kbd>addElementsToArray</kbd> live template and its alias <kbd>aeta</kbd> for [addElementsToArray](https://ydee.yamato-daiwa.com/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html) function.
+* [//]: # (TODO ==================================================================================================================)
 * Update <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> live template.
 * Update <kbd>getExpectedToBeSingleDOM_Element</kbd> live template.
 * Fixed mistakes and improve <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [`getLastElementOfArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
@@ -29,7 +33,7 @@
 
 ### Added
 
-* <kbd>addElementsToArray</kbd> The copy of the live template for [<kbd>aeta</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md).
+* <kbd>addElementsToArray</kbd> - The copy of the live template for [<kbd>aeta</kbd>](https://ydee.yamato-daiwa.com/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html).
   From this version, the <kbd>aeta</kbd> is the alias for <kbd>addElementsToArray</kbd>.
 * <kbd>getIndexesOfArrayElementsWhichSatisfiesThePredicate</kbd> - The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
 * <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [`getLastElementOfArray`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
@@ -54,7 +58,7 @@
 
 ### Added
 
-* <kbd>aeta</kbd> Live template for [**addElementsToArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
+* <kbd>aeta</kbd> Live template for [**addElementsToArray**](https://ydee.yamato-daiwa.com/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html) function
 * <kbd>cdefhc</kbd> Live template for [createDOM_ElementFromHTML_Code](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md) function
 * <kbd>dceh</kbd> Live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/delegateClickEventHandling.md) function
 * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Inserts working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)

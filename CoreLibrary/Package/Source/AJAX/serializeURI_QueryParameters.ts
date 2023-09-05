@@ -4,9 +4,7 @@ import isString from "../TypeGuards/Strings/isString";
 import { isBoolean, isNumber } from "../index";
 
 
-const serializeURI_QueryParameters: URI_QueryParametersSerializer =
-    (URI_QueryParameters: ReadonlyParsedJSON): string =>
-{
+const serializeURI_QueryParameters: URI_QueryParametersSerializer = (URI_QueryParameters: ReadonlyParsedJSON): string => {
 
   const stringifiedKeysAndValueParis: Array<string> = [];
 

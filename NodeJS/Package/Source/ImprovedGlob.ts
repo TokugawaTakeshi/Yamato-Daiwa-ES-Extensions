@@ -32,6 +32,7 @@ export default class ImprovedGlob {
     const matchingFilesAbsolutePaths: Array<string> = [];
 
     for (const inclusiveGlobSelector of inclusiveGlobSelectors) {
+
       matchingFilesAbsolutePaths.push(
         ...Glob.sync(
           inclusiveGlobSelector,
@@ -42,7 +43,9 @@ export default class ImprovedGlob {
                 fromFirstPosition: true,
                 targetCharacter: "!"
               })
-            )
+            ),
+            nodir: true,
+            dot: true
           }
         )
       );
@@ -279,6 +282,21 @@ export default class ImprovedGlob {
         fromLastPosition: true
       })
     ].join("");
+  }
+
+
+  /* ━━━ Including glob selectors to excluding ones ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static includingGlobSelectorToExcludingOne(targetIncludingGlobSelector: string): string {
+    return targetIncludingGlobSelector.startsWith("!") ? targetIncludingGlobSelector : `!${ targetIncludingGlobSelector }`;
+  }
+
+  public static includingGlobSelectorToExcludingOnes(
+    targetIncludingGlobSelectors: ReadonlyArray<string>
+  ): Array<string> {
+    return targetIncludingGlobSelectors.map(
+      (targetIncludingGlobSelector: string): string =>
+          ImprovedGlob.includingGlobSelectorToExcludingOne(targetIncludingGlobSelector)
+    );
   }
 
 }

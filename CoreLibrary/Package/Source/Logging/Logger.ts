@@ -35,39 +35,46 @@ abstract class Logger {
     }
 
 
-    if ("errorInstance" in errorLog) {
+    const errorMessage: string = [
 
-      errorLog.errorInstance.message = [
+      `${ errorLog.title }`,
+      ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
 
-        `${ errorLog.title }`,
-        ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
-        `${ errorLog.errorInstance.message }` +
+      ..."errorInstance" in errorLog ? [ `${ errorLog.errorInstance.message }` ] : [ errorLog.description ],
 
-        `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
+      `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
 
-        ...isNotUndefined(errorLog.innerError) ?
-            [
-              `\n\n${ Logger.localization.innerError }:` +
-                `\n${ stringifyAndFormatArbitraryValue(errorLog.innerError) }` +
-                `${ 
-                  errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack) ? 
-                    `\n${ errorLog.innerError.stack }` : 
-                    ""
-                }`
-            ] :
-            [ ],
+      ...isNotUndefined(errorLog.innerError) ?
+          [
 
-        ...isNotUndefined(errorLog.additionalData) ?
-            [
-              `\n\n${ Logger.localization.appendedData }:` +
-                `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`
-            ] :
-            [ ],
+            `\n\n${ Logger.localization.innerError }:` +
+              `\n${ stringifyAndFormatArbitraryValue(errorLog.innerError) }` +
+
+              /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(errorLog.innerError)`,
+              *    but it is runtime dependent because the `stack` property is non-standard. */
+              `${ 
+                errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack) ? 
+                  `\n${ errorLog.innerError.stack }` : 
+                  ""
+              }`
+          ] :
+          [ ],
+
+      ...isNotUndefined(errorLog.additionalData) ?
+          [
+            `\n\n${ Logger.localization.appendedData }:` +
+              `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`
+          ] :
+          [ ],
 
         /* Divider before stack trace */
         "\n"
 
       ].join("");
+
+    if ("errorInstance" in errorLog) {
+
+      errorLog.errorInstance.message = errorMessage;
 
       /* eslint-disable-next-line @typescript-eslint/no-throw-literal --
       *  In this case the `errorInstance` is the instance of `Error` or its inheritor.
@@ -80,7 +87,7 @@ abstract class Logger {
     }
 
 
-    const errorWillBeThrown: Error = new Error(errorLog.description);
+    const errorWillBeThrown: Error = new Error(errorMessage);
     errorWillBeThrown.name = errorLog.errorType;
 
     throw errorWillBeThrown;

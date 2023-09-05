@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-browserjs",
-  "version": "1.7.0-alpha.0",
+  "version": "1.7.0-alpha.2",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -27,13 +27,13 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": ">=1.6.0 <1.8.0"
+    "@yamato-daiwa/es-extensions": "1.7.0-alpha.6"
   },
   "devDependencies": {
     "@types/jsdom-global": "3.0.4",
     "@types/mocha": "10.0.1",
     "@types/node": "18.15.11",
-    "@yamato-daiwa/es-extensions": "1.7.0-alpha.0",
+    "@yamato-daiwa/es-extensions": "1.7.0-alpha.6",
     "@yamato-daiwa/style_guides": "0.0.47",
     "jsdom": "21.1.1",
     "jsdom-global": "3.0.2",
@@ -44,6 +44,7 @@
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc",
-    "Lint": "eslint Source"
+    "Lint": "eslint Source",
+    "Rebuild distributable and realize alpha": "npm run \"Rebuild distributable\" && npm publish --tag alpha"
   }
 }

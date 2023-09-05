@@ -110,22 +110,54 @@ block append SpecificContent
 
     h4.Article-Heading4 Логирование
 
-    h6.Article-Heading6 Метод #[code throwErrorAndLog] интерфейса #[code ILogger] теперь опциональный
+    h5.Article-Heading5 Метод #[code throwErrorAndLog] интерфейса #[code ILogger] теперь опциональный
 
     p.Article-Paragraph.
-      Если фасад #[+ImportantEntity--YDID Logger] не найдёт реализации метода #[+ImportantEntity__Code--YDID throwErrorAndLog],
-        то отработает его реализация по умолчанию.
-      Решение сделать этот метод опциональным у интерфейса обусловлено тем, что при бросании ошибки возможности форматирования
-        могут быть ограничены, а часто и вовсе не требуется, потому реализация этого метода может быть один в один
-        как у фасада #[+ImportantEntity--YDID Logger].
-      В то же время, реализовать этот метод всё ещё может потребоваться, если Вы хотите скрыть сообщение об ошибке
-        (поле #[+ImportantEntity__Code--YDID message] #[+Term--YDID нативного класса] #[+ImportantEntity--YDID Error]).
+      Теперь, если #[+Term--YDID фасад] #[+ImportantEntity--YDID Logger] не&nbsp;найдёт реализации #[+Term--YDID метода]
+        #[+ImportantEntity__Code--YDID throwErrorAndLog], то отработает реализация этого #[+Term--YDID метода]
+        по умолчанию.
+
+    p.Article-Paragraph.
+      Напомним, что #[+Term--YDID класс] #[+ImportantEntity--YDID Logger] имеет #[+Keyword--YDID только]
+        #[+Keyword__Contrast--YDID статические] #[+Term--YDID методы], однако если с помощью #[+Term--YDID метода]
+        #[+ImportantEntity__Code--YDID setImplementation] передать реализацию #[+Term--YDID интерфейса]
+        #[code ILogger], то #[+Term--YDID статические методы] #[+Term__Contrast--YDID класса]
+        #[+ImportantEntity--YDID Logger] будут вызывать #[+Keyword--YDID одноимённые] #[+Term--YDID методы]
+        этой реализации #[+Keyphrase--YDID вместо поведения по умолчанию].
+
+    p.Article-Paragraph.
+      Решение сделать этот #[+Term--YDID метод] опциональным у #[+Term--YDID интерфейса] обусловлено тем,
+        что при бросании ошибки возможности форматирования могут быть ограничены, а часто и вовсе форматирования
+        по умолчанию вполне достаточно, потому если реализация #[+Term--YDID метода]
+        #[+ImportantEntity__Code--YDID throwErrorAndLog]　обязательна, то зачастую она будет полностью повторять
+        реализацию в #[+Term--YDID классе] #[+ImportantEntity--YDID Logger].
+      В то же время, реализовать этот метод всё ещё может потребоваться, если Вы, например, хотите для режима
+        «продакшен» скрыть сообщение об ошибке (#[+Term--YDID поле] #[+ImportantEntity__Code--YDID message]
+        #[+Term--YDID нативного класса] #[+ImportantEntity--YDID Error]) от умеющих пользоваться предоставляемыми
+        браузером средствами разработка пользователей сайта или браузерного приложения.
+
+
+    h5.Article-Heading5 Улучшение логирования в реализации по умолчанию метода #[code throwErrorAndLog] фасада #[code Logger]
+
+    p.Article-Paragraph.
+      Теперь сообщение об ошибке, включающее данные #[+Term--YDID свойств] #[+ImportantEntity__Code--YDID title],
+        #[+ImportantEntity__Code--YDID occurrenceLocation], #[+ImportantEntity__Code--YDID innerError] (если определено)
+        и #[+ImportantEntity__Code--YDID additionalData] (если определено) #[+Term--YDID параметра]
+        #[+Term__Contrast--YDID объектного типа] #[+ImportantEntity__Code--YDID ThrownErrorLog] #[+Term--YDID метода]
+        #[+ImportantEntity__Code--YDID throwErrorAndLog] (#[+Keyphrase--YDID реализация по умолчанию]) будет
+        сконструировано не&nbsp;только в случае, когда указано #[+Term--YDID свойство]
+        #[+ImportantEntity__Code--YDID errorInstance], но и когда указаны #[+Term--YDID свойства]
+        #[+ImportantEntity__Code--YDID errorType] и #[+ImportantEntity__Code--YDID description] вместо
+        #[+ImportantEntity__Code--YDID errorInstance].
+      В #[+Keyword--YDID последнем] случае будет создан #[+Term--YDID объект] #[+ImportantEntity__Code--YDID Error],
+        и перед тем как его бросить (с помощью #[+Term--YDID ключевого слова] #[+ImportantEntity__Code--YDID throw]),
+        в его #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID message] будет сохранено сгенерированное сообщение.
 
 
     h5.Article-Heading5 Тип #[code Log] и его расширения
 
     p.Article-Paragraph.
-      Напомним, что объектные типы, являющиеся расширениями #[+Term--YDID Log]:
+      Напомним, что расширениями #[+Term--YDID объектного типа] #[+Term--YDID Log] являются следующие #[+Term--YDID типы]:
 
     ul.Article-UnorderedList
       li #[+ImportantEntity__Code--YDID ErrorLog]
@@ -133,47 +165,102 @@ block append SpecificContent
       li #[+ImportantEntity__Code--YDID WarningLog]
 
     p.Article-Paragraph.
-      Кроме того, на момент этой версии #[+ImportantEntity__Code--YDID SuccessLog] и #[+ImportantEntity__Code--YDID InfoLog]
-        полностью совпадают с #[+Term--YDID Log].
+      Кроме того, #[+Keyphrase--YDID для данной версии] #[+Term--YDID типы] #[+ImportantEntity__Code--YDID SuccessLog] и
+        #[+ImportantEntity__Code--YDID InfoLog] #[+Keyword--YDID полностью] #[+Keyword__Contrast--YDID совпадают] с
+        #[+Term--YDID Log].
 
     ul.Article-UnorderedList
 
       li.
-        Добавлено опциональное булевское свойство #[+ImportantEntity__Code--YDID compactLayout], которое при значении
-          #[+ImportantEntity__Code--YDID true] должно убирать переход на новую строку между заголовком
-          (#[+ImportantEntity__Code--YDID title]) и описанием (#[+ImportantEntity__Code--YDID description]),
-          но это зависит от конкретной реализации логгера.
-
+        Добавлено #[+Keyword--YDID необязательное] #[+Term--YDID булевское] #[+Term__Contrast--YDID свойство]
+          #[+ImportantEntity__Code--YDID compactLayout], которое при значении #[+ImportantEntity__Code--YDID true]
+          должно убирать переход на новую строку между заголовком (свойство #[+ImportantEntity__Code--YDID title])
+          и описанием (#[+Term--YDID свойство] #[+ImportantEntity__Code--YDID description]),
+          #[+Keyphrase--YDID но это будет зависеть от конкретной реализации логгера].
 
       li.
-        Добавлено опциональное булевское свойство #[+ImportantEntity__Code--YDID mustOutputIf], которое при значении
-          #[+ImportantEntity__Code--YDID false] должно отменять вывод в консоль, но это зависит от конкретной реализации
-          логгера.
+        Добавлено #[+Keyword--YDID необязательно] #[+Term--YDID булевское] #[+Term__Contrast--YDID свойство]
+          #[+ImportantEntity__Code--YDID mustOutputIf], которое при значении #[+ImportantEntity__Code--YDID false]
+          должно отменять вывод в консоль, #[+Keyphrase--YDID но это будет зависеть от конкретной реализации логгера].
+        При этом, если логгер используется посредством #[+Term--YDID фасада] #[+ImportantEntity--YDID Logger],
+          то значении #[+ImportantEntity__Code--YDID false] #[+Term__Contrast--YDID свойства]
+          #[+ImportantEntity__Code--YDID mustOutputIfFalse] вывода в консоль #[+Keyword--YDID не]&nbsp;будет
+          вне зависимости от конкретной реализации #[+Term--YDID фасада] #[+ImportantEntity--YDID ILogger].
 
 
     h3.Article-Heading3 Критические изменения
 
-    h4.Article-Heading4 Логирование
+    h4.Article-Heading4 Работа с массивами
 
-    h5.Article-Heading5 Тип #[code Log] и его расширения
+    h5.Article-Heading5 Изменение третьего параметра в #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
 
-    h6.Article-Heading6 Замена #[code customBadgeText] на объектное полиморфное свойство #[code badge]
+    p.Article-Paragraph.
+      В #[+ImportantEntity--YDID 3-ем] #[+Term--YDID параметре] типа #[+Term__Contrast--YDID «объект»],
+        #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]
+        было переименовано в #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
 
     dl.Article-DescriptionList
 
       dt Причина
-      dd Намерение сделать эту броскую надпись с цветным фоном опциональной, так как иногда она лишняя
+      dd.
+        Прежнее имя вводит в заблуждение: «or more than1» можно #[+Keyword--YDID ошибочно] интерпретировать как то,
+          что в #[+Keyword--YDID исходном] массиве не&nbsp;должно быть более одного элемента.
+        Теперь же «or matches are multiple» более чётко передаёт, что #[+Term--YDID элементов] не&nbsp;должно быть более
+          одного именно среди удовлетворяющих #[+Term--YDID предикату].
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd.
+        В Вашем коде при вызове #[+Term__Contrast--YDID функции]
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+          используется #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр].
 
       dt Миграция
       dd.
-        Если Вы ранее использовали свойство #[+ImportantEntity__Code--YDID customBadgeText], то замените его на свойство типа
-          #[+Term--YDID «объект»] со дочерним свойством #[+ImportantEntity__Code--YDID customText].
-        Например, для #[+SecondaryEntity__Code--YDID { customBadgeText: "FAILURE", /* ... */ }] это будет
-          #[+SecondaryEntity__Code--YDID { badge: { customText: "FAILURE", /* ... */ } }].
-        Если же Вы ранее свойство #[+ImportantEntity__Code--YDID customBadgeText] не использовали, то никаких действие
-          #[+Keyword--YDID не]&nbsp;требуется.
+        Используя соответствующую функциональность редактора кода или #[+Term--YDID интегрированной среды разработки],
+          замените #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] на
+          #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] во всех файлах проекта.
+        Например, в интегрированных средах разработки семейства #[+SecondaryEntity--YDID IntelliJ IDEA] такая
+          функциональность вызывается с помощью сочетания клавиш #[+SecondaryEntity--YDID Ctrl + Shift + R].
 
-    h6.Article-Heading6 Переименование свойства #[code wrappableError] на #[code innerError] в типе #[+ImportantEntity__Code--YDID ThrownErrorLog]
+
+    //- TODO 和訳 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h4.Article-Heading4 Логирование
+
+    h5.Article-Heading5 Тип #[code Log] и его расширения
+
+    h6.Article-Heading6 Замена #[code customBadgeText] на полиморфное свойство #[code badge]
+
+    p.Article-Paragraph.
+      Теперь вместо необязательного #[+Term--YDID строчного свойства] #[+ImportantEntity--YDID customBadgeText]
+        добавлено #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID badge], которое либо должно быть
+        #[+Term--YDID объектом] с единственным #[+Term--YDID строчным свойством] #[+ImportantEntity__Code--YDID customText],
+        либо иметь значение #[+ImportantEntity__Code--YDID false].
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Решение сделать эту надпись (зависит от реализации, но обычно она броская за счёт наличия цветного фона)
+          опциональной, так как без неё можно обойтись
+
+      dt Потребуются редактирование Вашего исходного кода если
+      dd Если Вы использовали свойство #[+ImportantEntity__Code--YDID customBadgeText]
+
+      dt Миграция
+      dd.
+        Замените #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID customBadgeText] на #[+Term--YDID свойство]
+          #[+ImportantEntity__Code--YDID badge] типа #[+Term--YDID «объект»] с дочерним #[+Term--YDID свойством]
+          #[+ImportantEntity__Code--YDID customText].
+        Например, для #[+SecondaryEntity__Code--YDID { customBadgeText: "DEBUG", /* ... */ }] это будет
+          #[+SecondaryEntity__Code--YDID { badge: { customText: "DEBUG", /* ... */ } }].
+        Вы также можете указать #[+ImportantEntity__Code--YDID badge] значение #[+ImportantEntity__Code--YDID false],
+          если не&nbsp;хотите, чтобы эта надпись с фоном отображалась при использовании стандартных реализаций
+          #[+Term--YDID интерфейса] #[+ImportantEntity__Code--YDID ILogger].
+
+    //- TODO 英訳 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h6.Article-Heading6.
+      Переименование свойства #[code wrappableError] на #[code innerError] в типе
+        #[+ImportantEntity__Code--YDID ThrownErrorLog]
 
     dl.Article-DescriptionList
 
@@ -187,7 +274,7 @@ block append SpecificContent
 
       dt Миграция
       dd.
-        Используя соответствующую функциональность текстового редактора или интегрированной среды разработки,
+        Используя соответствующую функциональность редактора кода или интегрированной среды разработки,
           замените #[+SecondaryEntity__Code--YDID wrappableError:] на #[+SecondaryEntity__Code--YDID innerError:].
         Например, в интегрированных средах разработки семейства IntelliJ IDEA такая функциональность вызывается с
           помощью сочетания клавиш #[+SecondaryEntity--YDID Ctrl + Shift + R].

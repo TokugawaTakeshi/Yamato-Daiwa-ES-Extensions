@@ -1,17 +1,21 @@
 import type ClassRequiredInitializationHasNotBeenExecutedError from "./ClassRequiredInitializationHasNotBeenExecutedError";
 
 
-const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English:
+const classRequiredInitializationHasNotBeenExecutedErrorLocalization__english:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
 
   defaultTitle: "Class required initialization has not been executed",
   generateDescription:
       (
-        namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
+        {
+          className,
+          initializingMethodName
+        }: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateVariables
       ): string =>
-          `Class '${ namedParameters.className }' is required the initialization while initializing method ` +
-          `'${ namedParameters.initializingMethodName }' has not been called.`
+          `Class "${ className }" is required the initialization while initializing method "${ initializingMethodName }" ` +
+            "has not been called."
+
 };
 
 
-export default ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English;
+export default classRequiredInitializationHasNotBeenExecutedErrorLocalization__english;

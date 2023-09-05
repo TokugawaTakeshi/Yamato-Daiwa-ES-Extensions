@@ -14,7 +14,7 @@ const loggerLocalization__english: Logger.Localization = {
   errorType: "Error type",
   occurrenceLocation: "Occurrence location",
   caughtError: "Caught error",
-  innerError: "Wrappable error",
+  innerError: "Inner error",
   appendedData: "Appended data"
 };
 

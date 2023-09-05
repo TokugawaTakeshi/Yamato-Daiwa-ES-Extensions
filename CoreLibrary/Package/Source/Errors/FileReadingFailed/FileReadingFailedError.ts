@@ -1,39 +1,43 @@
-import FileReadingFailedErrorLocalization__English from "./FileReadingFailedErrorLocalization.english";
+import fileReadingFailedErrorLocalization__english from "./FileReadingFailedErrorLocalization.english";
 
 
 class FileReadingFailedError extends Error {
 
   public static readonly NAME: string = "FileReadingFailure";
-  public static localization: FileReadingFailedError.Localization = FileReadingFailedErrorLocalization__English;
+
+  public static localization: FileReadingFailedError.Localization = fileReadingFailedErrorLocalization__english;
 
 
-  public constructor(namedParameters: FileReadingFailedError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: FileReadingFailedError.ConstructorParameter) {
 
     super();
 
     this.name = FileReadingFailedError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = FileReadingFailedError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        FileReadingFailedError.localization.generateDescription(compoundParameter);
+
   }
+
 }
 
 
 namespace FileReadingFailedError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
+  export type ConstructorParameter =
+      Localization.DescriptionTemplateVariables |
+      Readonly<{ customMessage: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{ filePath: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{ filePath: string; }>;
   }
+
 }
 
 

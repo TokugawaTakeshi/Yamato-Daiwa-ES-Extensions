@@ -1,6 +1,7 @@
 import AJAX_Service from "./AJAX_Service";
 import Logger from "../Logging/Logger";
-import { DataRetrievingFailedError } from "../index";
+import DataRetrievingFailedError from "../Errors/DataRetrievingFailed/DataRetrievingFailedError";
+import DataSubmittingFailedError from "../Errors/DataSubmittingFailed/DataSubmittingFailedError";
 
 
 export default class FetchAPI_Service extends AJAX_Service {
@@ -59,10 +60,10 @@ export default class FetchAPI_Service extends AJAX_Service {
     } catch (error: unknown) {
 
       Logger.throwErrorAndLog({
-        errorInstance: new DataRetrievingFailedError({
+        errorInstance: new DataSubmittingFailedError({
           customMessage: "The error has occurred before server response has been retrieved."
         }),
-        title: DataRetrievingFailedError.localization.defaultTitle,
+        title: DataSubmittingFailedError.localization.defaultTitle,
         occurrenceLocation: "FetchAPI_Service.retrieveRawData(namedParameters)",
         innerError: error
       });

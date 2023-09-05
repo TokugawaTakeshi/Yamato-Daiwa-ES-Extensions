@@ -1,11 +1,11 @@
-import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
 
 
 export default function createArrayOfNatualNumbers(elementsCount: number): Array<number> {
 
-  if (!isNaturalNumber(elementsCount)) {
+  if (!isNonNegativeInteger(elementsCount)) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,

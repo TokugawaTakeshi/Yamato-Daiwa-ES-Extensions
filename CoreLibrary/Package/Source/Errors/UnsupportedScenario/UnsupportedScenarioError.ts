@@ -1,10 +1,11 @@
-import UnsupportedScenarioErrorLocalization__English from "./UnsupportedScenarioErrorLocalization.english";
+import unsupportedScenarioErrorLocalization__english from "./UnsupportedScenarioErrorLocalization.english";
 
 
 class UnsupportedScenarioError extends Error {
 
   public static readonly NAME: string = "UnsupportedScenarioError";
-  public static localization: UnsupportedScenarioError.Localization = UnsupportedScenarioErrorLocalization__English;
+
+  public static localization: UnsupportedScenarioError.Localization = unsupportedScenarioErrorLocalization__english;
 
 
   public constructor(message: string) {
@@ -13,7 +14,9 @@ class UnsupportedScenarioError extends Error {
 
     this.name = UnsupportedScenarioError.NAME;
     this.message = message;
+
   }
+
 }
 
 

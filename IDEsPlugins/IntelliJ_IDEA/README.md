@@ -9,9 +9,31 @@
 [Live Templates](https://www.jetbrains.com/help/idea/using-live-templates.html) for 
 [@yamato-daiwa/es-extensions (**YDEE**)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions#readme) libraries.
 
+
+## Functions
+### Arrays
+
+<dl>
+
+  <dt>addElementsToArray</dt>
+  <dt>aeta</dt>
+  <dd>
+    The live template and its alias respectively for the
+      <a href="https://ydee.yamato-daiwa.com/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a> function.
+  </dd>
+
+  <dt>cropArray</dt>
+  <dt>ca</dt>
+  <dd>
+    The live template and its alias respectively for the
+      <a href="https://ydee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.english.html">cropArray</a> function.
+  </dd>
+
+</dl>
+
+* [//]: # (TODO ==================================================================================================================)
 * Functions
   * Arrays
-    * <kbd>addElementsToArray</kbd>, <kbd>aeta</kbd> The live template and it's alias respectively for the [**addElementsToArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
     * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
     * <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
     * <kbd>getIndexesOfArrayElementsWhichSatisfies6ThePredicate</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)

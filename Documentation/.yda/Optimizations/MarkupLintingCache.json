@@ -21,19 +21,19 @@
   },
   "01-Source/SharedAssets/Markup/SharedAssets.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.704Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.159Z"
   },
   "01-Source/SharedAssets/Markup/SharedAssets.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.705Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.163Z"
   },
   "01-Source/SharedAssets/Markup/SharedAssets.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.706Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.167Z"
   },
   "01-Source/SharedAssets/Markup/_generateLocalizedRouting.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T08:38:17.160Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.172Z"
   },
   "01-Source/SharedAssets/Markup/_generateSharedExternalLinks.pug": {
     "issues": [],
@@ -45,27 +45,27 @@
   },
   "01-Source/Pages/Top/TopPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.694Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.101Z"
   },
   "01-Source/Pages/Top/TopPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.694Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.107Z"
   },
   "01-Source/Pages/Top/_TopPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.695Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.113Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-03T05:41:49.882Z"
+    "modificationDatetime__ISO_8601": "2023-09-03T05:47:48.231Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-03T05:41:49.865Z"
+    "modificationDatetime__ISO_8601": "2023-09-03T05:47:48.231Z"
   },
   "01-Source/Pages/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-03T05:42:14.821Z"
+    "modificationDatetime__ISO_8601": "2023-09-03T05:47:48.232Z"
   },
   "01-Source/Pages/NodeJS/ConsoleCommandsParser/ConsoleCommandsParser.english.pug": {
     "issues": [],
@@ -93,51 +93,51 @@
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/MetaDescriptionTemplates.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.699Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.130Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/ReausableFragments.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.699Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.135Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/RoutingLocalization.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T08:31:49.082Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.142Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Japanese/SharedExternalLinksLocalizaiton.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.701Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.142Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/MetaDescriptionTemplates.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.696Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.117Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/ReausableFragments.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.696Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.121Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/RoutingLocalization.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T08:31:49.074Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.125Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/English/SharedExternalLinksLocalizaiton.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.698Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.126Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/MetaDescriptionTemplates.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.701Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.147Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/ReausableFragments.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.702Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.151Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/RoutingLocalization.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T08:31:49.093Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.154Z"
   },
   "01-Source/SharedAssets/Markup/Localizations/Russian/SharedExternalLinksLocalizaiton.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.703Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.154Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/areStringifiedDigitsOnly/areStringifiedDigitsOnly.english.pug": {
     "issues": [],
@@ -165,27 +165,27 @@
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.631Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.064Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.631Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.071Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.632Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.072Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.633Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.079Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.634Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.086Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.635Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.087Z"
   },
   "01-Source/Pages/NodeJS/ErrorsClasses/FileNotFoundError/FileNotFoundError.english.pug": {
     "issues": [],
@@ -253,50 +253,50 @@
   },
   "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.691Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T04:03:08.993Z"
   },
   "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.692Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.094Z"
   },
   "01-Source/Pages/RealiseNotes/v1d7/RealiseNotes-v1d7.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T08:38:17.138Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T04:02:48.341Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.690Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.091Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.690Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.092Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Strings/cropString/cropString.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.691Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.092Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.686Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.088Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.686Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.088Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/other/createArrayOfNatualNumbers/createArrayOfNatualNumbers.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.687Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.089Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.english.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.688Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.089Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.japanese.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.688Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.090Z"
   },
   "01-Source/Pages/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.russian.pug": {
     "issues": [],
-    "modificationDatetime__ISO_8601": "2023-09-01T02:08:11.689Z"
+    "modificationDatetime__ISO_8601": "2023-09-07T03:26:24.090Z"
   }
 }

@@ -1,10 +1,11 @@
-import CrossBrowserIssueErrorLocalization__English from "./CrossBrowserIssueErrorLocalization.english";
+import crossBrowserIssueErrorLocalization__english from "./CrossBrowserIssueErrorLocalization.english";
 
 
 class CrossBrowserIssueError extends Error {
 
   public static readonly NAME: string = "CrossBrowserIssueError";
-  public static localization: CrossBrowserIssueError.Localization = CrossBrowserIssueErrorLocalization__English;
+
+  public static localization: CrossBrowserIssueError.Localization = crossBrowserIssueErrorLocalization__english;
 
 
   public constructor(message: string) {
@@ -13,7 +14,9 @@ class CrossBrowserIssueError extends Error {
 
     this.name = CrossBrowserIssueError.NAME;
     this.message = message;
+
   }
+
 }
 
 
