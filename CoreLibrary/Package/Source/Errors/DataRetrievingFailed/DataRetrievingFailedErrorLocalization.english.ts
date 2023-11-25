@@ -1,13 +1,12 @@
 import type DataRetrievingFailedError from "./DataRetrievingFailedError";
 
 
-const DataRetrievingFailedErrorLocalization__English: DataRetrievingFailedError.Localization = {
+const dataRetrievingFailedErrorLocalization__english: DataRetrievingFailedError.Localization = {
   defaultTitle: "Retrieving of the data from data source failed",
   generateDescription: (
-    namedParameters: DataRetrievingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The error occurred during the retrieving of the data '${ namedParameters.mentionToData }' from the ` +
-      "external data source."
+    { mentionToData }: DataRetrievingFailedError.Localization.DescriptionTemplateVariables
+  ): string => `The error occurred during the retrieving of the data "${ mentionToData }" from the external data source.`
 };
 
 
-export default DataRetrievingFailedErrorLocalization__English;
+export default dataRetrievingFailedErrorLocalization__english;

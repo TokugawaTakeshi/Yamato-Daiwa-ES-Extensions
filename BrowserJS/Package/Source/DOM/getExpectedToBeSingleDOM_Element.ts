@@ -9,14 +9,14 @@ import {
 export default function getExpectedToBeSingleDOM_Element(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    context?: ParentNode;
   }>
 ): Element;
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    context?: ParentNode;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }>
 ): DOM_ElementSubtype;
@@ -29,7 +29,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
     expectedDOM_ElementSubtype
   }: Readonly<{
     selector: string;
-    context?: Element | Document;
+    context?: ParentNode;
     expectedDOM_ElementSubtype?: new () => DOM_ElementSubtype;
   }>
 ): Element | DOM_ElementSubtype {

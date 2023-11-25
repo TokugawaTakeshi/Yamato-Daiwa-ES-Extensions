@@ -3,7 +3,7 @@ import type { Log, ErrorLog, InfoLog, SuccessLog, ThrownErrorLog, WarningLog } f
 
 export interface ILogger {
 
-  readonly throwErrorAndLog: <CustomError extends Error = Error>(errorLog: ThrownErrorLog<CustomError>) => never;
+  readonly throwErrorAndLog?: <CustomError extends Error = Error>(errorLog: ThrownErrorLog<CustomError>) => never;
   readonly logError: (errorLog: ErrorLog) => void;
   readonly logErrorLikeMessage: (errorLikeLog: Log) => void;
 
@@ -12,5 +12,8 @@ export interface ILogger {
   readonly logSuccess: (successLog: SuccessLog) => void;
   readonly logInfo: (infoLog: InfoLog) => void;
 
+  readonly logGeneric: (genericLog: Log) => void;
+
   readonly highlightText: (targetString: string) => string;
+
 }

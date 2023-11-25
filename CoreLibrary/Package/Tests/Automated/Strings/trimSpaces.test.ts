@@ -29,7 +29,7 @@ describe("trimSpaces", (): void => {
   });
 
   it("All leading and trailing spaces except ideographic one has been removed", (): void => {
-    Object.entries(SpaceCharacters).forEach(([ , spaceCharacter ]: [ string, string ]): void => {
+    Object.entries(SpaceCharacters).forEach(([ , spaceCharacter ]: [ string, SpaceCharacters ]): void => {
 
       const testStringWithLeadingAndTrailingSpaces: string =
           `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +

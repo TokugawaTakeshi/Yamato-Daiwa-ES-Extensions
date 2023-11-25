@@ -34,7 +34,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.joinPathSegments(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -78,7 +78,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -103,7 +103,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "namedParameters", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.computeRelativePath(namedParameters)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -119,21 +119,22 @@ abstract class ImprovedPath {
 
     const nativeParsedPath: Path.ParsedPath = Path.parse(targetPath);
 
-    // const lastPathSegment__couldBeAnyOfFileOrDirectoryName: string = nativeParsedPath.base;
-    //
-    // const lastPathSegmentExplodedToSegmentsByDot: Array<string> = lastPathSegment__couldBeAnyOfFileOrDirectoryName.
-    //     split(".");
-    //
-    // let fileNameWithoutExtension: string | undefined;
-    // let fileNameExtensionsList: Array<string>;
-    //
-    // if (lastPathSegmentExplodedToSegmentsByDot[0].length > 0) {
-    //   fileNameWithoutExtension = lastPathSegmentExplodedToSegmentsByDot[0];
-    //   fileNameExtensionsList = lastPathSegmentExplodedToSegmentsByDot.slice(1);
-    // } else {
-    //   fileNameExtensionsList = lastPathSegmentExplodedToSegmentsByDot;
-    // }
+    /* [ Draft ]
+    const lastPathSegment__couldBeAnyOfFileOrDirectoryName: string = nativeParsedPath.base;
 
+    const lastPathSegmentExplodedToSegmentsByDot: Array<string> = lastPathSegment__couldBeAnyOfFileOrDirectoryName.
+        split(".");
+
+    let fileNameWithoutExtension: string | undefined;
+    let fileNameExtensionsList: Array<string>;
+
+    if (lastPathSegmentExplodedToSegmentsByDot[0].length > 0) {
+      fileNameWithoutExtension = lastPathSegmentExplodedToSegmentsByDot[0];
+      fileNameExtensionsList = lastPathSegmentExplodedToSegmentsByDot.slice(1);
+    } else {
+      fileNameExtensionsList = lastPathSegmentExplodedToSegmentsByDot;
+    }
+    */
 
     return new ImprovedPath.ParsingResult({
       rawPath: targetPath,

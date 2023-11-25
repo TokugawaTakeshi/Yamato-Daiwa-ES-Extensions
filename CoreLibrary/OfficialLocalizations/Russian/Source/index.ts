@@ -10,10 +10,6 @@ export { default as RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTim
 export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
 
 
-/* === Мокинг данных ================================================================================================ */
-export { default as MockGatewayHelperLocalization__Russian } from "./DataMocking/MockGatewayHelperLocalization.russian";
-
-
 /* === Обработка внешних данных типа "объект" ======================================================================= */
 export { default as RawObjectDataProcessorLocalization__Russian } from "./RawObjectDataProcessorLocalization.russian";
 

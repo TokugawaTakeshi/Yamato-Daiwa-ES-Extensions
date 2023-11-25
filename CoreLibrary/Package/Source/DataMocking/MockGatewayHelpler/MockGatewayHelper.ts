@@ -198,7 +198,7 @@ namespace MockGatewayHelper {
     ) => Localization.DataRetrievingSimulationCompletedLog;
 
     generateDataSubmittingSimulationCompletedLog: (
-        compoundParameter: Localization.DataSubmittingSimulationCompletedLog.CompoundParameter
+      compoundParameter: Localization.DataSubmittingSimulationCompletedLog.CompoundParameter
     ) => Localization.DataSubmittingSimulationCompletedLog;
 
   }>;

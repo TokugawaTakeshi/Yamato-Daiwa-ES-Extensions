@@ -11,7 +11,7 @@ try {
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
     title: UnexpectedEventError.localization.defaultTitle,
     occurrenceLocation: "className.methodName(parametersObject)",
-    wrappableError: error,
+    innerError: error,
     additionalData: {
       foo: null,
       bar: "bravo"
@@ -30,7 +30,7 @@ try {
     description: "'foo' is 'null'. With correctly working validation it could not be.",
     occurrenceLocation: "className.methodName(parametersObject)",
 
-    customBadgeText: "Exception",
+    badge: { customText: "Exception" },
     caughtError: error,
     additionalData: {
       foo: null,
@@ -43,7 +43,7 @@ try {
 Logger.logErrorLikeMessage({
   title: UnexpectedEventError.localization.defaultTitle,
   description: "'foo' is 'null'. With correctly working validation it could not be.",
-  customBadgeText: "Exception",
+  badge: { customText: "Exception" },
   additionalData: {
     foo: null,
     bar: "bravo"
@@ -52,7 +52,7 @@ Logger.logErrorLikeMessage({
 
 
 Logger.logWarning({
-  customBadgeText: "Caution",
+  badge: { customText: "customBadgeText" },
   title: UnexpectedEventError.localization.defaultTitle,
   occurrenceLocation: "className.methodName(parametersObject)",
   description: "'foo' is 'null'. With correctly working validation it could not be.",
@@ -66,7 +66,7 @@ Logger.logWarning({
 Logger.logSuccess({
   title: "Sign in success",
   description: "Successfully signed in.",
-  customBadgeText: "Normal operation",
+  badge: { customText: "Normal operation" },
   additionalData: {
     ID: "123456",
     userName: "Takeshi Tokugawa"
@@ -75,7 +75,7 @@ Logger.logSuccess({
 
 
 Logger.logInfo({
-  customBadgeText: "Output",
+  badge: { customText: "Output" },
   title: "Data logging",
   description: "'foo' is 'null'.",
   additionalData: {
@@ -91,5 +91,5 @@ Logger.logError({
   description: "'foo' is 'null'. With correctly working validation it could" +
       `${ ConsoleApplicationLogger.highlightText(" not ") }be.`,
   occurrenceLocation: "className.methodName(parametersObject)",
-  customBadgeText: "Exception"
+  badge: { customText: "Exception" }
 });

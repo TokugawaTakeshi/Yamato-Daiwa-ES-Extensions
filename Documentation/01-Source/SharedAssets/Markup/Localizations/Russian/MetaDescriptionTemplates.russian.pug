@@ -3,7 +3,11 @@
   const MetaDescriptionTemplates = {
 
     function: ({ functionName, whatFunctionDoes }) =>
-        `Функция &quot;${ functionName }&quot; библиотеки &quot;Yamato Daiwa ECMAScript extensions&quot; ` +
-        `(сокращённо: &quot;YDEE;&quot;) ${ whatFunctionDoes }`
+        `Функция «${ functionName }» библиотеки «Yamato Daiwa ECMAScript extensions» ` +
+        `(сокращённо: «YDEE») ${ whatFunctionDoes }`,
+
+    realiseNotes: ({ version }) =>
+        "Список изменений (новая функциональность, изменение существующий функциональности и удаления прежней) версии " +
+          `${ version } TypeScript-библиотеки вспомогательной функциональности «Yamato Daiwa ES Extensions» (сокращённо: «YDEE»).`
 
   };

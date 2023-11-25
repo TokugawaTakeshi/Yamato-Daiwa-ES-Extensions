@@ -2,15 +2,18 @@ import type InvalidConfigError from "./InvalidConfigError";
 import insertSubstring from "../../Strings/insertSubstring";
 
 
-const InvalidConfigErrorLocalization__English: InvalidConfigError.Localization = {
+const invalidConfigErrorLocalization__english: InvalidConfigError.Localization = {
   defaultTitle: "Invalid configuration",
   generateDescription: (
-    namedParameters: InvalidConfigError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The configuration of '${ namedParameters.mentionToConfig }' is invalid.` +
-      `${ insertSubstring(namedParameters.messageSpecificPart, {
-        modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-      }) }`
+    { mentionToConfig, messageSpecificPart }: InvalidConfigError.Localization.DescriptionTemplateVariables
+  ): string => `The configuration of "${ mentionToConfig }" is invalid.` +
+      `${
+        insertSubstring(
+          messageSpecificPart, 
+          { modifier: (definedMessageSpecificPart: string): string => `\n${ definedMessageSpecificPart }` }
+        ) 
+      }`
 };
 
 
-export default InvalidConfigErrorLocalization__English;
+export default invalidConfigErrorLocalization__english;

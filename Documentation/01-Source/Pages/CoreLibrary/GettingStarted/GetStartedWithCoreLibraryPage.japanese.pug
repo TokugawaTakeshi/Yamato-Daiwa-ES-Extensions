@@ -3,8 +3,8 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../Components/Components.japanese.pug
+  include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -27,8 +27,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./GetStartedWithCoreLibraryPage.english.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./GetStartedWithCoreLibraryPage.russian.html"
+      english: "./GetStartedWithCoreLibraryPage.english.html",
+      russian: "./GetStartedWithCoreLibraryPage.russian.html"
     });
 
     const externalLinks = {
@@ -38,13 +38,22 @@ block append Metadata
     };
 
 
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
 block append SpecificContent
 
   article
 
     h1.Article-Heading1 利用開始
 
-    h2.Article-Heading2#Installation--SECTION 導入
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
+    ) 導入
 
     p.Article-Paragraph.
       導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm]
@@ -52,13 +61,15 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "パッケージを導入するコンソールコマンド"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    h2.Article-Heading2#DistributiveVolumeNotice--SECTION 配布容量関連
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
+    ) 配布容量関連
 
     p.Article-Paragraph.
       #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト]の
@@ -69,13 +80,14 @@ block append SpecificContent
     +SingleImageViewer--YDF({
       imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
       imageAlternateText: "「npm」の公式サイトにおける配布パッケージの容量の表示例。" +
-          "注意点として、当パッケージの導入時に構成後の対象アプリケーションが表示容量通りにサイズ増加するとは限らない。"
+          "注意点として、当パッケージの導入時に構成後の対象アプリケーションが表示容量通りにサイズ増加するとは限らない。",
+      autoAspectRatioByYDA: true
     }).Article-SingleImageViewer
 
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
-    }).Article-AttentionBox.
+    }).
       其れは、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の導入に依って構成後アプリケーションに加わる容量#[+Keyword--YDID ではない]。
 
     p.Article-Paragraph.
@@ -109,7 +121,9 @@ block append SpecificContent
         特に、ライブラリのごく一部分のみ使われている様な場合だ。
 
 
-    h2.Article-Heading2#NonTypeScriptUsageWarning--SECTION TypeScriptの非利用者に対する注意事項
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
+    ) TypeScriptの非利用者に対する注意事項
 
     p.Article-Paragraph.
       我々のライブラリ開発は、#[+Keyword--YDID 優先目標として]#[+ImportantEntity--YDID TypeScript]利用者の補助を優先している。
@@ -140,7 +154,9 @@ block append SpecificContent
         型不整合関連エラーが発生する可能性が高い。だがエラーメッセージから原因が判明するとは限らず、「ライブラリのせいだ」等と誤解される事態も予想される。
 
 
-    h2.Article-Heading2#ImportingOfFunctionality--SECTION 機能のインポート
+    h2.Article-Heading2(
+      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingOfFunctionality.$anchor
+    ) 機能のインポート
 
     p.Article-Paragraph.
       当パッケージの導入後に、本説明用ページで紹介されている関数やクラス等のインポートが可能と成る。
@@ -149,7 +165,7 @@ block append SpecificContent
 
     +CodeViewer--YDF({
       title: "「@yamato-daiwa/es-extensions」からのインポートの例"
-    }).Article-CodeViewer
+    })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

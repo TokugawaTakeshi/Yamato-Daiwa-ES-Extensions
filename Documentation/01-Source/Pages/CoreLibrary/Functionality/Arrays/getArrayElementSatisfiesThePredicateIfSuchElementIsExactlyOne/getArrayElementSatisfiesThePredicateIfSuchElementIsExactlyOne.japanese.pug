@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../../../Components/Components.japanese.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -32,11 +32,16 @@ block append Metadata
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]:
-          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]:
-          "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+      english: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
+      russian: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -56,9 +61,9 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities

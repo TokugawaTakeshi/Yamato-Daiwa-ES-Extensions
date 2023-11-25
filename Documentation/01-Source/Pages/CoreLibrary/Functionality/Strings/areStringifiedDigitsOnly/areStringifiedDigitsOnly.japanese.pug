@@ -3,8 +3,8 @@ extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/L
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/Assets.japanese.pug
-  include ../../../../../Components/Components.japanese.pug
+  include ../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -29,9 +29,16 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./areStringifiedDigitsOnly.english.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.russian]: "./areStringifiedDigitsOnly.russian.html"
+      english: "./areStringifiedDigitsOnly.english.html",
+      russian: "./areStringifiedDigitsOnly.russian.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -51,7 +58,7 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
     p.Article-Paragraph.
       #[+Term--YDID 文字列]の#[+Keyword--YDID 全]文字が文字列化した#[+Term--YDID 数字]かどうか確認する。
@@ -65,7 +72,7 @@ block append SpecificContent
     +AttentionBox--YDF({
       decoration: AttentionBox__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
-    }).Article-AttentionBox
+    })
 
       h2.Article-Heading2 数と数字の違いを知る
 
@@ -90,7 +97,7 @@ block append SpecificContent
         #[+ImportantEntity__Code--YDID isStringifiedNonNegativeIntegerOfRegularNotation]とは異なり、
           一桁目に#[+ImportantEntity__Code--YDID 0]（#[+Term--YDID がある数字の並び]）は妥当としている。
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF.

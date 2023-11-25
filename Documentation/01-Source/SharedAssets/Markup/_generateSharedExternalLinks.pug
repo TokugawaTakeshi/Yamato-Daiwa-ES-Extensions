@@ -2,11 +2,14 @@
 
   function generateSharedExternalLinks(localization) {
 
-    return {
+    /* [ Methodology ] Keep this variable to easily copy the qualified name by IntelliJ IDEA IDEs functionality. */
+    const sharedExternalLinks = {
 
       mdn: {
         array: {
-          unshift: localization.mdn.array.unshift
+          unshift: localization.mdn.array.unshift,
+          push: localization.mdn.array.push,
+          splice: localization.mdn.array.splice
         }
       },
 
@@ -37,5 +40,7 @@
       }
 
     };
+
+    return sharedExternalLinks;
 
   }

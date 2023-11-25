@@ -1,12 +1,12 @@
 import type FileWritingFailedError from "./FileWritingFailedError";
 
 
-const FileWritingFailedErrorLocalization__English: FileWritingFailedError.Localization = {
+const fileWritingFailedErrorLocalization__english: FileWritingFailedError.Localization = {
   defaultTitle: "Writing to file failure",
   generateDescription: (
-    parametersObject: FileWritingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Failed to write the file with path '${ parametersObject.filePath }'.`
+    { filePath }: FileWritingFailedError.Localization.DescriptionTemplateVariables
+  ): string => `Failed to write the file with path "${ filePath }".`
 };
 
 
-export default FileWritingFailedErrorLocalization__English;
+export default fileWritingFailedErrorLocalization__english;

@@ -1,178 +1,214 @@
 /* eslint-disable no-console -- This class is wrapping the 'console' allowing to avoid of direct 'console' usage. */
 
+import {
+  stringifyAndFormatArbitraryValue,
+  insertSubstringIf,
+  isNull,
+  loggerLocalization__english
+} from "@yamato-daiwa/es-extensions";
 import type {
   ErrorLog,
-  ThrownErrorLog,
   InfoLog,
   SuccessLog,
   WarningLog,
   Log,
   Logger
 } from "@yamato-daiwa/es-extensions";
-import {
-  substituteWhenUndefined,
-  stringifyAndFormatArbitraryValue,
-  insertSubstringIf,
-  isNotUndefined,
-  LoggerLocalization__English
-} from "@yamato-daiwa/es-extensions";
 
 
 abstract class BasicFrontEndLogger {
 
-  private static localization: Logger.Localization = LoggerLocalization__English;
+  private static localization: Logger.Localization = loggerLocalization__english;
 
   public static setLocalization(localization: Logger.Localization): typeof BasicFrontEndLogger {
     BasicFrontEndLogger.localization = localization;
     return BasicFrontEndLogger;
   }
 
-
-  public static throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
-
-    if ("errorInstance" in errorLog) {
-
-      errorLog.errorInstance.message = `${ errorLog.title }\n${ errorLog.errorInstance.message }` +
-          `\n\n${ BasicFrontEndLogger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }` +
-          `${ insertSubstringIf(
-            `\n\n${ BasicFrontEndLogger.localization.wrappableError }:` +
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.wrappableError) }`,
-            isNotUndefined(errorLog.wrappableError)
-          ) }` +
-          `${ insertSubstringIf(
-            `\n\n${ BasicFrontEndLogger.localization.appendedData }:` +
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
-            isNotUndefined(errorLog.additionalData)
-          ) }` +
-
-          /* Divider before stack trace */
-          "\n";
-
-      /* 〔 ESLint muting rationale 〕 In this case the 'errorInstance' is the instance of 'Error' or it's inheritor.
-      *    Although '@typescript-eslint' considers the throwing of is as a violation, this scenario has not been mentioned
-      *    in incorrect code example of 'no-throw-literal' rule documentation.
-      *    https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md */
-      /* eslint-disable-next-line @typescript-eslint/no-throw-literal */
-      throw errorLog.errorInstance;
-    }
-
-
-    const errorWillBeThrown: Error = new Error(errorLog.description);
-    errorWillBeThrown.name = errorLog.errorType;
-
-    throw errorWillBeThrown;
-  }
-
+  /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static logError(errorLog: ErrorLog): void {
+    console.error(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
 
-    const badgeText: string = errorLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
-
-    console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
-      [ ` ${ badgeText } `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
-      [ ` ${ errorLog.title }\n`, { color: "red", "font-weight": "bold" } ],
-      [ `${ errorLog.description }`, { color: "red" } ],
-
-      [ `\n\n${ BasicFrontEndLogger.localization.errorType }: `, { "font-weight": "bold", color: "red" } ],
-      [ `${ errorLog.errorType }`, { color: "red" } ],
-
-      [ `\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "red" } ],
-      [ `${ errorLog.occurrenceLocation }`, { color: "red" } ],
-
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※
-       * The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
-       * type can/doest not be "matched" with function's parameter's types.
-       * https://stackoverflow.com/a/67015118/4818123 */
-      ...("caughtError" in errorLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.caughtError }:`, { "font-weight": "bold", color: "red" } ],
         [
-          errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` :
-              `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
-          { color: "red" }
-        ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData,
+          errorLog.badge === false ?
+              null : ` ${ errorLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "red", color: "white" }
+        ],
 
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("additionalData" in errorLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
-        [ `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`, { color: "red" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData
-    ]));
+        [
+          `${ insertSubstringIf(" ", errorLog.badge !== false) }${ errorLog.title }`,
+          { color: "red", "font-weight": "bold" }
+        ],
+        [ `${ errorLog.compactLayout === true ? " " : "\n" }${ errorLog.description }`, { color: "red" } ],
+
+        [ `\n\n${ BasicFrontEndLogger.localization.errorType }: `, { "font-weight": "bold", color: "red" } ],
+        [ `${ errorLog.errorType }`, { color: "red" } ],
+
+        [ `\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "red" } ],
+        [ `${ errorLog.occurrenceLocation }`, { color: "red" } ],
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※
+         * The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
+         * type can/doest not be "matched" with function's parameter's types.
+         * https://stackoverflow.com/a/67015118/4818123 */
+        ...("caughtError" in errorLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.caughtError }:`, { "font-weight": "bold", color: "red" } ],
+          [
+            errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` :
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
+            { color: "red" }
+          ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData,
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in errorLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`, { color: "red" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
+    );
   }
 
   public static logErrorLikeMessage(errorLikeLog: Log): void {
+    console.error(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
 
-    const badgeText: string = errorLikeLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error;
+        [
+          errorLikeLog.badge === false ?
+              null : ` ${ errorLikeLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.error } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "red", color: "white" }
+        ],
 
-    console.error(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
-      [ ` ${ badgeText } `, { background: "red", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
-      [ ` ${ errorLikeLog.title }\n`, { color: "red", "font-weight": "bold" } ],
-      [ `${ errorLikeLog.description }`, { color: "red" } ],
+        [
+          `${ insertSubstringIf(" ", errorLikeLog.badge !== false) }${ errorLikeLog.title }`,
+          { color: "red", "font-weight": "bold" }
+        ],
+        [ `${ errorLikeLog.compactLayout === true ? " " : "\n" }${ errorLikeLog.description }`, { color: "red" } ],
 
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("additionalData" in errorLikeLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
-        [ `\n${ stringifyAndFormatArbitraryValue(errorLikeLog.additionalData) }`, { color: "red" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData
-    ]));
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in errorLikeLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "red" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(errorLikeLog.additionalData) }`, { color: "red" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
+    );
   }
 
   public static logWarning(warningLog: WarningLog): void {
+    console.warn(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
 
-    const badgeText: string = substituteWhenUndefined(
-      warningLog.customBadgeText, BasicFrontEndLogger.localization.badgesDefaultTitles.warning
+        [
+          warningLog.badge === false ?
+              null : ` ${ warningLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.warning } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "orange", color: "white" }
+        ],
+
+        [
+          `${ insertSubstringIf(" ", warningLog.badge !== false) }${ warningLog.title }`,
+          { color: "orange", "font-weight": "bold" }
+        ],
+        [ `${ warningLog.compactLayout === true ? " " : "\n" }${ warningLog.description }`, { color: "orange" } ],
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("occurrenceLocation" in warningLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "orange" } ],
+          [ `${ warningLog.occurrenceLocation }`, { color: "orange" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData,
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in warningLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "orange" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`, { color: "orange" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
     );
-
-    console.warn(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
-      [ ` ${ badgeText } `, { background: "orange", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
-      [ ` ${ warningLog.title }\n`, { color: "orange", "font-weight": "bold" } ],
-      [ `${ warningLog.description }`, { color: "orange" } ],
-
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("occurrenceLocation" in warningLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "orange" } ],
-        [ `${ warningLog.occurrenceLocation }`, { color: "orange" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData,
-
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("additionalData" in warningLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "orange" } ],
-        [ `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`, { color: "orange" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData
-    ]));
   }
 
   public static logSuccess(successLog: SuccessLog): void {
+    console.log(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
 
-    const badgeText: string = successLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success;
+         [
+          successLog.badge === false ?
+              null : ` ${ successLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "mediumseagreen", color: "white" }
+        ],
 
-    console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
-      [ ` ${ badgeText } `, { background: "mediumseagreen", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
-      [ ` ${ successLog.title }\n`, { color: "mediumseagreen", "font-weight": "bold" } ],
-      [ `${ successLog.description }`, { color: "mediumseagreen" } ],
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("additionalData" in successLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "mediumseagreen" } ],
-        [ `\n${ stringifyAndFormatArbitraryValue(successLog.additionalData) }`, { color: "mediumseagreen" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData
-    ]));
+        [
+          `${ insertSubstringIf(" ", successLog.badge !== false) }${ successLog.title }`,
+          { color: "mediumseagreen", "font-weight": "bold" }
+        ],
+        [ `${ successLog.compactLayout === true ? " " : "\n" }${ successLog.description }`, { color: "mediumseagreen" } ],
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in successLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "mediumseagreen" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(successLog.additionalData) }`, { color: "mediumseagreen" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
+    );
   }
 
   public static logInfo(infoLog: InfoLog): void {
+    console.log(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
 
-    const badgeText: string = infoLog.customBadgeText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.info;
+        [
+          infoLog.badge === false ?
+              null : ` ${ infoLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "dodgerblue", color: "white" }
+        ],
 
-    console.log(...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
-      [ ` ${ badgeText } `, { background: "dodgerblue", color: "white", "font-weight": "bold", "border-radius": "4px" } ],
-      [ ` ${ infoLog.title }\n`, { color: "dodgerblue", "font-weight": "bold" } ],
-      [ `${ infoLog.description }`, { color: "dodgerblue" } ],
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-      ...("additionalData" in infoLog ? [
-        [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "dodgerblue" } ],
-        [ `\n${ stringifyAndFormatArbitraryValue(infoLog.additionalData) }`, { color: "dodgerblue" } ]
-      ] : []) as BasicFrontEndLogger.FormattedOutputData
-    ]));
+        [
+          `${ insertSubstringIf(" ", infoLog.badge !== false) }${ infoLog.title }`,
+          { color: "dodgerblue", "font-weight": "bold" }
+        ],
+        [ `${ infoLog.compactLayout === true ? " " : "\n" }${ infoLog.description }`, { color: "dodgerblue" } ],
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in infoLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold", color: "dodgerblue" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(infoLog.additionalData) }`, { color: "dodgerblue" } ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
+    );
   }
 
+  public static logGeneric(genericLog: Log): void {
+    console.log(
+      ...BasicFrontEndLogger.generateConsoleMethodParametersForFormattedOutput([
+
+        [
+          genericLog.badge === false ?
+              null : ` ${ genericLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success } `,
+          { "font-weight": "bold", "border-radius": "4px", background: "silver", color: "gray" }
+        ],
+
+        [
+          `${ insertSubstringIf(" ", genericLog.badge !== false) }${ genericLog.title }`,
+          { "font-weight": "bold" }
+        ],
+        [ `${ genericLog.compactLayout === true ? " " : "\n" }${ genericLog.description }`, {} ],
+
+        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+        ...("additionalData" in genericLog ? [
+          [ `\n\n${ BasicFrontEndLogger.localization.appendedData }:`, { "font-weight": "bold" } ],
+          [ `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`, {} ]
+        ] : []) as BasicFrontEndLogger.FormattedOutputData
+
+      ])
+    );
+  }
+
+
+  /* ━━━ Auxiliaries ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static highlightText(targetString: string): string {
     return `\x1b[43m${ targetString }`;
   }
@@ -185,6 +221,11 @@ abstract class BasicFrontEndLogger {
     const CSS_DeclarationsForEachContent: Array<string> = [];
 
     for (const singleFormattedOutputData of formattedOutputData) {
+
+      if (isNull(singleFormattedOutputData[0])) {
+        continue;
+      }
+
 
       outputContent.push(`%c${ singleFormattedOutputData[0] }`);
 
@@ -203,7 +244,7 @@ abstract class BasicFrontEndLogger {
 
 
 namespace BasicFrontEndLogger {
-  export type FormattedOutputData = Array<[string, { [CSS_Key: string]: string; }]>;
+  export type FormattedOutputData = Array<[string | null, { [CSS_Key: string]: string; }]>;
 }
 
 

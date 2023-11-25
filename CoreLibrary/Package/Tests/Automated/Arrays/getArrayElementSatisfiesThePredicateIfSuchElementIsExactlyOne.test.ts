@@ -1,6 +1,6 @@
 import {
-  UnexpectedEventError,
-  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne,
+  UnexpectedEventError
 } from "../../../Source";
 import Assert from "assert";
 
@@ -32,7 +32,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample,
           (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+          { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
         );
       },
       UnexpectedEventError
@@ -54,7 +54,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
           sample,
           (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+          { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
         );
       },
       UnexpectedEventError
