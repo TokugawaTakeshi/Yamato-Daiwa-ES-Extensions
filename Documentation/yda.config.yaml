@@ -8,7 +8,7 @@ projectBuilding:
       PRODUCTION: 03-ProductionBuild
 
 
-  # === Markup =========================================================================================================
+  # ━━━ Markup ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   markupProcessing:
 
     common:
@@ -32,7 +32,7 @@ projectBuilding:
             outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
-  # === Styles =========================================================================================================
+  # ━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   stylesProcessing:
 
     entryPointsGroups:
@@ -76,27 +76,7 @@ projectBuilding:
             outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
-  # === Logic =========================================================================================================
-  ECMA_ScriptLogicProcessing:
-
-    entryPointsGroups:
-
-      Common:
-
-        singleEntryPointSourceFileRelativePath: 01-Source/SharedAssets/Scripts/Common.ts
-
-        targetRuntime:
-          type: BROWSER
-
-        associatedMarkupEntryPointsGroupID_ForModulesDynamicLoadingWithoutDevelopmentServer: All
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
-
-
-  # === Images =========================================================================================================
+  # ━━━ Images ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   imagesProcessing:
 
     assetsGroups:
@@ -131,7 +111,32 @@ projectBuilding:
             outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
-  # === Development server =============================================================================================
+  # ━━━ Plain copying ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  plainCopying:
+
+    filesGroups:
+
+      CommonStyles:
+        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-PreMades.css
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild }
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+            # newFileNameWithExtension: YDPD-Common--0.js
+
+      # TODO External components
+      # TODO Layouts
+
+      CommonLogic:
+        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/LogicDistributable/YDPD-Common.js
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild }
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild
+            # newFileNameWithExtension: YDPD-Common--0.js
+
+
+  # ━━━ Development server ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   browserLiveReloading:
 
     setups:

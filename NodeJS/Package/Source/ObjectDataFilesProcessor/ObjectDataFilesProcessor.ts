@@ -131,7 +131,7 @@ abstract class ObjectDataFilesProcessor {
             errorInstance: new InvalidParameterValueError({
               parameterName: "compoundParameter.filePath",
               parameterNumber: 1,
-              messageSpecificPart: ObjectDataFilesProcessor.localization.generateUnsupportedFileNameExtension({
+              messageSpecificPart: ObjectDataFilesProcessor.localization.generateUnsupportedFileNameExtensionErrorMessage({
                 filePath, fileNameLastExtensionWithoutLeadingDot
               })
             }),
@@ -419,7 +419,7 @@ namespace ObjectDataFilesProcessor {
       templateVariables: Localization.UnableToDecideDataParsingAlgorithmErrorMessage.TemplateVariables
     ) => string;
 
-    generateUnsupportedFileNameExtension: (
+    generateUnsupportedFileNameExtensionErrorMessage: (
       templateVariables: Localization.UnsupportedFileNameExtensionErrorMessage.TemplateVariables
     ) => string;
 

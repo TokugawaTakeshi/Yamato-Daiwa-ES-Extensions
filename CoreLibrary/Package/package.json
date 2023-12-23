@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.6.9",
+  "version": "1.6.11",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -12,6 +12,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"

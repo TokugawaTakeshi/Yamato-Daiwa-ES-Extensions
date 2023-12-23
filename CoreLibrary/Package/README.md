@@ -216,7 +216,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
   <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray.md">getLastElementOfArray</a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.english.html">getLastElementOfArray</a></dt>
   <dd>Returns the last element of array, herewith depending on dedicated parameter either <b>UnexpectedEventError</b> will be thrown of null will be returned if target array is empty.</dd>
 
 </dl>
@@ -251,7 +251,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 ##### Adding of elements
 
 <dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md">addElementsToArray</a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a></dt>
   <dd>Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.</dd>
 </dl>
 
