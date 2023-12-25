@@ -16,17 +16,25 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("ConsoleCommandsParser");
     HTML_PageMetaData = {
-      description:
-          "Класс «ConsoleCommandsParser» библиотеки «@yamato-daiwa/es-extensions» (сокращённо: «YDEE») " +
-            "позволяет проанализировать вектор аргументов консольной команды, проверить его на соответствие заданным " +
-            "правилам валидации и привести к конкретному объектному TypeScript-типу. " +
-          "Возможно также сгенерировать справочный текст всех поддерживаемых команд.",
+      description: MetaDescriptionTemplates.class({
+        className: "ConsoleCommandsParser",
+        whatIsClassFor:
+            "предназначен для разбора (парсинга) векторов аргументов консольных команд с валидацией и преобразованием их " +
+            "к объектным TypeScript-типам. " +
+            "Возможно также сгенерировать справочный текст для всех поддерживаемых команд."
+      }),
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("localizedRouting.nodeJS.utils.ConsoleCommandsParser");
@@ -48,20 +56,26 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 ConsoleCommandsParser
+    h1.Article-Heading1 Класс #[code ConsoleCommandsParser]
 
     p.Article-Paragraph.
-      #[+Term--YDID Класс], предназначенный для разбора (#[+Term--YDID парсинга]) консольных команд с
-        #[+Term--YDID валидацией] согласно указанным правилам и приведением к однозначному #[+Term--YDID TypeScript-типу],
-        а также для генерации справочного текста по использованию консольных команд.
+      #[+Term--YDID Класс], предназначенный для разбора (#[+Term--YDID парсинга]) #[+Term--YDID векторов аргументов]
+        #[+Term__Contrast--YDID консольных команд] с валидацией и преобразованием их к #[+Term--YDID объектным]
+        #[+Term__Contrast--YDID TypeScript-типам].
+      Возможно также сгенерировать справочный текст для всех поддерживаемых команд.
 
 
     h2.Article-Heading2 Демо
 
-    p.Article-Paragraph Далее данный пример будет полностью разобран.
+    p.Article-Paragraph Далее нижеследующей пример пример будет полностью разобран.
 
-    //- +DemoCodeViewer()
-
+    +DemoCodeViewer({
+      commandPhrasesEnumeration: true,
+      consoleCommandsObjectTypes: true,
+      specification: true
+    })
+    //- TODO English ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- TODO 日本語 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h2.Article-Heading2 Минимальные теоретические знания
 
     p.Article-Paragraph
@@ -122,7 +136,7 @@ block append SpecificContent
           #[+SecondaryEntity__Code--YDID development] является #[+Term--YDID параметром] #[+Term__Contrast--YDID опции]
           #[+SecondaryEntity__Code--YDID --mode]).
 
-    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
       Если приведённый выше определения вырвать из контекста терминологии консольных команд, то они не&nbsp;только потеряют
         смысл, но внесут огромную путаницу.
 
@@ -145,7 +159,7 @@ block append SpecificContent
       li.
         #[+Term--YDID Аргументы] могут иметь пробелы, но при этом они должны быть обёрнуты в кавычки.
 
-    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
       Существует также синтаксис
         #[+SecondaryEntity__Code--YDID --опция1=параметр1 --опция2=параметр2 ... --опцияN=параметрN].
       На данный момент такой синтаксис не поддерживается #[+ImportantEntity--YDID ConsoleCommandsParser], однако
@@ -168,7 +182,7 @@ block append SpecificContent
       Тем не менее, поскольку пробелы в #[+Term--YDID командной фразе] #[+Keyword--YDID недопустимы], необходимо
         использовать слитные способы записи нескольких слов, такие как #[+Term--YDID верблюжий регистр].
 
-    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.notice, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.notice, hasPrependedSVG_Icon: true }).
       Если можно было бы отойти от более-мене устоявшейся терминологии, то логично «команду» назвать
         «приложением», а «командную фразу» — «командой», но разработчик #[+ImportantEntity--YDID YDEE] на сей раз
         решил дополнить более-менее устоявшую терминологию несмотря на её запутанность, а не вводить её заново.
@@ -179,8 +193,8 @@ block append SpecificContent
         #[+SecondaryEntity__Code--YDID build] является #[+Term--YDID командной фразой по умолчанию], а потому может
         быть опущена (#[+SecondaryEntity__Code--YDID webpack --mode development]).
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
     }).
       Данный термин введён разработчиком #[+ImportantEntity--YDID YDEE].
@@ -381,9 +395,9 @@ block append SpecificContent
         #[+Term--YDID методов] создаёт путаницу.
       Но это это требования стилистические, с которыми Вы можете не&nbsp;согласиться и установить собственные.
 
-    +AttentionBox--YDF({
+    +AdmonitionBlock--YDF({
       title: "Заметка об английской грамматике",
-      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
     })
       ul.Article-UnorderedList

@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
@@ -72,8 +78,8 @@ block append SpecificContent
         узкоспециализированных функций и методов классов #[+Keyphrase--YDID с содержательными и однозначными именами],
         а потому легко читался как список действий.
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
     })
 

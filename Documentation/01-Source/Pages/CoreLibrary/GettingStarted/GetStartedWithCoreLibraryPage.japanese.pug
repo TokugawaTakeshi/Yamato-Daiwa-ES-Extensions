@@ -23,7 +23,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
@@ -93,8 +99,8 @@ block append SpecificContent
       maximalHeight__anyValidCSS_Value: "450px"
     })
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
     }).
       其れは、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の導入に依ってプロジェクトの構成後アプリケーションに加わる
@@ -123,8 +129,8 @@ block append SpecificContent
       #[+ImportantEntity--YDID Webpack]と競合する#[+Term--YDID プロジェクト構成手段]を使っている場合、此の手段は似た様な未使用機能の除外に
         対応しなければいけない。
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
     }).
       ライブラリの未使用機能を可能な限り多く除外する為に、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の多くの機能は

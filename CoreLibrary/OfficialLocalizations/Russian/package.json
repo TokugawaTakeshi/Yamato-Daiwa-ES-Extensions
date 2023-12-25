@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -10,6 +10,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
@@ -26,7 +27,7 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": ">=1.6.0 <1.7.0"
+    "@yamato-daiwa/es-extensions": "^1.6.0"
   },
   "devDependencies": {
     "@types/mocha": "10.0.1",

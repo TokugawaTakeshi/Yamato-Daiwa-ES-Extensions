@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -149,7 +155,7 @@ block append SpecificContent
 
     h2.Article-Heading2 Примеры
 
-    +AttentionBox--YDF({　decoration: AttentionBox__YDF.DecorativeVariations.guidance,　hasPrependedSVG_Icon: true　}).
+    +AdmonitionBlock--YDF({　decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,　hasPrependedSVG_Icon: true　}).
       Поскольку многие читают эту страницу выборочно, то приведённые ниже объяснения содержат повторения
         важных моментов.
 
@@ -216,7 +222,7 @@ block append SpecificContent
               | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         | .
 
-      +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+      +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
         При таком варианте использования целевой #[+Term--YDID массив] (#[+ImportantEntity__Code--YDID targetArray])
           #[+Keyword--YDID не]&nbsp;может иметь #[+Term--YDID тип] #[+ImportantEntity__Code--YDID ReadonlyArray],
           поскольку #[+Term--YDID функция] будет вносить изменения в этот #[+Term--YDID массив].

@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -148,7 +154,7 @@ block append SpecificContent
 
     h2.Article-Heading2 例
 
-    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
       当ページの一部分のみを選択して読んでいる方が多いので、下記には重要な部分が繰り返されている。
 
 
@@ -212,8 +218,8 @@ block append SpecificContent
               | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         |   と成る。
 
-      +AttentionBox--YDF({
-        decoration: AttentionBox__YDF.DecorativeVariations.warning,
+      +AdmonitionBlock--YDF({
+        decoration: AdmonitionBlock__YDF.DecorativeVariations.warning,
         hasPrependedSVG_Icon: true
       }).
         此の使い方だと、#[+Keyword--YDID 元の]#[+Term--YDID 配列]（#[+ImportantEntity__Code--YDID targetArray]）が変更される為、

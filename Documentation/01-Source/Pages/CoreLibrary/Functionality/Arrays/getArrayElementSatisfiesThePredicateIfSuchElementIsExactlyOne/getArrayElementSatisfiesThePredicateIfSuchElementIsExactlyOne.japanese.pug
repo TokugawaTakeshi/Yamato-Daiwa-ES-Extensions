@@ -23,7 +23,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -60,7 +66,7 @@ block append SpecificContent
             {
               genericTechnicalName: "targetArray",
               localizedName: "対象配列",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
@@ -80,13 +86,13 @@ block append SpecificContent
             {
               genericTechnicalName: "targetArray",
               localizedName: "対象配列",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
               genericTechnicalName: "predicate",
               localizedName: "プレディケート",
-              type: "(arrayElement: string) =&gt; boolean",
+              type: "(arrayElement: string) => boolean",
               required: true
             },
             {
@@ -283,7 +289,7 @@ block append SpecificContent
       此の#[+Term--YDID 配列]の何れ#[+Keyword--YDID でも]の#[+Term--YDID 要素]（1番目、詰まり#[+Term--YDID 指数]
         #[+ImportantEntity--YDID 0]の個）にアクセスしてみても、#[+ImportantEntity__Code--YDID undefined]が返される。
       #[+ImportantEntity--YDID TypeScript]そして其の他の多数の#[+Term--YDID 静的型付け]のプログラミング言語が此れに就いて
-        警報#[+Keyword--YDID しない]（例えば、#[+SecondaryEntity__Code--YDID Array&lg;string&gt;]又は
+        警報#[+Keyword--YDID しない]（例えば、#[+SecondaryEntity__Code--YDID Array&lg;string>]又は
         #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;]は文字通り「#[+Keyword--YDID 無限]数の#[+Term--YDID 文字列]の
         #[+Term__Contrast--YDID 要素]の#[+Term--YDID 配列]」を意味しているが、事実上#[+Keyword--YDID 何れでもの]#[+Term--YDID 配列]
         #[+Keyword--YDID 有限]で、空に成っている事も有る）。

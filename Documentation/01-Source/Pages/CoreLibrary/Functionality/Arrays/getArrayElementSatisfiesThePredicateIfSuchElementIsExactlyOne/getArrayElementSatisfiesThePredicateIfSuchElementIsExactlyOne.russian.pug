@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -62,7 +68,7 @@ block append SpecificContent
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement&gt;",
               required: true
             },
             {
@@ -82,7 +88,7 @@ block append SpecificContent
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement&gt;",
               required: true
             },
             {

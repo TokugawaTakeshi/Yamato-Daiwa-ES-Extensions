@@ -37,29 +37,15 @@ projectBuilding:
 
     entryPointsGroups:
 
-      Shared:
+      CustomizedExternalComponents:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/Styles
-
-        partialsRecognition:
-          excludeFilesWithPrefixes: "_"
-          excludeSubdirectoriesWithPrefixes: "_"
+        singleEntryPointSourceFileRelativePath: 01-Source/SharedAssets/CustomizedExternalComponents.styl
 
         buildingModeDependent:
           LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles
           PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
-
-      Layouts:
-
-        sourceFilesTopDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
-
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
+            outputTopDirectoryRelativePath: 03-ProductionBuild/styles
 
       Pages:
 
@@ -117,23 +103,30 @@ projectBuilding:
     filesGroups:
 
       CommonStyles:
+        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-Common.css
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
+          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild/styles }
+
+      LayoutsStyles:
+        sourceDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
+        fileNameLastExtensions: [ "css" ]
+        buildingModeDependent:
+          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles/layouts }
+          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild/styles/layouts }
+
+      PreMadesStyles:
         sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-PreMades.css
         buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild }
+          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
           PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
-            # newFileNameWithExtension: YDPD-Common--0.js
-
-      # TODO External components
-      # TODO Layouts
+            outputTopDirectoryRelativePath: 03-ProductionBuild/styles
 
       CommonLogic:
         sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/LogicDistributable/YDPD-Common.js
         buildingModeDependent:
           LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild }
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
-            # newFileNameWithExtension: YDPD-Common--0.js
+          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild }
 
 
   # ━━━ Development server ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

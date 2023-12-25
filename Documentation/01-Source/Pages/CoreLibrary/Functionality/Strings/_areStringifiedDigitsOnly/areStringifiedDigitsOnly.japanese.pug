@@ -23,7 +23,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
@@ -69,8 +75,8 @@ block append SpecificContent
       このライブラリの目的は、高級言語の様に「人間に理解しやすい処理方法」を提供する事である。
       理想としては用途を必要最小限に絞り込み、一義的な名称の関数やクラスメソッドを順番に呼び出す様なコードが、箇条書きの様に読みやすくなる事だ。
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
     })
 

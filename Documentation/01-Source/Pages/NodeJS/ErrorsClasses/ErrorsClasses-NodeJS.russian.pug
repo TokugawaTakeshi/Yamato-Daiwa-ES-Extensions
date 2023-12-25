@@ -3,7 +3,7 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 
 block append Requirements
 
-  include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../SharedAssets/Markup/SharedAssets.russian.pug
   include ../../../SharedComponents/SharedComponents.russian.pug
 
 
@@ -11,8 +11,8 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("エラークラス");
+    HTML_PAGE_LANGUAGE = "ru";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Классы ошибок");
     HTML_PageMetaData = {
       description: "",
       author: HTML_PAGE_AUTHOR
@@ -20,14 +20,20 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("nodeJS.errorsClasses.DesiredFileActuallyIsDirectoryError");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: "./DesiredFileActuallyIsDirectoryError.english.html",
-      russian: "./DesiredFileActuallyIsDirectoryError.russian.html"
+      japanese: "./DesiredFileActuallyIsDirectoryError.japanese.html"
     });
 
 
@@ -44,7 +50,7 @@ block append SpecificContent
 
   article
 
-    h1 エラークラス
+    h1 Классы ошибок
 
     //- ─── DesiredFileActuallyIsDirectoryError ────────────────────────────────────────────────────────────────────────
     h2.Article-Heading2(

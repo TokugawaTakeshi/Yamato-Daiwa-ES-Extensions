@@ -23,7 +23,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
@@ -99,8 +105,8 @@ block append SpecificContent
       maximalHeight__anyValidCSS_Value: "450px"
     })
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
     }).
       It is #[+Keyword--YDID not] the volume of the #[+Keyword--YDID outputted] #[+Term--YDID JavaScript code], on which
@@ -140,8 +146,8 @@ block append SpecificContent
       |   "competitor of #[+ImportantEntity--YDID Webpack]", it must support the functionality similar to
       |   #[+ImportantEntity--YDID Webpack's] #[+Term--YDID tree shaking].
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
       hasPrependedSVG_Icon: true
     }).Article-Paragraph.
       In order to exclude as many unneeded modules as possible, the majority of the functionality of

@@ -26,7 +26,14 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico"
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/Minimal/MinimalLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents",
+      "@Pages/Top/TopPage"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("top");
@@ -62,8 +69,8 @@ block append SpecificContent
     p.TopPage-ShortDescription-Heading.
       Богатые функциональностью библиотеки для высококачественной разработки на языке TypeScript
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.warning,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.warning,
       hasPrependedSVG_Icon: true
     }).TopPage-Disclaimer.
 

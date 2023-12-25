@@ -23,7 +23,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
@@ -64,8 +70,8 @@ block append SpecificContent
       Checks whether #[+Keyword--YDID all] characters in the #[+Keyword--YDID string] #[+Term--YDID argument] are
         #[+Term__Contrast--YDID digits].
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.notice,
+    +AdmonitionBlock--YDF({
+      decoration: AdmonitionBlock__YDF.DecorativeVariations.notice,
       hasPrependedSVG_Icon: true
     })
 

@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -137,7 +143,7 @@ block append SpecificContent
 
     h2.Article-Heading2 Examples
 
-    +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
       Because this content may be read selectively, the important points have been repeated multiple times.
 
 
@@ -204,7 +210,7 @@ block append SpecificContent
               | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         | .
 
-      +AttentionBox--YDF({ decoration: AttentionBox__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+      +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
         With such usage, the target #[+Term--YDID array] could #[+Keyword--YDID not]&nbsp;have the #[+Term--YDID type]
           #[+ImportantEntity__Code--YDID ReadonlyArray] because the #[+Term--YDID function] will change this
           #[+Term--YDID array].

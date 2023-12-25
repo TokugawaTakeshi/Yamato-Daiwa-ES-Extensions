@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
@@ -60,12 +66,12 @@ block append SpecificContent
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
               genericTechnicalName: "predicate",
-              type: "(arrayElement: string) =&gt; boolean",
+              type: "(arrayElement: string) => boolean",
               required: true
             }
           ],
@@ -78,12 +84,12 @@ block append SpecificContent
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
               genericTechnicalName: "predicate",
-              type: "(arrayElement: string) =&gt; boolean",
+              type: "(arrayElement: string) => boolean",
               required: true
             },
             {
@@ -302,7 +308,7 @@ block append SpecificContent
         one that is with #[+Term--YDID index] #[+ImportantEntity--YDID 0]) the #[+ImportantEntity__Code--YDID undefined]
         will be returned what will&nbsp;#[+Keyword--YDID not]&nbsp;be warned by the #[+ImportantEntity--YDID TypeScript]
         (and, actually, by many other programming languages with static typing).
-      For example, #[+SecondaryEntity__Code--YDID Array&lg;string&gt;] or #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;]
+      For example, #[+SecondaryEntity__Code--YDID Array&lg;string>] or #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;]
         actually means the "#[+Term--YDID array] of the #[+Keyword--YDID infinite] number of #[+Term--YDID string]
         #[+Term__Contrast--YDID elements]" while #[+Keyphrase--YDID in real] #[+Keyword--YDID any] #[+Term--YDID array]
         is #[+Keyword--YDID finite] and sometimes could be empty.
