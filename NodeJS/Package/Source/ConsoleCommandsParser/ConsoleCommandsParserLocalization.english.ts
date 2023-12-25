@@ -1,5 +1,5 @@
 import ConsoleCommandsParser from "./ConsoleCommandsParser";
-import { RawObjectDataProcessorLocalization__English, isNotUndefined } from "@yamato-daiwa/es-extensions";
+import { rawObjectDataProcessorLocalization__english, isNotUndefined } from "@yamato-daiwa/es-extensions";
 
 
 import Localization = ConsoleCommandsParser.Localization;
@@ -28,7 +28,7 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     numbersSet: {
       key: "Numbers set",
-      generateValue: RawObjectDataProcessorLocalization__English.numbersSet
+      generateValue: rawObjectDataProcessorLocalization__english.numbersSet
     },
 
     minimalValue: "Minimal value",
@@ -198,7 +198,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not belong to ` +
-            `"${ RawObjectDataProcessorLocalization__English.numbersSet(expectedNumbersSet) }" numbers set.\n` +
+            `"${ rawObjectDataProcessorLocalization__english.numbersSet(expectedNumbersSet) }" numbers set.\n` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 

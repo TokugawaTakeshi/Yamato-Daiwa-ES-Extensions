@@ -25,6 +25,7 @@ abstract class BasicFrontEndLogger {
     return BasicFrontEndLogger;
   }
 
+
   /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static logError(errorLog: ErrorLog): void {
     console.error(
@@ -43,10 +44,10 @@ abstract class BasicFrontEndLogger {
         [ `${ errorLog.compactLayout === true ? " " : "\n" }${ errorLog.description }`, { color: "red" } ],
 
         [ `\n\n${ BasicFrontEndLogger.localization.errorType }: `, { "font-weight": "bold", color: "red" } ],
-        [ `${ errorLog.errorType }`, { color: "red" } ],
+        [ errorLog.errorType, { color: "red" } ],
 
         [ `\n${ BasicFrontEndLogger.localization.occurrenceLocation }: `, { "font-weight": "bold", color: "red" } ],
-        [ `${ errorLog.occurrenceLocation }`, { color: "red" } ],
+        [ errorLog.occurrenceLocation, { color: "red" } ],
 
         /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※
          * The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
@@ -161,7 +162,7 @@ abstract class BasicFrontEndLogger {
 
         [
           infoLog.badge === false ?
-              null : ` ${ infoLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success } `,
+              null : ` ${ infoLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.info } `,
           { "font-weight": "bold", "border-radius": "4px", background: "dodgerblue", color: "white" }
         ],
 
@@ -187,7 +188,7 @@ abstract class BasicFrontEndLogger {
 
         [
           genericLog.badge === false ?
-              null : ` ${ genericLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.success } `,
+              null : ` ${ genericLog.badge?.customText ?? BasicFrontEndLogger.localization.badgesDefaultTitles.generic } `,
           { "font-weight": "bold", "border-radius": "4px", background: "silver", color: "gray" }
         ],
 

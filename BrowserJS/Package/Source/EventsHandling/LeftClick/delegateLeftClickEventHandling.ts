@@ -9,7 +9,7 @@ import {
 } from "@yamato-daiwa/es-extensions";
 
 
-export default function delegateClickEventHandling(
+export default function delegateLeftClickEventHandling(
   compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
@@ -17,7 +17,7 @@ export default function delegateClickEventHandling(
   }>
 ): void;
 
-export default function delegateClickEventHandling<ClickTargetElement extends Element>(
+export default function delegateLeftClickEventHandling<ClickTargetElement extends Element>(
   compoundParameter: Readonly<{
     eventTargetSelector: string;
     delegatingContainerOrItsSelector: Element | Document | string;
@@ -27,7 +27,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
 ): void;
 
 
-export default function delegateClickEventHandling<ClickTargetElement extends Element = Element>(
+export default function delegateLeftClickEventHandling<ClickTargetElement extends Element = Element>(
   {
     eventTargetSelector,
     delegatingContainerOrItsSelector,
@@ -59,7 +59,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
         description: DOM_ElementRetrievingFailedError.localization.generateDescription({
           selector: delegatingContainerOrItsSelector
         }),
-        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+        occurrenceLocation: "delegateLeftClickEventHandling(compoundParameter)"
       });
 
       return;
@@ -87,7 +87,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
               "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
               "combination of circumstances it is not such as."
         }),
-        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+        occurrenceLocation: "delegateLeftClickEventHandling(compoundParameter)"
       });
 
       return;
@@ -108,7 +108,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
               "has type \"EventTarget\" while \".parentElement\" property has type \"HTMLElement\", however this bug " +
               "occurrence indicates the presence of exceptions which we need to investigate."
         }),
-        occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+        occurrenceLocation: "delegateLeftClickEventHandling(compoundParameter)"
       });
 
       return;
@@ -136,7 +136,7 @@ export default function delegateClickEventHandling<ClickTargetElement extends El
             errorType: UnexpectedEventError.NAME,
             title: UnexpectedEventError.localization.defaultTitle,
             description: `Contrary to expectations, the event target is not instance of '${ eventTargetElementSubtype.name }'.`,
-            occurrenceLocation: "delegateClickEventHandling(compoundParameter)"
+            occurrenceLocation: "delegateLeftClickEventHandling(compoundParameter)"
           });
 
           return;

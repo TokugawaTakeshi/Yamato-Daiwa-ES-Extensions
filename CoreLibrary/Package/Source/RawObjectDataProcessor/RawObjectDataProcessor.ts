@@ -5,7 +5,7 @@
 import type { ArbitraryObject } from "../Types/ArbitraryObject";
 import type { ReadonlyParsedJSON, ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
-import RawObjectDataProcessorLocalization__English from "./RawObjectDataProcessorLocalization__English";
+import rawObjectDataProcessorLocalization__english from "./RawObjectDataProcessorLocalization.english";
 
 import isUndefined from "../TypeGuards/Nullables/isUndefined";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
@@ -30,7 +30,7 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 class RawObjectDataProcessor {
 
-  private static defaultLocalization: RawObjectDataProcessor.Localization = RawObjectDataProcessorLocalization__English;
+  private static defaultLocalization: RawObjectDataProcessor.Localization = rawObjectDataProcessorLocalization__english;
 
   private readonly rawData: ArbitraryObject;
   private readonly fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -1452,11 +1452,22 @@ class RawObjectDataProcessor {
 
     if (
       isNotUndefined(targetValueSpecification.allowedAlternatives) &&
-      !targetValueSpecification.allowedAlternatives.includes(targetValue__expectedToBeNumber)
+      !targetValueSpecification.allowedAlternatives.
+          map(
+            (polymorphicElement: number | { key: string; value: number; }): number =>
+                (isNumber(polymorphicElement) ? polymorphicElement : polymorphicElement.value)
+          ).
+          includes(targetValue__expectedToBeNumber)
     ) {
 
       this.registerValidationError(
         this.validationErrorsMessagesBuilder.buildValueIsNotAmongAllowedAlternativesErrorMessage({
+          allowedAlternatives: targetValueSpecification.
+              allowedAlternatives.
+              map(
+                (polymorphicElement: number | { key: string; value: number; }): string =>
+                    (isNumber(polymorphicElement) ? polymorphicElement.toString() : polymorphicElement.key)
+              ),
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeNumber,
@@ -1591,11 +1602,22 @@ class RawObjectDataProcessor {
 
     if (
       isNotUndefined(targetValueSpecification.allowedAlternatives) &&
-      !targetValueSpecification.allowedAlternatives.includes(targetValue__expectedToBeString)
+      !targetValueSpecification.allowedAlternatives.
+          map(
+            (polymorphicElement: string | { key: string; value: string; }): string =>
+                (isString(polymorphicElement) ? polymorphicElement : polymorphicElement.value)
+          ).
+          includes(targetValue__expectedToBeString)
     ) {
 
       this.registerValidationError(
         this.validationErrorsMessagesBuilder.buildValueIsNotAmongAllowedAlternativesErrorMessage({
+          allowedAlternatives: targetValueSpecification.
+              allowedAlternatives.
+              map(
+                (polymorphicElement: string | { key: string; value: string; }): string =>
+                    (isString(polymorphicElement) ? polymorphicElement : polymorphicElement.key)
+              ),
           targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
@@ -2188,7 +2210,7 @@ namespace RawObjectDataProcessor {
       {
         readonly type: ValuesTypesIDs.number | NumberConstructor;
         readonly numbersSet: NumbersSets;
-        readonly allowedAlternatives?: Array<number>;
+        readonly allowedAlternatives?: ReadonlyArray<number> | ReadonlyArray<Readonly<{ key: string; value: number; }>>;
         readonly minimalValue?: number;
         readonly maximalValue?: number;
         readonly customValidators?: CustomValidator<number> | Array<CustomValidator<number>>;
@@ -2235,7 +2257,7 @@ namespace RawObjectDataProcessor {
     /* eslint-disable-next-line id-denylist --
      * This rule is not desired for object keys, but there is no option allows to disable it for the object properties. */
     readonly type: ValuesTypesIDs.string | StringConstructor;
-    readonly allowedAlternatives?: Array<string>;
+    readonly allowedAlternatives?: ReadonlyArray<string> | ReadonlyArray<Readonly<{ key: string; value: string; }>>;
     readonly minimalCharactersCount?: number;
     readonly maximalCharactersCount?: number;
     readonly fixedCharactersCount?: number;
@@ -2557,11 +2579,11 @@ namespace RawObjectDataProcessor {
             => Localization.TextDataForErrorMessagesBuilding;
 
     readonly buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData: (
-        missingRequiredKeys: Array<string>
+      missingRequiredKeys: Array<string>
     ) => Localization.TextDataForErrorMessagesBuilding;
 
     readonly buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData: (
-        requiredKeysAlternatives: Array<string>
+      allowedAlternatives: ReadonlyArray<string>
     ) => Localization.TextDataForErrorMessagesBuilding;
 
     readonly buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData: (
@@ -2583,7 +2605,8 @@ namespace RawObjectDataProcessor {
     readonly buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData: (expectedNumbersSet: NumbersSets) =>
         Localization.TextDataForErrorMessagesBuilding;
 
-    readonly valueIsNotAmongAllowedAlternativesErrorMessageTextData: Localization.TextDataForErrorMessagesBuilding;
+    readonly buildValueIsNotAmongAllowedAlternativesErrorMessageTextData: (allowedAlternatives: ReadonlyArray<string>) =>
+        Localization.TextDataForErrorMessagesBuilding;
 
     readonly buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData: (requiredMinimum: number) =>
         Localization.TextDataForErrorMessagesBuilding;
@@ -2877,11 +2900,11 @@ namespace RawObjectDataProcessor {
     }
 
     public buildValueIsNotAmongAllowedAlternativesErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding
+      payload: Localization.PropertyDataForMessagesBuilding & Readonly<{ allowedAlternatives: ReadonlyArray<string>; }>
     ): string {
       return this.buildErrorMessage({
         ...payload,
-        ...this.localization.valueIsNotAmongAllowedAlternativesErrorMessageTextData
+        ...this.localization.buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(payload.allowedAlternatives)
       });
     }
 

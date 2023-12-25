@@ -16,7 +16,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
       } |
       {
         templateElementSelector: string;
-        context?: Element | Document;
+        contextElement?: ParentNode | Readonly<{ selector: string; }>;
       }
     ) &
     {
@@ -35,7 +35,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement(
       } |
       {
         templateElementSelector: string;
-        context?: Element | Document;
+        contextElement?: ParentNode | Readonly<{ selector: string; }>;
       }
     ) &
     {
@@ -54,7 +54,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
     ) &
     {
       expectedChildElementSubtype?: new () => DOM_ElementSubtype;
-      context?: Element | Document;
+      contextElement?: ParentNode | Readonly<{ selector: string; }>;
       mustReplaceTemplateElementOnceDoneWith?: Node;
       mustRemoveTemplateElementOnceDone?: true;
     }
@@ -66,7 +66,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
       getExpectedToBeSingleDOM_Element({
         selector: compoundParameter.templateElementSelector,
         expectedDOM_ElementSubtype: HTMLTemplateElement,
-        context: compoundParameter.context
+        contextElement: compoundParameter.contextElement
       });
 
   const childrenNodes: HTMLCollection = templateElement.content.children;

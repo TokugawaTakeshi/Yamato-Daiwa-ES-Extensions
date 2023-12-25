@@ -2,8 +2,10 @@ import {
   Logger,
   PoliteErrorsMessagesBuilder,
   DOM_ElementRetrievingFailedError,
-  UnexpectedEventError
+  UnexpectedEventError,
+  isUndefined
 } from "@yamato-daiwa/es-extensions";
+import getExpectedToBeSingleDOM_Element from "../../DOM/getExpectedToBeSingleDOM_Element";
 
 
 export default function addLeftClickEventHandler(
@@ -11,7 +13,7 @@ export default function addLeftClickEventHandler(
     (
       { targetElement: Element; } |
       (
-        { targetElementSelector: string; } &
+        { targetElement: Readonly<{ selector: string; }>; } &
         (
           { mustApplyToAllMatchingsWithSelector: true; } |
           { mustIgnoreSubsequentMatchingsWithSelector: true; } |
@@ -20,21 +22,37 @@ export default function addLeftClickEventHandler(
       )
     ) &
     {
+      contextElement?: ParentNode | Readonly<{ selector: string; }>;
       handler: (leftClickEvent: MouseEvent) => unknown;
       mustInvokeBeforeChildren_sHandlers?: boolean;
+      mustStopEventPropagation?: boolean;
     }
   >
 ): void {
 
   let targetElements: ReadonlyArray<Element>;
 
-  if ("targetElement" in compoundParameter) {
+  if (compoundParameter.targetElement instanceof Element) {
 
     targetElements = [ compoundParameter.targetElement ];
 
   } else {
 
-    const matchesWithTargetSelector: NodeListOf<Element> = document.querySelectorAll(compoundParameter.targetElementSelector);
+    let matchesWithTargetSelector: NodeListOf<Element> | ReadonlyArray<Element>;
+
+    if (isUndefined(compoundParameter.contextElement)) {
+
+      matchesWithTargetSelector = document.querySelectorAll(compoundParameter.targetElement.selector);
+
+    } else if ("selector" in compoundParameter.contextElement) {
+
+      matchesWithTargetSelector = [ getExpectedToBeSingleDOM_Element({ selector: compoundParameter.contextElement.selector }) ];
+
+    } else {
+
+      matchesWithTargetSelector = compoundParameter.contextElement.querySelectorAll(compoundParameter.targetElement.selector);
+
+    }
 
     if (matchesWithTargetSelector.length === 0) {
 
@@ -42,7 +60,7 @@ export default function addLeftClickEventHandler(
         errorType: DOM_ElementRetrievingFailedError.NAME,
         title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
         description: DOM_ElementRetrievingFailedError.localization.generateDescription({
-          selector: compoundParameter.targetElementSelector
+          selector: compoundParameter.targetElement.selector
         }),
         occurrenceLocation: "addLeftClickEventHandler(compoundParameter)"
       });
@@ -65,7 +83,7 @@ export default function addLeftClickEventHandler(
           errorType: UnexpectedEventError.NAME,
           title: UnexpectedEventError.localization.defaultTitle,
           description: `Contrary to expectations, ${ matchesWithTargetSelector.length } matchings has been found for ` +
-              `the selector "${ compoundParameter.targetElementSelector }". The subsequent matchings will be ignored.`,
+              `the selector "${ compoundParameter.targetElement.selector }". The subsequent matchings will be ignored.`,
           occurrenceLocation: "addLeftClickEventHandler(compoundParameter)"
         });
 
@@ -103,6 +121,10 @@ export default function addLeftClickEventHandler(
 
         return;
 
+      }
+
+      if (compoundParameter.mustStopEventPropagation === true) {
+        event.stopPropagation();
       }
 
 

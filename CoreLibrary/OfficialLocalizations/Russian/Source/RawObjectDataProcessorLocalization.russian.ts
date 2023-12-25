@@ -6,7 +6,7 @@ import {
 import Localization = RawObjectDataProcessor.Localization;
 
 
-const RawObjectDataProcessorLocalization__Russian: Localization = {
+const rawObjectDataProcessorLocalization__russian: Localization = {
 
   errorMessageBasicTemplate(
     {
@@ -264,9 +264,15 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     };
   },
 
-  valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "Неразрешенный вариант значения",
-    specificMessagePart: "Это значение отсутствует среди допустимых вариантов."
+  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
+    allowedAlternatives: ReadonlyArray<string>
+  ): Localization.TextDataForErrorMessagesBuilding {
+    return {
+      title: "Недопустимый вариант значения",
+      specificMessagePart:
+          "Это значение отсутствует среди перечисленных ниже допустимых вариантов.\n" +
+          `${ allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n") }`
+    };
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -369,4 +375,4 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
 };
 
 
-export default RawObjectDataProcessorLocalization__Russian;
+export default rawObjectDataProcessorLocalization__russian;

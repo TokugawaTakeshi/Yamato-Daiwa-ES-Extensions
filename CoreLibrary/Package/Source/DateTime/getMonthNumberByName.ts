@@ -1,4 +1,4 @@
-import MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
+import { MonthsNames } from "fundamental-constants";
 
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../Logging/Logger";

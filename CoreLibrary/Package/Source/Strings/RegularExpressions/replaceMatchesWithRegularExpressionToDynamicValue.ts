@@ -14,15 +14,16 @@ export namespace ReplacingOfMatchesWithRegularExpressionToDynamicValue {
     replacer: Replacer<NamedCapturingGroups, NumeratedCapturingGroups>;
   }>;
 
-
   export type Replacer<
     NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }>,
     NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
   > = (matching: Matching<NamedCapturingGroups, NumeratedCapturingGroups>) => string | null;
 
   export type Matching<
-    NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }>,
-    NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
+    NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }> =
+        Readonly<{ [groupName: string]: string | undefined; }>,
+    NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }> =
+        Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
   > = Readonly<{
     fullMatching: string;
     positionIndex: number;
@@ -43,7 +44,7 @@ export default function replaceMatchesWithRegularExpressionToDynamicValue<
 ): string {
 
   const targetString: string = compoundParameter.targetString;
-  const regularExpression: RegExp = new RegExp(compoundParameter.regularExpressionWithCapturingGroups, "gu");
+  const regularExpression: RegExp = new RegExp(compoundParameter.regularExpressionWithCapturingGroups, "gmu");
 
   const matches: Array<
     ReplacingOfMatchesWithRegularExpressionToDynamicValue.Matching<NamedCapturingGroups, NumeratedCapturingGroups>

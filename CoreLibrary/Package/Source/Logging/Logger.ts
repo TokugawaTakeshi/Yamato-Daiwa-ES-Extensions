@@ -35,30 +35,36 @@ abstract class Logger {
     }
 
 
+    let stringifiedInnerError: string | undefined;
+
+    if (isNotUndefined(errorLog.innerError)) {
+
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(errorLog.innerError);
+
+      if (errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack)) {
+
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(errorLog.innerError)`,
+         *    but it is runtime dependent because the `stack` property is non-standard. */
+
+        stringifiedInnerError = errorLog.innerError.stack.includes(stringifiedInnerError)?
+            errorLog.innerError.stack :
+            `${ stringifiedInnerError }\n${ errorLog.innerError.stack }`
+
+      }
+
+    }
+
     const errorMessage: string = [
 
-      `${ errorLog.title }`,
+      errorLog.title,
       ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
 
-      ..."errorInstance" in errorLog ? [ `${ errorLog.errorInstance.message }` ] : [ errorLog.description ],
+      ..."errorInstance" in errorLog ? [ errorLog.errorInstance.message ] : [ errorLog.description ],
 
       `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
 
-      ...isNotUndefined(errorLog.innerError) ?
-          [
-
-            `\n\n${ Logger.localization.innerError }:` +
-              `\n${ stringifyAndFormatArbitraryValue(errorLog.innerError) }` +
-
-              /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(errorLog.innerError)`,
-              *    but it is runtime dependent because the `stack` property is non-standard. */
-              `${ 
-                errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack) ? 
-                  `\n${ errorLog.innerError.stack }` : 
-                  ""
-              }`
-          ] :
-          [ ],
+      ...isNotUndefined(stringifiedInnerError) ?
+          [ `\n\n${ Logger.localization.innerError }:\n${ stringifiedInnerError }` ] : [ ],
 
       ...isNotUndefined(errorLog.additionalData) ?
           [
@@ -124,8 +130,10 @@ abstract class Logger {
             [
               `\n\n${ Logger.localization.caughtError }:` +
                 `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }` +
-                `${ errorLog.caughtError instanceof Error && isNonEmptyString(errorLog.caughtError.stack) ? 
-                    `\n${ errorLog.caughtError.stack }` : "" }`
+                (
+                  errorLog.caughtError instanceof Error && isNonEmptyString(errorLog.caughtError.stack) ?
+                      `\n${ errorLog.caughtError.stack }` : ""
+                )
             ] :
             [ ],
 

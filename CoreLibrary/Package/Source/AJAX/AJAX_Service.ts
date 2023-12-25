@@ -1,3 +1,8 @@
+/* eslint-disable id-denylist --
+ * The "id-denylist" is not unsolicited for object properties, but the there is not API allowing to configure this rule
+ *   selectively.
+ * https://github.com/eslint/eslint/issues/15504 */
+
 import type { PossiblyReadonlyParsedJSON, ReadonlyParsedJSON, ReadonlyParsedJSON_Object } from "../Types/ParsedJSON";
 import HTTP_Methods from "../ConstantsAndEnumerations/HTTP/HTTP_Methods";
 
@@ -8,6 +13,7 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 import DataSubmittingFailedError from "../Errors/DataSubmittingFailed/DataSubmittingFailedError";
 import DataRetrievingFailedError from "../Errors/DataRetrievingFailed/DataRetrievingFailedError";
 import InvalidExternalDataError from "../Errors/InvalidExternalData/InvalidExternalDataError";
+import InvalidConfigError from "../Errors/InvalidConfig/InvalidConfigError";
 
 import removeSpecificCharacterFromCertainPosition from "../Strings/removeSpecificCharacterFromCertainPosition";
 import insertSubstring from "../Strings/insertSubstring";
@@ -61,49 +67,56 @@ abstract class AJAX_Service {
   /* ━━━ Facade methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataRetrieving.CompoundParameter
-  ): Promise<RawValidResponseData> {
+  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
     return AJAX_Service.getExpectedToBeInitializedImplementation().retrieveData(compoundParameter);
   }
 
 
   public static async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<RawValidResponseData>;
+  ): Promise<AJAX_Service.Response<RawValidResponseData>>;
 
   public static async submitData(
     compoundParameter: AJAX_Service.DataSubmitting.WithoutExpectedResponseData.CompoundParameter
-  ): Promise<void>;
+  ): Promise<AJAX_Service.Response>;
 
   public static async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<RawValidResponseData> {
-    return AJAX_Service.getExpectedToBeInitializedImplementation().submitData<RawValidResponseData>(compoundParameter);
+  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
+    return AJAX_Service.getExpectedToBeInitializedImplementation().submitData(compoundParameter);
   }
 
 
   /* ━━━ Protected abstract methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  protected abstract retrieveRawData(
+  protected abstract retrieveResponseWithRawData(
     compoundParameter: AJAX_Service.RawDataRetrieving.CompoundParameter
-  ): Promise<unknown>;
+  ): Promise<AJAX_Service.ResponseWithRawData>;
 
   protected abstract submitAndGetRawResponseDataIfAvailable(
     compoundParameter: AJAX_Service.GeneralizedDataSubmitting.CompoundParameter
-  ): Promise<unknown>;
+  ): Promise<AJAX_Service.ResponseWithRawData>;
 
 
   /* ━━━ Public instance methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Data retrieving ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /** @throws InvalidConfigError */
+  /** @throws DataRetrievingFailedError */
+  /** @throws HTTP_ResponseBodyParsingFailureError */
+  /** @throws InvalidExternalDataError */
   public async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataRetrieving.CompoundParameter
-  ): Promise<RawValidResponseData> {
+  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
 
-    let responseRawData: unknown;
+    let responseWithRawData: AJAX_Service.ResponseWithRawData;
 
     try {
 
-      responseRawData = await this.retrieveRawData({
+      responseWithRawData = await this.retrieveResponseWithRawData({
         URI: this.normalizeURI(compoundParameter),
         HTTP_Method: compoundParameter.HTTP_Method ?? HTTP_Methods.get,
-        HTTP_Headers: compoundParameter.HTTP_Headers ?? {}
+        HTTP_Headers: compoundParameter.HTTP_Headers ?? {},
+        mustIncludeCookiesAndAuthenticationHeadersToRequest:
+            compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest === true
       });
 
     } catch (error: unknown) {
@@ -113,56 +126,82 @@ abstract class AJAX_Service {
           customMessage: "The retrieving data by AJAX has failed."
         }),
         title: DataRetrievingFailedError.localization.defaultTitle,
-        occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
+        occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)",
+        innerError: error
       });
 
     }
 
-    const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
-        RawObjectDataProcessor.process(responseRawData, compoundParameter.validResponseDataSpecification);
 
-    if (responseRawDataProcessingResult.rawDataIsInvalid) {
-      Logger.throwErrorAndLog({
-        errorInstance: new InvalidExternalDataError({
-          mentionToExpectedData: "HTTP_ResponseData",
-          messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
-            responseRawDataProcessingResult.validationErrorsMessages
-          )
-        }),
-        title: InvalidExternalDataError.localization.defaultTitle,
-        occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
-      });
+    if (responseWithRawData.isSuccessful) {
+
+      const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
+          RawObjectDataProcessor.process(responseWithRawData.data, compoundParameter.validResponseDataSpecification);
+
+      if (responseRawDataProcessingResult.rawDataIsInvalid) {
+        Logger.throwErrorAndLog({
+          errorInstance: new InvalidExternalDataError({
+            mentionToExpectedData: "HTTP_ResponseData",
+            messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
+                responseRawDataProcessingResult.validationErrorsMessages
+            )
+          }),
+          title: InvalidExternalDataError.localization.defaultTitle,
+          occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
+        });
+      }
+
+      return {
+        isSuccessful: true,
+        data: responseRawDataProcessingResult.processedData,
+        HTTP_Headers: responseWithRawData.HTTP_Headers,
+        HTTP_Status: responseWithRawData.HTTP_Status
+      };
+
     }
 
 
-    return responseRawDataProcessingResult.processedData;
+    return {
+      isSuccessful: false,
+      data: responseWithRawData.data,
+      HTTP_Headers: responseWithRawData.HTTP_Headers,
+      HTTP_Status: responseWithRawData.HTTP_Status
+    };
 
   }
 
 
+  /* ─── Data submitting ──────────────────────────────────────────────────────────────────────────────────────────── */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<RawValidResponseData>;
+  ): Promise<AJAX_Service.Response<RawValidResponseData>>;
 
   public async submitData(
     compoundParameter: AJAX_Service.DataSubmitting.WithoutExpectedResponseData.CompoundParameter
-  ): Promise<void>;
+  ): Promise<AJAX_Service.Response>;
 
+  /** @throws InvalidConfigError */
+  /** @throws DataSubmittingFailedError */
+  /** @throws HTTP_ResponseBodyParsingFailureError */
+  /** @throws InvalidExternalDataError */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
     /* eslint-disable-next-line @typescript-eslint/no-invalid-void-type --
     * Depending on the overload, the promise payload could be or not to be. */
-  ): Promise<RawValidResponseData | void> {
+  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
 
-    let responseRawData: unknown;
+    let responseWithRawData: AJAX_Service.ResponseWithRawData;
 
     try {
 
-      responseRawData = await this.submitAndGetRawResponseDataIfAvailable({
+      responseWithRawData = await this.submitAndGetRawResponseDataIfAvailable({
         URI: this.normalizeURI(compoundParameter),
         HTTP_Method: compoundParameter.HTTP_Method ?? HTTP_Methods.get,
         HTTP_Headers: compoundParameter.HTTP_Headers ?? {},
-        requestData: compoundParameter.requestData
+        requestData: compoundParameter.requestData,
+        mustExpectResponseData: isNotUndefined(compoundParameter.validResponseDataSpecification),
+        mustIncludeCookiesAndAuthenticationHeadersToRequest:
+            compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest === true
       });
 
     } catch (error: unknown) {
@@ -171,41 +210,74 @@ abstract class AJAX_Service {
         errorInstance: new DataSubmittingFailedError({
           customMessage: "The submitting of the data by AJAX has failed."
         }),
-        title: DataRetrievingFailedError.localization.defaultTitle,
-        occurrenceLocation: "AJAX_Service.submitData(compoundParameter)"
+        title: DataSubmittingFailedError.localization.defaultTitle,
+        occurrenceLocation: "AJAX_Service.submitData(compoundParameter)",
+        innerError: error
       });
 
     }
 
 
     if (isUndefined(compoundParameter.validResponseDataSpecification)) {
-      return;
+      return responseWithRawData.isSuccessful ?
+          {
+            isSuccessful: true,
+            /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+            * TypeScript could not detect that when `compoundParameter.validResponseDataSpecification` is undefined,
+            *   the `RawValidResponseData` is `PossiblyReadonlyParsedJSON` without additional constraints. */
+            data: responseWithRawData.data as RawValidResponseData,
+            HTTP_Headers: responseWithRawData.HTTP_Headers,
+            HTTP_Status: responseWithRawData.HTTP_Status
+          } :
+          {
+            isSuccessful: false,
+            data: responseWithRawData.data,
+            HTTP_Headers: responseWithRawData.HTTP_Headers,
+            HTTP_Status: responseWithRawData.HTTP_Status
+          };
     }
 
 
-    const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
-        RawObjectDataProcessor.process(responseRawData, compoundParameter.validResponseDataSpecification);
+    if (responseWithRawData.isSuccessful) {
 
-    if (responseRawDataProcessingResult.rawDataIsInvalid) {
-      Logger.throwErrorAndLog({
-        errorInstance: new InvalidExternalDataError({
-          mentionToExpectedData: "HTTP_ResponseData",
-          messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
-            responseRawDataProcessingResult.validationErrorsMessages
-          )
-        }),
-        title: InvalidExternalDataError.localization.defaultTitle,
-        occurrenceLocation: "AJAX_Service.submitData(compoundParameter)"
-      });
+      const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
+          RawObjectDataProcessor.process(responseWithRawData.data, compoundParameter.validResponseDataSpecification);
+
+      if (responseRawDataProcessingResult.rawDataIsInvalid) {
+        Logger.throwErrorAndLog({
+          errorInstance: new InvalidExternalDataError({
+            mentionToExpectedData: "HTTP_ResponseData",
+            messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
+                responseRawDataProcessingResult.validationErrorsMessages
+            )
+          }),
+          title: InvalidExternalDataError.localization.defaultTitle,
+          occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
+        });
+      }
+
+      return {
+        isSuccessful: true,
+        data: responseRawDataProcessingResult.processedData,
+        HTTP_Headers: responseWithRawData.HTTP_Headers,
+        HTTP_Status: responseWithRawData.HTTP_Status
+      };
+
     }
 
 
-    return responseRawDataProcessingResult.processedData;
+    return {
+      isSuccessful: false,
+      data: responseWithRawData.data,
+      HTTP_Headers: responseWithRawData.HTTP_Headers,
+      HTTP_Status: responseWithRawData.HTTP_Status
+    };
 
   }
 
 
   /* ━━━ Routines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /** @throws InvalidConfigError */
   protected normalizeURI(
     compoundParameter: AJAX_Service.URI_PathRawDefinition & AJAX_Service.URI_QueryParametersDefinition
   ): string {
@@ -221,17 +293,16 @@ abstract class AJAX_Service {
           AJAX_Service.URI_QueryParametersSerializer(URI_QueryParameters);
     }
 
-    return `${ targetURI_PartUntilPath }` +
-        `${
-          insertSubstring(
-            serializedQueryParameters,
-            { modifier: (nonEmptySerializedQueryParameters: string): string => `?${ nonEmptySerializedQueryParameters }` }
-          )
-        }`;
+    return targetURI_PartUntilPath +
+        insertSubstring(
+          serializedQueryParameters,
+          { modifier: (nonEmptySerializedQueryParameters: string): string => `?${ nonEmptySerializedQueryParameters }` }
+        );
 
   }
 
-  /* eslint-disable-next-line class-methods-use-this --
+  /** @throws InvalidConfigError */
+  /* eslint-disable-next-line @typescript-eslint/class-methods-use-this --
   * This method do not need `this` but good to be here from the viewpoint of logic sequence. */
   protected normalizeURI_UntilPath(URI_PathRawDefinition: AJAX_Service.URI_PathRawDefinition): string {
 
@@ -239,12 +310,12 @@ abstract class AJAX_Service {
 
       if (isNull(AJAX_Service.API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH)) {
         Logger.throwErrorAndLog({
-          errorInstance: new DataSubmittingFailedError({
+          errorInstance: new InvalidConfigError({
             customMessage:
                 "The \"alternatingURI_PathPart\" has been specified while the the static field " +
                   "\"API_SERVER_URI_CONSTANT_PART\" has not been set."
           }),
-          title: DataSubmittingFailedError.localization.defaultTitle,
+          title: InvalidConfigError.localization.defaultTitle,
           occurrenceLocation: "AJAX_Service.normalizeURI_UntilPath(URI_PathRawDefinition)"
         });
       }
@@ -252,13 +323,11 @@ abstract class AJAX_Service {
 
       return encodeURI(
         `${ AJAX_Service.API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH }/` +
-        `${
-          removeSpecificCharacterFromCertainPosition({
-            targetString: URI_PathRawDefinition.alternatingURI_PathPart,
-            targetCharacter: "/",
-            fromFirstPosition: true
-          })
-        }`
+        removeSpecificCharacterFromCertainPosition({
+          targetString: URI_PathRawDefinition.alternatingURI_PathPart,
+          targetCharacter: "/",
+          fromFirstPosition: true
+        })
       );
 
     }
@@ -323,6 +392,31 @@ namespace AJAX_Service {
   export type HTTP_Headers = Readonly<{ [headerName: string]: string; }>;
 
 
+  export type ResponseWithRawData = Readonly<{
+    isSuccessful: boolean;
+    data: PossiblyReadonlyParsedJSON;
+    HTTP_Status: number;
+    HTTP_Headers: HTTP_Headers;
+  }>;
+
+  export type Response<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
+    Readonly<
+      (
+        {
+          isSuccessful: true;
+          data: ResponseData;
+        } |
+        {
+          isSuccessful: false;
+          data: PossiblyReadonlyParsedJSON;
+        }
+      ) &
+      {
+        HTTP_Status: number;
+        HTTP_Headers: HTTP_Headers;
+      }
+    >;
+
   export namespace DataRetrieving {
     export type CompoundParameter =
         URI_PathRawDefinition &
@@ -332,6 +426,7 @@ namespace AJAX_Service {
             HTTP_Method?: HTTP_Methods;
             HTTP_Headers?: HTTP_Headers;
             validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
+            mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
           }
         >;
   }
@@ -348,6 +443,7 @@ namespace AJAX_Service {
             HTTP_Headers?: HTTP_Headers;
             requestData: Readonly<ReadonlyParsedJSON_Object>;
             validResponseDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
+            mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
           };
 
     }
@@ -361,6 +457,7 @@ namespace AJAX_Service {
             HTTP_Method?: HTTP_Methods;
             HTTP_Headers?: HTTP_Headers;
             requestData: Readonly<ReadonlyParsedJSON_Object>;
+            mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
           };
 
     }
@@ -373,6 +470,7 @@ namespace AJAX_Service {
       URI: string;
       HTTP_Headers: HTTP_Headers;
       HTTP_Method: HTTP_Methods;
+      mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
     }>;
 
   }
@@ -384,6 +482,8 @@ namespace AJAX_Service {
       HTTP_Headers: HTTP_Headers;
       HTTP_Method: HTTP_Methods;
       requestData: ReadonlyParsedJSON;
+      mustExpectResponseData: boolean;
+      mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
     }>;
 
   }

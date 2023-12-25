@@ -9,14 +9,14 @@ export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElement
 export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1: true; }>
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
 ): number;
 
 
 export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: Readonly<{ throwErrorIfElementNotFoundOrMoreThan1?: true; }> = {}
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple?: true; }> = {}
 ): number | null {
 
   const indexesOfAllElementsSatisfiesThePredicate: Array<number> = [];
@@ -29,7 +29,7 @@ export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElement
 
   if (indexesOfAllElementsSatisfiesThePredicate.length === 0) {
 
-    if (options.throwErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (options.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError("Array element satisfies to specified predicate not found."),
         title: UnexpectedEventError.localization.defaultTitle,
@@ -46,7 +46,7 @@ export default function getIndexOfArrayElementSatisfiesThePredicateIfSuchElement
 
   if (indexesOfAllElementsSatisfiesThePredicate.length > 1) {
 
-    if (options.throwErrorIfElementNotFoundOrMoreThan1 === true) {
+    if (options.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple === true) {
       Logger.throwErrorAndLog({
         errorInstance: new UnexpectedEventError(
           "There are multiple elements satisfies the predicate. As it follows from the function name, two or more " +

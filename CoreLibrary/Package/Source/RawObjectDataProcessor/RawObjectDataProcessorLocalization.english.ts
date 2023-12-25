@@ -5,7 +5,7 @@ import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbit
 import insertSubstring from "../Strings/insertSubstring";
 
 
-const RawObjectDataProcessorLocalization__English: Localization = {
+const rawObjectDataProcessorLocalization__english: Localization = {
 
   errorMessageBasicTemplate(
     {
@@ -184,7 +184,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   },
 
   buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-    requiredKeysAlternatives: Array<string>
+    requiredKeysAlternatives: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Required keys alternatives are missing",
@@ -194,7 +194,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
   },
 
   buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData(
-      foundDisallowedKeys: Array<string>
+    foundDisallowedKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "Disallowed key(s) found in associative array",
@@ -243,6 +243,7 @@ const RawObjectDataProcessorLocalization__English: Localization = {
         return "associative array of uniform type values";
 
       case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "multiple alternatives allowed";
+
     }
   },
 
@@ -272,9 +273,15 @@ const RawObjectDataProcessorLocalization__English: Localization = {
     };
   },
 
-  valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "Disallowed alternative of value",
-    specificMessagePart: "This value is not among allowed alternatives."
+  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
+    allowedAlternatives: ReadonlyArray<string>
+  ): Localization.TextDataForErrorMessagesBuilding {
+    return {
+      title: "Disallowed alternative of value",
+      specificMessagePart:
+          "This value is not among following allowed alternatives.\n" +
+          `${ allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n") }`
+    };
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -374,4 +381,4 @@ const RawObjectDataProcessorLocalization__English: Localization = {
 };
 
 
-export default RawObjectDataProcessorLocalization__English;
+export default rawObjectDataProcessorLocalization__english;

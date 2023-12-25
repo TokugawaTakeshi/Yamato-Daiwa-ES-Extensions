@@ -51,7 +51,7 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
           getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (product: Product): boolean => product.ID === 3,
-            { throwErrorIfElementNotFoundOrMoreThan1: true }
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
           );
         },
         UnexpectedEventError
@@ -64,7 +64,7 @@ describe("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
           getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
               sample,
               (product: Product): boolean => product.price > 50,
-              { throwErrorIfElementNotFoundOrMoreThan1: true }
+              { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
           );
         },
         UnexpectedEventError

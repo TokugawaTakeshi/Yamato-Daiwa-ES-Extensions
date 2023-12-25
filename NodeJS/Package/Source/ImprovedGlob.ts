@@ -290,7 +290,7 @@ export default class ImprovedGlob {
     return targetIncludingGlobSelector.startsWith("!") ? targetIncludingGlobSelector : `!${ targetIncludingGlobSelector }`;
   }
 
-  public static includingGlobSelectorToExcludingOnes(
+  public static includingGlobSelectorsToExcludingOnes(
     targetIncludingGlobSelectors: ReadonlyArray<string>
   ): Array<string> {
     return targetIncludingGlobSelectors.map(

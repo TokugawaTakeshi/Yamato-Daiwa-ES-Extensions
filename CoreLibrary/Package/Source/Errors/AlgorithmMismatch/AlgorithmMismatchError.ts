@@ -14,6 +14,7 @@ class AlgorithmMismatchError extends Error {
 
     this.name = AlgorithmMismatchError.NAME;
     this.message = message;
+
   }
 
 }

@@ -1,6 +1,6 @@
 /*!
  * @yamato-daiwa/es-extensions v1.7
- * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
 
@@ -14,7 +14,7 @@ export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryP
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addElementsToArray } from "./Arrays/addElementsToArray";
-export { default as createArrayOfNatualNumbers } from "./Arrays/createArrayOfNatualNumbers";
+export { default as createArrayOfNaturalNumbers } from "./Arrays/createArrayOfNaturalNumbers";
 export { default as cropArray } from "./Arrays/cropArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
@@ -23,6 +23,8 @@ export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
+export { default as moveArrayElementTo1Position } from "./Arrays/moveArrayElementTo1Position";
+export { default as readonlyArrayToMutableOne } from "./Arrays/readonlyArrayToMutableOne";
 export { default as removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from
     "./Arrays/removeArrayElementsByIndexes";
 export { default as removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from
@@ -34,17 +36,6 @@ export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArr
 
 
 /* ━━━ Constants and enumerations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* ─── Date & Time ────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING } from
-    "./ConstantsAndEnumerations/DateTime/CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING";
-export { default as DaysOfWeek } from "./ConstantsAndEnumerations/DateTime/DaysOfWeek";
-export { default as HOURS_PER_STELLAR_DAY } from "./ConstantsAndEnumerations/DateTime/HOURS_PER_STELLAR_DAY";
-export { default as MAXIMAL_DAYS_AT_MONTH } from "./ConstantsAndEnumerations/DateTime/MAXIMAL_DAYS_IN_MONTH";
-export { default as MINUTES_PER_HOUR } from "./ConstantsAndEnumerations/DateTime/MINUTES_PER_HOUR";
-export { default as MONTHS_PER_YEAR } from "./ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
-export { default as MonthsNames } from "./ConstantsAndEnumerations/DateTime/MonthsNames";
-export { default as SECONDS_PER_MINUTE } from "./ConstantsAndEnumerations/DateTime/SECONDS_PER_MINUTE";
-
 /* ─── HTTP ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP/HTTP_Methods";
 export {
@@ -58,6 +49,27 @@ export {
 
 /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
+
+/* ─── Re-exporting from "fundamental-constants" ──────────────────────────────────────────────────────────────────── */
+export {
+  HTTP_DEFAULT_PORT,
+  HTTPS_DEFAULT_PORT,
+  NETWORK_PORT_MAXIMAL_VALUE,
+  NETWORK_PORT_MINIMAL_VALUE,
+  DAYS_COUNT_IN_WEEK,
+  DaysOfWeekNames,
+  HOURS_COUNT_IN_STELLAR_DAY,
+  MAXIMAL_DAYS_IN_MONTH,
+  MINUTES_COUNT_IN_HOUR,
+  MONTHS_COUNT_IN_YEAR,
+  MonthsNames,
+  SECONDS_COUNT_IN_MINUTE,
+  CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING,
+  CHARACTERS_COUNT_IN_FULL_ISO8601_STRING,
+  EMAIL_ADDRESS_VALID_PATTERN,
+  MAXIMAL_CHARACTERS_COUNT_OF_EMAIL_ADDRESS,
+  MINIMAL_CHARACTERS_COUNT_OF_EMAIL_ADDRESS
+} from "fundamental-constants";
 
 
 /* ━━━ Data mocking ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -122,6 +134,10 @@ export { default as fileReadingFailedErrorLocalization__english } from
 export { default as FileWritingFailedError } from "./Errors/FileWritingFailed/FileWritingFailedError";
 export { default as fileWritingFailedErrorLocalization__english } from
     "./Errors/FileWritingFailed/FileWritingFailedErrorLocalization.english";
+export { default as HTTP_ResponseBodyParsingFailureError } from
+    "./Errors/HTTP/ResponseBodyParsingFailure/HTTP_ResponseBodyParsingFailureError";
+export { default as HTTP_ResponseBodyParsingFailureErrorLocalization__english } from
+    "./Errors/HTTP/ResponseBodyParsingFailure/HTTP_ResponseBodyParsingFailureErrorLocalization.english";
 export { default as ImproperUsageError } from "./Errors/ImproperUsage/ImproperUsageError";
 export { default as improperUsageErrorLocalization__english } from
     "./Errors/ImproperUsage/ImproperUsageErrorLocalization.english";
@@ -181,13 +197,15 @@ export { default as loggerLocalization__english } from "./Logging/LoggerLocaliza
 export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
-
+export { removeEntriesFromMap, type RemovingEntriesFromMapOperation } from "./Maps/removeEntriesFromMap";
 
 /* ━━━ Numbers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
 export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
     "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
+export { default as limitMaximalValue } from "./Numbers/limitMaximalValue";
+export { default as limitMinimalValue } from "./Numbers/limitMinimalValue";
 export { default as roundDownToSpecificIntegerPlaceValue } from "./Numbers/roundDownToSpecificIntegerPlaceValue";
 export { default as roundToSpecificNearestIntegerPlaceValue } from "./Numbers/roundToSpecificNearestIntegerPlaceValue";
 export { default as roundToSpecifiedNearestDecimalPlaceValue } from "./Numbers/roundToSpecifiedNearestDecimalPlaceValue";
@@ -231,8 +249,8 @@ export { default as removeRandomArrayElement } from "./RandomValuesGenerators/re
 
 /* ━━━ Raw object data processor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as RawObjectDataProcessor } from "./RawObjectDataProcessor/RawObjectDataProcessor";
-export { default as RawObjectDataProcessorLocalization__English } from
-    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization__English";
+export { default as rawObjectDataProcessorLocalization__english } from
+    "./RawObjectDataProcessor/RawObjectDataProcessorLocalization.english";
 export { default as convertPotentialStringToNumberIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToNumberIfPossible";
 export { default as convertPotentialStringToIntegerIfPossible } from
@@ -257,6 +275,11 @@ export { default as stringifiedDigits } from "./Strings/CharactersAssets/stringi
 export { default as uppercaseLatinCharacters } from "./Strings/CharactersAssets/uppercaseLatinCharacters";
 
 
+/* ─── Line separators ────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as getLineSeparatorType } from "./Strings/LineSeparators/getLineSeparatorType";
+export { default as LineSeparators } from "./Strings/LineSeparators/LineSeparators";
+
+
 /* ─── Regular expressions ────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getMatchingWithFirstRegularExpressionCapturingGroup } from
     "./Strings/RegularExpressions/getMatchingWithFirstRegularExpressionCapturingGroup";
@@ -274,24 +297,31 @@ export {
 /* --- Files and directories ---------------------------------------------------------------------------------------- */
 export { default as appendLastFileNameExtension } from "./Strings/URI/FilesAndDirectories/appendLastFileNameExtension";
 export { default as extractAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/extractAllFileNameExtensions";
+export { default as extractFileNameWithAllExtensionsFromPath } from
+    "./Strings/URI/FilesAndDirectories/extractFileNameWithAllExtensionsFromPath";
+export { default as extractFileNameWithoutAnyExtensions } from
+    "./Strings/URI/FilesAndDirectories/extractFileNameWithoutAnyExtensions";
+export { default as extractFileNameWithoutLastExtension } from
+    "./Strings/URI/FilesAndDirectories/extractFileNameWithoutLastExtension";
 export { default as extractLastExtensionOfFileName } from "./Strings/URI/FilesAndDirectories/extractLastExtensionOfFileName";
 export { default as removeAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/removeAllFileNameExtensions";
 
 /* --- Rest --------------------------------------------------------------------------------------------------------- */
 export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
-export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
-export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
-export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/removeSpecificSegmentsFromURI_Path";
 export { default as explodeURI_PathToSegments } from "./Strings/URI/explodeURI_PathToSegments";
+export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
+export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
+export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/removeSpecificSegmentsFromURI_Path";
+export { default as replaceLastURI_PathSegment } from "./Strings/URI/replaceLastURI_PathSegment";
 
 /* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
-export { default as areStringifiedDigitsOnly } from "./Strings/areStringifiedDigitsOnly";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as cropString } from "./Strings/cropString";
 export { default as EmailAddress } from "./Strings/EmailAddress";
 export { default as explodeCasedPhraseToWords } from "./Strings/explodeCasedPhraseToWords";
+export { default as explodeStringToLines } from "./Strings/explodeStringToLines";
 export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEnglishAbbreviatedOrdinalNumber";
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
@@ -310,13 +340,14 @@ export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings
 export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
 export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
+export { default as surroundLabelByOrnament } from "./Strings/surroundLabelByOrnament";
 export { default as toLowerCamelCase } from "./Strings/toLowerCamelCase";
 export { default as toScreamingSnakeCase } from "./Strings/toScreamingSnakeCase";
 export { default as toUpperCamelCase } from "./Strings/toUpperCamelCase";
 export { default as trimSpaces } from "./Strings/trimSpaces";
 
 
-/* ━━━ Type guards ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━━━ Type Guards ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── Arrays ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
 export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
@@ -348,7 +379,12 @@ export { default as isNonEmptyArbitraryObject } from "./TypeGuards/Objects/isNon
 export { default as isNonEmptyObject } from "./TypeGuards/Objects/isNonEmptyObject";
 export { default as isNonNullObject } from "./TypeGuards/Objects/isNonNullObject";
 
+/* ─── ParsedJSON ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as isPossiblyReadonlyParsedJSON } from "./TypeGuards/ParsedJSON/isPossiblyReadonlyParsedJSON";
+export { default as isPossiblyReadonlyParsedJSON_Object } from "./TypeGuards/ParsedJSON/isPossiblyReadonlyParsedJSON_Object";
+
 /* ─── Strings ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as areStringifiedDigitsOnly } from "./TypeGuards/Strings/areStringifiedDigitsOnly";
 export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
 export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
 export { default as isString } from "./TypeGuards/Strings/isString";
