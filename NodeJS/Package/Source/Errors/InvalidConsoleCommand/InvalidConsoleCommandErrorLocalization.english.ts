@@ -1,16 +1,12 @@
 import type InvalidConsoleCommandError from "./InvalidConsoleCommandError";
-import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
-const InvalidConsoleCommandErrorLocalization__English: InvalidConsoleCommandError.Localization = {
+const invalidConsoleCommandErrorLocalization__english: InvalidConsoleCommandError.Localization = {
   defaultTitle: "Invalid console command",
-  generateDescription:
-    (namedParameters: InvalidConsoleCommandError.Localization.DescriptionTemplateNamedParameters): string =>
-        `Invalid console command for the application '${ namedParameters.applicationName }'.` +
-        `${ insertSubstring(namedParameters.messageSpecificPart, {
-          modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-        }) }`
+  generateDescriptionCommonPart:
+      ({ applicationName }: InvalidConsoleCommandError.Localization.CommonDescription.TemplateVariables): string =>
+          `Invalid console command for the application "${ applicationName }".`
 };
 
 
-export default InvalidConsoleCommandErrorLocalization__English;
+export default invalidConsoleCommandErrorLocalization__english;

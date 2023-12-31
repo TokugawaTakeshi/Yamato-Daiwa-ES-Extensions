@@ -1,6 +1,6 @@
 /*!
  * @yamato-daiwa/es-extensions-localization-russian v1.6
- * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * (c) 2023 Yamato Daiwa Co., Ltd
  * Released under the MIT License.
  */
 
@@ -8,10 +8,6 @@
 /* === Константы и перечисления ===================================================================================== */
 export { default as RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/RussianDaysOfWeek";
 export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
-
-
-/* === Мокинг данных ================================================================================================ */
-export { default as MockGatewayHelperLocalization__Russian } from "./DataMocking/MockGatewayHelperLocalization.russian";
 
 
 /* === Обработка внешних данных типа "объект" ======================================================================= */

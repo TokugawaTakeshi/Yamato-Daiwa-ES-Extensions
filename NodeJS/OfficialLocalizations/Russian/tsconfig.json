@@ -6,6 +6,7 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
 
     "strict": true,
     "noUnusedLocals": true,
@@ -19,4 +20,5 @@
   },
 
   "include": [ "Source/**/*" ]
+
 }

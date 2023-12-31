@@ -1,6 +1,6 @@
 /*!
  * @yamato-daiwa/es-extensions-localization-japanese v1.6
- * (c) 2021 Sole proprietorship "Yamato Daiwa" Takeshi Tokugawa
+ * (c) 2023 Yamato Daiwa Co., Ltd
  * Released under the MIT License.
  */
 
@@ -10,10 +10,6 @@ export { default as AbbreviatedJapaneseDaysOfWeek } from "./ConstantsAndEnumerat
 export { default as JapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/JapaneseDaysOfWeek";
 export { default as JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseTraditionalMonthsNames";
 export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";
-
-
-/* === データモキング ==================================================================================================== */
-export { default as MockGatewayHelperLocalization__Japanese } from "./DataMocking/MockGatewayHelperLocalization.japanese";
 
 
 /* === 生オブジェクト系データ処理 =========================================================================================== */

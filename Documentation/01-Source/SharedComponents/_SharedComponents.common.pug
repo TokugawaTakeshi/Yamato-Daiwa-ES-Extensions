@@ -1,0 +1,29 @@
+include ../../node_modules/@yamato-daiwa/frontend/Components.pug
+include ../../node_modules/@yamato-daiwa/frontend-documenting-kit/Components.pug
+include ../../node_modules/@yamato-daiwa/programming_documentation/Components.pug
+
+
+-
+
+  LanguageDropDownList__YDF_DK.initialize({
+    english: {
+      localizedName: "English",
+      SVG_FlagHTML_ID: "FLAG_OF_UNITED_KINGDOM--SVG_IMAGE"
+    },
+    japanese: {
+      localizedName: "日本語",
+      SVG_FlagHTML_ID: "FLAG_OF_JAPAN--SVG_IMAGE"
+    },
+    russian: {
+      localizedName: "Русский",
+      SVG_FlagHTML_ID: "RUSSIAN_FLAG--SVG_IMAGE"
+    }
+  });
+
+
+  Header__YDPD.
+      setLogoAndTitleTypeLinkURI(localizedRouting.top.$URI).
+      setLogoURI("@Shared/Icons/YDEE_Icon__White.svg").
+      setLibraryName("E(CMA)S(cript) extensions");
+
+  Footer__YDPD.setCopyright("© 2023 Yamato Daiwa Co., Ltd");

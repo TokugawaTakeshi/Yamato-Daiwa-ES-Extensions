@@ -3,8 +3,8 @@
 ## 導入
 
 **@yamato-daiwa/es-extensions-localization-japanese** は、**@yamato-daiwa/es-extensions（以下YDEE）** 
-にピア依存関係（[peer dependency](https://nodejs.org/en/blog/npm/peer-dependencies/)）を持つ日本語化ライブラリであり、
-マイナーバージョンまで一致している **YDEE** で利用可能だ。
+  にピア依存関係（[peer dependency](https://nodejs.org/en/blog/npm/peer-dependencies/)）を持つ日本語化ライブラリであり、
+  マイナーバージョンまで一致している **YDEE** で利用可能だ。
 
 例えばバージョン**1.5.0**は、**YDEE** のバージョン**1.5.0～1.5.?** で使えるが、バージョン**1.6.0以上**では使用不可。
 
