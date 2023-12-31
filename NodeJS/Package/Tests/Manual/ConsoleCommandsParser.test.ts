@@ -10,6 +10,7 @@ import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test --optionalStringOption sample
+ * ts-node Tests/Manual/ConsoleCommandsParser.test.ts help
  */
 namespace ApplicationConsoleLineInterface {
 
@@ -34,7 +35,7 @@ namespace ApplicationConsoleLineInterface {
 
   export type PackingOfBuildConsoleCommand = Readonly<{
     phrase: CommandPhrases.packingOfBuild;
-    enumerationLikeStringOption?: "FOO" | "BAR" | "BAZ";
+    enumerationLikeStringOption: "FOO" | "BAR" | "BAZ";
     numericOption?: number;
     limitedNumericOption?: number;
   }>;
@@ -81,7 +82,7 @@ namespace ApplicationConsoleLineInterface {
           enumerationLikeStringOption: {
             description: "Example enumeration like string option",
             type: ConsoleCommandsParser.ParametersTypes.string,
-            required: false,
+            defaultValue: "FOO",
             allowedAlternatives: [
               "FOO",
               "BAR",

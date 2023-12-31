@@ -105,9 +105,7 @@ block append SpecificContent
       maximalHeight__anyValidCSS_Value: "450px"
     })
 
-    +AdmonitionBlock--YDF({
-      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
-    }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       #[+Keyphrase--YDID В случае с #[+ImportantEntity--YDID @yamato-daiwa/es-extensions]], это
         #[+Keyword--YDID не]&nbsp;объём #[+Keyword--YDID выходного] #[+Term--YDID JavaScript-кода], на который увеличится
         объём выходных файлов после подключения данного #[+Term--YDID пакета] и сборки проекта.
@@ -145,10 +143,7 @@ block append SpecificContent
       |   #[+SecondaryEntity--YDID Webpack], то он обязан поддерживать функциональность, аналогичную
       |   #[+Term--YDID three shaking] у #[+Term--YDID Webpack].
 
-    +AdmonitionBlock--YDF({
-      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, бо&#x301;льшая часть
         #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
         (а не&nbsp;#[+Term--YDID классов], хотя #[+Term--YDID классы] тоже имеются).

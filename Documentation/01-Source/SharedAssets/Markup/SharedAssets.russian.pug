@@ -13,6 +13,17 @@ include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 -
 
   const localizedRouting = generateLocalizedRouting(routingRussianLocalization);
+  let generatePageTableOfContents;
+
+
+include ../../Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.russian.pug
+//include ../../Pages/NodeJS/ConsoleCommandsParser/TableOfContents/ConsoleCommandsParser.toc.russian.pug
+
+
+-
+
+  generatePageTableOfContents = null;
+
   RoutingEmulator.initialize(localizedRouting);
 
   const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksRussianLocalization);

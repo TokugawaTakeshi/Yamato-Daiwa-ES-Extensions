@@ -18,24 +18,26 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     type: "Type",
 
-    isRequired: "Is required",
+    isRequired: "Is Required",
+
+    defaultValue: "Default Value",
 
     yes: "Yes",
 
     no: "No",
 
-    allowedAlternatives: "Allowed alternatives",
+    allowedAlternatives: "Allowed Alternatives",
 
     numbersSet: {
-      key: "Numbers set",
+      key: "Numbers Set",
       generateValue: RawObjectDataProcessorLocalization__English.numbersSet
     },
 
-    minimalValue: "Minimal value",
+    minimalValue: "Minimal Value",
 
-    maximalValue: "Maximal value",
+    maximalValue: "Maximal Value",
 
-    objectTypeValuePropertiesSpecification: "Properties specification"
+    objectTypeValuePropertiesSpecification: "Properties Specification"
 
   },
 

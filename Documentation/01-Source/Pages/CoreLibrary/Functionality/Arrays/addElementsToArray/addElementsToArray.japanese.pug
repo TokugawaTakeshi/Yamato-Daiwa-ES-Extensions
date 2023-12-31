@@ -154,7 +154,7 @@ block append SpecificContent
 
     h2.Article-Heading2 例
 
-    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       当ページの一部分のみを選択して読んでいる方が多いので、下記には重要な部分が繰り返されている。
 
 
@@ -219,8 +219,8 @@ block append SpecificContent
         |   と成る。
 
       +AdmonitionBlock--YDF({
-        decoration: AdmonitionBlock__YDF.DecorativeVariations.warning,
-        hasPrependedSVG_Icon: true
+        decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
+        SVG_Icon: true
       }).
         此の使い方だと、#[+Keyword--YDID 元の]#[+Term--YDID 配列]（#[+ImportantEntity__Code--YDID targetArray]）が変更される為、
           #[+ImportantEntity__Code--YDID ReadonlyArray]#[+Term--YDID 型]が許可#[+Keyword--YDID されない]。
@@ -772,8 +772,8 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
 
 
-    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate",
+    +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate"
     })
 
       ol.Article-OrderedList

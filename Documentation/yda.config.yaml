@@ -24,6 +24,7 @@ projectBuilding:
         partialsRecognition:
           excludeFilesWithPrefixes: "_"
           excludeSubdirectoriesWithPrefixes: "_"
+          excludeSubdirectoriesWithNames: [ TableOfContents ]
 
         buildingModeDependent:
           LOCAL_DEVELOPMENT:
@@ -105,28 +106,36 @@ projectBuilding:
       CommonStyles:
         sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-Common.css
         buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
-          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild/styles }
+          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
+          PRODUCTION:
+            outputDirectoryRelativePath: 03-ProductionBuild/styles
+            revisioning: { enable: true }
 
       LayoutsStyles:
-        sourceDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
+        sourceTopDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
         fileNameLastExtensions: [ "css" ]
         buildingModeDependent:
           LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles/layouts }
-          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild/styles/layouts }
+          PRODUCTION:
+            outputTopDirectoryRelativePath: 03-ProductionBuild/styles/layouts
+            outputDirectoryPathTransformations: { segmentsCountRelativeToGroupTopDirectoryWhichMustBeRemoved: 1 }
+            revisioning: { enable: true }
 
       PreMadesStyles:
         sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-PreMades.css
         buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
+          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
           PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild/styles
+            outputDirectoryRelativePath: 03-ProductionBuild/styles
+            revisioning: { enable: true }
 
       CommonLogic:
         sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/LogicDistributable/YDPD-Common.js
         buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild }
-          PRODUCTION: { outputTopDirectoryRelativePath: 03-ProductionBuild }
+          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild }
+          PRODUCTION:
+            outputDirectoryRelativePath: 03-ProductionBuild
+            revisioning: { enable: true }
 
 
   # ━━━ Development server ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

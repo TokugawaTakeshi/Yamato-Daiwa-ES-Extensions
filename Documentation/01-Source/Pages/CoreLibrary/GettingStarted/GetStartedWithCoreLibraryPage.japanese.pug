@@ -99,10 +99,7 @@ block append SpecificContent
       maximalHeight__anyValidCSS_Value: "450px"
     })
 
-    +AdmonitionBlock--YDF({
-      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       其れは、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の導入に依ってプロジェクトの構成後アプリケーションに加わる
         #[+Keyword--YDID 出力]#[+Term--YDID JavaScriptコード]の容量では#[+Keyword--YDID ない]。
 
@@ -129,10 +126,7 @@ block append SpecificContent
       #[+ImportantEntity--YDID Webpack]と競合する#[+Term--YDID プロジェクト構成手段]を使っている場合、此の手段は似た様な未使用機能の除外に
         対応しなければいけない。
 
-    +AdmonitionBlock--YDF({
-      decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       ライブラリの未使用機能を可能な限り多く除外する為に、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の多くの機能は
         #[+Term--YDID クラス]では#[+Keyword--YDID なく]#[+Term--YDID 関数]で実装された（#[+Term--YDID クラス]の機能も少し有る）。
       尚#[+Term--YDID 関数]は、他の#[+Term--YDID 関数]を使っている場合に此の#[+Term--YDID 推移依存性]も構成に入るが、それでも実質的な最適化は入る。

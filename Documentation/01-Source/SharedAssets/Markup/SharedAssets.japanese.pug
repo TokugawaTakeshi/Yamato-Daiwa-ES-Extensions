@@ -13,6 +13,17 @@ include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 -
 
   const localizedRouting = generateLocalizedRouting(routingJapaneseLocalization);
+  let generatePageTableOfContents;
+
+
+include ../../Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.japanese.pug
+//include ../../Pages/NodeJS/ConsoleCommandsParser/TableOfContents/ConsoleCommandsParser.toc.japanese.pug
+
+
+-
+
+  generatePageTableOfContents = null;
+
   RoutingEmulator.initialize(localizedRouting);
 
   const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksJapaneseLocalization);

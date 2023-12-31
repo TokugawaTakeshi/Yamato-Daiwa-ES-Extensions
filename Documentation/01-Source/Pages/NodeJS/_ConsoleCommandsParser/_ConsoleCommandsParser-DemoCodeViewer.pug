@@ -45,7 +45,7 @@ mixin DemoCodeViewer(options)
 
             export type PackingOfBuildConsoleCommand = Readonly<{
               phrase: CommandPhrases.packingOfBuild;
-              enumerationLikeStringOption?: "FOO" | "BAR" | "BAZ";
+              enumerationLikeStringOption: "FOO" | "BAR" | "BAZ";
               numericOption?: number;
               limitedNumericOption?: number;
             }>;
@@ -94,7 +94,7 @@ mixin DemoCodeViewer(options)
                     enumerationLikeStringOption: {
                       description: "Example enumeration like string option",
                       type: ConsoleCommandsParser.ParametersTypes.string,
-                      required: false,
+                      defaultValue: "FOO",
                       allowedAlternatives: [
                         "FOO",
                         "BAR",

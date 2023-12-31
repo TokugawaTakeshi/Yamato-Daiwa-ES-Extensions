@@ -1,0 +1,74 @@
+-
+
+  generatePageTableOfContents = localizedStrings => {
+
+    const PAGE_URI = localizedRouting.coreLibrary.$children.
+        functionality.$children.
+        arrays.$children.
+        retrievingOfElements.$children.
+        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI;
+
+    const tableOfContents = {
+
+      example: {
+
+        $heading: localizedStrings.example.$heading,
+        $anchor: "EXAMPLE--SECTION",
+        get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+
+      },
+
+      comparisonWithNativeMethods: {
+
+        $heading: localizedStrings.comparisonWithNativeMethods.$heading,
+        $anchor: "COMPARISON_WITH_NATIVE_METHODS--SECTION",
+        get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; },
+
+        $children: {
+
+          find: {
+            $heading: "Array.prototype.find",
+            $anchor: "COMPARISON_WITH_NATIVE_METHODS-FIND--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+          },
+
+          filter: {
+            $heading: "Array.prototype.filter",
+            $anchor: "COMPARISON_WITH_NATIVE_METHODS-FILTER--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+          }
+
+        }
+
+      },
+
+      quickInputInIntelliJIDEA_FamilyOfIDEs: {
+
+        $heading: localizedStrings.quickInputInIntelliJIDEA_FamilyOfIDEs.$heading,
+        $anchor: "QUICK_INPUT_IN_INTELLIJ_IDEA_FAMILY_OF_IDES--SECTION",
+        get $URI() { return `${ PAGE_URI }#${ this.$anchor }` },
+
+        $children: {
+
+          stepsForUsingTheLiveTemplates: {
+            $heading: localizedStrings.quickInputInIntelliJIDEA_FamilyOfIDEs.
+                stepsForUsingTheLiveTemplates.$heading,
+            $anchor: "STEPS_FOR_USING_THE_LIVE_TEMPLATES--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }` }
+          }
+
+        }
+
+      },
+
+      externalLinks: {
+        $heading: localizedStrings.externalLinks.$heading,
+        $anchor: "EXTERNAL_LINKS--SECTION",
+        get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+      }
+
+    };
+
+    return tableOfContents;
+
+  };

@@ -143,7 +143,7 @@ block append SpecificContent
 
     h2.Article-Heading2 Examples
 
-    +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true }).
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       Because this content may be read selectively, the important points have been repeated multiple times.
 
 
@@ -210,7 +210,7 @@ block append SpecificContent
               | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         | .
 
-      +AdmonitionBlock--YDF({ decoration: AdmonitionBlock__YDF.DecorativeVariations.warning, hasPrependedSVG_Icon: true }).
+      +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning, SVG_Icon: true }).
         With such usage, the target #[+Term--YDID array] could #[+Keyword--YDID not]&nbsp;have the #[+Term--YDID type]
           #[+ImportantEntity__Code--YDID ReadonlyArray] because the #[+Term--YDID function] will change this
           #[+Term--YDID array].
@@ -541,7 +541,7 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
 
 
-    h3.Article-Heading3 Adding one element to the specific position of an array (numeration from 0)
+    h3.Article-Heading3 Adding one element to the specific position of an array (numeration from 1)
 
     p.Article-Paragraph.
       Although, in programming, counting from #[+ImportantEntity--YDID 0] is the standard, it frequently
@@ -782,8 +782,8 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
 
 
-    +IntellIJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate",
+    +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate"
     })
 
       ol.Article-OrderedList
