@@ -4,7 +4,7 @@
 
     const PAGE_URI = localizedRouting.nodeJS.$children.utils.$children.ConsoleApplicationLogger.$URI;
 
-    const tableOfContents = {
+    const pageTableOfContents = {
 
       demo: {
         $heading: localizedStrings.demo.$heading,
@@ -75,19 +75,51 @@
             get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; },
 
             $children: {
+
               optionsSpecification: {
+
                 $heading: localizedStrings.stepwiseGuide.consoleApplicationSpecification.optionsSpecification.$heading,
                 $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION--SECTION",
-                get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+                get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; },
+
+                $children: {
+
+                  specialPropertiesOfStringOptions: {
+                    $heading: localizedStrings.stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfStringOptions.$heading,
+                    $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_STRING_OPTIONS--SECTION",
+                    get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+                  },
+
+                  specialPropertiesOfNumericOptions: {
+                    $heading: localizedStrings.stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfNumericOptions.$heading,
+                    $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_NUMERIC_OPTIONS--SECTION",
+                    get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+                  },
+
+                  specialPropertiesOfObjectOptions: {
+                    $heading: localizedStrings.stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfObjectOptions.$heading,
+                    $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_OBJECT_OPTIONS--SECTION",
+                    get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+                  }
+
+                }
+
               }
+
             }
 
           },
 
           logic: {
             $heading: localizedStrings.stepwiseGuide.logic.$heading,
-            $anchor: "STEPWISE_GUIDE-LOGIC--SECTION"
-            // get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+            $anchor: "STEPWISE_GUIDE-LOGIC--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
+          },
+
+          launchingOfApplicationByName: {
+            $heading: localizedStrings.stepwiseGuide.launchingOfApplicationByName.$heading,
+            $anchor: "STEPWISE_GUIDE-LAUNCHING_OF_APPLICATION_BY_NAME--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
           }
 
         }
@@ -96,6 +128,6 @@
 
     };
 
-    return tableOfContents;
+    return pageTableOfContents;
 
   };

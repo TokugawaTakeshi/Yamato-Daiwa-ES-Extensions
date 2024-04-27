@@ -150,3 +150,10 @@ projectBuilding:
           rootDirectoryRelativePath: 02-LocalDevelopmentBuild
 
         openInBrowsers: chrome
+
+
+  # ━━━ Files Watching ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  filesWatching:
+
+    relativePathsOfExcludeDirectories:
+      - 03-ProductionBuild

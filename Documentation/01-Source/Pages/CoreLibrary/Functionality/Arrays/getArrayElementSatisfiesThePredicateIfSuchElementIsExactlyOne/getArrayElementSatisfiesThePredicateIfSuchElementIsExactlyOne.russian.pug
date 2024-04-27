@@ -164,7 +164,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
         +CodeViewer-Explanation--YDF.
           Возьмём в качестве опытного образца этот #[+Term--YDID массив] в названиями американских городов.
@@ -172,7 +172,7 @@ block append SpecificContent
             #[+SecondaryEntity--YDID 3] из них — с #[+SecondaryEntity__Code--YDID «Sa»], а вот с
             #[+SecondaryEntity--YDID «St.»] — #[+Keyword--YDID только] #[+SecondaryEntity--YDID 1].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
           );
@@ -191,7 +191,7 @@ block append SpecificContent
               #[+Keyphrase--YDID даже если таковой ожидается], потому #[+Keyphrase--YDID при таком сочетании параметров]
               #[+Term--YDID функции] может быть возвращён #[+ImportantEntity--YDID null].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(targetCityName.length);
         +CodeViewer-Explanation--YDF
 
@@ -221,7 +221,7 @@ block append SpecificContent
               других послаблений,
               #[+Keyphrase--YDID сводящих на нет смысл использования языка #[+ImportantEntity--YDID TypeScript]].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(
             getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
               sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
@@ -249,7 +249,7 @@ block append SpecificContent
               элемент (а вероятность этого события гораздо выше, чем кажется), то будет выброшено
               #[+Term--YDID исключение] #[+ImportantEntity__Code--YDID UnexpectedEventError].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
@@ -364,6 +364,7 @@ block append SpecificContent
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList

@@ -43,6 +43,12 @@ block append Metadata
       russian: "./addElementsToArray.russian.html"
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.
+        functionality.$children.
+        arrays.$children.
+        addingOfElements.$children.
+        addElementsToArray.$sectioning;
+
 
 block append HeadScriptsLinks
 
@@ -141,19 +147,34 @@ block append SpecificContent
         executed for the #[+Keyword--YDID arbitrary] #[+Term--YDID object]).
 
 
-    h2.Article-Heading2 Examples
+    //- ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.examples.$heading,
+      HTML_ID: pageTableOfContents.examples.$anchor
+    }).Article-Heading2
 
     +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       Because this content may be read selectively, the important points have been repeated multiple times.
 
 
-    h3.Article-Heading3 Adding of one element to the start of array
+    //- ─── Adding of one element to the start of array ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -261,11 +282,16 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -345,13 +371,23 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: false })
 
 
-    h3.Article-Heading3 Adding of one element to the end of array
+    //- ─── Adding of one element to the end of array ──────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -369,11 +405,16 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: true })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -392,13 +433,25 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: true })
 
 
-    h3.Article-Heading3 Adding of one element to the specific position of array (numeration from 0)
+    //- ─── Adding of one element to the specific position of array (numeration from 0) ────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -463,11 +516,18 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -541,7 +601,12 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
 
 
-    h3.Article-Heading3 Adding one element to the specific position of an array (numeration from 1)
+    //- ─── Adding one element to the specific position of an array (numeration from 1) ────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$anchor
+    }).Article-Heading3
 
     p.Article-Paragraph.
       Although, in programming, counting from #[+ImportantEntity--YDID 0] is the standard, it frequently
@@ -551,11 +616,18 @@ block append SpecificContent
         #[+ImportantEntity__Code--YDID toPosition__numerationFrom0].
 
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -573,11 +645,18 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -596,13 +675,25 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 1 })
 
 
-    h3.Article-Heading3 Adding of multiple elements to the start of array
+    //- ─── Adding of multiple elements to the start of array ──────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -620,11 +711,18 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: false })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -643,13 +741,25 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: false })
 
 
-    h3.Article-Heading3 Adding of multiple elements to the end of array
+    //- ─── Adding of multiple elements to the end of array ────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -667,11 +777,18 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: true })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -690,13 +807,25 @@ block append SpecificContent
     +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: true })
 
 
-    h3.Article-Heading3 Adding of multiple elements to specific position (numeration from 0)
+    //- ─── Adding of multiple elements to specific position (numeration from 0) ───────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -714,11 +843,18 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -736,13 +872,25 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
 
 
-    h3.Article-Heading3 Adding of multiple elements to specific position (numeration from 1)
+    //- ─── Adding of multiple elements to specific position (numeration from 1) ───────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$anchor
+    }).Article-Heading3
 
-    h4.Article-Heading4 Mutable adding
+    //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.mutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -760,11 +908,18 @@ block append SpecificContent
     +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
 
 
-    h4.Article-Heading4 Immutable adding
+    //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.immutableAdding.$heading,
+      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-        :html_special_characters_to_html_entities
+        :code_listing--yda
           const sampleArray: Array<string> = [
             "INITIALLY_EXISTED_ELEMENT-1",
             "INITIALLY_EXISTED_ELEMENT-2"
@@ -783,7 +938,9 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/addElementsToArray/Images/addElementsToArray-LiveTemplate"
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "addElementsToArray/Images/addElementsToArray-LiveTemplate",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -854,7 +1011,12 @@ block append SpecificContent
           of the name of the #[+Term--YDID function].
 
 
-    h2.Article-Heading2 External links
+    //- ━━━ External links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.externalLinks.$heading,
+      HTML_ID: pageTableOfContents.externalLinks.$anchor
+    }).Article-Heading2
 
     +LinksCardsFlow--YDF
 

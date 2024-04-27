@@ -4,7 +4,7 @@ extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts
 block append Requirements
 
   include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
-  include ../../../SharedComponents/SharedComponents.russian.pug
+  include ../../../SharedComponents/SharedComponents.japanese.pug
 
   include _ConsoleCommandsParser-DemoCodeViewer.pug
 
@@ -241,7 +241,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         enum CommandPhrases {
           projectBuilding = "build",
           packingOfBuild = "pack",
@@ -258,7 +258,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         type ProjectBuildingConsoleCommand = {
           phrase: CommandPhrases.projectBuilding;
           requiredStringOption: string;
@@ -290,7 +290,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         type SupportedCommandsAndParametersCombinations =
             ProjectBuildingConsoleCommand |
             PackingOfBuildConsoleCommand |
@@ -306,7 +306,7 @@ block append SpecificContent
       |   #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]と言う以前定義された
       |   #[+Term--YDID 型]の#[+Term__Contrast--YDID オブジェクト]を返す。
       |   事実上、
-      +ImportantEntity__Code--YDID: :html_special_characters_to_html_entities
+      +ImportantEntity__Code--YDID: :code_listing--yda
         ParsedCommand<SupportedCommandsAndParametersCombinations>
       |   に於いて#[+ImportantEntity__Code--YDID ParsedCommand]#[+Term--YDID TypeScriptジェネリック]は、
       |   #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]#[+Term--YDID ユニオン]
@@ -316,7 +316,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         const parsedConsoleCommand: ConsoleCommandsParser.
             ParsedCommand<SupportedCommandsAndParametersCombinations> =
             ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
@@ -331,7 +331,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
 
         switch (parsedConsoleCommand.phrase) {
 
@@ -410,7 +410,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         export enum CommandPhrases {
           projectBuilding = "build",
           packingOfBuild = "pack",
@@ -527,7 +527,7 @@ block append SpecificContent
           と明示的に指示する。
 
 
-    //- ─── Шаг 3 — Определение спецификации консольного приложения ────────────────────────────────────────────────────
+    //- ─── ③　コンソールアプリケーションの仕様を定義 ──────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
       text: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
@@ -598,3 +598,441 @@ block append SpecificContent
           li.
             #[+Term--YDID コマンドフレーズ]が#[+Term__Contrast--YDID オプション]がある場合、#[+ImportantEntity__Code--YDID options]
               #[+Term--YDID プロパティ]（こいつも#[+Keyword--YDID 連想配列系]の#[+Term--YDID オブジェクト]である）を埋める事。
+
+
+    //- ─── 各コマンドフレーズのオプションの定義 ───────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.
+          stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$heading,
+      HTML_ID: pageTableOfContents.
+          stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$anchor
+    }).Article-Heading4
+
+    p.Article-Paragraph.
+      #[+Term--YDID コマンドフレーズ]の#[+Term__Contrast--YDID オプション]が多ければ、#[+Term--YDID コマンドフレーズ]の
+        #[+Term__Contrast--YDID オプション]の使用定義こそ此の段階の大抵の時間がかかる。
+      とは言え、難しい事は無くて、コンソールに入力される値と同じ#[+Keyphrase--YDID 対象#[+Term--YDID コマンドフレーズ]の]
+        #[+Keyword--YDID 全]#[+Term--YDID オプション]を#[+Term--YDID オブジェクト]の#[+Keyword--YDID キー]で指定し、
+        #[+Term--YDID オブジェクト]の#[+Keyword--YDID 値]なら、#[+Keyword--YDID オブジェクト型]と成り、下記通り此れの中に
+        #[+Term--YDID オプション]の#[+Term__Contrast--YDID 型]、必須・任意等を指定すれば良い。
+
+    ol.Article-OrderedList
+
+      li.
+        #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes]#[+Term--YDID 列挙]の
+          #[+Term__Contrast--YDID 要素]で#[+Term--YDID オプション]の#[+Term__Contrast--YDID 型]を指定しておこう。
+        現在、#[+Term--YDID 文字列型]、#[+Term--YDID 数型]、#[+Term--YDID 真偽型]及び#[+Term--YDID オブジェクト型]
+          （入力の際妥当な#[+ImportantEntity--YDID JSON5型]の#[+Term--YDID 文字列]#[+Keyword--YDID でなければけない]）。
+      li.
+        #[+Term--YDID オプション]が規定値が有る場合、#[+ImportantEntity__Code--YDID defaultValue]#[+Term--YDID プロパティ]を
+          #[+Keyphrase--YDID 該当している#[+Term--YDID 型]の]値で指定しておこう。
+        規定値が無い場合、#[+Keyword--YDID 代わりに]#[+ImportantEntity__Code--YDID required]と言う#[+Keyword--YDID 真偽型の]
+          #[+Term--YDID プロパティ]を指定する#[+Keyword--YDID 必要]がある（無論、必須の場合は#[+ImportantEntity__Code--YDID true]）。
+        但し、#[+Keyword--YDID 任意の]#[+Keyword__Contrast--YDID 真偽型の]#[+Term--YDID オプション]の場合、
+          コンソールに明示的に入力されなかった値は明示的に入力された#[+ImportantEntity__Code--YDID false]も同然なので、
+        #[+Term--YDID TypeScript]は#[+ImportantEntity__Code--YDID defaultValue]を指定#[+Keyword--YDID されない]。
+
+      li.
+        高品質なコードを目指しているが、説明書を読まない意味が分からないオプション名でも、利用者達の入力の便利さの為に短いオプション名にしたい場合、
+          コードの整備者の為に仕様書を読まなくても和訳すれば意味が分かるオプション名を#[+ImportantEntity__Code--YDID newName]
+          #[+Term--YDID プロパティ]に指定しておこう。
+
+      li.
+        #[+Term--YDID オプション]の為#[+Keyword--YDID 一文字の]の省略（#[+Term--YDID フラッグ]）を確保したい場合、望ましい省略を
+          #[+ImportantEntity__Code--YDID shortcut]#[+Term--YDID プロパティ]に指定しておこう。
+        コンソールへの入力の際、当文字の前に#[+Term--YDID ハイフン]を指定しなければいけないが、オプションの仕様を定義している今なら、ハイフンが無くても
+          #[+Keyword--YDID 良い]です。
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID 残りの]#[+Term--YDID プロパティ]は#[+Keyword--YDID 皆]#[+Term--YDID オプション]の
+        #[+Term__Contrast--YDID 型]に依ります。
+      これらを考察しておこう。
+
+
+    //- ─── 文字列型オプションの特別なプロパティ ─────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$anchor
+    }).Article-Heading5
+
+    p.Article-Paragraph.
+      現在、こう言った#[+Term--YDID プロパティ]が#[+Keyword--YDID 一件]#[+Keyword__Contrast--YDID しか]なく、即ち
+        #[+ImportantEntity__Code--YDID allowedAlternatives]。
+      #[+Keyword--YDID 文字列型の]#[+Term--YDID オプション]の#[+Term--YDID]値を有限の数の選択肢に制限したい場合、
+        此の選択肢を#[+ImportantEntity__Code--YDID allowedAlternatives]#[+Term--YDID プロパティ]に#[+Term--YDID 配列]
+        として指定すれば良い。
+
+    //- ─── 数型オプションの特別なプロパティ ─────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$anchor
+    }).Article-Heading5
+
+    dl.Article-DescriptionList
+
+      dt #[+ImportantEntity__Code--YDID numbersSet]
+      dd
+
+        | #[+Term--YDID 数の集合]、此の#[+Term--YDID オプションの型]にとって#[+Keyword--YDID 必須な]#[+Term--YDID プロパティ]である。
+        | 値は当ライブラリ主要なパッケージから再利用された#[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets]
+        |   #[+Term--YDID 列挙]#[+Keyword--YDID でなければいけません]。
+
+        dl.Article-DescriptionList
+          dt #[+ImportantEntity__Code--YDID naturalNumber]
+          dd 自然数
+
+          dt #[+ImportantEntity__Code--YDID nonNegativeInteger]
+          dd 正の整数
+
+          dt #[+ImportantEntity__Code--YDID negativeInteger]
+          dd 負の整数
+
+          dt #[+ImportantEntity__Code--YDID negativeIntegerOrZero]
+          dd 負の整数・0
+
+          dt #[+ImportantEntity__Code--YDID anyInteger]
+          dd 正負不問の整数
+
+          dt #[+ImportantEntity__Code--YDID positiveDecimalFraction]
+          dd 正の小数
+
+          dt #[+ImportantEntity__Code--YDID negativeDecimalFraction]
+          dd 負の小数
+
+          dt #[+ImportantEntity__Code--YDID decimalFractionOfAnySign]
+          dd 正負不問の小数
+
+          dt #[+ImportantEntity__Code--YDID anyRealNumber]
+          dd 実数
+
+      dt #[+ImportantEntity__Code--YDID minimalValue]
+      dd 大小限
+
+      dt #[+ImportantEntity__Code--YDID maximalValue]
+      dd 最大限
+
+
+    //- ─── オブジェクト型オプションの特別なプロパティ ───────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$anchor
+    }).Article-Heading5
+
+    p.Article-Paragraph.
+      現在こう言った#[+Term--YDID プロパティ]が#[+Keyword--YDID 一つ]#[+Keyword__Contrast--YDID しか]なくて、
+        #[+ImportantEntity__Code--YDID validValueSpecification]と言い、#[+Keyword--YDID 必須]である。
+      此れで#[+Term--YDID JSON5形式]の#[+Term__Contrast--YDID 文字列]が変換されるオブジェクトの使用を定義する必要が有る。
+
+    p.Article-Paragraph
+      | 当#[+Term--YDID プロパティ]は
+      |
+      +Link--YDF({
+        endorsedExternalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            RawObjectDataProcessor.$sectioning.
+            API.$children.
+            types.$children.
+            PropertiesSpecification.$URI
+      }).Article-Link RawObjectDataProcessor.PropertiesSpecification型
+      |   と成り、主要パッケージから再利用され、#[+Term--YDID コマンドフレーズ]の#[+Term__Contrast--YDID オプション]の定義に似ているが、
+      |   #[+ImportantEntity--YDID RawObjectDataProcessor]#[+Term--YDID クラス]の#[+Term__Contrast--YDID API]
+      |   が使われている。
+
+
+    //- ─── ④　コンソールコマンド処理ロジックの作成 ────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.logic.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.logic.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      コンソールアプリケーションの仕様の定義が完了し、此れを入力されたコンソールコマンドの処理のに使われる様に成った。
+      其の為、#[+ImportantEntity--YDID ConsoleCommandsParser]#[+Term--YDID クラス]の#[+Keyword--YDID 静的]#[+Term--YDID メソッド]
+        #[+ImportantEntity__Code--YDID parse]を呼び出す事。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+        import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
+
+        const parsedConsoleCommand: ConsoleCommandsParser.
+            ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
+            ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+    ul.Article-UnorderedList
+
+      li.
+        直近の段階で定義されたアプリケーションコマンドの資料は#[+Keyword--YDID 必須]の#[+Term--YDID 引数]である。
+
+      li.
+        #[+ImportantEntity--YDID ２引数目]を指定しない限り、#[+ImportantEntity__Code--YDID process.argv]は#[+Term--YDID 引数ベクトル]
+          として使われる。
+
+      li.
+        #[+ImportantEntity--YDID ２段階目]に定義された#[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]
+          と言う#[+Term--YDID TypeScript]#[+Term--YDID ユニオン]#[+Term__Contrast--YDID をジェネリック引数]として渡す事。
+
+    p.Article-Paragraph.
+      続き、具体的に何方の#[+Term--YDID コマンドフレーズ]が入力されたか、判断する目的。
+      尚、安全に（#[+ImportantEntity__Code--YDID any]#[+Term--YDID 型]・#[+ImportantEntity--YDID TypeScript]エラー無し）
+        該当している#[+Term--YDID オプション]にアクセス出来る様にしなけれないけない（但し、規定値が無い#[+Keyword--YDID 任意な]
+        #[+Term--YDID オプション]はどうしても利用の前#[+Term--YDID 非undefined確認]が#[+Keyword--YDID 必要]）。
+      #[+ImportantEntity__Code--YDID switch/case]は此の様な場合に取って丁度良い。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        switch (parsedConsoleCommand.phrase) {
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
+            console.log("Build project", parsedConsoleCommand);
+            console.log("requiredStringOption", parsedConsoleCommand.requiredStringOption);
+            console.log("optionalStringOption", parsedConsoleCommand.optionalStringOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
+            console.log("Pack project", parsedConsoleCommand);
+            console.log("enumerationLikeStringOption", parsedConsoleCommand.enumerationLikeStringOption);
+            console.log("numericOption", parsedConsoleCommand.numericOption);
+            console.log("limitedNumericOption", parsedConsoleCommand.limitedNumericOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
+            console.log("Deploy project", parsedConsoleCommand);
+            console.log("booleanOption", parsedConsoleCommand.booleanOption);
+            console.log("JSON5_Option", parsedConsoleCommand.JSON5_Option);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
+            console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
+          }
+
+        }
+
+
+    //- ─── ⑤ 名前でアプリケーションを実行 ─────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph
+      | 現在、アプリケーションが#[+Keyphrase--YDID ファイルパスを指定し]
+      |
+      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.tsNode.homePage.top }).Article-Link ts-node
+      |   で既に実行出来る、例えば
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        ts-node EntryPoint.test.ts --requiredStringOption test --optionalStringOption sample
+
+    p.Article-Paragraph.
+      過半数の読者達は#[+Term--YDID コマンド]（混乱させてはいるが、汎用な用語に依るとアプリケーション名を意味する）でアプリケーションを実行したいだろうから、
+        上記の実行方法で満足しないはずだが、上記の方法が十分だから以前の手順で終了の場合を手短に考察しておこう。
+      先ずは、開発対象の#[+Term--YDID コンソールインターフェース]は単一のプロジェクトにしか使わない予定で、#[+ImportantEntity--YDID npm]が、
+        別の方法で公開する予定も場合である。
+      特に、
+
+    dl.Article-DescriptionList
+
+      dt サーバアプリケーションを
+      dd.
+        普通だと、サーバを実行する単一の#[+Term--YDID コマンドフレーズ]しかなく、#[+Term--YDID オプション]で#[+Term--YDID HTTPポート]番号や
+          ロギングレーベル等が指定される。
+
+      dt 自動化専用スクリプト
+      dd.
+        普通はファイル生成・コピー・自動改善の様な課題で、但し#[+ImportantEntity--YDID Gulp]の様に一般手段が役に立たない程特別な目的である。
+
+    p.Article-Paragraph.
+      上記は一旦宜しいが、#[+SecondaryEntity--YDID gulp]や#[+SecondaryEntity--YDID webpack]の様に、#[+Term--YDID 名前]で
+        コンソールアプリケーションを実行するにはどうすれば良いだろう。
+
+    p.Article-Paragraph.
+      先ずは、#[+ImportantEntity--YDID Node.js]#[+Term--YDID ランタイム]は#[+ImportantEntity--YDID TypeScript]に対応
+        #[+Term--YDID されていない]ので、#[+Term--YDID ソースコード]を#[+ImportantEntity--YDID JavaScript]に
+        #[+Term--YDID トラスパイル]#[+Keyword--YDID しなければいけない]。
+      #[+ImportantEntity--YDID TypeScript]パッケージ#[+Term--YDID のコンソールインターフェース]でも実現出来るし、例に出た
+        #[+ImportantEntity--YDID Webpack]でも活用すれば良い（但し#[+ImportantEntity--YDID TypeScript]専用のプラグインが
+        必要に成る）。
+
+    p.Article-Paragraph.
+      然し、#[+Term--YDID トランスパイリング]を実行する前に、#[+Term--YDID エントリーポイント]からアプリケーションの論理を実行する#[+Term--YDID 関数]か
+        #[+Term--YDID クラス]をエクスポート#[+Keyword--YDID しなければいけない]。
+      「エントリーポイントからエクスポートする」事は、普通だと可笑しいだろう。
+      理由としては、#[+Keyphrase--YDID コンソールアプリケーションの場合]、#[+Term--YDID エントリーポイント]は直接実行されるのでは#[+Keyword--YDID なく]、
+        #[+Term--YDID 実行ファイル]を#[+Keyword--YDID 介して]実行されるのだ。
+      下記の例では##[+SecondaryEntity__Code--YDID executeApplication]#[+Term--YDID 関数]をエクスポートする
+        #[+Term--YDID エントリーポイント]。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+        import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
+
+
+        export function executeApplication(): void {
+
+          const parsedConsoleCommand: ConsoleCommandsParser.
+              ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
+              ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+          switch (parsedConsoleCommand.phrase) {
+
+            case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
+              console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
+            }
+
+          }
+
+        }
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID ソース]コードの#[+ImportantEntity--YDID JavaScript]への変換が終わり次第、手動で下記の様な内容のファイルを作ろう（例えば、
+        #[+SecondaryEntity--YDID Executable.js]）。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JavaScript
+      }): :code_listing--yda
+        #!/usr/bin/env node
+
+        require("./EntryPoint").executeApplication();
+
+    p.Article-Paragraph.
+      此処で一行目は#[+Term--YDID シバン]を含み、此のファイルを#[+ImportantEntity--YDID Node.js]で実行しなければいけない指定の役割。
+      次は、アプリケーションを実行する関数（上記の例だと#[+SecondaryEntity__Code--YDID executeApplication]）をインポートし呼び出す。
+
+    +QuestionAndAnswerBox--YDF({
+      type: QuestionAndAnswerBox__YDF.Types.question,
+      question: "このファイルをエントリーポイントにすれば良いじゃない？シバンを除き、一般JavaScriptファイルはずだ。"
+    }).
+      可能ではあり、規約だけの問題。
+      普通は、行言った実行ファイルには、単一の関数かメソッドの呼び出しより複雑な倫理を保管する事が避けられる。
+      とは言え、推薦に過ぎないので、守っている開発者もいて（例えば、#[+SecondaryEntity--YDID Gulp]の開発者）、守っていない開発者も要る（例えば
+        #[+SecondaryEntity--YDID Webpack]の開発者、最終の確認は2024年の春）。
+
+    p.Article-Paragraph.
+      続き、上記の#[+Term--YDID 実行ファイル]に貴方プロジェクトの#[+ImportantEntity__Code--YDID package.json]から参照
+        #[+Keyword--YDID しなければいけない]。
+      コンソールアプリケーションを#[+Term--YDID 名前]で呼び出せる様に成るには、#[+ImportantEntity__Code--YDID bin]#[+Term--YDID フィルド]を
+        #[+Keyword--YDID 連想配列系の]の#[+Term--YDID オブジェクト]で埋めなければいけない、但し#[+Keyword--YDID キー]は
+        #[+Keyword--YDID コマンド]であり、#[+Keyword--YDID 値]は該当している#[+Term--YDID 実行ファイル]への#[+Keyword--YDID 相対]
+        #[+Term--YDID パス]（#[+Term--YDID ファイル名拡張]#[+Keyword--YDID 無し]でも可能）。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
+      }): :code_listing--yda
+        {
+          // ...
+          "bin": {
+            "my_app": "Executable"
+          },
+          // ...
+        }
+
+    p.Article-Paragraph
+      | #[+ImportantEntity__Code--YDID bin]#[+Term--YDID フィルド]に就いてもっと詳しい情報を
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.packageJSON.bin
+      }).Article-Link npmのオフィシャル説明サイト
+      | で確認可能。
+
+    p.Article-Paragraph
+      | 貴方のユーティリティを他のプロジェクトに導入するには、#[+ImportantEntity__Code--YDID name]や
+      |   #[+ImportantEntity__Code--YDID version]の様に、追加で#[+ImportantEntity--YDID package.json]の#[+Term--YDID フィルド]
+      |   を記入#[+Keyword--YDID しなけければいけない]。
+      | 尚、#[+ImportantEntity--YDID npm]でユーティリティを公開したい場合、更に多くの#[+Term--YDID フィルド]を記入するべき。
+      | #[+ImportantEntity--YDID npm]のオフィシャルサイトでは、
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.guides.minimalPackageJSON
+      }).Article-Link 関連している案内
+      | が有る。
+
+    //-
+      p.Article-Paragraph
+        | 貴方のユーティリテを含む#[+Term--YDID npmパッケージ]を別のプロジェクトに導入するには、複数の方法が有る。
+        | #[+ImportantEntity--YDID npm]上公開された場合、#[+ImportantEntity__Code--YDID npm install &lsqb;package_name&rsqb;]
+        |   で導入可能に成り、
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfLocalNPM_PackageByRelativePath
+        }).Article-Link 相対パス
+        | や#[+Term--YDID バージョン管理システム]の
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfNPM_PackageByCommitNumber
+        }).Article-Link コミットに参照
+        | する事も可能。
+        | 何れかの方法でユーティリテを別のプロジェクトに導入すれば、下記の様に当プロジェクトの#[+ImportantEntity--YDID package.json]で宣言された
+        |   #[+Term--YDID npmスクリプト]を介して、呼び出す事が出来る様に成る。
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
+        }): :code_listing--yda
+          {
+            // ...
+            "scripts": {
+              "example": "my_app --option1 alpha --flag"
+            },
+            // ...
+          }
+
+      p.Article-Paragraph.
+        とか言え、此れで又多くの方が満足されなく、下記の様に名前で直接コンソールから呼び出したいからだ。
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+        }): :code_listing--yda
+          my_app --option1 alpha --flag

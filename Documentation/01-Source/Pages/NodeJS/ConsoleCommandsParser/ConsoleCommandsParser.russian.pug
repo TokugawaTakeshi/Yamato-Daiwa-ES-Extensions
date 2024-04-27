@@ -260,7 +260,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         enum CommandPhrases {
           projectBuilding = "build",
           packingOfBuild = "pack",
@@ -279,7 +279,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         type ProjectBuildingConsoleCommand = {
           phrase: CommandPhrases.projectBuilding;
           requiredStringOption: string;
@@ -312,7 +312,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         type SupportedCommandsAndParametersCombinations =
             ProjectBuildingConsoleCommand |
             PackingOfBuildConsoleCommand |
@@ -330,7 +330,7 @@ block append SpecificContent
       |   #[+ImportantEntity__Code--YDID process.argv].
       | По сути, #[+Term--YDID TypeScript-обобщение] #[+ImportantEntity__Code--YDID ParsedCommand] в
       |
-      +ImportantEntity__Code--YDID: :html_special_characters_to_html_entities
+      +ImportantEntity__Code--YDID: :code_listing--yda
         ParsedCommand<SupportedCommandsAndParametersCombinations>
       |   сообщает #[+ImportantEntity--YDID TypeScript]-y, что к #[+Keyphrase--YDID одному из] #[+Term--YDID подтипов]
       |   #[+Term__Contrast--YDID объединения] #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]
@@ -339,7 +339,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         const parsedConsoleCommand: ConsoleCommandsParser.
             ParsedCommand<SupportedCommandsAndParametersCombinations> =
             ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
@@ -356,7 +356,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
 
         switch (parsedConsoleCommand.phrase) {
 
@@ -439,7 +439,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         export enum CommandPhrases {
           projectBuilding = "build",
           packingOfBuild = "pack",
@@ -683,12 +683,14 @@ block append SpecificContent
     }).Article-Heading4
 
     p.Article-Paragraph.
-      Большую часть времени этого этапа займёт именно определение #[+Term--YDID опций] #[+Term__Contrast--YDID комадных фраз],
-        если таковых много.
+      Большую часть времени этого этапа займёт именно определение #[+Term--YDID опций]
+        #[+Term__Contrast--YDID комадных фраз], если таковых много.
       Сложного, однако, ничего нет: через #[+Term--YDID ключи] #[+Term__Contrast--YDID объекта]
-        #[+Keyword--YDID необходимо] перечислить #[+Term--YDID опции] такими, какими они будут введены, а через
-        #[+Term--YDID значения] (#[+Keyword--YDID тоже] #[+Keyword__Contrast--YDID объектного] #[+Term--YDID типа]) —
+        #[+Keyword--YDID необходимо] перечислить #[+Term--YDID опции]
+        #[+Keyphrase--YDID такими, какими они будут введены в консоль], а через #[+Term--YDID значения]
+        (#[+Keyword--YDID тоже] #[+Keyword__Contrast--YDID объектного] #[+Term--YDID типа]) —
         настройки этих #[+Term--YDID опций], такие как #[+Term--YDID тип], обязательность и так далее.
+      Итак, #[+Keyphrase--YDID для каждой] #[+Term--YDID опции]:
 
     ol.Article-OrderedList
 
@@ -696,52 +698,82 @@ block append SpecificContent
         Укажите #[+Term--YDID тип] #[+Term__Contrast--YDID опции] в виде #[+Term--YDID элемента перечисления]
           #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes].
         На данный момент поддерживаются #[+Keyword--YDID строчные], #[+Keyword--YDID числовые] и
-          #[+Keyword--YDID булевские] #[+Term--YDID опции], а так же в формате #[+ImportantEntity--YDID JSON5].
+          #[+Keyword--YDID булевские] #[+Term--YDID опции], а так же #[+Keyword--YDID объектные]
+          (#[+Keyword--YDID должны] быть введены в консоль в формате #[+ImportantEntity--YDID JSON5]).
 
       li.
         Если #[+Term--YDID опция] имеет значение по умолчанию, то укажите значение #[+Keyword--YDID соответствующего]
-          #[+Term--YDID типа] свойству #[+ImportantEntity__Code--YDID defaultValue].
+          #[+Term--YDID типа] #[+Term__Contrast--YDID свойству] #[+ImportantEntity__Code--YDID defaultValue].
         #[+Keyphrase--YDID В противном случае], #[+Keyword--YDID необходимо] #[+Keyword__Contrast--YDID явно] указать
           #[+Keyword--YDID булевское] #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID required]
-          (#[+ImportantEntity__Code--YDID true] — если #[+Term--YDID опция] обязательна).
+          (естественно #[+ImportantEntity__Code--YDID true], если #[+Term--YDID опция] обязательна).
         При этом для #[+Keyword--YDID необязательной] #[+Keyword__Contrast--YDID булевской] #[+Term--YDID опции]
-          указать #[+ImportantEntity__Code--YDID defaultValue] #[+Keyword--YDID нельзя], поскольку
-          #[+Keyword--YDID не]&nbsp;введённое значение #[+Keyword--YDID равносильно] #[+Keyword--YDID false].
-      //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      li.
-        Если Вы хотите работать с более понятным именем опции, при этом оставить возможность пользователю вводить
-          короткое, хоть и неясное имя опции, то определите свойство #[+ImportantEntity__Code--YDID newName].
+          указать #[+ImportantEntity__Code--YDID defaultValue] #[+Term--YDID TypeScript]
+          #[+Keyword--YDID не]&nbsp;позволит, поскольку пропуск этого значения при вводе в консоль
+          #[+Keyword--YDID равносилен] явно указанному значению #[+Keyword--YDID false].
 
       li.
-        Если Вы хотите определить для #[+Term--YDID опции] однобуквенное сокращение, то определите его через
-          свойство #[+ImportantEntity__Code--YDID shortcut].
-        Дефис, который пользователь должен будет указать при использование этого сокращения, здесь, при определении,
-          указывать #[+Keyword--YDID не]&nbsp;нужно.
+        Если Вы пишете качественный код, а смысл короткого (в целях скорости ввода) имени #[+Term--YDID опции], которое
+          будет введено в консоль, неясен без обращения к документации, то определите #[+Term--YDID свойство]
+          #[+ImportantEntity__Code--YDID newName] более содержательным именем для программистов, которые будут
+          поддерживать Ваш код.
+
+      li.
+        Если Вы хотите определить для #[+Term--YDID опции] #[+Keyword--YDID однобуквенное] сокращение, укажите
+          соответствующее значение #[+Term--YDID свойству] #[+ImportantEntity__Code--YDID shortcut].
+        Дефис, который пользователь должен будет указать при использовании этого сокращения, здесь, при определении,
+          указывать #[+Keyword--YDID не]&nbsp;обязательно.
 
     p.Article-Paragraph.
-      Все остальные аттрибуты зависят от типа опции.
+      #[+Keyword--YDID Все] #[+Keyword__Contrast--YDID остальные] #[+Term--YDID свойства] зависят от #[+Term--YDID типа]
+        #[+Term__Contrast--YDID опции].
       Рассмотрим их.
 
 
-    h5.Article-Heading5 Специальные аттрибуты строчных опций
+    //- ─── Специальные свойства строчных опций ────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$anchor
+    }).Article-Heading5
 
     p.Article-Paragraph.
-      На данный момент такой аттрибут только один — #[+ImportantEntity__Code--YDID allowedAlternatives].
-      Если Вы хотите, чтобы строковая #[+Term--YDID опция] могла принимать только определённые значения, то укажите
-        их в виде #[+Term--YDID массива] #[+Term__Contrast--YDID свойству]
+      На данный момент такое #[+Term--YDID свойство] #[+Keyword--YDID только] #[+Keyword__Contrast--YDID одино] —
         #[+ImportantEntity__Code--YDID allowedAlternatives].
+      Если Вы хотите, чтобы #[+Keyword--YDID строковая] #[+Term--YDID опция] могла принимать #[+Keyword--YDID только]
+        значения из ограниченного набора вариантов, то укажите их в виде #[+Term--YDID массива]
+        #[+Term__Contrast--YDID свойству] #[+ImportantEntity__Code--YDID allowedAlternatives].
 
 
-    h5.Article-Heading5 Специальные аттрибуты числовых опций
+    //- ─── Специальные свойства числовых опций ────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$anchor
+    }).Article-Heading5
 
     dl.Article-DescriptionList
 
       dt #[+ImportantEntity__Code--YDID numbersSet]
       dd
 
-        | #[+Term--YDID Множество чисел], #[+Keyword--YDID обязательный] аттрибут для данного типа
-        | Его значением должен быть один из #[+Term--YDID элементов перечисления], заимствованного из главного пакета —
-        |  #[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets].
+        | #[+Term--YDID Множество чисел], #[+Keyword--YDID обязательное] #[+Term--YDID свойство] для данного типа
+        |   #[+Term--YDID опций].
+        | Его значением #[+Keyword--YDID должен] быть #[+Keyphrase--YDID один из] #[+Term--YDID элементов перечисления],
+        |   заимствованного из главного пакета библиотеки —
+        |   #[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets]:
 
         dl.Article-DescriptionList
           dt #[+ImportantEntity__Code--YDID naturalNumber]
@@ -778,11 +810,22 @@ block append SpecificContent
       dd Максимальное значение
 
 
-    h5.Article-Heading5 Специальные аттрибуты объектных опций
+    //- ─── Специальные свойства объектных опций ───────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$anchor
+    }).Article-Heading5
 
     p.Article-Paragraph.
-      На данный момент такой аттрибут только #[+Keyword--YDID один], но #[+Keyword__Contrast--YDID обязательный] —
-        #[+ImportantEntity__Code--YDID validValueSpecification].
+      На данный момент такое #[+Term--YDID свойство] #[+Keyword--YDID только] #[+Keyword__Contrast--YDID одно], но
+        #[+Keyword__Contrast--YDID обязательное] — #[+ImportantEntity__Code--YDID validValueSpecification].
       С помощью него необходимо задать правила валидации #[+Term--YDID объекта], в который будет преобразована
         #[+Term--YDID строка] формата #[+ImportantEntity--YDID JSON5].
 
@@ -796,26 +839,29 @@ block append SpecificContent
             API.$children.
             types.$children.
             PropertiesSpecification.$URI
-      }).Article-Link PropertiesSpecification
-      |   , заимствованный из #[+ImportantEntity--YDID RawObjectDataProcessor] основного пакета.
-      | Это #[+Keyword--YDID объектное] #[+Term--YDID свойство] очень похоже на спецификацию опций
-      |   #[+Term--YDID командной фразы], только вместо #[+Term--YDID опций] — ключи объекта, а спецификация каждого
-      |   свойства может быть гораздо более гибкой, в соответствии с #[+Term--YDID API]
-      |   #[+ImportantEntity--YDID RawObjectDataProcessor].
+      }).Article-Link RawObjectDataProcessor.PropertiesSpecification
+      |   , заимствованный из главного пакета библиотеки и очень похоже на спецификацию #[+Term--YDID опций]
+      |   #[+Term--YDID командной фразы], только здесь используется #[+ImportantEntity__Code--YDID API]
+      |   #[+Term--YDID класса] #[+ImportantEntity--YDID RawObjectDataProcessor].
 
 
-    h3.Article-Heading3 Шаг 4 — Создание логики разбора консольных команд
+    //- ─── Шаг 4 — Создание логики разбора консольных команд ──────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.logic.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.logic.$anchor
+    }).Article-Heading3
 
     p.Article-Paragraph.
-      На этом определение спецификации консольного приложения завершено; теперь её можно использовать при разборе
-        введённой #[+Term--YDID консольной команды].
-      Для этого необходимо у класса #[+ImportantEntity--YDID ConsoleCommandsParser] вызывать
-        #[+Term--YDID статический метод] #[+ImportantEntity__Code--YDID parse]:
+      На этом определение спецификации консольного приложения завершено; теперь её можно использовать при
+        #[+Term--YDID разборе] (#[+Term--YDID парсинге]) введённой #[+Term--YDID консольной команды].
+      Для этого #[+Keyword--YDID необходимо] у #[+Term--YDID класса] #[+ImportantEntity--YDID ConsoleCommandsParser]
+        вызывать #[+Term--YDID статический метод] #[+ImportantEntity__Code--YDID parse]:
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
         import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
 
@@ -823,26 +869,33 @@ block append SpecificContent
             ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
             ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
 
-    p.Article-Paragraph.
-      #[+Keyword--YDID Обязательным] #[+Term--YDID параметром] этого метода является спецификация
-        консольного приложения, которую Вы определили на предыдущем шаге.
-      Если #[+Keyword--YDID не]&nbsp;указывать #[+ImportantEntity--YDID 2го] #[+Term--YDID параметра], то
-        #[+Term--YDID вектор аргументов] будет взят из #[+ImportantEntity__Code--YDID process.argv].
-      Также, в качестве #[+Term--YDID параметра обобщения] #[+Keyword--YDID необходимо] указать
-        #[+Term--YDID TypeScript-объединение] #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations],
-        которое мы определили ранее.
+    ul.Article-UnorderedList
+
+      li.
+        #[+Keyword--YDID Обязательным] #[+Term--YDID параметром] этого #[+Term--YDID метода] является спецификация
+          консольного приложения, которую Вы определили на предыдущем шаге.
+
+      li.
+        Если #[+Keyword--YDID не]&nbsp;указывать #[+ImportantEntity--YDID 2го] #[+Term--YDID параметра], то
+          #[+Term--YDID вектор аргументов] будет взят из #[+ImportantEntity__Code--YDID process.argv].
+
+      li.
+        В качестве #[+Term--YDID параметра обобщения] #[+Keyword--YDID необходимо] указать
+          #[+Term--YDID TypeScript-объединение] #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations],
+          которое Вы определили на #[+ImportantEntity--YDID 2-ом] шаге.
 
     p.Article-Paragraph.
       Теперь нам нужно определить, какая именно #[+Term--YDID командная фраза] была введена, а также безопасно
-        (без ошибок #[+ImportantEntity--YDID TypeScript]) обратиться к её #[+Term--YDID опциям] (разве что
-        в случае #[+Keyword--YDID необязательными] #[+Term--YDID опциями] всё же потребуется проверка на
+        (без #[+Term--YDID типа] #[+ImportantEntity__Code--YDID any] и ошибок #[+ImportantEntity--YDID TypeScript])
+        обратиться к её #[+Term--YDID опциям] (разве что в случае #[+Keyword--YDID необязательными]
+        #[+Term--YDID опциями] без значений по умолчанию потребуется проверка на
         #[+ImportantEntity__Code--YDID undefined], прежде чем ими полноценно пользоваться).
       Сделать это можно с помощью #[+ImportantEntity__Code--YDID switch/case]:
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         switch (parsedConsoleCommand.phrase) {
 
           case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
@@ -874,64 +927,75 @@ block append SpecificContent
         }
 
 
-    h3.Article-Heading3 Шаг 5 — Обеспечение запуска приложения по имени
+    //- ─── Шаг 5 — Обеспечение запуска приложения по имени ────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
+    }).Article-Heading3
 
     p.Article-Paragraph
-      | На данный момент приложение уже можно запускать по пути файла с помощью
+      | На данный момент приложение уже можно запускать #[+Keyphrase--YDID по пути файла] с помощью
       |
       +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.tsNode.homePage.top }).Article-Link ts-node
-      |   , например:
+      | , например:
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         ts-node EntryPoint.test.ts --requiredStringOption test --optionalStringOption sample
 
     p.Article-Paragraph.
-      Хотя такой вариант многих не&nbsp;устроит, рассмотрим вкратце, когда он подходит и на завершённых предыдущих этапах
-        можно остановиться.
+      Хотя такой вариант многих не&nbsp;устроит (потому что хотят запускать консольное приложение по
+        #[+Term--YDID команде], то есть имени приложения — согласно запутанной, но устоявшейся терминологии), рассмотрим
+        вкратце, когда он подходит и на завершённых предыдущих этапах можно остановиться.
       Прежде всего это случаи, когда разрабатываемый #[+Term--YDID консольный интерфейс] планируется применять
-        #[+Keyword--YDID исключительно] в рамках одного проекта #[+Keyword--YDID без]&nbsp;публикации в
-        #[+ImportantEntity--YDID npm] или другими способами.
-      Частыми являются следующие сценарии:
+        #[+Keyword--YDID исключительно] в рамках #[+Keyword__Contrast--YDID одного] проекта
+        #[+Keyword--YDID без]&nbsp;публикации в #[+ImportantEntity--YDID npm] или другими способами.
+      В частности, это:
 
     dl.Article-DescriptionList
 
-      dt Серверное приложение
+      dt Серверные приложения
       dd.
-        Как правило, в таких приложениях одна #[+Term--YDID командная фраза] для запуска сервера, а через опции передаются
-          #[+Term--YDID HTTP-порт], уровень логирования и так далее.
+        Как правило, в таких приложениях одна #[+Term--YDID командная фраза] для запуска сервера, а через
+          #[+Term--YDID опции] передаются #[+Term--YDID HTTP-порт], уровень логирования и так далее.
 
       dt Скрипты для автоматизации
       dd.
         Обычно это генерация, копирование или модификация файлов, причём задача насколько специфическая, что средства
           общего назначения, такие как #[+ImportantEntity--YDID Gulp], не&nbsp;подходят.
-        Например, при создании демо для #[+Term--YDID GUI-компонентов] в
-          #[+ImportantEntity__Code--YDID @yamato-daiwa/frontend] был написан скрипт, позволяющий генерировать
-          #[+Term--YDID Pug-файлы], содержащие демонстрацию конкретной особенности компонента на основе определённых
-          исходных файлов (правда из-за того, что скрипт принимает всего один #[+Term--YDID аргумент] через консоль,
-          рассчитанный на более сложные случае #[+ImportantEntity__Code--YDID ConsoleCommandsParser] не&nbsp;потребовался).
 
     p.Article-Paragraph.
-      Но как же всё-таки сделать возможным вызов утилиты по имени, подобно #[+ImportantEntity--YDID gulp],
-        #[+ImportantEntity--YDID webpack] и так далее?
-      Во-первых, поскольку #[+Term--YDID рантайм] #[+ImportantEntity--YDID Node.js] #[+Keyword--YDID не]&nbsp;поддерживает
-        #[+ImportantEntity--YDID TypeScript], то сначала нужно обеспечить #[+Term--YDID транспайлинг] исходного кода в
+      Хорошо, но как же всё-таки сделать возможным вызов утилиты по её #[+Term--YDID имени], подобно
+        #[+SecondaryEntity--YDID gulp], #[+SecondaryEntity--YDID webpack] и так далее?
+
+    p.Article-Paragraph.
+      Во-первых, поскольку #[+Term--YDID рантайм] #[+ImportantEntity--YDID Node.js]
+        #[+Keyword--YDID не]&nbsp;поддерживает #[+ImportantEntity--YDID TypeScript], то сначала
+        #[+Keyword--YDID необходимо] обеспечить #[+Term--YDID транспайлинг] исходного кода в
         #[+ImportantEntity--YDID JavaScript].
-      Сделать это можно как и средствами #[+ImportantEntity--YDID CLI] языка #[+ImportantEntity--YDID TypeScript],
-        так и с помощью сторонних утилит, таких как тот же самый #[+ImportantEntity__Code--YDID Webpack].
+      Сделать это можно как с помощью #[+Term--YDID консольного интерфейса] пакета #[+ImportantEntity--YDID TypeScript],
+        так и с помощью специализированных утилит, таких как тот же самый #[+ImportantEntity--YDID Webpack] (
+        потребуются один или более #[+Term--YDID плагинов] для работы с #[+ImportantEntity--YDID TypeScript]).
 
     p.Article-Paragraph.
-      Однако перед тем, как запускать транспайлинг, необходимо импортировать из #[+Term--YDID точки входа]
-        #[+Term__Contrast--YDID функцию] или же #[+Term--YDID класс], один из #[+Term--YDID методов] которого приведёт
-        к запуску приложения.
-      Вот пример точки входа, которая импортирует функцию #[+ImportantEntity__Code--YDID executeApplication]:
+      Однако перед тем, как запускать #[+Term--YDID транспайлинг], #[+Keyword--YDID необходимо] экспортировать из
+        #[+Term--YDID точки входа] #[+Term__Contrast--YDID функцию] или же #[+Term--YDID класс], вызов одного из
+        #[+Term--YDID методов] которого приведёт к выполнению логики приложения.
+      «Экспортировать из точки входа» — звучит странно, ведь обычно в #[+Term--YDID точку входа] много что импортируется,
+        но ничего не&nbsp;экспортируется.
+      Объясняется это тем, что
+        #[+Keyphrase--YDID в случае консольных #[+ImportantEntity--YDID Node.js]-утилит] #[+Term--YDID точка входа]
+        выполняется #[+Keyword--YDID не]&nbsp;напрямую, а через через #[+Term--YDID исполняемый файл].
+      Вот пример #[+Term--YDID точки входа], которая экспортирует #[+Term__Contrast--YDID функцию]
+        #[+SecondaryEntity__Code--YDID executeApplication]:
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
         import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
 
@@ -975,7 +1039,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JavaScript
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         #!/usr/bin/env node
 
         require("./EntryPoint").executeApplication();
@@ -983,28 +1047,32 @@ block append SpecificContent
     p.Article-Paragraph.
       Здесь первая строка содержит #[+Term--YDID шебанг], указывающий на то, что этот файл необходимо выполнять с помощью
         #[+ImportantEntity--YDID Node.js].
-      Далее следует импортировать функцию, запускающую приложение (#[+SecondaryEntity__Code--YDID executeApplication]
-        в примере выше) и вызвать её.
+      Далее следует импортировать #[+Term--YDID функцию], запускающую приложение
+        (#[+SecondaryEntity__Code--YDID executeApplication] в примере выше) и вызвать её.
 
-    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.notice, SVG_Icon: true }).
-      Такая организация с #[+Term--YDID импортированием] #[+Term__Contrast--YDID функции] и вызовом ещё в
-        #[+Term--YDID исполняемом файле] #[+Keyword--YDID не]&nbsp;является единственной возможной,
-        но как вариант имеет право на существование.
-      Цель — обеспечить выполнение кода, находящегося в #[+Term--YDID точке входа] при её #[+Term--YDID импорте]
-        в #[+Term--YDID исполняемый файл].
+    +QuestionAndAnswerBox--YDF({
+      type: QuestionAndAnswerBox__YDF.Types.question,
+      question: "Почему нельзя это файл сделать точкой входа? " +
+          "Это же вроде как обычный JavaScript-файл, если не считать шебанга."
+    }).
+      В принципе можно, просто в таких #[+Term--YDID исполняемых файлах] не&nbsp;принято хранить логику, более сложную
+        чем вызов одной #[+Term--YDID функции] или одного #[+Term--YDID метода].
+      Однако это лишь рекомендация, а потому кто-то её соблюдает (например, разработчики #[+SecondaryEntity--YDID Gulp]),
+        кто-то — нет (например, разработчики #[+SecondaryEntity--YDID Webpack], на моменты весны 2024 года).
 
     p.Article-Paragraph.
-      Последний шаг — указание в #[+ImportantEntity--YDID package.json] #[+Term--YDID поля]
-        #[+ImportantEntity__Code--YDID bin].
-      Для того, чтобы утилита была доступна по имени, это поле необходимо заполнить #[+Term--YDID объектом]
-        #[+Term__Contrast--YDID типа] #[+Term--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого будут
-        #[+Keyword--YDID команды], а значениями - #[+Keyword--YDID относительные] пути к соответствующим
-        #[+Term--YDID исполняемым файлам] (расширение #[+ImportantEntity--YDID «.js»] #[+Keyword--YDID можно] опустить).
+      Теперь, на этот #[+Term--YDID исполняемый файл] #[+Keyword--YDID необходимо] сослаться из файла
+        #[+ImportantEntity--YDID package.json] Вашего проекта.
+      Для того, чтобы утилита была доступна по #[+Term--YDID имени], #[+Keyword--YDID надо] заполнить #[+Term--YDID поле]
+        #[+ImportantEntity__Code--YDID bin] #[+Term--YDID объектом] #[+Term__Contrast--YDID типа]
+        #[+Term--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого будут #[+Keyword--YDID команды], а
+        #[+Keyword__Contrast--YDID значениями] — #[+Keyword--YDID относительные] #[+Term--YDID пути] к соответствующим
+        #[+Term--YDID исполняемым файлам] (расширение #[+ImportantEntity--YDID «.js»] #[+Keyword--YDID можно] опустить):
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
-      }): :html_special_characters_to_html_entities
+      }): :code_listing--yda
         {
           // ...
           "bin": {
@@ -1012,12 +1080,6 @@ block append SpecificContent
           },
           // ...
         }
-
-    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.notice, SVG_Icon: true }).
-      Напомним, что согласно запутанной, но более-менее устоявшейся терминологии, #[+Term--YDID команда] — это
-        #[+Keyphrase--YDID имя приложения, которое вводится в консоль в первую очередь]
-        (наподобие #[+SecondaryEntity--YDID gulp] или #[+SecondaryEntity--YDID webpack]), а
-        #[+Keyword--YDID не]&nbsp;#[+Term--YDID командная фраза].
 
     p.Article-Paragraph
       | Более подробную информацию о #[+Term--YDID поле] #[+ImportantEntity__Code--YDID «bin»] Вы можете получить в
@@ -1027,409 +1089,487 @@ block append SpecificContent
       }).Article-Link официальной документации npm
       | .
 
-    p.Article-Paragraph.
-      Теперь, если Вы установите этот проект с консольным приложением в другой как #[+Term--YDID зависимость] (для этого
-        #[+Keyphrase--YDID не]&nbsp;обязательно публиковать его в #[+ImportantEntity--YDID npm]), то консольная утилита
-        будет доступна для вызова по тому имени, что Вы указали через #[+Keyword--YDID ключ]
-        #[+Term--YDID ассоциативного массива] #[+ImportantEntity__Code--YDID bin] в #[+ImportantEntity--YDID package.json].
-      Если же Вы планируете опубликовать утилиту в #[+ImportantEntity--YDID npm], то помимо
-        #[+ImportantEntity__Code--YDID bin] потребуется заполнить и некоторые другие поля в
-        #[+ImportantEntity--YDID package.json].
+    p.Article-Paragraph
+      | Для того, чтобы устанавливать Вашу утилиту в другие проекты, нужно заполнить и другие #[+Term--YDID поля]
+      |   #[+ImportantEntity--YDID package.json], такие как #[+ImportantEntity__Code--YDID name] и
+      |   #[+ImportantEntity__Code--YDID version].
+      | Ещё больше #[+Term--YDID полей] потребуется заполнить, если Вы собираетесь публиковать утилиту в
+      |   #[+ImportantEntity--YDID npm].
+      | На официальной сайте #[+ImportantEntity--YDID npm] есть
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.guides.minimalPackageJSON
+      }).Article-Link краткое руководство по данной теме
+      | .
+
+    //-
+      p.Article-Paragraph
+        | Установить Ваш #[+Term--YDID npm-пакет] с консольной утилитой в другой проект можно разными способами:
+        |   через #[+ImportantEntity__Code--YDID npm install &lsqb;package_name&rsqb;], если он опубликован,
+        |
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfLocalNPM_PackageByRelativePath
+        }).Article-Link по относительному пути
+        |   или
+        |
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfNPM_PackageByCommitNumber
+        }).Article-Link по ссылке на коммит
+        |   #[+Term--YDID системы контроля версий].
+        | Как только Вы установите Вашу утилиту в другой проект тем или способом, то сможете вызывать её через
+        |   #[+Term--YDID npm-скрипты], объявленные в #[+ImportantEntity--YDID package.json] этого проекта:
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
+        }): :code_listing--yda
+          {
+            // ...
+            "scripts": {
+              "example": "my_app --option1 alpha --flag"
+            },
+            // ...
+          }
+
+      p.Article-Paragraph.
+        Но опять же, это многих не устроит — ведь хотелось бы запускать утилиту напрямую из консоли по имени, как например:
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+        }): :code_listing--yda
+          my_app --option1 alpha --flag
+      //- TODO 和訳 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      p.Article-Paragraph.
+        Если на этом этапе так и сделать, то Вы получите сообщение о том, что такой команды нет.
+        В случае стандартного терминала #[+SecondaryEntity--YDID Windows] это будет:
+
+      +ConsoleOutput--YDF.
+        "my_app" не является внутренней иил внешней командой, исполняемой программной или пакетный файлом
+
+      p.Article-Paragraph.
+        Очень часто подобные сообщения вызывают удивление новичков, когда они пытаются воспользоваться
+          #[+Term--YDID npm-пакетами] с консольным интерфейсом, такими как #[+SecondaryEntity--YDID gulp],
+          #[+SecondaryEntity--YDID webpack], #[+SecondaryEntity--YDID ts-node] и так далее.
+        Дело в том, что установка #[+Term--YDID npm-пакета] #[+Keyphrase--YDID в проект]
+          #[+Keyword--YDID не]&nbsp;означает его установку на компьютер, а потому #[+Term--YDID операционная система]
+          #[+Keyword--YDID не]&nbsp;знает, где искать введённую #[+Term--YDID команду].
+      //- TODO 英訳 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      p.Article-Paragraph.
+        Решить эту проблему можно по-разному.
+        Наиболее популярными являются следующие решения.
+
+      dl.Article-DescriptionList
+
+        dt Глобальная установка
+        dd.
+          Если Вам действительно очень нужно, чтобы утилита запускалась #[+Keyword--YDID только] по своему имени,
+            то можно её установить #[+Keyword--YDID глобально] (с флагом #[+SecondaryEntity__Code--YDID -g] при запуске
+            #[+SecondaryEntity__Code--YDID npm install]).
+
+        dt Использование #[+ImportantEntity--YDID npx]
+        dd.
+          Если Вы не хотите устанавливать утилиту глобально, но #[+ImportantEntity--YDID npm run] Вас тоже,
+            не&nbsp;устраивает, то можно запустить утилиту через #[+SecondaryEntity__Code--YDID npx].
+          При условии, что утилита (скажем, #[+SecondaryEntity__Code--YDID my_app]) установлена
+            #[+SecondaryEntity__Code--YDID в проект], #[+ImportantEntity__Code--YDID npx myapp] запустит
+            утилиту из проекта, в противном случае предложит её глобальную установку.
+      //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-    h2.Article-Heading2 Программный интерфейс класса ConsoleCommandsParser (API)
+      h2.Article-Heading2 Программный интерфейс класса ConsoleCommandsParser (API)
 
-    p.Article-Paragraph.
-      Все открытые методы и поля класса являются статическими, создание экземпляра класса без ошибок TypeScript
-        невозможно.
+      p.Article-Paragraph.
+        Все открытые методы и поля класса являются статическими, создание экземпляра класса без ошибок TypeScript
+          невозможно.
 
-    h3.Article-Heading3 Статические методы
+      h3.Article-Heading3 Статические методы
 
-    +CallableExpressionScheme--YDF_DK({
-      technicalName: "parse",
-      localizedDescriptiveHeading: "Проанализировать (консольную команду)",
-      genericParameters: [
-        {
-          name: "TargetCommandsAndOptionsCombinations",
-          extends: "ConsoleCommandsParser.GeneralizedCommandsAndOptionsCombinations"
+      +CallableExpressionScheme--YDF_DK({
+        technicalName: "parse",
+        localizedDescriptiveHeading: "Проанализировать (консольную команду)",
+        genericParameters: [
+          {
+            name: "TargetCommandsAndOptionsCombinations",
+            extends: "ConsoleCommandsParser.GeneralizedCommandsAndOptionsCombinations"
+          }
+        ],
+        parametersSpecification: [
+          {
+            genericTechnicalName: "commandLineInterfaceSpecification",
+            localizedName: "Спецификация консольной команды",
+            type: "ConsoleCommandsParser.CommandLineInterfaceSpecification",
+            required: true
+          },
+          {
+            genericTechnicalName: "argumentsVector",
+            localizedName: "Вектор аргументов",
+            type: "Array<string>",
+            defaultValue: "process.argv"
+          }
+        ],
+        returnedValue: "ConsoleCommandsParser.ParsedCommand<TargetCommandsAndOptionsCombinations>",
+        headingTag: "h4"
+      })
+
+      p.Article-Paragraph.
+        Анализирует #[+Term--YDID вектор аргументов] (по умолчанию #[+ImportantEntity__Code--YDID process.argv]) в
+          соответствии со #[+Term--YDID спецификацией консольной команды], переданной через #[+Keyword--YDID первый]
+          #[+Term--YDID параметр], и если #[+Term--YDID вектор аргументов] соответствует спецификации, то возвращает
+          #[+Term--YDID объект], включающий в себя #[+Term--YDID опции консольной команды].
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+        }): :code_listing--yda
+          import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+          import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
+
+          const parsedConsoleCommand: ConsoleCommandsParser.
+              ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
+              ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+      p.Article-Paragraph.
+        Прежде, чем вызывать этот #[+Term--YDID метод], следует выполнить подготовительные работы, включающие в себя:
+
+      ol.Article-OrderedList
+        li.
+          Проектирование #[+Term--YDID консольного интерфейса], заключающееся в принятии решений о том, какие
+            будут в приложении #[+Term--YDID командные фразы] и соответствующие им #[+Term--YDID опции].
+        li.
+          Определение #[+Term--YDID дискриминантного объединения], #[+Keyword--YDID каждая] составляющая которого
+            соответствует #[+Keyword--YDID конкретной] #[+Term--YDID командной фразе] и содержащей в себе
+            #[+Term--YDID опции], #[+Keyphrase--YDID актуальные для этой #[+Term--YDID командной фразы]].
+          Это #[+Term--YDID дискриминантное объединение] предстоит передать в качестве #[+Term--YDID параметра обобщения]
+            #[+Term__Contrast--YDID метода] #[+ImportantEntity__Code--YDID parse].
+
+        li.
+          Определение #[+Term--YDID спецификации консольного приложения], в которой необходимо указать правила валидации
+            #[+Term--YDID опций] для каждой #[+Term--YDID командной фразы], а также рекомендуется указать описания
+            приложения в целом, #[+Term--YDID командных фраз] и #[+Term--YDID опций], чтобы можно было сгенерировать
+            качественную справку.
+          Эту #[+Term--YDID спецификации консольного приложения] предстоит передать в качестве #[+Keyword--YDID первого]
+            #[+Term--YDID параметра] #[+Term--YDID метода] #[+ImportantEntity__Code--YDID parse].
+
+      p.Article-Paragraph.
+        Выше был разобран следующий пример выполнения этих подготовительных шагов:
+
+      +DemoCodeViewer({
+        commandPhrasesEnumeration: true,
+        consoleCommandsObjectTypes: true,
+        specification: true
+      })
+
+
+      h5.Article-Heading5 Параметр обобщения
+
+      p.Article-Paragraph.
+        Должен быть #[+Term--YDID дискриминантным объединением], #[+Keyword--YDID каждая] составляющая которого должна:
+
+      ul.Article-UnorderedList
+
+        li Соответствовать #[+Keyword--YDID конкретной] #[+Term--YDID командной фразе].
+
+        li.
+          Иметь #[+Term--YDID свойство], #[+Keyword--YDID однозначно] идентифицирующее #[+Term--YDID командную фразу],
+            #[+Term__Contrast--YDID ключ] которого (например, #[+SecondaryEntity__Code--YDID phrase])
+            #[+Keyphrase--YDID #[+Keyword--YDID общий] для всех составляющих], однако #[+Term--YDID значение]
+            #[+Keyphrase--YDID в рамках #[+Term--YDID дискриминантного объединения]] #[+Keyword--YDID должно] быть
+            #[+Keyword__Contrast--YDID уникальным].
+          Чтобы гарантировать эту уникальность, можно, как показано в примере ниже, заготовить #[+Term--YDID перечисление]
+            для всех #[+Term--YDID командных фраз] и указывать его #[+Term--YDID элемент] в качестве значения
+            идентифицирующего свойства.
+
+        li.
+          Иметь #[+Term--YDID свойства], соответствующие той же #[+Term__Contrast--YDID командной фразе],
+            что и идентифицирующее свойство.
+          Если #[+Term--YDID опция] необязательная,
+            #[+Keyphrase--YDID при этом #[+Keyword--YDID не]&nbsp;имеет значения по умолчанию],
+            то #[+Keyword--YDID соответствующее] #[+Term--YDID TypeScript-свойство] #[+Keyword__Contrast--YDID необходимо]
+            пометить символом #[+ImportantEntity__Code--YDID ?] после имени свойства.
+
+      +DemoCodeViewer({
+        commandPhrasesEnumeration: true,
+        consoleCommandsObjectTypes: true
+      })
+
+
+      h5.Article-Heading5 Параметры
+
+      h6.Article-Heading6 specification — Спецификация консольного приложения
+
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "ConsoleCommandsParser.CommandLineInterfaceSpecification",
+        localizedDescriptiveHeading: "Спецификация консольной команды",
+        propertiesSpecification: {
+          applicationName: {
+            localizedInterpretation: "Имя приложения",
+            type: "string",
+            required: true
+          },
+          applicationDescription: {
+            localizedInterpretation: "Описание приложения",
+            type: "string",
+            required: false
+          },
+          commandPhrases: {
+            localizedInterpretation: "Спецификация командных фраз",
+            type: "{ [commandPhrase: string]: ConsoleCommandsParser.CommandPhraseSpecification; }",
+            required: true
+          }
         }
-      ],
-      parametersSpecification: [
-        {
-          genericTechnicalName: "commandLineInterfaceSpecification",
-          localizedName: "Спецификация консольной команды",
-          type: "ConsoleCommandsParser.CommandLineInterfaceSpecification",
-          required: true
-        },
-        {
-          genericTechnicalName: "argumentsVector",
-          localizedName: "Вектор аргументов",
-          type: "Array<string>",
-          defaultValue: "process.argv"
+      })
+
+      p.Article-Paragraph.
+        #[+Keyword--YDID Многоуровневый] #[+Term--YDID объект], включающий в себя информацию о
+          #[+Term--YDID консольном приложении] в целом, спецификацию #[+Term--YDID командных фраз] и
+          #[+Term--YDID опций] для каждой из них.
+        Используется для анализа #[+Term--YDID вектора аргументов], их валидации, а так же генерирования справки по
+          использованию #[+Term--YDID консольного приложения].
+
+      p.Article-Paragraph.
+        #[+Keyword--YDID Верхний] уровень включает в себя #[+ImportantEntity--YDID 3] #[+Term--YDID свойства]:
+
+      dl.Article-DescriptionList
+
+        dt #[+ImportantEntity__Code--YDID applicationName]
+        dd.
+          Имя приложения.
+          Используется при бросании #[+Term--YDID исключений], потому является обязательным.
+
+        dt #[+ImportantEntity__Code--YDID applicationDescription]
+        dd.
+          Описание приложения.
+          Используется исключительно для генерации справки.
+          Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
+            рекомендуется в одно-два предложения объяснить, для чего предназначено приложение.
+
+        dt #[+ImportantEntity__Code--YDID commandPhrases]
+        dd.
+          Спецификация #[+Term--YDID командных фраз].
+          #[+Term--YDID Объект] типа #[+Term__Contrast--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого
+            являются #[+Term--YDID командные фразы] #[+Keyphrase--YDID в таком виде, в каком их вводят в консоль].
+          #[+Term--YDID Значениями] же являются #[+Term--YDID объекты] нижеследующего #[+Term--YDID типа].
+
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "ConsoleCommandsParser.CommandPhraseSpecification",
+        localizedDescriptiveHeading: "Спецификация командной фразы",
+        propertiesSpecification: {
+          isDefault: {
+            localizedInterpretation: "Является ли командной фразой по умолчанию",
+            type: "boolean",
+            required: false
+          },
+          description: {
+            localizedInterpretation: "Описание (командной фразы)",
+            type: "string",
+            required: false
+          },
+          options: {
+            localizedInterpretation: "Спецификация опцией командной фразы",
+            type: "{ [optionKey: string]: ConsoleCommandsParser.OptionSpecification; }",
+            required: false
+          }
         }
-      ],
-      returnedValue: "ConsoleCommandsParser.ParsedCommand<TargetCommandsAndOptionsCombinations>",
-      headingTag: "h4"
-    })
-
-    p.Article-Paragraph.
-      Анализирует #[+Term--YDID вектор аргументов] (по умолчанию #[+ImportantEntity__Code--YDID process.argv]) в
-        соответствии со #[+Term--YDID спецификацией консольной команды], переданной через #[+Keyword--YDID первый]
-        #[+Term--YDID параметр], и если #[+Term--YDID вектор аргументов] соответствует спецификации, то возвращает
-        #[+Term--YDID объект], включающий в себя #[+Term--YDID опции консольной команды].
-
-    +CodeViewer--YDF
-      +CodeViewer-Listing--YDF({
-        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
-        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
-        import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
-
-        const parsedConsoleCommand: ConsoleCommandsParser.
-            ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
-            ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
-
-    p.Article-Paragraph.
-      Прежде, чем вызывать этот #[+Term--YDID метод], следует выполнить подготовительные работы, включающие в себя:
-
-    ol.Article-OrderedList
-      li.
-        Проектирование #[+Term--YDID консольного интерфейса], заключающееся в принятии решений о том, какие
-          будут в приложении #[+Term--YDID командные фразы] и соответствующие им #[+Term--YDID опции].
-      li.
-        Определение #[+Term--YDID дискриминантного объединения], #[+Keyword--YDID каждая] составляющая которого
-          соответствует #[+Keyword--YDID конкретной] #[+Term--YDID командной фразе] и содержащей в себе
-          #[+Term--YDID опции], #[+Keyphrase--YDID актуальные для этой #[+Term--YDID командной фразы]].
-        Это #[+Term--YDID дискриминантное объединение] предстоит передать в качестве #[+Term--YDID параметра обобщения]
-          #[+Term__Contrast--YDID метода] #[+ImportantEntity__Code--YDID parse].
-
-      li.
-        Определение #[+Term--YDID спецификации консольного приложения], в которой необходимо указать правила валидации
-          #[+Term--YDID опций] для каждой #[+Term--YDID командной фразы], а также рекомендуется указать описания
-          приложения в целом, #[+Term--YDID командных фраз] и #[+Term--YDID опций], чтобы можно было сгенерировать
-          качественную справку.
-        Эту #[+Term--YDID спецификации консольного приложения] предстоит передать в качестве #[+Keyword--YDID первого]
-          #[+Term--YDID параметра] #[+Term--YDID метода] #[+ImportantEntity__Code--YDID parse].
-
-    p.Article-Paragraph.
-      Выше был разобран следующий пример выполнения этих подготовительных шагов:
-
-    +DemoCodeViewer({
-      commandPhrasesEnumeration: true,
-      consoleCommandsObjectTypes: true,
-      specification: true
-    })
-
-
-    h5.Article-Heading5 Параметр обобщения
-
-    p.Article-Paragraph.
-      Должен быть #[+Term--YDID дискриминантным объединением], #[+Keyword--YDID каждая] составляющая которого должна:
-
-    ul.Article-UnorderedList
-
-      li Соответствовать #[+Keyword--YDID конкретной] #[+Term--YDID командной фразе].
-
-      li.
-        Иметь #[+Term--YDID свойство], #[+Keyword--YDID однозначно] идентифицирующее #[+Term--YDID командную фразу],
-          #[+Term__Contrast--YDID ключ] которого (например, #[+SecondaryEntity__Code--YDID phrase])
-          #[+Keyphrase--YDID #[+Keyword--YDID общий] для всех составляющих], однако #[+Term--YDID значение]
-          #[+Keyphrase--YDID в рамках #[+Term--YDID дискриминантного объединения]] #[+Keyword--YDID должно] быть
-          #[+Keyword__Contrast--YDID уникальным].
-        Чтобы гарантировать эту уникальность, можно, как показано в примере ниже, заготовить #[+Term--YDID перечисление]
-          для всех #[+Term--YDID командных фраз] и указывать его #[+Term--YDID элемент] в качестве значения
-          идентифицирующего свойства.
-
-      li.
-        Иметь #[+Term--YDID свойства], соответствующие той же #[+Term__Contrast--YDID командной фразе],
-          что и идентифицирующее свойство.
-        Если #[+Term--YDID опция] необязательная,
-          #[+Keyphrase--YDID при этом #[+Keyword--YDID не]&nbsp;имеет значения по умолчанию],
-          то #[+Keyword--YDID соответствующее] #[+Term--YDID TypeScript-свойство] #[+Keyword__Contrast--YDID необходимо]
-          пометить символом #[+ImportantEntity__Code--YDID ?] после имени свойства.
-
-    +DemoCodeViewer({
-      commandPhrasesEnumeration: true,
-      consoleCommandsObjectTypes: true
-    })
-
-
-    h5.Article-Heading5 Параметры
-
-    h6.Article-Heading6 specification — Спецификация консольного приложения
-
-    +ObjectTypeAbstract--YDF_DK({
-      typeName: "ConsoleCommandsParser.CommandLineInterfaceSpecification",
-      localizedDescriptiveHeading: "Спецификация консольной команды",
-      propertiesSpecification: {
-        applicationName: {
-          localizedInterpretation: "Имя приложения",
-          type: "string",
-          required: true
-        },
-        applicationDescription: {
-          localizedInterpretation: "Описание приложения",
-          type: "string",
-          required: false
-        },
-        commandPhrases: {
-          localizedInterpretation: "Спецификация командных фраз",
-          type: "{ [commandPhrase: string]: ConsoleCommandsParser.CommandPhraseSpecification; }",
-          required: true
-        }
-      }
-    })
-
-    p.Article-Paragraph.
-      #[+Keyword--YDID Многоуровневый] #[+Term--YDID объект], включающий в себя информацию о
-        #[+Term--YDID консольном приложении] в целом, спецификацию #[+Term--YDID командных фраз] и
-        #[+Term--YDID опций] для каждой из них.
-      Используется для анализа #[+Term--YDID вектора аргументов], их валидации, а так же генерирования справки по
-        использованию #[+Term--YDID консольного приложения].
-
-    p.Article-Paragraph.
-      #[+Keyword--YDID Верхний] уровень включает в себя #[+ImportantEntity--YDID 3] #[+Term--YDID свойства]:
-
-    dl.Article-DescriptionList
-
-      dt #[+ImportantEntity__Code--YDID applicationName]
-      dd.
-        Имя приложения.
-        Используется при бросании #[+Term--YDID исключений], потому является обязательным.
-
-      dt #[+ImportantEntity__Code--YDID applicationDescription]
-      dd.
-        Описание приложения.
-        Используется исключительно для генерации справки.
-        Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
-          рекомендуется в одно-два предложения объяснить, для чего предназначено приложение.
-
-      dt #[+ImportantEntity__Code--YDID commandPhrases]
-      dd.
-        Спецификация #[+Term--YDID командных фраз].
-        #[+Term--YDID Объект] типа #[+Term__Contrast--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого
-          являются #[+Term--YDID командные фразы] #[+Keyphrase--YDID в таком виде, в каком их вводят в консоль].
-        #[+Term--YDID Значениями] же являются #[+Term--YDID объекты] нижеследующего #[+Term--YDID типа].
-
-    +ObjectTypeAbstract--YDF_DK({
-      typeName: "ConsoleCommandsParser.CommandPhraseSpecification",
-      localizedDescriptiveHeading: "Спецификация командной фразы",
-      propertiesSpecification: {
-        isDefault: {
-          localizedInterpretation: "Является ли командной фразой по умолчанию",
-          type: "boolean",
-          required: false
-        },
-        description: {
-          localizedInterpretation: "Описание (командной фразы)",
-          type: "string",
-          required: false
-        },
-        options: {
-          localizedInterpretation: "Спецификация опцией командной фразы",
-          type: "{ [optionKey: string]: ConsoleCommandsParser.OptionSpecification; }",
-          required: false
-        }
-      }
-    })
-
-    dl.Article-DescriptionList
-
-      dt #[+ImportantEntity__Code--YDID isDefault]
-      dd.
-        Является ли #[+Term--YDID командной фразой] #[+Keyphrase--YDID по умолчанию].
-        Поскольку двух и более #[+Term--YDID командных фраз] по умолчанию быть #[+Keyword--YDID не]&nbsp;может,
-          то если #[+ImportantEntity__Code--YDID { isDefault: true }]&nbsp;указано для двух и более
-          #[+Term--YDID командных фраз], то #[+Keyphrase--YDID будет выброшено #[+Term--YDID исключение]].
-
-      dt #[+ImportantEntity__Code--YDID description]
-      dd.
-        Описание #[+Term--YDID командной фразы].
-        Используется исключительно для генерации справки.
-        Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
-          рекомендуется в одно-два предложения объяснить, какой функциональности соответствует
-          #[+Term--YDID командная фразы].
-
-      dt #[+ImportantEntity__Code--YDID options]
-      dd.
-        Спецификация #[+Term--YDID опций] #[+Term__Contrast--YDID командной фразы].
-        #[+Term--YDID Объект] типа #[+Term__Contrast--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого
-          являются #[+Term--YDID ключи опций] #[+Keyphrase--YDID в таком виде, в каком их вводят в консоль].
-        #[+Term--YDID Значениями] же являются #[+Term--YDID объекты] #[+Keyword--YDID полиморфного] #[+Term--YDID типа]
-          #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification].
-
-    p.Article-Paragraph.
-      #[+Keyphrase--YDID Вне зависимости от типа #[+Term--YDID опции]],
-        #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification] имеет следующие #[+Term--YDID свойства]:
-
-    dl.Article-DescriptionList
-
-      dt #[+ImportantEntity__Code--YDID description]
-      dd.
-        Описание #[+Term--YDID опции] #[+Term__Contrast--YDID командной фразы].
-        Используется исключительно для генерации справки.
-        Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
-          рекомендуется в одно-два предложения объяснить, на что влияет данная #[+Term--YDID опция].
-
-      dt #[+ImportantEntity__Code--YDID shortcut]
-      dd.
-        #[+Keyword--YDID Необязательное] #[+Keyword__Contrast--YDID однобуквенное] сокращение #[+Term--YDID ключа опции].
-        Дефис указывать #[+Keyword--YDID не]&nbsp;обязательно.
-
-      dt #[+ImportantEntity__Code--YDID newName]
-      dd.
-        Имя, под которым #[+Term--YDID опция] будет доступна по результатам разбора команды.
-        Если в качестве ключей в #[+Term--YDID ассоциативном массиве]
-          #[+ImportantEntity__Code--YDID options] #[+Keyword--YDID необходимо] указывать именно те строки,
-          которые будут введены в консоль, то #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID newName]
-          этот ключ переименовать в более удобную для разработчиков последовательность символов.
-        Если же переименование не&nbsp;требуется, то #[+ImportantEntity__Code--YDID newName] можно
-          #[+Keyword--YDID не]&nbsp;указывать.
-
-    p.Article-Paragraph.
-      Остальные #[+Term--YDID свойства] зависят от конкретного типа #[+Term--YDID опции], который указывается через
-        #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID type].
-      По сути, #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification] является
-        #[+Term--YDID дискриминантным объединением], где #[+ImportantEntity__Code--YDID type] —
-        #[+Term--YDID идентифицирующее свойство], значением которого должен быть один из
-        #[+Term--YDID элементов перечисления] #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes].
-
-    +CodeViewer--YDF
-      +CodeViewer-Listing--YDF({
-        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
-      }): :html_special_characters_to_html_entities
-        export type OptionSpecification =
-            Readonly<{
-              description?: string;
-              shortcut?: string;
-            }> &
-            (
-              StringOptionSpecification |
-              NumberOptionSpecification |
-              BooleanParameterSpecification |
-              JSON5_ParameterSpecification
-            );
-
-    dl.Article-DescriptionList
-
-      dt #[+ImportantEntity__Code--YDID StringOptionSpecification]
-      dd
-
-        | Спецификация #[+Keyword--YDID строчной] #[+Term--YDID опции].
-
-        dl.Article-DescriptionList
-
-          dt #[+ImportantEntity__Code--YDID type]
-          dd.
-            Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
-              динамической), для #[+Keyword--YDID строчной] #[+Term--YDID опции] должно быть указано значение
-              #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.string]
-              #[+Keyphrase--YDID и ничего другого].
-
-          dt #[+ImportantEntity__Code--YDID allowedAlternatives]
-          dd #[+Keyword--YDID Массив] допустимых значений.
-
-
-      dt #[+ImportantEntity__Code--YDID NumberOptionSpecification]
-      dd
-
-        | Спецификация #[+Keyword--YDID числовой] #[+Term--YDID опции].
-
-        dl.Article-DescriptionList
-
-          dt #[+ImportantEntity__Code--YDID type]
-          dd.
-            Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
-              динамической), для #[+Keyword--YDID числовой] #[+Term--YDID опции] должно быть указано значение
-              #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.number]
-              #[+Keyphrase--YDID и ничего другого].
-
-
-          dt #[+ImportantEntity__Code--YDID numbersSet]
-          dd
-
-            | #[+Term--YDID Множество чисел], которому должно удовлетворять введённое значение.
-            | #[+Keyword--YDID Обязательно] для указания, поскольку от этого зависит алгоритм преобразования
-            |   #[+Keyword--YDID строчного] значения (а #[+Term--YDID вектор аргументов] — это #[+Term--YDID массив]
-            |   #[+Keyword--YDID строк]) в #[+Term--YDID число].
-            | Должно быть #[+Term--YDID элементом перечисления]
-            |   #[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets], заимствованного из
-            |   #[+Term--YDID класса] #[+ImportantEntity__Code--YDID RawObjectDataProcessor] основного пакета:
-
-            dl.Article-DescriptionList
-
-              dt #[+ImportantEntity__Code--YDID naturalNumber]
-              dd Натуральное число
-
-              dt #[+ImportantEntity__Code--YDID nonNegativeInteger]
-              dd Неотрицательное целое число
-
-              dt #[+ImportantEntity__Code--YDID negativeInteger]
-              dd Отрицательное целое число
-
-              dt #[+ImportantEntity__Code--YDID negativeIntegerOrZero]
-              dd Отрицательное целое число либо ноль
-
-              dt #[+ImportantEntity__Code--YDID anyInteger]
-              dd Любое целое число
-
-              dt #[+ImportantEntity__Code--YDID positiveDecimalFraction]
-              dd Положительная десятичная дробь
-
-              dt #[+ImportantEntity__Code--YDID negativeDecimalFraction]
-              dd Отрицательная десятичная дробь
-
-              dt #[+ImportantEntity__Code--YDID decimalFractionOfAnySign]
-              dd Любая десятичная дробь
-
-              dt #[+ImportantEntity__Code--YDID anyRealNumber]
-              dd Любое действительное число
-
-              dt #[+ImportantEntity__Code--YDID minimalValue]
-              dd Минимальное значение
-
-              dt #[+ImportantEntity__Code--YDID maximalValue]
-              dd Минимальное значение
-
-      dt #[+ImportantEntity__Code--YDID BooleanParameterSpecification]
-      dd
-
-        | Спецификация #[+Keyword--YDID булевской] #[+Term--YDID опции].
-
-        dl.Article-DescriptionList
-
-          dt #[+ImportantEntity__Code--YDID type]
-          dd.
-            Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
-              динамической), для #[+Keyword--YDID булевской] #[+Term--YDID опции] должно быть указано значение
-              #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.boolean]
-              #[+Keyphrase--YDID и ничего другого].
-
-
-      dt #[+ImportantEntity__Code--YDID JSON5_ParameterSpecification]
-      dd
-
-        | Спецификация #[+Keyword--YDID объектной] #[+Term--YDID опции], сериализованной в формате
-        |   #[+ImportantEntity--YDID JSON5].
-
-        dl.Article-DescriptionList
-
-          dt #[+ImportantEntity__Code--YDID type]
-          dd.
-            Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
-              динамической), для #[+Keyword--YDID объектной] #[+Term--YDID опции] должно быть указано значение
-              #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.JSON5]
-              #[+Keyphrase--YDID и ничего другого].
-
-          dt #[+ImportantEntity__Code--YDID validValueSpecification]
-          dd.
-            Спецификация #[+Keyword--YDID объектного] #[+Term--YDID значения] в формате
-              #[+ImportantEntity__Code--YDID RawObjectDataProcessor.PropertiesSpecification], согласно которому оно
-              будет валидировано после преобразования из #[+Term--YDID строки] в #[+Term__Contrast--YDID объект].
-
-
-    h6.Article-Heading6 argumentsVector — Вектор аргументов
-
-    h5.Article-Heading5 Возвращаемое значение
-
-    h5.Article-Heading5 Локализация
+      })
+
+      dl.Article-DescriptionList
+
+        dt #[+ImportantEntity__Code--YDID isDefault]
+        dd.
+          Является ли #[+Term--YDID командной фразой] #[+Keyphrase--YDID по умолчанию].
+          Поскольку двух и более #[+Term--YDID командных фраз] по умолчанию быть #[+Keyword--YDID не]&nbsp;может,
+            то если #[+ImportantEntity__Code--YDID { isDefault: true }]&nbsp;указано для двух и более
+            #[+Term--YDID командных фраз], то #[+Keyphrase--YDID будет выброшено #[+Term--YDID исключение]].
+
+        dt #[+ImportantEntity__Code--YDID description]
+        dd.
+          Описание #[+Term--YDID командной фразы].
+          Используется исключительно для генерации справки.
+          Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
+            рекомендуется в одно-два предложения объяснить, какой функциональности соответствует
+            #[+Term--YDID командная фразы].
+
+        dt #[+ImportantEntity__Code--YDID options]
+        dd.
+          Спецификация #[+Term--YDID опций] #[+Term__Contrast--YDID командной фразы].
+          #[+Term--YDID Объект] типа #[+Term__Contrast--YDID «ассоциативный массив»], #[+Keyword--YDID ключами] которого
+            являются #[+Term--YDID ключи опций] #[+Keyphrase--YDID в таком виде, в каком их вводят в консоль].
+          #[+Term--YDID Значениями] же являются #[+Term--YDID объекты] #[+Keyword--YDID полиморфного] #[+Term--YDID типа]
+            #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification].
+
+      p.Article-Paragraph.
+        #[+Keyphrase--YDID Вне зависимости от типа #[+Term--YDID опции]],
+          #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification] имеет следующие #[+Term--YDID свойства]:
+
+      dl.Article-DescriptionList
+
+        dt #[+ImportantEntity__Code--YDID description]
+        dd.
+          Описание #[+Term--YDID опции] #[+Term__Contrast--YDID командной фразы].
+          Используется исключительно для генерации справки.
+          Хотя справка может быть сгенерирована и без этого #[+Term--YDID свойства], для повышения качества справки
+            рекомендуется в одно-два предложения объяснить, на что влияет данная #[+Term--YDID опция].
+
+        dt #[+ImportantEntity__Code--YDID shortcut]
+        dd.
+          #[+Keyword--YDID Необязательное] #[+Keyword__Contrast--YDID однобуквенное] сокращение #[+Term--YDID ключа опции].
+          Дефис указывать #[+Keyword--YDID не]&nbsp;обязательно.
+
+        dt #[+ImportantEntity__Code--YDID newName]
+        dd.
+          Имя, под которым #[+Term--YDID опция] будет доступна по результатам разбора команды.
+          Если в качестве ключей в #[+Term--YDID ассоциативном массиве]
+            #[+ImportantEntity__Code--YDID options] #[+Keyword--YDID необходимо] указывать именно те строки,
+            которые будут введены в консоль, то #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID newName]
+            этот ключ переименовать в более удобную для разработчиков последовательность символов.
+          Если же переименование не&nbsp;требуется, то #[+ImportantEntity__Code--YDID newName] можно
+            #[+Keyword--YDID не]&nbsp;указывать.
+
+      p.Article-Paragraph.
+        Остальные #[+Term--YDID свойства] зависят от конкретного типа #[+Term--YDID опции], который указывается через
+          #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID type].
+        По сути, #[+ImportantEntity__Code--YDID ConsoleCommandsParser.OptionSpecification] является
+          #[+Term--YDID дискриминантным объединением], где #[+ImportantEntity__Code--YDID type] —
+          #[+Term--YDID идентифицирующее свойство], значением которого должен быть один из
+          #[+Term--YDID элементов перечисления] #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes].
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+        }): :code_listing--yda
+          export type OptionSpecification =
+              Readonly<{
+                description?: string;
+                shortcut?: string;
+              }> &
+              (
+                StringOptionSpecification |
+                NumberOptionSpecification |
+                BooleanParameterSpecification |
+                JSON5_ParameterSpecification
+              );
+
+      dl.Article-DescriptionList
+
+        dt #[+ImportantEntity__Code--YDID StringOptionSpecification]
+        dd
+
+          | Спецификация #[+Keyword--YDID строчной] #[+Term--YDID опции].
+
+          dl.Article-DescriptionList
+
+            dt #[+ImportantEntity__Code--YDID type]
+            dd.
+              Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
+                динамической), для #[+Keyword--YDID строчной] #[+Term--YDID опции] должно быть указано значение
+                #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.string]
+                #[+Keyphrase--YDID и ничего другого].
+
+            dt #[+ImportantEntity__Code--YDID allowedAlternatives]
+            dd #[+Keyword--YDID Массив] допустимых значений.
+
+
+        dt #[+ImportantEntity__Code--YDID NumberOptionSpecification]
+        dd
+
+          | Спецификация #[+Keyword--YDID числовой] #[+Term--YDID опции].
+
+          dl.Article-DescriptionList
+
+            dt #[+ImportantEntity__Code--YDID type]
+            dd.
+              Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
+                динамической), для #[+Keyword--YDID числовой] #[+Term--YDID опции] должно быть указано значение
+                #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.number]
+                #[+Keyphrase--YDID и ничего другого].
+
+
+            dt #[+ImportantEntity__Code--YDID numbersSet]
+            dd
+
+              | #[+Term--YDID Множество чисел], которому должно удовлетворять введённое значение.
+              | #[+Keyword--YDID Обязательно] для указания, поскольку от этого зависит алгоритм преобразования
+              |   #[+Keyword--YDID строчного] значения (а #[+Term--YDID вектор аргументов] — это #[+Term--YDID массив]
+              |   #[+Keyword--YDID строк]) в #[+Term--YDID число].
+              | Должно быть #[+Term--YDID элементом перечисления]
+              |   #[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets], заимствованного из
+              |   #[+Term--YDID класса] #[+ImportantEntity__Code--YDID RawObjectDataProcessor] основного пакета:
+
+              dl.Article-DescriptionList
+
+                dt #[+ImportantEntity__Code--YDID naturalNumber]
+                dd Натуральное число
+
+                dt #[+ImportantEntity__Code--YDID nonNegativeInteger]
+                dd Неотрицательное целое число
+
+                dt #[+ImportantEntity__Code--YDID negativeInteger]
+                dd Отрицательное целое число
+
+                dt #[+ImportantEntity__Code--YDID negativeIntegerOrZero]
+                dd Отрицательное целое число либо ноль
+
+                dt #[+ImportantEntity__Code--YDID anyInteger]
+                dd Любое целое число
+
+                dt #[+ImportantEntity__Code--YDID positiveDecimalFraction]
+                dd Положительная десятичная дробь
+
+                dt #[+ImportantEntity__Code--YDID negativeDecimalFraction]
+                dd Отрицательная десятичная дробь
+
+                dt #[+ImportantEntity__Code--YDID decimalFractionOfAnySign]
+                dd Любая десятичная дробь
+
+                dt #[+ImportantEntity__Code--YDID anyRealNumber]
+                dd Любое действительное число
+
+                dt #[+ImportantEntity__Code--YDID minimalValue]
+                dd Минимальное значение
+
+                dt #[+ImportantEntity__Code--YDID maximalValue]
+                dd Минимальное значение
+
+        dt #[+ImportantEntity__Code--YDID BooleanParameterSpecification]
+        dd
+
+          | Спецификация #[+Keyword--YDID булевской] #[+Term--YDID опции].
+
+          dl.Article-DescriptionList
+
+            dt #[+ImportantEntity__Code--YDID type]
+            dd.
+              Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
+                динамической), для #[+Keyword--YDID булевской] #[+Term--YDID опции] должно быть указано значение
+                #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.boolean]
+                #[+Keyphrase--YDID и ничего другого].
+
+
+        dt #[+ImportantEntity__Code--YDID JSON5_ParameterSpecification]
+        dd
+
+          | Спецификация #[+Keyword--YDID объектной] #[+Term--YDID опции], сериализованной в формате
+          |   #[+ImportantEntity--YDID JSON5].
+
+          dl.Article-DescriptionList
+
+            dt #[+ImportantEntity__Code--YDID type]
+            dd.
+              Для выполнения корректной валидации (как статической с помощью #[+ImportantEntity--YDID TypeScript], так и
+                динамической), для #[+Keyword--YDID объектной] #[+Term--YDID опции] должно быть указано значение
+                #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes.JSON5]
+                #[+Keyphrase--YDID и ничего другого].
+
+            dt #[+ImportantEntity__Code--YDID validValueSpecification]
+            dd.
+              Спецификация #[+Keyword--YDID объектного] #[+Term--YDID значения] в формате
+                #[+ImportantEntity__Code--YDID RawObjectDataProcessor.PropertiesSpecification], согласно которому оно
+                будет валидировано после преобразования из #[+Term--YDID строки] в #[+Term__Contrast--YDID объект].
+
+
+      h6.Article-Heading6 argumentsVector — Вектор аргументов
+
+      h5.Article-Heading5 Возвращаемое значение
+
+      h5.Article-Heading5 Локализация

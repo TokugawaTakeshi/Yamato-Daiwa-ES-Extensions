@@ -160,7 +160,7 @@ block append SpecificContent
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
         +CodeViewer-Explanation--YDF.
           米国の都市名が含まれている#[+Term--YDID 配列]を例として挙げる。
@@ -168,7 +168,7 @@ block append SpecificContent
             #[+SecondaryEntity--YDID 3件]が#[+SecondaryEntity__Code--YDID 「Sa」]から始まっているが、#[+SecondaryEntity--YDID 「St.」]
             から始まっているのは#[+SecondaryEntity--YDID 1件]#[+Keyword--YDID のみ]である。
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
           );
@@ -186,7 +186,7 @@ block append SpecificContent
             其れで、此の#[+Term--YDID 引数]の組み合わせだと、#[+ImportantEntity--YDID null]が返される可能性が有る。
 
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(targetCityName.length);
         +CodeViewer-Explanation--YDF
 
@@ -212,7 +212,7 @@ block append SpecificContent
              其の他の#[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]を利用する事で得られる利点を無くしている]、
              #[+Keyphrase--YDID 有害な]機能を使用している事が多い。
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(
             getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
               sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
@@ -235,7 +235,7 @@ block append SpecificContent
               #[+Term--YDID プレディケート]を満たす要素の数が丁度1個では&nbsp;#[+Keyword--YDID なく]なった場合、
               #[+ImportantEntity__Code--YDID UnexpectedEventError]が投げられる（思われるより此れの可能性が高い）。
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
@@ -337,6 +337,7 @@ block append SpecificContent
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList

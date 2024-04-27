@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Incremental development building" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="Distributable Packing" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="Incremental development building" />
+      <script value="Distributable Packing" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

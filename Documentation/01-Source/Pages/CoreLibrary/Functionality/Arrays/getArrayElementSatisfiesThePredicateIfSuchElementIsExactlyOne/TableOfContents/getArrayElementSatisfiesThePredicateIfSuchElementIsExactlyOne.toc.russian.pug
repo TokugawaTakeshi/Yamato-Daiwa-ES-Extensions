@@ -9,12 +9,19 @@ include getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.pug
       retrievingOfElements.$children.
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$sectioning =
 
-          generatePageTableOfContents({
-            example: { $heading: "Пример" },
-            comparisonWithNativeMethods: { $heading: "Сравнение с нативными методами" },
-            quickInputInIntelliJIDEA_FamilyOfIDEs: {
-              $heading: "Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA",
-              stepsForUsingTheLiveTemplates: { $heading: "Steps for using the Live templates" }
-            },
-            externalLinks: { $heading: "Внешние ссылки" }
-          });
+          generatePageTableOfContents(
+            (() => {
+
+              /* [ Maintainability ] Keep this constant to make able the copying of qualified names in IntelliJ IDEA IDEs. */
+              const localizedStrings = {
+                example: { $heading: "Пример" },
+                comparisonWithNativeMethods: { $heading: "Сравнение с нативными методами" },
+                IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+                    IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__russian,
+                externalLinks: { $heading: "Внешние ссылки" }
+              };
+
+              return localizedStrings;
+
+            })()
+          );

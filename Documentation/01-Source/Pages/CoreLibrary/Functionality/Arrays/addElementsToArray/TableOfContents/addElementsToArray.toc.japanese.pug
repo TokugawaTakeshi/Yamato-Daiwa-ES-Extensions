@@ -8,69 +8,77 @@ include addElementsToArray.toc.pug
       arrays.$children.
       addingOfElements.$children.
       addElementsToArray.$sectioning =
-          generatePageTableOfContents({
 
-            examples: {
+          generatePageTableOfContents(
+            (() => {
 
-              $heading: "例",
+              /* [ Maintainability ] Keep this constant to make able the copying of qualified names in IntelliJ IDEA IDEs. */
+              const localizedStrings = {
 
-              addingOfOneElementToTheStartOfArray: {
-                $heading: "配列の最初の位置に、単一の要素を追加",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                examples: {
 
-              addingOfOneElementToTheEndOfArray: {
-                $heading: "配列の最後の位置に、単一の要素を追加",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  $heading: "例",
 
-              addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0: {
-                $heading: "配列の特定位置への単一要素の追加（0から計算）",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  addingOfOneElementToTheStartOfArray: {
+                    $heading: "配列の最初の位置に、単一の要素を追加",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-              addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1: {
-                $heading: "配列の特定位置への単一要素の追加（1から計算）",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  addingOfOneElementToTheEndOfArray: {
+                    $heading: "配列の最後の位置に、単一の要素を追加",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-              addingOfMultipleElementsToTheStartOfArray: {
-                $heading: "配列の最初の位置に、複数の要素を追加する",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0: {
+                    $heading: "配列の特定位置への単一要素の追加（0から計算）",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-              addingOfMultipleElementsToTheEndOfArray: {
-                $heading: "配列の最後の位置に、複数の要素を追加する",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1: {
+                    $heading: "配列の特定位置への単一要素の追加（1から計算）",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-              addingOfMultipleElementsToTheSpecificPositionNumerationFrom0: {
-                $heading: "配列の特定位置への、複数の新規要素の追加（0から計算）",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              },
+                  addingOfMultipleElementsToTheStartOfArray: {
+                    $heading: "配列の最初の位置に、複数の要素を追加する",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-              addingOfMultipleElementsToTheSpecificPositionNumerationFrom1: {
-                $heading: "配列の特定位置への、複数の新規要素の追加（1から計算）",
-                mutableAdding: { $heading: "変更を伴う追加" },
-                immutableAdding: { $heading: "変更を伴わない追加" }
-              }
+                  addingOfMultipleElementsToTheEndOfArray: {
+                    $heading: "配列の最後の位置に、複数の要素を追加する",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-            },
+                  addingOfMultipleElementsToTheSpecificPositionNumerationFrom0: {
+                    $heading: "配列の特定位置への、複数の新規要素の追加（0から計算）",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  },
 
-            quickInputInIntelliJIDEA_FamilyOfIDEs: {
-              $heading: "「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力",
-              stepsForUsingTheLiveTemplates: { $heading: "Live Templateの利用手順" }
-            },
+                  addingOfMultipleElementsToTheSpecificPositionNumerationFrom1: {
+                    $heading: "配列の特定位置への、複数の新規要素の追加（1から計算）",
+                    mutableAdding: { $heading: "変更を伴う追加" },
+                    immutableAdding: { $heading: "変更を伴わない追加" }
+                  }
 
-            externalLinks: {
-              $heading: "外部リンク"
-            }
+                },
 
-          });
+                IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+                    IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__japanese,
+
+                externalLinks: {
+                  $heading: "外部リンク"
+                }
+
+              };
+
+              return localizedStrings;
+
+            })()
+          );

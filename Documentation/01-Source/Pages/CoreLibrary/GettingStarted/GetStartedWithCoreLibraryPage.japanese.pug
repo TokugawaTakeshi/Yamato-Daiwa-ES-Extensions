@@ -39,6 +39,8 @@ block append Metadata
       russian: "./GetStartedWithCoreLibraryPage.russian.html"
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
+
     const externalLinks = {
       stackOverflow: {
         parametersValidationInTypeScript: "https://stackoverflow.com/q/73410742/4818123"
@@ -57,12 +59,18 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 利用開始
+    //- ━━━ 早速着手 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 1,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+    }).Article-Heading1
 
     //- ━━━ 導入 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.installation.$heading,
+      HTML_ID: pageTableOfContents.installation.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm]
@@ -77,9 +85,11 @@ block append SpecificContent
 
 
     //- ━━━ 配布容量関連 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.distributiveVolumeNotice.$heading,
+      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph
       +Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト
@@ -134,9 +144,11 @@ block append SpecificContent
 
 
     //- ━━━ TypeScriptの非利用者に対する注意事項 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       我々のライブラリ開発は、#[+ImportantEntity--YDID TypeScript]利用者の補助を
@@ -180,9 +192,11 @@ block append SpecificContent
 
 
     //- ━━━ 機能のインポート ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.importingFunctionality.$heading,
+      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       当#[+Term--YDID npmパッケージ]の導入後に、当サイト内で紹介している#[+Term--YDID 関数]や#[+Term--YDID クラス]等の

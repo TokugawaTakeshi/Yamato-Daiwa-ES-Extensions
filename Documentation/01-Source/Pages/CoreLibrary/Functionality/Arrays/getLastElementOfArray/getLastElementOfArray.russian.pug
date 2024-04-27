@@ -42,6 +42,12 @@ block append Metadata
       japanese: "./getLastElementOfArray.japanese.html"
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.
+        functionality.$children.
+        arrays.$children.
+        retrievingOfElements.$children.
+        getLastElementOfArray.$sectioning;
+
 
 block append HeadScriptsLinks
 
@@ -137,12 +143,17 @@ block append SpecificContent
         #[+Keyword--YDID гарантировать], что #[+Keyword--YDID последний] #[+Term--YDID элемент массива] существует.
 
 
-    h2.Article-Heading2 Примеры
+    //- ━━━ Примеры ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.examples.$heading,
+      HTML_ID: pageTableOfContents.examples.$anchor
+    }).Article-Heading2
 
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const sample: Array<string> = [ "alpha", "bravo", "charlie" ];
 
           const lastElementOfSample: string | null = getLastElementOfArray(sample);
@@ -155,7 +166,7 @@ block append SpecificContent
           Другими словами, предполагается, что #[+Term--YDID массив] может быть пустым все зависимости от того, знаем
             мы об этом заранее или нет (на практике обычно не&nbsp;знаем).
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(lastElementOfSample.length);
         +CodeViewer-Explanation--YDF
 
@@ -183,7 +194,7 @@ block append SpecificContent
               характер, сопровождающийся применением типа #[+ImportantEntity__Code--YDID any] и других послаблений,
               #[+Keyphrase--YDID сводящих на нет смысл использования языка #[+ImportantEntity--YDID TypeScript]].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const notNullLastElementOfSample: string = getLastElementOfArray(sample, { mustThrowErrorIfArrayIsEmpty: true });
         +CodeViewer-Explanation--YDF.
           #[+Keyphrase--YDID В данном случае, когда у нас есть #[+ImportantEntity--YDID 2-ой] #[+Term--YDID параметр]],
@@ -198,7 +209,9 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -245,7 +258,12 @@ block append SpecificContent
           #[+Term--YDID функции].
 
 
-    h2.Article-Heading2 Внешние ссылки
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.externalLinks.$heading,
+      HTML_ID: pageTableOfContents.externalLinks.$anchor
+    }).Article-Heading2
 
     +LinksCardsFlow--YDF
 

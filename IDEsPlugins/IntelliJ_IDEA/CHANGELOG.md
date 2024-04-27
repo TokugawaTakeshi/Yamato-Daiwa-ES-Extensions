@@ -13,6 +13,7 @@
 
 * Drop support forIntelliJ IDEA platform **>2023.1**
 
+
 ## [0.0.7]
 
 ### Changed

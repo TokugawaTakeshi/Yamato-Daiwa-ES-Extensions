@@ -1,9 +1,22 @@
+-
+
+  const IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__japanese = {
+    $heading: "「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力",
+    steps: { $heading: "Live Templateの利用手順" }
+  };
+
+
 mixin IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance(properties)
 
-  - const { imageURI } = properties
+  - const { imageURI, relatedTableOfContentsMetadata } = properties;
 
 
-  h2.Article-Heading2 「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力
+  //- ━━━ 「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  +Heading--YDF({
+    level: 2,
+    text: relatedTableOfContentsMetadata.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$anchor
+  }).Article-Heading2
 
   +SingleImageViewer--YDF({
     imageURI: imageURI,
@@ -22,7 +35,12 @@ mixin IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance(properties)
     |   を導入する必要が有る。
 
 
-  h3.Article-Heading3 Live Templateの利用手順
+  //- ─── Live Templateの利用手順 ───────────────────────────────────────────────────────────────────────────
+  +Heading--YDF({
+    level: 3,
+    text: relatedTableOfContentsMetadata.$children.steps.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$children.steps.$anchor
+  }).Article-Heading3
 
   p.Article-Paragraph.
     #[+Term--YDID ライブテンプレート]を使った事が無い場合でも、充実した内容の手順書が下記にある為、心配は無用である。

@@ -1,10 +1,10 @@
-/02-LocalDevelopmentBuild/
-/03-ProductionBuild/
+02-LocalDevelopmentBuild/
+03-ProductionBuild/
 
-/node_modules/
+node_modules/
 
 **/.DS_Store
 
 
 # Temporary
-/.yda/
+.yda/

@@ -39,6 +39,12 @@ block append Metadata
       russian: "./getLastElementOfArray.russian.html",
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.
+        functionality.$children.
+        arrays.$children.
+        retrievingOfElements.$children.
+        getLastElementOfArray.$sectioning;
+
 
 block append HeadScriptsLinks
 
@@ -130,12 +136,17 @@ block append SpecificContent
         #[+Term__Contrast--YDID 要素]が存在していると#[+Keyword--YDID 保証]する。
 
 
-    h2.Article-Heading2 例
+    //- ━━━ 例 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.examples.$heading,
+      HTML_ID: pageTableOfContents.examples.$anchor
+    }).Article-Heading2
 
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const sample: Array<string> = [ "alpha", "bravo", "charlie" ];
 
           const lastElementOfSample: string | null = getLastElementOfArray(sample);
@@ -145,7 +156,7 @@ block append SpecificContent
             の値を#[+Keyword--YDID 事前に]分かっているが、実践の場合には事前に知らない事が多いので、返される値が#[+ImportantEntity--YDID null]
             に成っている（詰まり#[+Term--YDID 配列]が空に成っている可能性が有る）#[+Keyword--YDID 前提]。
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(lastElementOfSample.length);
         +CodeViewer-Explanation--YDF
 
@@ -168,7 +179,7 @@ block append SpecificContent
             此の様な機能を使用するエンジニアは#[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]を利用する有意義さを無くす]
               #[+Keyword--YDID 有害]機能である#[+ImportantEntity__Code--YDID any]#[+Term--YDID 型]も幅広く用いている事が多い。
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const notNullLastElementOfSample: string = getLastElementOfArray(sample, { mustThrowErrorIfArrayIsEmpty: true });
         +CodeViewer-Explanation--YDF.
           #[+Keyphrase--YDID #[+ImportantEntity--YDID 2個目]の#[+Term--YDID 引数]を指定した場合]、
@@ -182,7 +193,9 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -218,7 +231,12 @@ block append SpecificContent
           最初の文字から成り立っている当#[+Term--YDID ライブテンプレート]の#[+Keyword--YDID アリアス]を使っても良いが、何度も使用しないと覚えられない点が短所である。
 
 
-    h2.Article-Heading2 外部リンク
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.externalLinks.$heading,
+      HTML_ID: pageTableOfContents.externalLinks.$anchor
+    }).Article-Heading2
 
     +LinksCardsFlow--YDF
 

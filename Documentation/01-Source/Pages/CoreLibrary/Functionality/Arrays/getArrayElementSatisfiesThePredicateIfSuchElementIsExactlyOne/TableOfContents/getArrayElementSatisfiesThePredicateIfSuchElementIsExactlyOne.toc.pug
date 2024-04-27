@@ -8,7 +8,7 @@
         retrievingOfElements.$children.
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI;
 
-    const tableOfContents = {
+    const pageTableOfContents = {
 
       example: {
 
@@ -42,21 +42,18 @@
 
       },
 
-      quickInputInIntelliJIDEA_FamilyOfIDEs: {
+      IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance: {
 
-        $heading: localizedStrings.quickInputInIntelliJIDEA_FamilyOfIDEs.$heading,
-        $anchor: "QUICK_INPUT_IN_INTELLIJ_IDEA_FAMILY_OF_IDES--SECTION",
-        get $URI() { return `${ PAGE_URI }#${ this.$anchor }` },
+        $heading: localizedStrings.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance.$heading,
+        $anchor: "INTELLIJ_IDEA_IDES_LIVE_TEMPLATE_USAGE_GUIDANCE--SECTION",
+        get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; },
 
         $children: {
-
-          stepsForUsingTheLiveTemplates: {
-            $heading: localizedStrings.quickInputInIntelliJIDEA_FamilyOfIDEs.
-                stepsForUsingTheLiveTemplates.$heading,
-            $anchor: "STEPS_FOR_USING_THE_LIVE_TEMPLATES--SECTION",
-            get $URI() { return `${ PAGE_URI }#${ this.$anchor }` }
+          steps: {
+            $heading: localizedStrings.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance.steps.$heading,
+            $anchor: "INTELLIJ_IDEA_IDES_LIVE_TEMPLATE_USAGE_GUIDANCE-STEPS--SECTION",
+            get $URI() { return `${ PAGE_URI }#${ this.$anchor }`; }
           }
-
         }
 
       },
@@ -69,6 +66,6 @@
 
     };
 
-    return tableOfContents;
+    return pageTableOfContents;
 
   };

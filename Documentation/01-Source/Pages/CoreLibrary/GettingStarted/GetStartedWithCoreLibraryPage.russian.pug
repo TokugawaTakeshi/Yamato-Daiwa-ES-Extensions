@@ -38,6 +38,8 @@ block append Metadata
       japanese: "./GetStartedWithCoreLibraryPage.japanese.html"
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
+
     const externalLinks = {
       stackOverflow: {
         parametersValidationInTypeScript: "https://ru.stackoverflow.com/q/1464837/193415"
@@ -56,12 +58,18 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Начало использования
+    //- ━━━ Начало использования ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 1,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+    }).Article-Heading1
 
     //- ━━━ Установка ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.installation.$heading,
+      HTML_ID: pageTableOfContents.installation.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       Процедура установки стандартная, с помощью #[+Term--YDID пакетного менеджера]
@@ -76,9 +84,11 @@ block append SpecificContent
 
 
     //- ━━━ Заметка об объёме дистрибутива ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.distributiveVolumeNotice.$heading,
+      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph
       | На
@@ -153,9 +163,11 @@ block append SpecificContent
 
 
     //- ━━━ Предупреждение об использовании без TypeScript ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       Библиотека разрабатывается #[+Keyphrase--YDID в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript]].
@@ -201,9 +213,11 @@ block append SpecificContent
 
 
     //- ━━━ Импорт функциональности ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.importingFunctionality.$heading,
+      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       После того, как #[+Term--YDID npm-пакет] установлен, становится возможным #[+Term--YDID импорт] любых

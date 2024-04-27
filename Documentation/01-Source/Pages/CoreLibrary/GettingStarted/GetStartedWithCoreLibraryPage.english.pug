@@ -39,6 +39,8 @@ block append Metadata
       russian: "./GetStartedWithCoreLibraryPage.russian.html"
     });
 
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
+
     const externalLinks = {
       stackOverflow: {
         parametersValidationInTypeScript: "https://stackoverflow.com/q/73410742/4818123"
@@ -57,12 +59,18 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Starting Use
+    //- ━━━ Starting Use ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 1,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+    }).Article-Heading1
 
     //- ━━━ Installation ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.installation.$heading,
+      HTML_ID: pageTableOfContents.installation.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       The normal installation method is to execute from the
@@ -78,9 +86,11 @@ block append SpecificContent
 
 
     //- ━━━ Information About Distribution Size ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.distributiveVolumeNotice.$heading,
+      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph
       | On the
@@ -154,9 +164,11 @@ block append SpecificContent
 
 
     //- ━━━ Precautions for Non-Users of TypeScript ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       Our library was developed #[+Keyword--YDID primarily] for the goal of assisting users of
@@ -210,9 +222,11 @@ block append SpecificContent
 
 
     //- ━━━ Importing functionality ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$anchor
-    )= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingFunctionality.$tableOfContentsTitle
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.importingFunctionality.$heading,
+      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       After installing this #[+Term--YDID npm package], you can import the #[+Term--YDID functions],
