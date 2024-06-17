@@ -1,0 +1,129 @@
+extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
+    HTML_PageMetaData = {
+      description: MetaDescriptionTemplates.function({
+        functionName: "areStringifiedDigitsOnly",
+        whatFunctionDoes:
+          "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
+            "то возвращает логическое значение «истина»"
+      }),
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./areStringifiedDigitsOnly.english.html",
+      japanese: "./areStringifiedDigitsOnly.japanese.html"
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "areStringifiedDigitsOnly",
+      localizedDescriptiveHeading: "Только ли цифры содержатся в строке",
+      parametersSpecification: [
+        {
+          localizedName: "Целевая строка",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean",
+      headingTag: "h1"
+    })
+
+    p.Article-Paragraph.
+      Проверяет, #[+Keyword--YDID только ли] #[+Term--YDID цифры] содержит целевое строчное значение.
+
+    p.Article-Paragraph.
+      Конечно, ту же проверку сделать и с помощью #[+Term--YDID регулярного выражения] (причём в данном случае оно будет
+        предельно простым), но всё же #[+Term--YDID регулярные выражения] - это #[+Keyword--YDID низкоуровневый] интерфейс,
+        а цель библиотеки - сделать код высокоуровневым, чтобы он идеале представлял собой последовательный вызов
+        узкоспециализированных функций и методов классов #[+Keyphrase--YDID с содержательными и однозначными именами],
+        а потому легко читался как список действий.
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.notice, SVG_Icon: true })
+
+      h2.Article-Heading2 Цифры, числа, последовательности цифр
+
+      p.Article-Paragraph.
+        Хотя в средствах массовой информации #[+Term--YDID "числа"] называют #[+Term--YDID "цифрами"],
+          #[+Keyphrase--YDID с точки зрения математики] это два #[+Keyword--YDID разных] термина.
+        #[+DefinableTerm--YDID Цифры] - это #[+Keyword--YDID набор] из #[+Keyword__Contrast--YDID десяти]
+          #[+Term--YDID символов] от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9].
+        Хотя #[+Term--YDID числа] от от #[+ImportantEntity--YDID 0] до #[+ImportantEntity--YDID 9] и #[+Keyword--YDID совпадают]
+          с #[+Term--YDID цифрами], двузначные числа и числа с бо&#x301;льшим количеством знаков, отрицательные числа,
+          дробные числа и так далее - это всё #[+Keyword--YDID именно] #[+Term--YDID числа], а #[+Keyword--YDID не] цифры.
+
+      p.Article-Paragraph.
+        Также, #[+Keyword--YDID последовательности] #[+Term--YDID цифр] #[+Keyphrase--YDID начинающиеся с нуля],
+        #[+Term--YDID числами] #[+Keyword--YDID не] являются - это, собственно, просто #[+Term--YDID последовательности цифр].
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF.
+          import { areStringifiedDigitsOnly } from "@yamato-daiwa/es-extensions";
+
+          console.log(areStringifiedDigitsOnly("123"));
+        +CodeViewer-Explanation--YDF.
+          Данная строка включает в себя #[+Keyword--YDID только] цифры, а потому вызов функции вернёт
+            #[+SecondaryEntity__Code--YDID true].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("032"));
+        +CodeViewer-Explanation--YDF.
+          Хотя содержимое строки - #[+SecondaryEntity__Code--YDID 032] - это #[+Keyword--YDID не] число,
+            #[+Term--YDID последовательностью цифр] оно является, а потому возвращаемым значением будет #[+SecondaryEntity__Code--YDID true].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("03e"));
+        +CodeViewer-Explanation--YDF.
+          Что такое #[+SecondaryEntity__Code--YDID e] в данный строке?
+          #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.wikipedia.math.euler_sNumber" }).Article-Link Число Эйлера]?
+          Как бы то ни было, #[+ImportantEntity__Code--YDID areStringifiedDigitsOnly] возвращает #[+ImportantEntity__Code--YDID true]
+            #[+Keyphrase--YDID тогда и только тогда], когда строка содержит #[+Keyword--YDID только] #[+Term--YDID цифры]
+            (что очевидно и #[+Keyphrase--YDID должно быть] очевидно из названия функции),
+            потому в данном случае будет возвращено значение #[+SecondaryEntity__Code--YDID false].
+
+        +CodeViewer-PartialListing--YDF.
+          console.log(areStringifiedDigitsOnly("ab1"));
+        +CodeViewer-Explanation--YDF.
+          Здесь, разумеется, будет возвращено #[+SecondaryEntity__Code--YDID false], потому что строка содержит
+            буквенные символы.

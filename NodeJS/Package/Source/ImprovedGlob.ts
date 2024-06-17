@@ -1,5 +1,5 @@
 import Glob from "glob";
-import minimatch from "minimatch";
+import { minimatch } from "minimatch";
 import {
   replaceDoubleBackslashesWithForwardSlashes,
   removeSpecificCharacterFromCertainPosition,

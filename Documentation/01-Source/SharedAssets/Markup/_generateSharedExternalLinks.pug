@@ -2,11 +2,14 @@
 
   function generateSharedExternalLinks(localization) {
 
-    return {
+    /* [ Methodology ] Keep this variable to easily copy the qualified name by IntelliJ IDEA IDEs functionality. */
+    const sharedExternalLinks = {
 
       mdn: {
         array: {
-          unshift: localization.mdn.array.unshift
+          unshift: localization.mdn.array.unshift,
+          push: localization.mdn.array.push,
+          splice: localization.mdn.array.splice
         }
       },
 
@@ -14,9 +17,26 @@
         configurationReference: "https://www.typescriptlang.org/tsconfig"
       },
 
+      tsNode: {
+        homePage: {
+          top: "https://typestrong.org/ts-node/"
+        }
+      },
+
       npm: {
         top: "https://www.npmjs.com",
+        packageJSON: {
+          bin: "https://docs.npmjs.com/cli/v10/configuring-npm/package-json#bin"
+        },
+        guides: {
+          minimalPackageJSON: "https://docs.npmjs.com/creating-a-package-json-file"
+        },
         YDES_Extensions: "https://www.npmjs.com/package/@yamato-daiwa/es-extensions"
+      },
+
+      stackOverflow: {
+        installationOfLocalNPM_PackageByRelativePath: "https://stackoverflow.com/a/26028854/4818123",
+        installationOfNPM_PackageByCommitNumber: "https://stackoverflow.com/a/18049685/4818123"
       },
 
       webpack: {
@@ -37,5 +57,7 @@
       }
 
     };
+
+    return sharedExternalLinks;
 
   }

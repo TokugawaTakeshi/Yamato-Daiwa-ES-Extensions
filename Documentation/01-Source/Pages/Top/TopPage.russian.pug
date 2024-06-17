@@ -3,8 +3,8 @@ extends ../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/Mi
 
 block append Requirements
 
-  include ../../Components/Components.russian.pug
-  include ../../SharedAssets/Markup/Assets.russian.pug
+  include ../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -12,27 +12,43 @@ block append Metadata
   -
 
     HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страницы");
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страница");
     HTML_PageMetaData = {
-      description: "Библиотека &quot;Yamato-Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;) - " +
-          "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
+      description:
+          "Библиотека «Yamato Daiwa ECMAScript extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и») - " +
+            "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
           "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
-          "&quot;RawObjectDataProcessor&quot; для валидации и постобработки структур данных. " +
+            "«RawObjectDataProcessor» для валидации и постобработки структур данных. " +
           "Имена функций, параметров и так далее спроектированы так, чтобы при знании базового английского код был " +
-          "понятным и очевидным без обращения к документации.",
+            "понятным и очевидным без обращения к документации.",
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico"
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/Minimal/MinimalLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents",
+      "@Pages/Top/TopPage"
+    ];
+
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      [LanguageDropDownList__YDF_DK.supportedLanguages.english]: "./../index.html",
-      [LanguageDropDownList__YDF_DK.supportedLanguages.japanese]: "./TopPage.japanese.html"
+      english: "./../index.html",
+      japanese: "./TopPage.japanese.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
@@ -51,11 +67,11 @@ block append SpecificContent
         span.TopPage-ImageAndTopHeadingGroup-Heading-SecondLine ECMAScript Extensions
 
     p.TopPage-ShortDescription-Heading.
-      Богатые функциональностью библиотеки для высококачественной разработке на языке TypeScript
+      Богатые функциональностью библиотеки для высококачественной разработки на языке TypeScript
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.warning,
-      hasPrependedSVG_Icon: true
+    +AdmonitionBlock--YDF({
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
+      SVG_Icon: true
     }).TopPage-Disclaimer.
 
       Сайт документации находится на стадии разработки разработки.

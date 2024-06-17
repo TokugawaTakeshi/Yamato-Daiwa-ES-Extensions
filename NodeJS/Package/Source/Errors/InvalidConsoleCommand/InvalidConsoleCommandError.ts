@@ -1,44 +1,57 @@
-import InvalidConsoleCommandErrorLocalization__English from "./InvalidConsoleCommandErrorLocalization.english";
+import invalidConsoleCommandErrorLocalization__english from "./InvalidConsoleCommandErrorLocalization.english";
+import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
 class InvalidConsoleCommandError extends Error {
 
   public static readonly NAME: string = "InvalidConsoleCommandError";
-  public static localization: InvalidConsoleCommandError.Localization = InvalidConsoleCommandErrorLocalization__English;
+
+  public static localization: InvalidConsoleCommandError.Localization = invalidConsoleCommandErrorLocalization__english;
 
 
-  public constructor(parametersObject: InvalidConsoleCommandError.ConstructorParametersObject) {
+  public constructor(constructorParameter: InvalidConsoleCommandError.ConstructorParameter) {
 
     super();
 
     this.name = InvalidConsoleCommandError.NAME;
 
-    if ("customMessage" in parametersObject) {
-      this.message = parametersObject.customMessage;
-    } else {
-      this.message = InvalidConsoleCommandError.localization.generateDescription(parametersObject);
-    }
+    this.message =
+        "customMessage" in constructorParameter ?
+            constructorParameter.customMessage :
+            `${ InvalidConsoleCommandError.localization.generateDescriptionCommonPart(constructorParameter) }` +
+                `${ 
+                  insertSubstring(
+                    constructorParameter.messageSpecificPart,
+                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                  )
+                }`;
+
   }
+
 }
 
 
 namespace InvalidConsoleCommandError {
 
-  export type ConstructorParametersObject = Localization.DescriptionTemplateNamedParameters | { readonly customMessage: string; };
+  export type ConstructorParameter = Readonly<
+    {
+      applicationName: string;
+      messageSpecificPart?: string;
+    } |
+    { customMessage: string; }
+  >;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (
-      namedParameters: Localization.DescriptionTemplateNamedParameters
-    ) => string;
+    generateDescriptionCommonPart: (templateVariables: Localization.CommonDescription.TemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
-      applicationName: string;
-      messageSpecificPart?: string;
-    }>;
+    export namespace CommonDescription {
+      export type TemplateVariables = Readonly<{ applicationName: string; }>;
+    }
   }
+
 }
 
 

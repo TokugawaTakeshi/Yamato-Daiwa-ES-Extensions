@@ -1,12 +1,12 @@
 //- TODO Edit path
-extends ../../../../../Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
   //- TODO Edit paths
-  include ../../Components/Components.pug
-  include ../../SharedAssets/Markup/Assets.english.pug
+  include ../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -23,25 +23,38 @@ block append Metadata
       author: HTML_PAGE_AUTHOR
     };
 
-    FAVICON_URI = "@MustBeInRoot/favicon";
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "${DS}CommonStyles",
+      "${DS}LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "${DS}PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("${ROUTE}");
 
-    LanguageDropDownList.setLinks({
-      [LanguageDropDownList.supportedLanguages.japanese]: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
-      [LanguageDropDownList.supportedLanguages.russian]: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html",
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
+      russian: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html"
     });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
 
 
 block append SpecificContent
 
   article
 
-    // TODO Edit
-    +CallableExpressionScheme({
+    //- TODO Edit
+    +CallableExpressionScheme--YDF_DK({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",
       localizedDescriptiveHeading: "Makes the special, street magic",
@@ -54,9 +67,9 @@ block append SpecificContent
         }
       ],
       returnedValue: "boolean"
-    }).Article-CallableExpressionScheme
+    })
 
-    +CodeViewer--YDF.Article-CodeViewer
+    +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
         +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
