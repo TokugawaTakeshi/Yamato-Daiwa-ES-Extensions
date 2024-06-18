@@ -13,6 +13,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
@@ -30,17 +31,17 @@
     "@yamato-daiwa/es-extensions": ">=1.7.0-rc.0"
   },
   "devDependencies": {
-    "@types/jsdom-global": "3.0.4",
-    "@types/mocha": "10.0.1",
-    "@types/node": "18.15.11",
+    "@types/jsdom-global": "3.0.7",
+    "@types/mocha": "10.0.6",
+    "@types/node": "20.14.4",
     "@yamato-daiwa/es-extensions": "1.7.0-rc.0",
-    "@yamato-daiwa/style_guides": "0.1.2",
-    "jsdom": "21.1.1",
+    "@yamato-daiwa/style_guides": "0.2.7",
+    "jsdom": "24.1.0",
     "jsdom-global": "3.0.2",
-    "mocha": "10.2.0",
-    "rimraf": "4.4.1",
-    "ts-node": "10.9.1",
-    "typescript": "5.3.3"
+    "mocha": "10.4.0",
+    "rimraf": "5.0.7",
+    "ts-node": "10.9.2",
+    "typescript": "5.4.5"
   },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc",

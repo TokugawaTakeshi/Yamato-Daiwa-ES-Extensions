@@ -10,40 +10,20 @@
 [@yamato-daiwa/es-extensions (**YDEE**)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions#readme) libraries.
 
 
-## Functions
-### Arrays
 
-<dl>
-
-  <dt>addElementsToArray</dt>
-  <dt>aeta</dt>
-  <dd>
-    The live template and its alias respectively for the
-      <a href="https://ydee.yamato-daiwa.com/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a> function.
-  </dd>
-
-  <dt>cropArray</dt>
-  <dt>ca</dt>
-  <dd>
-    The live template and its alias respectively for the
-      <a href="https://ydee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/removingOfElements/cropArray/cropArray.english.html">cropArray</a> function.
-  </dd>
-
-</dl>
-
-* [//]: # (TODO ==================================================================================================================)
 * Functions
   * Arrays
-    * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
+    * <kbd>addElementsToArray</kbd>, <kbd>aeta</kbd> The live template and it's alias respectively for the [**addElementsToArray**](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html) function
+    * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> The autocomplete imitator like Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
     * <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
     * <kbd>getIndexesOfArrayElementsWhichSatisfies6ThePredicate</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
     * <kbd>getIndexOfArrayElementIfSuchElementIsExactlyOne</kbd> The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
-    * <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> The live template and it's alias respectively for the [**getLastElementOfArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getLastElementOfArray/getLastElementOfArray.md) function
+    * <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> The live template and it's alias respectively for the [**getLastElementOfArray**](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.english.html) function
     * <kbd>removeArrayElementsByIndexes</kbd>, <kbd>raebi</kbd> The live template and it's alias respectively for [**removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md) function
     * <kbd>replaceArrayElementsByIndexesImmutably</kbd>, <kbd>raebii</kbd> The live template and it's alias respectively for [**replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md) function
     * <kbd>removeArrayElementsByPredicates</kbd>, <kbd>rmaebp</kbd> The live template and it's alias respectively for [**removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md) function
     * <kbd>replaceArrayElementsByPredicates</kbd>, <kbd>rpaebp</kbd> The live template and it's alias respectively for [**replaceArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md) function
-    * <kbd>twoDimensionalizeArray</kbd>, <kbd>tda</kbd> The live template and it's alias respectively for the [**twoDimensionalizeArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/addElementsToArray/addElementsToArray.md) function
+    * <kbd>twoDimensionalizeArray</kbd>, <kbd>tda</kbd> The live template and it's alias respectively for the [**twoDimensionalizeArray**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md) function
 
   * Strings
     * <kbd>rscfcp</kbd> Live template for [removeSpecificCharacterFromCertainPosition](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/removeSpecificCharacterFromCertainPosition.md) function 

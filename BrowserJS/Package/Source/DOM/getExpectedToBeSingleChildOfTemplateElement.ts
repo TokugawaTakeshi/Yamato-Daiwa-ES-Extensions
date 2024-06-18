@@ -113,7 +113,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
         parameterNumber: 1,
         parameterName: "compoundParameter",
         messageSpecificPart: "The child of specified \"templateElement\" is not the instance of " +
-            `${ compoundParameter.expectedChildElementSubtype.name }`
+            compoundParameter.expectedChildElementSubtype.name
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleChildOfTemplateElement(compoundParameter)"

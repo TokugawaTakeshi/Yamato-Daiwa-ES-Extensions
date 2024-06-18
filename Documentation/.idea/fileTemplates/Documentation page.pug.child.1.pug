@@ -25,7 +25,13 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
+    styleSheetsURIs = [
+      "${DS}CommonStyles",
+      "${DS}LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "${DS}PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
     scriptsURIs.endOfBody = [ "@Common" ];
 
     RoutingEmulator.setCurrentRoute("${ROUTE}");
@@ -47,7 +53,7 @@ block append SpecificContent
 
   article
 
-    // TODO 編集
+    //- TODO 編集
     +CallableExpressionScheme--YDF_DK({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",

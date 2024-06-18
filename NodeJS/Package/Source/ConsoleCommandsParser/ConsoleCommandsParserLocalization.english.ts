@@ -1,5 +1,5 @@
 import ConsoleCommandsParser from "./ConsoleCommandsParser";
-import { rawObjectDataProcessorLocalization__english, isNotUndefined } from "@yamato-daiwa/es-extensions";
+import { RawObjectDataProcessorLocalization__English, isNotUndefined, insertSubstringIf } from "@yamato-daiwa/es-extensions";
 
 
 import Localization = ConsoleCommandsParser.Localization;
@@ -18,24 +18,26 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     type: "Type",
 
-    isRequired: "Is required",
+    isRequired: "Is Required",
+
+    defaultValue: "Default Value",
 
     yes: "Yes",
 
     no: "No",
 
-    allowedAlternatives: "Allowed alternatives",
+    allowedAlternatives: "Allowed Alternatives",
 
     numbersSet: {
-      key: "Numbers set",
-      generateValue: rawObjectDataProcessorLocalization__english.numbersSet
+      key: "Numbers Set",
+      generateValue: RawObjectDataProcessorLocalization__English.numbersSet
     },
 
-    minimalValue: "Minimal value",
+    minimalValue: "Minimal Value",
 
-    maximalValue: "Maximal value",
+    maximalValue: "Maximal Value",
 
-    objectTypeValuePropertiesSpecification: "Properties specification"
+    objectTypeValuePropertiesSpecification: "Properties Specification"
 
   },
 
@@ -120,12 +122,13 @@ const consoleCommandsParserLocalization__english: Localization = {
         {
           missingOptionKey,
           commandPhrase,
+          isDefaultCommandPhrase,
           commandHelpReference
         }: ErrorsMessages.RequiredOptionKeyIsMissing.TemplateVariables
       ): string =>
-          `The option "${ missingOptionKey }" is required for the ` +
-            `${ isNotUndefined(commandPhrase) ? `command "${ commandPhrase }"` : "default command" }. ` +
-            `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
+          `The option "${ missingOptionKey }" is required for the command "${ commandPhrase }"` +
+            `${ insertSubstringIf(" (default command phrase)", isDefaultCommandPhrase) }. ` +
+          `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 
     noValueFollowingTheKeyOfNonBooleanOption: {
@@ -198,7 +201,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not belong to ` +
-            `"${ rawObjectDataProcessorLocalization__english.numbersSet(expectedNumbersSet) }" numbers set.\n` +
+            `"${ RawObjectDataProcessorLocalization__English.numbersSet(expectedNumbersSet) }" numbers set.\n` +
           `${ consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 

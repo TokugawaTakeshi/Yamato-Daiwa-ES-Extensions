@@ -14,22 +14,31 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ru";
     HTML_PAGE_TITLE = buildHTML_PageTitle("Начало использования");
     HTML_PageMetaData = {
-      description: "Начало работы с библиотекой &quot;Yamato Daiwa ECMAScript extensions&quot; (сокращённо: &quot;YDEE&quot;):, " +
-        `установка, заметка об объёме дистибутива, предупреждение об использовании без TypeScript, импорт зависимостей.`,
+      description:
+        "Для начала работы с библиотекой «Yamato Daiwa ES extensions» (сокращённо: «YDEE») " +
+          "её необходимо установить с помощью пакетного менеджера «npm» (имя пакета: «@yamato-daiwa/es-extensions»).",
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: "./GetStartedWithCoreLibraryPage.english.html",
       japanese: "./GetStartedWithCoreLibraryPage.japanese.html"
     });
+
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
 
     const externalLinks = {
       stackOverflow: {
@@ -49,15 +58,22 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Начало использования
+    //- ━━━ Начало использования ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 1,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+    }).Article-Heading1
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
-    ) Установка
+    //- ━━━ Установка ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.installation.$heading,
+      HTML_ID: pageTableOfContents.installation.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
       Процедура установки стандартная, с помощью #[+Term--YDID пакетного менеджера]
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm].
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm].
 
     +CodeViewer--YDF({
       title: "Консольная команда установки пакета"
@@ -67,114 +83,150 @@ block append SpecificContent
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
-    ) Об объёме дистибутива
+    //- ━━━ Заметка об объёме дистрибутива ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.distributiveVolumeNotice.$heading,
+      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+    }).Article-Heading2
 
-    p.Article-Paragraph.
-      На #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link странице @yamato-daiwa/es-extensions]
-        #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link официального сайта npm]
-        можно видеть объём пакета ("Unpacked Size").
-      Например, для версии #[+SecondaryEntity--YDID 1.5.8] это было 698 килобайт:
+    p.Article-Paragraph
+      | На
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions
+      }).Article-Link странице @yamato-daiwa/es-extensions
+      |
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.top
+      }).Article-Link официального сайта npm
+      |
+      |   отображается объём #[+Term--YDID пакета] («Unpacked Size»).
+      | Например, для версии #[+SecondaryEntity--YDID 1.5.8] это было 698 килобайт:
 
     +SingleImageViewer--YDF({
       imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
-      imageAlternateText: "Пример отображения объёма дистрибутива пакета на официальном сайте пакетного менеджера npm. " +
-          "Важно, что отображающийся объём не всегда соответствует тому объёму, на который после сборки увеличится приложение, " +
-          "использующее данный пакет.",
-      autoAspectRatioByYDA: true
-    }).Article-SingleImageViewer
-
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance, hasPrependedSVG_Icon: true
-    }).
-      Это #[+Keyword--YDID не] объём, на который увеличится Ваше приложение после подключения пакета и сборки приложения.
-
-    p.Article-Paragraph.
-      Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальны для браузерных приложений)
-        и #[+Term--YDID CommonJS-модулей] (актуальные по умолчанию для Node.js приложений).
-      Таким образом, какой бы тип модулей из этих двух не использовался, значительная часть файлов будут проигнорирована.
-
-    p.Article-Paragraph.
-      Объём в несколько сотен килобайт для серверных и консольных Node.js-приложений незначителен в большинстве случаев.
-      Что касается браузерных приложений, то здесь важно обеспечить устранение неиспользуемой функциональности из
-        #[+Term--YDID продакшен-сборки] с помощью сборщика проектов.
-
-    p.Article-Paragraph.
-      В #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack] эта функциональность
-        называется　#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link Tree shaking].
-      Для её активации в режиме продакшен необходимо в
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) настойках TypeScript]
-        указать тип модулей группы #[+ImportantEntity--YDID ES].
-      Второе условие срабатывания этой функциональности - наличие
-        #[+ImportantEntity__Code--YDID sideEffects: false] в #[+ImportantEntity--YDID package.json]
-        зависимости - со стороны #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] выполнено.
-      Если Вы используете другой сборщик проектов, называющий себя конкурентом #[+SecondaryEntity--YDID Webpack],
-        то он также обязан поддерживать аналогичную функциональность.
-
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).
-      Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, большая часть
-        #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
-        (а не #[+Term--YDID классов], хотя #[+Term--YDID классы] тоже имеются).
-      В случае, если одни функции используют другие, в сборку также войдут эти #[+Term--YDID транзитивные зависимости],
-        но даже при таком раскладе оптимизация будет очень хорошей, особенно используется меньшая часть возможностей библиотеки.
-
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
-    ) Предупреждение об использовании без TypeScript
-
-    p.Article-Paragraph.
-      Библиотека разрабатывается в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript].
-      Связано это прежде всего с отношением главного разработчика к #[+ImportantEntity--YDID JavaScript]: он считает, что
-        данный язык непригоден для #[+Keyword--YDID высококачественной] #[+Keyword__Contrast--YDID коммерческой]
-        разработки сайтов и приложений.
-      Однако к #[+ImportantEntity__Code--YDID TypeScript] отношение #[+Keyphrase--YDID совсем иное] -
-        из-за #[+Keyword--YDID полноценного] #[+Term--YDID объектно-ориентированного программирования], крайне гибкой
-        типизации и возможности транспайлинга не только в браузерный JavaScript, но и в #[+ImportantEntity--YDID Node.js].
-
-    p.Article-Paragraph.
-      #[+Keyphrase--YDID При отсутствии ошибок компиляции #[+ImportantEntity--YDID TypeScript]] вероятность возникновения
-        проблем с данной библиотекой низка.
-      Тем не менее, ожидаются пользователи #[+ImportantEntity--YDID JavaScript], которые захотят использовать данную библиотеку.
-
-    p.Article-Paragraph.
-      Транспилируя исходный код в #[+ImportantEntity--YDID JavaScript], транспайлер #[+ImportantEntity--YDID TypeScript]
-        #[+Keyword--YDID не] добавляет #[+Keyword--YDID никакой] новой функциональности, в частности
-        #[+Keyphrase--YDID не добавляется валидация параметров функций/методов] в соответствии с указанными в исходном
-        #[+ImportantEntity--YDID TypeScript] коде типами.
-      Поэтому, если бы была задача поддерживать #[+ImportantEntity--YDID JavaScript], то необходимо было провести
-        тщательную валидацию всех входных параметров и подробно логировать все нарушения.
-      На первый взгляд это может показаться незначительным увеличением кода, но на самом деле объём функций таким образом
-        может вырасти #[+Keyword--YDID в разы], и #[+Keyphrase--YDID это не преувеличение]
-        (см. #[+Link--YDF({ unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript }).Article-Link конкретный пример]).
-
-    p.Article-Paragraph.
-      После сбора информации было принято решение отказаться от реализации исчерпывающей валидации параметров.
-      Основной причиной является резкое увеличение объёма библиотеки и транзитивных зависимостей большинства модулей в
-        несколько раз, #[+Keyphrase--YDID что критично для браузерных приложений], где каждый килобайт на счету.
-      Это значит, что при использовании #[+ImportantEntity--YDID JavaScript] и наличии в коде ошибок, связанных с неверным
-        типом параметра возможно возникновение ошибок выполнения #[+ImportantEntity--YDID JavaScript],
-        однако #[+Keyphrase--YDID из сообщения об ошибке это не будет очевидно], а потому возникновение ошибки
-        может быть ошибочно расценено как баг библиотеки.
-
-
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingOfFunctionality.$anchor
-    ) Импорт функциональности
-
-    p.Article-Paragraph.
-      После того, как пакет установлен, становится возможным импорт любых функций, классов и т. д., упомянутых в данной
-        документации.
-      Способ импорта - стандартный.
-      Для сборщиков проекта или рантаймов, поддерживающих ключевое слово #[+ImportantEntity__Code--YDID import] это будет,
-        например,
-
-    +CodeViewer--YDF({
-      title: "Пример импортов из @yamato-daiwa/es-extensions"
+      imageAlternateText:
+          "Пример отображения объёма дистрибутива пакета на официальном сайте пакетного менеджера «npm». " +
+          "В случае с пакетом «Yamato Daiwa ES extensions», после его установки при правильной настройке сборщика " +
+            "проекта объём выходных файлов не увеличится на указанный объём дистрибутива.",
+      autoAspectRatioByYDA: true,
+      maximalHeight__anyValidCSS_Value: "450px"
     })
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
+      #[+Keyphrase--YDID В случае с #[+ImportantEntity--YDID @yamato-daiwa/es-extensions]], это
+        #[+Keyword--YDID не]&nbsp;объём #[+Keyword--YDID выходного] #[+Term--YDID JavaScript-кода], на который увеличится
+        объём выходных файлов после подключения данного #[+Term--YDID пакета] и сборки проекта.
+
+    p.Article-Paragraph.
+      Основной объём дистрибутива занимают набор #[+Term--YDID ECMAScript-модулей] (оптимальны для
+        #[+Term--YDID браузерных приложений])　и #[+Term--YDID CommonJS-модулей] (актуальные по #[+Keyword--YDID умолчанию]
+        для #[+Term--YDID Node.js-приложений]).
+      Таким образом, какой бы тип #[+Term--YDID модулей] из этих двух не&nbsp;использовался, #[+Keyword--YDID значительная]
+        часть файлов будут #[+Keyword--YDID проигнорирована].
+
+    p.Article-Paragraph.
+      Объём в несколько сотен килобайт
+        #[+Keyphrase--YDID для #[+Term--YDID серверных] и #[+Term--YDID консольных Node.js-приложений]]
+        #[+Keyword--YDID незначителен] #[+Keyphrase--YDID в большинстве случаев].
+      Что касается #[+Term--YDID браузерных приложений], то здесь важно обеспечить #[+Keyword--YDID устранение]
+        #[+Keyword__Contrast--YDID неиспользуемой] функциональности из #[+Term--YDID продакшен-сборки] с помощью
+        #[+Term--YDID сборщика проектов].
+
+    p.Article-Paragraph
+      | В #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack] такая
+      |   функциональность называется
+      |   #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link «Tree shaking»].
+      | Для её активации #[+Keyphrase--YDID в режиме «продакшен»] необходимо в
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference
+      }).Article-Link настройках TypeScript
+      |
+      |   указать тип #[+Term--YDID модулей] группы #[+ImportantEntity--YDID ES].
+      | Второе условие срабатывания этой функциональности — наличие #[+ImportantEntity__Code--YDID sideEffects: false] в
+      |   #[+ImportantEntity--YDID package.json] #[+Keyword--YDID зависимости] — со стороны
+      |   #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] выполнено.
+      | Если Вы используете другой #[+Term--YDID сборщик проектов], заявленный как конкурент
+      |   #[+SecondaryEntity--YDID Webpack], то он обязан поддерживать функциональность, аналогичную
+      |   #[+Term--YDID three shaking] у #[+Term--YDID Webpack].
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
+      Для того, чтобы было отсечено как можно больше неиспользуемой функциональности библиотеки, бо&#x301;льшая часть
+        #[+ImportantEntity--YDID @yamato-daiwa/es-extensions] реализована в виде #[+Term--YDID функций]
+        (а не&nbsp;#[+Term--YDID классов], хотя #[+Term--YDID классы] тоже имеются).
+      В случае, если одни #[+Term--YDID функции] используют другие, в сборку также войдут эти
+        #[+Term--YDID транзитивные зависимости], но даже при таком раскладе оптимизация будет очень хорошей,
+        особенно если используется меньшая часть возможностей библиотеки.
+
+
+    //- ━━━ Предупреждение об использовании без TypeScript ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      Библиотека разрабатывается #[+Keyphrase--YDID в первую очередь для пользователей #[+ImportantEntity--YDID TypeScript]].
+      Связано это прежде всего с отношением главного разработчика к #[+ImportantEntity--YDID JavaScript]: он считает, что
+        данный язык #[+Keyword--YDID непригоден] для современной #[+Keyword__Contrast--YDID высококачественной]
+        #[+Keyword--YDID коммерческой] разработки сайтов и приложений.
+      Однако к #[+ImportantEntity__Code--YDID TypeScript] отношение #[+Keyword--YDID совершенно]
+        #[+Keyword__Contrast--YDID другое] — из-за #[+Keyword--YDID полноценного]
+        #[+Term--YDID объектно-ориентированного программирования], крайне гибкой
+        #[+Term--YDID типизации] и возможности #[+Term--YDID транспайлинга] не&nbsp;только в
+        #[+Term--YDID браузерный JavaScript], но и в #[+ImportantEntity--YDID Node.js].
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID При отсутствии ошибок проверки типов #[+ImportantEntity--YDID TypeScript]-ом] вероятность
+        возникновения проблем с данной библиотекой низка.
+      Тем не&nbsp;менее, ожидаются пользователи #[+ImportantEntity--YDID JavaScript], которые захотят использовать
+        данную библиотеку.
+
+    p.Article-Paragraph
+      | Преобразуя исходный код в #[+ImportantEntity--YDID JavaScript], #[+Term--YDID транспайлер]
+      |   #[+ImportantEntity--YDID TypeScript] #[+Keyword--YDID не]&nbsp;добавляет #[+Keyword--YDID никакой] новой
+      |   функциональности, в частности
+      |   #[+Keyphrase--YDID не&nbsp;добавляется валидация #[+Term--YDID параметров] #[+Term__Contrast--YDID функций/методов]]
+      |   в соответствии с указанными в исходном #[+ImportantEntity--YDID TypeScript]-коде #[+Term--YDID типами].
+      | Поэтому, если бы была задача поддерживать #[+ImportantEntity--YDID JavaScript], то необходимо было провести
+      |   тщательную валидацию #[+Keyword--YDID всех] #[+Term--YDID параметров] и подробно логировать все нарушения.
+      | На первый взгляд это может показаться незначительным увеличением кода, но на самом деле объём кода
+      |   #[+Term--YDID функций] таким образом может вырасти #[+Keyphrase--YDID в разы, это не&nbsp;преувеличение] (
+      +Link--YDF({
+        unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript
+      }).Article-Link конкретный пример
+      | ).
+
+    p.Article-Paragraph.
+      После сбора информации было принято решение отказаться от реализации исчерпывающей валидации #[+Term--YDID параметров].
+      Основной причиной является резкое увеличение объёма библиотеки и #[+Term--YDID транзитивных зависимостей] большинства
+        #[+Term--YDID модулей] #[+Keyphrase--YDID в несколько раз], что
+        #[+Keyphrase--YDID критично для браузерных приложений], где каждый #[+Term--YDID килобайт] на счету.
+      Это значит, что при использовании #[+ImportantEntity--YDID JavaScript] и наличии в коде ошибок, связанных с неверными
+        типами #[+Term--YDID параметров] возможно возникновение ошибок выполнения #[+ImportantEntity--YDID JavaScript],
+        однако #[+Keyphrase--YDID из сообщения об ошибке причина&nbsp;не будет очевидна], потому возникновение подобной
+        ошибки может быть #[+Keyword--YDID неверно] диагностировано как баг библиотеки.
+
+
+    //- ━━━ Импорт функциональности ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.importingFunctionality.$heading,
+      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      После того, как #[+Term--YDID npm-пакет] установлен, становится возможным #[+Term--YDID импорт] любых
+        #[+Term--YDID функций], #[+Term--YDID классов] и другой функциональности, упомянутой в данной документации.
+      Способ #[+Term--YDID импорта] — стандартный.
+      Для #[+Term--YDID сборщиков проектов] или #[+Term--YDID рантаймов], поддерживающих
+        #[+Term__Contrast--YDID ключевое слово] #[+ImportantEntity__Code--YDID import] это будет, например,
+
+    +CodeViewer--YDF({ title: "Пример импортов из @yamato-daiwa/es-extensions" })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

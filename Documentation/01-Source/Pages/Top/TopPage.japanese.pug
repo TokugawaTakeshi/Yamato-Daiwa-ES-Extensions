@@ -3,8 +3,8 @@ extends ../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/Mi
 
 block append Requirements
 
-  include ../../SharedComponents/SharedComponents.japanese.pug
   include ../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -14,16 +14,24 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("トップ");
     HTML_PageMetaData = {
-      description: "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）は、TypeScript言語での高品質開発を補助するための専用ライブラリである。" +
-          "多数の特殊化した簡単な関数も、例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」等、豊富な機能クラスを含んでいる。" +
+      description:
+          "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）は、TypeScript言語での高品質開発を補助するための専用ライブラリである。" +
+            "多数の特殊化した簡単な関数も、例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」等、豊富な機能クラスを含んでいる。" +
           "関数名や引数名を和訳すれば、説明書を見ずともコードの動作が判る様に設計されている。",
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/Minimal/MinimalLayout", "@Shared/ExternalComponents", "@Pages/Top/TopPage" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/Minimal/MinimalLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents",
+      "@Pages/Top/TopPage"
+    ];
+
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute("top");
 
@@ -58,9 +66,9 @@ block append SpecificContent
     p.TopPage-ShortDescription-Heading.
       TypeScriptでの高品質開発専用豊富なライブラリ群
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.warning,
-      hasPrependedSVG_Icon: true
+    +AdmonitionBlock--YDF({
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
+      SVG_Icon: true
     }).TopPage-Disclaimer.
 
       説明書（ウェブサイト）は現在開発中です。

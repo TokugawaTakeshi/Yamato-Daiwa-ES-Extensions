@@ -1,0 +1,68 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    HTML_PAGE_LANGUAGE = "ru";
+    HTML_PAGE_TITLE = buildHTML_PageTitle("Классы ошибок");
+    HTML_PageMetaData = {
+      description: "",
+      author: HTML_PAGE_AUTHOR
+    };
+
+    FAVICON_URI = "@MustBeInPublicRoot/favicon";
+
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("nodeJS.errorsClasses.DesiredFileActuallyIsDirectoryError");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: "./DesiredFileActuallyIsDirectoryError.english.html",
+      japanese: "./DesiredFileActuallyIsDirectoryError.japanese.html"
+    });
+
+
+block append HeadScriptsLinks
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  - const sectioning = localizedRouting.nodeJS.$children.errorsClasses.$sectioning;
+
+  article
+
+    h1 Классы ошибок
+
+    //- ─── DesiredFileActuallyIsDirectoryError ────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.DesiredFileActuallyIsDirectoryError.$anchor
+    )= sectioning.DesiredFileActuallyIsDirectoryError.$heading
+
+    //- ─── FileNotFoundError ──────────────────────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.FileNotFoundError.$anchor
+    )= sectioning.FileNotFoundError.$heading
+
+    //- ─── InvalidConsoleCommandError ─────────────────────────────────────────────────────────────────────────────────
+    h2.Article-Heading2(
+      id= sectioning.InvalidConsoleCommandError.$anchor
+    )= sectioning.InvalidConsoleCommandError.$heading

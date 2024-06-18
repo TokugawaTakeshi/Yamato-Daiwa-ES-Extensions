@@ -13,23 +13,33 @@ block append Metadata
 
     HTML_PAGE_LANGUAGE = "ja";
     HTML_PAGE_TITLE = buildHTML_PageTitle("利用開始");
+
     HTML_PageMetaData = {
-      description: "「Yamato Daiwa ECMAScript extensions」ライブラリの利用開始に関する案内。" +
-          "導入手順・容量・TypeScript無しの利用時の注意事項、機能のインポート。",
+      description:
+          "「Yamato Daiwa ECMAScript extensions」（略：「YDEE」）ライブラリを利用するには、「npm」パッケージマネージャーで" +
+          "「@yamato-daiwa/es-extensions」パッケージを導入する必要がある。",
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.gettingStarted");
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: "./GetStartedWithCoreLibraryPage.english.html",
       russian: "./GetStartedWithCoreLibraryPage.russian.html"
     });
+
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
 
     const externalLinks = {
       stackOverflow: {
@@ -49,15 +59,22 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 利用開始
+    //- ━━━ 早速着手 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 1,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+    }).Article-Heading1
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.installation.$anchor
-    ) 導入
+    //- ━━━ 導入 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.installation.$heading,
+      HTML_ID: pageTableOfContents.installation.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
-      導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link  npm]
-        #[+Term--YDID パッケージマネージャー]により実行。
+      導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm]
+        #[+Term--YDID パッケージマネージャー]に依り実行。
 
     +CodeViewer--YDF({
       title: "パッケージを導入するコンソールコマンド"
@@ -67,105 +84,127 @@ block append SpecificContent
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.distributiveVolumeNotice.$anchor
-    ) 配布容量関連
+    //- ━━━ 配布容量関連 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.distributiveVolumeNotice.$heading,
+      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+    }).Article-Heading2
 
-    p.Article-Paragraph.
-      #[+Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト]の
-      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link @yamato-daiwa/es-extensionsのページ]
-        では、当パッケージの圧縮されていない状態の容量（「Unpacked Size」）が表示されている。
-      例えば、バージョン#[+SecondaryEntity--YDID 1.5.8]の場合は698キロバイトである。
+    p.Article-Paragraph
+      +Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト
+      | の
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions
+      }).Article-Link @yamato-daiwa/es-extensionsのページ
+      | では、当#[+Term--YDID パッケージ]の圧縮されていない状態の容量（「Unpacked Size」）が表示されている。
+      | 例えば、バージョン#[+SecondaryEntity--YDID 1.5.8]の場合は698キロバイトである。
 
     +SingleImageViewer--YDF({
       imageURI: "@AssociatedWithPages/CoreLibrary/GettingStarted/Images/NPM_DistributiveVolumeExample",
-      imageAlternateText: "「npm」の公式サイトにおける配布パッケージの容量の表示例。" +
-          "注意点として、当パッケージの導入時に構成後の対象アプリケーションが表示容量通りにサイズ増加するとは限らない。",
-      autoAspectRatioByYDA: true
-    }).Article-SingleImageViewer
+      imageAlternateText:
+          "「npm」の公式サイトにおける配布パッケージの容量の表示例。" +
+          "「Yamato Daiwa ECMAScript extensions」の場合パッケージの導入時に構成後の対象アプリケーションが表示容量通りにサイズ増加するとは限らない。",
+      autoAspectRatioByYDA: true,
+      maximalHeight__anyValidCSS_Value: "450px"
+    })
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).
-      其れは、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の導入に依って構成後アプリケーションに加わる容量#[+Keyword--YDID ではない]。
-
-    p.Article-Paragraph.
-      #[+Keyword--YDID 多くの]容量は、#[+Term--YDID ECMAScriptモジュール]（ブラウザーのアプリケーションにとって最適）と#[+Term--YDID CommonJSモジュール]
-        （Node.jsにとって規定）で占められている。
-      此の様に上記の中からどのモジュールを選んでも、多くのファイルは無視される。
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
+      其れは、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の導入に依ってプロジェクトの構成後アプリケーションに加わる
+        #[+Keyword--YDID 出力]#[+Term--YDID JavaScriptコード]の容量では#[+Keyword--YDID ない]。
 
     p.Article-Paragraph.
-      サーバ・コンソールNode.jsアプリケーションの場合、数千キロバイト程度の増加は大した問題ではない。
-      だが、#[+Term--YDID ブラウザーアプリケーション]であれば#[+Term__Contrast--YDID プロジェクト構成手段]を用いて、#[+Term--YDID 納品用構成]から
-        ライブラリで使われなかった機能を除外する事が重要だ。
+      #[+Keyword--YDID 多く]の容量は、#[+Term--YDID ECMAScriptモジュール]（#[+Term__Contrast--YDID ブラウザーのアプリケーション]にとって最適）
+        と#[+Term--YDID CommonJSモジュール]（#[+Term__Contrast--YDID Node.jsアプリケーション]にとって#[+Keyword--YDID 規定]）で占められている。
+      此の様に上記の中からどの#[+Term--YDID モジュール]を選んでも、#[+Keyword--YDID 多く]のファイルは#[+Keyword--YDID 無視]される。
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID #[+Term--YDID サーバ・コンソールNode.jsアプリケーション]の場合]、数百キロバイト程度の増加は
+        #[+Keyphrase--YDID 大した問題では#[+Keyword--YDID ない]事が多い]。
+      だが、#[+Keyphrase--YDID #[+Term--YDID ブラウザーアプリケーション]であれば]#[+Term__Contrast--YDID プロジェクト構成手段]を用いて、
+        #[+Term--YDID 本番用構成]からライブラリで使われなかった機能を#[+Keyword--YDID 除外]する事が重要だ。
 
     p.Article-Paragraph.
       #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack]の場合、此の機能は
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link 「Tree shaking」]と呼ぶ。
-      納品版構成モードで此れを有効化するには、
+      #[+Keyphrase--YDID 本番用構成モードで]此れを有効化するには、
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) TypeScript設定]
-        で#[+ImportantEntity--YDID ES系]のモジュールを指定しなければいけない。
-      二つ目の条件、即ち依存性が有る#[+ImportantEntity--YDID package.json]の#[+ImportantEntity__Code--YDID sideEffects: false]の
-        指定は、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]に依って満たされている。
-      #[+ImportantEntity--YDID Webpack]と競合する#[+Term--YDID プロジェクト構成手段]を使っている場合、
-        此の手段は似たような未使用機能の除外に対応しなければいけない。
+        で#[+ImportantEntity--YDID ES系]の#[+Term--YDID モジュール]を指定しなければいけない。
+      二つ目の条件、即ち#[+Keyword--YDID 依存性]が有る#[+ImportantEntity--YDID package.json]の
+        #[+ImportantEntity__Code--YDID sideEffects: false]の指定は、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]
+        に依って満たされている。
+      #[+ImportantEntity--YDID Webpack]と競合する#[+Term--YDID プロジェクト構成手段]を使っている場合、此の手段は似た様な未使用機能の除外に
+        対応しなければいけない。
 
-    +AttentionBox--YDF({
-      decoration: AttentionBox__YDF.DecorativeVariations.guidance,
-      hasPrependedSVG_Icon: true
-    }).Article-Paragraph.
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
       ライブラリの未使用機能を可能な限り多く除外する為に、#[+ImportantEntity--YDID @yamato-daiwa/es-extensions]の多くの機能は
-        #[+Term--YDID クラス]#[+Keyword--YDID ではなく]#[+Term--YDID 関数]で実装された（#[+Term--YDID クラス]の機能も少し有る）。
-      尚関数は、#[+Keyword--YDID 他の]関数を使っている場合に此の#[+Term--YDID 推移依存性]も構成に入るが、それでも実質的な最適化は入る。
-        特に、ライブラリのごく一部分のみ使われている様な場合だ。
+        #[+Term--YDID クラス]では#[+Keyword--YDID なく]#[+Term--YDID 関数]で実装された（#[+Term--YDID クラス]の機能も少し有る）。
+      尚#[+Term--YDID 関数]は、他の#[+Term--YDID 関数]を使っている場合に此の#[+Term--YDID 推移依存性]も構成に入るが、それでも実質的な最適化は入る。
+      特に、ライブラリのごく一部分のみ使われている様な場合だ。
 
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.nonTypeScriptUsageWarning.$anchor
-    ) TypeScriptの非利用者に対する注意事項
-
-    p.Article-Paragraph.
-      我々のライブラリ開発は、#[+Keyword--YDID 優先目標として]#[+ImportantEntity--YDID TypeScript]利用者の補助を優先している。
-      其の理由は、先ず開発者の#[+ImportantEntity__Code--YDID JavaScript]言語に対する評価であり、曰く
-        「JavaScriptは実用性の有る商業アプリケーションやウェブサイト等の高品質開発には向いていない言語」。
-      然し#[+ImportantEntity--YDID TypeScript]であれば話は全く違ってくる。完成した#[+Term--YDID オブジェクト指向プログラミング]の対応、
-        非常にフレキシブルな#[+Term--YDID タイピング]及びブラウザー専用JavaScriptだけでなく、#[+ImportantEntity--YDID Node.js]への
-        #[+Term--YDID トランスパイリング]は#[+Keyword--YDID 根本的に]流れを変える。
+    //- ━━━ TypeScriptの非利用者に対する注意事項 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
-      #[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]のコンパイルエラー]が無ければ、当ライブラリ関連で問題が発生する可能性は低い。
+      我々のライブラリ開発は、#[+ImportantEntity--YDID TypeScript]利用者の補助を
+        #[+Keyword--YDID 優先]している。
+      其の理由は、先ず当ライブラリ開発者の#[+ImportantEntity__Code--YDID JavaScript]言語に対する評価であり、曰く
+        「#[+ImportantEntity--YDID JavaScript]は実用性の有る#現代の[+Keyword--YDID 商業]アプリケーションやウェブサイト等の
+        #[+Keyword--YDID 高品質]開発には#[+Keyword__Contrast--YDID 向いていない]言語」。
+      然し#[+ImportantEntity--YDID TypeScript]であれば話は全く違ってくる。
+      完成された#[+Term--YDID オブジェクト指向プログラミング]への対応力、
+        フレキシブルな#[+Term--YDID タイピング感]、更に#[+ImportantEntity--YDID ブラウザー専用JavaScript]や
+        #[+ImportantEntity--YDID Node.js]への#[+Term--YDID トランスパイリング]は#[+Keyword--YDID 根本的に]流れを変える。
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]のコンパイルエラーが無ければ]、当ライブラリ関連で問題が発生する可能性は低い。
       然し、当ライブラリを#[+ImportantEntity--YDID JavaScript]利用者が使う事も予想される。
 
+    p.Article-Paragraph
+      | ソースコードを#[+ImportantEntity--YDID JavaScript]へ変換する際、#[+ImportantEntity--YDID TypeScript]#[+Term--YDID トランスパイラ]
+      |   は新規機能の中に何も追加#[+Keyword--YDID しない]。
+      | 特に
+      +Keyphrase--YDID.
+        #[+ImportantEntity--YDID TypeScript]のソースコード上で指定された#[+Term--YDID 関数]・#[+Term--YDID メソッド]の
+          #[+Term__Contrast--YDID 引数]の型確認が、#[+ImportantEntity--YDID JavaScript]上では実行#[+Keyword--YDID されない]
+      |   。
+      | 其の上で、#[+ImportantEntity--YDID JavaScript]への対応策を考える場合、#[+Term--YDID 関数]・#[+Term--YDID メソッド]の
+      |   #[+Term__Contrast--YDID 引数]の型の確認をしっかり実装する必要が有った。
+      | 此の実装は一見大したコード量には見えなさそうだが、事実上、#[+Term--YDID 関数]等でコード量が
+      |   #[+Keyphrase--YDID 数倍に膨れ上がると言っても過言ではない]（
+      +Link--YDF({
+        unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript
+      }).Article-Link 具体例を参照
+      |   )。
 
     p.Article-Paragraph.
-      ソースコードを#[+ImportantEntity--YDID JavaScript]へ変換する際、#[+ImportantEntity--YDID TypeScript]#[+Term--YDID トランスパイラ]
-        は新規機能の中に何も追加#[+Keyword--YDID しない]。
-      特に#[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]のソースコード上で指定された関数・メソッドの引数の型確認が、JavaScript上では実行されない]。
-      其の上で、仮に#[+ImportantEntity--YDID JavaScript]への対応課題として、関数・メソッドの引数の型の確認をしっかり実装する必要が有った。
-      此の実装は一見大したコード量には見えなさそうだが、事実上、関数等でコード量が#[+Keyphrase--YDID 数倍に膨れ上がると言っても過言ではない]
-        （#[+Link--YDF({ unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript }).Article-Link 具体例を参照])。
-
-    p.Article-Paragraph.
-      様々な情報を収集、分析した結果、引数の完成後の妥当性確認は実装しない事と成った。
-      主な理由としては、ライブラリの全体的な容量の急増、かつ多数の関数等の#[+Term--YDID 推移依存性]の急増が懸念され、それはキロバイト数を厳格に節約しなければならない
-        ブラウザーアプリケーションにとって無視出来ない問題だからだ。
+      様々な情報を収集、分析した結果、#[+Term--YDID 引数]の完成後の妥当性確認は実装#[+Keyword--YDID しない]事と成った。
+      主な理由としては、ライブラリの全体的な容量の急増、且つ多数の#[+Term--YDID 関数]等の#[+Term--YDID 推移依存性]の急増が懸念され、
+        其れは#[+Term--YDID キロバイト数]を厳格に節約しなければならない#[+Term--YDID ブラウザーアプリケーション]にとって無視出来ない問題だからだ。
       と言う事は、#[+ImportantEntity--YDID TypeScript]ではなく#[+ImportantEntity--YDID JavaScript]で当ライブラリを使う場合、
-        型不整合関連エラーが発生する可能性が高い。だがエラーメッセージから原因が判明するとは限らず、「ライブラリのせいだ」等と誤解される事態も予想される。
+        型不整合関連エラーが発生する可能性が高い。
+      だが#[+Keyphrase--YDID エラーメッセージから原因が判明するとは限らず]、「ライブラリのせいだ」等と#[+Keyword--YDID 誤解]される事態も予想される。
 
 
-    h2.Article-Heading2(
-      id= localizedRouting.coreLibrary.$children.gettingStarted.$sectioning.importingOfFunctionality.$anchor
-    ) 機能のインポート
+    //- ━━━ 機能のインポート ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.importingFunctionality.$heading,
+      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
-      当パッケージの導入後に、本説明用ページで紹介されている関数やクラス等のインポートが可能と成る。
-      標準のインポート方法は、#[+ImportantEntity__Code--YDID import]#[+Term--YDID キーワード]をサポートしているランタイムやプロジェクト構成手段
-        の場合なら、例えば以下の様に行う。
+      当#[+Term--YDID npmパッケージ]の導入後に、当サイト内で紹介している#[+Term--YDID 関数]や#[+Term--YDID クラス]等の
+        #[+Term__Contrast--YDID インポート]が可能と成る。
+      標準の#[+Term--YDID インポート]方法は、#[+ImportantEntity__Code--YDID import]#[+Term--YDID キーワード]をサポートしている
+        #[+Term--YDID ランタイム]や#[+Term--YDID プロジェクト構成手段]の場合なら、例えば以下の様に行う。
 
-    +CodeViewer--YDF({
-      title: "「@yamato-daiwa/es-extensions」からのインポートの例"
-    })
+    +CodeViewer--YDF({ title: "「@yamato-daiwa/es-extensions」からのインポートの例" })
       +CodeViewer-Listing--YDF({
         codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
       }) import { addElementsToArray, removeNthCharacter } from "@yamato-daiwa/es-extensions";

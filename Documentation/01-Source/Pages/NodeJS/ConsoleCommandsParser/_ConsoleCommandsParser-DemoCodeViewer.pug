@@ -1,0 +1,169 @@
+mixin DemoCodeViewer(options)
+
+  -
+    const {
+      commandPhrasesEnumeration = false,
+      consoleCommandsObjectTypes = false,
+      specification = false
+    } = options ?? {};
+
+  +CodeViewer--YDF
+
+    +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+      :code_listing--yda
+        import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
+        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+
+
+        namespace ApplicationConsoleLineInterface {
+
+      if commandPhrasesEnumeration
+
+        :code_listing--yda(
+          mustAppendEmptyLine
+          indentationMultiplier="2"
+          indentationString="  "
+        )
+          export enum CommandPhrases {
+            projectBuilding = "build",
+            packingOfBuild = "pack",
+            projectDeploying = "deploy",
+            referenceGenerating = "help"
+          }
+
+      if consoleCommandsObjectTypes
+
+        :code_listing--yda(
+          mustAppendEmptyLine
+          indentationMultiplier="2"
+          indentationString="  "
+        )
+          export type SupportedCommandsAndParametersCombinations =
+              ProjectBuildingConsoleCommand |
+              PackingOfBuildConsoleCommand |
+              ProjectDeployingConsoleCommand |
+              ReferenceGeneratingConsoleCommand;
+
+          export type ProjectBuildingConsoleCommand = Readonly<{
+            phrase: CommandPhrases.projectBuilding;
+            requiredStringOption: string;
+            optionalStringOption?: string;
+          }>;
+
+          export type PackingOfBuildConsoleCommand = Readonly<{
+            phrase: CommandPhrases.packingOfBuild;
+            enumerationLikeStringOption: "FOO" | "BAR" | "BAZ";
+            numericOption?: number;
+            limitedNumericOption?: number;
+          }>;
+
+          export type ProjectDeployingConsoleCommand = Readonly<{
+            phrase: CommandPhrases.projectDeploying;
+            booleanOption: boolean;
+            JSON5_Option?: Readonly<{ foo: string; bar?: number; }>;
+          }>;
+
+          export type ReferenceGeneratingConsoleCommand = Readonly<{
+            phrase: CommandPhrases.referenceGenerating;
+          }>;
+
+      if specification
+
+        :code_listing--yda(
+          mustAppendEmptyLine
+          indentationMultiplier="2"
+          indentationString="  "
+        )
+          export const specification: ConsoleCommandsParser.CommandLineInterfaceSpecification = {
+
+            applicationName: "Example task manager",
+            applicationDescription: "Executes various tasks.",
+
+            commandPhrases: {
+
+              [CommandPhrases.projectBuilding]: {
+                isDefault: true,
+                description: "Builds the project for specified mode.",
+                options: {
+                  requiredStringOption: {
+                    description: "Example required string option",
+                    type: ConsoleCommandsParser.ParametersTypes.string,
+                    required: true,
+                    shortcut: "a"
+                  },
+                  optionalStringOption: {
+                    description: "Example optional string option",
+                    type: ConsoleCommandsParser.ParametersTypes.string,
+                    required: false
+                  }
+                }
+              },
+
+              [CommandPhrases.packingOfBuild]: {
+                description: "Create the deployable pack of the project",
+                options: {
+                  enumerationLikeStringOption: {
+                    description: "Example enumeration like string option",
+                    type: ConsoleCommandsParser.ParametersTypes.string,
+                    defaultValue: "FOO",
+                    allowedAlternatives: [
+                      "FOO",
+                      "BAR",
+                      "BAZ"
+                    ]
+                  },
+                  numericOption: {
+                    description: "Example numeric option",
+                    type: ConsoleCommandsParser.ParametersTypes.number,
+                    numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber,
+                    required: false
+                  },
+                  limitedNumericOption: {
+                    description: "Example numeric option with fixed minimal and maximal value",
+                    type: ConsoleCommandsParser.ParametersTypes.number,
+                    numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                    required: false,
+                    minimalValue: -10,
+                    maximalValue: 10
+                  }
+                }
+              },
+
+              [CommandPhrases.projectDeploying]: {
+                description: "Deploys the project.",
+                options: {
+                  booleanOption: {
+                    description: "Example boolean option",
+                    type: ConsoleCommandsParser.ParametersTypes.boolean,
+                    shortcut: "b"
+                  },
+                  JSON5_Option: {
+                    description: "Example JSON5 option",
+                    type: ConsoleCommandsParser.ParametersTypes.JSON5,
+                    shortcut: "j",
+                    required: false,
+                    validValueSpecification: {
+                      foo: {
+                        type: RawObjectDataProcessor.ValuesTypesIDs.string,
+                        required: true,
+                        minimalCharactersCount: 1
+                      },
+                      bar: {
+                        type: RawObjectDataProcessor.ValuesTypesIDs.number,
+                        numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                        required: false,
+                        minimalValue: 1
+                      }
+                    }
+                  }
+                }
+              },
+
+              [CommandPhrases.referenceGenerating]: {}
+
+            }
+          };
+
+      :code_listing--yda
+        }

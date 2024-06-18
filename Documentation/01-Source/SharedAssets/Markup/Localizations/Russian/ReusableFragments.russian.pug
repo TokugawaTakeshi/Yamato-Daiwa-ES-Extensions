@@ -1,0 +1,51 @@
+-
+
+  const IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__russian = {
+    $heading: "Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA",
+    steps: { $heading: "Пошаговое описание процесса использования шаблона" }
+  };
+
+
+mixin IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance(properties)
+
+  - const { imageURI, relatedTableOfContentsMetadata } = properties;
+
+
+  //- ━━━ Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  +Heading--YDF({
+    level: 2,
+    text: relatedTableOfContentsMetadata.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$anchor
+  }).Article-Heading2
+
+  +SingleImageViewer--YDF({
+    imageURI: imageURI,
+    imageAlternateText:
+        "Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA с использованием функциональности " +
+          "«Live Template»."
+  })
+
+  p.Article-Paragraph.
+    Использование
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates }).Article-Link Live template-ов]
+      в семействе #[+Term--YDID интегрированных сред разработки]
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IntelliJ IDEA]
+      позволяет вводить код такой так #[+Term--YDID выражения вызова функции] быстрее.
+    Для получения доступа к #[+Term--YDID Live Template-ам] библиотеки #[+ImportantEntity--YDID YDEE] потребуется установить
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin }).Article-Link официальный плагин]
+      этой библиотеки.
+
+
+  //- ─── Пошаговое описание процесса использования шаблона ────────────────────────────────────────────────────────────
+  +Heading--YDF({
+    level: 3,
+    text: relatedTableOfContentsMetadata.$children.steps.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$children.steps.$anchor
+  }).Article-Heading3
+
+  p.Article-Paragraph.
+    Если Вы ранее не пользовались #[+Term--YDID Live template-ами], то пусть Вас не пугает приведённая ниже объёмная
+      инструкция: при сформированной привычке использования #[+Term--YDID Live template-ов] (эта привычка сходна с
+      повседневным применением сочетаний клавиш) скорость выполнения описанных ниже операций займёт считанные секунды.
+
+  block

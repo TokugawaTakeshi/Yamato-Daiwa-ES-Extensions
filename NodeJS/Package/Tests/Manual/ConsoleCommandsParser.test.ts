@@ -10,44 +10,45 @@ import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test
  * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test --optionalStringOption sample
+ * ts-node Tests/Manual/ConsoleCommandsParser.test.ts help
  */
 namespace ApplicationConsoleLineInterface {
 
   export enum CommandPhrases {
-    buildProject = "build",
-    packProject = "pack",
-    deployProject = "deploy",
-    help = "help"
+    projectBuilding = "build",
+    packingOfBuild = "pack",
+    projectDeploying = "deploy",
+    referenceGenerating = "help"
   }
 
   export type SupportedCommandsAndParametersCombinations =
-      BuildProjectConsoleCommand |
-      PackProjectConsoleCommand |
-      DeployProjectConsoleCommand |
-      HelpConsoleCommand;
+      ProjectBuildingConsoleCommand |
+      PackingOfBuildConsoleCommand |
+      ProjectDeployingConsoleCommand |
+      ReferenceGeneratingConsoleCommand;
 
-  export type BuildProjectConsoleCommand = {
-    phrase: CommandPhrases.buildProject;
+  export type ProjectBuildingConsoleCommand = Readonly<{
+    phrase: CommandPhrases.projectBuilding;
     requiredStringOption: string;
     optionalStringOption?: string;
-  };
+  }>;
 
-  export type PackProjectConsoleCommand = {
-    phrase: CommandPhrases.packProject;
-    enumerationLikeStringOption?: "FOO" | "BAR" | "BAZ";
+  export type PackingOfBuildConsoleCommand = Readonly<{
+    phrase: CommandPhrases.packingOfBuild;
+    enumerationLikeStringOption: "FOO" | "BAR" | "BAZ";
     numericOption?: number;
     limitedNumericOption?: number;
-  };
+  }>;
 
-  export type DeployProjectConsoleCommand = {
-    phrase: CommandPhrases.deployProject;
+  export type ProjectDeployingConsoleCommand = Readonly<{
+    phrase: CommandPhrases.projectDeploying;
     booleanOption: boolean;
     JSON5_Option?: Readonly<{ foo: string; bar?: number; }>;
-  };
+  }>;
 
-  export type HelpConsoleCommand = {
-    phrase: CommandPhrases.help;
-  };
+  export type ReferenceGeneratingConsoleCommand = Readonly<{
+    phrase: CommandPhrases.referenceGenerating;
+  }>;
 
 
   export const specification: ConsoleCommandsParser.CommandLineInterfaceSpecification = {
@@ -57,7 +58,7 @@ namespace ApplicationConsoleLineInterface {
 
     commandPhrases: {
 
-      [CommandPhrases.buildProject]: {
+      [CommandPhrases.projectBuilding]: {
         isDefault: true,
         description: "Builds the project for specified mode.",
         options: {
@@ -75,13 +76,13 @@ namespace ApplicationConsoleLineInterface {
         }
       },
 
-      [CommandPhrases.packProject]: {
+      [CommandPhrases.packingOfBuild]: {
         description: "Create the deployable pack of the project",
         options: {
           enumerationLikeStringOption: {
             description: "Example enumeration like string option",
             type: ConsoleCommandsParser.ParametersTypes.string,
-            required: false,
+            defaultValue: "FOO",
             allowedAlternatives: [
               "FOO",
               "BAR",
@@ -105,7 +106,7 @@ namespace ApplicationConsoleLineInterface {
         }
       },
 
-      [CommandPhrases.deployProject]: {
+      [CommandPhrases.projectDeploying]: {
         description: "Deploys the project.",
         options: {
           booleanOption: {
@@ -119,27 +120,23 @@ namespace ApplicationConsoleLineInterface {
             shortcut: "j",
             required: false,
             validValueSpecification: {
-              nameForLogging: "SampleJSON5_Option",
-              subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
-              properties: {
-                foo: {
-                  type: RawObjectDataProcessor.ValuesTypesIDs.string,
-                  required: true,
-                  minimalCharactersCount: 1
-                },
-                bar: {
-                  type: RawObjectDataProcessor.ValuesTypesIDs.number,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
-                  required: false,
-                  minimalValue: 1
-                }
+              foo: {
+                type: RawObjectDataProcessor.ValuesTypesIDs.string,
+                required: true,
+                minimalCharactersCount: 1
+              },
+              bar: {
+                type: RawObjectDataProcessor.ValuesTypesIDs.number,
+                numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                required: false,
+                minimalValue: 1
               }
             }
           }
         }
       },
 
-      [CommandPhrases.help]: {}
+      [CommandPhrases.referenceGenerating]: {}
 
     }
   };
@@ -154,14 +151,14 @@ const parsedConsoleCommand: ConsoleCommandsParser.
 
 switch (parsedConsoleCommand.phrase) {
 
-  case ApplicationConsoleLineInterface.CommandPhrases.buildProject: {
+  case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
     console.log("Build project", parsedConsoleCommand);
     console.log("requiredStringOption", parsedConsoleCommand.requiredStringOption);
     console.log("optionalStringOption", parsedConsoleCommand.optionalStringOption);
     break;
   }
 
-  case ApplicationConsoleLineInterface.CommandPhrases.packProject: {
+  case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
     console.log("Pack project", parsedConsoleCommand);
     console.log("enumerationLikeStringOption", parsedConsoleCommand.enumerationLikeStringOption);
     console.log("numericOption", parsedConsoleCommand.numericOption);
@@ -169,14 +166,14 @@ switch (parsedConsoleCommand.phrase) {
     break;
   }
 
-  case ApplicationConsoleLineInterface.CommandPhrases.deployProject: {
+  case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
     console.log("Deploy project", parsedConsoleCommand);
     console.log("booleanOption", parsedConsoleCommand.booleanOption);
     console.log("JSON5_Option", parsedConsoleCommand.JSON5_Option);
     break;
   }
 
-  case ApplicationConsoleLineInterface.CommandPhrases.help: {
+  case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
     console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
   }
 

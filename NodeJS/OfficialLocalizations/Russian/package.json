@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs-localization-russian",
-  "version": "1.6.0",
+  "version": "1.7.0-alpha.0",
   "description": "Russian localization for @yamato-daiwa/es-extensions-nodejs package.",
   "keywords": [
     "localization"
@@ -10,6 +10,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"

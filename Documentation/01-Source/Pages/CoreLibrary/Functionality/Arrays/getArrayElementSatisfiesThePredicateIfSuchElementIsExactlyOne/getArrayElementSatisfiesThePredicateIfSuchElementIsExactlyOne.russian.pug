@@ -25,8 +25,14 @@ block append Metadata
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
+
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
 
     RoutingEmulator.setCurrentRoute(
       "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
@@ -37,6 +43,12 @@ block append Metadata
       english: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html",
       japanese: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html"
     });
+
+    const pageTableOfContents = localizedRouting.coreLibrary.$children.
+        functionality.$children.
+        arrays.$children.
+        retrievingOfElements.$children.
+        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$sectioning;
 
 
 block append HeadScriptsLinks
@@ -52,17 +64,17 @@ block append SpecificContent
 
     +CallableExpressionScheme--YDF_DK({
       technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-      localizedDescriptiveHeading: "Получить элемент массива удовлетворяющего предикату если такой элемент ровно 1",
+      localizedDescriptiveHeading: "Получить удовлетворяющий предикату　элемент массива, если такой элемент ровно 1",
       signatures: [
 
         {
           localizedDescriptiveHeading: "Если искомого элемента нет либо таковых больше 1, то будет возвращён null",
-          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          genericParameters: [ "ArrayElement" ],
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
@@ -77,18 +89,18 @@ block append SpecificContent
 
         {
           localizedDescriptiveHeading: "Если искомого элемента нет либо таковых больше 1, будет брошено исключение",
-          genericParameters: [ { genericTechnicalName: "ArrayElement" } ],
+          genericParameters: [ "ArrayElement" ],
           parametersSpecification: [
             {
               genericTechnicalName: "targetArray",
               localizedName: "Целевой массив",
-              type: "ReadonlyArray&lt;ArrayElement&gt;",
+              type: "ReadonlyArray<ArrayElement>",
               required: true
             },
             {
               genericTechnicalName: "predicate",
               localizedName: "Предикат",
-              type: "(arrayElement: string) =&gt; boolean",
+              type: "(arrayElement: string) => boolean",
               required: true
             },
             {
@@ -98,59 +110,69 @@ block append SpecificContent
               required: true
             }
           ],
-          returnedValue: "ArrayElement | null"
+          returnedValue: "ArrayElement"
         }
 
-      ]
+      ],
+      headingTag: "h1"
     })
       +ObjectTypeAbstract--YDF_DK({
         typeName: "Options",
         localizedDescriptiveHeading: "Опции",
         propertiesSpecification: {
           mustThrowErrorIfElementNotFoundOrMoreThan1: {
-            localizedInterpretation: "Должен бросить ошибку если элемент не найден либо результатов поиска больше 1",
-            typeName: "Boolean (только true)",
+            localizedInterpretation: "Должен бросить ошибку, если элемент не найден либо результатов поиска больше 1",
+            type: "boolean (только true)",
             required: true
           }
         }
       })
 
     p.Article-Paragraph.
-      Возвращает элемент #[+Term--YDID массива] удовлетворяющий указанному #[+Term--YDID предикату]
+      Возвращает #[+Term--YDID элемент массива], удовлетворяющий указанному #[+Term--YDID предикату]
         (#[+Term--YDID функции], возвращающей #[+Term__Contrast--YDID булевское значение])
         #[+Keyphrase--YDID тогда и только тогда], когда такой элемент #[+Keyword--YDID ровно] #[+ImportantEntity--YDID 1].
-      Если же такого элемента нет, либо их #[+ImportantEntity--YDID 2] #[+Keyword--YDID и] #[+Keyword__Contrast--YDID больше]
-        то:
+      Если же такого #[+Term--YDID элемента] нет, либо их #[+ImportantEntity--YDID 2] #[+Keyword--YDID и]
+        #[+Keyword__Contrast--YDID больше] то:
 
     ul.Article-UnorderedList
+
       li.
-        Будет выброшено #[+Term--YDID исключение], если указано значение
-          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] #[+ImportantEntity--YDID 3-им]
+        Будет брошена #[+Term--YDID ошибка], если указано значение
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] #[+Keyword--YDID 3-им]
           #[+Term--YDID параметром].
-        #[+ImportantEntity--YDID TypeScript] при этом будет верить, что функция отработала успешно, то возвращаемое
-          значение имеет #[+Keyword--YDID не] #[+Term--YDID пустое значение] (#[+ImportantEntity__Code--YDID null]),
-          а того типа, который указан #[+Term--YDID параметром] #[+Term__Contrast--YDID обобщения].
+        #[+ImportantEntity--YDID TypeScript] при этом будет верить, что #[+Term--YDID функция] отработала успешно,
+          то #[+Term--YDID возвращаемое значение] имеет #[+Keyword--YDID непустое] #[+Term--YDID значение]
+          (#[+Keyword--YDID не]&nbsp;#[+ImportantEntity__Code--YDID null]), а того #[+Term--YDID типа],
+          который указан (#[+Keyphrase--YDID в данном случае] #[+Keyword--YDID обычно]
+          #[+Keyword__Contrast--YDID неявно]) через #[+Term--YDID параметр обобщения].
 
       li.
-        Если такая опция #[+Keyword--YDID не] указана, то будет возвращён #[+ImportantEntity__Code--YDID null].
-        При этом #[+ImportantEntity__Code--YDID TypeScript] будет требовать проверки на #[+ImportantEntity__Code--YDID null],
-          прежде чем можно будет пользоваться возвращённым значением.
+        Если #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр] #[+Keyword--YDID не]&nbsp;указан, то будет
+          возвращён #[+ImportantEntity__Code--YDID null].
+        При этом #[+ImportantEntity__Code--YDID TypeScript] будет #[+Keyword--YDID требовать] проверки на
+          #[+ImportantEntity__Code--YDID null],　прежде чем можно будет полноценно пользоваться возвращённым значением.
 
 
-    h2.Article-Heading2 Примеры
+    //- ━━━ Пример ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.example.$heading,
+      HTML_ID: pageTableOfContents.example.$anchor
+    }).Article-Heading2
 
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
         +CodeViewer-Explanation--YDF.
           Возьмём в качестве опытного образца этот #[+Term--YDID массив] в названиями американских городов.
           #[+SecondaryEntity--YDID 2] их них начинаются с #[+SecondaryEntity__Code--YDID «Santa»],
-          #[+SecondaryEntity--YDID 3] из них - с #[+SecondaryEntity__Code--YDID «Sa»], а вот с
-          #[+SecondaryEntity--YDID «St.»] - #[+Keyword--YDID только] #[+SecondaryEntity--YDID 1].
+            #[+SecondaryEntity--YDID 3] из них — с #[+SecondaryEntity__Code--YDID «Sa»], а вот с
+            #[+SecondaryEntity--YDID «St.»] — #[+Keyword--YDID только] #[+SecondaryEntity--YDID 1].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           const targetCityName: string | null = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
           );
@@ -159,25 +181,47 @@ block append SpecificContent
           p.Article-Paragraph.
             Будет возвращён #[+SecondaryEntity--YDID 3-ий] элемент, потому что согласно #[+Term--YDID предикату],
               нам нужен элемент, строчное значение которого начинается с #[+SecondaryEntity--YDID «St.»],
-              а такой элемент #[+Keyword--YDID только] #[+SecondaryEntity--YDID 1].
+              а такой элемент #[+Keyphrase--YDID в нашем случае] #[+Keyword--YDID только] #[+SecondaryEntity--YDID 1].
 
           p.Article-Paragraph.
-            Но это мы знаем в данном примере, какие у нас элементы в #[+Term--YDID массиве], а вот
-              #[+Keyphrase--YDID на практике] содержимое #[+Term--YDID массива] будет
+            Однако, #[+Keyphrase--YDID на практике] содержимое #[+Term--YDID массива] будет
               #[+Keyphrase--YDID заранее неизвестным].
-            Поэтому строчный элемент, который начинается с #[+SecondaryEntity--YDID «St.»], вовсе не обязан быть
-              один, да и вообще не обязан быть, даже если таковой ожидается, потому
-              #[+Keyphrase--YDID при таком сочетании параметров] функции может быть возвращён #[+ImportantEntity--YDID null].
+            Поэтому строчный элемент, который начинается с #[+SecondaryEntity--YDID «St.»], вовсе
+              #[+Keyword--YDID не]&nbsp;обязан быть один, да и вообще #[+Keyword--YDID не]&nbsp;обязан быть
+              #[+Keyphrase--YDID даже если таковой ожидается], потому #[+Keyphrase--YDID при таком сочетании параметров]
+              #[+Term--YDID функции] может быть возвращён #[+ImportantEntity--YDID null].
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          console.log(targetCityName.length);
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            Возникнет ошибка #[+ImportantEntity--YDID TypeScript] #[+ImportantEntity--YDID TS18047]
+              («'targetCityName' is possibly 'null'»), потому что свойство #[+ImportantEntity__Code--YDID length] имеется
+              у #[+Keyword--YDID строкового] типа (и #[+Term--YDID массивов]), а #[+Term--YDID переменная]
+              #[+SecondaryEntity__Code--YDID targetCityName], возможно, имеет значение
+              #[+ImportantEntity__Code--YDID null].
+
+          p.Article-Paragraph.
             Прежде, чем вызывать у #[+SecondaryEntity__Code--YDID targetCityName] какие-либо #[+Term--YDID строчные]
-              свойств и/или методы (например, #[+SecondaryEntity__Code--YDID length], #[+SecondaryEntity__Code--YDID splice],
-              #[+SecondaryEntity__Code--YDID includes] и так далее) необходимо доказать #[+ImportantEntity--YDID TypeScript-y],
-              что возвращённое значение #[+Keyword--YDID не] является #[+ImportantEntity__Code--YDID null].
-            Сделать это можно с помощью условной конструкции #[+SecondaryEntity__Code--YDID if (targetCityName !== null) {}],
-              тогда в пределах #[+Term--YDID if-блока] #[+ImportantEntity--YDID TypeScript] будет считать данное значение
-              #[+Keyword--YDID не] являющимся #[+ImportantEntity__Code--YDID null].
+              #[+Term__Contrast--YDID свойства] и/или #[+Term__Contrast--YDID методы] (в частности
+              #[+SecondaryEntity__Code--YDID length]) #[+Keyword--YDID необходимо] #[+Keyword__Contrast--YDID доказать]
+              #[+ImportantEntity--YDID TypeScript-y], что значение #[+SecondaryEntity__Code--YDID targetCityName]
+              #[+Keyword--YDID не]&nbsp;является #[+ImportantEntity__Code--YDID null].
+            Сделать это можно, например, с помощью #[+Term--YDID условной конструкции]
+              #[+SecondaryEntity__Code--YDID if (targetCityName !== null) {}],
+              #[+Keyphrase--YDID тогда в пределах #[+Term--YDID if-блока]] #[+ImportantEntity--YDID TypeScript] будет
+              считать данное значение #[+Keyword--YDID не]&nbsp;являющимся #[+ImportantEntity__Code--YDID null].
+            Есть и другие решения, но чего #[+Keyphrase--YDID категорически] #[+Keyword--YDID не]&nbsp;должен делать
+              инженер, заявляющий владением языком #[+ImportantEntity--YDID TypeScript] — это использовать
+              #[+Term--YDID выражения] типа #[+SecondaryEntity__Code--YDID targetCityName!.length], так как это
+              #[+Keyphrase--YDID большая трещина в качестве кода].
+            К тому же, обычно использование подобной #[+Keyword--YDID токсичной] функциональности имеет массовый
+              характер, сопровождающийся применением #[+Term--YDID типа] #[+ImportantEntity__Code--YDID any] и
+              других послаблений,
+              #[+Keyphrase--YDID сводящих на нет смысл использования языка #[+ImportantEntity--YDID TypeScript]].
 
-
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
           console.log(
             getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
               sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
@@ -186,112 +230,210 @@ block append SpecificContent
         +CodeViewer-Explanation--YDF
 
           p.Article-Paragraph.
-            В данном случае возвращён #[+ImportantEntity__Code--YDID null], потому что элементов, удовлетворяющих
-              #[+Term--YDID предикату] - #[+SecondaryEntity--YDID 2], а #[+Keyword--YDID не] #[+SecondaryEntity__Code--YDID 1].
-            В название функции чёрным по белому написано, что взятие элемента произойдёт
-              #[+Keyphrase--YDID тогда и только тогда], когда предикату удовлетворяет #[+Keyword--YDID ровно]
-              #[+Keyword__Contrast--YDID один] элемент, а в данном случае — #[+SecondaryEntity--YDID 2].
+            В данном случае возвращён #[+ImportantEntity__Code--YDID null], потому что #[+Term--YDID элементов],
+              удовлетворяющих #[+Term--YDID предикату] — #[+SecondaryEntity--YDID 2], а
+              #[+Keyword--YDID не]&nbsp;#[+SecondaryEntity__Code--YDID 1].
+            В название #[+Term--YDID функции] чёрным по белому написано, что взятие #[+Term--YDID элемента] произойдёт
+              #[+Keyphrase--YDID тогда и только тогда], когда #[+Term--YDID предикату] удовлетворяет
+              #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент], а в данном случае
+              таковых #[+SecondaryEntity--YDID 2].
 
           p.Article-Paragraph.
-            Но что если Вы уверены, что элемент, удовлетворяющий #[+Term--YDID предикату], будет #[+Keyword--YDID ровно]
-              #[+SecondaryEntity--YDID 1] и по-другому быть не должно?
-            Тогда можно уйти от проверки значения на #[+ImportantEntity__Code--YDID null], при этом если всё-таки
-              предикату будет удовлетворять #[+Keyword--YDID не] #[+Keyword__Contrast--YDID ровно] #[+SecondaryEntity--YDID 1]
-              элемент (а вероятность этого события гораздо выше, чем кажется), то будет выброшено исключение:
+            Но что если Вы уверены, что #[+Term--YDID элемент], удовлетворяющий #[+Term--YDID предикату], будет
+              #[+Keyword--YDID ровно] #[+SecondaryEntity--YDID 1] и по-другому быть не&nbsp;может?
+            Тогда можно указать передать #[+ImportantEntity--YDID 3-им] #[+Term--YDID параметром] значение
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] — в этом случае
+              #[+ImportantEntity--YDID TypeScript] #[+Keyword--YDID не]&nbsp;потребует проверки значения на
+              #[+ImportantEntity__Code--YDID null], при этом если вопреки ожиданиям #[+Term--YDID предикату] будет
+              удовлетворять #[+Keyword--YDID не]&nbsp;#[+Keyword__Contrast--YDID ровно] #[+SecondaryEntity--YDID 1]
+              элемент (а вероятность этого события гораздо выше, чем кажется), то будет выброшено
+              #[+Term--YDID исключение] #[+ImportantEntity__Code--YDID UnexpectedEventError].
 
-        +CodeViewer-PartialListing--YDF: :html_special_characters_to_html_entities
-          let matching: string;
-
-          try {
-
-            matching = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-              sample,
-              (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-              { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
-            );
-
-          } catch (error: unknown) {
-
-            if (error instanceof UnexpectedEventError) {
-              console.error("Что!? Я ожидал только один!");
-            }
-          }
-        +CodeViewer-Explanation--YDF
-
-          p.Article-Paragraph.
-            В данном случае мы можем аннотировать тип переменной #[+SecondaryEntity__Code--YDID matching] как
-              #[+SecondaryEntity__Code--YDID string], а #[+Keyword--YDID не] #[+SecondaryEntity__Code--YDID string | null],
-              так как вместо возврата #[+ImportantEntity__Code--YDID null] в случае, если элементов, удовлетворяющих
-              предикату #[+ImportantEntity__Code--YDID 0] #[+Keyword--YDID или] #[+Keyword__Contrast--YDID больше]
-              #[+ImportantEntity--YDID 1] будет выброшено исключение #[+ImportantEntity__Code--YDID UnexpectedEventError].
-
-          p.Article-Paragraph.
-            Едва ли Вы захотите перехватывать эту ошибку, как в примере
-
-        //.
-
-          //- TODO Кстати, как вы думаете, почему третий параметр имеет тип "объект", а не просто boolean? До потому что
-               по ... не
-                Да , среды разработки, но всех на IntelliJ IDEA работать не заставишь, да необходимость читать код возникает
-                не только из среды разработки, но и, например, с GitHub.
-                Поэтому в железное правило высококачественное разработки - смысл всех переменных своейст и так далее
-                должен быть кристально чист и ясен и комменрариев в коде и/или документации.
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample,
+            (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+          );
+        +CodeViewer-Explanation--YDF.
+          В данном случае, #[+Keyphrase--YDID когда у нас есть #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр]],
+            мы можем аннотировать тип #[+Term--YDID переменной] #[+SecondaryEntity__Code--YDID matching] как
+            #[+SecondaryEntity__Code--YDID string], а&nbsp;#[+Keyword--YDID не]&nbsp;
+            #[+SecondaryEntity__Code--YDID string | null], так как вместо возврата #[+ImportantEntity__Code--YDID null]
+            в случае, если #[+Term--YDID элементов], удовлетворяющих #[+Term--YDID предикату]
+            #[+ImportantEntity__Code--YDID 0] #[+Keyword--YDID или] #[+Keyword__Contrast--YDID больше]
+            #[+ImportantEntity--YDID 1], будет выброшено #[+ImportantEntity--YDID исключение]
+            #[+ImportantEntity__Code--YDID UnexpectedEventError].
+          Вы, конечно, можете обработать это #[+Term--YDID исключение] с помощью #[+ImportantEntity__Code--YDID try/catch],
+            но #[+Keyphrase--YDID в общем случае] это #[+Keyword--YDID не]&nbsp;даст никакого преимущества перед
+            рассмотренной выше проверкой на #[+ImportantEntity__Code--YDID null].
 
 
-    h2.Article-Heading2 Сравнение с нативными методами
+    //- ━━━ Сравнение с нативными методами ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.comparisonWithNativeMethods.$heading,
+      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$anchor
+    }).Article-Heading2
 
     p.Article-Paragraph.
-      Приведённые ниже #[+Keyword--YDID нативные] #[+Term--YDID методы] не лучше и не хуже функции
+      Приведённые ниже #[+Keyword--YDID нативные] #[+Term--YDID методы] #[+Keyword--YDID не]&nbsp;лучше и
+        #[+Keyword--YDID не]&nbsp;хуже #[+Term--YDID функции]
         #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne];
         что именно использовать — зависит от того, какое поведение требуется с случаях, когда:
 
     ul.Article-UnorderedList
-      li Нет ни одного элемента, удовлетворяющего #[+Term--YDID предикату]
-      li Имеется два и более элементов, удовлетворяющих #[+Term--YDID предикату]
+      li.
+        Нет #[+Keyword--YDID ни] одного #[+Term--YDID элемента массива], удовлетворяющего
+          #[+Term__Contrast--YDID предикату].
+      li.
+        Имеется #[+ImportantEntity--YDID 2] #[+Keyword--YDID и] #[+Keyword__Contrast--YDID более]
+          #[+Term--YDID элементов массива], удовлетворяющих #[+Term--YDID предикату].
 
-    h3.Article-Heading3 Array.prototype.find
+
+    //- ─── Array.prototype.find ───────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.comparisonWithNativeMethods.$children.find.$heading,
+      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$children.find.$anchor
+    }).Article-Heading3
 
     ul.Article-UnorderedList
 
       li.
         Общего с #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] у этого
-          #[+Term--YDID метода] то, что #[+Keyword--YDID оба] ищут #[+Keyword__Contrast--YDID первое] совпадение с
-          #[+Term--YDID предикатом].
+          #[+Term--YDID метода] то, что #[+Keyword--YDID оба] ищут #[+Keyword__Contrast--YDID первый]
+          #[+Term--YDID элемент], удовлетворяющий #[+Term--YDID предикату].
 
       li.
-        Если удовлетворяющих #[+Term--YDID предикату] элементов нет, #[+ImportantEntity__Code--YDID Array.prototype.find]
-          возвращает #[+ImportantEntity__Code--YDID undefined].
-        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] возвращает
-          #[+ImportantEntity__Code--YDID null] либо бросает ошибку - в зависимости от наличия #[+ImportantEntity--YDID 3-его]
+        Если удовлетворяющих #[+Term--YDID предикату] #[+Term--YDID элементов] #[+Keyword--YDID нет],
+          #[+ImportantEntity__Code--YDID Array.prototype.find] вернёт #[+ImportantEntity__Code--YDID undefined],
+          в во время как #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+          #[+Keyword--YDID либо] возвращает #[+ImportantEntity__Code--YDID null], #[+Keyword--YDID либо] бросает
+          #[+Term--YDID ошибку] — в зависимости от наличия или отсутствия #[+ImportantEntity--YDID 3-его]
           #[+Term--YDID параметра].
-        Если выбран вариант с бросанием ошибки, то #[+ImportantEntity--YDID TypeScript] #[+Keyword--YDID не] будет
-          требовать проверки на #[+ImportantEntity__Code--YDID null].
+        Если выбран вариант с бросанием #[+Term--YDID ошибки], то #[+ImportantEntity--YDID TypeScript]
+          #[+Keyword--YDID не]&nbsp;будет требовать проверки на #[+ImportantEntity__Code--YDID null] —
+          именно эта особенность может побудить использовать
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne], так как в случае
+          с #[+ImportantEntity__Code--YDID Array.prototype.find] #[+Keyword--YDID потребуется] проверка на
+          #[+ImportantEntity--YDID undefined].
 
       li.
-        Если удовлетворяющих #[+Term__Contrast--YDID предикату] элементов #[+ImportantEntity--YDID 2] #[+Keyword--YDID и]
-          #[+Keyword__Contrast--YDID больше], то #[+ImportantEntity__Code--YDID Array.prototype.find] возвращает
-          #[+Keyword--YDID первый], а остальные игнорирует.
-        Именно потребность в этой особенности стала основным мотивом к созданию
-          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne], потому что
-          часто надо не просто получить элемент по предикату, но и убедиться, что он уникальный.
-        Поэтому, #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
-          #[+Keyword--YDID никогда] #[+Keyword__Contrast--YDID не] возвращает элемент, если #[+Keyword--YDID не]
-          только он один удовлетворяет #[+Term--YDID предикату].
+        Если удовлетворяющих #[+Term__Contrast--YDID предикату] #[+Term--YDID элементов] #[+ImportantEntity--YDID 2]
+          #[+Keyword--YDID или] #[+Keyword__Contrast--YDID больше], то #[+ImportantEntity__Code--YDID Array.prototype.find]
+          возвращает #[+Keyword--YDID первый], а #[+Keyword__Contrast--YDID остальные] — #[+Keyword--YDID игнорирует].
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]　же, найдя
+          удовлетворяющий #[+Term--YDID предикату] #[+Term__Contrast--YDID элемент], дополнительно проверит,
+          не&nbsp;удовлетворяют ли #[+Term--YDID предикату] ещё какие-либо #[+Term--YDID элементы], и если да, то
+          #[+Keyword--YDID никакой] #[+Term--YDID элемент] #[+Keyword--YDID не]&nbsp;вернёт.
+        Эта особенность полезна в тех случаях, когда надо не&nbsp;просто получить #[+Term--YDID элемент массива] по
+          #[+Term__Contrast--YDID предикату], но и убедиться, что он в чём-то отличен от других,
+          например имеет уникальный идентификатор.
 
 
-    h3.Article-Heading3 Array.prototype.filter
+    //- ─── Array.prototype.filter ─────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.comparisonWithNativeMethods.$children.filter.$heading,
+      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$children.filter.$anchor
+    }).Article-Heading3
 
     p.Article-Paragraph.
-      Данный метод предназначен #[+Keyword--YDID не] для доступа к #[+Keyword__Contrast--YDID конкретному] элементу массива,
-        а для получения #[+Keyword--YDID выборки] из исходного #[+Term--YDID массива].
+      Данный метод предназначен #[+Keyword--YDID не]&nbsp;для доступа к #[+Keyword__Contrast--YDID конкретному]
+        #[+Term--YDID элементу массива], а для получения #[+Keyword--YDID выборки] из исходного #[+Term--YDID массива].
       Таким образом, этот #[+Term--YDID метод] #[+Term__Contrast--YDID массива] возвращает #[+Keyword--YDID тоже]
-        #[+Term--YDID массив] — #[+Keyword--YDID всех] элементов, удовлетворяющих #[+Term--YDID предикату],
-         а #[+Keyword--YDID не] конкретный элемент.
+        #[+Keyword__Contrast--YDID массив] — #[+Term--YDID элементов], удовлетворяющих #[+Term--YDID предикату],
+         а #[+Keyword--YDID не]&nbsp;конкретный #[+Term--YDID элемент].
 
     p.Article-Paragraph.
-      Если же элементов, удовлетворяющих #[+Term--YDID предикату], нет, то будет возвращён #[+Keyword--YDID пустой]
-        #[+Term--YDID массив].
-      Попытка доступа к любому элементу этого #[+Term--YDID массива] (в томи числе к первому, то есть с
-        #[+Term--YDID индексом] #[+ImportantEntity--YDID 0]) никак #[+Keyword--YDID не] будет замечена
-        #[+ImportantEntity--YDID TypeScript]-ом, а при обращении к #[+Keyword--YDID пустому] элементу #[+Term--YDID массива]
-        будет возвращено #[+ImportantEntity__Code--YDID undefined].
+      Если же #[+Term--YDID элементов], удовлетворяющих #[+Term--YDID предикату] нет, то будет возвращён
+        #[+Keyword--YDID пустой] #[+Term--YDID массив].
+      При обращении к #[+Keyword--YDID любому] #[+Term--YDID элементу] этого #[+Term__Contrast--YDID массива]
+        (в томи числе к первому, то есть с #[+Term--YDID индексом] #[+ImportantEntity--YDID 0]) будет возвращено
+        значение #[+ImportantEntity__Code--YDID undefined], чего #[+ImportantEntity--YDID TypeScript]
+        (да и вообще-то многие другие статически типизированные языки программирования) об этом
+        #[+Keyword--YDID не]&nbsp;предупредит.
+      Например, #[+SecondaryEntity__Code--YDID Array&lt;string&gt;] или
+        #[+SecondaryEntity__Code--YDID string&lsqb;&rsqb;] #[+Keyword--YDID фактически] означает «#[+Term--YDID массив]
+        #[+Keyword--YDID бесконечного] количества #[+Keyword--YDID строчных] #[+Term--YDID элементов]»,
+        когда #[+Keyphrase--YDID в реальности] #[+Keyword--YDID любой] #[+Term--YDID массив] #[+Keyword--YDID конечен],
+        а иногда может быть пустым.
+
+    +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
+          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
+      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          Скопируйте в буфер обмен имя #[+Term--YDID переменной], содержащей #[+Term--YDID массив], либо само
+            #[+Term--YDID выражение массива].
+          Чтобы #[+Term--YDID среда разработки] смогла автоматически заполнить позицию #[+ImportantEntity__Code--YDID 1-ого]
+           #[+Term--YDID параметра] нужным значением, сформируйте привычку делать это копирование перед тем, как начинать
+            вводить #[+Term--YDID Live template] #[+Term__Contrast--YDID функции]
+            #[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne].
+
+        li
+
+          | Начните набирать имя #[+Term--YDID функции] —
+          |   #[+ImportantEntity--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne].
+          | Подсветится #[+ImportantEntity--YDID 2] варианта автодополнения:
+
+          ol.Article-OrderedList
+
+            li.
+              Круглая иконка с буквой — это просто автодополнение имени #[+Term--YDID функции], #[+Keyword--YDID стандартная]
+                функциональность #[+Term--YDID среды разработки].
+              Нажатие на #[+ImportantEntity--YDID Enter] введёт полное имя #[+Term--YDID функции], а также при необходимости
+                объявления #[+Term--YDID импорта] этой #[+Term__Contrast--YDID функции].
+              Неплохо, однако это не&nbsp;предел, до которого можно частично автоматизировать процесс.
+
+            li.
+              Иконка с клише — это как раз нужный шаблон.
+              Нажмите #[+ImportantEntity--YDID Enter].
+              Произойдёт вставка шаблона кода, при этом значение #[+ImportantEntity__Code--YDID 1-ого]
+                #[+Term--YDID параметра] будет автоматически выделено и заполнено содержимым буфера обмена.
+              Поскольку при следовании данному руководству менять подставленное значение
+                #[+ImportantEntity__Code--YDID targetArray] на другое не&nbsp;требуется, выйдете из режима редактирования
+                #[+ImportantEntity__Code--YDID 1-ого] #[+Term--YDID параметра], нажав #[+ImportantEntity--YDID Enter]
+                ещё раз.
+
+          li.
+            Введите имя #[+Term--YDID параметра] #[+Term__Contrast--YDID предиката] — #[+Term--YDID стрелочной функции].
+            Данным #[+Term--YDID параметром] является #[+Term--YDID элемент массива], однако рекомендуется дать
+              ему более конкретное имя, чем «element».
+            Когда закончите вводить, нажмите #[+ImportantEntity--YDID Tab].
+            Если этому будет препятствовать на этот раз ненужное Вам автодополнение, то сначала нажмите
+              #[+ImportantEntity--YDID Esc].
+
+          li.
+            Введите тип #[+Term--YDID параметра] #[+Term__Contrast--YDID предиката], затем нажмите
+              #[+ImportantEntity__Code--YDID Enter].
+
+          li Удалите лишний код.
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.externalLinks.$heading,
+      HTML_ID: pageTableOfContents.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

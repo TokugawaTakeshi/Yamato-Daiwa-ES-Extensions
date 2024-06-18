@@ -1,0 +1,49 @@
+-
+
+  const IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__english = {
+    $heading: "Quick input in IntelliJ IDEA family of IDEs",
+    steps: { $heading: "Steps for using the Live templates" }
+  };
+
+
+mixin IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance(properties)
+
+  - const { imageURI, relatedTableOfContentsMetadata } = properties;
+
+
+  //- ━━━ Quick input in IntelliJ IDEA family of IDEs ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  +Heading--YDF({
+    level: 2,
+    text: relatedTableOfContentsMetadata.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$anchor
+  }).Article-Heading2
+
+  +SingleImageViewer--YDF({
+    imageURI: imageURI,
+    imageAlternateText: "Quick input in IntelliJ IDEA family of IDEs using the \"Live templates\" functionality."
+  })
+
+  p.Article-Paragraph.
+    Using the functionality of
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates }).Article-Link Live templates]
+      in the
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs }).Article-Link IntelliJ IDEA]
+      family if #[+Term--YDID IDEs] allows you to quickly input code such as a function invocation expression.
+    To get the #[+Term--YDID Live templates] of the #[+ImportantEntity--YDID YDEE] library,
+      you need to install the
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin }).Article-Link official plugin]
+      of this library.
+
+  //- ─── Steps for using the Live templates ───────────────────────────────────────────────────────────────────────────
+  +Heading--YDF({
+    level: 3,
+    text: relatedTableOfContentsMetadata.$children.steps.$heading,
+    HTML_ID: relatedTableOfContentsMetadata.$children.steps.$anchor
+  }).Article-Heading3
+
+  p.Article-Paragraph.
+    If you have not used #[+Term--YDID Live templates] before, do not worry if the instructions below are too complicated.
+    Once you have developed the habit of using #[+Term--YDID Live templates] (similar to the habit of using keyboard
+      shortcuts), the following operations will take a matter of seconds.
+
+  block

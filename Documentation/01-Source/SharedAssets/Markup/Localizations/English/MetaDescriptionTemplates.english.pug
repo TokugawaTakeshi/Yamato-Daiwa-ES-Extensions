@@ -3,12 +3,15 @@
   const MetaDescriptionTemplates = {
 
     function: ({ functionName, whatFunctionDoes }) =>
-        `The function &quot;${ functionName }&quot; of &quot;Yamato Daiwa ECMAScript extensions&quot; ` +
-        `(abbreviation: &quot;YDEE;&quot;) library ${ whatFunctionDoes }`,
+        `The function "${ functionName }" of "Yamato Daiwa ECMAScript extensions" ` +
+        `(abbreviation: "YDEE") library ${ whatFunctionDoes }`,
+
+    class: ({ className, whatIsClassFor }) =>
+        `The class "${ className }" of "Yamato Daiwa ECMAScript extensions" ` +
+        `(abbreviation: "YDEE") library ${ whatIsClassFor }`,
 
     realiseNotes: ({ version }) =>
         "The changes log (new functionality, changing of the existing functionality and removing of the previous one) of " +
-          `the version ${ version } of the utility TypeScript library &quot;Yamato Daiwa ES Extensions&quot; ` +
-          "(abbreviation: &quot;YDEE&quot;)."
+        `the version ${ version } of the utility TypeScript library "Yamato Daiwa ES Extensions" (abbreviation: \"YDEE\").`
 
   };

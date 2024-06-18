@@ -4,8 +4,8 @@ include _generateSharedExternalLinks.pug
 
 include Localizations/Japanese/MetaDescriptionTemplates.japanese.pug
 include Localizations/Japanese/RoutingLocalization.japanese.pug
-include Localizations/Japanese/SharedExternalLinksLocalizaiton.japanese.pug
-include Localizations/Japanese/ReausableFragments.japanese.pug
+include Localizations/Japanese/SharedExternalLinksLocalization.japanese.pug
+include Localizations/Japanese/ReusableFragments.japanese.pug
 
 include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 
@@ -13,6 +13,20 @@ include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 -
 
   const localizedRouting = generateLocalizedRouting(routingJapaneseLocalization);
+  let generatePageTableOfContents;
+
+
+include ../../Pages/CoreLibrary/GettingStarted/TableOfContents/GetStartedWithCoreLibraryPage.toc.japanese.pug
+include ../../Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/TableOfContents/addElementsToArray.toc.japanese.pug
+include ../../Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.japanese.pug
+include ../../Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.japanese.pug
+include ../../Pages/NodeJS/ConsoleCommandsParser/TableOfContents/ConsoleCommandsParser.toc.japanese.pug
+
+
+-
+
+  generatePageTableOfContents = null;
+
   RoutingEmulator.initialize(localizedRouting);
 
   const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksJapaneseLocalization);

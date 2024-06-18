@@ -6,6 +6,8 @@ block append Requirements
   include ../../../SharedAssets/Markup/SharedAssets.english.pug
   include ../../../SharedComponents/SharedComponents.english.pug
 
+  include _ConsoleCommandsParser-DemoCodeViewer.pug
+
 
 block append Metadata
 
@@ -14,21 +16,35 @@ block append Metadata
     HTML_PAGE_LANGUAGE = "en";
     HTML_PAGE_TITLE = buildHTML_PageTitle("ConsoleCommandsParser");
     HTML_PageMetaData = {
-      description: "",
+      description: MetaDescriptionTemplates.class({
+        className: "ConsoleCommandsParser",
+        whatIsClassFor:
+            "is intended to be used for the parsing of the arguments vectors of the console commands with validation " +
+                "and transforming to specific TypeScript types constrained to an object." +
+            "Also, the generation of help (reference) text about console commands functionality is available."
+      }),
       author: HTML_PAGE_AUTHOR
     };
 
     FAVICON_URI = "@MustBeInPublicRoot/favicon";
 
-    styleSheetsURIs = [ "@Shared/CommonStyles", "@Layouts/TwoColumns/TwoColumnsLayout", "@Shared/ExternalComponents" ];
-    scriptsURIs.endOfBody = [ "@Common" ];
+    styleSheetsURIs = [
+      "$CommonStyles",
+      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+      "$PreMadesStyles",
+      "@CustomizedExternalComponents"
+    ];
 
-    RoutingEmulator.setCurrentRoute("localizedRouting.nodeJS.utils.ConsoleCommandsParser");
+    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+
+    RoutingEmulator.setCurrentRoute("nodeJS.utils.ConsoleCommandsParser");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: "./ConsoleCommandsParser.japanese.html",
       russian: "./ConsoleCommandsParser.russian.html"
     });
+
+    const pageTableOfContents = localizedRouting.nodeJS.$children.utils.$children.ConsoleApplicationLogger.$sectioning;
 
 
 block append HeadScriptsLinks
@@ -42,21 +58,1055 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 ConsoleCommandsParser
+    h1.Article-Heading1 #[code ConsoleCommandsParser] class
 
-    h2.Article-Heading2 Minimal theory
+    +CompactTableOfContents--YDF_DK(pageTableOfContents, { mustApplyAnchorsInsteadOfURIs: true })
+
+    p.Article-Paragraph.
+      The #[+Term--YDID class] is intended to be used for parsing the #[+Term--YDID argument vectors] of
+        #[+Term__Contrast--YDID console commands] with validation and transforming to specific
+        #[+Term--YDID TypeScript types] constrained to an #[+Term--YDID object].
+      Also, the generation of help (reference) text about console commands functionality is available.
+
+
+    //- ━━━ Demo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.demo.$heading,
+      HTML_ID: pageTableOfContents.demo.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph The following example will be explained in detail.
+
+    +DemoCodeViewer({
+      commandPhrasesEnumeration: true,
+      consoleCommandsObjectTypes: true,
+      specification: true
+    })
+
+
+    //- ━━━ Minimal Theory ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.minimalTheory.$heading,
+      HTML_ID: pageTableOfContents.minimalTheory.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph
+      | There are #[+Keyword--YDID no]&nbsp;official terminology and standards concerning the
+      |   #[+Term--YDID console command] anatomy — #[+Keyphrase--YDID just a more or less established convention].
+      | At last, the #[+ImportantEntity__Code--YDID process.argv] (shorthand for the #[+Term--YDID "arguments vector,"]
+      |   the
+      +Link--YDF({
+        unendorsedExternalURI: "https://stackoverflow.com/q/3024197/4818123"
+      }).Article-Link convention inherited from C++ language
+      |   is an #[+Term--YDID array] of #[+Term__Contrast--YDID strings].
+      | What to do with them — the application author and/or his customers decide.
+
+    p.Article-Paragraph.
+      In fact, the parsing of the #[+Term--YDID console command] is the #[+Keyword--YDID kind] of
+        #[+Term--YDID problem of the structured external data parsing] where the #[+Term--YDID indexed array]
+        of #[+Term__Contrast--YDID strings] is such data, thus the #[+Term--YDID elements] #[+Keyword--YDID order] is
+        #[+Keyword__Contrast--YDID critical].
+      #[+ImportantEntity--YDID Node.js] does #[+Keyword--YDID not]&nbsp;provide any functionality for the parsing
+        and validation of such #[+Term--YDID arrays], and in addition, not every third-party library specialized on
+        #[+Term--YDID console commands] parsing can do it type-safely (as far as possible).
+
+
+    //- ─── Conventional Terminology ───────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$heading,
+      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      Generally, a #[+Term--YDID console command] presents itself as a sequence of #[+Term--YDID string values]
+        separated by spaces:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash }).
+        command argument1 argument2 ... argumentN
+
+    p.Article-Paragraph.
+      On the #[+SecondaryEntity--YDID Webpack] utility example, such a command could be like:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash }).
+        webpack build --mode development
+
+    dl.Article-DescriptionList
+
+      dt Command
+      dd.
+        In essence, it is the #[+Term--YDID application name] — either full #[+Keyword--YDID or] abbreviated.
+        On the example of the console interface of the #[+SecondaryEntity--YDID Angular] framework, the
+          #[+SecondaryEntity__Code--YDID ng] in the #[+Term--YDID command].
+        However, usually the #[+Term--YDID command] is even with the full name of the utility or close to it,
+          for example, #[+SecondaryEntity__Code--YDID webpack], #[+SecondaryEntity__Code--YDID gulp],
+          #[+SecondaryEntity__Code--YDID lerna].
+
+      dt Option / Option key
+      dd Begins with a double #[+Term--YDID n-dash] (like #[+SecondaryEntity__Code--YDID --mode] in the above example).
+
+      dt Parameter
+      dd.
+        The #[+Term--YDID value] of the #[+Term__Contrast--YDID option].
+        For the above example, the value #[+SecondaryEntity__Code--YDID development] is the #[+Term--YDID parameter]
+          of the #[+SecondaryEntity__Code--YDID --mode] option.
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning, SVG_Icon: true }).
+      Because of imperfection of established terminology, if the above temps are taken out of the
+        #[+Term--YDID console command] context, besides missing the point, it will cause significant confusion.
 
     ul.Article-UnorderedList
 
       li.
-        There are #[+Keyword--YDID no] official terminology and standards concerning the #[+Term--YDID console command]
-          anatomy - #[+Keyphrase--YDID just more or less established convention].
+        If the #[+Term--YDID option] has&nbsp;#[+Keyword--YDID no] #[+Term--YDID parameter], it is considered a
+          #[+Keyword--YDID boolean] #[+Term--YDID option] with a #[+ImportantEntity__Code--YDID true] value.
+        Accordingly, when this #[+Term--YDID option] has&nbsp;not&nbsp;been specified, it is #[+Keyword--YDID equivalent]
+          to #[+ImportantEntity__Code--YDID false] for this #[+Term--YDID option].
+
+      li.
+        The #[+Term--YDID option] could have an abbreviation consisting of a single #[+Term--YDID n-dash] and a letter
+          (for example, #[+SecondaryEntity__Code--YDID -d]).
+        Noteworthy, in the #[+SecondaryEntity--YDID Webpack] utility, although there is the abbreviated option
+          #[+SecondaryEntity__Code--YDID -m], it is&nbsp;#[+Keyword--YDID not] the shorthand for the
+          #[+SecondaryEntity__Code--YDID --mode].
+        As it appears, though the abbreviations are inputted quickly, to memorize them frequent usage is required.
+
+      li.
+        #[+Term--YDID Arguments] could include spaces; however, in this case, they must be wrapped in quotes.
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning, SVG_Icon: true }).
+      The syntax like #[+ImportantEntity__Code--YDID --option1=parameter1 --option2=parameter2 ... --optionN=parameterN]
+        also exists.
+      Currently, such syntax is #[+Keyword--YDID not]&nbsp;being supported by
+        #[+ImportantEntity--YDID ConsoleCommandsParser], but if this syntax will be highly demanded,
+        adding support in future versions is possible.
+
+    p.Article-Paragraph.
+      What is the #[+SecondaryEntity__Code--YDID build] in the above example?
+      Good question, and it deserves to be considered in a separate section.
+
+
+    //- ─── "Command phrase" term ──────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$heading,
+      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$anchor
+    }).Article-Heading4
+
+    p.Article-Paragraph.
+      The #[+DefinableTerm--YDID command phase] is the #[+Keyword--YDID non-option] #[+Keyword__Contrast--YDID first]
+        #[+Term--YDID argument] of the #[+Term__Contrast--YDID console command], referring to the certain
+        functionality of the console application.
+      For example, in #[+SecondaryEntity__Code--YDID yda build --mode DEVELOPMENT], the
+        #[+SecondaryEntity__Code--YDID build] is the #[+Term--YDID command phrase], but because it
+        must&nbsp;#[+Keyword--YDID not]&nbsp;consist of one word, it is being called by phrase.
+      If the #[+Term--YDID command phrase] included multiple words, besides wrapping in quotes, it also possible to use
+        sentence fused writing methods such as #[+Term--YDID camel case].
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.notice, SVG_Icon: true }).
+      If it was fine to ignore the settled is was logical to call the "command" by the "application," and
+        "command phrase" by "command," but this time the main developer of the #[+ImportantEntity--YDID YDEE]
+        has decided to complement the settled terminology instead of replacing it with new one.
+
+    p.Article-Paragraph.
+      The #[+Term--YDID command phrase] could be explicit or implicit (the #[+Term--YDID command phrase by default]).
+      For example, in #[+SecondaryEntity__Code--YDID webpack build --mode development], the
+        #[+Term--YDID default command phrase] #[+SecondaryEntity__Code--YDID build] could be
+        omitted (#[+SecondaryEntity__Code--YDID webpack --mode development]).
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.notice, SVG_Icon: true }).
+      This term has been introduced by the main developer of #[+ImportantEntity--YDID YDEE].
+      If it is being used somewhere else, it has been instituted independently thus could have another meaning.
+
+
+    //- ─── Discriminated Unions in TypeScript ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$heading,
+      HTML_ID: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      To use the #[+ImportantEntity--YDID ConsoleCommandsParser], it is required to understand the concept of
+        #[+Term--YDID discriminated unions] in #[+ImportantEntity--YDID TypeScript] language.
+      In essence, #[+Term--YDID discriminated unions] mean that some #[+Term--YDID (data) type] could be
+        #[+Keyphrase--YDID one of multiple] #[+Keyword--YDID object] #[+Term--YDID subtypes] with
+        #[+Keyword--YDID certain] #[+Term--YDID properties] set, herewith one of these #[+Term--YDID properties]
+        #[+Keyword--YDID identifies] the specific #[+Term--YDID subtype].
+      So, the #[+Term--YDID discriminated union] is the #[+Keyword--YDID generalizing] of the multiple
+        #[+Keyword--YDID specific] #[+Term--YDID object types], such as the "passenger car" could be "sedan,"
+        "hatchback," "minivan," and others, herewith this set #[+Keyword--YDID must] be
+        #[+Keyword__Contrast--YDID finite] and there is the "type" column in the car documentation, thanks to which
+        the car type could be uniquely known.
+
+    p.Article-Paragraph.
+      Let us consider it on the example related to #[+ImportantEntity--YDID ConsoleCommandsParser].
+      Assume that the console application developed by us has #[+Term--YDID command phrases]
+        #[+SecondaryEntity__Code--YDID build], #[+SecondaryEntity__Code--YDID pack],
+        #[+SecondaryEntity__Code--YDID deploy], #[+SecondaryEntity__Code--YDID help].
+      #[+Keyphrase--YDID For now], it is negligible which functionality of the console applications these
+        #[+Term--YDID command phrases] represent, but if for the users the short #[+Term--YDID command phrases] are
+        desired while for the developers the meaningful #[+Term--YDID command phrases] are desired, we can store the
+        short ones to the #[+Keyword--YDID values] of the #[+Term--YDID enumeration]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        enum CommandPhrases {
+          projectBuilding = "build",
+          packingOfBuild = "pack",
+          projectDeploying = "deploy",
+          referenceGenerating = "referenceGenerating"
+        }
+
+    p.Article-Paragraph.
+      Let us create the #[+Term--YDID object] #[+Keyphrase--YDID for each] #[+Term--YDID command phrase] which will
+        include the #[+SecondaryEntity__Code--YDID phrase] #[+Term--YDID property] with #[+Keyphrase--YDID one of] the
+        values of the #[+Term--YDID enumeration] #[+SecondaryEntity__Code--YDID CommandPhrases] defined above, and also
+        the #[+Term--YDID options] actual for the corresponding #[+Term--YDID command phrases].
+      Let all #[+Term--YDID command phrases] #[+Keyword--YDID except] the #[+Keyword__Contrast--YDID last] one have
+        the #[+Term--YDID options].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        type ProjectBuildingConsoleCommand = {
+          phrase: CommandPhrases.projectBuilding;
+          requiredStringOption: string;
+          optionalStringOption?: string;
+        };
+
+        type PackingOfBuildConsoleCommand = {
+          phrase: CommandPhrases.packingOfBuild;
+          enumerationLikeStringOption: "FOO" | "BAR" | "BAZ";
+          numericOption?: number;
+          limitedNumericOption?: number;
+        };
+
+        type ProjectDeployingConsoleCommand = {
+          phrase: CommandPhrases.projectDeploying;
+          booleanOption: boolean;
+          JSON5_Option?: Readonly<{ foo: string; bar?: number; }>;
+        };
+
+        type ReferenceGeneratingConsoleCommand = {
+          phrase: CommandPhrases.referenceGenerating;
+        };
+
+
+    p.Article-Paragraph.
+      We could&nbsp;#[+Keyword--YDID not]&nbsp;know #[+Keyphrase--YDID in advance] which exactly
+        #[+Term--YDID command phrase] will be inputted by user, but
+        #[+Keyphrase--YDID with correctly defined validation rules] (it will be explained how to) it will be
+        #[+Keyphrase--YDID one of] the #[+Term--YDID command phrases] defined above:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        type SupportedCommandsAndParametersCombinations =
+            ProjectBuildingConsoleCommand |
+            PackingOfBuildConsoleCommand |
+            ProjectDeployingConsoleCommand |
+            ReferenceGeneratingConsoleCommand;
+
+    p.Article-Paragraph
+      | The #[+ImportantEntity__Code--YDID parse] #[+Term--YDID method] of
+      |   #[+ImportantEntity__Code--YDID ConsoleCommandsParser] will return the #[+Term--YDID object] of the defined
+      |   above #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations] with
+      |   #[+ImportantEntity--YDID 2] #[+Keyword--YDID additional] #[+Term--YDID properties]:
+      |   #[+ImportantEntity__Code--YDID NodeJS_InterpreterAbsolutePath] and
+      |   #[+ImportantEntity__Code--YDID executableFileAbsolutePath] — they are the #[+Keyword--YDID first]
+      |   #[+ImportantEntity--YDID two] #[+Term--YDID elements] of #[+ImportantEntity__Code--YDID process.argv]
+      |   #[+Term--YDID array].
+      | In fact, the #[+ImportantEntity__Code--YDID ParsedCommand] #[+Term--YDID generic] in
+      |
+      +ImportantEntity__Code--YDID: :code_listing--yda
+        ParsedCommand<SupportedCommandsAndParametersCombinations>
+      |   tells #[+ImportantEntity--YDID TypeScript] that to #[+Keyphrase--YDID one of] the #[+Term--YDID subtypes] of
+      |   #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations] #[+Term--YDID union] these
+      |   #[+Term--YDID properties] will be added:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        const parsedConsoleCommand: ConsoleCommandsParser.
+            ParsedCommand<SupportedCommandsAndParametersCombinations> =
+            ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+    p.Article-Paragraph.
+      But, how will we know which #[+Term--YDID command phrase] exactly has been inputted by the user of the application?
+      Because #[+Keyword--YDID all] #[+Term--YDID subtypes] of
+        #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations] #[+Term--YDID discriminated union]
+        have the identifier-like #[+SecondaryEntity__Code--YDID phrase] #[+Term--YDID property] which is
+        #[+Keyword--YDID unique] #[+Keyphrase--YDID for each subtype of this #[+Term--YDID union]], using
+        #[+Term--YDID conditional statements] (for this case #[+ImportantEntity__Code--YDID switch/case] is just right)
+        we can know the specific #[+Term--YDID subtype]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+
+        switch (parsedConsoleCommand.phrase) {
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
+            console.log("Build project");
+            console.log(parsedConsoleCommand.requiredStringOption);
+            console.log(parsedConsoleCommand.optionalStringOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
+            console.log("Pack build");
+            console.log(parsedConsoleCommand.enumerationLikeStringOption);
+            console.log(parsedConsoleCommand.numericOption);
+            console.log(parsedConsoleCommand.limitedNumericOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
+            console.log("Deploy project")
+            console.log(parsedConsoleCommand.phrase);
+            console.log(parsedConsoleCommand.booleanOption);
+            console.log(parsedConsoleCommand.JSON5_Option);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
+            console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
+          }
+
+        }
+
+    p.Article-Paragraph.
+      As a result, #[+Keyphrase--YDID in each] #[+Term--YDID case-block] we can access the #[+Term--YDID properties] of
+        #[+SecondaryEntity__Code--YDID parsedConsoleCommand]
+        #[+Keyphrase--YDID corresponding to the current #[+Term--YDID command phrase]], and if we try to access the
+         #[+Term--YDID property] corresponding to another #[+Term--YDID command phrase],
+         #[+ImportantEntity--YDID TypeScript] will notice it as an error.
+      Admittedly, there are many #[+Keyword--YDID optional] #[+Term--YDID properties] in this example, so a
+        #[+Term--YDID non-undefined check] will be required before using these #[+Term--YDID properties].
+
+
+    //- ━━━ Creating of Console Line Interface — Stepwise Guidance ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: pageTableOfContents.stepwiseGuide.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$anchor
+    }).Article-Heading2
+
+    //- ─── Step 1. Defining of Command Phrases Set ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      Decide, which #[+Term--YDID command phrases] will be available in your application.
+
+    ul.Article-UnorderedList
+
+      li.
+        Maybe, you will need only one #[+Term--YDID command phrase].
+        If your application is narrow specialized, it is normal.
+
+      li.
+        For now, it is better to define only such #[+Term--YDID command phrases] which are clear for you.
+        You can add more #[+Term--YDID command phrases] later.
+
+    p.Article-Paragraph.
+      Store all your #[+Term--YDID command phrases] to the #[+Term__Contrast--YDID enumeration].
+      The #[+Term--YDID enumeration keys] #[+Keyword--YDID not]&nbsp;necessarily must match with the sequences of
+        characters which the user will input to the console: let the #[+Term--YDID keys] be longer, but understandable for
+        programmers #[+Keyphrase--YDID without documentation].
+      And if you, like the developers of most console applications, want to make the inputted
+        #[+Term--YDID command phrases] short, then store them to the #[+Keyword--YDID values] of the
+        #[+Term--YDID enumeration elements].
+      Fortunately, #[+ImportantEntity--YDID TypeScript] allows to define #[+Keyword--YDID string-type]
+        #[+Term--YDID enumerations], which is impossible or limited in many other programming languages.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        export enum CommandPhrases {
+          projectBuilding = "build",
+          packingOfBuild = "pack",
+          projectDeploying = "deploy",
+          referenceGenerating = "help"
+        }
+
+    p.Article-Paragraph.
+      As you can see, in the example above the #[+Term--YDID compound nouns] #[+Keyword--YDID without]
+        #[+Term--YDID verbs] are being using if the name begins from #[+Term--YDID verb] herewith
+        #[+Keyword--YDID not]&nbsp;belong to #[+Term--YDID function] or #[+Term--YDID method], it creates the confusion.
+      However, it is the stylistic requirement, with which you may disagree and set your own.
+
+    p.Article-Paragraph.
+      It is recommended to write this code in a #[+Keyword--YDID separate] file, for example
+        #[+SecondaryEntity--YDID ApplicationConsoleLineInterface.ts].
+      Also, for the clear definition of the context, we recommend to wrap all the content of this file by
+        #[+Term--YDID namespace], for example #[+SecondaryEntity__Code--YDID ApplicationConsoleLineInterface].
+      Although some developers are against the usage of #[+Term--YDID namespaces] (in #[+ImportantEntity--YDID TypeScript]),
+        such a negative attitude to #[+Term--YDID namespaces] is usually associated with outdated ways of splitting
+        the code into modules, and such usage, as in our example (contextual container for #[+Term--YDID types] and
+        #[+Term--YDID constants]) #[+Keyword--YDID not]&nbsp;carries any problems.
+
+    +DemoCodeViewer({ commandPhrasesEnumeration: true })
+
+
+    //- ─── Step 2. Determination of Options for Command Phrases ───────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      Decide which #[+Term--YDID options] you will support #[+Keyphrase--YDID for each] #[+Term--YDID command phrase],
+        as well as their #[+Term--YDID types], #[+Keyword--YDID requiredness] and default values (if any) of
+        #[+Keyword--YDID each] #[+Term--YDID option].
+
+    ul.Article-UnorderedList
+
+      li.
+        Again, to get the feedback from your code faster, #[+Keyphrase--YDID for initial phase] you can limit yourself
+          to the minimal set of #[+Term--YDID options] which are most thoughtful.
+
+      li.
+        Some #[+Term--YDID command phrases] could have no #[+Term--YDID options] at all — it is normal,
+          and if you will feel the need in the future, you can always add them.
+        In our example, the #[+SecondaryEntity__Code--YDID referenceGenerating] #[+Term--YDID command phrase]
+          has&nbsp;#[+Keyword--YDID no]&nbsp;options.
+
+    p.Article-Paragraph.
+      Now, #[+Keyphrase--YDID for each] #[+Term--YDID command phrase] define the #[+Term--YDID object type] with the
+        following #[+Term--YDID properties]:
+
+    dl.Article-DescriptionList
+
+      dt phrase
+      dd.
+        #[+Keyword--YDID Must] contain the #[+Term--YDID element] of the #[+Term--YDID commanded phrases]
+          #[+Term__Contrast--YDID enumeration] (#[+SecondaryEntity__Code--YDID CommandPhrases] in above example)
+          #[+Keyphrase--YDID corresponding to the #[+Keyword--YDID same] #[+Term--YDID command phrase]]
+          as the #[+Term--YDID type] you are defining.
+        This #[+Term--YDID property] plays the role of the #[+Keyword--YDID identifier], with which it will be
+          necessary to determine which exactly #[+Term--YDID command phrase] the user has inputted.
+        As the #[+Term--YDID type] of this #[+Term--YDID property] it is #[+Keyword--YDID required] to specify the
+          #[+Keyword--YDID certain] #[+Term--YDID element] of #[+Term--YDID enumeration] (for example,
+          #[+SecondaryEntity__Code--YDID CommandPhrases.projectBuilding]),
+          #[+Keyphrase--YDID #[+Keyword--YDID not]&nbsp;the&nbsp;#[+Term--YDID enumeration] itself] (from the
+          viewpoint of #[+ImportantEntity--YDID discriminated unions] in #[+ImportantEntity--YDID TypeScript] it is
+          #[+Keyword--YDID not]&nbsp;senselessly).
+
+      dt Command options
+      dd
+
+        p.Article-Paragraph.
+          #[+Keyword--YDID All] #[+Term--YDID options] for the current #[+Term--YDID command phrase].
+          The #[+Term--YDID keys] of must&nbsp;#[+Keyword--YDID not]&nbsp;be the same as ones which the user will input
+            to the console, so let their names be clear to the programmers #[+Keyphrase--YDID without documentation].
+          The #[+Term--YDID type] of #[+Keyword--YDID each] of these #[+Term--YDID properties] #[+Keyword--YDID must]
+            be #[+Keyphrase--YDID one of] the following supported types:
+
+        ul.Article-UnorderedList
+          li #[+ImportantEntity__Code--YDID string]
+          li #[+ImportantEntity__Code--YDID number]
+          li #[+ImportantEntity__Code--YDID boolean]
+          li
+            | The #[+Term--YDID object] constrained to
+            |
+            +Link--YDF({
+              internalURI: localizedRouting.coreLibrary.$children.
+                  functionality.$children.
+                  types.$children.
+                  ParsedJSON_AndRelated.$URI
+            }).Article-Link ParsedJSON
+            |
+            | from the #[+Keyword--YDID core] #[+Term--YDID package]
+            |   (#[+ImportantEntity--YDID @yamato-daiwa/es-extensions])
+
+        p.Article-Paragraph.
+          If the #[+Term--YDID option] is #[+Keyword--YDID non-required] herewith
+            #[+Keyphrase--YDID #[+Keyword--YDID no]&nbsp;#[+Term--YDID default value] planned],
+            place the [+Term--YDID question mark] before #[+Term--YDID colon] (the
+            #[+Term--YDID key and value's type separator]).
+
+    p.Article-Paragraph.
+      Finally, declare the #[+Term--YDID union] of #[+Keyword--YDID all] the #[+Term--YDID object types] defined above
+        #[+Keyphrase--YDID for each] #[+Term--YDID command phrase] (in the below example, it is the
+        #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]).
+
+    +DemoCodeViewer({
+      commandPhrasesEnumeration: true,
+      consoleCommandsObjectTypes: true
+    })
+
+    ul.Article-UnorderedList
+
+      li.
+        Again, drawing your attention which stylistic requirements could be concerning the #[+Term--YDID naming] of
+          #[+Term--YDID types].
+        The name of each #[+Term--YDID type] corresponding to specific #[+Term--YDID command phrase]
+          does&nbsp;#[+Keyword--YDID not] including the #[+Term--YDID verbs] and ends with
+          #[+SecondaryEntity--YDID ConsoleCommand].
+
+      li.
+        The usage of #[+ImportantEntity--YDID Readonly] #[+Term--YDID utility type] is
+          #[+Keyword--YDID not]&nbsp;required, but #[+Keyword--YDID recommended], because using it we are explicitly
+          expressing that the #[+Term--YDID properties] of the #[+Term--YDID objects types] defined by us are
+          #[+Keyword--YDID not]&nbsp;indented to be changed #[+Keyphrase--YDID during program execution].
+
+
+    //- ─── Step 3. Determination of Console Application Specification ─────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      Based on the #[+Term--YDID console command specification], the #[+Term__Contrast--YDID parsing] and
+        #[+Term__Contrast--YDID validation] of the inputted #[+Term--YDID console command] will be performed,
+        and if necessary — the generation of the help about usage of this console application.
+
+    p.Article-Paragraph.
+      Define the #[+Term--YDID constant] of the
+        #[+ImportantEntity--YDID ConsoleCommandsParser.CommandLineInterfaceSpecification] #[+Term--YDID type] —
+        it is a #[+Keyword--YDID multi-level] #[+Term--YDID object], in which should be contained the specification of
+        #[+Keyword--YDID all] the #[+Term--YDID command phrases] including the #[+Term__Contrast--YDID options] of
+        #[+Keyphrase--YDID each of them], as well as the data for the help generation.
+      If you have followed the advice to wrap the code in the #[+Term--YDID namespace] such as
+        #[+SecondaryEntity__Code--YDID ApplicationConsoleLineInterface], then the long name of the
+        #[+Term--YDID constant] such as #[+SecondaryEntity__Code--YDID consoleCommandLineInterfaceSpecification]
+        is #[+Keyword--YDID not]&nbsp;required: we have declared the #[+Keyword--YDID context]
+        #[+ImportantEntity--YDID ApplicationConsoleLineInterface], so the #[+Term--YDID constant] could be named just
+        #[+ImportantEntity__Code--YDID specification].
+
+    +DemoCodeViewer({
+      commandPhrasesEnumeration: true,
+      consoleCommandsObjectTypes: true,
+      specification: true
+    })
+
+    ol.Article-OrderedList
+
+      li.
+        Specify the #[+ImportantEntity__Code--YDID applicationName] #[+Term--YDID property] with the name of your
+          application.
+        If is #[+Keyword--YDID not]&nbsp;mandatory to be even with the inputted to the console application name,
+          and if it consists of multiple words, then it is #[+Keyword--YDID possible] to input them with the
+          space separation.
+        This value will be used in the generation of the help about the usage of the console application.
+
+      li.
+        Unlike #[+ImportantEntity__Code--YDID applicationName], #[+Term--YDID property]
+          #[+ImportantEntity__Code--YDID applicationDescription] is #[+Keyword--YDID optional], however it is
+          #[+Keyword--YDID strongly] recommended to fill it with a short description so the generated help will be
+          full-fledged.
 
       li
-        | At last, the #[+ImportantEntity__Code--YDID process.argv] (shorthand for the #[+Term--YDID "arguments vector"],
-        | the
+
+        | The #[+Term--YDID property] #[+ImportantEntity__Code--YDID commandPhrases] #[+Keyword--YDID must] contain the
+        |   specifications of #[+Keyword--YDID all] the #[+Term--YDID command phrases].
+        | This specification is the #[+Keyphrase--YDID associative array-like] #[+Term--YDID object] which
+        |   #[+Term--YDID keys] #[+Keyword--YDID must] match with the #[+Term--YDID command phrases].
+        | The safest way to guarantee this matching is refer the #[+Term--YDID keys] of
+        |  #[+ImportantEntity__Code--YDID commandPhrases] to the #[+Keyword--YDID corresponding] #[+Term--YDID elements]
+        |   of the enumeration #[+SecondaryEntity__Code--YDID CommandPhrases] using the #[+Term--YDID bracket notation]
+        |   (for example, #[+SecondaryEntity__Code--YDID &lsqb;CommandPhrases.packingOfBuild&rsqb;]).
+        | About the #[+Term--YDID values] of this #[+Term--YDID associative array],
+
+        ul.Article-UnorderedList
+
+          li.
+            If #[+Keyword--YDID corresponding] #[+Term--YDID command phrase] is the #[+Keyword--YDID default] one,
+              specify the #[+ImportantEntity__Code--YDID true] value to #[+ImportantEntity__Code--YDID isDefault]
+              #[+Term--YDID boolean property].
+            Because the #[+Keyword--YDID default] #[+Term--YDID command phrase] could be #[+Keyword--YDID only]
+              #[+Keyword__Contrast--YDID one], #[+ImportantEntity__Code--YDID isDefault: true] could be specified
+              #[+Keyword--YDID maximally] to #[+Keyword__Contrast--YDID one] #[+Term--YDID command phrase],
+              #[+Keyphrase--YDID otherwise the exception will be thrown] once application start.
+
+          li.
+            Similar to explained above #[+ImportantEntity__Code--YDID applicationDescription] #[+Term--YDID property],
+              for the #[+Term--YDID command phrases] specifications there is the
+              #[+ImportantEntity__Code--YDID description] #[+Term--YDID property], which is #[+Keyword--YDID optional]
+              but #[+Keyword__Contrast--YDID strongly] #[+Keyword--YDID recommend] to be filled specified for the
+              generating of high quality reference.
+            In the example below, the description has been omitted only for #[+SecondaryEntity__Code--YDID help]
+              (#[+SecondaryEntity__Code--YDID CommandPhrases.referenceGenerating]) #[+Term--YDID command phrase].
+
+          li.
+            In the #[+Term--YDID command phrase] has #[+Term--YDID options], its' specification must be specified
+              in the #[+Term--YDID options] #[+Term--YDID property] which is also the
+              #[+Keyword--YDID associative array-like] #[+Term--YDID object].
+
+
+    //- ─── The Defining of the Command Phrases ────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: pageTableOfContents.
+          stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$heading,
+      HTML_ID: pageTableOfContents.
+          stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$anchor
+    }).Article-Heading4
+
+    p.Article-Paragraph.
+      A majority of time of current step will be taken by the defining of the #[+Term--YDID options] of the
+        #[+Term--YDID command phrases] if there are many of them.
+      However, it is nothing difficult: it is #[+Keyword--YDID required] specify the #[+Term--YDID options] (as inputted)
+        via #[+Term--YDID object] #[+Term__Contrast--YDID keys], and their specifications such as #[+Term--YDID type],
+        requirement, etc. via #[+Keyword--YDID object-type] #[+Term--YDID values] with below #[+Term--YDID properties]:
+
+    ol.Article-OrderedList
+
+      li.
+        Specify #[+Term__Contrast--YDID option] #[+Term--YDID type] by the #[+Term--YDID element] of
+          #[+ImportantEntity__Code--YDID ConsoleCommandsParser.ParametersTypes] #[+Term--YDID enumeration].
+        Currently, the #[+Term--YDID string], #[+Term--YDID number], #[+Term--YDID boolean], and #[+Term--YDID objects]
+          (must be inputted with #[+Term--YDID JSON5 format]) types are supported.
+
+      li.
+        If the #[+Term--YDID option] has default value, specify #[+ImportantEntity__Code--YDID defaultValue]
+          #[+Term--YDID property] with the value of the #[+Keyword--YDID corresponding] #[+Term--YDID type].
+        #[+Keyword--YDID Otherwise], you #[+Keyword--YDID have] to specify the #[+ImportantEntity--YDID required]
+          #[+Term--YDID property] with the #[+Keyword--YDID boolean] value (of course, with
+          #[+ImportantEntity__Code--YDID true] if the #[+Term--YDID option] is required).
+        Herewith, #[+Keyword--YDID no]&nbsp;#[+ImportantEntity__Code--YDID defaultValue] could be specified
+          (by the #[+ImportantEntity--YDID TypeScript] types definitions) for the #[+Keyword--YDID optional]
+          #[+Keyword__Contrast--YDID boolean] #[+Term--YDID option] because the #[+Keyword--YDID optional]
+          #[+Keyword__Contrast--YDID boolean] #[+Term--YDID option] omitted during command inputting is
+          #[+Keyword--YDID equivalent] to explicitly specified #[+ImportantEntity__Code--YDID false] value.
+
+      li.
+        If you are writing the high quality code, but for the inputting speed the names of #[+Term--YDID options] are
+          too short to be understood without documentation, define the #[+ImportantEntity__Code--YDID newName]
+          #[+Term--YDID property] with meaningful name for the code maintainers.
+
+
+      li.
+        If you want define the #[+Keyword--YDID single] letter abbreviation for the #[+Term--YDID option], then define
+          the #[+ImportantEntity__Code--YDID shortcut] #[+Term--YDID property].
+        The #[+Term--YDID n-dash], which the user will be required to specify when input the abbreviated option, here,
+          when defining of the specification, could be #[+Keyword--YDID safely] #[+Keyword__Contrast--YDID omitted].
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID All] #[+Keyword__Contrast--YDID other] #[+Term--YDID properties] are
+        #[+Keyword--YDID type-dependent].
+      Let us consider them.
+
+
+    //- ─── Special Properties of String-type Options ──────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfStringOptions.$anchor
+    }).Article-Heading5
+
+    p.Article-Paragraph.
+      Currently there is #[+Keyword--YDID only] #[+Keyword__Contrast--YDID one] such #[+Term--YDID property] —
+        #[+ImportantEntity__Code--YDID allowedAlternatives].
+      If you want the #[+Keyword--YDID string] #[+Term--YDID option] to be able to accept the values among limited
+        set, specify them as an #[+Term--YDID array] to the #[+ImportantEntity__Code--YDID allowedAlternatives]
+        #[+Term--YDID property].
+
+
+    //- ─── Special Properties of Number-type Options ──────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfNumericOptions.$anchor
+    }).Article-Heading5
+
+    p.Article-Paragraph.
+      The #[+Keyword--YDID required] #[+Term--YDID property] for this type of #[+Term--YDID options] is
+        #[+ImportantEntity__Code--YDID numbersSet].
+      It #[+Keyword--YDID must] be defined with the #[+Term--YDID element] of
+        #[+ImportantEntity__Code--YDID RawObjectDataProcessor.NumbersSets] #[+Term--YDID enumeration] adopted from
+        the core package of library:
+
+    ul.Article-UnorderedList
+      li #[+ImportantEntity__Code--YDID naturalNumber]
+      li #[+ImportantEntity__Code--YDID nonNegativeInteger]
+      li #[+ImportantEntity__Code--YDID negativeInteger]
+      li #[+ImportantEntity__Code--YDID negativeIntegerOrZero]
+      li #[+ImportantEntity__Code--YDID anyInteger]
+      li #[+ImportantEntity__Code--YDID positiveDecimalFraction]
+      li #[+ImportantEntity__Code--YDID negativeDecimalFraction]
+      li #[+ImportantEntity__Code--YDID decimalFractionOfAnySign]
+      li #[+ImportantEntity__Code--YDID anyRealNumber]
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID Optionally] the #[+ImportantEntity__Code--YDID minimalValue] and
+        #[+ImportantEntity__Code--YDID maximalValue] properties could be specified.
+
+
+    //- ─── Special Properties of Object-type Options ──────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 5,
+      text: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+          consoleApplicationSpecification.$children.
+          optionsSpecification.$children.
+          specialPropertiesOfObjectOptions.$anchor
+    }).Article-Heading5
+
+    p.Article-Paragraph.
+      Currently, there is #[+Keyword--YDID only] #[+Keyword__Contrast--YDID one] such #[+Term--YDID property] —
+        #[+ImportantEntity__Code--YDID validValueSpecification], but it is the #[+Keyword--YDID required] one.
+      Using this, it is required to define the validation rules for the #[+Term--YDID object] to which the
+        #[+ImportantEntity--YDID JSON5] #[+Term--YDID string] will be transformed.
+
+    p.Article-Paragraph
+      | This #[+Term--YDID property] has #[+Term--YDID type]
+      |
+      +Link--YDF({
+        endorsedExternalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            RawObjectDataProcessor.$sectioning.
+            API.$children.
+            types.$children.
+            PropertiesSpecification.$URI
+      }).Article-Link RawObjectDataProcessor.PropertiesSpecification
+      |   , adopted from the core package.
+      | This #[+Keyword--YDID object-type] #[+Term--YDID property] is pretty similar to the #[+Term--YDID options]
+      |   specification, but here is the #[+ImportantEntity--YDID API] of #[+ImportantEntity--YDID RawObjectDataProcessor]
+      |   #[+Term--YDID class] is being used.
+
+
+    //- ─── Step 4. Creating of the Logic of the Console Commands Parsing ──────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.logic.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.logic.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      The defining of the console command application specification has been finished; now it can be used for the
+        #[+Term--YDID parsing] of the inputted #[+Term--YDID console command].
+      To parse the console command, it is #[+Keyword--YDID required] to call the #[+ImportantEntity--YDID parse]
+        #[+Keyword--YDID static] #[+Term--YDID method] of #[+ImportantEntity--YDID ConsoleCommandsParser]
+        #[+Term--YDID class]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+        import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
+
+        const parsedConsoleCommand: ConsoleCommandsParser.
+            ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
+            ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+    ul.Article-UnorderedList
+
+      li.
+        The console application specification defined at previous step is the #[+Keyword--YDID required]
+          #[+Term--YDID parameter].
+
+      li.
+        If to omit the #[+Keyword--YDID second] #[+Term--YDID parameter], the #[+Term--YDID arguments vector] will
+          be taken from #[+ImportantEntity__Code--YDID process.argv].
+
+      li.
+        It is required to specify the #[+Term--YDID generic parameter] with
+          #[+SecondaryEntity__Code--YDID SupportedCommandsAndParametersCombinations]
+          defined at the #[+Keyword--YDID second] step.
+
+
+    p.Article-Paragraph.
+      Now, we need to determine which exactly #[+Term--YDID command phrase] was inputted, and also safely
+        (without #[+ImportantEntity__Code--YDID any] type errors in #[+ImportantEntity--YDID TypeScript]) access
+        its #[+Term--YDID options] (unless the #[+Keyword--YDID optional] #[+Term--YDID options] wihtout default values
+         will require the check for #[+ImportantEntity__Code--YDID undefined] before using them).
+      We can do this with the help of #[+ImportantEntity__Code--YDID switch/case] #[+Term--YDID statement]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        switch (parsedConsoleCommand.phrase) {
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
+            console.log("Build project", parsedConsoleCommand);
+            console.log("requiredStringOption", parsedConsoleCommand.requiredStringOption);
+            console.log("optionalStringOption", parsedConsoleCommand.optionalStringOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
+            console.log("Pack project", parsedConsoleCommand);
+            console.log("enumerationLikeStringOption", parsedConsoleCommand.enumerationLikeStringOption);
+            console.log("numericOption", parsedConsoleCommand.numericOption);
+            console.log("limitedNumericOption", parsedConsoleCommand.limitedNumericOption);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
+            console.log("Deploy project", parsedConsoleCommand);
+            console.log("booleanOption", parsedConsoleCommand.booleanOption);
+            console.log("JSON5_Option", parsedConsoleCommand.JSON5_Option);
+            break;
+          }
+
+          case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
+            console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
+          }
+
+        }
+
+
+    //- ─── Step 5. Launching of the Application by Name ───────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
+      HTML_ID: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph
+      | Currently, the application already could be launched #[+Keyphrase--YDID by the file path] with
+      |
+      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.tsNode.homePage.top }).Article-Link ts-node
+      | , for example:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        ts-node EntryPoint.test.ts --requiredStringOption test --optionalStringOption sample
+
+    p.Article-Paragraph.
+      Although many of you will&nbsp;not&nbsp;be satisfied by this (because want to launch the application by the
+        #[+Term--YDID command], it means the application name according confusing established terminology), let us
+        consider in short when such variant fits to requirements thus completed previous steps will be enough.
+      First of all this are the cases when the developed #[+Term--YDID console interface] planned to use
+        #[+Term--YDID exclusively] for single project wihtout publication to #[+ImportantEntity--YDID npm]
+        or by other methods.
+      In particular:
+
+    dl.Article-DescriptionList
+
+      dt Server Applications
+      dd.
+        Commonly, such application has only one #[+Term--YDID command phrase] for the server starting.
+        Here, the #[+Term--YDID HTTP port], logging level etc. are usually been specified via #[+Term--YDID options].
+
+      dt Automation scripts
+      dd.
+        Usually it is the generating, copying or modifying the files, herewith the target is as specific as the
+          general utilities such #[+ImportantEntity--YDID Gulp] does&nbsp;not&nbsp;fit.
+
+    p.Article-Paragraph.
+      Well, but how to make possible the invocation of the utility by its #[+Term--YDID name] like
+        #[+SecondaryEntity--YDID gulp], #[+SecondaryEntity--YDID webpack] etc.?
+
+    p.Article-Paragraph.
+      First of all, because the #[+ImportantEntity--YDID Node.js] #[+Term--YDID runtime] does&nbsp;#[+Keyword--YDID not]
+        support the #[+ImportantEntity--YDID TypeScript], it is #[+Keyword--YDID required] to provide the
+        #[+Term--YDID transpiling] of the source code to #[+ImportantEntity--YDID JavaScript].
+      It could be done by the #[+Term--YDID console line interface] of the #[+ImportantEntity--YDID TypeScript] package,
+        or the utilities as #[+ImportantEntity--YDID Webpack] mentioned above (one ore more #[+Term--YDID plugins]
+        specializing of #[+ImportantEntity--YDID TypeScript] will require).
+
+    p.Article-Paragraph.
+      But before run the #[+Term--YDID transpiling], it is #[+Keyword--YDID required] to export from the
+        #[+Term--YDID entry point] the #[+Term--YDID function] or #[+Term__Contrast--YDID class], one of which
+        #[+Term--YDID methods] will launch the application's logic.
+      "Export from the entry point" is sounds weird, because normally the #[+Term--YDID entry point] has many
+        imports, but exports nothing.
+      The reason is, #[+Keyphrase--YDID in the case of the #[+ImportantEntity--YDID Node.js] console utilities], the
+        #[+Term--YDID entry point] is being executed #[+Keyword--YDID indirectly], via #[+Term--YDID executable file].
+      Here is the example of the #[+Term--YDID entry point] which exports the
+        #[+SecondaryEntity__Code--YDID executeApplication] #[+Term--YDID function]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript
+      }): :code_listing--yda
+        import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
+        import ApplicationConsoleLineInterface from "./ConsoleLineInterface";
+
+
+        export function executeApplication(): void {
+
+          const parsedConsoleCommand: ConsoleCommandsParser.
+              ParsedCommand<ApplicationConsoleLineInterface.SupportedCommandsAndParametersCombinations> =
+              ConsoleCommandsParser.parse(ApplicationConsoleLineInterface.specification);
+
+          switch (parsedConsoleCommand.phrase) {
+
+            case ApplicationConsoleLineInterface.CommandPhrases.projectBuilding: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.packingOfBuild: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.projectDeploying: {
+              // ...
+              break;
+            }
+
+            case ApplicationConsoleLineInterface.CommandPhrases.referenceGenerating: {
+              console.log(ConsoleCommandsParser.generateFullHelpReference(ApplicationConsoleLineInterface.specification));
+            }
+
+          }
+
+        }
+
+    p.Article-Paragraph.
+      Once #[+Term--YDID transpiling] done, create one more #[+ImportantEntity--YDID JavaScript] file
+        (for example, #[+SecondaryEntity--YDID Executable.js]) manually with the content like the following one:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JavaScript
+      }): :code_listing--yda
+        #!/usr/bin/env node
+
+        require("./EntryPoint").executeApplication();
+
+    p.Article-Paragraph.
+      Here the first line contents the #[+Term--YDID shebang] specifying that this file must be executed by
+        #[+ImportantEntity--YDID Node.js].
+      Then, we need to import the #[+Term--YDID function] launching the application
+        (#[+SecondaryEntity__Code--YDID executeApplication] in above example) and call it.
+
+    +QuestionAndAnswerBox--YDF({
+      type: QuestionAndAnswerBox__YDF.Types.question,
+      question:
+          "Why not to make this file the entry point? It seems like the JavaScript file except the shebang line, right?"
+    }).
+      Well, it is possible.
+      But, it is not recommended to store in these files more complicated logic that the calling on one
+        #[+Term--YDID function] or #[+Term--YDID method].
+      However, because this is the recommendation, some developers following it (for example, the developers of
+        #[+SecondaryEntity--YDID Gulp]), and some developers ignores it (for example, the developers of the
+        #[+SecondaryEntity--YDID Webpack]; checked on spring of 2024).
+
+    p.Article-Paragraph.
+      Now, it is #[+Keyword--YDID required] to reference to above executable file from the
+        #[+ImportantEntity--YDID package.json] file of your project.
+      To make your utility callable by #[+Term--YDID name], the #[+ImportantEntity__Code--YDID bin] #[+Term--YDID field]
+        #[+Term--YDID must] to be filled with the #[+Term--YDID associative array]-like #[+Term__Contrast--YDID object],
+        where the #[+Term--YDID keys] are the #[+Keyword--YDID commands], and #[+Keyword__Contrast--YDID values] are the
+        #[+Keyword--YDID relative] #[+Term--YDID paths] to #[+Term--YDID executable files]
+         (#[+ImportantEntity--YDID ".js"] extension could be omitted):
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({
+        codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
+      }): :code_listing--yda
+        {
+          // ...
+          "bin": {
+            "my_app": "Executable"
+          },
+          // ...
+        }
+
+    p.Article-Paragraph
+      | More details about #[+ImportantEntity__Code--YDID bin] #[+Term--YDID field] you can found in the
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.packageJSON.bin
+      }).Article-Link npm official documentation
+      | .
+
+    p.Article-Paragraph
+      | To install your utility to another projects, it is required to fill certain other  #[+Term--YDID fields] of
+      |   #[+ImportantEntity--YDID package.json], such as #[+ImportantEntity__Code--YDID name] and
+      |   #[+ImportantEntity__Code--YDID version].
+      | More #[+Term--YDID fields] need to be filled, if you are going to publish your utility by
+      |   #[+ImportantEntity--YDID npm].
+      | On the #[+ImportantEntity--YDID npm] official website, there is the
+      |
+      +Link--YDF({
+        unendorsedExternalURI: sharedExternalLinks.npm.guides.minimalPackageJSON
+      }).Article-Link brief manual about this
+      | .
+
+    //-
+      p.Article-Paragraph
+        | The #[+Term--YDID npm package] with your console utility could be installed to other project by various methods:
+        |   via #[+ImportantEntity__Code--YDID npm install &lsqb;package_name&rsqb;] if it has been published,
+        |
         +Link--YDF({
-          unendorsedExternalURI: "https://stackoverflow.com/questions/3024197/what-does-int-argc-char-argv-mean"
-        }).Article-Link convention inherited from C++ language
-        |) is the #[+Term--YDID array] of #[+Term__Contrast--YDID strings].
-        | What to do with them - the author of the application is deciding.
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfLocalNPM_PackageByRelativePath
+        }).Article-Link by the relative path
+        |   or
+        |
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfNPM_PackageByCommitNumber
+        }).Article-Link with the reference to commit
+        |   of #[+Term--YDID Version Control System].
+        | Once you will install your utility to another project by some way, you can call it via #[+Term--YDID npm scripts]
+        |   declared in #[+ImportantEntity--YDID package.json] of this project:
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.JSON
+        }): :code_listing--yda
+          {
+            // ...
+            "scripts": {
+              "example": "my_app --option1 alpha --flag"
+            },
+            // ...
+          }
+
+      p.Article-Paragraph.
+        Again, many of yours will&nbsp;not&nbsp;be satisfied with it because of need to call the utility directory from
+          the console by the name like:
+
+      +CodeViewer--YDF
+        +CodeViewer-Listing--YDF({
+          codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.Bash
+        }): :code_listing--yda
+          my_app --option1 alpha --flag
+
+      p.Article-Paragraph.
+        It to do it now, you will get the message about there is no such command.
+        In the case of #[+SecondaryEntity__Code--YDID Windows] terminal, it will be:
+
+      +ConsoleOutput--YDF.
+        'my_app' is not recognized as an internal or external command, operable program or batch file
+
+      p.Article-Paragraph.
+        Such messages are frequently surprises the novices when they are trying to use the #[+Term--YDID npm packages] with
+          #[+Term--YDID CLI], such as #[+SecondaryEntity--YDID gulp], #[+SecondaryEntity--YDID webpack],
+          #[+SecondaryEntity--YDID ts-node] etc.
+        The cause is, the installing of #[+Term--YDID npm package] #[+Keyword--YDID to the project]
+          does&nbsp;#[+Keyword--YDID not] means the installing to the computer, thus the #[+Term--YDID operating system]
+          does&nbsp;#[+Keyword--YDID not] know where to find the inputted command.

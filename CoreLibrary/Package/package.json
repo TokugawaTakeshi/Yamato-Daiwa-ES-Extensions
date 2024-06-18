@@ -12,6 +12,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
@@ -29,12 +30,12 @@
   ],
   "devDependencies": {
     "@types/mocha": "10.0.6",
-    "@types/node": "20.12.2",
-    "@yamato-daiwa/style_guides": "0.2.0",
+    "@types/node": "20.14.4",
+    "@yamato-daiwa/style_guides": "0.2.7",
     "mocha": "10.4.0",
-    "rimraf": "5.0.5",
+    "rimraf": "5.0.7",
     "ts-node": "10.9.2",
-    "typescript": "5.4.3"
+    "typescript": "5.4.5"
   },
   "engines": {
     "node": ">=12.0.0"

@@ -1,7 +1,7 @@
-/* ─── Third-party utils ─────────────────────────────────────────────────────────────────────────────────────────── */
+/* ─── Third-party Utils ──────────────────────────────────────────────────────────────────────────────────────────── */
 import JSON5 from "json5";
 
-/* ─── YDEE core ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+/* ─── YDEE Core ──────────────────────────────────────────────────────────────────────────────────────────────────── */
 import {
   RawObjectDataProcessor,
   InvalidExternalDataError,
@@ -23,11 +23,11 @@ import {
 } from "@yamato-daiwa/es-extensions";
 import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 
-/* ─── YDEE Node.js ──────────────────────────────────────────────────────────────────────────────────────────────── */
+/* ─── YDEE Node.js ───────────────────────────────────────────────────────────────────────────────────────────────── */
 import InvalidConsoleCommandError from "../Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
 import IndentationCoordinator from "../Temporary/IndentationCoordinator";
 
-/* ─── Localization ──────────────────────────────────────────────────────────────────────────────────────────────── */
+/* ─── Localization ───────────────────────────────────────────────────────────────────────────────────────────────── */
 import consoleCommandsParserLocalization__english from "./ConsoleCommandsParserLocalization.english";
 
 
@@ -53,7 +53,7 @@ class ConsoleCommandsParser<
   private readonly targetCommandOptionsSpecification?: ConsoleCommandsParser.CommandOptionsSpecification;
 
 
-  /* ━━━ Public methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Public Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /*
    * The example of valid argument vector
    * [ 'C:\\Program Files\\nodejs\\node.exe',
@@ -200,7 +200,7 @@ class ConsoleCommandsParser<
   }
 
 
-  /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private constructor(
     {
       commandLineInterfaceSpecification,
@@ -336,8 +336,8 @@ class ConsoleCommandsParser<
   }
 
 
-  /* ━━━ Private methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  /* ─── Parsing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ━━━ Private Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Parsing ──────────────────────────────────────────────────────────────────────────────────────────────────── */
   private parseOptionsAndParameters(): TargetCommandsAndOptionsCombinations {
 
     if (isUndefined(this.targetCommandOptionsSpecification)) {
@@ -384,12 +384,19 @@ class ConsoleCommandsParser<
 
       if (!hasCurrentOptionBeenSpecified) {
 
-        if (optionSpecification.required) {
+        if ("defaultValue" in optionSpecification) {
+          parsedOptions[optionName] = optionSpecification.defaultValue;
+          continue;
+        }
+
+
+        if ("required" in optionSpecification && optionSpecification.required) {
           Logger.throwErrorAndLog({
             errorInstance: new InvalidConsoleCommandError({
               applicationName: this.applicationName,
               messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.requiredOptionKeyIsMissing.generate({
                 commandPhrase: this.targetCommandPhrase,
+                isDefaultCommandPhrase: this.isTargetCommandPhraseDefault,
                 missingOptionKey: optionKeyWithLeading2NDashes,
                 commandHelpReference: ConsoleCommandsParser.generateSingleCommandPhraseHelpReference({
                   commandPhrase: this.targetCommandPhrase,
@@ -453,6 +460,7 @@ class ConsoleCommandsParser<
           });
 
           break;
+
         }
 
         case ConsoleCommandsParser.ParametersTypes.number: {
@@ -464,22 +472,24 @@ class ConsoleCommandsParser<
           });
 
           break;
+
         }
 
         case ConsoleCommandsParser.ParametersTypes.JSON5: {
 
           const targetParsedJSON5_ParameterValue: ParsedJSON | undefined = this.
               extractAndValidateParsedJSON5_ParameterValue({
-              targetOptionRawValue: potentialValueOfCurrentOption,
-              optionKeyWithLeading2NDashes,
-              optionSpecification
-            });
+                targetOptionRawValue: potentialValueOfCurrentOption,
+                optionKeyWithLeading2NDashes,
+                optionSpecification
+              });
 
           if (isNotUndefined(targetParsedJSON5_ParameterValue)) {
             parsedOptions[optionName] = targetParsedJSON5_ParameterValue;
           }
 
           break;
+
         }
 
         default: {
@@ -776,7 +786,14 @@ class ConsoleCommandsParser<
 
 
     const validationResult: RawObjectDataProcessor.ProcessingResult<ParsedJSON> = RawObjectDataProcessor.
-        process<ParsedJSON>(targetParameterParsedValue, optionSpecification.validValueSpecification);
+        process<ParsedJSON>(
+          targetParameterParsedValue,
+          {
+            nameForLogging: optionKeyWithLeading2NDashes,
+            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+            properties: optionSpecification.validValueSpecification
+          }
+        );
 
     if (validationResult.rawDataIsInvalid) {
       Logger.throwErrorAndLog({
@@ -803,7 +820,7 @@ class ConsoleCommandsParser<
   }
 
 
-  /* ─── Help reference ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ─── Help Reference ───────────────────────────────────────────────────────────────────────────────────────────── */
   private static generateSingleCommandPhraseHelpReference(
     {
       commandPhrase,
@@ -909,6 +926,11 @@ class ConsoleCommandsParser<
       textSegments.push(
         `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.isRequired }: ` +
         `${ commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no }`
+      );
+    } else if ("defaultValue" in commandOptionSpecification) {
+      textSegments.push(
+        `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.defaultValue }: ` +
+        `${ stringifyAndFormatArbitraryValue(commandOptionSpecification.defaultValue) }`
       );
     }
 
@@ -1071,7 +1093,11 @@ namespace ConsoleCommandsParser {
   export type CommandOptionsSpecification = Readonly<{ [optionKey: string]: OptionSpecification; }>;
 
   export type OptionSpecification =
-      Readonly<{ description?: string; }> &
+      Readonly<{
+        description?: string;
+        shortcut?: string;
+        newName?: string;
+      }> &
       (
         StringOptionSpecification |
         NumberOptionSpecification |
@@ -1080,48 +1106,44 @@ namespace ConsoleCommandsParser {
       );
 
 
-  export type ParameterSpecification__CommonProperties = Readonly<{
-    shortcut?: string;
-  }>;
-
   export type StringOptionSpecification =
-      ParameterSpecification__CommonProperties &
       Readonly<{
         /* eslint-disable-next-line id-denylist --
          * The "id-denylist" is not unsolicited for object properties, but the applying to add respective option
          * has been denied. https://github.com/eslint/eslint/issues/15504 */
         type: ParametersTypes.string;
-        required: boolean;
         allowedAlternatives?: ReadonlyArray<string>;
-        newName?: string;
-      }>;
+      }> &
+      (
+        Readonly<{ required: boolean; }> |
+        Readonly<{ defaultValue: string; }>
+      );
 
   export type NumberOptionSpecification =
-      ParameterSpecification__CommonProperties &
       Readonly<{
         type: ParametersTypes.number;
-        required: boolean;
         numbersSet: RawObjectDataProcessor.NumbersSets;
         minimalValue?: number;
         maximalValue?: number;
-        newName?: string;
-      }>;
+      }> &
+      (
+        Readonly<{ required: boolean; }> |
+        Readonly<{ defaultValue: number; }>
+      );
 
-  export type BooleanParameterSpecification =
-      ParameterSpecification__CommonProperties &
-      Readonly<{
-        type: ParametersTypes.boolean;
-        newName?: string;
-      }>;
+  export type BooleanParameterSpecification = Readonly<{
+    type: ParametersTypes.boolean;
+  }>;
 
   export type JSON5_ParameterSpecification =
-      ParameterSpecification__CommonProperties &
       Readonly<{
         type: ParametersTypes.JSON5;
-        required: boolean;
-        newName?: string;
-        validValueSpecification: RawObjectDataProcessor.FixedKeyAndValuesTypeObjectDataSpecification;
-    }>;
+        validValueSpecification: RawObjectDataProcessor.PropertiesSpecification;
+      }> &
+      (
+        Readonly<{ required: boolean; }> |
+        Readonly<{ defaultValue: ParsedJSON; }>
+      );
 
   export enum ParametersTypes {
     /* eslint-disable-next-line id-denylist --
@@ -1268,6 +1290,8 @@ namespace ConsoleCommandsParser {
 
       isRequired: string;
 
+      defaultValue: string;
+
       yes: string;
 
       no: string;
@@ -1349,7 +1373,8 @@ namespace ConsoleCommandsParser {
 
       export namespace RequiredOptionKeyIsMissing {
         export type TemplateVariables = Readonly<{
-          commandPhrase?: string;
+          commandPhrase: string;
+          isDefaultCommandPhrase: boolean;
           missingOptionKey: string;
           commandHelpReference: string;
         }>;

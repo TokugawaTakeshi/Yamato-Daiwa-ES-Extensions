@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs-localization-japanese",
-  "version": "1.6.0",
+  "version": "1.7.0-alpha.0",
   "description": "Japanese localization for @yamato-daiwa/es-extensions-nodejs package.",
   "keywords": [
     "localization"
@@ -10,6 +10,7 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "license": "MIT",
+  "homepage": "https://ee.yamato-daiwa.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions.git"
@@ -34,7 +35,7 @@
     "@types/node": "16.11.62",
     "@yamato-daiwa/es-extensions": "1.6.0",
     "@yamato-daiwa/es-extensions-localization-japanese": "1.6.0",
-    "@yamato-daiwa/es-extensions-nodejs": "1.6.0-alpha.12",
+    "@yamato-daiwa/es-extensions-nodejs": "1.6.0-rc.1",
     "@yamato-daiwa/style_guides": "0.0.49",
     "mocha": "10.2.0",
     "rimraf": "5.0.1",
