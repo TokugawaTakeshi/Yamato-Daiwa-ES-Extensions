@@ -57,7 +57,7 @@ export default function extractMatchingsWithRegularExpression(
           "Contrary to expectations, there is no matchings with regular expression:\n" +
           `${ regularExpression.toString() }\n` +
           "in the string:\n" +
-          `${ targetString }`
+          targetString
         ),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "extractMatchingsWithRegularExpression(targetString, regularExpression, options)"
@@ -86,7 +86,7 @@ export default function extractMatchingsWithRegularExpression(
             "Contrary to expectations, there are more that one matchings with regular expression:\n" +
             `${ regularExpression.toString() }\n` +
             "in the string:\n" +
-            `${ targetString }`
+            targetString
         ),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "extractMatchingsWithRegularExpression(targetString, regularExpression, options)"
@@ -101,7 +101,7 @@ export default function extractMatchingsWithRegularExpression(
   }
 
 
-  if (options.mustExpectOneOrZeroMatchings || options.mustExpectExactlyOneMatching) {
+  if (options.mustExpectOneOrZeroMatchings === true || options.mustExpectExactlyOneMatching === true) {
 
     return {
       extractedMatching: searchingResults[0],

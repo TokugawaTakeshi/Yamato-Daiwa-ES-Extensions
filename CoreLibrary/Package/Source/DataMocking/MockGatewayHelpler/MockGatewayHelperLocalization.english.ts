@@ -23,12 +23,11 @@ const MockGatewayHelperLocalization__English: MockGatewayHelper.Localization = {
   ): MockGatewayHelper.Localization.DataRetrievingSimulationCompletedLog =>
       ({
         title: `"${ gatewayName }.${ transactionName }", the simulation of the data retrieving has complete`,
-        description: "The \"MockGatewayHelper\" class has finished the simulation of the data retrieving for the transaction " +
-            `"${ gatewayName }.${ transactionName }".` +
-            `${ isNonEmptyString(formattedRequestParameters) ? 
-                `\n\nRequest parameters:\n${ formattedRequestParameters }` : "" }` +
-            `${ isNonEmptyString(formattedResponseData) ? 
-                `\n\nResponse data:\n${ formattedResponseData }` : "" }`
+        description:
+            "The \"MockGatewayHelper\" class has finished the simulation of the data retrieving for the transaction " +
+              `"${ gatewayName }.${ transactionName }".` +
+            (isNonEmptyString(formattedRequestParameters) ? `\n\nRequest parameters:\n${ formattedRequestParameters }` : "") +
+            isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : ""
       }),
 
   generateDataSubmittingSimulationCompletedLog: (
@@ -41,10 +40,11 @@ const MockGatewayHelperLocalization__English: MockGatewayHelper.Localization = {
   ): MockGatewayHelper.Localization.DataSubmittingSimulationCompletedLog =>
       ({
         title: `"${ gatewayName }.${ transactionName }", the simulation of the data submitting has complete`,
-        description: "The \"MockGatewayHelper\" class has finished the simulation of the data submitting for the transaction " +
-            `"${ gatewayName }.${ transactionName }"` +
-            `${ isNonEmptyString(formattedRequestData) ? `\n\nRequest data:\n${ formattedRequestData }` : "" }` +
-            `${ isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : "" }`
+        description:
+            "The \"MockGatewayHelper\" class has finished the simulation of the data submitting for the transaction " +
+              `"${ gatewayName }.${ transactionName }"` +
+            (isNonEmptyString(formattedRequestData) ? `\n\nRequest data:\n${ formattedRequestData }` : "") +
+            isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : ""
       })
 
 };

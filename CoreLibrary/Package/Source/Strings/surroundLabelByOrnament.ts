@@ -17,8 +17,8 @@ export default function surroundLabelByOrnament(
     minimalValue: 0
   });
 
-  return `${ compoundParameter.ornamentPatten.repeat(compoundParameter.prependedPartCharactersCount) }` +
-      `${ compoundParameter.label }` +
-      `${ compoundParameter.ornamentPatten.repeat(remainPartCharactersCount) }`;
+  return compoundParameter.ornamentPatten.repeat(compoundParameter.prependedPartCharactersCount) +
+      compoundParameter.label +
+      compoundParameter.ornamentPatten.repeat(remainPartCharactersCount);
 
 }

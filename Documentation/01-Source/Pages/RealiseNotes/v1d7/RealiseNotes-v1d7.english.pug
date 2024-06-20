@@ -11,29 +11,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("v1d7");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Realize Notes - 1.7"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./v1d7.japanese.html",
-      russian: "./v1d7.russian.html"
+      japanese: "./RealiseNotes-v1d7.japanese.html",
+      russian: "./RealiseNotes-v1d7.russian.html"
     });
 
 
@@ -48,10 +43,57 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Version 1.7
+    h1.Article-Heading1 Version 1.7 — Realize Notes
+
+    h2.Article-Heading2 Core Package (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 Breaking Changes
+
+    h4.Article-Heading4 Working with Arrays
+
+    h5.Article-Heading5.
+      Renaming of the Third Parameter in #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] and
+        #[code getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+
+    p.Article-Paragraph.
+      In the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] of the #[+Term__Contrast--YDID object]
+        #[+Term--YDID type] the #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]
+        #[+Term--YDID property] has been #[+Keyword--YDID renamed] to
+        #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
+
+    dl.Article-DescriptionList
+
+      dt Reason
+      dd.
+        The previous name is confusing because "or more than1" could be #[+Keyword--YDID misinterpreted] as like
+          there must&nbsp;not be more than one element in the #[+Keyword--YDID source] #[+Term--YDID array].
+        Now, «or matches are multiple» clearly declares that it must not&nbsp;be more than one #[+Term--YDID element]
+          #[+Keyphrase--YDID namely among ones which satisfying the #[+Term--YDID predicate]].
+
+      dt Changes in your code will required if
+      dd.
+        In your code, during the calling of
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+          #[+Term__Contrast--YDID function], #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] is being used.
+
+      dt Migration
+      dd.
+        Using the appropriate functionality of your code editor or IDE, replace
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] occurrences with
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] in all files of the project.
+
+
+    h4.Article-Heading4 "RawObjectDataProcessor" class
+    h5.Article-Heading5 Renaming of Localization Object
+
+    p.Article-Paragraph.
+      According the updated naming conventions, the localization #[+Term--YDID object]
+        #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] has been #[+Keyword--YDID renamed]
+        to #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
+      Similar changes has been applied to other localization #[+Term--YDID objects].
 
     //-
-      h2.Article-Heading2 Core package (@yamato-daiwa/es-extensions)
+
 
       h3.Article-Heading3 New functionality
 
@@ -199,35 +241,7 @@ block append SpecificContent
 
       h4.Article-Heading4 Working with arrays
 
-      h5.Article-Heading5 Renaming of the third parameter in #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
 
-      p.Article-Paragraph.
-        In the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] of the #[+Term__Contrast--YDID object] #[+Term--YDID type]
-          the #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] #[+Term--YDID property]
-          has been renamed to #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
-
-      dl.Article-DescriptionList
-
-        dt Reason
-        dd.
-          The previous name is confusing because «or more than1» could be #[+Keyword--YDID misinterpreted] as like
-            there must&nbsp;not be more than one element in the #[+Keyword--YDID source] array.
-          Now, «or matches are multiple» clearly declares that it must not&nbsp;be more that one #[+Term--YDID element]
-            namely among ones which satisfying the #[+Term--YDID predicate].
-
-        dt Changes in your code will required if
-        dd.
-          In your code, during the calling of
-            #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
-            #[+Term__Contrast--YDID function], #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] is being used.
-
-        dt Migration
-        dd.
-          Using the appropriate functionality of your code editor or IDE, replace
-            #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] occurrences with
-            #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] in all files of the project.
-          For IDEs of #[+SecondaryEntity--YDID IntelliJ IDEA] family such functionality could be invoked by
-            #[+SecondaryEntity--YDID Ctrl + Shift + R] shortcut.
 
 
       h4.Article-Heading4 Logging

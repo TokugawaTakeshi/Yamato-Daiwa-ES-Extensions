@@ -6,14 +6,15 @@ export default function getLineSeparatorType(
   defaultLineSeparator: LineSeparators = LineSeparators.lineFeed
 ): LineSeparators {
 
-  if (/\r\n$/mu.test(targetString)) {
+  if ((/\r\n$/mu).test(targetString)) {
     return LineSeparators.carriageReturnAndLineFeed;
   }
 
 
-  if (/\n$/mu.test(targetString)) {
+  if ((/\n$/mu).test(targetString)) {
     return LineSeparators.lineFeed;
   }
+
 
   /* [ Performance ] Keep this order of if-blocks for the micro optimization. */
   if (!targetString.includes("\r") && !targetString.includes("\n")) {

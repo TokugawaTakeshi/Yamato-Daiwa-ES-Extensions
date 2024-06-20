@@ -152,9 +152,11 @@ class RawObjectDataProcessor {
     messages: Array<string>, localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
   ): string {
     return messages.reduce(
-      (accumulatingValue: string, message: string, index: number): string => `${ accumulatingValue }\n\n` +
+      (accumulatingValue: string, message: string, index: number): string =>
+          `${ accumulatingValue }\n\n` +
           `${ localization.buildErrorMessagesListItemHeading(index + 1) }\n` +
-          `${ message }`, ""
+          message,
+      ""
     );
   }
 

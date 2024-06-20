@@ -27,14 +27,12 @@ export default function appendLastFileNameExtension(
   const isTargetLastFileNameExtensionAlreadyPresentsAtSpecifiedPath: boolean = targetPathWihtoutFragment.
       endsWith(targetFileNameExtensionWithLeadingDot);
 
-  return `${ targetPathWihtoutFragment }` +
-      `${
-        insertSubstringIf(
-          targetFileNameExtensionWithLeadingDot,
-          !isTargetLastFileNameExtensionAlreadyPresentsAtSpecifiedPath ||
-              sourceData.mustAppendDuplicateEvenIfTargetLastFileNameExtensionAlreadyPresentsAtSpecifiedPath
-        )
-      }` +
-      `${ nullToEmptyString(targetPathFragmentWithLeadingHash) }`;
+  return targetPathWihtoutFragment +
+      insertSubstringIf(
+        targetFileNameExtensionWithLeadingDot,
+        !isTargetLastFileNameExtensionAlreadyPresentsAtSpecifiedPath ||
+            sourceData.mustAppendDuplicateEvenIfTargetLastFileNameExtensionAlreadyPresentsAtSpecifiedPath
+      ) +
+      nullToEmptyString(targetPathFragmentWithLeadingHash);
 
 }

@@ -65,7 +65,7 @@ abstract class ConsoleApplicationLogger {
           }
         ],
         [
-          `${ errorLog.errorType }`,
+          errorLog.errorType,
           {
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }
@@ -79,7 +79,7 @@ abstract class ConsoleApplicationLogger {
           }
         ],
         [
-          `${ errorLog.occurrenceLocation }`,
+          errorLog.occurrenceLocation,
           {
             foregroundColor: { red: 231, green: 76, blue: 60 }
           }

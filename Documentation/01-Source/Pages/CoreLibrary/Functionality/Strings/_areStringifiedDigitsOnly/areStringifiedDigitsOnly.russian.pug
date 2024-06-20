@@ -11,28 +11,26 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "areStringifiedDigitsOnly",
-        whatFunctionDoes:
-          "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
-            "то возвращает логическое значение «истина»"
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("areStringifiedDigitsOnly"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "areStringifiedDigitsOnly",
+          whatFunctionDoes: MetaDescriptionTemplates.function({
+            functionName: "areStringifiedDigitsOnly",
+            whatFunctionDoes:
+                "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
+                  "то возвращает логическое значение «истина»"
+          })
+        }),
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 

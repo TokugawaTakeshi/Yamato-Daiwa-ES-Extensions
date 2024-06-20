@@ -11,26 +11,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("areStringifiedDigitsOnly");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "areStringifiedDigitsOnly",
-        whatFunctionDoes: "対象文字列が数字のみかどうかを確認して真/偽を返す。"
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("areStringifiedDigitsOnly"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "areStringifiedDigitsOnly",
+          whatFunctionDoes: MetaDescriptionTemplates.function({
+            functionName: "areStringifiedDigitsOnly",
+            whatFunctionDoes: "対象文字列が数字のみかどうかを確認して真/偽を返す。"
+          })
+        }),
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 

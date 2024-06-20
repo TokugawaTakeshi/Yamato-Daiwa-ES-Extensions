@@ -13,29 +13,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("ConsoleCommandsParser");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.class({
-        className: "ConsoleCommandsParser",
-        whatIsClassFor:
-            "предназначен для разбора (парсинга) векторов аргументов консольных команд с валидацией и преобразованием их " +
-            "к объектным TypeScript-типам. " +
-            "Возможно также сгенерировать справочный текст для всех поддерживаемых команд."
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("ConsoleCommandsParser"),
+        description: MetaDescriptionTemplates.class({
+          className: "ConsoleCommandsParser",
+          whatIsClassFor:
+              "предназначен для разбора (парсинга) векторов аргументов консольных команд с валидацией и преобразованием их " +
+                "к объектным TypeScript-типам. " +
+              "Возможно также сгенерировать справочный текст для всех поддерживаемых команд."
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("nodeJS.utils.ConsoleCommandsParser");
 

@@ -23,18 +23,19 @@
     "email": "tokugawa.takesi@gmail.com"
   },
   "main": "./Distributable/index.js",
+  "sideEffects": false,
   "types": "./Distributable/index.d.ts",
   "files": [
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": ">=1.7.0-rc.0"
+    "@yamato-daiwa/es-extensions": ">=1.7.0-rc.2"
   },
   "devDependencies": {
     "@types/jsdom-global": "3.0.7",
     "@types/mocha": "10.0.6",
-    "@types/node": "20.14.4",
-    "@yamato-daiwa/es-extensions": "1.7.0-rc.0",
+    "@types/node": "20.14.7",
+    "@yamato-daiwa/es-extensions": "1.7.0-rc.2",
     "@yamato-daiwa/style_guides": "0.2.7",
     "jsdom": "24.1.0",
     "jsdom-global": "3.0.2",
@@ -46,6 +47,7 @@
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc",
     "Lint": "eslint Source",
-    "Rebuild distributable and realize alpha": "npm run \"Rebuild distributable\" && npm publish --tag alpha"
+    "Rebuild distributable and realize alpha": "npm run \"Rebuild distributable\" && npm publish --tag alpha",
+    "Rebuild distributable and realize rc": "npm run \"Rebuild distributable\" && npm publish --tag rc"
   }
 }

@@ -14,7 +14,7 @@ sampleTimer.countDown().
         description: `With result: ${ outcome }`
       });
     }).
-    catch((error: Error): void => {
+    catch((error: unknown): void => {
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,

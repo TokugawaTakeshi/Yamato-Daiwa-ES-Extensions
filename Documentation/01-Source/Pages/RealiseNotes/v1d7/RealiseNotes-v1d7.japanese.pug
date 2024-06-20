@@ -11,29 +11,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("v1d7");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("リリースノート ： 1.7"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./v1d7.english.html",
-      russian: "./v1d7.russian.html"
+      english: "./RealiseNotes-v1d7.english.html",
+      russian: "./RealiseNotes-v1d7.russian.html"
     });
 
 
@@ -48,14 +43,56 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 バージョン 1.7
+    h1.Article-Heading1 リリースノート　｜　バージョン 1.7
+
+    h2.Article-Heading2 主要パッケージ (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 破壊的変更
+
+    h4.Article-Heading4 配列の弄り
+
+    h5.Article-Heading5.
+      #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]と
+      #[code getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]でのの３引数目の名前変更
+
+    p.Article-Paragraph.
+      #[+Term--YDID オブジェクト型]の#[+ImportantEntity--YDID 第３引数目]に於いて、
+        #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]#[+Term--YDID プロパティ]は
+        #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に名前が変更された。
+
+    dl.Article-DescriptionList
+
+      dt 理由
+      dd.
+        以前の名前が迷わせる、即ち「or more than1」を「#[+Keyword--YDID 元の]#[+Term--YDID 配列]に１個以上の#[+Term--YDID 要素]がなくては
+          成らない」と#[+Keyword--YDID 勘違い]しがち。
+        今の「or matches are multiple」（「・・・それとも一致は複数の場合」）は、
+        #[+Keyphrase--YDID #[+Term--YDID プレディケート]に満たされている#[+Term--YDID 要素]の中に]は複数がなくては成らないと明確に伝える様に成った。
+
+      dt 貴方のコードが編集が必要に成る条件
+      dd.
+        #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]の利用の際、
+          #[+ImportantEntity--YDID ３引数目]が参照されている所が有る。
+
+      dt 対策
+      dd.
+        コードエディター又は#[+Term--YDID 結合開発環境]の適切な機能を使って、プロジェクトの全ファイルに
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]を
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に置き換えて下さい。
+
+
+    h4.Article-Heading4 「RawObjectDataProcessor」クラス
+    h5.Article-Heading5 ローカリゼーションオブジェクト名前変更
+
+    p.Article-Paragraph.
+      更新された名付けのガイドライン通り、#[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English]と言う
+        ローカリゼーション#[+Term--YDID オブジェクト]は#[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english]に
+        名前が変更された。
+      同じ様な変更が他のローカリゼーション#[+Term--YDID オブジェクト]にも適応された。
 
     //-
-      h2.Article-Heading2 主要パッケージ (@yamato-daiwa/es-extensions)
 
       h3.Article-Heading3 新規機能
-
-      h4.Article-Heading4 配列の弄り
 
       ul.Article-UnorderedList
 
@@ -191,29 +228,3 @@ block append SpecificContent
 
       h4.Article-Heading4 配列の弄り
 
-      h5.Article-Heading5 #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]の３引数目の名前変更
-
-      p.Article-Paragraph.
-        #[+Term--YDID オブジェクト型]の#[+ImportantEntity--YDID 第３]#[+Term__Contrast--YDID 引数]目
-          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]#[+Term--YDID プロパティ]は
-          #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に名前が変更された。
-
-      dl.Article-DescriptionList
-
-        dt 理由
-        dd.
-          以前の名前が迷わせる、即ち「or more than1」を「#[+Keyword--YDID 元の]配列に１個以上の要素がなくては成らない」と#[+Keyword--YDID 勘違い]しがち。
-          今の「or matches are multiple」は、プレディケートに満たされている#[+Term--YDID 要素]は１個以上の要素がなくては成らないともっと明確に伝える様に成った。
-
-        dt 貴方のコードが編集が必要に成る条件
-        dd.
-          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]の際、
-            #[+ImportantEntity--YDID ３引数目]が参照されている所が有る。
-
-        dt 対策
-        dd.
-          コードエディター又は#[+Term--YDID 結合開発環境]の適切な機能を使って、プロジェクトの前ファイルに
-            #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]を
-            #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple]に置き換えて下さい。
-          例えば、#[+SecondaryEntity--YDID IntelliJ IDEA ファミリー]#[+Term--YDID 結合開発環境]の場合、此の機能は
-            #[+SecondaryEntity--YDID Ctrl + Shift + R]ショートカットに呼び出される。

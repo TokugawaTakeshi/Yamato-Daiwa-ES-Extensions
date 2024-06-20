@@ -19,13 +19,11 @@ class PathRefersToDirectoryNotFileError extends Error {
     this.message =
         "customMessage" in constructorParameter ?
             constructorParameter.customMessage :
-            `${ PathRefersToDirectoryNotFileError.localization.genericDescription(constructorParameter) }` +
-                `${
-                  insertSubstring(
-                    constructorParameter.messageSpecificPart,
-                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
-                  )
-                }`;
+            PathRefersToDirectoryNotFileError.localization.genericDescription(constructorParameter) +
+                insertSubstring(
+                  constructorParameter.messageSpecificPart,
+                  { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                );
 
   }
 

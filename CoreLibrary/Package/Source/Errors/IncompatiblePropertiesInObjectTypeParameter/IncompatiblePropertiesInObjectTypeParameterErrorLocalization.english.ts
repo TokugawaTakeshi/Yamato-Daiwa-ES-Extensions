@@ -13,11 +13,9 @@ const incompatiblePropertiesInObjectTypeParameterErrorLocalization__english:
     }: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateVariables
   ): string =>
       `In parameter "${ parameterName }", property "${ conflictingPropertyName }" is incompatible with properties:` +
-        `${ 
-          incompatiblePropertiesNames.reduce(
-            (accumulatingString: string, propertyName: string): string => `${ accumulatingString }\n- ${ propertyName }`, ""
-          ) 
-        }`
+      incompatiblePropertiesNames.reduce(
+        (accumulatingString: string, propertyName: string): string => `${ accumulatingString }\n- ${ propertyName }`, ""
+      )
 };
 
 

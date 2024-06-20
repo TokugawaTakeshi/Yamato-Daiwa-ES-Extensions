@@ -28,25 +28,25 @@
   "files": [
     "Distributable"
   ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "fundamental-constants": "0.1.0"
+  },
   "devDependencies": {
     "@types/mocha": "10.0.6",
-    "@types/node": "20.14.4",
+    "@types/node": "20.14.7",
     "@yamato-daiwa/style_guides": "0.2.7",
     "mocha": "10.4.0",
     "rimraf": "5.0.7",
     "ts-node": "10.9.2",
     "typescript": "5.4.5"
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
   "scripts": {
     "Rebuild distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
     "Lint": "eslint Source Tests",
     "Rebuild distributable and realize alpha": "npm run \"Rebuild distributable\" && npm publish --tag alpha",
     "Rebuild distributable and realize rc": "npm run \"Rebuild distributable\" && npm publish --tag rc"
-  },
-  "dependencies": {
-    "fundamental-constants": "0.1.0"
   }
 }

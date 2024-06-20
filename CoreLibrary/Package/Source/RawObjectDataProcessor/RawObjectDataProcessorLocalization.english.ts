@@ -24,19 +24,19 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       type: this.valueType(targetPropertyValueSpecification.type)
     });
 
-    return `${ title }` +
+    return title +
         `\n\n●　Property / element: '${ targetPropertyDotSeparatedQualifiedName }'` +
-        `${ insertSubstring(
-          targetPropertyNewName, 
+        insertSubstring(
+          targetPropertyNewName,
           { modifier: (targetSubstring: string): string => ` (new name: ${ targetSubstring })` }
-        ) }` +
+        ) +
         `\n${ specificMessagePart }` +
         `\n\n●　Property / element specification: \n${ propertyOrElementSpecification__stringified }` +
         `\n●　Actual value: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
-        `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
-          modifier: (targetSubstring: string): string => 
+        insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
+          modifier: (targetSubstring: string): string =>
               `\n●　Value before first pre-validation modification: ${ targetSubstring }`
-        }) }`;
+        });
   },
 
   buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Error No. ${ messageNumber } ==========`; },
@@ -179,7 +179,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     return {
       title: "Required key(s) of associative array are missing",
       specificMessagePart: "Below keys are missing but required for this associative array type value:\n" +
-          `${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
+          stringifyAndFormatArbitraryValue(missingRequiredKeys)
     };
   },
 
@@ -199,7 +199,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     return {
       title: "Disallowed key(s) found in associative array",
       specificMessagePart: "Below keys presents in this associative array type value while these keys are disallowed.\n" +
-          `${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
+          stringifyAndFormatArbitraryValue(foundDisallowedKeys)
     };
   },
 
@@ -280,7 +280,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Disallowed alternative of value",
       specificMessagePart:
           "This value is not among following allowed alternatives.\n" +
-          `${ allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n") }`
+            allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n")
     };
   },
 
@@ -337,7 +337,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     return {
       title: "Regular expression mismatch",
       specificMessagePart: "This string value does not match with specified regular expression:\n " +
-          `${ regularExpression.toString() }`
+          regularExpression.toString()
     };
   },
 

@@ -31,7 +31,7 @@ export default function isIPv4AddressLiesInRange(
         parameterNumber: 1,
         parameterName: "compoundParameter.comparedIP_Address",
         messageSpecificPart: "The \"comparedIP_Address\" must be a string while actually has type " +
-            `${ typeof compoundParameter.comparedIP_Address }`
+            typeof compoundParameter.comparedIP_Address
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "isIPv4AddressLiesInRange(compoundParameter)"
@@ -45,7 +45,7 @@ export default function isIPv4AddressLiesInRange(
         parameterNumber: 1,
         parameterName: "compoundParameter.minimalIP_Address",
         messageSpecificPart: "The \"minimalIP_Address\" must be a string while actually has type " +
-            `${ typeof compoundParameter.minimalIP_Address }`
+            typeof compoundParameter.minimalIP_Address
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "isIPv4AddressLiesInRange(compoundParameter)"
@@ -59,7 +59,7 @@ export default function isIPv4AddressLiesInRange(
         parameterNumber: 1,
         parameterName: "maximalIP_Address.minimalIP_Address",
         messageSpecificPart: "The \"maximalIP_Address\" must be a string while actually has type " +
-            `${ typeof compoundParameter.maximalIP_Address }`
+            typeof compoundParameter.maximalIP_Address
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "isIPv4AddressLiesInRange(compoundParameter)"

@@ -14,17 +14,20 @@ const configFileNotFoundErrorLocalization__english: ConfigFileNotFoundError.Loca
       configFilePathOrMultipleOfThem
     }: ConfigFileNotFoundError.Localization.DescriptionTemplateVariables
   ): string {
-    return `${
-      isString(configFilePathOrMultipleOfThem) ?
-          `The "${ targetTechnologyName }" configuration file not found at "${ configFilePathOrMultipleOfThem }".` :
-          `None of below "${ targetTechnologyName }" configuration files found.\n${ configFilePathOrMultipleOfThem.join(", ") }`
-    }` +
-        `${ 
-          insertSubstring(
-            messageSpecificPart, 
-            { modifier: (_messageSpecificPart: string): string => `\n${ _messageSpecificPart }` }
-          ) 
-        }`;
+    return (
+      (isString(configFilePathOrMultipleOfThem) ?
+        `The "${ targetTechnologyName }" configuration file not found at "${ configFilePathOrMultipleOfThem }".` :
+        /* eslint-disable-next-line @stylistic/no-extra-parens -- For better readability. */
+        (
+          `None of below "${ targetTechnologyName }" configuration files found.` +
+          `\n${ configFilePathOrMultipleOfThem.join(", ") }`
+        )
+      ) +
+      insertSubstring(
+        messageSpecificPart,
+        { modifier: (_messageSpecificPart: string): string => `\n${ _messageSpecificPart }` }
+      )
+    );
   }
 };
 

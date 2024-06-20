@@ -13,12 +13,10 @@ const invalidParameterValueErrorLocalization__english: InvalidParameterValueErro
         }: InvalidParameterValueError.Localization.DescriptionTemplateVariables
       ): string =>
           `The value of parameter No. ${ parameterNumber } (commonly named as "${ parameterName }") is invalid.` +
-          `${ 
-            insertSubstring(
-              messageSpecificPart, 
-              { modifier: (definedMessageSpecificPart: string): string => `\n${ definedMessageSpecificPart }` }
-            ) 
-          }`
+          insertSubstring(
+            messageSpecificPart,
+            { modifier: (definedMessageSpecificPart: string): string => `\n${ definedMessageSpecificPart }` }
+          )
 };
 
 

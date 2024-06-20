@@ -19,11 +19,13 @@ export namespace ReplacingOfMatchesWithRegularExpressionToDynamicValue {
     NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
   > = (matching: Matching<NamedCapturingGroups, NumeratedCapturingGroups>) => string | null;
 
+  /* eslint-disable @stylistic/type-generic-spacing --
+   *  This rule should allow the line braking while currently is does not.  */
   export type Matching<
-    NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }> =
-        Readonly<{ [groupName: string]: string | undefined; }>,
-    NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }> =
-        Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
+      NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }> =
+          Readonly<{ [groupName: string]: string | undefined; }>,
+      NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }> =
+          Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
   > = Readonly<{
     fullMatching: string;
     positionIndex: number;
@@ -38,6 +40,7 @@ export default function replaceMatchesWithRegularExpressionToDynamicValue<
         Readonly<{ [groupName: string]: string | undefined; }>,
     NumeratedCapturingGroups extends Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }> =
         Readonly<{ [groupNumber: Exclude<number, 0>]: string | undefined; }>
+    /* eslint-enable @stylistic/type-generic-spacing */
 >(
   compoundParameter: ReplacingOfMatchesWithRegularExpressionToDynamicValue.
       CompoundParameter<NamedCapturingGroups, NumeratedCapturingGroups>

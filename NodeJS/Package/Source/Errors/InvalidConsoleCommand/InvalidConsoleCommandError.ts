@@ -18,13 +18,11 @@ class InvalidConsoleCommandError extends Error {
     this.message =
         "customMessage" in constructorParameter ?
             constructorParameter.customMessage :
-            `${ InvalidConsoleCommandError.localization.generateDescriptionCommonPart(constructorParameter) }` +
-                `${ 
-                  insertSubstring(
-                    constructorParameter.messageSpecificPart,
-                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
-                  )
-                }`;
+            InvalidConsoleCommandError.localization.generateDescriptionCommonPart(constructorParameter) +
+                insertSubstring(
+                  constructorParameter.messageSpecificPart,
+                  { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+                );
 
   }
 

@@ -387,7 +387,7 @@ abstract class ObjectDataFilesProcessor {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidExternalDataError({
           customMessage: `The contents of file '${ filePathForLogging }' does not matching with valid data specification:\n` +
-              `${ RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages) }`
+              RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)
         }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION

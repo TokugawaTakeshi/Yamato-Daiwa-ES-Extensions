@@ -11,29 +11,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("v1d7");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Что нового в 1.7"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./v1d7.english.html",
-      japanese: "./v1d7.japanese.html"
+      english: "./RealiseNotes-v1d7.english.html",
+      japanese: "./RealiseNotes-v1d7.japanese.html"
     });
 
 
@@ -48,10 +43,59 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 Версия 1.7
+    h1.Article-Heading1 Версия 1.7 — Что нового
+
+    h2.Article-Heading2 Основной пакет (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 Критические изменения
+
+    h4.Article-Heading4 Работа с массивами
+
+    h5.Article-Heading5.
+      Изменение 3-его параметра в #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] и
+        #[code getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+
+    p.Article-Paragraph.
+      В #[+ImportantEntity--YDID 3-ем] #[+Term--YDID параметре] типа #[+Term__Contrast--YDID «объект»],
+        #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]
+        было #[+Keyword--YDID переименовано] в
+        #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Прежнее имя вводит в заблуждение: «or more than1» можно #[+Keyword--YDID ошибочно] интерпретировать как то,
+          что в #[+Keyword--YDID исходном] #[+Term--YDID массиве] не&nbsp;должно быть более одного
+          #[+Term--YDID элемента].
+        Теперь же «or matches are multiple» («... или совпадений несколько») однозначно передаёт, что
+          #[+Term--YDID элементов] не&nbsp;должно быть более одного
+          #[+Keyphrase--YDID именно среди удовлетворяющих #[+Term--YDID предикату]].
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd.
+        В Вашем коде при вызове #[+Term__Contrast--YDID функций]
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] или
+          #[+ImportantEntity__Code--YDID getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+          используется #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр].
+
+      dt Миграция
+      dd.
+        Используя соответствующую функциональность редактора кода или #[+Term--YDID интегрированной среды разработки],
+          замените #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] на
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] во всех файлах проекта.
+
+
+    h4.Article-Heading4 Класс «RawObjectDataProcessor»
+    h5.Article-Heading5 Переименование объекта локализации
+
+    p.Article-Paragraph.
+      В соответствии с обновлёнными соглашениями по именованию, #[+Term--YDID объект] локализации
+        #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] был #[+Keyword--YDID переименован] в
+        #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
+      Аналогичные изменения были применены и к другим #[+Term--YDID объектам] локализациям.
 
     //-
-      h2.Article-Heading2 Основной пакет (@yamato-daiwa/es-extensions)
 
       h3.Article-Heading3 Новая функциональность
 
@@ -226,52 +270,10 @@ block append SpecificContent
             вне зависимости от конкретной реализации #[+Term--YDID фасада] #[+ImportantEntity--YDID ILogger].
 
 
-      h3.Article-Heading3 Критические изменения
-
-      h4.Article-Heading4 Работа с массивами
-
-      h5.Article-Heading5.
-        Изменение третьего параметра в #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] и
-          #[code getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
-
-      p.Article-Paragraph.
-        В #[+ImportantEntity--YDID 3-ем] #[+Term--YDID параметре] типа #[+Term__Contrast--YDID «объект»],
-          #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]
-          было переименовано в #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
-
-      dl.Article-DescriptionList
-
-        dt Причина
-        dd.
-          Прежнее имя вводит в заблуждение: «or more than1» можно #[+Keyword--YDID ошибочно] интерпретировать как то,
-            что в #[+Keyword--YDID исходном] массиве не&nbsp;должно быть более одного элемента.
-          Теперь же «or matches are multiple» более чётко передаёт, что #[+Term--YDID элементов] не&nbsp;должно быть более
-            одного именно среди удовлетворяющих #[+Term--YDID предикату].
-
-        dt Потребуются редактирование Вашего исходного кода, если
-        dd.
-          В Вашем коде при вызове #[+Term__Contrast--YDID функций]
-            #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] или
-            #[+ImportantEntity__Code--YDID getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
-            используется #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр].
-
-        dt Миграция
-        dd.
-          Используя соответствующую функциональность редактора кода или #[+Term--YDID интегрированной среды разработки],
-            замените #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] на
-            #[+SecondaryEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] во всех файлах проекта.
-          Например, в интегрированных средах разработки семейства #[+SecondaryEntity--YDID IntelliJ IDEA] такая
-            функциональность вызывается с помощью сочетания клавиш #[+SecondaryEntity--YDID Ctrl + Shift + R].
 
 
-      h4.Article-Heading4 Класс #[+ImportantEntity__Code--YDID RawObjectDataProcessor]
-      h5.Article-Heading5 Переименование объекта локализации
 
-      p.Article-Paragraph.
-        В соответствии с обновлёнными соглашениями по именованию, объект локализации
-          #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] был переименован в
-          #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
-        Аналогичные изменения будут применены и к другим локализациям.
+
 
       h4.Article-Heading4 Логирование
 

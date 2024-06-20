@@ -11,28 +11,23 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-        whatFunctionDoes:
-            "возвращает элемент массива когда он и только он один удовлетворяет указанному предикату, в противном случае" +
-            "либо возвращает null, либо бросает ошибку — в зависимости от наличия третьего параметра."
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+          whatFunctionDoes:
+              "возвращает элемент массива когда он и только он один удовлетворяет указанному предикату, в противном " +
+                "случае либо возвращает null, либо бросает ошибку — в зависимости от наличия третьего параметра."
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute(
       "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +

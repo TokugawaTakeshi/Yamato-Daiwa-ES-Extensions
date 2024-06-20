@@ -11,32 +11,26 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "addElementsToArray",
-        whatFunctionDoes:
-            "добавляет новые элементы в начало, конец или указанную позицию массива. " +
-            "Возможно как изменение начального массива, так и создание нового на основе старого (но без глубокого копирования)."
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("addElementsToArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "addElementsToArray",
+          whatFunctionDoes:
+              "добавляет новые элементы в начало, конец или указанную позицию массива. " +
+              "Возможно как изменение начального массива, так и создание нового на основе старого (но без глубокого " +
+                "копирования)."
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
-
-    RoutingEmulator.setCurrentRoute(
-      "coreLibrary.functionality.arrays.addingOfElements.addElementsToArray"
-    );
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.addingOfElements.addElementsToArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: "./addElementsToArray.english.html",

@@ -46,9 +46,9 @@ abstract class Logger {
         /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(errorLog.innerError)`,
          *    but it is runtime dependent because the `stack` property is non-standard. */
 
-        stringifiedInnerError = errorLog.innerError.stack.includes(stringifiedInnerError)?
+        stringifiedInnerError = errorLog.innerError.stack.includes(stringifiedInnerError) ?
             errorLog.innerError.stack :
-            `${ stringifiedInnerError }\n${ errorLog.innerError.stack }`
+            `${ stringifiedInnerError }\n${ errorLog.innerError.stack }`;
 
       }
 
