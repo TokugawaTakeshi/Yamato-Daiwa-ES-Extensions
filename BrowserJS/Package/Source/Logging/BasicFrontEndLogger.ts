@@ -56,7 +56,8 @@ abstract class BasicFrontEndLogger {
         ...("caughtError" in errorLog ? [
           [ `\n\n${ BasicFrontEndLogger.localization.caughtError }:`, { "font-weight": "bold", color: "red" } ],
           [
-            errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` :
+            errorLog.caughtError instanceof Error ?
+                `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` :
                 `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
             { color: "red" }
           ]

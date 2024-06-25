@@ -2,15 +2,18 @@ import type { InvalidExternalDataError } from "@yamato-daiwa/es-extensions";
 import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
-export const InvalidExternalDataErrorLocalization__Russian: InvalidExternalDataError.Localization = {
+export const invalidExternalDataErrorLocalization__russian: InvalidExternalDataError.Localization = {
   defaultTitle: "Внешние данные не соответствуют ожидаемым",
   generateDescription:
-      (namedParameters: InvalidExternalDataError.Localization.DescriptionTemplateNamedParameters): string =>
-          `Внешние данные '${ namedParameters.mentionToExpectedData }' не соответствуют ожидаемым.` +
-          `${ insertSubstring(namedParameters.messageSpecificPart, {
-            modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-          }) }`
+      (
+        {
+          messageSpecificPart,
+          mentionToExpectedData
+        }: InvalidExternalDataError.Localization.DescriptionTemplateVariables
+      ): string =>
+          `Внешние данные "${ mentionToExpectedData }" не соответствуют ожидаемым.` +
+          insertSubstring(
+            messageSpecificPart,
+            { modifier: (specifiedMessageSpecificPart: string): string => `\n${ specifiedMessageSpecificPart }` }
+          )
 };
-
-
-export default InvalidExternalDataErrorLocalization__Russian;

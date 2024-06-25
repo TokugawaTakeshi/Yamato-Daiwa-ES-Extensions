@@ -6,55 +6,55 @@
 
 
 /* === Константы и перечисления ===================================================================================== */
-export { default as RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/RussianDaysOfWeek";
-export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
+export { RussianDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/RussianDaysOfWeek";
+export { RussianMonthsNames } from "./ConstantsAndEnumerations/DateTime/RussianMonthsNames";
 
 
 /* === Обработка внешних данных типа "объект" ======================================================================= */
-export { default as rawObjectDataProcessorLocalization__russian } from "./RawObjectDataProcessorLocalization.russian";
+export { rawObjectDataProcessorLocalization__russian } from "./RawObjectDataProcessorLocalization.russian";
 
 
 /* === Логирование ================================================================================================== */
-export { default as LoggerLocalization__Russian } from "./LoggerLocalization.russian";
-export { default as PoliteErrorsMessagesBuilder__Russian } from "./PoliteErrorsMessagesBuilderLocalization.russian";
+export { loggerLocalization__russian } from "./LoggerLocalization.russian";
+export { politeErrorsMessagesBuilder__russian } from "./PoliteErrorsMessagesBuilderLocalization.russian";
 
 
 /* === Классы ошибок ================================================================================================ */
-export { default as AlgorithmMismatchErrorLocalization__Russian } from
+export { algorithmMismatchErrorLocalization__russian } from
     "./Errors/AlgorithmMismatchErrorLocalization.russian";
-export { default as ClassRedundantSubsequentInitializationErrorLocalization__Russian } from
+export { classRedundantSubsequentInitializationErrorLocalization__russian } from
     "./Errors/ClassRedundantSubsequentInitializationErrorLocalization.russian";
-export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Russian } from
+export { classRequiredInitializationHasNotBeenExecutedErrorLocalization__russian } from
     "./Errors/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.russian";
-export { default as ConfigFileNotFoundErrorLocalization__Russian } from
+export { configFileNotFoundErrorLocalization__russian } from
     "./Errors/ConfigFileNotFoundErrorLocalization.russian";
-export { default as CrossBrowserIssueErrorLocalization__Russian } from
+export { crossBrowserIssueErrorLocalization__russian } from
     "./Errors/CrossBrowserIssueErrorLocalization.russian";
-export { default as DataRetrievingFailedErrorLocalization__Russian } from
+export { dataRetrievingFailedErrorLocalization__russian } from
     "./Errors/DataRetrievingFailedErrorLocalization.russian";
-export { default as DataSubmittingFailedErrorLocalization__Russian } from
+export { dataSubmittingFailedErrorLocalization__russian } from
     "./Errors/DataSubmittingFailedErrorLocalization.russian";
-export { default as DOM_ElementRetrievingFailedErrorLocalization__Russian } from
+export { DOM_ElementRetrievingFailedErrorLocalization__russian } from
     "./Errors/DOM_ElementRetrievingFailedErrorLocalization.russian";
-export { default as FileReadingFailedErrorLocalization__Russian } from
+export { fileReadingFailedErrorLocalization__russian } from
     "./Errors/FileReadingFailedErrorLocalization.russian";
-export { default as FileWritingFailedErrorLocalization__Russian } from
+export { fileWritingFailedErrorLocalization__russian } from
     "./Errors/FileWritingFailedErrorLocalization.russian";
-export { default as ImproperUsageErrorLocalization__Russian } from
+export { improperUsageErrorLocalization__russian } from
     "./Errors/ImproperUsageErrorLocalization.russian";
-export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Russian } from
+export { incompatiblePropertiesInObjectTypeParameterErrorLocalization__russian } from
     "./Errors/IncompatiblePropertiesInObjectTypeParameterLocalization.russian";
-export { default as InterProcessInteractionFailedErrorLocalization__Russian } from
+export { interProcessInteractionFailedErrorLocalization__russian } from
     "./Errors/InterProcessInteractionFailedErrorLocalization.russian";
-export { default as InvalidConfigErrorLocalization__Russian } from
+export { invalidConfigErrorLocalization__russian } from
     "./Errors/InvalidConfigErrorLocalization.russian";
-export { default as InvalidExternalDataErrorLocalization__Russian } from
+export { invalidExternalDataErrorLocalization__russian } from
     "./Errors/InvalidExternalDataErrorLocalization.russian";
-export { default as InvalidParameterValueErrorLocalization__Russian } from
+export { invalidParameterValueErrorLocalization__russian } from
     "./Errors/InvalidParameterValueErrorLocalization.russian";
-export { default as ModuleDynamicLoadingFailedErrorLocalization__Russian } from
+export { moduleDynamicLoadingFailedErrorLocalization__russian } from
     "./Errors/ModuleDynamicLoadingFailedErrorLocalization.russian";
-export { default as UnexpectedEventErrorLocalization__Russian } from
+export { unexpectedEventErrorLocalization__russian } from
     "./Errors/UnexpectedEventErrorLocalization.russian";
-export { default as UnsupportedScenarioErrorLocalization__Russian } from
+export { unsupportedScenarioErrorLocalization__russian } from
     "./Errors/UnsupportedScenarioErrorLocalization.russian";

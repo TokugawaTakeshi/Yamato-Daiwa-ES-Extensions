@@ -99,8 +99,9 @@ abstract class ConsoleApplicationLogger {
             }
           ],
           [
-            errorLog.caughtError instanceof Error ? `\n${ errorLog.caughtError.stack }` :
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
+            errorLog.caughtError instanceof Error ?
+                `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` :
+                `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
             {
               foregroundColor: { red: 231, green: 76, blue: 60 }
             }

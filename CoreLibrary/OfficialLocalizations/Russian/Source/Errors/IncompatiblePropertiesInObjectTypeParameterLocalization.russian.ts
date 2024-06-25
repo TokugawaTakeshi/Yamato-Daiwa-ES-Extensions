@@ -1,17 +1,18 @@
 import type { IncompatiblePropertiesInObjectTypeParameterError } from "@yamato-daiwa/es-extensions";
 
 
-const IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Russian:
+export const incompatiblePropertiesInObjectTypeParameterErrorLocalization__russian:
     IncompatiblePropertiesInObjectTypeParameterError.Localization =
     {
       defaultTitle: "Несовместимые свойства в объектном параметре",
       generateDescription: (
-        namedParameters: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateNamedParameters
-      ): string => `В параметре '${ namedParameters.parameterName }' типа 'объект' свойство ` +
-          `'${ namedParameters.conflictingPropertyName }' несовместимо со следующими свойствами:` +
-          `${ namedParameters.incompatiblePropertiesNames.reduce((accumulatingString: string, propertyName: string): string =>
-              `${ accumulatingString }\n- ${ propertyName }`, "") }`
+        {
+          parameterName,
+          conflictingPropertyName,
+          incompatiblePropertiesNames
+        }: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateVariables
+      ): string =>
+          `В параметре "${ parameterName }" типа "объект" свойство "${ conflictingPropertyName }" несовместимо со ` +
+            "следующими свойствами:\n" +
+            incompatiblePropertiesNames.map((propertyName: string): string => `● ${ propertyName }`).join("\n")
     };
-
-
-export default IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Russian;

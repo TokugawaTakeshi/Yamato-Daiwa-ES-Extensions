@@ -14,6 +14,8 @@ export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryP
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addElementsToArray } from "./Arrays/addElementsToArray";
+export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
+    "./Arrays/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
 export { default as createArrayOfNaturalNumbers } from "./Arrays/createArrayOfNaturalNumbers";
 export { default as cropArray } from "./Arrays/cropArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
@@ -194,10 +196,11 @@ export { default as loggerLocalization__english } from "./Logging/LoggerLocaliza
 
 
 /* ━━━ Maps ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as addMultiplePairsToMap } from "./Maps/addMultiplePairsToMap";
+export { default as addEntriesToMap } from "./Maps/addEntriesToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
 export { removeEntriesFromMap, type RemovingEntriesFromMapOperation } from "./Maps/removeEntriesFromMap";
+export { default as replaceValuesInMap, type ReplaceOfValuesInMapOperation } from "./Maps/replaceValuesInMap";
 
 /* ━━━ Numbers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";

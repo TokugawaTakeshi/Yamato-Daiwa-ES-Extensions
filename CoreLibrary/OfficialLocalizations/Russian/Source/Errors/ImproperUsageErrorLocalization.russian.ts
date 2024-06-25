@@ -1,9 +1,6 @@
 import type { ImproperUsageError } from "@yamato-daiwa/es-extensions";
 
 
-const ImproperUsageErrorLocalization__Russian: ImproperUsageError.Localization = {
+export const improperUsageErrorLocalization__russian: ImproperUsageError.Localization = {
   defaultTitle: "Ненадлежащее использование"
 };
-
-
-export default ImproperUsageErrorLocalization__Russian;

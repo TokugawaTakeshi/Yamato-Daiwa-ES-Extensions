@@ -1,4 +1,4 @@
-enum JapaneseTraditionalMonthsNames {
+export enum JapaneseTraditionalMonthsNames {
   january = "睦月",
   february = "如月",
   march = "弥生",
@@ -12,6 +12,3 @@ enum JapaneseTraditionalMonthsNames {
   november = "霜月",
   december = "師走"
 }
-
-
-export default JapaneseTraditionalMonthsNames;

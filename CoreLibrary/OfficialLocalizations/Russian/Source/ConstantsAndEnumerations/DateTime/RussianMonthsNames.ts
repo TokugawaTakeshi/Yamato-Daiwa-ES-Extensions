@@ -1,4 +1,4 @@
-enum RussianMonthsNames {
+export enum RussianMonthsNames {
   january = "ЯНВАРЬ",
   february = "ФЕВРАЛЬ",
   march = "МАРТ",
@@ -12,6 +12,3 @@ enum RussianMonthsNames {
   november = "НОЯБРЬ",
   december = "ДЕКАБРЬ"
 }
-
-
-export default RussianMonthsNames;

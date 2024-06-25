@@ -1,7 +1,7 @@
 import type { PoliteErrorsMessagesBuilder } from "@yamato-daiwa/es-extensions";
 
 
-const PoliteErrorsMessagesBuilder__Russian: PoliteErrorsMessagesBuilder.Localization = {
+export const politeErrorsMessagesBuilder__russian: PoliteErrorsMessagesBuilder.Localization = {
 
   introduction: "Мы сожалеем, но это баг. " +
       "Пожалуйста, примите наши глубочайшие изменения за доставленные этой ошибкой проблемы во время Вашей работы.",
@@ -22,6 +22,3 @@ const PoliteErrorsMessagesBuilder__Russian: PoliteErrorsMessagesBuilder.Localiza
         "разработчиков. Если они содержат какие-либо секретные данные, пожалуйста, замените их на что-нибудь нейтральное."
   }
 };
-
-
-export default PoliteErrorsMessagesBuilder__Russian;

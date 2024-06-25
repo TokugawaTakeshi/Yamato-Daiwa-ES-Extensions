@@ -43,9 +43,23 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 リリースノート　｜　バージョン 1.7
+    h1.Article-Heading1 リリースノート｜バージョン 1.7
 
     h2.Article-Heading2 主要パッケージ (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 新規機能
+
+    h4.Article-Heading4 配列の弄り
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.
+            functionality.$children.
+            arrays.$children.
+            creating.$children.
+            createArrayOfNaturalNumbers.$URI
+      }).Article-Link createArrayOfNaturalNumbers
 
     h3.Article-Heading3 破壊的変更
 
@@ -92,17 +106,7 @@ block append SpecificContent
 
     //-
 
-      h3.Article-Heading3 新規機能
-
       ul.Article-UnorderedList
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              other.$children.
-              createArrayOfNaturalNumbers.$URI
-        }).Article-Link createArrayOfNaturalNumbers
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.

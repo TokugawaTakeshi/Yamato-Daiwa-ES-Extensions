@@ -4,61 +4,62 @@ import { isNaturalNumber, isNonNegativeInteger } from "../index";
 
 
 export default function cropArray<ArrayElement>(
-  compoundParameter:
-      (
-        {
-          mutably: true;
-          targetArray: Array<ArrayElement>;
-        } |
-        {
-          mutably: false;
-          targetArray: ReadonlyArray<ArrayElement>;
-        }
-      ) &
-      (
-        {
-          startingElementNumber__numerationFrom0: number;
-          startingElementNumber__numerationFrom1?: undefined;
-          fromStart?: undefined;
-        } |
-        {
-          startingElementNumber__numerationFrom1: number;
-          startingElementNumber__numerationFrom0?: undefined;
-          fromStart?: undefined;
-        } |
-        {
-          fromStart: true;
-          startingElementNumber__numerationFrom1?: undefined;
-          startingElementNumber__numerationFrom0?: undefined;
-        }
-      ) &
-      (
-        {
-          endingElementNumber__numerationFrom0: number;
-          endingElementNumber__numerationFrom1?: undefined;
-          elementsCount?: undefined;
-          untilEnd?: undefined;
-        } |
-        {
-          endingElementNumber__numerationFrom1: number;
-          endingElementNumber__numerationFrom0?: undefined;
-          elementsCount?: undefined;
-          untilEnd?: undefined;
-        } |
-        {
-          elementsCount: number;
-          endingElementNumber__numerationFrom0?: undefined;
-          endingElementNumber__numerationFrom1?: undefined;
-          untilEnd?: undefined;
-        } |
-        {
-          untilEnd: true;
-          endingElementNumber__numerationFrom0?: undefined;
-          endingElementNumber__numerationFrom1?: undefined;
-          elementsCount?: undefined;
-        }
-      ) &
-      { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+  compoundParameter: Readonly<
+    (
+      {
+        mutably: true;
+        targetArray: Array<ArrayElement>;
+      } |
+      {
+        mutably: false;
+        targetArray: ReadonlyArray<ArrayElement>;
+      }
+    ) &
+    (
+      {
+        startingElementNumber__numerationFrom0: number;
+        startingElementNumber__numerationFrom1?: undefined;
+        fromStart?: undefined;
+      } |
+      {
+        startingElementNumber__numerationFrom1: number;
+        startingElementNumber__numerationFrom0?: undefined;
+        fromStart?: undefined;
+      } |
+      {
+        fromStart: true;
+        startingElementNumber__numerationFrom1?: undefined;
+        startingElementNumber__numerationFrom0?: undefined;
+      }
+    ) &
+    (
+      {
+        endingElementNumber__numerationFrom0: number;
+        endingElementNumber__numerationFrom1?: undefined;
+        elementsCount?: undefined;
+        untilEnd?: undefined;
+      } |
+      {
+        endingElementNumber__numerationFrom1: number;
+        endingElementNumber__numerationFrom0?: undefined;
+        elementsCount?: undefined;
+        untilEnd?: undefined;
+      } |
+      {
+        elementsCount: number;
+        endingElementNumber__numerationFrom0?: undefined;
+        endingElementNumber__numerationFrom1?: undefined;
+        untilEnd?: undefined;
+      } |
+      {
+        untilEnd: true;
+        endingElementNumber__numerationFrom0?: undefined;
+        endingElementNumber__numerationFrom1?: undefined;
+        elementsCount?: undefined;
+      }
+    ) &
+    { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+  >
 ): Array<ArrayElement> {
 
   const targetArray: ReadonlyArray<ArrayElement> = compoundParameter.targetArray;

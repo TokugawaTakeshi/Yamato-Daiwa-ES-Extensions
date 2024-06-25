@@ -112,6 +112,7 @@ abstract class Logger {
       return;
     }
 
+
     console.error(
       [
 
@@ -132,7 +133,7 @@ abstract class Logger {
                 `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }` +
                 (
                   errorLog.caughtError instanceof Error && isNonEmptyString(errorLog.caughtError.stack) ?
-                      `\n${ errorLog.caughtError.stack }` : ""
+                      `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` : ""
                 )
             ] :
             [ ],

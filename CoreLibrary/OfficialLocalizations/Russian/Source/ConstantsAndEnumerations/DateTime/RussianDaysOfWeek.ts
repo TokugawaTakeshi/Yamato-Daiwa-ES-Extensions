@@ -1,4 +1,4 @@
-enum RussianDaysOfWeek {
+export enum RussianDaysOfWeek {
   sunday = "ВОСКРЕСЕНЬЕ",
   monday = "ПОНЕДЕЛЬНИК",
   tuesday = "ВТОРНИК",
@@ -7,6 +7,3 @@ enum RussianDaysOfWeek {
   friday = "ПЯТНИЦА",
   saturday = "СУББОТА"
 }
-
-
-export default RussianDaysOfWeek;

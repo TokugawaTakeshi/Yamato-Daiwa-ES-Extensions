@@ -2,15 +2,17 @@ import type { InvalidConfigError } from "@yamato-daiwa/es-extensions";
 import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
-const InvalidConfigErrorLocalization__Russian: InvalidConfigError.Localization = {
+export const invalidConfigErrorLocalization__russian: InvalidConfigError.Localization = {
   defaultTitle: "Невалидные настройки",
   generateDescription: (
-    namedParameters: InvalidConfigError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Настройки '${ namedParameters.mentionToConfig }' невалидны.` +
-      `${ insertSubstring(namedParameters.messageSpecificPart, {
-        modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-      }) }`
+    {
+      mentionToConfig,
+      messageSpecificPart
+    }: InvalidConfigError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `Настройки "${ mentionToConfig }" невалидны.` +
+      insertSubstring(
+        messageSpecificPart,
+        { modifier: (specifiedMessageSpecificPart: string): string => `\n${ specifiedMessageSpecificPart }` }
+      )
 };
-
-
-export default InvalidConfigErrorLocalization__Russian;

@@ -1,12 +1,10 @@
 import type { DataSubmittingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const DataSubmittingFailedErrorLocalization__Russian: DataSubmittingFailedError.Localization = {
+export const dataSubmittingFailedErrorLocalization__russian: DataSubmittingFailedError.Localization = {
   defaultTitle: "Ошибка при отправке данных",
   generateDescription: (
-    namedParameters: DataSubmittingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибка при отправке данных '${ namedParameters.mentionToData }'.`
+    { mentionToData }: DataSubmittingFailedError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `Произошла ошибка при отправке данных "${ mentionToData }".`
 };
-
-
-export default DataSubmittingFailedErrorLocalization__Russian;

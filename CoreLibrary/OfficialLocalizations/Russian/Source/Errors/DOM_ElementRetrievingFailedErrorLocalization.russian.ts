@@ -1,12 +1,10 @@
 import type { DOM_ElementRetrievingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const DOM_ElementRetrievingFailedErrorLocalization__Russian: DOM_ElementRetrievingFailedError.Localization = {
+export const DOM_ElementRetrievingFailedErrorLocalization__russian: DOM_ElementRetrievingFailedError.Localization = {
   defaultTitle: "DOM элемент не найден",
   generateDescription: (
-    parameters: DOM_ElementRetrievingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Не найден DOM-элемент соответствующий селектору '${ parameters.selector }'.`
+    { selector }: DOM_ElementRetrievingFailedError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `Не найден DOM-элемент соответствующий селектору "${ selector }".`
 };
-
-
-export default DOM_ElementRetrievingFailedErrorLocalization__Russian;

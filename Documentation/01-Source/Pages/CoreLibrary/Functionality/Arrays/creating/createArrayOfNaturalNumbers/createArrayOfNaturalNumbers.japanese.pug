@@ -1,12 +1,10 @@
-//- TODO Редактировать глубину
-extends ../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  //- TODO Редактировать глубину
-  include ../../SharedAssets/Markup/SharedAssets.russian.pug
-  include ../../SharedComponents/SharedComponents.russian.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -15,10 +13,10 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}"),
+        title: buildHTML_PageTitle("createArrayOfNaturalNumbers"),
         description: MetaDescriptionTemplates.function({
-          functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
-          whatFunctionDoes: "особую, уличную магию" // TODO Редактировать
+          functionName: "createArrayOfNaturalNumbers",
+          whatFunctionDoes: ""
         }),
       },
       stylesSheetsURIs: [
@@ -29,11 +27,11 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("${ROUTE}");
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.creating.createArrayOfNaturalNumbers");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
-      japanese: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html"
+      english: "./createArrayOfNaturalNumbers.english.html",
+      russian: "./createArrayOfNaturalNumbers.russian.html"
     });
 
 
@@ -48,11 +46,10 @@ block append SpecificContent
 
   article
 
-    //- TODO Редактировать
     +CallableExpressionScheme--YDF_DK({
-      technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
+      technicalName: "createArrayOfNaturalNumbers",
       headingTag: "h1",
-      localizedDescriptiveHeading: "Делает особую, уличную магию",
+      localizedDescriptiveHeading: "特別なストリートの魔法をする",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -72,4 +69,4 @@ block append SpecificContent
 
         +CodeViewer-Explanation--YDF
           p.Article-Paragraph.
-            Выводит "OK" в консоль (спасибо, кэп).
+            "OK"をコンソールに取得させる（キャプテン・オブヴィアス、ありがとう）。

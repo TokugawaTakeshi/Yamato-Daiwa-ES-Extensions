@@ -1,7 +1,7 @@
 import type { PoliteErrorsMessagesBuilder } from "@yamato-daiwa/es-extensions";
 
 
-const PoliteErrorsMessagesBuilder__Japanese: PoliteErrorsMessagesBuilder.Localization = {
+export const politeErrorsMessagesBuilder__japanese: PoliteErrorsMessagesBuilder.Localization = {
 
   introduction: "バグが発生しました。" +
       "お忙しい中ご迷惑を掛けてしまい、大変申し訳ありません。",
@@ -21,6 +21,3 @@ const PoliteErrorsMessagesBuilder__Japanese: PoliteErrorsMessagesBuilder.Localiz
         "原因の発見と修正に必要な為ですが、部外秘の内容が含まれる場合は、当該箇所を伏せ字や黒塗り、表現の置き換え等で伏せて下さい。"
   }
 };
-
-
-export default PoliteErrorsMessagesBuilder__Japanese;

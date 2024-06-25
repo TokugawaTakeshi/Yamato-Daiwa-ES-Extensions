@@ -1,4 +1,4 @@
-enum JapaneseDaysOfWeek {
+export enum JapaneseDaysOfWeek {
   sunday = "日曜日",
   monday = "月曜日",
   tuesday = "火曜日",
@@ -7,6 +7,3 @@ enum JapaneseDaysOfWeek {
   friday = "金曜日",
   saturday = "土曜日"
 }
-
-
-export default JapaneseDaysOfWeek;

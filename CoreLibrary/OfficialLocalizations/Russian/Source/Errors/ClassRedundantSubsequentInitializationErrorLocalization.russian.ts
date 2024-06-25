@@ -1,14 +1,11 @@
 import type { ClassRedundantSubsequentInitializationError } from "@yamato-daiwa/es-extensions";
 
 
-const ClassRedundantSubsequentInitializationErrorLocalizationRussian:
+export const classRedundantSubsequentInitializationErrorLocalization__russian:
     ClassRedundantSubsequentInitializationError.Localization =
 {
   defaultTitle: "Ненужная повторная инициализация класса",
   generateDescription:
-    (namedParameters: ClassRedundantSubsequentInitializationError.Localization.DescriptionTemplateNamedParameters): string =>
-        `Класс '${ namedParameters.className }' должен быть инициализирован только один раз.`
+      ({ className }: ClassRedundantSubsequentInitializationError.Localization.DescriptionTemplateVariables): string =>
+          `Класс "${ className }" должен быть инициализирован только один раз.`
 };
-
-
-export default ClassRedundantSubsequentInitializationErrorLocalizationRussian;

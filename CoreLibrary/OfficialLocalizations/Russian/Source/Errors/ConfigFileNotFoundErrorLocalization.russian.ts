@@ -1,28 +1,25 @@
 import type { ConfigFileNotFoundError } from "@yamato-daiwa/es-extensions";
-import { insertSubstring } from "@yamato-daiwa/es-extensions";
+import { isString, isNonEmptyString } from "@yamato-daiwa/es-extensions";
 
 
-const ConfigFileNotFoundErrorLocalization__Russian: ConfigFileNotFoundError.Localization = {
+export const configFileNotFoundErrorLocalization__russian: ConfigFileNotFoundError.Localization = {
   defaultTitle: "Файл конфигурации не найден",
-  generateDescription(namedParameters: ConfigFileNotFoundError.Localization.DescriptionTemplateNamedParameters): string {
+  generateDescription: (
+    {
+      configFilePathOrMultipleOfThem,
+      targetTechnologyName,
+      messageSpecificPart
+    }: ConfigFileNotFoundError.Localization.DescriptionTemplateVariables
+  ): string => [
 
-    let messageCommonPart: string;
+      isString(configFilePathOrMultipleOfThem) ?
+          [ `Конфигурационный файл "${ configFilePathOrMultipleOfThem }" для "${ targetTechnologyName }" не найден.` ] :
+          [
+            `Ни один из нижеследующих конфигурационных файлов для "${ targetTechnologyName }" не найден.\n` +
+            configFilePathOrMultipleOfThem.join(", ")
+          ],
 
-    if (Array.isArray(namedParameters.configFilePathOrMultipleOfThem)) {
-      messageCommonPart = `Ни один из нижеследующих конфигурационных файлов для '${ namedParameters.targetTechnologyName }' ` +
-          `не найден.\n${ namedParameters.configFilePathOrMultipleOfThem.join(", ") }`;
-    } else {
-      messageCommonPart = `Конфигурационный файл '${ namedParameters.configFilePathOrMultipleOfThem }' для ` +
-          `'${ namedParameters.targetTechnologyName }' не найден.`;
-    }
+      isNonEmptyString(messageSpecificPart) ? [ `\n${ messageSpecificPart }` ] : []
 
-
-    return `${ messageCommonPart }` +
-        `${ insertSubstring(namedParameters.messageSpecificPart, {
-          modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-        }) }`;
-  }
+    ].join("")
 };
-
-
-export default ConfigFileNotFoundErrorLocalization__Russian;
