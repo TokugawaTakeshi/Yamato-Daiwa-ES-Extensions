@@ -11,7 +11,7 @@ export { default as RussianMonthsNames } from "./ConstantsAndEnumerations/DateTi
 
 
 /* === Обработка внешних данных типа "объект" ======================================================================= */
-export { default as RawObjectDataProcessorLocalization__Russian } from "./RawObjectDataProcessorLocalization.russian";
+export { default as rawObjectDataProcessorLocalization__russian } from "./RawObjectDataProcessorLocalization.russian";
 
 
 /* === Логирование ================================================================================================== */

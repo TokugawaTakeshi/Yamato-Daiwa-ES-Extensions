@@ -1,4 +1,4 @@
-# delegateClickEventHandling
+# delegateLeftClickEventHandling
 
 [![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-dceh-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 

@@ -1,4 +1,5 @@
-import { getMonthNameByNumber, MonthsNames, InvalidParameterValueError } from "../../../Source";
+import { getMonthNameByNumber, InvalidParameterValueError } from "../../../Source";
+import { MonthsNames } from "fundamental-constants";
 import Assert from "assert";
 
 

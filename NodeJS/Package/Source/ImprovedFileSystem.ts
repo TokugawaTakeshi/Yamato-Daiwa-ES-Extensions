@@ -1,6 +1,8 @@
 import FileSystem, { constants as FileSystemConstants } from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
+import ImprovedPath from "./ImprovedPath/ImprovedPath";
+import isErrnoException from "./isErrnoException";
 import { isNull, Logger } from "@yamato-daiwa/es-extensions";
 
 
@@ -73,7 +75,6 @@ export default class ImprovedFileSystem {
     }>
   ): Promise<void> | void {
 
-
     if (synchronously) {
 
       if (ImprovedFileSystem.isFileOrDirectoryExists({ targetPath, synchronously: true })) {
@@ -89,13 +90,14 @@ export default class ImprovedFileSystem {
 
         }
 
-
         return;
 
       }
 
 
       FileSystem.mkdirSync(targetPath, { recursive: true });
+
+      return;
 
     }
 
@@ -132,7 +134,7 @@ export default class ImprovedFileSystem {
   }
 
 
-  /* ━━━ Removing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Removing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
   public static removeDirectoryWithFiles(
     compoundParameter: Readonly<{ targetPath: string; mustThrowErrorIfOneOrMoreFilesCouldNotBeDeleted: boolean; }>
   ): void {
@@ -169,6 +171,103 @@ export default class ImprovedFileSystem {
     }
 
     FileSystem.rmdirSync(targetDirectoryPath);
+
+  }
+
+
+  /* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Creating / Updating ──────────────────────────────────────────────────────────────────────────────────────── */
+  public static writeFileToPossiblyNotExistingDirectory(
+    compoundParameter: Readonly<{
+      filePath: string;
+      content: string;
+      synchronously: true;
+    }>
+  ): void;
+
+  public static writeFileToPossiblyNotExistingDirectory(
+    compoundParameter: Readonly<{
+      filePath: string;
+      content: string;
+      synchronously: false;
+    }>
+  ): Promise<void>;
+
+  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
+   * Adding of the `async` keyword to this method will cause TS1064 error. */
+  public static writeFileToPossiblyNotExistingDirectory(
+    {
+      filePath,
+      content,
+      synchronously
+    }: Readonly<{
+      filePath: string;
+      content: string;
+      synchronously: boolean;
+    }>
+  ): Promise<void> | void {
+
+    if (synchronously) {
+
+      try {
+
+        FileSystem.writeFileSync(filePath, content);
+
+      } catch (error: unknown) {
+
+        if (isErrnoException(error) && error.code === "ENOENT") {
+
+          ImprovedFileSystem.createDirectory({
+            targetPath: ImprovedPath.extractDirectoryFromFilePath({
+              targetPath: filePath,
+              ambiguitiesResolution: {
+                mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+                mustConsiderLastSegmentStartingWithDotAsDirectory: false
+              }
+            }),
+            synchronously: true,
+            mustThrowErrorIfTargetDirectoryExists: true
+          });
+
+          FileSystem.writeFileSync(filePath, content);
+
+        }
+
+      }
+
+      return;
+
+    }
+
+
+    return PromisfiedFileSystem.
+        writeFile(filePath, content).
+        catch(async (error: unknown): Promise<void> => {
+
+          if (isErrnoException(error) && error.code === "ENOENT") {
+
+            ImprovedFileSystem.createDirectory({
+              targetPath: ImprovedPath.extractDirectoryFromFilePath({
+                targetPath: filePath,
+                ambiguitiesResolution: {
+                  mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                  mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
+                  mustConsiderLastSegmentStartingWithDotAsDirectory: false
+                }
+              }),
+              synchronously: true,
+              mustThrowErrorIfTargetDirectoryExists: true
+            });
+
+            return PromisfiedFileSystem.writeFile(filePath, content);
+
+          }
+
+
+          throw error;
+
+        });
 
   }
 

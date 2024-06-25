@@ -1,4 +1,5 @@
-import { getPreviousMonthNumber, MonthsNames } from "../../../Source";
+import { getPreviousMonthNumber } from "../../../Source";
+import { MonthsNames } from "fundamental-constants";
 import Assert from "assert";
 
 

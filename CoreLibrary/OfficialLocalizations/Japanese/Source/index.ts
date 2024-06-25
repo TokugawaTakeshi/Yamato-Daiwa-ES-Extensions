@@ -13,7 +13,7 @@ export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateT
 
 
 /* === 生オブジェクト系データ処理 =========================================================================================== */
-export { default as RawObjectDataProcessorLocalization__Japanese } from "./RawObjectDataProcessorLocalization.japanese";
+export { default as rawObjectDataProcessorLocalization__japanese } from "./RawObjectDataProcessorLocalization.japanese";
 
 
 /* === ログ =========================================================================================================== */

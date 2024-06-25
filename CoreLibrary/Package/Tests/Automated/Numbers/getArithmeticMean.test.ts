@@ -4,6 +4,10 @@ import Assert from "assert";
 
 describe("getArithmeticMean", (): void => {
 
+  it("The arithmetic mean of 0 numbers has been computed correctly", (): void => {
+    Assert.strictEqual(getArithmeticMean(), 0);
+  });
+
   it("The arithmetic mean of 2 numbers has been computed correctly", (): void => {
     Assert.strictEqual(getArithmeticMean(4, 3), 3.5);
   });

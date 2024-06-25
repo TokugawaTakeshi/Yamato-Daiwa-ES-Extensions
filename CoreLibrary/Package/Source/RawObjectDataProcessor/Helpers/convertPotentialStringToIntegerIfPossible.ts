@@ -1,10 +1,9 @@
-import areStringifiedDigitsOnly from "../../Strings/areStringifiedDigitsOnly";
-import { isString } from "../../index";
+import areStringifiedDigitsOnly from "../../TypeGuards/Strings/areStringifiedDigitsOnly";
 
 
 export default function convertPotentialStringToIntegerIfPossible(rawValue: unknown): unknown {
 
-  if (!isString(rawValue) || !areStringifiedDigitsOnly(rawValue)) {
+  if (!areStringifiedDigitsOnly(rawValue)) {
     return rawValue;
   }
 
@@ -12,4 +11,5 @@ export default function convertPotentialStringToIntegerIfPossible(rawValue: unkn
   const parsedInteger: number = parseInt(rawValue, 10);
 
   return isNaN(parsedInteger) ? rawValue : parsedInteger;
+
 }

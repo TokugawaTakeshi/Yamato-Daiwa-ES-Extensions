@@ -1,10 +1,11 @@
-import UnexpectedEventErrorLocalization__English from "./UnexpectedEventErrorLocalization.english";
+import unexpectedEventErrorLocalization__english from "./UnexpectedEventErrorLocalization.english";
 
 
 class UnexpectedEventError extends Error {
 
   public static readonly NAME: string = "UnexpectedEventError";
-  public static localization: UnexpectedEventError.Localization = UnexpectedEventErrorLocalization__English;
+
+  public static localization: UnexpectedEventError.Localization = unexpectedEventErrorLocalization__english;
 
 
   public constructor(message: string) {
@@ -13,7 +14,9 @@ class UnexpectedEventError extends Error {
 
     this.name = UnexpectedEventError.NAME;
     this.message = message;
+
   }
+
 }
 
 

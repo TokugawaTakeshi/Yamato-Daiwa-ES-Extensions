@@ -11,7 +11,7 @@ describe("replace2OrMoreSpacesTo1", (): void => {
       `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
       eiusmod tempor incididunt ut labore et dolore magna aliqua.`
       ),
-        // eslint-disable-next-line max-len
+      /* eslint-disable-next-line @stylistic/max-len -- To make all spaces clearly visible. */
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     );
 

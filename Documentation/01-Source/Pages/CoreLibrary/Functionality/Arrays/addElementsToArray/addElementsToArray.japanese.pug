@@ -11,32 +11,25 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "addElementsToArray",
-        whatFunctionDoes:
-            "目標の配列の最初の位置、最後の位置、もしくは引数で指定された位置に、新規要素を追加する。" +
-            "初期の配列を変更するか、新しい配列を作る事も指定可能（但し、ディープコピーは不可能）。"
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("addElementsToArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "addElementsToArray",
+          whatFunctionDoes:
+              "目標の配列の最初の位置、最後の位置、もしくは引数で指定された位置に、新規要素を追加する。" +
+              "初期の配列を変更するか、新しい配列を作る事も指定可能（但し、ディープコピーは不可能）。"
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
-
-    RoutingEmulator.setCurrentRoute(
-      "coreLibrary.functionality.arrays.addingOfElements.addElementsToArray"
-    );
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.addingOfElements.addElementsToArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: "./addElementsToArray.english.html",

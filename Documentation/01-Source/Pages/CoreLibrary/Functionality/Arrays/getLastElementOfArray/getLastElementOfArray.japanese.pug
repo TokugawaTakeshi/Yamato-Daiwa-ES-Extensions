@@ -11,26 +11,21 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("getLastElementOfArray");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "getLastElementOfArray",
-        whatFunctionDoes: "配列の最後の要素（存在している時）を返す。この要素が無い場合、２引数目の有無に依り「null」が返されるが、例外が投げられる。"
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getLastElementOfArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getLastElementOfArray",
+          whatFunctionDoes: "配列の最後の要素（存在している時）を返す。この要素が無い場合、２引数目の有無に依り「null」が返されるが、例外が投げられる。"
+        }),
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
 

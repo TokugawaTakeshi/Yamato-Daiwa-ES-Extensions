@@ -14,7 +14,7 @@ class PromisesQueue {
       errorType: UnexpectedEventError.NAME,
       title: UnexpectedEventError.localization.defaultTitle,
       description: "The promise queue execution has failed.",
-      occurrenceLocation: "promisesQueue.startExecutionIfHasNotStartedYet(namedParameters)",
+      occurrenceLocation: "promisesQueue.startExecutionIfHasNotStartedYet(compoundParameter)",
       caughtError: error
     });
   }

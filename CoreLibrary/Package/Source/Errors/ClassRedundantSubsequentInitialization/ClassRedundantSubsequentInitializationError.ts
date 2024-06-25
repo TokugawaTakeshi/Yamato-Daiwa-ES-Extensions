@@ -1,41 +1,45 @@
-import ClassRedundantSubsequentInitializationErrorLocalization__English from
+import classRedundantSubsequentInitializationErrorLocalization__english from
     "./ClassRedundantSubsequentInitializationErrorLocalization.english";
 
 
 class ClassRedundantSubsequentInitializationError extends Error {
 
   public static readonly NAME: string = "ClassRedundantSubsequentInitializationError";
+
   public static localization: ClassRedundantSubsequentInitializationError.Localization =
-      ClassRedundantSubsequentInitializationErrorLocalization__English;
+      classRedundantSubsequentInitializationErrorLocalization__english;
 
 
-  public constructor(namedParameters: ClassRedundantSubsequentInitializationError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: ClassRedundantSubsequentInitializationError.ConstructorParameter) {
 
     super();
 
     this.name = ClassRedundantSubsequentInitializationError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = ClassRedundantSubsequentInitializationError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        ClassRedundantSubsequentInitializationError.localization.generateDescription(compoundParameter);
+
   }
+
 }
 
 
 namespace ClassRedundantSubsequentInitializationError {
 
-  export type ConstructorNamedParameters = Readonly<{ customMessage: string; }> | Readonly<{ className: string; }>;
+  export type ConstructorParameter =
+      Readonly<{ customMessage: string; }> |
+      Readonly<{ className: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{ className: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{ className: string; }>;
   }
+
 }
 
 

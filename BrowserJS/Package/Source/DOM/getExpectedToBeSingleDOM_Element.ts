@@ -9,63 +9,106 @@ import {
 export default function getExpectedToBeSingleDOM_Element(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
   }>
 ): Element;
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }>
 ): DOM_ElementSubtype;
 
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
-  {
-    selector,
-    context = document,
-    expectedDOM_ElementSubtype
-  }: Readonly<{
+  compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
     expectedDOM_ElementSubtype?: new () => DOM_ElementSubtype;
   }>
 ): Element | DOM_ElementSubtype {
 
-  const targetElementSearchResults: Array<Element> = Array.from(context.querySelectorAll(selector));
+  let contextElement: ParentNode;
 
-  if (targetElementSearchResults.length === 0) {
+  if (isUndefined(compoundParameter.contextElement)) {
+    contextElement = document;
+  } else if ("selector" in compoundParameter.contextElement) {
+
+    const elementsCorrespondingToContextElementSelector: NodeListOf<ParentNode> = document.
+        querySelectorAll(compoundParameter.contextElement.selector);
+
+    if (elementsCorrespondingToContextElementSelector.length === 0) {
+
+      Logger.throwErrorAndLog({
+        errorInstance: new DOM_ElementRetrievingFailedError({
+          customMessage:
+              `The context element has not been found by the selector "${ compoundParameter.contextElement.selector }".`
+        }),
+        title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
+        occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
+      });
+
+    } else if (elementsCorrespondingToContextElementSelector.length > 1) {
+
+      Logger.logError({
+        errorType: UnexpectedEventError.NAME,
+        title: UnexpectedEventError.localization.defaultTitle,
+        description:
+            `Multiple elements are corresponding to context element selector "${ compoundParameter.contextElement.selector }" ` +
+              "while the context element must be single.",
+        occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
+      });
+
+    }
+
+
+    contextElement = elementsCorrespondingToContextElementSelector[0];
+
+  } else {
+    contextElement = compoundParameter.contextElement;
+  }
+
+
+  const targetElementSelector: string = compoundParameter.selector;
+  const elementsCorrespondingToTargetElementSelector: NodeListOf<Element> =
+      contextElement.querySelectorAll(targetElementSelector);
+
+  if (elementsCorrespondingToTargetElementSelector.length === 0) {
     Logger.throwErrorAndLog({
-      errorInstance: new DOM_ElementRetrievingFailedError({ selector }),
+      errorInstance: new DOM_ElementRetrievingFailedError({ selector: targetElementSelector }),
       title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
 
-  if (targetElementSearchResults.length > 1) {
+  if (elementsCorrespondingToTargetElementSelector.length > 1) {
     Logger.logError({
       errorType: UnexpectedEventError.NAME,
       title: UnexpectedEventError.localization.defaultTitle,
-      description: `Contrary to expectations, ${ targetElementSearchResults.length } elements has been found for the selector ` +
-          `'${ selector }'. First one only will be picked.`,
+      description:
+          `Contrary to expectations, ${ elementsCorrespondingToTargetElementSelector.length } elements has been found for the ` +
+            `selector "${ targetElementSelector }". ` +
+          "First one will be picked.",
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
     });
   }
 
-  if (isUndefined(expectedDOM_ElementSubtype)) {
-    return targetElementSearchResults[0];
+
+  const targetElement: Element = elementsCorrespondingToTargetElementSelector[0];
+
+  if (isUndefined(compoundParameter.expectedDOM_ElementSubtype)) {
+    return targetElement;
   }
 
 
-  const targetElement: Element = targetElementSearchResults[0];
-
-  if (!(targetElement instanceof expectedDOM_ElementSubtype)) {
+  if (!(targetElement instanceof compoundParameter.expectedDOM_ElementSubtype)) {
     Logger.throwErrorAndLog({
       errorInstance: new UnexpectedEventError(
-        `Contrary to expectations, the picked element in not instance of '${ expectedDOM_ElementSubtype.name }'.`
+        "Contrary to expectations, the picked element in not instance of " +
+            `"${ compoundParameter.expectedDOM_ElementSubtype.name }".`
       ),
       title: UnexpectedEventError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"

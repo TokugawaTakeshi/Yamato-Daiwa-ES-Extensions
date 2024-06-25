@@ -6,24 +6,24 @@ export default class NodeJS_Timer extends Timer {
 
   #nativeTimeout!: Timeout;
   #secondsLeft: number = this.period__seconds;
-
+  #isActive: boolean = false;
 
   public constructor(
-    namedParameters: Readonly<{
+    compoundParameter: Readonly<{
       period__seconds: number;
       onElapsed?: (outcome: Timer.Outcomes) => void;
     }>
   ) {
-    super(namedParameters);
+    super(compoundParameter);
   }
 
 
   public countDown(
-    namedParameters?: Readonly<{ asynchronousCompletion?: Timer.AsynchronousCompletions.promise; }>
+    compoundParameter?: Readonly<{ asynchronousCompletion?: Timer.AsynchronousCompletions.promise; }>
   ): Promise<Timer.Outcomes>;
 
   public countDown(
-    namedParameters: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+    compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
   ): void;
 
 
@@ -42,26 +42,50 @@ export default class NodeJS_Timer extends Timer {
      *  In this case function could return or not return the value depending on parameter. */
   ): Promise<Timer.Outcomes> | void {
 
-    const promise: Promise<Timer.Outcomes> = new Promise<Timer.Outcomes>((resolve: (outcome: Timer.Outcomes) => void): void => {
-
-      this.#nativeTimeout = setInterval((): void => {
-
-        if (this.mustStop) {
-          window.clearInterval(this.#nativeTimeout);
-          resolve(Timer.Outcomes.stopped);
-          return;
-        }
+    if (this.isActive) {
+      return;
+    }
 
 
-        this.#secondsLeft = this.#secondsLeft - 1;
+    this.#isActive = true;
 
-        if (this.#secondsLeft === 0) {
-          clearInterval(this.#nativeTimeout);
-          resolve(Timer.Outcomes.elapsed);
-        }
+    const promise: Promise<Timer.Outcomes> = new Promise<Timer.Outcomes>(
+      (resolve: (outcome: Timer.Outcomes) => void): void => {
 
-      }, secondsToMilliseconds(1));
-    });
+        this.#nativeTimeout = setInterval(
+
+          (): void => {
+
+            if (this.mustStop) {
+
+              this.#isActive = false;
+              window.clearInterval(this.#nativeTimeout);
+
+              resolve(Timer.Outcomes.stopped);
+
+              return;
+
+            }
+
+
+            this.#secondsLeft = this.#secondsLeft - 1;
+
+            if (this.#secondsLeft === 0) {
+
+              this.#isActive = false;
+              this.#secondsLeft = this.period__seconds;
+
+              clearInterval(this.#nativeTimeout);
+
+              resolve(Timer.Outcomes.elapsed);
+
+            }
+
+          },
+          secondsToMilliseconds(1)
+        );
+      }
+    );
 
     if (asynchronousCompletion === Timer.AsynchronousCompletions.promise) {
       return promise;
@@ -80,4 +104,46 @@ export default class NodeJS_Timer extends Timer {
           });
         });
   }
+
+
+  public resetAndRestart(
+    compoundParameter?: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.promise; }>
+  ): Promise<Timer.Outcomes>;
+
+  public resetAndRestart(
+    compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+  ): void;
+
+  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
+   * In this case, the function could return or not return the promise.
+   * If to make this function async, the return type signature will become invalid. */
+  public resetAndRestart(
+    {
+      asynchronousCompletion = Timer.AsynchronousCompletions.promise
+    }: {
+      asynchronousCompletion?: Timer.AsynchronousCompletions;
+    } | {
+      asynchronousCompletion: Timer.AsynchronousCompletions.callback;
+    } = {}
+    /* eslint-disable-next-line @typescript-eslint/no-invalid-void-type --
+    *  In this case function could return or not return the value depending on parameter. */
+  ): Promise<Timer.Outcomes> | void {
+
+    clearInterval(this.#nativeTimeout);
+    this.#isActive = false;
+    this.#secondsLeft = this.period__seconds;
+
+    if (asynchronousCompletion === Timer.AsynchronousCompletions.promise) {
+      return this.countDown({ asynchronousCompletion: Timer.AsynchronousCompletions.promise });
+    }
+
+
+    this.countDown({ asynchronousCompletion: Timer.AsynchronousCompletions.callback });
+
+  }
+
+  public get isActive(): boolean {
+    return this.#isActive;
+  }
+
 }

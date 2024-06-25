@@ -1,42 +1,44 @@
-import InvalidExternalDataErrorLocalization__English from "./InvalidExternalDataErrorLocalization.english";
+import invalidExternalDataErrorLocalization__english from "./InvalidExternalDataErrorLocalization.english";
 
 
 class InvalidExternalDataError extends Error {
 
   public static readonly NAME: string = "InvalidExternalDataError";
-  public static localization: InvalidExternalDataError.Localization = InvalidExternalDataErrorLocalization__English;
+
+  public static localization: InvalidExternalDataError.Localization = invalidExternalDataErrorLocalization__english;
 
 
-  public constructor(namedParameters: InvalidExternalDataError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: InvalidExternalDataError.ConstructorParameter) {
 
     super();
 
     this.name = InvalidExternalDataError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = InvalidExternalDataError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        InvalidExternalDataError.localization.generateDescription(compoundParameter);
+
   }
+
 }
 
 
 namespace InvalidExternalDataError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
+  export type ConstructorParameter = Localization.DescriptionTemplateVariables | Readonly<{ customMessage: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
+    export type DescriptionTemplateVariables = Readonly<{
       mentionToExpectedData: string;
       messageSpecificPart?: string;
     }>;
   }
+
 }
 
 

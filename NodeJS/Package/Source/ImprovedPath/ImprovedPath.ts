@@ -34,7 +34,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.joinPathSegments(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -78,7 +78,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -103,7 +103,7 @@ abstract class ImprovedPath {
         errorInstance: new InvalidParameterValueError({ parameterName: "namedParameters", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.computeRelativePath(namedParameters)",
-        wrappableError: error
+        innerError: error
       });
 
     }
@@ -184,44 +184,6 @@ abstract class ImprovedPath {
 
 
     return true;
-
-  }
-
-
-  public static extractFileNameWithExtensionFromPath(
-    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: false; }>
-  ): string | null;
-
-  public static extractFileNameWithExtensionFromPath(
-    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: true; }>
-  ): string;
-
-  public static extractFileNameWithExtensionFromPath(
-    namedParameters: Readonly<{ targetPath: string; mustThrowErrorIfLastPathSegmentHasNoDots: boolean; }>
-  ): string | null {
-
-    const fileNameWithExtension: string = Path.basename(namedParameters.targetPath);
-
-    if (fileNameWithExtension.includes(".")) {
-      return fileNameWithExtension;
-    }
-
-
-    if (namedParameters.mustThrowErrorIfLastPathSegmentHasNoDots) {
-
-      Logger.throwErrorAndLog({
-        errorInstance: new UnexpectedEventError(
-          `Contrary to expectations, the last segment of '${ namedParameters.targetPath }' does not look like the ` +
-          "file name with extension."
-        ),
-        title: UnexpectedEventError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.extractFileNameWithExtensionFromPath(namedParameters)"
-      });
-
-    }
-
-
-    return null;
 
   }
 
@@ -335,26 +297,6 @@ abstract class ImprovedPath {
 
 
     return compoundParameter.alwaysForwardSlashSeparators === true ? targetPath : Path.normalize(targetPath);
-
-  }
-
-
-  /* === File name extensions ======================================================================================= */
-  public static extractAllFileNameExtensions(
-    compoundParameter: Readonly<{ targetPath: string; withLeadingDots: boolean; }>
-  ): Array<string> {
-
-    const fileNameWithExtension: string | null = ImprovedPath.extractFileNameWithExtensionFromPath({
-      targetPath: compoundParameter.targetPath,
-      mustThrowErrorIfLastPathSegmentHasNoDots: false
-    });
-
-    if (isNull(fileNameWithExtension)) {
-      return [];
-    }
-
-
-    return splitString(fileNameWithExtension, ".").slice(1);
 
   }
 

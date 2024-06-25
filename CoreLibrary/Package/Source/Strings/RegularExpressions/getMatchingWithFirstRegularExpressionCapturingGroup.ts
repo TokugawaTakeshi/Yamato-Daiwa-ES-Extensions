@@ -43,7 +43,7 @@ export default function getMatchingWithFirstRegularExpressionCapturingGroup(
           "Contrary to expectations, the string:\n" +
           `${ sourceDataAndOptions.targetString }\n` +
           "has no matchings with regular expression:\n" +
-          `${ sourceDataAndOptions.regularExpression.toString() }`
+          sourceDataAndOptions.regularExpression.toString()
         ),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getMatchingWithFirstRegularExpressionCapturingGroup(sourceDataAndOptions)"
@@ -65,7 +65,7 @@ export default function getMatchingWithFirstRegularExpressionCapturingGroup(
             "Contrary to expectations, the string:\n" +
             `${ sourceDataAndOptions.targetString }\n` +
             "has more that one matching with regular expression:\n" +
-            `${ sourceDataAndOptions.regularExpression.toString() }`
+            sourceDataAndOptions.regularExpression.toString()
         ),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getMatchingWithFirstRegularExpressionCapturingGroup(sourceDataAndOptions)"

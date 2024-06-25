@@ -1,12 +1,12 @@
 import type DataSubmittingFailedError from "./DataSubmittingFailedError";
 
 
-const DataSubmittingFailedErrorLocalization__English: DataSubmittingFailedError.Localization = {
+const dataSubmittingFailedErrorLocalization__english: DataSubmittingFailedError.Localization = {
   defaultTitle: "Data submitting failure",
   generateDescription: (
-    namedParameters: DataSubmittingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `The error occurred during submitting of the data '${ namedParameters.mentionToData }'.`
+    { mentionToData }: DataSubmittingFailedError.Localization.DescriptionTemplateVariables
+  ): string => `The error occurred during submitting of the data "${ mentionToData }".`
 };
 
 
-export default DataSubmittingFailedErrorLocalization__English;
+export default dataSubmittingFailedErrorLocalization__english;

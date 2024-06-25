@@ -1,45 +1,49 @@
-import IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English from
+import incompatiblePropertiesInObjectTypeParameterErrorLocalization__english from
     "./IncompatiblePropertiesInObjectTypeParameterErrorLocalization.english";
 
 
 class IncompatiblePropertiesInObjectTypeParameterError extends Error {
 
   public static readonly NAME: string = "IncompatiblePropertiesError";
+
   public static localization: IncompatiblePropertiesInObjectTypeParameterError.Localization =
-      IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English;
+      incompatiblePropertiesInObjectTypeParameterErrorLocalization__english;
 
 
-  public constructor(namedParameters: IncompatiblePropertiesInObjectTypeParameterError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: IncompatiblePropertiesInObjectTypeParameterError.ConstructorParameter) {
 
     super();
 
     this.name = IncompatiblePropertiesInObjectTypeParameterError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
+    if ("customMessage" in compoundParameter) {
+      this.message = compoundParameter.customMessage;
     } else {
-      this.message = IncompatiblePropertiesInObjectTypeParameterError.localization.generateDescription(namedParameters);
+      this.message = IncompatiblePropertiesInObjectTypeParameterError.localization.generateDescription(compoundParameter);
     }
+
   }
+
 }
 
 
 namespace IncompatiblePropertiesInObjectTypeParameterError {
 
-  export type ConstructorNamedParameters = Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>;
+  export type ConstructorParameter = Localization.DescriptionTemplateVariables | Readonly<{ customMessage: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
+    export type DescriptionTemplateVariables = Readonly<{
       parameterName: string;
       conflictingPropertyName: string;
       incompatiblePropertiesNames: Array<string>;
     }>;
   }
+
 }
 
 

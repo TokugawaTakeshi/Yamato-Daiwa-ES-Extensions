@@ -2,8 +2,8 @@
 * There are too many numbers refers to month or day of week number in this class. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import DaysOfWeek from "../../ConstantsAndEnumerations/DateTime/DaysOfWeek";
-import type MonthsNames from "../../ConstantsAndEnumerations/DateTime/MonthsNames";
+import { DaysOfWeekNames } from "fundamental-constants";
+import type { MonthsNames } from "fundamental-constants";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
 import isString from "../../TypeGuards/Strings/isString";
@@ -29,7 +29,7 @@ class TimePoint {
   public readonly dayOfMonth: number;
   public readonly dayOfMonth__2Digits: string;
 
-  public readonly dayOfWeek: DaysOfWeek;
+  public readonly dayOfWeek: DaysOfWeekNames;
   public readonly dayOfWeekNumber__numerationFrom0AsSunday: number;
   public readonly dayOfWeekNumber__numerationFrom1AsSunday: number;
   public readonly dayOfWeekNumber__numerationFrom1AsSunday__2Digits: string;
@@ -96,13 +96,13 @@ class TimePoint {
         this.dayOfWeekNumber__numerationFrom1AsSunday.toString().padStart(2, "0");
 
     switch (this.dayOfWeekNumber__numerationFrom1AsSunday) {
-      case 1: { this.dayOfWeek = DaysOfWeek.sunday; break; }
-      case 2: { this.dayOfWeek = DaysOfWeek.monday; break; }
-      case 3: { this.dayOfWeek = DaysOfWeek.tuesday; break; }
-      case 4: { this.dayOfWeek = DaysOfWeek.wednesday; break; }
-      case 5: { this.dayOfWeek = DaysOfWeek.thursday; break; }
-      case 6: { this.dayOfWeek = DaysOfWeek.friday; break; }
-      default: { this.dayOfWeek = DaysOfWeek.saturday; }
+      case 1: { this.dayOfWeek = DaysOfWeekNames.sunday; break; }
+      case 2: { this.dayOfWeek = DaysOfWeekNames.monday; break; }
+      case 3: { this.dayOfWeek = DaysOfWeekNames.tuesday; break; }
+      case 4: { this.dayOfWeek = DaysOfWeekNames.wednesday; break; }
+      case 5: { this.dayOfWeek = DaysOfWeekNames.thursday; break; }
+      case 6: { this.dayOfWeek = DaysOfWeekNames.friday; break; }
+      default: { this.dayOfWeek = DaysOfWeekNames.saturday; }
     }
 
     this.hours__24Format = normalizedDateTime.getHours();

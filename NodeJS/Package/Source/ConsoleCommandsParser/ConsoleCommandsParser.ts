@@ -849,8 +849,8 @@ class ConsoleCommandsParser<
 
     if (isNonEmptyString(commandPhraseSpecification.description)) {
       textSegments.push(
-        `${ indentationCoordinator.insertIncrementedIndentWihtoutUpdatingOfIndentationMultiplier() }` +
-            `${ commandPhraseSpecification.description }`
+        indentationCoordinator.insertIncrementedIndentWihtoutUpdatingOfIndentationMultiplier() +
+            commandPhraseSpecification.description
       );
     }
 
@@ -925,12 +925,12 @@ class ConsoleCommandsParser<
     if ("required" in commandOptionSpecification) {
       textSegments.push(
         `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.isRequired }: ` +
-        `${ commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no }`
+          commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no
       );
     } else if ("defaultValue" in commandOptionSpecification) {
       textSegments.push(
         `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.defaultValue }: ` +
-        `${ stringifyAndFormatArbitraryValue(commandOptionSpecification.defaultValue) }`
+          stringifyAndFormatArbitraryValue(commandOptionSpecification.defaultValue)
       );
     }
 
@@ -948,11 +948,12 @@ class ConsoleCommandsParser<
           indentationCoordinator.incrementIndent();
 
           textSegments.push(
-            `${ 
-              commandOptionSpecification.allowedAlternatives.map(
-                (allowedAlternative: string): string => `\n${ indentationCoordinator.insertIndent() }◆ ${ allowedAlternative }`
-              ).join("") 
-            }`
+            commandOptionSpecification.allowedAlternatives.
+                map(
+                  (allowedAlternative: string): string =>
+                      `\n${ indentationCoordinator.insertIndent() }◆ ${ allowedAlternative }`
+                ).
+                join("")
           );
 
           indentationCoordinator.decrementIndent();

@@ -1,17 +1,22 @@
 import type IncompatiblePropertiesInObjectTypeParameterError from "./IncompatiblePropertiesInObjectTypeParameterError";
 
 
-const IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English:
+const incompatiblePropertiesInObjectTypeParameterErrorLocalization__english:
     IncompatiblePropertiesInObjectTypeParameterError.Localization =
 {
   defaultTitle: "Incompatible properties in object-type parameter",
   generateDescription: (
-    namedParameters: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateNamedParameters
-  ): string => `In parameter '${ namedParameters.parameterName }, property '${ namedParameters.conflictingPropertyName }' ` +
-      "is incompatible with properties:" +
-      `${ namedParameters.incompatiblePropertiesNames.reduce((accumulatingString: string, propertyName: string): string => 
-        `${ accumulatingString }\n- ${ propertyName }`, "") }`
+    {
+      parameterName,
+      conflictingPropertyName,
+      incompatiblePropertiesNames
+    }: IncompatiblePropertiesInObjectTypeParameterError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `In parameter "${ parameterName }", property "${ conflictingPropertyName }" is incompatible with properties:` +
+      incompatiblePropertiesNames.reduce(
+        (accumulatingString: string, propertyName: string): string => `${ accumulatingString }\n- ${ propertyName }`, ""
+      )
 };
 
 
-export default IncompatiblePropertiesInObjectTypeParameterErrorLocalization__English;
+export default incompatiblePropertiesInObjectTypeParameterErrorLocalization__english;

@@ -11,13 +11,13 @@
 <ArrayElement>(
   targetArray: ReadonlyArray<ArrayElement>,
   predicate: (arrayElement: ArrayElement) => boolean,
-  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMoreThan1: true; }>
+  options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
 ): ArrayElement
 ```
 
 * Returns the element matching with the `predicate` is such element is exactly one in `targetArray`.
 * If the element matching with the `predicate` is not presents or there are multiple matches with the predicate,
-  * error will be thrown if `mustThrowErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
+  * error will be thrown if `mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` option has been specified as `true`.
   * otherwise `null` will be returned
 
 ![IntelliJ IDEA Live Template](getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)
@@ -87,7 +87,7 @@ try {
   match = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
   );
   
 } catch (error: unknown) {
@@ -118,7 +118,7 @@ try {
   const match: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
   );
   
 } catch (error: unknown) {

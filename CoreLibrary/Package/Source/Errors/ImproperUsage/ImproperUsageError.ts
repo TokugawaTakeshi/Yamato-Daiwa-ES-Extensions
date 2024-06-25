@@ -1,10 +1,11 @@
-import ImproperUsageErrorLocalization__English from "./ImproperUsageErrorLocalization.english";
+import improperUsageErrorLocalization__english from "./ImproperUsageErrorLocalization.english";
 
 
 class ImproperUsageError extends Error {
 
   public static readonly NAME: string = "ImproperUsageError";
-  public static localization: ImproperUsageError.Localization = ImproperUsageErrorLocalization__English;
+
+  public static localization: ImproperUsageError.Localization = improperUsageErrorLocalization__english;
 
 
   public constructor(message: string) {
@@ -13,7 +14,9 @@ class ImproperUsageError extends Error {
 
     this.name = ImproperUsageError.NAME;
     this.message = message;
+
   }
+
 }
 
 

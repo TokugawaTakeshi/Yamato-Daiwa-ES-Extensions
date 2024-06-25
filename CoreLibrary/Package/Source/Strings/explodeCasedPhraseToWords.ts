@@ -40,16 +40,16 @@ export default function explodeCasedPhraseToWords(targetString: string): Array<s
     }
 
 
-    if (!/[a-zA-Z]/u.test(currentCharacter)) {
+    if (!(/[a-zA-Z]/u).test(currentCharacter)) {
       words.push(currentWord);
       continue;
     }
 
 
-    const isCurrentCharacterTheCapital: boolean = /[A-Z]/u.test(currentCharacter);
+    const isCurrentCharacterTheCapital: boolean = (/[A-Z]/u).test(currentCharacter);
 
     const previousCharacter: string | null = index > 1 ? characters[index - 1] : null;
-    const isPreviousCharacterTheLowerCase: boolean = isNotNull(previousCharacter) ? /[a-z]/u.test(previousCharacter) : false;
+    const isPreviousCharacterTheLowerCase: boolean = isNotNull(previousCharacter) ? (/[a-z]/u).test(previousCharacter) : false;
 
     /* Example
      *    ↓↓
@@ -62,7 +62,7 @@ export default function explodeCasedPhraseToWords(targetString: string): Array<s
 
 
     const nextCharacter: string | undefined = characters[index + 1];
-    const isNextCharacterTheLowerCase: boolean = isNotUndefined(nextCharacter) ? /[a-z]/u.test(nextCharacter) : false;
+    const isNextCharacterTheLowerCase: boolean = isNotUndefined(nextCharacter) ? (/[a-z]/u).test(nextCharacter) : false;
 
     /* Example
      *     ↓↓

@@ -1,10 +1,11 @@
-import AlgorithmMismatchErrorLocalization__English from "./AlgorithmMismatchErrorLocalization.english";
+import algorithmMismatchErrorLocalization__english from "./AlgorithmMismatchErrorLocalization.english";
 
 
 class AlgorithmMismatchError extends Error {
 
   public static readonly NAME: string = "AlgorithmMismatchError";
-  public static localization: AlgorithmMismatchError.Localization = AlgorithmMismatchErrorLocalization__English;
+
+  public static localization: AlgorithmMismatchError.Localization = algorithmMismatchErrorLocalization__english;
 
 
   public constructor(message: string) {
@@ -13,7 +14,9 @@ class AlgorithmMismatchError extends Error {
 
     this.name = AlgorithmMismatchError.NAME;
     this.message = message;
+
   }
+
 }
 
 

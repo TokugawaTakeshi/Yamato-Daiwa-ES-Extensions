@@ -18,13 +18,11 @@ class FileNotFoundError extends Error {
     this.message =
         "customMessage" in constructorParameter ?
             constructorParameter.customMessage :
-            `${ FileNotFoundError.localization.generateDescriptionCommonPart(constructorParameter) }` +
-                `${
-                  insertSubstring(
-                    constructorParameter.messageSpecificPart,
-                    { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
-                  )
-                }`;
+            FileNotFoundError.localization.generateDescriptionCommonPart(constructorParameter) +
+              insertSubstring(
+                constructorParameter.messageSpecificPart,
+                { modifier: (messageSpecificPart: string): string => ` ${ messageSpecificPart }` }
+              );
 
   }
 

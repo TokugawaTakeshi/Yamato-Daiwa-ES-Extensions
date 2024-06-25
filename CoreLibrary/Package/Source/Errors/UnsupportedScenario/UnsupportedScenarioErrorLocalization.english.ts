@@ -1,9 +1,9 @@
 import type UnsupportedScenarioError from "./UnsupportedScenarioError";
 
 
-const UnsupportedScenarioErrorLocalization__English: UnsupportedScenarioError.Localization = {
+const unsupportedScenarioErrorLocalization__english: UnsupportedScenarioError.Localization = {
   defaultTitle: "Unsupported scenario"
 };
 
 
-export default UnsupportedScenarioErrorLocalization__English;
+export default unsupportedScenarioErrorLocalization__english;

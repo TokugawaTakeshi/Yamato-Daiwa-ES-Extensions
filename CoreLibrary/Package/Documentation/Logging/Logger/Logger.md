@@ -83,7 +83,7 @@ type ThrownErrorLog<CustomError extends Error = Error> =
     }) &
     {
       occurrenceLocation: string;
-      wrappableError?: unknown;
+      innerError?: unknown;
     };
 
 type Log = {
@@ -104,7 +104,7 @@ try {
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
     title: UnexpectedEventError.localization.defaultTitle,
     occurrenceLocation: "className.methodName(parametersObject)",
-    wrappableError: error,
+    innerError: error,
     customBadgeText: "Exception",
     additionalData: {
       foo: null,

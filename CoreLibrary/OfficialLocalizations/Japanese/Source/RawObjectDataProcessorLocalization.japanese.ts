@@ -6,7 +6,7 @@ import {
 import Localization = RawObjectDataProcessor.Localization;
 
 
-const RawObjectDataProcessorLocalization__Japanese: Localization = {
+const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   errorMessageBasicTemplate(
     {
@@ -165,7 +165,7 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   },
 
   buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      missingRequiredKeys: Array<string>
+    missingRequiredKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "必須キーの未定義",
@@ -175,12 +175,12 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   },
 
   buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      requiredKeysAlternatives: Array<string>
+    requiredKeysAlternatives: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "選択式必須キーの未定義",
       specificMessagePart: "下記のいずれかの必須キーが定義されていない。" +
-          `presents.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
+          `\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
     };
   },
 
@@ -251,9 +251,15 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     };
   },
 
-  valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "許可されていない選択肢",
-    specificMessagePart: "この値は、許可されている選択肢の中に含まれていない。"
+  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
+    allowedAlternatives: ReadonlyArray<string>
+  ): Localization.TextDataForErrorMessagesBuilding {
+    return {
+      title: "許可されていない選択肢",
+      specificMessagePart:
+          "この値は、下記の許可されている選択肢の中に含まれていない。\n" +
+          `${ allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n") }`
+    };
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -349,4 +355,4 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
 };
 
 
-export default RawObjectDataProcessorLocalization__Japanese;
+export default rawObjectDataProcessorLocalization__japanese;

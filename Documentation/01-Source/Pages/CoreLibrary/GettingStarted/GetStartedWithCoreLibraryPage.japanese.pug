@@ -11,26 +11,20 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("利用開始");
-
-    HTML_PageMetaData = {
-      description:
-          "「Yamato Daiwa ECMAScript extensions」（略：「YDEE」）ライブラリを利用するには、「npm」パッケージマネージャーで" +
-          "「@yamato-daiwa/es-extensions」パッケージを導入する必要がある。",
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Getting Started"),
+        description:
+            "「Yamato Daiwa ECMAScript extensions」（略：「YDEE」）ライブラリを利用するには、「npm」パッケージマネージャーで" +
+              "「@yamato-daiwa/es-extensions」パッケージを導入する必要がある。"
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 

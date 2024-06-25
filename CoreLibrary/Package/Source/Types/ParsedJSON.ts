@@ -34,3 +34,6 @@ export type ReadonlyParsedJSON_NestedProperty =
     | ReadonlyParsedJSON_Object
     | ReadonlyParsedJSON_Array
     | undefined;
+
+
+export type PossiblyReadonlyParsedJSON = ParsedJSON | ReadonlyParsedJSON;

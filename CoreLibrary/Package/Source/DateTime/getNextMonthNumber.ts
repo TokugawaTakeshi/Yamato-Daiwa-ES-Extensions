@@ -1,5 +1,6 @@
-import type MonthsNames from "../ConstantsAndEnumerations/DateTime/MonthsNames";
-import MONTHS_PER_YEAR from "../ConstantsAndEnumerations/DateTime/MONTHS_PER_YEAR";
+import type { MonthsNames } from "fundamental-constants";
+import { MONTHS_COUNT_IN_YEAR } from "fundamental-constants";
+
 
 import getMonthNumberByName from "./getMonthNumberByName";
 
@@ -30,7 +31,7 @@ export default function getNextMonthNumber(
     });
   }
 
-  const nextMonthNumber__numerationFrom1: number = referenceMonthNumber__numerationFrom1 === MONTHS_PER_YEAR ?
+  const nextMonthNumber__numerationFrom1: number = referenceMonthNumber__numerationFrom1 === MONTHS_COUNT_IN_YEAR ?
       1 : referenceMonthNumber__numerationFrom1 + 1;
 
   return sourceData.firstMonthNumberInRelationToReturnableValue === 1 ?
