@@ -198,6 +198,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
     return workpiece;
   }
 
+
   let positionOfNewElement__numerationFrom0: number;
 
   if (isNonNegativeInteger(compoundParameter.addingToPosition__numerationFrom0)) {
@@ -218,10 +219,9 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
             "● \"addingToPosition__numerationFrom1\": must the the natual number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "addElementToArrayIfItIsNotPresentOtherwiseRemove(compoundParameter)"
+      occurrenceLocation: "addElementsToArrayIfTheyAreNotPresentOtherwiseRemove(compoundParameter)"
     });
   }
-
 
   workpiece.splice(positionOfNewElement__numerationFrom0, 0, ...newElements);
 
