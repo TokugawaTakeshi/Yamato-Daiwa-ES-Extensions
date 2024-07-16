@@ -1,7 +1,7 @@
-import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
+import Logger from "../Logging/Logger";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default function createArrayOfNaturalNumbers(
