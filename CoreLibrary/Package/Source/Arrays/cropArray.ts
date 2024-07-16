@@ -1,6 +1,7 @@
+import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../Logging/Logger";
-import { isNaturalNumber, isNonNegativeInteger } from "../index";
 
 
 export default function cropArray<ArrayElement>(
@@ -129,7 +130,7 @@ export default function cropArray<ArrayElement>(
         parameterNumber: 1,
         parameterName: "compoundParameter",
         messageSpecificPart:
-            `The specified last element number is ${ endingElementNumber__numerationFrom1 } (numeration from 0) while ` +
+            `The specified last element number is ${ endingElementNumber__numerationFrom1 } (numeration from 1) while ` +
               `the target array has only ${ targetArray.length } elements.` +
             "The error has been thrown because the \"mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange\" option " +
               "has been set to \"true\"."
