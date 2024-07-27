@@ -1,6 +1,5 @@
 import {
   Logger,
-  PoliteErrorsMessagesBuilder,
   DOM_ElementRetrievingFailedError,
   UnexpectedEventError
 } from "@yamato-daiwa/es-extensions";
@@ -19,9 +18,7 @@ export default function addInputEventHandler(
         )
       )
     ) &
-    {
-      handler: (inputEvent: InputEvent) => unknown;
-    }
+    { handler: (inputtedValue: string, event__notAlwaysInput: Event) => unknown; }
   >
 ): void {
 
@@ -79,33 +76,13 @@ export default function addInputEventHandler(
 
   for (const targetElement of targetElements) {
 
+    /* [ Theory ] The `event` is not always the instance of `InputEvent`
+     * https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/1174 */
     targetElement.addEventListener("input", (event: Event): void => {
 
-      if (!(event instanceof InputEvent)) {
-
-        Logger.logError({
-          errorType: UnexpectedEventError.NAME,
-          title: UnexpectedEventError.localization.defaultTitle,
-          description: PoliteErrorsMessagesBuilder.buildMessage({
-            technicalDetails:
-                "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"InputEvent\"",
-            politeExplanation:
-                "Using native addEventListener(\"input\") we did expected that the subtype of \"event\", " +
-                  "the first parameter of the callback, will be the instance of \"InputEvent\". " +
-                "The TypeScript types definitions does not provide the overload for each type of event, so the \"event\" " +
-                  "has been annotated just as \"Event\". " +
-                "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
-                  "combination of circumstances it is not such as."
-          }),
-          occurrenceLocation: "addLeftClickEventHandler(compoundParameter)"
-        });
-
-        return;
-
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+        compoundParameter.handler(event.target.value, event);
       }
-
-
-      compoundParameter.handler(event);
 
     });
 

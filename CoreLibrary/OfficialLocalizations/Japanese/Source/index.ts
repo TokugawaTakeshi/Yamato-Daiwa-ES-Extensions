@@ -60,3 +60,6 @@ export { unexpectedEventErrorLocalization__japanese } from
     "./Errors/UnexpectedEventErrorLocalization.japanese";
 export { unsupportedScenarioErrorLocalization__japanese } from
     "./Errors/UnsupportedScenarioErrorLocalization.japanese";
+
+/* === 関数 ========================================================================================================== */
+export { formatJapanesePhoneNumber } from "./Strings/formatJapanesePhoneNumber";

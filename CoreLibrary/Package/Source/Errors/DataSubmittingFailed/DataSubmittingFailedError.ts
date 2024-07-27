@@ -1,4 +1,6 @@
 import dataSubmittingFailedErrorLocalization__english from "./DataSubmittingFailedErrorLocalization.english";
+import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
 
 
 class DataSubmittingFailedError extends Error {
@@ -24,6 +26,14 @@ class DataSubmittingFailedError extends Error {
     this.typicalCause = compoundParameter.typicalCause;
     this.additionalData = compoundParameter.additionalData;
 
+  }
+
+
+  public toString(): string {
+    return [
+      super.toString(),
+        ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
+    ].join("\n");
   }
 
 }

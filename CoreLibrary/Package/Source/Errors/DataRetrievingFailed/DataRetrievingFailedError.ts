@@ -1,4 +1,6 @@
 import dataRetrievingFailedErrorLocalization__english from "./DataRetrievingFailedErrorLocalization.english";
+import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
 
 
 class DataRetrievingFailedError extends Error {
@@ -24,6 +26,14 @@ class DataRetrievingFailedError extends Error {
     this.typicalCause = compoundParameter.typicalCause;
     this.additionalData = compoundParameter.additionalData;
 
+  }
+
+
+  public toString(): string {
+    return [
+      super.toString(),
+        ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
+    ].join("\n");
   }
 
 }
