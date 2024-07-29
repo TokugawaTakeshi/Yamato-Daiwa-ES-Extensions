@@ -12,6 +12,7 @@ export { default as BrowserJS_Timer } from "./DateTime/BrowserJS_Timer";
 export { default as cloneDOM_Element } from "./DOM/cloneDOM_Element";
 export { default as createDOM_ElementFromHTML_Code } from "./DOM/createDOM_ElementFromHTML_Code";
 export { default as createHTML_CollectionFromHTML_Code } from "./DOM/createHTML_CollectionFromHTML_Code";
+export { default as extractAndValidateDatasetFromDOM_Element } from "./DOM/extractAndValidateDatasetFromDOM_Element";
 export { default as getExpectedToBeSingleDOM_Element } from "./DOM/getExpectedToBeSingleDOM_Element";
 export { default as getExpectedToBeSingleChildOfTemplateElement } from "./DOM/getExpectedToBeSingleChildOfTemplateElement";
 export { default as EventPropagationTypes } from "./EventsHandling/LeftClick/EventPropagationTypes";

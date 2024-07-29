@@ -64,7 +64,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ━━━ Facade methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Facade Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.Response<RawValidResponseData>> {
@@ -97,8 +97,8 @@ abstract class AJAX_Service {
   ): Promise<AJAX_Service.ResponseWithRawData>;
 
 
-  /* ━━━ Public instance methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  /* ─── Data retrieving ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ━━━ Public Instance Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Data Retrieving ──────────────────────────────────────────────────────────────────────────────────────────── */
   /** @throws InvalidConfigError */
   /** @throws DataRetrievingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
@@ -171,7 +171,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ─── Data submitting ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ─── Data Submitting ──────────────────────────────────────────────────────────────────────────────────────────── */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
   ): Promise<AJAX_Service.Response<RawValidResponseData>>;
@@ -421,14 +421,12 @@ namespace AJAX_Service {
     export type CompoundParameter =
         URI_PathRawDefinition &
         URI_QueryParametersDefinition &
-        Readonly<
-          {
-            HTTP_Method?: HTTP_Methods;
-            HTTP_Headers?: HTTP_Headers;
-            validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
-            mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-          }
-        >;
+        Readonly<{
+          HTTP_Method?: HTTP_Methods;
+          HTTP_Headers?: HTTP_Headers;
+          validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
+          mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+        }>;
   }
 
   export namespace DataSubmitting {
@@ -438,13 +436,13 @@ namespace AJAX_Service {
       export type CompoundParameter =
           URI_PathRawDefinition &
           URI_QueryParametersDefinition &
-          {
+          Readonly<{
             HTTP_Method?: HTTP_Methods;
             HTTP_Headers?: HTTP_Headers;
             requestData: Readonly<ReadonlyParsedJSON_Object>;
             validResponseDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
             mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-          };
+          }>;
 
     }
 
@@ -453,12 +451,12 @@ namespace AJAX_Service {
       export type CompoundParameter =
           URI_PathRawDefinition &
           URI_QueryParametersDefinition &
-          {
+          Readonly<{
             HTTP_Method?: HTTP_Methods;
             HTTP_Headers?: HTTP_Headers;
             requestData: Readonly<ReadonlyParsedJSON_Object>;
             mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-          };
+          }>;
 
     }
 

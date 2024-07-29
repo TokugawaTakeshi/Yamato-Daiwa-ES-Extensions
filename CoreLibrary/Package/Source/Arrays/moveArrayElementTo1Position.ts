@@ -39,7 +39,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
               "Target array must contain at least 2 elements while actually contains " +
                   `${ compoundParameter.targetArray.length }. ` +
               "This situation is being considered as an error when \"errorMustBeThrownIf.elementsCountIsLessThan2\" " +
-                "flag is set to \"true\"."
+                "flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "moveArrayElementTo1Position(compoundParameter)"
@@ -49,8 +49,8 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
 
     /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-    * When `mutably` option is falsy, it is being assumed that array is immutable only for this function but function
-    *   user could be able to be returned the mutable array. */
+    * When `mutably` option is falsy, it is being assumed that array is immutable only for this function but
+    *   once value returned it must be a mutable array. */
     return compoundParameter.targetArray as Array<ArrayElement>;
 
   }
@@ -75,7 +75,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
           messageSpecificPart:
               "Target element number is out of range. " +
               "This situation is being considered as an error when " +
-                  "\"errorMustBeThrownIf.targetElementNumberIsOutOfRange\" flag is set to \"true\"."
+                  "\"errorMustBeThrownIf.targetElementNumberIsOutOfRange\" flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "moveArrayElementTo1Position(compoundParameter)"
