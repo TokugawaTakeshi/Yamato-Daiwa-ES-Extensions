@@ -13,16 +13,20 @@ export default function addLeftClickEventHandler(
     (
       { targetElement: Element; } |
       (
-        { targetElement: Readonly<{ selector: string; }>; } &
-        (
-          { mustApplyToAllMatchingsWithSelector: true; } |
-          { mustIgnoreSubsequentMatchingsWithSelector: true; } |
-          { mustExpectExactlyOneMatchingWithSelector: true; }
-        )
+        {
+          targetElement: Readonly<
+            { selector: string; } &
+            (
+              { mustApplyToAllMatchingsWithSelector: true; } |
+              { mustIgnoreSubsequentMatchingsWithSelector: true; } |
+              { mustExpectExactlyOneMatchingWithSelector: true; }
+            )
+          >;
+        } &
+        { contextElement?: ParentNode | Readonly<{ selector: string; }>; }
       )
     ) &
     {
-      contextElement?: ParentNode | Readonly<{ selector: string; }>;
       handler: (leftClickEvent: MouseEvent) => unknown;
       mustInvokeBeforeChildren_sHandlers?: boolean;
       mustStopEventPropagation?: boolean;
@@ -39,18 +43,26 @@ export default function addLeftClickEventHandler(
   } else {
 
     let matchesWithTargetSelector: NodeListOf<Element> | ReadonlyArray<Element>;
+    let contextElement: ParentNode | Readonly<{ selector: string; }> | undefined;
 
-    if (isUndefined(compoundParameter.contextElement)) {
+    /* [ Theory ] From the viewpoint of JavaScript, this part is redundant, but TypeScript does not see from the type definitions
+    *     that if `targetElement` is not the instance of `Element`, the `contextElement` property could exist. */
+    if ("contextElement" in compoundParameter) {
+      contextElement = compoundParameter.contextElement;
+    }
+
+
+    if (isUndefined(contextElement)) {
 
       matchesWithTargetSelector = document.querySelectorAll(compoundParameter.targetElement.selector);
 
-    } else if ("selector" in compoundParameter.contextElement) {
+    } else if ("selector" in contextElement) {
 
-      matchesWithTargetSelector = [ getExpectedToBeSingleDOM_Element({ selector: compoundParameter.contextElement.selector }) ];
+      matchesWithTargetSelector = [ getExpectedToBeSingleDOM_Element({ selector: contextElement.selector }) ];
 
     } else {
 
-      matchesWithTargetSelector = compoundParameter.contextElement.querySelectorAll(compoundParameter.targetElement.selector);
+      matchesWithTargetSelector = contextElement.querySelectorAll(compoundParameter.targetElement.selector);
 
     }
 
