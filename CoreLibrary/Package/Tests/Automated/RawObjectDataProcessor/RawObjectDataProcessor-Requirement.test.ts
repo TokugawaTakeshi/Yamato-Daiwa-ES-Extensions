@@ -1,9 +1,9 @@
 import {
   RawObjectDataProcessor,
   undefinedToEmptyArray,
-  rawObjectDataProcessorLocalization__english
+  rawObjectDataProcessorLocalization__english,
+  type ArbitraryObject
 } from "../../../Source";
-import type { ArbitraryObject } from "../../../Source";
 import { deepEqual, notDeepEqual, strictEqual } from "assert";
 
 

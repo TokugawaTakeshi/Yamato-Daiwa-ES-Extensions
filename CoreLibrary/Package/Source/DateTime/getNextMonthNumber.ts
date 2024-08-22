@@ -1,5 +1,4 @@
-import type { MonthsNames } from "fundamental-constants";
-import { MONTHS_COUNT_IN_YEAR } from "fundamental-constants";
+import { MONTHS_COUNT_IN_YEAR, type MonthsNames } from "fundamental-constants";
 
 
 import getMonthNumberByName from "./getMonthNumberByName";

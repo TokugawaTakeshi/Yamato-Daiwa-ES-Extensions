@@ -2,8 +2,7 @@
 * There are too many numbers refers to month or day of week number in this class. */
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import { DaysOfWeekNames } from "fundamental-constants";
-import type { MonthsNames } from "fundamental-constants";
+import { DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
 
 import isNumber from "../../TypeGuards/Numbers/isNumber";
 import isString from "../../TypeGuards/Strings/isString";
@@ -12,12 +11,8 @@ import getMonthNameByNumber from "../getMonthNameByNumber";
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
-import TimePointLocalization__English from "./TimePointLocalization__English";
-
 
 class TimePoint {
-
-  private static localization: TimePoint.Localization = TimePointLocalization__English;
 
   public readonly year: number;
 
@@ -51,11 +46,6 @@ class TimePoint {
   public readonly nativeDateObject: Date;
 
 
-  public static setLocalization(localization: TimePoint.Localization): void {
-    TimePoint.localization = localization;
-  }
-
-
   public constructor(rawDateTime: number | string | Date) {
 
     let normalizedDateTime: Date;
@@ -67,7 +57,9 @@ class TimePoint {
       if (normalizedDateTime.toString() === "Invalid Date") {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidParameterValueError({
-            customMessage: TimePoint.localization.errors.invalidRawDateTime
+            customMessage:
+                "If the parameter of TimePoint's constructor is not the Date instance, it must the the valid " +
+                  "ISO 8601 string or amount of milliseconds elapsed since the UNIX epoch."
           }),
           title: InvalidParameterValueError.localization.defaultTitle,
           occurrenceLocation: "TimePoint.constructor(rawDateTime)"

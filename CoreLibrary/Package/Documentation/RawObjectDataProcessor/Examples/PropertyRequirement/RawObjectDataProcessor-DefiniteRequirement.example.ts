@@ -32,9 +32,9 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
 if (processingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
-    title: InvalidExternalDataError.DEFAULT_TITLE,
+    title: InvalidExternalDataError.localization.defaultTitle,
     description: "The 'sample' is invalid.\n" +
-        `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
+        RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages),
     occurrenceLocation: "Top-level scope"
   });
 }

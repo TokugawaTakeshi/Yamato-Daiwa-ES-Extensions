@@ -1,5 +1,3 @@
-/* eslint-disable @stylistic/array-element-newline */
-
 import Assert from "assert";
 import { describe } from "mocha";
 import { CalendarBuilder } from "../../../Source";

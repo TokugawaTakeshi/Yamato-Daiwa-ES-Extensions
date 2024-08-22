@@ -1,5 +1,4 @@
-import { DAYS_COUNT_IN_WEEK, DaysOfWeekNames } from "fundamental-constants";
-import type { MonthsNames } from "fundamental-constants";
+import { DAYS_COUNT_IN_WEEK, DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
 
 import getDaysCountInSpecificMonth from "./getDaysCountInSpecificMonth";
 import getYearOfPreviousMonth from "./getYearOfPreviousMonth";

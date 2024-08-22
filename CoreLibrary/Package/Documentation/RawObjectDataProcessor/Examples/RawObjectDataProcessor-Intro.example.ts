@@ -38,9 +38,9 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
 if (processingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
-    title: InvalidExternalDataError.DEFAULT_TITLE,
+    title: InvalidExternalDataError.localization.defaultTitle,
     description: "The raw data is invalid:" +
-        `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
+        RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages),
     occurrenceLocation: "upper scope"
   });
 }

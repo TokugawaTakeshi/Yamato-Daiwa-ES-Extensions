@@ -1,5 +1,4 @@
-import { removeArrayElementsByPredicates } from "../../../Source";
-import type { RemovingArrayElementsByPredicatesOperation } from "../../../Source";
+import { removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from "../../../Source";
 import Assert from "assert";
 
 

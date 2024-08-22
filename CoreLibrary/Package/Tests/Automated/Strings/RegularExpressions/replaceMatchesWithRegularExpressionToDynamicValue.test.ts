@@ -1,5 +1,7 @@
-import type { ReplacingOfMatchesWithRegularExpressionToDynamicValue } from "../../../../Source";
-import { replaceMatchesWithRegularExpressionToDynamicValue } from "../../../../Source";
+import {
+  replaceMatchesWithRegularExpressionToDynamicValue,
+  type ReplacingOfMatchesWithRegularExpressionToDynamicValue
+} from "../../../../Source";
 import Assert from "assert";
 
 

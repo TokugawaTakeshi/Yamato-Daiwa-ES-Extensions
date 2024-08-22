@@ -1,4 +1,4 @@
-import EventPropagationTypes from "./EventPropagationTypes";
+import EventPropagationTypes from "../EventPropagationTypes";
 
 
 class LeftClickOutOfElementEventListener {

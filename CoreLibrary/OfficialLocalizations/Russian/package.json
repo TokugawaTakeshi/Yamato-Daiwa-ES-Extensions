@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.7.0",
+  "version": "1.8.0-alpha.0",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -27,14 +27,13 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "~1.7.0"
+    "@yamato-daiwa/es-extensions": "1.8.0-alpha.0"
   },
   "devDependencies": {
-    "@types/mocha": "10.0.7",
-    "@types/node": "20.14.12",
-    "@yamato-daiwa/es-extensions": "1.7.0",
-    "@yamato-daiwa/style_guides": "0.2.11",
-    "mocha": "10.7.0",
+    "@types/node": "22.5.5",
+    "@yamato-daiwa/es-extensions": "../../Package",
+    "@yamato-daiwa/style_guides": "0.3.0-alpha.3",
+    "mocha": "10.7.3",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
@@ -43,6 +42,6 @@
     "Rebuild Distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
     "Lint": "eslint Source",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
-    "Rebuild distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
+    "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   }
 }

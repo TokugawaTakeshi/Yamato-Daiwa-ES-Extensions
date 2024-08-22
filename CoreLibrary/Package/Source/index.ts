@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.7
+ * @yamato-daiwa/es-extensions v1.8
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
@@ -91,6 +91,7 @@ export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNu
 export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
 export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
+export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
 export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
 export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
 export { default as TimePoint } from "./DateTime/TimePoint/TimePoint";
@@ -174,6 +175,10 @@ export { default as unsupportedScenarioErrorLocalization__english } from
 
 /* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
+
+
+/* ━━━ Linear Algebra ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+export { default as Matrix } from "./LinearAlgebra/Matrix";
 
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */

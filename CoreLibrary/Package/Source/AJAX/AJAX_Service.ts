@@ -1,8 +1,3 @@
-/* eslint-disable id-denylist --
- * The "id-denylist" is not unsolicited for object properties, but the there is not API allowing to configure this rule
- *   selectively.
- * https://github.com/eslint/eslint/issues/15504 */
-
 import type { PossiblyReadonlyParsedJSON, ReadonlyParsedJSON, ReadonlyParsedJSON_Object } from "../Types/ParsedJSON";
 import HTTP_Methods from "../ConstantsAndEnumerations/HTTP/HTTP_Methods";
 
@@ -66,35 +61,46 @@ abstract class AJAX_Service {
 
   /* ━━━ Facade Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataRetrieving.CompoundParameter
-  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
+    compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
     return AJAX_Service.getExpectedToBeInitializedImplementation().retrieveData(compoundParameter);
   }
 
 
   public static async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<AJAX_Service.Response<RawValidResponseData>>;
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
 
   public static async submitData(
-    compoundParameter: AJAX_Service.DataSubmitting.WithoutExpectedResponseData.CompoundParameter
-  ): Promise<AJAX_Service.Response>;
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse>;
 
   public static async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
     return AJAX_Service.getExpectedToBeInitializedImplementation().submitData(compoundParameter);
   }
 
 
+  public static async retrieveText(
+    compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
+  ): Promise<AJAX_Service.TextDataResponse> {
+    return AJAX_Service.getExpectedToBeInitializedImplementation().retrieveText(compoundParameter);
+  }
+
+
   /* ━━━ Protected abstract methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  protected abstract retrieveResponseWithRawData(
-    compoundParameter: AJAX_Service.RawDataRetrieving.CompoundParameter
-  ): Promise<AJAX_Service.ResponseWithRawData>;
+  protected abstract retrieveResponseWithRawObjectData(
+    compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
+  ): Promise<AJAX_Service.RawObjectDataResponse>;
 
   protected abstract submitAndGetRawResponseDataIfAvailable(
-    compoundParameter: AJAX_Service.GeneralizedDataSubmitting.CompoundParameter
-  ): Promise<AJAX_Service.ResponseWithRawData>;
+    compoundParameter: AJAX_Service.GeneralizedObjectDataSubmitting.CompoundParameter
+  ): Promise<AJAX_Service.RawObjectDataResponse>;
+
+  protected abstract retrieveResponseWithTextData(
+    compoundParameter: AJAX_Service.TextDataRetrieving.NormalizedCompoundParameter
+  ): Promise<AJAX_Service.TextDataResponse>;
 
 
   /* ━━━ Public Instance Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -104,14 +110,14 @@ abstract class AJAX_Service {
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws InvalidExternalDataError */
   public async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataRetrieving.CompoundParameter
-  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
+    compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
 
-    let responseWithRawData: AJAX_Service.ResponseWithRawData;
+    let rawObjectDataResponse: AJAX_Service.RawObjectDataResponse;
 
     try {
 
-      responseWithRawData = await this.retrieveResponseWithRawData({
+      rawObjectDataResponse = await this.retrieveResponseWithRawObjectData({
         URI: this.normalizeURI(compoundParameter),
         HTTP_Method: compoundParameter.HTTP_Method ?? HTTP_Methods.get,
         HTTP_Headers: compoundParameter.HTTP_Headers ?? {},
@@ -133,68 +139,35 @@ abstract class AJAX_Service {
     }
 
 
-    if (responseWithRawData.isSuccessful) {
-
-      const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
-          RawObjectDataProcessor.process(responseWithRawData.data, compoundParameter.validResponseDataSpecification);
-
-      if (responseRawDataProcessingResult.rawDataIsInvalid) {
-        Logger.throwErrorAndLog({
-          errorInstance: new InvalidExternalDataError({
-            mentionToExpectedData: "HTTP_ResponseData",
-            messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
-                responseRawDataProcessingResult.validationErrorsMessages
-            )
-          }),
-          title: InvalidExternalDataError.localization.defaultTitle,
-          occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
-        });
-      }
-
-      return {
-        isSuccessful: true,
-        data: responseRawDataProcessingResult.processedData,
-        HTTP_Headers: responseWithRawData.HTTP_Headers,
-        HTTP_Status: responseWithRawData.HTTP_Status
-      };
-
-    }
-
-
-    return {
-      isSuccessful: false,
-      data: responseWithRawData.data,
-      HTTP_Headers: responseWithRawData.HTTP_Headers,
-      HTTP_Status: responseWithRawData.HTTP_Status
-    };
+    return AJAX_Service.normalizeRawObjectDataResponse(
+      rawObjectDataResponse, compoundParameter.validResponseDataSpecification
+    );
 
   }
 
 
   /* ─── Data Submitting ──────────────────────────────────────────────────────────────────────────────────────────── */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-  ): Promise<AJAX_Service.Response<RawValidResponseData>>;
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
 
   public async submitData(
-    compoundParameter: AJAX_Service.DataSubmitting.WithoutExpectedResponseData.CompoundParameter
-  ): Promise<AJAX_Service.Response>;
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse>;
 
   /** @throws InvalidConfigError */
   /** @throws DataSubmittingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws InvalidExternalDataError */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-    compoundParameter: AJAX_Service.DataSubmitting.WithExpectedResponseData.CompoundParameter
-    /* eslint-disable-next-line @typescript-eslint/no-invalid-void-type --
-    * Depending on the overload, the promise payload could be or not to be. */
-  ): Promise<AJAX_Service.Response<RawValidResponseData>> {
+    compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+  ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
 
-    let responseWithRawData: AJAX_Service.ResponseWithRawData;
+    let rawObjectDataResponse: AJAX_Service.RawObjectDataResponse;
 
     try {
 
-      responseWithRawData = await this.submitAndGetRawResponseDataIfAvailable({
+      rawObjectDataResponse = await this.submitAndGetRawResponseDataIfAvailable({
         URI: this.normalizeURI(compoundParameter),
         HTTP_Method: compoundParameter.HTTP_Method ?? HTTP_Methods.get,
         HTTP_Headers: compoundParameter.HTTP_Headers ?? {},
@@ -219,64 +192,48 @@ abstract class AJAX_Service {
 
 
     if (isUndefined(compoundParameter.validResponseDataSpecification)) {
-      return responseWithRawData.isSuccessful ?
+      return rawObjectDataResponse.isSuccessful ?
           {
             isSuccessful: true,
             /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
             * TypeScript could not detect that when `compoundParameter.validResponseDataSpecification` is undefined,
             *   the `RawValidResponseData` is `PossiblyReadonlyParsedJSON` without additional constraints. */
-            data: responseWithRawData.data as RawValidResponseData,
-            HTTP_Headers: responseWithRawData.HTTP_Headers,
-            HTTP_Status: responseWithRawData.HTTP_Status
+            data: rawObjectDataResponse.data as RawValidResponseData,
+            HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
+            HTTP_Status: rawObjectDataResponse.HTTP_Status
           } :
           {
             isSuccessful: false,
-            data: responseWithRawData.data,
-            HTTP_Headers: responseWithRawData.HTTP_Headers,
-            HTTP_Status: responseWithRawData.HTTP_Status
+            data: rawObjectDataResponse.data,
+            HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
+            HTTP_Status: rawObjectDataResponse.HTTP_Status
           };
     }
 
 
-    if (responseWithRawData.isSuccessful) {
-
-      const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
-          RawObjectDataProcessor.process(responseWithRawData.data, compoundParameter.validResponseDataSpecification);
-
-      if (responseRawDataProcessingResult.rawDataIsInvalid) {
-        Logger.throwErrorAndLog({
-          errorInstance: new InvalidExternalDataError({
-            mentionToExpectedData: "HTTP_ResponseData",
-            messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
-                responseRawDataProcessingResult.validationErrorsMessages
-            )
-          }),
-          title: InvalidExternalDataError.localization.defaultTitle,
-          occurrenceLocation: "AJAX_Service.retrieveData(compoundParameter)"
-        });
-      }
-
-      return {
-        isSuccessful: true,
-        data: responseRawDataProcessingResult.processedData,
-        HTTP_Headers: responseWithRawData.HTTP_Headers,
-        HTTP_Status: responseWithRawData.HTTP_Status
-      };
-
-    }
-
-
-    return {
-      isSuccessful: false,
-      data: responseWithRawData.data,
-      HTTP_Headers: responseWithRawData.HTTP_Headers,
-      HTTP_Status: responseWithRawData.HTTP_Status
-    };
+    return AJAX_Service.normalizeRawObjectDataResponse(
+      rawObjectDataResponse, compoundParameter.validResponseDataSpecification
+    );
 
   }
 
 
-  /* ━━━ Routines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Text or HTML Retrieving ──────────────────────────────────────────────────────────────────────────────────── */
+  public async retrieveText(
+    compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
+  ): Promise<AJAX_Service.TextDataResponse> {
+    return this.retrieveResponseWithTextData({
+      URI: this.normalizeURI(compoundParameter),
+      HTTP_Method: compoundParameter.HTTP_Method ?? HTTP_Methods.get,
+      HTTP_Headers: compoundParameter.HTTP_Headers ?? {},
+      ...isNotUndefined(compoundParameter.requestData) ? { requestData: compoundParameter.requestData } : null,
+      mustIncludeCookiesAndAuthenticationHeadersToRequest:
+          compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest === true
+    });
+  }
+
+
+  /* ━━━ Routines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /** @throws InvalidConfigError */
   protected normalizeURI(
     compoundParameter: AJAX_Service.URI_PathRawDefinition & AJAX_Service.URI_QueryParametersDefinition
@@ -350,6 +307,49 @@ abstract class AJAX_Service {
 
   }
 
+  protected static normalizeRawObjectDataResponse<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+    rawObjectDataResponse: AJAX_Service.RawObjectDataResponse,
+    validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>
+  ): AJAX_Service.ObjectDataResponse<RawValidResponseData> {
+
+    if (rawObjectDataResponse.isSuccessful) {
+
+      const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
+          RawObjectDataProcessor.process(rawObjectDataResponse.data, validResponseDataSpecification);
+
+      if (responseRawDataProcessingResult.rawDataIsInvalid) {
+        Logger.throwErrorAndLog({
+          errorInstance: new InvalidExternalDataError({
+            mentionToExpectedData: "HTTP_ResponseData",
+            messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
+                responseRawDataProcessingResult.validationErrorsMessages
+            )
+          }),
+          title: InvalidExternalDataError.localization.defaultTitle,
+          occurrenceLocation:
+              "AJAX_Service.normalizeRawObjectDataResponse(rawObjectDataResponse, validResponseDataSpecification)"
+        });
+      }
+
+      return {
+        isSuccessful: true,
+        data: responseRawDataProcessingResult.processedData,
+        HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
+        HTTP_Status: rawObjectDataResponse.HTTP_Status
+      };
+
+    }
+
+
+    return {
+      isSuccessful: false,
+      data: rawObjectDataResponse.data,
+      HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
+      HTTP_Status: rawObjectDataResponse.HTTP_Status
+    };
+
+  }
+
   protected static getExpectedToBeInitializedImplementation(): AJAX_Service {
 
     if (isNull(AJAX_Service.implementation)) {
@@ -373,6 +373,7 @@ abstract class AJAX_Service {
 
 namespace AJAX_Service {
 
+  /* ━━━ Common ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   export type URI_PathRawDefinition = Readonly<
     {
       alternatingURI_PathPart: string;
@@ -392,32 +393,34 @@ namespace AJAX_Service {
   export type HTTP_Headers = Readonly<{ [headerName: string]: string; }>;
 
 
-  export type ResponseWithRawData = Readonly<{
+  /* ━━━ Object Data ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  export type RawObjectDataResponse = Readonly<{
     isSuccessful: boolean;
     data: PossiblyReadonlyParsedJSON;
     HTTP_Status: number;
     HTTP_Headers: HTTP_Headers;
   }>;
 
-  export type Response<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
-    Readonly<
-      (
+  export type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
+      Readonly<
+        (
+          {
+            isSuccessful: true;
+            data: ResponseData;
+          } |
+          {
+            isSuccessful: false;
+            data: PossiblyReadonlyParsedJSON;
+          }
+        ) &
         {
-          isSuccessful: true;
-          data: ResponseData;
-        } |
-        {
-          isSuccessful: false;
-          data: PossiblyReadonlyParsedJSON;
+          HTTP_Status: number;
+          HTTP_Headers: HTTP_Headers;
         }
-      ) &
-      {
-        HTTP_Status: number;
-        HTTP_Headers: HTTP_Headers;
-      }
-    >;
+      >;
 
-  export namespace DataRetrieving {
+  export namespace ObjectDataRetrieving {
+
     export type CompoundParameter =
         URI_PathRawDefinition &
         URI_QueryParametersDefinition &
@@ -427,9 +430,10 @@ namespace AJAX_Service {
           validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
           mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
         }>;
+
   }
 
-  export namespace DataSubmitting {
+  export namespace ObjectDataSubmitting {
 
     export namespace WithExpectedResponseData {
 
@@ -462,29 +466,71 @@ namespace AJAX_Service {
 
   }
 
-  export namespace RawDataRetrieving {
+  export namespace RawObjectDataRetrieving {
 
     export type CompoundParameter = Readonly<{
       URI: string;
-      HTTP_Headers: HTTP_Headers;
       HTTP_Method: HTTP_Methods;
+      HTTP_Headers: HTTP_Headers;
       mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
     }>;
 
   }
 
-  export namespace GeneralizedDataSubmitting {
+  export namespace GeneralizedObjectDataSubmitting {
 
     export type CompoundParameter = Readonly<{
       URI: string;
-      HTTP_Headers: HTTP_Headers;
       HTTP_Method: HTTP_Methods;
+      HTTP_Headers: HTTP_Headers;
       requestData: ReadonlyParsedJSON;
       mustExpectResponseData: boolean;
       mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
     }>;
 
   }
+
+
+  /* ━━━ Text Data (Including HTML and Other Code) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  export namespace TextDataRetrieving {
+
+    export type CompoundParameter =
+        URI_PathRawDefinition &
+        URI_QueryParametersDefinition &
+        Readonly<{
+          HTTP_Method?: HTTP_Methods;
+          HTTP_Headers?: HTTP_Headers;
+          requestData?: ReadonlyParsedJSON_Object;
+          mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+        }>;
+
+    export type NormalizedCompoundParameter = Readonly<{
+      URI: string;
+      HTTP_Method: HTTP_Methods;
+      HTTP_Headers: HTTP_Headers;
+      requestData?: ReadonlyParsedJSON_Object;
+      mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
+    }>;
+
+  }
+
+  export type TextDataResponse = Readonly<
+    (
+      {
+        isSuccessful: true;
+        text: string;
+      } |
+      {
+        isSuccessful: false;
+        data: PossiblyReadonlyParsedJSON;
+      }
+    ) &
+    {
+      HTTP_Status: number;
+      HTTP_Headers: HTTP_Headers;
+    }
+  >;
+
 
 }
 

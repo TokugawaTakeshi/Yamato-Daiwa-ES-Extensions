@@ -2164,9 +2164,6 @@ namespace RawObjectDataProcessor {
 
   export enum ValuesTypesIDs {
     number = "NUMBER",
-    /* eslint-disable-next-line id-denylist --
-     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties.
-     *  */
     string = "STRING",
     boolean = "BOOLEAN",
     fixedKeyAndValuePairsObject = "FIXED_KEY_AND_VALUE_PAIRS_OBJECT",
@@ -2256,8 +2253,6 @@ namespace RawObjectDataProcessor {
 
   /* --- String value/property -------------------------------------------------------------------------------------- */
   export type StringValueSpecification = ValueSpecification__CommonParameters & {
-    /* eslint-disable-next-line id-denylist --
-     * This rule is not desired for object keys, but there is no option allows to disable it for the object properties. */
     readonly type: ValuesTypesIDs.string | StringConstructor;
     readonly allowedAlternatives?: ReadonlyArray<string> | ReadonlyArray<Readonly<{ key: string; value: string; }>>;
     readonly minimalCharactersCount?: number;

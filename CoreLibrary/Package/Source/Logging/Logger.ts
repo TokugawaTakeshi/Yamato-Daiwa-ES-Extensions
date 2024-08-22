@@ -82,7 +82,7 @@ abstract class Logger {
 
       errorLog.errorInstance.message = errorMessage;
 
-      /* eslint-disable-next-line @typescript-eslint/no-throw-literal --
+      /* eslint-disable-next-line @typescript-eslint/only-throw-error --
       *  In this case the `errorInstance` is the instance of `Error` or its inheritor.
       *  Although `@typescript-eslint` considers the throwing of it as the violation, this scenario has not been mentioned
       *    in incorrect code example of `no-throw-literal` rule documentation.

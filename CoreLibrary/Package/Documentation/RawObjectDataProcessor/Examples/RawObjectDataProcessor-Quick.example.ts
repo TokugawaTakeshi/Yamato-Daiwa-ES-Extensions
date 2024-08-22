@@ -80,9 +80,9 @@ const dataSample1ProcessingResult: RawObjectDataProcessor.ProcessingResult<Valid
 if (dataSample1ProcessingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
-    title: InvalidExternalDataError.DEFAULT_TITLE,
+    title: InvalidExternalDataError.localization.defaultTitle,
     description: "The dataSample1 is invalid:" +
-        `${RawObjectDataProcessor.formatValidationErrorsList(dataSample1ProcessingResult.validationErrorsMessages)}`,
+        RawObjectDataProcessor.formatValidationErrorsList(dataSample1ProcessingResult.validationErrorsMessages),
     occurrenceLocation: "upper scope"
   });
 } else {
@@ -99,9 +99,9 @@ const dataSample2ProcessingResult: RawObjectDataProcessor.ProcessingResult<Valid
 if (dataSample2ProcessingResult.rawDataIsInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
-    title: InvalidExternalDataError.DEFAULT_TITLE,
+    title: InvalidExternalDataError.localization.defaultTitle,
     description: "The dataSample2 is invalid:" +
-        `${RawObjectDataProcessor.formatValidationErrorsList(dataSample2ProcessingResult.validationErrorsMessages)}`,
+        RawObjectDataProcessor.formatValidationErrorsList(dataSample2ProcessingResult.validationErrorsMessages),
     occurrenceLocation: "upper scope"
   });
 } else {

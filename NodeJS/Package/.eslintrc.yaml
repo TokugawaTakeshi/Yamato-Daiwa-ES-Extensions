@@ -1,5 +1,0 @@
-extends: ./node_modules/@yamato-daiwa/style_guides/ECMAScript.js
-
-parserOptions:
-
-  project: "./tsconfig.test.json"

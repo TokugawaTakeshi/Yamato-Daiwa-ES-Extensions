@@ -17,7 +17,7 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
     targetDOM_Element: Element;
     targetDOM_ElementNameOrSelectorForLogging: string;
     validDataSpecification: RawObjectDataProcessor.PropertiesSpecification;
-    mustDeleteMentionedDataAttributesOnceExtracted: boolean;
+    mustDeleteMentionedDataAttributesOnceExtracted?: boolean;
   }>
 ): ExtractedDataset {
 

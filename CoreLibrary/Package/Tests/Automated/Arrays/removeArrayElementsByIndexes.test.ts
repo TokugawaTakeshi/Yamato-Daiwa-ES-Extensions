@@ -1,5 +1,4 @@
-import { removeArrayElementsByIndexes } from "../../../Source";
-import type { RemovingArrayElementsByIndexesOperation } from "../../../Source";
+import { removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from "../../../Source";
 
 import Assert from "assert";
 
