@@ -1,1 +1,8 @@
-rootProject.name = "yamato_daiwa-es_extensions-intellij_platform_plugin"
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+
+rootProject.name = "YDEE - IntelliJ IDEA Plugin"

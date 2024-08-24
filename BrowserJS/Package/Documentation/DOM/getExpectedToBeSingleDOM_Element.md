@@ -5,20 +5,20 @@
 Retrieves the element corresponding to specified selector if this element presents in single instance inside specific context.
 
 ```
-(
+export default function getExpectedToBeSingleDOM_Element(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
   }>
-): Element
+): Element;
 
-<DOM_ElementSubtype extends Element>(
+export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<{
     selector: string;
-    context?: Element | Document;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }>
-): DOM_ElementSubtype
+): DOM_ElementSubtype;
 ```
 
 

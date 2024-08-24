@@ -1,13 +1,17 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
 
-    <name>Yamato-Daiwa ES-Extensions</name>
-    <vendor url="https://github.com/TokugawaTakeshi" email="tokugawa.takesi@gmail.com">Tokugawa Takeshi</vendor>
+  <name>Yamato-Daiwa ES-Extensions</name>
+  <vendor url="https://github.com/TokugawaTakeshi" email="tokugawa.takesi@gmail.com">Tokugawa Takeshi</vendor>
 
-    <!-- Product and plugin compatibility requirements -->
-    <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-    <depends>com.intellij.modules.platform</depends>
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <defaultLiveTemplates file="/liveTemplates/Yamato Daiwa ES Extensions - TypeScript.xml"/>
-    </extensions>
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <defaultLiveTemplates file="/liveTemplates/Yamato Daiwa ES Extensions - TypeScript.xml"/>
+  </extensions>
+
 </idea-plugin>

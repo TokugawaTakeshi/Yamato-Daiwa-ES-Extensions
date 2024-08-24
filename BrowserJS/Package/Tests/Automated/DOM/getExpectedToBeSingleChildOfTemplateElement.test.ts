@@ -39,7 +39,7 @@ describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
       Assert.strictEqual(
         getExpectedToBeSingleChildOfTemplateElement({
           templateElementSelector: "#CardTemplate",
-          context: sampleDOM
+          contextElement: sampleDOM
         }).className,
         "Card"
       );

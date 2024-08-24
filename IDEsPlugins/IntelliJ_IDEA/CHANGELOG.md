@@ -2,6 +2,12 @@
 
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
+## [0.0.8]
+
+### Changed
+
+* Support IntelliJ IDEA platform until **2024.2.1**
+
 
 ## [0.0.8]
 

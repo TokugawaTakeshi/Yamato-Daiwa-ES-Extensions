@@ -32,7 +32,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -94,6 +94,70 @@ block append SpecificContent
         #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] был #[+Keyword--YDID переименован] в
         #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
       Аналогичные изменения были применены и к другим #[+Term--YDID объектам] локализациям.
+
+
+    h2.Article-Heading2 Браузерный JavaScript (@yamato-daiwa/es-extensions-browserjs)
+
+    h3.Article-Heading3 Критические изменения
+
+    h4.Article-Heading4 Работа с DOM
+
+    h5.Article-Heading5.
+      Изменения параметров и условий бросания ошибок в функциях #[code getExpectedToBeSingleDOM_Element]
+        и #[code getExpectedToBeSingleChildOfTemplateElement]
+
+    p.Article-Paragraph.
+      Прежде, #[+Keyword--YDID единственный] #[+Term--YDID параметр] типа #[+Term--YDID «объект»] имел
+        #[+Keyword--YDID полиморфное] #[+Keyword__Contrast--YDID опциональное] #[+Term--YDID свойство]
+        #[+ImportantEntity__Code--YDID context], которое, если было определено, #[+Keyword--YDID должно] было иметь
+        #[+Term--YDID тип]
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }).Article-Link Element],
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }).Article-Link Document],
+        или производные от них.
+      Теперь это #[+Term--YDID свойство] было заменено на #[+ImportantEntity__Code--YDID contextElement], которое
+        #[+Keyword--YDID также] #[+Keyword__Contrast--YDID полиморфное], но теперь имеет
+        тип #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;], благодаря чему стало
+        возможно в качестве контекста указать не&nbsp;только контекстный #[+Term--YDID элемент], но и его
+        #[+Term--YDID селектор].
+      Однако, когда указан #[+Term--YDID селектор] контекстного #[+Term--YDID элемента], ему должен соответствовать
+        #[+Keyword--YDID только] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент], иначе будет брошена
+        #[+Term--YDID ошибка] (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] если
+          контекстный #[+Term--YDID элемент] не&nbsp;найден, или #[+ImportantEntity__Code--YDID UnexpectedEventError],
+          если найдено два и более #[+Term--YDID элементов]).
+      Поскольку и #[+ImportantEntity__Code--YDID Element], и #[+ImportantEntity__Code--YDID Document] унаследованы
+        от #[+ImportantEntity__Code--YDID ParentNode], то тип нового #[+Term--YDID свойства] совместим со старым.
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd
+        | Унификация #[+Term--YDID API] указания контекстного #[+Term__Contrast--YDID элемента] — #[+Term--YDID свойство]
+        |   #[+ImportantEntity__Code--YDID contextElement] #[+Term--YDID типа]
+        |   #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] теперь
+        |   используется в #[+Term--YDID параметрах] #[+Keyword--YDID нескольких] #[+Term--YDID функций] и даже за пределами
+        |   библиотеки #[+ImportantEntity--YDID YDEE] (например, в библиотеке для фронтенд-разработки
+        |
+        +Link--YDF({
+          endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
+        }).Article-Link Yamato Daiwa Frontend
+        | .
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd.
+        Вы пользовались #[+Term--YDID свойством] #[+ImportantEntity__Code--YDID context] #[+Term--YDID параметра]
+          #[+Term__Contrast--YDID функций]
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleDOM_Element] или
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement].
+
+      dt Миграция
+      dd.
+        Переименуйте #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID context] в
+          #[+ImportantEntity__Code--YDID contextElement] во всех файлах проекта.
+        Если Вам будет удобнее указать #[+Term--YDID селектор] контекстного #[+Term--YDID элемента] вместо самого
+          контекстного элемента, то теперь Вы можете выполнить соответствующий рефакторинг с использованием новейшего
+          #[+ImportantEntity--YDID API], при этом #[+Term--YDID селектору] контекстного #[+Term--YDID элемента] должен
+          соответствовать #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
+          #[+Keyphrase--YDID в противном случае будет брошена ошибка].
 
     //-
 
@@ -270,11 +334,6 @@ block append SpecificContent
             вне зависимости от конкретной реализации #[+Term--YDID фасада] #[+ImportantEntity--YDID ILogger].
 
 
-
-
-
-
-
       h4.Article-Heading4 Логирование
 
       h5.Article-Heading5 Тип #[code Log] и его расширения
@@ -408,8 +467,10 @@ block append SpecificContent
                 идентификатор.
 
 
-      h2.Article-Heading2 Браузерный JavaScript (@yamato-daiwa/es-extensions-browserjs)
 
+
+
+    //-
       h3.Article-Heading3 Новая функциональность
 
       ul.Article-UnorderedList
@@ -441,49 +502,6 @@ block append SpecificContent
         Также, если нужно указать не&nbsp;сам контекстный элемент элемент, а его селектор, то помимо явного указания
           комбинатора в #[+ImportantEntity__Code--YDID targetElementSelector] теперь можно указать контекстный селектор
           отдельно через свойство #[+ImportantEntity__Code--YDID contextElementSelector].
-
-      h3.Article-Heading3 Критические изменения
-
-      h4.Article-Heading4 Работа с DOM
-
-      h5.Article-Heading5.
-        Изменения параметров и условий бросания ошибок в функциях #[code getExpectedToBeSingleDOM_Element]
-          и #[code getExpectedToBeSingleChildOfTemplateElement]
-
-      p.Article-Paragraph.
-        Раньше, единственный параметр типа «объект» имел полиморфное опциональное свойство #[code context], которое,
-          если было определено, должно было иметь тип #[+ImportantEntity__Code--YDID Element],
-          #[+ImportantEntity__Code--YDID Document] или производные от них.
-        Теперь это свойство было заменено на #[code contextElement], которое также полиморфное, но на этот раз имеет
-          тип #[+ImportantEntity__Code--YDID ParentNode | Readonly<{ selector: string; }>], благодаря чему стало возможно
-          в качестве контекста указать не&nbsp;только контекстный элемент, но и его селектор.
-        Однако, когда указан #[+Term--YDID селектор] контекстного элемента, ему должен соответствовать только один
-            элемент, иначе будет брошена ошибка (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] если
-            контекстный элемент не&nbsp;найден, или #[+ImportantEntity__Code--YDID UnexpectedEventError], если найдено
-            два и больше элементов).
-        Поскольку и #[+ImportantEntity__Code--YDID Element], и #[+ImportantEntity__Code--YDID Document] унаследованы
-          от #[+ImportantEntity__Code--YDID ParentNode], то новое свойство совместимо по типу со старым.
-
-      dt Причина
-      dd.
-        Унификация интерфейса указания контекстного элемента — свойство #[+ImportantEntity__Code--YDID contextElement]
-          #[+Term--YDID типа] #[+ImportantEntity__Code--YDID ParentNode | Readonly<{ selector: string; }>] теперь
-          используется в параметрах нескольких функций и даже за пределами библиотеки #[+ImportantEntity--YDID YDEE] (
-          например, в библиотеке для фронтенд-разработки #[+ImportantEntity--YDID Yamato Daiwa Frontend]).
-
-      dt Потребуются редактирование Вашего исходного кода, если
-      dd.
-        Пользовались свойством #[+ImportantEntity__Code--YDID context] параметра функций
-          #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement] или
-          #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement].
-
-      dt Миграция
-      dd.
-        Переименуйте #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID context] в
-          #[+ImportantEntity__Code--YDID contextElement] во всех файлах проекта.
-        Если где-либо в Вашем случае удобнее указать селектор контекстного элемента, а не сам элемент, то теперь Вы можете
-          выполнить соответствующий рефакторинг, при этом селектору контекстного элемента должен соответствовать ровно
-          один элемент, в противном случае будет брошена ошибка.
 
 
       h4.Article-Heading4 Логирование

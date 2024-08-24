@@ -20,7 +20,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
     Assert.strictEqual(
       getExpectedToBeSingleDOM_Element({
         selector: ".Button",
-        context: sample
+        contextElement: sample
       }) instanceof Element, true
     );
   });
@@ -34,7 +34,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
     Assert.strictEqual(
       getExpectedToBeSingleDOM_Element({
         selector: ".Button",
-        context: sample,
+        contextElement: sample,
         expectedDOM_ElementSubtype: HTMLButtonElement
       }) instanceof HTMLButtonElement, true
     );
@@ -53,7 +53,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
         (): void => {
           getExpectedToBeSingleDOM_Element({
             selector: ".InputField",
-            context: sample
+            contextElement: sample
           });
         },
         {
@@ -72,7 +72,7 @@ describe("getExpectedToBeSingleDOM_Element", (): void => {
         (): void => {
           getExpectedToBeSingleDOM_Element({
             selector: ".Button",
-            context: sample,
+            contextElement: sample,
             expectedDOM_ElementSubtype: HTMLInputElement
           });
         },

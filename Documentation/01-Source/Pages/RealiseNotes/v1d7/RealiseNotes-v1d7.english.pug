@@ -32,7 +32,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -91,6 +91,70 @@ block append SpecificContent
         #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] has been #[+Keyword--YDID renamed]
         to #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
       Similar changes has been applied to other localization #[+Term--YDID objects].
+
+
+    h2.Article-Heading2 BrowserJS JavaScript (@yamato-daiwa/es-extensions-browserjs)
+
+    h3.Article-Heading3 Braking changes
+
+    h4.Article-Heading4 Working with DOM
+
+    h5.Article-Heading5.
+      The Changes in Parameters and Conditions of Error Throwing at Functions #[code getExpectedToBeSingleDOM_Element]
+        and #[code getExpectedToBeSingleChildOfTemplateElement]
+
+    p.Article-Paragraph.
+      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] has
+        #[+Keyword__Contrast--YDID optional] #[+Keyword--YDID polymorphic] #[+Term--YDID property]
+        #[+ImportantEntity__Code--YDID context] which, if defined, #[+Keyword--YDID must] have #[+Term--YDID type]
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }).Article-Link Element],
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }).Article-Link Document] or
+        derived from them.
+      Now, this #[+Term--YDID property] has been replaced with #[+ImportantEntity__Code--YDID contextElement],
+        which #[+Keyword--YDID also] #[+Keyword__Contrast--YDID polymorphic], but now has
+        #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type, due to what besides
+        the specifying of the context #[+Term--YDID element] itself it has become possible to specify its
+        #[+Term--YDID selector].
+      However, if the #[+Term--YDID selector] of context #[+Term__Contrast--YDID element] specified,
+        #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to it,
+        otherwise #[+Term--YDID error] will be thrown (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]
+        if #[+Term--YDID element] not&nbsp;found, or #[+ImportantEntity__Code--YDID UnexpectedEventError], if two
+        or more #[+Term--YDID elements] found).
+      Because #[+Keyword--YDID both] #[+ImportantEntity__Code--YDID Element] and #[+ImportantEntity__Code--YDID Document]
+        are inherited from #[+ImportantEntity__Code--YDID ParentNode], the new type of new #[+Term--YDID property] is
+        compatible with old one.
+
+    dl.Article-DescriptionList
+
+      dt Reason
+      dd
+        | The unification of #[+Term--YDID API] for specifying of the context #[+Term--YDID element]: the
+        |   #[+ImportantEntity__Code--YDID contextElement] #[+Term--YDID property] of
+        |   #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type now being used
+        |   in #[+Term--YDID parameters] of #[+Keyword--YDID multiple] #[+Term--YDID functions] and even outside of
+        |   #[+ImportantEntity--YDID YDEE] library (for example, in
+        |
+        +Link--YDF({
+          endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
+        }).Article-Link Yamato Daiwa Frontend
+        |
+        | library for the frontend development).
+
+      dt Changes in your code will required if
+      dd.
+        You have use the #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] of
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleDOM_Element] or
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement] #[+Term__Contrast--YDID functions].
+
+      dt Migration
+      dd.
+        Rename #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] to
+          #[+ImportantEntity__Code--YDID contextElement] in all files of your project.
+        If it will be good for you to specify the #[+Term--YDID selector] of the context #[+Term--YDID element] instead
+          of context #[+Term--YDID element] itself, you may refactor the calling of these function using the newest
+          #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one]
+          #[+Term--YDID element] must correspond to specified #[+Term--YDID selector],
+          #[+Keyphrase--YDID otherwise the error will be thrown].
 
     //-
 
