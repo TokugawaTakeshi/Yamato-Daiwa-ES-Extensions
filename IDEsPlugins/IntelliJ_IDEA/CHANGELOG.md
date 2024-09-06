@@ -7,7 +7,8 @@
 ### Changed
 
 * Support IntelliJ IDEA platform until **2024.2.1**
-
+* Update <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> live template according to v1.7.X API.
+* Update <kbd>getExpectedToBeSingleDOM_Element</kbd> live template to v1.7.X API.
 
 ## [0.0.8]
 

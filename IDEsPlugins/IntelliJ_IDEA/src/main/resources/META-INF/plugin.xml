@@ -1,8 +1,16 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
 
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
   <name>Yamato-Daiwa ES-Extensions</name>
+
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
   <vendor url="https://github.com/TokugawaTakeshi" email="tokugawa.takesi@gmail.com">Tokugawa Takeshi</vendor>
+
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description>Live Templates for @yamato-daiwa/es-extensions (YDEE) libraries.</description>
 
   <!-- Product and plugin compatibility requirements.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
