@@ -159,6 +159,71 @@ block append SpecificContent
           соответствовать #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
           #[+Keyphrase--YDID в противном случае будет брошена ошибка].
 
+
+    //- TODO < ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h4.Article-Heading4 Обработка событий
+
+    h5.Article-Heading5 Изменение API функции #[code addLeftClickEventHandler]
+
+    p.Article-Paragraph.
+      Как и ранее, #[+Term--YDID функция] имеет #[+Keyword--YDID единственный] #[+Term--YDID параметр] типа
+        «объект», однако его #[+Term--YDID свойства] изменились:
+
+    dl.Article-DescriptionList
+
+      dt targetElement
+      dd.
+        Теперь является полиморфным.
+
+    //-
+
+      === До: ==========================================================================================================
+      export default function addLeftClickEventHandler(
+        compoundParameter: Readonly<
+          (
+            { targetElement: Element; } |
+            (
+              { targetElementSelector: string; } &
+              (
+                { mustApplyToAllMatchingsWithSelector: true; } |
+                { mustIgnoreSubsequentMatchingsWithSelector: true; } |
+                { mustExpectExactlyOneMatchingWithSelector: true; }
+              )
+            )
+          ) &
+          {
+            handler: (leftClickEvent: MouseEvent) => unknown;
+            mustInvokeBeforeChildren_sHandlers?: boolean;
+          }
+        >
+      ): void {
+
+      === После: =======================================================================================================
+      export default function addLeftClickEventHandler(
+        compoundParameter: Readonly<
+          (
+            { targetElement: Element; } |
+            (
+              {
+                targetElement: Readonly<
+                  { selector: string; } &
+                  (
+                    { mustApplyToAllMatchingsWithSelector: true; } |
+                    { mustIgnoreSubsequentMatchingsWithSelector: true; } |
+                    { mustExpectExactlyOneMatchingWithSelector: true; }
+                  )
+                >;
+              } &
+              { contextElement?: ParentNode | Readonly<{ selector: string; }>; }
+            )
+          ) &
+          {
+            handler: (leftClickEvent: MouseEvent) => unknown;
+            eventPropagation?: EventPropagationTypes | false;
+          }
+        >
+      ): void {
+    //- TODO > ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     //-
 
       h3.Article-Heading3 Новая функциональность
@@ -478,31 +543,6 @@ block append SpecificContent
         li: +Link--YDF({
           internalURI: localizedRouting.browserJS.$children.eventsHandling.$children.addInputEventHandler.$URI
         }).Article-Link addInputEventHandler
-
-
-      h3.Article-Heading3 Улучшение прежней функциональности
-
-      h4.Article-Heading4 Работа с DOM
-
-      h5.Article-Heading5.
-        Изменение типа свойства #[code context] у единственного параметра функции #[code getExpectedToBeSingleDOM_Element]
-
-      p.Article-Paragraph.
-        Теперь свойство #[+ImportantEntity__Code--YDID context] имеет тип #[+ImportantEntity__Code--YDID ParentNode],
-          благодаря чему значение теперь может не только тип, производный от #[+ImportantEntity__Code--YDID Document] или
-          #[+ImportantEntity__Code--YDID Element], но и, например, #[+ImportantEntity__Code--YDID DocumentFragment].
-
-      h5.Article-Heading5.
-        Возможность указать контекстный элемент или селектор в функции #[+ImportantEntity__Code--YDID addLeftClickEventHandler]
-
-      p.Article-Paragraph.
-        Если раньше при указании свойства #[+Term__Contrast--YDID targetElementSelector] не&nbsp;было возможности
-          указать контекстный элемент, то теперь это стало возможно с помощью свойства
-          #[+ImportantEntity__Code--YDID contextElement].
-        Также, если нужно указать не&nbsp;сам контекстный элемент элемент, а его селектор, то помимо явного указания
-          комбинатора в #[+ImportantEntity__Code--YDID targetElementSelector] теперь можно указать контекстный селектор
-          отдельно через свойство #[+ImportantEntity__Code--YDID contextElementSelector].
-
 
       h4.Article-Heading4 Логирование
 

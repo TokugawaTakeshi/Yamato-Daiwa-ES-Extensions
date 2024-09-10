@@ -6,6 +6,7 @@ import {
   isUndefined
 } from "@yamato-daiwa/es-extensions";
 import getExpectedToBeSingleDOM_Element from "../../DOM/getExpectedToBeSingleDOM_Element";
+import EventPropagationTypes from "../EventPropagationTypes";
 
 
 export default function addLeftClickEventHandler(
@@ -28,8 +29,7 @@ export default function addLeftClickEventHandler(
     ) &
     {
       handler: (leftClickEvent: MouseEvent) => unknown;
-      mustInvokeBeforeChildren_sHandlers?: boolean;
-      mustStopEventPropagation?: boolean;
+      eventPropagation?: EventPropagationTypes | false;
     }
   >
 ): void {
@@ -107,43 +107,50 @@ export default function addLeftClickEventHandler(
 
   }
 
-
   for (const targetElement of targetElements) {
 
-    targetElement.addEventListener("click", (event: Event): void => {
+    targetElement.addEventListener(
 
-      if (!(event instanceof MouseEvent)) {
+      "click",
 
-        Logger.logError({
-          errorType: UnexpectedEventError.NAME,
-          title: UnexpectedEventError.localization.defaultTitle,
-          description: PoliteErrorsMessagesBuilder.buildMessage({
-            technicalDetails:
-                "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"MouseEvent\"",
-            politeExplanation:
-                "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
-                  "the first parameter of the callback, will be the instance of \"MouseEvent\". " +
-                "The TypeScript types definitions does not provide the overload for each type of event, so the \"event\" " +
-                  "has been annotated just as \"Event\". " +
-                "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
-                  "combination of circumstances it is not such as."
-          }),
-          occurrenceLocation: "addLeftClickEventHandler(compoundParameter)"
-        });
+      (event: Event): void => {
 
-        return;
+        if (!(event instanceof MouseEvent)) {
 
-      }
+          Logger.logError({
+            errorType: UnexpectedEventError.NAME,
+            title: UnexpectedEventError.localization.defaultTitle,
+            description: PoliteErrorsMessagesBuilder.buildMessage({
+              technicalDetails:
+                  "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"MouseEvent\"",
+              politeExplanation:
+                  "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
+                    "the first parameter of the callback, will be the instance of \"MouseEvent\". " +
+                  "The TypeScript types definitions does not provide the overload for each type of event, so the \"event\" " +
+                    "has been annotated just as \"Event\". " +
+                  "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
+                    "combination of circumstances it is not such as."
+            }),
+            occurrenceLocation: "addLeftClickEventHandler(compoundParameter)"
+          });
 
-      if (compoundParameter.mustStopEventPropagation === true) {
-        event.stopPropagation();
-      }
+          return;
+
+        }
+
+        if (compoundParameter.eventPropagation === false) {
+          event.stopPropagation();
+        }
 
 
-      compoundParameter.handler(event);
+        compoundParameter.handler(event);
 
-    /* [ Reference ] https://stackoverflow.com/q/7398290/4818123 */
-    }, compoundParameter.mustInvokeBeforeChildren_sHandlers ?? false);
+
+      },
+
+      { capture: compoundParameter.eventPropagation === EventPropagationTypes.capturing }
+
+    );
 
   }
 
