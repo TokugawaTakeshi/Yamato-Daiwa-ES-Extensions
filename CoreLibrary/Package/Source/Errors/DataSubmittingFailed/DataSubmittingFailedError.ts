@@ -9,7 +9,6 @@ class DataSubmittingFailedError extends Error {
 
   public static localization: DataSubmittingFailedError.Localization = dataSubmittingFailedErrorLocalization__english;
 
-  public readonly typicalCause?: DataSubmittingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
@@ -23,7 +22,6 @@ class DataSubmittingFailedError extends Error {
         compoundParameter.customMessage :
         DataSubmittingFailedError.localization.generateDescription(compoundParameter);
 
-    this.typicalCause = compoundParameter.typicalCause;
     this.additionalData = compoundParameter.additionalData;
 
   }
@@ -32,7 +30,7 @@ class DataSubmittingFailedError extends Error {
   public toString(): string {
     return [
       super.toString(),
-        ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
+      ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
     ].join("\n");
   }
 
@@ -43,15 +41,8 @@ namespace DataSubmittingFailedError {
 
   export type ConstructorParameter =
       (Localization.DescriptionTemplateVariables | Readonly<{ customMessage: string; }>) &
-      Readonly<{
-        additionalData?: unknown;
-        typicalCause?: TypicalCauses;
-      }>;
+      Readonly<{ additionalData?: unknown; }>;
 
-  export enum TypicalCauses {
-    notFound = "NOT_FOUND",
-    notEnoughPermissions = "NOT_ENOUGH_PERMISSIONS"
-  }
 
   export type Localization = Readonly<{
     defaultTitle: string;
@@ -59,7 +50,10 @@ namespace DataSubmittingFailedError {
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateVariables = Readonly<{ mentionToData: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{
+      mentionToData: string;
+      messageSpecificPart?: string;
+    }>;
   }
 
 }

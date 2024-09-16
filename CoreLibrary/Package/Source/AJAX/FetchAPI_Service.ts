@@ -47,8 +47,15 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     return {
-      isSuccessful: response.ok,
-      data: await FetchAPI_Service.extractRawObjectDataFromResponse(response),
+      ...response.ok ?
+          {
+            isSuccessful: true,
+            data: await FetchAPI_Service.extractRawObjectDataFromResponse(response)
+          } :
+          {
+            isSuccessful: false,
+            ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
+          },
       HTTP_Headers: Array.from(response.headers).reduce(
         (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
           HTTP_Headers[key] = value;
@@ -100,10 +107,16 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     return {
-      isSuccessful: response.ok,
-      data: compoundParameter.mustExpectResponseData || !response.ok ?
-          await FetchAPI_Service.extractRawObjectDataFromResponse(response) :
-          {},
+      ...response.ok ?
+          {
+            isSuccessful: true,
+            data: compoundParameter.mustExpectResponseData ?
+                await FetchAPI_Service.extractRawObjectDataFromResponse(response) : {}
+          } :
+          {
+            isSuccessful: false,
+            ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
+          },
       HTTP_Headers: Array.from(response.headers).reduce(
         (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
           HTTP_Headers[key] = value;
@@ -177,7 +190,7 @@ export default class FetchAPI_Service extends AJAX_Service {
           text: decodedText
         } : {
           isSuccessful: false,
-          data: await FetchAPI_Service.extractRawObjectDataFromResponse(response)
+          ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
         },
       HTTP_Headers: Array.from(response.headers).reduce(
         (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
@@ -223,6 +236,75 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     return responseRawData;
+
+  }
+
+  /** @throws HTTP_ResponseBodyParsingFailureError */
+  protected static async extractErrorPayloadFromResponse(response: Response): Promise<
+    { errorObjectPayload: PossiblyReadonlyParsedJSON; } | { errorTextPayload: string; }
+  > {
+
+    const contentType: string | null = response.headers.get("content-type");
+
+    if (contentType?.includes("application/json") === true) {
+
+      let objectTypeData: unknown;
+
+      try {
+        objectTypeData = await response.json();
+      } catch (error: unknown) {
+        Logger.throwErrorAndLog({
+          errorInstance: new HTTP_ResponseBodyParsingFailureError(
+            "The HTTP response body could not be represented as JSON while \"content-type\" HTTP header is includes " +
+              "\"application/json\"."
+          ),
+          title: HTTP_ResponseBodyParsingFailureError.localization.defaultTitle,
+          occurrenceLocation: "FetchAPI_Service.extractErrorPayloadFromResponse(response)",
+          innerError: error
+        });
+      }
+
+
+      if (!isPossiblyReadonlyParsedJSON(objectTypeData)) {
+        Logger.throwErrorAndLog({
+          errorInstance: new UnsupportedScenarioError(
+            `The data has type "${ typeof objectTypeData }" while currently non-object data in not supported.`
+          ),
+          title: UnsupportedScenarioError.localization.defaultTitle,
+          occurrenceLocation: "FetchAPI_Service.extractRawObjectDataFromResponse(response)"
+        });
+      }
+
+
+      return { errorObjectPayload: objectTypeData };
+
+    }
+
+
+    if (contentType?.includes("text") === true) {
+
+      let decodedText: string;
+
+      try {
+        decodedText = await response.text();
+      } catch (error: unknown) {
+        Logger.throwErrorAndLog({
+          errorInstance: new HTTP_ResponseBodyParsingFailureError(
+            "The HTTP response body could not be represented as text while \"content-type\" HTTP header is includes " +
+              "\"text\"."
+          ),
+          title: HTTP_ResponseBodyParsingFailureError.localization.defaultTitle,
+          occurrenceLocation: "FetchAPI_Service.extractRawObjectDataFromResponse(compoundParameter)",
+          innerError: error
+        });
+      }
+
+      return { errorTextPayload: decodedText };
+
+    }
+
+
+    return { errorObjectPayload: {} };
 
   }
 

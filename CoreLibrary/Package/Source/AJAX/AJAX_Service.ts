@@ -192,22 +192,24 @@ abstract class AJAX_Service {
 
 
     if (isUndefined(compoundParameter.validResponseDataSpecification)) {
-      return rawObjectDataResponse.isSuccessful ?
-          {
-            isSuccessful: true,
-            /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-            * TypeScript could not detect that when `compoundParameter.validResponseDataSpecification` is undefined,
-            *   the `RawValidResponseData` is `PossiblyReadonlyParsedJSON` without additional constraints. */
-            data: rawObjectDataResponse.data as RawValidResponseData,
-            HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
-            HTTP_Status: rawObjectDataResponse.HTTP_Status
-          } :
-          {
-            isSuccessful: false,
-            data: rawObjectDataResponse.data,
-            HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
-            HTTP_Status: rawObjectDataResponse.HTTP_Status
-          };
+      return {
+        ...rawObjectDataResponse.isSuccessful ?
+            {
+              isSuccessful: true,
+              /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+               * TypeScript could not detect that when `compoundParameter.validResponseDataSpecification` is undefined,
+               *   the `RawValidResponseData` is `PossiblyReadonlyParsedJSON` without additional constraints. */
+              data: rawObjectDataResponse.data as RawValidResponseData
+            } :
+            {
+              isSuccessful: false,
+              ..."errorObjectPayload" in rawObjectDataResponse ?
+                  { errorObjectPayload: rawObjectDataResponse.errorObjectPayload } :
+                  { errorTextPayload: rawObjectDataResponse.errorTextPayload }
+            },
+        HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
+        HTTP_Status: rawObjectDataResponse.HTTP_Status
+      };
     }
 
 
@@ -331,6 +333,7 @@ abstract class AJAX_Service {
         });
       }
 
+
       return {
         isSuccessful: true,
         data: responseRawDataProcessingResult.processedData,
@@ -343,7 +346,9 @@ abstract class AJAX_Service {
 
     return {
       isSuccessful: false,
-      data: rawObjectDataResponse.data,
+      ..."errorObjectPayload" in rawObjectDataResponse ?
+          { errorObjectPayload: rawObjectDataResponse.errorObjectPayload } :
+          { errorTextPayload: rawObjectDataResponse.errorTextPayload },
       HTTP_Headers: rawObjectDataResponse.HTTP_Headers,
       HTTP_Status: rawObjectDataResponse.HTTP_Status
     };
@@ -394,30 +399,46 @@ namespace AJAX_Service {
 
 
   /* ━━━ Object Data ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  export type RawObjectDataResponse = Readonly<{
-    isSuccessful: boolean;
-    data: PossiblyReadonlyParsedJSON;
-    HTTP_Status: number;
-    HTTP_Headers: HTTP_Headers;
-  }>;
+  export type RawObjectDataResponse = Readonly<(
+    (
+      {
+        isSuccessful: true;
+        data: PossiblyReadonlyParsedJSON;
+      } |
+      (
+        { isSuccessful: false; } &
+        (
+          { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+          { errorTextPayload: string; }
+        )
+      )
+    ) &
+    {
+      HTTP_Status: number;
+      HTTP_Headers: HTTP_Headers;
+    }
+  )>;
 
   export type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
-      Readonly<
+      Readonly<(
         (
           {
             isSuccessful: true;
             data: ResponseData;
           } |
-          {
-            isSuccessful: false;
-            data: PossiblyReadonlyParsedJSON;
-          }
+          (
+            { isSuccessful: false; } &
+            (
+              { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+              { errorTextPayload: string; }
+            )
+          )
         ) &
         {
           HTTP_Status: number;
           HTTP_Headers: HTTP_Headers;
         }
-      >;
+      )>;
 
   export namespace ObjectDataRetrieving {
 
@@ -520,10 +541,13 @@ namespace AJAX_Service {
         isSuccessful: true;
         text: string;
       } |
-      {
-        isSuccessful: false;
-        data: PossiblyReadonlyParsedJSON;
-      }
+      (
+        { isSuccessful: false; } &
+        (
+          { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+          { errorTextPayload: string; }
+        )
+      )
     ) &
     {
       HTTP_Status: number;

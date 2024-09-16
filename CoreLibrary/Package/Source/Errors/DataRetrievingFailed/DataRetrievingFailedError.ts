@@ -9,7 +9,6 @@ class DataRetrievingFailedError extends Error {
 
   public static localization: DataRetrievingFailedError.Localization = dataRetrievingFailedErrorLocalization__english;
 
-  public readonly typicalCause?: DataRetrievingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
@@ -23,7 +22,6 @@ class DataRetrievingFailedError extends Error {
         compoundParameter.customMessage :
         DataRetrievingFailedError.localization.generateDescription(compoundParameter);
 
-    this.typicalCause = compoundParameter.typicalCause;
     this.additionalData = compoundParameter.additionalData;
 
   }
@@ -32,7 +30,7 @@ class DataRetrievingFailedError extends Error {
   public toString(): string {
     return [
       super.toString(),
-        ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
+      ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
     ].join("\n");
   }
 
@@ -43,15 +41,7 @@ namespace DataRetrievingFailedError {
 
   export type ConstructorParameter =
       (Localization.DescriptionTemplateVariables | Readonly<{ customMessage: string; }>) &
-      Readonly<{
-        additionalData?: unknown;
-        typicalCause?: TypicalCauses;
-      }>;
-
-  export enum TypicalCauses {
-    notFound = "NOT_FOUND",
-    notEnoughPermissions = "NOT_ENOUGH_PERMISSIONS"
-  }
+      Readonly<{ additionalData?: unknown; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
@@ -59,7 +49,10 @@ namespace DataRetrievingFailedError {
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateVariables = Readonly<{ mentionToData: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{
+      mentionToData: string;
+      messageSpecificPart?: string;
+    }>;
   }
 
 }
