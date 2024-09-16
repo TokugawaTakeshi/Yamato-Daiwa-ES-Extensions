@@ -36,7 +36,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -60,6 +60,17 @@ block append SpecificContent
 
     p.TopPage-ShortDescription-Heading.
       TypeScriptでの高品質開発専用豊富なライブラリ群
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/Top/Images/TopPage-MainVisual.japanese",
+      imageAlternateText:
+          "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）ライブラリ。" +
+          "ルーチンコードを減らす為の透明なAPIの関数・クラス揃い。" +
+          "無anyのTypeScript。",
+      autoAspectRatioByYDA: true,
+      geometry: SingleImageViewer__YDF.GeometricVariations.minimalistic,
+      decoration: SingleImageViewer__YDF.DecorativeVariations.minimalistic
+    }).TopPage-MainVisual
 
     +AdmonitionBlock--YDF({
       decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,

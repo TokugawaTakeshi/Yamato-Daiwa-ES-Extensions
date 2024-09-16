@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Rebuild Distributable" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="Rebuild Distributable and Realize Alpha" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="Rebuild Distributable" />
+      <script value="Rebuild Distributable and Realize Alpha" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

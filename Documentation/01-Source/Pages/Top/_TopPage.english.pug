@@ -39,7 +39,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -63,6 +63,17 @@ block append SpecificContent
 
     p.TopPage-ShortDescription-Heading.
       Rich utility libraries for high-quality TypeScript-based development
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/Top/Images/TopPage-MainVisual.english",
+      imageAlternateText:
+          "\"Yamato Daiwa ECMAScript Extensions\" (abbreviation: \"YDEE\") library. " +
+          "Functions and classes with clear API to reduce the routine code." +
+          "TypeScript Without \"any\".",
+      autoAspectRatioByYDA: true,
+      geometry: SingleImageViewer__YDF.GeometricVariations.minimalistic,
+      decoration: SingleImageViewer__YDF.DecorativeVariations.minimalistic
+    }).TopPage-MainVisual
 
     +AdmonitionBlock--YDF({
       decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,

@@ -1,17 +1,17 @@
 <component name="ProjectRunConfigurationManager">
-<<<<<<<< HEAD:CoreLibrary/Package/.idea/runConfigurations/Rebuild_Distributable.xml
+<<<<<<<< HEAD:CoreLibrary/OfficialLocalizations/Japanese/.idea/runConfigurations/Rebuild_Distributable.xml
   <configuration default="false" name="Rebuild Distributable" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
       <script value="Rebuild Distributable" />
 ========
-  <configuration default="false" name="Rebuild Distributable and Realize Alpha" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="Rebuild Distributable and Realize RC" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="Rebuild Distributable and Realize Alpha" />
->>>>>>>> origin/master:CoreLibrary/OfficialLocalizations/Japanese/.idea/runConfigurations/Rebuild_Distributable_and_Realize_Alpha.xml
+      <script value="Rebuild Distributable and Realize RC" />
+>>>>>>>> origin/master:NodeJS/Package/.idea/runConfigurations/Rebuild_Distributable_and_Realize_RC.xml
     </scripts>
     <node-interpreter value="project" />
     <envs />
