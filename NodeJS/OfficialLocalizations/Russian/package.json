@@ -41,7 +41,7 @@
     "typescript": "5.5.4"
   },
   "scripts": {
-    "Rebuild Distributable": "rimraf Distributable & tsc -p tsconfig-cjs.json && tsc -p tsconfig-esm.json",
+    "Rebuild Distributable": "rimraf Distributable & tsc",
     "Lint": "eslint Source",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
