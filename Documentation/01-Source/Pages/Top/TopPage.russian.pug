@@ -15,7 +15,7 @@ block append Metadata
       metadata: {
         title: buildHTML_PageTitle("Главная страница"),
         description:
-            "Библиотека «Yamato Daiwa ECMAScript extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и») - " +
+            "Библиотека «Yamato Daiwa ECMAScript Extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и») - " +
               "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
             "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
               "«RawObjectDataProcessor» для валидации и постобработки структур данных. " +
@@ -63,6 +63,17 @@ block append SpecificContent
 
     p.TopPage-ShortDescription-Heading.
       Богатые функциональностью библиотеки для высококачественной разработки на языке TypeScript
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/Top/Images/TopPage-MainVisual.russian",
+      imageAlternateText:
+          "Библиотека «Yamato Daiwa ECMAScript Extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и»). " +
+          "Функции и классы с понятным API для уменьшения рутинного кода. " +
+          "TypeScript без «any»",
+      autoAspectRatioByYDA: true,
+      geometry: SingleImageViewer__YDF.GeometricVariations.minimalistic,
+      decoration: SingleImageViewer__YDF.DecorativeVariations.minimalistic
+    }).TopPage-MainVisual
 
     +AdmonitionBlock--YDF({
       decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
