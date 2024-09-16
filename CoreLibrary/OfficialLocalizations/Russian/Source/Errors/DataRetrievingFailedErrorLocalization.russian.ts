@@ -1,12 +1,10 @@
 import type { DataRetrievingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const DataRetrievingFailedErrorLocalization__Russian: DataRetrievingFailedError.Localization = {
+export const dataRetrievingFailedErrorLocalization__russian: DataRetrievingFailedError.Localization = {
   defaultTitle: "Ошибка при получении данных",
   generateDescription: (
-    namedParameters: DataRetrievingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибка при получении данных '${ namedParameters.mentionToData }' из внешнего источника.`
+    { mentionToData }: DataRetrievingFailedError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `Произошла ошибка при получении данных "${ mentionToData }" из внешнего источника.`
 };
-
-
-export default DataRetrievingFailedErrorLocalization__Russian;

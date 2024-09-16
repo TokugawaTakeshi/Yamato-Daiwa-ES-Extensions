@@ -1,12 +1,10 @@
 import type { ModuleDynamicLoadingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const ModuleDynamicLoadingFailedErrorLocalization__Russian: ModuleDynamicLoadingFailedError.Localization = {
+export const moduleDynamicLoadingFailedErrorLocalization__russian: ModuleDynamicLoadingFailedError.Localization = {
   defaultTitle: "Ошибка динамической подгрузки модуля",
   generateDescription: (
-    namedParameters: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибка при динамической подгрузке модуля '${ namedParameters.modulePath }'.`
+    { modulePath }: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
+  ): string =>
+      `Произошла ошибка при динамической подгрузке модуля "${ modulePath }".`
 };
-
-
-export default ModuleDynamicLoadingFailedErrorLocalization__Russian;

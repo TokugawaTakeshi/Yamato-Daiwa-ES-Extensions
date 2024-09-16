@@ -213,7 +213,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
   <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.english.html">getLastElementOfArray</a></dt>

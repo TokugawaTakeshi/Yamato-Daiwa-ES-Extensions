@@ -11,25 +11,20 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("Начало использования");
-    HTML_PageMetaData = {
-      description:
-        "Для начала работы с библиотекой «Yamato Daiwa ES extensions» (сокращённо: «YDEE») " +
-          "её необходимо установить с помощью пакетного менеджера «npm» (имя пакета: «@yamato-daiwa/es-extensions»).",
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Getting Started"),
+        description:
+            "Для начала работы с библиотекой «Yamato Daiwa ES extensions» (сокращённо: «YDEE») её необходимо установить " +
+              "с помощью пакетного менеджера «npm» (имя пакета: «@yamato-daiwa/es-extensions»)."
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 
@@ -47,7 +42,7 @@ block append Metadata
     };
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 

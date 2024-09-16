@@ -1,4 +1,4 @@
-enum AbbreviatedJapaneseDaysOfWeek {
+export enum AbbreviatedJapaneseDaysOfWeek {
   sunday = "日",
   monday = "月",
   tuesday = "火",
@@ -7,6 +7,3 @@ enum AbbreviatedJapaneseDaysOfWeek {
   friday = "金",
   saturday = "土"
 }
-
-
-export default AbbreviatedJapaneseDaysOfWeek;

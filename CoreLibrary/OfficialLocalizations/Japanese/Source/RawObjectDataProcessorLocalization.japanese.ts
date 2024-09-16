@@ -6,7 +6,7 @@ import {
 import Localization = RawObjectDataProcessor.Localization;
 
 
-const RawObjectDataProcessorLocalization__Japanese: Localization = {
+export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   errorMessageBasicTemplate(
     {
@@ -25,19 +25,20 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
       type: this.valueType(targetPropertyValueSpecification.type)
     });
 
-    return `${ title }` +
+    return title +
         `\n\n●　プロパティ・要素： '${ targetPropertyDotSeparatedQualifiedName }'` +
-        `${ insertSubstring(
-            targetPropertyNewName,
-            { modifier: (targetSubstring: string): string => ` (新名： ${ targetSubstring })` }
-        ) }` +
+        insertSubstring(
+          targetPropertyNewName,
+          { modifier: (targetSubstring: string): string => ` (新名： ${ targetSubstring })` }
+        ) +
         `\n${ specificMessagePart }` +
         `\n\n●　プロパティ・要素仕様: \n${ propertyOrElementSpecification__stringified }` +
         `\n●　実際値: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
-        `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
+        insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
           modifier: (targetSubstring: string): string =>
               `\n●　妥当性確認の前段階処理で変更される以前の初期値： ${ targetSubstring }`
-        }) }`;
+        });
+
   },
 
   buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== ${ messageNumber }エラー名 ==========`; },
@@ -165,22 +166,22 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
   },
 
   buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      missingRequiredKeys: Array<string>
+    missingRequiredKeys: Array<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "必須キーの未定義",
       specificMessagePart: "下記の必須キーが定義されていない。\n" +
-          `${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
+          stringifyAndFormatArbitraryValue(missingRequiredKeys)
     };
   },
 
   buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-      requiredKeysAlternatives: Array<string>
+    requiredKeysAlternatives: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {
     return {
       title: "選択式必須キーの未定義",
-      specificMessagePart: "下記のいずれかの必須キーが定義されていない。" +
-          `presents.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
+      specificMessagePart: "下記のいずれかの必須キーが定義されていない。\n" +
+          stringifyAndFormatArbitraryValue(requiredKeysAlternatives)
     };
   },
 
@@ -190,7 +191,7 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     return {
       title: "禁止キーの使用",
       specificMessagePart: "この連想配列で、下記の使用禁止キーが発見された。\n" +
-          `${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
+          stringifyAndFormatArbitraryValue(foundDisallowedKeys)
     };
   },
 
@@ -251,9 +252,15 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     };
   },
 
-  valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "許可されていない選択肢",
-    specificMessagePart: "この値は、許可されている選択肢の中に含まれていない。"
+  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
+    allowedAlternatives: ReadonlyArray<string>
+  ): Localization.TextDataForErrorMessagesBuilding {
+    return {
+      title: "許可されていない選択肢",
+      specificMessagePart:
+          "この値は、下記の許可されている選択肢の中に含まれていない。\n" +
+          allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n")
+    };
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -347,6 +354,3 @@ const RawObjectDataProcessorLocalization__Japanese: Localization = {
     };
   }
 };
-
-
-export default RawObjectDataProcessorLocalization__Japanese;

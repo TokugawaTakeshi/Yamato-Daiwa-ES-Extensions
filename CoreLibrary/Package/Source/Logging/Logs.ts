@@ -1,8 +1,10 @@
 export type Log = Readonly<{
-  customBadgeText?: string;
+  badge?: Readonly<{ customText: string; }> | false;
   title: string;
   description: string;
   additionalData?: unknown;
+  compactLayout?: boolean;
+  mustOutputIf?: boolean;
 }>;
 
 
@@ -25,7 +27,7 @@ export type ThrownErrorLog<CustomError extends Error = Error> =
     ) &
     Readonly<{
       occurrenceLocation: string;
-      wrappableError?: unknown;
+      innerError?: unknown;
     }>;
 
 

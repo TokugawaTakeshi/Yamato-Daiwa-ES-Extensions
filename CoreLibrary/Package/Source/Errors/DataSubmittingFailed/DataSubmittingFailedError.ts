@@ -1,37 +1,48 @@
-import DataSubmittingFailedErrorLocalization__English from "./DataSubmittingFailedErrorLocalization.english";
+import dataSubmittingFailedErrorLocalization__english from "./DataSubmittingFailedErrorLocalization.english";
+import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
 
 
 class DataSubmittingFailedError extends Error {
 
   public static readonly NAME: string = "DataSubmittingFailedError";
-  public static localization: DataSubmittingFailedError.Localization = DataSubmittingFailedErrorLocalization__English;
+
+  public static localization: DataSubmittingFailedError.Localization = dataSubmittingFailedErrorLocalization__english;
 
   public readonly typicalCause?: DataSubmittingFailedError.TypicalCauses;
   public readonly additionalData?: unknown;
 
 
-  public constructor(namedParameters: DataSubmittingFailedError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: DataSubmittingFailedError.ConstructorParameter) {
 
     super();
 
     this.name = DataSubmittingFailedError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = DataSubmittingFailedError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        DataSubmittingFailedError.localization.generateDescription(compoundParameter);
 
-    this.typicalCause = namedParameters.typicalCause;
-    this.additionalData = namedParameters.additionalData;
+    this.typicalCause = compoundParameter.typicalCause;
+    this.additionalData = compoundParameter.additionalData;
+
   }
+
+
+  public toString(): string {
+    return [
+      super.toString(),
+        ...isNotUndefined(this.additionalData) ? [ stringifyAndFormatArbitraryValue(this.additionalData) ] : []
+    ].join("\n");
+  }
+
 }
 
 
 namespace DataSubmittingFailedError {
 
-  export type ConstructorNamedParameters =
-      (Localization.DescriptionTemplateNamedParameters | Readonly<{ customMessage: string; }>) &
+  export type ConstructorParameter =
+      (Localization.DescriptionTemplateVariables | Readonly<{ customMessage: string; }>) &
       Readonly<{
         additionalData?: unknown;
         typicalCause?: TypicalCauses;
@@ -44,12 +55,13 @@ namespace DataSubmittingFailedError {
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{ mentionToData: string; }>;
+    export type DescriptionTemplateVariables = Readonly<{ mentionToData: string; }>;
   }
+
 }
 
 

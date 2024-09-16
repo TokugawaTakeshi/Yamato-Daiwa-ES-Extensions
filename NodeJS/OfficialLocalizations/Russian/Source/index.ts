@@ -1,10 +1,3 @@
-/*!
- * @yamato-daiwa/es-extensions-nodejs-localization-russian v1.7
- * (c) 2023 Yamato Daiwa Co., Ltd
- * Released under the MIT License.
- */
-
-
 /* ━━━ Классы ошибок ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as FileNotFoundError } from "@yamato-daiwa/es-extensions-nodejs";
 export { default as InvalidConsoleCommandErrorLocalization__Russian } from

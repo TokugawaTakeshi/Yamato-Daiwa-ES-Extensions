@@ -131,7 +131,7 @@ abstract class ObjectDataFilesProcessor {
             errorInstance: new InvalidParameterValueError({
               parameterName: "compoundParameter.filePath",
               parameterNumber: 1,
-              messageSpecificPart: ObjectDataFilesProcessor.localization.generateUnsupportedFileNameExtensionErrorMessage({
+              messageSpecificPart: ObjectDataFilesProcessor.localization.generateUnsupportedFileNameExtension({
                 filePath, fileNameLastExtensionWithoutLeadingDot
               })
             }),
@@ -207,7 +207,7 @@ abstract class ObjectDataFilesProcessor {
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-          wrappableError: error
+          innerError: error
         });
       }
 
@@ -261,7 +261,7 @@ abstract class ObjectDataFilesProcessor {
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-          wrappableError: error
+          innerError: error
         });
       }
 
@@ -370,7 +370,7 @@ abstract class ObjectDataFilesProcessor {
         errorInstance: new InvalidExternalDataError({ mentionToExpectedData: filePathForLogging }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
-        wrappableError: error
+        innerError: error
       });
     }
 
@@ -387,7 +387,7 @@ abstract class ObjectDataFilesProcessor {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidExternalDataError({
           customMessage: `The contents of file '${ filePathForLogging }' does not matching with valid data specification:\n` +
-              `${ RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages) }`
+              RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)
         }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
@@ -419,7 +419,7 @@ namespace ObjectDataFilesProcessor {
       templateVariables: Localization.UnableToDecideDataParsingAlgorithmErrorMessage.TemplateVariables
     ) => string;
 
-    generateUnsupportedFileNameExtensionErrorMessage: (
+    generateUnsupportedFileNameExtension: (
       templateVariables: Localization.UnsupportedFileNameExtensionErrorMessage.TemplateVariables
     ) => string;
 

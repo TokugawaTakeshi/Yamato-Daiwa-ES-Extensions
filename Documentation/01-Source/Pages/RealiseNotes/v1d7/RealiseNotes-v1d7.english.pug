@@ -1,0 +1,345 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Realize Notes - 1.7"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.7" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: "./RealiseNotes-v1d7.japanese.html",
+      russian: "./RealiseNotes-v1d7.russian.html"
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 Version 1.7 — Realize Notes
+
+    h2.Article-Heading2 Core Package (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 Breaking Changes
+
+    h4.Article-Heading4 Working with Arrays
+
+    h5.Article-Heading5.
+      Renaming of the Third Parameter in #[code getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne] and
+        #[code getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+
+    p.Article-Paragraph.
+      In the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] of the #[+Term__Contrast--YDID object]
+        #[+Term--YDID type] the #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1]
+        #[+Term--YDID property] has been #[+Keyword--YDID renamed] to
+        #[+ImportantEntity--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple].
+
+    dl.Article-DescriptionList
+
+      dt Reason
+      dd.
+        The previous name is confusing because "or more than1" could be #[+Keyword--YDID misinterpreted] as like
+          there must&nbsp;not be more than one element in the #[+Keyword--YDID source] #[+Term--YDID array].
+        Now, «or matches are multiple» clearly declares that it must not&nbsp;be more than one #[+Term--YDID element]
+          #[+Keyphrase--YDID namely among ones which satisfying the #[+Term--YDID predicate]].
+
+      dt Changes in your code will required if
+      dd.
+        In your code, during the calling of
+          #[+ImportantEntity__Code--YDID getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne]
+          #[+Term__Contrast--YDID function], #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter] is being used.
+
+      dt Migration
+      dd.
+        Using the appropriate functionality of your code editor or IDE, replace
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMoreThan1] occurrences with
+          #[+ImportantEntity__Code--YDID mustThrowErrorIfElementNotFoundOrMatchesAreMultiple] in all files of the project.
+
+
+    h4.Article-Heading4 "RawObjectDataProcessor" class
+    h5.Article-Heading5 Renaming of Localization Object
+
+    p.Article-Paragraph.
+      According the updated naming conventions, the localization #[+Term--YDID object]
+        #[+ImportantEntity__Code--YDID RawObjectDataProcessorLocalization__English] has been #[+Keyword--YDID renamed]
+        to #[+ImportantEntity__Code--YDID rawObjectDataProcessorLocalization__english].
+      Similar changes has been applied to other localization #[+Term--YDID objects].
+
+
+    h2.Article-Heading2 BrowserJS JavaScript (@yamato-daiwa/es-extensions-browserjs)
+
+    h3.Article-Heading3 Braking changes
+
+    h4.Article-Heading4 Working with DOM
+
+    h5.Article-Heading5.
+      The Changes in Parameters and Conditions of Error Throwing at Functions #[code getExpectedToBeSingleDOM_Element]
+        and #[code getExpectedToBeSingleChildOfTemplateElement]
+
+    p.Article-Paragraph.
+      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] has
+        #[+Keyword__Contrast--YDID optional] #[+Keyword--YDID polymorphic] #[+Term--YDID property]
+        #[+ImportantEntity__Code--YDID context] which, if defined, #[+Keyword--YDID must] have #[+Term--YDID type]
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }).Article-Link Element],
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }).Article-Link Document] or
+        derived from them.
+      Now, this #[+Term--YDID property] has been replaced with #[+ImportantEntity__Code--YDID contextElement],
+        which #[+Keyword--YDID also] #[+Keyword__Contrast--YDID polymorphic], but now has
+        #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type, due to what besides
+        the specifying of the context #[+Term--YDID element] itself it has become possible to specify its
+        #[+Term--YDID selector].
+      However, if the #[+Term--YDID selector] of context #[+Term__Contrast--YDID element] specified,
+        #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to it,
+        otherwise #[+Term--YDID error] will be thrown (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]
+        if #[+Term--YDID element] not&nbsp;found, or #[+ImportantEntity__Code--YDID UnexpectedEventError], if two
+        or more #[+Term--YDID elements] found).
+      Because #[+Keyword--YDID both] #[+ImportantEntity__Code--YDID Element] and #[+ImportantEntity__Code--YDID Document]
+        are inherited from #[+ImportantEntity__Code--YDID ParentNode], the new type of new #[+Term--YDID property] is
+        compatible with old one.
+
+    dl.Article-DescriptionList
+
+      dt Reason
+      dd
+        | The unification of #[+Term--YDID API] for specifying of the context #[+Term--YDID element]: the
+        |   #[+ImportantEntity__Code--YDID contextElement] #[+Term--YDID property] of
+        |   #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type now being used
+        |   in #[+Term--YDID parameters] of #[+Keyword--YDID multiple] #[+Term--YDID functions] and even outside of
+        |   #[+ImportantEntity--YDID YDEE] library (for example, in
+        |
+        +Link--YDF({
+          endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
+        }).Article-Link Yamato Daiwa Frontend
+        |
+        | library for the frontend development).
+
+      dt Changes in your code will required if
+      dd.
+        You have use the #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] of
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleDOM_Element] or
+          #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement] #[+Term__Contrast--YDID functions].
+
+      dt Migration
+      dd.
+        Rename #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] to
+          #[+ImportantEntity__Code--YDID contextElement] in all files of your project.
+        If it will be good for you to specify the #[+Term--YDID selector] of the context #[+Term--YDID element] instead
+          of context #[+Term--YDID element] itself, you may refactor the calling of these function using the newest
+          #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one]
+          #[+Term--YDID element] must correspond to specified #[+Term--YDID selector],
+          #[+Keyphrase--YDID otherwise the error will be thrown].
+
+    //-
+
+      h3.Article-Heading3 New Functionality
+
+      h4.Article-Heading4 Working With Arrays
+
+      ul.Article-UnorderedList
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.
+              functionality.$children.
+              arrays.$children.
+              creating.$children.
+              createArrayOfNaturalNumbers.$URI
+        }).Article-Link createArrayOfNaturalNumbers
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.
+              functionality.$children.
+              arrays.$children.
+              removingOfElements.$children.
+              cropArray.$URI
+        }).Article-Link cropArray
+
+      h4.Article-Heading4 Pagination
+
+      ul.Article-UnorderedList
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.
+              functionality.$children.
+              pagination.$children.
+              PaginationCollection.$URI
+        }).Article-Link getItemsOfPaginationPage
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.
+              functionality.$children.
+              pagination.$children.
+              PaginationCollection.$URI
+        }).Article-Link PaginationCollection
+
+
+      h4.Article-Heading4 Working with strings
+
+      ul.Article-UnorderedList
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.functionality.$children.strings.$children.other.cropString.$URI
+        }).Article-Link cropString
+
+
+      h4.Article-Heading4 Working with files
+
+      ul.Article-UnorderedList
+
+        li: +Link--YDF({
+          internalURI: localizedRouting.coreLibrary.$children.functionality.$children.files.$children.encodeFileToBase64.$URI
+        }).Article-Link encodeFileToBase64
+
+
+      h3.Article-Heading3 Improvements
+
+      h4.Article-Heading4 Logging
+
+      h5.Article-Heading5 Method #[code throwErrorAndLog] of #[code ILogger] интерфейса is optional now
+
+      p.Article-Paragraph.
+        From now, if the #[+ImportantEntity--YDID Logger] #[+Term--YDID facade] will not&nbsp;find the implementation on the
+          #[+ImportantEntity__Code--YDID throwErrorAndLog] #[+Term--YDID method], the default implementation of this
+          #[+Term--YDID method] will be executed.
+
+      p.Article-Paragraph.
+        Recall that #[+ImportantEntity--YDID Logger] #[+Term--YDID класс] has #[+Keyword--YDID only]
+          #[+Keyword__Contrast--YDID static] #[+Term--YDID methods], but it if to pass the implementation of
+          #[code ILogger] #[+Term--YDID interface] by #[+ImportantEntity__Code--YDID setImplementation] #[+Term--YDID method],
+          the #[+Term__Contrast--YDID static methods] of the #[+ImportantEntity--YDID Logger] #[+Term--YDID class]
+          will call the #[+Keyword--YDID eponymous] #[+Term--YDID methods] of this implementation
+          #[+Keyphrase--YDID instead of default behaviour].
+
+      p.Article-Paragraph.
+        When throwing the error, the formatting functionality could be restricted and frequently default formatting
+          could be enough, that is why if to make this method required for the implementation, this implementation will
+          be often even with one in #[+ImportantEntity--YDID Logger] #[+Term--YDID class].
+        At the same time, the implementation of this method could required if you, for example, want to hide the
+          error message (the #[+ImportantEntity__Code--YDID message] #[+Term--YDID field] of the
+          #[+Term__Contrast--YDID native class] #[+ImportantEntity--YDID Error]) on the production mode from the users of
+          the web-site or the browser application those could check this message by the developer tools providing by the
+          browser.
+
+
+      h5.Article-Heading5 Improvement of the default implementation of #[code throwErrorAndLog] method of the #[code Logger] facade
+
+      p.Article-Paragraph.
+        Now the error message including the data from #[+ImportantEntity__Code--YDID title],
+          #[+ImportantEntity__Code--YDID occurrenceLocation], #[+ImportantEntity__Code--YDID innerError] (if defined)
+          and #[+ImportantEntity__Code--YDID additionalData] (if defined) #[+Term--YDID properties] of the
+          #[+Term--YDID parameter] of the #[+Term--YDID object type] #[+ImportantEntity__Code--YDID ThrownErrorLog] of the
+          #[+ImportantEntity__Code--YDID throwErrorAndLog] method (#[+Keyphrase--YDID default implementation]) will be
+          built not only when the #[+Term--YDID property] #[+ImportantEntity__Code--YDID errorInstance] has been defined,
+          but also when the #[+Term--YDID properties] #[+ImportantEntity__Code--YDID errorType] и
+          #[+ImportantEntity__Code--YDID description] defined instead.
+        In the #[+Keyword--YDID last] case, the #[+ImportantEntity__Code--YDID Error] #[+Term--YDID object] will be
+          created, and before throw it (by the #[+ImportantEntity__Code--YDID throw] #[+Term--YDID keyword])
+          the generated message will be written to its #[+ImportantEntity__Code--YDID message] #[+Term--YDID property].
+
+
+      h5.Article-Heading5 Type #[code Log] and its extensions
+
+      p.Article-Paragraph.
+        Recall that below #[+Term--YDID types] are the #[+Keyword--YDID extensions] of the #[+Term--YDID object]
+          #[+Term__Contrast--YDID type] #[+ImportantEntity--YDID Log]:
+
+      ul.Article-UnorderedList
+        li #[+ImportantEntity__Code--YDID ErrorLog]
+        li #[+ImportantEntity__Code--YDID ThrownErrorLog]
+        li #[+ImportantEntity__Code--YDID WarningLog]
+
+      p.Article-Paragraph.
+        In addition, #[+Keyphrase--YDID for the current version], the #[+Term--YDID types]
+          #[+ImportantEntity__Code--YDID SuccessLog] and #[+ImportantEntity__Code--YDID InfoLog] are #[+Keyword--YDID even]
+          with #[+Term--YDID Log].
+
+      ul.Article-UnorderedList
+
+        li.
+          The #[+Keyword--YDID optional] #[+Term--YDID булевское] #[+Term__Contrast--YDID property]
+            #[+ImportantEntity__Code--YDID compactLayout] has been added.
+          Intended that when been set to #[+ImportantEntity__Code--YDID true] the line break between the title
+            (#[+ImportantEntity__Code--YDID title] #[+Term--YDID property]) and description
+            (#[+ImportantEntity__Code--YDID description] #[+Term--YDID property]) will be removed,
+            #[+Keyphrase--YDID but it will depend on the specific implementation of the logger].
+
+        li.
+          The #[+Keyword--YDID optional] #[+Term--YDID boolean] #[+Term__Contrast--YDID property]
+            #[+ImportantEntity__Code--YDID mustOutputIf] has been added.
+          Intended that when been set to #[+ImportantEntity__Code--YDID false] the output to the console will be cancelled,
+            #[+Keyphrase--YDID but it will depend on the specific implementation of the logger].
+          Herewith, if the logger is being used via #[+ImportantEntity--YDID Logger] #[+Term--YDID facade],
+            regardless to specific implementation of the #[+ImportantEntity__Code--YDID ILogger] #[+Term--YDID interface],
+            the output will&nbsp;#[+Keyword--YDID not]&nbsp;be.
+
+
+      h3.Article-Heading3 Breaking changes
+
+      h4.Article-Heading4 Working with arrays
+
+
+
+
+      h4.Article-Heading4 Logging
+
+      h5.Article-Heading5 Type #[code Log] and its extensions
+
+      h6.Article-Heading6 Replacing of #[code customBadgeText] to polymorphic property #[code badge]
+
+      p.Article-Paragraph.
+        Now, instead of optional #[+Term--YDID string property] #[+ImportantEntity--YDID customBadgeText],
+          the #[+ImportantEntity__Code--YDID badge] #[+Term--YDID property] has been added which must be either
+          the object with #[+Term--YDID string property] #[+ImportantEntity__Code--YDID customText] or has
+          #[+ImportantEntity__Code--YDID false] value.
+
+      dl.Article-DescriptionList
+
+        dt Reason
+        dd.
+          The decision to make this label (it is depends on the implementation, but usually this label is catchy
+            because of presence of the background) optional because sometimes is could be redundant
+
+        dt Changes in your code will required if
+        dd You have used the #[+ImportantEntity__Code--YDID customBadgeText] property
+
+        dt Migration
+        dd.
+          Replace the #[+ImportantEntity__Code--YDID customBadgeText] #[+Term--YDID property] to the #[+Term--YDID property]
+            #[+ImportantEntity__Code--YDID badge] of the #[+Term__Contrast--YDID object] type with the child
+            #[+Term--YDID property] #[+ImportantEntity__Code--YDID customText].
+          For example, for the #[+SecondaryEntity__Code--YDID { customBadgeText: "DEBUG", /* ... */ }] it will be
+            #[+SecondaryEntity__Code--YDID { badge: { customText: "DEBUG", /* ... */ } }].
+          Alternatively, you can specify the #[+ImportantEntity__Code--YDID false] value for the
+            #[+ImportantEntity__Code--YDID badge] #[+Term--YDID property] if you don't want this badge be displayed
+            when using the standard implementations of the #[+ImportantEntity__Code--YDID ILogger] #[+Term--YDID interface].
+
+
+      h6.Article-Heading6.
+        Renaming of the #[code wrappableError] property to #[code innerError] at
+          #[+ImportantEntity__Code--YDID ThrownErrorLog] type

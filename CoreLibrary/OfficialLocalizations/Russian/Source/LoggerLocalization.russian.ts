@@ -1,21 +1,20 @@
 import type { Logger } from "@yamato-daiwa/es-extensions";
 
 
-const LoggerLocalization__Russian: Logger.Localization = {
+export const loggerLocalization__russian: Logger.Localization = {
 
   badgesDefaultTitles: {
     error: "Ошибка",
-    success: "Нормальное завершение",
     warning: "Предупреждение",
-    info: "Оповещение"
+    info: "Оповещение",
+    success: "Нормальное завершение",
+    generic: "Общее"
   },
 
   errorType: "Тип ошибки",
   occurrenceLocation: "Локализация происшествия",
   caughtError: "Перехваченная ошибка",
-  wrappableError: "Обёрнутая ошибка",
+  innerError: "Обёрнутая ошибка",
   appendedData: "Приложенные данные"
+
 };
-
-
-export default LoggerLocalization__Russian;

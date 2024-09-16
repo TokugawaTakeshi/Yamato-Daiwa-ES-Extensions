@@ -6,57 +6,60 @@
 
 
 /* === 定数・列挙 ===================================================================================================== */
-export { default as AbbreviatedJapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/AbbreviatedJapaneseDaysOfWeek";
-export { default as JapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/JapaneseDaysOfWeek";
-export { default as JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseTraditionalMonthsNames";
-export { default as JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";
+export { AbbreviatedJapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/AbbreviatedJapaneseDaysOfWeek";
+export { JapaneseDaysOfWeek } from "./ConstantsAndEnumerations/DateTime/JapaneseDaysOfWeek";
+export { JapaneseTraditionalMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseTraditionalMonthsNames";
+export { JapaneseMonthsNames } from "./ConstantsAndEnumerations/DateTime/JapaneseMonthsNames";
 
 
 /* === 生オブジェクト系データ処理 =========================================================================================== */
-export { default as RawObjectDataProcessorLocalization__Japanese } from "./RawObjectDataProcessorLocalization.japanese";
+export { rawObjectDataProcessorLocalization__japanese } from "./RawObjectDataProcessorLocalization.japanese";
 
 
 /* === ログ =========================================================================================================== */
-export { default as LoggerLocalization__Japanese } from "./LoggerLocalization.japanese";
-export { default as PoliteErrorsMessagesBuilder__Japanese } from "./PoliteErrorsMessagesBuilderLocalization.japanese";
+export { loggerLocalization__japanese } from "./LoggerLocalization.japanese";
+export { politeErrorsMessagesBuilder__japanese } from "./PoliteErrorsMessagesBuilderLocalization.japanese";
 
 
 /* === エラークラス ====================================================================================================== */
-export { default as AlgorithmMismatchErrorLocalization__Japanese } from
+export { algorithmMismatchErrorLocalization__japanese } from
     "./Errors/AlgorithmMismatchErrorLocalization.japanese";
-export { default as ClassRedundantSubsequentInitializationErrorLocalization__Japanese } from
+export { classRedundantSubsequentInitializationErrorLocalization__japanese } from
     "./Errors/ClassRedundantSubsequentInitializationErrorLocalization.japanese";
-export { default as ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese } from
+export { classRequiredInitializationHasNotBeenExecutedErrorLocalization__japanese } from
     "./Errors/ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.japanese";
-export { default as ConfigFileNotFoundErrorLocalization__Japanese } from
+export { configFileNotFoundErrorLocalization__japanese } from
     "./Errors/ConfigFileNotFoundErrorLocalization.japanese";
-export { default as CrossBrowserIssueErrorLocalization__Japanese } from
+export { crossBrowserIssueErrorLocalization__japanese } from
     "./Errors/CrossBrowserIssueErrorLocalization.japanese";
-export { default as DataRetrievingFailedErrorLocalization__Japanese } from
+export { dataRetrievingFailedErrorLocalization__japanese } from
     "./Errors/DataRetrievingFailedErrorLocalization.japanese";
-export { default as DataSubmittingFailedErrorLocalization__Japanese } from
+export { dataSubmittingFailedErrorLocalization__japanese } from
     "./Errors/DataSubmittingFailedErrorLocalization.japanese";
-export { default as DOM_ElementRetrievingFailedErrorLocalization__Japanese } from
+export { DOM_ElementRetrievingFailedErrorLocalization__japanese } from
     "./Errors/DOM_ElementRetrievingFailedErrorLocalization.japanese";
-export { default as FileReadingFailedErrorLocalization__Japanese } from
+export { fileReadingFailedErrorLocalization__japanese } from
     "./Errors/FileReadingFailedErrorLocalization.japanese";
-export { default as FileWritingFailedErrorLocalization__Japanese } from
+export { fileWritingFailedErrorLocalization__japanese } from
     "./Errors/FileWritingFailedErrorLocalization.japanese";
-export { default as ImproperUsageErrorLocalization__Japanese } from
+export { improperUsageErrorLocalization__japanese } from
     "./Errors/ImproperUsageErrorLocalization.japanese";
-export { default as IncompatiblePropertiesInObjectTypeParameterErrorLocalization__Japanese } from
+export { incompatiblePropertiesInObjectTypeParameterErrorLocalization__japanese } from
     "./Errors/IncompatiblePropertiesInObjectTypeParameterLocalization.japanese";
-export { default as InterProcessInteractionFailedErrorLocalization__Japanese } from
+export { interProcessInteractionFailedErrorLocalization__japanese } from
     "./Errors/InterProcessInteractionFailedErrorLocalization.japanese";
-export { default as InvalidConfigErrorLocalization__Japanese } from
+export { invalidConfigErrorLocalization__japanese } from
     "./Errors/InvalidConfigErrorLocalization.japanese";
-export { default as InvalidExternalDataErrorLocalization__Japanese } from
+export { invalidExternalDataErrorLocalization__japanese } from
     "./Errors/InvalidExternalDataErrorLocalization.japanese";
-export { default as InvalidParameterValueErrorLocalization__Japanese } from
+export { invalidParameterValueErrorLocalization__japanese } from
     "./Errors/InvalidParameterValueErrorLocalization.japanese";
-export { default as ModuleDynamicLoadingFailedErrorLocalization__Japanese } from
+export { moduleDynamicLoadingFailedErrorLocalization__japanese } from
     "./Errors/ModuleDynamicLoadingFailedErrorLocalization.japanese";
-export { default as UnexpectedEventErrorLocalization__Japanese } from
+export { unexpectedEventErrorLocalization__japanese } from
     "./Errors/UnexpectedEventErrorLocalization.japanese";
-export { default as UnsupportedScenarioErrorLocalization__Japanese } from
+export { unsupportedScenarioErrorLocalization__japanese } from
     "./Errors/UnsupportedScenarioErrorLocalization.japanese";
+
+/* === 関数 ========================================================================================================== */
+export { formatJapanesePhoneNumber } from "./Strings/formatJapanesePhoneNumber";

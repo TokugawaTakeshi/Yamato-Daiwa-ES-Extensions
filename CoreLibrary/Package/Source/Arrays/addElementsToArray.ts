@@ -1,5 +1,11 @@
+import { isNonNegativeInteger } from "../index";
+import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
+import Logger from "../Logging/Logger";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+
+
 export default function addElementsToArray<ArrayElement>(
-  sourceData:
+  compoundParameter:
       Readonly<
         { newElements: ReadonlyArray<ArrayElement>; } &
         (
@@ -13,33 +19,75 @@ export default function addElementsToArray<ArrayElement>(
           }
         ) &
         (
-          { toStart: true; } |
-          { toEnd: true; } |
-          { toPosition__numerationFrom0: number; } |
-          { toPosition__numerationFrom1: number; }
+          {
+            toStart: true;
+            toEnd?: undefined;
+            toPosition__numerationFrom0?: undefined;
+            toPosition__numerationFrom1?: undefined;
+          } |
+          {
+            toEnd: true;
+            toStart?: undefined;
+            toPosition__numerationFrom0?: undefined;
+            toPosition__numerationFrom1?: undefined;
+          } |
+          {
+            toPosition__numerationFrom0: number;
+            toStart?: undefined;
+            toEnd?: undefined;
+            toPosition__numerationFrom1?: undefined;
+          } |
+          {
+            toPosition__numerationFrom1: number;
+            toStart?: undefined;
+            toEnd?: undefined;
+            toPosition__numerationFrom0?: undefined;
+          }
         )
       >
 ): Array<ArrayElement> {
 
-  const workpiece: Array<ArrayElement> = sourceData.mutably ?
-      sourceData.targetArray : [ ...sourceData.targetArray ];
+  const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
+      compoundParameter.targetArray : [ ...compoundParameter.targetArray ];
 
-  if ("toStart" in sourceData) {
-    workpiece.unshift(...sourceData.newElements);
+  if ("toStart" in compoundParameter) {
+    workpiece.unshift(...compoundParameter.newElements);
     return workpiece;
   }
 
 
-  if ("toEnd" in sourceData) {
-    workpiece.push(...sourceData.newElements);
+  if ("toEnd" in compoundParameter) {
+    workpiece.push(...compoundParameter.newElements);
     return workpiece;
   }
 
 
-  const positionOfFirstNewElement__numerationFrom0: number = "toPosition__numerationFrom0" in sourceData ?
-      sourceData.toPosition__numerationFrom0 : sourceData.toPosition__numerationFrom1 - 1;
+  let positionOfFirstNewElement__numerationFrom0: number;
 
-  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...sourceData.newElements);
+  if (isNonNegativeInteger(compoundParameter.toPosition__numerationFrom0)) {
+    positionOfFirstNewElement__numerationFrom0 = compoundParameter.toPosition__numerationFrom0;
+  } else if (isNaturalNumber(compoundParameter.toPosition__numerationFrom1)) {
+    positionOfFirstNewElement__numerationFrom0 = compoundParameter.toPosition__numerationFrom1 - 1;
+  } else {
+    Logger.throwErrorAndLog({
+      errorInstance: new InvalidParameterValueError({
+        parameterNumber: 1,
+        parameterName: "compoundParameter",
+        messageSpecificPart:
+            "The target position has been incorrectly specified. " +
+            "The valid alternatives are:\n" +
+            "● \"toStart\": must the the boolean herewith \"true\" only" +
+            "● \"toEnd\": must the the boolean herewith \"true\" only" +
+            "● \"toPosition__numerationFrom0\": must the the positive integer\n" +
+            "● \"toPosition__numerationFrom1\": must the the natual number"
+      }),
+      title: InvalidParameterValueError.localization.defaultTitle,
+      occurrenceLocation: "addElementsToArray(compoundParameter)"
+    });
+  }
+
+
+  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...compoundParameter.newElements);
 
   return workpiece;
 

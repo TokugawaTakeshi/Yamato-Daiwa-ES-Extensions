@@ -29,15 +29,13 @@ abstract class PoliteErrorsMessagesBuilder {
 
     return `\n${ localization.introduction }` +
 
-        `${
-          insertSubstring(
-            bugTackerURI,
-            {
-              modifier: (definedBugTrackerURI: string): string =>
-                  `\n\n${ localization.generateReportingRequest({ bugTrackerURI: definedBugTrackerURI }) }`
-            }
-          )
-        }` +
+        insertSubstring(
+          bugTackerURI,
+          {
+            modifier: (definedBugTrackerURI: string): string =>
+                `\n\n${ localization.generateReportingRequest({ bugTrackerURI: definedBugTrackerURI }) }`
+          }
+        ) +
 
         `\n\n${ localization.whatHappened.heading }` +
         `\n${ localization.whatHappened.introduction }` +

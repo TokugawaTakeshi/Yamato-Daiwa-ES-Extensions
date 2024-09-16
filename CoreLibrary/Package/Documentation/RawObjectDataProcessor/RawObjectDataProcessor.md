@@ -1346,7 +1346,7 @@ each error message.
 
 Officially, Japanese and Russian localization are available.
 You can create your ows localization object of **RawObjectDataProcessor.Localization** type.
-Check the [listing of English localization](../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization__English.ts)
+Check the [listing of English localization](../../Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts)
 as reference.
 
 ### getNormalizedValueTypeID

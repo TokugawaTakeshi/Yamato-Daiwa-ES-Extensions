@@ -12,7 +12,7 @@ const objectDataFilesProcessorLocalization__english: Localization = {
       "If it is intentional, specify \"dataSchema\" property with desired element of " +
         "\"ObjectDataFilesProcessor.SupportedSchemas\" enumeration.",
 
-  generateUnsupportedFileNameExtensionErrorMessage: (
+  generateUnsupportedFileNameExtension: (
     { filePath, fileNameLastExtensionWithoutLeadingDot }: Localization.UnsupportedFileNameExtensionErrorMessage.TemplateVariables
   ): string =>
       `Target file "${ filePath }" has unsupported file name extension "${ fileNameLastExtensionWithoutLeadingDot }". ` +

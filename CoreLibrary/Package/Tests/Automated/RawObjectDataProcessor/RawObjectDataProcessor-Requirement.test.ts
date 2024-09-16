@@ -1,7 +1,7 @@
 import {
   RawObjectDataProcessor,
   undefinedToEmptyArray,
-  RawObjectDataProcessorLocalization__English
+  rawObjectDataProcessorLocalization__english
 } from "../../../Source";
 import type { ArbitraryObject } from "../../../Source";
 import { deepEqual, notDeepEqual, strictEqual } from "assert";
@@ -10,7 +10,7 @@ import { deepEqual, notDeepEqual, strictEqual } from "assert";
 describe("RawObjectProcessor: requirement", (): void => {
 
   const validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder =
-      new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(RawObjectDataProcessorLocalization__English);
+      new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(rawObjectDataProcessorLocalization__english);
 
 
   describe("Definitely required/optional object property", (): void => {

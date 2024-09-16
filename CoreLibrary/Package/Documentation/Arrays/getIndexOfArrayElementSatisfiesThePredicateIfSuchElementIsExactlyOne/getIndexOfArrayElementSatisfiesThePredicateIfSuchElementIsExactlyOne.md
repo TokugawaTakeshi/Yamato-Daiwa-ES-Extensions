@@ -17,7 +17,7 @@
 
 * Returns the index of array element matching with the `predicate` is such element is exactly one in `targetArray`.
 * If the element matching with the `predicate` is not presents or there are multiple matches with the predicate,
-  * **UnexpectedEventError** error will be thrown if `mustThrowErrorIfElementNotFoundOrMoreThan1` option has been specified as `true`.
+  * **UnexpectedEventError** error will be thrown if `mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` option has been specified as `true`.
   * otherwise `null` will be returned
 
 If multiple elements matching with the predicate are being expected in **targetArray** and you want indexes of all of them,
@@ -84,7 +84,7 @@ try {
   indexOfDesiredElement = getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (product: Product): boolean => product.price > 50,
-    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
   );
   
 } catch (error) {
@@ -115,7 +115,7 @@ try {
   indexOfDesiredElement = getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample,
     (product: Product): boolean => product.ID === 3,
-    { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+    { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
   );
   
 } catch (error) {

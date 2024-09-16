@@ -1,45 +1,48 @@
-import ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English from
+import classRequiredInitializationHasNotBeenExecutedErrorLocalization__english from
     "./ClassRequiredInitializationHasNotBeenExecutedErrorLocalization.english";
 
 
 class ClassRequiredInitializationHasNotBeenExecutedError extends Error {
 
   public static readonly NAME: string = "ClassRequiredInitializationHasNotBeenExecutedError";
+
   public static localization: ClassRequiredInitializationHasNotBeenExecutedError.Localization =
-      ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__English;
+      classRequiredInitializationHasNotBeenExecutedErrorLocalization__english;
 
 
-  public constructor(namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorNamedParameters) {
+  public constructor(compoundParameter: ClassRequiredInitializationHasNotBeenExecutedError.ConstructorParameter) {
 
     super();
 
     this.name = ClassRequiredInitializationHasNotBeenExecutedError.NAME;
 
-    if ("customMessage" in namedParameters) {
-      this.message = namedParameters.customMessage;
-    } else {
-      this.message = ClassRequiredInitializationHasNotBeenExecutedError.localization.generateDescription(namedParameters);
-    }
+    this.message = "customMessage" in compoundParameter ?
+        compoundParameter.customMessage :
+        ClassRequiredInitializationHasNotBeenExecutedError.localization.generateDescription(compoundParameter);
+
   }
+
 }
 
 
 namespace ClassRequiredInitializationHasNotBeenExecutedError {
 
-  export type ConstructorNamedParameters =
-      Localization.DescriptionTemplateNamedParameters | Readonly<{ readonly customMessage: string; }>;
+  export type ConstructorParameter =
+      Localization.DescriptionTemplateVariables |
+      Readonly<{ readonly customMessage: string; }>;
 
   export type Localization = Readonly<{
     defaultTitle: string;
-    generateDescription: (namedParameters: Localization.DescriptionTemplateNamedParameters) => string;
+    generateDescription: (templateVariables: Localization.DescriptionTemplateVariables) => string;
   }>;
 
   export namespace Localization {
-    export type DescriptionTemplateNamedParameters = Readonly<{
+    export type DescriptionTemplateVariables = Readonly<{
       className: string;
       initializingMethodName: string;
     }>;
   }
+
 }
 
 

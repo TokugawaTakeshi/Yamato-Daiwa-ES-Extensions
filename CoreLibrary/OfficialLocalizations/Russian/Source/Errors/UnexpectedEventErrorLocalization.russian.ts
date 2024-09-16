@@ -1,9 +1,6 @@
 import type { UnexpectedEventError } from "@yamato-daiwa/es-extensions";
 
 
-const UnexpectedEventErrorLocalization__Russian: UnexpectedEventError.Localization = {
+export const unexpectedEventErrorLocalization__russian: UnexpectedEventError.Localization = {
   defaultTitle: "Произошло считавшееся практически невозможным событие"
 };
-
-
-export default UnexpectedEventErrorLocalization__Russian;

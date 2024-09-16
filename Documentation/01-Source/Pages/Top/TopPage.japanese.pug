@@ -11,27 +11,22 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("トップ");
-    HTML_PageMetaData = {
-      description:
-          "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）は、TypeScript言語での高品質開発を補助するための専用ライブラリである。" +
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("トップ"),
+        description:
+            "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）は、TypeScript言語での高品質開発を補助するための専用ライブラリである。" +
             "多数の特殊化した簡単な関数も、例えばデータ構造の妥当性確認及び処理専用の「RawObjectDataProcessor」等、豊富な機能クラスを含んでいる。" +
-          "関数名や引数名を和訳すれば、説明書を見ずともコードの動作が判る様に設計されている。",
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon.ico";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/Minimal/MinimalLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents",
-      "@Pages/Top/TopPage"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+            "関数名や引数名を和訳すれば、説明書を見ずともコードの動作が判る様に設計されている。"
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/Minimal/MinimalLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents",
+        "@Pages/Top/TopPage"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("top");
 
@@ -41,7 +36,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -65,6 +60,17 @@ block append SpecificContent
 
     p.TopPage-ShortDescription-Heading.
       TypeScriptでの高品質開発専用豊富なライブラリ群
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/Top/Images/TopPage-MainVisual.japanese",
+      imageAlternateText:
+          "「Yamato Daiwa ECMAScript Extensions」（略：YDEE）ライブラリ。" +
+          "ルーチンコードを減らす為の透明なAPIの関数・クラス揃い。" +
+          "無anyのTypeScript。",
+      autoAspectRatioByYDA: true,
+      geometry: SingleImageViewer__YDF.GeometricVariations.minimalistic,
+      decoration: SingleImageViewer__YDF.DecorativeVariations.minimalistic
+    }).TopPage-MainVisual
 
     +AdmonitionBlock--YDF({
       decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,

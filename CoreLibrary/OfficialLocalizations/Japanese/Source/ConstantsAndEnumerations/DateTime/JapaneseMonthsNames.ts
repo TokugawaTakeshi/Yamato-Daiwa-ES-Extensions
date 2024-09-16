@@ -1,4 +1,4 @@
-enum JapaneseMonthsNames {
+export enum JapaneseMonthsNames {
   january = "１月",
   february = "２月",
   march = "３月",
@@ -12,6 +12,3 @@ enum JapaneseMonthsNames {
   november = "１１月",
   december = "１２月"
 }
-
-
-export default JapaneseMonthsNames;

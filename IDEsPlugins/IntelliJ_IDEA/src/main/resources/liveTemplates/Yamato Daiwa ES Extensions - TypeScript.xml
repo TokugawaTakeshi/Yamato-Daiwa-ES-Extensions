@@ -65,7 +65,7 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getExpectedToBeSingleDOM_Element" value="getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  context: $CONTEXT$,&#10;  expectedDOM_ElementSubtype: $DOM_ELEMENT_SUBTYPE$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="getExpectedToBeSingleDOM_Element" value="getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  contextElement: $CONTEXT$, // `ParentNode` or `{ selector: &quot;#SELECTOR&quot; }`&#10;  expectedDOM_ElementSubtype: $DOM_ELEMENT_SUBTYPE$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="SELECTOR" expression="" defaultValue="&quot;\&quot;.Button\&quot;&quot;" alwaysStopAt="true" />
     <variable name="CONTEXT" expression="" defaultValue="&quot;createDOM_ElementFromHTML_Code(\&quot;&lt;div class='ActionBar'&gt;&lt;button type='button' class='Button'&gt;&lt;/button&gt;&lt;/div&gt;\&quot;)&quot;" alwaysStopAt="true" />
     <variable name="DOM_ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLButtonElement&quot;" alwaysStopAt="true" />
@@ -169,7 +169,7 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getExpectedToBeSingleChildOfTemplateElement" value="getExpectedToBeSingleChildOfTemplateElement({&#10;&#10;  // === How you want to retrieve the template element?  &#10;  $END$templateElement: sampleTemplateElement,&#10;  &#10;  // or&#10;  &#10;  templateElementSelector: &quot;#TEMPLATE_ELEMENT&quot;,&#10;  context: parentElement, // optional&#10;&#10;  &#10;  // === If you want the specific subtype of &quot;Element&quot;, specify it:&#10;  expectedChildElementSubtype: HTMLElement,&#10;  &#10;  &#10;  // === If you don't need the template element anymore, you can remove or replace it:&#10;  mustRemoveTemplateElementOnceDone: true,&#10;  &#10;  // or&#10;  &#10;  mustReplaceTemplateElementOnceDoneWith: newElement,&#10;  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="getExpectedToBeSingleChildOfTemplateElement" value="getExpectedToBeSingleChildOfTemplateElement({&#10;&#10;  // === How you want to retrieve the template element?  &#10;  $END$templateElement: sampleTemplateElement,&#10;  &#10;  // or&#10;  &#10;  templateElementSelector: &quot;#TEMPLATE_ELEMENT&quot;,&#10;  &#10;  // optional&#10;  contextElement: parentElement,&#10;  // or:&#10;  contextElement: { selector: &quot;#PRODUCT_CARD&quot; } // must refer to exactly one element&#10;  &#10;  &#10;  // === If you want the specific subtype of &quot;Element&quot;, specify it:&#10;  expectedChildElementSubtype: HTMLElement,&#10;  &#10;  &#10;  // === If you don't need the template element anymore, you can remove or replace it:&#10;  mustRemoveTemplateElementOnceDone: true,&#10;  &#10;  // or&#10;  &#10;  mustReplaceTemplateElementOnceDoneWith: newElement,&#10;  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
@@ -284,30 +284,6 @@
   <template name="cloneDOM_Element" value="cloneDOM_Element({&#10;  targetElement: $TARGET_ELEMENT$,&#10;  mustCopyAllChildren: $MUST_COPY_ALL_CHILDREN$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="MUST_COPY_ALL_CHILDREN" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="&quot;true&quot;" alwaysStopAt="true" />
-    <context>
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
-    </context>
-  </template>
-  <template name="cropArray" value="cropArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$startingElementNumber__numerationFrom0: $STARTING_POSITION$,&#10;  startingElementNumber__numerationFrom1: $STARTING_POSITION$,&#10;  fromStart: true,&#10;  &#10;  // TODO Leave one, delete remain&#10;  endingElementNumber__numerationFrom0: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  endingElementNumber__numerationFrom1: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  elementsCount: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  untilEnd: true,&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { cropArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
-    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
-    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
-    <variable name="STARTING_POSITION" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="ENDING_POSITION_OR_ELEMENTS_COUNT" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
-    </context>
-  </template>
-  <template name="ca" value="cropArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$startingElementNumber__numerationFrom0: $STARTING_POSITION$,&#10;  startingElementNumber__numerationFrom1: $STARTING_POSITION$,&#10;  fromStart: true,&#10;  &#10;  // TODO Leave one, delete remain&#10;  endingElementNumber__numerationFrom0: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  endingElementNumber__numerationFrom1: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  elementsCount: $ENDING_POSITION_OR_ELEMENTS_COUNT$,&#10;  untilEnd: true,&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { cropArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `cropArray`" toReformat="false" toShortenFQNames="true">
-    <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
-    <variable name="MUTABLY" expression="enum(&quot;true&quot;, &quot;false&quot;)" defaultValue="" alwaysStopAt="true" />
-    <variable name="STARTING_POSITION" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="ENDING_POSITION_OR_ELEMENTS_COUNT" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />

@@ -1,11 +1,8 @@
 import type { FileReadingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const FileReadingFailedErrorLocalization__Russian: FileReadingFailedError.Localization = {
+export const fileReadingFailedErrorLocalization__russian: FileReadingFailedError.Localization = {
   defaultTitle: "Ошибка при чтении файла",
-  generateDescription: (namedParameters: FileReadingFailedError.Localization.DescriptionTemplateNamedParameters): string =>
-      `Произошла ошибка при чтении файла пути '${ namedParameters.filePath }'.`
+  generateDescription: ({ filePath }: FileReadingFailedError.Localization.DescriptionTemplateVariables): string =>
+      `Произошла ошибка при чтении файла пути "${ filePath }".`
 };
-
-
-export default FileReadingFailedErrorLocalization__Russian;

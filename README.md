@@ -1,6 +1,6 @@
 # Yamato-Daiwa ES-Extensions 〔YDEE〕
 
-![Hero image of @yamato-daiwa/es-extensions](https://user-images.githubusercontent.com/41653501/168199236-0895483f-e4f1-4d1f-b7a8-ab296e51a57d.png)
+![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/16885e85-0a9a-49ed-afaa-1010ad9bdf06)
 
 * [📖 **Core library** (documentation for `@yamato-daiwa/es-extensions` is here)](CoreLibrary/Package/README.md)
 * [📖 **BrowserJS functionality** (documentation for `@yamato-daiwa/es-extensions-browserjs` is here)](BrowserJS/Package/README.md)

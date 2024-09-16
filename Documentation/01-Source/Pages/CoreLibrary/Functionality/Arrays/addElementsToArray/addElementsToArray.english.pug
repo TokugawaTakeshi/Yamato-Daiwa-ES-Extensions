@@ -11,32 +11,25 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("addElementsToArray");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "addElementsToArray",
-        whatFunctionDoes:
-            "adds elements to start, end, or specified position of target array. " +
-            "Mutable or non-mutable adding (without deep copying) are available."
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("addElementsToArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "addElementsToArray",
+          whatFunctionDoes:
+              "adds elements to start, end, or specified position of target array. " +
+              "Mutable or non-mutable adding (without deep copying) are available."
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
-
-    RoutingEmulator.setCurrentRoute(
-      "coreLibrary.functionality.arrays.addingOfElements.addElementsToArray"
-    );
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.addingOfElements.addElementsToArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: "./addElementsToArray.japanese.html",
@@ -50,7 +43,7 @@ block append Metadata
         addElementsToArray.$sectioning;
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 

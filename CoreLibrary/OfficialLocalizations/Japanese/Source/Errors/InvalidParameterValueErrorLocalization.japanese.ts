@@ -2,15 +2,19 @@ import type { InvalidParameterValueError } from "@yamato-daiwa/es-extensions";
 import { insertSubstring } from "@yamato-daiwa/es-extensions";
 
 
-const InvalidParameterValueErrorLocalization__Japanese: InvalidParameterValueError.Localization = {
+export const invalidParameterValueErrorLocalization__japanese: InvalidParameterValueError.Localization = {
   defaultTitle: "引数の値の不正",
   generateDescription:
-      (namedParameters: InvalidParameterValueError.Localization.DescriptionTemplateNamedParameters): string =>
-          `${ namedParameters.parameterNumber }番の引数（「${ namedParameters.parameterName }」）が不正な値になっている。` +
-          `${ insertSubstring(namedParameters.messageSpecificPart, {
-            modifier: (messageSpecificPart: string): string => `\n${ messageSpecificPart }`
-          }) }`
+      (
+        {
+          parameterNumber,
+          parameterName,
+          messageSpecificPart
+        }: InvalidParameterValueError.Localization.DescriptionTemplateVariables
+      ): string =>
+          `${ parameterNumber }番の引数（「${ parameterName }」）が不正な値になっている。` +
+          insertSubstring(
+            messageSpecificPart,
+            { modifier: (specifiedMessageSpecificPart: string): string => `\n${ specifiedMessageSpecificPart }` }
+          )
 };
-
-
-export default InvalidParameterValueErrorLocalization__Japanese;

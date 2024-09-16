@@ -2,6 +2,13 @@
 
 # yamato_daiwa-es_extensions-intellij_platform_plugin Changelog
 
+## [0.0.8]
+
+### Changed
+
+* Support IntelliJ IDEA platform until **2024.2.1**
+* Update <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> live template according to v1.7.X API.
+* Update <kbd>getExpectedToBeSingleDOM_Element</kbd> live template to v1.7.X API.
 
 ## [0.0.8]
 
@@ -75,7 +82,7 @@
 * <kbd>aeta</kbd> Live template for [**addElementsToArray**](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html) function
 * <kbd>cdefhc</kbd> Live template for [createDOM_ElementFromHTML_Code](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md) function
 * <kbd>dceh</kbd> Live template for [delegateClickEventHandling](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/delegateClickEventHandling.md) function
-* <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Inserts working examples of usage of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
+* <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Inserts working examples of usage of [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 * <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> Inserts the examples of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/getExpectedToBeSingleChildOfTemplateElement.md) usage
 * <kbd>getExpectedToBeSingleDOM_Element</kbd> Inserts the examples of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/getExpectedToBeSingleDOM_Element.md) usage
 * <kbd>getIndexOfArrayElementIfSuchElementIsExactlyOne</kbd> Live template for  [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)

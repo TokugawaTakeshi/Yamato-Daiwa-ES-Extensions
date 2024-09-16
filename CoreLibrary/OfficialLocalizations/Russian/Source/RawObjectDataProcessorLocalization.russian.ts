@@ -6,7 +6,7 @@ import {
 import Localization = RawObjectDataProcessor.Localization;
 
 
-const RawObjectDataProcessorLocalization__Russian: Localization = {
+export const rawObjectDataProcessorLocalization__russian: Localization = {
 
   errorMessageBasicTemplate(
     {
@@ -25,19 +25,23 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
       type: this.valueType(targetPropertyValueSpecification.type)
     });
 
-    return `${ title }` +
+    return title +
         `\n\n●　Свойство / элемент: '${ targetPropertyDotSeparatedQualifiedName }'` +
-        `${ insertSubstring(
+        insertSubstring(
           targetPropertyNewName,
           { modifier: (targetSubstring: string): string => ` (новое имя: ${ targetSubstring })` }
-        ) }` +
+        ) +
         `\n${ specificMessagePart }` +
         `\n\n●　Спецификация свойства / элемента: \n${ propertyOrElementSpecification__stringified }` +
         `\n●　Действительное значение: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
-        `${ insertSubstring(targetPropertyStringifiedValueBeforeFirstPreValidationModification, {
-          modifier: (targetSubstring: string): string => 
-              `\n●　Значение свойства перед первой предвалидационной модификацией: ${ targetSubstring }`
-        }) }`;
+        insertSubstring(
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+          {
+            modifier: (targetSubstring: string): string =>
+                `\n●　Значение свойства перед первой предвалидационной модификацией: ${ targetSubstring }`
+          }
+        );
+
   },
 
   buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Ошибка №${ messageNumber } ==========`; },
@@ -264,9 +268,15 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     };
   },
 
-  valueIsNotAmongAllowedAlternativesErrorMessageTextData: {
-    title: "Неразрешенный вариант значения",
-    specificMessagePart: "Это значение отсутствует среди допустимых вариантов."
+  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
+    allowedAlternatives: ReadonlyArray<string>
+  ): Localization.TextDataForErrorMessagesBuilding {
+    return {
+      title: "Недопустимый вариант значения",
+      specificMessagePart:
+          "Это значение отсутствует среди перечисленных ниже допустимых вариантов.\n" +
+          allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n")
+    };
   },
 
   buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
@@ -343,7 +353,7 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     return "Значения типа 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (алиас: 'Object'）и" +
         "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（алиас: Map）не могут быть указанны одновременно как варианты " +
         "'ValuesTypesIDs.oneOf', потому как точки зрения ECMAScript оба имеют тип 'object'. Значение помечено как невалидное.\n" +
-        `${ stringifyAndFormatArbitraryValue(targetValueSpecification) }`;
+        stringifyAndFormatArbitraryValue(targetValueSpecification);
   },
 
   buildUnsupportedValueTypeErrorMessageTextData(
@@ -367,6 +377,3 @@ const RawObjectDataProcessorLocalization__Russian: Localization = {
     };
   }
 };
-
-
-export default RawObjectDataProcessorLocalization__Russian;

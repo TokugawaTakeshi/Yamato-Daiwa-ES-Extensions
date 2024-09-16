@@ -1,17 +1,16 @@
 import type { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato-daiwa/es-extensions";
 
 
-const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese:
+export const classRequiredInitializationHasNotBeenExecutedErrorLocalization__japanese:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization =
 {
   defaultTitle: "クラスが初期化されていない",
   generateDescription:
       (
-        namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
+        {
+          className,
+          initializingMethodName
+        }: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateVariables
       ): string =>
-          `クラス「${ namedParameters.className }」で、必要な初期化メソッド「${ namedParameters.initializingMethodName }」` +
-          "が呼び出されていない。"
+          `クラス「${ className }」で、必要な初期化メソッド「${ initializingMethodName }」が呼び出されていない。`
 };
-
-
-export default ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Japanese;

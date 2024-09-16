@@ -13,28 +13,23 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ja";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("ConsoleCommandsParser");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.class({
-        className: "ConsoleCommandsParser",
-        whatIsClassFor:
-            "クラスはコンソールコマンドの引数ベクトルの処理、バリデーションそしてオブジェクト系の特定のTypeScript型への変換のに使われている。" +
-            "尚、全コマンドに関する参考本文（ヘルプ）生成機能もある。"
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("ConsoleCommandsParser"),
+        description: MetaDescriptionTemplates.class({
+          className: "ConsoleCommandsParser",
+          whatIsClassFor:
+              "クラスはコンソールコマンドの引数ベクトルの処理、バリデーションそしてオブジェクト系の特定のTypeScript型への変換のに使われている。" +
+              "尚、全コマンドに関する参考本文（ヘルプ）生成機能もある。"
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("nodeJS.utils.ConsoleCommandsParser");
 
@@ -46,7 +41,7 @@ block append Metadata
     const pageTableOfContents = localizedRouting.nodeJS.$children.utils.$children.ConsoleApplicationLogger.$sectioning;
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 

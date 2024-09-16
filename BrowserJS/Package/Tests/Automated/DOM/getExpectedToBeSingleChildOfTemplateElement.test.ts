@@ -23,7 +23,7 @@ describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
 
       const templateElement: HTMLTemplateElement = getExpectedToBeSingleDOM_Element({
         selector: "#CardTemplate",
-        context: sampleDOM,
+        contextElement: sampleDOM,
         expectedDOM_ElementSubtype: HTMLTemplateElement
       });
 
@@ -39,7 +39,7 @@ describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
       Assert.strictEqual(
         getExpectedToBeSingleChildOfTemplateElement({
           templateElementSelector: "#CardTemplate",
-          context: sampleDOM
+          contextElement: sampleDOM
         }).className,
         "Card"
       );

@@ -1,17 +1,17 @@
 import type { ClassRequiredInitializationHasNotBeenExecutedError } from "@yamato-daiwa/es-extensions";
 
 
-const ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Russian:
-    ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
-
+export const classRequiredInitializationHasNotBeenExecutedErrorLocalization__russian:
+    ClassRequiredInitializationHasNotBeenExecutedError.Localization =
+{
   defaultTitle: "Обязательная инициализация класса не была выполнена",
   generateDescription:
       (
-        namedParameters: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateNamedParameters
+        {
+          className,
+          initializingMethodName
+        }: ClassRequiredInitializationHasNotBeenExecutedError.Localization.DescriptionTemplateVariables
       ): string =>
-          `Класс '${ namedParameters.className }' требует инициализацию, но инициализирующий метод ` +
-          `'${ namedParameters.initializingMethodName }' не был вызван.`
+          `Класс "${ className }" требует инициализацию, но инициализирующий метод "${ initializingMethodName }" ` +
+            "не был вызван."
 };
-
-
-export default ClassRequiredInitializationHasNotBeenExecutedErrorLocalization__Russian;

@@ -1,9 +1,9 @@
 import type UnexpectedEventError from "./UnexpectedEventError";
 
 
-const UnexpectedEventErrorLocalization__English: UnexpectedEventError.Localization = {
+const unexpectedEventErrorLocalization__english: UnexpectedEventError.Localization = {
   defaultTitle: "Unexpected event occurred"
 };
 
 
-export default UnexpectedEventErrorLocalization__English;
+export default unexpectedEventErrorLocalization__english;

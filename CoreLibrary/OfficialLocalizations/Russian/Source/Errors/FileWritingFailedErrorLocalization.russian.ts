@@ -1,12 +1,10 @@
 import type { FileWritingFailedError } from "@yamato-daiwa/es-extensions";
 
 
-const FileWritingFailedErrorLocalization__Russian: FileWritingFailedError.Localization = {
+export const fileWritingFailedErrorLocalization__russian: FileWritingFailedError.Localization = {
   defaultTitle: "Ошибка при записи файла",
   generateDescription: (
-    namedParameters: FileWritingFailedError.Localization.DescriptionTemplateNamedParameters
-  ): string => `Произошла ошибки при записи файла по пути\n: '${ namedParameters.filePath }'`
+    { filePath }: FileWritingFailedError.Localization.DescriptionTemplateVariables
+  ): string =>
+      `Произошла ошибки при записи файла по пути\n: '${ filePath }'`
 };
-
-
-export default FileWritingFailedErrorLocalization__Russian;

@@ -11,30 +11,25 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "ru";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("Главная страница");
-    HTML_PageMetaData = {
-      description:
-          "Библиотека «Yamato Daiwa ECMAScript extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и») - " +
-            "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
-          "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
-            "«RawObjectDataProcessor» для валидации и постобработки структур данных. " +
-          "Имена функций, параметров и так далее спроектированы так, чтобы при знании базового английского код был " +
-            "понятным и очевидным без обращения к документации.",
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon.ico"
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/Minimal/MinimalLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents",
-      "@Pages/Top/TopPage"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Главная страница"),
+        description:
+            "Библиотека «Yamato Daiwa ECMAScript Extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и») - " +
+              "набор вспомогательной функциональности для высококачественной разработки на языке TypeScript. " +
+            "Включает в себя как множество простых узкоспециализированных функций, так и мощных классов, например " +
+              "«RawObjectDataProcessor» для валидации и постобработки структур данных. " +
+            "Имена функций, параметров и так далее спроектированы так, чтобы при знании базового английского код был " +
+              "понятным и очевидным без обращения к документации."
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/Minimal/MinimalLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents",
+        "@Pages/Top/TopPage"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("top");
 
@@ -44,7 +39,7 @@ block append Metadata
     });
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -68,6 +63,17 @@ block append SpecificContent
 
     p.TopPage-ShortDescription-Heading.
       Богатые функциональностью библиотеки для высококачественной разработки на языке TypeScript
+
+    +SingleImageViewer--YDF({
+      imageURI: "@AssociatedWithPages/Top/Images/TopPage-MainVisual.russian",
+      imageAlternateText:
+          "Библиотека «Yamato Daiwa ECMAScript Extensions» (сокращённо: «YDEE», читается: «Уай-ди-и-и»). " +
+          "Функции и классы с понятным API для уменьшения рутинного кода. " +
+          "TypeScript без «any»",
+      autoAspectRatioByYDA: true,
+      geometry: SingleImageViewer__YDF.GeometricVariations.minimalistic,
+      decoration: SingleImageViewer__YDF.DecorativeVariations.minimalistic
+    }).TopPage-MainVisual
 
     +AdmonitionBlock--YDF({
       decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,

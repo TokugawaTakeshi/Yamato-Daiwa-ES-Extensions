@@ -1,9 +1,9 @@
 import type AlgorithmMismatchError from "./AlgorithmMismatchError";
 
 
-const AlgorithmMismatchErrorLocalization__English: AlgorithmMismatchError.Localization = {
+const algorithmMismatchErrorLocalization__english: AlgorithmMismatchError.Localization = {
   defaultTitle: "Desired and real behaviours mismatch"
 };
 
 
-export default AlgorithmMismatchErrorLocalization__English;
+export default algorithmMismatchErrorLocalization__english;

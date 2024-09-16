@@ -11,29 +11,24 @@ block append Metadata
 
   -
 
-    HTML_PAGE_LANGUAGE = "en";
-    HTML_PAGE_TITLE = buildHTML_PageTitle("getLastElementOfArray");
-    HTML_PageMetaData = {
-      description: MetaDescriptionTemplates.function({
-        functionName: "getLastElementOfArray",
-        whatFunctionDoes:
-            "returns the last element of an array if it exists. " +
-            "When the array is empty, the behavior depends on the presence or absence of the second parameter. " +
-            "If the second parameter is specified, the function returns null; otherwise, an exception is thrown."
-      }),
-      author: HTML_PAGE_AUTHOR
-    };
-
-    FAVICON_URI = "@MustBeInPublicRoot/favicon";
-
-    styleSheetsURIs = [
-      "$CommonStyles",
-      "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-      "$PreMadesStyles",
-      "@CustomizedExternalComponents"
-    ];
-
-    scriptsURIs.endOfBody = [ "$CommonLogic" ];
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getLastElementOfArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getLastElementOfArray",
+          whatFunctionDoes:
+              "returns the last element of an array if it exists. " +
+              "When the array is empty, the behavior depends on the presence or absence of the second parameter. " +
+              "If the second parameter is specified, the function returns null; otherwise, an exception is thrown."
+        }),
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
 
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
 
@@ -49,7 +44,7 @@ block append Metadata
         getLastElementOfArray.$sectioning;
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 

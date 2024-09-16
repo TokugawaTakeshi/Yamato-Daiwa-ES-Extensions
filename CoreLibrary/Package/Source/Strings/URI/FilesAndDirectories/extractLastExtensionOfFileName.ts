@@ -27,7 +27,7 @@ export default function extractLastExtensionOfFileName(
   }>
 ): string | null {
 
-  const lastFileNameExtensionWithoutLeadingDot: string | undefined = /.(?<lastFileNameExtensionWithoutLeadingDot>\w+)$/u.
+  const lastFileNameExtensionWithoutLeadingDot: string | undefined = (/.(?<lastFileNameExtensionWithoutLeadingDot>\w+)$/u).
       exec(compoundParameter.targetPath)?.
       groups?.
       lastFileNameExtensionWithoutLeadingDot;

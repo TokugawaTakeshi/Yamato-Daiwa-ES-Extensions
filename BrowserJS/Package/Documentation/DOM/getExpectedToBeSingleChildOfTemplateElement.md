@@ -15,7 +15,7 @@ otherwise throws the error.
       } |
       {
         templateElementSelector: string;
-        context?: Element | Document;
+        contextElement?: ParentNode | Readonly<{ selector: string; }>;
       }
     ) &
     {
@@ -34,7 +34,7 @@ otherwise throws the error.
       } |
       {
         templateElementSelector: string;
-        context?: Element | Document;
+        contextElement?: ParentNode | Readonly<{ selector: string; }>;
       }
     ) &
     {

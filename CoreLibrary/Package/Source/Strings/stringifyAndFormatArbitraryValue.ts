@@ -18,7 +18,7 @@ export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): st
 
 
   if (rawEntity instanceof Error) {
-    return String(rawEntity);
+    return rawEntity.toString();
   }
 
 
@@ -59,4 +59,5 @@ export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): st
 
 
   return String(rawEntity);
+
 }

@@ -18,12 +18,24 @@ abstract class Timer {
 
 
   public abstract countDown(
-    namedParameters?: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.promise; }>
+    compoundParameter?: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.promise; }>
   ): Promise<Timer.Outcomes>;
 
   public abstract countDown(
-    namedParameters: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+    compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
   ): void;
+
+
+  public abstract resetAndRestart(
+    compoundParameter?: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.promise; }>
+  ): Promise<Timer.Outcomes>;
+
+  public abstract resetAndRestart(
+    compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
+  ): void;
+
+
+  public abstract get isActive(): boolean;
 
 }
 
