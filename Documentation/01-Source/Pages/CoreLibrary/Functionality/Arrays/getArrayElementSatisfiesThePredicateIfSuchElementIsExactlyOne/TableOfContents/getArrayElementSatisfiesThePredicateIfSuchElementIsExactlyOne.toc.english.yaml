@@ -1,0 +1,14 @@
+example:
+
+  $heading: "Example"
+
+comparisonWithNativeMethods:
+
+  $heading: "Comparison with Native Methods"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+    IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__english
+
+externalLinks:
+
+  $heading: "External Links"

@@ -4,12 +4,12 @@
 
 import { DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
 
-import isNumber from "../../TypeGuards/Numbers/isNumber";
-import isString from "../../TypeGuards/Strings/isString";
-import getMonthNameByNumber from "../getMonthNameByNumber";
+import isNumber from "../TypeGuards/Numbers/isNumber";
+import isString from "../TypeGuards/Strings/isString";
+import getMonthNameByNumber from "./getMonthNameByNumber";
 
-import Logger from "../../Logging/Logger";
-import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
+import Logger from "../Logging/Logger";
+import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 class TimePoint {

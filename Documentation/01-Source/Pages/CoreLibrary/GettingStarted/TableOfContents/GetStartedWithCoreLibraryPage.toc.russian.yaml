@@ -1,0 +1,15 @@
+installation:
+
+  $heading: "Установка"
+
+distributiveVolumeNotice:
+
+  $heading: "Об объёме дистрибутива"
+
+nonTypeScriptUsageWarning:
+
+  $heading: "Предупреждение об использовании без TypeScript"
+
+importingFunctionality:
+
+  $heading: "Импорт функциональности"

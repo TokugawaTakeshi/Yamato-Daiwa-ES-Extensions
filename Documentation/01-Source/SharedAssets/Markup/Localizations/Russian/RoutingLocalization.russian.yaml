@@ -1,0 +1,250 @@
+fileNameLocalizationExtensions: "russian"
+
+topPage:
+
+  $heading: "Главная страница"
+  $URI: "@All/Top/TopPage.russian"
+
+coreLibrary:
+
+  $heading: "Основная библиотека"
+
+  gettingStarted:
+
+    $heading: "Начало работы"
+
+  functionality:
+
+    $heading: "Функциональность"
+
+    arrays:
+
+      $heading: "Работа с массивами"
+
+      creating:
+
+        $heading: "Создание"
+
+      retrievingOfElements:
+
+        $heading: "Получение элементов"
+
+      retrievingOfIndexes:
+
+        $heading: "Получение индексов"
+
+      addingOfElements:
+
+        $heading: "Добавление элементов"
+
+      removingOfElements:
+
+        $heading: "Удаление элементов"
+
+      other:
+
+        $heading: "Остальные"
+
+    constantsAndEnumerations:
+
+      $heading: "Константы и перечисления"
+
+      dateTime:
+
+        $heading: "Дата и время"
+
+      HTTP:
+
+        HTTP_StatusCodes:
+
+          $heading: "Коды состояний HTTP"
+
+    dataMocking:
+
+      $heading: "Мокинг данных"
+
+      guide:
+
+        $heading: "Руководство по мокингу данных"
+
+      DataMockingClass:
+
+        $heading: "Класс <code>DataMocking</code>"
+
+    dateTime:
+
+      $heading: "Дата и время"
+
+      comparison:
+
+        $heading: "Сравнение"
+
+      other:
+
+        $heading: "Остальные"
+
+    defaultValueSubstituters:
+
+      $heading: "Подстановка значений по умолчанию"
+
+    errors:
+
+      $heading: "Классы ошибок"
+
+    logging:
+
+      $heading: "Логирование"
+
+      loggerFacade:
+
+        $heading: "Фасад <code>Logger</code>"
+
+      loggerInterface:
+
+        $heading: "Интерфейс <code>ILogger</code>"
+
+      relatedTypes:
+
+        $heading: "Связанные типы"
+
+    maps:
+
+      $heading: "Работа с типом данных Map"
+
+    numbers:
+
+      $heading: "Работа с числами"
+
+    objects:
+
+      $heading: "Работа с объектами"
+
+    pagination:
+
+      $heading: "Пагинация"
+
+    promises:
+
+      $heading: "Промисы"
+
+    randomValuesGenerators:
+
+      $heading: "Генераторы случайных значений"
+
+    rawObjectDataProcessor:
+
+      quickExample:
+
+        $heading: "Пример"
+
+      problemOverview:
+
+        $heading: "Обзор задачи"
+
+      theoreticalMinimum:
+
+        $heading: "Теоретический минимум"
+
+      gettingStarted:
+
+        $heading: "Начало использования"
+
+      helpers:
+
+        $heading: "Вспомогательная функциональность"
+
+    sets:
+
+      $heading: "Наборы (Set)"
+
+    strings:
+
+      $heading: "Работа со строками"
+
+      charactersAssets:
+
+        $heading: "Наборы символов"
+
+      regularExpressions:
+
+        $heading: "Регулярные выражения"
+
+      URI:
+
+        filesAndDirectories:
+
+          $heading: "Файлы и директории"
+
+      other:
+
+        $heading: "Другое"
+
+    typeGuards:
+
+      $heading: "Проверяющие типов данных"
+
+      arrays:
+
+        $heading: "Массивы"
+
+      nullables:
+
+        $heading: "Пустые типы"
+
+      numbers:
+
+        $heading: "Числа"
+
+      objects:
+
+        $heading: "Объекты"
+
+      strings:
+
+        $heading: "Строки"
+
+      others:
+
+        $heading: "Другие"
+
+    types:
+
+      $heading: "Типы"
+
+    valueTransformers:
+
+      $heading: "Преобразователи выражений"
+
+browserJS:
+
+  $heading: "Браузерный JS"
+
+  DOM_Manipulations:
+
+    $heading: "Манипуляции с DOM"
+
+  eventsHandling:
+
+    $heading: "Обработка событий"
+
+  logging:
+
+    $heading: "Логирование"
+
+NodeJS:
+
+  utils:
+
+    $heading: "Утилиты"
+
+  errorsClasses:
+
+    $heading: "Классы ошибок"
+
+  other:
+
+    $heading: "Другое"
+
+realiseNotes:
+
+  $heading: "Что нового"

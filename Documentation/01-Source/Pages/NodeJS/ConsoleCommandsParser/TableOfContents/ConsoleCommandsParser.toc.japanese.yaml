@@ -1,0 +1,59 @@
+demo:
+
+  $heading: "デモ"
+
+minimalTheory:
+
+  $heading: "最低限の理論"
+
+  conventionalTerminology:
+
+    $heading: "条約的な用語"
+
+    commandPhrase:
+
+      $heading: "「コマンドフレーズ」用語"
+
+  TypeScriptDiscriminatedUnions:
+
+    $heading: "TypeScriptの差別化組合せ"
+
+stepwiseGuide:
+
+  $heading: "コマンドラインインターフェース（CLI）開発　｜　段階的な案内"
+
+  initialCommandPhrasesSet:
+
+    $heading: "① コマンドフレーズの初期揃いの決定"
+
+  commandPhrasesOptions:
+
+    $heading: "② 各コマンドフレーズのオプションの決定"
+
+  consoleApplicationSpecification:
+
+    $heading: "③ コンソールアプリケーションの仕様を定義"
+
+    optionsSpecification:
+
+      $heading: "各コマンドフレーズのオプションの定義"
+
+      specialPropertiesOfStringOptions:
+
+        $heading: "文字列型オプションの特別なプロパティ"
+
+      specialPropertiesOfNumericOptions:
+
+        $heading: "数型オプションの特別なプロパティ"
+
+      specialPropertiesOfObjectOptions:
+
+        $heading: "オブジェクト型オプションの特別なプロパティ"
+
+  logic:
+
+    $heading: "④ コンソールコマンド処理ロジックの作成"
+
+  launchingOfApplicationByName:
+
+    $heading: "⑤ 名前でアプリケーションを実行"

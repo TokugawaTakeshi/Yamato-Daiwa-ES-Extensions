@@ -1,0 +1,250 @@
+fileNameLocalizationExtensions: "japanese"
+
+topPage:
+
+  $heading: "トップ"
+  $URI: "@All/Top/TopPage.japanese"
+
+coreLibrary:
+
+  $heading: "主要ライブラリ"
+
+  gettingStarted:
+
+    $heading: "早速着手"
+
+  functionality:
+
+    $heading: "機能"
+
+    arrays:
+
+      $heading: "配列"
+
+      creating:
+
+        $heading: "作成"
+
+      retrievingOfElements:
+
+        $heading: "要素の取得"
+
+      retrievingOfIndexes:
+
+        $heading: "指数の取得"
+
+      addingOfElements:
+
+        $heading: "要素の追加"
+
+      removingOfElements:
+
+        $heading: "要素の取り除き"
+
+      other:
+
+        $heading: "その他"
+
+    constantsAndEnumerations:
+
+      $heading: "定数・列挙"
+
+      dateTime:
+
+        $heading: "日付・時間"
+
+      HTTP:
+
+        HTTP_StatusCodes:
+
+          $heading: "HTTP レスポンスステータスコード"
+
+    dataMocking:
+
+      $heading: "データモキング"
+
+      guide:
+
+        $heading: "データモキングガイド"
+
+      DataMockingClass:
+
+        $heading: "<code>DataMocking</code>クラス"
+
+    dateTime:
+
+      $heading: "時間・日付"
+
+      comparison:
+
+        $heading: "比較"
+
+      other:
+
+        $heading: "其の他"
+
+    defaultValueSubstituters:
+
+      $heading: "規定値の代入"
+
+    errors:
+
+      $heading: "エラークラス"
+
+    logging:
+
+      $heading: "ロギング"
+
+      loggerFacade:
+
+        $heading: "<code>Logger</code>ファサード"
+
+      loggerInterface:
+
+        $heading: "<code>ILogger</code>インターフェース"
+
+      relatedTypes:
+
+        $heading: "関連型"
+
+    maps:
+
+      $heading: "マップ"
+
+    numbers:
+
+      $heading: "数"
+
+    objects:
+
+      $heading: "オブジェクト"
+
+    pagination:
+
+      $heading: "ページネーション"
+
+    promises:
+
+      $heading: "プロミス"
+
+    randomValuesGenerators:
+
+      $heading: "ランダム値の生成"
+
+    rawObjectDataProcessor:
+
+      quickExample:
+
+        $heading: "先ずは例"
+
+      problemOverview:
+
+        $heading: "問題考察"
+
+      theoreticalMinimum:
+
+        $heading: "最少理論"
+
+      gettingStarted:
+
+        $heading: "着手"
+
+      helpers:
+
+        $heading: "補助昨日"
+
+    sets:
+
+      $heading: "セット"
+
+    strings:
+
+      $heading: "文字列"
+
+      charactersAssets:
+
+        $heading: "文字列アセット"
+
+      regularExpressions:
+
+        $heading: "正規表現"
+
+      URI:
+
+        filesAndDirectories:
+
+          $heading: "ファイル・ディレクトリ"
+
+      other:
+
+        $heading: "其の他"
+
+    typeGuards:
+
+      $heading: "タイプガード"
+
+      arrays:
+
+        $heading: "配列"
+
+      nullables:
+
+        $heading: "空の型"
+
+      numbers:
+
+        $heading: "数"
+
+      objects:
+
+        $heading: "オブジェクト"
+
+      strings:
+
+        $heading: "文字列"
+
+      others:
+
+        $heading: "その他"
+
+    types:
+
+      $heading: "型"
+
+    valueTransformers:
+
+      $heading: "値の変換"
+
+browserJS:
+
+  $heading: "ブラウザーJS"
+
+  DOM_Manipulations:
+
+    $heading: "DOM弄り"
+
+  eventsHandling:
+
+    $heading: "イベント処理"
+
+  logging:
+
+    $heading: "ロギング"
+
+NodeJS:
+
+  utils:
+
+    $heading: "補助手段"
+
+  errorsClasses:
+
+    $heading: "エラーのクラス"
+
+  other:
+
+    $heading: "その他"
+
+realiseNotes:
+
+  $heading: "リリースノート"

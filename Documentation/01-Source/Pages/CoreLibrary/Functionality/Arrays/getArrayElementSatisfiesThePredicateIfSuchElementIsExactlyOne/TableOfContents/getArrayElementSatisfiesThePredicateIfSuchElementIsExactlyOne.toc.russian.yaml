@@ -1,0 +1,12 @@
+example:
+
+  $heading: "Пример"
+
+comparisonWithNativeMethods:
+
+  $heading: "Сравнение с нативными методами"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+  IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__russian
+
+externalLinks: { $heading: "Внешние ссылки" }
