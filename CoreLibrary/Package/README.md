@@ -9,7 +9,7 @@ Helper functions and classes aimed to reduce the routine code.
 Build-in TypeScript type safety without `any` type.
 Oriented to TypeScript users investing the time to quality including type-safety.
 
-![Hero image of @yamato-daiwa/es-extensions](https://user-images.githubusercontent.com/41653501/168199236-0895483f-e4f1-4d1f-b7a8-ab296e51a57d.png)
+![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/f2eda148-6781-4205-ba2c-bd5f61da370f)
 
 
 ## Installation

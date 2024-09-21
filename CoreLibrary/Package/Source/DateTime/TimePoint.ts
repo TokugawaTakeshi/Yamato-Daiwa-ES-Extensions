@@ -1,141 +1,293 @@
-/* [ ESLint muting rationale ]
-* There are too many numbers refers to month or day of week number in this class. */
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
-import { DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
-
-import isNumber from "../TypeGuards/Numbers/isNumber";
-import isString from "../TypeGuards/Strings/isString";
-import getMonthNameByNumber from "./getMonthNameByNumber";
-
-import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import DateWithoutTime from "./DateWithoutTime";
+import isBoolean from "../TypeGuards/isBoolean";
+import isNotNull from "../TypeGuards/Nullables/isNotNull";
 
 
-class TimePoint {
+class TimePoint extends DateWithoutTime {
 
-  public readonly year: number;
+  /* ━━━ Protected Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  // < =================================================================================================================
+  /* eslint-disable no-underscore-dangle -- [ Convention ]
+   * The underscored fields MUST be changes ONLY via `nativeDateObject` setter. */
+  protected _hours__24Format: number | null = null;
+  protected _hours__24Format__2Digits: string | null = null;
+  protected _hours__12Format: number | null = null;
+  protected _isBeforeMidday: boolean | null = null;
+  protected _isAfterMidday: boolean | null = null;
 
-  public readonly monthName: MonthsNames;
-  public readonly monthNumber__numerationFrom0: number;
-  public readonly monthNumber__numerationFrom1: number;
-  public readonly monthNumber__numerationFrom1__2Digits: string;
+  protected _minutes: number | null = null;
+  protected _minutes__2Digits: string | null = null;
 
-  public readonly dayOfMonth: number;
-  public readonly dayOfMonth__2Digits: string;
+  protected _seconds: number | null = null;
+  protected _seconds__2Digits: string | null = null;
 
-  public readonly dayOfWeek: DaysOfWeekNames;
-  public readonly dayOfWeekNumber__numerationFrom0AsSunday: number;
-  public readonly dayOfWeekNumber__numerationFrom1AsSunday: number;
-  public readonly dayOfWeekNumber__numerationFrom1AsSunday__2Digits: string;
+  protected _milliseconds: number | null = null;
+  // > =================================================================================================================
 
-  public readonly hours__24Format: number;
-  public readonly hours__24Format__2Digits: string;
-  public readonly hours__12Format: number;
-  public readonly isBeforeMidday: boolean;
-  public readonly isAfterMidday: boolean;
-
-  public readonly minutes: number;
-  public readonly minutes__2Digits: string;
-
-  public readonly seconds: number;
-  public readonly seconds__2Digits: string;
-
-  public readonly milliseconds: number;
-
-  public readonly nativeDateObject: Date;
+  protected computingOnDemandSettings: TimePoint.ComputingOnDemandSettings;
 
 
-  public constructor(rawDateTime: number | string | Date) {
+  /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public constructor(
+    sourceDataAndOptions:
+        TimePoint.DateTimeDefinition &
+        Readonly<{ computingOnDemand?: TimePoint.ComputingOnDemandSettings | boolean; }>
+  ) {
 
-    let normalizedDateTime: Date;
+    super(sourceDataAndOptions);
 
-    if (isNumber(rawDateTime) || isString(rawDateTime)) {
+    this.computingOnDemandSettings = TimePoint.normalizeComputingOnDemandOptions(sourceDataAndOptions.computingOnDemand);
+    this.nativeDateObject = TimePoint.normalizeDateTimeDefinition(sourceDataAndOptions);
 
-      normalizedDateTime = new Date(rawDateTime);
-
-      if (normalizedDateTime.toString() === "Invalid Date") {
-        Logger.throwErrorAndLog({
-          errorInstance: new InvalidParameterValueError({
-            customMessage:
-                "If the parameter of TimePoint's constructor is not the Date instance, it must the the valid " +
-                  "ISO 8601 string or amount of milliseconds elapsed since the UNIX epoch."
-          }),
-          title: InvalidParameterValueError.localization.defaultTitle,
-          occurrenceLocation: "TimePoint.constructor(rawDateTime)"
-        });
-      }
-
-    } else {
-      normalizedDateTime = rawDateTime;
-    }
-
-    this.nativeDateObject = normalizedDateTime;
-    this.year = normalizedDateTime.getFullYear();
-
-    this.monthNumber__numerationFrom0 = normalizedDateTime.getMonth();
-    this.monthNumber__numerationFrom1 = this.monthNumber__numerationFrom0 + 1;
-    this.monthNumber__numerationFrom1__2Digits = this.monthNumber__numerationFrom1.toString().padStart(2, "0");
-
-    this.monthName = getMonthNameByNumber({ targetMonthNumber: this.monthNumber__numerationFrom1, numerationFrom: 1 });
-
-    this.dayOfMonth = normalizedDateTime.getDate();
-    this.dayOfMonth__2Digits = this.dayOfMonth.toString().padStart(2, "0");
-
-    this.dayOfWeekNumber__numerationFrom0AsSunday = normalizedDateTime.getDay();
-    this.dayOfWeekNumber__numerationFrom1AsSunday = this.dayOfWeekNumber__numerationFrom0AsSunday + 1;
-    this.dayOfWeekNumber__numerationFrom1AsSunday__2Digits =
-        this.dayOfWeekNumber__numerationFrom1AsSunday.toString().padStart(2, "0");
-
-    switch (this.dayOfWeekNumber__numerationFrom1AsSunday) {
-      case 1: { this.dayOfWeek = DaysOfWeekNames.sunday; break; }
-      case 2: { this.dayOfWeek = DaysOfWeekNames.monday; break; }
-      case 3: { this.dayOfWeek = DaysOfWeekNames.tuesday; break; }
-      case 4: { this.dayOfWeek = DaysOfWeekNames.wednesday; break; }
-      case 5: { this.dayOfWeek = DaysOfWeekNames.thursday; break; }
-      case 6: { this.dayOfWeek = DaysOfWeekNames.friday; break; }
-      default: { this.dayOfWeek = DaysOfWeekNames.saturday; }
-    }
-
-    this.hours__24Format = normalizedDateTime.getHours();
-    this.hours__24Format__2Digits = this.hours__24Format.toString().padStart(2, "0");
-
-    this.isBeforeMidday = this.hours__24Format < 13;
-    this.isAfterMidday = !this.isBeforeMidday;
-
-    if (this.hours__24Format === 0) {
-      this.hours__12Format = 12;
-    } else if (this.hours__24Format < 13) {
-      this.hours__12Format = this.hours__24Format;
-    } else {
-      this.hours__12Format = this.hours__24Format - 12;
-    }
-
-    this.minutes = normalizedDateTime.getMinutes();
-    this.minutes__2Digits = this.minutes.toString().padStart(2, "0");
-
-    this.seconds = normalizedDateTime.getSeconds();
-    this.seconds__2Digits = this.seconds.toString().padStart(2, "0");
-
-    this.milliseconds = normalizedDateTime.getMilliseconds();
   }
 
 
+  /* ━━━ Public Accessors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public get hours__24Format(): number {
+    return this._hours__24Format ?? (this._hours__24Format = this._nativeDateObject.getHours());
+  }
+
+  public get hours__24Format__2Digits(): string {
+    return this._monthNumber__numerationFrom1__2Digits ??
+        (this._monthNumber__numerationFrom1__2Digits = this._nativeDateObject.getHours().toString().padStart(2, "0"));
+  }
+
+  public get hours__12Format(): number {
+
+    if (isNotNull(this._hours__12Format)) {
+      return this._hours__12Format;
+    }
+
+
+    const hours__24Format: number = this._nativeDateObject.getHours();
+
+    if (hours__24Format === 0) {
+      return this._hours__12Format = 12;
+    }
+
+
+    if (hours__24Format < 13) {
+      return this._hours__12Format = hours__24Format;
+    }
+
+
+    return this._hours__12Format = hours__24Format - 12;
+
+  }
+
+  public get isBeforeMidday(): boolean {
+    return this._isBeforeMidday ?? (this._isBeforeMidday = this._nativeDateObject.getTime() < 13);
+  }
+
+  public get isAfterMidday(): boolean {
+    return this._isAfterMidday ?? (this._isAfterMidday = this._nativeDateObject.getTime() >= 13);
+  }
+
+  public get minutes(): number {
+    return this._minutes ?? (this._minutes = this._nativeDateObject.getMinutes());
+  }
+
+  public get minutes__2Digits(): string {
+    return this._minutes__2Digits ?? (
+      this._minutes__2Digits = this._nativeDateObject.
+          getMinutes().
+          toString().
+          padStart(2, "0")
+    );
+  }
+
+  public get seconds(): number {
+    return this._seconds ?? (this._seconds = this._nativeDateObject.getSeconds());
+  }
+
+  public get seconds__2Digits(): string {
+    return this._seconds__2Digits ?? (
+      this._seconds__2Digits = this._nativeDateObject.
+          getSeconds().
+          toString().
+          padStart(2, "0")
+    );
+  }
+
+  public get milliseconds(): number {
+    return this._milliseconds ?? (this._milliseconds = this._nativeDateObject.getMilliseconds());
+  }
+
+
+  /* ━━━ Public Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public format(formatter: (selfInstance: TimePoint) => string): string {
     return formatter(this);
   }
 
   public toISO8601String(): string {
-    return this.nativeDateObject.toISOString();
+    return this._nativeDateObject.toISOString();
+  }
+
+  public toLocaleString(): string {
+    return this._nativeDateObject.toLocaleString();
+  }
+
+  public update(
+    sourceDataAndOptions:
+        TimePoint.DateTimeDefinition &
+        Readonly<{
+          mutably: boolean;
+          computingOnDemand?: TimePoint.ComputingOnDemandSettings | boolean;
+        }>
+  ): TimePoint {
+
+    this.computingOnDemandSettings = TimePoint.normalizeComputingOnDemandOptions(
+      sourceDataAndOptions.computingOnDemand
+    );
+
+    if (sourceDataAndOptions.mutably) {
+      this.nativeDateObject = TimePoint.normalizeDateTimeDefinition(sourceDataAndOptions);
+      return this;
+    }
+
+
+    return new TimePoint(sourceDataAndOptions);
+
+  }
+
+
+  /* ━━━ Mutating ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  protected set nativeDateObject(newValue: Date) {
+
+    super.nativeDateObject = newValue;
+
+    if (this.computingOnDemandSettings.hours) {
+
+      this._hours__24Format = null;
+      this._hours__24Format__2Digits = null;
+
+      this._isBeforeMidday = null;
+      this._isAfterMidday = null;
+
+      this._hours__12Format = null;
+
+    } else {
+
+      this._hours__24Format = this._nativeDateObject.getHours();
+      this._hours__24Format__2Digits = this._hours__24Format.toString().padStart(2, "0");
+
+      this._isBeforeMidday = this._hours__24Format < 13;
+      this._isAfterMidday = !this._isBeforeMidday;
+
+      if (this._hours__24Format === 0) {
+        this._hours__12Format = 12;
+      } else if (this._hours__24Format < 13) {
+        this._hours__12Format = this._hours__24Format;
+      } else {
+        this._hours__12Format = this._hours__24Format - 12;
+      }
+
+    }
+
+    if (this.computingOnDemandSettings.minutes) {
+      this._minutes = null;
+      this._minutes__2Digits = null;
+    } else {
+      this._minutes = this._nativeDateObject.getMinutes();
+      this._minutes__2Digits = this._minutes.toString().padStart(2, "0");
+    }
+
+    if (this.computingOnDemandSettings.seconds) {
+      this._seconds = null;
+      this._seconds__2Digits = null;
+    } else {
+      this._seconds = this._nativeDateObject.getSeconds();
+      this._seconds__2Digits = this._seconds.toString().padStart(2, "0");
+    }
+
+    this._milliseconds = this.computingOnDemandSettings.milliseconds ?
+        null : this._nativeDateObject.getMilliseconds();
+
+  }
+
+
+  protected static normalizeDateTimeDefinition(dateTimeDefinition: TimePoint.DateTimeDefinition): Date {
+
+    const normalizedDateTime: Date = DateWithoutTime.normalizeDateDefinition(dateTimeDefinition);
+
+    if (
+      ("ISO8601String" in dateTimeDefinition) ||
+      ("millisecondsElapsedSinceUNIX_Epoch" in dateTimeDefinition) ||
+      ("nativeDateObject" in dateTimeDefinition)
+    ) {
+      return normalizedDateTime;
+    }
+
+
+    normalizedDateTime.setHours(dateTimeDefinition.hours);
+    normalizedDateTime.setMinutes(dateTimeDefinition.minutes);
+    normalizedDateTime.setSeconds(dateTimeDefinition.seconds);
+    normalizedDateTime.setMilliseconds(dateTimeDefinition.milliseconds);
+
+    return normalizedDateTime;
+
+  }
+
+  protected static normalizeComputingOnDemandOptions(
+    computingOnDemandSettings?: Partial<TimePoint.ComputingOnDemandSettings> | boolean
+  ): Required<TimePoint.ComputingOnDemandSettings> {
+    return {
+      ...DateWithoutTime.normalizeComputingOnDemandOptions(computingOnDemandSettings),
+      ...isBoolean(computingOnDemandSettings) ?
+          {
+            hours: computingOnDemandSettings,
+            minutes: computingOnDemandSettings,
+            seconds: computingOnDemandSettings,
+            milliseconds: computingOnDemandSettings
+          } :
+          {
+            hours: computingOnDemandSettings?.hours ?? false,
+            minutes: computingOnDemandSettings?.minutes ?? false,
+            seconds: computingOnDemandSettings?.seconds ?? false,
+            milliseconds: computingOnDemandSettings?.milliseconds ?? false
+          }
+    };
   }
 
 }
 
 
 namespace TimePoint {
-  export type Localization = Readonly<{
-    errors: Readonly<{ invalidRawDateTime: string; }>;
-  }>;
+
+  export type DateTimeDefinition = Readonly<
+    { ISO8601String: string; } |
+    { millisecondsElapsedSinceUNIX_Epoch: number; } |
+    { nativeDateObject: Date; } |
+    DateTimeDefinition.ClearAPI
+  >;
+
+  export namespace DateTimeDefinition {
+
+    export type ClearAPI =
+        DateWithoutTime.DateDefinition.ClearAPI &
+        Readonly<{
+          hours: number;
+          minutes: number;
+          seconds: number;
+          milliseconds: number;
+        }>;
+
+  }
+
+
+  export type ComputingOnDemandSettings =
+      DateWithoutTime.ComputingOnDemandSettings &
+      ComputingOnDemandSettings.TimeFields;
+
+  export namespace ComputingOnDemandSettings {
+    export type TimeFields = Readonly<{
+      hours: boolean;
+      minutes: boolean;
+      seconds: boolean;
+      milliseconds: boolean;
+    }>;
+  }
+
 }
 
 

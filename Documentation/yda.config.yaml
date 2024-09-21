@@ -32,6 +32,15 @@ projectBuilding:
           PRODUCTION:
             outputTopDirectoryRelativePath: 03-ProductionBuild
 
+    routing:
+
+      $specificationFileRelativePath: 01-Source/Pages/Routing.yaml
+      $variable: routing
+      $localizations:
+        english: 01-Source/SharedAssets/Markup/Localizations/English/RoutingLocalization.english.yaml
+        japanese: 01-Source/SharedAssets/Markup/Localizations/Japanese/RoutingLocalization.japanese.yaml
+        russian: 01-Source/SharedAssets/Markup/Localizations/Russian/RoutingLocalization.russian.yaml
+
 
   # ━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   stylesProcessing:

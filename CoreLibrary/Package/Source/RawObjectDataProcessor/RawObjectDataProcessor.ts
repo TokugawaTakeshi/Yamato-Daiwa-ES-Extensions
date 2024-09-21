@@ -45,18 +45,20 @@ class RawObjectDataProcessor {
   private rawDataIsInvalid: boolean = false;
 
 
+  /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static process<ProcessedData extends ReadonlyParsedJSON, InterimValidData extends ReadonlyParsedJSON = ProcessedData>(
     rawData: unknown,
     validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification,
     options: RawObjectDataProcessor.Options = {}
   ): RawObjectDataProcessor.ProcessingResult<ProcessedData> {
 
-    const localization: RawObjectDataProcessor.Localization = options.localization ?? RawObjectDataProcessor.defaultLocalization;
     const validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder =
-        new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(localization);
+        new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(
+          options.localization ?? RawObjectDataProcessor.defaultLocalization
+        );
 
     /* [ Theory ]
-    * Because `typeof null === "object"`, besides `typeof` it's required to check for the null value for the accurate
+    * Because `typeof null` is `"object"`, besides `typeof` it's required to check for the null value for the accurate
     *   error message. */
     if (isNull(rawData)) {
       return {
@@ -73,7 +75,6 @@ class RawObjectDataProcessor {
       };
     }
 
-
     const dataHoldingSelfInstance: RawObjectDataProcessor = new RawObjectDataProcessor({
       rawData,
       fullDataSpecification: validDataSpecification,
@@ -87,7 +88,7 @@ class RawObjectDataProcessor {
 
       case RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject: {
         rawDataProcessingResult = dataHoldingSelfInstance.processFixedKeyAndValuePairsNonNullObjectTypeValue({
-          targetValue__expectedToBeObject: rawData,
+          targetValue__expectedToBeObject: dataHoldingSelfInstance.rawData,
           targetObjectTypeValueSpecification: {
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject },
             ...validDataSpecification
@@ -146,6 +147,7 @@ class RawObjectDataProcessor {
       rawDataIsInvalid: false,
       processedData
     };
+
   }
 
   public static formatValidationErrorsList(
@@ -167,7 +169,7 @@ class RawObjectDataProcessor {
   /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
    * https://stackoverflow.com/q/69848208/4818123
    * https://stackoverflow.com/q/69848689/4818123
-   * [ Approach ] This method is public because it is required for the 'localization'.
+   * [ Approach ] This method is public because it is required for the "localization".
    *  */
   public static getNormalizedValueTypeID(
     valueType: NumberConstructor |
@@ -238,9 +240,11 @@ class RawObjectDataProcessor {
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "RawObjectDataProcessor.processSingleNeitherUndefinedNorNullValue(valueType)"
     });
+
   }
 
 
+  /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private constructor(
     parametersObject: {
       rawData: ArbitraryObject;
@@ -251,12 +255,13 @@ class RawObjectDataProcessor {
   ) {
     this.rawData = parametersObject.rawData;
     this.fullDataSpecification = parametersObject.fullDataSpecification;
-    this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
     this.processingApproach = parametersObject.processingApproach;
+    this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
     this.validationErrorsMessagesBuilder = parametersObject.validationErrorsMessagesBuilder;
   }
 
 
+  /* ━━━ Private Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private processFixedKeyAndValuePairsNonNullObjectTypeValue(
     {
       targetValue__expectedToBeObject,
@@ -2021,6 +2026,7 @@ class RawObjectDataProcessor {
 namespace RawObjectDataProcessor {
 
   export type Options = {
+    processingApproach?: ProcessingApproaches;
     postProcessing?: <InterimValidData, ProcessedData>(interimData: InterimValidData) => ProcessedData;
     localization?: Localization;
   };

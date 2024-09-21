@@ -3,7 +3,7 @@ fileNameLocalizationExtensions: "english"
 topPage:
 
   $heading: "Top"
-  URI: "@All/index"
+  $URI: "@All/index"
 
 coreLibrary:
 

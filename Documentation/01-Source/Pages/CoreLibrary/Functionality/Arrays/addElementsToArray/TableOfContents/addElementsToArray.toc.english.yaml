@@ -99,7 +99,12 @@ examples:
       $heading: "Immutable adding"
 
 IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
-    IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__english
+
+  $heading: "Quick Input in IntelliJ IDEA Family of IDEs"
+
+  steps:
+
+    $heading: "Steps for Using the Live Templates"
 
 externalLinks:
 

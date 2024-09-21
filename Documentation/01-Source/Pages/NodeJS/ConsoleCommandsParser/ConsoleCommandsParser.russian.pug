@@ -39,7 +39,10 @@ block append Metadata
       japanese: "./ConsoleCommandsParser.japanese.html"
     });
 
-    const pageTableOfContents = localizedRouting.nodeJS.$children.utils.$children.ConsoleApplicationLogger.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = routing.russian.nodeJS.$children.utils.$children.ConsoleCommandsParser;
 
 
 block append HeadScripts
@@ -55,7 +58,7 @@ block append SpecificContent
 
     h1.Article-Heading1 Класс #[code ConsoleCommandsParser]
 
-    +CompactTableOfContents--YDF_DK(pageTableOfContents, { mustApplyAnchorsInsteadOfURIs: true })
+    +CompactTableOfContents--YDF_DK(localizedSectioning, { mustApplyAnchorsInsteadOfURIs: true })
 
     p.Article-Paragraph.
       #[+Term--YDID Класс], предназначенный для разбора (#[+Term--YDID парсинга]) #[+Term--YDID векторов аргументов]
@@ -67,8 +70,8 @@ block append SpecificContent
     //- ━━━ Демо ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.demo.$heading,
-      HTML_ID: pageTableOfContents.demo.$anchor
+      text: localizedSectioning.demo.$heading,
+      HTML_ID: localizedSectioning.demo.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph Нижеследующей пример пример будет полностью разобран.
@@ -83,8 +86,8 @@ block append SpecificContent
     //- ━━━ Минимальные теоретические знания ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.minimalTheory.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$anchor
+      text: localizedSectioning.minimalTheory.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph
@@ -113,8 +116,8 @@ block append SpecificContent
     //- ─── Соглашения по терминологии ─────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$anchor
+      text: localizedSectioning.minimalTheory.$children.conventionalTerminology.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.conventionalTerminology.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -192,8 +195,8 @@ block append SpecificContent
     //- ─── Термин «командная фраза» («command phrase») ────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$anchor
+      text: localizedSectioning.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$anchor
     }).Article-Heading4
 
     p.Article-Paragraph.
@@ -225,8 +228,8 @@ block append SpecificContent
     //- ─── Дискриминантное объединение в TypeScript ───────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$anchor
+      text: localizedSectioning.minimalTheory.$children.TypeScriptDiscriminatedUnions.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.TypeScriptDiscriminatedUnions.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -397,15 +400,15 @@ block append SpecificContent
     //- ━━━ Пошаговое руководство по созданию консольного интерфейса ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.stepwiseGuide.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$anchor
+      text: localizedSectioning.stepwiseGuide.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$anchor
     }).Article-Heading2
 
     //- ─── Шаг 1 — Определение начального набора командных фраз ───────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.initialCommandPhrasesSet.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.initialCommandPhrasesSet.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -485,8 +488,8 @@ block append SpecificContent
     //- ─── Шаг 2 — Определение опций для командных фраз ───────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.commandPhrasesOptions.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.commandPhrasesOptions.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -588,8 +591,8 @@ block append SpecificContent
     //- ─── Шаг 3 — Определение спецификации консольного приложения ────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.consoleApplicationSpecification.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -671,9 +674,9 @@ block append SpecificContent
     //- ─── Определение опций командных фраз ───────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.
+      text: localizedSectioning.
           stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$heading,
-      HTML_ID: pageTableOfContents.
+      HTML_ID: localizedSectioning.
           stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$anchor
     }).Article-Heading4
 
@@ -728,11 +731,11 @@ block append SpecificContent
     //- ─── Специальные свойства строчных опций ────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfStringOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfStringOptions.$anchor
@@ -749,11 +752,11 @@ block append SpecificContent
     //- ─── Специальные свойства числовых опций ────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfNumericOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfNumericOptions.$anchor
@@ -808,11 +811,11 @@ block append SpecificContent
     //- ─── Специальные свойства объектных опций ───────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfObjectOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfObjectOptions.$anchor
@@ -827,13 +830,9 @@ block append SpecificContent
     p.Article-Paragraph
       | Это #[+Term--YDID свойство] имеет #[+Term--YDID тип]
       |
+      //- TODO Replace to internal link once ready
       +Link--YDF({
-        endorsedExternalURI: localizedRouting.coreLibrary.$children.
-            functionality.$children.
-            RawObjectDataProcessor.$sectioning.
-            API.$children.
-            types.$children.
-            PropertiesSpecification.$URI
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#propertiesspecification-and-related---object-properties-specification"
       }).Article-Link RawObjectDataProcessor.PropertiesSpecification
       |   , заимствованный из главного пакета библиотеки и очень похоже на спецификацию #[+Term--YDID опций]
       |   #[+Term--YDID командной фразы], только здесь используется #[+ImportantEntity__Code--YDID API]
@@ -843,8 +842,8 @@ block append SpecificContent
     //- ─── Шаг 4 — Создание логики разбора консольных команд ──────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.logic.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.logic.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.logic.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.logic.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -925,8 +924,8 @@ block append SpecificContent
     //- ─── Шаг 5 — Обеспечение запуска приложения по имени ────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph

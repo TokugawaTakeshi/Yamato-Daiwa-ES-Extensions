@@ -83,7 +83,9 @@ export { default as MockGatewayHelperLocalization__English } from
 
 /* ━━━ Date & Time ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
+export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
+export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";
 export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
 export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
 export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
@@ -91,12 +93,13 @@ export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNu
 export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
 export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
+export { default as isValidISO8601DateAndPossiblyTimeDefinition } from
+    "./DateTime/isValidISO8601DateAndPossiblyTimeDefinition";
 export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
 export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
 export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
-export { default as TimePoint } from "./DateTime/TimePoint/TimePoint";
+export { default as TimePoint } from "./DateTime/TimePoint";
 export { default as Timer } from "./DateTime/Timer";
-
 
 /* ━━━ Default value substituters ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as substituteWhenNull } from "./DefaultValueSubstituters/substituteWhenNull";
@@ -178,7 +181,12 @@ export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
 
 
 /* ━━━ Linear Algebra ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as Matrix } from "./LinearAlgebra/Matrix";
+/* ─── Classes ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as ColumnVector } from "./LinearAlgebra/Classes/ColumnVector";
+export { default as Matrix } from "./LinearAlgebra/Classes/Matrix";
+export { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/ReadonlyColumnVector";
+export { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
+export { default as RowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
 
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */

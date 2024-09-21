@@ -1,6 +1,6 @@
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
-import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import isUndefined from "../../TypeGuards/Nullables/isUndefined";
+import Logger from "../../Logging/Logger";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default class Matrix {

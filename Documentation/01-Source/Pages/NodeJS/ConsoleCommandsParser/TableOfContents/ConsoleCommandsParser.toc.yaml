@@ -69,7 +69,6 @@ stepwiseGuide:
     logic:
       $heading: `stepwiseGuide.logic.$heading`
       $anchor: "STEPWISE_GUIDE-LOGIC--SECTION"
-    }
 
     launchingOfApplicationByName:
       $heading: `stepwiseGuide.launchingOfApplicationByName.$heading`

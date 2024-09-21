@@ -1,5 +1,4 @@
 include _HTML_PageMetadata.pug
-include _generateLocalizedRouting.pug
 include _generateSharedExternalLinks.pug
 
 include Localizations/Russian/MetaDescriptionTemplates.russian.pug
@@ -14,21 +13,7 @@ include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 
   RegularWebPageTemplate__YDF.metadata.locale = "ru";
 
-  const localizedRouting = generateLocalizedRouting(routingRussianLocalization);
-  let generatePageTableOfContents;
-
-
-include ../../Pages/CoreLibrary/GettingStarted/TableOfContents/GetStartedWithCoreLibraryPage.toc.russian.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/TableOfContents/addElementsToArray.toc.russian.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.russian.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.russian.pug
-include ../../Pages/NodeJS/ConsoleCommandsParser/TableOfContents/ConsoleCommandsParser.toc.russian.pug
-
-
--
-
-  generatePageTableOfContents = null;
-
+  const localizedRouting = routing.russian;
   RoutingEmulator.initialize(localizedRouting);
 
   const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksRussianLocalization);

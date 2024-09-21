@@ -17,7 +17,7 @@
     "prismjs": "1.29.0"
   },
   "devDependencies": {
-    "@yamato-daiwa/automation": "0.4.2",
+    "@yamato-daiwa/automation": "../../YamatoDaiwaAutomation/MainPackage",
     "@yamato-daiwa/style_guides": "0.2.6",
     "cpy-cli": "5.0.0",
     "rimraf": "5.0.7"

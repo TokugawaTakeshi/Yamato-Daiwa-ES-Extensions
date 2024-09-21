@@ -7,7 +7,12 @@ comparisonWithNativeMethods:
   $heading: "ネイティブメソッドとの比較"
 
 IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
-    IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidanceTableOfContentsMetadataLocalization__japanese
+
+  $heading: "「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力"
+
+  steps:
+
+    $heading: "Live Templateの利用手順"
 
 externalLinks:
 
