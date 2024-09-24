@@ -35,14 +35,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("nodeJS.utils.ConsoleCommandsParser");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./ConsoleCommandsParser.japanese.html",
-      russian: "./ConsoleCommandsParser.russian.html"
+      japanese: routing.japanese.nodeJS.$children.utils.$children.ConsoleCommandsParser.$URI,
+      russian: routing.russian.nodeJS.$children.utils.$children.ConsoleCommandsParser.$URI
     });
 
     const {
       $sectioning: localizedSectioning,
       $heading: topHeading
-    } = routing.english.nodeJS.$children.utils.$children.ConsoleCommandsParser;
+    } = localizedRouting.nodeJS.$children.utils.$children.ConsoleCommandsParser;
 
 
 block append HeadScripts
@@ -56,7 +56,8 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 #[code ConsoleCommandsParser] class
+    //- ━━━ `ConsoleCommandsParser` class ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= topHeading
 
     +CompactTableOfContents--YDF_DK(localizedSectioning, { mustApplyAnchorsInsteadOfURIs: true })
 

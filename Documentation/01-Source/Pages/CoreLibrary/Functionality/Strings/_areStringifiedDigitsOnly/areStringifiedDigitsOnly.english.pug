@@ -20,7 +20,7 @@ block append Metadata
             functionName: "areStringifiedDigitsOnly",
             whatFunctionDoes: "Checks whether all characters in the string argument are digits."
           })
-        }),
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -30,11 +30,13 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
+    RoutingEmulator.setCurrentRoute("areStringifiedDigitsOnly");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./areStringifiedDigitsOnly.japanese.html",
-      russian: "./areStringifiedDigitsOnly.russian.html"
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI
     });
 
 

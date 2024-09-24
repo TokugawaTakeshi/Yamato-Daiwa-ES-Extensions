@@ -17,7 +17,7 @@ block append Metadata
         description: MetaDescriptionTemplates.function({
           functionName: "getLastElementOfArray",
           whatFunctionDoes: "配列の最後の要素（存在している時）を返す。この要素が無い場合、２引数目の有無に依り「null」が返されるが、例外が投げられる。"
-        }),
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -30,15 +30,17 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./getLastElementOfArray.english.html",
-      russian: "./getLastElementOfArray.russian.html",
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.
-        functionality.$children.
-        arrays.$children.
-        retrievingOfElements.$children.
-        getLastElementOfArray.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+        retrievingOfElements.$children.getLastElementOfArray;
 
 
 block append HeadScripts
@@ -134,8 +136,8 @@ block append SpecificContent
     //- ━━━ 例 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.examples.$heading,
-      HTML_ID: pageTableOfContents.examples.$anchor
+      text: localizedSectioning.examples.$heading,
+      HTML_ID: localizedSectioning.examples.$anchor
     }).Article-Heading2
 
     +CodeViewer--YDF
@@ -190,7 +192,7 @@ block append SpecificContent
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
-      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -229,8 +231,8 @@ block append SpecificContent
     //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.externalLinks.$heading,
-      HTML_ID: pageTableOfContents.externalLinks.$anchor
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
     }).Article-Heading2
 
     +LinksCardsFlow--YDF

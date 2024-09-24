@@ -42,7 +42,7 @@ class RawObjectDataProcessor {
   private readonly validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
   private readonly validationErrorsMessages: Array<string> = [];
 
-  private rawDataIsInvalid: boolean = false;
+  private isRawDataInvalid: boolean = false;
 
 
   /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -78,7 +78,7 @@ class RawObjectDataProcessor {
     const dataHoldingSelfInstance: RawObjectDataProcessor = new RawObjectDataProcessor({
       rawData,
       fullDataSpecification: validDataSpecification,
-      processingApproach: RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling,
+      processingApproach: options.processingApproach,
       validationErrorsMessagesBuilder
     });
 
@@ -249,13 +249,15 @@ class RawObjectDataProcessor {
     parametersObject: {
       rawData: ArbitraryObject;
       fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
-      processingApproach: RawObjectDataProcessor.ProcessingApproaches;
+      processingApproach?: RawObjectDataProcessor.ProcessingApproaches;
       validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
     }
   ) {
     this.rawData = parametersObject.rawData;
     this.fullDataSpecification = parametersObject.fullDataSpecification;
-    this.processingApproach = parametersObject.processingApproach;
+    this.processingApproach =
+        parametersObject.processingApproach ??
+        RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation;
     this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
     this.validationErrorsMessagesBuilder = parametersObject.validationErrorsMessagesBuilder;
   }
@@ -1984,7 +1986,7 @@ class RawObjectDataProcessor {
 
   /* --- Helpers ---------------------------------------------------------------------------------------------------- */
   private registerValidationError(errorMessage: string): void {
-    this.rawDataIsInvalid = true;
+    this.isRawDataInvalid = true;
     this.validationErrorsMessages.push(errorMessage);
   }
 
@@ -1995,7 +1997,7 @@ class RawObjectDataProcessor {
 
   /* [ Approach ] The alias for the logic clarifying */
   private get isValidationOnlyMode(): boolean {
-    return this.rawDataIsInvalid;
+    return this.isRawDataInvalid;
   }
 
   private static getNormalizedPreValidationModifications(

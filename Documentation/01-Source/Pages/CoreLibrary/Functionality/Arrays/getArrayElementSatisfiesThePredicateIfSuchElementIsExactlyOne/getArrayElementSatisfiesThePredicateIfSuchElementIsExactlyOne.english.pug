@@ -36,15 +36,17 @@ block append Metadata
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.japanese.html",
-      russian: "./getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.russian.html",
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.
-        functionality.$children.
-        arrays.$children.
-        retrievingOfElements.$children.
-        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+        retrievingOfElements.$children.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne;
 
 
 block append HeadScripts
@@ -146,8 +148,8 @@ block append SpecificContent
     //- ━━━ Example ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.example.$heading,
-      HTML_ID: pageTableOfContents.example.$anchor
+      text: localizedSectioning.example.$heading,
+      HTML_ID: localizedSectioning.example.$anchor
     }).Article-Heading2
 
     +CodeViewer--YDF
@@ -264,8 +266,8 @@ block append SpecificContent
     //- ━━━ Comparison with native methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.comparisonWithNativeMethods.$heading,
-      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$anchor
+      text: localizedSectioning.comparisonWithNativeMethods.$heading,
+      HTML_ID: localizedSectioning.comparisonWithNativeMethods.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
@@ -283,8 +285,8 @@ block append SpecificContent
     //- ─── Array.prototype.find ───────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      innerHTML: pageTableOfContents.comparisonWithNativeMethods.$children.find.$heading,
-      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$children.find.$anchor
+      innerHTML: localizedSectioning.comparisonWithNativeMethods.$children.find.$heading,
+      HTML_ID: localizedSectioning.comparisonWithNativeMethods.$children.find.$anchor
     }).Article-Heading3
 
     ul.Article-UnorderedList
@@ -328,8 +330,8 @@ block append SpecificContent
     //- ─── Array.prototype.filter ─────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      innerHTML: pageTableOfContents.comparisonWithNativeMethods.$children.filter.$heading,
-      HTML_ID: pageTableOfContents.comparisonWithNativeMethods.$children.filter.$anchor
+      innerHTML: localizedSectioning.comparisonWithNativeMethods.$children.filter.$heading,
+      HTML_ID: localizedSectioning.comparisonWithNativeMethods.$children.filter.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -356,7 +358,7 @@ block append SpecificContent
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/Images/" +
           "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo",
-      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -413,8 +415,8 @@ block append SpecificContent
     //- ━━━ External links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.externalLinks.$heading,
-      HTML_ID: pageTableOfContents.externalLinks.$anchor
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
     }).Article-Heading2
 
     +LinksCardsFlow--YDF

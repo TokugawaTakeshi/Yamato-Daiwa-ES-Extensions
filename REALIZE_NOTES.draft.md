@@ -8,6 +8,7 @@
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **ReadonlyRowVector** class
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **RowVector** class
 + (( Core Package )) (( New )) Add **Matrix** class
++ (( Core Package )) (( Breaking )) **RawObjectDataProcessor** now manipulating with source object as default 
 + (( Core Package )) (( Breaking )) Update API of **TimePoint** class
 + (( Core Package )) (( Breaking )) Update API of **DataRetrievingFailedError** and **DataSubmittingFailedError** and localizations
 + (( Core Package )) (( Breaking )) Update API and refactor **AJAX_Service** and **FetchAPI_Service**

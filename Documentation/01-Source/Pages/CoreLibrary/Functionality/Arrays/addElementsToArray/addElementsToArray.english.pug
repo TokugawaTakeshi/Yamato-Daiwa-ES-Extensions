@@ -32,15 +32,17 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.addingOfElements.addElementsToArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./addElementsToArray.japanese.html",
-      russian: "./addElementsToArray.russian.html"
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          addingOfElements.$children.addElementsToArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          addingOfElements.$children.addElementsToArray.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.
-        functionality.$children.
-        arrays.$children.
-        addingOfElements.$children.
-        addElementsToArray.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+        addingOfElements.$children.addElementsToArray;
 
 
 block append HeadScripts
@@ -143,8 +145,8 @@ block append SpecificContent
     //- ━━━ Examples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.examples.$heading,
-      HTML_ID: pageTableOfContents.examples.$anchor
+      text: localizedSectioning.examples.$heading,
+      HTML_ID: localizedSectioning.examples.$anchor
     }).Article-Heading2
 
     +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
@@ -154,15 +156,15 @@ block append SpecificContent
     //- ─── Adding of one element to the start of array ────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$anchor
     }).Article-Heading4
 
     +CodeViewer--YDF
@@ -278,8 +280,8 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$anchor
     }).Article-Heading4
 
     +CodeViewer--YDF
@@ -367,15 +369,15 @@ block append SpecificContent
     //- ─── Adding of one element to the end of array ──────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$anchor
     }).Article-Heading4
 
     +CodeViewer--YDF
@@ -401,8 +403,8 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$anchor
     }).Article-Heading4
 
     +CodeViewer--YDF
@@ -429,16 +431,16 @@ block append SpecificContent
     //- ─── Adding of one element to the specific position of array (numeration from 0) ────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -512,9 +514,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -597,8 +599,8 @@ block append SpecificContent
     //- ─── Adding one element to the specific position of an array (numeration from 1) ────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$anchor
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -612,9 +614,9 @@ block append SpecificContent
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -641,9 +643,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -671,16 +673,16 @@ block append SpecificContent
     //- ─── Adding of multiple elements to the start of array ──────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.$anchor
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -707,9 +709,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -737,16 +739,16 @@ block append SpecificContent
     //- ─── Adding of multiple elements to the end of array ────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.$anchor
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -773,9 +775,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -803,16 +805,16 @@ block append SpecificContent
     //- ─── Adding of multiple elements to specific position (numeration from 0) ───────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$anchor
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -839,9 +841,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -868,16 +870,16 @@ block append SpecificContent
     //- ─── Adding of multiple elements to specific position (numeration from 1) ───────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$anchor
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$anchor
     }).Article-Heading3
 
     //- ─── Mutable adding ─────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
           $children.mutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
           $children.mutableAdding.$anchor
     }).Article-Heading4
 
@@ -904,9 +906,9 @@ block append SpecificContent
     //- ─── Immutable adding ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
           $children.immutableAdding.$heading,
-      HTML_ID: pageTableOfContents.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
           $children.immutableAdding.$anchor
     }).Article-Heading4
 
@@ -933,7 +935,7 @@ block append SpecificContent
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "addElementsToArray/Images/addElementsToArray-LiveTemplate",
-      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -1007,8 +1009,8 @@ block append SpecificContent
     //- ━━━ External links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.externalLinks.$heading,
-      HTML_ID: pageTableOfContents.externalLinks.$anchor
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
     }).Article-Heading2
 
     +LinksCardsFlow--YDF

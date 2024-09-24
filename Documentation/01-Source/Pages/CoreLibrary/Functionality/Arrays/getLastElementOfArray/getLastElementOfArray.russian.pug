@@ -20,7 +20,7 @@ block append Metadata
               "возвращает последний элемент массива, когда он есть. " +
               "Если же массив пустой, будет либо возвращён null, либо брошено исключение — в зависимости от наличия " +
                 "или отсутствия второго параметра."
-        }),
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -33,15 +33,17 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./getLastElementOfArray.english.html",
-      japanese: "./getLastElementOfArray.japanese.html"
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.
-        functionality.$children.
-        arrays.$children.
-        retrievingOfElements.$children.
-        getLastElementOfArray.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+        retrievingOfElements.$children.getLastElementOfArray;
 
 
 block append HeadScripts
@@ -141,8 +143,8 @@ block append SpecificContent
     //- ━━━ Примеры ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.examples.$heading,
-      HTML_ID: pageTableOfContents.examples.$anchor
+      text: localizedSectioning.examples.$heading,
+      HTML_ID: localizedSectioning.examples.$anchor
     }).Article-Heading2
 
     +CodeViewer--YDF
@@ -206,7 +208,7 @@ block append SpecificContent
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
       imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
           "getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
-      relatedTableOfContentsMetadata: pageTableOfContents.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })
 
       ol.Article-OrderedList
@@ -256,8 +258,8 @@ block append SpecificContent
     //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.externalLinks.$heading,
-      HTML_ID: pageTableOfContents.externalLinks.$anchor
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
     }).Article-Heading2
 
     +LinksCardsFlow--YDF

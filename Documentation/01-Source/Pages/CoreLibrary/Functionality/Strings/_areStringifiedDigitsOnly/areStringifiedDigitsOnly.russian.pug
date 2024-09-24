@@ -22,7 +22,7 @@ block append Metadata
                 "проверяет, содержит ли передаваемая через параметр строка только цифры, и если да, " +
                   "то возвращает логическое значение «истина»"
           })
-        }),
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -35,8 +35,10 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./areStringifiedDigitsOnly.english.html",
-      japanese: "./areStringifiedDigitsOnly.japanese.html"
+      english: routing.english.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI
     });
 
 
