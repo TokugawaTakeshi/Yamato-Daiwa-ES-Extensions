@@ -1,10 +1,11 @@
+import type ReadonlyRowVector from "./ReadonlyRowVector";
 import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
+import isNumber from "../../TypeGuards/Numbers/isNumber";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../../Logging/Logger";
-import isNumber from "../../TypeGuards/Numbers/isNumber";
 
 
-export default class RowVector<ElementType> extends Array<ElementType> {
+export default class RowVector<ElementType> extends Array<ElementType> implements ReadonlyRowVector<ElementType> {
 
   public static fromArray<ElementType>(array: ReadonlyArray<ElementType>): RowVector<ElementType> {
     return new RowVector(...array);

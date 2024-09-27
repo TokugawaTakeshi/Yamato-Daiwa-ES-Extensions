@@ -30,7 +30,7 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 class RawObjectDataProcessor {
 
-  private static defaultLocalization: RawObjectDataProcessor.Localization = rawObjectDataProcessorLocalization__english;
+  public static defaultLocalization: RawObjectDataProcessor.Localization = rawObjectDataProcessorLocalization__english;
 
   private readonly rawData: ArbitraryObject;
   private readonly fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -58,8 +58,8 @@ class RawObjectDataProcessor {
         );
 
     /* [ Theory ]
-    * Because `typeof null` is `"object"`, besides `typeof` it's required to check for the null value for the accurate
-    *   error message. */
+    * Because `typeof null` is `"object"`, besides `typeof` it's required to check for the null the value for the
+    *   accurate error message. */
     if (isNull(rawData)) {
       return {
         rawDataIsInvalid: true,
@@ -75,6 +75,7 @@ class RawObjectDataProcessor {
       };
     }
 
+
     const dataHoldingSelfInstance: RawObjectDataProcessor = new RawObjectDataProcessor({
       rawData,
       fullDataSpecification: validDataSpecification,
@@ -87,17 +88,21 @@ class RawObjectDataProcessor {
     switch (validDataSpecification.subtype) {
 
       case RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject: {
+
         rawDataProcessingResult = dataHoldingSelfInstance.processFixedKeyAndValuePairsNonNullObjectTypeValue({
-          targetValue__expectedToBeObject: dataHoldingSelfInstance.rawData,
+          topLevelObject: dataHoldingSelfInstance.rawData,
           targetObjectTypeValueSpecification: {
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject },
             ...validDataSpecification
           }
         });
+
         break;
+
       }
 
       case RawObjectDataProcessor.ObjectSubtypes.indexedArray: {
+
         rawDataProcessingResult = dataHoldingSelfInstance.processIndexedArrayTypeValue({
           targetValue__expectedToBeIndexedArray: dataHoldingSelfInstance.rawData,
           targetIndexedArrayTypeValueSpecification: {
@@ -105,10 +110,13 @@ class RawObjectDataProcessor {
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements }
           }
         });
+
         break;
+
       }
 
       case RawObjectDataProcessor.ObjectSubtypes.associativeArray: {
+
         rawDataProcessingResult = dataHoldingSelfInstance.processAssociativeArrayTypeValue({
           targetValue__expectedToBeAssociativeArrayTypeObject: dataHoldingSelfInstance.rawData,
           targetAssociativeArrayTypeValueSpecification: {
@@ -116,7 +124,9 @@ class RawObjectDataProcessor {
             ...{ type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues }
           }
         });
+
       }
+
     }
 
     if ("isInvalid" in rawDataProcessingResult || "isValidButValidationOnlyModeActive" in rawDataProcessingResult) {
@@ -127,50 +137,40 @@ class RawObjectDataProcessor {
     }
 
 
-    let processedData: ProcessedData;
-
-    /* [ Theory ] While type aliases and interfaces are not existing for the JavaScript it's impossible to guarantee
-    *   programmatically that some value has object-based type 'X'. Nothing left except believe the user that 'ProcessedData'
-    * is corresponding to 'validDataSpecification'. */
-    if (isNotUndefined(options.postProcessing)) {
-      processedData = options.
-          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-          * See the "Problem overview" section of the official documentation */
-          postProcessing<InterimValidData, ProcessedData>(rawDataProcessingResult.processedValue as InterimValidData);
-    } else {
-      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-       * See the "Problem overview" section of the official documentation */
-      processedData = rawDataProcessingResult.processedValue as ProcessedData;
-    }
-
     return {
+
       rawDataIsInvalid: false,
-      processedData
+
+      /* eslint-disable @typescript-eslint/consistent-type-assertions --
+       * Bethe the type aliases and interfaces are not existing at transpiled JavaScript it's impossible to
+       *   programmatically provide the correspondence between `validDataSpecification` object and
+       *   `ProcessedData` type. So, the type assertion reinforced by preliminary validation is the best that possible
+       *    ever validation rules could be unrelated with desired type. */
+      processedData: isUndefined(options.postProcessing) ?
+          rawDataProcessingResult.processedValue as ProcessedData :
+          options.postProcessing<InterimValidData, ProcessedData>(rawDataProcessingResult.processedValue as InterimValidData)
+      /* eslint-enable @typescript-eslint/consistent-type-assertions */
+
     };
 
   }
 
   public static formatValidationErrorsList(
-    messages: Array<string>, localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
+    messages: ReadonlyArray<string>,
+    localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
   ): string {
-    return messages.reduce(
-      (accumulatingValue: string, message: string, index: number): string =>
-          `${ accumulatingValue }\n\n` +
-          `${ localization.buildErrorMessagesListItemHeading(index + 1) }\n` +
-          message,
-      ""
-    );
+    return messages.
+        map(
+          (message: string, index: number): string =>
+              `${ localization.buildErrorMessagesListItemHeading({ messageNumber: index + 1 }) }\n${ message }`
+        ).
+        join("\n\n");
   }
 
-  public static setDefaultLocalization(newLocalization: RawObjectDataProcessor.Localization): void {
-    RawObjectDataProcessor.defaultLocalization = newLocalization;
-  }
-
-  /* [ Theory ] Basically, the switch/case is working, but there are some exceptions.
+  /* [ Theory ] Basically, the `switch/case` is working, but there are some exceptions.
    * https://stackoverflow.com/q/69848208/4818123
    * https://stackoverflow.com/q/69848689/4818123
-   * [ Approach ] This method is public because it is required for the "localization".
-   *  */
+   * [ Approach ] This method is public because it is required for the `localization` object. */
   public static getNormalizedValueTypeID(
     valueType: NumberConstructor |
         StringConstructor |
@@ -221,10 +221,7 @@ class RawObjectDataProcessor {
     }
 
 
-    if (
-      valueType === RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues ||
-      (typeof valueType === "function" && valueType.name === "Map")
-    ) {
+    if (valueType === RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues) {
       return RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues;
     }
 
@@ -253,50 +250,77 @@ class RawObjectDataProcessor {
       validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
     }
   ) {
+
     this.rawData = parametersObject.rawData;
     this.fullDataSpecification = parametersObject.fullDataSpecification;
+
     this.processingApproach =
         parametersObject.processingApproach ??
-        RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation;
+        RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling;
+
     this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
     this.validationErrorsMessagesBuilder = parametersObject.validationErrorsMessagesBuilder;
+
   }
 
 
   /* ━━━ Private Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private processFixedKeyAndValuePairsNonNullObjectTypeValue(
-    {
-      targetValue__expectedToBeObject,
+    compoundParameter: Readonly<
+      (
+        { topLevelObject: ArbitraryObject; } |
+        { targetValueOfSubsequentLevel__expectedToBeObject: unknown; }
+      ) &
+      {
+        targetObjectTypeValueSpecification: RawObjectDataProcessor.FixedKeyAndValuePairsObjectValueSpecification;
+        parentObject?: ArbitraryObject;
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
+      }
+    >
+  ): RawObjectDataProcessor.ValueProcessingResult {
+
+    const {
       targetObjectTypeValueSpecification,
       parentObject,
       targetPropertyStringifiedValueBeforeFirstPreValidationModification
-    }: {
-      targetValue__expectedToBeObject: unknown;
-      targetObjectTypeValueSpecification: RawObjectDataProcessor.FixedKeyAndValuePairsObjectValueSpecification;
-      parentObject?: ArbitraryObject;
-      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
+    }: Parameters<typeof this.processFixedKeyAndValuePairsNonNullObjectTypeValue>[0] = compoundParameter;
+
+    let targetObjectTypeValue: ArbitraryObject;
+    let processedValueWorkpiece: ArbitraryObject;
+
+    if ("topLevelObject" in compoundParameter) {
+
+      targetObjectTypeValue = compoundParameter.topLevelObject;
+
+      processedValueWorkpiece =
+          this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation ?
+              compoundParameter.topLevelObject : {};
+
+    } else {
+
+      if (!isArbitraryObject(compoundParameter.targetValueOfSubsequentLevel__expectedToBeObject)) {
+
+        this.registerValidationError(
+          this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
+            targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: compoundParameter.targetValueOfSubsequentLevel__expectedToBeObject,
+            targetPropertyValueSpecification: targetObjectTypeValueSpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
+          })
+        );
+
+        return { isInvalid: true };
+
+      }
+
+      targetObjectTypeValue = compoundParameter.targetValueOfSubsequentLevel__expectedToBeObject;
+
+      processedValueWorkpiece =
+          this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation ?
+              compoundParameter.targetValueOfSubsequentLevel__expectedToBeObject : {};
+
     }
-  ): RawObjectDataProcessor.ValueProcessingResult {
-
-    /* [ Approach ] If "targetValue__expectedToBeObject" is a root object (rawData) this condition will always be falsy
-     *    because "isArbitraryObject" check already has been executed. */
-    if (!isArbitraryObject(targetValue__expectedToBeObject)) {
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
-          targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeObject,
-          targetPropertyValueSpecification: targetObjectTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
-      return { isInvalid: true };
-    }
-
-
-    let processedValueWorkpiece: ArbitraryObject =
-        this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation ?
-            targetValue__expectedToBeObject : {};
 
     const currentObjectDepthLevel__countFromZero: number =
         this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.length;
@@ -305,7 +329,7 @@ class RawObjectDataProcessor {
 
     for (
       const [ childPropertyName, childPropertySpecification ] of
-      Object.entries(targetObjectTypeValueSpecification.properties)
+          Object.entries(targetObjectTypeValueSpecification.properties)
     ) {
 
       this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[
@@ -322,20 +346,27 @@ class RawObjectDataProcessor {
         this.currentlyIteratedPropertyNewNameForLogging = childPropertyFinalName;
       }
 
-      let childPropertyValue: unknown = targetValue__expectedToBeObject[childPropertyName];
+      let childPropertyValue: unknown = targetObjectTypeValue[childPropertyName];
       let childPropertyStringifiedValueBeforeFirstPreValidationModification: string | undefined;
 
-      const preValidationModifications: Array<RawObjectDataProcessor.PreValidationModification> =
-          RawObjectDataProcessor.getNormalizedPreValidationModifications(childPropertySpecification.preValidationModifications);
+      const preValidationModifications: ReadonlyArray<RawObjectDataProcessor.PreValidationModification> =
+          RawObjectDataProcessor.getNormalizedPreValidationModifications(
+            childPropertySpecification.preValidationModifications
+          );
 
       if (preValidationModifications.length > 0) {
-        childPropertyStringifiedValueBeforeFirstPreValidationModification = stringifyAndFormatArbitraryValue(childPropertyValue);
+        childPropertyStringifiedValueBeforeFirstPreValidationModification =
+            stringifyAndFormatArbitraryValue(childPropertyValue);
       }
 
       for (const preValidationModification of preValidationModifications) {
+
         try {
+
           childPropertyValue = preValidationModification(childPropertyValue);
+
         } catch (error: unknown) {
+
           this.registerValidationError(
             this.validationErrorsMessagesBuilder.buildPreValidationModificationFailedErrorMessage({
               targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -347,7 +378,9 @@ class RawObjectDataProcessor {
               thrownError: error
             })
           );
+
         }
+
       }
 
 
@@ -374,7 +407,7 @@ class RawObjectDataProcessor {
 
         if (
           isNotUndefined(childPropertySpecification.requiredIf) &&
-          childPropertySpecification.requiredIf.predicate(targetValue__expectedToBeObject, this.rawData)
+          childPropertySpecification.requiredIf.predicate(targetObjectTypeValue, this.rawData)
         ) {
 
           areOneOnMorePropertiesInvalid = true;
@@ -567,7 +600,7 @@ class RawObjectDataProcessor {
     ) {
 
       if (!customValidator.validationFunction({
-        currentPropertyValue: targetValue__expectedToBeObject,
+        currentPropertyValue: targetObjectTypeValue,
         rawData__full: this.rawData,
         rawData__currentObjectDepth: parentObject ?? this.rawData
       })) {
@@ -578,7 +611,7 @@ class RawObjectDataProcessor {
           this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
             targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeObject,
+            targetPropertyValue: targetObjectTypeValue,
             targetPropertyValueSpecification: targetObjectTypeValueSpecification,
             customValidationDescription: customValidator.descriptionForLogging,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification
@@ -1311,7 +1344,7 @@ class RawObjectDataProcessor {
 
       case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: {
         return this.processFixedKeyAndValuePairsNonNullObjectTypeValue({
-          targetValue__expectedToBeObject: targetValue,
+          targetValueOfSubsequentLevel__expectedToBeObject: targetValue,
           /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※※ */
           targetObjectTypeValueSpecification: targetValueSpecification as RawObjectDataProcessor.
               FixedKeyAndValuePairsObjectValueSpecification,
@@ -2523,7 +2556,7 @@ namespace RawObjectDataProcessor {
 
     readonly errorMessageBasicTemplate: (payload: Localization.DataForMessagesBuilding) => string;
 
-    readonly buildErrorMessagesListItemHeading: (messageNumber: number) => string;
+    readonly buildErrorMessagesListItemHeading: (templateVariables: Readonly<{ messageNumber: number; }>) => string;
 
     readonly rawDataIsNullErrorMessage: string;
 

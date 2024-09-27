@@ -184,9 +184,9 @@ export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
 /* ─── Classes ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as ColumnVector } from "./LinearAlgebra/Classes/ColumnVector";
 export { default as Matrix } from "./LinearAlgebra/Classes/Matrix";
-export { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/ReadonlyColumnVector";
-export { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
-export { default as RowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
+export type { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/ReadonlyColumnVector";
+export type { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
+export { default as RowVector } from "./LinearAlgebra/Classes/RowVector";
 
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */

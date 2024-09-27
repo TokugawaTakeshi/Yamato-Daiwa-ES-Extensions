@@ -8,7 +8,7 @@ import { isNull, Logger } from "@yamato-daiwa/es-extensions";
 
 export default class ImprovedFileSystem {
 
-  /* ━━━ Existence check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Existence Check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static isFileOrDirectoryExists(
     compoundParameter: Readonly<{ targetPath: string; synchronously: false; }>
   ): Promise<boolean>;
@@ -29,15 +29,11 @@ export default class ImprovedFileSystem {
 
 
     return new Promise<boolean>((resolve: (isExists: boolean) => void): void => {
-
-      /* eslint-disable-next-line node/prefer-promises/fs --
-      *  `PromisfiedFileSystem.access()` returns the promise with empty payload. */
       FileSystem.access(
         targetPath,
         FileSystemConstants.F_OK,
         (error: NodeJS.ErrnoException | null): void => { resolve(isNull(error)); }
       );
-
     });
 
   }
@@ -193,8 +189,6 @@ export default class ImprovedFileSystem {
     }>
   ): Promise<void>;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static writeFileToPossiblyNotExistingDirectory(
     {
       filePath,

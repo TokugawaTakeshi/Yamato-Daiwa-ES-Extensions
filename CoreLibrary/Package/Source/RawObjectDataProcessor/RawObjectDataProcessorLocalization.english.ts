@@ -39,7 +39,9 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         });
   },
 
-  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Error No. ${ messageNumber } ==========`; },
+  buildErrorMessagesListItemHeading({ messageNumber }: Readonly<{ messageNumber: number; }>): string {
+    return `=== Error No. ${ messageNumber } ==========`;
+  },
 
   rawDataIsNullErrorMessage: "Raw data, the first parameter of 'RawObjectDataProcessor.process' is null.",
 
