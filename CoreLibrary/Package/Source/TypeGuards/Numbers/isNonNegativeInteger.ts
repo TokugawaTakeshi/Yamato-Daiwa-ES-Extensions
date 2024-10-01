@@ -1,3 +1,8 @@
+export default function isNonNegativeInteger(potentialInteger: unknown): potentialInteger is number;
+
+export default function isNonNegativeInteger(potentialInteger: number): boolean;
+
+
 export default function isNonNegativeInteger(potentialInteger: unknown): potentialInteger is number {
 
   if (typeof potentialInteger !== "number") {
@@ -6,4 +11,5 @@ export default function isNonNegativeInteger(potentialInteger: unknown): potenti
 
 
   return Number.isInteger(potentialInteger) && potentialInteger >= 0;
+
 }

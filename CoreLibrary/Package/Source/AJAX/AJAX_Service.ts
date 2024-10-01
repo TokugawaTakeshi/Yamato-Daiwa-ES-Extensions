@@ -1,5 +1,5 @@
 import type { PossiblyReadonlyParsedJSON, ReadonlyParsedJSON, ReadonlyParsedJSON_Object } from "../Types/ParsedJSON";
-import HTTP_Methods from "../ConstantsAndEnumerations/HTTP/HTTP_Methods";
+import { HTTP_Methods } from "fundamental-constants";
 
 import RawObjectDataProcessor from "../RawObjectDataProcessor/RawObjectDataProcessor";
 

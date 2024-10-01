@@ -38,39 +38,48 @@ export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArr
 
 
 /* ━━━ Constants and enumerations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* ─── HTTP ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as HTTP_Methods } from "./ConstantsAndEnumerations/HTTP/HTTP_Methods";
+export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
+
+/* ─── Re-exporting from "fundamental-constants" ──────────────────────────────────────────────────────────────────── */
 export {
+
+  /* --- Computer Networking ---------------------------------------------------------------------------------------- */
+  HTTP_DEFAULT_PORT,
+  HTTP_Methods,
+  HTTPS_DEFAULT_PORT,
+  NETWORK_PORT_MAXIMAL_VALUE,
+  NETWORK_PORT_MINIMAL_VALUE,
   HTTP_StatusCodes,
   InformationalResponsesHTTP_StatusCodes,
   SuccessfulResponsesHTTP_StatusCodes,
   RedirectionResponsesHTTP_StatusCodes,
   ClientErrorsHTTP_StatusCodes,
-  ServerErrorsHTTP_StatusCodes
-} from "./ConstantsAndEnumerations/HTTP/HTTP_StatusCodes";
+  ServerErrorsHTTP_StatusCodes,
 
-/* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as YDEE_BUG_REPORTING_PAGE_URI } from "./ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";
+  /* --- Data Types ------------------------------------------------------------------------------------------------- */
+  IntegerDataTypes,
 
-/* ─── Re-exporting from "fundamental-constants" ──────────────────────────────────────────────────────────────────── */
-export {
-  HTTP_DEFAULT_PORT,
-  HTTPS_DEFAULT_PORT,
-  NETWORK_PORT_MAXIMAL_VALUE,
-  NETWORK_PORT_MINIMAL_VALUE,
+  /* --- Date & Time ------------------------------------------------------------------------------------------------ */
   DAYS_COUNT_IN_WEEK,
   DaysOfWeekNames,
   HOURS_COUNT_IN_STELLAR_DAY,
   MAXIMAL_DAYS_IN_MONTH,
+  MAXIMAL_SUPPORTED_UNIX_MILLISECONDS_AMOUNT,
+  MINIMAL_SUPPORTED_UNIX_MILLISECONDS_AMOUNT,
   MINUTES_COUNT_IN_HOUR,
   MONTHS_COUNT_IN_YEAR,
   MonthsNames,
   SECONDS_COUNT_IN_MINUTE,
-  CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING,
+
+  /* --- ISO 8601 --------------------------------------------------------------------------------------------------- */
+  MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING,
   CHARACTERS_COUNT_IN_FULL_ISO8601_STRING,
+
+  /* --- Email Address ---------------------------------------------------------------------------------------------- */
   EMAIL_ADDRESS_VALID_PATTERN,
   MAXIMAL_CHARACTERS_COUNT_OF_EMAIL_ADDRESS,
   MINIMAL_CHARACTERS_COUNT_OF_EMAIL_ADDRESS
+
 } from "fundamental-constants";
 
 

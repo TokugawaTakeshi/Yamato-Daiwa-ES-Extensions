@@ -35,7 +35,7 @@ export namespace IsArrayOfLengthCheckingOperation {
 
 
   export function isArrayOfLength<ArrayElement>(
-      potentialArray: unknown, options: Options
+    potentialArray: unknown, options: Options
   ): potentialArray is Array<ArrayElement> {
 
     if (!Array.isArray(potentialArray)) {

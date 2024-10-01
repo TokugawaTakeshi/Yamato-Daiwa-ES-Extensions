@@ -32,7 +32,7 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "fundamental-constants": "0.2.1"
+    "fundamental-constants": "0.3.0"
   },
   "devDependencies": {
     "@types/mocha": "10.0.8",

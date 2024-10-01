@@ -34,6 +34,11 @@ export namespace IsStringOfLengthCheckingOperation {
       Options__MinimalAndMaximalCharactersCountCase;
 
 
+  export function isStringOfLength(potentialString: unknown, options: Options): potentialString is string;
+
+  export function isStringOfLength(definiteString: string, options: Options): boolean;
+
+
   export function isStringOfLength(potentialString: unknown, options: Options): potentialString is string {
 
     if (typeof potentialString !== "string") {

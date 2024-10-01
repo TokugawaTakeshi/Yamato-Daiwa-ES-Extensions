@@ -1,3 +1,8 @@
+export default function isDecimalFractionOfAnySign(potentialDecimalFraction: unknown): potentialDecimalFraction is number;
+
+export default function isDecimalFractionOfAnySign(potentialDecimalFraction: number): boolean;
+
+
 export default function isDecimalFractionOfAnySign(potentialDecimalFraction: unknown): potentialDecimalFraction is number {
 
   if (typeof potentialDecimalFraction !== "number") {
