@@ -51,59 +51,66 @@ class DateWithoutTime {
 
 
   /* ━━━ Public Accessors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Year ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
   public get year(): number {
-    return this._year ?? (this._year = this._nativeDateObject.getFullYear());
+    return this._year ?? (this._year = this._nativeDateObject.getUTCFullYear());
   }
 
+
+  /* ─── Month ────────────────────────────────────────────────────────────────────────────────────────────────────── */
   public get monthName(): MonthsNames {
     return this._monthName ?? (
-      this._monthName = getMonthNameByNumber({ targetMonthNumber: this._nativeDateObject.getMonth(), numerationFrom: 0 })
+      this._monthName = getMonthNameByNumber({ targetMonthNumber: this._nativeDateObject.getUTCMonth(), numerationFrom: 0 })
     );
   }
 
   public get monthNumber__numerationFrom0(): number {
     return this._monthNumber__numerationFrom0 ?? (
-      this._monthNumber__numerationFrom0 = this._nativeDateObject.getMonth()
+      this._monthNumber__numerationFrom0 = this._nativeDateObject.getUTCMonth()
     );
   }
 
   public get monthNumber__numerationFrom1(): number {
     return this._monthNumber__numerationFrom1 ?? (
-      this._monthNumber__numerationFrom1 = this._nativeDateObject.getMonth() + 1
+      this._monthNumber__numerationFrom1 = this._nativeDateObject.getUTCMonth() + 1
     );
   }
 
   public get monthNumber__numerationFrom1__2Digits(): string {
     return this._monthNumber__numerationFrom1__2Digits ?? (
-      this._monthNumber__numerationFrom1__2Digits = (this._nativeDateObject.getMonth() + 1).toString().padStart(2, "0")
+      this._monthNumber__numerationFrom1__2Digits = (this._nativeDateObject.getUTCMonth() + 1).toString().padStart(2, "0")
     );
   }
 
+
+  /* ─── Day of Month ─────────────────────────────────────────────────────────────────────────────────────────────── */
   public get dayOfMonth(): number {
-    return this._dayOfMonth ?? (this._dayOfMonth = this._nativeDateObject.getDate());
+    return this._dayOfMonth ?? (this._dayOfMonth = this._nativeDateObject.getUTCDate());
   }
 
   public get dayOfMonth__2Digits(): string {
     return this._dayOfMonth__2Digits ?? (
       this._dayOfMonth__2Digits = this._nativeDateObject.
-          getDate().
+          getUTCDate().
           toString().
           padStart(2, "0")
     );
   }
 
+
+  /* ─── Day of Week ──────────────────────────────────────────────────────────────────────────────────────────────── */
   public get dayOfWeek(): DaysOfWeekNames {
     return this._dayOfWeek ??
         (this._dayOfWeek = ((): DaysOfWeekNames => {
-          switch (this._dayOfWeekNumber__numerationFrom1AsSunday) {
+          switch (this._nativeDateObject.getUTCDay()) {
             /* eslint-disable @typescript-eslint/no-magic-numbers --
             *  Currently there is no enumeration with number (from 0) of each day of week. */
-            case 1: return DaysOfWeekNames.sunday;
-            case 2: return DaysOfWeekNames.monday;
-            case 3: return DaysOfWeekNames.tuesday;
-            case 4: return DaysOfWeekNames.wednesday;
-            case 5: return DaysOfWeekNames.thursday;
-            case 6: return DaysOfWeekNames.friday;
+            case 0: return DaysOfWeekNames.sunday;
+            case 1: return DaysOfWeekNames.monday;
+            case 2: return DaysOfWeekNames.tuesday;
+            case 3: return DaysOfWeekNames.wednesday;
+            case 4: return DaysOfWeekNames.thursday;
+            case 5: return DaysOfWeekNames.friday;
             default: return DaysOfWeekNames.saturday;
             /* eslint-enable @typescript-eslint/no-magic-numbers */
           }
@@ -112,18 +119,18 @@ class DateWithoutTime {
 
   public get dayOfWeekNumber__numerationFrom0AsSunday(): number {
     return this._dayOfWeekNumber__numerationFrom0AsSunday ??
-        (this._dayOfWeekNumber__numerationFrom0AsSunday = this._nativeDateObject.getDay());
+        (this._dayOfWeekNumber__numerationFrom0AsSunday = this._nativeDateObject.getUTCDay());
   }
 
   public get dayOfWeekNumber__numerationFrom1AsSunday(): number {
     return this._dayOfWeekNumber__numerationFrom1AsSunday ??
-        (this._dayOfWeekNumber__numerationFrom1AsSunday = this._nativeDateObject.getDay() + 1);
+        (this._dayOfWeekNumber__numerationFrom1AsSunday = this._nativeDateObject.getUTCDay() + 1);
   }
 
   public get dayOfWeekNumber__numerationFrom1AsSunday__2Digits(): string {
     return this._dayOfWeekNumber__numerationFrom1AsSunday__2Digits ?? (
       this._dayOfWeekNumber__numerationFrom1AsSunday__2Digits =
-          (this._nativeDateObject.getDay() + 1).toString().padStart(2, "0")
+          (this._nativeDateObject.getUTCDay() + 1).toString().padStart(2, "0")
     );
   }
 
@@ -138,10 +145,6 @@ class DateWithoutTime {
       nativeDateInstance: this._nativeDateObject,
       mustAssociateOutputWithLocalDate: false
     });
-  }
-
-  public toLocaleString(): string {
-    return this._nativeDateObject.toLocaleDateString();
   }
 
   public update(
@@ -167,51 +170,39 @@ class DateWithoutTime {
   }
 
 
-  /* ━━━ Mutating ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Protected Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Mutating ─────────────────────────────────────────────────────────────────────────────────────────────────── */
   protected set nativeDateObject(newValue: Date) {
 
     this._nativeDateObject = newValue;
 
-    this._year = this.computingOnDemandSettings.year ? null : this._nativeDateObject.getFullYear();
+    if (!this.computingOnDemandSettings.year) {
+      this._year = this._nativeDateObject.getUTCFullYear();
+    }
 
-    if (this.computingOnDemandSettings.month) {
-      this._monthNumber__numerationFrom0 = null;
-      this._monthNumber__numerationFrom1 = null;
-      this._monthNumber__numerationFrom1__2Digits = null;
-      this._monthName = null;
-    } else {
-      this._monthNumber__numerationFrom0 = this._nativeDateObject.getMonth();
+    if (!this.computingOnDemandSettings.month) {
+      this._monthNumber__numerationFrom0 = this._nativeDateObject.getUTCMonth();
       this._monthNumber__numerationFrom1 = this._monthNumber__numerationFrom0 + 1;
       this._monthNumber__numerationFrom1__2Digits = this._monthNumber__numerationFrom1.toString().padStart(2, "0");
       this._monthName = getMonthNameByNumber({ targetMonthNumber: this._monthNumber__numerationFrom1, numerationFrom: 1 });
     }
 
-
-    if (this.computingOnDemandSettings.dayOfMonth) {
-      this._dayOfMonth = null;
-      this._dayOfMonth__2Digits = null;
-    } else {
-      this._dayOfMonth = this._nativeDateObject.getDate();
+    if (!this.computingOnDemandSettings.dayOfMonth) {
+      this._dayOfMonth = this._nativeDateObject.getUTCDate();
       this._dayOfMonth__2Digits = this._dayOfMonth.toString().padStart(2, "0");
     }
 
-    if (this.computingOnDemandSettings.dayOfWeek) {
 
-      this._dayOfWeekNumber__numerationFrom0AsSunday = null;
-      this._dayOfWeekNumber__numerationFrom1AsSunday = null;
-      this._dayOfWeekNumber__numerationFrom1AsSunday__2Digits = null;
-      this._dayOfWeek = null;
+    if (!this.computingOnDemandSettings.dayOfWeek) {
 
-    } else {
-
-      this._dayOfWeekNumber__numerationFrom0AsSunday = this._nativeDateObject.getDay();
+      this._dayOfWeekNumber__numerationFrom0AsSunday = this._nativeDateObject.getUTCDay();
       this._dayOfWeekNumber__numerationFrom1AsSunday = this._dayOfWeekNumber__numerationFrom0AsSunday + 1;
       this._dayOfWeekNumber__numerationFrom1AsSunday__2Digits =
           this._dayOfWeekNumber__numerationFrom1AsSunday.toString().padStart(2, "0");
 
       switch (this._dayOfWeekNumber__numerationFrom1AsSunday) {
         /* eslint-disable @typescript-eslint/no-magic-numbers --
-         *  Currently there is no enumeration with number (from 0) of each day of week. */
+         *  Currently there is no enumeration with number (from 1) of each day of week. */
         case 1: { this._dayOfWeek = DaysOfWeekNames.sunday; break; }
         case 2: { this._dayOfWeek = DaysOfWeekNames.monday; break; }
         case 3: { this._dayOfWeek = DaysOfWeekNames.tuesday; break; }
@@ -227,7 +218,7 @@ class DateWithoutTime {
   }
 
 
-  /* ━━━ Routines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Routines ─────────────────────────────────────────────────────────────────────────────────────────────────── */
   protected static normalizeDateDefinition(dateDefinition: DateWithoutTime.DateDefinition): Date {
 
     let normalizedDate: Date;
@@ -276,7 +267,13 @@ class DateWithoutTime {
 
 
     if ("nativeDateObject" in dateDefinition) {
-      return dateDefinition.nativeDateObject;
+      return new Date(
+        Date.UTC(
+          dateDefinition.nativeDateObject.getFullYear(),
+          dateDefinition.nativeDateObject.getMonth(),
+          dateDefinition.nativeDateObject.getDate()
+        )
+      );
     }
 
 
@@ -292,7 +289,7 @@ class DateWithoutTime {
     }
 
     normalizedDate = new Date(
-      dateDefinition.year, monthNumber__numerationFrom0, dateDefinition.dayOfMonth
+      Date.UTC(dateDefinition.year, monthNumber__numerationFrom0, dateDefinition.dayOfMonth)
     );
 
     if (normalizedDate.toString() === "Invalid Date") {

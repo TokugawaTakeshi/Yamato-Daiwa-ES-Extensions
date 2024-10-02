@@ -92,6 +92,7 @@ export { default as MockGatewayHelperLocalization__English } from
 
 /* ━━━ Date & Time ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
+export { default as convert24HoursFormatTo12HoursFormat } from "./DateTime/convert24HoursFormatTo12HoursFormat";
 export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
 export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";

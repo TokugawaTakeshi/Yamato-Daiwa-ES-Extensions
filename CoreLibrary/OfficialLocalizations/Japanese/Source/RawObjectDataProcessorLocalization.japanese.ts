@@ -41,7 +41,9 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   },
 
-  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== ${ messageNumber }エラー名 ==========`; },
+  buildErrorMessagesListItemHeading({ messageNumber }: Readonly<{ messageNumber: number; }>): string {
+    return `=== ${ messageNumber }エラー名 ==========`;
+  },
 
   rawDataIsNullErrorMessage: "'RawObjectDataProcessor.process'の第一引数である生データがnullになっている。",
 

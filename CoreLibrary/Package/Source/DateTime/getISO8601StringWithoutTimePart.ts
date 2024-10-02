@@ -1,7 +1,6 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import type { MonthsNames } from "fundamental-constants";
-import { CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING } from "fundamental-constants";
+import { type MonthsNames, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING } from "fundamental-constants";
 import getMonthNumberByName from "./getMonthNumberByName";
 import isValidISO8601DateAndPossiblyTimeDefinition from "./isValidISO8601DateAndPossiblyTimeDefinition";
 import isValidNativeDate from "./isValidNativeDate";
@@ -48,7 +47,7 @@ export default function getISO8601StringWithoutTimePart(
     let nativeDateInstance: Date;
 
     if (
-      sourceDataAndOptions.ISO8601Definition.length <= CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING &&
+      sourceDataAndOptions.ISO8601Definition.length <= MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING &&
       sourceDataAndOptions.mustConsiderAsLocalIfTimeNotSpecified
     ) {
 
@@ -58,7 +57,7 @@ export default function getISO8601StringWithoutTimePart(
        * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#date_string
        * for details. */
       nativeDateInstance = new Date(
-        `${ sourceDataAndOptions.ISO8601Definition.substring(0, CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING) }T00:00`
+        `${ sourceDataAndOptions.ISO8601Definition.substring(0, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING) }T00:00`
       );
 
     } else {
@@ -74,7 +73,7 @@ export default function getISO8601StringWithoutTimePart(
     }
 
 
-    return nativeDateInstance.toISOString().substring(0, CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
+    return nativeDateInstance.toISOString().substring(0, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
 
   }
 
@@ -126,7 +125,7 @@ export default function getISO8601StringWithoutTimePart(
     }
 
 
-    return nativeDateInstance.toISOString().substring(0, CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
+    return nativeDateInstance.toISOString().substring(0, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
 
   }
 
@@ -142,6 +141,6 @@ export default function getISO8601StringWithoutTimePart(
 
   return sourceDataAndOptions.nativeDateInstance.
     toISOString().
-    substring(0, CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
+    substring(0, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING);
 
 }

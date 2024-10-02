@@ -44,18 +44,19 @@
   "devDependencies": {
     "@types/json5": "0.0.30",
     "@types/mocha": "10.0.8",
-    "@types/node": "22.5.5",
+    "@types/node": "22.7.4",
     "@types/yamljs": "0.2.34",
     "@yamato-daiwa/es-extensions": "../../CoreLibrary/Package",
-    "@yamato-daiwa/style_guides": "0.3.0-alpha.3",
+    "@yamato-daiwa/style_guides": "0.3.0-alpha.8",
     "mocha": "10.7.3",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
     "typescript": "5.5.4"
   },
   "scripts": {
-    "Rebuild Distributable": "rimraf Distributable & tsc",
     "Lint": "eslint Source Tests",
+    "Rebuild Distributable Without Preliminary Cleaning": "tsc",
+    "Rebuild Distributable": "rimraf Distributable & tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   }

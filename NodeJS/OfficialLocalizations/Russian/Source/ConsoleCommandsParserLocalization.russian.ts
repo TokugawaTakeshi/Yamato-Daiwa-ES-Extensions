@@ -1,6 +1,6 @@
 import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
 import { isNotUndefined, insertSubstringIf } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Russian } from "@yamato-daiwa/es-extensions-localization-russian";
+import { rawObjectDataProcessorLocalization__russian } from "@yamato-daiwa/es-extensions-localization-russian";
 
 import Localization = ConsoleCommandsParser.Localization;
 import ErrorsMessages = Localization.ErrorsMessages;
@@ -28,7 +28,7 @@ const consoleCommandsParserLocalization__russian: Localization = {
 
     numbersSet: {
       key: "Множество чисел",
-      generateValue: RawObjectDataProcessorLocalization__Russian.numbersSet
+      generateValue: rawObjectDataProcessorLocalization__russian.numbersSet
     },
 
     minimalValue: "Минимальное значение",
@@ -196,7 +196,7 @@ const consoleCommandsParserLocalization__russian: Localization = {
         }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `Значение "${ actualOptionValue }" числовой опции "${ targetOptionKey }" не принадлежит множеству чисел ` +
-            `"${ RawObjectDataProcessorLocalization__Russian.numbersSet(expectedNumbersSet) }". ` +
+            `"${ rawObjectDataProcessorLocalization__russian.numbersSet(expectedNumbersSet) }". ` +
           `${ consoleCommandsParserLocalization__russian.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 

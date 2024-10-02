@@ -10,6 +10,7 @@ import rawObjectDataProcessorLocalization__english from "./RawObjectDataProcesso
 import isUndefined from "../TypeGuards/Nullables/isUndefined";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
 import isNull from "../TypeGuards/Nullables/isNull";
+import isNotNull from "../TypeGuards/Nullables/isNotNull";
 import isArbitraryObject from "../TypeGuards/Objects/isArbitraryObject";
 import isNumber from "../TypeGuards/Numbers/isNumber";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
@@ -26,6 +27,8 @@ import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbit
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import InvalidExternalDataError from "../Errors/InvalidExternalData/InvalidExternalDataError";
+import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
 
 
 class RawObjectDataProcessor {
@@ -41,6 +44,8 @@ class RawObjectDataProcessor {
 
   private readonly validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
   private readonly validationErrorsMessages: Array<string> = [];
+
+  private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
 
   private isRawDataInvalid: boolean = false;
 
@@ -80,7 +85,8 @@ class RawObjectDataProcessor {
       rawData,
       fullDataSpecification: validDataSpecification,
       processingApproach: options.processingApproach,
-      validationErrorsMessagesBuilder
+      validationErrorsMessagesBuilder,
+      errorHandlingStrategies: options.errorsHandlingStrategies
     });
 
     let rawDataProcessingResult: RawObjectDataProcessor.ValueProcessingResult;
@@ -248,6 +254,7 @@ class RawObjectDataProcessor {
       fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
       processingApproach?: RawObjectDataProcessor.ProcessingApproaches;
       validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
+      errorHandlingStrategies?: Partial<RawObjectDataProcessor.ErrorsHandlingStrategies>;
     }
   ) {
 
@@ -260,6 +267,15 @@ class RawObjectDataProcessor {
 
     this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
     this.validationErrorsMessagesBuilder = parametersObject.validationErrorsMessagesBuilder;
+
+    this.errorHandlingStrategies = {
+      onUnableToSetProperty:
+          parametersObject.errorHandlingStrategies?.onUnableToSetProperty ??
+          RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError,
+      onUnableToDeleteProperty:
+          parametersObject.errorHandlingStrategies?.onUnableToDeleteProperty ??
+          RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError
+    };
 
   }
 
@@ -402,6 +418,7 @@ class RawObjectDataProcessor {
           );
 
           continue;
+
         }
 
 
@@ -426,49 +443,48 @@ class RawObjectDataProcessor {
           );
 
           continue;
+
         }
 
 
-        if (isNotUndefined(childPropertySpecification.defaultValue)) {
+        if (isNotUndefined(childPropertySpecification.defaultValue) && !this.isValidationOnlyMode) {
 
           switch (this.processingApproach) {
 
             case RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling: {
-              if (!this.isValidationOnlyMode) {
-                Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
-                  value: childPropertySpecification.defaultValue,
-                  configurable: isBoolean(childPropertySpecification.makeNonConfigurable) ?
-                      childPropertySpecification.makeNonConfigurable : true,
-                  enumerable: isBoolean(childPropertySpecification.makeNonEnumerable) ?
-                      childPropertySpecification.makeNonEnumerable : true,
-                  writable: isBoolean(childPropertySpecification.makeReadonly) ?
-                      childPropertySpecification.makeReadonly : true
-                });
-              }
+
+              Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
+                value: childPropertySpecification.defaultValue,
+                configurable: childPropertySpecification.mustMakeNonConfigurable !== true,
+                enumerable: childPropertySpecification.mustMakeNonEnumerable !== true,
+                writable: childPropertySpecification.mustMakeReadonly !== true
+              });
+
               break;
+
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
 
-              /* ※ Reserved for the future.
-              *  The desired 'configurable', 'enumerable', 'writable' could be different with actual ones.
-              *  If 'configurable === false', the descriptors could not be changed
-              *  1. If 'childPropertyName' and 'childPropertyFinalName' are different and
-              *     'childPropertySpecification.leaveEvenIfRenamed !== true', and also property is not configurable,
-              *     the 'childPropertyName' could not be deleted (warning should be enough, but data will become invalid).
-              *  2. If property is not 'writable', default value could not be substituted.
-              * */
+              this.substituteDefaultPropertyValueAtSourceObject({
+                sourceObject: processedValueWorkpiece,
+                targetPropertyInitialName: childPropertyName,
+                targetPropertySpecification: childPropertySpecification
+              });
+
             }
+
           }
 
           continue;
+
         }
 
 
         /* [ Approach ] Nothing required to do for omitted optional properties. */
         continue;
-      }
 
+      }
 
       if (isNull(childPropertyValue)) {
 
@@ -486,67 +502,64 @@ class RawObjectDataProcessor {
           }));
 
           continue;
+
         }
 
-
-        if (isNotUndefined(childPropertySpecification.nullSubstitution)) {
+        if (isNotUndefined(childPropertySpecification.nullSubstitution) && !this.isValidationOnlyMode) {
 
           switch (this.processingApproach) {
 
             case RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling: {
-              if (!this.isValidationOnlyMode) {
-                Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
-                  value: childPropertySpecification.nullSubstitution,
-                  configurable: isBoolean(childPropertySpecification.makeNonConfigurable) ?
-                      childPropertySpecification.makeNonConfigurable : true,
-                  enumerable: isBoolean(childPropertySpecification.makeNonEnumerable) ?
-                      childPropertySpecification.makeNonEnumerable : true,
-                  writable: isBoolean(childPropertySpecification.makeReadonly) ?
-                      childPropertySpecification.makeReadonly : true
-                });
-              }
+
+              Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
+                value: childPropertySpecification.nullSubstitution,
+                configurable: childPropertySpecification.mustMakeNonConfigurable !== true,
+                enumerable: childPropertySpecification.mustMakeNonEnumerable !== true,
+                writable: childPropertySpecification.mustMakeReadonly !== true
+              });
+
               break;
+
             }
 
             case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
 
-              /* ※ Reserved for the future. */
+              this.substituteNullPropertyValueAtSourceObject({
+                sourceObject: processedValueWorkpiece,
+                targetPropertyInitialName: childPropertyName,
+                targetPropertySpecification: childPropertySpecification
+              });
+
             }
+
           }
 
           continue;
+
         }
+
 
         if (childPropertySpecification.nullable === true) {
 
-          switch (this.processingApproach) {
-
-            case RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling: {
-              if (!this.isValidationOnlyMode) {
-                Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
-                  value: null,
-                  configurable: isBoolean(childPropertySpecification.makeNonConfigurable) ?
-                      childPropertySpecification.makeNonConfigurable : true,
-                  enumerable: isBoolean(childPropertySpecification.makeNonEnumerable) ?
-                      childPropertySpecification.makeNonEnumerable : true,
-                  writable: isBoolean(childPropertySpecification.makeReadonly) ?
-                      childPropertySpecification.makeReadonly : true
-                });
-              }
-              break;
-            }
-
-            case RawObjectDataProcessor.ProcessingApproaches.existingObjectManipulation: {
-
-              /* ※ Reserved for the future (no need to change the value itself, but the changing of descriptors could be
-               * requested). */
-            }
+          if (
+            this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.newObjectAssembling &&
+            !this.isValidationOnlyMode
+          ) {
+            Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
+              value: null,
+              configurable: childPropertySpecification.mustMakeNonConfigurable !== true,
+              enumerable: childPropertySpecification.mustMakeNonEnumerable !== true,
+              writable: childPropertySpecification.mustMakeReadonly !== true
+            });
           }
 
           continue;
-        }
-      }
 
+        }
+
+      }
+      // TODO プロパティが変わらない場合も、mustMakeNonConfigurable/mustMakeNonEnumerabl/mustMakeReadonlyを指定しないといけない
+      // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
       const childPropertyValueProcessingResult: RawObjectDataProcessor.ValueProcessingResult =
           this.processSingleNeitherUndefinedNorNullValue({
@@ -572,12 +585,12 @@ class RawObjectDataProcessor {
 
           Object.defineProperty(processedValueWorkpiece, childPropertyFinalName, {
             value: childPropertyValueProcessingResult.processedValue,
-            configurable: isBoolean(childPropertySpecification.makeNonConfigurable) ?
-                childPropertySpecification.makeNonConfigurable : true,
-            enumerable: isBoolean(childPropertySpecification.makeNonEnumerable) ?
-                childPropertySpecification.makeNonEnumerable : true,
-            writable: isBoolean(childPropertySpecification.makeReadonly) ?
-                childPropertySpecification.makeReadonly : true
+            configurable: isBoolean(childPropertySpecification.mustMakeNonConfigurable) ?
+                childPropertySpecification.mustMakeNonConfigurable : true,
+            enumerable: isBoolean(childPropertySpecification.mustMakeNonEnumerable) ?
+                childPropertySpecification.mustMakeNonEnumerable : true,
+            writable: isBoolean(childPropertySpecification.mustMakeReadonly) ?
+                childPropertySpecification.mustMakeReadonly : true
           });
 
           break;
@@ -2023,7 +2036,6 @@ class RawObjectDataProcessor {
     this.validationErrorsMessages.push(errorMessage);
   }
 
-
   private get currentObjectPropertyDotSeparatedQualifiedName(): string {
     return this.currentlyIteratedObjectPropertyQualifiedNameSegmentsForLogging.join(".");
   }
@@ -2031,6 +2043,412 @@ class RawObjectDataProcessor {
   /* [ Approach ] The alias for the logic clarifying */
   private get isValidationOnlyMode(): boolean {
     return this.isRawDataInvalid;
+  }
+
+  private substituteDefaultPropertyValueAtSourceObject(
+    {
+      sourceObject,
+      targetPropertyInitialName,
+      targetPropertySpecification
+    }: Readonly<{
+      sourceObject: ArbitraryObject;
+      targetPropertyInitialName: string;
+      targetPropertySpecification: RawObjectDataProcessor.CertainPropertySpecification;
+    }>
+  ): void {
+
+    /* [ Theory ] The descriptor will be non-undefined only if target property has explicit `undefined` value. */
+    const targetPropertyDescriptor: PropertyDescriptor | undefined = Object.
+        getOwnPropertyDescriptor(sourceObject, targetPropertyInitialName);
+
+    if (isNotNull(this.currentlyIteratedPropertyNewNameForLogging)) {
+
+      Object.defineProperty(
+        sourceObject,
+        this.currentlyIteratedPropertyNewNameForLogging,
+        {
+          value: targetPropertySpecification.defaultValue,
+          configurable: targetPropertySpecification.mustMakeNonConfigurable === true ?
+              false :
+              targetPropertyDescriptor?.configurable ?? true,
+          enumerable: targetPropertySpecification.mustMakeNonEnumerable === true ?
+              false :
+              targetPropertyDescriptor?.enumerable ?? true,
+          writable: targetPropertySpecification.mustMakeReadonly === true ?
+              false :
+              targetPropertyDescriptor?.writable ?? true
+        }
+      );
+
+      if (targetPropertySpecification.mustLeaveEvenRenamed !== true) {
+
+        if (targetPropertyDescriptor?.configurable === false) {
+
+          switch (this.errorHandlingStrategies.onUnableToDeleteProperty) {
+
+            case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
+
+              // TODO 抽出
+              Logger.throwErrorAndLog({
+                errorInstance: new InvalidExternalDataError({
+                  customMessage:
+                      `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                        `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                        "creating of new the property and deleting of the outdated one while the outdated one is " +
+                        "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                        "Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+                      "● Specify `errorsHandlingStrategies.onUnableToDeleteProperty` option with " +
+                      "  `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` if you want to " +
+                      "  mark the processed data as invalid instead of the throwing of the error.\n" +
+                      "● Specify `errorsHandlingStrategies.onUnableToDeleteProperty` option with " +
+                      "  `RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid` if " +
+                      "  you want to be only warned without the throwing of errors or marking of the processed data as " +
+                      "  invalid (not recommended because the data does not matching with valid data specification" +
+                      "  will be marked as valid is no other errors).\n" +
+                      "● If the creating of new object based on the source one is fine, specify `processingApproach` " +
+                      "  option with `ProcessingApproaches.newObjectAssembling` value, herewith everything that was " +
+                      "  not specified via valid data specification will not be added to new object."
+                }),
+                title: InvalidExternalDataError.localization.defaultTitle,
+                occurrenceLocation: "RawObjectDataProcessor." +
+                    "substituteDefaultPropertyValueAtSourceObject(compoundParameter)"
+              });
+
+            }
+
+            /* eslint-disable-next-line no-fallthrough --
+             * The ESLint does not see that `Logger.throwErrorAndLog()` returns `never` type in previous `case` block.
+             * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
+            case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
+
+              // TODO 抽出
+              this.registerValidationError(
+                `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                "creating of new the property and deleting of the outdated one while the outdated one is " +
+                "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
+                "Such data is being considered as invalid because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
+                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` " +
+                "value."
+              );
+
+              break;
+
+            }
+
+            case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid: {
+
+              // TODO 抽出
+              Logger.logWarning({
+                title: "Unable to Delete non-configurable Property",
+                description:
+                    `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                    `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                    "creating of new the property and deleting of the outdated one while the outdated one is " +
+                    "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                    "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
+                    "This warning has been emitted because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
+                    "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
+                    "warningWithoutMarkingOfDataAsInvalid`.",
+                occurrenceLocation:
+                    "RawObjectDataProcessor.substituteDefaultPropertyValueAtSourceObject(compoundParameter)"
+              });
+
+            }
+
+          }
+
+          return;
+
+        }
+
+
+        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete --
+         * If library user managed to rename the property, and it is deletable, it could be deleted.
+         * If library user do not comprehend that deleted property could cause the side effect to getters and/or setters
+         *   and/or methods, there is nothing that the library can do. */
+        delete sourceObject[targetPropertyInitialName];
+
+      }
+
+      return;
+
+    }
+
+
+    if (targetPropertyDescriptor?.writable === false) {
+
+      switch (this.errorHandlingStrategies.onUnableToSetProperty) {
+
+        case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
+
+          // TODO 抽出
+          Logger.throwErrorAndLog({
+            errorInstance: new InvalidExternalDataError({
+              customMessage:
+                  `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+                  `property because it is readonly.\n"` +
+                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
+                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` if you want to " +
+                  "   mark the processed data as invalid instead of the throwing of the error.\n" +
+                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
+                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid` if " +
+                  "  you want to be only warned without the throwing of errors or marking of the processed data as " +
+                  "  invalid (not recommended because the data does not matching with valid data specification" +
+                  "  will be marked as valid is no other errors).\n" +
+                  "● If the creating of new object based on the source one is fine, specify `processingApproach` " +
+                  "  option with `ProcessingApproaches.newObjectAssembling` value, herewith everything that was " +
+                  "  not specified via valid data specification will not be added to new object."
+            }),
+            title: InvalidExternalDataError.localization.defaultTitle,
+            occurrenceLocation: "RawObjectDataProcessor." +
+                "substituteDefaultPropertyValueAtSourceObject(compoundParameter)"
+          });
+
+        }
+
+        /* eslint-disable-next-line no-fallthrough --
+         * The ESLint does not see that `Logger.throwErrorAndLog()` returns `never` type in previous `case` block.
+         * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
+        case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
+
+          this.registerValidationError(
+            `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+            `property because it is readonly.\n"`
+          );
+
+          break;
+
+        }
+
+        case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid:
+
+          // TODO 抽出
+          Logger.logWarning({
+            title: "Unable to Set the Readonly Property",
+            description:
+                `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+                `property because it is readonly.\n"` +
+                "This warning has been emitted because `errorsHandlingStrategies.onUnableToSetProperty` " +
+                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
+                "warningWithoutMarkingOfDataAsInvalid`.",
+            occurrenceLocation:
+                "RawObjectDataProcessor.substituteDefaultPropertyValueAtSourceObject(compoundParameter)"
+          });
+
+      }
+
+    }
+
+    sourceObject[targetPropertyInitialName] = targetPropertySpecification.defaultValue;
+
+  }
+
+    private substituteNullPropertyValueAtSourceObject(
+    {
+      sourceObject,
+      targetPropertyInitialName,
+      targetPropertySpecification
+    }: Readonly<{
+      sourceObject: ArbitraryObject;
+      targetPropertyInitialName: string;
+      targetPropertySpecification: RawObjectDataProcessor.CertainPropertySpecification;
+    }>
+  ): void {
+
+    /* [ Theory ] Unlike `substituteDefaultPropertyValueAtSourceObject` method, here the property descriptor must be. */
+    const targetPropertyDescriptor: PropertyDescriptor | undefined = Object.
+        getOwnPropertyDescriptor(sourceObject, targetPropertyInitialName);
+
+    if (isUndefined(targetPropertyDescriptor)) {
+      Logger.throwErrorAndLog({
+        errorInstance: new UnexpectedEventError(
+          `No property descriptor has been retrieved for "${ this.currentObjectPropertyDotSeparatedQualifiedName }" ` +
+          "property. If this property has `null` value, it must have the descriptor."
+        ),
+        title: UnexpectedEventError.localization.defaultTitle,
+        occurrenceLocation: "RawObjectDataProcessor." +
+            "substituteNullPropertyValueAtSourceObject(compoundParameter)"
+      });
+    }
+
+    if (isNotNull(this.currentlyIteratedPropertyNewNameForLogging)) {
+
+      Object.defineProperty(
+        sourceObject,
+        this.currentlyIteratedPropertyNewNameForLogging,
+        {
+          value: targetPropertySpecification.nullSubstitution,
+          configurable: targetPropertySpecification.mustMakeNonConfigurable !== true,
+          enumerable: targetPropertySpecification.mustMakeNonEnumerable !== true,
+          writable: targetPropertySpecification.mustMakeReadonly !== true
+        }
+      );
+
+      if (targetPropertySpecification.mustLeaveEvenRenamed !== true) {
+
+        if (targetPropertyDescriptor.configurable === false) {
+
+          switch (this.errorHandlingStrategies.onUnableToDeleteProperty) {
+
+            case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
+
+              // TODO 抽出 (`occurrenceLocation` 以外　substituteDefaultPropertyValueAtSourceObject)と完全一致
+              Logger.throwErrorAndLog({
+                errorInstance: new InvalidExternalDataError({
+                  customMessage:
+                      `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                        `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                        "creating of new the property and deleting of the outdated one while the outdated one is " +
+                        "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                        "Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+                      "● Specify `errorsHandlingStrategies.onUnableToDeleteProperty` option with " +
+                      "  `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` if you want to " +
+                      "  mark the processed data as invalid instead of the throwing of the error.\n" +
+                      "● Specify `errorsHandlingStrategies.onUnableToDeleteProperty` option with " +
+                      "  `RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid` if " +
+                      "  you want to be only warned without the throwing of errors or marking of the processed data as " +
+                      "  invalid (not recommended because the data does not matching with valid data specification" +
+                      "  will be marked as valid is no other errors).\n" +
+                      "● If the creating of new object based on the source one is fine, specify `processingApproach` " +
+                      "  option with `ProcessingApproaches.newObjectAssembling` value, herewith everything that was " +
+                      "  not specified via valid data specification will not be added to new object."
+                }),
+                title: InvalidExternalDataError.localization.defaultTitle,
+                occurrenceLocation: "RawObjectDataProcessor." +
+                    "substituteNullPropertyValueAtSourceObject(compoundParameter)"
+              });
+
+            }
+
+            /* eslint-disable-next-line no-fallthrough --
+             * The ESLint does not see that `Logger.throwErrorAndLog()` returns `never` type in previous `case` block.
+             * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
+            case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
+
+              // TODO 抽出 (`occurrenceLocation` 以外　substituteDefaultPropertyValueAtSourceObject)と完全一致
+              this.registerValidationError(
+                `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                "creating of new the property and deleting of the outdated one while the outdated one is " +
+                "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
+                "Such data is being considered as invalid because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
+                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` " +
+                "value."
+              );
+
+              break;
+
+            }
+
+            case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid: {
+
+              // TODO 抽出 (`occurrenceLocation` 以外　substituteDefaultPropertyValueAtSourceObject)と完全一致
+              Logger.logWarning({
+                title: "Unable to Delete non-configurable Property",
+                description:
+                    `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
+                    `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
+                    "creating of new the property and deleting of the outdated one while the outdated one is " +
+                    "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
+                    "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
+                    "This warning has been emitted because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
+                    "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
+                    "warningWithoutMarkingOfDataAsInvalid`.",
+                occurrenceLocation:
+                    "RawObjectDataProcessor.substituteNullPropertyValueAtSourceObject(compoundParameter)"
+              });
+
+            }
+
+          }
+
+          return;
+
+        }
+
+
+        /* eslint-disable-next-line @typescript-eslint/no-dynamic-delete --
+         * If library user managed to rename the property, and it is deletable, it could be deleted.
+         * If library user do not comprehend that deleted property could cause the side effect to getters and/or setters
+         *   and/or methods, there is nothing that the library can do. */
+        delete sourceObject[targetPropertyInitialName];
+
+      }
+
+      return;
+
+    }
+
+
+    if (targetPropertyDescriptor.writable === false) {
+
+      switch (this.errorHandlingStrategies.onUnableToSetProperty) {
+
+        case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
+
+          // TODO 抽出　Unable to substicute null/defaultにすれば完全一致
+          Logger.throwErrorAndLog({
+            errorInstance: new InvalidExternalDataError({
+              customMessage:
+                  `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+                  `property because it is readonly.\n"` +
+                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
+                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` if you want to " +
+                  "   mark the processed data as invalid instead of the throwing of the error.\n" +
+                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
+                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid` if " +
+                  "  you want to be only warned without the throwing of errors or marking of the processed data as " +
+                  "  invalid (not recommended because the data does not matching with valid data specification" +
+                  "  will be marked as valid is no other errors).\n" +
+                  "● If the creating of new object based on the source one is fine, specify `processingApproach` " +
+                  "  option with `ProcessingApproaches.newObjectAssembling` value, herewith everything that was " +
+                  "  not specified via valid data specification will not be added to new object."
+            }),
+            title: InvalidExternalDataError.localization.defaultTitle,
+            occurrenceLocation: "RawObjectDataProcessor." +
+                "substituteNullPropertyValueAtSourceObject(compoundParameter)"
+          });
+
+        }
+
+        /* eslint-disable-next-line no-fallthrough --
+         * The ESLint does not see that `Logger.throwErrorAndLog()` returns `never` type in previous `case` block.
+         * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
+        case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
+
+          this.registerValidationError(
+            `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+            `property because it is readonly.\n"`
+          );
+
+          break;
+
+        }
+
+        case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid:
+
+          // TODO 抽出　Unable to substicute null/defaultにすれば完全一致
+          Logger.logWarning({
+            title: "Unable to Set the Readonly Property",
+            description:
+                `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
+                `property because it is readonly.\n"` +
+                "This warning has been emitted because `errorsHandlingStrategies.onUnableToSetProperty` " +
+                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
+                "warningWithoutMarkingOfDataAsInvalid`.",
+            occurrenceLocation:
+                "RawObjectDataProcessor.substituteNullPropertyValueAtSourceObject(compoundParameter)"
+          });
+
+      }
+
+    }
+
+    sourceObject[targetPropertyInitialName] = targetPropertySpecification.nullSubstitution;
+
   }
 
   private static getNormalizedPreValidationModifications(
@@ -2055,6 +2473,7 @@ class RawObjectDataProcessor {
   ): Array<RawObjectDataProcessor.CustomValidator<ValidValue>> {
     return Array.isArray(customValidatorOrMultipleOfThem) ? customValidatorOrMultipleOfThem : [ customValidatorOrMultipleOfThem ];
   }
+
 }
 
 
@@ -2064,11 +2483,24 @@ namespace RawObjectDataProcessor {
     processingApproach?: ProcessingApproaches;
     postProcessing?: <InterimValidData, ProcessedData>(interimData: InterimValidData) => ProcessedData;
     localization?: Localization;
+    errorsHandlingStrategies?: Partial<ErrorsHandlingStrategies>;
   };
 
+  // TODO Renaming
   export enum ProcessingApproaches {
     newObjectAssembling = "ASSEMBLING_OF_NEW_OBJECT",
     existingObjectManipulation = "MANIPULATING_OF_EXISTING_OBJECT"
+  }
+
+  export type ErrorsHandlingStrategies = Readonly<{
+    onUnableToSetProperty: ErrorHandlingStrategies;
+    onUnableToDeleteProperty: ErrorHandlingStrategies;
+  }>;
+
+  export enum ErrorHandlingStrategies {
+    throwingOfError = "THROWING_OF_ERROR",
+    markingOfDataAsInvalid = "MARKING_OF_DATA_AS_INVALID",
+    warningWithoutMarkingOfDataAsInvalid = "WARNING_WITHOUT_MARKING_OF_DATA_AS_INVALID"
   }
 
   export enum ObjectSubtypes {
@@ -2158,10 +2590,10 @@ namespace RawObjectDataProcessor {
       ObjectKeySpecification &
       {
         readonly nullable?: boolean;
-        readonly makeNonConfigurable?: boolean;
-        readonly makeNonEnumerable?: boolean;
-        readonly makeReadonly?: boolean;
-        readonly leaveEvenIfRenamed?: boolean;
+        readonly mustMakeNonConfigurable?: boolean;
+        readonly mustMakeNonEnumerable?: boolean;
+        readonly mustMakeReadonly?: boolean;
+        readonly mustLeaveEvenRenamed?: boolean;
       };
 
 

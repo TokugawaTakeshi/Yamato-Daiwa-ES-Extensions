@@ -2,14 +2,17 @@
 + (( Core Package )) (( New )) Add **getISO8601StringWithoutTimePart** function
 + (( Core Package )) (( New )) Add **isValidISO8601DateAndPossiblyTimeDefinition** function
 + (( Core Package )) (( New )) Add **isValidNativeDate** function
++ (( Core Package )) (( New )) Add **convert24HoursFormatTo12HoursFormat** function
++ (( Core Package )) (( Feature )) Now **RawObjectDataProcessor** class can substitute the `undefined` and `null` values to existing objects
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **ColumnVector** class
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **Matrix** class
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **ReadonlyColumnVector** class
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **ReadonlyRowVector** class
 + (( Core Package ))(( Linear Algebra )) (( New )) Add **RowVector** class
 + (( Core Package )) (( New )) Add **Matrix** class
-+ (( Core Package )) (( Update )) Add overloading for numeric type parameter  
-+ (( Core Package )) (( Breaking )) **RawObjectDataProcessor** now manipulating with source object as default 
++ (( Core Package )) (( Update )) Add overloading for numeric type parameter
++ (( Core Package )) (( Update )) Now **undefinedToEmptyArray** works can return `ReadonlyArray` if required
++ (( Core Package )) (( Breaking )) **RawObjectDataProcessor** now manipulating with source object as default
 + (( Core Package )) (( Breaking )) Update API of **TimePoint** class
 + (( Core Package )) (( Breaking )) Update API of **DataRetrievingFailedError** and **DataSubmittingFailedError** and localizations
 + (( Core Package )) (( Breaking )) Update API and refactor **AJAX_Service** and **FetchAPI_Service**

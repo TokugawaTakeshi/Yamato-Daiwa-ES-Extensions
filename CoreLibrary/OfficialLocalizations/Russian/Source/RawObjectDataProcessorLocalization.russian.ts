@@ -44,7 +44,9 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
   },
 
-  buildErrorMessagesListItemHeading(messageNumber: number): string { return `=== Ошибка №${ messageNumber } ==========`; },
+  buildErrorMessagesListItemHeading({ messageNumber }: Readonly<{ messageNumber: number; }>): string {
+    return `=== Ошибка №${ messageNumber } ==========`;
+  },
 
   rawDataIsNullErrorMessage: "Первый параметр 'RawObjectDataProcessor.process' имеет значение null.",
 
