@@ -5,23 +5,21 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 
 export default function createArrayOfNaturalNumbers(
-  options: Readonly<{
-    elementsCount: number;
-    startingNumber?: number;
-    isDescendingOrder?: boolean;
-  }>
-): Array<number> {
-
-  const {
+  {
 
     elementsCount,
     isDescendingOrder = false,
 
     /* eslint-disable-next-line no-nested-ternary, @stylistic/no-extra-parens --
-    * Actually not so readable, but the expanded version will not be so element.  */
+     * The expanded version will require to make the `startingNumber` the let-variable what is undesirable for parameters. */
     startingNumber = isDescendingOrder ? (elementsCount === 0 ? 1 : elementsCount) : 1
 
-  }: Parameters<typeof createArrayOfNaturalNumbers>["0"] = options;
+  }: Readonly<{
+    elementsCount: number;
+    startingNumber?: number;
+    isDescendingOrder?: boolean;
+  }>
+): Array<number> {
 
   if (!isNonNegativeInteger(elementsCount)) {
     Logger.throwErrorAndLog({
@@ -29,7 +27,7 @@ export default function createArrayOfNaturalNumbers(
         parameterNumber: 1,
         parameterName: "options",
         messageSpecificPart:
-            `The "elementsCount" must be the positive integer while ${ String(elementsCount) } has been specified.`
+            `The "elementsCount" must be the positive integer while ${ elementsCount } has been specified.`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "createArrayOfNaturalNumbers(elementsCount)"
@@ -43,7 +41,7 @@ export default function createArrayOfNaturalNumbers(
         parameterNumber: 1,
         parameterName: "options",
         messageSpecificPart:
-            `The "startingNumber" must the natural number while ${ String(elementsCount) } has been specified.`
+            `The "startingNumber" must the natural number while ${ elementsCount } has been specified.`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "createArrayOfNaturalNumbers(elementsCount)"
@@ -58,7 +56,7 @@ export default function createArrayOfNaturalNumbers(
         parameterName: "options",
         messageSpecificPart:
             `The specified "startingNumber" ${ startingNumber } is smaller than requested ${ elementsCount }. ` +
-            "The monotonically decreasing array of natual number could not be created with such conditions."
+            "The monotonically decreasing array of natual numbers could not be created with such conditions."
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "createArrayOfNaturalNumbers(elementsCount)"

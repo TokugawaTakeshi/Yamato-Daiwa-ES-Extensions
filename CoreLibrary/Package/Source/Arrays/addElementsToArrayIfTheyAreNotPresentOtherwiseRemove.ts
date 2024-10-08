@@ -164,12 +164,12 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
 ): Array<ArrayElement> {
 
   const indexesOfTargetElements: ReadonlyArray<number> = getIndexesOfArrayElementsWhichSatisfiesThePredicate(
-      compoundParameter.targetArray,
-      "targetElement" in compoundParameter ?
-            compoundParameter.targetElementFinder ??
-                ((element: ArrayElement): boolean => element === compoundParameter.targetElement) :
-            compoundParameter.targetElementsFinder ??
-              ((element: ArrayElement): boolean => compoundParameter.targetElements.includes(element))
+    compoundParameter.targetArray,
+    "targetElement" in compoundParameter ?
+        compoundParameter.targetElementFinder ??
+            ((element: ArrayElement): boolean => element === compoundParameter.targetElement) :
+        compoundParameter.targetElementsFinder ??
+          ((element: ArrayElement): boolean => compoundParameter.targetElements.includes(element))
   );
 
   const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
@@ -215,8 +215,8 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
             "The valid alternatives are:\n" +
             "● \"addingToStart\": must the the boolean herewith \"true\" only" +
             "● \"addingToEnd\": must the the boolean herewith \"true\" only" +
-            "● \"addingToPosition__numerationFrom0\": must the the positive integer\n" +
-            "● \"addingToPosition__numerationFrom1\": must the the natual number"
+            "● \"addingToPosition__numerationFrom0\": must the positive integer\n" +
+            "● \"addingToPosition__numerationFrom1\": must the natual number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "addElementsToArrayIfTheyAreNotPresentOtherwiseRemove(compoundParameter)"

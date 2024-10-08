@@ -1,18 +1,19 @@
 import { createArrayOfNaturalNumbers, InvalidParameterValueError } from "../../../Source";
+import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-describe("createArrayOfNaturalNumbers", (): void => {
+await suite("createArrayOfNaturalNumbers", async (): Promise<void> => {
 
-  describe("Normal scenarios", (): void => {
+  await suite("Normal scenarios", async (): Promise<void> => {
 
-    describe("Ascending order", (): void => {
+    await suite("Ascending order", (): void => {
       Assert.deepStrictEqual(createArrayOfNaturalNumbers({ elementsCount: 0 }), []);
       Assert.deepStrictEqual(createArrayOfNaturalNumbers({ elementsCount: 1 }), [ 1 ]);
       Assert.deepStrictEqual(createArrayOfNaturalNumbers({ elementsCount: 3 }), [ 1, 2, 3 ]);
     });
 
-    describe("Descending order", (): void => {
+    await suite("Descending order", (): void => {
 
       Assert.deepStrictEqual(createArrayOfNaturalNumbers({ elementsCount: 0, isDescendingOrder: true }), []);
       Assert.deepStrictEqual(createArrayOfNaturalNumbers({ elementsCount: 1, isDescendingOrder: true }), [ 1 ]);
@@ -32,9 +33,9 @@ describe("createArrayOfNaturalNumbers", (): void => {
 
   });
 
-  describe("Errored scenarios", (): void => {
+  await suite("Errored scenarios", async (): Promise<void> => {
 
-    it("Negative elements count", (): void => {
+    await test("Negative elements count", (): void => {
 
       Assert.throws(
         (): void => { createArrayOfNaturalNumbers({ elementsCount: -1 }); },
@@ -43,7 +44,7 @@ describe("createArrayOfNaturalNumbers", (): void => {
 
     });
 
-    it("Fractional elements count", (): void => {
+    await test("Fractional elements count", (): void => {
 
       Assert.throws(
         (): void => { createArrayOfNaturalNumbers({ elementsCount: 1.2 }); },
@@ -52,7 +53,7 @@ describe("createArrayOfNaturalNumbers", (): void => {
 
     });
 
-    it("Non-natural starting number", (): void => {
+    await test("Non-natural starting number", (): void => {
 
       Assert.throws(
         (): void => { createArrayOfNaturalNumbers({ elementsCount: 3, startingNumber: 0 }); },
@@ -71,7 +72,7 @@ describe("createArrayOfNaturalNumbers", (): void => {
 
     });
 
-    it("With descending order the starting number is less than elements count", (): void => {
+    await test("With descending order the starting number is less than elements count", (): void => {
 
       Assert.throws(
         (): void => { createArrayOfNaturalNumbers({ elementsCount: 5, startingNumber: 4, isDescendingOrder: true }); },
