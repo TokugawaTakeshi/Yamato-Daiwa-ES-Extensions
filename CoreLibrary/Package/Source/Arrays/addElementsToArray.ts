@@ -1,4 +1,4 @@
-import { isNonNegativeInteger } from "../index";
+import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -74,12 +74,11 @@ export default function addElementsToArray<ArrayElement>(
         parameterNumber: 1,
         parameterName: "compoundParameter",
         messageSpecificPart:
-            "The target position has been incorrectly specified. " +
-            "The valid alternatives are:\n" +
+            "The target position has been incorrectly specified. The valid alternatives are:\n" +
             "● \"toStart\": must the the boolean herewith \"true\" only" +
             "● \"toEnd\": must the the boolean herewith \"true\" only" +
-            "● \"toPosition__numerationFrom0\": must the the positive integer\n" +
-            "● \"toPosition__numerationFrom1\": must the the natual number"
+            "● \"toPosition__numerationFrom0\": must the positive integer\n" +
+            "● \"toPosition__numerationFrom1\": must the natual number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "addElementsToArray(compoundParameter)"

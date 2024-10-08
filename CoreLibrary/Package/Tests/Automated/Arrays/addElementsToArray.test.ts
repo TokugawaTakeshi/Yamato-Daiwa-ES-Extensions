@@ -1,16 +1,17 @@
 import { addElementsToArray } from "../../../Source";
+import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-describe("addElementsToArray", (): void => {
+await suite("addElementsToArray", async (): Promise<void> => {
 
   function getInitialSampleArray(): Array<string> {
     return [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
   }
 
-  describe("One to start", (): void => {
+  await suite("One to start", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -21,20 +22,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has mutated", (): void => {
+      await test("Initial array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -45,14 +46,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -60,9 +61,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("One to end", (): void => {
+  await suite("One to end", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -73,20 +74,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -97,14 +98,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -112,9 +113,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("One to position numerated from 0", (): void => {
+  await suite("One to position numerated from 0", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -125,20 +126,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -149,14 +150,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -164,9 +165,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("One to position numerated from 1", (): void => {
+  await suite("One to position numerated from 1", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -177,19 +178,19 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -200,14 +201,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -216,9 +217,9 @@ describe("addElementsToArray", (): void => {
   });
 
 
-  describe("Multiple to start", (): void => {
+  await suite("Multiple to start", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -229,20 +230,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      await test("Updated array matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has mutated", (): void => {
+      await test("Initial array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -253,14 +254,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -268,9 +269,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("Multiple to end", (): void => {
+  await suite("Multiple to end", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -281,19 +282,19 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -304,14 +305,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -319,9 +320,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("Multiple to position numerated from 0", (): void => {
+  await suite("Multiple to position numerated from 0", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -332,20 +333,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -356,14 +357,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array is matching with expected", (): void => {
+      await test("Updated array is matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
@@ -371,9 +372,9 @@ describe("addElementsToArray", (): void => {
 
   });
 
-  describe("Multiple to position numerated from 1", (): void => {
+  await suite("Multiple to position numerated from 1", async (): Promise<void> => {
 
-    describe("Mutable adding", (): void => {
+    await suite("Mutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -384,20 +385,20 @@ describe("addElementsToArray", (): void => {
         mutably: true
       });
 
-      it("Updated array matching with expected", (): void => {
+      await test("Updated array matching with expected", (): void => {
         Assert.deepStrictEqual(
           experimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Array has mutated", (): void => {
+      await test("Array has mutated", (): void => {
         Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
     });
 
-    describe("Immutable adding", (): void => {
+    await suite("Immutable adding", async (): Promise<void> => {
 
       const experimentalSample: Array<string> = getInitialSampleArray();
 
@@ -408,14 +409,14 @@ describe("addElementsToArray", (): void => {
         mutably: false
       });
 
-      it("Updated array matching with expected", (): void => {
+      await test("Updated array matching with expected", (): void => {
         Assert.deepStrictEqual(
           updatedCopyOfExperimentalSample,
           [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
         );
       });
 
-      it("Initial array has not mutated", (): void => {
+      await test("Initial array has not mutated", (): void => {
         Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
       });
 
