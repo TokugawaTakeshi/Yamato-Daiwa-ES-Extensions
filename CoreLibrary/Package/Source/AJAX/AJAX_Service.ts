@@ -271,7 +271,7 @@ abstract class AJAX_Service {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidConfigError({
             customMessage:
-                "The \"alternatingURI_PathPart\" has been specified while natural static field " +
+                "The \"alternatingURI_PathPart\" has been specified while the static field " +
                   "\"API_SERVER_URI_CONSTANT_PART\" has not been set."
           }),
           title: InvalidConfigError.localization.defaultTitle,

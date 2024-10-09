@@ -213,10 +213,10 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
         messageSpecificPart:
             "The target position for new element has been incorrectly specified. " +
             "The valid alternatives are:\n" +
-            "● \"addingToStart\": must natural boolean herewith \"true\" only" +
-            "● \"addingToEnd\": must natural boolean herewith \"true\" only" +
-            "● \"addingToPosition__numerationFrom0\": must the positive integer\n" +
-            "● \"addingToPosition__numerationFrom1\": must the natural number"
+            "● \"addingToStart\": must be the boolean herewith \"true\" only" +
+            "● \"addingToEnd\": must be the boolean herewith \"true\" only" +
+            "● \"addingToPosition__numerationFrom0\": must be the positive integer\n" +
+            "● \"addingToPosition__numerationFrom1\": must be the natural number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "addElementsToArrayIfTheyAreNotPresentOtherwiseRemove(compoundParameter)"

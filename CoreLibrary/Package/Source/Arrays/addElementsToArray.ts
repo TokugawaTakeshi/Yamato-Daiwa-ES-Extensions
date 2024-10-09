@@ -75,10 +75,10 @@ export default function addElementsToArray<ArrayElement>(
         parameterName: "compoundParameter",
         messageSpecificPart:
             "The target position has been incorrectly specified. The valid alternatives are:\n" +
-            "● \"toStart\": must the boolean herewith \"true\" only" +
-            "● \"toEnd\": must the boolean herewith \"true\" only" +
-            "● \"toPosition__numerationFrom0\": must the positive integer\n" +
-            "● \"toPosition__numerationFrom1\": must the natural number"
+            "● \"toStart\": must be the boolean herewith \"true\" only" +
+            "● \"toEnd\": must be the boolean herewith \"true\" only" +
+            "● \"toPosition__numerationFrom0\": must be the positive integer\n" +
+            "● \"toPosition__numerationFrom1\": must be the natural number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "addElementsToArray(compoundParameter)"

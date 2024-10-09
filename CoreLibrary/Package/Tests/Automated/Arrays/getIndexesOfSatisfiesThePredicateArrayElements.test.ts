@@ -1,8 +1,9 @@
 import { getIndexesOfSatisfiesThePredicateArrayElements } from "../../../Source";
+import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-describe("getIndexesOfSatisfiesThePredicateArrayElements", (): void => {
+await suite("getIndexesOfSatisfiesThePredicateArrayElements", async (): Promise<void> => {
 
   type Product = { title: string; price: number; };
 
@@ -13,7 +14,7 @@ describe("getIndexesOfSatisfiesThePredicateArrayElements", (): void => {
     { title: "DELTA", price: 1500 }
   ];
 
-  it("Works as intended", (): void => {
+  await test("Works as intended", (): void => {
 
     Assert.deepStrictEqual(
       getIndexesOfSatisfiesThePredicateArrayElements(
