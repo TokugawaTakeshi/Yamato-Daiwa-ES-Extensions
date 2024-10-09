@@ -78,7 +78,7 @@ export default function addElementsToArray<ArrayElement>(
             "● \"toStart\": must the boolean herewith \"true\" only" +
             "● \"toEnd\": must the boolean herewith \"true\" only" +
             "● \"toPosition__numerationFrom0\": must the positive integer\n" +
-            "● \"toPosition__numerationFrom1\": must the natual number"
+            "● \"toPosition__numerationFrom1\": must the natural number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "addElementsToArray(compoundParameter)"

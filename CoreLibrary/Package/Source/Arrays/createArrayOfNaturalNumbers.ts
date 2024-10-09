@@ -56,7 +56,7 @@ export default function createArrayOfNaturalNumbers(
         parameterName: "options",
         messageSpecificPart:
             `The specified "startingNumber" ${ startingNumber } is smaller than requested ${ elementsCount }. ` +
-            "The monotonically decreasing array of natual numbers could not be created with such conditions."
+            "The monotonically decreasing array of natural numbers could not be created with such conditions."
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "createArrayOfNaturalNumbers(elementsCount)"

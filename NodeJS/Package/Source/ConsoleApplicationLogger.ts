@@ -1,20 +1,22 @@
-/* eslint-disable no-console -- This class is wrapping the 'console' allowing to avoid of direct 'console' usage. */
+/* eslint-disable no-console -- This class using native "console" because of its specialization. */
 
 import {
-  stringifyAndFormatArbitraryValue,
-  insertSubstringIf,
-  isArbitraryObject,
+  type Logger,
+  type ErrorLog,
+  type InfoLog,
+  type SuccessLog,
+  type WarningLog,
+  type Log,
+  isString,
+  isNumber,
   isNonNegativeInteger,
+  isBoolean,
+  isArbitraryObject,
+  isUndefined,
   isNull,
+  insertSubstringIf,
+  stringifyAndFormatArbitraryValue,
   loggerLocalization__english
-} from "@yamato-daiwa/es-extensions";
-import type {
-  Logger,
-  ErrorLog,
-  InfoLog,
-  SuccessLog,
-  WarningLog,
-  Log
 } from "@yamato-daiwa/es-extensions";
 
 
@@ -28,375 +30,255 @@ abstract class ConsoleApplicationLogger {
   }
 
 
-  /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  public static logError(errorLog: ErrorLog): void {
+  /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static logError(polymorphicPayload: ErrorLog | string): void {
     console.error(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          errorLog.badge === false ?
-              null : ` ${ errorLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error } `,
-          {
-            bold: true,
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            backgroundColor: { red: 192, green: 57, blue: 43 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", errorLog.badge !== false) }${ errorLog.title }`,
-          {
-            bold: true,
-            foregroundColor: { red: 192, green: 57, blue: 43 }
-          }
-        ],
-        [
-          `${ errorLog.compactLayout === true ? " " : "\n" }${ errorLog.description }`,
-          {
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-
-        [
-          `\n\n${ ConsoleApplicationLogger.localization.errorType }: `,
-          {
-            bold: true,
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-        [
-          errorLog.errorType,
-          {
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-
-        [
-          `\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: `,
-          {
-            bold: true,
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-        [
-          errorLog.occurrenceLocation,
-          {
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-         * [ Theory ※ ] The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
-         * type can/doest not be "matched" with function's parameter's types.
-         * https://stackoverflow.com/a/67015118/4818123
-        * */
-        ...("caughtError" in errorLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.caughtError }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ],
-          [
-            errorLog.caughtError instanceof Error ?
-                `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` :
-                `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
-            {
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData,
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in errorLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
-            {
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-
-      ])
+      ...isString(polymorphicPayload) ?
+          [ polymorphicPayload ] : ConsoleApplicationLogger.formatErrorLog(polymorphicPayload)
     );
   }
 
-  public static logErrorLikeMessage(errorLikeLog: Log): void {
+  public static logErrorLikeMessage(polymorphicPayload: Log | string): void {
     console.error(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          errorLikeLog.badge === false ?
-              null : ` ${ errorLikeLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.error } `,
-          {
-            bold: true,
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            backgroundColor: { red: 192, green: 57, blue: 43 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", errorLikeLog.badge !== false) }${ errorLikeLog.title }`,
-          {
-            bold: true,
-            foregroundColor: { red: 192, green: 57, blue: 43 }
-          }
-        ],
-        [
-          `${ errorLikeLog.compactLayout === true ? " " : "\n" }${ errorLikeLog.description }`,
-          {
-            foregroundColor: { red: 231, green: 76, blue: 60 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in errorLikeLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(errorLikeLog.additionalData) }`,
-            {
-              foregroundColor: { red: 231, green: 76, blue: 60 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-      ])
-
+      ...isString(polymorphicPayload) ?
+          [ polymorphicPayload ] :
+          ConsoleApplicationLogger.formatGenericLog({
+            genericLog: polymorphicPayload,
+            badgeContentAndFormatting: {
+              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.error,
+              foregroundColor: { red: 255, green: 255, blue: 255 },
+              backgroundColor: { red: 192, green: 57, blue: 43 }
+            },
+            mainColor: { red: 231, green: 76, blue: 60 },
+            titleColor: { red: 192, green: 57, blue: 43 }
+          })
     );
   }
 
-  public static logWarning(warningLog: WarningLog): void {
+  public static logWarning(polymorphicPayload: WarningLog | string): void {
     console.warn(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          warningLog.badge === false ?
-              null : ` ${ warningLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.warning } `,
-          {
-            bold: true,
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            backgroundColor: { red: 211, green: 84, blue: 0 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", warningLog.badge !== false) }${ warningLog.title }`,
-          {
-            bold: true,
-            foregroundColor: { red: 211, green: 84, blue: 0 }
-          }
-        ],
-        [
-          `${ warningLog.compactLayout === true ? " " : "\n" }${ warningLog.description }`,
-          {
-            foregroundColor: { red: 230, green: 126, blue: 34 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("occurrenceLocation" in warningLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: `,
-            {
-              bold: true,
-              foregroundColor: { red: 230, green: 126, blue: 34 }
-            }
-          ],
-          [
-            `${ warningLog.occurrenceLocation }`,
-            {
-              foregroundColor: { red: 230, green: 126, blue: 34 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData,
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in warningLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              "font-weight": "bold",
-              foregroundColor: { red: 230, green: 126, blue: 34 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`,
-            {
-              foregroundColor: { red: 230, green: 126, blue: 34 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-
-      ])
+      ...isString(polymorphicPayload) ?
+          [ polymorphicPayload ] :
+          ConsoleApplicationLogger.formatGenericLog({
+            genericLog: polymorphicPayload,
+            badgeContentAndFormatting: {
+              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.warning,
+              foregroundColor: { red: 255, green: 255, blue: 255 },
+              backgroundColor: { red: 211, green: 84, blue: 0 }
+            },
+            mainColor: { red: 230, green: 126, blue: 34 },
+            titleColor: { red: 211, green: 84, blue: 0 }
+          })
     );
   }
 
-  public static logSuccess(successLog: SuccessLog): void {
+    public static logInfo(polymorphicPayload: InfoLog | string): void {
     console.log(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          successLog.badge === false ?
-              null : ` ${ successLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.success } `,
-          {
-            bold: true,
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            backgroundColor: { red: 39, green: 174, blue: 96 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", successLog.badge !== false) }${ successLog.title }`,
-          {
-            bold: true,
-            foregroundColor: { red: 39, green: 174, blue: 96 }
-          }
-        ],
-        [
-          `${ successLog.compactLayout === true ? " " : "\n" }${ successLog.description }`,
-          {
-            foregroundColor: { red: 46, green: 204, blue: 113 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in successLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 46, green: 204, blue: 113 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(successLog.additionalData) }`,
-            {
-              foregroundColor: { red: 46, green: 204, blue: 113 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-
-      ])
+      ...isString(polymorphicPayload) ?
+          [ polymorphicPayload ] :
+          ConsoleApplicationLogger.formatGenericLog({
+            genericLog: polymorphicPayload,
+            badgeContentAndFormatting: {
+              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.info,
+              foregroundColor: { red: 255, green: 255, blue: 255 },
+              backgroundColor: { red: 41, green: 128, blue: 185 }
+            },
+            mainColor: { red: 52, green: 152, blue: 219 },
+            titleColor: { red: 41, green: 128, blue: 185 }
+          })
     );
   }
 
-  public static logInfo(infoLog: InfoLog): void {
+  public static logSuccess(polymorphicPayload: SuccessLog | string): void {
     console.log(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          infoLog.badge === false ?
-              null : ` ${ infoLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.info } `,
-          {
-            bold: true,
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            backgroundColor: { red: 41, green: 128, blue: 185 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", infoLog.badge !== false) }${ infoLog.title }`,
-          {
-            foregroundColor: { red: 41, green: 128, blue: 185 },
-            bold: true
-          }
-        ],
-        [
-          `${ infoLog.compactLayout === true ? " " : "\n" }${ infoLog.description }`,
-          {
-            foregroundColor: { red: 52, green: 152, blue: 219 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in infoLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 52, green: 152, blue: 219 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(infoLog.additionalData) }`,
-            {
-              foregroundColor: { red: 52, green: 152, blue: 219 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-
-      ])
+      ...isString(polymorphicPayload) ?
+          [ polymorphicPayload ] :
+          ConsoleApplicationLogger.formatGenericLog({
+            genericLog: polymorphicPayload,
+            badgeContentAndFormatting: {
+              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.success,
+              foregroundColor: { red: 255, green: 255, blue: 255 },
+              backgroundColor: { red: 39, green: 174, blue: 96 }
+            },
+            mainColor: { red: 46, green: 204, blue: 113 },
+            titleColor: { red: 39, green: 174, blue: 96 }
+          })
     );
   }
 
-  public static logGeneric(genericLog: Log): void {
+  public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
     console.log(
-      ...ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
-
-        [
-          genericLog.badge === false ?
-              null : ` ${ genericLog.badge?.customText ?? ConsoleApplicationLogger.localization.badgesDefaultTitles.info } `,
-          {
-            bold: true,
-            foregroundColor: { red: 0, green: 0, blue: 0 },
-            backgroundColor: { red: 255, green: 255, blue: 255 }
-          }
-        ],
-
-        [
-          `${ insertSubstringIf(" ", genericLog.badge !== false) }${ genericLog.title }`,
-          {
-            foregroundColor: { red: 255, green: 255, blue: 255 },
-            bold: true
-          }
-        ],
-        [
-          `${ genericLog.compactLayout === true ? " " : "\n" }${ genericLog.description }`,
-          {
-            foregroundColor: { red: 255, green: 255, blue: 255 }
-          }
-        ],
-
-        /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
-        ...("additionalData" in genericLog ? [
-          [
-            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
-            {
-              bold: true,
-              foregroundColor: { red: 255, green: 255, blue: 255 }
-            }
-          ],
-          [
-            `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`,
-            {
-              foregroundColor: { red: 255, green: 255, blue: 255 }
-            }
-          ]
-        ] : []) as ConsoleApplicationLogger.FormattedOutputData
-
-      ])
+      ...isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload) ?
+          [ polymorphicPayload ] :
+          ConsoleApplicationLogger.formatGenericLog({
+            genericLog: polymorphicPayload,
+            badgeContentAndFormatting: {
+              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.generic,
+              foregroundColor: { red: 0, green: 0, blue: 0 },
+              backgroundColor: { red: 255, green: 255, blue: 255 }
+            },
+            mainColor: { red: 255, green: 255, blue: 255 },
+            titleColor: { red: 255, green: 255, blue: 255 }
+          })
     );
   }
 
 
-  /* ━━━ Auxiliaries ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Formatters ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static highlightText(targetString: string): string {
     return `\x1b[43m${ targetString }\x1b[49m`;
   }
 
+  public static formatErrorLog(errorLog: ErrorLog): Array<string> {
+    return ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
+
+      ConsoleApplicationLogger.generateBadgeIfMust(
+        errorLog.badge,
+        {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.error,
+          foregroundColor: { red: 255, green: 255, blue: 255 },
+          backgroundColor: { red: 192, green: 57, blue: 43 }
+        }
+      ),
+
+      [
+        `${ insertSubstringIf(" ", errorLog.badge !== false) }${ errorLog.title }`,
+        { bold: true, foregroundColor: { red: 192, green: 57, blue: 43 } }
+      ],
+      [
+        `${ errorLog.compactLayout === true ? " " : "\n" }${ errorLog.description }`,
+        { foregroundColor: { red: 231, green: 76, blue: 60 } }
+      ],
+
+      [
+        `\n\n${ ConsoleApplicationLogger.localization.errorType }: `,
+        { bold: true, foregroundColor: { red: 231, green: 76, blue: 60 } }
+      ],
+      [
+        errorLog.errorType,
+        { foregroundColor: { red: 231, green: 76, blue: 60 } }
+      ],
+
+      [
+        `\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: `,
+        { bold: true, foregroundColor: { red: 231, green: 76, blue: 60 } }
+      ],
+      [
+        errorLog.occurrenceLocation,
+        { foregroundColor: { red: 231, green: 76, blue: 60 } }
+      ],
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+       * [ Theory ※ ] The 'as' assertion required because the expression is not calculated at compile time, so it's resultant
+       * type can/doest not be "matched" with function's parameter's types.
+       * https://stackoverflow.com/a/67015118/4818123
+      * */
+      ...("caughtError" in errorLog ? [
+        [
+          `\n\n${ ConsoleApplicationLogger.localization.caughtError }:`,
+          { bold: true, foregroundColor: { red: 231, green: 76, blue: 60 } }
+        ],
+        [
+          errorLog.caughtError instanceof Error ?
+              `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` :
+              `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
+          { foregroundColor: { red: 231, green: 76, blue: 60 } }
+        ]
+      ] : []) as ConsoleApplicationLogger.FormattedOutputData,
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+      ...("additionalData" in errorLog ? [
+        [
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
+          {
+            bold: true,
+            foregroundColor: { red: 231, green: 76, blue: 60 }
+          }
+        ],
+        [
+          `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`,
+          {
+            foregroundColor: { red: 231, green: 76, blue: 60 }
+          }
+        ]
+      ] : []) as ConsoleApplicationLogger.FormattedOutputData
+
+    ]);
+  }
+
+  public static formatGenericLog(
+    {
+      genericLog,
+      badgeContentAndFormatting,
+      mainColor,
+      titleColor
+    }: Readonly<{
+      genericLog: Log;
+      badgeContentAndFormatting: Readonly<{
+        defaultText: string;
+        foregroundColor: ConsoleApplicationLogger.RedGreenBlue;
+        backgroundColor: ConsoleApplicationLogger.RedGreenBlue;
+      }>;
+      mainColor: ConsoleApplicationLogger.RedGreenBlue;
+      titleColor: ConsoleApplicationLogger.RedGreenBlue;
+    }>
+  ): Array<string> {
+    return ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
+
+      ConsoleApplicationLogger.generateBadgeIfMust(genericLog.badge, badgeContentAndFormatting),
+
+      [
+        `${ insertSubstringIf(" ", genericLog.badge !== false) }${ genericLog.title }`,
+        { foregroundColor: titleColor, bold: true }
+      ],
+      [
+        `${ genericLog.compactLayout === true ? " " : "\n" }${ genericLog.description }`,
+        { foregroundColor: mainColor }
+      ],
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See ※ */
+      ...("additionalData" in genericLog ? [
+        [
+          `\n\n${ ConsoleApplicationLogger.localization.appendedData }:`,
+          { bold: true, foregroundColor: mainColor }
+        ],
+        [
+          `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`,
+          { foregroundColor: mainColor }
+        ]
+      ] : []) as ConsoleApplicationLogger.FormattedOutputData
+
+    ]);
+  }
+
+  public static generateBadgeIfMust(
+    badge: Readonly<{ customText: string; }> | false | undefined,
+    {
+      defaultText,
+      foregroundColor,
+      backgroundColor
+    }: Readonly<{
+      defaultText: string;
+      foregroundColor: ConsoleApplicationLogger.RedGreenBlue;
+      backgroundColor: ConsoleApplicationLogger.RedGreenBlue;
+    }>
+  ): [ string | null, ConsoleApplicationLogger.Formatting ] {
+    return [
+      badge === false ? null : ` ${ badge?.customText ?? defaultText } `,
+      {
+        bold: true,
+        foregroundColor,
+        backgroundColor
+      }
+    ];
+  }
+
+
+  /* ━━━ Auxiliaries ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
      https://stackoverflow.com/a/33206814/4818123 */
   public static generateConsoleMethodParametersForFormattedOutput(
@@ -555,6 +437,7 @@ abstract class ConsoleApplicationLogger {
   ): string {
     return `\x1b[48;2;${ colorDefinition.red };${ colorDefinition.green };${ colorDefinition.blue }m`;
   }
+
 }
 
 
