@@ -21,7 +21,7 @@
   * otherwise `null` will be returned
 
 If multiple elements matching with the predicate are being expected in **targetArray** and you want indexes of all of them,
-use [**getIndexesOfArrayElementsWhichSatisfiesThePredicate**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
+use [**getIndexesOfSatisfiesThePredicateArrayElements**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.md)
 function instead.
 
 ![IntelliJ IDEA Live Template](getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne-LiveTemplateDemo.gif)

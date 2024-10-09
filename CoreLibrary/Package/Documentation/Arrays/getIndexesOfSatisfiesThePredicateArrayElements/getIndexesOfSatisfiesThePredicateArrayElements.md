@@ -1,6 +1,6 @@
-# `getIndexesOfArrayElementsWhichSatisfiesThePredicate` - Retrieving of indexes of array elements which satisfies to predicate
+# `getIndexesOfSatisfiesThePredicateArrayElements` - Retrieving of indexes of array elements which satisfies to predicate
 
-[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexesOfArrayElementsWhichSatisfiesThePredicate-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+[![Official plugin](https://img.shields.io/badge/IntelliJ_IDEA_Live_Template-getIndexesOfSatisfiesThePredicateArrayElements-blue.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 ```
 <ArrayElement>(
@@ -11,7 +11,7 @@
 
 Returns the array of indexes of `targetArray`'s elements which are satisfies the `predicate` function.
 
-![IntelliJ IDEA Live Template](getIndexesOfArrayElementsWhichSatisfiesThePredicate-LiveTemplateDemo.gif)
+![IntelliJ IDEA Live Template](getIndexesOfSatisfiesThePredicateArrayElements-LiveTemplateDemo.gif)
 
 ```typescript
 type Product = { title: string; price: number; };
@@ -23,11 +23,11 @@ const sample1: Array<Product> = [
   { title: "DELTA", price: 1500 }
 ];
 
-getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+getIndexesOfSatisfiesThePredicateArrayElements(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 500
 ); // -> Expected output: [ 2, 3 ]
 
-getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+getIndexesOfSatisfiesThePredicateArrayElements(
   sample1, (arrayElement: Product): boolean => arrayElement.price > 1500
 ); // -> Expected output: []
 ```
@@ -39,12 +39,12 @@ Use [Live templates](https://www.jetbrains.com/help/idea/using-live-templates.ht
 of [IntelliJ IDEA family IDEs](https://www.jetbrains.com/idea/) (including WebStorm sharpened for web development)
 to insert the example (available in [official YDEE plugin](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)):
 
-![IntelliJ IDEA Live Template](getIndexesOfArrayElementsWhichSatisfiesThePredicate-LiveTemplateDemo.gif)
+![IntelliJ IDEA Live Template](getIndexesOfSatisfiesThePredicateArrayElements-LiveTemplateDemo.gif)
 
 It is recommended to copy the variable name containing array to clipboard preliminary - the identifier will be
 automatically substituted to required position. Then, use <kbd>Tab</kbd> key to move to next position at which
 specific code must be inputted.
 
-Because the abbreviation of `getIndexesOfArrayElementsWhichSatisfiesThePredicate` is too long (gioaewstp),
+Because the abbreviation of `getIndexesOfSatisfiesThePredicateArrayElements` is too long (gioaewstp),
 the live template has been added without abbreviation (however, you don't need to input whole function name).
 Please make sure that you are selecting the live template, not just function name from the suggested autocompletes.

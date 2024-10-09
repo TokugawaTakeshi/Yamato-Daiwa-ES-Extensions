@@ -1,4 +1,4 @@
-import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfArrayElementsWhichSatisfiesThePredicate";
+import getIndexesOfSatisfiesThePredicateArrayElements from "./getIndexesOfSatisfiesThePredicateArrayElements";
 
 
 export namespace ReplacingArrayElementsByPredicatesOperation {
@@ -60,7 +60,7 @@ export default function replaceArrayElementsByPredicates<ArrayElement>(
   for (const replacement of replacements) {
 
     const indexesOfElementsSatisfiesTheCurrentPredicate: ReadonlyArray<number> =
-        getIndexesOfArrayElementsWhichSatisfiesThePredicate(targetArray, replacement.predicate);
+        getIndexesOfSatisfiesThePredicateArrayElements(targetArray, replacement.predicate);
 
     for (const indexOfElementWhichSatisfiedToCurrentPredicate of indexesOfElementsSatisfiesTheCurrentPredicate) {
 

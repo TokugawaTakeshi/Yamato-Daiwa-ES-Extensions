@@ -81,9 +81,9 @@ export default function cropArray<ArrayElement>(
         messageSpecificPart:
             "It has been incorrectly specified from which element target array must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"startingElementNumber__numerationFrom0\": must the the positive integer\n" +
-            "● \"startingElementNumber__numerationFrom1\": must the the natual number\n" +
-            "● \"fromStart\": must the the boolean herewith \"true\" only"
+            "● \"startingElementNumber__numerationFrom0\": must the positive integer\n" +
+            "● \"startingElementNumber__numerationFrom1\": must the natural number\n" +
+            "● \"fromStart\": must natural boolean herewith \"true\" only"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "cropArray(compoundParameter)"
@@ -109,10 +109,10 @@ export default function cropArray<ArrayElement>(
         messageSpecificPart:
             "It has been incorrectly specified until which element target array must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"endingElementNumber__numerationFrom0\": must the the positive integer\n" +
-            "● \"endingElementNumber__numerationFrom1\": must the the natual number\n" +
-            "● \"elementsCount\": must the the natual number\n" +
-            "● \"untilEnd\": must the the boolean herewith \"true\" only\n"
+            "● \"endingElementNumber__numerationFrom0\": must natural positive integer\n" +
+            "● \"endingElementNumber__numerationFrom1\": must natural natural number\n" +
+            "● \"elementsCount\": must natural natural number\n" +
+            "● \"untilEnd\": must natural boolean herewith \"true\" only\n"
 
       }),
       title: InvalidParameterValueError.localization.defaultTitle,

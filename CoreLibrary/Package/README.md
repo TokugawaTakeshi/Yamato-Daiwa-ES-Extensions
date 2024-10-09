@@ -226,7 +226,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md">getIndexesOfArrayElementsWhichSatisfiesThePredicate</a></dt>
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.md">getIndexesOfSatisfiesThePredicateArrayElements</a></dt>
   <dd>Returns the array of indexes of array elements which are satisfies to predicate function.</dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>

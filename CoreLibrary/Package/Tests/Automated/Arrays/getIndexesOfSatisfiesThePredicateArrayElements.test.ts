@@ -1,8 +1,8 @@
-import { getIndexesOfArrayElementsWhichSatisfiesThePredicate } from "../../../Source";
+import { getIndexesOfSatisfiesThePredicateArrayElements } from "../../../Source";
 import Assert from "assert";
 
 
-describe("getIndexesOfArrayElementsWhichSatisfiesThePredicate", (): void => {
+describe("getIndexesOfSatisfiesThePredicateArrayElements", (): void => {
 
   type Product = { title: string; price: number; };
 
@@ -16,14 +16,14 @@ describe("getIndexesOfArrayElementsWhichSatisfiesThePredicate", (): void => {
   it("Works as intended", (): void => {
 
     Assert.deepStrictEqual(
-      getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+      getIndexesOfSatisfiesThePredicateArrayElements(
         sample, (arrayElement: Product): boolean => arrayElement.price > 500
       ),
       [ 2, 3 ]
     );
 
     Assert.deepStrictEqual(
-      getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+      getIndexesOfSatisfiesThePredicateArrayElements(
         sample, (arrayElement: Product): boolean => arrayElement.price > 1500
       ),
       []

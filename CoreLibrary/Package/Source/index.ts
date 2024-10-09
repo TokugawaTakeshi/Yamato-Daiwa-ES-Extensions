@@ -20,8 +20,8 @@ export { default as createArrayOfNaturalNumbers } from "./Arrays/createArrayOfNa
 export { default as cropArray } from "./Arrays/cropArray";
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getIndexesOfArrayElementsWhichSatisfiesThePredicate } from
-    "./Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate";
+export { default as getIndexesOfSatisfiesThePredicateArrayElements } from
+    "./Arrays/getIndexesOfSatisfiesThePredicateArrayElements";
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
     "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";

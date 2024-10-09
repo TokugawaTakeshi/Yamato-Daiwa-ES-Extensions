@@ -2,14 +2,15 @@ import {
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne,
   UnexpectedEventError
 } from "../../../Source";
+import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): void => {
+await suite("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", async (): Promise<void> => {
 
   const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
 
-  it("One match", (): void => {
+  await test("One match", (): void => {
     Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
         sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
@@ -18,7 +19,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
     );
   });
 
-  it("More than one match", (): void => {
+  await test("More than one match", (): void => {
 
     Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
@@ -40,7 +41,7 @@ describe("getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne", (): vo
 
   });
 
-  it("No matches", (): void => {
+  await test("No matches", (): void => {
 
     Assert.strictEqual(
       getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(

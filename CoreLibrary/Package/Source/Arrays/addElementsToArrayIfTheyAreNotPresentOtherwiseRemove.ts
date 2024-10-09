@@ -1,4 +1,4 @@
-import getIndexesOfArrayElementsWhichSatisfiesThePredicate from "./getIndexesOfArrayElementsWhichSatisfiesThePredicate";
+import getIndexesOfSatisfiesThePredicateArrayElements from "./getIndexesOfSatisfiesThePredicateArrayElements";
 import removeArrayElementsByIndexes from "./removeArrayElementsByIndexes";
 import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
@@ -163,7 +163,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
       >
 ): Array<ArrayElement> {
 
-  const indexesOfTargetElements: ReadonlyArray<number> = getIndexesOfArrayElementsWhichSatisfiesThePredicate(
+  const indexesOfTargetElements: ReadonlyArray<number> = getIndexesOfSatisfiesThePredicateArrayElements(
     compoundParameter.targetArray,
     "targetElement" in compoundParameter ?
         compoundParameter.targetElementFinder ??
