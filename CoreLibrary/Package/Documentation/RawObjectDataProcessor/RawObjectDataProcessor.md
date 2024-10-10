@@ -743,7 +743,7 @@ Available number sets are:
   <dd>1, 2, 3 and so on towards infinity.</dd>
 
   <dt>RawObjectDataProcessor.NumbersSets.nonNegativeInteger</dt>
-  <dd>All naturals numbers and also 0 which is the positive number according to Math.</dd>
+  <dd>All natural numbers and also 0 which is the positive number according to Math.</dd>
 
   <dt>RawObjectDataProcessor.NumbersSets.negativeInteger</dt>
   <dd>-1, -2, -3 and so on towards minus infinity.</dd>

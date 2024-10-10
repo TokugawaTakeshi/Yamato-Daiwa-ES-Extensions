@@ -30,10 +30,9 @@ export default function getURI_Fragment(
   }>
 ): string | null {
 
-  const URI_FragmentWithoutLeadingHash: string | null = getMatchingWithFirstRegularExpressionCapturingGroup({
-    targetString: sourceDataAndOptions.targetURI,
-    regularExpression: /#(?<hash>.+)$/u
-  });
+  const URI_FragmentWithoutLeadingHash: string | null = getMatchingWithFirstRegularExpressionCapturingGroup(
+    sourceDataAndOptions.targetURI, /#(?<hash>.+)$/u
+  );
 
   if (isNull(URI_FragmentWithoutLeadingHash)) {
 
