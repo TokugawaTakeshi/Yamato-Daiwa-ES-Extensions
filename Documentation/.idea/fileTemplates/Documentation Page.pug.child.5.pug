@@ -1,12 +1,12 @@
-//- TODO Редактировать глубину
+//- TODO 深さを編集
 extends ../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  //- TODO Редактировать глубину
-  include ../../SharedAssets/Markup/SharedAssets.russian.pug
-  include ../../SharedComponents/SharedComponents.russian.pug
+  //- TODO 深さを編集
+  include ../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -18,26 +18,32 @@ block append Metadata
         title: buildHTML_PageTitle("${FILE_NAME_WITHOUT_EXTENSION}"),
         description: MetaDescriptionTemplates.function({
           functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
-          whatFunctionDoes: "особую, уличную магию" // TODO Редактировать
+          whatFunctionDoes: "特別なストリートの魔法" // TODO Edit
         }),
       },
       stylesSheetsURIs: [
-        "$CommonStyles",
-        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-        "$PreMadesStyles",
+        "${DS}CommonStyles",
+        "${DS}LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "${DS}PreMadesStyles",
         "@CustomizedExternalComponents"
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("${ROUTE}");
+    RoutingEmulator.setCurrentRoute("${ROUTE_WIHTOUT_CHILDREN}");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./${FILE_NAME_WITHOUT_EXTENSION}.english.html",
-      japanese: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html"
+      english: routing.english.${ROUTE_WITH_CHILDREN}.${DS}URI,
+      russian: routing.russian.${ROUTE_WITH_CHILDREN}.${DS}URI
     });
+    
+    //- TODO `+CallableExpressionScheme--YDF_DK`と言うPugミックスインが使われているなら、`pageTopHeading`無しで良い
+    const { 
+      ${DS}sectioning: localizedSectioning,
+      ${DS}heading: pageTopHeading
+    } = localizedRouting.${ROUTE_WITH_CHILDREN};
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
@@ -48,11 +54,11 @@ block append SpecificContent
 
   article
 
-    //- TODO Редактировать
+    //- TODO 編集
     +CallableExpressionScheme--YDF_DK({
       technicalName: "${FILE_NAME_WITHOUT_EXTENSION}",
       headingTag: "h1",
-      localizedDescriptiveHeading: "Делает особую, уличную магию",
+      localizedDescriptiveHeading: "特別なストリートの魔法をする",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -72,4 +78,4 @@ block append SpecificContent
 
         +CodeViewer-Explanation--YDF
           p.Article-Paragraph.
-            Выводит "OK" в консоль (спасибо, кэп).
+            "OK"をコンソールに取得させる（キャプテン・オブヴィアス、ありがとう）。

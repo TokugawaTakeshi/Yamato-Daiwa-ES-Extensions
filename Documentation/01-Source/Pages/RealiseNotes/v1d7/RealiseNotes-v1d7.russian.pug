@@ -47,6 +47,27 @@ block append SpecificContent
 
     h2.Article-Heading2 Основной пакет (@yamato-daiwa/es-extensions)
 
+    h3.Article-Heading3 Новая функциональность
+
+    h4.Article-Heading4 Работа с массивами
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            other.$children.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI
+      }).Article-Link addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            creating.$children.createArrayOfNaturalNumbers.$URI
+      }).Article-Link createArrayOfNaturalNumbers
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            retrievingOfSubarrays.$children.cropArray.$URI
+      }).Article-Link cropArray
+
     h3.Article-Heading3 Критические изменения
 
     h4.Article-Heading4 Работа с массивами
@@ -171,83 +192,90 @@ block append SpecificContent
 
     dl.Article-DescriptionList
 
-      dt targetElement
+      dt Удаление #[+ImportantEntity__Code--YDID targetElementSelector]
       dd.
-        Теперь является полиморфным.
+        Удалено взамен на превращение #[+Term--YDID свойства] #[+ImportantEntity__Code--YDID targetElement] в
+          #[+Keyword--YDID полиморфное].
+        Теперь, чтобы указать [+Term--YDID селектор] целевого #[+Term--YDID элемента], нужно #[+Term--YDID свойству]
+          #[+ImportantEntity__Code--YDID targetElement] указать #[+Term--YDID объект] со #[+Term--YDID свойством]
+          #[+ImportantEntity__Code--YDID selector].
+        При этом #[+Keyphrase--YDID как и раньше], если целевой #[+Term--YDID элемент] указан через
+          #[+Term--YDID селектор], то #[+Keyword--YDID необходимо] через #[+Keyphrase--YDID одно из] #[+Term--YDID свойств]
+          #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector],
+          #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector] и
+          #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector] указать, как #[+Term--YDID функция]
+          должна себя вести в случае, когда указанному #[+Term--YDID селектору] соответствует более одного
+          #[+Term--YDID элемента].
 
-    //-
+      dt Добавление #[+ImportantEntity__Code--YDID contextElement]
+      dd.
+        Если указано #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID targetElementSelector], то можно
+          дополнительно указать #[+Keyword--YDID контекстный] #[+Term--YDID элемент], внутри которого будет
+          осуществляться поиск целевого #[+Term--YDID элемента].
+        Сделать это можно, как в случае с #[+ImportantEntity__Code--YDID targetElementSelector], либо указав
+          экземпляр #[+Term--YDID элемента], либо #[+Term--YDID селектор] конкретного элемента, однако
+          в случае в #[+Keyword--YDID контекстным] #[+Term--YDID элементом] #[+Term__Contrast--YDID селектор]
+          #[+Keyword--YDID должен] ссылаться на #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один]
+          #[+Term--YDID элемент], в противном случае будет выброшено #[+Term--YDID исключение].
 
-      === До: ==========================================================================================================
-      export default function addLeftClickEventHandler(
-        compoundParameter: Readonly<
-          (
-            { targetElement: Element; } |
-            (
-              { targetElementSelector: string; } &
-              (
-                { mustApplyToAllMatchingsWithSelector: true; } |
-                { mustIgnoreSubsequentMatchingsWithSelector: true; } |
-                { mustExpectExactlyOneMatchingWithSelector: true; }
-              )
-            )
-          ) &
-          {
-            handler: (leftClickEvent: MouseEvent) => unknown;
-            mustInvokeBeforeChildren_sHandlers?: boolean;
-          }
-        >
-      ): void {
+      dt.
+        Замена #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers] на
+          #[+ImportantEntity__Code--YDID eventPropagation]
+      dd.
+        Благодаря новому #[+Keyword--YDID полиморфному] свойству  #[+ImportantEntity__Code--YDID eventPropagation]
+          можно не&nbsp;только указывать тип распространения события, но и вовсе прервать это распространение.
+        Хотя элементы перечисления #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.сapturing]
+          и #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling] могут показаться менее
+          понятными, captuting (движение вниз по DOM-древу) и bubbling (движение вверх по DOM-древу) являются
+          #[+Keyword--YDID каноническими] терминами, а использование канонических терминов
+          #[+Keyword--YDID не]&nbsp;является признаком низкокачественного API.
 
-      === После: =======================================================================================================
-      export default function addLeftClickEventHandler(
-        compoundParameter: Readonly<
-          (
-            { targetElement: Element; } |
-            (
-              {
-                targetElement: Readonly<
-                  { selector: string; } &
-                  (
-                    { mustApplyToAllMatchingsWithSelector: true; } |
-                    { mustIgnoreSubsequentMatchingsWithSelector: true; } |
-                    { mustExpectExactlyOneMatchingWithSelector: true; }
-                  )
-                >;
-              } &
-              { contextElement?: ParentNode | Readonly<{ selector: string; }>; }
-            )
-          ) &
-          {
-            handler: (leftClickEvent: MouseEvent) => unknown;
-            eventPropagation?: EventPropagationTypes | false;
-          }
-        >
-      ): void {
+    dl.Article-DescriptionList
+
+      dt Причины
+      dd
+
+        ul.Article-UnorderedList
+
+          li Унификация API с другими функциями
+          li.
+            Потребность в возможности указывать селектор целевого элемента внутри конкретного родительского элемента
+          li Потребность в более гибком управлении распространением события
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd
+
+        ul.Article-UnorderedList
+
+          li.
+            Используется #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID targetElementSelector] единственного
+              #[+Term--YDID параметра]
+
+          li.
+            Используется #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]
+              единственного #[+Term--YDID параметра].
+
+      dt Миграция
+      dd
+
+        ul.Article-UnorderedList
+
+          li.
+            Переименуйте свойство #[+ImportantEntity__Code--YDID targetElementSelector] в #
+              [+ImportantEntity__Code--YDID targetElement], а строковый литерал с селектором поместите в объект
+              со #[+Term--YDID свойством] #[+ImportantEntity__Code--YDID selector].
+            Например, #[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"] превратится
+              в #[+SecondaryEntity__Code--YDID targetElement: { selector: ".Card-SavingButton"}].
+
+          li.
+            Если у Вас указано #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true],
+              то заменить это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.Capturing].
+
+          li.
+            Если у Вас указано #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true],
+              то заменить это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.Bubbling].
     //- TODO > ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     //-
-
-      h3.Article-Heading3 Новая функциональность
-
-      h4.Article-Heading4 Работа с массивами
-
-      ul.Article-UnorderedList
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              creating.$children.
-              createArrayOfNaturalNumbers.$URI
-        }).Article-Link createArrayOfNaturalNumbers
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              removingOfElements.$children.
-              cropArray.$URI
-        }).Article-Link cropArray
-
 
       h4.Article-Heading4 Пагинация
 

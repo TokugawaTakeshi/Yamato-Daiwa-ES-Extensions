@@ -33,6 +33,10 @@ coreLibrary:
 
         $heading: "Retrieving of Indexes"
 
+      retrievingOfSubarrays:
+
+        $heading: "Retrieving of Subarrays"
+
       addingOfElements:
 
         $heading: "Adding of Elements"

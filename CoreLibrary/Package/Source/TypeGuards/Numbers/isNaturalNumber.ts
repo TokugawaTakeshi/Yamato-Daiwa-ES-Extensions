@@ -1,6 +1,6 @@
-export default function isNaturalNumber(potentialNaturalNumber: unknown): potentialNaturalNumber is number;
-
 export default function isNaturalNumber(potentialNaturalNumber: number): boolean;
+
+export default function isNaturalNumber(potentialNaturalNumber: unknown): potentialNaturalNumber is number;
 
 
 export default function isNaturalNumber(potentialNaturalNumber: unknown): potentialNaturalNumber is number {

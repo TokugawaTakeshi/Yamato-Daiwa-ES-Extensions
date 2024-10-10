@@ -33,6 +33,10 @@ coreLibrary:
 
         $heading: "Получение индексов"
 
+      retrievingOfSubarrays:
+
+        $heading: "Взятие подмассивов"
+
       addingOfElements:
 
         $heading: "Добавление элементов"

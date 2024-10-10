@@ -1,0 +1,4 @@
+examples:
+
+  ${DS}heading: `examples.${DS}heading`
+  ${DS}anchor: EXAMPLES--SECTION

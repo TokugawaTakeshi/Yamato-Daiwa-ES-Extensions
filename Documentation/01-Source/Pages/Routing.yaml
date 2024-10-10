@@ -29,15 +29,21 @@ coreLibrary:
           $heading: `coreLibrary.functionality.arrays.$heading`
           $children:
 
-#            creating:
-#
-#              $heading: `coreLibrary.functionality.arrays.creating.$heading`
-#
-#              $children:
-#
-#                createArrayOfNaturalNumbers:
-#                  $heading: "<code>createArrayOfNaturalNumbers</code>"
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.${ fileNameLocalizationExtensions *`
+            creating:
+
+              $heading: `coreLibrary.functionality.arrays.creating.$heading`
+
+              $children:
+
+                createArrayOfNaturalNumbers:
+                  $heading: "<code>createArrayOfNaturalNumbers</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.russian.yaml
 
             retrievingOfElements:
 
@@ -79,6 +85,22 @@ coreLibrary:
                   $heading: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>"
                   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
 
+            retrievingOfSubarrays:
+
+              $heading: `coreLibrary.functionality.arrays.retrievingOfSubarrays.$heading`
+
+              $children:
+
+                cropArray:
+                  $heading: "<code>cropArray</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/cropArray.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.russian.yaml
+
             addingOfElements:
 
               $heading: `coreLibrary.functionality.arrays.addingOfElements.$heading`
@@ -116,7 +138,17 @@ coreLibrary:
 
               $children:
 
-                removeArrayElementsByIndexes:
+                addElementsToArrayIfTheyAreNotPresentOtherwiseRemove:
+                  $heading: "<code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
+
+                twoDimensionalizeArray:
                   $heading: "<code>twoDimensionalizeArray</code>"
                   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md"
 

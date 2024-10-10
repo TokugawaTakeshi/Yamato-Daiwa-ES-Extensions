@@ -17,7 +17,7 @@ import {
   isNotUndefined,
   isNull
 } from "@yamato-daiwa/es-extensions";
-import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
+import type { PossiblyReadonlyParsedJSON } from "@yamato-daiwa/es-extensions";
 import extractLastExtensionOfFileName from "../Temporary/extractLastExtensionOfFileName";
 
 /* --- YDEE Node.js ------------------------------------------------------------------------------------------------- */
@@ -35,7 +35,7 @@ abstract class ObjectDataFilesProcessor {
   public static localization: ObjectDataFilesProcessor.Localization = objectDataFilesProcessorLocalization__english;
 
 
-  public static async processFile<ValidData extends ParsedJSON>(
+  public static async processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -44,7 +44,7 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): Promise<ValidData>;
 
-  public static processFile<ValidData extends ParsedJSON>(
+  public static processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -71,7 +71,7 @@ abstract class ObjectDataFilesProcessor {
 
   /* eslint-disable-next-line @typescript-eslint/promise-function-async --
   * This function returns or not returns the promise dependent of overloading. */
-  public static processFile<ValidData extends ParsedJSON>(
+  public static processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification?: RawObjectDataProcessor.ObjectDataSpecification;
@@ -235,7 +235,8 @@ abstract class ObjectDataFilesProcessor {
       Logger.throwErrorAndLog({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
-        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
+        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
+        innerError: error
       });
     }
 
@@ -289,7 +290,8 @@ abstract class ObjectDataFilesProcessor {
       Logger.throwErrorAndLog({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
-        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
+        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
+        innerError: error
       });
     }
 
@@ -298,7 +300,7 @@ abstract class ObjectDataFilesProcessor {
   }
 
 
-  private static parseRawData<ValidData extends ParsedJSON>(
+  private static parseRawData<ValidData extends PossiblyReadonlyParsedJSON>(
     {
       rawData,
       validDataSpecification,
@@ -324,7 +326,7 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): unknown;
 
-  private static parseRawData<ValidData extends ParsedJSON>(
+  private static parseRawData<ValidData extends PossiblyReadonlyParsedJSON>(
     {
       rawData,
       validDataSpecification,

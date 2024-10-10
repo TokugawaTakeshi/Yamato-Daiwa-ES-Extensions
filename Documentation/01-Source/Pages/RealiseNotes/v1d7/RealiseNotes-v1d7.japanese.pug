@@ -47,6 +47,27 @@ block append SpecificContent
 
     h2.Article-Heading2 主要パッケージ (@yamato-daiwa/es-extensions)
 
+    h3.Article-Heading3 新規機能
+
+    h4.Article-Heading4 配列の弄り
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            other.$children.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI
+      }).Article-Link addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            creating.$children.createArrayOfNaturalNumbers.$URI
+      }).Article-Link createArrayOfNaturalNumbers
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            retrievingOfSubarrays.$children.cropArray.$URI
+      }).Article-Link cropArray
+
     h3.Article-Heading3 破壊的変更
 
     h4.Article-Heading4 配列の弄り
@@ -149,31 +170,6 @@ block append SpecificContent
           #[+ImportantEntity--YDID 1個]の#[+Term--YDID 要素]が該当している様に気を付けるのだ。
 
     //-
-
-      h3.Article-Heading3 新規機能
-
-      h4.Article-Heading4 配列の弄り
-
-      ul.Article-UnorderedList
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              creating.$children.
-              createArrayOfNaturalNumbers.$URI
-        }).Article-Link createArrayOfNaturalNumbers
-
-      ul.Article-UnorderedList
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              removingOfElements.$children.
-              cropArray.$URI
-        }).Article-Link cropArray
-
 
       h4.Article-Heading4 ページネーション
 

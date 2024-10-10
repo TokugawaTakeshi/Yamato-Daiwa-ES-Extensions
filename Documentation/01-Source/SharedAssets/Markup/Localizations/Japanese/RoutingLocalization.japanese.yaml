@@ -33,6 +33,10 @@ coreLibrary:
 
         $heading: "指数の取得"
 
+      retrievingOfSubarrays:
+
+        $heading: "部分配列の取得"
+
       addingOfElements:
 
         $heading: "要素の追加"

@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.8.0-alpha.5",
+  "version": "1.8.0-alpha.6",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -23,8 +23,8 @@
   },
   "main": "./Distributable/cjs/index.js",
   "module": "./Distributable/esm/index.js",
-  "sideEffects": false,
   "types": "./Distributable/esm/index.d.ts",
+  "sideEffects": false,
   "files": [
     "Distributable"
   ],

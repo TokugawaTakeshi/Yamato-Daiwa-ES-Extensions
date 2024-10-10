@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-browserjs",
-  "version": "1.8.0-alpha.1",
+  "version": "1.8.0-alpha.2",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -29,7 +29,7 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.2"
+    "@yamato-daiwa/es-extensions": "1.8.0-alpha.5"
   },
   "devDependencies": {
     "@types/jsdom-global": "3.0.7",

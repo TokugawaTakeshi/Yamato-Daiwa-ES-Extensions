@@ -22,22 +22,28 @@ block append Metadata
         }),
       },
       stylesSheetsURIs: [
-        "$CommonStyles",
-        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
-        "$PreMadesStyles",
+        "${DS}CommonStyles",
+        "${DS}LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "${DS}PreMadesStyles",
         "@CustomizedExternalComponents"
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("${ROUTE}");
+    RoutingEmulator.setCurrentRoute("${ROUTE_WIHTOUT_CHILDREN}");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./${FILE_NAME_WITHOUT_EXTENSION}.japanese.html",
-      russian: "./${FILE_NAME_WITHOUT_EXTENSION}.russian.html"
+      japanese: routing.japanese.${ROUTE_WITH_CHILDREN}.${DS}URI,
+      russian: routing.russian.${ROUTE_WITH_CHILDREN}.${DS}URI
     });
+    
+    //- TODO If `+CallableExpressionScheme--YDF_DK` Pug mixin is being used, `pageTopHeading` is not required 
+    const { 
+      ${DS}sectioning: localizedSectioning,
+      ${DS}heading: pageTopHeading
+    } = localizedRouting.${ROUTE_WITH_CHILDREN};
 
 
-block append HeadScriptsLinks
+block append HeadScripts
 
   if __IS_PRODUCTION_BUILDING_MODE__
 
