@@ -1,10 +1,10 @@
-extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/SharedAssets.english.pug
-  include ../../../../../SharedComponents/SharedComponents.english.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -231,7 +231,7 @@ block append SpecificContent
       p.Article-Paragraph
         | This usage of the #[+Term--YDID function] is close to the #[+Term__Contrast--YDID native method]
         |
-        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
+        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI })= similarNativeMethodName
         | .
         | The difference is that #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID always]&nbsp;returns
         |   the #[+Keyword__Contrast--YDID updated] #[+Term--YDID array], #[+Keyword--YDID not]&nbsp;the&nbsp;count of its
@@ -258,16 +258,16 @@ block append SpecificContent
         | In particular, for the
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
-        }).Article-Link IntelliJ IDEA family IDEs
+        }) IntelliJ IDEA family IDEs
         |
         |   the
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
-        }).Article-Link official YDEE plugin
+        }) official YDEE plugin
         |   is supported, and it includes
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
-        }).Article-Link templates for quick input (so-called "Live templates")
+        }) templates for quick input (so-called "Live templates")
         |   , such as the one for #[+ImportantEntity__Code--YDID addElementsToArray].
 
 
@@ -486,7 +486,7 @@ block append SpecificContent
 
       p.Article-Paragraph.
         The same thing could be done without libraries by using the #[+Term--YDID native method]
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], but:
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }) splice], but:
 
       ul.Article-UnorderedList
 
@@ -930,7 +930,7 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/AddingOfElements/" +
           "addElementsToArray/Images/addElementsToArray-LiveTemplate",
       relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })

@@ -780,7 +780,8 @@ class ConsoleCommandsParser<
           })
         }),
         title: InvalidConsoleCommandError.localization.defaultTitle,
-        occurrenceLocation: ConsoleCommandsParser.PARSING_METHOD_INVOCATION_EXPRESSION
+        occurrenceLocation: ConsoleCommandsParser.PARSING_METHOD_INVOCATION_EXPRESSION,
+        innerError: error
       });
     }
 
@@ -925,7 +926,7 @@ class ConsoleCommandsParser<
     if ("required" in commandOptionSpecification) {
       textSegments.push(
         `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.isRequired }: ` +
-          commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no
+          (commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no)
       );
     } else if ("defaultValue" in commandOptionSpecification) {
       textSegments.push(

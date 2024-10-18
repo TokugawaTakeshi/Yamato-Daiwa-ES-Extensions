@@ -16,8 +16,8 @@ block append Metadata
         title: buildHTML_PageTitle("cropArray"),
         description: MetaDescriptionTemplates.function({
           functionName: "cropArray",
-          whatFunctionDoes: "the special street magic" // TODO Edit
-        }),
+          whatFunctionDoes: ""
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -30,15 +30,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfSubarrays.cropArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray.$URI,
-      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray.$URI
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI
     });
 
-    //- TODO If `+CallableExpressionScheme--YDF_DK` Pug mixin is being used, `pageTopHeading` is not required
-    const {
-      $sectioning: localizedSectioning,
-      $heading: pageTopHeading
-    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray;
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.retrievingOfSubarrays.$children.cropArray;
 
 
 block append HeadScripts
@@ -52,11 +51,10 @@ block append SpecificContent
 
   article
 
-    //- TODO Edit
     +CallableExpressionScheme--YDF_DK({
       technicalName: "cropArray",
       headingTag: "h1",
-      localizedDescriptiveHeading: "Makes the special, street magic",
+      localizedDescriptiveHeading: "",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -67,13 +65,3 @@ block append SpecificContent
       ],
       returnedValue: "boolean"
     })
-
-    +CodeViewer--YDF
-      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-
-        +CodeViewer-PartialListing--YDF: :code_listing--yda
-          console.log("OK");
-
-        +CodeViewer-Explanation--YDF
-          p.Article-Paragraph.
-            This code outputs "OK" to console (thanks, cap).

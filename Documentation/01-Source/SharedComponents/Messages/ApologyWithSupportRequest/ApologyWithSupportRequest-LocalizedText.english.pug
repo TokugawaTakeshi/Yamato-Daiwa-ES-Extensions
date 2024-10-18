@@ -1,0 +1,29 @@
+- ApologyWithSupportRequest.title = "Documentation Page is not Complete";
+
+
+mixin ApologyWithSupportRequest-LocalizedText(properties)
+
+  - const { currentState } = properties;
+
+  case currentState
+
+    when ApologyWithSupportRequest.States.initialTextNotWritten
+
+      | We are sorry, but this page not complete.
+      | Unfortunately, currently we are able to provide only the #[+Term--YDID TypeScript types] and the links to the
+      |   source code.
+      | If you need this documentation page be complete, please consider the
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) financial supporting of this project
+      | .
+      | Particularly, the part of funds will be spent to the reviewing by the English native speakers.
+
+    when ApologyWithSupportRequest.States.notTranslated
+
+      |
+
+    when ApologyWithSupportRequest.States.notCheckedByNativeSpeakers
+
+      |

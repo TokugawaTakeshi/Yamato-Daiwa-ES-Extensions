@@ -9,7 +9,7 @@ Helper functions and classes aimed to reduce the routine code.
 Build-in TypeScript type safety without `any` type.
 Oriented to TypeScript users investing the time to quality including type-safety.
 
-![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/f2eda148-6781-4205-ba2c-bd5f61da370f)
+![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/ab848ff3-8bfb-4142-8b8f-fe191340bb3a)
 
 
 ## Installation
@@ -251,7 +251,7 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 ##### Adding of elements
 
 <dl>
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a></dt>
   <dd>Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.</dd>
 </dl>
 

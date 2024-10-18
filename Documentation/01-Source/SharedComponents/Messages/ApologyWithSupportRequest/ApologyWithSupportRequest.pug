@@ -1,0 +1,29 @@
+-
+
+  class ApologyWithSupportRequest {
+
+    /** @type { (string | undefined) }
+     *  @public */
+    static title;
+
+    static States = {
+      initialTextNotWritten: "INITIAL_TEXT_NOT_WRITTEN",
+      notTranslated: "NOT_TRANSLATED",
+      notCheckedByNativeSpeakers: "NOT_CHECKED_BY_NATIVE_SPEAKERS",
+    };
+
+  }
+
+
+mixin ApologyWithSupportRequest(properties)
+
+  +AdmonitionBlock--YDF({
+    title: ApologyWithSupportRequest.title,
+    SVG_Icon: true,
+    theme: AdmonitionBlock__YDF.Themes.regular,
+    areThemesCSS_ClassesCommon: true,
+    geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+    decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
+  })&attributes(attributes)
+
+    +ApologyWithSupportRequest-LocalizedText({ currentState: ApologyWithSupportRequest.States.initialTextNotWritten })

@@ -9,6 +9,7 @@ import getExpectedToBeSingleDOM_Element from "../../DOM/getExpectedToBeSingleDOM
 import EventPropagationTypes from "../EventPropagationTypes";
 
 
+/** @deprecated Use LeftClickEventListener instead. */
 export default function addLeftClickEventHandler(
   compoundParameter: Readonly<
     (
