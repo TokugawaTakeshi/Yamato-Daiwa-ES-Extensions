@@ -3,16 +3,19 @@
 import {
   type Logger,
   type ErrorLog,
+  type ThrownErrorLog,
   type InfoLog,
   type SuccessLog,
   type WarningLog,
   type Log,
   isString,
+  isNonEmptyString,
   isNumber,
   isNonNegativeInteger,
   isBoolean,
   isArbitraryObject,
   isUndefined,
+  isNotUndefined,
   isNull,
   insertSubstringIf,
   stringifyAndFormatArbitraryValue,
@@ -31,6 +34,52 @@ abstract class ConsoleApplicationLogger {
 
 
   /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static throwErrorAndLog<CustomError extends Error>(
+    polymorphicPayload: Error | ThrownErrorLog<CustomError>
+  ): never {
+
+    if (polymorphicPayload instanceof Error) {
+      throw polymorphicPayload;
+    }
+
+
+    let stringifiedInnerError: string | undefined;
+
+    if (isNotUndefined(polymorphicPayload.innerError)) {
+
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(polymorphicPayload.innerError);
+
+      if (polymorphicPayload.innerError instanceof Error && isNonEmptyString(polymorphicPayload.innerError.stack)) {
+
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(polymorphicPayload.innerError)`,
+         *    but it is runtime dependent because the `stack` property is non-standard. */
+
+        stringifiedInnerError = polymorphicPayload.innerError.stack.includes(stringifiedInnerError) ?
+            polymorphicPayload.innerError.stack :
+            `${ stringifiedInnerError }\n${ polymorphicPayload.innerError.stack }`;
+
+      }
+
+    }
+
+    const errorMessage: string = ConsoleApplicationLogger.
+        generateFormattedErrorFromThrownErrorLog(polymorphicPayload, stringifiedInnerError);
+
+    /* [ Theory ] Although the formatting of error `name` is possible, it could break the error handling so it is
+     *    better to keep it as is. */
+    if ("errorInstance" in polymorphicPayload) {
+      polymorphicPayload.errorInstance.message = errorMessage;
+      throw polymorphicPayload.errorInstance;
+    }
+
+
+    const errorWillBeThrown: Error = new Error(errorMessage);
+    errorWillBeThrown.name = polymorphicPayload.errorType;
+
+    throw errorWillBeThrown;
+
+  }
+
   public static logError(polymorphicPayload: ErrorLog | string): void {
     console.error(
       ...isString(polymorphicPayload) ?
@@ -132,6 +181,44 @@ abstract class ConsoleApplicationLogger {
   public static highlightText(targetString: string): string {
     return `\x1b[43m${ targetString }\x1b[49m`;
   }
+
+  public static generateFormattedErrorFromThrownErrorLog(
+    thrownErrorLog: ThrownErrorLog, stringifiedInnerError?: string
+  ): string {
+    return [
+
+      ConsoleApplicationLogger.generateRedGreenBlueForegroundColorControlSequence({ red: 231, green: 76, blue: 60 }),
+
+      "\x1b[1m",
+      thrownErrorLog.title,
+      "\x1b[22m",
+
+      ...thrownErrorLog.compactLayout === true ? [ " " ] : [ "\n" ],
+
+      ..."errorInstance" in thrownErrorLog ?
+          [ thrownErrorLog.errorInstance.message ] :
+          [ thrownErrorLog.description ],
+
+      `\n\n${ ConsoleApplicationLogger.localization.occurrenceLocation }: ${ thrownErrorLog.occurrenceLocation }`,
+
+      ...isNotUndefined(stringifiedInnerError) ?
+          [ `\n\n${ ConsoleApplicationLogger.localization.innerError }:\n${ stringifiedInnerError }` ] : [ ],
+
+      ...isNotUndefined(thrownErrorLog.additionalData) ?
+          [
+            `\n\n${ ConsoleApplicationLogger.localization.appendedData }:` +
+              `\n${ stringifyAndFormatArbitraryValue(thrownErrorLog.additionalData) }`
+          ] :
+          [ ],
+
+        "\x1b[0m",
+
+        /* Divider before stack trace */
+        "\n"
+
+    ].join("");
+  }
+
 
   public static formatErrorLog(errorLog: ErrorLog): Array<string> {
     return ConsoleApplicationLogger.generateConsoleMethodParametersForFormattedOutput([
@@ -419,6 +506,7 @@ abstract class ConsoleApplicationLogger {
 
       logsTextings.push(singleFormattedOutputData[0]);
       templatesWithFormattings.push(templateWithFormatting);
+
     }
 
     return [ `${ templatesWithFormattings.join("%s\x1b[0m") }%s\x1b[0m` ].concat(logsTextings);

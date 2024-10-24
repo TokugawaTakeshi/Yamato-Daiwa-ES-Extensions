@@ -56,17 +56,17 @@ block append SpecificContent
       li: +Link--YDF({
         internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
             other.$children.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI
-      }).Article-Link addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
+      }) addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
 
       li: +Link--YDF({
         internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
             creating.$children.createArrayOfNaturalNumbers.$URI
-      }).Article-Link createArrayOfNaturalNumbers
+      }) createArrayOfNaturalNumbers
 
       li: +Link--YDF({
         internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
             retrievingOfSubarrays.$children.cropArray.$URI
-      }).Article-Link cropArray
+      }) cropArray
 
     h3.Article-Heading3 破壊的変更
 
@@ -126,8 +126,8 @@ block append SpecificContent
       以前、#[+Keyword--YDID オブジェクト型の]#[+Keyword__Contrast--YDID 単一]#[+Term--YDID 引数]は#
         [+ImportantEntity__Code--YDID context]と言う#[+Keyword--YDID 多態性の]#[+Keyword__Contrast--YDID 任意]
         #[+Term--YDID プロパティ]が有り、指定された場合、
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }).Article-Link Element型]か、
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }).Article-Link Document型]か、
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }) Element型]か、
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document型]か、
         これらから継承した#[+Term--YDID 型]でなければいけなかった。
       当#[+Term--YDID プロパティ]は#[+ImportantEntity__Code--YDID contextElement]に代わり、#[+Keyword--YDID 多態性の]儘だが、
         #[+Term--YDID 型]は#[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;]に成った御蔭て
@@ -151,7 +151,7 @@ block append SpecificContent
         |   だけでなく、#[+ImportantEntity--YDID YDEE]以外にも使われる事がある（例えば、
         +Link--YDF({
           endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
-        }).Article-Link Yamato Daiwa Frontend
+        }) Yamato Daiwa Frontend
         | と言うフロントエンド開発専用ライブラリ.
 
       dt 貴方のコードが編集が必要に成る条件
@@ -169,6 +169,62 @@ block append SpecificContent
           使ってリファクタリングしても良いが、#[+Term--YDID エラー]が投げられない様に、#[+Term--YDID セレクター]に#[+Keyword--YDID 丁度]
           #[+ImportantEntity--YDID 1個]の#[+Term--YDID 要素]が該当している様に気を付けるのだ。
 
+
+    h4.Article-Heading4 イベント処理
+
+    h5.Article-Heading5 #[code addLeftClickEventHandler]関数APIの変更
+
+    p.Article-Paragraph.
+      相変わらず、当関数の#[+Keyword--YDID 単一の]#[+Term--YDID 引数]は#[+Term__Contrast--YDID オブジェクト型]だが、
+        此れの#[+Term--YDID プロパティ]に下記の変化が適応された。
+
+    dl.Article-DescriptionList
+
+      dt #[+ImportantEntity__Code--YDID targetElementSelector]の廃止
+      dd.
+        当#[+Term--YDID プロパティ]が削除されかた代わりに、#[+ImportantEntity__Code--YDID targetElement]#[+Term--YDID プロパティ] to
+          #[+Keyword--YDID 多態性の]になった。
+        現在以降、目的#[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]を#[+ImportantEntity__Code--YDID targetElement]
+          #[+Term--YDID オブジェクト]の#[+ImportantEntity__Code--YDID selector]と言う
+          #[+Keyword--YDID 文字列型の]#[+Term--YDID プロパティ]で指定しなければいけない。
+        但し以前と相変わらず、目的#[+Term--YDID 要素]は#[+Term__Contrast--YDID セレクター]で指定された場合、
+          #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector]か、
+          #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector]か、
+          #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector]#[+Term--YDID プロパティ]で
+          当#[+Term--YDID セレクター]に複数の#[+Term--YDID 要素]が発見された時の振る舞いを指定しなくてはならない。
+
+      dt #[+ImportantEntity__Code--YDID contextElement]の追加
+      dd.
+        #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]が指定された場合、其れに加えて
+          #[+ImportantEntity__Code--YDID contextElement]と言う新規任意#[+Term--YDID プロパティ]を使って、
+          対象#[+Term--YDID 要素]が検索される事に成る#[+Term--YDID コンテキスト要素]を指定出来る様に成った。
+        #[+ImportantEntity__Code--YDID targetElementSelector]の場合と同じ様に、#[+Term--YDID 要素]のインスタンスを指定するか、
+          #[+Term--YDID セレクター]で出来る、但し#[+Term--YDID セレクター]の場合当#[+Term--YDID セレクター]は#[+Keyword--YDID 単一の]
+          #[+Term--YDID 要素]に該当していなければいけない、#[+Keyphrase--YDID さもなくばエラーが投げられる]。
+
+      dt.
+        #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]を
+          #[+ImportantEntity__Code--YDID eventPropagation]への置き換え
+      dd.
+        #[+ImportantEntity__Code--YDID eventPropagation]と言う新規#[+Keyword--YDID 多態性の]#[+Term--YDID プロパティ]で
+          #[+Term--YDID イベントの伝播]の種類を指定可能だけでなく、#[+Term--YDID イベントの伝播]の無効化も出来る様に成った。
+        [+ImportantEntity__Code--YDID capturing]と
+          #[+ImportantEntity__Code--YDID eventPropagation: bubbling]と言う
+          #[+ImportantEntity__Code--YDID eventPropagation]#[+Term--YDID 列挙]の要素は以前のAPIに比べて分かりにくいと評判される
+          かもしれないが、#[+Term--YDID 「capturing」]（#[+Term--YDID DOMツリー]の下降移動）と#[+Term--YDID 「bubbling」]
+          （#[+Term--YDID DOMツリー]の上昇移動）は正規的な用語であり、正規的な用語の利用は低品質のAPIとして見做されない。
+
+    dl.Article-DescriptionList
+
+      dt 理由
+      dd
+
+        ul.Article-UnorderedList
+
+          li 他#[+Term--YDID 関数]との#[+ImportantEntity--YDID API]の部分的な統一
+          li コンテキスト依存の対象#[+Term--YDID 要素]のセレクターを指定する需要
+          li イベントの伝搬のもっと柔軟な指定の需要
+
     //-
 
       h4.Article-Heading4 ページネーション
@@ -180,14 +236,14 @@ block append SpecificContent
               functionality.$children.
               pagination.$children.
               PaginationCollection.$URI
-        }).Article-Link getItemsOfPaginationPage
+        }) getItemsOfPaginationPage
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.
               functionality.$children.
               pagination.$children.
               PaginationCollection.$URI
-        }).Article-Link PaginationCollection
+        }) PaginationCollection
 
 
       h4.Article-Heading4 文字列の弄り
@@ -196,7 +252,7 @@ block append SpecificContent
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.functionality.$children.strings.$children.other.cropString.$URI
-        }).Article-Link cropString
+        }) cropString
 
 
       h4.Article-Heading4 ファイルの弄り
@@ -205,7 +261,7 @@ block append SpecificContent
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.functionality.$children.files.$children.encodeFileToBase64.$URI
-        }).Article-Link encodeFileToBase64
+        }) encodeFileToBase64
 
 
       h3.Article-Heading3 以前のコードの修正が必要になる恐れ有りの変化

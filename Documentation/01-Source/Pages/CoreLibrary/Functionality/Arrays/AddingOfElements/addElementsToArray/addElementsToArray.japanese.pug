@@ -1,10 +1,10 @@
-extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
-  include ../../../../../SharedComponents/SharedComponents.japanese.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -241,7 +241,7 @@ block append SpecificContent
       p.Article-Paragraph
         | 此の様な#[+Term--YDID 関数]の利用は
         |
-        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
+        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI })= similarNativeMethodName
         |   と言う#[+Term__Contrast--YDID ネイティブメソッド]に近い。
         | 違うのは、#[+ImportantEntity__Code--YDID addElementsToArray]は#[+Keyword--YDID 常に]
         |   #[+Keyword__Contrast--YDID 更新された]#[+Term--YDID 配列]の#[+Term__Contrast--YDID 要素]数では#[+Keyword--YDID なく]、
@@ -266,15 +266,15 @@ block append SpecificContent
         | 特に
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
-        }).Article-Link 「IntelliJ IDEA」ファミリー統合開発環境
+        }) 「IntelliJ IDEA」ファミリー統合開発環境
         |   では専用の
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
-        }).Article-Link 正式なYDEEプラグイン
+        }) 正式なYDEEプラグイン
         |   が提供され、此れが
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
-        }).Article-Link 「Live templates」と呼ぶ高速入力専用の原型
+        }) 「Live templates」と呼ぶ高速入力専用の原型
         |   を含んでいる。
         | #[+ImportantEntity__Code--YDID addElementsToArray]専用のものも在る。
 
@@ -485,7 +485,7 @@ block append SpecificContent
 
       p.Article-Paragraph.
         #[+Term--YDID ネイティブメソッド]
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice]で同じ事が出来るが、
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }) splice]で同じ事が出来るが、
 
       ul.Article-UnorderedList
 
@@ -920,7 +920,7 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/AddingOfElements/" +
           "addElementsToArray/Images/addElementsToArray-LiveTemplate",
       relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })

@@ -1,0 +1,28 @@
+- ApologyWithSupportRequest.title = "準備中";
+
+
+mixin ApologyWithSupportRequest-LocalizedText(properties)
+
+  - const { currentState } = properties;
+
+  case currentState
+
+    when ApologyWithSupportRequest.States.initialTextNotWritten
+
+      | 恐れ入りますが、現在此のページは未完成の状態です。
+      | 残念ながら、現時点では#[+Term--YDID TypeScript型]及びソースコードへのリンクしか提示出来ません。
+      | 当ページが完成されて欲しい場合、当プロジェクトの
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) 金曜的なサポート
+      | を御検討下さい。
+      | 一部の資金は日本語の母語話者に依る校閲に利用されます。
+      | 但し、漢字の利用頻度が減りませんので、予め御了承下さい。
+
+    when ApologyWithSupportRequest.States.notTranslated
+
+      |
+
+    when ApologyWithSupportRequest.States.notCheckedByNativeSpeakers
+
+      |

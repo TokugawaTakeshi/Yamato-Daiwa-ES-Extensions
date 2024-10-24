@@ -20,6 +20,7 @@ export { default as getExpectedToBeSingleChildOfTemplateElement } from "./DOM/ge
 /* ━━━ Events Handling ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── Left Click ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as addLeftClickEventHandler } from "./EventsHandling/LeftClick/addLeftClickEventHandler";
+export { default as DelegatedLeftClickEventListener } from "./EventsHandling/LeftClick/DelegatedLeftClickEventListener";
 export { default as delegateLeftClickEventHandling } from "./EventsHandling/LeftClick/delegateLeftClickEventHandling";
 export { default as LeftClickEventListener } from "./EventsHandling/LeftClick/LeftClickEventListener";
 export { default as LeftClickOutOfElementEventListener } from "./EventsHandling/LeftClick/LeftClickOutOfElementEventListener";

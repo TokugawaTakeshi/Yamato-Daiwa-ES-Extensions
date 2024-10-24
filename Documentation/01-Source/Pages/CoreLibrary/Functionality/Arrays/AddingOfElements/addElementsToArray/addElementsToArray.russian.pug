@@ -1,10 +1,10 @@
-extends ../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  include ../../../../../SharedAssets/Markup/SharedAssets.russian.pug
-  include ../../../../../SharedComponents/SharedComponents.russian.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
 
 
 block append Metadata
@@ -244,7 +244,7 @@ block append SpecificContent
       p.Article-Paragraph
         | Такое использование #[+Term--YDID функции] близко к #[+Term__Contrast--YDID нативному методу]
         |
-        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI }).Article-Link= similarNativeMethodName
+        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI })= similarNativeMethodName
         | .
         | Разница в том, что #[+ImportantEntity__Code--YDID addElementsToArray] #[+Keyword--YDID всегда]&nbsp;возвращает
         |   #[+Keyword__Contrast--YDID обновлённый] #[+Term--YDID массив], а #[+Keyword--YDID не]&nbsp;его количество
@@ -272,17 +272,17 @@ block append SpecificContent
         |
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
-        }).Article-Link интегрированных сред разработки семейства IntelliJ IDEA
+        }) интегрированных сред разработки семейства IntelliJ IDEA
         |
         |   поддерживается
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
-        }).Article-Link официальный плагин YDEE
+        }) официальный плагин YDEE
         |   , включающий в себя
         |
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
-        }).Article-Link шаблоны быстрого ввода
+        }) шаблоны быстрого ввода
         |   (в том числе и для #[+ImportantEntity__Code--YDID addElementsToArray]).
 
     +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })
@@ -507,7 +507,7 @@ block append SpecificContent
 
       p.Article-Paragraph.
         Сделать то же самое без использования библиотек можно с помощью #[+Term--YDID нативного метода]
-          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }).Article-Link splice], но:
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }) splice], но:
 
       ul.Article-UnorderedList
 
@@ -948,7 +948,7 @@ block append SpecificContent
 
 
     +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
-      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/" +
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/AddingOfElements/" +
           "addElementsToArray/Images/addElementsToArray-LiveTemplate",
       relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
     })

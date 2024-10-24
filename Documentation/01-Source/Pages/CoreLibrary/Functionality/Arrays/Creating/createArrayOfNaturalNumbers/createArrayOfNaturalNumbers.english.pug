@@ -16,8 +16,8 @@ block append Metadata
         title: buildHTML_PageTitle("createArrayOfNaturalNumbers"),
         description: MetaDescriptionTemplates.function({
           functionName: "createArrayOfNaturalNumbers",
-          whatFunctionDoes: "the special street magic" // TODO Edit
-        }),
+          whatFunctionDoes: ""
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -30,15 +30,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.creating.createArrayOfNaturalNumbers");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.createArrayOfNaturalNumbers.$URI,
-      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.createArrayOfNaturalNumbers.$URI
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.
+          createArrayOfNaturalNumbers.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.
+          createArrayOfNaturalNumbers.$URI
     });
 
-    //- TODO If `+CallableExpressionScheme--YDF_DK` Pug mixin is being used, `pageTopHeading` is not required
-    const {
-      $sectioning: localizedSectioning,
-      $heading: pageTopHeading
-    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.createArrayOfNaturalNumbers;
+    const { $sectioning: localizedSectioning, $heading: topHeading } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.creating.$children.createArrayOfNaturalNumbers;
 
 
 block append HeadScripts
@@ -52,28 +51,22 @@ block append SpecificContent
 
   article
 
-    //- TODO Edit
-    +CallableExpressionScheme--YDF_DK({
-      technicalName: "createArrayOfNaturalNumbers",
-      headingTag: "h1",
-      localizedDescriptiveHeading: "Makes the special, street magic",
-      parametersSpecification: [
-        {
-          localizedName: "Target string",
-          type: "string",
-          required: true,
-          genericTechnicalName: "targetString"
-        }
-      ],
-      returnedValue: "boolean"
-    })
+    h1.Article-Heading1!= topHeading
 
-    +CodeViewer--YDF
-      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+    +ApologyWithSupportRequest
 
-        +CodeViewer-PartialListing--YDF: :code_listing--yda
-          console.log("OK");
-
-        +CodeViewer-Explanation--YDF
-          p.Article-Paragraph.
-            This code outputs "OK" to console (thanks, cap).
+    //-
+      +CallableExpressionScheme--YDF_DK({
+        technicalName: "createArrayOfNaturalNumbers",
+        headingTag: "h1",
+        localizedDescriptiveHeading: "",
+        parametersSpecification: [
+          {
+            localizedName: "Target string",
+            type: "string",
+            required: true,
+            genericTechnicalName: "targetString"
+          }
+        ],
+        returnedValue: "boolean"
+      })

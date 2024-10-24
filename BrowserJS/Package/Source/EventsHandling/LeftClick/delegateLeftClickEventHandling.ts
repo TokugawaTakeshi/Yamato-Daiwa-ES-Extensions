@@ -27,6 +27,7 @@ export default function delegateLeftClickEventHandling<ClickTargetElement extend
 ): void;
 
 
+/** @deprecated Use DelegatedLeftClickEventListener instead */
 export default function delegateLeftClickEventHandling<ClickTargetElement extends Element = Element>(
   {
     eventTargetSelector,
@@ -95,6 +96,7 @@ export default function delegateLeftClickEventHandling<ClickTargetElement extend
     }
 
 
+    // TODO It is actually occurs. More info needed.
     /* [ Theory ] The "event.target" has type "EventTarget" while ".parentElement" property has type "HTMLElement"  */
     if (!(event.target instanceof HTMLElement)) {
 

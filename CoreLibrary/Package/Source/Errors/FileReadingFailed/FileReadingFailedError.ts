@@ -3,7 +3,7 @@ import fileReadingFailedErrorLocalization__english from "./FileReadingFailedErro
 
 class FileReadingFailedError extends Error {
 
-  public static readonly NAME: string = "FileReadingFailure";
+  public static readonly NAME: string = "FileReadingFailedError";
 
   public static localization: FileReadingFailedError.Localization = fileReadingFailedErrorLocalization__english;
 

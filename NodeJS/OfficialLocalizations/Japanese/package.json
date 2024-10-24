@@ -35,10 +35,10 @@
     "@yamato-daiwa/es-extensions": "../../../CoreLibrary/Package",
     "@yamato-daiwa/es-extensions-localization-japanese": "../../../CoreLibrary/OfficialLocalizations/Japanese",
     "@yamato-daiwa/es-extensions-nodejs": "../../../NodeJS/Package",
-    "@yamato-daiwa/style_guides": "0.3.0-alpha.8",
+    "@yamato-daiwa/style_guides": "0.3.0-alpha.12",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4"
+    "typescript": "5.6.3"
   },
   "scripts": {
     "Lint": "eslint Source",

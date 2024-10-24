@@ -1,0 +1,29 @@
+- ApologyWithSupportRequest.title = "Эта страница не завершена";
+
+
+mixin ApologyWithSupportRequest-LocalizedText(properties)
+
+  - const { currentState } = properties;
+
+  case currentState
+
+    when ApologyWithSupportRequest.States.initialTextNotWritten
+
+      | Приносим свои извинения, но данная страница ещё не завершена.
+      | К сожалению, на данный момент мы можем лишь ограничиться публикацией #[+Term--YDID TypeScript-типов] и
+      |   ссылок на исходный код.
+      | Если Вам нужна эта страница документации завершённом виде, просим Вас рассмотреть вопрос об
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) оказании финансовой поддержки проекту
+      | .
+
+
+    when ApologyWithSupportRequest.States.notTranslated
+
+      |
+
+    when ApologyWithSupportRequest.States.notCheckedByNativeSpeakers
+
+      |

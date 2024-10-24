@@ -14,9 +14,17 @@ class LeftClickEventListener {
   private readonly externalHandler: (leftClickEvent: MouseEvent, targetElement: Element) => void;
   private readonly eventPropagation: EventPropagationTypes | false;
   private readonly mustBeCalledOnce: boolean;
+  private readonly mustKeepDefaultBehaviour: boolean;
 
   /* [ Theory ] A new function reference is created after `.bind()` is called, so the reference must be single. */
-  private readonly boundOnLeftClickEventHanlder: (event: Event) => void;
+  private readonly boundOnLeftClickEventHandler: (event: Event) => void;
+
+
+  /* [ Approach ] Required additionally to constructor to avoid the ESLint's "no-new" error/waring when do not going
+  *    to call the instance methods. */
+  public static initialize(initializationProperties: LeftClickEventListener.InitializationProperties): LeftClickEventListener {
+    return new LeftClickEventListener(initializationProperties);
+  }
 
 
   public constructor(
@@ -100,16 +108,19 @@ class LeftClickEventListener {
 
     this.targetElements = targetElements;
     this.externalHandler = initializationProperties.handler;
-    this.boundOnLeftClickEventHanlder = this.onLeftClick.bind(this);
+    this.boundOnLeftClickEventHandler = this.onLeftClick.bind(this);
 
     this.eventPropagation = initializationProperties.eventPropagation ?? EventPropagationTypes.bubbling;
     this.mustBeCalledOnce = initializationProperties.mustBeCalledOnce ?? false;
+
+    // TODO Trueにした方が良い。
+    this.mustKeepDefaultBehaviour = initializationProperties.mustKeepDefaultBehaviour ?? false;
 
     for (const targetElement of this.targetElements) {
 
       targetElement.addEventListener(
         "click",
-        this.boundOnLeftClickEventHanlder,
+        this.boundOnLeftClickEventHandler,
         {
           capture: this.eventPropagation === EventPropagationTypes.capturing,
           once: this.mustBeCalledOnce
@@ -123,15 +134,11 @@ class LeftClickEventListener {
 
   public utilize(): void {
 
-    console.log("OK!!!");
-
     for (const targetElement of this.targetElements) {
-
-      console.log("REMOVING");
 
       targetElement.removeEventListener(
         "click",
-        this.boundOnLeftClickEventHanlder,
+        this.boundOnLeftClickEventHandler,
         { capture: this.eventPropagation === EventPropagationTypes.capturing }
       );
 
@@ -144,6 +151,11 @@ class LeftClickEventListener {
 
     if (this.eventPropagation === false) {
       leftClickEvent.stopPropagation();
+    }
+
+
+    if (!this.mustKeepDefaultBehaviour) {
+      leftClickEvent.preventDefault();
     }
 
 
@@ -189,6 +201,7 @@ namespace LeftClickEventListener {
       handler: (leftClickEvent: MouseEvent, targetElement: Element) => void;
       eventPropagation?: EventPropagationTypes | false;
       mustBeCalledOnce?: boolean;
+      mustKeepDefaultBehaviour?: boolean;
     }
   >;
 

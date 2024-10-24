@@ -252,3 +252,7 @@ NodeJS:
 realiseNotes:
 
   $heading: "Что нового"
+
+supportProject:
+
+  $heading: "Поддержать проект"

@@ -16,8 +16,8 @@ block append Metadata
         title: buildHTML_PageTitle("cropArray"),
         description: MetaDescriptionTemplates.function({
           functionName: "cropArray",
-          whatFunctionDoes: "特別なストリートの魔法" // TODO Edit
-        }),
+          whatFunctionDoes: ""
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -30,15 +30,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfSubarrays.cropArray");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray.$URI,
-      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray.$URI
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI
     });
 
-    //- TODO `+CallableExpressionScheme--YDF_DK`と言うPugミックスインが使われているなら、`pageTopHeading`無しで良い
-    const {
-      $sectioning: localizedSectioning,
-      $heading: pageTopHeading
-    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfSubarrays.$children.cropArray;
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfSubarrays.$children.cropArray;
 
 
 block append HeadScripts
@@ -52,11 +51,10 @@ block append SpecificContent
 
   article
 
-    //- TODO 編集
     +CallableExpressionScheme--YDF_DK({
       technicalName: "cropArray",
       headingTag: "h1",
-      localizedDescriptiveHeading: "特別なストリートの魔法をする",
+      localizedDescriptiveHeading: "",
       parametersSpecification: [
         {
           localizedName: "Target string",
@@ -67,13 +65,3 @@ block append SpecificContent
       ],
       returnedValue: "boolean"
     })
-
-    +CodeViewer--YDF
-      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
-
-        +CodeViewer-PartialListing--YDF: :code_listing--yda
-          console.log("OK");
-
-        +CodeViewer-Explanation--YDF
-          p.Article-Paragraph.
-            "OK"をコンソールに取得させる（キャプテン・オブヴィアス、ありがとう）。
