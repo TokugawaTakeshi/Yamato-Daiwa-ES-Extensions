@@ -1,14 +1,17 @@
 import insertSubstring from "../../Strings/insertSubstring";
-import PoliteErrorsMessagesBuilder__English from "./PoliteErrorsMessagesBuilderLocalization.english";
+import politeErrorsMessagesBuilder__english from "./PoliteErrorsMessagesBuilderLocalization.english";
+import surroundLabelByOrnament from "../../Strings/surroundLabelByOrnament";
 
 
 abstract class PoliteErrorsMessagesBuilder {
 
-  private static isTechnicalsDetailOnlyMode: boolean = false;
+  protected static readonly MAXIMAL_CHARACTERS_PER_ROW_COUNT: number = 120;
 
-  private static localization: PoliteErrorsMessagesBuilder.Localization = PoliteErrorsMessagesBuilder__English;
+  protected static isTechnicalsDetailOnlyMode: boolean = false;
 
-  private static defaultBugTrackerURI: string | undefined;
+  protected static localization: PoliteErrorsMessagesBuilder.Localization = politeErrorsMessagesBuilder__english;
+
+  protected static defaultBugTrackerURI: string | undefined;
 
 
   public static buildMessage(sourceData: PoliteErrorsMessagesBuilder.SourceData): string {
@@ -37,12 +40,27 @@ abstract class PoliteErrorsMessagesBuilder {
           }
         ) +
 
-        `\n\n${ localization.whatHappened.heading }` +
+        `\n\n${ 
+          surroundLabelByOrnament({
+            label: ` ${ localization.whatHappened.heading } `,
+            ornamentPatten: "━",
+            prependedPartCharactersCount: 3,
+            totalCharactersCount: PoliteErrorsMessagesBuilder.MAXIMAL_CHARACTERS_PER_ROW_COUNT
+          }) 
+        }` +
         `\n${ localization.whatHappened.introduction }` +
         `\n${ sourceData.politeExplanation }` +
 
-        `\n\n${ localization.technicalDetails.heading }` +
+        `\n\n${
+          surroundLabelByOrnament({
+            label: ` ${ localization.technicalDetails.heading } `,
+            ornamentPatten: "━",
+            prependedPartCharactersCount: 3,
+            totalCharactersCount: PoliteErrorsMessagesBuilder.MAXIMAL_CHARACTERS_PER_ROW_COUNT
+          })
+        }` +
         `\n${ localization.technicalDetails.introduction }` +
+        `\n${ "─".repeat(PoliteErrorsMessagesBuilder.MAXIMAL_CHARACTERS_PER_ROW_COUNT) }` +
         `\n${ sourceData.technicalDetails }`;
 
   }

@@ -1,10 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="cropArray" type="NodeJsTestRunner">
     <node-interpreter value="project" />
-    <node-options value="--import tsx --tsconfig tsconfig.test.json" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />
-    <typescript-loader value="MANUAL_SETUP_IN_NODE_OPTION" />
+    <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
     <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/cropArray.test.ts" />

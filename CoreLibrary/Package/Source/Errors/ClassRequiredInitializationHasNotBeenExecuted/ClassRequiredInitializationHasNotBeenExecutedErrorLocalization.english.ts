@@ -4,7 +4,7 @@ import type ClassRequiredInitializationHasNotBeenExecutedError from "./ClassRequ
 const classRequiredInitializationHasNotBeenExecutedErrorLocalization__english:
     ClassRequiredInitializationHasNotBeenExecutedError.Localization = {
 
-  defaultTitle: "Class required initialization has not been executed",
+  defaultTitle: "Class Required Initialization has not been Executed",
   generateDescription:
       (
         {

@@ -3,16 +3,21 @@ import EventPropagationTypes from "../EventPropagationTypes";
 
 class LeftClickOutOfElementEventListener {
 
-  private readonly elementOutOfWhich: Element;
-  private readonly eventListeningParent: ParentNode | Window;
+  protected readonly elementOutOfWhich: Element;
+  protected readonly eventListeningParent: ParentNode | Window;
 
-  private readonly payloadHandler: (leftClickEvent: MouseEvent) => void;
-  private readonly boundHandler: (event: Event) => void;
+  /* [ Theory ] A new function reference is created after `.bind()` is called, so the reference must be single. */
+  protected readonly boundInternalHandler: (event: Event) => void;
+  protected readonly externalHandler: (leftClickEvent: MouseEvent) => void;
 
-  private readonly eventPropagation: EventPropagationTypes | false;
-  private readonly mustBeCalledOnce: boolean;
+  protected readonly eventPropagation: EventPropagationTypes | false;
+  protected readonly mustBeCalledOnce: boolean;
+  protected readonly mustKeepDefaultBehaviour: boolean;
 
 
+  /* [ Approach ]
+   * Required additionally to constructor to avoid the ESLint's "no-new" error/waring when do not going to call the
+   *   instance methods. */
   public static createAndAssign(
     initializationProperties: LeftClickOutOfElementEventListener.InitializationProperties
   ): LeftClickOutOfElementEventListener {
@@ -20,28 +25,30 @@ class LeftClickOutOfElementEventListener {
   }
 
 
-  private constructor(
+  protected constructor(
     {
       elementOutOfWhich,
       eventListeningParent = window,
       callback,
       eventPropagation = EventPropagationTypes.bubbling,
-      mustBeCalledOnce = false
+      mustBeCalledOnce = false,
+      mustKeepDefaultBehaviour = false
     }: LeftClickOutOfElementEventListener.InitializationProperties
   ) {
 
     this.elementOutOfWhich = elementOutOfWhich;
     this.eventListeningParent = eventListeningParent;
 
-    this.payloadHandler = callback;
-    this.boundHandler = this.handler.bind(this);
+    this.externalHandler = callback;
+    this.boundInternalHandler = this.onLeftClick.bind(this);
 
     this.eventPropagation = eventPropagation;
     this.mustBeCalledOnce = mustBeCalledOnce;
+    this.mustKeepDefaultBehaviour = mustKeepDefaultBehaviour;
 
     this.eventListeningParent.addEventListener(
       "click",
-      this.boundHandler,
+      this.boundInternalHandler,
       {
         capture: this.eventPropagation === EventPropagationTypes.capturing,
         once: this.mustBeCalledOnce
@@ -53,31 +60,34 @@ class LeftClickOutOfElementEventListener {
   public utilize(): void {
     this.eventListeningParent.removeEventListener(
       "click",
-      this.boundHandler,
+      this.boundInternalHandler,
       { capture: this.eventPropagation === EventPropagationTypes.capturing }
     );
   }
 
 
-  private handler(event: Event): void {
+  protected onLeftClick(leftClickEvent: Event): void {
+
+    if (!this.mustKeepDefaultBehaviour) {
+      leftClickEvent.preventDefault();
+    }
 
     if (this.eventPropagation === false) {
-      event.stopPropagation();
+      leftClickEvent.stopPropagation();
     }
 
-
-    if (!(event instanceof MouseEvent)) {
+    if (!(leftClickEvent instanceof MouseEvent)) {
       return;
     }
 
 
-    if (!(event.target instanceof Element)) {
+    if (!(leftClickEvent.target instanceof Element)) {
       return;
     }
 
 
-    if (!this.elementOutOfWhich.contains(event.target)) {
-      this.payloadHandler(event);
+    if (!this.elementOutOfWhich.contains(leftClickEvent.target)) {
+      this.externalHandler(leftClickEvent);
     }
 
   }
@@ -93,6 +103,7 @@ namespace LeftClickOutOfElementEventListener {
     callback: (leftClickEvent: MouseEvent) => void;
     eventPropagation?: EventPropagationTypes | false;
     mustBeCalledOnce?: boolean;
+    mustKeepDefaultBehaviour?: boolean;
   }>;
 
 }

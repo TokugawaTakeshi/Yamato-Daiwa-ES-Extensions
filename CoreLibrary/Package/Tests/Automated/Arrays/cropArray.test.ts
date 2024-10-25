@@ -1,9 +1,9 @@
-import { cropArray, InvalidParameterValueError } from "../../../Source";
+import { cropArray, InvalidParameterValueError, Logger } from "../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-await suite("cropArray", async (): Promise<void> => {
+suite("cropArray", async (): Promise<void> => {
 
   function generateExperimentalSample(): Array<string> {
     return [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ];
@@ -607,7 +607,7 @@ await suite("cropArray", async (): Promise<void> => {
       const experimentalSample: Array<string> = generateExperimentalSample();
 
       cropArray({
-        targetArray: generateExperimentalSample(),
+        targetArray: experimentalSample,
         startingElementNumber__numerationFrom0: 1,
         endingElementNumber__numerationFrom0: experimentalSample.length,
         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
@@ -620,29 +620,25 @@ await suite("cropArray", async (): Promise<void> => {
 
     });
 
-    await test("Error has been thrown", async (): Promise<void> => {
+    await test("Error has been thrown", (): void => {
 
-      await test("Updated array is matching with expected", (): void => {
+      const experimentalSample: Array<string> = generateExperimentalSample();
 
-        const experimentalSample: Array<string> = generateExperimentalSample();
-
-        Assert.throws(
-          (): void => {
-            cropArray({
-              targetArray: generateExperimentalSample(),
-              startingElementNumber__numerationFrom0: 1,
-              endingElementNumber__numerationFrom0: experimentalSample.length,
-              mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
-              mutably: true
-            });
-          },
-          InvalidParameterValueError
-        );
-
-      });
+      Assert.throws(
+        (): void => {
+          cropArray({
+            targetArray: experimentalSample,
+            startingElementNumber__numerationFrom0: 1,
+            endingElementNumber__numerationFrom0: experimentalSample.length,
+            mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+            mutably: true
+          });
+        },
+        InvalidParameterValueError
+      );
 
     });
 
   });
 
-});
+}).catch(Logger.logPromiseError);

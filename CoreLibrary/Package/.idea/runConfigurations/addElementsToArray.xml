@@ -1,10 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="addElementsToArray" type="NodeJsTestRunner">
     <node-interpreter value="project" />
+    <node-options value="--require ts-node/register" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />
     <typescript-loader value="TSX" />
-    <envs />
+    <envs>
+      <env name="TS_NODE_PROJECT" value="tsconfig.test.json" />
+    </envs>
     <scope-kind value="TEST_FILE" />
     <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/addElementsToArray.test.ts" />
     <method v="2" />
