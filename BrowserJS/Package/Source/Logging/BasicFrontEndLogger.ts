@@ -30,98 +30,166 @@ abstract class BasicFrontEndLogger {
 
   /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static logError(polymorphicPayload: ErrorLog | string): void {
-    console.error(
-      ...isString(polymorphicPayload) ? [ polymorphicPayload ] : BasicFrontEndLogger.formatErrorLog(polymorphicPayload)
-    );
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.error(...BasicFrontEndLogger.formatErrorLog(polymorphicPayload));
+
   }
 
   public static logErrorLikeMessage(polymorphicPayload: Log | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.error(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          BasicFrontEndLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.error,
-              foregroundColor: "white",
-              backgroundColor: "red"
-            },
-            mainColor: "red",
-            titleColor: "red"
-          })
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.error,
+          foregroundColor: "white",
+          backgroundColor: "red"
+        },
+        mainColor: "red",
+        titleColor: "red"
+      })
     );
+
   }
 
   public static logWarning(polymorphicPayload: WarningLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.warn(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          BasicFrontEndLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.warning,
-              foregroundColor: "white",
-              backgroundColor: "orange"
-            },
-            mainColor: "orange",
-            titleColor: "orange"
-          })
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.warning,
+          foregroundColor: "white",
+          backgroundColor: "orange"
+        },
+        mainColor: "orange",
+        titleColor: "orange"
+      })
     );
+
   }
 
   public static logInfo(polymorphicPayload: InfoLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.log(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          BasicFrontEndLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
-              foregroundColor: "white",
-              backgroundColor: "dodgerblue"
-            },
-            mainColor: "dodgerblue",
-            titleColor: "dodgerblue"
-          })
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
+          foregroundColor: "white",
+          backgroundColor: "dodgerblue"
+        },
+        mainColor: "dodgerblue",
+        titleColor: "dodgerblue"
+      })
     );
+
   }
 
   public static logSuccess(polymorphicPayload: SuccessLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.log(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          BasicFrontEndLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
-              foregroundColor: "white",
-              backgroundColor: "mediumseagreen"
-            },
-            mainColor: "mediumseagreen",
-            titleColor: "mediumseagreen"
-          })
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
+          foregroundColor: "white",
+          backgroundColor: "mediumseagreen"
+        },
+        mainColor: "mediumseagreen",
+        titleColor: "mediumseagreen"
+      })
     );
+
   }
 
   public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.log(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.log(
-      ...isString(polymorphicPayload) ||
-          isNumber(polymorphicPayload) ||
-          isBoolean(polymorphicPayload) ||
-          isNull(polymorphicPayload) ||
-          isUndefined(polymorphicPayload) ?
-              [ polymorphicPayload ] :
-              BasicFrontEndLogger.formatGenericLog({
-                genericLog: polymorphicPayload,
-                badgeContentAndFormatting: {
-                  defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
-                  foregroundColor: "white",
-                  backgroundColor: "gray"
-                },
-                mainColor: "gray",
-                titleColor: "gray"
-              })
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
+          foregroundColor: "white",
+          backgroundColor: "gray"
+        },
+        mainColor: "gray",
+        titleColor: "gray"
+      })
     );
+
   }
 
 

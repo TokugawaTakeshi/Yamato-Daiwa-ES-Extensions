@@ -1,10 +1,10 @@
-extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
-  include ../../../../../../SharedComponents/SharedComponents.english.pug
+  include ../../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -13,9 +13,9 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("addElementsToArrayIfTheyAreNotPresentOtherwiseRemove"),
+        title: buildHTML_PageTitle("swapArrayElements"),
         description: MetaDescriptionTemplates.function({
-          functionName: "addElementsToArrayIfTheyAreNotPresentOtherwiseRemove",
+          functionName: "swapArrayElements",
           whatFunctionDoes: ""
         })
       },
@@ -27,19 +27,17 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute(
-      "coreLibrary.functionality.arrays.other.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove"
-    );
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.other.swapArrayElements");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.other.$children.
-          addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI,
+          swapArrayElements.$URI,
       russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.other.$children.
-          addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI
+          swapArrayElements.$URI
     });
 
     const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
-        $children.other.$children.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove;
+        $children.other.$children.swapArrayElements;
 
 
 block append HeadScripts
@@ -53,18 +51,18 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
+    h1.Article-Heading1 swapArrayElements
 
     +ApologyWithSupportRequest
 
-    +CodeViewer--YDF({ title: "Signature" })
-      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+      +CodeViewer--YDF({ title: "Signature" })
+        +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
 
     //-
       +CallableExpressionScheme--YDF_DK({
-        technicalName: "addElementsToArrayIfTheyAreNotPresentOtherwiseRemove",
+        technicalName: "swapArrayElements",
         headingTag: "h1",
-        localizedDescriptiveHeading: "",
+        localizedDescriptiveHeading: "Makes the special, street magic",
         parametersSpecification: [
           {
             localizedName: "Target string",

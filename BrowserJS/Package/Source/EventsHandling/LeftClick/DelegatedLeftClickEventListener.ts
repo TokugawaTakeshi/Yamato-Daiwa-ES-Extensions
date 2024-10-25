@@ -10,29 +10,39 @@ import getExpectedToBeSingleDOM_Element from "../../DOM/getExpectedToBeSingleDOM
 import EventPropagationTypes from "../EventPropagationTypes";
 
 
-export default class DelegatedLeftClickEventListener {
+class DelegatedLeftClickEventListener {
 
   protected readonly delegatingContainer: Element | Document;
-  protected readonly externalHandlersBySelectors: Readonly<{
-    [selector: string]: (clickedElement: Element, event: MouseEvent) => unknown;
-  }>;
-  private readonly eventPropagation: EventPropagationTypes | false;
-  private readonly mustBeCalledOnce: boolean;
-  private readonly mustKeepDefaultBehaviour: boolean;
 
   /* [ Theory ] A new function reference is created after `.bind()` is called, so the reference must be single. */
-  private readonly boundOnLeftClickEventHandler: (event: Event) => void;
+  protected readonly boundInternalHandler: (event: Event) => void;
+  protected readonly externalHandlersBySelectors: Readonly<DelegatedLeftClickEventListener.HandlersBySelectors>;
+
+  protected readonly eventPropagation: EventPropagationTypes | false;
+  protected readonly mustBeCalledOnce: boolean;
+  protected readonly mustPreventDefaultBehaviour: boolean;
+
+
+  /* [ Approach ]
+   * Required additionally to constructor to avoid the ESLint's "no-new" error/waring when do not going to call the
+   *   instance methods. */
+  public static createAndAssign(
+    initializationProperties: DelegatedLeftClickEventListener.InitializationProperties
+  ): DelegatedLeftClickEventListener {
+    return new DelegatedLeftClickEventListener(initializationProperties);
+  }
+
 
   public constructor(
-    initializationProperties: Readonly<{
-      delegatingContainer: Element | Document | Readonly<{ selector: string; }>;
-      contextElement?: ParentNode | Readonly<{ selector: string; }>;
-      handlersBySelectors: Readonly<{ [selector: string]: (clickedElement: Element, event: MouseEvent) => unknown; }>;
-      eventPropagation?: EventPropagationTypes | false;
-      mustBeCalledOnce?: boolean;
-      mustKeepDefaultBehaviour?: boolean;
-    }>
+    initializationProperties: DelegatedLeftClickEventListener.InitializationProperties
   ) {
+
+    const {
+      handlersBySelectors,
+      eventPropagation = EventPropagationTypes.bubbling,
+      mustBeCalledOnce = false,
+      mustPreventDefaultBehaviour = false
+    }: DelegatedLeftClickEventListener.InitializationProperties = initializationProperties;
 
     let delegatingContainer: Element | Document;
 
@@ -99,16 +109,17 @@ export default class DelegatedLeftClickEventListener {
     }
 
     this.delegatingContainer = delegatingContainer;
-    this.externalHandlersBySelectors = initializationProperties.handlersBySelectors;
-    this.boundOnLeftClickEventHandler = this.onLeftClick.bind(this);
 
-    this.eventPropagation = initializationProperties.eventPropagation ?? EventPropagationTypes.bubbling;
-    this.mustBeCalledOnce = initializationProperties.mustBeCalledOnce ?? false;
-    this.mustKeepDefaultBehaviour = initializationProperties.mustKeepDefaultBehaviour ?? false;
+    this.boundInternalHandler = this.onLeftClick.bind(this);
+    this.externalHandlersBySelectors = handlersBySelectors;
+
+    this.eventPropagation = eventPropagation;
+    this.mustBeCalledOnce = mustBeCalledOnce;
+    this.mustPreventDefaultBehaviour = mustPreventDefaultBehaviour;
 
     delegatingContainer.addEventListener(
       "click",
-      this.boundOnLeftClickEventHandler,
+      this.boundInternalHandler,
       {
         capture: this.eventPropagation === EventPropagationTypes.capturing,
         once: this.mustBeCalledOnce
@@ -117,27 +128,27 @@ export default class DelegatedLeftClickEventListener {
 
   }
 
+
   public utilize(): void {
 
     this.delegatingContainer.removeEventListener(
       "click",
-      this.boundOnLeftClickEventHandler,
+      this.boundInternalHandler,
       { capture: this.eventPropagation === EventPropagationTypes.capturing }
     );
 
   }
 
-  private onLeftClick(leftClickEvent: Event): void {
+
+  protected onLeftClick(leftClickEvent: Event): void {
+
+    if (this.mustPreventDefaultBehaviour) {
+      leftClickEvent.preventDefault();
+    }
 
     if (this.eventPropagation === false) {
       leftClickEvent.stopPropagation();
     }
-
-
-    if (!this.mustKeepDefaultBehaviour) {
-      leftClickEvent.preventDefault();
-    }
-
 
     if (!(leftClickEvent instanceof MouseEvent)) {
 
@@ -145,15 +156,17 @@ export default class DelegatedLeftClickEventListener {
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,
         description: PoliteErrorsMessagesBuilder.buildMessage({
-          technicalDetails: "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of " +
-              "\"MouseEvent\"",
-          politeExplanation: "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
-              "the first parameter of the callback, will be the instance of \"MouseEvent\". The TypeScript types definitions " +
-              "does not provide the overload for each type of event, so the \"event\" has been annotated just as \"Event\". " +
+          technicalDetails:
+              "The subtype of \"event\" variable of addEventListener(\"click\" is not the instance of \"MouseEvent\".",
+          politeExplanation:
+              "Using native addEventListener(\"click\") we did expected that the subtype of \"event\", " +
+                "the first parameter of the callback, will be the instance of \"MouseEvent\". " +
+              "The TypeScript types definitions does not provide the overload for each type of event, so the \"event\" " +
+                "has been annotated just as \"Event\". " +
               "It must be the the instance of \"MouseEvent\" subtype, however, as this occurrence shows, under certain " +
-              "combination of circumstances it is not such as."
+                "combination of circumstances it is not such as."
         }),
-        occurrenceLocation: "delegateLeftClickEventHandling(initializationProperties)"
+        occurrenceLocation: "delegatedLeftClickEventListener.onLeftClick(leftClickEvent)"
       });
 
       return;
@@ -162,19 +175,22 @@ export default class DelegatedLeftClickEventListener {
 
 
     /* [ Theory ] The "event.target" has type "EventTarget" while ".parentElement" property has type "HTMLElement"  */
-    if (!(leftClickEvent.target instanceof HTMLElement)) {
+    if (!(leftClickEvent.target instanceof Element)) {
 
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,
         description: PoliteErrorsMessagesBuilder.buildMessage({
-          technicalDetails: "The \"event.target\" is not the instance of \"HTMLElement\".",
-          politeExplanation: "To reach the container to which the click event has been delegated by valid TypeScript," +
-              "we had to check is \"event.target\" the instance of \"HTMLElement\". Theoretically, the \"event.target\" " +
-              "has type \"EventTarget\" while \".parentElement\" property has type \"HTMLElement\", however this bug " +
+          technicalDetails: "The \"event.target\" is not the instance of \"Element\".",
+          politeExplanation:
+              "To reach the container to which the click event has been delegated by valid TypeScript, " +
+                "we had to check is \"event.target\" the instance of \"Element\". " +
+              "Theoretically, the \"event.target\" has type \"EventTarget\" while \".parentElement\" property has type " +
+                "\"Element\", however this bug " +
               "occurrence indicates the presence of exceptions which we need to investigate."
         }),
-        occurrenceLocation: "delegateLeftClickEventHandling(initializationProperties)"
+        occurrenceLocation: "delegatedLeftClickEventListener.onLeftClick(leftClickEvent)",
+        additionalData: { eventTarget: leftClickEvent.target }
       });
 
       return;
@@ -183,7 +199,7 @@ export default class DelegatedLeftClickEventListener {
 
 
     for (
-      let parentElement: HTMLElement | null = leftClickEvent.target;
+      let parentElement: Element | null = leftClickEvent.target;
       isNotNull(parentElement) && parentElement !== leftClickEvent.currentTarget;
       parentElement = parentElement.parentElement
     ) {
@@ -201,3 +217,24 @@ export default class DelegatedLeftClickEventListener {
   }
 
 }
+
+
+namespace DelegatedLeftClickEventListener {
+
+  export type InitializationProperties = Readonly<{
+    delegatingContainer: Element | Document | Readonly<{ selector: string; }>;
+    contextElement?: ParentNode | Readonly<{ selector: string; }>;
+    handlersBySelectors: Readonly<HandlersBySelectors>;
+    eventPropagation?: EventPropagationTypes | false;
+    mustBeCalledOnce?: boolean;
+    mustPreventDefaultBehaviour?: boolean;
+  }>;
+
+  export type HandlersBySelectors = {
+    [selector: string]: (clickedElement: Element, event: MouseEvent) => unknown;
+  };
+
+}
+
+
+export default DelegatedLeftClickEventListener;

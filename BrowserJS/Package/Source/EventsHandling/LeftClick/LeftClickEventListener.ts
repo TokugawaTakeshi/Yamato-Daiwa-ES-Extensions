@@ -10,19 +10,23 @@ import EventPropagationTypes from "../EventPropagationTypes";
 
 class LeftClickEventListener {
 
-  private readonly targetElements: ReadonlyArray<Element>;
-  private readonly externalHandler: (leftClickEvent: MouseEvent, targetElement: Element) => void;
-  private readonly eventPropagation: EventPropagationTypes | false;
-  private readonly mustBeCalledOnce: boolean;
-  private readonly mustKeepDefaultBehaviour: boolean;
+  protected readonly targetElements: ReadonlyArray<Element>;
 
   /* [ Theory ] A new function reference is created after `.bind()` is called, so the reference must be single. */
-  private readonly boundOnLeftClickEventHandler: (event: Event) => void;
+  protected readonly boundInternalHandler: (event: Event) => void;
+  protected readonly externalHandler: (leftClickEvent: MouseEvent, targetElement: Element) => void;
+
+  protected readonly eventPropagation: EventPropagationTypes | false;
+  protected readonly mustBeCalledOnce: boolean;
+  protected readonly mustKeepDefaultBehaviour: boolean;
 
 
-  /* [ Approach ] Required additionally to constructor to avoid the ESLint's "no-new" error/waring when do not going
-  *    to call the instance methods. */
-  public static initialize(initializationProperties: LeftClickEventListener.InitializationProperties): LeftClickEventListener {
+  /* [ Approach ]
+   * Required additionally to constructor to avoid the ESLint's "no-new" error/waring when do not going to call the
+   *   instance methods. */
+  public static createAndAssign(
+    initializationProperties: LeftClickEventListener.InitializationProperties
+  ): LeftClickEventListener {
     return new LeftClickEventListener(initializationProperties);
   }
 
@@ -30,6 +34,12 @@ class LeftClickEventListener {
   public constructor(
     initializationProperties: LeftClickEventListener.InitializationProperties
   ) {
+
+    const {
+      eventPropagation = EventPropagationTypes.bubbling,
+      mustBeCalledOnce = false,
+      mustKeepDefaultBehaviour = false
+    }: LeftClickEventListener.InitializationProperties = initializationProperties;
 
     let targetElements: ReadonlyArray<Element>;
 
@@ -82,7 +92,7 @@ class LeftClickEventListener {
 
         targetElements = [ matchesWithTargetSelector[0] ];
 
-      } else if ("mustApplyToAllMatchingsWithSelector" in initializationProperties) {
+      } else if ("mustApplyToAllMatchesWithSelector" in initializationProperties) {
 
         targetElements = Array.from(matchesWithTargetSelector);
 
@@ -93,9 +103,12 @@ class LeftClickEventListener {
           Logger.logError({
             errorType: UnexpectedEventError.NAME,
             title: UnexpectedEventError.localization.defaultTitle,
-            description: `Contrary to expectations, ${ matchesWithTargetSelector.length } matchings has been found for ` +
-                `the selector "${ initializationProperties.targetElement.selector }". The subsequent matchings will be ignored.`,
-            occurrenceLocation: "LeftClickEventListener.constructor(initializationProperties)"
+            description:
+                `Contrary to expectations, ${ matchesWithTargetSelector.length } matches has been found for ` +
+                  `the selector "${ initializationProperties.targetElement.selector }". ` +
+                "The subsequent matches will be ignored.",
+            occurrenceLocation:
+                "LeftClickEventListener.createAndAssign(initializationProperties) -> constructor(initializationProperties)"
           });
 
         }
@@ -107,20 +120,19 @@ class LeftClickEventListener {
     }
 
     this.targetElements = targetElements;
+
     this.externalHandler = initializationProperties.handler;
-    this.boundOnLeftClickEventHandler = this.onLeftClick.bind(this);
+    this.boundInternalHandler = this.onLeftClick.bind(this);
 
-    this.eventPropagation = initializationProperties.eventPropagation ?? EventPropagationTypes.bubbling;
-    this.mustBeCalledOnce = initializationProperties.mustBeCalledOnce ?? false;
-
-    // TODO Trueにした方が良い。
-    this.mustKeepDefaultBehaviour = initializationProperties.mustKeepDefaultBehaviour ?? false;
+    this.eventPropagation = eventPropagation;
+    this.mustBeCalledOnce = mustBeCalledOnce;
+    this.mustKeepDefaultBehaviour = mustKeepDefaultBehaviour;
 
     for (const targetElement of this.targetElements) {
 
       targetElement.addEventListener(
         "click",
-        this.boundOnLeftClickEventHandler,
+        this.boundInternalHandler,
         {
           capture: this.eventPropagation === EventPropagationTypes.capturing,
           once: this.mustBeCalledOnce
@@ -138,7 +150,7 @@ class LeftClickEventListener {
 
       targetElement.removeEventListener(
         "click",
-        this.boundOnLeftClickEventHandler,
+        this.boundInternalHandler,
         { capture: this.eventPropagation === EventPropagationTypes.capturing }
       );
 
@@ -147,17 +159,15 @@ class LeftClickEventListener {
   }
 
 
-  private onLeftClick(leftClickEvent: Event): void {
-
-    if (this.eventPropagation === false) {
-      leftClickEvent.stopPropagation();
-    }
-
+  protected onLeftClick(leftClickEvent: Event): void {
 
     if (!this.mustKeepDefaultBehaviour) {
       leftClickEvent.preventDefault();
     }
 
+    if (this.eventPropagation === false) {
+      leftClickEvent.stopPropagation();
+    }
 
     if (!(leftClickEvent instanceof MouseEvent)) {
       return;
@@ -188,8 +198,8 @@ namespace LeftClickEventListener {
           targetElement: Readonly<
             { selector: string; } &
             (
-              { mustApplyToAllMatchingsWithSelector: true; } |
-              { mustIgnoreSubsequentMatchingsWithSelector: true; } |
+              { mustApplyToAllMatchesWithSelector: true; } |
+              { mustIgnoreSubsequentMatchesWithSelector: true; } |
               { mustExpectExactlyOneMatchingWithSelector: true; }
             )
           >;
@@ -198,7 +208,7 @@ namespace LeftClickEventListener {
       )
     ) &
     {
-      handler: (leftClickEvent: MouseEvent, targetElement: Element) => void;
+      handler: (leftClickEvent: MouseEvent, targetElement: Element) => unknown;
       eventPropagation?: EventPropagationTypes | false;
       mustBeCalledOnce?: boolean;
       mustKeepDefaultBehaviour?: boolean;

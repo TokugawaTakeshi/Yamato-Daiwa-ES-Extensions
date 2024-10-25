@@ -1,9 +1,9 @@
-import { createArrayOfNaturalNumbers, InvalidParameterValueError } from "../../../Source";
+import { createArrayOfNaturalNumbers, InvalidParameterValueError, Logger } from "../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-await suite("createArrayOfNaturalNumbers", async (): Promise<void> => {
+suite("createArrayOfNaturalNumbers", async (): Promise<void> => {
 
   await suite("Normal scenarios", async (): Promise<void> => {
 
@@ -83,4 +83,4 @@ await suite("createArrayOfNaturalNumbers", async (): Promise<void> => {
 
   });
 
-});
+}).catch(Logger.logPromiseError);

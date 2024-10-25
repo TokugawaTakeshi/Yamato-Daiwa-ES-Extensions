@@ -36,7 +36,7 @@ block append Metadata
           createArrayOfNaturalNumbers.$URI
     });
 
-    const { $sectioning: localizedSectioning, $heading: topHeading } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
         $children.creating.$children.createArrayOfNaturalNumbers;
 
 
@@ -51,9 +51,12 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1!= topHeading
+    h1.Article-Heading1 createArrayOfNaturalNumbers
 
     +ApologyWithSupportRequest
+
+    +CodeViewer--YDF({ title: "シグネチャ" })
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
 
     //-
       +CallableExpressionScheme--YDF_DK({

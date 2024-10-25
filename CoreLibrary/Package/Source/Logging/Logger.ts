@@ -19,9 +19,9 @@ import loggerLocalization__english from "./LoggerLocalization.english";
 
 abstract class Logger {
 
-  /* ━━━ Private Static Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  private static implementation: ILogger | null = null;
-  private static localization: Logger.Localization = loggerLocalization__english;
+  /* ━━━ Protected Static Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  protected static implementation: ILogger | null = null;
+  protected static localization: Logger.Localization = loggerLocalization__english;
 
 
   /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -101,6 +101,11 @@ abstract class Logger {
     }
 
 
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.error(Logger.formatErrorLog(polymorphicPayload));
 
   }
@@ -115,6 +120,11 @@ abstract class Logger {
 
     if (isString(polymorphicPayload)) {
       console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
       return;
     }
 
@@ -137,6 +147,11 @@ abstract class Logger {
     }
 
 
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.warn(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.warning));
 
   }
@@ -155,6 +170,11 @@ abstract class Logger {
     }
 
 
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.info(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.info));
 
   }
@@ -169,6 +189,11 @@ abstract class Logger {
 
     if (isString(polymorphicPayload)) {
       console.info(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
       return;
     }
 

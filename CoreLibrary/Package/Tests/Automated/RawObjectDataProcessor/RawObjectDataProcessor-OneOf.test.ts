@@ -63,7 +63,7 @@ describe("RawObjectProcessor: one of", (): void => {
 
       const rawDataIsInvalid: boolean = processingResult.rawDataIsInvalid;
       let processedData: ValidData | undefined;
-      let validationErrorsMessages: Array<string> | undefined;
+      let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
       if ("processedData" in processingResult) {
         processedData = processingResult.processedData;

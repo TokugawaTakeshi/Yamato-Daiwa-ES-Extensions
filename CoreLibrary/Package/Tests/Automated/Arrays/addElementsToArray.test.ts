@@ -1,9 +1,9 @@
-import { addElementsToArray } from "../../../Source";
+import { addElementsToArray, Logger } from "../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-await suite("addElementsToArray", async (): Promise<void> => {
+suite("addElementsToArray", async (): Promise<void> => {
 
   function getInitialSampleArray(): Array<string> {
     return [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ];
@@ -424,4 +424,4 @@ await suite("addElementsToArray", async (): Promise<void> => {
 
   });
 
-});
+}).catch(Logger.logPromiseError);

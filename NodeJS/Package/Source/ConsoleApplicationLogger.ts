@@ -25,7 +25,8 @@ import {
 
 abstract class ConsoleApplicationLogger {
 
-  private static localization: Logger.Localization = loggerLocalization__english;
+  protected static localization: Logger.Localization = loggerLocalization__english;
+
 
   public static setLocalization(localization: Logger.Localization): typeof ConsoleApplicationLogger {
     ConsoleApplicationLogger.localization = localization;
@@ -81,99 +82,166 @@ abstract class ConsoleApplicationLogger {
   }
 
   public static logError(polymorphicPayload: ErrorLog | string): void {
-    console.error(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] : ConsoleApplicationLogger.formatErrorLog(polymorphicPayload)
-    );
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.error(...ConsoleApplicationLogger.formatErrorLog(polymorphicPayload));
+
   }
 
   public static logErrorLikeMessage(polymorphicPayload: Log | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.error(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          ConsoleApplicationLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.error,
-              foregroundColor: { red: 255, green: 255, blue: 255 },
-              backgroundColor: { red: 192, green: 57, blue: 43 }
-            },
-            mainColor: { red: 231, green: 76, blue: 60 },
-            titleColor: { red: 192, green: 57, blue: 43 }
-          })
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.error,
+          foregroundColor: { red: 255, green: 255, blue: 255 },
+          backgroundColor: { red: 192, green: 57, blue: 43 }
+        },
+        mainColor: { red: 231, green: 76, blue: 60 },
+        titleColor: { red: 192, green: 57, blue: 43 }
+      })
     );
+
   }
 
   public static logWarning(polymorphicPayload: WarningLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.warn(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          ConsoleApplicationLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.warning,
-              foregroundColor: { red: 255, green: 255, blue: 255 },
-              backgroundColor: { red: 211, green: 84, blue: 0 }
-            },
-            mainColor: { red: 230, green: 126, blue: 34 },
-            titleColor: { red: 211, green: 84, blue: 0 }
-          })
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.warning,
+          foregroundColor: { red: 255, green: 255, blue: 255 },
+          backgroundColor: { red: 211, green: 84, blue: 0 }
+        },
+        mainColor: { red: 230, green: 126, blue: 34 },
+        titleColor: { red: 211, green: 84, blue: 0 }
+      })
     );
+
   }
 
-    public static logInfo(polymorphicPayload: InfoLog | string): void {
+  public static logInfo(polymorphicPayload: InfoLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.log(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          ConsoleApplicationLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.info,
-              foregroundColor: { red: 255, green: 255, blue: 255 },
-              backgroundColor: { red: 41, green: 128, blue: 185 }
-            },
-            mainColor: { red: 52, green: 152, blue: 219 },
-            titleColor: { red: 41, green: 128, blue: 185 }
-          })
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.info,
+          foregroundColor: { red: 255, green: 255, blue: 255 },
+          backgroundColor: { red: 41, green: 128, blue: 185 }
+        },
+        mainColor: { red: 52, green: 152, blue: 219 },
+        titleColor: { red: 41, green: 128, blue: 185 }
+      })
     );
+
   }
 
   public static logSuccess(polymorphicPayload: SuccessLog | string): void {
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
     console.log(
-      ...isString(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          ConsoleApplicationLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.success,
-              foregroundColor: { red: 255, green: 255, blue: 255 },
-              backgroundColor: { red: 39, green: 174, blue: 96 }
-            },
-            mainColor: { red: 46, green: 204, blue: 113 },
-            titleColor: { red: 39, green: 174, blue: 96 }
-          })
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.success,
+          foregroundColor: { red: 255, green: 255, blue: 255 },
+          backgroundColor: { red: 39, green: 174, blue: 96 }
+        },
+        mainColor: { red: 46, green: 204, blue: 113 },
+        titleColor: { red: 39, green: 174, blue: 96 }
+      })
     );
+
   }
 
   public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
-    console.log(
-      ...isString(polymorphicPayload) ||
+
+    if (
+      isString(polymorphicPayload) ||
       isNumber(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
-      isUndefined(polymorphicPayload) ?
-          [ polymorphicPayload ] :
-          ConsoleApplicationLogger.formatGenericLog({
-            genericLog: polymorphicPayload,
-            badgeContentAndFormatting: {
-              defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.generic,
-              foregroundColor: { red: 0, green: 0, blue: 0 },
-              backgroundColor: { red: 255, green: 255, blue: 255 }
-            },
-            mainColor: { red: 255, green: 255, blue: 255 },
-            titleColor: { red: 255, green: 255, blue: 255 }
-          })
+      isUndefined(polymorphicPayload)
+    ) {
+      console.log(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.log(
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.generic,
+          foregroundColor: { red: 0, green: 0, blue: 0 },
+          backgroundColor: { red: 255, green: 255, blue: 255 }
+        },
+        mainColor: { red: 255, green: 255, blue: 255 },
+        titleColor: { red: 255, green: 255, blue: 255 }
+      })
     );
+
   }
 
 
