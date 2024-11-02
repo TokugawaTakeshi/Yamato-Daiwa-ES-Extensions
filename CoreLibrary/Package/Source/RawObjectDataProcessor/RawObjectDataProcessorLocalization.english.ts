@@ -152,6 +152,71 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
             "the processed object, or rename this property, or add the getter by post validation modifications."
 
+    },
+
+    unableToSubstituteNullPropertyValue: {
+
+      title: "Unable to Substitute Undefined Property Value",
+
+      description:
+          "This property has been requested to be substitute with default value when it is null, but because this " +
+            "property is not writable, the default value could not be substituted. " +
+          "The data has been marked as invalid because the error handling strategy " +
+            "\"onUnableToSubstituteNullPropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+            "is recommended only if this property on source data actually expected to be writable. " +
+          "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
+            "the following measures left:" +
+          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+            "not specified via valid data specification will not be added to new object." +
+          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+            "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    },
+
+
+    /* ─── Nullability ────────────────────────────────────────────────────────────────────────────────────────────── */
+    nonNullableValueIsNullError: {
+      title: "Non-nullable value is null",
+      description: "This value is \"null\" while nullability has not been permitted by valid data specification."
+    },
+
+
+    /* ─── Numeric Value ──────────────────────────────────────────────────────────────────────────────────────────── */
+    numericValueIsNotBelongToExpectedNumbersSet: {
+      title: "Expected and Actual Numbers Set Mismatch",
+      generateDescription: (
+        { expectedNumberSet }: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
+      ): string =>
+          `Contrary to expectations, this numeric value is in not member of "${ this.numbersSet(expectedNumberSet) }"`
+    },
+
+    /* [ Approach ] Applicable also to string properties. */
+    valueIsNotAmongAllowedAlternatives: {
+      title: "Disallowed Alternative of Value",
+      generateDescription: (
+        { allowedAlternatives }: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
+      ): string =>
+          "This value is not among following allowed alternatives.\n" +
+          allowedAlternatives.map((allowedAlternative: string | number): string =>
+              `  ○ ${ allowedAlternative }`).join("\n")
+    },
+
+    numericValueIsSmallerThanRequiredMinimum: {
+      title: "Minimal Value Fall Short",
+      generateDescription: (
+        { requiredMinimum }: ValidationErrors.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `This value is smaller than required minimal value ${ requiredMinimum }.`
+    },
+
+    numericValueIsGreaterThanAllowedMaximumReadonly: {
+      title: "Maximal Numeric Value Exceeding",
+      generateDescription: (
+        { allowedMaximum }: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `This value is greater than required maximal value ${ allowedMaximum }.`
     }
 
   },
@@ -218,6 +283,34 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "The second case has occurred, but because this property is not writable, the default value could not be " +
             "substituted. " +
           "This error has been thrown because the error handling strategy \"onUnableToSubstituteUndefinePropertyValue\" " +
+            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
+          "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
+            "select the one matching with your case:\n" +
+          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
+            "Alternatively, consider the making of this property writable. " +
+            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+            "property is configurable. \n" +
+          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+            "not specified via valid data specification will not be added to new object. \n" +
+          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+            "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    },
+
+    unableToSubstituteNullPropertyValue: {
+
+      title: "Unable to Substitute Null Property Value",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName
+        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+      ): string =>
+          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to substitute with default ` +
+            "when it is null, but because this property is not writable, the default value could not be substituted. " +
+          "This error has been thrown because the error handling strategy \"onUnableToSubstituteNullPropertyValue\" " +
             "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
           "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
             "select the one matching with your case:\n" +
@@ -317,36 +410,37 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
             "the processed object, or rename this property, or add the getter by post validation modifications."
 
+    },
+
+    unableToSubstituteNullPropertyValue: {
+
+      title: "Unable to Substitute Null Property Value",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName
+        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+      ): string =>
+          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to substitute with default ` +
+          "when it is null, but because this property is not writable, the default value could not be substituted. " +
+          "This error has been reported as warning because the error handling strategy " +
+            "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
+          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
+            "Alternatively, consider the making of this property writable. " +
+            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+            "property is configurable. \n" +
+          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+            "not specified via valid data specification will not be added to new object.\n" +
+          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+            "the processed object, or rename this property, or add the getter by post validation modifications."
+
     }
 
   },
   // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  /** @deprecated */
-  buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
-    {
-      targetPropertyValue,
-      targetPropertyValueSpecification
-    }: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
-      targetPropertyValueSpecification: Exclude<
-        RawObjectDataProcessor.ValueSpecification,
-        RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
-      >;
-    }
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Expected and actual value types mismatch",
-      description: `This value expected to have type '${ this.getLocalizedValueType(targetPropertyValueSpecification.type) }' ` +
-          `while actually it's type is '${ typeof targetPropertyValue }'.`
-    };
-  },
-
-  /* === Nullability ================================================================================================ */
-  nonNullableValueIsNullErrorMessageTextData: {
-    title: "Non-nullable value is 'null'",
-    description: "This value is 'null' while nullability has not been permitted by valid data specification."
-  },
-
-
   /* === Indexed arrays ============================================================================================= */
   buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData(
     { minimalElementsCount, actualElementsCount }: { minimalElementsCount: number; actualElementsCount: number; }
@@ -509,48 +603,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "any real number";
     }
   },
-
-
-  /* === Numeric value =============================================================================================== */
-  buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData(
-    expectedNumberSet: RawObjectDataProcessor.NumbersSets
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Expected and actual numbers set mismatch",
-      description: "Contrary to expectations, this numeric value is in not member of " +
-          `'${ this.numbersSet(expectedNumberSet) }'`
-    };
-  },
-
-  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
-    allowedAlternatives: ReadonlyArray<string>
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Disallowed alternative of value",
-      description:
-          "This value is not among following allowed alternatives.\n" +
-            allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n")
-    };
-  },
-
-  buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
-    requiredMinimum: number
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Minimal value fall short",
-      description: `This value is smaller than required minimal value ${ requiredMinimum }.`
-    };
-  },
-
-  buildNumericValueIsGreaterThanAllowedMaximumErrorMessageTextData(
-    allowedMaximum: number
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Maximal numeric value exceeding",
-      description: `This value is greater than required maximal value ${ allowedMaximum }.`
-    };
-  },
-
 
   /* === String value =============================================================================================== */
   buildCharactersCountIsLessThanRequiredErrorMessageTextData(

@@ -576,21 +576,21 @@ class RawObjectDataProcessor {
 
       }
 
-      // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       if (isNull(childPropertyValue)) {
 
         if (childPropertySpecification.nullable !== true && isUndefined(childPropertySpecification.nullSubstitution)) {
 
           areOneOnMorePropertiesInvalid = true;
 
-          this.registerValidationError(this.validationErrorsMessagesBuilder.buildNonNullableValueIsNullErrorMessage({
+          this.registerValidationError({
+            ...this.localization.validationErrors.nonNullableValueIsNullError,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: childPropertyValue,
             targetPropertyValueSpecification: childPropertySpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
                 childPropertyStringifiedValueBeforeFirstPreValidationModification
-          }));
+          });
 
           continue;
 
@@ -650,8 +650,7 @@ class RawObjectDataProcessor {
 
       }
 
-      // TODO プロパティが変わらない場合も、mustMakeNonConfigurable/mustMakeNonEnumerabl/mustMakeReadonlyを指定しないといけない
-
+      // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       const childPropertyValueProcessingResult: RawObjectDataProcessor.ValueProcessingResult =
           this.processSingleNeitherUndefinedNorNullValue({
             targetValue: childPropertyValue,
@@ -778,7 +777,7 @@ class RawObjectDataProcessor {
 
     if (!Array.isArray(targetValue__expectedToBeIndexedArray)) {
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
+        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeIndexedArray,
@@ -1056,7 +1055,7 @@ class RawObjectDataProcessor {
      *    because "isArbitraryObject" check already has been executed. */
     if (!isArbitraryObject(targetValue__expectedToBeAssociativeArrayTypeObject)) {
       this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
+          this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
@@ -1421,7 +1420,7 @@ class RawObjectDataProcessor {
     switch (targetValueTypeID) {
 
       case RawObjectDataProcessor.ValuesTypesIDs.number: {
-        return this.processNumberValue({
+        return this.processNumericValue({
           targetValue__expectedToBeNumber: targetValue,
           /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ※※
           * TypeScript can not see the relation between 'targetValueTypeID' and specific type of 'targetValueSpecification'.
@@ -1513,8 +1512,8 @@ class RawObjectDataProcessor {
   }
 
 
-  /* === Non-object types validation ================================================================================ */
-  private processNumberValue(
+  /* ━━━ Non-object Types Validation ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  private processNumericValue(
     {
       targetValue__expectedToBeNumber,
       targetValueSpecification,
@@ -1530,17 +1529,22 @@ class RawObjectDataProcessor {
 
     if (!isNumber(targetValue__expectedToBeNumber)) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
+        description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
+        generateDescription({
+          actualType: typeof targetValue__expectedToBeNumber,
+          expectedType: RawObjectDataProcessor.ValuesTypesIDs.number
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeNumber,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1587,18 +1591,20 @@ class RawObjectDataProcessor {
 
     if (!propertyValueMatchingWithExpectedNumberSet) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          expectedNumbersSet: targetValueSpecification.numbersSet
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.numericValueIsNotBelongToExpectedNumbersSet.title,
+        description: this.localization.validationErrors.numericValueIsNotBelongToExpectedNumbersSet.generateDescription({
+          expectedNumberSet: targetValueSpecification.numbersSet
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeNumber,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1612,23 +1618,23 @@ class RawObjectDataProcessor {
           includes(targetValue__expectedToBeNumber)
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueIsNotAmongAllowedAlternativesErrorMessage({
-          allowedAlternatives: targetValueSpecification.
-              allowedAlternatives.
-              map(
-                (polymorphicElement: number | { key: string; value: number; }): string =>
-                    (isNumber(polymorphicElement) ? polymorphicElement.toString() : polymorphicElement.key)
-              ),
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueIsNotAmongAllowedAlternatives.title,
+        description: this.localization.validationErrors.valueIsNotAmongAllowedAlternatives.generateDescription({
+          allowedAlternatives: targetValueSpecification.allowedAlternatives.map(
+            (polymorphicElement: number | { key: string; value: number; }): string =>
+                (isNumber(polymorphicElement) ? polymorphicElement.toString() : polymorphicElement.key)
+          )
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeNumber,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1637,18 +1643,20 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeNumber < targetValueSpecification.minimalValue
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildNumericValueIsSmallerThanRequiredMinimumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          requiredMinimum: targetValueSpecification.minimalValue,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.numericValueIsSmallerThanRequiredMinimum.title,
+        description: this.localization.validationErrors.numericValueIsSmallerThanRequiredMinimum.generateDescription({
+          requiredMinimum: targetValueSpecification.minimalValue
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeNumber,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1657,18 +1665,20 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeNumber > targetValueSpecification.maximalValue
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildNumericValueIsGreaterThanAllowedMaximumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeNumber,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      this.registerValidationError({
+        title: this.localization.validationErrors.numericValueIsGreaterThanAllowedMaximumReadonly.title,
+        description: this.localization.validationErrors.numericValueIsGreaterThanAllowedMaximumReadonly.generateDescription({
           allowedMaximum: targetValueSpecification.maximalValue
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeNumber,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1679,12 +1689,15 @@ class RawObjectDataProcessor {
       RawObjectDataProcessor.getNormalizedCustomValidators(targetValueSpecification.customValidators)
     ) {
 
-      if (!customValidator.validationFunction({
-        currentPropertyValue: targetValue__expectedToBeNumber,
-        rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject ?? this.rawData,
-        targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
-      })) {
+      // TODO try / catch + 三つの戦略
+      if (
+        !customValidator.validationFunction({
+          currentPropertyValue: targetValue__expectedToBeNumber,
+          rawData__full: this.rawData,
+          rawData__currentObjectDepth: parentObject ?? this.rawData,
+          targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+        })
+      ) {
 
         atLeastOneCustomValidationFailed = true;
 
@@ -1740,7 +1753,7 @@ class RawObjectDataProcessor {
     if (!isString(targetValue__expectedToBeString)) {
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
+        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeString,
@@ -1764,7 +1777,7 @@ class RawObjectDataProcessor {
     ) {
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueIsNotAmongAllowedAlternativesErrorMessage({
+        this.validationErrorsMessagesBuilder.valueIsNotAmongAllowedAlternatives({
           allowedAlternatives: targetValueSpecification.
               allowedAlternatives.
               map(
@@ -1930,7 +1943,7 @@ class RawObjectDataProcessor {
     if (!isBoolean(targetValue__expectedToBeBoolean)) {
 
       this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildValueTypeDoesNotMatchWithExpectedErrorMessage({
+        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
           targetPropertyValue: targetValue__expectedToBeBoolean,
@@ -2269,7 +2282,6 @@ class RawObjectDataProcessor {
       switch (this.errorHandlingStrategies.onUnableToSubstituteUndefinePropertyValue) {
 
         case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
-
           Logger.throwErrorAndLog({
             errorType: RawObjectDataProcessor.ThrowableErrorsNames.unableToSubstituteUndefinedValueWithDefault,
             title: this.localization.throwableErrors.unableToSubstituteUndefinedPropertyValue.title,
@@ -2279,7 +2291,6 @@ class RawObjectDataProcessor {
             occurrenceLocation: "RawObjectDataProcessor." +
                 "substituteUndefinedPropertyValueAtSourceObject(compoundParameter)"
           });
-
         }
 
         /* eslint-disable-next-line no-fallthrough --
@@ -2331,11 +2342,13 @@ class RawObjectDataProcessor {
     {
       sourceObject,
       targetPropertyInitialName,
-      targetPropertySpecification
+      targetPropertySpecification,
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification
     }: Readonly<{
       sourceObject: ArbitraryObject;
       targetPropertyInitialName: string;
       targetPropertySpecification: RawObjectDataProcessor.PropertySpecification;
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
     }>
   ): void {
 
@@ -2354,6 +2367,7 @@ class RawObjectDataProcessor {
             "substituteNullPropertyValueAtSourceObject(compoundParameter)"
       });
     }
+
 
     if (isNotNull(this.currentlyIteratedPropertyNewNameForLogging)) {
 
@@ -2391,40 +2405,29 @@ class RawObjectDataProcessor {
              * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
             case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
 
-              // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-              this.registerValidationError(
-                `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
-                `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
-                "creating of new the property and deleting of the outdated one while the outdated one is " +
-                "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
-                "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
-                "Such data is being considered as invalid because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
-                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` " +
-                "value."
-              );
+              this.registerValidationError({
+                title: this.localization.validationErrors.unableToDeletePropertyWithOutdatedKey.title,
+                description: this.localization.validationErrors.unableToDeletePropertyWithOutdatedKey.description,
+                targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+                targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+                targetPropertyValue: null,
+                targetPropertyValueSpecification: targetPropertySpecification,
+                targetPropertyStringifiedValueBeforeFirstPreValidationModification
+              });
 
               break;
 
             }
 
             case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid: {
-
-              // TODO 抽出 (`occurrenceLocation` 以外　substituteUndefinedPropertyValueAtSourceObject)と完全一致
               Logger.logWarning({
-                title: "Unable to Delete non-configurable Property",
-                description:
-                    `The renaming of the property ${ this.currentObjectPropertyDotSeparatedQualifiedName } to ` +
-                    `${ this.currentlyIteratedPropertyNewNameForLogging } has been requested what means the ` +
-                    "creating of new the property and deleting of the outdated one while the outdated one is " +
-                    "not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/" +
-                    "Global_Objects/Object/defineProperty#configurable) thus could not be deleted. " +
-                    "This warning has been emitted because `errorsHandlingStrategies.onUnableToDeleteProperty` " +
-                    "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
-                    "warningWithoutMarkingOfDataAsInvalid`.",
-                occurrenceLocation:
-                    "RawObjectDataProcessor.substituteNullPropertyValueAtSourceObject(compoundParameter)"
+                title: this.localization.warnings.unableToDeletePropertyWithOutdatedKey.title,
+                description: this.localization.warnings.unableToDeletePropertyWithOutdatedKey.generateDescription({
+                  targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
+                  propertyNewKey: this.currentlyIteratedPropertyNewNameForLogging
+                }),
+                occurrenceLocation: "RawObjectDataProcessor.substituteNullPropertyValueAtSourceObject(compoundParameter)"
               });
-
             }
 
           }
@@ -2449,33 +2452,17 @@ class RawObjectDataProcessor {
 
     if (targetPropertyDescriptor.writable === false) {
 
-      switch (this.errorHandlingStrategies.onUnableToSubstituteUndefinePropertyValue) {
+      switch (this.errorHandlingStrategies.onUnableToSubstituteNullPropertyValue) {
 
         case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
-
-          // TODO 抽出　Unable to substicute null/defaultにすれば完全一致
           Logger.throwErrorAndLog({
-            errorInstance: new InvalidExternalDataError({
-              customMessage:
-                  `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
-                  `property because it is readonly.\n"` +
-                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
-                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid` if you want to " +
-                  "   mark the processed data as invalid instead of the throwing of the error.\n" +
-                  "● Specify `errorsHandlingStrategies.onUnableToSetProperty` option with " +
-                  "  `RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid` if " +
-                  "  you want to be only warned without the throwing of errors or marking of the processed data as " +
-                  "  invalid (not recommended because the data does not matching with valid data specification" +
-                  "  will be marked as valid is no other errors).\n" +
-                  "● If the creating of new object based on the source one is fine, specify `processingApproach` " +
-                  "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-                  "  not specified via valid data specification will not be added to new object."
+            errorType: RawObjectDataProcessor.ThrowableErrorsNames.unableToSubstituteNullValueWithDefault,
+            title: this.localization.throwableErrors.unableToSubstituteNullPropertyValue.title,
+            description: this.localization.throwableErrors.unableToSubstituteNullPropertyValue.generateDescription({
+              targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName
             }),
-            title: InvalidExternalDataError.localization.defaultTitle,
-            occurrenceLocation: "RawObjectDataProcessor." +
-                "substituteNullPropertyValueAtSourceObject(compoundParameter)"
+            occurrenceLocation: "RawObjectDataProcessor.substituteUndefinedPropertyValueAtSourceObject(compoundParameter)"
           });
-
         }
 
         /* eslint-disable-next-line no-fallthrough --
@@ -2483,10 +2470,15 @@ class RawObjectDataProcessor {
          * If to add the `break` to previous `case` block, it will be `TS7027: Unreachable code detected.` error. */
         case RawObjectDataProcessor.ErrorHandlingStrategies.markingOfDataAsInvalid: {
 
-          this.registerValidationError(
-            `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
-            `property because it is readonly.\n"`
-          );
+          this.registerValidationError({
+            title: this.localization.validationErrors.unableToSubstituteUndefinedPropertyValue.title,
+            description: this.localization.validationErrors.unableToSubstituteUndefinedPropertyValue.description,
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: null,
+            targetPropertyValueSpecification: targetPropertySpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification
+          });
 
           break;
 
@@ -2494,17 +2486,13 @@ class RawObjectDataProcessor {
 
         case RawObjectDataProcessor.ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid:
 
-          // TODO 抽出　Unable to substicute null/defaultにすれば完全一致
           Logger.logWarning({
-            title: "Unable to Set the Readonly Property",
-            description:
-                `Unable to substitute the default value for ${ this.currentObjectPropertyDotSeparatedQualifiedName } ` +
-                `property because it is readonly.\n"` +
-                "This warning has been emitted because `errorsHandlingStrategies.onUnableToSetProperty` " +
-                "option has been specified with `RawObjectDataProcessor.ErrorHandlingStrategies." +
-                "warningWithoutMarkingOfDataAsInvalid`.",
+            title: this.localization.warnings.unableToSubstituteUndefinedPropertyValue.title,
+            description: this.localization.warnings.unableToSubstituteUndefinedPropertyValue.generateDescription({
+              targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName
+            }),
             occurrenceLocation:
-                "RawObjectDataProcessor.substituteNullPropertyValueAtSourceObject(compoundParameter)"
+                "RawObjectDataProcessor.substituteUndefinedPropertyValueAtSourceObject(compoundParameter)"
           });
 
       }
@@ -3085,10 +3073,6 @@ namespace RawObjectDataProcessor {
     warnings: Localization.Warnings;
 
     // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    /* === Nullability ============================================================================================== */
-    readonly nonNullableValueIsNullErrorMessageTextData: Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-
     /* === Indexed arrays =========================================================================================== */
     readonly buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData:
         (minimalElementsCount: { minimalElementsCount: number; actualElementsCount: number; }) =>
@@ -3144,16 +3128,16 @@ namespace RawObjectDataProcessor {
 
 
     /* === Numeric value ============================================================================================ */
-    readonly buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData: (expectedNumbersSet: NumbersSets) =>
+    readonly numericValueIsNotBelongToExpectedNumbersSet: (expectedNumbersSet: NumbersSets) =>
         Localization.InvalidPropertyValidationErrorMessageTemplateData;
 
-    readonly buildValueIsNotAmongAllowedAlternativesErrorMessageTextData: (allowedAlternatives: ReadonlyArray<string>) =>
+    readonly valueIsNotAmongAllowedAlternativesTextData: (allowedAlternatives: ReadonlyArray<string>) =>
         Localization.InvalidPropertyValidationErrorMessageTemplateData;
 
-    readonly buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData: (requiredMinimum: number) =>
+    readonly numericValueIsSmallerThanRequiredMinimumTextData: (requiredMinimum: number) =>
         Localization.InvalidPropertyValidationErrorMessageTemplateData;
 
-    readonly buildNumericValueIsGreaterThanAllowedMaximumErrorMessageTextData: (allowedMaximum: number) =>
+    readonly numericValueIsGreaterThanAllowedMaximumTextData: (allowedMaximum: number) =>
         Localization.InvalidPropertyValidationErrorMessageTemplateData;
 
 
@@ -3191,7 +3175,7 @@ namespace RawObjectDataProcessor {
 
     /* === Deprecated ============================================================================================ */
     /** @deprecated */
-    readonly buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData: (
+    readonly valueTypeDoesNotMatchWithExpectedOneTextData: (
         payload: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
           targetPropertyValueSpecification: Exclude<ValueSpecification, MultipleTypesAllowedValueSpecification>;
         }
@@ -3249,6 +3233,44 @@ namespace RawObjectDataProcessor {
         description: string;
       }>;
 
+      unableToSubstituteNullPropertyValue: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      nonNullableValueIsNullError: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      numericValueIsNotBelongToExpectedNumbersSet: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
+        ) => string;
+      }>;
+
+      valueIsNotAmongAllowedAlternatives: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
+        ) => string;
+      }>;
+
+      numericValueIsSmallerThanRequiredMinimum: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
+        ) => string;
+      }>;
+
+      numericValueIsGreaterThanAllowedMaximumReadonly: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
+        ) => string;
+      }>;
+
     }>;
 
     export namespace ValidationErrors {
@@ -3273,6 +3295,30 @@ namespace RawObjectDataProcessor {
       export namespace ConditionallyRequiredPropertyIsMissing {
         export type TemplateVariables = Readonly<{
           requirementCondition: string;
+        }>;
+      }
+
+      export namespace NumericValueIsNotBelongToExpectedNumbersSet {
+        export type TemplateVariables = Readonly<{
+          expectedNumberSet: NumbersSets;
+        }>;
+      }
+
+      export namespace ValueIsNotAmongAllowedAlternatives {
+        export type TemplateVariables = Readonly<{
+          allowedAlternatives: ReadonlyArray<string | number>;
+        }>;
+      }
+
+      export namespace NumericValueIsSmallerThanRequiredMinimum {
+        export type TemplateVariables = Readonly<{
+          requiredMinimum: number;
+        }>;
+      }
+
+      export namespace NumericValueIsGreaterThanAllowedMaximum {
+        export type TemplateVariables = Readonly<{
+          allowedMaximum: number;
         }>;
       }
 
@@ -3303,6 +3349,13 @@ namespace RawObjectDataProcessor {
         ) => string;
       }>;
 
+      unableToSubstituteNullPropertyValue: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ThrowableErrors.UnableToSubstituteNullPropertyValue.TemplateVariables
+        ) => string;
+      }>;
+
     }>;
 
     export namespace ThrowableErrors {
@@ -3321,6 +3374,12 @@ namespace RawObjectDataProcessor {
       }
 
       export namespace UnableToSubstituteUndefinedPropertyValue {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+        }>;
+      }
+
+      export namespace UnableToSubstituteNullPropertyValue {
         export type TemplateVariables = Readonly<{
           targetPropertyDotSeparatedQualifiedName: string;
         }>;
@@ -3353,6 +3412,13 @@ namespace RawObjectDataProcessor {
         ) => string;
       }>;
 
+      unableToSubstituteNullPropertyValue: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: Warnings.UnableToSubstituteNullPropertyValue.TemplateVariables
+        ) => string;
+      }>;
+
     }>;
 
     export namespace Warnings {
@@ -3377,15 +3443,21 @@ namespace RawObjectDataProcessor {
         }>;
       }
 
+      export namespace UnableToSubstituteNullPropertyValue {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+        }>;
+      }
+
     }
 
-    export type PropertyDataForMessagesBuilding = {
+    export type PropertyDataForMessagesBuilding = Readonly<{
       targetPropertyDotSeparatedQualifiedInitialName: string;
       targetPropertyNewName: string | null;
       targetPropertyValue: unknown;
       targetPropertyValueSpecification: ValueSpecification;
       targetPropertyStringifiedValueBeforeFirstPreValidationModification?: string;
-    };
+    }>;
 
     export type InvalidPropertyValidationErrorMessageTemplateData = Readonly<{
       title: string;
@@ -3402,6 +3474,7 @@ namespace RawObjectDataProcessor {
         ArrayConstructor |
         MapConstructor |
         ValuesTypesIDs;
+
   }
 
   /** @deprecated */
@@ -3415,29 +3488,7 @@ namespace RawObjectDataProcessor {
       this.buildErrorMessage = localization.generateValidationErrorMessage.bind(this.localization);
     }
 
-    /** @deprecated */
-    public buildValueTypeDoesNotMatchWithExpectedErrorMessage(
-      payload: Omit<Localization.PropertyDataForMessagesBuilding, "targetPropertyValueSpecification"> &
-        { targetPropertyValueSpecification: Exclude<ValueSpecification, MultipleTypesAllowedValueSpecification>; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData({
-          targetPropertyValue: payload.targetPropertyValue,
-          targetPropertyValueSpecification: payload.targetPropertyValueSpecification
-        })
-      });
-    }
-
-    /* === Nullability ============================================================================================== */
-    public buildNonNullableValueIsNullErrorMessage(payload: Localization.PropertyDataForMessagesBuilding): string {
-     return this.buildErrorMessage({
-       ...payload,
-       ...this.localization.nonNullableValueIsNullErrorMessageTextData
-     });
-    }
-
-
+    // ━━━ TODO 分解　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     /* === Indexed arrays =========================================================================================== */
     public buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessage(
       payload: Localization.PropertyDataForMessagesBuilding & { minimalElementsCount: number; actualElementsCount: number; }
@@ -3575,46 +3626,6 @@ namespace RawObjectDataProcessor {
       return this.buildErrorMessage({
         ...payload,
         ...this.localization.associativeArrayDisallowedNullValueErrorMessageTextData
-      });
-    }
-
-    /* === Numeric value ============================================================================================ */
-    public buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { expectedNumbersSet: NumbersSets; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData(
-          payload.expectedNumbersSet
-        ),
-        ...{ expectedNumbersSet: payload.expectedNumbersSet }
-      });
-    }
-
-    public buildValueIsNotAmongAllowedAlternativesErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & Readonly<{ allowedAlternatives: ReadonlyArray<string>; }>
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(payload.allowedAlternatives)
-      });
-    }
-
-    public buildNumericValueIsSmallerThanRequiredMinimumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { requiredMinimum: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(payload.requiredMinimum)
-      });
-    }
-
-    public buildNumericValueIsGreaterThanAllowedMaximumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { allowedMaximum: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildNumericValueIsGreaterThanAllowedMaximumErrorMessageTextData(payload.allowedMaximum)
       });
     }
 
