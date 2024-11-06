@@ -29,14 +29,14 @@ npm i @yamato-daiwa/es-extensions-localization-russian @yamato-daiwa/es-extensio
 
 Класс [RawObjectDataProcessor](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
 можно локализовать как на время одного выполнения [метода `process`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#process),
-так и на всё время выполнения приложения. В любом случае понадобится объект локализации **RawObjectDataProcessorLocalization__Russian**.
+так и на всё время выполнения приложения. В любом случае понадобится объект локализации **rawObjectDataProcessorLocalization__russian**.
 
-Для локализации на время одного выполнения метода `process` необходимо передать **RawObjectDataProcessorLocalization__Russian**
+Для локализации на время одного выполнения метода `process` необходимо передать **rawObjectDataProcessorLocalization__russian**
 через свойство **localization** третьего параметра:
 
 ```typescript
 import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Russian } from "@yamato-daiwa/es-extensions-localization-russian";
+import { rawObjectDataProcessorLocalization__russian } from "@yamato-daiwa/es-extensions-localization-russian";
 
 type User = {
   ID: string;
@@ -52,7 +52,7 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
     subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
     properties: { /* */ }
   },
-  { localization: RawObjectDataProcessorLocalization__Russian }
+  { localization: rawObjectDataProcessorLocalization__russian }
 );
 ```
 
@@ -60,16 +60,16 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
 
 ```typescript
 import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Russian } from "@yamato-daiwa/es-extensions-localization-russian";
+import { rawObjectDataProcessorLocalization__russian } from "@yamato-daiwa/es-extensions-localization-russian";
 
 
-RawObjectDataProcessor.setDefaultLocalization(RawObjectDataProcessorLocalization__Russian);
+RawObjectDataProcessor.setDefaultLocalization(rawObjectDataProcessorLocalization__russian);
 ```
 
 
 ### Локализация фасада Logger
 
-Объект **LoggerLocalization__Russian** локализует только те строки, которые принадлежат непосредственно классу 
+Объект **loggerLocalization__russian** локализует только те строки, которые принадлежат непосредственно классу 
 [**Logger**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md)
 (а таких [немного](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/Logging/LoggerLocalization__English.ts)),
 однако сообщения об ошибках должны быть локализованы отдельно (см. **локализация классов ошибок** для примера с готовыми
@@ -77,10 +77,10 @@ RawObjectDataProcessor.setDefaultLocalization(RawObjectDataProcessorLocalization
 
 ```typescript
 import { Logger } from "@yamato-daiwa/es-extensions";
-import LoggerLocalization__Russian from "@yamato-daiwa/es-extensions-localization-russian";
+import loggerLocalization__russian from "@yamato-daiwa/es-extensions-localization-russian";
 
 
-Logger.setLocalization(LoggerLocalization__Russian);
+Logger.setLocalization(loggerLocalization__russian);
 ```
 
 
@@ -89,10 +89,10 @@ Logger.setLocalization(LoggerLocalization__Russian);
 Объект, содержащий данные локализации конкретного класса ошибки, имеет имя согласно схеме
 
 ```
-[ имя класса ошибки ]Lozalization__Russian
+[ имя класса ошибки ]Localization__russian
 ```
 
-Например, для **AlgorithmMismatchError** это будет **AlgorithmMismatchErrorLocalization__Russian**.
+Например, для **AlgorithmMismatchError** это будет **algorithmMismatchErrorLocalization__russian**.
 Имена всех доступных классов ошибок можно посмотреть в 
 [официальной документации](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/README.md#logging).
 
@@ -101,9 +101,9 @@ Logger.setLocalization(LoggerLocalization__Russian);
 
 ```typescript
 import { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
-import { AlgorithmMismatchErrorLocalization__Russian } from "@yamato-daiwa/es-extensions-localization-russian";
+import { algorithmMismatchErrorLocalization__russian } from "@yamato-daiwa/es-extensions-localization-russian";
 
-AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Russian;
+AlgorithmMismatchError.localization = algorithmMismatchErrorLocalization__russian;
 ```
 
 

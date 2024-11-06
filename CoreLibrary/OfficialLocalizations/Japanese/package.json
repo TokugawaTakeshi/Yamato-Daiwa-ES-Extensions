@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-japanese",
-  "version": "1.7.0",
+  "version": "1.7.3",
   "description": "Japanese localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"

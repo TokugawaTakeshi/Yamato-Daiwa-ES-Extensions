@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
