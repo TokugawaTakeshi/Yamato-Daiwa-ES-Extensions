@@ -225,6 +225,38 @@ block append SpecificContent
           li コンテキスト依存の対象#[+Term--YDID 要素]のセレクターを指定する需要
           li イベントの伝搬のもっと柔軟な指定の需要
 
+      dt 貴方のコードが編集が必要に成る条件
+      dd
+
+        p.Article-Paragraph.
+          単一の#[+Term--YDID 引数]の下記の#[+Term--YDID プロパティ]の中から#[+ImportantEntity--YDID １個以上]利用中
+
+        ul.Article-UnorderedList
+          li #[+ImportantEntity__Code--YDID targetElementSelector]
+          li #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]
+
+
+      dt 対策
+      dd
+
+        ul.Article-UnorderedList
+
+          li.
+            #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]を
+              #[+ImportantEntity__Code--YDID targetElement]に名前変更の上、#[+Term--YDID セレクター]を含めている
+              #[+Term--YDID 文字列リテラル]か、此の#[+Term--YDID リテラル]を含めている#[+Term--YDID 変数]を#[+Term--YDID 子オブジェクト]
+              の#[+ImportantEntity__Code--YDID selector]#[+Term--YDID プロパティ]へ移動させてください。
+            例えば、#[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"]は
+              #[+SecondaryEntity__Code--YDID targetElement: { selector: ".Card-SavingButton"}]に成る。
+
+          li.
+            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定してある場合、
+              #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing]に置き換えて下さい。
+
+          li.
+            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定している場合、
+              #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling]に置き換えて下さい。
+
     //-
 
       h4.Article-Heading4 ページネーション

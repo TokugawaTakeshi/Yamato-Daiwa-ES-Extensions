@@ -1,10 +1,10 @@
-extends ../../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
 
 
 block append Requirements
 
-  include ../../../../../../../SharedAssets/Markup/SharedAssets.english.pug
-  include ../../../../../../../SharedComponents/SharedComponents.english.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -30,7 +30,7 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.other.swapArrayElements");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.other.$children.
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.other.$children.
           swapArrayElements.$URI,
       russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.other.$children.
           swapArrayElements.$URI
@@ -55,14 +55,15 @@ block append SpecificContent
 
     +ApologyWithSupportRequest
 
-      +CodeViewer--YDF({ title: "Signature" })
+      +CodeViewer--YDF({ title: "シグネチャ" })
         +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+
 
     //-
       +CallableExpressionScheme--YDF_DK({
         technicalName: "swapArrayElements",
         headingTag: "h1",
-        localizedDescriptiveHeading: "Makes the special, street magic",
+        localizedDescriptiveHeading: "特別なストリートの魔法をする",
         parametersSpecification: [
           {
             localizedName: "Target string",

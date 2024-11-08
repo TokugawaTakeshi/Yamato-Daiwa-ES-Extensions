@@ -152,7 +152,7 @@ coreLibrary:
                   $heading: "<code>swapArrayElements</code>"
                   $URI: `@All/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/swapArrayElements.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.yaml
                     $localizations:
                       english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.english.yaml
                       japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.japanese.yaml
