@@ -215,7 +215,7 @@ export default class ImprovedFileSystem {
             targetPath: ImprovedPath.extractDirectoryFromFilePath({
               targetPath: filePath,
               ambiguitiesResolution: {
-                mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: true,
                 mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
                 mustConsiderLastSegmentStartingWithDotAsDirectory: false
               }
@@ -245,7 +245,7 @@ export default class ImprovedFileSystem {
               targetPath: ImprovedPath.extractDirectoryFromFilePath({
                 targetPath: filePath,
                 ambiguitiesResolution: {
-                  mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                  mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: true,
                   mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
                   mustConsiderLastSegmentStartingWithDotAsDirectory: false
                 }

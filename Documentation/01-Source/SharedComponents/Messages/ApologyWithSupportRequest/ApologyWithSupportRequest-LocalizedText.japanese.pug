@@ -10,19 +10,33 @@ mixin ApologyWithSupportRequest-LocalizedText(properties)
     when ApologyWithSupportRequest.States.initialTextNotWritten
 
       | 恐れ入りますが、現在此のページは未完成の状態です。
-      | 残念ながら、現時点では#[+Term--YDID TypeScript型]及びソースコードへのリンクしか提示出来ません。
-      | 当ページが完成されて欲しい場合、当プロジェクトの
+      | 残念ながら、現時点ではソースコードへのリンクしか提示出来ません。
+      | 当ページが可能な限り早く完成されて欲しい場合、当プロジェクトの
       +Link--YDF({
         internalURI: localizedRouting.supportProject.$URI
       }) 金曜的なサポート
       | を御検討下さい。
       | 一部の資金は日本語の母語話者に依る校閲に利用されます。
-      | 但し、漢字の利用頻度が減りませんので、予め御了承下さい。
+      | 但し、伝統的な日本語保守活動中、漢字の利用頻度が減りませんので、予め御了承下さい。
 
     when ApologyWithSupportRequest.States.notTranslated
 
-      |
+      | 恐れ入りますが、現在此のページは未和訳の状態です。
+      | 残念ながら、現時点ではソースコードへのリンクしか提示出来ません。
+      | 当ページが可能な限り早く和訳されて欲しい場合、当プロジェクトの
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) 金曜的なサポート
+      | を御検討下さい。
+      | 一部の資金は日本語の母語話者に依る校閲に利用されます。
+      | 但し、伝統的な日本語保守活動中、漢字の利用頻度が減りませんので、予め御了承下さい。
 
     when ApologyWithSupportRequest.States.notCheckedByNativeSpeakers
 
-      |
+      | 恐れ入りますが、現在此のページは母語話者に依る校閲されていない状態で御座います。
+      | 当ページが可能な限り早く自然的な日本語に直されてほしい場合、
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) 金曜的なサポート
+      | を御検討下さい。
+      | 但し、伝統的な日本語保守活動中、漢字の利用頻度が減りませんので、予め御了承下さい。

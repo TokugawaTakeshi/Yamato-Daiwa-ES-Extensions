@@ -2,7 +2,7 @@ import type CrossBrowserIssueError from "./CrossBrowserIssueError";
 
 
 const crossBrowserIssueErrorLocalization__english: CrossBrowserIssueError.Localization = {
-  defaultTitle: "Cross-browser issue"
+  defaultTitle: "Cross-browser Issue"
 };
 
 

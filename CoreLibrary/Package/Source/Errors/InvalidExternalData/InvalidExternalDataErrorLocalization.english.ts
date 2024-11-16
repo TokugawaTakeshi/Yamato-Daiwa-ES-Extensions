@@ -3,7 +3,7 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 
 export const invalidExternalDataErrorLocalization__english: InvalidExternalDataError.Localization = {
-  defaultTitle: "Invalid external data",
+  defaultTitle: "Invalid External Data",
   generateDescription: (
     { mentionToExpectedData, messageSpecificPart }: InvalidExternalDataError.Localization.DescriptionTemplateVariables
   ): string => `

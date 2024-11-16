@@ -3,7 +3,7 @@ import type DataSubmittingFailedError from "./DataSubmittingFailedError";
 
 const dataSubmittingFailedErrorLocalization__english: DataSubmittingFailedError.Localization = {
 
-  defaultTitle: "Data submitting failure",
+  defaultTitle: "Data Submitting Failed",
 
   generateDescription: (
     { mentionToData, messageSpecificPart }: DataSubmittingFailedError.Localization.DescriptionTemplateVariables

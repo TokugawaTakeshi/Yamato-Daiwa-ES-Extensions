@@ -3,7 +3,7 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 
 const invalidParameterValueErrorLocalization__english: InvalidParameterValueError.Localization = {
-  defaultTitle: "Invalid parameter value",
+  defaultTitle: "Invalid Parameter Value",
   generateDescription:
       (
         {

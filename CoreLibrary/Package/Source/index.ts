@@ -355,6 +355,7 @@ export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringO
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
 export { default as isIPv4AddressLiesInRange } from "./Strings/isIPv4AddressLiesInRange";
+export { default as isStringIncludingAtLeastOneOfSubstrings } from "./Strings/isStringIncludingAtLeastOneOfSubstrings";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";

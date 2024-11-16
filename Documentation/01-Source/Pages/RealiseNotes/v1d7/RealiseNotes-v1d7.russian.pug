@@ -134,19 +134,24 @@ block append SpecificContent
         #[+Term--YDID тип]
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }) Element],
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document],
-        или производные от них.
-      Теперь это #[+Term--YDID свойство] было заменено на #[+ImportantEntity__Code--YDID contextElement], которое
+        или производный от одного из них.
+      Теперь это #[+Term--YDID свойство] было #[+Keyword--YDID заменено] на
+        #[+ImportantEntity__Code--YDID contextElement], которое
         #[+Keyword--YDID также] #[+Keyword__Contrast--YDID полиморфное], но теперь имеет
-        тип #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;], благодаря чему стало
+        #[+Term--YDID тип] #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;],
+        благодаря чему стало
         возможно в качестве контекста указать не&nbsp;только контекстный #[+Term--YDID элемент], но и его
         #[+Term--YDID селектор].
-      Однако, когда указан #[+Term--YDID селектор] контекстного #[+Term--YDID элемента], ему должен соответствовать
-        #[+Keyword--YDID только] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент], иначе будет брошена
-        #[+Term--YDID ошибка] (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] если
-          контекстный #[+Term--YDID элемент] не&nbsp;найден, или #[+ImportantEntity__Code--YDID UnexpectedEventError],
-          если найдено два и более #[+Term--YDID элементов]).
-      Поскольку и #[+ImportantEntity__Code--YDID Element], и #[+ImportantEntity__Code--YDID Document] унаследованы
-        от #[+ImportantEntity__Code--YDID ParentNode], то тип нового #[+Term--YDID свойства] совместим со старым.
+      Однако, когда указан #[+Term--YDID селектор] #[+Keyword--YDID контекстного] #[+Term--YDID элемента], ему должен
+        соответствовать #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
+          #[+Keyphrase--YDID иначе будет брошена #[+Term--YDID ошибка]] (
+          #[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] если
+          контекстный #[+Term--YDID элемент] не&nbsp;найден или #[+ImportantEntity__Code--YDID UnexpectedEventError],
+          если найдено #[+Keyword--YDID два] #[+Keyword__Contrast--YDID или] #[+Keyword--YDID более]
+          #[+Term--YDID элементов]).
+      Поскольку и #[+ImportantEntity__Code--YDID Element], и #[+ImportantEntity__Code--YDID Document]
+        #[+Term--YDID унаследованы] от #[+ImportantEntity__Code--YDID ParentNode], то #[+Term--YDID тип]
+        #[+Keyword--YDID нового] #[+Term--YDID свойства] #[+Keyword--YDID совместим] со старым.
 
     dl.Article-DescriptionList
 
@@ -155,8 +160,8 @@ block append SpecificContent
         | Унификация #[+Term--YDID API] указания контекстного #[+Term__Contrast--YDID элемента] — #[+Term--YDID свойство]
         |   #[+ImportantEntity__Code--YDID contextElement] #[+Term--YDID типа]
         |   #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] теперь
-        |   используется в #[+Term--YDID параметрах] #[+Keyword--YDID нескольких] #[+Term--YDID функций] и даже за пределами
-        |   библиотеки #[+ImportantEntity--YDID YDEE] (например, в библиотеке для фронтенд-разработки
+        |   используется в #[+Term--YDID параметрах] #[+Keyword--YDID нескольких] #[+Term--YDID функций] и даже за
+        |   пределами библиотеки #[+ImportantEntity--YDID YDEE] (например, в библиотеке для фронтенд-разработки
         |
         +Link--YDF({
           endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
@@ -175,63 +180,64 @@ block append SpecificContent
         Переименуйте #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID context] в
           #[+ImportantEntity__Code--YDID contextElement] во всех файлах проекта.
         Если Вам будет удобнее указать #[+Term--YDID селектор] контекстного #[+Term--YDID элемента] вместо самого
-          контекстного элемента, то теперь Вы можете выполнить соответствующий рефакторинг с использованием новейшего
-          #[+ImportantEntity--YDID API], при этом #[+Term--YDID селектору] контекстного #[+Term--YDID элемента] должен
-          соответствовать #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
-          #[+Keyphrase--YDID в противном случае будет брошена ошибка].
+          контекстного #[+Term--YDID элемента], то теперь Вы можете выполнить соответствующий рефакторинг с
+          использованием нового #[+ImportantEntity--YDID API], при этом #[+Term--YDID селектору]
+          #[+Keyword--YDID контекстного] #[+Term--YDID элемента] #[+Keyword--YDID должен] соответствовать
+          #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
+          #[+Keyphrase--YDID в противном случае будет брошена #[+Term--YDID ошибка]].
 
 
     h4.Article-Heading4 Обработка событий
 
-    h5.Article-Heading5 Изменение API функции #[code addLeftClickEventHandler]
+    h5.Article-Heading5 Изменение параметра функции #[code addLeftClickEventHandler]
 
     p.Article-Paragraph.
       Как и ранее, #[+Term--YDID функция] имеет #[+Keyword--YDID единственный] #[+Term--YDID параметр] типа
-        #[+Term--YDID «объект»], однако его #[+Term--YDID свойства] изменились:
+        #[+Term--YDID «объект»], однако его #[+Term--YDID свойства] #[+Keyword--YDID изменились]:
 
     dl.Article-DescriptionList
 
       dt Удаление #[+ImportantEntity__Code--YDID targetElementSelector]
       dd.
-        Удалено взамен на превращение #[+Term--YDID свойства] #[+ImportantEntity__Code--YDID targetElement] в
-          #[+Keyword--YDID полиморфное].
-        Теперь #[+Term--YDID селектор] целевого #[+Term--YDID элемента] должен быть указан #[+Keyword--YDID строковое]
-          #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID selector] #[+Term--YDID объекта]
-          #[+ImportantEntity__Code--YDID targetElement].
-        При этом #[+Keyphrase--YDID как и раньше], если целевой #[+Term--YDID элемент] указан через
-          #[+Term--YDID селектор], то #[+Keyword--YDID необходимо] через #[+Keyphrase--YDID одно из] #[+Term--YDID свойств]
-          #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector],
+        Удалено #[+Keyword--YDID взамен] на превращение #[+Term--YDID свойства]
+          #[+ImportantEntity__Code--YDID targetElement] в #[+Keyword--YDID полиморфное].
+        Теперь #[+Term--YDID селектор] целевого #[+Term--YDID элемента] должен быть указан через
+          #[+Keyword--YDID строковое] #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID selector]
+          #[+Term--YDID объекта] #[+ImportantEntity__Code--YDID targetElement].
+        При этом #[+Keyphrase--YDID как и раньше], если целевой #[+Term--YDID элемент] указан с помощью
+          #[+Term--YDID селектора], то #[+Keyword--YDID необходимо] через #[+Keyphrase--YDID одно из]
+          #[+Term--YDID свойств] #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector],
           #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector] и
           #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector] указать, как #[+Term--YDID функция]
           должна себя вести в случае, когда указанному #[+Term--YDID селектору] соответствует более одного
           #[+Term--YDID элемента].
 
-      //- FIXME Баг Селектор конкретного - рендерится слитно
       dt Добавление #[+ImportantEntity__Code--YDID contextElement]
       dd.
         Если указано #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID targetElementSelector], то можно
-          дополнительно через новое свойство #[+ImportantEntity__Code--YDID contextElement] указать
-          #[+Keyword--YDID контекстный] #[+Term--YDID элемент], внутри которого будет осуществляться поиск целевого
-          #[+Term--YDID элемента].
+          #[+Keyword--YDID дополнительно] через #[+Keyword--YDID новое] #[+Term--YDID свойство]
+          #[+ImportantEntity__Code--YDID contextElement] указать #[+Keyword--YDID контекстный] #[+Term--YDID элемент],
+          внутри которого будет осуществляться поиск целевого #[+Term--YDID элемента].
         Сделать это можно, как в случае с #[+ImportantEntity__Code--YDID targetElementSelector], либо указав
-          экземпляр #[+Term--YDID элемента], либо #[+Term--YDID селектор] конкретного элемента, однако
-          во #[+Keyword--YDID втором] случае #[+Term__Contrast--YDID селектор]
-          #[+Keyword--YDID должен] ссылаться на #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один]
-          #[+Term--YDID элемент], #[+Keyphrase--YDID в противном случае будет брошена #[+Term--YDID ошибка]].
+          экземпляр #[+Term--YDID элемента], либо #[+Term--YDID селектор] конкретного #[+Term--YDID элемента], однако
+          во #[+Keyword--YDID втором] случае #[+Term__Contrast--YDID селектор] #[+Keyword--YDID должен] ссылаться на
+          #[+Keyword--YDID ровно] #[+Keyword__Contrast--YDID один] #[+Term--YDID элемент],
+          #[+Keyphrase--YDID в противном случае будет брошена #[+Term--YDID ошибка]].
 
       dt.
         Замена #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers] на
           #[+ImportantEntity__Code--YDID eventPropagation]
       dd.
-        Благодаря новому #[+Keyword--YDID полиморфному] свойству #[+ImportantEntity__Code--YDID eventPropagation]
-          можно не&nbsp;только указывать тип распространения события, но и вовсе прервать это распространение.
+        Благодаря #[+Keyword--YDID новому] #[+Keyword__Contrast--YDID полиморфному] #[+Term--YDID свойству]
+        #[+ImportantEntity__Code--YDID eventPropagation] можно #[+Keyword--YDID не]&nbsp;только указывать тип
+        #[+Term--YDID распространения события], но и вовсе прервать это распространение.
         Хотя #[+Term--YDID элементы перечисления] #[+ImportantEntity__Code--YDID eventPropagation], а именно
           #[+ImportantEntity__Code--YDID EventPropagationTypes.capturing]
           и #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling] могут показаться менее
-          понятными, #[+Term--YDID «capturing»] (движение вниз по #[+Term--YDID DOM-древу]) и #[+Term--YDID «bubbling»]
-          (движение вверх по #[+Term--YDID DOM-древу]) являются #[+Keyword--YDID каноническими] терминами, а
-          использование канонической терминологи #[+Keyword--YDID не]&nbsp;является признаком низкокачественного
-          #[+ImportantEntity--YDID API].
+          понятными, #[+Term--YDID «capturing»] (движение #[+Keyword--YDID вниз] по #[+Term--YDID DOM-древу]) и
+          #[+Term--YDID «bubbling»] (движение #[+Keyword--YDID вверх] по #[+Term--YDID DOM-древу]) являются
+          #[+Keyword--YDID каноническими] терминами, а использование канонической терминологи
+          #[+Keyword--YDID не]&nbsp;является признаком низкокачественного #[+ImportantEntity--YDID API].
 
     dl.Article-DescriptionList
 
@@ -242,15 +248,15 @@ block append SpecificContent
 
           li Частичная унификация #[+ImportantEntity--YDID API] с другими #[+Term--YDID функциями]
           li.
-            Потребность в возможности указывать #[+Term--YDID селектор] целевого элемента внутри конкретного
-              родительского элемента
-          li Потребность в более гибком управлении распространением события
+            Потребность в возможности указывать #[+Term--YDID селектор] целевого #[+Term--YDID элемента] внутри
+              конкретного родительского #[+Term--YDID элемента]
+          li Потребность в более гибком управлении #[+Term--YDID распространением события]
 
       dt Потребуются редактирование Вашего исходного кода, если
       dd
 
         p.Article-Paragraph.
-          Используется одно или более #[+Term--YDID свойств] единственного #[+Term--YDID параметра] среди нижеследующих
+          Используется одно или более #[+Term--YDID свойств] единственного #[+Term--YDID параметра] среди нижеследующих:
 
         ul.Article-UnorderedList
           li #[+ImportantEntity__Code--YDID targetElementSelector]
@@ -262,7 +268,7 @@ block append SpecificContent
         ul.Article-UnorderedList
 
           li.
-            Переименуйте свойство #[+ImportantEntity__Code--YDID targetElementSelector] в
+            Переименуйте #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID targetElementSelector] в
               #[+ImportantEntity__Code--YDID targetElement], а #[+Term--YDID строковый литерал] с
               #[+Term__Contrast--YDID селектором] либо #[+Term--YDID переменную] с этим #[+Term--YDID литералом]
               поместите в дочерний #[+Term--YDID объект] со #[+Term--YDID свойством]
@@ -275,9 +281,9 @@ block append SpecificContent
               то замените это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing].
 
           li.
-            Если у Вас указано #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true],
+            Если у Вас указано #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: false],
               то замените это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling].
-    //- TODO > ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
     //-
 
       h4.Article-Heading4 Пагинация
