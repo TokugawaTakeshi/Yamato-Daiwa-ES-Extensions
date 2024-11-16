@@ -31,12 +31,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         stringifyAndFormatArbitraryValue({
           ...targetPropertyValueSpecification,
           type: this.getLocalizedValueType(targetPropertyValueSpecification.type)
-        }) 
+        })
       }`,
       `\n● Actual Value: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
       ...isNotUndefined(targetPropertyStringifiedValueBeforeFirstPreValidationModification) ? [
         "\n●　Value Before First Pre-validation Modification: " +
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
       ] : []
     ].join("");
   },
@@ -189,7 +189,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { expectedNumberSet }: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
-          `Contrary to expectations, this numeric value is in not member of "${ this.numbersSet(expectedNumberSet) }"`
+          "Contrary to expectations, this numeric value is in not member of " +
+            `"${ rawObjectDataProcessorLocalization__english.getLocalizedNumbersSet(expectedNumberSet) }"`
     },
 
     /* [ Approach ] Applicable also to string properties. */
@@ -217,6 +218,190 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         { allowedMaximum }: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
       ): string =>
           `This value is greater than required maximal value ${ allowedMaximum }.`
+    },
+
+
+    /* ─── String Value ───────────────────────────────────────────────────────────────────────────────────────────── */
+    charactersCountIsLessThanRequired: {
+      title: "Minimal Characters Count Fall Short",
+      generateDescription: (
+        { minimalCharactersCount, realCharactersCount }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
+      ): string =>
+          `This string value has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`,
+
+    },
+
+    charactersCountIsMoreThanAllowed: {
+      title: "Maximal Characters Count Exceeding",
+      generateDescription: (
+          { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
+      ): string =>
+          `This string value has ${ realCharactersCount } characters while ${ maximalCharactersCount } allowed ` +
+            "as maximum."
+    },
+
+    charactersCountDoesNotMatchWithSpecified: {
+      title: "Fixed Characters Count Mismatch",
+      generateDescription: (
+          { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
+      ): string =>
+          `The value has ${ realCharactersCount } characters exactly ${ fixedCharactersCount } required.`
+    },
+
+    regularExpressionMismatch: {
+      title: "Regular Expression Mismatch",
+      generateDescription: ({ regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables): string =>
+          `This string value does not match with specified regular expression:\n ${ regularExpression.toString() }`
+    },
+
+
+    /* ─── Indexed Arrays ─────────────────────────────────────────────────────────────────────────────────────────── */
+    indexedArrayElementsCountIsLessThanRequiredMinimum: {
+      title: "Indexed Array has Less Elements than Expected Minimum",
+      generateDescription: (
+        {
+          minimalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
+            `${ minimalElementsCount } expected.`
+    },
+
+    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
+      title: "Indexed Array has More Elements than Expected Maximum",
+      generateDescription: (
+        {
+          maximalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `This value of indexed array type has ${ actualElementsCount } elements while ` +
+            `maximally ${ maximalElementsCount } expected.`
+    },
+
+    indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "The Count of Elements of Indexed Array does not Match with Expected Fixed Value",
+      generateDescription: (
+        {
+          exactElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `This value of indexed array type has ${ actualElementsCount } elements while ` +
+            `exactly ${ exactElementsCount } expected.`
+    },
+
+    indexedArrayDisallowedUndefinedElement: {
+      title: "Disallowed Undefined-type Element of Indexed Array",
+      description:
+          "This element of indexed array is `undefined` while undefined-type elements has not been allowed by valid " +
+            "element specification."
+    },
+
+    indexedArrayDisallowedNullElement: {
+      title: "Disallowed null Element of Indexed Array",
+      description:
+          "This element of indexed array is `null` while null elements has not been allowed by valid element " +
+            "specification."
+    },
+
+    /* ─── Associative Arrays ─────────────────────────────────────────────────────────────────────────────────────── */
+    associativeArrayEntriesCountIsLessThanRequiredMinimum: {
+      title: "Associative Array has Less Entries than Expected Minimum",
+      generateDescription: (
+        {
+          actualEntriesCount,
+          minimalEntriesCount
+        }: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `This value of associative array type value has ${ actualEntriesCount } entries while at least ` +
+            `${ minimalEntriesCount } expected.`
+    },
+
+    associativeArrayPairsCountIsMoreThanAllowedMaximum: {
+      title: "Associative Array has More Entries than Expected Maximum",
+      generateDescription: (
+        {
+          maximalEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `This value of associative array-type value has ${ actualEntriesCount } entries while maximally ` +
+            `${ maximalEntriesCount } expected.`
+    },
+
+    associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "The Count of Entries of Associative Array does not Match with Expected Fixed Value",
+      generateDescription: (
+        {
+          exactEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `This value of associative array-type value has ${ exactEntriesCount } entries while ` +
+            `exactly ${ actualEntriesCount } expected.`
+    },
+
+    requiredKeysOfAssociativeArrayAreMissing: {
+      title: "Required Key(s) of Associative Array are Missing",
+      generateDescription: (
+        { missingRequiredKeys }: ValidationErrors.RequiredKeysOfAssociativeArrayAreMissing.TemplateVariables
+      ): string =>
+          "Below keys are missing but required for this associative array type value:\n" +
+            stringifyAndFormatArbitraryValue(missingRequiredKeys)
+    },
+
+    requiredAlternativeKeysOfAssociativeArrayAreMissing: {
+      title: "Required Keys Alternatives are Missing",
+      generateDescription: (
+        { requiredKeysAlternatives }: ValidationErrors.RequiredAlternativeKeysOfAssociativeArrayAreMissing.TemplateVariables
+      ): string =>
+          "One of below keys must present in this associative array-type value, but actually none of them presents. " +
+            stringifyAndFormatArbitraryValue(requiredKeysAlternatives)
+    },
+
+    disallowedKeysFoundInAssociativeArray: {
+      title: "Disallowed key(s) Found in Associative Array",
+      generateDescription: (
+          { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
+      ): string =>
+          "Below keys presents in this associative array type value while these keys are disallowed.\n" +
+            stringifyAndFormatArbitraryValue(foundDisallowedKeys)
+    },
+
+    associativeArrayDisallowedUndefinedValue: {
+      title: "Disallowed Undefined-type Value of Associative Array",
+      description: "This value of associative array is 'undefined' while undefined-type values has not been allowed " +
+          "by valid value specification."
+    },
+
+    associativeArrayDisallowedNullValue: {
+      title: "Disallowed null Value of Associative Array",
+      description: "This value of associative array is 'null' while null values has not been allowed by valid value " +
+          "specification."
+    },
+
+    /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────── */
+    disallowedBooleanValueVariant: {
+      title: "Disallowed Boolean Variant",
+      generateDescription: (
+        { disallowedVariant }: ValidationErrors.DisallowedBooleanValueVariant.TemplateVariables
+      ): string =>
+          `This boolean value is '${ disallowedVariant }' while only '${ !disallowedVariant }' allowed.`
+    },
+
+    unsupportedValueType: {
+      title: "Unsupported Value Type",
+      generateDescription:
+          ({ targetPropertyValue }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
+              `This value has type ${ typeof targetPropertyValue } which is not a valid parsed JSON`
+    },
+
+    customValidationFailed: {
+      title: "Custom Validation did not Passed",
+      generateDescription: ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
+          `This value did not passed the custom validation "${ customValidationDescription }".`
     }
 
   },
@@ -287,8 +472,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
             "select the one matching with your case:\n" +
           "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-            "Alternatively, consider the making of this property writable. " +
-            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          "Alternatively, consider the making of this property writable. " +
+          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
             "property is configurable. \n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
             "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
@@ -315,8 +500,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
             "select the one matching with your case:\n" +
           "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-            "Alternatively, consider the making of this property writable. " +
-            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          "Alternatively, consider the making of this property writable. " +
+          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
             "property is configurable. \n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
             "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
@@ -325,6 +510,17 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
             "the processed object, or rename this property, or add the getter by post validation modifications."
 
+    },
+
+    incompatibleValuesTypesAlternatives: {
+      title: "",
+      generateDescription: (
+        { targetValueStringifiedSpecification }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
+      ): string =>
+          "The 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (aliased as Object) and " +
+            "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
+            "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. " +
+          `Please fix the specification of this property.\n ${ targetValueStringifiedSpecification }`
     }
 
   },
@@ -400,8 +596,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
             "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
           "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-            "Alternatively, consider the making of this property writable. " +
-            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          "Alternatively, consider the making of this property writable. " +
+          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
             "property is configurable. \n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
             "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
@@ -427,8 +623,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
             "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
           "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-            "Alternatively, consider the making of this property writable. " +
-            "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          "Alternatively, consider the making of this property writable. " +
+          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
             "property is configurable. \n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
             "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
@@ -440,132 +636,15 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     }
 
   },
-  // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  /* === Indexed arrays ============================================================================================= */
-  buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalElementsCount, actualElementsCount }: { minimalElementsCount: number; actualElementsCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Indexed array has less elements than expected minimum",
-      description: `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
-          `${ minimalElementsCount } expected.`
-    };
-  },
-
-  buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalElementsCount, actualElementsCount }: { maximalElementsCount: number; actualElementsCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Indexed array has more elements than expected maximum",
-      description: `This value of indexed array type has ${ actualElementsCount } elements while ` +
-          `maximally ${ maximalElementsCount } expected.`
-    };
-  },
-
-  buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactElementsCount, actualElementsCount }: { exactElementsCount: number; actualElementsCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "The count of elements of indexed array does not match with expected fixed value",
-      description: `This value of indexed array type has ${ actualElementsCount } elements while ` +
-          `exactly ${ exactElementsCount } expected.`
-    };
-  },
-
-  indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
-    title: "Disallowed undefined-type element of indexed array",
-    description: "This element of indexed array is 'undefined' while undefined-type elements has not been allowed " +
-        "by valid element specification."
-  },
-
-  indexedArrayDisallowedNullElementErrorMessageTextData: {
-    title: "Disallowed null element of indexed array",
-    description: "This element of indexed array is 'null' while null elements has not been allowed by valid element " +
-        "specification."
-  },
-
-
-  /* === Associative arrays ========================================================================================= */
-  buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalEntriesCount, actualEntriesCount }: { minimalEntriesCount: number; actualEntriesCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Associative array has less entries than expected minimum",
-      description: `This value of associative array type value has ${ actualEntriesCount } entries while at least ` +
-          `${ minimalEntriesCount } expected.`
-    };
-  },
-
-  buildAssociativeArrayEntriesCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalEntriesCount, actualEntriesCount }: { maximalEntriesCount: number; actualEntriesCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Associative array has more entries than expected maximum",
-      description: `This value of associative array-type value has ${ actualEntriesCount } entries while maximally ` +
-          `${ maximalEntriesCount } expected.`
-    };
-  },
-
-  buildAssociativeArrayEntriesCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactEntriesCount, actualEntriesCount }: { exactEntriesCount: number; actualEntriesCount: number; }
-  ): RawObjectDataProcessor.Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "The count of entries of associative array does not match with expected fixed value",
-      description: `This value of associative array-type value has ${ exactEntriesCount } entries while ` +
-          `exactly ${ actualEntriesCount } expected.`
-    };
-  },
-
-  buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-    missingRequiredKeys: Array<string>
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Required key(s) of associative array are missing",
-      description: "Below keys are missing but required for this associative array type value:\n" +
-          stringifyAndFormatArbitraryValue(missingRequiredKeys)
-    };
-  },
-
-  buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-    requiredKeysAlternatives: ReadonlyArray<string>
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Required keys alternatives are missing",
-      description: "One of below keys must present in this associative array-type value, but actually none of them " +
-          `presents.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
-    };
-  },
-
-  buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData(
-    foundDisallowedKeys: Array<string>
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Disallowed key(s) found in associative array",
-      description: "Below keys presents in this associative array type value while these keys are disallowed.\n" +
-          stringifyAndFormatArbitraryValue(foundDisallowedKeys)
-    };
-  },
-
-  associativeArrayDisallowedUndefinedValueErrorMessageTextData: {
-    title: "Disallowed undefined-type value of associative array",
-    description: "This value of associative array is 'undefined' while undefined-type values has not been allowed " +
-        "by valid value specification."
-  },
-
-  associativeArrayDisallowedNullValueErrorMessageTextData: {
-    title: "Disallowed null value of associative array",
-    description: "This value of associative array is 'null' while null values has not been allowed by valid value " +
-        "specification."
-  },
 
 
   /* === Value type ================================================================================================= */
   getLocalizedValueType(valueType: Localization.ValuesTypes): string {
 
     /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
-    * https://stackoverflow.com/q/69848208/4818123
-    * https://stackoverflow.com/q/69848689/4818123
-    *  */
+     * https://stackoverflow.com/q/69848208/4818123
+     * https://stackoverflow.com/q/69848689/4818123
+     *  */
     const targetValueTypeID: RawObjectDataProcessor.ValuesTypesIDs = RawObjectDataProcessor.
         getNormalizedValueTypeID(valueType);
 
@@ -590,7 +669,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     }
   },
 
-  numbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
+  getLocalizedNumbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
     switch (numberSet) {
       case RawObjectDataProcessor.NumbersSets.naturalNumber: return "natural number";
       case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "non-negative integer";
@@ -602,83 +681,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: return "decimal fraction on any sign";
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "any real number";
     }
-  },
-
-  /* === String value =============================================================================================== */
-  buildCharactersCountIsLessThanRequiredErrorMessageTextData(
-    { minimalCharactersCount, realCharactersCount }: { minimalCharactersCount: number; realCharactersCount: number; }
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Minimal characters count fall short",
-      description: `This string value has ${ realCharactersCount } characters while at least ` +
-          `${ minimalCharactersCount } required.`
-    };
-  },
-
-  buildCharactersCountIsMoreThanAllowedErrorMessageTextData(
-    { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Maximal characters count exceeding",
-      description: `This string value has ${ realCharactersCount } characters ${ maximalCharactersCount } allowed ` +
-          "as maximum."
-    };
-  },
-
-  buildCharactersCountDoesNotMatchWithSpecifiedErrorMessageTextData(
-    { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Fixed characters count mismatch",
-      description: `The value has ${ realCharactersCount } characters exactly ${ fixedCharactersCount } required.`
-    };
-  },
-
-  buildRegularExpressionMismatchErrorMessageTextData(regularExpression: RegExp): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Regular expression mismatch",
-      description: "This string value does not match with specified regular expression:\n " +
-          regularExpression.toString()
-    };
-  },
-
-  /* === Other ====================================================================================================== */
-  buildDisallowedBooleanValueVariantErrorMessageTextData(
-    disallowedVariant: boolean
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Disallowed boolean variant",
-      description: `This boolean value is '${ disallowedVariant }' while only '${ !disallowedVariant }' allowed.`
-    };
-  },
-
-  buildIncompatibleValuesTypesAlternativesErrorDescription(
-    targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
-  ): string {
-    return "The 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (aliased as Object) and " +
-        "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
-        "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. Target value marked " +
-        `as invalid. Please correct below specification:\n ${ stringifyAndFormatArbitraryValue(targetValueSpecification) }`;
-  },
-
-  buildUnsupportedValueTypeErrorMessageTextData(
-    propertyDataForMessagesBuilding: RawObjectDataProcessor.Localization.PropertyDataForMessagesBuilding
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Unsupported value type",
-      description: `This value has type ${ typeof propertyDataForMessagesBuilding.targetPropertyValue } which is ` +
-          "not a valid parsed JSON"
-    };
-  },
-
-  buildCustomValidationFailedErrorMessageTextData(
-    customValidationDescription: string
-  ): Localization.InvalidPropertyValidationErrorMessageTemplateData {
-    return {
-      title: "Custom validation did not passed",
-      description: `This value did not passed the custom validation "${ customValidationDescription }".`
-    };
   }
+
 };
 
 

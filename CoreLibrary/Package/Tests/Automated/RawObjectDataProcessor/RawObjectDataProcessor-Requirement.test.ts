@@ -1,264 +1,336 @@
 import {
   RawObjectDataProcessor,
-  undefinedToEmptyArray,
-  rawObjectDataProcessorLocalization__english,
+  Logger,
   type ArbitraryObject,
-  Logger
+  undefinedToEmptyArray,
+  toUpperCamelCase,
+  explodeCasedPhraseToWords
 } from "../../../Source";
 import { suite, test } from "node:test";
 import { deepEqual, strictEqual, notDeepEqual } from "assert";
 
 
-suite("Requirement", async (): Promise<void> => {
+suite(
+  "Requirement",
+  async (): Promise<void> => {
 
-  const validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder =
-      new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(rawObjectDataProcessorLocalization__english);
+    await Promise.all(
 
-  await Promise.all(
-    Object.values(RawObjectDataProcessor.ProcessingApproaches).map(
-      async (processingApproach: RawObjectDataProcessor.ProcessingApproaches): Promise<void> =>
-          suite(processingApproach, async (): Promise<void> => {
-            await Promise.all([
+      Object.values(RawObjectDataProcessor.ProcessingApproaches).map(
 
-              suite("Definitely Required/Optional Property", async (): Promise<void> => {
+        async (processingApproach: RawObjectDataProcessor.ProcessingApproaches): Promise<void> =>
 
-                const dataNameForLogging: string = "ValidData";
-                const targetPropertyName: "alpha" = "alpha";
-                type ValidData = { [targetPropertyName]: number; };
+            suite(
+              explodeCasedPhraseToWords(toUpperCamelCase(processingApproach)).join(" "),
+              async (): Promise<void> => {
 
-                const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                  nameForLogging: dataNameForLogging,
-                  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
-                  properties: {
-                    [targetPropertyName]: {
-                      type: Number,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                      required: true
-                    },
-                    bar: {
-                      type: Number,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                      required: false
+                await Promise.all([
+
+                  suite(
+                    "Definitely Required/Optional Property",
+                    async (): Promise<void> => {
+
+                      const DATA_NAME_FOR_LOGGING: string = "ValidData";
+                      const TARGET_PROPERTY_NAME: "alpha" = "alpha";
+                      type ValidData = { [TARGET_PROPERTY_NAME]: number; };
+
+                      const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+                        nameForLogging: DATA_NAME_FOR_LOGGING,
+                        subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+                        properties: {
+                          [TARGET_PROPERTY_NAME]: {
+                            type: Number,
+                            numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
+                            required: true
+                          },
+                          bar: {
+                            type: Number,
+                            numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
+                            required: false
+                          }
+                        }
+                      };
+
+                      await suite(
+                        "Valid Data",
+                        async (): Promise<void> => {
+
+                          function generateConstantValidDataSample(): ValidData {
+                            return { alpha: 7 };
+                          }
+
+                          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+                              process(generateConstantValidDataSample(), validDataSpecification, { processingApproach });
+
+                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          let processedData: ValidData | undefined;
+                          let validationErrorsMessages: ReadonlyArray<string> | undefined;
+
+                          if ("processedData" in processingResult) {
+                            processedData = processingResult.processedData;
+                          } else {
+                            validationErrorsMessages = processingResult.validationErrorsMessages;
+                          }
+
+                          await test(
+                            "Input Data is Valid as Expected",
+                            (): void => {
+                              strictEqual(isRawDataInvalid, false);
+                            }
+                          );
+
+                          await test(
+                            "No Validation Errors Messages as Expected",
+                            (): void => {
+                              strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 0);
+                            }
+                          );
+
+                          await test(
+                            "Output Data is Even With Input Data as Expected",
+                            (): void => {
+                              deepEqual(processedData, generateConstantValidDataSample());
+                            }
+                          );
+
+                        }
+                      );
+
+                      await suite(
+                        "Invalid Data",
+                        async (): Promise<void> => {
+
+                          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+                            process({}, validDataSpecification, { processingApproach });
+
+                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                              processingResult.validationErrorsMessages : [];
+
+                          await test(
+                            "Input Data is Invalid as Expected",
+                            (): void => {
+                              strictEqual(isRawDataInvalid, true);
+                            }
+                          );
+
+                          await test(
+                            "Has Exactly One Validation Error Message as Expected",
+                            (): void => {
+                              strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 1);
+                            }
+                          );
+
+                          await test(
+                            "Validation Error Message is Correct",
+                            (): void => {
+                              strictEqual(
+                                undefinedToEmptyArray(validationErrorsMessages)[0],
+                                RawObjectDataProcessor.generateValidationErrorMessage({
+                                  ...RawObjectDataProcessor.defaultLocalization.validationErrors.requiredPropertyIsMissing,
+                                  targetPropertyDotSeparatedQualifiedInitialName:
+                                      `${ DATA_NAME_FOR_LOGGING }.${ TARGET_PROPERTY_NAME }`,
+                                  targetPropertyNewName: null,
+                                  /* eslint-disable-next-line no-undefined --
+                                   * It could be omitted, but the explicit `undefined` is better for readability of the tests
+                                   *   for this case. */
+                                  targetPropertyValue: undefined,
+                                  targetPropertyValueSpecification: validDataSpecification.properties[TARGET_PROPERTY_NAME]
+                                })
+                              );
+                            }
+                          );
+
+                        }
+                      );
+
                     }
-                  }
-                };
+                  ),
 
-                await suite("Valid Data", async (): Promise<void> => {
+                  suite(
+                    "Conditionally Required Property",
+                    async (): Promise<void> => {
 
-                  function generateConstantValidDataSample(): ValidData {
-                    return { alpha: 7 };
-                  }
+                      const DATA_NAME_FOR_LOGGING: string = "ValidData";
+                      const TARGET_PROPERTY_NAME: "swimmingPoolMaximalDepth__meters" = "swimmingPoolMaximalDepth__meters";
+                      type ValidData = { hasSwimmingPool: boolean; [TARGET_PROPERTY_NAME]: number; };
+                      const requirementConditionDescription: string = "`hasSwimmingPool` is true";
 
-                  const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                      process(generateConstantValidDataSample(), validDataSpecification, { processingApproach });
+                      const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+                        nameForLogging: DATA_NAME_FOR_LOGGING,
+                        subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+                        properties: {
+                          hasSwimmingPool: {
+                            type: Boolean,
+                            required: false
+                          },
+                          [TARGET_PROPERTY_NAME]: {
+                            type: Number,
+                            numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
+                            requiredIf: {
+                              predicate: (rawData: ArbitraryObject): boolean => rawData.hasSwimmingPool === true,
+                              descriptionForLogging: requirementConditionDescription
+                            }
+                          }
+                        }
+                      };
 
-                  const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                  let processedData: ValidData | undefined;
-                  let validationErrorsMessages: ReadonlyArray<string> | undefined;
+                      await suite(
+                        "Valid Data",
+                        async (): Promise<void> => {
 
-                  if ("processedData" in processingResult) {
-                    processedData = processingResult.processedData;
-                  } else {
-                    validationErrorsMessages = processingResult.validationErrorsMessages;
-                  }
+                          function generateConstantValidDataSample(): ValidData {
+                            return { hasSwimmingPool: true, swimmingPoolMaximalDepth__meters: 3 };
+                          }
 
-                  await test("Input data is valid as expected", (): void => {
-                    strictEqual(isRawDataInvalid, false);
-                  });
+                          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+                              process(generateConstantValidDataSample(), validDataSpecification, { processingApproach });
 
-                  await test("No validation errors messages as expected", (): void => {
-                    strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 0);
-                  });
+                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          let processedData: ValidData | undefined;
+                          let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
-                  await test("Output data is even with input data as expected", (): void => {
-                    deepEqual(processedData, generateConstantValidDataSample());
-                  });
+                          if ("processedData" in processingResult) {
+                            processedData = processingResult.processedData;
+                          } else {
+                            validationErrorsMessages = processingResult.validationErrorsMessages;
+                          }
 
-                });
+                          await test("Input Data is Valid as Expected", (): void => {
+                            strictEqual(isRawDataInvalid, false);
+                          });
 
-                await suite("Invalid Data", async (): Promise<void> => {
+                          await test("No Validation Errors Messages as Expected", (): void => {
+                            strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 0);
+                          });
 
-                  const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                    process({}, validDataSpecification, { processingApproach });
+                          await test("Output Data is Even with Input Data as Expected", (): void => {
+                            deepEqual(processedData, generateConstantValidDataSample());
+                          });
 
-                  const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                  const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
-                      processingResult.validationErrorsMessages : [];
+                        }
+                      );
 
-                  await test("Input data is invalid as expected", (): void => {
-                    strictEqual(isRawDataInvalid, true);
-                  });
+                      await suite(
+                        "Invalid Data",
+                        async (): Promise<void> => {
 
-                  await test("Has exactly one validation error message as expected", (): void => {
-                    strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 1);
-                  });
+                          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+                              process({ hasSwimmingPool: true }, validDataSpecification, { processingApproach });
 
-                  await test("Validation error message is correct", (): void => {
-                    strictEqual(
-                        undefinedToEmptyArray(validationErrorsMessages)[0],
-                        RawObjectDataProcessor.
-                        validationErrorsMessagesBuilder.buildRequiredPropertyIsMissingErrorMessage({
-                          targetPropertyDotSeparatedQualifiedName: `${ dataNameForLogging }.${ targetPropertyName }`,
-                          targetPropertyNewName: null,
-                          /* eslint-disable-next-line no-undefined --
-                           * It could be omitted, but the explicit `undefined` is better for readability of the tests
-                           *   for this case. */
-                          targetPropertyValue: undefined,
-                          targetPropertyValueSpecification: validDataSpecification.properties[targetPropertyName]
-                        })
-                    );
-                  });
+                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                              processingResult.validationErrorsMessages : [];
 
-                });
+                          await test(
+                            "Input Data is Invalid as Expected",
+                              (): void => {
+                                strictEqual(isRawDataInvalid, true);
+                              }
+                          );
 
-              }),
+                          await test(
+                            "Has Exactly one Validation Error Message as Expected",
+                            (): void => {
+                              strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 1);
+                            }
+                          );
 
-              suite("Conditionally Required Property", async (): Promise<void> => {
+                          await test(
+                            "Validation Error Message is Correct",
+                            (): void => {
+                              strictEqual(
+                                undefinedToEmptyArray(validationErrorsMessages)[0],
+                                RawObjectDataProcessor.generateValidationErrorMessage({
+                                  title: RawObjectDataProcessor.defaultLocalization.validationErrors.
+                                      conditionallyRequiredPropertyIsMissing.title,
+                                  description: RawObjectDataProcessor.defaultLocalization.validationErrors.
+                                      conditionallyRequiredPropertyIsMissing.
+                                      generateDescription({ requirementCondition: requirementConditionDescription }),
+                                  targetPropertyDotSeparatedQualifiedInitialName:
+                                      `${ DATA_NAME_FOR_LOGGING }.${ TARGET_PROPERTY_NAME }`,
+                                  targetPropertyNewName: null,
+                                  /* eslint-disable-next-line no-undefined --
+                                   * It could be omitted, but the explicit `undefined` is better for readability of the tests
+                                   *   for this case. */
+                                  targetPropertyValue: undefined,
+                                  targetPropertyValueSpecification: validDataSpecification.properties[TARGET_PROPERTY_NAME]
+                                })
+                              );
+                            }
+                          );
 
-                const dataNameForLogging: string = "ValidData";
-                const targetPropertyName: "swimmingPoolMaximalDepth__meters" = "swimmingPoolMaximalDepth__meters";
-                type ValidData = { hasSwimmingPool: boolean; [targetPropertyName]: number; };
-                const requirementConditionDescription: string = "`hasSwimmingPool` is true";
+                        }
+                      );
 
-                const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                  nameForLogging: dataNameForLogging,
-                  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
-                  properties: {
-                    hasSwimmingPool: {
-                      type: Boolean,
-                      required: false
-                    },
-                    [targetPropertyName]: {
-                      type: Number,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                      requiredIf: {
-                        predicate: (rawData: ArbitraryObject): boolean => rawData.hasSwimmingPool === true,
-                        descriptionForLogging: requirementConditionDescription
+                    }
+                  ),
+
+                  suite(
+                    "Default Value Substitution",
+                    async (): Promise<void> => {
+
+                      type ValidData = { foo: string; };
+
+                      function generateConstantDataSample(): Partial<ValidData> {
+                        return {};
                       }
+
+                      const TARGET_PROPERTY_DEFAULT_VALUE: string = "ALPHA";
+
+                      const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+                        nameForLogging: "Sample",
+                        subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+                        properties: {
+                          foo: {
+                            type: String,
+                            defaultValue: TARGET_PROPERTY_DEFAULT_VALUE
+                          }
+                        }
+                      };
+
+                      const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+                        process(generateConstantDataSample(), validDataSpecification, { processingApproach });
+
+                      const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                      let processedData: ValidData | undefined;
+
+                      if ("processedData" in processingResult) {
+                        processedData = processingResult.processedData;
+                      }
+
+                      await test(
+                        "Default Value has been Substituted as Expected",
+                        (): void => {
+                          strictEqual(processedData?.foo, TARGET_PROPERTY_DEFAULT_VALUE);
+                        }
+                      );
+
+                      await test(
+                        "Input Data is Valid as Expected",
+                        (): void => {
+                          strictEqual(isRawDataInvalid, false);
+                        }
+                      );
+
+                      await test(
+                        "Output Data is not Even With Input Data as Expected",
+                        (): void => {
+                          notDeepEqual(processedData, generateConstantDataSample());
+                        }
+                      );
+
                     }
-                  }
-                };
+                  )
 
-                await suite("Valid Data", async (): Promise<void> => {
+                ]);
 
-                  function generateConstantValidDataSample(): ValidData {
-                    return { hasSwimmingPool: true, swimmingPoolMaximalDepth__meters: 3 };
-                  }
+            }
+          )
 
-                  const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                      process(generateConstantValidDataSample(), validDataSpecification, { processingApproach });
+      )
 
-                  const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                  let processedData: ValidData | undefined;
-                  let validationErrorsMessages: ReadonlyArray<string> | undefined;
+    );
 
-                  if ("processedData" in processingResult) {
-                    processedData = processingResult.processedData;
-                  } else {
-                    validationErrorsMessages = processingResult.validationErrorsMessages;
-                  }
-
-                  await test("Input data is valid as expected", (): void => {
-                    strictEqual(isRawDataInvalid, false);
-                  });
-
-                  await test("No validation errors messages as expected", (): void => {
-                    strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 0);
-                  });
-
-                  await test("Output data is even with input data as expected", (): void => {
-                    deepEqual(processedData, generateConstantValidDataSample());
-                  });
-
-                });
-
-                await suite("Invalid Data", async (): Promise<void> => {
-
-                  const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                      process({ hasSwimmingPool: true }, validDataSpecification, { processingApproach });
-
-                  const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                  const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
-                      processingResult.validationErrorsMessages : [];
-
-                  await test("Input data is invalid as expected", (): void => {
-                    strictEqual(isRawDataInvalid, true);
-                  });
-
-                  await test("Has exactly one validation error message as expected", (): void => {
-                    strictEqual(undefinedToEmptyArray(validationErrorsMessages).length, 1);
-                  });
-
-                  await test("Validation error message is correct", (): void => {
-                    strictEqual(
-                      undefinedToEmptyArray(validationErrorsMessages)[0],
-                      validationErrorsMessagesBuilder.
-                          buildConditionallyRequiredPropertyIsMissingWhileRequirementConditionSatisfiedErrorMessage({
-                            targetPropertyDotSeparatedQualifiedName: `${ dataNameForLogging }.${ targetPropertyName }`,
-                            targetPropertyNewName: null,
-                            /* eslint-disable-next-line no-undefined --
-                             * It could be omitted, but the explicit `undefined` is better for readability of the tests
-                             *   for this case. */
-                            targetPropertyValue: undefined,
-                            targetPropertyValueSpecification: validDataSpecification.properties[targetPropertyName],
-                            requirementConditionDescription
-                          })
-                    );
-                  });
-
-                });
-
-              }),
-
-              suite("Default Value Substitution", async (): Promise<void> => {
-
-                type ValidData = { foo: string; };
-
-                function generateConstantDataSample(): Partial<ValidData> {
-                  return {};
-                }
-
-                const TARGET_PROPERTY_DEFAULT_VALUE: string = "ALPHA";
-
-                const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                  nameForLogging: "Sample",
-                  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
-                  properties: {
-                    foo: {
-                      type: String,
-                      defaultValue: TARGET_PROPERTY_DEFAULT_VALUE
-                    }
-                  }
-                };
-
-                const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                  process(generateConstantDataSample(), validDataSpecification, { processingApproach });
-
-                const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                let processedData: ValidData | undefined;
-
-                if ("processedData" in processingResult) {
-                  processedData = processingResult.processedData;
-                }
-
-                await test("Default value has been substituted as expected", (): void => {
-                  strictEqual(processedData?.foo, TARGET_PROPERTY_DEFAULT_VALUE);
-                });
-
-                await test("Input data is valid as expected", (): void => {
-                  strictEqual(isRawDataInvalid, false);
-                });
-
-                await test("Output data is not even with input data as expected", (): void => {
-                  notDeepEqual(processedData, generateConstantDataSample());
-                });
-
-              })
-
-            ]);
-
-          })
-    )
-  );
-
-}).catch(Logger.logPromiseError);
+  }
+).catch(Logger.logPromiseError);

@@ -1,5 +1,3 @@
-/* eslint max-depth: [ "error", 6 ] */
-
 import type { ArbitraryObject } from "../Types/ArbitraryObject";
 import type { ReadonlyParsedJSON, ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
 
@@ -44,8 +42,6 @@ class RawObjectDataProcessor {
 
   private readonly localization: RawObjectDataProcessor.Localization;
 
-  /** @deprecated */
-  private readonly validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder; // TODO 削除
   private readonly validationErrorsMessages: Array<string> = [];
 
   private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
@@ -62,9 +58,6 @@ class RawObjectDataProcessor {
 
     const localization: RawObjectDataProcessor.Localization =
         options.localization ?? RawObjectDataProcessor.defaultLocalization;
-
-    const validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder =
-        new RawObjectDataProcessor.ValidationErrorsMessagesBuilder(localization);
 
     /* [ Theory ]
     * Because `typeof null` is `"object"`, besides `typeof` it's required to check for the null the value for the
@@ -91,7 +84,6 @@ class RawObjectDataProcessor {
       rawData,
       fullDataSpecification: validDataSpecification,
       processingApproach: options.processingApproach,
-      validationErrorsMessagesBuilder,
       localization,
       errorHandlingStrategies: options.errorsHandlingStrategies
     });
@@ -274,7 +266,6 @@ class RawObjectDataProcessor {
       rawData: ArbitraryObject;
       fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
       processingApproach?: RawObjectDataProcessor.ProcessingApproaches;
-      validationErrorsMessagesBuilder: RawObjectDataProcessor.ValidationErrorsMessagesBuilder;
       localization: RawObjectDataProcessor.Localization;
       errorHandlingStrategies?: Partial<RawObjectDataProcessor.ErrorsHandlingStrategies>;
     }
@@ -288,7 +279,6 @@ class RawObjectDataProcessor {
         RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject;
 
     this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
-    this.validationErrorsMessagesBuilder = parametersObject.validationErrorsMessagesBuilder;
     this.localization = parametersObject.localization;
 
     this.errorHandlingStrategies = {
@@ -660,7 +650,6 @@ class RawObjectDataProcessor {
                 childPropertyStringifiedValueBeforeFirstPreValidationModification
           });
 
-
       switch (this.processingApproach) {
 
         case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
@@ -711,17 +700,20 @@ class RawObjectDataProcessor {
 
         areOneOnMorePropertiesInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetObjectTypeSourceValue,
-            targetPropertyValueSpecification: targetObjectTypeValueSpecification,
-            customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
+            customValidationDescription: customValidator.descriptionForLogging
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetObjectTypeSourceValue,
+          targetPropertyValueSpecification: targetObjectTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -776,16 +768,23 @@ class RawObjectDataProcessor {
   ): RawObjectDataProcessor.ValueProcessingResult {
 
     if (!Array.isArray(targetValue__expectedToBeIndexedArray)) {
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeIndexedArray,
-          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
+        description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
+        generateDescription({
+          actualType: typeof targetValue__expectedToBeIndexedArray,
+          expectedType: RawObjectDataProcessor.ValuesTypesIDs.number
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeIndexedArray,
+        targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
       return { isInvalid: true };
+
     }
 
 
@@ -798,17 +797,20 @@ class RawObjectDataProcessor {
 
       isTargetIndexedArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeIndexedArray,
-          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          minimalElementsCount: targetIndexedArrayTypeValueSpecification.minimalElementsCount,
-          actualElementsCount: targetValue__expectedToBeIndexedArray.length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.indexedArrayElementsCountIsLessThanRequiredMinimum.title,
+        description: this.localization.validationErrors.indexedArrayElementsCountIsLessThanRequiredMinimum.
+            generateDescription({
+              minimalElementsCount: targetIndexedArrayTypeValueSpecification.minimalElementsCount,
+              actualElementsCount: targetValue__expectedToBeIndexedArray.length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeIndexedArray,
+        targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -819,17 +821,20 @@ class RawObjectDataProcessor {
 
       isTargetIndexedArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeIndexedArray,
-          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          maximalElementsCount: targetIndexedArrayTypeValueSpecification.maximalElementsCount,
-          actualElementsCount: targetValue__expectedToBeIndexedArray.length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.indexedArrayElementsCountIsMoreThanAllowedMaximum.title,
+        description: this.localization.validationErrors.indexedArrayElementsCountIsMoreThanAllowedMaximum.
+            generateDescription({
+              maximalElementsCount: targetIndexedArrayTypeValueSpecification.maximalElementsCount,
+              actualElementsCount: targetValue__expectedToBeIndexedArray.length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeIndexedArray,
+        targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -840,17 +845,20 @@ class RawObjectDataProcessor {
 
       isTargetIndexedArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeIndexedArray,
-          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          exactElementsCount: targetIndexedArrayTypeValueSpecification.exactElementsCount,
-          actualElementsCount: targetValue__expectedToBeIndexedArray.length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.title,
+        description: this.localization.validationErrors.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.
+            generateDescription({
+              exactElementsCount: targetIndexedArrayTypeValueSpecification.exactElementsCount,
+              actualElementsCount: targetValue__expectedToBeIndexedArray.length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeIndexedArray,
+        targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -903,19 +911,21 @@ class RawObjectDataProcessor {
 
           areOneOnMoreElementsInvalid = true;
 
-          this.registerValidationError(
-            this.validationErrorsMessagesBuilder.buildIndexedArrayDisallowedUndefinedElementErrorMessage({
-              targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-              targetPropertyValue: targetValue__expectedToBeIndexedArray,
-              targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedElementBeforeFirstPreValidationModification
-            })
-          );
+          this.registerValidationError({
+            title: this.localization.validationErrors.indexedArrayDisallowedUndefinedElement.title,
+            description: this.localization.validationErrors.indexedArrayDisallowedUndefinedElement.description,
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeIndexedArray,
+            targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+            stringifiedElementBeforeFirstPreValidationModification
+          });
+
         }
 
         continue;
+
       }
 
 
@@ -925,19 +935,21 @@ class RawObjectDataProcessor {
 
           areOneOnMoreElementsInvalid = true;
 
-          this.registerValidationError(
-            this.validationErrorsMessagesBuilder.buildIndexedArrayDisallowedNullElementErrorMessage({
-              targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-              targetPropertyValue: targetValue__expectedToBeIndexedArray,
-              targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedElementBeforeFirstPreValidationModification
-            })
-          );
+          this.registerValidationError({
+            title: this.localization.validationErrors.indexedArrayDisallowedNullElement.title,
+            description: this.localization.validationErrors.indexedArrayDisallowedNullElement.description,
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeIndexedArray,
+            targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                stringifiedElementBeforeFirstPreValidationModification
+          });
+
         }
 
         continue;
+
       }
 
 
@@ -949,7 +961,6 @@ class RawObjectDataProcessor {
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
                 stringifiedElementBeforeFirstPreValidationModification
           });
-
 
       switch (this.processingApproach) {
 
@@ -996,17 +1007,20 @@ class RawObjectDataProcessor {
 
         areOneOnMoreElementsInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeIndexedArray,
-            targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
-            customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
+            customValidationDescription: customValidator.descriptionForLogging
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeIndexedArray,
+          targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -1034,6 +1048,7 @@ class RawObjectDataProcessor {
      * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
      * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Array };
+
   }
 
 
@@ -1054,16 +1069,23 @@ class RawObjectDataProcessor {
     /* [ Approach ] If "targetValue__expectedToBeObject" is a root object (rawData) this condition will always be falsy
      *    because "isArbitraryObject" check already has been executed. */
     if (!isArbitraryObject(targetValue__expectedToBeAssociativeArrayTypeObject)) {
-      this.registerValidationError(
-          this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
-          })
-      );
+
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
+        description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
+        generateDescription({
+          actualType: typeof targetValue__expectedToBeAssociativeArrayTypeObject,
+          expectedType: RawObjectDataProcessor.ValuesTypesIDs.number
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+        targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
       return { isInvalid: true };
+
     }
 
 
@@ -1077,17 +1099,20 @@ class RawObjectDataProcessor {
 
       isTargetAssociativeArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          minimalEntriesCount: targetAssociativeArrayTypeValueSpecification.minimalEntriesCount,
-          actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.associativeArrayEntriesCountIsLessThanRequiredMinimum.title,
+        description: this.localization.validationErrors.associativeArrayEntriesCountIsLessThanRequiredMinimum.
+            generateDescription({
+              minimalEntriesCount: targetAssociativeArrayTypeValueSpecification.minimalEntriesCount,
+              actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+        targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -1099,17 +1124,20 @@ class RawObjectDataProcessor {
 
       isTargetAssociativeArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildAssociativeArrayPairsCountIsMoreThanAllowedMaximumErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          maximalEntriesCount: targetAssociativeArrayTypeValueSpecification.maximalEntriesCount,
-          actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.associativeArrayPairsCountIsMoreThanAllowedMaximum.title,
+        description: this.localization.validationErrors.associativeArrayPairsCountIsMoreThanAllowedMaximum.
+            generateDescription({
+              maximalEntriesCount: targetAssociativeArrayTypeValueSpecification.maximalEntriesCount,
+              actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+        targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -1121,17 +1149,20 @@ class RawObjectDataProcessor {
 
       isTargetAssociativeArrayTypeValueInvalid = true;
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildAssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          exactEntriesCount: targetAssociativeArrayTypeValueSpecification.exactEntriesCount,
-          actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.title,
+        description: this.localization.validationErrors.associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.
+            generateDescription({
+              exactEntriesCount: targetAssociativeArrayTypeValueSpecification.exactEntriesCount,
+              actualEntriesCount: Object.entries(targetValue__expectedToBeAssociativeArrayTypeObject).length
+            }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+        targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
     }
 
 
@@ -1144,17 +1175,20 @@ class RawObjectDataProcessor {
 
         isTargetAssociativeArrayTypeValueInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildRequiredKeysOfAssociativeArrayAreMissingErrorMessage({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-            missingRequiredKeys
-          })
-        );
+        // buildRequiredKeysOfAssociativeArrayAreMissingErrorMessage
+        this.registerValidationError({
+          title: this.localization.validationErrors.requiredKeysOfAssociativeArrayAreMissing.title,
+          description: this.localization.validationErrors.requiredKeysOfAssociativeArrayAreMissing.
+            generateDescription({ missingRequiredKeys }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -1173,17 +1207,21 @@ class RawObjectDataProcessor {
 
         isTargetAssociativeArrayTypeValueInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessage({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-            requiredKeysAlternatives: targetAssociativeArrayTypeValueSpecification.oneOfKeysIsRequired
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.requiredAlternativeKeysOfAssociativeArrayAreMissing.title,
+          description: this.localization.validationErrors.requiredAlternativeKeysOfAssociativeArrayAreMissing.
+              generateDescription({
+                requiredKeysAlternatives: targetAssociativeArrayTypeValueSpecification.oneOfKeysIsRequired
+              }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -1201,17 +1239,19 @@ class RawObjectDataProcessor {
 
         isTargetAssociativeArrayTypeValueInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildDisallowedKeysFoundInAssociativeArrayErrorMessage({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-            foundDisallowedKeys
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.disallowedKeysFoundInAssociativeArray.title,
+          description: this.localization.validationErrors.disallowedKeysFoundInAssociativeArray.
+              generateDescription({ foundDisallowedKeys }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -1247,7 +1287,6 @@ class RawObjectDataProcessor {
         try {
           value = preValidationModification(value);
         } catch (error: unknown) {
-
           this.registerValidationError({
             title: this.localization.validationErrors.preValidationModificationFailed.title,
             description: this.localization.validationErrors.preValidationModificationFailed.generateDescription({
@@ -1272,19 +1311,21 @@ class RawObjectDataProcessor {
 
           areOneOnMoreValuesInvalid = true;
 
-          this.registerValidationError(
-            this.validationErrorsMessagesBuilder.associativeArrayDisallowedUndefinedValueErrorMessage({
-              targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-              targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-              targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedValueBeforeFirstPreValidationModification
-            })
-          );
+          this.registerValidationError({
+            title: this.localization.validationErrors.associativeArrayDisallowedUndefinedValue.title,
+            description: this.localization.validationErrors.associativeArrayDisallowedUndefinedValue.description,
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                stringifiedValueBeforeFirstPreValidationModification
+          });
+
         }
 
         continue;
+
       }
 
       if (isNull(value)) {
@@ -1293,19 +1334,20 @@ class RawObjectDataProcessor {
 
           areOneOnMoreValuesInvalid = true;
 
-          this.registerValidationError(
-            this.validationErrorsMessagesBuilder.associativeArrayDisallowedNullValueErrorMessage({
-              targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-              targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-              targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-              targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-                  stringifiedValueBeforeFirstPreValidationModification
-            })
-          );
+          this.registerValidationError({
+            title: this.localization.validationErrors.associativeArrayDisallowedNullValue.title,
+            description: this.localization.validationErrors.associativeArrayDisallowedNullValue.description,
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                stringifiedValueBeforeFirstPreValidationModification
+          });
         }
 
         continue;
+
       }
 
 
@@ -1317,7 +1359,6 @@ class RawObjectDataProcessor {
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
                 stringifiedValueBeforeFirstPreValidationModification
           });
-
 
       switch (this.processingApproach) {
 
@@ -1333,6 +1374,7 @@ class RawObjectDataProcessor {
           processedValueWorkpiece[keyFinalName] = valueProcessingResult.processedValue;
 
           break;
+
         }
 
         case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
@@ -1340,11 +1382,12 @@ class RawObjectDataProcessor {
           /* ※ Reserved for the future.
           * Basically no need to change value, but postValidationModification could be requested. */
         }
+
       }
+
     }
 
     this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
-
 
     for (
       const customValidator of
@@ -1360,17 +1403,20 @@ class RawObjectDataProcessor {
 
         areOneOnMoreValuesInvalid = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
-            targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
-            customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
+            customValidationDescription: customValidator.descriptionForLogging
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeAssociativeArrayTypeObject,
+          targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
 
@@ -1394,6 +1440,7 @@ class RawObjectDataProcessor {
      * Same as any type guard in TypeScript, it does not guarantee that all checks matching with target types, but it is
      * the best that possible with current limitations. */
     return { processedValue: processedValueWorkpiece as ParsedJSON_Object };
+
   }
 
 
@@ -1701,17 +1748,20 @@ class RawObjectDataProcessor {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeNumber,
-            targetPropertyValueSpecification: targetValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
             customValidationDescription: customValidator.descriptionForLogging
-          })
-        );
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeNumber,
+          targetPropertyValueSpecification: targetValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
     if (atLeastOneCustomValidationFailed) {
@@ -1752,17 +1802,22 @@ class RawObjectDataProcessor {
 
     if (!isString(targetValue__expectedToBeString)) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
+        description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
+        generateDescription({
+          actualType: typeof targetValue__expectedToBeString,
+          expectedType: RawObjectDataProcessor.ValuesTypesIDs.number
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1776,23 +1831,23 @@ class RawObjectDataProcessor {
           includes(targetValue__expectedToBeString)
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.valueIsNotAmongAllowedAlternatives({
-          allowedAlternatives: targetValueSpecification.
-              allowedAlternatives.
-              map(
-                (polymorphicElement: string | { key: string; value: string; }): string =>
-                    (isString(polymorphicElement) ? polymorphicElement : polymorphicElement.key)
-              ),
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueIsNotAmongAllowedAlternatives.title,
+        description: this.localization.validationErrors.valueIsNotAmongAllowedAlternatives.generateDescription({
+          allowedAlternatives: targetValueSpecification.allowedAlternatives.map(
+            (polymorphicElement: string | { key: string; value: string; }): string =>
+                (isString(polymorphicElement) ? polymorphicElement : polymorphicElement.key)
+          )
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1801,19 +1856,21 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeString.length < targetValueSpecification.minimalCharactersCount
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildCharactersCountIsLessThanRequiredErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      this.registerValidationError({
+        title: this.localization.validationErrors.charactersCountIsLessThanRequired.title,
+        description: this.localization.validationErrors.charactersCountIsLessThanRequired.generateDescription({
           minimalCharactersCount: targetValueSpecification.minimalCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1822,19 +1879,21 @@ class RawObjectDataProcessor {
       targetValue__expectedToBeString.length > targetValueSpecification.maximalCharactersCount
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildCharactersCountIsMoreThanAllowedErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      this.registerValidationError({
+        title: this.localization.validationErrors.charactersCountIsMoreThanAllowed.title,
+        description: this.localization.validationErrors.charactersCountIsMoreThanAllowed.generateDescription({
           maximalCharactersCount: targetValueSpecification.maximalCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1842,18 +1901,22 @@ class RawObjectDataProcessor {
       isNaturalNumber(targetValueSpecification.fixedCharactersCount) &&
       targetValue__expectedToBeString.length !== targetValueSpecification.fixedCharactersCount
     ) {
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildCharactersCountDoesNotMatchWithSpecifiedErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+
+      this.registerValidationError({
+        title: this.localization.validationErrors.charactersCountDoesNotMatchWithSpecified.title,
+        description: this.localization.validationErrors.charactersCountDoesNotMatchWithSpecified.generateDescription({
           fixedCharactersCount: targetValueSpecification.fixedCharactersCount,
           realCharactersCount: targetValue__expectedToBeString.length
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
       return { isInvalid: true };
+
     }
 
 
@@ -1861,17 +1924,21 @@ class RawObjectDataProcessor {
       isNotUndefined(targetValueSpecification.validValueRegularExpression) &&
       !targetValueSpecification.validValueRegularExpression.test(targetValue__expectedToBeString)
     ) {
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildRegularExpressionMismatchErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeString,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+
+      this.registerValidationError({
+        title: this.localization.validationErrors.regularExpressionMismatch.title,
+        description: this.localization.validationErrors.regularExpressionMismatch.generateDescription({
           regularExpression: targetValueSpecification.validValueRegularExpression
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeString,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
+
       return { isInvalid: true };
+
     }
 
 
@@ -1882,26 +1949,32 @@ class RawObjectDataProcessor {
       RawObjectDataProcessor.getNormalizedCustomValidators(targetValueSpecification.customValidators)
     ) {
 
-      if (!customValidator.validationFunction({
-        currentPropertyValue: targetValue__expectedToBeString,
-        rawData__full: this.rawData,
-        rawData__currentObjectDepth: parentObject ?? this.rawData,
-        targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
-      })) {
+      // TODO try / catch + 三つの戦略
+      if (
+        !customValidator.validationFunction({
+          currentPropertyValue: targetValue__expectedToBeString,
+          rawData__full: this.rawData,
+          rawData__currentObjectDepth: parentObject ?? this.rawData,
+          targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+        })
+      ) {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeString,
-            targetPropertyValueSpecification: targetValueSpecification,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
             customValidationDescription: customValidator.descriptionForLogging
-          })
-        );
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeString,
+          targetPropertyValueSpecification: targetValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
     if (atLeastOneCustomValidationFailed) {
@@ -1942,17 +2015,22 @@ class RawObjectDataProcessor {
 
     if (!isBoolean(targetValue__expectedToBeBoolean)) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.valueTypeDoesNotMatchWithExpectedOne({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeBoolean,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        })
-      );
+      this.registerValidationError({
+        title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
+        description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
+        generateDescription({
+          actualType: typeof targetValue__expectedToBeBoolean,
+          expectedType: RawObjectDataProcessor.ValuesTypesIDs.number
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeBoolean,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1961,18 +2039,20 @@ class RawObjectDataProcessor {
       (targetValueSpecification.falseOnly === true && targetValue__expectedToBeBoolean)
     ) {
 
-      this.registerValidationError(
-        this.validationErrorsMessagesBuilder.buildDisallowedBooleanValueVariantErrorMessage({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue__expectedToBeBoolean,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      this.registerValidationError({
+        title: this.localization.validationErrors.disallowedBooleanValueVariant.title,
+        description: this.localization.validationErrors.disallowedBooleanValueVariant.generateDescription({
           disallowedVariant: !(targetValueSpecification.trueOnly === true)
-        })
-      );
+        }),
+        targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyValue: targetValue__expectedToBeBoolean,
+        targetPropertyValueSpecification: targetValueSpecification,
+        targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      });
 
       return { isInvalid: true };
+
     }
 
 
@@ -1983,26 +2063,30 @@ class RawObjectDataProcessor {
       RawObjectDataProcessor.getNormalizedCustomValidators(targetValueSpecification.customValidators)
     ) {
 
+      // TODO try / catch + 三つの戦略
       if (!customValidator.validationFunction({
         currentPropertyValue: targetValue__expectedToBeBoolean,
         rawData__full: this.rawData,
         rawData__currentObjectDepth: parentObject ?? this.rawData,
-        targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
       })) {
 
         atLeastOneCustomValidationFailed = true;
 
-        this.registerValidationError(
-          this.validationErrorsMessagesBuilder.buildCustomValidationFailedErrorMessageTextData({
-            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-            targetPropertyValue: targetValue__expectedToBeBoolean,
-            targetPropertyValueSpecification: targetValueSpecification,
-            customValidationDescription: customValidator.descriptionForLogging,
-            targetPropertyStringifiedValueBeforeFirstPreValidationModification
-          })
-        );
+        this.registerValidationError({
+          title: this.localization.validationErrors.customValidationFailed.title,
+          description: this.localization.validationErrors.customValidationFailed.generateDescription({
+            customValidationDescription: customValidator.descriptionForLogging
+          }),
+          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyValue: targetValue__expectedToBeBoolean,
+          targetPropertyValueSpecification: targetValueSpecification,
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+        });
+
       }
+
     }
 
     if (atLeastOneCustomValidationFailed) {
@@ -2095,16 +2179,16 @@ class RawObjectDataProcessor {
 
         if (possibleSpecificationsForObjectValueTypes.length > 1) {
 
-          Logger.logError({
-            errorType: InvalidParameterValueError.NAME,
-            title: InvalidParameterValueError.localization.defaultTitle,
-            description: this.validationErrorsMessagesBuilder.buildIncompatibleValuesTypesAlternativesErrorDescription(
-                targetValueSpecification
-            ),
-            occurrenceLocation: "RawObjectDataProcessor.processMultipleTypesAllowedValue(parametersObject)"
+          Logger.throwErrorAndLog({
+            errorInstance: new InvalidParameterValueError({
+              customMessage: this.localization.throwableErrors.incompatibleValuesTypesAlternatives.generateDescription({
+                targetValueStringifiedSpecification: stringifyAndFormatArbitraryValue(targetValueSpecification)
+              })
+            }),
+            title: this.localization.throwableErrors.incompatibleValuesTypesAlternatives.title,
+            occurrenceLocation: "RawObjectDataProcessor.processMultipleTypesAllowedValue(compoundParameter)"
           });
 
-          return { isInvalid: true };
         }
 
         specificationForValueOfCurrentType = possibleSpecificationsForObjectValueTypes[0];
@@ -2120,19 +2204,16 @@ class RawObjectDataProcessor {
 
       Logger.logError({
         errorType: InvalidParameterValueError.NAME,
-        title: InvalidParameterValueError.localization.defaultTitle,
-        description: this.validationErrorsMessagesBuilder.buildUnsupportedValueTypeErrorDescription({
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
-          targetPropertyValue: targetValue,
-          targetPropertyValueSpecification: targetValueSpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification
-        }),
+        title: this.localization.validationErrors.unsupportedValueType.title,
+        description: this.localization.validationErrors.unsupportedValueType.
+            generateDescription({ targetPropertyValue: targetValue }),
         occurrenceLocation: "RawObjectDataProcessor.processMultipleTypesAllowedValue(parametersObject)"
       });
 
       return { isInvalid: true };
+
     }
+
 
     return this.processSingleNeitherUndefinedNorNullValue({
       targetValue,
@@ -2140,14 +2221,12 @@ class RawObjectDataProcessor {
       parentObject,
       targetPropertyStringifiedValueBeforeFirstPreValidationModification
     });
+
   }
 
 
   /* --- Helpers ---------------------------------------------------------------------------------------------------- */
-  // TODO 文字列という選択しを無くす
-  private registerValidationError(
-    payload: RawObjectDataProcessor.Localization.DataForMessagesBuilding | string
-  ): void {
+  private registerValidationError(payload: RawObjectDataProcessor.Localization.DataForMessagesBuilding): void {
     this.isRawDataInvalid = true;
     this.validationErrorsMessages.push(
       isString(payload) ? payload : RawObjectDataProcessor.generateValidationErrorMessage(payload, this.localization)
@@ -2937,8 +3016,8 @@ namespace RawObjectDataProcessor {
         customValidators?: CustomValidator<ReadonlyArray<ParsedJSON_NestedProperty>> |
             ReadonlyArray<CustomValidator<ReadonlyArray<ParsedJSON_NestedProperty>>>;
         postValidationModifications?:
-            ((validValue: ReadonlyArray<ParsedJSON_NestedProperty>) => ReadonlyArray<ParsedJSON_NestedProperty>) |
-            ReadonlyArray<(validValue: ReadonlyArray<ParsedJSON_NestedProperty>) => ReadonlyArray<ParsedJSON_NestedProperty>>;
+            ((validValue: ReadonlyArray<ParsedJSON_NestedProperty>) => Array<ParsedJSON_NestedProperty>) |
+            ReadonlyArray<(validValue: ReadonlyArray<ParsedJSON_NestedProperty>) => Array<ParsedJSON_NestedProperty>>;
       }>;
 
   export type NestedUniformElementsIndexedArrayPropertySpecification =
@@ -3072,114 +3151,9 @@ namespace RawObjectDataProcessor {
 
     warnings: Localization.Warnings;
 
-    // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    /* === Indexed arrays =========================================================================================== */
-    readonly buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData:
-        (minimalElementsCount: { minimalElementsCount: number; actualElementsCount: number; }) =>
-            Localization.InvalidPropertyValidationErrorMessageTemplateData;
+    getLocalizedValueType: (valueType: Localization.ValuesTypes) => string;
 
-    readonly buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessageTextData:
-        (maximalElementsCount: { maximalElementsCount: number; actualElementsCount: number; }) =>
-            Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData:
-        (parametersObject: { exactElementsCount: number; actualElementsCount: number; }) =>
-            Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly indexedArrayDisallowedUndefinedElementErrorMessageTextData: Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly indexedArrayDisallowedNullElementErrorMessageTextData: Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-
-    /* === Associative arrays ======================================================================================= */
-    readonly buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData:
-        (minimalElementsCount: { minimalEntriesCount: number; actualEntriesCount: number; })
-            => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildAssociativeArrayEntriesCountIsMoreThanAllowedMaximumErrorMessageTextData:
-        (maximalElementsCount: { maximalEntriesCount: number; actualEntriesCount: number; })
-            => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildAssociativeArrayEntriesCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData:
-        (parametersObject: { exactEntriesCount: number; actualEntriesCount: number; })
-            => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData: (
-      missingRequiredKeys: Array<string>
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData: (
-      allowedAlternatives: ReadonlyArray<string>
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData: (
-        requiredKeysAlternatives: Array<string>
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly associativeArrayDisallowedUndefinedValueErrorMessageTextData: Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly associativeArrayDisallowedNullValueErrorMessageTextData: Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-
-    /* === Value type =============================================================================================== */
-    readonly getLocalizedValueType: (valueType: Localization.ValuesTypes) => string;
-
-    readonly numbersSet: (numberSet: NumbersSets) => string;
-
-
-    /* === Numeric value ============================================================================================ */
-    readonly numericValueIsNotBelongToExpectedNumbersSet: (expectedNumbersSet: NumbersSets) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly valueIsNotAmongAllowedAlternativesTextData: (allowedAlternatives: ReadonlyArray<string>) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly numericValueIsSmallerThanRequiredMinimumTextData: (requiredMinimum: number) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly numericValueIsGreaterThanAllowedMaximumTextData: (allowedMaximum: number) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-
-    /* === String value ============================================================================================= */
-    readonly buildCharactersCountIsLessThanRequiredErrorMessageTextData: (
-      payload: { minimalCharactersCount: number; realCharactersCount: number; }
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildCharactersCountIsMoreThanAllowedErrorMessageTextData: (
-      payload: { maximalCharactersCount: number; realCharactersCount: number; }
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildCharactersCountDoesNotMatchWithSpecifiedErrorMessageTextData: (
-      payload: { fixedCharactersCount: number; realCharactersCount: number; }
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildRegularExpressionMismatchErrorMessageTextData: (regularExpression: RegExp) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-
-    /* === Boolean value ============================================================================================ */
-    readonly buildDisallowedBooleanValueVariantErrorMessageTextData: (disallowedVariant: boolean) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildIncompatibleValuesTypesAlternativesErrorDescription: (
-      targetValueSpecification: MultipleTypesAllowedValueSpecification
-    ) => string;
-
-    readonly buildUnsupportedValueTypeErrorMessageTextData: (
-      propertyDataForMessagesBuilding: Localization.PropertyDataForMessagesBuilding
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    readonly buildCustomValidationFailedErrorMessageTextData: (customValidationDescription: string) =>
-        Localization.InvalidPropertyValidationErrorMessageTemplateData;
-
-    /* === Deprecated ============================================================================================ */
-    /** @deprecated */
-    readonly valueTypeDoesNotMatchWithExpectedOneTextData: (
-        payload: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
-          targetPropertyValueSpecification: Exclude<ValueSpecification, MultipleTypesAllowedValueSpecification>;
-        }
-    ) => Localization.InvalidPropertyValidationErrorMessageTemplateData;
+    getLocalizedNumbersSet: (numberSet: NumbersSets) => string;
 
   }>;
 
@@ -3271,7 +3245,174 @@ namespace RawObjectDataProcessor {
         ) => string;
       }>;
 
+      charactersCountIsLessThanRequired: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
+        ) => string;
+      }>;
+
+      charactersCountIsMoreThanAllowed: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.CharactersCountIsMoreThanAllowed.TemplateVariables
+        ) => string;
+      }>;
+
+      charactersCountDoesNotMatchWithSpecified: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.CharactersCountDoesNotMatchWithSpecified.TemplateVariables
+        ) => string;
+      }>;
+
+      regularExpressionMismatch: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.RegularExpressionMismatch.TemplateVariables
+        ) => string;
+      }>;
+
+      disallowedBooleanValueVariant: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.DisallowedBooleanValueVariant.TemplateVariables
+        ) => string;
+      }>;
+
+      indexedArrayElementsCountIsLessThanRequiredMinimum: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
+        ) => string;
+      }>;
+
+      indexedArrayElementsCountIsMoreThanAllowedMaximum: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
+        ) => string;
+      }>;
+
+      indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.IndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+        ) => string;
+      }>;
+
+      indexedArrayDisallowedUndefinedElement: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      indexedArrayDisallowedNullElement: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      associativeArrayEntriesCountIsLessThanRequiredMinimum: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
+        ) => string;
+      }>;
+
+      associativeArrayPairsCountIsMoreThanAllowedMaximum: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
+        ) => string;
+      }>;
+
+      associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+        ) => string;
+      }>;
+
+      requiredKeysOfAssociativeArrayAreMissing: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.RequiredKeysOfAssociativeArrayAreMissing.TemplateVariables
+        ) => string;
+      }>;
+
+      requiredAlternativeKeysOfAssociativeArrayAreMissing: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.RequiredAlternativeKeysOfAssociativeArrayAreMissing.TemplateVariables
+        ) => string;
+      }>;
+
+      disallowedKeysFoundInAssociativeArray: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
+        ) => string;
+      }>;
+
+      associativeArrayDisallowedUndefinedValue: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      associativeArrayDisallowedNullValue: Readonly<{
+        title: string;
+        description: string;
+      }>;
+
+      unsupportedValueType: Readonly<{
+        title: string;
+        generateDescription: (
+            templateVariables: ValidationErrors.UnsupportedValueType.TemplateVariables
+        ) => string;
+      }>;
+
+      customValidationFailed: Readonly<{
+        title: string;
+        generateDescription: (
+            templateVariables: ValidationErrors.CustomValidationFailed.TemplateVariables
+        ) => string;
+      }>;
+
     }>;
+
+    export namespace ThrowableErrors {
+
+      export namespace PreValidationModificationFailed {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+        }>;
+      }
+
+      export namespace UnableToDeletePropertyWithOutdatedKey {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+          propertyNewKey: string;
+        }>;
+      }
+
+      export namespace UnableToSubstituteUndefinedPropertyValue {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+        }>;
+      }
+
+      export namespace UnableToSubstituteNullPropertyValue {
+        export type TemplateVariables = Readonly<{
+          targetPropertyDotSeparatedQualifiedName: string;
+        }>;
+      }
+
+      export namespace IncompatibleValuesTypesAlternatives {
+        export type TemplateVariables = Readonly<{
+          targetValueStringifiedSpecification: string;
+        }>;
+      }
+
+    }
 
     export namespace ValidationErrors {
 
@@ -3322,6 +3463,103 @@ namespace RawObjectDataProcessor {
         }>;
       }
 
+      export namespace CharactersCountIsLessThanRequired {
+        export type TemplateVariables = Readonly<{
+          minimalCharactersCount: number;
+          realCharactersCount: number;
+        }>;
+      }
+
+      export namespace CharactersCountIsMoreThanAllowed {
+        export type TemplateVariables = Readonly<{
+          maximalCharactersCount: number;
+          realCharactersCount: number;
+        }>;
+      }
+
+      export namespace CharactersCountDoesNotMatchWithSpecified {
+        export type TemplateVariables = Readonly<{
+          fixedCharactersCount: number;
+          realCharactersCount: number;
+        }>;
+      }
+
+      export namespace RegularExpressionMismatch {
+        export type TemplateVariables = Readonly<{
+          regularExpression: RegExp;
+        }>;
+      }
+
+      export namespace DisallowedBooleanValueVariant {
+        export type TemplateVariables = Readonly<{
+          disallowedVariant: boolean;
+        }>;
+      }
+
+      export namespace IndexedArrayElementsCountIsLessThanRequiredMinimum {
+        export type TemplateVariables = Readonly<{
+          minimalElementsCount: number;
+          actualElementsCount: number;
+        }>;
+      }
+
+      export namespace IndexedArrayElementsCountIsMoreThanAllowedMaximum {
+        export type TemplateVariables = Readonly<{
+          maximalElementsCount: number;
+          actualElementsCount: number;
+        }>;
+      }
+
+      export namespace IndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber {
+        export type TemplateVariables = Readonly<{
+          exactElementsCount: number;
+          actualElementsCount: number;
+        }>;
+      }
+
+      export namespace AssociativeArrayEntriesCountIsLessThanRequiredMinimum {
+        export type TemplateVariables = Readonly<{
+          minimalEntriesCount: number;
+          actualEntriesCount: number;
+        }>;
+      }
+
+      export namespace AssociativeArrayPairsCountIsMoreThanAllowedMaximum {
+        export type TemplateVariables = Readonly<{
+          maximalEntriesCount: number;
+          actualEntriesCount: number;
+        }>;
+      }
+
+      export namespace AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber {
+        export type TemplateVariables = Readonly<{
+          exactEntriesCount: number;
+          actualEntriesCount: number;
+        }>;
+      }
+
+      export namespace RequiredKeysOfAssociativeArrayAreMissing {
+        export type TemplateVariables = Readonly<{ missingRequiredKeys: ReadonlyArray<string>; }>;
+      }
+
+      export namespace RequiredAlternativeKeysOfAssociativeArrayAreMissing {
+        export type TemplateVariables = Readonly<{ requiredKeysAlternatives: ReadonlyArray<string>; }>;
+      }
+
+      export namespace DisallowedKeysFoundInAssociativeArray {
+        export type TemplateVariables = Readonly<{ foundDisallowedKeys: ReadonlyArray<string>; }>;
+      }
+
+      export namespace UnsupportedValueType {
+        export type TemplateVariables = Readonly<{ targetPropertyValue: unknown; }>;
+      }
+
+      export namespace CustomValidationFailed {
+        export type TemplateVariables = Readonly<{
+          customValidationDescription: string;
+        }>;
+      }
+
     }
 
 
@@ -3356,36 +3594,14 @@ namespace RawObjectDataProcessor {
         ) => string;
       }>;
 
+      incompatibleValuesTypesAlternatives: Readonly<{
+        title: string;
+        generateDescription: (
+          templateVariables: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
+        ) => string;
+      }>;
+
     }>;
-
-    export namespace ThrowableErrors {
-
-      export namespace PreValidationModificationFailed {
-        export type TemplateVariables = Readonly<{
-          targetPropertyDotSeparatedQualifiedName: string;
-        }>;
-      }
-
-      export namespace UnableToDeletePropertyWithOutdatedKey {
-        export type TemplateVariables = Readonly<{
-          targetPropertyDotSeparatedQualifiedName: string;
-          propertyNewKey: string;
-        }>;
-      }
-
-      export namespace UnableToSubstituteUndefinedPropertyValue {
-        export type TemplateVariables = Readonly<{
-          targetPropertyDotSeparatedQualifiedName: string;
-        }>;
-      }
-
-      export namespace UnableToSubstituteNullPropertyValue {
-        export type TemplateVariables = Readonly<{
-          targetPropertyDotSeparatedQualifiedName: string;
-        }>;
-      }
-
-    }
 
 
     /* ─── Warnings ───────────────────────────────────────────────────────────────────────────────────────────────── */
@@ -3477,236 +3693,6 @@ namespace RawObjectDataProcessor {
 
   }
 
-  /** @deprecated */
-  export class ValidationErrorsMessagesBuilder {
-
-    private readonly localization: Localization;
-    private readonly buildErrorMessage: (payload: Localization.DataForMessagesBuilding) => string;
-
-    public constructor(localization: Localization) {
-      this.localization = localization;
-      this.buildErrorMessage = localization.generateValidationErrorMessage.bind(this.localization);
-    }
-
-    // ━━━ TODO 分解　━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    /* === Indexed arrays =========================================================================================== */
-    public buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { minimalElementsCount: number; actualElementsCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData({
-          minimalElementsCount: payload.minimalElementsCount,
-          actualElementsCount: payload.actualElementsCount
-        })
-      });
-    }
-
-    public buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { maximalElementsCount: number; actualElementsCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessageTextData({
-          maximalElementsCount: payload.maximalElementsCount,
-          actualElementsCount: payload.actualElementsCount
-        })
-      });
-    }
-
-    public buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { exactElementsCount: number; actualElementsCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData({
-          exactElementsCount: payload.exactElementsCount,
-          actualElementsCount: payload.actualElementsCount
-        })
-      });
-    }
-
-    public buildIndexedArrayDisallowedUndefinedElementErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.indexedArrayDisallowedUndefinedElementErrorMessageTextData
-      });
-    }
-
-    public buildIndexedArrayDisallowedNullElementErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.indexedArrayDisallowedNullElementErrorMessageTextData
-      });
-    }
-
-
-    /* === Associative arrays ======================================================================================= */
-    public buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { minimalEntriesCount: number; actualEntriesCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData({
-          minimalEntriesCount: payload.minimalEntriesCount,
-          actualEntriesCount: payload.actualEntriesCount
-        })
-      });
-    }
-
-    public buildAssociativeArrayPairsCountIsMoreThanAllowedMaximumErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { maximalEntriesCount: number; actualEntriesCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildAssociativeArrayEntriesCountIsMoreThanAllowedMaximumErrorMessageTextData({
-          maximalEntriesCount: payload.maximalEntriesCount,
-          actualEntriesCount: payload.actualEntriesCount
-        })
-      });
-    }
-
-    public buildAssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumberErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { exactEntriesCount: number; actualEntriesCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildAssociativeArrayEntriesCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData({
-          exactEntriesCount: payload.exactEntriesCount,
-          actualEntriesCount: payload.actualEntriesCount
-        })
-      });
-    }
-
-    public buildRequiredKeysOfAssociativeArrayAreMissingErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { missingRequiredKeys: Array<string>; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(payload.missingRequiredKeys)
-      });
-    }
-
-    public buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { requiredKeysAlternatives: ReadonlyArray<string>; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-          payload.requiredKeysAlternatives
-        )
-      });
-    }
-
-    public buildDisallowedKeysFoundInAssociativeArrayErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { foundDisallowedKeys: Array<string>; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData(payload.foundDisallowedKeys)
-      });
-    }
-
-    public associativeArrayDisallowedUndefinedValueErrorMessage(
-        payload: Localization.PropertyDataForMessagesBuilding
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.associativeArrayDisallowedUndefinedValueErrorMessageTextData
-      });
-    }
-
-    public associativeArrayDisallowedNullValueErrorMessage(
-        payload: Localization.PropertyDataForMessagesBuilding
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.associativeArrayDisallowedNullValueErrorMessageTextData
-      });
-    }
-
-
-    /* === String value ============================================================================================= */
-    public buildCharactersCountIsLessThanRequiredErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { minimalCharactersCount: number; realCharactersCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildCharactersCountIsLessThanRequiredErrorMessageTextData({
-          minimalCharactersCount: payload.minimalCharactersCount,
-          realCharactersCount: payload.realCharactersCount
-        })
-      });
-    }
-
-    public buildCharactersCountIsMoreThanAllowedErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { maximalCharactersCount: number; realCharactersCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildCharactersCountIsMoreThanAllowedErrorMessageTextData({
-          maximalCharactersCount: payload.maximalCharactersCount,
-          realCharactersCount: payload.realCharactersCount
-        })
-      });
-    }
-
-    public buildCharactersCountDoesNotMatchWithSpecifiedErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { fixedCharactersCount: number; realCharactersCount: number; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildCharactersCountDoesNotMatchWithSpecifiedErrorMessageTextData({
-          fixedCharactersCount: payload.fixedCharactersCount,
-          realCharactersCount: payload.realCharactersCount
-        })
-      });
-    }
-
-    public buildRegularExpressionMismatchErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { regularExpression: RegExp; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildRegularExpressionMismatchErrorMessageTextData(payload.regularExpression)
-      });
-    }
-
-    /* === Other ====================================================================================================== */
-    public buildDisallowedBooleanValueVariantErrorMessage(
-      payload: Localization.PropertyDataForMessagesBuilding & { disallowedVariant: boolean; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload, ...this.localization.buildDisallowedBooleanValueVariantErrorMessageTextData(payload.disallowedVariant)
-      });
-    }
-
-    public buildIncompatibleValuesTypesAlternativesErrorDescription(
-      targetValueSpecification: MultipleTypesAllowedValueSpecification
-    ): string {
-      return this.localization.buildIncompatibleValuesTypesAlternativesErrorDescription(targetValueSpecification);
-    }
-
-    public buildUnsupportedValueTypeErrorDescription(payload: Localization.PropertyDataForMessagesBuilding): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildUnsupportedValueTypeErrorMessageTextData(payload)
-      });
-    }
-
-    public buildCustomValidationFailedErrorMessageTextData(
-      payload: Localization.PropertyDataForMessagesBuilding & { customValidationDescription: string; }
-    ): string {
-      return this.buildErrorMessage({
-        ...payload,
-        ...this.localization.buildCustomValidationFailedErrorMessageTextData(payload.customValidationDescription)
-      });
-    }
-  }
 }
 
 

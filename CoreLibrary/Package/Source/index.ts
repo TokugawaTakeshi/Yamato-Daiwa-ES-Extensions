@@ -34,6 +34,7 @@ export { default as removeArrayElementsByPredicates, type RemovingArrayElementsB
 export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
 export { default as replaceArrayElementsByPredicates, type ReplacingArrayElementsByPredicatesOperation } from
     "./Arrays/replaceArrayElementsByPredicates";
+export { default as swapArrayElements } from "./Arrays/swapArrayElements";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 
