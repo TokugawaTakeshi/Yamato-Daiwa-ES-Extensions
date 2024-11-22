@@ -1,4 +1,4 @@
-import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
 export namespace IsArrayOfLengthCheckingOperation {
@@ -43,22 +43,22 @@ export namespace IsArrayOfLengthCheckingOperation {
     }
 
 
-    if (isNonNegativeInteger(options.exactElementsCount)) {
+    if (isNaturalNumberOrZero(options.exactElementsCount)) {
       return potentialArray.length === options.exactElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.minimalElementsCount) && isNonNegativeInteger(options.maximalElementsCount)) {
+    if (isNaturalNumberOrZero(options.minimalElementsCount) && isNaturalNumberOrZero(options.maximalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount && potentialArray.length <= options.maximalElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.minimalElementsCount)) {
+    if (isNaturalNumberOrZero(options.minimalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.maximalElementsCount)) {
+    if (isNaturalNumberOrZero(options.maximalElementsCount)) {
       return potentialArray.length <= options.maximalElementsCount;
     }
 

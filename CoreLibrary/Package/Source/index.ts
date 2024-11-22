@@ -34,6 +34,7 @@ export { default as removeArrayElementsByPredicates, type RemovingArrayElementsB
 export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
 export { default as replaceArrayElementsByPredicates, type ReplacingArrayElementsByPredicatesOperation } from
     "./Arrays/replaceArrayElementsByPredicates";
+export { default as swapArrayElements } from "./Arrays/swapArrayElements";
 export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
 
 
@@ -392,10 +393,10 @@ export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 /* ─── Numbers ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
+export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";
 export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
 export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInteger";
 export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
-export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegativeInteger";
 export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
 export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
 

@@ -1,4 +1,4 @@
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../Logging/Logger";
@@ -67,7 +67,7 @@ export default function cropArray<ArrayElement>(
 
   let startingElementNumber__numerationFrom0: number;
 
-  if (isNonNegativeInteger(compoundParameter.startingElementNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.startingElementNumber__numerationFrom0)) {
     startingElementNumber__numerationFrom0 = compoundParameter.startingElementNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.startingElementNumber__numerationFrom1)) {
     startingElementNumber__numerationFrom0 = compoundParameter.startingElementNumber__numerationFrom1 - 1;
@@ -81,7 +81,7 @@ export default function cropArray<ArrayElement>(
         messageSpecificPart:
             "It has been incorrectly specified from which element target array must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"startingElementNumber__numerationFrom0\": must be the positive integer\n" +
+            "● \"startingElementNumber__numerationFrom0\": must be the natural number or zero\n" +
             "● \"startingElementNumber__numerationFrom1\": must be the natural number\n" +
             "● \"fromStart\": must be the boolean herewith \"true\" only"
       }),
@@ -93,7 +93,7 @@ export default function cropArray<ArrayElement>(
 
   let endingElementNumber__numerationFrom1: number;
 
-  if (isNonNegativeInteger(compoundParameter.endingElementNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.endingElementNumber__numerationFrom0)) {
     endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom0 + 1;
   } else if (isNaturalNumber(compoundParameter.endingElementNumber__numerationFrom1)) {
     endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom1;
@@ -109,7 +109,7 @@ export default function cropArray<ArrayElement>(
         messageSpecificPart:
             "It has been incorrectly specified until which element target array must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"endingElementNumber__numerationFrom0\": must be the positive integer\n" +
+            "● \"endingElementNumber__numerationFrom0\": must be the natural number or zero\n" +
             "● \"endingElementNumber__numerationFrom1\": must be the natural number\n" +
             "● \"elementsCount\": must be the natural number\n" +
             "● \"untilEnd\": must be the boolean herewith \"true\" only"

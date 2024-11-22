@@ -1,6 +1,6 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 
 
@@ -56,7 +56,7 @@ export default function cropString(
   const targetString: string = compoundParameter.targetString;
   let startingCharacterNumber__numerationFrom0: number;
 
-  if (isNonNegativeInteger(compoundParameter.startingCharacterNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.startingCharacterNumber__numerationFrom0)) {
     startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.startingCharacterNumber__numerationFrom1)) {
     startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom1 - 1;
@@ -82,7 +82,7 @@ export default function cropString(
 
   let endingCharacterNumber__numerationFrom1: number;
 
-  if (isNonNegativeInteger(compoundParameter.endingCharacterNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.endingCharacterNumber__numerationFrom0)) {
     endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.endingCharacterNumber__numerationFrom1)) {
     endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom1 - 1;

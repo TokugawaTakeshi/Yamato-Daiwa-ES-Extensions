@@ -1,4 +1,4 @@
-import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
 export namespace IsStringOfLengthCheckingOperation {
@@ -45,19 +45,19 @@ export namespace IsStringOfLengthCheckingOperation {
       return false;
     }
 
-    if (isNonNegativeInteger(options.exactCharactersCount)) {
+    if (isNaturalNumberOrZero(options.exactCharactersCount)) {
       return potentialString.length === options.exactCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.minimalCharactersCount) && isNonNegativeInteger(options.maximalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.minimalCharactersCount) && isNaturalNumberOrZero(options.maximalCharactersCount)) {
       return potentialString.length >= options.minimalCharactersCount && potentialString.length <= options.maximalCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.minimalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.minimalCharactersCount)) {
       return potentialString.length >= options.minimalCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.maximalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.maximalCharactersCount)) {
       return potentialString.length <= options.maximalCharactersCount;
     }
 

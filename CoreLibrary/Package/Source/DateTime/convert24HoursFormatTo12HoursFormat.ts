@@ -7,14 +7,14 @@
  * Although the computing like `HOURS_COUNT_IN_STELLAR_DAY - 1` or `HOURS_COUNT_IN_STELLAR_DAY / 2` will
  *   not cause the significant performance impact, for the common function like this one, the executing of such
  *   operations with same numbers each time is unsolicited. */
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default function convert24HoursFormatTo12HoursFormat(hoursAmount__24Format: number): number {
 
-  if (!isNonNegativeInteger(hoursAmount__24Format) || hoursAmount__24Format > 23) {
+  if (!isNaturalNumberOrZero(hoursAmount__24Format) || hoursAmount__24Format > 23) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,

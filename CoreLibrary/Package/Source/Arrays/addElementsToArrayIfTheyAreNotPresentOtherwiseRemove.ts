@@ -1,6 +1,6 @@
 import getIndexesOfSatisfiesThePredicateArrayElements from "./getIndexesOfSatisfiesThePredicateArrayElements";
 import removeArrayElementsByIndexes from "./removeArrayElementsByIndexes";
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -201,7 +201,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
 
   let positionOfNewElement__numerationFrom0: number;
 
-  if (isNonNegativeInteger(compoundParameter.addingToPosition__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.addingToPosition__numerationFrom0)) {
     positionOfNewElement__numerationFrom0 = compoundParameter.addingToPosition__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.addingToPosition__numerationFrom1)) {
     positionOfNewElement__numerationFrom0 = compoundParameter.addingToPosition__numerationFrom1 - 1;
@@ -213,9 +213,9 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
         messageSpecificPart:
             "The target position for new element has been incorrectly specified. " +
             "The valid alternatives are:\n" +
-            "● \"addingToStart\": must be the boolean herewith \"true\" only" +
-            "● \"addingToEnd\": must be the boolean herewith \"true\" only" +
-            "● \"addingToPosition__numerationFrom0\": must be the positive integer\n" +
+            "● \"addingToStart\": must be the boolean herewith \"true\" only\n" +
+            "● \"addingToEnd\": must be the boolean herewith \"true\" only\n" +
+            "● \"addingToPosition__numerationFrom0\": must be the natural number or zero\n" +
             "● \"addingToPosition__numerationFrom1\": must be the natural number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,

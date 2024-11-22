@@ -1,4 +1,4 @@
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -21,13 +21,13 @@ export default function createArrayOfNaturalNumbers(
   }>
 ): Array<number> {
 
-  if (!isNonNegativeInteger(elementsCount)) {
+  if (!isNaturalNumberOrZero(elementsCount)) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "options",
         messageSpecificPart:
-            `The "elementsCount" must be the positive integer while ${ elementsCount } has been specified.`
+            `The "elementsCount" must be the natural number or zeo while ${ elementsCount } has been specified.`
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "createArrayOfNaturalNumbers(elementsCount)"

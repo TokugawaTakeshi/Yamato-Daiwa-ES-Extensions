@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="addElementsToArray" type="NodeJsTestRunner">
+  <configuration default="false" name="addElementsToArray" type="NodeJsTestRunner" folderName="Arrays">
     <node-interpreter value="project" />
     <node-options value="--require ts-node/register" />
     <working-dir value="$PROJECT_DIR$" />

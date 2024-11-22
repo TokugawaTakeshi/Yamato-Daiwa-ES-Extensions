@@ -1,4 +1,4 @@
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -54,7 +54,7 @@ export default function removeArrayElementsByIndexes<ArrayElement>(
     indexesOfArrayElementsWhichWillBeRemoved__fromLast__actualForArrayInInitialStateOnly
   ) {
 
-    if (!isNonNegativeInteger(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)) {
+    if (!isNaturalNumberOrZero(indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly)) {
 
       Logger.logError({
         errorType: InvalidParameterValueError.NAME,
