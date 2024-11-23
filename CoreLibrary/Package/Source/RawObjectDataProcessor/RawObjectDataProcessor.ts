@@ -1,5 +1,10 @@
 import type { ArbitraryObject } from "../Types/ArbitraryObject";
-import type { ReadonlyParsedJSON, ParsedJSON_Array, ParsedJSON_NestedProperty, ParsedJSON_Object } from "../Types/ParsedJSON";
+import type {
+  PossiblyReadonlyParsedJSON,
+  ParsedJSON_Array,
+  ParsedJSON_NestedProperty,
+  ParsedJSON_Object
+} from "../Types/ParsedJSON";
 
 import rawObjectDataProcessorLocalization__english from "./RawObjectDataProcessorLocalization.english";
 
@@ -19,13 +24,13 @@ import isDecimalFractionOfAnySign from "../TypeGuards/Numbers/isDecimalFractionO
 import isString from "../TypeGuards/Strings/isString";
 import isBoolean from "../TypeGuards/isBoolean";
 import isNonEmptyArray from "../TypeGuards/Arrays/isNonEmptyArray";
-import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import InvalidExternalDataError from "../Errors/InvalidExternalData/InvalidExternalDataError";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
 import surroundLabelByOrnament from "../Strings/surroundLabelByOrnament";
+import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 import removeArrayElementsByPredicates from "../Arrays/removeArrayElementsByPredicates";
 
 
@@ -34,23 +39,21 @@ class RawObjectDataProcessor {
   public static defaultLocalization: RawObjectDataProcessor.Localization = rawObjectDataProcessorLocalization__english;
 
   private readonly rawData: ArbitraryObject;
-  private readonly fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
   private readonly processingApproach: RawObjectDataProcessor.ProcessingApproaches;
-
-  private currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging: Array<string | number> = [];
-  private currentlyIteratedPropertyNewNameForLogging: string | null = null;
-
   private readonly localization: RawObjectDataProcessor.Localization;
+  private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
 
   private readonly validationErrorsMessages: Array<string> = [];
 
-  private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
-
-  private isRawDataInvalid: boolean = false;
+  private readonly currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging: Array<string | number> = [];
+  private currentlyIteratedPropertyNewNameForLogging: string | null = null;
 
 
   /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  public static process<ProcessedData extends ReadonlyParsedJSON, InterimValidData extends ReadonlyParsedJSON = ProcessedData>(
+  public static process<
+    ProcessedData extends PossiblyReadonlyParsedJSON,
+    InterimValidData extends PossiblyReadonlyParsedJSON = ProcessedData
+  >(
     rawData: unknown,
     validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification,
     options: RawObjectDataProcessor.Options = {}
@@ -60,7 +63,7 @@ class RawObjectDataProcessor {
         options.localization ?? RawObjectDataProcessor.defaultLocalization;
 
     /* [ Theory ]
-    * Because `typeof null` is `"object"`, besides `typeof` it's required to check for the null the value for the
+    * Because `typeof null` is `"object"`, besides `typeof` check it is required to check is value the null for the
     *   accurate error message. */
     if (isNull(rawData)) {
       return {
@@ -82,7 +85,6 @@ class RawObjectDataProcessor {
 
     const dataHoldingSelfInstance: RawObjectDataProcessor = new RawObjectDataProcessor({
       rawData,
-      fullDataSpecification: validDataSpecification,
       processingApproach: options.processingApproach,
       localization,
       errorHandlingStrategies: options.errorsHandlingStrategies
@@ -134,7 +136,8 @@ class RawObjectDataProcessor {
 
     }
 
-    if ("isInvalid" in rawDataProcessingResult || "isValidButValidationOnlyModeActive" in rawDataProcessingResult) {
+    // TODO isValidButValidationOnlyModeIsActive: それは一体どうやって起きるだろうか？
+    if ("isInvalid" in rawDataProcessingResult || "isValidButValidationOnlyModeIsActive" in rawDataProcessingResult) {
       return {
         rawDataIsInvalid: true,
         validationErrorsMessages: dataHoldingSelfInstance.validationErrorsMessages
@@ -171,7 +174,7 @@ class RawObjectDataProcessor {
               label: localization.generateLanguageDependentErrorNumberHeadingPart({ messageNumber: index + 1 }),
               ornamentPatten: "─",
               prependedPartCharactersCount: 3,
-              totalCharactersCount: 120
+              totalCharactersCount: 80
             }),
             message
           ].join("\n")
@@ -179,6 +182,7 @@ class RawObjectDataProcessor {
         join("\n\n");
   }
 
+  /* [ Usage ] For testing purposes */
   public static generateValidationErrorMessage(
     payload: RawObjectDataProcessor.Localization.DataForMessagesBuilding,
     localization: RawObjectDataProcessor.Localization = RawObjectDataProcessor.defaultLocalization
@@ -191,7 +195,8 @@ class RawObjectDataProcessor {
    * https://stackoverflow.com/q/69848689/4818123
    * [ Approach ] This method is public because it is required for the `localization` object. */
   public static getNormalizedValueTypeID(
-    valueType: NumberConstructor |
+    valueType:
+        NumberConstructor |
         StringConstructor |
         BooleanConstructor |
         ObjectConstructor |
@@ -262,37 +267,35 @@ class RawObjectDataProcessor {
 
   /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private constructor(
-    parametersObject: {
+    {
+      rawData,
+      processingApproach = RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject,
+      localization,
+      errorHandlingStrategies = {}
+    }: Readonly<{
       rawData: ArbitraryObject;
-      fullDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
       processingApproach?: RawObjectDataProcessor.ProcessingApproaches;
       localization: RawObjectDataProcessor.Localization;
       errorHandlingStrategies?: Partial<RawObjectDataProcessor.ErrorsHandlingStrategies>;
-    }
+    }>
   ) {
 
-    this.rawData = parametersObject.rawData;
-    this.fullDataSpecification = parametersObject.fullDataSpecification;
-
-    this.processingApproach =
-        parametersObject.processingApproach ??
-        RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject;
-
-    this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[0] = this.fullDataSpecification.nameForLogging;
-    this.localization = parametersObject.localization;
+    this.rawData = rawData;
+    this.processingApproach = processingApproach;
+    this.localization = localization;
 
     this.errorHandlingStrategies = {
       onPreValidationModificationFailed:
-          parametersObject.errorHandlingStrategies?.onPreValidationModificationFailed ??
+          errorHandlingStrategies.onPreValidationModificationFailed ??
           RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError,
       onUnableToDeletePropertyWithOutdatedValue:
-          parametersObject.errorHandlingStrategies?.onUnableToDeletePropertyWithOutdatedValue ??
+          errorHandlingStrategies.onUnableToDeletePropertyWithOutdatedValue ??
           RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError,
       onUnableToSubstituteUndefinePropertyValue:
-          parametersObject.errorHandlingStrategies?.onUnableToSubstituteUndefinePropertyValue ??
+          errorHandlingStrategies.onUnableToSubstituteUndefinePropertyValue ??
           RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError,
       onUnableToSubstituteNullPropertyValue:
-          parametersObject.errorHandlingStrategies?.onUnableToSubstituteNullPropertyValue ??
+          errorHandlingStrategies.onUnableToSubstituteNullPropertyValue ??
           RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError
     };
 
@@ -301,7 +304,12 @@ class RawObjectDataProcessor {
 
   /* ━━━ Private Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private processFixedKeyAndValuePairsNonNullObjectTypeValue(
-    compoundParameter: Readonly<
+    {
+      targetObjectTypeValueSpecification,
+      parentObject,
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      ...compoundParameter
+    }: Readonly<
       (
         { topLevelObject: ArbitraryObject; } |
         { targetValueOfSubsequentLevel__expectedToBeObject: unknown; }
@@ -313,12 +321,6 @@ class RawObjectDataProcessor {
       }
     >
   ): RawObjectDataProcessor.ValueProcessingResult {
-
-    const {
-      targetObjectTypeValueSpecification,
-      parentObject,
-      targetPropertyStringifiedValueBeforeFirstPreValidationModification
-    }: Parameters<typeof this.processFixedKeyAndValuePairsNonNullObjectTypeValue>[0] = compoundParameter;
 
     let targetObjectTypeSourceValue: ArbitraryObject;
     let processedValueWorkpiece: ArbitraryObject;
@@ -417,6 +419,7 @@ class RawObjectDataProcessor {
 
         } catch (error: unknown) {
 
+          // TODO 深さを減らす為の別の関数への抽出を検討する
           switch (this.errorHandlingStrategies.onPreValidationModificationFailed) {
 
             case RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError: {
@@ -479,8 +482,8 @@ class RawObjectDataProcessor {
           areOneOnMorePropertiesInvalid = true;
 
           this.registerValidationError({
-            title: this.localization.validationErrors.requiredPropertyIsMissing.title,
-            description: this.localization.validationErrors.requiredPropertyIsMissing.description,
+            title: this.localization.validationErrors.notAllowedUndefinedValueOfProperty.title,
+            description: this.localization.validationErrors.notAllowedUndefinedValueOfProperty.description,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
             targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
             targetPropertyValue: childPropertyValue,
@@ -493,7 +496,6 @@ class RawObjectDataProcessor {
 
         }
 
-
         if (
           isNotUndefined(childPropertySpecification.requiredIf) &&
           childPropertySpecification.requiredIf.predicate(
@@ -504,8 +506,8 @@ class RawObjectDataProcessor {
           areOneOnMorePropertiesInvalid = true;
 
           this.registerValidationError({
-            title: this.localization.validationErrors.conditionallyRequiredPropertyIsMissing.title,
-            description: this.localization.validationErrors.conditionallyRequiredPropertyIsMissing.generateDescription({
+            title: this.localization.validationErrors.conditionallyNotAllowedUndefinedValueOfProperty.title,
+            description: this.localization.validationErrors.conditionallyNotAllowedUndefinedValueOfProperty.generateDescription({
               requirementCondition: childPropertySpecification.requiredIf.descriptionForLogging
             }),
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
@@ -520,9 +522,10 @@ class RawObjectDataProcessor {
 
         }
 
-
+        // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         if (isNotUndefined(childPropertySpecification.defaultValue) && !this.isValidationOnlyMode) {
 
+          // TODO 深さを減らす為の別の関数への抽出を検討する
           switch (this.processingApproach) {
 
             case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
@@ -640,7 +643,6 @@ class RawObjectDataProcessor {
 
       }
 
-      // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       const childPropertyValueProcessingResult: RawObjectDataProcessor.ValueProcessingResult =
           this.processSingleNeitherUndefinedNorNullValue({
             targetValue: childPropertyValue,
@@ -657,7 +659,7 @@ class RawObjectDataProcessor {
           if ("isInvalid" in childPropertyValueProcessingResult) {
             areOneOnMorePropertiesInvalid = true;
             continue;
-          } else if ("isValidButValidationOnlyModeActive" in childPropertyValueProcessingResult) {
+          } else if ("isValidButValidationOnlyModeIsActive" in childPropertyValueProcessingResult) {
             continue;
           }
 
@@ -720,7 +722,7 @@ class RawObjectDataProcessor {
     if (areOneOnMorePropertiesInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -969,7 +971,7 @@ class RawObjectDataProcessor {
           if ("isInvalid" in elementProcessingResult) {
             areOneOnMoreElementsInvalid = true;
             continue;
-          } else if ("isValidButValidationOnlyModeActive" in elementProcessingResult) {
+          } else if ("isValidButValidationOnlyModeIsActive" in elementProcessingResult) {
             continue;
           }
 
@@ -1027,7 +1029,7 @@ class RawObjectDataProcessor {
     if (isTargetIndexedArrayTypeValueInvalid || areOneOnMoreElementsInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -1367,7 +1369,7 @@ class RawObjectDataProcessor {
           if ("isInvalid" in valueProcessingResult) {
             areOneOnMoreValuesInvalid = true;
             continue;
-          } else if ("isValidButValidationOnlyModeActive" in valueProcessingResult) {
+          } else if ("isValidButValidationOnlyModeIsActive" in valueProcessingResult) {
             continue;
           }
 
@@ -1423,7 +1425,7 @@ class RawObjectDataProcessor {
     if (isTargetAssociativeArrayTypeValueInvalid || areOneOnMoreValuesInvalid) {
       return { isInvalid: true };
     } else if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -1555,7 +1557,7 @@ class RawObjectDataProcessor {
     });
 
 
-    return this.isValidationOnlyMode ? { isValidButValidationOnlyModeActive: true } : { isInvalid: true };
+    return this.isValidationOnlyMode ? { isValidButValidationOnlyModeIsActive: true } : { isInvalid: true };
   }
 
 
@@ -1594,46 +1596,94 @@ class RawObjectDataProcessor {
 
     }
 
-
+    // TODO NaN の処理
     let propertyValueMatchingWithExpectedNumberSet: boolean;
 
     switch (targetValueSpecification.numbersSet) {
+
       case RawObjectDataProcessor.NumbersSets.naturalNumber: {
         propertyValueMatchingWithExpectedNumberSet = isNaturalNumber(targetValue__expectedToBeNumber);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: {
+
+      case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: {
+        // TODO Rename function
         propertyValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetValue__expectedToBeNumber);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeInteger: {
         propertyValueMatchingWithExpectedNumberSet = isNegativeInteger(targetValue__expectedToBeNumber);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: {
         propertyValueMatchingWithExpectedNumberSet = isNegativeIntegerOrZero(targetValue__expectedToBeNumber);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.anyInteger: {
         propertyValueMatchingWithExpectedNumberSet = Number.isInteger(targetValue__expectedToBeNumber);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: {
         propertyValueMatchingWithExpectedNumberSet = isPositiveDecimalFraction(targetValue__expectedToBeNumber);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFractionOrZero: {
+        propertyValueMatchingWithExpectedNumberSet =
+            isPositiveDecimalFraction(targetValue__expectedToBeNumber) || targetValue__expectedToBeNumber === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: {
         propertyValueMatchingWithExpectedNumberSet = isNegativeDecimalFraction(targetValue__expectedToBeNumber);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: {
+
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFractionOrZero: {
+        propertyValueMatchingWithExpectedNumberSet =
+            isNegativeDecimalFraction(targetValue__expectedToBeNumber) || targetValue__expectedToBeNumber === 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFraction: {
         propertyValueMatchingWithExpectedNumberSet = isDecimalFractionOfAnySign(targetValue__expectedToBeNumber);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFractionOrZero: {
+        propertyValueMatchingWithExpectedNumberSet =
+            isDecimalFractionOfAnySign(targetValue__expectedToBeNumber) || targetValue__expectedToBeNumber === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: {
         propertyValueMatchingWithExpectedNumberSet = true;
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumber: {
+        propertyValueMatchingWithExpectedNumberSet = targetValue__expectedToBeNumber > 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumber: {
+        propertyValueMatchingWithExpectedNumberSet = targetValue__expectedToBeNumber < 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumberOrZero: {
+        propertyValueMatchingWithExpectedNumberSet = targetValue__expectedToBeNumber >= 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumberOrZero: {
+        propertyValueMatchingWithExpectedNumberSet = targetValue__expectedToBeNumber <= 0;
+      }
+
     }
 
     if (!propertyValueMatchingWithExpectedNumberSet) {
@@ -1770,7 +1820,7 @@ class RawObjectDataProcessor {
 
 
     if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -1983,7 +2033,7 @@ class RawObjectDataProcessor {
 
 
     if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -2095,7 +2145,7 @@ class RawObjectDataProcessor {
 
 
     if (this.isValidationOnlyMode) {
-      return { isValidButValidationOnlyModeActive: true };
+      return { isValidButValidationOnlyModeIsActive: true };
     }
 
 
@@ -2227,7 +2277,6 @@ class RawObjectDataProcessor {
 
   /* --- Helpers ---------------------------------------------------------------------------------------------------- */
   private registerValidationError(payload: RawObjectDataProcessor.Localization.DataForMessagesBuilding): void {
-    this.isRawDataInvalid = true;
     this.validationErrorsMessages.push(
       isString(payload) ? payload : RawObjectDataProcessor.generateValidationErrorMessage(payload, this.localization)
     );
@@ -2239,7 +2288,7 @@ class RawObjectDataProcessor {
 
   /* [ Approach ] The alias for the logic clarifying */
   private get isValidationOnlyMode(): boolean {
-    return this.isRawDataInvalid;
+    return this.validationErrorsMessages.length > 0;
   }
 
   private substituteUndefinedPropertyValueAtSourceObject(
@@ -2712,10 +2761,10 @@ namespace RawObjectDataProcessor {
 
 
   /* ─── Processed Data Workpiece ─────────────────────────────────────────────────────────────────────────────────── */
-  // TODO 未だ`isValidButValidationOnlyModeActive`を完全に理解していない。必要に応じて名前変更。
+  // TODO 未だ`isValidButValidationOnlyModeIsActive`を完全に理解していない。必要に応じて名前変更。
   export type ValueProcessingResult =
       { isInvalid: true; } |
-      { isValidButValidationOnlyModeActive: true; } |
+      { isValidButValidationOnlyModeIsActive: true; } |
       { processedValue: ParsedJSON_NestedProperty; };
 
   type ObjectKeySpecification = Readonly<{
@@ -2825,14 +2874,21 @@ namespace RawObjectDataProcessor {
   /* ─── Numeric Value / Property ─────────────────────────────────────────────────────────────────────────────────── */
   export enum NumbersSets {
     naturalNumber = "NATURAL_NUMBER",
-    nonNegativeInteger = "NON_NEGATIVE_INTEGER",
+    positiveIntegerOrZero = "POSITIVE_INTEGER_OR_ZERO",
     negativeInteger = "NEGATIVE_INTEGER",
     negativeIntegerOrZero = "NEGATIVE_INTEGER_OR_ZERO",
     anyInteger = "ANY_INTEGER",
     positiveDecimalFraction = "POSITIVE_DECIMAL_FRACTION",
+    positiveDecimalFractionOrZero = "POSITIVE_DECIMAL_FRACTION_OR_ZERO",
     negativeDecimalFraction = "NEGATIVE_DECIMAL_FRACTION",
-    decimalFractionOfAnySign = "DECIMAL_FRACTION_OF_ANY_SIGN",
-    anyRealNumber = "ANY_REAL_NUMBER"
+    negativeDecimalFractionOrZero = "NEGATIVE_DECIMAL_FRACTION_OR_ZERO",
+    anyDecimalFraction = "ANY_DECIMAL_FRACTION",
+    anyDecimalFractionOrZero = "ANY_DECIMAL_FRACTION_OR_ZERO",
+    anyRealNumber = "ANY_REAL_NUMBER",
+    positiveRealNumber = "POSITIVE_REAL_NUMBER",
+    negativeRealNumber = "NEGATIVE_REAL_NUMBER",
+    positiveRealNumberOrZero = "POSITIVE_REAL_NUMBER_OR_ZERO",
+    negativeRealNumberOrZero = "NEGATIVE_REAL_NUMBER_OR_ZERO"
   }
 
   export type NumericValueSpecification =
@@ -3185,12 +3241,12 @@ namespace RawObjectDataProcessor {
         ) => string;
       }>;
 
-      requiredPropertyIsMissing: Readonly<{
+      notAllowedUndefinedValueOfProperty: Readonly<{
         title: string;
         description: string;
       }>;
 
-      conditionallyRequiredPropertyIsMissing: Readonly<{
+      conditionallyNotAllowedUndefinedValueOfProperty: Readonly<{
         title: string;
         generateDescription: (
           templateVariables: ValidationErrors.ConditionallyRequiredPropertyIsMissing.TemplateVariables

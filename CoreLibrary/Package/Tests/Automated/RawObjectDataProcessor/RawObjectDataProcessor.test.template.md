@@ -11,7 +11,7 @@ import { strictEqual } from "assert";
 
 suite(
   "Numeric Property",
-  (): void => {
+  async (): Promise<void> => {
 
     await Promise.all(
 

@@ -30,12 +30,11 @@ suite(
                     "Definitely Required/Optional Property",
                     async (): Promise<void> => {
 
-                      const DATA_NAME_FOR_LOGGING: string = "ValidData";
                       const TARGET_PROPERTY_NAME: "alpha" = "alpha";
                       type ValidData = { [TARGET_PROPERTY_NAME]: number; };
 
                       const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                        nameForLogging: DATA_NAME_FOR_LOGGING,
+                        nameForLogging: "ValidData",
                         subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
                         properties: {
                           [TARGET_PROPERTY_NAME]: {
@@ -127,9 +126,9 @@ suite(
                               strictEqual(
                                 undefinedToEmptyArray(validationErrorsMessages)[0],
                                 RawObjectDataProcessor.generateValidationErrorMessage({
-                                  ...RawObjectDataProcessor.defaultLocalization.validationErrors.requiredPropertyIsMissing,
-                                  targetPropertyDotSeparatedQualifiedInitialName:
-                                      `${ DATA_NAME_FOR_LOGGING }.${ TARGET_PROPERTY_NAME }`,
+                                  ...RawObjectDataProcessor.defaultLocalization.validationErrors.
+                                      notAllowedUndefinedValueOfProperty,
+                                  targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                   targetPropertyNewName: null,
                                   /* eslint-disable-next-line no-undefined --
                                    * It could be omitted, but the explicit `undefined` is better for readability of the tests
@@ -151,13 +150,12 @@ suite(
                     "Conditionally Required Property",
                     async (): Promise<void> => {
 
-                      const DATA_NAME_FOR_LOGGING: string = "ValidData";
                       const TARGET_PROPERTY_NAME: "swimmingPoolMaximalDepth__meters" = "swimmingPoolMaximalDepth__meters";
                       type ValidData = { hasSwimmingPool: boolean; [TARGET_PROPERTY_NAME]: number; };
                       const requirementConditionDescription: string = "`hasSwimmingPool` is true";
 
                       const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                        nameForLogging: DATA_NAME_FOR_LOGGING,
+                        nameForLogging: "ValidData",
                         subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
                         properties: {
                           hasSwimmingPool: {
@@ -243,12 +241,11 @@ suite(
                                 undefinedToEmptyArray(validationErrorsMessages)[0],
                                 RawObjectDataProcessor.generateValidationErrorMessage({
                                   title: RawObjectDataProcessor.defaultLocalization.validationErrors.
-                                      conditionallyRequiredPropertyIsMissing.title,
+                                      conditionallyNotAllowedUndefinedValueOfProperty.title,
                                   description: RawObjectDataProcessor.defaultLocalization.validationErrors.
-                                      conditionallyRequiredPropertyIsMissing.
+                                      conditionallyNotAllowedUndefinedValueOfProperty.
                                       generateDescription({ requirementCondition: requirementConditionDescription }),
-                                  targetPropertyDotSeparatedQualifiedInitialName:
-                                      `${ DATA_NAME_FOR_LOGGING }.${ TARGET_PROPERTY_NAME }`,
+                                  targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                   targetPropertyNewName: null,
                                   /* eslint-disable-next-line no-undefined --
                                    * It could be omitted, but the explicit `undefined` is better for readability of the tests
@@ -289,8 +286,10 @@ suite(
                         }
                       };
 
+                      const inputData: Partial<ValidData> = generateConstantDataSample();
+
                       const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                        process(generateConstantDataSample(), validDataSpecification, { processingApproach });
+                          process(inputData, validDataSpecification, { processingApproach });
 
                       const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
                       let processedData: ValidData | undefined;
@@ -319,6 +318,26 @@ suite(
                           notDeepEqual(processedData, generateConstantDataSample());
                         }
                       );
+
+                      if (processingApproach === RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject) {
+
+                        await test(
+                          "Input data has been Changed",
+                          (): void => {
+                            notDeepEqual(inputData, generateConstantDataSample());
+                          }
+                        );
+
+                      } else {
+
+                        await test(
+                          "Input data has not been Changed",
+                          (): void => {
+                            deepEqual(inputData, generateConstantDataSample());
+                          }
+                        );
+
+                      }
 
                     }
                   )

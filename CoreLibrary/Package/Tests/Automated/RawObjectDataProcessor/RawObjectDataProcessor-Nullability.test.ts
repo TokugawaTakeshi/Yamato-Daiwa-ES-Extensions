@@ -27,12 +27,11 @@ suite(
 
                   suite("Definitely Nullable/Non-nullable Property", async (): Promise<void> => {
 
-                    const DATA_NAME_FOR_LOGGING: string = "ValidData";
                     const TARGET_PROPERTY_NAME: "alpha" = "alpha";
                     type ValidData = { [TARGET_PROPERTY_NAME]: number; };
 
                     const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
-                      nameForLogging: DATA_NAME_FOR_LOGGING,
+                      nameForLogging: "ValidData",
                       subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
                       properties: {
                         [TARGET_PROPERTY_NAME]: {
@@ -125,8 +124,7 @@ suite(
                               undefinedToEmptyArray(validationErrorsMessages)[0],
                               RawObjectDataProcessor.generateValidationErrorMessage({
                                 ...RawObjectDataProcessor.defaultLocalization.validationErrors.nonNullableValueIsNullError,
-                                targetPropertyDotSeparatedQualifiedInitialName:
-                                    `${ DATA_NAME_FOR_LOGGING }.${ TARGET_PROPERTY_NAME }`,
+                                targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                 targetPropertyNewName: null,
                                 targetPropertyValue: null,
                                 targetPropertyValueSpecification: validDataSpecification.properties[TARGET_PROPERTY_NAME]
@@ -164,8 +162,10 @@ suite(
                         }
                       };
 
+                      const inputData: { foo: string | null; } = generateConstantDataSample();
+
                       const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-                        process(generateConstantDataSample(), validDataSpecification, { processingApproach });
+                          process(inputData, validDataSpecification, { processingApproach });
 
                       const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
                       let processedData: ValidData | undefined;
@@ -185,6 +185,26 @@ suite(
                       await test("Output Data is not Even with Input Data as Expected", (): void => {
                         notDeepEqual(processedData, generateConstantDataSample());
                       });
+
+                      if (processingApproach === RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject) {
+
+                        await test(
+                          "Input data has been Changed",
+                          (): void => {
+                            notDeepEqual(inputData, generateConstantDataSample());
+                          }
+                        );
+
+                      } else {
+
+                        await test(
+                          "Input data has not been Changed",
+                          (): void => {
+                            deepEqual(inputData, generateConstantDataSample());
+                          }
+                        );
+
+                      }
 
                     }
                   )

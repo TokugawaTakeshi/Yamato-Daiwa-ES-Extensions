@@ -56,19 +56,18 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     rawDataIsNotObject: {
       generateMessage: ({ actualType }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-          `Raw data, the first parameter of "RawObjectDataProcessor.process" is not the object and actually has type 
+          `Raw data, the first parameter of "RawObjectDataProcessor.process()" is not the object and actually has type 
             "${ actualType }".`
     },
 
     valueTypeDoesNotMatchWithExpected: {
       title: "Expected and Actual Value Types Mismatch",
-      generateDescription(
+      generateDescription: (
         { expectedType, actualType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
-      ): string {
-        return "This value expected to have type " +
+      ): string =>
+          "This value expected to have type " +
             `"${ rawObjectDataProcessorLocalization__english.getLocalizedValueType(expectedType) }" while actually ` +
-            `it's type is "${ actualType }".`;
-      }
+            `its type is "${ actualType }".`
     },
 
     preValidationModificationFailed: {
@@ -82,27 +81,28 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `${ stringifiedCaughtError }\n` +
           "The data has been marked as invalid because the error handling strategy \"onPreValidationModificationFailed\" " +
             "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended because the problem could " +
-            "be in pre-validation modification function, not always in data. " +
+            "be in pre-validation modification function, not always in the data. " +
           "Also, most likely this strategy will cause the subsequent errors. " +
           "It is recommended to set the strategy to \"ErrorHandlingStrategies.throwingOfError\" which is default and " +
             "fix the pre-validation modification function."
 
     },
 
-    /* ─── Requirement ────────────────────────────────────────────────────────────────────────────────────────────── */
-    requiredPropertyIsMissing: {
-      title: "Required Property is Missing",
-      description: "This property is \"undefined\" while has been marked as required."
+    /* ─── Non-undefined Check ────────────────────────────────────────────────────────────────────────────────────── */
+    notAllowedUndefinedValueOfProperty: {
+      title: "Not Allowed Undefined Value Of Property",
+      description: "This property is `undefined` while has been marked as required."
     },
 
-    conditionallyRequiredPropertyIsMissing: {
+    conditionallyNotAllowedUndefinedValueOfProperty: {
 
-      title: "Conditionally Required Property is Missing",
+      title: "Conditionally Not Allowed Undefined Value Of Property",
 
       generateDescription: (
         { requirementCondition }: ValidationErrors.ConditionallyRequiredPropertyIsMissing.TemplateVariables
       ): string =>
-          `This value is "undefined" while requirement condition "${ requirementCondition }" satisfied.`
+          "This value is `undefined` while the following non-undefined value condition satisfied: " +
+            `"${ requirementCondition }"`
 
     },
 
@@ -417,10 +417,10 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The error has occurred during the pre-validation modification of property " +
+          "The error has occurred during the pre-validation modification of the property " +
             `"${ targetPropertyDotSeparatedQualifiedName }". ` +
           "This error has been thrown because the error handling strategy \"onPreValidationModificationFailed\" is " +
-            "\"ErrorHandlingStrategies.throwingOfError\" which is default. " +
+            "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
           "It is recommended to keep this strategy and fix the pre-validation modification function."
 
     },
@@ -539,13 +539,13 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           stringifiedCaughtError
         }: Warnings.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The following error has occurred during the pre-validation modification of property " +
-            `${ targetPropertyDotSeparatedQualifiedName }.` +
+          "The following error has occurred during the pre-validation modification of the property " +
+            `${ targetPropertyDotSeparatedQualifiedName }.\n` +
           `${ stringifiedCaughtError }\n` +
           "This error has been reported as warning because the error handling strategy " +
             "\"onPreValidationModificationFailed\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because because failed pre-validation modification could cause the subsequent " +
-            "errors." +
+            "what is not recommended because failed pre-validation means that the pre-validation modification function " +
+            "does not respect all possible variations of the source data and could cause the subsequent errors." +
           "It is recommended to set the strategy to \"\"ErrorHandlingStrategies.throwingOfError\" which is default and " +
             "fix the pre-validation modification function."
 
@@ -672,14 +672,21 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   getLocalizedNumbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
     switch (numberSet) {
       case RawObjectDataProcessor.NumbersSets.naturalNumber: return "natural number";
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "non-negative integer";
+      case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: return "positive integer or zero";
       case RawObjectDataProcessor.NumbersSets.negativeInteger: return "negative integer";
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "negative integer of zero";
       case RawObjectDataProcessor.NumbersSets.anyInteger: return "any integer";
       case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "positive decimal fraction";
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFractionOrZero: return "positive decimal fraction or zero";
       case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: return "negative decimal fraction";
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: return "decimal fraction on any sign";
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFractionOrZero: return "negative decimal fraction or zero";
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFraction: return "any decimal fraction";
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFractionOrZero: return "any decimal fraction or zero";
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "any real number";
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumber: return "positive real number";
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumber: return "negative real number";
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumberOrZero: return "positive real number or zero";
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumberOrZero: return "negative real number or zero";
     }
   }
 
