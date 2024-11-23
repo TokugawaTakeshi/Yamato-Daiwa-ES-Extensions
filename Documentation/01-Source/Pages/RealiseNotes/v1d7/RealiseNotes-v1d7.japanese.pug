@@ -123,23 +123,23 @@ block append SpecificContent
         引数及びエラー投擲条件変更
 
     p.Article-Paragraph.
-      以前、#[+Keyword--YDID オブジェクト型の]#[+Keyword__Contrast--YDID 単一]#[+Term--YDID 引数]は#
-        [+ImportantEntity__Code--YDID context]と言う#[+Keyword--YDID 多態性の]#[+Keyword__Contrast--YDID 任意]
+      以前、#[+Keyword--YDID オブジェクト型の]#[+Keyword__Contrast--YDID 単一]#[+Term--YDID 引数]は
+        #[+ImportantEntity__Code--YDID context]と言う#[+Keyword--YDID 多態性の]#[+Keyword__Contrast--YDID 任意]
         #[+Term--YDID プロパティ]が有り、指定された場合、
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }) Element型]か、
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document型]か、
-        これらから継承した#[+Term--YDID 型]でなければいけなかった。
-      当#[+Term--YDID プロパティ]は#[+ImportantEntity__Code--YDID contextElement]に代わり、#[+Keyword--YDID 多態性の]儘だが、
+        何方からから継承した#[+Term--YDID 型]でなければいけなかった。
+      当#[+Term--YDID プロパティ]は#[+ImportantEntity__Code--YDID contextElement]に代えられ、#[+Keyword--YDID 多態性の]儘だが、
         #[+Term--YDID 型]は#[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;]に成った御蔭て
         コンテキスト#[+Term--YDID 要素]自体だけでなく、此れの#[+Term--YDID セレクター]を指定可能に成った。
-      但し、コンテキスト#[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]が指定してある場合、此れに#[+Keyword--YDID 丁度]
-        #[+Keyword__Contrast--YDID 一個]の#[+Term--YDID 要素]が該当#[+Keyword--YDID しなければいけない]、然もないと
-        #[+Term--YDID エラー]が投げられる（#[+ImportantEntity--YDID 0個]の場合は
-        #[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]、#[+ImportantEntity--YDID ２個以上]の場合
+      但し、コンテキスト#[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]が指定された場合、此れに#[+Keyword--YDID 丁度]
+        #[+Keyword__Contrast--YDID 一個]の#[+Term--YDID 要素]が該当#[+Keyword--YDID しなければいけない]、
+        #[+Keyphrase--YDID 然もないと#[+Term--YDID エラー]が投げられる]（#[+ImportantEntity--YDID 0個]の場合は
+        #[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]、#[+ImportantEntity--YDID ２個以上]の場合は
         #[+ImportantEntity__Code--YDID UnexpectedEventError]）。
-      [+ImportantEntity__Code--YDID Element]も#[+ImportantEntity__Code--YDID Document]も
-        #[+ImportantEntity__Code--YDID ParentNode]から継承した御蔭で、旧い#[+Term--YDID プロパティ]の#[+Term__Contrast--YDID 型]と
-        新しい#[+Term--YDID プロパティ]の型が互換性が有る。
+      #[+ImportantEntity__Code--YDID Element]も#[+ImportantEntity__Code--YDID Document]も
+        #[+ImportantEntity__Code--YDID ParentNode]から#[+Term__Contrast--YDID 継承した]御蔭で、旧い
+        #[+Term--YDID プロパティ]の#[+Term__Contrast--YDID 型]と新しい#[+Term--YDID プロパティ]の型が#[+Keyphrase--YDID 互換性が有る]。
 
     dl.Article-DescriptionList
 
@@ -147,29 +147,30 @@ block append SpecificContent
       dd
         | コンテキスト#[+Term--YDID 要素]の指定方法の統一。
         | #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;]#[+Term--YDID 型]の
-        |   #[+ImportantEntity__Code--YDID contextElement]#[+Term--YDID プロパティ]は複数の#[+Term--YDID 関数]に使われる様に成った
-        |   だけでなく、#[+ImportantEntity--YDID YDEE]以外にも使われる事がある（例えば、
+        |   #[+ImportantEntity__Code--YDID contextElement]#[+Term--YDID プロパティ]は#[+Keyword--YDID 複数の]
+        |   #[+Term--YDID 関数]に使われる様に成っただけでなく、#[+ImportantEntity--YDID YDEE]以外にも使われる事が有る（例えば、
         +Link--YDF({
           endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
         }) Yamato Daiwa Frontend
-        | と言うフロントエンド開発専用ライブラリ.
+        | と言うフロントエンド開発専用ライブラリで）.
 
       dt 貴方のコードが編集が必要に成る条件
       dd.
         #[+ImportantEntity__Code--YDID getExpectedToBeSingleDOM_Element]#[+Term--YDID 関数]か、
           #[+ImportantEntity__Code--YDID getExpectedToBeSingleChildOfTemplateElement]#[+Term--YDID 関数]の
-          #[+Term__Contrast--YDID プロパティ]が使用中。
+          #[+ImportantEntity__Code--YDID context]#[+Term__Contrast--YDID プロパティ]が使用中。
 
       dt 対策
       dd.
         コードエディター又は#[+Term--YDID 結合開発環境]の適切な機能を使って、プロジェクトの全ファイルに
          #[+ImportantEntity__Code--YDID context]#[+Term--YDID プロパティ]を#[+ImportantEntity__Code--YDID contextElement]に
          置き換えて下さい。
-        コンテキスト#[+Term--YDID 要素]ではなく、此れの#[+Term--YDID セレクター]が使えれば便利なら、最新の#[+ImportantEntity--YDID API]を
-          使ってリファクタリングしても良いが、#[+Term--YDID エラー]が投げられない様に、#[+Term--YDID セレクター]に#[+Keyword--YDID 丁度]
-          #[+ImportantEntity--YDID 1個]の#[+Term--YDID 要素]が該当している様に気を付けるのだ。
+        コンテキスト#[+Term--YDID 要素]ではなく、此れの#[+Term--YDID セレクター]が使えば便利なら、最新の#[+ImportantEntity--YDID API]を
+          使ってリファクタリングしても良いが、#[+Keyphrase--YDID #[+Term--YDID エラー]が投げられない様に]、#[+Keyword--YDID コンテキスト]
+          #[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]に#[+Keyword--YDID 丁度]
+          #[+ImportantEntity--YDID 1個]の#[+Term--YDID 要素]が該当#[+Keyword--YDID していなければいけない]。
 
-
+    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h4.Article-Heading4 イベント処理
 
     h5.Article-Heading5 #[code addLeftClickEventHandler]関数APIの変更
@@ -224,6 +225,38 @@ block append SpecificContent
           li 他#[+Term--YDID 関数]との#[+ImportantEntity--YDID API]の部分的な統一
           li コンテキスト依存の対象#[+Term--YDID 要素]のセレクターを指定する需要
           li イベントの伝搬のもっと柔軟な指定の需要
+
+      dt 貴方のコードが編集が必要に成る条件
+      dd
+
+        p.Article-Paragraph.
+          単一の#[+Term--YDID 引数]の下記の#[+Term--YDID プロパティ]の中から#[+ImportantEntity--YDID １個以上]利用中
+
+        ul.Article-UnorderedList
+          li #[+ImportantEntity__Code--YDID targetElementSelector]
+          li #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]
+
+
+      dt 対策
+      dd
+
+        ul.Article-UnorderedList
+
+          li.
+            #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]を
+              #[+ImportantEntity__Code--YDID targetElement]に名前変更の上、#[+Term--YDID セレクター]を含めている
+              #[+Term--YDID 文字列リテラル]か、此の#[+Term--YDID リテラル]を含めている#[+Term--YDID 変数]を#[+Term--YDID 子オブジェクト]
+              の#[+ImportantEntity__Code--YDID selector]#[+Term--YDID プロパティ]へ移動させてください。
+            例えば、#[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"]は
+              #[+SecondaryEntity__Code--YDID targetElement: { selector: ".Card-SavingButton"}]に成る。
+
+          li.
+            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定してある場合、
+              #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing]に置き換えて下さい。
+
+          li.
+            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定している場合、
+              #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling]に置き換えて下さい。
 
     //-
 

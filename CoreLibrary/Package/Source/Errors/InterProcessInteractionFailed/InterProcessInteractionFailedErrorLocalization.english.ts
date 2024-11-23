@@ -2,7 +2,7 @@ import type InterProcessInteractionFailedError from "./InterProcessInteractionFa
 
 
 const interProcessInteractionFailedErrorLocalization__english: InterProcessInteractionFailedError.Localization = {
-  defaultTitle: "Inter process interaction failure"
+  defaultTitle: "Inter Process Interaction Failure"
 };
 
 

@@ -4,7 +4,7 @@
 
     /** @type { (string | undefined) }
      *  @public */
-    static title;
+    static projectSupportPageURI;
 
     static States = {
       initialTextNotWritten: "INITIAL_TEXT_NOT_WRITTEN",
@@ -12,13 +12,19 @@
       notCheckedByNativeSpeakers: "NOT_CHECKED_BY_NATIVE_SPEAKERS",
     };
 
+    static localization = {
+
+    };
+
   }
 
 
 mixin ApologyWithSupportRequest(properties)
 
+  - const { currentState } = properties;
+
   +AdmonitionBlock--YDF({
-    title: ApologyWithSupportRequest.title,
+    title: "",
     SVG_Icon: true,
     theme: AdmonitionBlock__YDF.Themes.regular,
     areThemesCSS_ClassesCommon: true,
@@ -26,4 +32,4 @@ mixin ApologyWithSupportRequest(properties)
     decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
   })&attributes(attributes)
 
-    +ApologyWithSupportRequest-LocalizedText({ currentState: ApologyWithSupportRequest.States.initialTextNotWritten })
+    +ApologyWithSupportRequest-LocalizedText({ currentState })

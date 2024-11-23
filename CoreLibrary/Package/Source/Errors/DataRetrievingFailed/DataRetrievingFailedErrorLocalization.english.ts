@@ -3,7 +3,7 @@ import type DataRetrievingFailedError from "./DataRetrievingFailedError";
 
 const dataRetrievingFailedErrorLocalization__english: DataRetrievingFailedError.Localization = {
 
-  defaultTitle: "Retrieving of the data from data source failed",
+  defaultTitle: "Retrieving of the Data From Data Source Failed",
 
   generateDescription: (
     { mentionToData, messageSpecificPart }: DataRetrievingFailedError.Localization.DescriptionTemplateVariables

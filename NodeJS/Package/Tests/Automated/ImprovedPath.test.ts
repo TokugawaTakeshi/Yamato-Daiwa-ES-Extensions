@@ -360,7 +360,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -373,7 +373,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -392,7 +392,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: true,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -405,7 +405,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -424,7 +424,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -437,7 +437,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: true,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -456,7 +456,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: true
           },
           alwaysForwardSlashSeparators: true
         }),
@@ -469,7 +469,7 @@ describe("ImprovedPath", (): void => {
           ambiguitiesResolution: {
             mustConsiderLastSegmentStartingWithDotAsDirectory: false,
             mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
-            mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: false
+            mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: false
           },
           alwaysForwardSlashSeparators: true
         }),

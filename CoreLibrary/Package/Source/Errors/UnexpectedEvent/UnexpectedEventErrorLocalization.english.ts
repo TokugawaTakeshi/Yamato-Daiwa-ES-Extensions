@@ -2,7 +2,7 @@ import type UnexpectedEventError from "./UnexpectedEventError";
 
 
 const unexpectedEventErrorLocalization__english: UnexpectedEventError.Localization = {
-  defaultTitle: "Unexpected event occurred"
+  defaultTitle: "Unexpected Event Occurred"
 };
 
 

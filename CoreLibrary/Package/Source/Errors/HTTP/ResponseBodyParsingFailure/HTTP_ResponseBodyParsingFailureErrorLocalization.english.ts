@@ -2,7 +2,7 @@ import type HTTP_ResponseBodyParsingFailureError from "./HTTP_ResponseBodyParsin
 
 
 const HTTP_ResponseBodyParsingFailureErrorLocalization__english: HTTP_ResponseBodyParsingFailureError.Localization = {
-  defaultTitle: "HTTP Response Body Parsing Failure"
+  defaultTitle: "HTTP Response Body Parsing Failed"
 };
 
 

@@ -3,7 +3,7 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 
 const invalidConfigErrorLocalization__english: InvalidConfigError.Localization = {
-  defaultTitle: "Invalid configuration",
+  defaultTitle: "Invalid Configuration",
   generateDescription: (
     { mentionToConfig, messageSpecificPart }: InvalidConfigError.Localization.DescriptionTemplateVariables
   ): string =>

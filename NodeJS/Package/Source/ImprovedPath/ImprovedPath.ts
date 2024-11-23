@@ -238,9 +238,8 @@ abstract class ImprovedPath {
       ambiguitiesResolution: Readonly<{
         mustConsiderLastSegmentStartingWithDotAsDirectory: boolean;
         mustConsiderLastSegmentWithNonLeadingDotAsDirectory: boolean;
-        mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: boolean;
+        mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: boolean;
       }>;
-
       alwaysForwardSlashSeparators?: boolean;
     }>
   ): string {
@@ -288,7 +287,7 @@ abstract class ImprovedPath {
     }
 
 
-    if (compoundParameter.ambiguitiesResolution.mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension) {
+    if (compoundParameter.ambiguitiesResolution.mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension) {
       return ImprovedPath.joinPathSegments(
         pathSegments.slice(0, -1),
         { alwaysForwardSlashSeparators: compoundParameter.alwaysForwardSlashSeparators === true }

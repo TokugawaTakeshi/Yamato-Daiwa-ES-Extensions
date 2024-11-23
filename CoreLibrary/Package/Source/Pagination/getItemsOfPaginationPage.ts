@@ -1,7 +1,7 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import cropArray from "../Arrays/cropArray";
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 
 
@@ -24,7 +24,7 @@ export default function getItemsOfPaginationPage<Item>(
 
   let targetPageNumber__numerationFrom0: number;
 
-  if (isNonNegativeInteger(compoundParameter.targetPageNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.targetPageNumber__numerationFrom0)) {
 
     targetPageNumber__numerationFrom0 = compoundParameter.targetPageNumber__numerationFrom0;
 

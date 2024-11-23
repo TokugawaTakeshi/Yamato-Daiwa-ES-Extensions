@@ -356,6 +356,7 @@ export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringO
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
 export { default as isIPv4AddressLiesInRange } from "./Strings/isIPv4AddressLiesInRange";
+export { default as isStringIncludingAtLeastOneOfSubstrings } from "./Strings/isStringIncludingAtLeastOneOfSubstrings";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
@@ -392,10 +393,10 @@ export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 /* ─── Numbers ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
+export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";
 export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
 export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInteger";
 export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
-export { default as isNonNegativeInteger } from "./TypeGuards/Numbers/isNonNegativeInteger";
 export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
 export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
 

@@ -10,7 +10,7 @@ import isNotNull from "../TypeGuards/Nullables/isNotNull";
 import isArbitraryObject from "../TypeGuards/Objects/isArbitraryObject";
 import isNumber from "../TypeGuards/Numbers/isNumber";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNegativeInteger from "../TypeGuards/Numbers/isNegativeInteger";
 import isNegativeIntegerOrZero from "../TypeGuards/Numbers/isNegativeIntegerOrZero";
 import isPositiveDecimalFraction from "../TypeGuards/Numbers/isPositiveDecimalFraction";
@@ -1603,7 +1603,7 @@ class RawObjectDataProcessor {
         break;
       }
       case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: {
-        propertyValueMatchingWithExpectedNumberSet = isNonNegativeInteger(targetValue__expectedToBeNumber);
+        propertyValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetValue__expectedToBeNumber);
         break;
       }
       case RawObjectDataProcessor.NumbersSets.negativeInteger: {

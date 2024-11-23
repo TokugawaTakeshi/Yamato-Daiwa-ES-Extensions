@@ -125,25 +125,27 @@ block append SpecificContent
         and #[code getExpectedToBeSingleChildOfTemplateElement]
 
     p.Article-Paragraph.
-      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] has
+      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] had
         #[+Keyword__Contrast--YDID optional] #[+Keyword--YDID polymorphic] #[+Term--YDID property]
         #[+ImportantEntity__Code--YDID context] which, if defined, #[+Keyword--YDID must] have #[+Term--YDID type]
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }) Element],
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document] or
-        derived from them.
-      Now, this #[+Term--YDID property] has been replaced with #[+ImportantEntity__Code--YDID contextElement],
-        which #[+Keyword--YDID also] #[+Keyword__Contrast--YDID polymorphic], but now has
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document] or the one
+        derived from the one of them.
+      Now, this #[+Term--YDID property] has been #[+Keyword--YDID replaced] with
+        #[+ImportantEntity__Code--YDID contextElement], which #[+Keyword--YDID also]
+        #[+Keyword__Contrast--YDID polymorphic], but now has
         #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type, due to what besides
         the specifying of the context #[+Term--YDID element] itself it has become possible to specify its
         #[+Term--YDID selector].
       However, if the #[+Term--YDID selector] of context #[+Term__Contrast--YDID element] specified,
         #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to it,
-        otherwise #[+Term--YDID error] will be thrown (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]
-        if #[+Term--YDID element] not&nbsp;found, or #[+ImportantEntity__Code--YDID UnexpectedEventError], if two
-        or more #[+Term--YDID elements] found).
+        #[+Keyphrase--YDID otherwise #[+Term--YDID error] will be thrown] (
+        #[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] if #[+Term--YDID element] not&nbsp;found,
+        or #[+ImportantEntity__Code--YDID UnexpectedEventError], if #[+Keyword--YDID two] #[+Keyword__Contrast--YDID or]
+        #[+Keyword--YDID more] #[+Term--YDID elements] found).
       Because #[+Keyword--YDID both] #[+ImportantEntity__Code--YDID Element] and #[+ImportantEntity__Code--YDID Document]
-        are inherited from #[+ImportantEntity__Code--YDID ParentNode], the new type of new #[+Term--YDID property] is
-        compatible with old one.
+        are #[+Term--YDID inherited] from #[+ImportantEntity__Code--YDID ParentNode], the new #[+Term--YDID type] of the
+        #[+Keyword--YDID new] #[+Term--YDID property] is #[+Keyword--YDID compatible] with the old one.
 
     dl.Article-DescriptionList
 
@@ -172,15 +174,17 @@ block append SpecificContent
         Rename #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] to
           #[+ImportantEntity__Code--YDID contextElement] in all files of your project.
         If it will be good for you to specify the #[+Term--YDID selector] of the context #[+Term--YDID element] instead
-          of context #[+Term--YDID element] itself, you may refactor the calling of these function using the newest
-          #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one]
-          #[+Term--YDID element] must correspond to specified #[+Term--YDID selector],
-          #[+Keyphrase--YDID otherwise the error will be thrown].
+          of context #[+Term--YDID element] itself, you may refactor the occurrences of the calling of this
+          #[+Term--YDID function] using the newest #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly]
+          #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to specified #[+Term--YDID selector] of
+          the #[+Keyword--YDID context] #[+Term--YDID element],
+          #[+Keyphrase--YDID otherwise the #[+Term--YDID error] will be thrown].
 
 
+    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h4.Article-Heading4 Events Handling
 
-    h5.Article-Heading5 Changes in API of #[code addLeftClickEventHandler] function
+    h5.Article-Heading5 Changes of #[code addLeftClickEventHandler] Parameter
 
     p.Article-Paragraph.
       As previously, this #[+Term--YDID function] has #[+Keyword--YDID single] #[+Term--YDID parameter] of the
@@ -268,11 +272,11 @@ block append SpecificContent
 
           li.
             If #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true] has been specified in your code,
-              then replace it with #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.Capturing].
+              then replace it with #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing].
 
           li.
             If #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true] has been specified in your code,
-              then то замените это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.Bubbling].
+              then то замените это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling].
     //-
 
       h4.Article-Heading4 Pagination

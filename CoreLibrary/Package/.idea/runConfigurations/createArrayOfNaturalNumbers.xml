@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="createArrayOfNaturalNumbers.test.ts" type="NodeJsTestRunner">
+  <configuration default="false" name="createArrayOfNaturalNumbers" type="NodeJsTestRunner" folderName="Arrays">
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />

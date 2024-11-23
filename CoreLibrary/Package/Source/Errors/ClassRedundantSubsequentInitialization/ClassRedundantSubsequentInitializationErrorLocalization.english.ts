@@ -4,7 +4,7 @@ import type ClassRedundantSubsequentInitializationError from "./ClassRedundantSu
 const classRedundantSubsequentInitializationErrorLocalization__english:
     ClassRedundantSubsequentInitializationError.Localization =
 {
-  defaultTitle: "Class redundant subsequent initialization",
+  defaultTitle: "Class Redundant Subsequent Initialization",
   generateDescription:
       ({ className }: ClassRedundantSubsequentInitializationError.Localization.DescriptionTemplateVariables): string =>
           `Class "${ className }" intended to be initialized only one time.`

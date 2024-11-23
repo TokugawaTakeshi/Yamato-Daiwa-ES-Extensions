@@ -1,4 +1,4 @@
-- ApologyWithSupportRequest.title = "Documentation Page is not Complete";
+- ApologyWithSupportRequest.title = "Documentation Page is has not Completed Yet";
 
 
 mixin ApologyWithSupportRequest-LocalizedText(properties)
@@ -9,10 +9,21 @@ mixin ApologyWithSupportRequest-LocalizedText(properties)
 
     when ApologyWithSupportRequest.States.initialTextNotWritten
 
-      | We are sorry, but this page not complete.
-      | Unfortunately, currently we are able to provide only the #[+Term--YDID TypeScript types] and the links to the
-      |   source code.
-      | If you need this documentation page be complete, please consider the
+      | We are sorry, but this page has not completed yet.
+      | Unfortunately, currently we are only able to provide the links to source code.
+      | If you need this documentation page be complete ASAP, please consider the
+      |
+      +Link--YDF({
+        internalURI: ApologyWithSupportRequest.projectSupportPageURI
+      }) financial supporting of this project
+      | .
+      | Particularly, the part of funds will be spent to the reviewing by the English native speakers.
+
+    when ApologyWithSupportRequest.States.notTranslated
+
+      | We are sorry, but this page has not been translated yet.
+      | Unfortunately, currently we are only able to provide the links to source code.
+      | If you need the translation of this page ASAP, please consider the
       |
       +Link--YDF({
         internalURI: localizedRouting.supportProject.$URI
@@ -20,10 +31,12 @@ mixin ApologyWithSupportRequest-LocalizedText(properties)
       | .
       | Particularly, the part of funds will be spent to the reviewing by the English native speakers.
 
-    when ApologyWithSupportRequest.States.notTranslated
-
-      |
-
     when ApologyWithSupportRequest.States.notCheckedByNativeSpeakers
 
+      | We are sorry, this this page has not been checked by English native speakers yet.
+      | If you need this pag be completed including the height-quality translation, please consider the
       |
+      +Link--YDF({
+        internalURI: localizedRouting.supportProject.$URI
+      }) financial supporting of this project
+      | .
