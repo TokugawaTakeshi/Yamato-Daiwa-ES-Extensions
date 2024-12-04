@@ -19,7 +19,7 @@ block append Metadata
         description: MetaDescriptionTemplates.function({
           functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
           whatFunctionDoes: "the special street magic" // TODO Edit
-        }),
+        })
       },
       stylesSheetsURIs: [
         "${DS}CommonStyles",
@@ -39,7 +39,7 @@ block append Metadata
     //- TODO If `+CallableExpressionScheme--YDF_DK` Pug mixin is being used, `pageTopHeading` is not required 
     const { 
       ${DS}sectioning: localizedSectioning,
-      ${DS}heading: pageTopHeading
+      ${DS}heading: topHeading
     } = localizedRouting.${ROUTE_WITH_CHILDREN};
 
 

@@ -1,7 +1,7 @@
-import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
-import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
-import Logger from "../Logging/Logger";
-import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
+import isNaturalNumberOrZero from "../../TypeGuards/Numbers/isNaturalNumberOrZero";
+import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
+import Logger from "../../Logging/Logger";
+import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
 export default function addElementsToArray<ArrayElement>(

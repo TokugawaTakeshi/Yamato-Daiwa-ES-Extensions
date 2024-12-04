@@ -620,7 +620,16 @@ coreLibrary:
         RawObjectDataProcessor:
 
           $heading: "<code>RawObjectDataProcessor</code>"
-          $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md"
+
+          #$URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md"
+
+          $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.${ fileNameLocalizationExtensions }`
+          $sectioning:
+            $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.yaml
+            $localizations:
+              english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.english.yaml
+              japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.japanese.yaml
+              russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.russian.yaml
 
         sets:
 

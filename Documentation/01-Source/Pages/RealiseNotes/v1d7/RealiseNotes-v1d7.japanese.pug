@@ -170,50 +170,54 @@ block append SpecificContent
           #[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]に#[+Keyword--YDID 丁度]
           #[+ImportantEntity--YDID 1個]の#[+Term--YDID 要素]が該当#[+Keyword--YDID していなければいけない]。
 
-    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
     h4.Article-Heading4 イベント処理
 
     h5.Article-Heading5 #[code addLeftClickEventHandler]関数APIの変更
 
     p.Article-Paragraph.
-      相変わらず、当関数の#[+Keyword--YDID 単一の]#[+Term--YDID 引数]は#[+Term__Contrast--YDID オブジェクト型]だが、
-        此れの#[+Term--YDID プロパティ]に下記の変化が適応された。
+      相変わらず、当#[+Term--YDID 関数]の#[+Keyword--YDID 単一の]#[+Term--YDID 引数]は#[+Term__Contrast--YDID オブジェクト型]だが、
+        此れの#[+Term--YDID プロパティ]に下記の#[+Keyword--YDID 変更]が適応された。
 
     dl.Article-DescriptionList
 
       dt #[+ImportantEntity__Code--YDID targetElementSelector]の廃止
       dd.
-        当#[+Term--YDID プロパティ]が削除されかた代わりに、#[+ImportantEntity__Code--YDID targetElement]#[+Term--YDID プロパティ] to
-          #[+Keyword--YDID 多態性の]になった。
-        現在以降、目的#[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]を#[+ImportantEntity__Code--YDID targetElement]
+        当#[+Term--YDID プロパティ]が#[+Keyword--YDID 削除]されかた代わりに、#[+ImportantEntity__Code--YDID targetElement]
+          #[+Term--YDID プロパティ]が#[+Keyword--YDID 多態性の]になった。
+        今後目的#[+Term--YDID 要素]の#[+Term__Contrast--YDID セレクター]を#[+ImportantEntity__Code--YDID targetElement]
           #[+Term--YDID オブジェクト]の#[+ImportantEntity__Code--YDID selector]と言う
           #[+Keyword--YDID 文字列型の]#[+Term--YDID プロパティ]で指定しなければいけない。
-        但し以前と相変わらず、目的#[+Term--YDID 要素]は#[+Term__Contrast--YDID セレクター]で指定された場合、
+        但し#[+Keyphrase--YDID 以前と相変わらず]、目的#[+Term--YDID 要素]は#[+Term__Contrast--YDID セレクター]で指定された場合、
           #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector]か、
           #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector]か、
           #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector]#[+Term--YDID プロパティ]で
-          当#[+Term--YDID セレクター]に複数の#[+Term--YDID 要素]が発見された時の振る舞いを指定しなくてはならない。
+          当#[+Term--YDID セレクター]に該当している複数の#[+Term--YDID 要素]が発見された時の振る舞いを指定
+          #[+Keyword--YDID しなくてはならない]。
 
       dt #[+ImportantEntity__Code--YDID contextElement]の追加
       dd.
-        #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]が指定された場合、其れに加えて
-          #[+ImportantEntity__Code--YDID contextElement]と言う新規任意#[+Term--YDID プロパティ]を使って、
+        #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]が指定された場合、
+          #[+Keyphrase--YDID 其れに加えて]#[+ImportantEntity__Code--YDID contextElement]と言う#[+Keyword--YDID 新規]で
+          #[+Keyword__Contrast--YDID 任意な]#[+Term--YDID プロパティ]を用いて、
           対象#[+Term--YDID 要素]が検索される事に成る#[+Term--YDID コンテキスト要素]を指定出来る様に成った。
         #[+ImportantEntity__Code--YDID targetElementSelector]の場合と同じ様に、#[+Term--YDID 要素]のインスタンスを指定するか、
-          #[+Term--YDID セレクター]で出来る、但し#[+Term--YDID セレクター]の場合当#[+Term--YDID セレクター]は#[+Keyword--YDID 単一の]
-          #[+Term--YDID 要素]に該当していなければいけない、#[+Keyphrase--YDID さもなくばエラーが投げられる]。
+          #[+Term--YDID セレクター]を指定出来る、#[+Keyword--YDID 但し]#[+Keyphrase--YDID #[+Term--YDID セレクター]の場合]
+          当#[+Term--YDID セレクター]は#[+Keyword--YDID 単一の]#[+Term--YDID 要素]に該当#[+Keyword--YDID していなければいけない]、
+          #[+Keyphrase--YDID さもなくばエラーが投げられる]のだ。
 
       dt.
         #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]を
           #[+ImportantEntity__Code--YDID eventPropagation]への置き換え
       dd.
-        #[+ImportantEntity__Code--YDID eventPropagation]と言う新規#[+Keyword--YDID 多態性の]#[+Term--YDID プロパティ]で
-          #[+Term--YDID イベントの伝播]の種類を指定可能だけでなく、#[+Term--YDID イベントの伝播]の無効化も出来る様に成った。
-        [+ImportantEntity__Code--YDID capturing]と
-          #[+ImportantEntity__Code--YDID eventPropagation: bubbling]と言う
-          #[+ImportantEntity__Code--YDID eventPropagation]#[+Term--YDID 列挙]の要素は以前のAPIに比べて分かりにくいと評判される
-          かもしれないが、#[+Term--YDID 「capturing」]（#[+Term--YDID DOMツリー]の下降移動）と#[+Term--YDID 「bubbling」]
-          （#[+Term--YDID DOMツリー]の上昇移動）は正規的な用語であり、正規的な用語の利用は低品質のAPIとして見做されない。
+        #[+ImportantEntity__Code--YDID eventPropagation]と言う#[+Keyword--YDID 新規]#[+Keyword--YDID 多態性の]
+          #[+Term--YDID プロパティ]で#[+Term--YDID イベントの伝播]の種類を指定可能だけで#[+Keyword--YDID なく]、
+          #[+Term--YDID イベントの伝播]#[+Keyword--YDID 自体]の無効化も出来る様に成った。
+        #[+ImportantEntity__Code--YDID capturing]と#[+ImportantEntity__Code--YDID bubbling]と言う
+          #[+ImportantEntity__Code--YDID eventPropagation]#[+Term--YDID 列挙]の#[+Term__Contrast--YDID 要素]は以前の
+          #[+ImportantEntity--YDID API]に比べて分かりにくいと評判されるかもしれないが、#[+Term--YDID 「capturing」]
+          （#[+Term--YDID DOMツリー]の#[+Keyword--YDID 下降]移動）と#[+Term--YDID 「bubbling」]
+          （#[+Term--YDID DOMツリー]の#[+Keyword--YDID 上昇]移動）は正規的な用語であり、正規的な用語の利用は低品質のAPIとして見做されない。
 
     dl.Article-DescriptionList
 
@@ -223,8 +227,8 @@ block append SpecificContent
         ul.Article-UnorderedList
 
           li 他#[+Term--YDID 関数]との#[+ImportantEntity--YDID API]の部分的な統一
-          li コンテキスト依存の対象#[+Term--YDID 要素]のセレクターを指定する需要
-          li イベントの伝搬のもっと柔軟な指定の需要
+          li コンテキスト依存の対象#[+Term--YDID 要素]をセレクターを指定する需要
+          li #[+Term--YDID イベントの伝搬]のもっと柔軟な指定の需要
 
       dt 貴方のコードが編集が必要に成る条件
       dd
@@ -245,8 +249,9 @@ block append SpecificContent
           li.
             #[+ImportantEntity__Code--YDID targetElementSelector]#[+Term--YDID プロパティ]を
               #[+ImportantEntity__Code--YDID targetElement]に名前変更の上、#[+Term--YDID セレクター]を含めている
-              #[+Term--YDID 文字列リテラル]か、此の#[+Term--YDID リテラル]を含めている#[+Term--YDID 変数]を#[+Term--YDID 子オブジェクト]
-              の#[+ImportantEntity__Code--YDID selector]#[+Term--YDID プロパティ]へ移動させてください。
+              #[+Term--YDID 文字列リテラル]か、此の#[+Term--YDID リテラル]を含めている#[+Term--YDID 変数]を
+              #[+Term__Contrast--YDID 子オブジェクト]の#[+ImportantEntity__Code--YDID selector]#[+Term--YDID プロパティ]
+              へ移してください。
             例えば、#[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"]は
               #[+SecondaryEntity__Code--YDID targetElement: { selector: ".Card-SavingButton"}]に成る。
 
@@ -255,7 +260,7 @@ block append SpecificContent
               #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing]に置き換えて下さい。
 
           li.
-            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定している場合、
+            #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true]が指定してある場合、
               #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling]に置き換えて下さい。
 
     //-

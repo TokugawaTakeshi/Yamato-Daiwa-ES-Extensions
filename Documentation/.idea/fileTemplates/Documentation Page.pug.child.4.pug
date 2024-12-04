@@ -19,7 +19,7 @@ block append Metadata
         description: MetaDescriptionTemplates.function({
           functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
           whatFunctionDoes: "особую, уличную магию" // TODO Редактировать
-        }),
+        })
       },
       stylesSheetsURIs: [
         "${DS}CommonStyles",
@@ -39,7 +39,7 @@ block append Metadata
     //- TODO Если используется Pug-примесь `+CallableExpressionScheme--YDF_DK` то `pageTopHeading` не нужно    
     const { 
       ${DS}sectioning: localizedSectioning,
-      ${DS}heading: pageTopHeading
+      ${DS}heading: topHeading
     } = localizedRouting.${ROUTE_WITH_CHILDREN};
 
 

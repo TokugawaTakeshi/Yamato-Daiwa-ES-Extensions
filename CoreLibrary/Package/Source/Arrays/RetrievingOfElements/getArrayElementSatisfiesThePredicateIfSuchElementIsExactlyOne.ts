@@ -1,5 +1,5 @@
-import Logger from "../Logging/Logger";
-import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
+import Logger from "../../Logging/Logger";
+import UnexpectedEventError from "../../Errors/UnexpectedEvent/UnexpectedEventError";
 
 
 export default function getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne<ArrayElement>(
