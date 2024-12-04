@@ -11,7 +11,7 @@ import {
   isString,
   isNonEmptyString,
   isNumber,
-  isNonNegativeInteger,
+  isNaturalNumberOrZero,
   isBoolean,
   isArbitraryObject,
   isUndefined,
@@ -634,9 +634,9 @@ namespace ConsoleApplicationLogger {
 
   export function isRegGreenBlue(rawValue: unknown): rawValue is RedGreenBlue {
     return isArbitraryObject(rawValue) &&
-        isNonNegativeInteger(rawValue.red) &&
-        isNonNegativeInteger(rawValue.green) &&
-        isNonNegativeInteger(rawValue.blue);
+        isNaturalNumberOrZero(rawValue.red) &&
+        isNaturalNumberOrZero(rawValue.green) &&
+        isNaturalNumberOrZero(rawValue.blue);
   }
 }
 

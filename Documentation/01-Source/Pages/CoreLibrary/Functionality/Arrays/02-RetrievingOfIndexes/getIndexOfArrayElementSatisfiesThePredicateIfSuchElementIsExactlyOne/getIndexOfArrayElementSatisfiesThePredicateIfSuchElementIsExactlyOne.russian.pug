@@ -1,0 +1,76 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfIndexes.$children.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
+
+    // +ApologyWithSupportRequest
+
+    +CodeViewer--YDF({ title: "Сигнатура" })
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+
+
+    //-
+      +CallableExpressionScheme--YDF_DK({
+        technicalName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+        headingTag: "h1",
+        localizedDescriptiveHeading: "",
+        parametersSpecification: [
+          {
+            localizedName: "Target string",
+            type: "string",
+            required: true,
+            genericTechnicalName: "targetString"
+          }
+        ],
+        returnedValue: "boolean"
+      })

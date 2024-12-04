@@ -1,0 +1,247 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getLastElementOfArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getLastElementOfArray",
+          whatFunctionDoes: "配列の最後の要素（存在している時）を返す。この要素が無い場合、２引数目の有無に依り「null」が返されるが、例外が投げられる。"
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfElements.getLastElementOfArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfElements.$children.getLastElementOfArray.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfElements.$children.getLastElementOfArray;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getLastElementOfArray",
+      headingTag: "h1",
+      localizedDescriptiveHeading: "配列の最後の要素を取得",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「null」が返される",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "目標的配列",
+              type: "Array<ArrayElement>",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "配列が空の場合「UnexpectedEventError」例外が投げられる",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "目標的配列",
+              type: "Array<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              localizedName: "オプション",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        localizedDescriptiveHeading: "オプション",
+        propertiesSpecification: {
+          mustThrowErrorIfArrayIsEmpty: {
+            localizedInterpretation: "配列が空の場合エラーを投げなければならないか",
+            type: "boolean （trueのみ）",
+            required: true
+          }
+        }
+      })
+
+    p.Article-Paragraph.
+      #[+Term--YDID 指数配列]が#[+Keyphrase--YDID 空ではない時]、#[+Keyword--YDID 最後の]#[+Term__Contrast--YDID 要素]を返す。
+      #[+Term--YDID 配列]が空の場合、
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+ImportantEntity--YDID ２引数目]は#[+ImportantEntity__Code--YDID { mustThrowErrorIfArrayIsEmpty: true }]
+          で指定された場合、#[+ImportantEntity__Code--YDID UnexpectedEventError]#[+Term--YDID 例外]が投げられる。
+        但し、もし#[+Term--YDID 関数]エラーが発生せずに実行出来たら、#[+Term--YDID 配列要素]の#[+Term__Contrast--YDID 型]が
+          #[+ImportantEntity__Code--YDID 非undefined]#[+Keyword--YDID 且つ]#[+ImportantEntity__Code--YDID 非null]
+          で指定され（明示的か暗黙的）、#[+Term--YDID 返値]も#[+ImportantEntity__Code--YDID undefined]又は
+          #[+ImportantEntity__Code--YDID null]に成っていないと、#[+ImportantEntity--YDID TypeScript]が信用してくれる。
+      li.
+        #[+ImportantEntity--YDID ２引数目]が指定されていない場合、#[+ImportantEntity__Code--YDID null]が返される。
+        #[+ImportantEntity__Code--YDID TypeScript]が厳密に設定している場合、#[+Term--YDID 配列]の#[+Term__Contrast--YDID 要素]
+          を使う前に、#[+Term--YDID 非null確認]がさせられる。
+
+    p.Article-Paragraph.
+      此の#[+Term--YDID 関数]は#[+SecondaryEntity__Code--YDID targetArray&lsqb;targetArray.length - 1&rsqb;]の様な
+        #[+Term--YDID 表現]を代用するだけで#[+Keyword--YDID なく]、#[+Term--YDID 配列]の#[+Keyword--YDID 最後の]
+        #[+Term__Contrast--YDID 要素]が存在していると#[+Keyword--YDID 保証]する。
+
+
+    //- ━━━ 例 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.examples.$heading,
+      HTML_ID: localizedSectioning.examples.$anchor
+    }).Article-Heading2
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const sample: Array<string> = [ "alpha", "bravo", "charlie" ];
+
+          const lastElementOfSample: string | null = getLastElementOfArray(sample);
+        +CodeViewer-Explanation--YDF.
+          此の場合#[+SecondaryEntity__Code--YDID lastElementOfSample]は#[+SecondaryEntity__Code--YDID "charlie"]値に成る。
+          上記のコードサンプルの場合、#[+SecondaryEntity__Code--YDID sample]#[+Term--YDID 配列]の#[+Keyword--YDID 全]#[+Term--YDID 要素]
+            の値を#[+Keyword--YDID 事前に]分かっているが、実践の場合には事前に知らない事が多いので、返される値が#[+ImportantEntity--YDID null]
+            に成っている（詰まり#[+Term--YDID 配列]が空に成っている可能性が有る）#[+Keyword--YDID 前提]。
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          console.log(lastElementOfSample.length);
+        +CodeViewer-Explanation--YDF
+
+          p.Article-Paragraph.
+            #[+ImportantEntity--YDID TypeScript]が#[+Term--YDID エラ]ー#[+ImportantEntity--YDID TS18047]
+              （「'lastElementOfSample' is possibly 'null'」）を投げる場合。
+            原因は#[+ImportantEntity__Code--YDID length]#[+Term--YDID プロパティ]は#[+Term__Contrast--YDID 文字列]
+              （と#[+Term__Contrast--YDID 配列]）には存在しているが、#[+SecondaryEntity__Code--YDID lastElementOfSample]は
+              #[+ImportantEntity__Code--YDID null]に成っている可能性が有る。
+
+          p.Article-Paragraph.
+            #[+SecondaryEntity__Code--YDID length]を含めて#[+Term--YDID 文字列]の#[+Term__Contrast--YDID プロパティ]や
+              #[+Term__Contrast--YDID メソッド]を呼び出す前に、#[+SecondaryEntity__Code--YDID lastElementOfSample]は
+              #[+Keyword--YDID 非]#[+ImportantEntity__Code--YDID null]と保証しなくてはならない。
+            一つの方法は#[+SecondaryEntity__Code--YDID if (lastElementOfSample !== null) {/* ... */}]の様に
+              #[+Term--YDID 条件文]を使う方法である、此の場合#[+Term--YDID 条件文]#[+Keyword--YDID 内]の値は#[+Keyword--YDID 非]
+              #[+ImportantEntity__Code--YDID null]であると#[+ImportantEntity--YDID TypeScript]が信じてくれる。
+            他の解決方法も有るが、#[+SecondaryEntity__Code--YDID lastElementOfSample!.length]はコードの品質が大きく低下する為、
+            #[+ImportantEntity--YDID TypeScript]が出来ると発言するエンジニアは絶対に使用してはいけない表現である。
+            此の様な機能を使用するエンジニアは#[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]を利用する有意義さを無くす]
+              #[+Keyword--YDID 有害]機能である#[+ImportantEntity__Code--YDID any]#[+Term--YDID 型]も幅広く用いている事が多い。
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const notNullLastElementOfSample: string = getLastElementOfArray(sample, { mustThrowErrorIfArrayIsEmpty: true });
+        +CodeViewer-Explanation--YDF.
+          #[+Keyphrase--YDID #[+ImportantEntity--YDID 2個目]の#[+Term--YDID 引数]を指定した場合]、
+             #[+SecondaryEntity__Code--YDID notNullLastElementOfSample]の#[+Term--YDID 型]を
+             #[+SecondaryEntity__Code--YDID string | null]では#[+Keyword--YDID なく]、#[+SecondaryEntity__Code--YDID string]
+             が指定出来る。
+           #[+Term--YDID 配列]が空の時、#[+ImportantEntity__Code--YDID null]が返されずに
+            #[+ImportantEntity__Code--YDID UnexpectedEventError]が投げられるからである。
+           無論、此の#[+Term--YDID 例外]を#[+ImportantEntity__Code--YDID try/catch]で処理出来るが、此の場合だと、
+            #[+Term--YDID 非null確認]に比べ利点は特に無い。
+
+
+    +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/" +
+          "getLastElementOfArray/Images/getLastElementOfArray-LiveTemplate",
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          対象#[+Term--YDID 配列]を保持している#[+Term--YDID 変数]か、#[+Term--YDID 配列]自体をクリップボードにコピーする。
+          此の行動を、#[+ImportantEntity--YDID getLastElementOfArray]の#[+Term--YDID ライブテンプレート]を呼び出す前に実行する習慣を身に
+            付けたなら、開発環境は自動的に#[+ImportantEntity--YDID 1引数目]を必要な表現で埋められる様に成る。
+
+        li
+          | #[+ImportantEntity--YDID addElementsToArray]と言う#[+Term--YDID 関数]の名前入力を開始する。
+          | 下記のオートコンプリートの選択肢が表示される。
+
+          ol.Article-OrderedList
+
+            li.
+              重なっている異色の３個の円板は単に#[+Term--YDID 関数]名のオートコンプリートで、結合開発環境の既定の機能である。
+              #[+ImportantEntity--YDID Enter]を押すと、#[+Term--YDID 関数]の名前が入力され、必要に応じて#[+Term--YDID インポート宣言]
+                も追加される。
+              悪くはないが、更成る自動化が可能である。
+
+            li.
+              印鑑アイコンは望ましい項目。
+              #[+ImportantEntity--YDID Enter]を押すと、コードの原型が自動入力され、#[+ImportantEntity--YDID 1引数目]は自動的に
+                埋められた上で選択される。
+              上記の手順通り操作を行った場合、自動入力された#[+ImportantEntity--YDID 1引数目]を変える必要は無いので、
+                もう一度#[+ImportantEntity--YDID Enter]を押して下さい。
+
+          li 不要なコードを削除する。
+
+      p.Article-Paragraph.
+        #[+ImportantEntity__Code--YDID gleoa]と言う#[+ImportantEntity__Code--YDID getLastElementOfArray]の各言葉の
+          最初の文字から成り立っている当#[+Term--YDID ライブテンプレート]の#[+Keyword--YDID アリアス]を使っても良いが、何度も使用しないと覚えられない点が短所である。
+
+
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Source/Arrays/getLastElementOfArray.ts",
+        title: "ソースコード"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
+            "CoreLibrary/Package/Tests/Automated/Arrays/getLastElementOfArray.test.ts",
+        title: "テストコード"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

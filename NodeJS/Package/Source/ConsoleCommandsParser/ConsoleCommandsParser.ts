@@ -10,7 +10,7 @@ import {
   insertSubstring,
   isNaturalNumber,
   isNegativeInteger,
-  isNonNegativeInteger,
+  isNaturalNumberOrZero,
   isNegativeIntegerOrZero,
   isPositiveDecimalFraction,
   isNegativeDecimalFraction,
@@ -634,7 +634,7 @@ class ConsoleCommandsParser<
         break;
       }
       case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: {
-        isOptionValueMatchingWithExpectedNumberSet = isNonNegativeInteger(targetOptionParsedValue);
+        isOptionValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetOptionParsedValue);
         break;
       }
       case RawObjectDataProcessor.NumbersSets.negativeInteger: {

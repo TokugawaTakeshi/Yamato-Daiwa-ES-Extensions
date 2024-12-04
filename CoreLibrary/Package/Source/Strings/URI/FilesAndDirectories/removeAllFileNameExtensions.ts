@@ -1,8 +1,9 @@
 import replaceDoubleBackslashesWithForwardSlashes from "../../replaceDoubleBackslashesWithForwardSlashes";
 import splitString from "../../splitString";
-import getLastElementOfArray from "../../../Arrays/getLastElementOfArray";
+import getLastElementOfArray from "../../../Arrays/01-RetrievingOfElements/getLastElementOfArray";
 import isNull from "../../../TypeGuards/Nullables/isNull";
-import replaceArrayElementsByIndexesImmutably from "../../../Arrays/replaceArrayElementsByIndexesImmutably";
+import replaceArrayElementsByIndexesImmutably from
+    "../../../Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably";
 
 
 export default function removeAllFileNameExtensions(targetPath: string): string {

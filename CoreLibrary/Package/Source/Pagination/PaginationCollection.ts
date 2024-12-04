@@ -1,6 +1,6 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import cropArray from "../Arrays/cropArray";
+import cropArray from "../Arrays/03-RetrievingOfSubarrays/cropArray";
 import isUndefined from "../TypeGuards/Nullables/isUndefined";
 
 

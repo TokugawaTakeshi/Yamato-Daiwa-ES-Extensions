@@ -13,29 +13,53 @@ export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryP
 
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as addElementsToArray } from "./Arrays/addElementsToArray";
-export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
-    "./Arrays/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
-export { default as createArrayOfNaturalNumbers } from "./Arrays/createArrayOfNaturalNumbers";
-export { default as cropArray } from "./Arrays/cropArray";
+/* [ Maintainability ] The categories logic arranging must match with the documentation. */
+
+/* ─── Creating ───────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as createArrayOfNaturalNumbers } from "./Arrays/00-Creating/createArrayOfNaturalNumbers";
+
+/* ─── Retrieving of Elements ─────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+    "./Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+export { default as getLastElementOfArray } from "./Arrays/01-RetrievingOfElements/getLastElementOfArray";
+
+/* ─── Retrieving of Indexes ──────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getIndexesOfSatisfiesThePredicateArrayElements } from
-    "./Arrays/getIndexesOfSatisfiesThePredicateArrayElements";
+    "./Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements";
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
-export { default as moveArrayElementTo1Position } from "./Arrays/moveArrayElementTo1Position";
-export { default as readonlyArrayToMutableOne } from "./Arrays/readonlyArrayToMutableOne";
+    "./Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+
+/* ─── Retrieving of Subarrays ────────────────────────────────────────────────────────────────────────────────────── */
+export { default as cropArray } from "./Arrays/03-RetrievingOfSubarrays/cropArray";
+
+/* ─── Adding of Elements ─────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addElementsToArray } from "./Arrays/04-AddingOfElements/addElementsToArray";
+
+/* ─── Replacing of Elements ──────────────────────────────────────────────────────────────────────────────────────── */
+export { default as replaceArrayElementsByIndexesImmutably } from
+    "./Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably";
+export {
+  default as replaceArrayElementsByPredicates,
+  type ReplacingArrayElementsByPredicatesOperation
+} from "./Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates";
+
+/* ─── Permutations of Elements ───────────────────────────────────────────────────────────────────────────────────── */
+export { default as moveArrayElementTo1Position } from "./Arrays/06-PermutationsOfElements/moveArrayElementTo1Position";
+export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
+
+/* ─── Removing of Elements ───────────────────────────────────────────────────────────────────────────────────────── */
 export { default as removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from
-    "./Arrays/removeArrayElementsByIndexes";
+    "./Arrays/07-RemovingOfElements/removeArrayElementsByIndexes";
 export { default as removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from
-    "./Arrays/removeArrayElementsByPredicates";
-export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
-export { default as replaceArrayElementsByPredicates, type ReplacingArrayElementsByPredicatesOperation } from
-    "./Arrays/replaceArrayElementsByPredicates";
-export { default as swapArrayElements } from "./Arrays/swapArrayElements";
-export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
+    "./Arrays/07-RemovingOfElements/removeArrayElementsByPredicates";
+
+/* ─── Restructuring ──────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as twoDimensionalizeArray } from "./Arrays/08-Restructuring/twoDimensionalizeArray";
+
+/* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
+    "./Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
+export { default as readonlyArrayToMutableOne } from "./Arrays/09-Other/readonlyArrayToMutableOne";
 
 
 /* ━━━ Constants and enumerations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -223,6 +247,8 @@ export { default as loggerLocalization__english } from "./Logging/LoggerLocaliza
 export { default as addEntriesToMap } from "./Maps/addEntriesToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
+export { default as getExpectedToBeNonUndefinedMapValue } from "./Maps/getExpectedToBeNonUndefinedMapValue";
+export { default as invertMapImmutably } from "./Maps/invertMapImmutably";
 export { removeEntriesFromMap, type RemovingEntriesFromMapOperation } from "./Maps/removeEntriesFromMap";
 export { default as replaceValuesInMap, type ReplaceOfValuesInMapOperation } from "./Maps/replaceValuesInMap";
 

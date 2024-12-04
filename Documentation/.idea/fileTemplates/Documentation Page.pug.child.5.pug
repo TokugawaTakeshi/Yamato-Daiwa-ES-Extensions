@@ -19,7 +19,7 @@ block append Metadata
         description: MetaDescriptionTemplates.function({
           functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
           whatFunctionDoes: "特別なストリートの魔法" // TODO Edit
-        }),
+        })
       },
       stylesSheetsURIs: [
         "${DS}CommonStyles",
@@ -29,18 +29,18 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("${ROUTE_WIHTOUT_CHILDREN}");
+    RoutingEmulator.setCurrentRoute("${ROUTE_PATH.replaceAll('$children.', '')}");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: routing.english.${ROUTE_WITH_CHILDREN}.${DS}URI,
-      russian: routing.russian.${ROUTE_WITH_CHILDREN}.${DS}URI
+      english: routing.english.${ROUTE_PATH}.${DS}URI,
+      russian: routing.russian.${ROUTE_PATH}.${DS}URI
     });
     
     //- TODO `+CallableExpressionScheme--YDF_DK`と言うPugミックスインが使われているなら、`pageTopHeading`無しで良い
     const { 
       ${DS}sectioning: localizedSectioning,
-      ${DS}heading: pageTopHeading
-    } = localizedRouting.${ROUTE_WITH_CHILDREN};
+      ${DS}heading: topHeading
+    } = localizedRouting.${ROUTE_PATH};
 
 
 block append HeadScripts

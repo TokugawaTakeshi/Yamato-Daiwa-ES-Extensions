@@ -1,0 +1,87 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getIndexesOfArrayElementsWhichSatisfiesThePredicate"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexesOfArrayElementsWhichSatisfiesThePredicate"
+    );
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+      headingTag: "h1",
+      localizedDescriptiveHeading: "",
+      parametersSpecification: [
+        {
+          localizedName: "Target string",
+          type: "string",
+          required: true,
+          genericTechnicalName: "targetString"
+        }
+      ],
+      returnedValue: "boolean"
+    })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

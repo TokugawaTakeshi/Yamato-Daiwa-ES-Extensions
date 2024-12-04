@@ -41,9 +41,21 @@ coreLibrary:
 
         $heading: "Добавление элементов"
 
+      replacingOfElements:
+
+        $heading: "Замена элементов"
+
+      permutationsOfElements:
+
+        $heading: "Перестановки элементов"
+
       removingOfElements:
 
         $heading: "Удаление элементов"
+
+      restructuring:
+
+        $heading: "Реструктуризация"
 
       other:
 

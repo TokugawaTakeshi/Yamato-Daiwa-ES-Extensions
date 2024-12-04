@@ -6,7 +6,7 @@
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/createArrayOfNaturalNumbers.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/00-Creating/createArrayOfNaturalNumbers.test.ts" />
     <method v="2" />
   </configuration>
 </component>

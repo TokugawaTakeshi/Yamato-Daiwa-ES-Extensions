@@ -9,7 +9,7 @@
       <env name="TS_NODE_PROJECT" value="tsconfig.test.json" />
     </envs>
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/addElementsToArray.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/04-AddingOfElements/addElementsToArray.test.ts" />
     <method v="2" />
   </configuration>
 </component>

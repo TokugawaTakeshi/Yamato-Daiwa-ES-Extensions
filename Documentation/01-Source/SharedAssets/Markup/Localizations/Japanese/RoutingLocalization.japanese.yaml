@@ -41,9 +41,21 @@ coreLibrary:
 
         $heading: "要素の追加"
 
+      replacingOfElements:
+
+        $heading: "要素の置き換え"
+
+      permutationsOfElements:
+
+        $heading: "要素の並べ替え"
+
       removingOfElements:
 
         $heading: "要素の取り除き"
+
+      restructuring:
+
+        $heading: "Restructuring"
 
       other:
 

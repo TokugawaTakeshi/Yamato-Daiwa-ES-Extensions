@@ -18,34 +18,22 @@ Oriented to TypeScript users investing the time to quality including type-safety
 npm i @yamato-daiwa/es-extensions -E
 ```
 
-
-## Notice about "Unpacked size" (displaying in npmjs.com)
-
-The displaying "Unpacked size" (for example, 633 kB for version 1.4.5 as in image below) is the 
-**total size of all built CommonJS and ECMAScript modules**.
-
-![image](https://user-images.githubusercontent.com/41653501/168949802-72554886-39b0-43b1-9813-43f7c4405f69.png)
-
-ECMAScript modules are preferred for the browser JavaScript while CommonJS - for Node.js.
-
-For the websites and web applications where each kilobyte on count it is possible to automatically exclude the unused 
-functionality of **@yamato-daiwa/es-extensions** (and possibly other dependencies) from built JavaScript.
-The JavaScript bundlers like [Webpack](https://webpack.js.org) can exclude the unused functionality under certain conditions.
-For the TypeScript and Webpack combination case, it is required to use ECMAScript modules to activate the
-[tree shaking](https://webpack.js.org/guides/tree-shaking/) functionality (works on production mode).
-
-
 ## Documentation
 
-### Get functionality
++ [Getting Started](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html)
 
-All available functionality could be imported from `@yamato-daiwa/es-extensions`:
+### Arrays
+#### Creating
 
-```typescript
-export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
-```
+* [createArrayOfNaturalNumbers](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
 
-### Functionality reference
+#### Retrieving of element
+
+* [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
+* [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
+
+
+[//]: # (todo =========================================================================================================)
 
 #### RawObjectDataProcessor
 
@@ -206,76 +194,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
     Intended to be used when the schema of value is not known enough (for example, because of lack of TypeScript type definition).
   </dd>
 </dl>
-
-
-#### Arrays
-##### Retrieving of elements
-
-<dl>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.english.html">getLastElementOfArray</a></dt>
-  <dd>Returns the last element of array, herewith depending on dedicated parameter either <b>UnexpectedEventError</b> will be thrown of null will be returned if target array is empty.</dd>
-
-</dl>
-
-
-##### Retrieving of indexes 
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.md">getIndexesOfSatisfiesThePredicateArrayElements</a></dt>
-  <dd>Returns the array of indexes of array elements which are satisfies to predicate function.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
-
-</dl>
-
-
-##### Replacing of elements
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md">replaceArrayElementsByIndexesImmutably</a></dt>
-  <dd>Creates the copy of target array and replaces the elements by specified indexes.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md">replaceArrayElementsByPredicates</a></dt>
-  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated option.</dd>
-
-</dl>
-
-
-##### Adding of elements
-
-<dl>
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a></dt>
-  <dd>Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.</dd>
-</dl>
-
-
-##### Removing of elements
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md">removeArrayElementsByIndexes</a></dt>
-  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated option.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md">removeArrayElementsByPredicates</a></dt>
-  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated option.</dd>
-
-</dl>
-
-
-##### Other
-
-<dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md">twoDimensionalizeArray</a></dt>
-  <dd>Converts flat array to 2-dimensional array with nested arrays of fixed elements count.</dd>
-</dl>
-
 
 #### Sets
 

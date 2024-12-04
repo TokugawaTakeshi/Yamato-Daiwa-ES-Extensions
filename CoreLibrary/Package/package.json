@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.8.0-alpha.8",
+  "version": "1.8.0-alpha.10",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -29,7 +29,7 @@
     "Distributable"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "fundamental-constants": "0.4.0"

@@ -26,6 +26,8 @@ export { default as LeftClickEventListener } from "./EventsHandling/LeftClick/Le
 export { default as LeftClickOutOfElementEventListener } from "./EventsHandling/LeftClick/LeftClickOutOfElementEventListener";
 
 /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as FocusOutEventListener } from "./EventsHandling/FocusOutEventListener";
+export { default as InputEventListener } from "./EventsHandling/InputEventListener";
 export { default as addInputEventHandler } from "./EventsHandling/addInputEventHandler";
 export { default as EventPropagationTypes } from "./EventsHandling/EventPropagationTypes";
 
