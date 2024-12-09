@@ -89,20 +89,20 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
     /* ─── Non-undefined Check ────────────────────────────────────────────────────────────────────────────────────── */
-    notAllowedUndefinedValueOfProperty: {
-      title: "Not Allowed Undefined Value Of Property",
-      description: "This property is `undefined` while has been marked as required."
+    forbiddenUndefinedValueOfProperty: {
+      title: "Forbidden Undefined Value Of Property",
+      description: "This property is not defined or have explicit `undefined` value what is forbidden."
     },
 
-    conditionallyNotAllowedUndefinedValueOfProperty: {
+    conditionallyForbiddenUndefinedValue: {
 
-      title: "Conditionally Not Allowed Undefined Value Of Property",
+      title: "Conditionally Forbidden Undefined Value",
 
       generateDescription: (
-        { requirementCondition }: ValidationErrors.ConditionallyRequiredPropertyIsMissing.TemplateVariables
+        { conditionWhenUndefinedIsForbidden }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
-          "This value is `undefined` while the following non-undefined value condition satisfied: " +
-            `"${ requirementCondition }"`
+          "This property/element is not defined or has explicit `undefined` value while the following undefined value " +
+            `prohibition condition has been satisfied: "${ conditionWhenUndefinedIsForbidden }".`
 
     },
 
@@ -154,6 +154,37 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
+    conditionallyForbiddenNonUndefinedValue: {
+
+      title: "Conditionally Forbidden non-undefined Value",
+
+      generateDescription: (
+        { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
+      ): string =>
+          `This property is not undefined while must be undefined when ${ conditionWhenMustBeUndefined } and this ` +
+            "condition has been satisfied."
+
+    },
+
+
+    /* ─── Nullability ────────────────────────────────────────────────────────────────────────────────────────────── */
+    nonNullableValueIsNullError: {
+      title: "Non-nullable value is null",
+      description: "This value is \"null\" while nullability has not been permitted by valid data specification."
+    },
+
+    conditionallyForbiddenNullValue: {
+
+      title: "Conditionally Forbidden Null Value",
+
+      generateDescription: (
+        { conditionWhenNullIsForbidden }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
+      ): string =>
+          "This property/element is not defined or has `null` value while the following null value prohibition " +
+            `condition has been satisfied: "${ conditionWhenNullIsForbidden }".`
+
+    },
+
     unableToSubstituteNullPropertyValue: {
 
       title: "Unable to Substitute Undefined Property Value",
@@ -175,13 +206,17 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
+    conditionallyForbiddenNonNullValue: {
 
-    /* ─── Nullability ────────────────────────────────────────────────────────────────────────────────────────────── */
-    nonNullableValueIsNullError: {
-      title: "Non-nullable value is null",
-      description: "This value is \"null\" while nullability has not been permitted by valid data specification."
+      title: "Conditionally Forbidden non-null Value",
+
+      generateDescription: (
+        { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
+      ): string =>
+          `This property is not null while must be null when ${ conditionWhenMustBeNull } and this condition has ` +
+            "been satisfied."
+
     },
-
 
     /* ─── Numeric Value ──────────────────────────────────────────────────────────────────────────────────────────── */
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -227,7 +262,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { minimalCharactersCount, realCharactersCount }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
       ): string =>
-          `This string value has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`,
+          `This string value has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`
 
     },
 
@@ -410,6 +445,20 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   /* ━━━ Throwable Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   throwableErrors: {
 
+    mutuallyExclusiveUndefinedAndNullValueTransformations: {
+
+      title: "Mutually Exclusive Undefined and Null values Transformations",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName
+        }: ThrowableErrors.MutuallyExclusiveUndefinedAndNullValueTransformations.TemplateVariables
+      ): string =>
+        "Both \"mustTransformUndefinedToNull\" and \"mustTransformNullToUndefined\" options has been specified with " +
+          `boolean "true" value for the property "${ targetPropertyDotSeparatedQualifiedName }" what it the contradiction. ` +
+        "Delete one these options, or both of them then replace with another ones."
+    },
+
     preValidationModificationFailed: {
 
       title: "Pre-validation Modification Failed",
@@ -440,18 +489,18 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
             "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
             "\"true\" boolean value for target property, the deleting of the outdated one. " +
-          "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
-            "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+          "However, because the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+            "Reference/Global_Objects/Object/defineProperty#configurable), it could not be deleted.\n" +
           "This error has been thrown because the error handling strategy \"onUnableToDeletePropertyWithOutdatedValue\" is " +
             "\"ErrorHandlingStrategies.throwingOfError\" which is default. " +
-          "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
+          "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
             "select the one matching with your case:\n" +
-          "● If you are have access to data source, consider the making of this property configurable.\n" +
+          "● If you are have access to the data source, consider the making of this property configurable.\n" +
           "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
             "\"true\" for this property.\n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-          "  not specified via valid data specification will not be added to new object."
+          "  with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+          "valid data specification will not be added to new object."
     },
 
     unableToSubstituteUndefinedPropertyValue: {
@@ -459,9 +508,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Unable to Substitute Undefined Property Value",
 
       generateDescription: (
-        {
-          targetPropertyDotSeparatedQualifiedName
-        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
       ): string =>
           `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to be substitute with default ` +
             "value when it is not defined or has explicit `undefined` value. " +
@@ -481,6 +528,18 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
             "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
             "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    },
+
+    propertyUndefinedabilityNotSpecified: {
+
+      title: "Property Undefinedability Not Specified",
+      generateDescription: (
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
+      ): string =>
+          "Is has not been specified how to process the undefined value of this property " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
 
     },
 
@@ -509,6 +568,18 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
             "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
             "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    },
+
+    propertyNullabilityNotSpecified: {
+
+      title: "Property Nullability Not Specified",
+      generateDescription: (
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
+      ): string =>
+          "Is has not been specified how to process the null value of this property " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
 
     },
 

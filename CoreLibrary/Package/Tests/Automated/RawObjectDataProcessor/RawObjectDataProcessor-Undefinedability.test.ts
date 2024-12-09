@@ -27,7 +27,7 @@ suite(
                 await Promise.all([
 
                   suite(
-                    "Definitely Required/Optional Property",
+                    "Undefined Property is Definitely Allowed or Forbidden",
                     async (): Promise<void> => {
 
                       const TARGET_PROPERTY_NAME: "alpha" = "alpha";
@@ -40,12 +40,14 @@ suite(
                           [TARGET_PROPERTY_NAME]: {
                             type: Number,
                             numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                            required: true
+                            isUndefinedForbidden: true,
+                            isNullForbidden: true
                           },
                           bar: {
                             type: Number,
                             numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                            required: false
+                            isUndefinedForbidden: false,
+                            isNullForbidden: true
                           }
                         }
                       };
@@ -127,7 +129,7 @@ suite(
                                 undefinedToEmptyArray(validationErrorsMessages)[0],
                                 RawObjectDataProcessor.generateValidationErrorMessage({
                                   ...RawObjectDataProcessor.defaultLocalization.validationErrors.
-                                      notAllowedUndefinedValueOfProperty,
+                                      forbiddenUndefinedValueOfProperty,
                                   targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                   targetPropertyNewName: null,
                                   /* eslint-disable-next-line no-undefined --
@@ -147,25 +149,25 @@ suite(
                   ),
 
                   suite(
-                    "Conditionally Required Property",
+                    "Undefined Value is Conditionally Forbidden",
                     async (): Promise<void> => {
 
                       const TARGET_PROPERTY_NAME: "swimmingPoolMaximalDepth__meters" = "swimmingPoolMaximalDepth__meters";
                       type ValidData = { hasSwimmingPool: boolean; [TARGET_PROPERTY_NAME]: number; };
                       const requirementConditionDescription: string = "`hasSwimmingPool` is true";
 
-                      const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+                      const validDataSpecification: RawObjectDataProcessor.FixedKeyAndValuesTypeObjectDataSpecification = {
                         nameForLogging: "ValidData",
                         subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
                         properties: {
                           hasSwimmingPool: {
                             type: Boolean,
-                            required: false
+                            isUndefinedForbidden: false
                           },
                           [TARGET_PROPERTY_NAME]: {
                             type: Number,
                             numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
-                            requiredIf: {
+                            undefinedForbiddenIf: {
                               predicate: (rawData: ArbitraryObject): boolean => rawData.hasSwimmingPool === true,
                               descriptionForLogging: requirementConditionDescription
                             }
@@ -241,10 +243,10 @@ suite(
                                 undefinedToEmptyArray(validationErrorsMessages)[0],
                                 RawObjectDataProcessor.generateValidationErrorMessage({
                                   title: RawObjectDataProcessor.defaultLocalization.validationErrors.
-                                      conditionallyNotAllowedUndefinedValueOfProperty.title,
+                                      conditionallyForbiddenUndefinedValue.title,
                                   description: RawObjectDataProcessor.defaultLocalization.validationErrors.
-                                      conditionallyNotAllowedUndefinedValueOfProperty.
-                                      generateDescription({ requirementCondition: requirementConditionDescription }),
+                                      conditionallyForbiddenUndefinedValue.
+                                      generateDescription({ conditionWhenUndefinedIsForbidden: requirementConditionDescription }),
                                   targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                   targetPropertyNewName: null,
                                   /* eslint-disable-next-line no-undefined --
@@ -264,7 +266,7 @@ suite(
                   ),
 
                   suite(
-                    "Default Value Substitution",
+                    "Undefined Value Substitution",
                     async (): Promise<void> => {
 
                       type ValidData = { foo: string; };
@@ -281,7 +283,7 @@ suite(
                         properties: {
                           foo: {
                             type: String,
-                            defaultValue: TARGET_PROPERTY_DEFAULT_VALUE
+                            undefinedValueSubstitution: TARGET_PROPERTY_DEFAULT_VALUE
                           }
                         }
                       };
@@ -340,7 +342,9 @@ suite(
                       }
 
                     }
-                  )
+                  ),
+
+                  // TODO mustBeUndefineConditionally
 
                 ]);
 
