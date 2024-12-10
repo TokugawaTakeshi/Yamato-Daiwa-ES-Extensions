@@ -13,13 +13,20 @@ export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryP
 
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as addElementsToArray } from "./Arrays/addElementsToArray";
+/* ─── Adding of Elements ─────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addElementsToArray } from "./Arrays/AddingOfElements/addElementsToArray";
+
+/* ─── Creating ───────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as createArrayOfNaturalNumbers } from "./Arrays/Creating/createArrayOfNaturalNumbers";
+
+/* ─── Retrieving of Elements ─────────────────────────────────────────────────────────────────────────────────────── */
+export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
+    "./Arrays/RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+
+/* ─── Not Classified Yet ─────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
     "./Arrays/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
-export { default as createArrayOfNaturalNumbers } from "./Arrays/createArrayOfNaturalNumbers";
 export { default as cropArray } from "./Arrays/cropArray";
-export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 export { default as getIndexesOfSatisfiesThePredicateArrayElements } from
     "./Arrays/getIndexesOfSatisfiesThePredicateArrayElements";
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from

@@ -181,41 +181,40 @@ block append SpecificContent
           #[+Keyphrase--YDID otherwise the #[+Term--YDID error] will be thrown].
 
 
-    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h4.Article-Heading4 Events Handling
 
     h5.Article-Heading5 Changes of #[code addLeftClickEventHandler] Parameter
 
     p.Article-Paragraph.
       As previously, this #[+Term--YDID function] has #[+Keyword--YDID single] #[+Term--YDID parameter] of the
-        #[+Term--YDID «object»] type, but its #[+Term--YDID properties] has changed:
+        #[+Term--YDID «object»] type, but its #[+Term--YDID properties] has #[+Keyword--YDID changed]:
 
     dl.Article-DescriptionList
 
       dt Removing of #[+ImportantEntity__Code--YDID targetElementSelector]
       dd.
-        Deleted in exchange to turing of #[+ImportantEntity__Code--YDID targetElement] #[+Term--YDID property] to
-          #[+Keyword--YDID polymorphic].
-        Now the #[+Term--YDID selector] of target #[+Term--YDID element] must be specified via #[+Keyword--YDID string]
-          #[+Term--YDID property] #[+ImportantEntity__Code--YDID selector] of the
+        #[+Keyword--YDID Deleted] in exchange to the turing of #[+ImportantEntity__Code--YDID targetElement]
+          #[+Term--YDID property] to #[+Keyword--YDID polymorphic].
+        Now the #[+Term--YDID selector] of target #[+Term--YDID element] #[+Keyword--YDID must] be specified via
+          #[+Keyword--YDID string] #[+Term--YDID property] #[+ImportantEntity__Code--YDID selector] of the
           #[+ImportantEntity__Code--YDID targetElement] #[+Term--YDID object].
-        Herewith #[+Keyphrase--YDID as previously], if target #[+Term--YDID element] is being specified via
+        Herewith #[+Keyphrase--YDID as previously], if target #[+Term--YDID element] is been specified via
           #[+Term--YDID selector], it is #[+Keyword--YDID required] to specify via #[+Keyphrase--YDID one of]
           #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector],
           #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector] or
-          #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector] #[+Term--YDID properties],
+          #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector] #[+Term--YDID properties]
           how the #[+Term--YDID function] must to behave when more than one #[+Term--YDID element] detected for
           specified #[+Term--YDID selector].
 
       dt Adding of #[+ImportantEntity__Code--YDID contextElement]
       dd.
-        If #[+ImportantEntity__Code--YDID targetElementSelector] #[+Term--YDID property] has been specified than it is
-          possible to specify also the #[+Keyword--YDID context] #[+Term--YDID element] inside which target
-          #[+Term--YDID element] will be searched via new #[+ImportantEntity__Code--YDID contextElement]
+        If #[+ImportantEntity__Code--YDID targetElementSelector] #[+Term--YDID property] has been specified then it is
+          possible to specify #[+Keyword--YDID additionally] the #[+Keyword--YDID context] #[+Term--YDID element] inside
+          which target #[+Term--YDID element] will be searched via new #[+ImportantEntity__Code--YDID contextElement]
           #[+Term--YDID property].
         As in the #[+ImportantEntity__Code--YDID targetElementSelector] case, it is possible to specify either the
-          #[+Term--YDID instance] of #[+Term__Contrast--YDID element], or the #[+Term--YDID selector], however
-          in the second scenario the #[+Term__Contrast--YDID selector] #[+Keyword--YDID must] refer to
+          #[+Term--YDID instance] of #[+Term__Contrast--YDID element] or the #[+Term--YDID selector], however
+          in the #[+Keyword--YDID second] scenario the #[+Term__Contrast--YDID selector] #[+Keyword--YDID must] refer to
           #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element],
           #[+Keyphrase--YDID otherwise the #[+Term--YDID error] will be thrown].
 
@@ -224,18 +223,16 @@ block append SpecificContent
           #[+ImportantEntity__Code--YDID eventPropagation]
       dd.
 
-        Thanks to the new #[+Keyword--YDID polymorphic] property  #[+ImportantEntity__Code--YDID eventPropagation]
-          it is possible to specify not&nbsp;only the type of the event propagation, but also prevent the
-          event propagation.
+        Thanks to the new #[+Keyword--YDID polymorphic] #[+Term--YDID property]
+          #[+ImportantEntity__Code--YDID eventPropagation] it is possible to specify not&nbsp;only the type of the
+          #[+Term--YDID event propagation], but also #[+Keyword--YDID prevent] this #[+Term--YDID event propagation].
         Although the #[+Term--YDID elements] of #[+ImportantEntity__Code--YDID eventPropagation]
           #[+Term--YDID enumeration] namely #[+ImportantEntity__Code--YDID EventPropagationTypes.capturing]
-          and #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling] seem to be less
-          understandable, the #[+Term--YDID capturing] (moving down of the #[+Term--YDID DOM tree]) and
-          #[+Term--YDID bubbling] (moving up of the #[+Term--YDID DOM tree]) are the #[+Keyword--YDID canonical]
-          terms, and the usage of canonical terminology is #[+Keyword--YDID not]&nbsp;the indicator of low quality
-          #[+ImportantEntity--YDID API].
-
-    dl.Article-DescriptionList
+          and #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling] seems to be less
+          understandable, the #[+Term--YDID capturing] (moving #[+Keyword--YDID down] of the #[+Term--YDID DOM tree])
+          and #[+Term--YDID bubbling] (moving #[+Keyword--YDID up] of the #[+Term--YDID DOM tree]) are the
+          #[+Keyword--YDID canonical] terms, and the usage of canonical terminology
+          does #[+Keyword--YDID not]&nbsp;indicate the low quality of #[+ImportantEntity--YDID API].
 
       dt Reasons
       dd
@@ -245,13 +242,13 @@ block append SpecificContent
           li Partial unification with the #[+ImportantEntity--YDID API] of another #[+Term--YDID functions]
           li.
             The demand in specifying of the #[+Term--YDID selector] of target element inside the specific parent element.
-          li The demand of more flexible control on event propagation
+          li The demand in more flexible control on #[+Term--YDID event propagation]
 
       dt Changes in your code will required if
       dd
 
         p.Article-Paragraph.
-          One ore more of the following #[+Term--YDID properties] of the single #[+Term--YDID parameter] are being used
+          One ore more of the following #[+Term--YDID properties] of the single #[+Term--YDID parameter] are being used:
 
         ul.Article-UnorderedList
           li #[+ImportantEntity__Code--YDID targetElementSelector]
@@ -264,7 +261,7 @@ block append SpecificContent
 
           li.
             Rename the #[+ImportantEntity__Code--YDID targetElementSelector] #[+Term--YDID property] to
-              #[+ImportantEntity__Code--YDID targetElement], then place the #[+Term--YDID string literal] with
+              #[+ImportantEntity__Code--YDID targetElement], then place the #[+Term--YDID string literal] with the
               #[+Term__Contrast--YDID selector] or the #[+Term--YDID variable] containing this #[+Term--YDID literal]
               to the child #[+Term--YDID object] with #[+ImportantEntity__Code--YDID selector] #[+Term--YDID property].
             For example, #[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"] will become to

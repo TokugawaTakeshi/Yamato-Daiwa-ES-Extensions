@@ -19,7 +19,7 @@ block append Metadata
         description: MetaDescriptionTemplates.function({
           functionName: "${FILE_NAME_WITHOUT_EXTENSION}",
           whatFunctionDoes: "特別なストリートの魔法" // TODO Edit
-        }),
+        })
       },
       stylesSheetsURIs: [
         "${DS}CommonStyles",
@@ -39,7 +39,7 @@ block append Metadata
     //- TODO `+CallableExpressionScheme--YDF_DK`と言うPugミックスインが使われているなら、`pageTopHeading`無しで良い
     const { 
       ${DS}sectioning: localizedSectioning,
-      ${DS}heading: pageTopHeading
+      ${DS}heading: topHeading
     } = localizedRouting.${ROUTE_WITH_CHILDREN};
 
 

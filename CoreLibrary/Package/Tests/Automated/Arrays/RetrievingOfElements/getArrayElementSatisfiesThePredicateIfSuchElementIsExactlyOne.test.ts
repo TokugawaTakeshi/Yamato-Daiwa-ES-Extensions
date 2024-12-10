@@ -1,7 +1,7 @@
 import {
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne,
   UnexpectedEventError
-} from "../../../Source";
+} from "../../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
