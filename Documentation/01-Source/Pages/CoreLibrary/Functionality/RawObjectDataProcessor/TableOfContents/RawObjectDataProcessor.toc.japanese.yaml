@@ -1,3 +1,15 @@
-examples:
+quickExample:
 
-  $heading: "例"
+  $heading: "早速の例"
+
+throwableErrors:
+
+  $heading: "投げられるエラー"
+
+  objectSchemaNotSpecified:
+
+    $heading: "オブジェクトのスキーマが未指定 (<code>objectSchemaNotSpecified</code>)"
+
+  mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
+
+    $heading: "<code>undefined</code>・<code>null</code>の間相反変換 (<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>)"

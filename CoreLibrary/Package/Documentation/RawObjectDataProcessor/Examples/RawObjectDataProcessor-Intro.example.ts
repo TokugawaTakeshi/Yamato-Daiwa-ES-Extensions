@@ -17,7 +17,7 @@ const rawData: unknown = { ID: 1, familyName: "John", title: "Shampoo" };
 *    have a mistake or simply be unrelated with `User`. */
 const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjectDataProcessor.process(rawData, {
   nameForLogging: "User",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     ID: {
       required: true,

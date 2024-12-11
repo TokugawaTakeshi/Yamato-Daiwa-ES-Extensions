@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="RawObjectDataProcessor - Nested Objects Property" type="NodeJsTestRunner" folderName="RawObjectDataProcessor">
+  <configuration default="false" name="RawObjectDataProcessor - Associative Array Type Object Features" type="NodeJsTestRunner" folderName="RawObjectDataProcessor">
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/RawObjectDataProcessor/RawObjectDataProcessor-NestedObjectsProperty.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/RawObjectDataProcessor/RawObjectDataProcessor-AssociativeArrayTypeObjectFeatures.test.ts" />
     <method v="2" />
   </configuration>
 </component>

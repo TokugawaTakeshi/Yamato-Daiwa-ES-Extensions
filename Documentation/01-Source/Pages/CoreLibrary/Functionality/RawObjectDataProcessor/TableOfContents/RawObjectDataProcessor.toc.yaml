@@ -1,4 +1,69 @@
-examples:
+quickExample:
 
-  $heading: `examples.$heading`
-  $anchor: EXAMPLES--SECTION
+  $heading: `quickExample.$heading`
+  $anchor: QUICK_EXAMPLE--SECTION
+
+throwableErrors:
+
+  $heading: `throwableErrors.$heading`
+  $anchor: THROWABLE_ERRORS--SECTION
+
+  $children:
+
+    objectSchemaNotSpecified:
+      $heading: `throwableErrors.objectSchemaNotSpecified.$heading`
+      $anchor: "THROWABLE_ERRORS-OBJECT_SCHEMA_NOT_SPECIFIED--SECTION"
+
+    mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
+      $heading: `throwableErrors.mutuallyExclusiveTransformationsBetweenUndefinedAndNull.$heading`
+      $anchor: "THROWABLE_ERRORS-MUTUALLY_EXCLUSIVE_TRANSFORMATIONS_BETWEEN_UNDEFINED_AND_NULL--SECTION"
+
+#problemsOverview:
+#
+#  $heading: `problemsOverview.$heading`
+#  $anchor: PROBLEMS_OVERVIEW--SECTION
+#
+#theoreticalMinimum:
+#
+#  $heading: `theoreticalMinimum.$heading`
+#  $anchor: THEORETICAL_MINIMUM--SECTION
+#
+#disclaimer:
+#
+#  $heading: `disclaimer.$heading`
+#  $anchor: DISCLAIMER--SECTION
+#
+#functionality:
+#
+#  $heading: `functionality.$heading`
+#  $anchor: FUNCTIONALITY--SECTION
+#
+#
+#  $children:
+#
+#    minimalSetup:
+#
+#      $heading: `functionality.minimalSetup`
+#      $anchor: `FUNCTIONALITY-MINIMAL_SETUP--SECTION`
+#
+#    propertiesType:
+#
+#      $heading: `functionality.propertiesType`
+#      $anchor: `FUNCTIONALITY-PROPERTIES_TYPE--SECTION`
+#
+#    propertiesRequirement:
+#
+#      $heading: `functionality.propertiesRequirement`
+#      $anchor: `FUNCTIONALITY-PROPERTIES_REQUIREMENT--SECTION`
+#
+#      $children:
+#
+#        undefinedability:
+#
+#          $heading: `functionality.propertiesRequirement.undefinedability`
+#          $anchor: `FUNCTIONALITY-PROPERTIES_REQUIREMENT-UNDEFINEDABILITY--SECTION`
+#
+#        nullability:
+#
+#          $heading: `functionality.propertiesRequirement.nullability`
+#          $anchor: `FUNCTIONALITY-PROPERTIES_REQUIREMENT-NULLABILITY--SECTION`

@@ -11,6 +11,11 @@ block append Metadata
 
   -
 
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor;
+
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle("RawObjectDataProcessor"),
@@ -31,11 +36,6 @@ block append Metadata
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$URI
     });
 
-    const {
-      $sectioning: localizedSectioning,
-      $heading: topHeading
-    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor;
-
 
 block append HeadScripts
 
@@ -48,4 +48,402 @@ block append SpecificContent
 
   article
 
-    h1 RawObjectDataProcessor
+    h1.Article-Heading1!= "<code>RawObjectDataProcessor</code>"
+
+    p.Article-Paragraph.
+      #[+Term--YDID Класс] для валидации и обработки данных типа #[+Term--YDID «объект»] (в частности
+        #[+Term--YDID массивов]) с привидением их к конкретному #[+Term--YDID TypeScript-типу].
+
+
+    h2.Article-Heading2 Пример
+
+    p.Article-Paragraph.
+      Допустим, значение #[+Term--YDID параметра] #[+SecondaryEntity__Code--YDID externalData] получено
+        из внешнего источника данных, недосягаемого для проверки типов с помощью #[+ImportantEntity--YDID TypeScript].
+      В частности, это могут быть следующие сценарии:
+
+    ul.Article-UnorderedList
+      li Полученные данных с клиентской части в клиент-серверном взаимодействии
+      li Наоборот, полученные данных с серверной части в клиент-серверном взаимодействии
+      li Чтение данных из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+          // ...
+        }
+
+
+    p.Article-Paragraph.
+      Мы ожидаем, что полученные данные будут иметь #[+Term--YDID тип] #[+SecondaryEntity__Code--YDID SampleType],
+        однако какими будут эти данные в реальности при выполнении программы —
+        #[+Keyphrase--YDID на стадии написания кода мы знать не&nbsp;можем], поэтому #[+Term--YDID параметр] и имеет
+        #[+Term--YDID тип] #[+SecondaryEntity__Code--YDID unknown], а
+        #[+Keyword--YDID не]&nbsp;#[+SecondaryEntity__Code--YDID SampleType].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    // TODO ссылка
+    p.Article-Paragraph.
+      Ввиду этого, просто взять и привести #[+Term--YDID тип] наподобие
+        #[+SecondaryEntity__Code--YDID externalData as SampleType] #[+Keyword--YDID небезопасно].
+      Хотя в силу природы #[+ImportantEntity--YDID TypeScript] в итоге так сделать и придётся
+        (см. подробнее в разделе проблематика), это должно быть чем-то подкреплено, а именно #[+Term--YDID валидацией].
+
+    p.Article-Paragraph.
+      Решая эту задачу с помощью #[+ImportantEntity--YDID RawObjectDataProcessor], необходимо определить
+        #[+Term--YDID спецификацию валидных данных] — по сути #[+Term--YDID объект], в котором описаны метаданные для
+        конкретных данных, в частности ожидаемые #[+Term--YDID типы] каждого #[+Term--YDID свойства], их
+        #[+Term--YDID обязательность] и прочие ограничения.
+      Для демонстрации, помимо указания ожидаемых #[+Term--YDID типов] добавлены и некоторые другие ограничения,
+        например ограничение по количеству символов или список возможных значений.
+      На практике, такая функциональность довольно востребована, потому она не&nbsp;сделает начальный пример избыточным.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+    p.Article-Paragraph.
+      Когда #[+Term--YDID спецификация валидных данных] определена, нужно передать её через #[+Term--YDID параметр]
+        #[+Keyword--YDID статическому] #[+Term--YDID методу] #[+ImportantEntity--YDID process]
+        класса #[+ImportantEntity--YDID RawObjectDataProcessor] вместе с данными, пока ещё #[+Term--YDID типа]
+        #[+ImportantEntity__Code--YDID unknown]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    p.Article-Paragraph.
+      Значение, которое возвращает #[+Term--YDID метод] #[+ImportantEntity--YDID process] имеет #[+Term--YDID тип]
+        со следующим определением:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ProcessingResult<ProcessedData> =
+            Readonly<
+              {
+                rawDataIsInvalid: false;
+                processedData: ProcessedData;
+              } |
+              {
+                rawDataIsInvalid: true;
+                validationErrorsMessages: ReadonlyArray<string>;
+              }
+            >;
+
+    p.Article-Paragraph.
+      Особенность его том, что мы #[+Keyword--YDID не]&nbsp;можем обратиться к #[+Term--YDID свойству]
+        #[+ImportantEntity__Code--YDID processedData] до тех пор, пока не&nbsp;проверим #[+Term--YDID свойство]
+        #[+ImportantEntity__Code--YDID isInvalid]:
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+          console.log(externalDataProcessingResult.processedData);
+
+        +CodeViewer-Explanation--YDF
+          | Обратиться к #[+SecondaryEntity__Code--YDID externalDataProcessingResult.processedData]
+          |
+          +Keyphrase--YDID
+            | без предварительной проверки #[+SecondaryEntity__Code--YDID externalDataProcessingResult.rawDataIsInvalid]
+          |
+          |   не&nbsp;нарушив #[+ImportantEntity--YDID TypeScript] #[+Keyword--YDID не]&nbsp;получится — возникнет ошибка
+          |   «#[+SecondaryEntity--YDID TS2339]: Property #[+SecondaryEntity__Code--YDID processedData] does not exist
+          |   on type #[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;]».
+          | Сообщение об ошибке неточное, потому что #[+Term--YDID свойства] #[+SecondaryEntity__Code--YDID processedData]
+          |   нет не&nbsp; у типа #[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;], а у
+          |   #[+Keyphrase--YDID одного из] его #[+Term--YDID подтипов] — у которого
+          |   #[+ImportantEntity__Code--YDID rawDataIsInvalid: true].
+          | Соответственно, перед тем как обращаться к #[+Term--YDID свойству] #[+SecondaryEntity__Code--YDID processedData],
+          |   нужно #[+Keyword--YDID отсеять] #[+Term--YDID подтип], у которого этого #[+Term--YDID свойства] нет.
+          | Сделать это можно с помощью обычной #[+Term--YDID условной конструкции]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.rawDataIsInvalid) {
+          console.log(externalDataProcessingResult.validationErrorsMessages);
+        }
+
+    p.Article-Paragraph.
+      Если #[+ImportantEntity__Code--YDID isInvalid] имеет значение #[+ImportantEntity__Code--YDID true], то к
+        #[+ImportantEntity__Code--YDID processedData] обратиться по-прежнему нельзя, потому что его просто нет, а вместо
+        него можно обратиться к #[+Term--YDID массиву], в котором содержатся ошибки валидации, то есть описания всех
+        несоответствий реальных данных ожидаемым.
+      Как на эти ошибки валидации реагировать — решает разработчик в зависимости от специфики его задачи, но обычно
+        это оповещение пользователя и/или бросание ошибки:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.rawDataIsInvalid) {
+
+          throw new InvalidExternalDataError({
+            mentionToExpectedData: "N External Data",
+            messageSpecificPart: RawObjectDataProcessor.
+                formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
+          });
+
+        }
+
+    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    p.Article-Paragraph.
+      Как видно из примера выше, #[+ImportantEntity--YDID RawObjectDataProcessor] имеет также #[+Term--YDID метод] для
+        форматирования ошибок валидации.
+      Например, при вызове функции #[+SecondaryEntity__Code--YDID onDataRetrieved] со следующими входными данными:
+
+    //- TODO Код
+
+    p.Article-Paragraph.
+      Node.js выдаст следующий лог:
+
+    //- TODO Пример вывода, но только после того, как Property / Element Specification: будет нормально отображаться
+
+
+    p.Article-Paragraph.
+      Если же #[+ImportantEntity__Code--YDID isInvalid] имеет значение #[+ImportantEntity__Code--YDID false], то
+        можно обращаться к #[+ImportantEntity__Code--YDID processedData] и пользоваться ими.
+
+    p.Article-Paragraph.
+      Почему же класс называется #[+ImportantEntity--YDID RawObjectDataProcessor], а
+        не&nbsp;#[+SecondaryEntity--YDID RawObjectDataValidator]?
+      Потому что он может не&nbsp;только валидировать данные, но и вносить в них изменения, в частности переименовывать
+        ключи и менять значения.
+      Всё это и многое другое описано в настоящей документации.
+
+
+    h2.Article-Heading2 Основные сценарии
+
+    h3.Article-Heading3 Объекты
+
+    h4.Article-Heading4 Обязательность свойств/элементов
+
+    p.Article-Paragraph.
+      В случае #[+ImportantEntity--YDID ECMAScript], понятие #[+Term--YDID обязательности] (#[+Term--YDID requirement])
+        #[+Term__Contrast--YDID свойств/элементов] #[+Keyword--YDID расплывчато] ввиду наличия #[+Keyword--YDID двух]
+        #[+Keyword__Contrast--YDID пустых] #[+Term--YDID типов] — #[+ImportantEntity__Code--YDID undefined] и
+        #[+ImportantEntity__Code--YDID null], причём отсутствие какого-либо #[+Term--YDID свойства] или
+        #[+Term--YDID элемента] #[+Keyword--YDID не]&nbsp;равносильно его наличию со явно указанным
+        #[+ImportantEntity__Code--YDID undefined] в качестве значения.
+      Что значит «свойство обязательно»?
+      Оно не&nbsp;должно иметь значения #[+ImportantEntity__Code--YDID undefined] или #[+ImportantEntity__Code--YDID null]?
+      А может, ни того, не другого?
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning, SVG_Icon: true }).
+      Между прочим, по этой же причине расплывчатыми являются и такие родственные понятия, как
+        #[+Term--YDID «опциональное свойство»] или #[+Term--YDID «подстановка значения по умолчанию»] (в каких случаях
+        эту постановка осуществляется?).
+
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID До] версии #[+ImportantEntity--YDID 1.8] библиотеки #[+ImportantEntity--YDID YDEE], в
+        #[+Term--YDID спецификации] #[+Term__Contrast--YDID свойств] #[+Term--YDID объектных данных]
+        #[+ImportantEntity__Code--YDID required: true] означал запрет на #[+ImportantEntity__Code--YDID undefined],
+        но #[+Keyword--YDID не]&nbsp;#[+ImportantEntity__Code--YDID null] — по умолчанию
+        #[+ImportantEntity__Code--YDID null] был запрещён, а снять этот запрет можно было указав
+        #[+ImportantEntity__Code--YDID nullable: true].
+      Может быть, такой #[+ImportantEntity--YDID API] и лаконичный, но не&nbsp;слишком интуитивный, а это — множественные
+        трещины в поддерживаемости кода.
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID Начиная с версии #[+ImportantEntity--YDID 1.8]], разрешения/запреты на
+        #[+ImportantEntity__Code--YDID undefined] и на #[+ImportantEntity__Code--YDID null] #[+Keyword--YDID необходимо]
+        указывать #[+Keyword--YDID явно] и #[+Keyword--YDID отдельно], но единообразным способом:
+
+    +Table--YDF({
+      decorativeVariation: Table__YDF.DecorativeVariations.neutralPastelSolid
+    })
+
+      thread
+
+        tr
+
+          th(scope="col") Разрешение/запрет
+          th(scope="col") Случай с undefined
+          th(scope="col") Случай с null
+
+      tbody
+
+        tr
+
+          th(scope="row") Полный запрет
+          td: +ImportantEntity__Code--YDID isUndefinedForbidden: true
+          td: +ImportantEntity__Code--YDID isNullForbidden: true
+
+        tr
+
+          th(scope="row") Условный запрет
+          td: +ImportantEntity__Code--YDID undefinedForbiddenIf: ConditionAssociatedWithProperty
+          td: +ImportantEntity__Code--YDID nullForbiddenIf: ConditionAssociatedWithProperty
+
+        tr
+
+          th(scope="row") Подстановка значения по умолчанию
+          td: +ImportantEntity__Code--YDID undefinedValueSubstitution: NonEmptyValue
+          td: +ImportantEntity__Code--YDID nullValueSubstitution: NonEmptyValue
+
+        tr
+
+          th(scope="row") Трансформация в другой пустой тип
+          td: +ImportantEntity__Code--YDID mustTransformUndefinedToNull: true
+          td: +ImportantEntity__Code--YDID mustTransformNullToUndefined: true
+
+        tr
+
+          th(scope="row") Полное разрешение
+          td: +ImportantEntity__Code--YDID isUndefinedForbidden: false
+          td: +ImportantEntity__Code--YDID isNullForbidden: false
+
+
+    p.Article-Paragraph.
+      Также, если #[+ImportantEntity__Code--YDID isUndefinedForbidden]/#[+ImportantEntity__Code--YDID isNullForbidden]
+        указано значение #[+ImportantEntity__Code--YDID false] (полное разрешение), то можно дополнительно через
+        #[+ImportantEntity__Code--YDID mustBeUndefinedIf]/#[+ImportantEntity__Code--YDID mustBeNullIf] соответственно
+        указать, когда значение должно быть пустым.
+
+
+    h4.Article-Heading4 Полный запрет пустых значений
+
+    ul.Article-UnorderedList
+
+      li.
+        Укажите #[+ImportantEntity__Code--YDID isUndefinedForbidden: true], чтобы запретить #[+Term--YDID свойства] со
+          значениями #[+ImportantEntity__Code--YDID undefined], будь то #[+Term--YDID явный undefined] или просто
+          отсутствие свойства.
+
+      li.
+        Укажите #[+ImportantEntity__Code--YDID isNullForbidden: true] чтобы запретить #[+Term--YDID свойства] со
+          значением #[+ImportantEntity__Code--YDID null].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }).
+        import { areStringifiedDigitsOnly } from "hikari-es-extensions";
+
+        console.log(areStringifiedDigitsOnly("123")); // 数字しか含めていないので「true」
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          type ValidData = { alpha: number; };
+
+          const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+            nameForLogging: "ValidData",
+            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+            properties: {
+              alpha: {
+                type: Number,
+                numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
+                isUndefinedForbidden: true,
+                isNullForbidden: true
+              }
+            }
+          };
+        +CodeViewer-Explanation--YDF.
+          Возьмём для примера объект с #[+Keyword--YDID единственным] #[+Term--YDID свойством]
+            #[+SecondaryEntity__Code--YDID alpha], которое может иметь #[+Keyword--YDID только]
+            #[+Keyword__Contrast--YDID числовые] значения, но никакие другие, в частности
+            #[+SecondaryEntity__Code--YDID undefined] и #[+SecondaryEntity__Code--YDID null]
+            #[+Keyword--YDID не]&nbsp;допускаются ни&nbsp;при каких условиях.
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+              process({}, validDataSpecification);
+        +CodeViewer-Explanation--YDF.
+          В данном случае исходный объект #[+Keyword--YDID невалиден], потому что отсутствует свойство
+            #[+SecondaryEntity__Code--YDID alpha].
+          Это #[+Keyword--YDID не]&nbsp; эквивалентно тому, что если был указан явно
+            #[+ImportantEntity__Code--YDID undefined], тем не менее если бы мы попробовали обратиться к свойству
+            #[+ImportantEntity__Code--YDID alpha] у исходного объекта, то #[+Term--YDID возвращённым значением]
+            было бы #[+ImportantEntity__Code--YDID undefined], а это не&nbsp;допускается запретом
+            #[+SecondaryEntity__Code--YDID isUndefinedForbidden: true].
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+              process({ alpha: underfined }, validDataSpecification);
+        +CodeViewer-Explanation--YDF.
+          В данном случае исходный объект тоже #[+Keyword--YDID невалиден], потому что свойство
+            #[+SecondaryEntity__Code--YDID alpha] хотя и указано, но указанным значением является явный
+            #[+ImportantEntity__Code--YDID undefined], что также не&nbsp;удовлетворяем ограничению
+            #[+SecondaryEntity__Code--YDID isUndefinedForbidden: true].
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
+              process({ alpha: 7 }, validDataSpecification);
+        +CodeViewer-Explanation--YDF.
+          А вот здесь всё нормально: значением свойства #[+SecondaryEntity__Code--YDID alpha] является число,
+            что соответствует установленным ограничениям для данного свойства.

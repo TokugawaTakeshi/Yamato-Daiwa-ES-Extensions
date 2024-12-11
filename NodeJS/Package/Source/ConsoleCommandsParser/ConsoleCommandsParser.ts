@@ -10,7 +10,7 @@ import {
   insertSubstring,
   isNaturalNumber,
   isNegativeInteger,
-  isNonNegativeInteger,
+  isNaturalNumberOrZero,
   isNegativeIntegerOrZero,
   isPositiveDecimalFraction,
   isNegativeDecimalFraction,
@@ -629,42 +629,89 @@ class ConsoleCommandsParser<
     let isOptionValueMatchingWithExpectedNumberSet: boolean;
 
     switch (numbersSet) {
+
       case RawObjectDataProcessor.NumbersSets.naturalNumber: {
         isOptionValueMatchingWithExpectedNumberSet = isNaturalNumber(targetOptionParsedValue);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: {
-        isOptionValueMatchingWithExpectedNumberSet = isNonNegativeInteger(targetOptionParsedValue);
+
+      case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeInteger: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeInteger(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeIntegerOrZero(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.anyInteger: {
         isOptionValueMatchingWithExpectedNumberSet = Number.isInteger(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isPositiveDecimalFraction(targetOptionParsedValue);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isPositiveDecimalFraction(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeDecimalFraction(targetOptionParsedValue);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: {
+
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isNegativeDecimalFraction(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isDecimalFractionOfAnySign(targetOptionParsedValue);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isDecimalFractionOfAnySign(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: {
         isOptionValueMatchingWithExpectedNumberSet = true;
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumber: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue > 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumber: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue < 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumberOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue >= 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumberOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue <= 0;
+      }
+
     }
 
     if (!isOptionValueMatchingWithExpectedNumberSet) {
@@ -791,7 +838,7 @@ class ConsoleCommandsParser<
           targetParameterParsedValue,
           {
             nameForLogging: optionKeyWithLeading2NDashes,
-            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
             properties: optionSpecification.validValueSpecification
           }
         );

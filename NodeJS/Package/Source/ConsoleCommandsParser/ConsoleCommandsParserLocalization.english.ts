@@ -30,7 +30,7 @@ const consoleCommandsParserLocalization__english: Localization = {
 
     numbersSet: {
       key: "Numbers Set",
-      generateValue: rawObjectDataProcessorLocalization__english.numbersSet
+      generateValue: rawObjectDataProcessorLocalization__english.getLocalizedNumbersSet
     },
 
     minimalValue: "Minimal Value",
@@ -201,7 +201,7 @@ const consoleCommandsParserLocalization__english: Localization = {
         }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `The value "${ actualOptionValue }" of the numeric option "${ targetOptionKey }" is not belong to ` +
-            `"${ rawObjectDataProcessorLocalization__english.numbersSet(expectedNumbersSet) }" numbers set.\n` +
+            `"${ rawObjectDataProcessorLocalization__english.getLocalizedNumbersSet(expectedNumbersSet) }" numbers set.\n` +
           consoleCommandsParserLocalization__english.generateCheckTheCommandReferenceAsking(commandHelpReference)
     },
 

@@ -3,7 +3,7 @@ import { RawObjectDataProcessor } from "../../../Source";
 
 const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     foo: {
       type: Number,
@@ -47,14 +47,14 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
       }
     },
     xyzzy: {
-      type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues,
+      type: RawObjectDataProcessor.ValuesTypesIDs.associativeArray,
       required: true,
       value: {
         type: String
       }
     },
     plugh: {
-      type: RawObjectDataProcessor.ValuesTypesIDs.oneOf,
+      type: RawObjectDataProcessor.ValuesTypesIDs.polymorphic,
       required: true,
       alternatives: [
         {

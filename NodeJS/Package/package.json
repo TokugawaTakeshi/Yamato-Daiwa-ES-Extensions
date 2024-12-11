@@ -32,7 +32,7 @@
     "node": ">=18.0.0"
   },
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.7"
+    "@yamato-daiwa/es-extensions": "1.8.0-experimental.0"
   },
   "dependencies": {
     "dotenv": "16.4.5",

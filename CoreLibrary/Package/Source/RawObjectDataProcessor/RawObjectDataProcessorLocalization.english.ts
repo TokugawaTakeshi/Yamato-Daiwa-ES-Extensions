@@ -6,6 +6,8 @@ import Warnings = Localization.Warnings;
 
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotNull from "../TypeGuards/Nullables/isNotNull";
+import isNull from "../TypeGuards/Nullables/isNull";
 
 
 const rawObjectDataProcessorLocalization__english: Localization = {
@@ -23,14 +25,14 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   ): string {
     return [
       title,
-      `\n\n● Property / Element: "${ targetPropertyDotSeparatedQualifiedInitialName }"`,
-      ...isNotUndefined(targetPropertyNewName) ? [ ` (new name: "${ targetPropertyNewName }")` ] : [],
+      `\n\n● Property / Element: ${ targetPropertyDotSeparatedQualifiedInitialName ?? "(Root)" }`,
+      ...isNotNull(targetPropertyNewName) ? [ ` (new name: "${ targetPropertyNewName }")` ] : [],
       `\n${ description }`,
       "\n\n●　Property / Element Specification: ",
       `\n${
         stringifyAndFormatArbitraryValue({
           ...targetPropertyValueSpecification,
-          type: this.getLocalizedValueType(targetPropertyValueSpecification.type)
+          type: targetPropertyValueSpecification.type
         })
       }`,
       `\n● Actual Value: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
@@ -52,46 +54,50 @@ const rawObjectDataProcessorLocalization__english: Localization = {
    * So, even the ambiguous expressions like "this property" will be clear as the part of above template. */
   validationErrors: {
 
-    rawDataIsNull: "Raw data, the first parameter of \"RawObjectDataProcessor.process()\" is null.",
-
     rawDataIsNotObject: {
-      generateMessage: ({ actualType }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-          `Raw data, the first parameter of "RawObjectDataProcessor.process()" is not the object and actually has type 
-            "${ actualType }".`
+      generateMessage: ({ actualNativeType }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
+          "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is not the object and actually has " +
+            `type "${ actualNativeType }".`
     },
+
+    rawDataIsNull:
+        "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is null while non-null object expected.",
 
     valueTypeDoesNotMatchWithExpected: {
       title: "Expected and Actual Value Types Mismatch",
       generateDescription: (
-        { expectedType, actualType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
+        { expectedTypeID, actualNativeType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
       ): string =>
           "This value expected to have type " +
-            `"${ rawObjectDataProcessorLocalization__english.getLocalizedValueType(expectedType) }" while actually ` +
-            `its type is "${ actualType }".`
+            `"${ rawObjectDataProcessorLocalization__english.getLocalizedValueType(expectedTypeID) }" while actually ` +
+            `its type is "${ actualNativeType }".`
     },
 
     preValidationModificationFailed: {
 
       title: "Pre-validation Modification Failed",
 
+      // TODO Link Injection
       generateDescription: (
         { stringifiedCaughtError }: ValidationErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The following error has occurred during the pre-validation modification of this property. \n" +
-          `${ stringifiedCaughtError }\n` +
+          "The following error has occurred during the pre-validation modification of this property/element. \n" +
+            `${ stringifiedCaughtError }\n` +
           "The data has been marked as invalid because the error handling strategy \"onPreValidationModificationFailed\" " +
             "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended because the problem could " +
-            "be in pre-validation modification function, not always in the data. " +
-          "Also, most likely this strategy will cause the subsequent errors. " +
-          "It is recommended to set the strategy to \"ErrorHandlingStrategies.throwingOfError\" which is default and " +
-            "fix the pre-validation modification function."
+            "be in pre-validation modification function, not always in the data. "
+          // "Also, most likely this strategy will cause the subsequent errors. " +
+          // "It is recommended to set the strategy to \"ErrorHandlingStrategies.throwingOfError\" which is default and " +
+          //   "fix the pre-validation modification function."
 
     },
 
-    /* ─── Non-undefined Check ────────────────────────────────────────────────────────────────────────────────────── */
-    forbiddenUndefinedValueOfProperty: {
-      title: "Forbidden Undefined Value Of Property",
-      description: "This property is not defined or have explicit `undefined` value what is forbidden."
+
+    /* ─── Undefinedability of Fixed Schema Objects ───────────────────────────────────────────────────────────────── */
+    forbiddenUndefinedValue: {
+      title: "Forbidden Undefined Value Of Property/Element",
+      description:
+          "This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden."
     },
 
     conditionallyForbiddenUndefinedValue: {
@@ -99,10 +105,22 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Conditionally Forbidden Undefined Value",
 
       generateDescription: (
-        { conditionWhenUndefinedIsForbidden }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
+        { verbalConditionWhenUndefinedIsForbidden }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
-          "This property/element is not defined or has explicit `undefined` value while the following undefined value " +
-            `prohibition condition has been satisfied: "${ conditionWhenUndefinedIsForbidden }".`
+          "This property/element is not defined or has explicit `undefined` value what has been forbidden when " +
+            `${ verbalConditionWhenUndefinedIsForbidden }, and this condition has been satisfied.`
+
+    },
+
+    conditionallyForbiddenNonUndefinedValue: {
+
+      title: "Conditionally Forbidden non-undefined Value",
+
+      generateDescription: (
+        { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
+      ): string =>
+          `This property/element is not undefined while must be undefined when ${ conditionWhenMustBeUndefined }, and ` +
+            "this condition has been satisfied."
 
     },
 
@@ -131,17 +149,15 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
-    unableToSubstituteUndefinedPropertyValue: {
+    unableToUpdatePropertyValue: {
 
-      title: "Unable to Substitute Undefined Property Value",
+      title: "Unable to Update Property Value",
 
       description:
-          "This property has been requested to be substitute with default value when it is not defined or has explicit " +
-            "`undefined` value. " +
-          "The second case has occurred, but because this property is not writable, the default value could not be " +
-            "substituted. " +
+          "The updating of this property has been requested via default value substitution or pre-validation " +
+            "modification while this property is read-only. " +
           "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
             "is recommended only if this property on source data actually expected to be writable. " +
           "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
             "the following measures left:" +
@@ -154,23 +170,11 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
-    conditionallyForbiddenNonUndefinedValue: {
-
-      title: "Conditionally Forbidden non-undefined Value",
-
-      generateDescription: (
-        { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
-      ): string =>
-          `This property is not undefined while must be undefined when ${ conditionWhenMustBeUndefined } and this ` +
-            "condition has been satisfied."
-
-    },
-
 
     /* ─── Nullability ────────────────────────────────────────────────────────────────────────────────────────────── */
-    nonNullableValueIsNullError: {
-      title: "Non-nullable value is null",
-      description: "This value is \"null\" while nullability has not been permitted by valid data specification."
+    forbiddenNullValue: {
+      title: "Forbidden Null Value Of Property/Element",
+      description: "This property/element has `null` value what has been explicitly forbidden."
     },
 
     conditionallyForbiddenNullValue: {
@@ -178,31 +182,10 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Conditionally Forbidden Null Value",
 
       generateDescription: (
-        { conditionWhenNullIsForbidden }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
+        { verbalConditionWhenNullIsForbidden }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
       ): string =>
-          "This property/element is not defined or has `null` value while the following null value prohibition " +
-            `condition has been satisfied: "${ conditionWhenNullIsForbidden }".`
-
-    },
-
-    unableToSubstituteNullPropertyValue: {
-
-      title: "Unable to Substitute Undefined Property Value",
-
-      description:
-          "This property has been requested to be substitute with default value when it is null, but because this " +
-            "property is not writable, the default value could not be substituted. " +
-          "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToSubstituteNullPropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
-            "is recommended only if this property on source data actually expected to be writable. " +
-          "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
-            "the following measures left:" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object." +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
+          "This property/element has `null` value what has been forbidden when " +
+            `${ verbalConditionWhenNullIsForbidden }, and this condition has been satisfied.`
 
     },
 
@@ -213,10 +196,25 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-          `This property is not null while must be null when ${ conditionWhenMustBeNull } and this condition has ` +
-            "been satisfied."
+          `This property/element is not null while must be null when ${ conditionWhenMustBeNull }, and this condition ` +
+            "has been satisfied."
 
     },
+
+
+    /* ─── Changing of Property Descriptions ──────────────────────────────────────────────────────────────────────── */
+    unableToChangePropertyDescriptors: {
+
+      title: "Usable to Change Property Descriptors",
+
+      description:
+          "The changing of descriptors of this property has been requested but ths property is not configurable. " +
+          "The data has been marked as invalid because the error handling strategy " +
+            "\"onUnableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+            "is recommended only if this property on source data actually expected to be configurable. "
+
+    },
+
 
     /* ─── Numeric Value ──────────────────────────────────────────────────────────────────────────────────────────── */
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -327,20 +325,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             `exactly ${ exactElementsCount } expected.`
     },
 
-    indexedArrayDisallowedUndefinedElement: {
-      title: "Disallowed Undefined-type Element of Indexed Array",
-      description:
-          "This element of indexed array is `undefined` while undefined-type elements has not been allowed by valid " +
-            "element specification."
-    },
-
-    indexedArrayDisallowedNullElement: {
-      title: "Disallowed null Element of Indexed Array",
-      description:
-          "This element of indexed array is `null` while null elements has not been allowed by valid element " +
-            "specification."
-    },
-
     /* ─── Associative Arrays ─────────────────────────────────────────────────────────────────────────────────────── */
     associativeArrayEntriesCountIsLessThanRequiredMinimum: {
       title: "Associative Array has Less Entries than Expected Minimum",
@@ -378,13 +362,15 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             `exactly ${ actualEntriesCount } expected.`
     },
 
-    requiredKeysOfAssociativeArrayAreMissing: {
-      title: "Required Key(s) of Associative Array are Missing",
+    forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {
+      title: "Forbidden for Specific Keys Undefined or Null Values in Associative Array Type Object",
       generateDescription: (
-        { missingRequiredKeys }: ValidationErrors.RequiredKeysOfAssociativeArrayAreMissing.TemplateVariables
+        { keysOfEitherUndefinedOrNullValues }:
+            ValidationErrors.ForbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.TemplateVariables
       ): string =>
-          "Below keys are missing but required for this associative array type value:\n" +
-            stringifyAndFormatArbitraryValue(missingRequiredKeys)
+          "The values of the following keys are either null or explicit undefined while for these keys such values has " +
+            "been explicitly forbidden:\n" +
+          stringifyAndFormatArbitraryValue(keysOfEitherUndefinedOrNullValues)
     },
 
     requiredAlternativeKeysOfAssociativeArrayAreMissing: {
@@ -392,8 +378,9 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { requiredKeysAlternatives }: ValidationErrors.RequiredAlternativeKeysOfAssociativeArrayAreMissing.TemplateVariables
       ): string =>
-          "One of below keys must present in this associative array-type value, but actually none of them presents. " +
-            stringifyAndFormatArbitraryValue(requiredKeysAlternatives)
+          "At least one value for the following keys must be neither null nor explicit undefined while actually of them " +
+            "are not satisfying this condition.\n" +
+          stringifyAndFormatArbitraryValue(requiredKeysAlternatives)
     },
 
     disallowedKeysFoundInAssociativeArray: {
@@ -403,18 +390,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       ): string =>
           "Below keys presents in this associative array type value while these keys are disallowed.\n" +
             stringifyAndFormatArbitraryValue(foundDisallowedKeys)
-    },
-
-    associativeArrayDisallowedUndefinedValue: {
-      title: "Disallowed Undefined-type Value of Associative Array",
-      description: "This value of associative array is 'undefined' while undefined-type values has not been allowed " +
-          "by valid value specification."
-    },
-
-    associativeArrayDisallowedNullValue: {
-      title: "Disallowed null Value of Associative Array",
-      description: "This value of associative array is 'null' while null values has not been allowed by valid value " +
-          "specification."
     },
 
     /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────── */
@@ -437,6 +412,16 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Custom Validation did not Passed",
       generateDescription: ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
           `This value did not passed the custom validation "${ customValidationDescription }".`
+    },
+
+    unexpectedProperties: {
+
+      title: "Unexpected Properties",
+
+      generateDescription:
+          ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
+              "The following properties are unexpected ones:\n" +
+              unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
     }
 
   },
@@ -445,32 +430,70 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   /* ━━━ Throwable Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   throwableErrors: {
 
-    mutuallyExclusiveUndefinedAndNullValueTransformations: {
+    objectSchemaNotSpecified: {
 
-      title: "Mutually Exclusive Undefined and Null values Transformations",
+      title: "Object Schema Not Specified",
 
+      // TODO Link Injectcion
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName
-        }: ThrowableErrors.MutuallyExclusiveUndefinedAndNullValueTransformations.TemplateVariables
+        }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
+      ): string =>
+          `Object schema is not specified for "${ targetPropertyDotSeparatedQualifiedName }".`
+    },
+
+    mutuallyExclusiveTransformationsBetweenUndefinedAndNull: {
+
+      title: "Mutually Exclusive Transformations Between Undefined and Null",
+
+      // TODO Link Injectcion
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName
+        }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
       ): string =>
         "Both \"mustTransformUndefinedToNull\" and \"mustTransformNullToUndefined\" options has been specified with " +
-          `boolean "true" value for the property "${ targetPropertyDotSeparatedQualifiedName }" what it the contradiction. ` +
-        "Delete one these options, or both of them then replace with another ones."
+          `boolean true value for the property "${ targetPropertyDotSeparatedQualifiedName }" what is the contradiction. `
     },
 
     preValidationModificationFailed: {
 
       title: "Pre-validation Modification Failed",
 
+      // TODO Link Injection
       generateDescription: (
         { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The error has occurred during the pre-validation modification of the property " +
+          "The error has occurred during the pre-validation modification of the property/element " +
             `"${ targetPropertyDotSeparatedQualifiedName }". ` +
           "This error has been thrown because the error handling strategy \"onPreValidationModificationFailed\" is " +
-            "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
-          "It is recommended to keep this strategy and fix the pre-validation modification function."
+            "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. "
+          // "It is recommended to keep this strategy and fix the pre-validation modification function."
+
+    },
+
+    propertyUndefinedabilityNotSpecified: {
+
+      title: "Property Undefinedability has not been Specified",
+      generateDescription: (
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
+      ): string =>
+          "It has not been specified how to process the undefined value of the property/element " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
+
+    },
+
+    propertyNullabilityNotSpecified: {
+
+      title: "Property Nullability has not been Specified",
+      generateDescription: (
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
+      ): string =>
+          "It has not been specified how to process the null value of the property/element " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
 
     },
 
@@ -499,22 +522,41 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
             "\"true\" for this property.\n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          "  with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-          "valid data specification will not be added to new object."
+            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+            "valid data specification will not be added to new object."
     },
 
-    unableToSubstituteUndefinedPropertyValue: {
+    unableToChangePropertyDescriptors: {
 
-      title: "Unable to Substitute Undefined Property Value",
+      title: "Unable to Change Property Descriptors",
 
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to be substitute with default ` +
-            "value when it is not defined or has explicit `undefined` value. " +
-          "The second case has occurred, but because this property is not writable, the default value could not be " +
-            "substituted. " +
-          "This error has been thrown because the error handling strategy \"onUnableToSubstituteUndefinePropertyValue\" " +
+          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          "This error has been thrown because the error handling strategy \"onUnableToChangePropertyDescriptors\" is " +
+            "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
+           "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
+            "select the one matching with your case:\n" +
+          "● If you are have access to the data source, consider the making of this property configurable.\n" +
+          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+            "valid data specification will not be added to new object.\n" +
+          "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
+            "Consider the creating of derived from the source one object　instead."
+
+    },
+
+    unableToUpdatePropertyValue: {
+
+      title: "Unable to Update Property Value",
+
+      generateDescription: (
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
+      ): string =>
+          `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
+            "value substitution or pre-validation modification while this property is read-only. " +
+          "This error has been thrown because the error handling strategy \"onUnableToUnableToUpdatePropertyValue\" " +
             "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
           "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
             "select the one matching with your case:\n" +
@@ -531,56 +573,22 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
-    propertyUndefinedabilityNotSpecified: {
+    mutuallyExclusiveAssociativeArrayKeysLimitations: {
 
-      title: "Property Undefinedability Not Specified",
-      generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
-      ): string =>
-          "Is has not been specified how to process the undefined value of this property " +
-            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
-          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
-
-    },
-
-    unableToSubstituteNullPropertyValue: {
-
-      title: "Unable to Substitute Null Property Value",
+      title: "Mutually Exclusive Associative Array Keys Limitations",
 
       generateDescription: (
-        {
-          targetPropertyDotSeparatedQualifiedName
-        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.
+            MutuallyExclusiveAssociativeArrayKeysLimitations.TemplateVariables
       ): string =>
-          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to substitute with default ` +
-            "when it is null, but because this property is not writable, the default value could not be substituted. " +
-          "This error has been thrown because the error handling strategy \"onUnableToSubstituteNullPropertyValue\" " +
-            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
-          "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
-            "select the one matching with your case:\n" +
-          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-          "Alternatively, consider the making of this property writable. " +
-          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
-            "property is configurable. \n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object. \n" +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
-
-    },
-
-    propertyNullabilityNotSpecified: {
-
-      title: "Property Nullability Not Specified",
-      generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
-      ): string =>
-          "Is has not been specified how to process the null value of this property " +
-            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
-          "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
-
+          "Both allowed and forbidden keys has been specified for " +
+              (
+                isNull(targetPropertyDotSeparatedQualifiedName) ?
+                  "root associative array " :
+                  `associative array "${ targetPropertyDotSeparatedQualifiedName }" `
+              ) +
+              "what it the contradiction. " +
+              "You can specify allowed keys of forbidden keys but not both."
     },
 
     incompatibleValuesTypesAlternatives: {
@@ -610,15 +618,15 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           stringifiedCaughtError
         }: Warnings.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The following error has occurred during the pre-validation modification of the property " +
-            `${ targetPropertyDotSeparatedQualifiedName }.\n` +
+          "The following error has occurred during the pre-validation modification of the property/element " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
           `${ stringifiedCaughtError }\n` +
           "This error has been reported as warning because the error handling strategy " +
             "\"onPreValidationModificationFailed\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
             "what is not recommended because failed pre-validation means that the pre-validation modification function " +
-            "does not respect all possible variations of the source data and could cause the subsequent errors." +
-          "It is recommended to set the strategy to \"\"ErrorHandlingStrategies.throwingOfError\" which is default and " +
-            "fix the pre-validation modification function."
+            "does not respect all possible variations of the source data and could cause the subsequent errors."
+          // "It is recommended to set the strategy to \"\"ErrorHandlingStrategies.throwingOfError\" which is default and " +
+          //   "fix the pre-validation modification function."
 
     },
 
@@ -650,48 +658,39 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "  not specified via valid data specification will not be added to new object."
     },
 
-    unableToSubstituteUndefinedPropertyValue: {
+    unableToChangePropertyDescriptors: {
 
-      title: "Unable to Substitute Undefined Property Value",
+      title: "Unable to Change Property Descriptors",
 
       generateDescription: (
-        {
-          targetPropertyDotSeparatedQualifiedName
-        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to be substitute with default ` +
-            "value when it is not defined or has explicit `undefined` value. " +
-          "The second case has occurred, but because this property is not writable, the default value could not be " +
-            "substituted. " +
+          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }". ` +
           "This error has been reported as warning because the error handling strategy " +
-            "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+            "\"unableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
             "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
-          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-          "Alternatively, consider the making of this property writable. " +
-          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
-            "property is configurable. \n" +
+          "● If you are have access to the data source, consider the making of this property configurable.\n" +
           "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object.\n" +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
+            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+            "valid data specification will not be added to new object.\n" +
+          "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
+            "Consider the creating of derived from the source one object　instead."
 
     },
 
-    unableToSubstituteNullPropertyValue: {
+    unableToUpdatePropertyValue: {
 
-      title: "Unable to Substitute Null Property Value",
+      title: "Unable to Update property Value",
 
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName
-        }: ThrowableErrors.UnableToSubstituteUndefinedPropertyValue.TemplateVariables
+        }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
       ): string =>
-          `The property "${ targetPropertyDotSeparatedQualifiedName }" has been requested to substitute with default ` +
-          "when it is null, but because this property is not writable, the default value could not be substituted. " +
+          `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
+            "value substitution or pre-validation modification while this property is read-only. " +
           "This error has been reported as warning because the error handling strategy " +
-            "\"onUnableToSubstituteUndefinePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
             "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
           "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
           "Alternatively, consider the making of this property writable. " +
@@ -710,34 +709,33 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
 
   /* === Value type ================================================================================================= */
-  getLocalizedValueType(valueType: Localization.ValuesTypes): string {
+  getLocalizedValueType(valueTypeID: RawObjectDataProcessor.ValuesTypesIDs): string {
 
-    /* [ Theory ] Basically, the switch/case including Number/String/etc constructor is working, but there are some exceptions.
-     * https://stackoverflow.com/q/69848208/4818123
-     * https://stackoverflow.com/q/69848689/4818123
-     *  */
-    const targetValueTypeID: RawObjectDataProcessor.ValuesTypesIDs = RawObjectDataProcessor.
-        getNormalizedValueTypeID(valueType);
-
-    switch (targetValueTypeID) {
+    switch (valueTypeID) {
 
       case RawObjectDataProcessor.ValuesTypesIDs.number: return "number";
       case RawObjectDataProcessor.ValuesTypesIDs.string: return "string";
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "boolean";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements:
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray:
         return "indexed array of uniform elements";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject:
+      case RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject:
         return "filed key and value pairs object";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues:
-
+      case RawObjectDataProcessor.ValuesTypesIDs.associativeArray:
         return "associative array of uniform type values";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "multiple alternatives allowed";
+      case RawObjectDataProcessor.ValuesTypesIDs.tuple: return "tuple";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject: return "ambiguous object";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray: return "ambiguous array";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.polymorphic: return "polymorphic";
 
     }
+
   },
 
   getLocalizedNumbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {

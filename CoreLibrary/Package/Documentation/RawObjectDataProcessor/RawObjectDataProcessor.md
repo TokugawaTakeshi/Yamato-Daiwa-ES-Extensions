@@ -220,7 +220,7 @@ Error type: InvalidExternalDataError
 Occurrence location: upper scope
 ```
 
-[📄 Full code listing](Examples/RawObjectDataProcessor-Quick.example.ts)
+[📄 Full code listing](../../Tests/Manual/RawObjectDataProcessor/RawObjectDataProcessor-Quick.example.ts)
 
 
 ## Problem overview

@@ -11,7 +11,7 @@ const sample: unknown = {};
 
 const dataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     foo: {
       type: Number,
