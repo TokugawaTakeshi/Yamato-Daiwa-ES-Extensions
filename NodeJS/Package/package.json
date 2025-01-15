@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs",
-  "version": "1.8.0-alpha.9",
+  "version": "1.8.0-alpha.12",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for Node.js environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "nodejs",
@@ -56,7 +56,7 @@
   "scripts": {
     "Lint": "eslint Source Tests",
     "Rebuild Distributable Without Preliminary Cleaning": "tsc",
-    "Rebuild Distributable": "rimraf Distributable & tsc",
+    "Rebuild Distributable": "rimraf Distributable && tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   }

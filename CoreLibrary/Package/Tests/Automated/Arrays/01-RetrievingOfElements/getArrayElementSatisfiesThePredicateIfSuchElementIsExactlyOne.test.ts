@@ -64,5 +64,4 @@ Promise.all([
 
   })
 
-
 ]).catch(Logger.logPromiseError);

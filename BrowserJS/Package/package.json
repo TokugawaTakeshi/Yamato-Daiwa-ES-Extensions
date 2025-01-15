@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-browserjs",
-  "version": "1.8.0-alpha.6",
+  "version": "1.8.0-alpha.7",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for browser environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -47,7 +47,7 @@
   "scripts": {
     "Lint": "eslint Source",
     "Rebuild Distributable Without Preliminary Cleaning": "tsc",
-    "Rebuild Distributable": "rimraf Distributable & tsc",
+    "Rebuild Distributable": "rimraf Distributable && tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   }

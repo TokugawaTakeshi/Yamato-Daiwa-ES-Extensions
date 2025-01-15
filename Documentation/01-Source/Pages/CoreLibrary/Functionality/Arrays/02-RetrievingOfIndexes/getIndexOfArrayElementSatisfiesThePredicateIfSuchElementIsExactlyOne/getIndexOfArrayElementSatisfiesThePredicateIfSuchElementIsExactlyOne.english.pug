@@ -27,7 +27,9 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
@@ -51,25 +53,97 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      signatures: [
 
-    // +ApologyWithSupportRequest
+        {
+          localizedDescriptiveHeading:
+              "If the number of elements that satisfy the predicate is 0 or more than 1, null will be returned",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              type: "(arrayElement: string) => boolean",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
 
-    +CodeViewer--YDF({ title: "Signature" })
-      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        {
+          localizedDescriptiveHeading:
+              "If the number of elements that satisfy the predicate is 0 or more than 1, an error will be thrown",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              type: "(arrayElement: string) => boolean",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
 
-    //-
-      +CallableExpressionScheme--YDF_DK({
-        technicalName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-        headingTag: "h1",
-        localizedDescriptiveHeading: "",
-        parametersSpecification: [
-          {
-            localizedName: "Target string",
-            type: "string",
-            required: true,
-            genericTechnicalName: "targetString"
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        propertiesSpecification: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
+            type: "boolean (true only)",
+            required: true
           }
-        ],
-        returnedValue: "boolean"
+        }
       })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md",
+        title: "Temporary markdown documentation"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

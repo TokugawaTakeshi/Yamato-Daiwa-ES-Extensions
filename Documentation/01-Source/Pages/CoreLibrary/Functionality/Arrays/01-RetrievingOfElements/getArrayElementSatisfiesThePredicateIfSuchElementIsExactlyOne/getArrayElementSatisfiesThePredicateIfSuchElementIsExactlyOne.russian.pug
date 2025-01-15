@@ -30,8 +30,7 @@ block append Metadata
     });
 
     RoutingEmulator.setCurrentRoute(
-      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
-          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+      "coreLibrary.functionality.arrays.retrievingOfElements.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
@@ -58,7 +57,7 @@ block append SpecificContent
 
     +CallableExpressionScheme--YDF_DK({
       technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-      localizedDescriptiveHeading: "Получить удовлетворяющий предикату　элемент массива, если такой элемент ровно 1",
+      localizedDescriptiveHeading: "Получить удовлетворяющий предикату элемент массива, если такой элемент ровно 1",
       signatures: [
 
         {
@@ -114,7 +113,7 @@ block append SpecificContent
         typeName: "Options",
         localizedDescriptiveHeading: "Опции",
         propertiesSpecification: {
-          mustThrowErrorIfElementNotFoundOrMoreThan1: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
             localizedInterpretation: "Должен бросить ошибку, если элемент не найден либо результатов поиска больше 1",
             type: "boolean (только true)",
             required: true
@@ -133,7 +132,7 @@ block append SpecificContent
 
       li.
         Будет брошена #[+Term--YDID ошибка], если указано значение
-          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] #[+Keyword--YDID 3-им]
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }] #[+Keyword--YDID 3-им]
           #[+Term--YDID параметром].
         #[+ImportantEntity--YDID TypeScript] при этом будет верить, что #[+Term--YDID функция] отработала успешно,
           то #[+Term--YDID возвращаемое значение] имеет #[+Keyword--YDID непустое] #[+Term--YDID значение]
@@ -236,7 +235,7 @@ block append SpecificContent
             Но что если Вы уверены, что #[+Term--YDID элемент], удовлетворяющий #[+Term--YDID предикату], будет
               #[+Keyword--YDID ровно] #[+SecondaryEntity--YDID 1] и по-другому быть не&nbsp;может?
             Тогда можно указать передать #[+ImportantEntity--YDID 3-им] #[+Term--YDID параметром] значение
-              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] — в этом случае
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }] — в этом случае
               #[+ImportantEntity--YDID TypeScript] #[+Keyword--YDID не]&nbsp;потребует проверки значения на
               #[+ImportantEntity__Code--YDID null], при этом если вопреки ожиданиям #[+Term--YDID предикату] будет
               удовлетворять #[+Keyword--YDID не]&nbsp;#[+Keyword__Contrast--YDID ровно] #[+SecondaryEntity--YDID 1]
@@ -247,7 +246,7 @@ block append SpecificContent
           const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
           );
         +CodeViewer-Explanation--YDF.
           В данном случае, #[+Keyphrase--YDID когда у нас есть #[+ImportantEntity--YDID 3-ий] #[+Term--YDID параметр]],
@@ -421,13 +420,15 @@ block append SpecificContent
     +LinksCardsFlow--YDF
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
         title: "Исходный код"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
         title: "Код тестов"
       }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

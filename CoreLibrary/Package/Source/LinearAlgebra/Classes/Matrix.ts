@@ -1,22 +1,24 @@
+import RowVector from "./RowVector";
+import ColumnVector from "./ColumnVector";
 import isUndefined from "../../TypeGuards/Nullables/isUndefined";
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
-export default class Matrix {
+export default class Matrix<Element> {
 
   public readonly rowsCount: number;
   public readonly columnsCount: number;
 
 
-  protected readonly rows: Array<Array<number>>;
+  protected readonly rows: Array<Array<Element>>;
 
 
-  public static createEmptyOne(
+  public static createEmptyOne<Element>(
     { rowsCount, columnsCount }: Readonly<{ rowsCount: number; columnsCount: number; }>
-  ): Matrix {
+  ): Matrix<Element> {
 
-    const rowsDefinition: Array<Array<number>> = new Array(rowsCount);
+    const rowsDefinition: Array<Array<Element>> = new Array(rowsCount);
 
     for (let rowIndex: number = 0; rowIndex <= columnsCount; rowIndex++) {
       rowsDefinition[rowIndex] = new Array(columnsCount);
@@ -26,7 +28,7 @@ export default class Matrix {
 
   }
 
-  public constructor(rowsDefinition: Array<Array<number>>) {
+  public constructor(rowsDefinition: Array<Array<Element>>) {
 
     if (rowsDefinition.length === 0) {
       Logger.throwErrorAndLog({
@@ -79,7 +81,6 @@ export default class Matrix {
 
   }
 
-
   public getElement(
     elementCoordinates: Readonly<
       (
@@ -91,12 +92,12 @@ export default class Matrix {
         { columnNumber__numerationFrom1: number; }
       )
     >
-  ): number {
+  ): Element {
 
     const targetRowIndex: number = "rowIndex" in elementCoordinates ?
         elementCoordinates.rowIndex : elementCoordinates.rowNumber__numerationFrom1 - 1;
 
-    const targetRow: Array<number> | undefined = this.rows[targetRowIndex];
+    const targetRow: Array<Element> | undefined = this.rows[targetRowIndex];
 
     if (isUndefined(targetRow)) {
       Logger.throwErrorAndLog({
@@ -116,7 +117,7 @@ export default class Matrix {
     const targetColumnIndex: number = "columnIndex" in elementCoordinates ?
         elementCoordinates.columnIndex : elementCoordinates.columnNumber__numerationFrom1 - 1;
 
-    const targetElement: number | undefined = targetRow[targetColumnIndex];
+    const targetElement: Element | undefined = targetRow[targetColumnIndex];
 
     if (isUndefined(targetRow)) {
       Logger.throwErrorAndLog({
@@ -149,14 +150,14 @@ export default class Matrix {
           { columnNumber__numerationFrom1: number; }
         )
       ) &
-      { value: number; }
+      { value: Element; }
     >
   ): this {
 
     const targetRowIndex: number = "rowIndex" in elementCoordinates ?
         elementCoordinates.rowIndex : elementCoordinates.rowNumber__numerationFrom1 - 1;
 
-    const targetRow: Array<number> | undefined = this.rows[targetRowIndex];
+    const targetRow: Array<Element> | undefined = this.rows[targetRowIndex];
 
     if (isUndefined(targetRow)) {
       Logger.throwErrorAndLog({
@@ -194,6 +195,23 @@ export default class Matrix {
 
     return this;
 
+  }
+
+  public getRow(
+    coordinate: Readonly<{ index: number; } | { number__numerationFrom1: number; }>
+  ): RowVector<Element> {
+    const targetRowIndex: number = "index" in coordinate ? coordinate.index : coordinate.number__numerationFrom1;
+    return RowVector.fromArray(this.rows[targetRowIndex]);
+  }
+
+  public getColumn(
+    coordinate: Readonly<{ index: number; } | { number__numerationFrom1: number; }>
+  ): ColumnVector<Element> {
+    const targetColumnIndex: number = "index" in coordinate ? coordinate.index : coordinate.number__numerationFrom1;
+    return ColumnVector.fromArray(
+      /* eslint-disable-next-line id-length -- Nothing specific required for name of iterated variable in this case. */
+      this.rows.map((row: Array<Element>): Element => row[targetColumnIndex])
+    );
   }
 
 }

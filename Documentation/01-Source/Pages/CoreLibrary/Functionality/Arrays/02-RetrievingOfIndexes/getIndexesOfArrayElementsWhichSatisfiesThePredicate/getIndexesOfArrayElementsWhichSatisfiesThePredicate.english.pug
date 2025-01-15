@@ -56,23 +56,42 @@ block append SpecificContent
     +CallableExpressionScheme--YDF_DK({
       technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
       headingTag: "h1",
-      localizedDescriptiveHeading: "",
+      genericParameters: [ "ArrayElement" ],
       parametersSpecification: [
         {
-          localizedName: "Target string",
-          type: "string",
+          type: "Array<ArrayElement>",
           required: true,
-          genericTechnicalName: "targetString"
+          genericTechnicalName: "targetArray"
+        },
+        {
+          type: "(arrayElement: ArrayElement) => boolean",
+          required: true,
+          genericTechnicalName: "predicate"
         }
       ],
-      returnedValue: "boolean"
+      returnedValue: "Array<number>"
     })
 
     +PageNotReadyApology--YDPD({
       currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
     })
 
+
+    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
     +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/" +
+            "getIndexesOfArrayElementsWhichSatisfiesThePredicate.md",
+        title: "Temporary markdown documentation"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
         unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +

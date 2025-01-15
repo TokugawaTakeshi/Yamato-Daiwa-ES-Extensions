@@ -37,13 +37,12 @@ export namespace ReplacingArrayElementsByPredicatesOperation {
 
 
 export default function replaceArrayElementsByPredicates<ArrayElement>(
-  sourceData: ReplacingArrayElementsByPredicatesOperation.SourceData<ArrayElement>
-): ReplacingArrayElementsByPredicatesOperation.Result<ArrayElement> {
-
-  const {
+  {
     targetArray,
-    mutably
-  }: ReplacingArrayElementsByPredicatesOperation.SourceData<ArrayElement> = sourceData;
+    mutably,
+    ...sourceData
+  }: ReplacingArrayElementsByPredicatesOperation.SourceData<ArrayElement>
+): ReplacingArrayElementsByPredicatesOperation.Result<ArrayElement> {
 
   const indexesOfElementsWhichWillBeReplacedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
   const indexesOfElementsWhichAlreadyHasBeenReplaced: Array<number> = [];
@@ -79,7 +78,7 @@ export default function replaceArrayElementsByPredicates<ArrayElement>(
   }
 
 
-  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...sourceData.targetArray ];
+  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...targetArray ];
 
   for (const [ targetElementIndex, newValue ] of indexesOfElementsWhichWillBeReplacedAndNewValuesMap) {
     workpiece[targetElementIndex] = newValue;

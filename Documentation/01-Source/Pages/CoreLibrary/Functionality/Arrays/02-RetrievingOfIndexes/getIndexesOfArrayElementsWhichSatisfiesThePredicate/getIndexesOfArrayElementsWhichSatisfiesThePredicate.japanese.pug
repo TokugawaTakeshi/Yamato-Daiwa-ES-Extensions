@@ -51,25 +51,57 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 getIndexesOfArrayElementsWhichSatisfiesThePredicate
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+      localizedDescriptiveHeading: "プレディケートを満たしている配列の要素の指数を取得する",
+      headingTag: "h1",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          type: "Array<ArrayElement>",
+          required: true,
+          genericTechnicalName: "targetArray",
+          localizedName: "目標的配列"
+        },
+        {
+          type: "(arrayElement: ArrayElement) => boolean",
+          required: true,
+          genericTechnicalName: "predicate",
+          localizedName: "プレディケート"
+        }
+      ],
+      returnedValue: "Array<number>"
+    })
 
-    // +ApologyWithSupportRequest
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
 
-    +CodeViewer--YDF({ title: "シグネチャ" })
-      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
 
-    //-
-      +CallableExpressionScheme--YDF_DK({
-        technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
-        headingTag: "h1",
-        localizedDescriptiveHeading: "",
-        parametersSpecification: [
-          {
-            localizedName: "Target string",
-            type: "string",
-            required: true,
-            genericTechnicalName: "targetString"
-          }
-        ],
-        returnedValue: "boolean"
-      })
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/" +
+            "getIndexesOfArrayElementsWhichSatisfiesThePredicate.md",
+        title: "一時的英語マークダウン資料"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.ts",
+        title: "ソースコード"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.test.ts",
+        title: "テストコード"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

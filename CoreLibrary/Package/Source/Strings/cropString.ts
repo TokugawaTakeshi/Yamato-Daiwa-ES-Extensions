@@ -70,9 +70,9 @@ export default function cropString(
         messageSpecificPart:
             "It has been incorrectly specified from which character target string must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"startingCharacterNumber__numerationFrom0\": must natural positive integer\n" +
-            "● \"startingCharacterNumber__numerationFrom1\": must natural natural number\n" +
-            "● \"fromStart\": must natural boolean herewith \"true\" only"
+            "● \"startingCharacterNumber__numerationFrom0\": must be the positive integer\n" +
+            "● \"startingCharacterNumber__numerationFrom1\": must be the natural number\n" +
+            "● \"fromStart\": must be the boolean herewith \"true\" only"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "cropString(compoundParameter)"
@@ -98,10 +98,10 @@ export default function cropString(
         messageSpecificPart:
             "It has been incorrectly specified until which character target string must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"endingCharacterNumber__numerationFrom0\": must natural positive integer\n" +
-            "● \"endingCharacterNumber__numerationFrom1\": must natural natural number\n" +
-            "● \"charactersCount\": must natural natural number\n" +
-            "● \"untilEnd\": must natural boolean herewith \"true\" only\n"
+            "● \"endingCharacterNumber__numerationFrom0\": must be the positive integer \n" +
+            "● \"endingCharacterNumber__numerationFrom1\": must be the natural number\n" +
+            "● \"charactersCount\": must be the natural number\n" +
+            "● \"untilEnd\": must be the boolean herewith \"true\" only\n"
 
       }),
       title: InvalidParameterValueError.localization.defaultTitle,

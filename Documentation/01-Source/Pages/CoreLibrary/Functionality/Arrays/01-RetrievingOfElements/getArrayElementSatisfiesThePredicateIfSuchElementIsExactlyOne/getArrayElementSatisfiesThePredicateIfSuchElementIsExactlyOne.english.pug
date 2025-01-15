@@ -31,8 +31,7 @@ block append Metadata
     });
 
     RoutingEmulator.setCurrentRoute(
-      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
-          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+      "coreLibrary.functionality.arrays.retrievingOfElements.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
@@ -110,7 +109,7 @@ block append SpecificContent
       +ObjectTypeAbstract--YDF_DK({
         typeName: "Options",
         propertiesSpecification: {
-          mustThrowErrorIfElementNotFoundOrMoreThan1: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
             type: "boolean (true only)",
             required: true
           }
@@ -128,7 +127,7 @@ block append SpecificContent
 
       li.
         An #[+Term--YDID error] will be thrown if
-          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }]
           has been specified as the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter].
         In this case, #[+ImportantEntity--YDID TypeScript] will believe that if the #[+Term--YDID function] has been
           executed successfully, the #[+Term--YDID returned value] has a #[+Keyword--YDID non-null] #[+Term--YDID type]
@@ -232,7 +231,7 @@ block append SpecificContent
             What if you are sure that there is #[+Keyword--YDID only] #[+SecondaryEntity--YDID 1]
               #[+Term--YDID element] that satisfies the #[+Term--YDID predicate]?
             In this case, you can pass
-              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }] as the
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }] as the
               #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter].
             As a result, #[+ImportantEntity--YDID TypeScript] will not require a #[+Term--YDID non-null check].
               However, if contrary to expectations, if the number of #[+Term--YDID elements] satisfying the
@@ -245,7 +244,7 @@ block append SpecificContent
           const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
           );
         +CodeViewer-Explanation--YDF.
           In this case,  #[+Keyphrase--YDID when we have the #[+ImportantEntity--YDID 3rd] #[+Term--YDID parameter]],
@@ -419,13 +418,15 @@ block append SpecificContent
     +LinksCardsFlow--YDF
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
         title: "Source code"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
         title: "Tests code"
       }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

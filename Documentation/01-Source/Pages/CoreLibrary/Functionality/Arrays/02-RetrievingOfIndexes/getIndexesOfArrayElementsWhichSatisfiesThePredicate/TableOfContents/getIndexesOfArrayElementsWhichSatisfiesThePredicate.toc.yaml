@@ -1,4 +1,4 @@
-examples:
+externalLinks:
 
-  $heading: `examples.$heading`
-  $anchor: EXAMPLES--SECTION
+  $heading: `externalLinks.$heading`
+  $anchor: EXTERNAL_LINKS--SECTION

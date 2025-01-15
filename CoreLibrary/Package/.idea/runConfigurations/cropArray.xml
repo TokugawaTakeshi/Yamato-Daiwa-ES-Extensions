@@ -1,12 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="cropArray" type="NodeJsTestRunner" folderName="Arrays">
     <node-interpreter value="project" />
+    <node-options value="--require ts-node/register" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/cropArray.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/03-RetrievingOfSubarrays/cropArray.test.ts" />
     <method v="2" />
   </configuration>
 </component>

@@ -27,7 +27,9 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne");
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
@@ -51,25 +53,103 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      localizedDescriptiveHeading: "プレディケートを満たす要素が1つのみの場合に、此の要素の指数を取得する。",
+      signatures: [
 
-    // +ApologyWithSupportRequest
+        {
+          localizedDescriptiveHeading: "プレディケートを満たす要素が無いか、2つ以上の場合、「null」を返す。",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "対象の配列",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "プレディケート",
+              type: "Predicate",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
 
-    +CodeViewer--YDF({ title: "シグネチャ" })
-      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        {
+          localizedDescriptiveHeading: "プレディケートを満たす要素が無いか、2つ以上の場合、エラーを投げる。",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "対象の配列",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "プレディケート",
+              type: "(arrayElement: string) => boolean",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              localizedName: "オプション",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
 
-    //-
-      +CallableExpressionScheme--YDF_DK({
-        technicalName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
-        headingTag: "h1",
-        localizedDescriptiveHeading: "",
-        parametersSpecification: [
-          {
-            localizedName: "Target string",
-            type: "string",
-            required: true,
-            genericTechnicalName: "targetString"
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        localizedDescriptiveHeading: "オプション",
+        propertiesSpecification: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
+            localizedInterpretation: "対象の要素が見つからない、又は検索結果が2つ以上の場合に、エラーを投げる必要があるかどうか",
+            type: "boolean （trueのみ）",
+            required: true
           }
-        ],
-        returnedValue: "boolean"
+        }
       })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md",
+        title: "一時的英語マークダウン資料"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "ソースコード"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "テストコード"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

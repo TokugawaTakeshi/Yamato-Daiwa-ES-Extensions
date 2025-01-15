@@ -1,119 +1,186 @@
-import { replaceArrayElementsByPredicates } from "../../../../Source";
+import { Logger, replaceArrayElementsByPredicates } from "../../../../Source";
+import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-describe("replaceArrayElementsByPredicates", (): void => {
+function getConstantSample(): Array<string> {
+  return [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO" ];
+}
 
-  function getInitialSampleArray(): Array<string> {
-    return [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "ECHO" ];
-  }
 
-  describe("One replacement", (): void => {
+Promise.all([
 
-    describe("Mutably", (): void => {
+  suite(
+    "One Replacement",
+    async (): Promise<void> => {
 
-      const experimentalSample: Array<string> = getInitialSampleArray();
+      await Promise.all([
 
-      replaceArrayElementsByPredicates({
-        targetArray: experimentalSample,
-        predicate: (element: string): boolean => element.includes("O"),
-        newValue: "OOO!",
-        mutably: true
-      });
+        suite(
+          "Mutably",
+          async (): Promise<void> => {
 
-      it("Updated array matching with expected", (): void => {
-        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
-      });
+            const experimentalSample: Array<string> = getConstantSample();
 
-      it("Initial array has been mutated", (): void => {
-        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+            replaceArrayElementsByPredicates({
+              targetArray: experimentalSample,
+              predicate: (element: string): boolean => element.includes("O"),
+              newValue: "OOO!",
+              mutably: true
+            });
 
-    });
+            await Promise.all([
 
-    describe("Immutably", (): void => {
+              test(
+                "Updated Array Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
+                }
+              ),
 
-      const experimentalSample: Array<string> = getInitialSampleArray();
+              test(
+                "Initial Array has Mutated",
+                (): void => {
+                  Assert.notDeepStrictEqual(experimentalSample, getConstantSample());
+                }
+              )
 
-      const updatedExperimentalSampleClone: Array<string> = replaceArrayElementsByPredicates({
-        targetArray: experimentalSample,
-        predicate: (element: string): boolean => element.includes("O"),
-        newValue: "OOO!",
-        mutably: false
-      }).updatedArray;
+            ]);
 
-      it("Updated array matching with expected", (): void => {
-        Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
-      });
-
-      it("Initial array has not been mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
-
-    });
-
-  });
-
-  describe("Multiple replacements", (): void => {
-
-    describe("Mutably", (): void => {
-
-      const experimentalSample: Array<string> = getInitialSampleArray();
-
-      replaceArrayElementsByPredicates({
-        targetArray: experimentalSample,
-        replacements: [
-          {
-            predicate: (element: string): boolean => element.includes("O"),
-            newValue: "OOO!"
-          },
-          {
-            predicate: (element: string): boolean => element.includes("I"),
-            replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
           }
-        ],
-        mutably: true
-      });
+        ),
 
-      it("Updated array matching with expected", (): void => {
-        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
-      });
+        suite(
+          "Immutably",
+          async (): Promise<void> => {
 
-      it("Initial array has been mutated", (): void => {
-        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+          const experimentalSample: Array<string> = getConstantSample();
 
-    });
+            const updatedExperimentalSampleClone: Array<string> = replaceArrayElementsByPredicates({
+              targetArray: experimentalSample,
+              predicate: (element: string): boolean => element.includes("O"),
+              newValue: "OOO!",
+              mutably: false
+            }).updatedArray;
 
-    describe("Immutably", (): void => {
+            await Promise.all([
 
-      const experimentalSample: Array<string> = getInitialSampleArray();
+              test(
+                "Updated Array Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIE", "DELTA", "OOO!" ]);
+                }
+              ),
 
-      const updatedExperimentalSampleClone: Array<string> = replaceArrayElementsByPredicates({
-        targetArray: experimentalSample,
-        replacements: [
-          {
-            predicate: (element: string): boolean => element.includes("O"),
-            newValue: "OOO!"
-          },
-          {
-            predicate: (element: string): boolean => element.includes("I"),
-            replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
+              test(
+                "Initial Array has not Mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getConstantSample());
+                }
+              )
+
+            ]);
+
           }
-        ],
-        mutably: false
-      }).updatedArray;
+        )
 
-      it("Updated array matching with expected", (): void => {
-        Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
-      });
+      ]);
 
-      it("Initial array has not been mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+    }
+  ),
 
-    });
+  suite(
+    "Multiple Replacements",
+    async (): Promise<void> => {
 
-  });
+      await Promise.all([
 
-});
+        suite(
+          "Mutably",
+          async (): Promise<void> => {
+
+            const experimentalSample: Array<string> = getConstantSample();
+
+            replaceArrayElementsByPredicates({
+              targetArray: experimentalSample,
+              replacements: [
+                {
+                  predicate: (element: string): boolean => element.includes("O"),
+                  newValue: "OOO!"
+                },
+                {
+                  predicate: (element: string): boolean => element.includes("I"),
+                  replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
+                }
+              ],
+              mutably: true
+            });
+
+            await Promise.all([
+
+              test(
+                "Updated Array Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
+                }
+              ),
+
+              test(
+                "Initial array has been mutated", (): void => {
+                  Assert.notDeepStrictEqual(experimentalSample, getConstantSample());
+                }
+              )
+
+            ]);
+
+          }
+        ),
+
+        suite(
+          "Immutably",
+          async (): Promise<void> => {
+
+            const experimentalSample: Array<string> = getConstantSample();
+
+            const updatedExperimentalSampleClone: Array<string> = replaceArrayElementsByPredicates({
+              targetArray: experimentalSample,
+              replacements: [
+                {
+                  predicate: (element: string): boolean => element.includes("O"),
+                  newValue: "OOO!"
+                },
+                {
+                  predicate: (element: string): boolean => element.includes("I"),
+                  replacer: (currentValueOfElement: string): string => `${ currentValueOfElement.replace("I", "III") }!!!`
+                }
+              ],
+              mutably: false
+            }).updatedArray;
+
+            await Promise.all([
+
+              test(
+                "Updated Array Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(updatedExperimentalSampleClone, [ "ALPHA", "OOO!", "CHARLIIIE!!!", "DELTA", "OOO!" ]);
+                }
+              ),
+
+              test(
+                "Initial Array has not Mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getConstantSample());
+                }
+              )
+
+            ]);
+
+          }
+        )
+
+      ]);
+
+    }
+  )
+
+]).catch(Logger.logPromiseError);

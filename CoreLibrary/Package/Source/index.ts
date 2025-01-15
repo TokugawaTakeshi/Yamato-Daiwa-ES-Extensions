@@ -223,6 +223,10 @@ export type { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/Re
 export type { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
 export { default as RowVector } from "./LinearAlgebra/Classes/RowVector";
 
+/* ─── Operations ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as computeDotProduct } from "./LinearAlgebra/Operations/computeDotProduct";
+export { default as multiplyMatrices } from "./LinearAlgebra/Operations/multiplyMatrices";
+
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */
 export { default as PoliteErrorsMessagesBuilder } from "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";

@@ -28,8 +28,7 @@ block append Metadata
     });
 
     RoutingEmulator.setCurrentRoute(
-      "coreLibrary.children.functionality.children.arrays.children.retrievingOfElements.children." +
-          "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+      "coreLibrary.functionality.arrays.retrievingOfElements.getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
     );
 
     LanguageDropDownList__YDF_DK.setLinks({
@@ -112,7 +111,7 @@ block append SpecificContent
         typeName: "Options",
         localizedDescriptiveHeading: "オプション",
         propertiesSpecification: {
-          mustThrowErrorIfElementNotFoundOrMoreThan1: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
             localizedInterpretation: "対象の要素が見つからない、又は検索結果が2つ以上の場合に、エラーを投げる必要があるかどうか",
             type: "boolean （trueのみ）",
             required: true
@@ -131,7 +130,7 @@ block append SpecificContent
 
       li.
         #[+ImportantEntity--YDID 3つ目]の#[+Term--YDID 引数]の#[+Term__Contrast--YDID 値]として
-          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]
+          #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }]
           が渡された場合、#[+Term--YDID エラー]が投げられる。
         然し、#[+Term--YDID 関数]の実行がエラー無しで終了した場合、#[+ImportantEntity--YDID TypeScript]は、返ってきた#[+Term--YDID 値]が
           #[+ImportantEntity__Code--YDID null]では#[+Keyword--YDID なく]、#[+Term--YDID ジェネリック引数]で指定された
@@ -223,7 +222,7 @@ block append SpecificContent
           p.Article-Paragraph.
             #[+Term--YDID プレディケート]を満たす#[+Term--YDID 要素]が#[+SecondaryEntity--YDID 1個]#[+Keyword--YDID のみ]で、
               其れ以外に成る事は無いと言い切れる場合、
-              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMoreThan1: true }]を
+              #[+ImportantEntity__Code--YDID { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }]を
               #[+ImportantEntity--YDID 3つ目]の#[+Term--YDID 引数]として渡す事が出来る。
             結果として、#[+ImportantEntity--YDID TypeScript]は#[+Term--YDID 非null確認]を求めないが、期待に反して
               #[+Term--YDID プレディケート]を満たす要素の数が丁度1個では&nbsp;#[+Keyword--YDID なく]なった場合、
@@ -233,7 +232,7 @@ block append SpecificContent
           const matching: string = getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
             sample,
             (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-            { mustThrowErrorIfElementNotFoundOrMoreThan1: true }
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
           );
         +CodeViewer-Explanation--YDF.
           #[+Keyphrase--YDID #[+ImportantEntity--YDID 3つ目]の#[+Term--YDID 引数]を指定している]此の場合、
@@ -387,13 +386,15 @@ block append SpecificContent
     +LinksCardsFlow--YDF
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Source/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
         title: "ソースコード"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/" +
-            "CoreLibrary/Package/Tests/Automated/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/01-RetrievingOfElements/" +
+            "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
         title: "テストコード"
       }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
