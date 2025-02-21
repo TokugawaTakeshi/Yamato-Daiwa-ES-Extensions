@@ -77,15 +77,15 @@ coreLibrary:
 
               $children:
 
-                getIndexesOfArrayElementsWhichSatisfiesThePredicate:
-                  $heading: "<code>getIndexesOfArrayElementsWhichSatisfiesThePredicate</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.${ fileNameLocalizationExtensions }`
+                getIndexesOfSatisfiesThePredicateArrayElements:
+                  $heading: "<code>getIndexesOfSatisfiesThePredicateArrayElements</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/TableOfContents/getIndexesOfArrayElementsWhichSatisfiesThePredicate.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/TableOfContents/getIndexesOfArrayElementsWhichSatisfiesThePredicate.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/TableOfContents/getIndexesOfArrayElementsWhichSatisfiesThePredicate.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/TableOfContents/getIndexesOfArrayElementsWhichSatisfiesThePredicate.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.russian.yaml
 
                 getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne:
                   $heading: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>"
@@ -1294,7 +1294,7 @@ realiseNotes:
       $URI: `@All/RealiseNotes/v1d7/RealiseNotes-v1d7.${ fileNameLocalizationExtensions }`
 
 
-supportProject:
-
-  $heading: `supportProject.$heading`
-  $URI: `SupportsProject/SupportsProject.${ fileNameLocalizationExtensions }`
+#supportProject:
+#
+#  $heading: `supportProject.$heading`
+#  $URI: `SupportsProject/SupportsProject.${ fileNameLocalizationExtensions }`

@@ -3,8 +3,8 @@ extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentatio
 
 block append Requirements
 
-  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
-  include ../../../../../../SharedComponents/SharedComponents.english.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
 
 
 block append Metadata
@@ -13,9 +13,9 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("getIndexesOfArrayElementsWhichSatisfiesThePredicate"),
+        title: buildHTML_PageTitle("getIndexesOfSatisfiesThePredicateArrayElements"),
         description: MetaDescriptionTemplates.function({
-          functionName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+          functionName: "getIndexesOfSatisfiesThePredicateArrayElements",
           whatFunctionDoes: ""
         })
       },
@@ -27,19 +27,17 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute(
-      "coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexesOfArrayElementsWhichSatisfiesThePredicate"
-    );
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexesOfSatisfiesThePredicateArrayElements");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
-          retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI,
-      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
-          retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexesOfSatisfiesThePredicateArrayElements.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexesOfSatisfiesThePredicateArrayElements.$URI
     });
 
     const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
-        $children.retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate;
+        $children.retrievingOfIndexes.$children.getIndexesOfSatisfiesThePredicateArrayElements;
 
 
 block append HeadScripts
@@ -54,19 +52,22 @@ block append SpecificContent
   article
 
     +CallableExpressionScheme--YDF_DK({
-      technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+      technicalName: "getIndexesOfSatisfiesThePredicateArrayElements",
+      localizedDescriptiveHeading: "プレディケートを満たしている配列の要素の指数を取得する",
       headingTag: "h1",
       genericParameters: [ "ArrayElement" ],
       parametersSpecification: [
         {
           type: "Array<ArrayElement>",
           required: true,
-          genericTechnicalName: "targetArray"
+          genericTechnicalName: "targetArray",
+          localizedName: "目標的配列"
         },
         {
           type: "(arrayElement: ArrayElement) => boolean",
           required: true,
-          genericTechnicalName: "predicate"
+          genericTechnicalName: "predicate",
+          localizedName: "プレディケート"
         }
       ],
       returnedValue: "Array<number>"
@@ -77,7 +78,7 @@ block append SpecificContent
     })
 
 
-    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
       text: localizedSectioning.externalLinks.$heading,
@@ -87,20 +88,20 @@ block append SpecificContent
     +LinksCardsFlow--YDF
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
-            "Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/" +
-            "getIndexesOfArrayElementsWhichSatisfiesThePredicate.md",
-        title: "Temporary markdown documentation"
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "Package/Documentation/Arrays/getIndexesOfSatisfiesThePredicateArrayElements/" +
+            "getIndexesOfSatisfiesThePredicateArrayElements.md",
+        title: "一時的英語マークダウン資料"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
         unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
             "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.ts",
-        title: "Source code"
+        title: "ソースコード"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
         unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
             "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements.test.ts",
-        title: "Tests code"
+        title: "テストコード"
       }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

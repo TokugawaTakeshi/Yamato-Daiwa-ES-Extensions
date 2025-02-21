@@ -1,6 +1,5 @@
 import RowVector from "./RowVector";
 import ColumnVector from "./ColumnVector";
-import isUndefined from "../../TypeGuards/Nullables/isUndefined";
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
@@ -17,15 +16,11 @@ export default class Matrix<Element> {
   public static createEmptyOne<Element>(
     { rowsCount, columnsCount }: Readonly<{ rowsCount: number; columnsCount: number; }>
   ): Matrix<Element> {
-
-    const rowsDefinition: Array<Array<Element>> = new Array(rowsCount);
-
-    for (let rowIndex: number = 0; rowIndex <= columnsCount; rowIndex++) {
-      rowsDefinition[rowIndex] = new Array(columnsCount);
-    }
-
-    return new Matrix(rowsDefinition);
-
+    return new Matrix(
+      Array.from(Array(rowsCount).keys()).map(
+        (): Array<Element> => new Array(columnsCount)
+      )
+    );
   }
 
   public constructor(rowsDefinition: Array<Array<Element>>) {
@@ -48,7 +43,9 @@ export default class Matrix<Element> {
 
     if (rowsCount > 1) {
 
-      for (let rowIndex: number = 1; rowIndex <= rowsCount; rowIndex++) {
+      console.log("CHECKPOINT1");
+
+      for (let rowIndex: number = 1; rowIndex < rowsCount; rowIndex++) {
 
         const elementsCountInCurrentRow: number = rowsDefinition[rowIndex].length;
 
@@ -97,9 +94,7 @@ export default class Matrix<Element> {
     const targetRowIndex: number = "rowIndex" in elementCoordinates ?
         elementCoordinates.rowIndex : elementCoordinates.rowNumber__numerationFrom1 - 1;
 
-    const targetRow: Array<Element> | undefined = this.rows[targetRowIndex];
-
-    if (isUndefined(targetRow)) {
+    if (targetRowIndex > this.rowsCount - 1) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
@@ -114,12 +109,12 @@ export default class Matrix<Element> {
     }
 
 
+    const targetRow: Array<Element> = this.rows[targetRowIndex];
+
     const targetColumnIndex: number = "columnIndex" in elementCoordinates ?
         elementCoordinates.columnIndex : elementCoordinates.columnNumber__numerationFrom1 - 1;
 
-    const targetElement: Element | undefined = targetRow[targetColumnIndex];
-
-    if (isUndefined(targetRow)) {
+    if (targetColumnIndex > this.columnsCount - 1) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
@@ -133,8 +128,7 @@ export default class Matrix<Element> {
       });
     }
 
-
-    return targetElement;
+    return targetRow[targetColumnIndex];
 
   }
 
@@ -157,9 +151,7 @@ export default class Matrix<Element> {
     const targetRowIndex: number = "rowIndex" in elementCoordinates ?
         elementCoordinates.rowIndex : elementCoordinates.rowNumber__numerationFrom1 - 1;
 
-    const targetRow: Array<Element> | undefined = this.rows[targetRowIndex];
-
-    if (isUndefined(targetRow)) {
+    if (targetRowIndex > this.rowsCount - 1) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
@@ -174,10 +166,12 @@ export default class Matrix<Element> {
     }
 
 
+    const targetRow: Array<Element> | undefined = this.rows[targetRowIndex];
+
     const targetColumnIndex: number = "columnIndex" in elementCoordinates ?
         elementCoordinates.columnIndex : elementCoordinates.columnNumber__numerationFrom1 - 1;
 
-    if (isUndefined(targetRow[targetColumnIndex])) {
+    if (targetColumnIndex > this.columnsCount - 1) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
@@ -212,6 +206,11 @@ export default class Matrix<Element> {
       /* eslint-disable-next-line id-length -- Nothing specific required for name of iterated variable in this case. */
       this.rows.map((row: Array<Element>): Element => row[targetColumnIndex])
     );
+  }
+
+  public to2DimensionalArray(): Array<Array<Element>> {
+    /* eslint-disable-next-line id-length -- Nothing specific required for name of iterated variable in this case. */
+    return [ ...this.rows.map((row: Array<Element>): Array<Element> => [ ...row ]) ];
   }
 
 }

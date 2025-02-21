@@ -13,9 +13,9 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("getIndexesOfArrayElementsWhichSatisfiesThePredicate"),
+        title: buildHTML_PageTitle("getIndexesOfSatisfiesThePredicateArrayElements"),
         description: MetaDescriptionTemplates.function({
-          functionName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+          functionName: "getIndexesOfSatisfiesThePredicateArrayElements",
           whatFunctionDoes: ""
         })
       },
@@ -27,17 +27,17 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexesOfArrayElementsWhichSatisfiesThePredicate");
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexesOfSatisfiesThePredicateArrayElements");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
-          getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI,
+          getIndexesOfSatisfiesThePredicateArrayElements.$URI,
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
-          getIndexesOfArrayElementsWhichSatisfiesThePredicate.$URI
+          getIndexesOfSatisfiesThePredicateArrayElements.$URI
     });
 
     const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
-        $children.retrievingOfIndexes.$children.getIndexesOfArrayElementsWhichSatisfiesThePredicate;
+        $children.retrievingOfIndexes.$children.getIndexesOfSatisfiesThePredicateArrayElements;
 
 
 block append HeadScripts
@@ -52,7 +52,7 @@ block append SpecificContent
   article
 
     +CallableExpressionScheme--YDF_DK({
-      technicalName: "getIndexesOfArrayElementsWhichSatisfiesThePredicate",
+      technicalName: "getIndexesOfSatisfiesThePredicateArrayElements",
       localizedDescriptiveHeading: "Получить индексы элементов массива удовлетворяющих предикату",
       headingTag: "h1",
       genericParameters: [ "ArrayElement" ],
@@ -88,9 +88,9 @@ block append SpecificContent
     +LinksCardsFlow--YDF
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
-        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
-            "Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/" +
-            "getIndexesOfArrayElementsWhichSatisfiesThePredicate.md",
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "Package/Documentation/Arrays/getIndexesOfSatisfiesThePredicateArrayElements/" +
+            "getIndexesOfSatisfiesThePredicateArrayElements.md",
         title: "Временная англоязычная Markdown-документация"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 

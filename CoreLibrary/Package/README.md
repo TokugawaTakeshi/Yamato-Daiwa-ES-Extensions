@@ -32,12 +32,13 @@ npm i @yamato-daiwa/es-extensions -E
 * [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 * [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
 
+[//]: # (todo =========================================================================================================&#41;)
+
 #### Retrieving of Indexes
 
 * [getIndexesOfArrayElementsWhichSatisfiesThePredicate](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.english.html)
 * [getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
-[//]: # (todo =========================================================================================================&#41;)
 
 #### RawObjectDataProcessor
 

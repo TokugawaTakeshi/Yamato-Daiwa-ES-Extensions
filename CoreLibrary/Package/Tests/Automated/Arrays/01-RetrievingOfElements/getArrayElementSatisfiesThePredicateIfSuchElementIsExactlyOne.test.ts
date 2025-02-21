@@ -1,5 +1,6 @@
 import {
-  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne, Logger,
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne,
+  Logger,
   UnexpectedEventError
 } from "../../../../Source";
 import { test } from "node:test";
@@ -11,57 +12,66 @@ const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "San
 
 Promise.all([
 
-  test("One Match", (): void => {
-    Assert.strictEqual(
-      getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-        sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
-      ),
-      "St. Louis"
-    );
-  }),
-
-  test("More than One Match", (): void => {
-
-    Assert.strictEqual(
-      getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-        sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
-      ),
-      null
-    );
-
-    Assert.throws(
-      (): void => {
+  test(
+    "One Match",
+    (): void => {
+      Assert.strictEqual(
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-          sample,
-          (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
-        );
-      },
-      UnexpectedEventError
-    );
+          sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+        ),
+        "St. Louis"
+      );
+    }
+  ),
 
-  }),
+  test(
+    "More than One Match",
+    (): void => {
 
-  test("No Matches", (): void => {
-
-    Assert.strictEqual(
-      getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-        sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
-      ),
-      null
-    );
-
-    Assert.throws(
-      (): void => {
+      Assert.strictEqual(
         getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-          sample,
-          (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
-          { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
-        );
-      },
-      UnexpectedEventError
-    );
+          sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
+        ),
+        null
+      );
 
-  })
+      Assert.throws(
+        (): void => {
+          getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample,
+            (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+          );
+        },
+        UnexpectedEventError
+      );
+
+    }
+  ),
+
+  test(
+    "No Matches",
+    (): void => {
+
+      Assert.strictEqual(
+        getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+          sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
+        ),
+        null
+      );
+
+      Assert.throws(
+        (): void => {
+          getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+            sample,
+            (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+            { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+          );
+        },
+        UnexpectedEventError
+      );
+
+    }
+  )
 
 ]).catch(Logger.logPromiseError);

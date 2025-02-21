@@ -16,9 +16,9 @@ export default function multiplyMatrices(
     columnsCount: secondMatrix.columnsCount
   });
 
-  for (let productRowIndex: number = 0; productRowIndex <= firstMatrix.rowsCount; productRowIndex++) {
+  for (let productRowIndex: number = 0; productRowIndex < firstMatrix.rowsCount; productRowIndex++) {
 
-    for (let productColumnIndex: number = 0; productColumnIndex <= secondMatrix.columnsCount; productColumnIndex++) {
+    for (let productColumnIndex: number = 0; productColumnIndex < secondMatrix.columnsCount; productColumnIndex++) {
 
       product.setElement({
         rowIndex: productRowIndex,
@@ -32,7 +32,6 @@ export default function multiplyMatrices(
     }
 
   }
-
 
   return product;
 
