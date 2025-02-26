@@ -1,0 +1,72 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("リリースノート ： 1.8"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.8" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("realiseNotes.v1d8");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.realiseNotes.$children.v1d8.$URI,
+      russian: routing.russian.realiseNotes.$children.v1d8.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 リリースノート｜バージョン 1.8
+
+    h2.Article-Heading2 主要パッケージ (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 破壊的変更
+
+    h4.Article-Heading4 配列の弄り
+
+    h5.Article-Heading5.
+      #[code getIndexesOfArrayElementsWhichSatisfiesThePredicate]を#[code getIndexesOfSatisfiesThePredicateArrayElements]
+        に名前変更
+
+    dl.Article-DescriptionList
+
+      dt 理由
+      dd.
+        意味を広げずに関数がする事をより少ない文字数で使える可能
+
+      dt 貴方のコードが編集が必要に成る条件
+      dd.
+        #[+ImportantEntity__Code--YDID getIndexesOfArrayElementsWhichSatisfiesThePredicate]が直接利用されるところがある
+
+      dt 対策
+      dd.
+        コードエディター又は#[+Term--YDID 結合開発環境]の適切な機能を使って、プロジェクトの全ファイルに
+          #[+ImportantEntity__Code--YDID getIndexesOfArrayElementsWhichSatisfiesThePredicate]を
+          #[+ImportantEntity__Code--YDID getIndexesOfSatisfiesThePredicateArrayElements]に置き換えて下さい。

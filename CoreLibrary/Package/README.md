@@ -25,21 +25,25 @@ npm i @yamato-daiwa/es-extensions -E
 ### Arrays
 #### Creating
 
-* [createArrayOfNaturalNumbers](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
++ [createArrayOfNaturalNumbers](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
 
 #### Retrieving of Elements
 
-* [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
-* [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
++ [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
++ [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
 
-[//]: # (todo =========================================================================================================&#41;)
 
 #### Retrieving of Indexes
 
-* [getIndexesOfArrayElementsWhichSatisfiesThePredicate](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.english.html)
-* [getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
++ [getIndexesOfSatisfiesThePredicateArrayElements](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
++ [getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
 
+#### Retrieving of Subarrays
+
++ [cropArray](#)
+
+[//]: # (todo =========================================================================================================&#41;)
 #### RawObjectDataProcessor
 
 The tool for the validation and processing of unknown at advance external data (from HTTP requests/responses, files, etc.).

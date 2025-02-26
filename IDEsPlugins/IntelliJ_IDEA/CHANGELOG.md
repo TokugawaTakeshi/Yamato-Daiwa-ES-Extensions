@@ -7,6 +7,13 @@
 
 + **createArrayOfNaturalNumbers** — The autocomplete imitator type Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
 
+### Changed
+
++ **getIndexesOfArrayElementsWhichSatisfiesThePredicate** has been renamed to 
+  **getIndexesOfSatisfiesThePredicateArrayElements** as [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
+  and updated
+
+
 ## [0.0.8]
 
 ### Changed
@@ -61,7 +68,7 @@
 
 * <kbd>addElementsToArray</kbd> The copy of the live template for [<kbd>aeta</kbd>](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/addElementsToArray.english.html).
   From this version, the <kbd>aeta</kbd> is the alias for <kbd>addElementsToArray</kbd>.
-* <kbd>getIndexesOfArrayElementsWhichSatisfiesThePredicate</kbd> - The live template for the [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md)
+* <kbd>getIndexesOfArrayElementsWhichSatisfiesThePredicate</kbd> - The live template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
 * <kbd>getLastElementOfArray</kbd>, <kbd>gleoa</kbd> - The live template and it's alias respectively for the [`getLastElementOfArray`](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html) function
 * <kbd>removeArrayElementsByIndexes</kbd> The copy of the live template for [<kbd>raebi</kbd>](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md).
   From this version, the <kbd>raebi</kbd> is the alias for <kbd>removeArrayElementsByIndexes</kbd>.
@@ -90,8 +97,8 @@
 * <kbd>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Inserts working examples of usage of eponymous function
 * <kbd>getExpectedToBeSingleChildOfTemplateElement</kbd> Inserts the examples of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/getExpectedToBeSingleChildOfTemplateElement.md) usage
 * <kbd>getExpectedToBeSingleDOM_Element</kbd> Inserts the examples of [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/getExpectedToBeSingleDOM_Element.md) usage
-* <kbd>getIndexOfArrayElementIfSuchElementIsExactlyOne</kbd> Live template for  [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
-* <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Live template for  [eponymous function](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md)
+* <kbd>getIndexOfArrayElementIfSuchElementIsExactlyOne</kbd> Live template for [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
+* <kbd>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</kbd> Live template for [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 * <kbd>raebi</kbd> Live template for [**removeArrayElementsByIndexes**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md) function
 * <kbd>raebii</kbd> Live template for [**replaceArrayElementsByIndexesImmutably**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md) function
 * <kbd>rmaebp</kbd> Live template for [**removeArrayElementsByPredicates**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md) function
