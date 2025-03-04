@@ -6,6 +6,7 @@
 ### Added
 
 + **createArrayOfNaturalNumbers** — The autocomplete imitator type Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
++ **cropArray**, alis: **ca**　— The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html)
 
 ### Changed
 

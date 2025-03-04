@@ -41,7 +41,18 @@ npm i @yamato-daiwa/es-extensions -E
 
 #### Retrieving of Subarrays
 
-+ [cropArray](#)
++ [cropArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html)
+
+
+#### AddingOfElements
+
++ [addElementsToArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html)
+
+
+#### Replacing of Elements
+
++ [replaceArrayElementsByIndexesImmutably](#)
++ [replaceArrayElementsByPredicates](#)
 
 [//]: # (todo =========================================================================================================&#41;)
 #### RawObjectDataProcessor

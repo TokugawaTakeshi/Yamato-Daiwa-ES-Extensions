@@ -112,7 +112,7 @@ coreLibrary:
                       english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.english.yaml
                       japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.japanese.yaml
                       russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.russian.yaml
-            # === TODO =================================================================================================
+
             addingOfElements:
 
               $heading: `coreLibrary.functionality.arrays.addingOfElements.$heading`
@@ -137,26 +137,24 @@ coreLibrary:
 
                 replaceArrayElementsByIndexesImmutably:
                   $heading: "<code>replaceArrayElementsByIndexesImmutably</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably.ts"
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.russian.yaml
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.russian.yaml
 
                 replaceArrayElementsByPredicates:
                   $heading: "<code>replaceArrayElementsByPredicates</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates.ts"
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.russian.yaml
-
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.russian.yaml
+            # === TODO =================================================================================================
             permutationsOfElements:
 
               $heading: `coreLibrary.functionality.arrays.permutationsOfElements.$heading`
