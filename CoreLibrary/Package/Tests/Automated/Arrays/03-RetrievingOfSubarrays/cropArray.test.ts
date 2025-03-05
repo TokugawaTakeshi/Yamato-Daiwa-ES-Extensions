@@ -1,4 +1,4 @@
-import { cropArray, Logger } from "../../../../Source";
+import { cropArray, InvalidParameterValueError, Logger } from "../../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
@@ -99,7 +99,7 @@ Promise.all([
         ),
 
         suite(
-          "...and \"startingElementNumber__numerationFrom1\" Options",
+          "...and `startingElementNumber__numerationFrom1` Options",
           async (): Promise<void> => {
 
             await Promise.all([
@@ -209,7 +209,7 @@ Promise.all([
                     ),
 
                     test(
-                      "Initial Array has not Mutated",
+                      "Initial Array has Mutated",
                       (): void => {
                         Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
                       }
@@ -274,7 +274,7 @@ Promise.all([
       await Promise.all([
 
         suite(
-          "... and \"startingElementNumber__numerationFrom0\" Options",
+          "... and `startingElementNumber__numerationFrom0` Options",
           async (): Promise<void> => {
 
             await Promise.all([
@@ -355,7 +355,7 @@ Promise.all([
         ),
 
         suite(
-          "... and \"startingElementNumber__numerationFrom1\" Options",
+          "... and `startingElementNumber__numerationFrom1` Options",
           async (): Promise<void> => {
 
             await suite(
@@ -514,7 +514,7 @@ Promise.all([
   ),
 
   suite(
-    "With \"elementsCount\" Option",
+    "With `elementsCount` Option",
     async (): Promise<void> => {
 
       const elementsCount: number = 3;
@@ -522,7 +522,7 @@ Promise.all([
       await Promise.all([
 
         suite(
-          "... and \"startingElementNumber__numerationFrom0\" Option",
+          "... and `startingElementNumber__numerationFrom0` Option",
           async (): Promise<void> => {
 
             await Promise.all([
@@ -600,296 +600,483 @@ Promise.all([
             ]);
 
           }
+        ),
+
+        suite(
+          "... and `startingElementNumber__numerationFrom1` Option",
+          async (): Promise<void> => {
+
+            await Promise.all([
+
+              suite(
+                "Mutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom1: 2,
+                    elementsCount,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: true
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, [ "BRAVO", "CHARLIE", "DELTA" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has Mutated",
+                      (): void => {
+                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              ),
+
+              suite(
+                "Immutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  const updatedCopyOfExperimentalSample: Array<string> = cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom1: 2,
+                    elementsCount,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: false
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One", (): void => {
+                        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "BRAVO", "CHARLIE", "DELTA" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has not Mutated",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              )
+
+            ]);
+
+          }
+        ),
+
+        suite(
+          "... and with `fromStart` Option",
+          async (): Promise<void> => {
+
+            await Promise.all([
+
+              suite(
+                "Mutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  cropArray({
+                    targetArray: experimentalSample,
+                    fromStart: true,
+                    elementsCount,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: true
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial array has mutated",
+                      (): void => {
+                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              ),
+
+              suite(
+                "Immutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  const updatedCopyOfExperimentalSample: Array<string> = cropArray({
+                    targetArray: experimentalSample,
+                    fromStart: true,
+                    elementsCount,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: false
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "ALPHA", "BRAVO", "CHARLIE" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has not Mutated",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              )
+
+            ]);
+
+          }
         )
 
-        //
+      ]);
+
+    }
+  ),
+
+  suite(
+    "With `untilEnd` option",
+    async (): Promise<void> => {
+
+      await Promise.all([
+
+        suite(
+          "...and with `startingElementNumber__numerationFrom0` Option",
+          async (): Promise<void> => {
+
+            await Promise.all([
+
+              suite(
+                "Mutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom0: 2,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: true
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has Mutated",
+                      (): void => {
+                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              ),
+
+              suite(
+                "Immutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  const updatedCopyOfExperimentalSample: Array<string> = cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom0: 2,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: false
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has not Mutated",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              )
+
+            ]);
+
+          }
+        ),
+
+        suite(
+          "... and with `startingElementNumber__numerationFrom1` Option",
+          async (): Promise<void> => {
+
+            await Promise.all([
+
+              suite(
+                "Mutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom1: 3,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: true
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected Once",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has Mutated",
+                      (): void => {
+                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              ),
+
+              suite(
+                "Immutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  const updatedCopyOfExperimentalSample: Array<string> = cropArray({
+                    targetArray: experimentalSample,
+                    startingElementNumber__numerationFrom1: 3,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: false
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has not Mutated",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              )
+
+            ]);
+
+          }
+        ),
+
+        suite(
+          "... and With `fromStart` Option",
+          async (): Promise<void> => {
+
+            await Promise.all([
+
+              suite(
+                "Mutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  cropArray({
+                    targetArray: experimentalSample,
+                    fromStart: true,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: true
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has Mutated",
+                      (): void => {
+                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              ),
+
+              suite(
+                "Immutably",
+                async (): Promise<void> => {
+
+                  const experimentalSample: Array<string> = generateConstantSample();
+
+                  const updatedCopyOfExperimentalSample: Array<string> = cropArray({
+                    targetArray: experimentalSample,
+                    fromStart: true,
+                    untilEnd: true,
+                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                    mutably: false
+                  });
+
+                  await Promise.all([
+
+                    test(
+                      "Updated Array is Matching with Expected One",
+                      (): void => {
+                        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
+                      }
+                    ),
+
+                    test(
+                      "Initial Array has not Mutated",
+                      (): void => {
+                        Assert.deepStrictEqual(experimentalSample, generateConstantSample());
+                      }
+                    )
+
+                  ]);
+
+                }
+              )
+
+            ]);
+
+          }
+        )
+
+      ]);
+
+    }
+  ),
+
+  suite(
+    "Behaviour in out of Range Case",
+    async (): Promise<void> => {
+
+      await Promise.all([
+
+        test(
+          "Cropping until Last Element",
+          async (): Promise<void> => {
+
+            const experimentalSample: Array<string> = generateConstantSample();
+
+            cropArray({
+              targetArray: experimentalSample,
+              startingElementNumber__numerationFrom0: 1,
+              endingElementNumber__numerationFrom0: experimentalSample.length,
+              mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
+              mutably: true
+            });
+
+            await test(
+              "Updated Array is Matching With Expected One",
+              (): void => {
+                Assert.deepStrictEqual(experimentalSample, [ "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
+              }
+            );
+
+          }
+        ),
+
+        test(
+          "Error has been Thrown",
+          (): void => {
+
+            const experimentalSample: Array<string> = generateConstantSample();
+
+            Assert.throws(
+              (): void => {
+                cropArray({
+                  targetArray: experimentalSample,
+                  startingElementNumber__numerationFrom0: 1,
+                  endingElementNumber__numerationFrom0: experimentalSample.length,
+                  mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                  mutably: true
+                });
+              },
+              InvalidParameterValueError
+            );
+
+          }
+        )
 
       ]);
 
     }
   )
-
-    // })
-
-  // })
-  //
-  //   await suite("With \"startingElementNumber__numerationFrom1\" option", async (): Promise<void> => {
-  //
-  //     await suite("Mutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom1: 2,
-  //         elementsCount,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: true
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, [ "BRAVO", "CHARLIE", "DELTA" ]);
-  //       });
-  //
-  //       await test("Initial array has mutated", (): void => {
-  //         Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //     await suite("Immutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       const updatedCopyOfExperimentalSample: Array<string> = cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom1: 2,
-  //         elementsCount,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: false
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "BRAVO", "CHARLIE", "DELTA" ]);
-  //       });
-  //
-  //       await test("Initial array has not mutated", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //   });
-  //
-  //   await suite("With \"fromStart\" option", async (): Promise<void> => {
-  //
-  //     await suite("Mutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       cropArray({
-  //         targetArray: experimentalSample,
-  //         fromStart: true,
-  //         elementsCount,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: true
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE" ]);
-  //       });
-  //
-  //       await test("Initial array has mutated", (): void => {
-  //         Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //     await suite("Immutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       const updatedCopyOfExperimentalSample: Array<string> = cropArray({
-  //         targetArray: experimentalSample,
-  //         fromStart: true,
-  //         elementsCount,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: false
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "ALPHA", "BRAVO", "CHARLIE" ]);
-  //       });
-  //
-  //       await test("Initial array has not mutated", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //   });
-  //
-  // }),
-  //
-  // suite("With \"untilEnd\" option", async (): Promise<void> => {
-  //
-  //   await suite("With \"startingElementNumber__numerationFrom0\" option", async (): Promise<void> => {
-  //
-  //     await suite("Mutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom0: 2,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: true
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //       await test("Initial array has mutated", (): void => {
-  //         Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //     await suite("Immutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       const updatedCopyOfExperimentalSample: Array<string> = cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom0: 2,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: false
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //       await test("Initial array has not mutated", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //   });
-  //
-  //   await suite("With \"startingElementNumber__numerationFrom1\" option", async (): Promise<void> => {
-  //
-  //     await suite("Mutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom1: 3,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: true
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //       await test("Initial array has mutated", (): void => {
-  //         Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //     await suite("Immutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       const updatedCopyOfExperimentalSample: Array<string> = cropArray({
-  //         targetArray: experimentalSample,
-  //         startingElementNumber__numerationFrom1: 3,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: false
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //       await test("Initial array has not mutated", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, generateConstantSample());
-  //       });
-  //
-  //     });
-  //
-  //   });
-  //
-  //   await suite("With \"fromStart\" option", async (): Promise<void> => {
-  //
-  //     await suite("Mutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       cropArray({
-  //         targetArray: experimentalSample,
-  //         fromStart: true,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: true
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //     });
-  //
-  //     await suite("Immutably", async (): Promise<void> => {
-  //
-  //       const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //       const updatedCopyOfExperimentalSample: Array<string> = cropArray({
-  //         targetArray: experimentalSample,
-  //         fromStart: true,
-  //         untilEnd: true,
-  //         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //         mutably: false
-  //       });
-  //
-  //       await test("Updated array is matching with expected", (): void => {
-  //         Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
-  //       });
-  //
-  //     });
-  //
-  //   });
-  //
-  // }),
-  //
-  // suite("Behaviour in out of range case", async (): Promise<void> => {
-  //
-  //   await test("Has been cropped until last element of array", async (): Promise<void> => {
-  //
-  //     const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //     cropArray({
-  //       targetArray: experimentalSample,
-  //       startingElementNumber__numerationFrom0: 1,
-  //       endingElementNumber__numerationFrom0: experimentalSample.length,
-  //       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
-  //       mutably: true
-  //     });
-  //
-  //     await test("Updated array is matching with expected", (): void => {
-  //       Assert.deepStrictEqual(experimentalSample, [ "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
-  //     });
-  //
-  //   });
-  //
-  //   await test("Error has been thrown", (): void => {
-  //
-  //     const experimentalSample: Array<string> = generateConstantSample();
-  //
-  //     Assert.throws(
-  //         (): void => {
-  //           cropArray({
-  //             targetArray: experimentalSample,
-  //             startingElementNumber__numerationFrom0: 1,
-  //             endingElementNumber__numerationFrom0: experimentalSample.length,
-  //             mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-  //             mutably: true
-  //           });
-  //         },
-  //         InvalidParameterValueError
-  //     );
-  //
-  //   });
-  //
-  // })
 
 ]).catch(Logger.logPromiseError);

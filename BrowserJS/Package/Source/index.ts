@@ -17,6 +17,7 @@ export { default as getExpectedToBeSingleDOM_Element } from "./DOM/getExpectedTo
 export { default as getExpectedToBeSingleChildOfTemplateElement } from "./DOM/getExpectedToBeSingleChildOfTemplateElement";
 export { default as resolveContextDOM_ElementPolymorphicSpecification } from
     "./DOM/resolveContextDOM_ElementPolymorphicSpecification";
+export { default as setHTML_Attributes } from "./DOM/setHTML_Attributes";
 
 
 /* ━━━ Events Handling ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

@@ -3,42 +3,48 @@ import InvalidParameterValueError from "../../Errors/InvalidParameterValue/Inval
 
 
 export default function moveArrayElementTo1Position<ArrayElement>(
-  compoundParameter:
-      (
-        {
-          mutably: true;
-          targetArray: Array<ArrayElement>;
-        } |
-        {
-          mutably: false;
-          targetArray: ReadonlyArray<ArrayElement>;
-        }
-      ) &
-      (
-        { targetElementNumber__numerationFrom0: number; } |
-        { targetElementNumber__numerationFrom1: number; }
-      ) &
+  {
+    mutably,
+    targetArray,
+    toLeft,
+    errorMustBeThrownIf,
+    ...compoundParameter
+  }: Readonly<
+    (
       {
-        toLeft: boolean;
-        errorMustBeThrownIf: Readonly<{
-          elementsCountIsLessThan2: boolean;
-          targetElementNumberIsOutOfRange: boolean;
-        }>;
+        mutably: true;
+        targetArray: Array<ArrayElement>;
+      } |
+      {
+        mutably: false;
+        targetArray: ReadonlyArray<ArrayElement>;
       }
+    ) &
+    (
+      { targetElementNumber__numerationFrom0: number; } |
+      { targetElementNumber__numerationFrom1: number; }
+    ) &
+    {
+      toLeft: boolean;
+      errorMustBeThrownIf: Readonly<{
+        elementsCountIsLessThan2: boolean;
+        targetElementNumberIsOutOfRange: boolean;
+      }>;
+    }
+  >
 ): Array<ArrayElement> {
 
-  if (compoundParameter.targetArray.length < 2) {
+  if (targetArray.length < 2) {
 
-    if (compoundParameter.errorMustBeThrownIf.elementsCountIsLessThan2) {
+    if (errorMustBeThrownIf.elementsCountIsLessThan2) {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",
           messageSpecificPart:
-              "Target array must contain at least 2 elements while actually contains " +
-                  `${ compoundParameter.targetArray.length }. ` +
-              "This situation is being considered as an error when \"errorMustBeThrownIf.elementsCountIsLessThan2\" " +
+              `Target array must contain at least 2 elements while actually contains ${ targetArray.length }. ` +
+              "This case is being considered as an error when \"errorMustBeThrownIf.elementsCountIsLessThan2\" " +
                 "flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
@@ -51,13 +57,12 @@ export default function moveArrayElementTo1Position<ArrayElement>(
     /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
     * When `mutably` option is falsy, it is being assumed that array is immutable only for this function but
     *   once value returned it must be a mutable array. */
-    return compoundParameter.targetArray as Array<ArrayElement>;
+    return targetArray as Array<ArrayElement>;
 
   }
 
 
-  const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
-      compoundParameter.targetArray : [ ...compoundParameter.targetArray ];
+  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...targetArray ];
 
   const targetElementNumber__numerationFrom0: number =
       "targetElementNumber__numerationFrom0" in compoundParameter ?
@@ -66,7 +71,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
   if (targetElementNumber__numerationFrom0 < 0 || targetElementNumber__numerationFrom0 > workpiece.length) {
 
-    if (compoundParameter.errorMustBeThrownIf.targetElementNumberIsOutOfRange) {
+    if (errorMustBeThrownIf.targetElementNumberIsOutOfRange) {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
@@ -74,7 +79,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
           parameterName: "compoundParameter",
           messageSpecificPart:
               "Target element number is out of range. " +
-              "This situation is being considered as an error when " +
+              "This case is being considered as an error when " +
                   "\"errorMustBeThrownIf.targetElementNumberIsOutOfRange\" flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
@@ -88,7 +93,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
   }
 
 
-  if (targetElementNumber__numerationFrom0 === 0 && compoundParameter.toLeft) {
+  if (targetElementNumber__numerationFrom0 === 0 && toLeft) {
 
     const firstElement: ArrayElement = workpiece[0];
 
@@ -97,7 +102,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
     return workpiece;
 
-  } else if (targetElementNumber__numerationFrom0 === workpiece.length - 1 && !compoundParameter.toLeft) {
+  } else if (targetElementNumber__numerationFrom0 === workpiece.length - 1 && !toLeft) {
 
     const indexOfLastElement: number = workpiece.length - 1;
     const lastElement: ArrayElement = workpiece[indexOfLastElement];
@@ -110,7 +115,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
   }
 
 
-  const indexOfElementWhichWillBeOusted: number = compoundParameter.toLeft ?
+  const indexOfElementWhichWillBeOusted: number = toLeft ?
       targetElementNumber__numerationFrom0 - 1 : targetElementNumber__numerationFrom0 + 1;
   const elementWhichWillBeOusted: ArrayElement = workpiece[indexOfElementWhichWillBeOusted];
 

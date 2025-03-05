@@ -10,7 +10,7 @@ export default function createArrayOfNaturalNumbers(
     elementsCount,
     isDescendingOrder = false,
 
-    /* eslint-disable-next-line no-nested-ternary, @stylistic/no-extra-parens --
+    /* eslint-disable-next-line no-nested-ternary --
      * The expanded version will require to make the `startingNumber` the let-variable what is undesirable for parameters. */
     startingNumber = isDescendingOrder ? (elementsCount === 0 ? 1 : elementsCount) : 1
 

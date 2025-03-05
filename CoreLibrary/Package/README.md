@@ -51,8 +51,8 @@ npm i @yamato-daiwa/es-extensions -E
 
 #### Replacing of Elements
 
-+ [replaceArrayElementsByIndexesImmutably](#)
-+ [replaceArrayElementsByPredicates](#)
++ [replaceArrayElementsByIndexesImmutably](http://localhost:3000/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html)
++ [replaceArrayElementsByPredicates](http://localhost:3000/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html)
 
 [//]: # (todo =========================================================================================================&#41;)
 #### RawObjectDataProcessor
