@@ -39,8 +39,8 @@
 
 #### Replacing of Elements
 
-+ **replaceArrayElementsByIndexesImmutably**, **raebii** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](#)
-+ **replaceArrayElementsByPredicates**, **rpaebp** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](#)
++ **replaceArrayElementsByIndexesImmutably**, **raebii** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html)
++ **replaceArrayElementsByPredicates**, **rpaebp** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html)
 
 [//]: # (todo ============================================================================================================)
 * Functions

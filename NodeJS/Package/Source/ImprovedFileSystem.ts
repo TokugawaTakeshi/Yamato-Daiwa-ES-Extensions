@@ -130,6 +130,21 @@ export default class ImprovedFileSystem {
   }
 
 
+  /* ─── Ensuring ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  public static ensureDirectoriesCreated(targetDirectoryPathOrMultipleOfThem: string | ReadonlyArray<string>): void {
+    for (
+      const targetDirectory of Array.isArray(targetDirectoryPathOrMultipleOfThem) ?
+          targetDirectoryPathOrMultipleOfThem : [ targetDirectoryPathOrMultipleOfThem ]
+    ) {
+      ImprovedFileSystem.createDirectory({
+        targetPath: targetDirectory,
+        synchronously: true,
+        mustThrowErrorIfTargetDirectoryExists: false
+      });
+    }
+  }
+
+
   /* ─── Removing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
   public static removeDirectoryWithFiles(
     compoundParameter: Readonly<{ targetPath: string; mustThrowErrorIfOneOrMoreFilesCouldNotBeDeleted: boolean; }>
@@ -138,14 +153,7 @@ export default class ImprovedFileSystem {
     const targetDirectoryPath: string = compoundParameter.targetPath;
 
     if (!FileSystem.existsSync(targetDirectoryPath)) {
-
-      Logger.logInfo({
-        title: "The directory to delete does not exist",
-        description: `The directory "${ targetDirectoryPath }" does not exist; nothing to delete.`
-      });
-
       return;
-
     }
 
 

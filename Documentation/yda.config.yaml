@@ -1,19 +1,19 @@
-projectBuilding:
+$projectBuilding:
 
-  commonSettings:
+  $commonSettings:
 
-    publicDirectoriesRelativePaths:
+    $publicDirectoriesRelativePaths:
 
-      LOCAL_DEVELOPMENT: 02-LocalDevelopmentBuild
-      PRODUCTION: 03-ProductionBuild
+      $localDevelopment: 02-LocalDevelopmentBuild
+      $production: 03-ProductionBuild
 
 
   # ━━━ Markup ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  markupProcessing:
+  $markupProcessing:
 
-    common:
-      buildingModeDependent:
-        LOCAL_DEVELOPMENT: { mustUseResolveResourceReferencesToRelativePaths: true }
+    $common:
+      $buildingModeDependent:
+        $localDevelopment: { mustUseResolveResourceReferencesToRelativePaths: true }
 
     entryPointsGroups:
 
@@ -43,7 +43,7 @@ projectBuilding:
 
 
   # ━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  stylesProcessing:
+  $stylesProcessing:
 
     entryPointsGroups:
 
