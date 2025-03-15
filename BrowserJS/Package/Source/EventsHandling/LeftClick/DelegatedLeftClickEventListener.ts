@@ -1,10 +1,12 @@
 import {
   isNotNull,
   isUndefined,
+  isNotUndefined,
   Logger,
   UnexpectedEventError,
   DOM_ElementRetrievingFailedError,
-  PoliteErrorsMessagesBuilder
+  PoliteErrorsMessagesBuilder,
+  type InfoLog
 } from "@yamato-daiwa/es-extensions";
 import getExpectedToBeSingleDOM_Element from "../../DOM/getExpectedToBeSingleDOM_Element";
 import EventPropagationTypes from "../EventPropagationTypes";
@@ -21,6 +23,8 @@ class DelegatedLeftClickEventListener {
   protected readonly eventPropagation: EventPropagationTypes | false;
   protected readonly mustBeCalledOnce: boolean;
   protected readonly mustPreventDefaultBehaviour: boolean;
+
+  protected readonly loggingOnClick?: InfoLog;
 
 
   /* [ Approach ]
@@ -102,8 +106,7 @@ class DelegatedLeftClickEventListener {
 
       delegatingContainer = getExpectedToBeSingleDOM_Element({
         selector: initializationProperties.delegatingContainer.selector,
-        contextElement,
-        expectedDOM_ElementSubtype: HTMLButtonElement
+        contextElement
       });
 
     }
@@ -116,6 +119,8 @@ class DelegatedLeftClickEventListener {
     this.eventPropagation = eventPropagation;
     this.mustBeCalledOnce = mustBeCalledOnce;
     this.mustPreventDefaultBehaviour = mustPreventDefaultBehaviour;
+
+    this.loggingOnClick = initializationProperties.loggingOnClick;
 
     delegatingContainer.addEventListener(
       "click",
@@ -198,6 +203,11 @@ class DelegatedLeftClickEventListener {
     }
 
 
+    if (isNotUndefined(this.loggingOnClick)) {
+      Logger.logInfo(this.loggingOnClick);
+    }
+
+
     for (
       let parentElement: Element | null = leftClickEvent.target;
       isNotNull(parentElement) && parentElement !== leftClickEvent.currentTarget;
@@ -228,6 +238,7 @@ namespace DelegatedLeftClickEventListener {
     eventPropagation?: EventPropagationTypes | false;
     mustBeCalledOnce?: boolean;
     mustPreventDefaultBehaviour?: boolean;
+    loggingOnClick?: InfoLog;
   }>;
 
   export type HandlersBySelectors = {

@@ -1,181 +1,270 @@
-import { moveArrayElementTo1Position, InvalidParameterValueError } from "../../../../Source";
+import { moveArrayElementTo1Position, InvalidParameterValueError, Logger } from "../../../../Source";
 import Assert from "assert";
+import { test, suite } from "node:test";
 
 
-describe("moveArrayElementTo1Position", (): void => {
+function getInitialSampleArray(): Array<number> {
+  return [ 1, 2, 3, 4, 5 ];
+}
 
-  function getInitialSampleArray(): Array<number> {
-    return [ 1, 2, 3, 4, 5 ];
-  }
 
-  describe("Move to the left", (): void => {
+await Promise.all([
 
-    describe("Mutable moving", (): void => {
+  suite(
+    "Moving to Left",
+    async (): Promise<void> => {
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+      await Promise.all([
 
-      moveArrayElementTo1Position({
-        mutably: true,
-        targetArray: experimentalSample,
-        targetElementNumber__numerationFrom1: 3,
-        toLeft: true,
-        errorMustBeThrownIf: { elementsCountIsLessThan2: true, targetElementNumberIsOutOfRange: true }
-      });
+        suite(
+          "Mutable Moving",
+          async (): Promise<void> => {
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(experimentalSample, [ 1, 3, 2, 4, 5 ]);
-      });
+            const experimentalSample: Array<number> = getInitialSampleArray();
 
-      it("Initial array has mutated", (): void => {
-        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+            moveArrayElementTo1Position({
+              mutably: true,
+              targetArray: experimentalSample,
+              targetElementNumber__numerationFrom1: 3,
+              toLeft: true,
+              errorMustBeThrownIf: { elementsCountIsLessThan2: true, targetElementNumberIsOutOfRange: true }
+            });
 
-    });
+            await Promise.all([
 
-    describe("Immutable moving", (): void => {
+              test(
+                "Updated Array is Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, [ 1, 3, 2, 4, 5 ]);
+                }
+              ),
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+              test(
+                "Initial Array has mutated",
+                (): void => {
+                  Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
+                }
+              )
 
-      const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
-        mutably: false,
-        targetArray: experimentalSample,
-        targetElementNumber__numerationFrom1: 3,
-        toLeft: true,
-        errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
-      });
+            ]);
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ 1, 3, 2, 4, 5 ]);
-      });
+          }
+        ),
 
-      it("Initial array has not mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+        suite(
+          "Immutable Moving",
+          async (): Promise<void> => {
 
-    });
+            const experimentalSample: Array<number> = getInitialSampleArray();
 
-  });
+            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
+              mutably: false,
+              targetArray: experimentalSample,
+              targetElementNumber__numerationFrom1: 3,
+              toLeft: true,
+              errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
+            });
 
-  describe("Move to the right", (): void => {
+            await Promise.all([
 
-    describe("Mutable moving", (): void => {
+              test(
+                "Updated Array is Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ 1, 3, 2, 4, 5 ]);
+                }
+              ),
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+              test(
+                "Initial Array has not Mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
+                }
+              )
 
-      moveArrayElementTo1Position({
-        mutably: true,
-        targetArray: experimentalSample,
-        targetElementNumber__numerationFrom1: 3,
-        toLeft: false,
-        errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
-      });
+            ]);
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(experimentalSample, [ 1, 2, 4, 3, 5 ]);
-      });
+          }
+        )
 
-      it("Initial array has mutated", (): void => {
-        Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+      ]);
 
-    });
+    }
+  ),
 
-    describe("Immutable moving", (): void => {
+  suite(
+    "Moving to Right",
+    async (): Promise<void> => {
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+      await Promise.all([
 
-      const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
-        mutably: false,
-        targetArray: experimentalSample,
-        targetElementNumber__numerationFrom1: 3,
-        toLeft: false,
-        errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
-      });
+        suite(
+          "Mutable Moving",
+          async (): Promise<void> => {
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ 1, 2, 4, 3, 5 ]);
-      });
+            const experimentalSample: Array<number> = getInitialSampleArray();
 
-      it("Initial array has not mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
-      });
+            moveArrayElementTo1Position({
+              mutably: true,
+              targetArray: experimentalSample,
+              targetElementNumber__numerationFrom1: 3,
+              toLeft: false,
+              errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
+            });
 
-    });
+            await Promise.all([
 
-  });
+              test(
+                "Updated Array is Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, [ 1, 2, 4, 3, 5 ]);
+                }
+              ),
 
-  describe("Error scenarios", (): void => {
+              test(
+                "Initial Array has mutated",
+                (): void => {
+                  Assert.notDeepStrictEqual(experimentalSample, getInitialSampleArray());
+                }
+              )
 
-    it("Throws error when array has less than 2 elements", (): void => {
+            ]);
 
-      const experimentalSample: Array<number> = [ 1 ];
+          }
+        ),
 
-      Assert.throws(
-        (): void => {
-          moveArrayElementTo1Position({
-            mutably: true,
-            targetArray: experimentalSample,
-            targetElementNumber__numerationFrom1: 1,
-            toLeft: true,
-            errorMustBeThrownIf: { elementsCountIsLessThan2: true, targetElementNumberIsOutOfRange: true }
-          });
-        },
-        InvalidParameterValueError
-      );
+        suite(
+          "Immutable Moving",
+          async (): Promise<void> => {
 
-    });
+            const experimentalSample: Array<number> = getInitialSampleArray();
 
-    it("Does not throw error when array has less than 2 elements (errorMustBeThrownIf is false)", (): void => {
+            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
+              mutably: false,
+              targetArray: experimentalSample,
+              targetElementNumber__numerationFrom1: 3,
+              toLeft: false,
+              errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
+            });
 
-      const experimentalSample: Array<number> = [ 1 ];
+            await Promise.all([
 
-      Assert.doesNotThrow((): void => {
-        moveArrayElementTo1Position({
-          mutably: true,
-          targetArray: experimentalSample,
-          targetElementNumber__numerationFrom1: 1,
-          toLeft: true,
-          errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: true }
-        });
-      });
+              test(
+                "Updated Array is Matching with Expected One",
+                (): void => {
+                  Assert.deepStrictEqual(updatedCopyOfExperimentalSample, [ 1, 2, 4, 3, 5 ]);
+                }
+              ),
 
-    });
+              test(
+                "Initial Array has not Mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getInitialSampleArray());
+                }
+              )
 
-    it("Throws error when target element number is out of range", (): void => {
+            ]);
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+          }
+        )
 
-      Assert.throws(
-        (): void => {
-          moveArrayElementTo1Position({
-            mutably: true,
-            targetArray: experimentalSample,
-            targetElementNumber__numerationFrom1: experimentalSample.length + 2,
-            toLeft: true,
-            errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: true }
-          });
-        },
-        InvalidParameterValueError
-      );
+      ]);
 
-    });
+    }
+  ),
 
-    it("Does not throw error when target element number is out of range (errorMustBeThrownIf is false)", (): void => {
+  suite(
+    "Error Scenarios",
+    async (): Promise<void> => {
 
-      const experimentalSample: Array<number> = getInitialSampleArray();
+      await Promise.all([
 
-      Assert.doesNotThrow((): void => {
-        moveArrayElementTo1Position({
-          mutably: true,
-          targetArray: experimentalSample,
-          targetElementNumber__numerationFrom1: experimentalSample.length + 2,
-          toLeft: true,
-          errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
-        });
-      });
+        test(
+          "Throws Error when Array has Less than 2 Elements and \"errorMustBeThrownIf\" is true",
+          (): void => {
 
-    });
+            const experimentalSample: Array<number> = [ 1 ];
 
-  });
+            Assert.throws(
+              (): void => {
+                moveArrayElementTo1Position({
+                  mutably: true,
+                  targetArray: experimentalSample,
+                  targetElementNumber__numerationFrom1: 1,
+                  toLeft: true,
+                  errorMustBeThrownIf: { elementsCountIsLessThan2: true, targetElementNumberIsOutOfRange: true }
+                });
+              },
+              InvalidParameterValueError
+            );
 
-});
+          }
+        ),
+
+        test(
+          "Does not Throw Error when Array has Less than 2 Elements and \"errorMustBeThrownIf\" is false",
+          (): void => {
+
+            const experimentalSample: Array<number> = [ 1 ];
+
+            Assert.doesNotThrow((): void => {
+              moveArrayElementTo1Position({
+                mutably: true,
+                targetArray: experimentalSample,
+                targetElementNumber__numerationFrom1: 1,
+                toLeft: true,
+                errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: true }
+              });
+            });
+
+          }
+        ),
+
+        test(
+          "Throws Error when Target Element Number is Out of Range and \"targetElementNumberIsOutOfRange\" is true",
+          (): void => {
+
+            const experimentalSample: Array<number> = getInitialSampleArray();
+
+            Assert.throws(
+              (): void => {
+                moveArrayElementTo1Position({
+                  mutably: true,
+                  targetArray: experimentalSample,
+                  targetElementNumber__numerationFrom1: experimentalSample.length + 2,
+                  toLeft: true,
+                  errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: true }
+                });
+              },
+              InvalidParameterValueError
+            );
+
+          }
+        ),
+
+        test(
+          "Does not Throw Error when Target Element Number is Out of Range \"targetElementNumberIsOutOfRange\" is false",
+          (): void => {
+
+            const experimentalSample: Array<number> = getInitialSampleArray();
+
+            Assert.doesNotThrow(
+              (): void => {
+                moveArrayElementTo1Position({
+                  mutably: true,
+                  targetArray: experimentalSample,
+                  targetElementNumber__numerationFrom1: experimentalSample.length + 2,
+                  toLeft: true,
+                  errorMustBeThrownIf: { elementsCountIsLessThan2: false, targetElementNumberIsOutOfRange: false }
+                });
+              }
+            );
+
+          }
+        )
+
+      ]);
+
+    }
+  )
+
+]).catch(Logger.logPromiseError);

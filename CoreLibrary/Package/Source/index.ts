@@ -211,8 +211,12 @@ export { default as unsupportedScenarioErrorLocalization__english } from
     "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
 
 
-/* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
+
+
+/* ━━━ IDs Generators ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+export { default as StringTypeID_Generator } from "./IDsGenerators/StringTypeID_Generator";
 
 
 /* ━━━ Linear Algebra ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -314,6 +318,8 @@ export { default as convertPotentialStringToIntegerIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToIntegerIfPossible";
 export { default as convertPotentialStringToFloatIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";
+export { default as destringifyBooleanValueIfPossible } from
+    "./RawObjectDataProcessor/Helpers/destringifyBooleanValueIfPossible";
 
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -474,9 +480,12 @@ export type { PartialBy } from "./Types/PartialBy";
 
 /* ━━━ Value transformers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
+export { default as emptyStringToTrue } from "./ValueTransformers/emptyStringToTrue";
+export { default as emptyStringToUndefined } from "./ValueTransformers/emptyStringToUndefined";
 export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
 export { default as nullToUndefined } from "./ValueTransformers/nullToUndefined";
 export { default as nullToZero } from "./ValueTransformers/nullToZero";
 export { default as undefinedToEmptyArray } from "./ValueTransformers/undefinedToEmptyArray";
 export { default as undefinedToEmptyString } from "./ValueTransformers/undefinedToEmptyString";
+export { default as undefinedToFalse } from "./ValueTransformers/undefinedToFalse";
 export { default as undefinedToNull } from "./ValueTransformers/undefinedToNull";

@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-japanese",
-  "version": "1.8.0-alpha.3",
+  "version": "1.8.0-alpha.15",
   "description": "Japanese localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -27,11 +27,11 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": ">=1.8.0-alpha.9"
+    "@yamato-daiwa/es-extensions": "1.8.0-alpha.15"
   },
   "devDependencies": {
     "@types/node": "22.7.4",
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.9",
+    "@yamato-daiwa/es-extensions": "1.8.0-alpha.15",
     "@yamato-daiwa/style_guides": "0.3.0-alpha.12",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
