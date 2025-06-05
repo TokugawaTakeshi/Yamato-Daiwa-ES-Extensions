@@ -147,6 +147,10 @@ class DateWithoutTime {
     });
   }
 
+  public toNativeDateObject(): Date {
+    return new Date(this.nativeDateObject);
+  }
+
   public update(
     sourceDataAndOptions:
         DateWithoutTime.DateDefinition &
@@ -172,6 +176,10 @@ class DateWithoutTime {
 
   /* ━━━ Protected Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* ─── Mutating ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  protected get nativeDateObject(): Date {
+    return this._nativeDateObject;
+  }
+
   protected set nativeDateObject(newValue: Date) {
 
     this._nativeDateObject = newValue;

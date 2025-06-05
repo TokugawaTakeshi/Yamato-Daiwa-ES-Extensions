@@ -1,0 +1,193 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("cropArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "cropArray",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfSubarrays.cropArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfSubarrays.$children.cropArray;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "cropArray",
+      headingTag: "h1",
+      genericParameters: [ "ArrayElement" ],
+      localizedDescriptiveHeading: "Обрезать массив",
+      parametersSpecification: [
+        {
+          localizedName: "Входные данные",
+          genericTechnicalName: "sourceData",
+          type: "SourceData",
+          required: true
+        }
+      ],
+      returnedValue: "Array<ArrayElement>"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceData",
+        propertiesSpecification: {
+          $intersection: [
+            [
+              {
+                mutably: {
+                  localizedInterpretation: "Мутабельно",
+                  type: "boolean (только true)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "Целевой массив",
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              },
+              {
+                mutably: {
+                  localizedInterpretation: "Мутабельно",
+                  type: "boolean (только false)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "Целевой массив",
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                startingElementNumber__numerationFrom0: {
+                  localizedInterpretation: "Номер первого элемента (счёт с 0)",
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
+                }
+              },
+              {
+                startingElementNumber__numerationFrom1: {
+                  localizedInterpretation: "Номер первого элемента (счёт с 1)",
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
+                }
+              },
+              {
+                fromStart: {
+                  localizedInterpretation: "Обрезать ли с первого элемента",
+                  type: "boolean (только only)",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                endingElementNumber__numerationFrom0: {
+                  localizedInterpretation: "Номер последнего элемента (счёт с 0)",
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
+                }
+              },
+              {
+                endingElementNumber__numerationFrom1: {
+                  localizedInterpretation: "Номер последнего элемента (счёт с 1)",
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
+                }
+              },
+              {
+                untilEnd: {
+                  localizedInterpretation: "Обрезать ли до последнего элемента",
+                  type: "boolean (true only)",
+                  required: true
+                }
+              },
+              {
+                elementsCount: {
+                  type: "Количество элементов подмассива",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: {
+                  localizedInterpretation:
+                      "Надо ли бросать ошибку если указанные номера элементов не соответствуют размера массива",
+                  type: "boolean",
+                  required: true
+                }
+              }
+            ]
+          ]
+        }
+      })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/03-RetrievingOfSubarrays/cropArray.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/03-RetrievingOfSubarrays/cropArray.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

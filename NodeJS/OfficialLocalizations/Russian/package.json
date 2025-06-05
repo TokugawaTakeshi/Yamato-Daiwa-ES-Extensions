@@ -43,7 +43,7 @@
   "scripts": {
     "Lint": "eslint Source",
     "Rebuild Distributable Without Preliminary Cleaning": "tsc",
-    "Rebuild Distributable": "rimraf Distributable & tsc",
+    "Rebuild Distributable": "rimraf Distributable && tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   }

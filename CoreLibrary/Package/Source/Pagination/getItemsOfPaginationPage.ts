@@ -1,6 +1,6 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import cropArray from "../Arrays/cropArray";
+import cropArray from "../Arrays/03-RetrievingOfSubarrays/cropArray";
 import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 

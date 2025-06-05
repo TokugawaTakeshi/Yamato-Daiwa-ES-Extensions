@@ -1,0 +1,110 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("createArrayOfNaturalNumbers"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "createArrayOfNaturalNumbers",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.creating.createArrayOfNaturalNumbers");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.
+          createArrayOfNaturalNumbers.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.
+          createArrayOfNaturalNumbers.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.creating.$children.createArrayOfNaturalNumbers;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "createArrayOfNaturalNumbers",
+      headingTag: "h1",
+      parametersSpecification: [
+        {
+          genericTechnicalName: "options",
+          type: "Options",
+          required: true
+        }
+      ],
+      returnedValue: "boolean"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        propertiesSpecification: {
+          elementsCount: {
+            type: Number,
+            numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+            required: true
+          },
+          startingNumber: {
+            type: Number,
+            numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber,
+            required: false
+          },
+          isDescendingOrder: {
+            type: Boolean,
+            defaultValue: false
+          }
+        }
+      })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/00-Creating/createArrayOfNaturalNumbers.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/00-Creating/createArrayOfNaturalNumbers.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

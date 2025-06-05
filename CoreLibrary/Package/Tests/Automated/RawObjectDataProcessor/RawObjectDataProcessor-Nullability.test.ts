@@ -64,7 +64,7 @@ Promise.all(
                                 generateConstantValidDataSample(), validDataSpecification, { processingApproach }
                               );
 
-                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                           let processedData: ValidData | undefined;
                           let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
@@ -111,8 +111,8 @@ Promise.all(
                                 { alpha: null }, validDataSpecification, { processingApproach }
                               );
 
-                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                          const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
+                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.isRawDataInvalid ?
                               processingResult.validationErrorsMessages : [];
 
                           await Promise.all([
@@ -200,7 +200,7 @@ Promise.all(
                               generateConstantValidDataSample(), validDataSpecification, { processingApproach }
                             );
 
-                        const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                        const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                         let processedData: ValidData | undefined;
                         let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
@@ -249,8 +249,8 @@ Promise.all(
                               { processingApproach }
                             );
 
-                        const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                        const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                        const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
+                        const validationErrorsMessages: ReadonlyArray<string> = processingResult.isRawDataInvalid ?
                             processingResult.validationErrorsMessages : [];
 
                         await Promise.all([
@@ -279,7 +279,7 @@ Promise.all(
                                       conditionallyForbiddenNullValue.title,
                                   description: RawObjectDataProcessor.defaultLocalization.validationErrors.
                                       conditionallyForbiddenNullValue.generateDescription({
-                                        verbalConditionWhenNullIsForbidden: requirementConditionDescription
+                                        verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark: requirementConditionDescription
                                       }),
                                   targetPropertyDotSeparatedQualifiedInitialName: TARGET_PROPERTY_NAME,
                                   targetPropertyNewName: null,
@@ -327,7 +327,7 @@ Promise.all(
                     const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
                         process(inputData, validDataSpecification, { processingApproach });
 
-                    const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                    const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                     let processedData: ValidData | undefined;
 
                     if ("processedData" in processingResult) {
@@ -412,7 +412,7 @@ Promise.all(
                           { processingApproach }
                         );
 
-                    const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                    const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                     let processedData: ValidProcessedData | undefined;
 
                     if ("processedData" in processingResult) {
@@ -519,7 +519,7 @@ Promise.all(
                                 generateConstantValidDataSample(), validDataSpecification, { processingApproach }
                               );
 
-                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                          const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                           let processedData: ValidData | undefined;
                           let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
@@ -573,8 +573,8 @@ Promise.all(
                                 { processingApproach }
                               );
 
-                          const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                          const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
+                          const validationErrorsMessages: ReadonlyArray<string> = processingResult.isRawDataInvalid ?
                               processingResult.validationErrorsMessages : [];
 
                           await Promise.all([

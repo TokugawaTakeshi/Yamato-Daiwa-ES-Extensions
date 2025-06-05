@@ -98,7 +98,7 @@ const dataSample1ProcessingResult: RawObjectDataProcessor.ProcessingResult<Valid
 Check is processed data valid, and if no log all errors:
 
 ```typescript
-if (dataSample1ProcessingResult.rawDataIsInvalid) {
+if (dataSample1ProcessingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
@@ -115,10 +115,10 @@ if (dataSample1ProcessingResult.rawDataIsInvalid) {
 ```
 
 To access the processed data (`dataSample1ProcessingResult.processedData`) and use it, you need to make sure is
-`dataSample1ProcessingResult.rawDataIsInvalid` property falsy first:
+`dataSample1ProcessingResult.isRawDataInvalid` property falsy first:
 
 ```typescript
-if (dataSample1ProcessingResult.rawDataIsInvalid) {
+if (dataSample1ProcessingResult.isRawDataInvalid) {
   // throw error or create the message and exit from current function/method 
 }
 
@@ -369,7 +369,7 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
   }
 });
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
@@ -525,7 +525,7 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = Raw
     } 
   });
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   // ...
   return;
 }
@@ -574,7 +574,7 @@ const dataProcessingResult: RawObjectDataProcessor.ProcessingResult<Sample> = Ra
     );
 
 /* Step 3 */
-if (dataProcessingResult.rawDataIsInvalid) {
+if (dataProcessingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
@@ -1305,9 +1305,9 @@ process<ProcessedData extends ReadonlyParsedJSON, InterimValidData extends Reado
     * **localization** the object of **RawObjectDataProcessor.Localization** type containing the function generating
       the validation error messages.
 * **Returned value** is the object containing the processing result. The property **processedData** is available is
-  and only if property **rawDataIsInvalid** is truthy, same as **validationErrorsMessages** is available if and only if
-  property **rawDataIsInvalid** is falsy. So, you need to check **rawDataIsInvalid** before access to **processedData**
-  or **rawDataIsInvalid**.
+  and only if property **isRawDataInvalid** is truthy, same as **validationErrorsMessages** is available if and only if
+  property **isRawDataInvalid** is falsy. So, you need to check **isRawDataInvalid** before access to **processedData**
+  or **isRawDataInvalid**.
 
 The section [getting-started](#getting-started) contains the example with most of above properties.
 
@@ -1323,7 +1323,7 @@ formatValidationErrorsList(
 Formatting the validation errors messages which **RawObjectDataProcessor.ProcessingResult** contains when raw data is invalid.
 
 ```typescript
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.DEFAULT_TITLE,
@@ -1479,7 +1479,7 @@ Even with first generic parameter of **process** method - the shape of valid and
 
 #### Properties
 
-* **rawDataIsInvalid** - boolean property reflects the result of validation of the raw data.
-* **processedData** - the validated and processed data. Presents (non-undefined) if and only if **rawDataIsInvalid** is **true**.
+* **isRawDataInvalid** - boolean property reflects the result of validation of the raw data.
+* **processedData** - the validated and processed data. Presents (non-undefined) if and only if **isRawDataInvalid** is **true**.
 * **validationErrorsMessages** - the array of validation errors messages. Presents (non-undefined) if and only if
-  **rawDataIsInvalid** is **false**.
+  **isRawDataInvalid** is **false**.

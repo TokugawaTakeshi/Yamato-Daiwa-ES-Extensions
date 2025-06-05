@@ -43,7 +43,7 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
     }
   );
 
-  if (datasetProcessingResult.rawDataIsInvalid) {
+  if (datasetProcessingResult.isRawDataInvalid) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidExternalDataError({
         mentionToExpectedData: targetDOM_ElementNameOrSelectorForLogging,

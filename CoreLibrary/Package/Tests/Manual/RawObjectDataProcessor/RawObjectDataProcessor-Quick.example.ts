@@ -80,7 +80,7 @@ function onDataRetrieved(externalData: unknown): void {
   const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
       process(externalData, validDataSpecification);
 
-  if (externalDataProcessingResult.rawDataIsInvalid) {
+  if (externalDataProcessingResult.isRawDataInvalid) {
 
     throw new InvalidExternalDataError({
       mentionToExpectedData: "N External Data",
@@ -118,7 +118,7 @@ onDataRetrieved({
 //
 //
 
-// if (dataSample1ProcessingResult.rawDataIsInvalid) {
+// if (dataSample1ProcessingResult.isRawDataInvalid) {
 //   Logger.logError({
 //     errorType: InvalidExternalDataError.NAME,
 //     title: InvalidExternalDataError.localization.defaultTitle,
@@ -137,7 +137,7 @@ onDataRetrieved({
 // const dataSample2ProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
 //     process(dataSample2, validDataSpecification);
 //
-// if (dataSample2ProcessingResult.rawDataIsInvalid) {
+// if (dataSample2ProcessingResult.isRawDataInvalid) {
 //   Logger.logError({
 //     errorType: InvalidExternalDataError.NAME,
 //     title: InvalidExternalDataError.localization.defaultTitle,

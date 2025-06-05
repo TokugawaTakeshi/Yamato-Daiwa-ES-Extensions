@@ -35,7 +35,7 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
 });
 
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.localization.defaultTitle,

@@ -6,6 +6,7 @@ export default function isNaturalNumberOrZero(potentialInteger: number): boolean
 export default function isNaturalNumberOrZero(potentialInteger: unknown): potentialInteger is number;
 
 
+/** @alias isPositiveIntegerOrZero */
 export default function isNaturalNumberOrZero(potentialInteger: unknown): potentialInteger is number {
 
   if (typeof potentialInteger !== "number") {

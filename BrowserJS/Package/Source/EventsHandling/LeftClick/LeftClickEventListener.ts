@@ -32,14 +32,13 @@ class LeftClickEventListener {
 
 
   public constructor(
-    initializationProperties: LeftClickEventListener.InitializationProperties
-  ) {
-
-    const {
+    {
       eventPropagation = EventPropagationTypes.bubbling,
       mustBeCalledOnce = false,
-      mustKeepDefaultBehaviour = false
-    }: LeftClickEventListener.InitializationProperties = initializationProperties;
+      mustKeepDefaultBehaviour = false,
+      ...initializationProperties
+    }: LeftClickEventListener.InitializationProperties
+  ) {
 
     let targetElements: ReadonlyArray<Element>;
 

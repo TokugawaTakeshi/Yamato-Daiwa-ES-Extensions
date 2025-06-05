@@ -30,11 +30,11 @@ export default class IndentationCoordinator {
     return this.insertIndent();
   }
 
-  public insertIncrementedIndentWihtoutUpdatingOfIndentationMultiplier(): string {
+  public insertIncrementedIndentWithoutUpdatingOfIndentationMultiplier(): string {
     return IndentationCoordinator.DOUBLE_SPACE.repeat(this.currentIndentationMultiplier + 1);
   }
 
-  public addCurrentIntendationToEachLineOf(targetString: string): string {
+  public addCurrentIndentationToEachLineOf(targetString: string): string {
     return splitString(targetString, "\n").
         map((line: string): string => `${ this.insertIndent() }${ line }`).
         join("\n");

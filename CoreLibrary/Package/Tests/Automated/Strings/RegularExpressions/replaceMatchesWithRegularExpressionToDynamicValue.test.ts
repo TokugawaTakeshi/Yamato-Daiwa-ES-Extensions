@@ -10,7 +10,7 @@ describe("replaceMatchesWithRegularExpressionToDynamicValue", (): void => {
   const sample: string =
       "Meta description is [very important](https://www.orange-sha.co.jp/blog/web01_description/) for SEO.";
 
-  it("Works as indented", (): void => {
+  it("Works as intended", (): void => {
     Assert.strictEqual(
       replaceMatchesWithRegularExpressionToDynamicValue<
         Readonly<{ URI: string; anchorText: string; }>,

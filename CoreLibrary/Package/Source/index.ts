@@ -13,36 +13,53 @@ export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryP
 
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* ─── Adding of Elements ─────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as addElementsToArray } from "./Arrays/AddingOfElements/addElementsToArray";
+/* [ Maintainability ] The categories logic arranging must match with the documentation. */
 
 /* ─── Creating ───────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as createArrayOfNaturalNumbers } from "./Arrays/Creating/createArrayOfNaturalNumbers";
+export { default as createArrayOfNaturalNumbers } from "./Arrays/00-Creating/createArrayOfNaturalNumbers";
 
 /* ─── Retrieving of Elements ─────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+    "./Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+export { default as getLastElementOfArray } from "./Arrays/01-RetrievingOfElements/getLastElementOfArray";
 
-/* ─── Not Classified Yet ─────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
-    "./Arrays/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
-export { default as cropArray } from "./Arrays/cropArray";
+/* ─── Retrieving of Indexes ──────────────────────────────────────────────────────────────────────────────────────── */
 export { default as getIndexesOfSatisfiesThePredicateArrayElements } from
-    "./Arrays/getIndexesOfSatisfiesThePredicateArrayElements";
+    "./Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements";
 export { default as getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from
-    "./Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
-export { default as getLastElementOfArray } from "./Arrays/getLastElementOfArray";
-export { default as moveArrayElementTo1Position } from "./Arrays/moveArrayElementTo1Position";
-export { default as readonlyArrayToMutableOne } from "./Arrays/readonlyArrayToMutableOne";
+    "./Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+
+/* ─── Retrieving of Subarrays ────────────────────────────────────────────────────────────────────────────────────── */
+export { default as cropArray } from "./Arrays/03-RetrievingOfSubarrays/cropArray";
+
+/* ─── Adding of Elements ─────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addElementsToArray } from "./Arrays/04-AddingOfElements/addElementsToArray";
+
+/* ─── Replacing of Elements ──────────────────────────────────────────────────────────────────────────────────────── */
+export { default as replaceArrayElementsByIndexesImmutably } from
+    "./Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably";
+export {
+  default as replaceArrayElementsByPredicates,
+  type ReplacingArrayElementsByPredicatesOperation
+} from "./Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates";
+
+/* ─── Permutations of Elements ───────────────────────────────────────────────────────────────────────────────────── */
+export { default as moveArrayElementTo1Position } from "./Arrays/06-PermutationsOfElements/moveArrayElementTo1Position";
+export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
+
+/* ─── Removing of Elements ───────────────────────────────────────────────────────────────────────────────────────── */
 export { default as removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from
-    "./Arrays/removeArrayElementsByIndexes";
+    "./Arrays/07-RemovingOfElements/removeArrayElementsByIndexes";
 export { default as removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from
-    "./Arrays/removeArrayElementsByPredicates";
-export { default as replaceArrayElementsByIndexesImmutably } from "./Arrays/replaceArrayElementsByIndexesImmutably";
-export { default as replaceArrayElementsByPredicates, type ReplacingArrayElementsByPredicatesOperation } from
-    "./Arrays/replaceArrayElementsByPredicates";
-export { default as swapArrayElements } from "./Arrays/swapArrayElements";
-export { default as twoDimensionalizeArray } from "./Arrays/twoDimensionalizeArray";
+    "./Arrays/07-RemovingOfElements/removeArrayElementsByPredicates";
+
+/* ─── Restructuring ──────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as twoDimensionalizeArray } from "./Arrays/08-Restructuring/twoDimensionalizeArray";
+
+/* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addElementsToArrayIfTheyAreNotPresentOtherwiseRemove } from
+    "./Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove";
+export { default as readonlyArrayToMutableOne } from "./Arrays/09-Other/readonlyArrayToMutableOne";
 
 
 /* ━━━ Constants and enumerations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -194,8 +211,12 @@ export { default as unsupportedScenarioErrorLocalization__english } from
     "./Errors/UnsupportedScenario/UnsupportedScenarioErrorLocalization.english";
 
 
-/* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
+
+
+/* ━━━ IDs Generators ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+export { default as StringTypeID_Generator } from "./IDsGenerators/StringTypeID_Generator";
 
 
 /* ━━━ Linear Algebra ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -205,6 +226,10 @@ export { default as Matrix } from "./LinearAlgebra/Classes/Matrix";
 export type { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/ReadonlyColumnVector";
 export type { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
 export { default as RowVector } from "./LinearAlgebra/Classes/RowVector";
+
+/* ─── Operations ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as computeDotProduct } from "./LinearAlgebra/Operations/computeDotProduct";
+export { default as multiplyMatrices } from "./LinearAlgebra/Operations/multiplyMatrices";
 
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */
@@ -230,6 +255,8 @@ export { default as loggerLocalization__english } from "./Logging/LoggerLocaliza
 export { default as addEntriesToMap } from "./Maps/addEntriesToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
+export { default as getExpectedToBeNonUndefinedMapValue } from "./Maps/getExpectedToBeNonUndefinedMapValue";
+export { default as invertMapImmutably } from "./Maps/invertMapImmutably";
 export { removeEntriesFromMap, type RemovingEntriesFromMapOperation } from "./Maps/removeEntriesFromMap";
 export { default as replaceValuesInMap, type ReplaceOfValuesInMapOperation } from "./Maps/replaceValuesInMap";
 
@@ -291,6 +318,8 @@ export { default as convertPotentialStringToIntegerIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToIntegerIfPossible";
 export { default as convertPotentialStringToFloatIfPossible } from
     "./RawObjectDataProcessor/Helpers/convertPotentialStringToFloatIfPossible";
+export { default as destringifyBooleanValueIfPossible } from
+    "./RawObjectDataProcessor/Helpers/destringifyBooleanValueIfPossible";
 
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -351,6 +380,7 @@ export { default as replaceLastURI_PathSegment } from "./Strings/URI/replaceLast
 /* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
+export { default as ArbitraryValueFormatter } from "./Strings/ArbitraryValueFormatter";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as cropString } from "./Strings/cropString";
 export { default as EmailAddress } from "./Strings/EmailAddress";
@@ -399,6 +429,7 @@ export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
 
 /* ─── Numbers ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
+export { default as isIntegerOnAnySign } from "./TypeGuards/Numbers/isIntegerOnAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
 export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";
 export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
@@ -406,6 +437,7 @@ export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInt
 export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
 export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
 export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
+export { default as isPositiveIntegerOrZero } from "./TypeGuards/Numbers/isPositiveIntegerOrZero";
 
 /* ─── Objects ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
@@ -451,9 +483,12 @@ export type { PartialBy } from "./Types/PartialBy";
 
 /* ━━━ Value transformers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as emptyStringToNull } from "./ValueTransformers/emptyStringToNull";
+export { default as emptyStringToTrue } from "./ValueTransformers/emptyStringToTrue";
+export { default as emptyStringToUndefined } from "./ValueTransformers/emptyStringToUndefined";
 export { default as nullToEmptyString } from "./ValueTransformers/nullToEmptyString";
 export { default as nullToUndefined } from "./ValueTransformers/nullToUndefined";
 export { default as nullToZero } from "./ValueTransformers/nullToZero";
 export { default as undefinedToEmptyArray } from "./ValueTransformers/undefinedToEmptyArray";
 export { default as undefinedToEmptyString } from "./ValueTransformers/undefinedToEmptyString";
+export { default as undefinedToFalse } from "./ValueTransformers/undefinedToFalse";
 export { default as undefinedToNull } from "./ValueTransformers/undefinedToNull";

@@ -1,6 +1,6 @@
 import replaceDoubleBackslashesWithForwardSlashes from "../../replaceDoubleBackslashesWithForwardSlashes";
 import splitString from "../../splitString";
-import getLastElementOfArray from "../../../Arrays/getLastElementOfArray";
+import getLastElementOfArray from "../../../Arrays/01-RetrievingOfElements/getLastElementOfArray";
 import isNull from "../../../TypeGuards/Nullables/isNull";
 import Logger from "../../../Logging/Logger";
 import UnexpectedEventError from "../../../Errors/UnexpectedEvent/UnexpectedEventError";

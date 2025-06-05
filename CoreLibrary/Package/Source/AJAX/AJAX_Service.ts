@@ -319,7 +319,7 @@ abstract class AJAX_Service {
       const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
           RawObjectDataProcessor.process(rawObjectDataResponse.data, validResponseDataSpecification);
 
-      if (responseRawDataProcessingResult.rawDataIsInvalid) {
+      if (responseRawDataProcessingResult.isRawDataInvalid) {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidExternalDataError({
             mentionToExpectedData: "HTTP_ResponseData",

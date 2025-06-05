@@ -67,7 +67,7 @@ Promise.all(
                   { processingApproach }
                 );
 
-                const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                 let processedData: ValidData | undefined;
                 let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
@@ -158,7 +158,7 @@ Promise.all(
                         { processingApproach }
                       );
 
-                      const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+                      const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
                       let processedData: ValidData | undefined;
                       let validationErrorsMessages: ReadonlyArray<string> | undefined;
 
@@ -216,8 +216,8 @@ Promise.all(
                         { processingApproach }
                       );
 
-                      const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
-                      const validationErrorsMessages: ReadonlyArray<string> = processingResult.rawDataIsInvalid ?
+                      const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
+                      const validationErrorsMessages: ReadonlyArray<string> = processingResult.isRawDataInvalid ?
                           processingResult.validationErrorsMessages : [];
 
                       await Promise.all([

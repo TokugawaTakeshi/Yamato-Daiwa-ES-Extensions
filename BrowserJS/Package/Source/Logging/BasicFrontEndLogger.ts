@@ -119,7 +119,7 @@ abstract class BasicFrontEndLogger {
       ...BasicFrontEndLogger.formatGenericLog({
         genericLog: polymorphicPayload,
         badgeContentAndFormatting: {
-          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.info,
           foregroundColor: "white",
           backgroundColor: "dodgerblue"
         },

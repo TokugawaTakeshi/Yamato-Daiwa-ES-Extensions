@@ -54,7 +54,7 @@ Promise.all(
                     generateConstantValidDataSample(), validDataSpecification, { processingApproach }
                   );
 
-              const isRawDataInvalid: boolean = processingResult.rawDataIsInvalid;
+              const isRawDataInvalid: boolean = processingResult.isRawDataInvalid;
               let processedData: ValidData | undefined;
               let validationErrorsMessages: ReadonlyArray<string> | undefined;
 

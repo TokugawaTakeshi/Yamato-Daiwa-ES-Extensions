@@ -37,7 +37,7 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
 const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
     RawObjectDataProcessor.process(sample, validDataSpecification);
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.localization.defaultTitle,

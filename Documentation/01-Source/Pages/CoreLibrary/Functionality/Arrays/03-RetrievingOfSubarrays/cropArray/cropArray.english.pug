@@ -1,0 +1,179 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("cropArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "cropArray",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfSubarrays.cropArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.retrievingOfSubarrays.$children.cropArray;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "cropArray",
+      headingTag: "h1",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          genericTechnicalName: "sourceData",
+          type: "SourceData",
+          required: true
+        }
+      ],
+      returnedValue: "Array<ArrayElement>",
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceData",
+        propertiesSpecification: {
+          $intersection: [
+            [
+              {
+                mutably: {
+                  type: "boolean (true only)",
+                  required: true
+                },
+                targetArray: {
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              },
+              {
+                mutably: {
+                  type: "boolean (false only)",
+                  required: true
+                },
+                targetArray: {
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                startingElementNumber__numerationFrom0: {
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
+                }
+              },
+              {
+                startingElementNumber__numerationFrom1: {
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
+                }
+              },
+              {
+                fromStart: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                endingElementNumber__numerationFrom0: {
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
+                }
+              },
+              {
+                endingElementNumber__numerationFrom1: {
+                  type: Number,
+                  required: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
+                }
+              },
+              {
+                untilEnd: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              },
+              {
+                elementsCount: {
+                  type: "boolean (true only)",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: {
+                  type: "boolean",
+                  required: true
+                }
+              }
+            ]
+          ]
+        }
+      })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/03-RetrievingOfSubarrays/cropArray.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/03-RetrievingOfSubarrays/cropArray.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

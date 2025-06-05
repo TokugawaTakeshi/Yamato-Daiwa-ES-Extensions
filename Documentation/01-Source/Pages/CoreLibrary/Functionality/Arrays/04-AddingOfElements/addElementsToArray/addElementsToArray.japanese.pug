@@ -1,0 +1,1008 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.japanese.pug
+  include ../../../../../../SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("addElementsToArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "addElementsToArray",
+          whatFunctionDoes:
+              "目標の配列の最初の位置、最後の位置、もしくは引数で指定された位置に、新規要素を追加する。" +
+              "初期の配列を変更するか、新しい配列を作る事も指定可能（但し、ディープコピーは不可能）。"
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.addingOfElements.addElementsToArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          addingOfElements.$children.addElementsToArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          addingOfElements.$children.addElementsToArray.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.addingOfElements.$children.addElementsToArray;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "addElementsToArray",
+      localizedDescriptiveHeading: "配列に要素を追加する",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          genericTechnicalName: "sourceData",
+          localizedName: "入力データ",
+          type: "SourceData",
+          required: true
+        }
+      ],
+      returnedValue: "Array<ArrayElement>",
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceData",
+        localizedDescriptiveHeading: "入力データ",
+        propertiesSpecification: {
+          $intersection: [
+            {
+              newElements: {
+                localizedInterpretation: "新規要素",
+                type: "Array<ArrayElement>",
+                required: true
+              }
+            },
+            [
+              {
+                mutably: {
+                  localizedInterpretation: "変更の有無",
+                  type: "boolean (trueのみ)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "目標の配列",
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              },
+              {
+                mutably: {
+                  localizedInterpretation: "変更の有無",
+                  type: "boolean (falseのみ)",
+                  required: true
+                },
+                targetArray: {
+                  localizedInterpretation: "目標の配列",
+                  type: "Array<ArrayElement>",
+                  required: true
+                }
+              }
+            ],
+            [
+              {
+                toStart: {
+                  localizedInterpretation: "最初の位置へ",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              },
+              {
+                toEnd: {
+                  localizedInterpretation: "最後の位置へ",
+                  type: "boolean (trueのみ)",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom0: {
+                  localizedInterpretation: "特定の位置へ（０からの計算）",
+                  type: "number（非負整数）",
+                  required: true
+                }
+              },
+              {
+                toPosition__numerationFrom1: {
+                  localizedInterpretation: "特定の位置へ（１からの計算）",
+                  type: "number（自然数）",
+                  required: true
+                }
+              }
+            ]
+          ]
+        }
+      })
+
+    p.Article-Paragraph.
+      #[+Term--YDID 指数配列]の最初の位置、最後の位置、又は番号で指定された位置の何れかに、#[+Keyword--YDID 新規]要素を追加する。
+      専用の#[+Term--YDID オプション]に依って、元の#[+Term--YDID 配列]の変化（変更を伴う追加）、元の#[+Term--YDID 配列]から新規
+        #[+Term--YDID 配列]の作成（変更を伴わない追加）、其の#[+Keyword--YDID 何れか]が可能である。
+      但し、#[+Term--YDID 変更]を#[+Keyword--YDID 伴わない]変化の場合、#[+Term--YDID 配列]のコンテナーが置き換えられるが、
+        #[+Term--YDID ディープコピー]（#[+Term__Contrast--YDID オブジェクト系の型]の#[+Term__Contrast--YDID 要素]の、
+        #[+Keyword--YDID 完全に]独立したコピー）は作成#[+Keyword--YDID されず]、そもそも#[+Keyword--YDID 何れの]場合でも作成可能な
+        訳では#[+Keyword--YDID ない]。
+
+
+    //- ━━━ 例 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.examples.$heading,
+      HTML_ID: localizedSectioning.examples.$anchor
+    }).Article-Heading2
+
+    +AdmonitionBlock--YDF({ decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance, SVG_Icon: true }).
+      当ページの一部分のみを選択して読んでいる方が多いので、下記には重要な部分が繰り返されている。
+
+
+    //- ─── 配列の最初の位置に、単一の要素を追加 ──────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+
+    mixin AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment(properties)
+
+      -
+
+        const {
+          newElementsCount,
+          toEnd,
+          similarNativeMethod
+        } = properties;
+
+        const similarNativeMethodName = toEnd ? "push" : "unshift";
+        const similarNativeMethodReferenceURI = toEnd ? sharedExternalLinks.mdn.array.push : sharedExternalLinks.mdn.array.unshift;
+
+
+      p.Article-Paragraph
+        | #[+Term--YDID 文字列]の#[+Term__Contrast--YDID 配列]に#[+Term--YDID 要素]
+        |   #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        if newElementsCount > 1
+          | と#[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        | を追加する。
+        | #[+ImportantEntity__Code--YDID mutably]#[+Term--YDID オプション]は理由も無く#[+Keyword--YDID 必須]にされた訳では
+        |   #[+Keyword--YDID なく]、プログラマーが何をしているかを、はっきりと意識させる為の専門上の#[+Keyword--YDID 義務]だからである。
+        | 此の例の場合、#[+SecondaryEntity__Code--YDID true]値が指定してあるため、#[+Keyword--YDID 元の]#[+Term--YDID 配列]が
+        |   #[+Keyword--YDID 変更]され、
+        if newElementsCount === 1
+          if toEnd
+            +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+          else
+            +SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          if toEnd
+            +SecondaryEntity__Code--YDID
+              | [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+          else
+            +SecondaryEntity__Code--YDID
+              | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        |   と成る。
+
+      +AdmonitionBlock--YDF({
+        decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning,
+        SVG_Icon: true
+      }).
+        此の使い方だと、#[+Keyword--YDID 元の]#[+Term--YDID 配列]（#[+ImportantEntity__Code--YDID targetArray]）が変更される為、
+          #[+ImportantEntity__Code--YDID ReadonlyArray]#[+Term--YDID 型]が許可#[+Keyword--YDID されない]。
+
+      p.Article-Paragraph
+        | 此の様な#[+Term--YDID 関数]の利用は
+        |
+        +Link--YDF({ unendorsedExternalURI: similarNativeMethodReferenceURI })= similarNativeMethodName
+        |   と言う#[+Term__Contrast--YDID ネイティブメソッド]に近い。
+        | 違うのは、#[+ImportantEntity__Code--YDID addElementsToArray]は#[+Keyword--YDID 常に]
+        |   #[+Keyword__Contrast--YDID 更新された]#[+Term--YDID 配列]の#[+Term__Contrast--YDID 要素]数では#[+Keyword--YDID なく]、
+        |   #[+Keyword__Contrast--YDID 更新された]#[+Term--YDID 配列]#[+Keyword--YDID 自体]を返す。
+        | もし#[+Keyword--YDID 新規]#[+Term--YDID 配列]の#[+Term__Contrast--YDID 要素]数が必要な場合、新しく#[+Term--YDID 変数]を
+        |   定義せずに、#[+Term--YDID 戻り値]の#[+ImportantEntity__Code--YDID length]#[+Term--YDID プロパティ]を呼び出せば良い。
+
+      p.Article-Paragraph.
+        上記に加え、#[+ImportantEntity__Code--YDID #{ similarNativeMethodName }]と違って、和訳の能力が或る程度あれば、
+          #[+ImportantEntity__Code--YDID addElementsToArray]は何をやっているのか、新規#[+Term--YDID 要素]はどの位置に追加されるのか、
+          初期#[+Term--YDID 配列]が変わるかどうかがはっきりと分かる。
+        確かに、#[+ImportantEntity__Code--YDID #{ similarNativeMethodName }]に比べると
+          #[+ImportantEntity__Code--YDID addElementsToArray]の呼び出し表現の方が、入力の手間がかかるが、コードが自明な為に
+          #[+Keyphrase--YDID 整備のしやすさは#[+Keyword--YDID 初期]コードの入力速度よりずっと重要]なのだ。
+        残念ながら、多くのエンジニア（特に初級者）は納得しない。
+        其の理由としては、人間の心理は将来の大きな営利よりも、ずっと小さくても今直ぐ得られる営利を好みがちだからである。
+        此の特性に依り、ウェブサイトやソフトの開発に於いてコードの整備には非常にコストがかかり、其の結果、開発されるウェブサイトやアプリケーションの整備が利益を食い潰し、
+          赤字と成る。
+
+      p.Article-Paragraph
+        | 入力速度の話なら、モダンな#[+Term--YDID 統合開発環境]は、此の要望を上手く満たしている。
+        | 特に
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.intelliJ_IDEA_FamilyIDEs
+        }) 「IntelliJ IDEA」ファミリー統合開発環境
+        |   では専用の
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.YDEE_Plugin
+        }) 正式なYDEEプラグイン
+        |   が提供され、此れが
+        +Link--YDF({
+          unendorsedExternalURI: sharedExternalLinks.jetBrains.liveTemplates
+        }) 「Live templates」と呼ぶ高速入力専用の原型
+        |   を含んでいる。
+        | #[+ImportantEntity__Code--YDID addElementsToArray]専用のものも在る。
+
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: false })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheStartOfArray.$children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toStart: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+
+    mixin NoticeAboutOneLevelCopying
+
+      p.Article-Paragraph.
+        だが、当#[+Term--YDID 関数]は配列の#[+Keyword--YDID 完全な]コピー（#[+Term--YDID ディープコピー]）は#[+Keyword--YDID しない]。
+        取り敢えず、#[+Keyword--YDID 一般的に]#[+Keyword__Contrast--YDID 何れの]#[+Term--YDID オブジェクト]の
+          #[+Term__Contrast--YDID ディープコピー]が作れる訳では#[+Keyword--YDID ない]（ところで、
+          #[+Keyphrase--YDID ECMAScript系の言語に於いて]、#[+ImportantEntity--YDID Array]は#[+Term--YDID オブジェクト]の
+          #[+Keyword--YDID 継承者]である）。
+        例えば、#[+Term--YDID クロージャ]や#[+ImportantEntity--YDID ES2022]に追加された#[+Term--YDID プライベートフィルド]をコピーする
+          事が#[+Keyword--YDID 不可能]なので、どんな#[+Term--YDID オブジェクト]でも#[+Term--YDID ディープコピー]が作れる#[+Term--YDID 関数]
+          を開発する事は#[+Keyword--YDID 無理]である。
+        #[+Keyphrase--YDID #[+Term--YDID 配列]への新規#[+Term--YDID 要素]の追加の場合]は、#[+SecondaryEntity--YDID React]でも
+          問題に成っていないが、#[+Term--YDID 配列]の#[+Keyword--YDID オブジェクト型]の#[+Term--YDID 要素]の更新は、可成り面倒に成る
+          （#[+Term--YDID 配列]自体を新しく作らなければいけないと言う他に、更新した#[+Term--YDID 要素]も、事前に手動で
+          #[+Term--YDID ディープコピー]を作らなければならない為）。
+
+
+    mixin AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment(properties)
+
+      -
+
+        const { newElementsCount, toEnd } = properties;
+
+      p.Article-Paragraph
+        | #[+Term--YDID 変更]を#[+Keyword--YDID 起こさない]要素を追加する場合、以前の#[+Term--YDID 配列]を元に#[+Keyword--YDID 新規]で
+        |   #[+Term--YDID 配列]が作られてから、指定された#[+Term--YDID 要素]が追加される。
+        | 此の様に#[+Keyword--YDID 以前の]#[+Term--YDID 配列]#[+SecondaryEntity__Code--YDID sampleArray]は変化
+        |   #[+Keyword--YDID しない]が、#[+Keyword--YDID 新規の]#[+SecondaryEntity__Code--YDID updatedSampleArray]
+        |   が変わり、
+        |
+        if newElementsCount === 1
+          if toEnd
+            +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1" ]
+          else
+            +SecondaryEntity__Code--YDID [ "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          if toEnd
+            +SecondaryEntity__Code--YDID
+              | [ "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2", "NEW_ELEMENT-1", "NEW_ELEMENT-2" ]
+          else
+            +SecondaryEntity__Code--YDID
+              | [ "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | に成る。
+
+      p.Article-Paragraph.
+        此の様な直観的ではない操作は、主に#[+Term--YDID フロントエンドフレームワーク]で需要がある。
+        此れ等の一部分（例えば#[+SecondaryEntity--YDID React]）は利用者に対して、以前の#[+Term--YDID ステートオブジェクト]を元にして新しいものを
+          作ると言う単調作業を、フレームワークの利用者達に盥（たらい）回ししている。
+        #[+ImportantEntity__Code--YDID addElementsToArray]なら、コードが分かりやすく成り、#[+Keyword--YDID 中間の]位置への
+          新規#[+Term--YDID 要素]の追加が必要な時には、コードの量も減る。
+
+      +NoticeAboutOneLevelCopying
+
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: false })
+
+
+    //- ─── 配列の最後の位置に、単一の要素を追加 ──────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 1, toEnd: true })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheEndOfArray.$children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toEnd: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 1, toEnd: true })
+
+
+    //- ─── 配列の特定位置への単一要素の追加（0から計算） ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    mixin AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment(properties)
+
+      - const { numerationFrom, newElementsCount } = properties
+
+      p.Article-Paragraph
+        | 新規#[+Term--YDID 要素]
+        if newElementsCount === 1
+          | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        else
+          | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]と#[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        |
+        |   を#[+SecondaryEntity--YDID #{ numerationFrom === 0 ? "1st" : "2nd" }位置目]
+        |   (#[+Keyphrase--YDID #[+SecondaryEntity--YDID #{ numerationFrom }]から数える])に追加する。
+        | #[+Keyword--YDID 最初に]#[+Term--YDID 配列]は#[+SecondaryEntity--YDID 2つ]#[+Term--YDID 要素]を持っていたので、
+        |   新規#[+Term--YDID 要素]は既存の#[+Term--YDID 要素]の間に位置する事と成り、#[+Keyword--YDID 更新後]の値は
+        |
+        if newElementsCount === 1
+          +SecondaryEntity__Code--YDID [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          +SecondaryEntity__Code--YDID
+            | [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+        | に成る。
+
+      p.Article-Paragraph.
+        #[+Term--YDID ネイティブメソッド]
+          #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.array.splice }) splice]で同じ事が出来るが、
+
+      ul.Article-UnorderedList
+
+        li.
+          此の#[+Term--YDID メソッド]は、主に#[+Term--YDID 配列]からの#[+Term__Contrast--YDID 要素]の#[+Keyword--YDID 削除]に向いている。
+          #[+Keyphrase--YDID 何も削除せずに]新規#[+Term--YDID 要素]を#[+Keyword--YDID 追加]したい#[+Keyword__Contrast--YDID だけ]
+            の場合、#[+ImportantEntity--YDID 2つ目]の#[+Term--YDID 引数]が邪魔に成る（当#[+Term--YDID メソッド]で此の様な使い方をする場合、
+            #[+ImportantEntity--YDID 2つめ]の#[+Term--YDID 引数]は#[+SecondaryEntity--YDID 0]でなければいけない）。
+
+        li.
+          暗記する事がなかなか難しく、各#[+Term--YDID 引数]の用途が#[+Keyword--YDID 非自明的]である。
+          1つの#[+Term--YDID 引数]は#[+Term__Contrast--YDID 要素]の#[+Term--YDID 指数]であり、他の#[+Term--YDID 引数]は
+            #[+Term__Contrast--YDID 要素]の#[+Keyword--YDID 数]を表し、其の後は新しい#[+Term--YDID 要素]自体である。
+
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({　numerationFrom: 0,　newElementsCount: 1　})
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    mixin AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment(properties)
+
+      - const { numerationFrom, newElementsCount } = properties
+
+      p.Article-Paragraph
+        | #[+ImportantEntity__Code--YDID mutably: false]の時、#[+Keyword--YDID 元の]#[+Term--YDID 配列]を基にした
+        |   #[+Keyword--YDID 新規]#[+Term--YDID 配列]が作られた上で、#[+Keyword--YDID 新規]の方に変更を加える事に成る。
+        | 此の例だと、#[+Keyword--YDID 新規]#[+Term--YDID 配列]が作られた後で、#[+Term--YDID 要素]
+        if newElementsCount === 1
+          | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]
+        else
+          | #[+SecondaryEntity__Code--YDID "NEW_ELEMENT-1"]と#[+SecondaryEntity__Code--YDID "NEW_ELEMENT-2"]
+        |   が位置#[+SecondaryEntity--YDID #{ numerationFrom + 1 }]
+        |   （#[+Keyphrase--YDID #[+SecondaryEntity--YDID #{ numerationFrom }]から計算]）に追加され、
+        |   結果的に#[+Keyword--YDID 新規]#[+Term--YDID 配列]は
+        if newElementsCount === 1
+          +SecondaryEntity__Code--YDID.
+            [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "INITIALLY_EXISTED_ELEMENT-2" ]
+        else
+          +SecondaryEntity__Code--YDID.
+            [ "INITIALLY_EXISTED_ELEMENT-1", "NEW_ELEMENT-1", "NEW_ELEMENT-2", "INITIALLY_EXISTED_ELEMENT-2" ]
+        |   に成る。
+
+      +NoticeAboutOneLevelCopying
+
+      p.Article-Paragraph.
+        最近迄は、第三者のライブラリを使わずに、同じ処理を1つの表現で済ませる事は無理であり、
+
+      ol.Article-OrderedList
+        li 新規#[+Term--YDID 配列]を作り、
+        li 元の#[+Term--YDID 配列]から新しい#[+Term--YDID 配列]に要素をコピーし、
+        li #[+Keyword--YDID 新規]#[+Term--YDID 配列]に#[+ImportantEntity__Code--YDID splice]#[+Term--YDID メソッド]を呼び出す
+
+      p.Article-Paragraph.
+        事が必要だった。
+        実は上記のルーチンは、#[+ImportantEntity__Code--YDID addElementsToArray]の#[+ImportantEntity__Code--YDID mutable]オプション
+          が#[+ImportantEntity__Code--YDID false]に成っている時に、代行してくれる。
+
+      p.Article-Paragraph.
+        #[+ImportantEntity--YDID 2023年]に#[+ImportantEntity__Code--YDID toSpliced]#[+Term--YDID メソッド]の導入が始まり、
+         #[+ImportantEntity__Code--YDID splice]と同じ事をしているが、#[+Keyword--YDID 事前に]#[+Keyword__Contrast--YDID 新しい]
+         #[+Term--YDID 配列]を作っている動作である。
+        #[+ImportantEntity--YDID 2023春頃]は、サポートされていたのは全てのブラウザーでは#[+Keyword--YDID なく]、
+          #[+ImportantEntity--YDID Node.js]であれば、バージョン#[+ImportantEntity--YDID 20]以降で利用可能に成った。
+        何方にせよ、#[+ImportantEntity__Code--YDID splice]と#[+ImportantEntity__Code--YDID toSpliced]の#[+Term--YDID パラメーター]を
+          暗記する必要が有る事には変わらない。
+        其の為、#[+ImportantEntity__Code--YDID addElementsToArray]は引き続き役に立ち、
+          #[+ImportantEntity__Code--YDID toSpliced]の導入を切っ掛けに#[+ImportantEntity__Code--YDID addElementsToArray]
+          をライブラリから削除する事は予定#[+Keyword--YDID されていない]。
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 1 })
+
+
+    //- ─── 配列の特定位置への単一要素の追加（1から計算） ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      プログラミングに於いては#[+ImportantEntity--YDID 0]からの計算が標準化されていると共に、混乱を生じる為、間違いの原因と成る事が多い。
+      此の問題は#[+ImportantEntity__Code--YDID toPosition__numerationFrom1]オプションの動機である。
+      和訳から分かる通り、数える位置の番号を#[+ImportantEntity--YDID 1]から指定する事が出来、
+        #[+ImportantEntity__Code--YDID toPosition__numerationFrom0]の#[+Keyword--YDID 代わりに]指定する必要がある。
+
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 2,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    //- ─── 変更を伴わない追加 ────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1" ],
+            toPosition__numerationFrom0: 2,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 1 })
+
+
+    //- ─── 配列の最初の位置に、複数の要素を追加する ────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toStart: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: false })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheStartOfArray.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toStart: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: false })
+
+
+    //- ─── 配列の最後の位置に、複数の要素を追加する ───────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: sampleArray,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toEnd: true,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayMutably--TextFragment({ newElementsCount: 2, toEnd: true })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheEndOfArray.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toEnd: true,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+          console.log(updatedSampleArray);
+
+    +AddingOfOneElementToStartOrEndOfArrayImmutably--TextFragment({ newElementsCount: 2, toEnd: true })
+
+
+    //- ─── 配列の特定位置への、複数の新規要素の追加（0から計算） ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom0.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 0, newElementsCount: 2 })
+
+
+    //- ─── 配列の特定位置への、複数の新規要素の追加（1から計算） ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.$anchor
+    }).Article-Heading3
+
+    //- ─── 変更を伴う追加 ────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.mutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.mutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 2,
+            mutably: true
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayMutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    //- ─── 変更を伴わない追加 ─────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 4,
+      text: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.immutableAdding.$heading,
+      HTML_ID: localizedSectioning.examples.$children.addingOfMultipleElementsToTheSpecificPositionNumerationFrom1.
+          $children.immutableAdding.$anchor
+    }).Article-Heading4
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+        :code_listing--yda
+          const sampleArray: Array<string> = [
+            "INITIALLY_EXISTED_ELEMENT-1",
+            "INITIALLY_EXISTED_ELEMENT-2"
+          ];
+
+          const updatedSampleArray: Array<string> = addElementsToArray({
+            targetArray: experimentalSample,
+            newElements: [ "NEW_ELEMENT-1", "NEW_ELEMENT-2" ],
+            toPosition__numerationFrom0: 1,
+            mutably: false
+          });
+
+          console.log(sampleArray);
+
+    +AddingOfOneElementToSpecificPositionOfArrayImmutably--TextFragment({ numerationFrom: 1, newElementsCount: 2 })
+
+
+    +IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance({
+      imageURI: "@AssociatedWithPages/CoreLibrary/Functionality/Arrays/04-AddingOfElements/" +
+          "addElementsToArray/Images/addElementsToArray-LiveTemplate",
+      relatedTableOfContentsMetadata: localizedSectioning.IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance
+    })
+
+      ol.Article-OrderedList
+
+        li.
+          #[+Term--YDID 配列]を含む#[+Term--YDID 変数]の名前か、#[+Term--YDID 配列表現]をクリップボードにコピーする。
+          #[+Term--YDID 統合開発環境]が、単一の#[+Term--YDID 引数]の位置に正しい値を入れられる様に、
+            #[+ImportantEntity--YDID addElementsToArray]#[+Term--YDID 関数]の#[+Term--YDID Live template]を入力し始める前に、
+            事前に此れをクリップボードにコピーする習慣を作る事。
+
+        li
+
+          | #[+ImportantEntity--YDID addElementsToArray]#[+Term--YDID 関数]の名前入力を開始する。
+          | オートコンプリートに依り、下記の#[+ImportantEntity--YDID 2件]が表示される。
+
+          ol.Article-OrderedList
+
+            li.
+              丸で囲まれたアルファベット文字のアイコン：#[+Term--YDID 関数]の名前のオートコンプリートで、#[+Term--YDID 統合開発環境]の
+                #[+Keyword--YDID 既定]の機能である。
+              #[+ImportantEntity--YDID Enter]を押すと、#[+Term--YDID 関数]の名前が入力され、必要に応じて#[+Term--YDID インポート]の
+                宣言も追加される。
+              悪くはないが、更成る自動化が可能である。
+
+            li.
+              判子のアイコン：我々が必要とするテンプレート。
+              #[+ImportantEntity--YDID Enter]を一度押すと、テンプレートのコードが入力され、#[+ImportantEntity__Code--YDID targetArray]
+                クリップボードの内容が#[+Term--YDID プロパティ]に挿入され、カーソルに依り選択される。
+              当説明に従えば、貼り付けられた値は不要なので、#[+ImportantEntity__Code--YDID targetArray]
+                もう一度#[+ImportantEntity--YDID Enter]を押下して、編集を終了する。
+
+        li.
+          #[+ImportantEntity__Code--YDID newElements]の値を入力する。
+          終わり次第、#[+ImportantEntity--YDID Enter]を押下する。
+          今回、不要なオートコンプリートが表示された場合は、先に#[+ImportantEntity--YDID Esc]を押せば良い。
+
+        li.
+          ドロップダウンリストに依って、#[+ImportantEntity--YDID mutably]プロパティの値の選択肢が提案される。
+          既定では#[+ImportantEntity__Code--YDID true]が選択されており、そのままで良い場合は、#[+ImportantEntity--YDID Enter]を押下すると
+            次の段階へ進む。
+          若しくは、先に下の矢印のキーで#[+ImportantEntity__Code--YDID false]オプションを選ぶ。
+
+        li.
+          オプション#[+ImportantEntity__Code--YDID toPosition__numerationFrom0]の入力が提案される。
+          入力すると#[+ImportantEntity__Code--YDID toPosition__numerationFrom1]も埋められるが、此の二つの中から
+            #[+Keyphrase--YDID 少なくとも一個]の削除が#[+Keyword--YDID 必要]に成る。
+          此の二つの何れかが必要な場合、数型の値か、望ましい変数名を入力する。
+          何方にせよ、此の段階が終わり次第、#[+ImportantEntity__Code--YDID Enter]を押下する。
+
+        li.
+          不要なコードを削除する。
+          #[+ImportantEntity__Code--YDID toStart]、#[+ImportantEntity__Code--YDID toEnd]、
+            #[+ImportantEntity__Code--YDID toPosition__numerationFrom0]と
+            #[+ImportantEntity__Code--YDID toPosition__numerationFrom1]の中から、#[+Keyword--YDID 一件]
+            #[+Keyword__Contrast--YDID のみ]残さなくてはならない。
+
+      p.Article-Paragraph.
+        #[+ImportantEntity__Code--YDID aeta]と言う此の原型の#[+Keyword--YDID エイリアス]（当関数名の各単語の最初の文字から成り立っている）
+          を使っても良いが、エイリアスの欠点は暗記しづらい事である。
+        此れに対して、#[+ImportantEntity--YDID addElementsToArray]と言うオートコンプリートのヒントを得るには、完全に名前を覚える必要はなく、
+          最初の文字だけ知っていれば十分である。
+
+
+    //- ━━━ 外部リンク ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/04-AddingOfElements/addElementsToArray.ts",
+        title: "ソースコード"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/04-AddingOfElements/addElementsToArray.test.ts",
+        title: "テストコード"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

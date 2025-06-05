@@ -1,0 +1,155 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.functionality.arrays.retrievingOfIndexes.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne"
+    );
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.retrievingOfIndexes.$children.
+          getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
+        $children.retrievingOfIndexes.$children.getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+      localizedDescriptiveHeading: "Получить индекс удовлетворяющего предикату　элемента массива, если такой элемент ровно 1",
+      signatures: [
+
+        {
+          localizedDescriptiveHeading: "Если искомого элемента нет либо таковых больше 1, то будет возвращён null",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "Целевой массив",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "Предикат",
+              type: "Predicate",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement | null"
+        },
+
+        {
+          localizedDescriptiveHeading: "Если искомого элемента нет либо таковых больше 1, будет брошено исключение",
+          genericParameters: [ "ArrayElement" ],
+          parametersSpecification: [
+            {
+              genericTechnicalName: "targetArray",
+              localizedName: "Целевой массив",
+              type: "ReadonlyArray<ArrayElement>",
+              required: true
+            },
+            {
+              genericTechnicalName: "predicate",
+              localizedName: "Предикат",
+              type: "(arrayElement: string) => boolean",
+              required: true
+            },
+            {
+              genericTechnicalName: "options",
+              localizedName: "Опции",
+              type: "Options",
+              required: true
+            }
+          ],
+          returnedValue: "ArrayElement"
+        }
+
+      ],
+      headingTag: "h1"
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Options",
+        localizedDescriptiveHeading: "Опции",
+        propertiesSpecification: {
+          mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: {
+            localizedInterpretation: "Должен бросить ошибку, если элемент не найден либо результатов поиска больше 1",
+            type: "boolean (только true)",
+            required: true
+          }
+        }
+      })
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md",
+        title: "Временная англоязычная Markdown-документация"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/02-RetrievingOfIndexes/" +
+            "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

@@ -1,0 +1,14 @@
+throwableErrors:
+
+  $heading: `throwableErrors.$heading`
+  $anchor: THROWABLE_ERRORS--SECTION
+
+  $children:
+
+    objectSchemaNotSpecified:
+      $heading: `throwableErrors.objectSchemaNotSpecified.$heading`
+      $anchor: "THROWABLE_ERRORS-OBJECT_SCHEMA_NOT_SPECIFIED--SECTION"
+
+    mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
+      $heading: `throwableErrors.mutuallyExclusiveTransformationsBetweenUndefinedAndNull.$heading`
+      $anchor: "THROWABLE_ERRORS-MUTUALLY_EXCLUSIVE_TRANSFORMATIONS_BETWEEN_UNDEFINED_AND_NULL--SECTION"

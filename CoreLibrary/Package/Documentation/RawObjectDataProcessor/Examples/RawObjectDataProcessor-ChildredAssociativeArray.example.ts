@@ -35,7 +35,7 @@ const dataSample: unknown = {
 const dataSampleProcessingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
     process(dataSample, validDataSpecification);
 
-if (dataSampleProcessingResult.rawDataIsInvalid) {
+if (dataSampleProcessingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.localization.defaultTitle,

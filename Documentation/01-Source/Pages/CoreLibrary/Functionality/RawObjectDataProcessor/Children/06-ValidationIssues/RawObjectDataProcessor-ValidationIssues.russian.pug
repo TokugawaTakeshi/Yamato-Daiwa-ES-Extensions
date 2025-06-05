@@ -1,0 +1,66 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues;
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
+        description: ""
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.validationIssues");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- ━━━ `RawObjectDataProcessor` — Ошибки и предупреждения о невалидных данных ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
+
+    //- ━━━ Throwable Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.throwableErrors.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$anchor
+    }).Article-Heading2
+
+    //- ─── Схема объекта не определена (<code>objectSchemaNotSpecified</code>) ────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$anchor
+    }).Article-Heading3

@@ -41,9 +41,21 @@ coreLibrary:
 
         $heading: "Adding of Elements"
 
+      replacingOfElements:
+
+        $heading: "Replacing of Elements"
+
+      permutationsOfElements:
+
+        $heading: "Permutations Of Elements"
+
       removingOfElements:
 
         $heading: "Removing of Elements"
+
+      restructuring:
+
+        $heading: "Restructuring"
 
       other:
 
@@ -137,9 +149,9 @@ coreLibrary:
 
     rawObjectDataProcessor:
 
-      quickExample:
+      demo:
 
-        $heading: "Quick Example"
+        $heading: "Demo"
 
       problemOverview:
 
@@ -149,13 +161,17 @@ coreLibrary:
 
         $heading: "Theoretical Minimum"
 
-      gettingStarted:
+      commonScenarios:
 
-        $heading: "Getting Started"
+        $heading: "Common Scenarios"
 
-      helpers:
+      API:
 
-        $heading: "Helpers"
+        $heading: "API"
+
+      validationIssues:
+
+        $heading: "Validation Issues"
 
     sets:
 

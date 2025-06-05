@@ -32,7 +32,7 @@ class LeftClickOutOfElementEventListener {
       callback,
       eventPropagation = EventPropagationTypes.bubbling,
       mustBeCalledOnce = false,
-      mustKeepDefaultBehaviour = false
+      mustKeepDefaultBehaviour = true
     }: LeftClickOutOfElementEventListener.InitializationProperties
   ) {
 

@@ -1,0 +1,11 @@
+throwableErrors:
+
+  $heading: "Бросаемые ошибки"
+
+  objectSchemaNotSpecified:
+
+    $heading: "Схема объекта не определена (<code>objectSchemaNotSpecified</code>)"
+
+  mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
+
+    $heading: "Взаимоисключающий трансформации между <code>undefined</code> и <code>null</code> (<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>)"

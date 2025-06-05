@@ -41,9 +41,21 @@ coreLibrary:
 
         $heading: "要素の追加"
 
+      replacingOfElements:
+
+        $heading: "要素の置き換え"
+
+      permutationsOfElements:
+
+        $heading: "要素の並べ替え"
+
       removingOfElements:
 
         $heading: "要素の取り除き"
+
+      restructuring:
+
+        $heading: "Restructuring"
 
       other:
 
@@ -137,9 +149,9 @@ coreLibrary:
 
     rawObjectDataProcessor:
 
-      quickExample:
+      demo:
 
-        $heading: "先ずは例"
+        $heading: "デモ"
 
       problemOverview:
 
@@ -149,13 +161,17 @@ coreLibrary:
 
         $heading: "最少理論"
 
-      gettingStarted:
+      commonScenarios:
 
-        $heading: "着手"
+        $heading: "一般シナリオ"
 
-      helpers:
+      API:
 
-        $heading: "補助昨日"
+        $heading: "API"
+
+      validationIssues:
+
+        $heading: "不正データ関連エラー・警告"
 
     sets:
 

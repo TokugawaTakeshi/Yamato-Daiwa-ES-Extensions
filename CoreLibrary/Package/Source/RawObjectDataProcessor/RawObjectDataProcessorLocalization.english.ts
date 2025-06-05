@@ -8,6 +8,7 @@ import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbit
 import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
 import isNotNull from "../TypeGuards/Nullables/isNotNull";
 import isNull from "../TypeGuards/Nullables/isNull";
+import { isUndefined } from "../index";
 
 
 const rawObjectDataProcessorLocalization__english: Localization = {
@@ -102,13 +103,15 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     conditionallyForbiddenUndefinedValue: {
 
-      title: "Conditionally Forbidden Undefined Value",
+      title: "Conditionally Forbidden Undefined Value of Property/Element",
 
       generateDescription: (
-        { verbalConditionWhenUndefinedIsForbidden }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
+        {
+          verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
           "This property/element is not defined or has explicit `undefined` value what has been forbidden when " +
-            `${ verbalConditionWhenUndefinedIsForbidden }, and this condition has been satisfied.`
+            `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }, and this condition has been satisfied.`
 
     },
 
@@ -119,54 +122,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-          `This property/element is not undefined while must be undefined when ${ conditionWhenMustBeUndefined }, and ` +
-            "this condition has been satisfied."
-
-    },
-
-    unableToDeletePropertyWithOutdatedKey: {
-
-      title: "Unable to Delete Property With Outdated Key",
-
-      description:
-          "The renaming of this property has been requested. " +
-          "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
-            "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
-            "\"true\" boolean value for target property, the deleting of the outdated one. " +
-          "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
-            "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
-          "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
-            "is recommended only if this property on source data actually expected to be configurable " +
-            "(thus deletable). " +
-          "But, if you have not the control on source data and it could be guaranteed that the source data is " +
-            "configurable, basically one of two following measures left:" +
-          "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
-            "\"true\" for this property.\n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-          "  not specified via valid data specification will not be added to new object."
-
-    },
-
-    unableToUpdatePropertyValue: {
-
-      title: "Unable to Update Property Value",
-
-      description:
-          "The updating of this property has been requested via default value substitution or pre-validation " +
-            "modification while this property is read-only. " +
-          "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
-            "is recommended only if this property on source data actually expected to be writable. " +
-          "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
-            "the following measures left:" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object." +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
+          `This property/element is not \`undefined\` while must be \`undefined\` when ${ conditionWhenMustBeUndefined }, ` +
+            "and this condition has been satisfied."
 
     },
 
@@ -182,10 +139,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Conditionally Forbidden Null Value",
 
       generateDescription: (
-        { verbalConditionWhenNullIsForbidden }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
+        {
+          verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
       ): string =>
           "This property/element has `null` value what has been forbidden when " +
-            `${ verbalConditionWhenNullIsForbidden }, and this condition has been satisfied.`
+            `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }, and this condition has been satisfied.`
 
     },
 
@@ -196,25 +155,92 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-          `This property/element is not null while must be null when ${ conditionWhenMustBeNull }, and this condition ` +
-            "has been satisfied."
+          `This property/element is not \`null\` while must be \`null\` when ${ conditionWhenMustBeNull }, and this ` +
+            "condition has been satisfied."
 
     },
 
 
-    /* ─── Changing of Property Descriptions ──────────────────────────────────────────────────────────────────────── */
+    // TODO Link Injections
+    unableToDeletePropertyWithOutdatedKey: {
+
+      title: "Unable to Delete Property With Outdated Key",
+
+      generateDescription: (
+        { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
+      ): string =>
+          `Unable to delete this property after renaming to "${ propertyNewKey }" because it is not configurable ` +
+            "while the processing approach is the manipulations with source object and \"mustLeaveEvenRenamed\" " +
+            "has not been set to true."
+          // "The renaming of this property has been requested. " +
+          // "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
+          //   "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
+          //   "\"true\" boolean value for target property, the deleting of the outdated one. " +
+          // "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+          //   "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+          // "The data has been marked as invalid because the error handling strategy " +
+          //   "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+          //   "is recommended only if this property on source data actually expected to be configurable " +
+          //   "(thus deletable). " +
+          // "But, if you have not the control on source data and it could be guaranteed that the source data is " +
+          //   "configurable, basically one of two following measures left:" +
+          // "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
+          //   "\"true\" for this property.\n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          // "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+          // "  not specified via valid data specification will not be added to new object."
+
+    },
+
+    // TODO Link Injections
     unableToChangePropertyDescriptors: {
 
       title: "Usable to Change Property Descriptors",
 
       description:
-          "The changing of descriptors of this property has been requested but ths property is not configurable. " +
-          "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
-            "is recommended only if this property on source data actually expected to be configurable. "
+        "Unable to change the descriptions of this property because it is not configurable while the processing " +
+          "approach is the manipulations with source object and \"mustLeaveEvenRenamed\" has not been set to true."
+          // "The changing of descriptors of this property has been requested but ths property is not configurable. " +
+          // "The data has been marked as invalid because the error handling strategy " +
+          //   "\"onUnableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+          //   "is recommended only if this property on source data actually expected to be configurable. "
 
     },
 
+    // TODO Link Injections
+    unableToUpdatePropertyValue: {
+
+      title: "Unable to Update Property Value",
+
+      description:
+          "The updating of this property has been requested via default value substitution or pre-validation " +
+            "modification while this property is read-only. " +
+          "The data has been marked as invalid because the error handling strategy " +
+            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+            "is recommended only if this property on source data actually expected to be writable. "
+          // "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
+          //   "the following measures left:" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+          //   "not specified via valid data specification will not be added to new object." +
+          // "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+          //   "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+          //   "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    },
+
+
+    /* ─── Other ───────────────────────────────────────────────────────────────────────────────────────────────────── */
+    unexpectedProperties: {
+
+      title: "Unexpected Properties",
+
+      generateDescription:
+          ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
+              "The following properties are unexpected ones:\n" +
+              unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
+    },
+    // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     /* ─── Numeric Value ──────────────────────────────────────────────────────────────────────────────────────────── */
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -409,19 +435,9 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
     customValidationFailed: {
-      title: "Custom Validation did not Passed",
+      title: "Custom Validation has not Passed",
       generateDescription: ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
-          `This value did not passed the custom validation "${ customValidationDescription }".`
-    },
-
-    unexpectedProperties: {
-
-      title: "Unexpected Properties",
-
-      generateDescription:
-          ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
-              "The following properties are unexpected ones:\n" +
-              unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
+          `This value has not passed the custom validation "${ customValidationDescription }".`
     }
 
   },
@@ -473,6 +489,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
+    // TODO Link Injection
     propertyUndefinedabilityNotSpecified: {
 
       title: "Property Undefinedability has not been Specified",
@@ -480,11 +497,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
       ): string =>
           "It has not been specified how to process the undefined value of the property/element " +
-            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+            `\`${ targetPropertyDotSeparatedQualifiedName }\`.\n` +
           "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
 
     },
 
+    // TODO Link Injection
     propertyNullabilityNotSpecified: {
 
       title: "Property Nullability has not been Specified",
@@ -492,11 +510,32 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
       ): string =>
           "It has not been specified how to process the null value of the property/element " +
-            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+            `\`${ targetPropertyDotSeparatedQualifiedName }\`.\n` +
           "Check the documentation and specify one of the valid options: https://ee.yamato-daiwa.com/"
 
     },
 
+    // TODO Link Injection
+    dataTypeNotSpecified: {
+
+      title: "Data Type not Specified",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          specifiedStringifiedType
+        }: ThrowableErrors.DataTypeNotSpecified.TemplateVariables
+      ): string =>
+          (
+            isUndefined(specifiedStringifiedType) ?
+                "Data type has not been " :
+                `Unsupported data type "${ specifiedStringifiedType } has been"`
+          ) +
+          `specified for property/element "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          "It is possible only with TypeScript error."
+
+    },
+
+    // TODO Link Injections
     unableToDeletePropertyWithOutdatedKey: {
 
       title: "Unable to Delete Property With Outdated Key",
@@ -507,25 +546,27 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           propertyNewKey
         }: ThrowableErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `The renaming of the property "${ targetPropertyDotSeparatedQualifiedName }" to "${ propertyNewKey }" has ` +
-            "been requested. " +
-          "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
-            "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
-            "\"true\" boolean value for target property, the deleting of the outdated one. " +
-          "However, because the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
-            "Reference/Global_Objects/Object/defineProperty#configurable), it could not be deleted.\n" +
-          "This error has been thrown because the error handling strategy \"onUnableToDeletePropertyWithOutdatedValue\" is " +
-            "\"ErrorHandlingStrategies.throwingOfError\" which is default. " +
-          "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
-            "select the one matching with your case:\n" +
-          "● If you are have access to the data source, consider the making of this property configurable.\n" +
-          "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
-            "\"true\" for this property.\n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-            "valid data specification will not be added to new object."
+          `Unable to delete the property "${ targetPropertyDotSeparatedQualifiedName }" after renaming to ` +
+            `"${ propertyNewKey }" because it is not configurable while the processing approach is the manipulations ` +
+            "with source object and \"mustLeaveEvenRenamed\" has not been set to true."
+          // "If , it " +
+          //   "means the defining of new property and, while  option has not been specified with " +
+          //   "\"true\" boolean value for target property, the deleting of the outdated one. " +
+          // "However, because the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+          //   "Reference/Global_Objects/Object/defineProperty#configurable), it could not be deleted.\n" +
+          // "This error has been thrown because the error handling strategy \"onUnableToDeletePropertyWithOutdatedValue\" is " +
+          //   "\"ErrorHandlingStrategies.throwingOfError\" which is default. " +
+          // "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
+          //   "select the one matching with your case:\n" +
+          // "● If you are have access to the data source, consider the making of this property configurable.\n" +
+          // "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
+          //   "\"true\" for this property.\n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+          //   "valid data specification will not be added to new object."
     },
 
+    // TODO Link Injections
     unableToChangePropertyDescriptors: {
 
       title: "Unable to Change Property Descriptors",
@@ -533,20 +574,23 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }". ` +
-          "This error has been thrown because the error handling strategy \"onUnableToChangePropertyDescriptors\" is " +
-            "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
-           "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
-            "select the one matching with your case:\n" +
-          "● If you are have access to the data source, consider the making of this property configurable.\n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-            "valid data specification will not be added to new object.\n" +
-          "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
-            "Consider the creating of derived from the source one object　instead."
+          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }" because this ` +
+            "property is not configurable while the processing approach is the manipulations with source object and " +
+            "\"mustLeaveEvenRenamed\" has not been set to true."
+          // "This error has been thrown because the error handling strategy \"onUnableToChangePropertyDescriptors\" is " +
+          //   "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
+          //  "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
+          //   "select the one matching with your case:\n" +
+          // "● If you are have access to the data source, consider the making of this property configurable.\n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+          //   "valid data specification will not be added to new object.\n" +
+          // "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
+          //   "Consider the creating of derived from the source one object　instead."
 
     },
 
+    // TODO Link Injections
     unableToUpdatePropertyValue: {
 
       title: "Unable to Update Property Value",
@@ -557,21 +601,23 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
             "value substitution or pre-validation modification while this property is read-only. " +
           "This error has been thrown because the error handling strategy \"onUnableToUnableToUpdatePropertyValue\" " +
-            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
-          "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
-            "select the one matching with your case:\n" +
-          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-          "Alternatively, consider the making of this property writable. " +
-          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
-            "property is configurable. \n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object. \n" +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
+            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. "
+          // "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
+          //   "select the one matching with your case:\n" +
+          // "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
+          // "Alternatively, consider the making of this property writable. " +
+          // "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          //   "property is configurable. \n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+          //   "not specified via valid data specification will not be added to new object. \n" +
+          // "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+          //   "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+          //   "the processed object, or rename this property, or add the getter by post validation modifications."
 
     },
+
+    // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
     mutuallyExclusiveAssociativeArrayKeysLimitations: {
 
@@ -608,6 +654,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   /* ━━━ Warnings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   warnings: {
 
+    // TODO Link Injection
     preValidationModificationFailed: {
 
       title: "Pre-validation Modification Failed",
@@ -630,6 +677,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
+    // TODO Link Injections
     unableToDeletePropertyWithOutdatedKey: {
 
       title: "Unable to Delete Property With Outdated Key",
@@ -640,24 +688,28 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           propertyNewKey
         }: Warnings.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `The renaming of the property "${ targetPropertyDotSeparatedQualifiedName }" to "${ propertyNewKey }" has ` +
-            "been requested. " +
-          "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
-            "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
-            "\"true\" boolean value for target property, the deleting of the outdated one. " +
-          "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
-            "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
-          "This error has been reported as warning because the error handling strategy " +
-            "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
-          "● If you are have access to data source, consider the making of this property configurable.\n" +
-          "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
-            "\"true\" for this property.\n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-          "  not specified via valid data specification will not be added to new object."
+          `Unable to delete the property "${ targetPropertyDotSeparatedQualifiedName }" after renaming to ` +
+            `"${ propertyNewKey }" because it is not configurable while the processing approach is the manipulations ` +
+            "with source object and \"mustLeaveEvenRenamed\" has not been set to true."
+          // `The renaming of the property "${ targetPropertyDotSeparatedQualifiedName }" to "${ propertyNewKey }" has ` +
+          //   "been requested. " +
+          // "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
+          //   "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
+          //   "\"true\" boolean value for target property, the deleting of the outdated one. " +
+          // "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+          //   "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+          // "This error has been reported as warning because the error handling strategy " +
+          //   "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+          //   "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
+          // "● If you are have access to data source, consider the making of this property configurable.\n" +
+          // "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
+          //   "\"true\" for this property.\n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          // "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+          // "  not specified via valid data specification will not be added to new object."
     },
 
+    // TODO Link Injections
     unableToChangePropertyDescriptors: {
 
       title: "Unable to Change Property Descriptors",
@@ -668,16 +720,17 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }". ` +
           "This error has been reported as warning because the error handling strategy " +
             "\"unableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
-          "● If you are have access to the data source, consider the making of this property configurable.\n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-            "valid data specification will not be added to new object.\n" +
-          "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
-            "Consider the creating of derived from the source one object　instead."
+            "what is not recommended because the output data will differ with expected one while could be marked as valid. "
+          // "● If you are have access to the data source, consider the making of this property configurable.\n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+          //   "valid data specification will not be added to new object.\n" +
+          // "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
+          //   "Consider the creating of derived from the source one object　instead."
 
     },
 
+    // TODO Link Injectino
     unableToUpdatePropertyValue: {
 
       title: "Unable to Update property Value",
@@ -691,21 +744,22 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "value substitution or pre-validation modification while this property is read-only. " +
           "This error has been reported as warning because the error handling strategy " +
             "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
-          "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-          "Alternatively, consider the making of this property writable. " +
-          "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
-            "property is configurable. \n" +
-          "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-            "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-            "not specified via valid data specification will not be added to new object.\n" +
-          "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-            "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-            "the processed object, or rename this property, or add the getter by post validation modifications."
+            "what is not recommended because the output data will differ with expected one while could be marked as valid. "
+          // "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
+          // "Alternatively, consider the making of this property writable. " +
+          // "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+          //   "property is configurable. \n" +
+          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+          //   "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+          //   "not specified via valid data specification will not be added to new object.\n" +
+          // "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+          //   "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+          //   "the processed object, or rename this property, or add the getter by post validation modifications."
 
     }
 
   },
+  // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
   /* === Value type ================================================================================================= */
@@ -742,6 +796,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     switch (numberSet) {
       case RawObjectDataProcessor.NumbersSets.naturalNumber: return "natural number";
       case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: return "positive integer or zero";
+      case RawObjectDataProcessor.NumbersSets.naturalNumberOrZero: return "natural number or zero";
       case RawObjectDataProcessor.NumbersSets.negativeInteger: return "negative integer";
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "negative integer of zero";
       case RawObjectDataProcessor.NumbersSets.anyInteger: return "any integer";

@@ -17,6 +17,7 @@ export { default as getExpectedToBeSingleDOM_Element } from "./DOM/getExpectedTo
 export { default as getExpectedToBeSingleChildOfTemplateElement } from "./DOM/getExpectedToBeSingleChildOfTemplateElement";
 export { default as resolveContextDOM_ElementPolymorphicSpecification } from
     "./DOM/resolveContextDOM_ElementPolymorphicSpecification";
+export { default as setHTML_Attributes } from "./DOM/setHTML_Attributes";
 
 
 /* ━━━ Events Handling ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -26,6 +27,8 @@ export { default as LeftClickEventListener } from "./EventsHandling/LeftClick/Le
 export { default as LeftClickOutOfElementEventListener } from "./EventsHandling/LeftClick/LeftClickOutOfElementEventListener";
 
 /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as FocusOutEventListener } from "./EventsHandling/FocusOutEventListener";
+export { default as InputEventListener } from "./EventsHandling/InputEventListener";
 export { default as addInputEventHandler } from "./EventsHandling/addInputEventHandler";
 export { default as EventPropagationTypes } from "./EventsHandling/EventPropagationTypes";
 

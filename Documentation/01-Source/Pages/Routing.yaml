@@ -37,13 +37,13 @@ coreLibrary:
 
                 createArrayOfNaturalNumbers:
                   $heading: "<code>createArrayOfNaturalNumbers</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.${ fileNameLocalizationExtensions }`
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/TableOfContents/createArrayOfNaturalNumbers.toc.russian.yaml
 
             retrievingOfElements:
 
@@ -53,23 +53,23 @@ coreLibrary:
 
                 getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne:
                   $heading: "<code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ fileNameLocalizationExtensions }`
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.russian.yaml
 
                 getLastElementOfArray:
                   $heading: "<code>getLastElementOfArray</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.${ fileNameLocalizationExtensions }`
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.russian.yaml
 
             retrievingOfIndexes:
 
@@ -77,13 +77,25 @@ coreLibrary:
 
               $children:
 
-                getIndexesOfArrayElementsWhichSatisfiesThePredicate:
-                  $heading: "<code>getIndexesOfArrayElementsWhichSatisfiesThePredicate</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md"
+                getIndexesOfSatisfiesThePredicateArrayElements:
+                  $heading: "<code>getIndexesOfSatisfiesThePredicateArrayElements</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/TableOfContents/getIndexesOfSatisfiesThePredicateArrayElements.toc.russian.yaml
 
                 getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne:
                   $heading: "<code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.russian.yaml
 
             retrievingOfSubarrays:
 
@@ -93,13 +105,13 @@ coreLibrary:
 
                 cropArray:
                   $heading: "<code>cropArray</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/cropArray.${ fileNameLocalizationExtensions }`
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/TableOfContents/cropArray.toc.russian.yaml
 
             addingOfElements:
 
@@ -109,14 +121,67 @@ coreLibrary:
 
                 addElementsToArray:
                   $heading: "<code>addElementsToArray</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/addElementsToArray.${ fileNameLocalizationExtensions }`
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.${ fileNameLocalizationExtensions }`
                   $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.yaml
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.yaml
                     $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.russian.yaml
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/TableOfContents/addElementsToArray.toc.russian.yaml
 
+            replacingOfElements:
+
+              $heading: `coreLibrary.functionality.arrays.replacingOfElements.$heading`
+
+              $children:
+
+                replaceArrayElementsByIndexesImmutably:
+                  $heading: "<code>replaceArrayElementsByIndexesImmutably</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/TableOfContents/replaceArrayElementsByIndexesImmutably.toc.russian.yaml
+
+                replaceArrayElementsByPredicates:
+                  $heading: "<code>replaceArrayElementsByPredicates</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/TableOfContents/replaceArrayElementsByPredicates.toc.russian.yaml
+
+            permutationsOfElements:
+
+              $heading: `coreLibrary.functionality.arrays.permutationsOfElements.$heading`
+
+              $children:
+
+                moveArrayElementTo1Position:
+                  $heading: "<code>moveArrayElementTo1Position</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position/moveArrayElementTo1Position.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position/TableOfContents/moveArrayElementTo1Position.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position/TableOfContents/moveArrayElementTo1Position.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position/TableOfContents/moveArrayElementTo1Position.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position/TableOfContents/moveArrayElementTo1Position.toc.russian.yaml
+
+                swapArrayElements:
+                  $heading: "<code>swapArrayElements</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/swapArrayElements.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.russian.yaml
+
+            # === TODO =================================================================================================
             removingOfElements:
 
               $heading: `coreLibrary.functionality.arrays.removingOfElements.$heading`
@@ -124,13 +189,52 @@ coreLibrary:
               $children:
 
                 removeArrayElementsByIndexes:
+
                   $heading: "<code>removeArrayElementsByIndexes</code>"
+
                   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md"
 
+#                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.${ fileNameLocalizationExtensions }`
+#                  $sectioning:
+#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.yaml
+#                    $localizations:
+#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.english.yaml
+#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.japanese.yaml
+#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.russian.yaml
 
                 removeArrayElementsByPredicates:
+
                   $heading: "<code>removeArrayElementsByPredicates</code>"
+
                   $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md"
+
+#                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
+#                  $sectioning:
+#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.yaml
+#                    $localizations:
+#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.english.yaml
+#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.japanese.yaml
+#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.russian.yaml
+
+            restructuring:
+
+              $heading: `coreLibrary.functionality.arrays.restructuring.$heading`
+
+              $children:
+
+                twoDimensionalizeArray:
+
+                  $heading: "<code>twoDimensionalizeArray</code>"
+
+                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/08-Restructuring/twoDimensionalizeArray.ts"
+
+#                  $URI: `@All/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/twoDimensionalizeArray.${ fileNameLocalizationExtensions }`
+#                  $sectioning:
+#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.yaml
+#                    $localizations:
+#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.english.yaml
+#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.japanese.yaml
+#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.russian.yaml
 
             other:
 
@@ -139,28 +243,18 @@ coreLibrary:
               $children:
 
                 addElementsToArrayIfTheyAreNotPresentOtherwiseRemove:
+
                   $heading: "<code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
-                  $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
-                    $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
 
-                swapArrayElements:
-                  $heading: "<code>swapArrayElements</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/swapArrayElements.${ fileNameLocalizationExtensions }`
-                  $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.yaml
-                    $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/Other/swapArrayElements/TableOfContents/swapArrayElements.toc.russian.yaml
+                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.ts"
 
-                twoDimensionalizeArray:
-                  $heading: "<code>twoDimensionalizeArray</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md"
+#                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
+#                  $sectioning:
+#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
+#                    $localizations:
+#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
+#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
+#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
 
         constantsAndEnumerations:
 
@@ -620,16 +714,75 @@ coreLibrary:
         RawObjectDataProcessor:
 
           $heading: "<code>RawObjectDataProcessor</code>"
-
-          #$URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md"
-
           $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.${ fileNameLocalizationExtensions }`
-          $sectioning:
-            $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.yaml
-            $localizations:
-              english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.english.yaml
-              japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.japanese.yaml
-              russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.russian.yaml
+
+          $children:
+
+            demo:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.demo.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.russian.yaml
+
+            problemOverview:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.problemOverview.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.toc.russian.yaml
+
+            theoreticalMinimum:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.theoreticalMinimum.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.russian.yaml
+
+            commonScenarios:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.commonScenarios.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/RawObjectDataProcessor-CommonScenarios.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.russian.yaml
+
+            API:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.API.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/RawObjectDataProcessor-API.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.russian.yaml
+
+            validationIssues:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.validationIssues.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.russian.yaml
 
         sets:
 
@@ -1195,8 +1348,11 @@ realiseNotes:
       $heading: "1.7"
       $URI: `@All/RealiseNotes/v1d7/RealiseNotes-v1d7.${ fileNameLocalizationExtensions }`
 
+    v1d8:
+      $heading: "1.8"
+      $URI: `@All/RealiseNotes/v1d8/RealiseNotes-v1d8.${ fileNameLocalizationExtensions }`
 
-supportProject:
-
-  $heading: `supportProject.$heading`
-  $URI: `SupportsProject/SupportsProject.${ fileNameLocalizationExtensions }`
+#supportProject:
+#
+#  $heading: `supportProject.$heading`
+#  $URI: `SupportsProject/SupportsProject.${ fileNameLocalizationExtensions }`

@@ -1,4 +1,4 @@
-import removeArrayElementsByPredicates from "../../Arrays/removeArrayElementsByPredicates";
+import removeArrayElementsByPredicates from "../../Arrays/07-RemovingOfElements/removeArrayElementsByPredicates";
 import explodeURI_PathToSegments from "./explodeURI_PathToSegments";
 
 

@@ -635,6 +635,7 @@ class ConsoleCommandsParser<
         break;
       }
 
+      case RawObjectDataProcessor.NumbersSets.naturalNumberOrZero:
       case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: {
         isOptionValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetOptionParsedValue);
         break;
@@ -843,7 +844,7 @@ class ConsoleCommandsParser<
           }
         );
 
-    if (validationResult.rawDataIsInvalid) {
+    if (validationResult.isRawDataInvalid) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidExternalDataError({
           customMessage: ConsoleCommandsParser.localization.errorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.generate({
@@ -897,7 +898,7 @@ class ConsoleCommandsParser<
 
     if (isNonEmptyString(commandPhraseSpecification.description)) {
       textSegments.push(
-        indentationCoordinator.insertIncrementedIndentWihtoutUpdatingOfIndentationMultiplier() +
+        indentationCoordinator.insertIncrementedIndentWithoutUpdatingOfIndentationMultiplier() +
             commandPhraseSpecification.description
       );
     }
@@ -1048,7 +1049,7 @@ class ConsoleCommandsParser<
         indentationCoordinator.incrementIndent();
 
         textSegments.push(
-          indentationCoordinator.addCurrentIntendationToEachLineOf(
+          indentationCoordinator.addCurrentIndentationToEachLineOf(
             stringifyAndFormatArbitraryValue(commandOptionSpecification.validValueSpecification.properties)
           )
         );
