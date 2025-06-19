@@ -16,6 +16,14 @@ export default abstract class ArbitraryValueFormatter {
       case "function": return rawEntity.toString();
       case "object": {
 
+        if (
+          rawEntity instanceof Error ||
+          rawEntity instanceof RegExp
+        ) {
+          return rawEntity.toString();
+        }
+
+
         if (rawEntity === null) {
           return "null";
         }
@@ -25,8 +33,7 @@ export default abstract class ArbitraryValueFormatter {
         }
 
 
-        return "";
-        // return ArbitraryValueFormatter.stringifyAndFormatObject(rawEntity);
+        return JSON.stringify(rawEntity, ArbitraryValueFormatter.stringifyNonCompatibleWithJSON_KeyAndValue, 2);
 
       }
 
@@ -35,9 +42,15 @@ export default abstract class ArbitraryValueFormatter {
   }
 
 
-  // private static stringifyAndFormatObject(targetObject: object): string {
-  //
-  // }
+  private static stringifyNonCompatibleWithJSON_KeyAndValue(_key: string, value: unknown): string {
+
+    if (value instanceof Set) {
+      return `Set(${ value.size }) { ${ Array.from(value).toString() } }`;
+    }
+
+    return String(value);
+
+  }
 
   private static stringifyAndFormatMap<Key, Value>(targetMap: Map<Key, Value>): string {
 
@@ -57,6 +70,5 @@ export default abstract class ArbitraryValueFormatter {
             "}";
 
   }
-
 
 }

@@ -1,11 +1,12 @@
+validationErrorsMessages:
+
+  $heading: "妥当性違反メッセージ"
+
 throwableErrors:
 
   $heading: "投げられるエラー"
 
-  objectSchemaNotSpecified:
+warnings:
 
-    $heading: "オブジェクトのスキーマが未指定 (<code>objectSchemaNotSpecified</code>)"
+  $heading: "警告"
 
-  mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
-
-    $heading: "<code>undefined</code>・<code>null</code>の間相反変換 (<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>)"

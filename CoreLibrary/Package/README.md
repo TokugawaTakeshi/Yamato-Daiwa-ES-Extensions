@@ -1,7 +1,7 @@
 # Yamato Daiwa ES Extensions 〔YDEE〕
 
 [![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)]()
-[![No third-party dependencies](https://img.shields.io/badge/Dependencies-No_dependencies-brightgreen.svg?style=flat)]()
+[![No third-party dependencies](https://img.shields.io/badge/Dependencies-No_third_party_dependencies-brightgreen.svg?style=flat)]()
 [![NPM Version](https://img.shields.io/npm/v/@yamato-daiwa/es-extensions)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
 [![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-Official_Plugin-088BF8.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 

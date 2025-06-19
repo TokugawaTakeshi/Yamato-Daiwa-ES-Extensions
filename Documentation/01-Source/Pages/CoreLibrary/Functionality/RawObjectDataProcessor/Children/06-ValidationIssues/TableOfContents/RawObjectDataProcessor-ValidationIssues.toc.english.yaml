@@ -1,11 +1,11 @@
+validationErrorsMessages:
+
+  $heading: "Validation Errors Messages"
+
 throwableErrors:
 
   $heading: "Throwable Errors"
 
-  objectSchemaNotSpecified:
+warnings:
 
-    $heading: "Object Schema not Specified (<code>objectSchemaNotSpecified</code>)"
-
-  mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
-
-    $heading: "Mutually Exclusive Transformations Between <code>undefined</code> and <code>null</code> (<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>)"
+  $heading: "Warnings"

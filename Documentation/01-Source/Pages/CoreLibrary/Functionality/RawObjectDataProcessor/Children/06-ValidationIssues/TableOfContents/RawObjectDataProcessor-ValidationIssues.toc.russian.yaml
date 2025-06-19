@@ -1,11 +1,11 @@
+validationErrorsMessages:
+
+  $heading: "Сообщения об ошибках валидации"
+
 throwableErrors:
 
   $heading: "Бросаемые ошибки"
 
-  objectSchemaNotSpecified:
+warnings:
 
-    $heading: "Схема объекта не определена (<code>objectSchemaNotSpecified</code>)"
-
-  mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
-
-    $heading: "Взаимоисключающий трансформации между <code>undefined</code> и <code>null</code> (<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>)"
+  $heading: "Предупреждения"

@@ -51,16 +51,37 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor` — Ошибки и предупреждения о невалидных данных ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
-    //- ━━━ Throwable Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ Сообщения об ошибках валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: localizedSectioning.throwableErrors.$heading,
-      HTML_ID: localizedSectioning.throwableErrors.$anchor
+      text: localizedSectioning.validationErrorsMessages.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$anchor
     }).Article-Heading2
 
-    //- ─── Схема объекта не определена (<code>objectSchemaNotSpecified</code>) ────────────────────────────────────────
+    //- ─── RAW_DATA_IS_NOT_OBJECT ─────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$heading,
-      HTML_ID: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$anchor
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.rawDataIsNotObject.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.rawDataIsNotObject.$anchor
+    }).Article-Heading3
+
+    //- ─── RAW_DATA_IS_NULL ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.rawDataIsNull.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.rawDataIsNull.$anchor
+    }).Article-Heading3
+
+    //- ─── VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.valueTypeDoesNotMatchWithExpected.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.valueTypeDoesNotMatchWithExpected.$anchor
+    }).Article-Heading3
+
+    //- ─── PRE_VALIDATION_MODIFICATION_FAILED ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.preValidationModificationFailed.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.preValidationModificationFailed.$anchor
     }).Article-Heading3

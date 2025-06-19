@@ -1,3 +1,30 @@
+validationErrorsMessages:
+
+  $heading: `validationErrorsMessages.$heading`
+  $anchor: VALIDATION_ERRORS_MESSAGES--SECTION
+
+  $children:
+
+    rawDataIsNotObject:
+
+      $heading: "<code>RAW_DATA_IS_NOT_OBJECT</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-RAW_DATA_IS_NOT_OBJECT--SECTION"
+
+    rawDataIsNull:
+
+      $heading: "<code>RAW_DATA_IS_NULL</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-RAW_DATA_IS_NULL--SECTION"
+
+    valueTypeDoesNotMatchWithExpected:
+
+      $heading: "<code>VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED--SECTION"
+
+    preValidationModificationFailed:
+
+      $heading: "<code>PRE_VALIDATION_MODIFICATION_FAILED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-PRE_VALIDATION_MODIFICATION_FAILED--SECTION"
+
 throwableErrors:
 
   $heading: `throwableErrors.$heading`
@@ -6,9 +33,26 @@ throwableErrors:
   $children:
 
     objectSchemaNotSpecified:
-      $heading: `throwableErrors.objectSchemaNotSpecified.$heading`
+      $heading: "<code>objectSchemaNotSpecified</code>"
       $anchor: "THROWABLE_ERRORS-OBJECT_SCHEMA_NOT_SPECIFIED--SECTION"
 
     mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
-      $heading: `throwableErrors.mutuallyExclusiveTransformationsBetweenUndefinedAndNull.$heading`
+      $heading: "<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>"
       $anchor: "THROWABLE_ERRORS-MUTUALLY_EXCLUSIVE_TRANSFORMATIONS_BETWEEN_UNDEFINED_AND_NULL--SECTION"
+
+warnings:
+
+  $heading: `warnings.$heading`
+  $anchor: WARNINGS--SECTION
+
+  $children:
+
+    preValidationModificationFailed:
+
+      $heading: "<code>preValidationModificationFailed</code>"
+      $anchor: "WARNINGS-PRE_VALIDATION_MODIFICATION_FAILED--SECTION"
+
+    unableToDeletePropertyWithOutdatedKey:
+
+      $heading: "<code>unableToDeletePropertyWithOutdatedKey</code>"
+      $anchor: "WARNINGS-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY--SECTION"
