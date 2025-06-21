@@ -1,0 +1,23 @@
+numericTypes:
+
+  $heading: "数系の型"
+
+stringTypes:
+
+  $heading: "文字列系の型"
+
+objectTypes:
+
+  $heading: "オブジェクト系の型"
+
+arrayedTypes:
+
+  $heading: "配列系の型"
+
+emptyTypes:
+
+  $heading: "空の型"
+
+otherTypes:
+
+  $heading: "其の他の型"

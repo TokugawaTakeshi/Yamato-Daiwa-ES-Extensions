@@ -3,8 +3,8 @@ import uppercaseLatinCharacters from "../../Strings/CharactersAssets/uppercaseLa
 import stringifiedDigits from "../../Strings/CharactersAssets/stringifiedDigits";
 
 import isString from "../../TypeGuards/Strings/isString";
-import isUndefined from "../../TypeGuards/Nullables/isUndefined";
-import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import isUndefined from "../../TypeGuards/EmptyTypes/isUndefined";
+import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
 import undefinedToEmptyString from "../../ValueTransformers/undefinedToEmptyString";
 import substituteWhenUndefined from "../../DefaultValueSubstituters/substituteWhenUndefined";
 import getRandomInteger from "../getRandomInteger";
@@ -288,7 +288,7 @@ export namespace RandomStringsGenerator {
       latinUppercase?: boolean;
       latinLowercase?: boolean;
       digits?: boolean;
-      other?: Array<string> | string;
+      other?: ReadonlyArray<string> | string;
     }>;
   }
 

@@ -1,4 +1,4 @@
-import isNull from "../../TypeGuards/Nullables/isNull";
+import isNull from "../../TypeGuards/EmptyTypes/isNull";
 import UnexpectedEventError from "../../Errors/UnexpectedEvent/UnexpectedEventError";
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";

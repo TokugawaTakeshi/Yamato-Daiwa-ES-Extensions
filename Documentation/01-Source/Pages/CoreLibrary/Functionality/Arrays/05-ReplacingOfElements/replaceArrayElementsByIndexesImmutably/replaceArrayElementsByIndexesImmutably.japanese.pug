@@ -60,16 +60,16 @@ block append SpecificContent
       genericParameters: [ "ArrayElement" ],
       parametersSpecification: [
         {
-          genericTechnicalName: "sourceData",
+          genericTechnicalName: "sourceDataAndOptions",
           localizedName: "入力データ",
-          type: "SourceData",
+          type: "SourceDataAndOptions",
           required: true
         }
       ],
       returnedValue: "Array<ArrayElement>",
     })
       +ObjectTypeAbstract--YDF_DK({
-        typeName: "SourceData",
+        typeName: "SourceDataAndOptions",
         propertiesSpecification: {
           $intersection: [
             {

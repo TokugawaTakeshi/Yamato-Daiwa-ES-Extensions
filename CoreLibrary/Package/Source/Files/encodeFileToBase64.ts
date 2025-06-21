@@ -1,4 +1,4 @@
-import isNull from "../TypeGuards/Nullables/isNull";
+import isNull from "../TypeGuards/EmptyTypes/isNull";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
 import PoliteErrorsMessagesBuilder from "../Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
 import YDEE_BUG_REPORTING_PAGE_URI from "../ConstantsAndEnumerations/YDEE_BUG_REPORTING_PAGE_URI";

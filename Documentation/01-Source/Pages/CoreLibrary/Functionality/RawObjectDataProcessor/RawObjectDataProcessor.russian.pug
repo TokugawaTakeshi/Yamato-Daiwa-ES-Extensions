@@ -11,9 +11,14 @@ block append Metadata
 
   -
 
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor;
+
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("RawObjectDataProcessor"),
+        title: buildHTML_PageTitle(topHeading),
         description: "",
       },
       stylesSheetsURIs: [
@@ -31,11 +36,6 @@ block append Metadata
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$URI
     });
 
-    const {
-      $sectioning: localizedSectioning,
-      $heading: topHeading
-    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor;
-
 
 block append HeadScripts
 
@@ -48,4 +48,24 @@ block append SpecificContent
 
   article
 
-    h1 RawObjectDataProcessor
+    //- ━━━ `RawObjectDataProcessor` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= topHeading
+
+    p.Article-Paragraph.
+      #[+Term--YDID Класс] для валидации и обработки данных типа #[+Term--YDID «объект»] (в частности
+        #[+Term--YDID массивов]) с привидением их к конкретному #[+Term--YDID TypeScript-типу].
+
+    p.Article-Paragraph.
+      Востребован в большинстве случаев, когда данные приходят из источника, недосягаемого для проверки типов с помощью
+        #[+ImportantEntity--YDID TypeScript].
+      В частности, это могут быть следующие сценарии:
+
+    ul.Article-UnorderedList
+      li Полученные данных с клиентской части в клиент-серверном взаимодействии
+      li Наоборот, полученные данных с серверной части в клиент-серверном взаимодействии
+      li Получение данных из базы данных
+      li Чтение данных из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+
+    +CompactTableOfContents--YDF_DK(
+      localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children
+    )

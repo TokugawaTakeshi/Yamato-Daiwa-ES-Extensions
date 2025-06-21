@@ -1,6 +1,6 @@
 import getLastElementOfArray from "../../../Arrays/01-RetrievingOfElements/getLastElementOfArray";
 import explodeURI_PathToSegments from "../explodeURI_PathToSegments";
-import isNull from "../../../TypeGuards/Nullables/isNull";
+import isNull from "../../../TypeGuards/EmptyTypes/isNull";
 
 
 export default function extractFileNameWithoutLastExtension(targetPath: string): string {

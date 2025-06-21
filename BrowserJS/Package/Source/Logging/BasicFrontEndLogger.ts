@@ -158,6 +158,40 @@ abstract class BasicFrontEndLogger {
 
   }
 
+  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.debug(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.debug(
+      ...BasicFrontEndLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.debug,
+          foregroundColor: "white",
+          backgroundColor: "gray"
+        },
+        mainColor: "gray",
+        titleColor: "gray"
+      })
+    );
+
+  }
+
   public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
 
     if (
@@ -181,7 +215,7 @@ abstract class BasicFrontEndLogger {
       ...BasicFrontEndLogger.formatGenericLog({
         genericLog: polymorphicPayload,
         badgeContentAndFormatting: {
-          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.success,
+          defaultText: BasicFrontEndLogger.localization.badgesDefaultTitles.generic,
           foregroundColor: "white",
           backgroundColor: "gray"
         },

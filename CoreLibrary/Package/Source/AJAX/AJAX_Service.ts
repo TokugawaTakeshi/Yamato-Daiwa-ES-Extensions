@@ -16,9 +16,9 @@ import type URI_QueryParametersSerializer from "./URI_QueryParametersSerializer"
 import serializeURI_QueryParameters from "./serializeURI_QueryParameters";
 
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
-import isNull from "../TypeGuards/Nullables/isNull";
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNull from "../TypeGuards/EmptyTypes/isNull";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 abstract class AJAX_Service {
@@ -319,7 +319,7 @@ abstract class AJAX_Service {
       const responseRawDataProcessingResult: RawObjectDataProcessor.ProcessingResult<RawValidResponseData> =
           RawObjectDataProcessor.process(rawObjectDataResponse.data, validResponseDataSpecification);
 
-      if (responseRawDataProcessingResult.rawDataIsInvalid) {
+      if (responseRawDataProcessingResult.isRawDataInvalid) {
         Logger.throwErrorAndLog({
           errorInstance: new InvalidExternalDataError({
             mentionToExpectedData: "HTTP_ResponseData",

@@ -8,6 +8,7 @@ const loggerLocalization__english: Logger.Localization = {
     warning: "Warning",
     success: "Success",
     info: "Info",
+    debug: "Debug",
     generic: "Common"
   },
 

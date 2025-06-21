@@ -1,5 +1,5 @@
-import isNull from "../../TypeGuards/Nullables/isNull";
-import isNotNull from "../../TypeGuards/Nullables/isNotNull";
+import isNull from "../../TypeGuards/EmptyTypes/isNull";
+import isNotNull from "../../TypeGuards/EmptyTypes/isNotNull";
 import splitString from "../splitString";
 
 

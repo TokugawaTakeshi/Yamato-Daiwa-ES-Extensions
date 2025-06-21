@@ -1,5 +1,5 @@
 import reverseString from "../Strings/reverseString";
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 
 
 export default function formatNumberWith4KetaKanji(targetNumber: number | bigint | string): string {

@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs",
-  "version": "1.8.0-alpha.15",
+  "version": "1.8.0-rc.1",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for Node.js environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "nodejs",
@@ -29,35 +29,39 @@
     "Distributable"
   ],
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.15"
+    "@yamato-daiwa/es-extensions": "1.8.0-rc.0"
   },
   "dependencies": {
-    "dotenv": "16.4.5",
-    "glob": "11.0.0",
+    "dotenv": "17.2.0",
+    "glob": "11.0.3",
     "json5": "2.2.3",
-    "minimatch": "10.0.0",
+    "minimatch": "10.0.3",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
     "@types/json5": "0.0.30",
-    "@types/mocha": "10.0.8",
-    "@types/node": "22.7.4",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.15.31",
     "@types/yamljs": "0.2.34",
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.15",
-    "@yamato-daiwa/style_guides": "0.6.5",
+    "@yamato-daiwa/es-extensions": "1.8.0-rc.0",
+    "@yamato-daiwa/style_guides": "0.8.0",
     "mocha": "10.7.3",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
-    "typescript": "5.8.2"
+    "tsx": "4.20.3",
+    "typescript": "5.8.3"
   },
   "scripts": {
+    "Check Types": "tsc --noEmit",
     "Lint": "eslint Source Tests",
+    "Run Tests": "node --require tsx/cjs --test \"Tests/**/*.test.ts\"",
     "Rebuild Distributable Without Preliminary Cleaning": "tsc",
-    "Rebuild Distributable": "rimraf Distributable && tsc",
+    "Rebuild Distributable": "rimraf Distributable & tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
-  }
+  },
+  "funding": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1"
 }

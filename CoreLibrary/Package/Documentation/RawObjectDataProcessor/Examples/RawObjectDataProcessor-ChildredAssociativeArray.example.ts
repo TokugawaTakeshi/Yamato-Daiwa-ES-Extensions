@@ -11,10 +11,10 @@ type ValidData = {
 
 const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     foo: {
-      type: RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues,
+      type: RawObjectDataProcessor.ValuesTypesIDs.associativeArray,
       required: true,
       value: {
         type: String,
@@ -35,7 +35,7 @@ const dataSample: unknown = {
 const dataSampleProcessingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
     process(dataSample, validDataSpecification);
 
-if (dataSampleProcessingResult.rawDataIsInvalid) {
+if (dataSampleProcessingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.localization.defaultTitle,

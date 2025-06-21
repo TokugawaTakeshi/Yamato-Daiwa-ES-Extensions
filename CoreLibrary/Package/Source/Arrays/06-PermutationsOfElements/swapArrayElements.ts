@@ -1,7 +1,7 @@
 import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
 import isNaturalNumberOrZero from "../../TypeGuards/Numbers/isNaturalNumberOrZero";
-import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
-import isNull from "../../TypeGuards/Nullables/isNull";
+import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
+import isNull from "../../TypeGuards/EmptyTypes/isNull";
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 import getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne from

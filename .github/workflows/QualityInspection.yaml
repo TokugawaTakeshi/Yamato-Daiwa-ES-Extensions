@@ -1,0 +1,35 @@
+name: Quality Inspection
+
+on: [ push ]
+
+jobs:
+
+  build:
+
+    name: Quality Inspection
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.15.0
+
+      - name: Node.js Version Checking
+        run: node --version
+
+      - name: Dependencies Installation
+        run: cd CoreLibrary/Package && npm install
+
+      - name: Types Checking
+        run: npm run "Check Types"
+
+      - name: Linting
+        run: npm run "Linting"
+
+      - name: Tests
+        run: npm run "Run Tests"

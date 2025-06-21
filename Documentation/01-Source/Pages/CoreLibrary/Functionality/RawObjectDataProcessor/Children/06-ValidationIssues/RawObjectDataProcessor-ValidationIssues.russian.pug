@@ -1,0 +1,453 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues;
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
+        description: ""
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.validationIssues");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.validationIssues.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- ━━━ `RawObjectDataProcessor` — Ошибки и предупреждения о невалидных данных ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+    +CompactTableOfContents--YDF_DK(localizedSectioning, { mustApplyAnchorsInsteadOfURIs: true })
+
+
+    //- ━━━ Сообщения об ошибках валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.validationErrorsMessages.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$anchor
+    }).Article-Heading2
+
+    //- ─── RAW_DATA_IS_NOT_OBJECT ─────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.rawDataIsNotObject.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.rawDataIsNotObject.$anchor
+    }).Article-Heading3
+
+    //- ─── RAW_DATA_IS_NULL ───────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.rawDataIsNull.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.rawDataIsNull.$anchor
+    }).Article-Heading3
+
+    //- ─── VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.valueTypeDoesNotMatchWithExpected.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.valueTypeDoesNotMatchWithExpected.$anchor
+    }).Article-Heading3
+
+    //- ─── PRE_VALIDATION_MODIFICATION_FAILED ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.preValidationModificationFailed.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.preValidationModificationFailed.$anchor
+    }).Article-Heading3
+
+    //-
+      "Also, most likely this strategy will cause the subsequent errors. " +
+      "It is recommended to set the strategy to \"ErrorHandlingStrategies.throwingOfError\" which is default and " +
+      "fix the pre-validation modification function."
+
+    //- ─── FORBIDDEN_UNDEFINED_VALUE ──────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.forbiddenUndefinedValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.forbiddenUndefinedValue.$anchor
+    }).Article-Heading3
+
+    //- ─── CONDITIONALLY_FORBIDDEN_UNDEFINED_VALUE ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenUndefinedValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenUndefinedValue.$anchor
+    }).Article-Heading3
+
+    //- ─── CONDITIONALLY_FORBIDDEN_NON_UNDEFINED_VALUE ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNonUndefinedValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNonUndefinedValue.$anchor
+    }).Article-Heading3
+
+    //- ─── FORBIDDEN_NULL_VALUE ───────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.forbiddenNullValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.forbiddenNullValue.$anchor
+    }).Article-Heading3
+
+    //- ─── CONDITIONALLY_FORBIDDEN_NULL_VALUE ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNullValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNullValue.$anchor
+    }).Article-Heading3
+
+    //- ─── CONDITIONALLY_FORBIDDEN_NON_NULL_VALUE ─────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNonNullValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.conditionallyForbiddenNonNullValue.$anchor
+    }).Article-Heading3
+
+    //- ─── UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.unableToDeletePropertyWithOutdatedKey.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.unableToDeletePropertyWithOutdatedKey.$anchor
+    }).Article-Heading3
+
+    //-
+      "The renaming of this property has been requested. " +
+      "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
+        "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
+        "\"true\" boolean value for target property, the deleting of the outdated one. " +
+      "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+        "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+      "The data has been marked as invalid because the error handling strategy " +
+        "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+        "is recommended only if this property on source data actually expected to be configurable " +
+        "(thus deletable). " +
+      "But, if you have not the control on source data and it could be guaranteed that the source data is " +
+        "configurable, basically one of two following measures left:" +
+      "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
+        "\"true\" for this property.\n" +
+      "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+      "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+      "  not specified via valid data specification will not be added to new object."
+
+    //- ─── UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.unableToChangePropertyDescriptors.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.unableToChangePropertyDescriptors.$anchor
+    }).Article-Heading3
+
+    //-
+      "The changing of descriptors of this property has been requested but ths property is not configurable. " +
+        "The data has been marked as invalid because the error handling strategy " +
+          "\"onUnableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
+          "is recommended only if this property on source data actually expected to be configurable. "
+
+    //- ─── UNABLE_TO_UPDATE_PROPERTY_VALUE ────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.unableToUpdatePropertyValue.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.unableToUpdatePropertyValue.$anchor
+    }).Article-Heading3
+
+    //-
+      "But, if you have not the control on source data and it could be guaranteed that the source data is writable, " +
+        "the following measures left:" +
+      "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+        "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+        "not specified via valid data specification will not be added to new object." +
+      "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+        "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+        "the processed object, or rename this property, or add the getter by post validation modifications."
+
+    //- ─── UNEXPECTED_PROPERTIES ──────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.unexpectedProperties.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.unexpectedProperties.$anchor
+    }).Article-Heading3
+
+    //- ─── CUSTOM_VALIDATION_FAILED ───────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.customValidationFailed.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.customValidationFailed.$anchor
+    }).Article-Heading3
+
+    //- ─── ASSOCIATIVE_ARRAY_ENTRIES_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM ──────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.associativeArrayEntriesCountIsLessThanRequiredMinimum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.associativeArrayEntriesCountIsLessThanRequiredMinimum.$anchor
+    }).Article-Heading3
+
+    //- ─── ASSOCIATIVE_ARRAY_PAIRS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM ─────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.associativeArrayPairsCountIsMoreThanAllowedMaximum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.associativeArrayPairsCountIsMoreThanAllowedMaximum.$anchor
+    }).Article-Heading3
+
+    //- ─── ASSOCIATIVE_ARRAY_PAIRS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER ───────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.$anchor
+    }).Article-Heading3
+
+    //- ─── FORBIDDEN_FOR_SPECIFIC_KEYS_UNDEFINED_OR_NULL_VALUES_FOUND_IN_ASSOCIATIVE_ARRAY_TYPE_OBJECT ────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.$anchor
+    }).Article-Heading3
+
+    //- ─── DISALLOWED_KEYS_FOUND_IN_ASSOCIATIVE_ARRAY ─────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.disallowedKeysFoundInAssociativeArray.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.disallowedKeysFoundInAssociativeArray.$anchor
+    }).Article-Heading3
+
+    //- ─── INDEXED_ARRAY_ELEMENTS_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM ─────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountIsLessThanRequiredMinimum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountIsLessThanRequiredMinimum.$anchor
+    }).Article-Heading3
+
+    //- ─── INDEXED_ARRAY_ELEMENTS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM ──────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountIsMoreThanAllowedMaximum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountIsMoreThanAllowedMaximum.$anchor
+    }).Article-Heading3
+
+    //- ─── INDEXED_ARRAY_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER ────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.$anchor
+    }).Article-Heading3
+
+    //- ─── NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET ────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.numericValueIsNotBelongToExpectedNumbersSet.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.numericValueIsNotBelongToExpectedNumbersSet.$anchor
+    }).Article-Heading3
+
+    //- ─── VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.valueIsNotAmongAllowedAlternatives.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.valueIsNotAmongAllowedAlternatives.$anchor
+    }).Article-Heading3
+
+    //- ─── NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM ─────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.numericValueIsSmallerThanRequiredMinimum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.numericValueIsSmallerThanRequiredMinimum.$anchor
+    }).Article-Heading3
+
+    //- ─── NUMERIC_VALUE_IS_GREATER_THAN_ALLOWED_MAXIMUM ──────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.numericValueIsGreaterThanAllowedMaximum.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.numericValueIsGreaterThanAllowedMaximum.$anchor
+    }).Article-Heading3
+
+    //- ─── CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED ─────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.charactersCountIsLessThanRequired.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.charactersCountIsLessThanRequired.$anchor
+    }).Article-Heading3
+
+    //- ─── CHARACTERS_COUNT_IS_MORE_THAN_ALLOWED ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.charactersCountIsMoreThanAllowed.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.charactersCountIsMoreThanAllowed.$anchor
+    }).Article-Heading3
+
+    //- ─── CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED ─────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.charactersCountDoesNotMatchWithSpecified.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.charactersCountDoesNotMatchWithSpecified.$anchor
+    }).Article-Heading3
+
+    //- ─── REGULAR_EXPRESSION_MISMATCH ────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.regularExpressionMismatch.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.regularExpressionMismatch.$anchor
+    }).Article-Heading3
+
+    //- ─── DISALLOWED_BOOLEAN_VALUE_VARIANT ───────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.disallowedBooleanValueVariant.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.disallowedBooleanValueVariant.$anchor
+    }).Article-Heading3
+
+
+    //- ━━━ Бросаемые ошибки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.throwableErrors.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$anchor
+    }).Article-Heading2
+
+    //- ─── OBJECT_SCHEMA_NOT_SPECIFIED ────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.objectSchemaNotSpecified.$anchor
+    }).Article-Heading3
+
+    //- ─── PRE_VALIDATION_MODIFICATION_FAILED ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.preValidationModificationFailed.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.preValidationModificationFailed.$anchor
+    }).Article-Heading3
+
+    //- ─── MUTUALLY_EXCLUSIVE_TRANSFORMATIONS_BETWEEN_UNDEFINED_AND_NULL ──────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.mutuallyExclusiveTransformationsBetweenUndefinedAndNull.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.mutuallyExclusiveTransformationsBetweenUndefinedAndNull.$anchor
+    }).Article-Heading3
+
+    //- ─── PROPERTY_UNDEFINEDABILITY_NOT_SPECIFIED ────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.propertyUndefinedabilityNotSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.propertyUndefinedabilityNotSpecified.$anchor
+    }).Article-Heading3
+
+    //- ─── PROPERTY_NULLABILITY_NOT_SPECIFIED ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.propertyNullabilityNotSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.propertyNullabilityNotSpecified.$anchor
+    }).Article-Heading3
+    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+    //- ━━━ Предупреждения ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.warnings.$heading,
+      HTML_ID: localizedSectioning.warnings.$anchor
+    }).Article-Heading2
+
+    //- ─── PRE_VALIDATION_MODIFICATION_FAILED ─────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.warnings.$children.preValidationModificationFailed.$heading,
+      HTML_ID: localizedSectioning.warnings.$children.preValidationModificationFailed.$anchor
+    }).Article-Heading3
+
+    //-
+      "It is recommended to set the strategy to \"\"ErrorHandlingStrategies.throwingOfError\" which is default and " +
+        "fix the pre-validation modification function."
+
+
+    //- ─── UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.warnings.$children.unableToDeletePropertyWithOutdatedKey.$heading,
+      HTML_ID: localizedSectioning.warnings.$children.unableToDeletePropertyWithOutdatedKey.$anchor
+    }).Article-Heading3
+
+    //-
+      `The renaming of the property "${ targetPropertyDotSeparatedQualifiedName }" to "${ propertyNewKey }" has ` +
+        "been requested. " +
+      "If \"processingApproach\" option has been set to \"ProcessingApproaches.manipulationsWithSourceObject\", it " +
+        "means the defining of new property and, while \"mustLeaveEvenRenamed\" option has not been specified with " +
+        "\"true\" boolean value for target property, the deleting of the outdated one. " +
+      "However, the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
+        "Reference/Global_Objects/Object/defineProperty#configurable) thus could not be deleted.\n" +
+      "This error has been reported as warning because the error handling strategy " +
+        "\"onUnableToDeletePropertyWithOutdatedValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+        "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
+      "● If you are have access to data source, consider the making of this property configurable.\n" +
+      "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
+        "\"true\" for this property.\n" +
+      "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+      "  option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+      "  not specified via valid data specification will not be added to new object."
+
+    //- ─── UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.warnings.$children.unableToChangePropertyDescriptors.$heading,
+      HTML_ID: localizedSectioning.warnings.$children.unableToChangePropertyDescriptors.$anchor
+    }).Article-Heading3
+
+    //-
+      "● If you are have access to the data source, consider the making of this property configurable.\n" +
+      "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+        "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
+        "valid data specification will not be added to new object.\n" +
+      "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
+        "Consider the creating of derived from the source one object　instead."
+
+    //- ─── UNABLE_TO_UPDATE_PROPERTY_VALUE ────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.warnings.$children.unableToUpdatePropertyValue.$heading,
+      HTML_ID: localizedSectioning.warnings.$children.unableToUpdatePropertyValue.$anchor
+    }).Article-Heading3
+
+    //-
+      "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
+      "Alternatively, consider the making of this property writable. " +
+      "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
+        "property is configurable. \n" +
+      "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
+        "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
+        "not specified via valid data specification will not be added to new object.\n" +
+      "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
+        "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
+        "the processed object, or rename this property, or add the getter by post validation modifications."

@@ -51,26 +51,113 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 swapArrayElements
-
-    // +ApologyWithSupportRequest
+    h1.Article-Heading1!= "<code>swapArrayElements</code>"
 
     +CodeViewer--YDF({ title: "Сигнатура" })
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        <ArrayElement>(
+          compoundParameter:
+              Readonly<
+                (
+                  {
+                    mutably: true;
+                    targetArray: Array<ArrayElement>;
+                  } |
+                  {
+                    mutably: false;
+                    targetArray: ReadonlyArray<ArrayElement>;
+                  }
+                ) &
+                {
+                  oneElement: Readonly<(
+                    {
+                      position__numerationFrom0: number;
+                      position__numerationFrom1?: undefined;
+                      isLastOne?: undefined;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound: boolean;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1: number;
+                      isLastOne?: undefined;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound: boolean;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1?: undefined;
+                      isLastOne: true;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound?: undefined;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1?: undefined;
+                      isLastOne?: undefined;
+                      finder: (arrayElement: ArrayElement) => boolean;
+                      mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+                    }
+                  )>;
+                  otherElement: Readonly<(
+                    {
+                      position__numerationFrom0: number;
+                      position__numerationFrom1?: undefined;
+                      isLastOne?: undefined;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound: boolean;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1: number;
+                      isLastOne?: undefined;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound: boolean;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1?: undefined;
+                      isLastOne: true;
+                      finder?: undefined;
+                      mustThrowErrorIfNotFound?: undefined;
+                    } |
+                    {
+                      position__numerationFrom0?: undefined;
+                      position__numerationFrom1?: undefined;
+                      isLastOne?: undefined;
+                      finder: (arrayElement: ArrayElement) => boolean;
+                      mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+                    }
+                  )>;
+                } & {
+                  mustThrowErrorIfTargetArrayIsEmpty: boolean;
+                  mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition: boolean;
+                }
+              >
+        ): Array<ArrayElement>
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
 
 
-    //-
-      +CallableExpressionScheme--YDF_DK({
-        technicalName: "swapArrayElements",
-        headingTag: "h1",
-        localizedDescriptiveHeading: "Делает особую, уличную магию",
-        parametersSpecification: [
-          {
-            localizedName: "Target string",
-            type: "string",
-            required: true,
-            genericTechnicalName: "targetString"
-          }
-        ],
-        returnedValue: "boolean"
-      })
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/06-PermutationsOfElements/swapArrayElements.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/06-PermutationsOfElements/swapArrayElements.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

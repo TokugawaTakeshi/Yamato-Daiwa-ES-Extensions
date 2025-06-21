@@ -20,7 +20,7 @@ describe("removeNthCharacter", (): void => {
 
   it("String with surrogate pairs", (): void => {
     Assert.strictEqual(
-      removeNthCharacter("aあ😒🙂", { numerationFrom: 1, targetCharacterNumber: 3 }), "" +
+      removeNthCharacter("aあ😒🙂", { numerationFrom: 1, targetCharacterNumber: 3 }),
       "aあ🙂"
     );
   });

@@ -1,6 +1,6 @@
 import replaceDoubleBackslashesWithForwardSlashes from "../../replaceDoubleBackslashesWithForwardSlashes";
 import splitString from "../../splitString";
-import isUndefined from "../../../TypeGuards/Nullables/isUndefined";
+import isUndefined from "../../../TypeGuards/EmptyTypes/isUndefined";
 
 
 export default function extractAllFileNameExtensions(

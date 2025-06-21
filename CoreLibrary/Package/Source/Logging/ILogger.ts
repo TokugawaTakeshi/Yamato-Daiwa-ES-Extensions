@@ -15,6 +15,7 @@ export interface ILogger {
   readonly logInfo: (polymorphicPayload: InfoLog | string) => void;
   readonly logSuccess: (polymorphicPayload: SuccessLog | string) => void;
 
+  readonly logDebug: (polymorphicPayload: Log | string | number | boolean | null | undefined) => void;
   readonly logGeneric: (polymorphicPayload: Log | string | number | boolean | null | undefined) => void;
 
   readonly highlightText: (targetString: string) => string;

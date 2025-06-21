@@ -28,7 +28,7 @@ abstract class StringTypeID_Generator {
 
 
   protected abstract generateID_ButNotValidateYet(): string;
-  protected abstract isGeneratedID_ConflictsWithExistingOne(generatedID: string): Promise<boolean>;
+  protected abstract isGeneratedID_AvailableForUsage(generatedID: string): Promise<boolean>;
 
 
   /** @throws StringTypeID_Generator.CollisionsLimitReachedError */
@@ -44,7 +44,7 @@ abstract class StringTypeID_Generator {
       /* eslint-disable-next-line no-await-in-loop --
        * It is completely useless to execute multiple check simultaneously in this case, each check must be executed
        * on demand. */
-      if (await this.isGeneratedID_ConflictsWithExistingOne(ID)) {
+      if (await this.isGeneratedID_AvailableForUsage(ID)) {
         break;
       }
 

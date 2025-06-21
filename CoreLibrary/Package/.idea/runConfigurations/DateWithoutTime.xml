@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DateWithoutTime" type="NodeJsTestRunner">
+  <configuration default="false" name="DateWithoutTime" type="NodeJsTestRunner" folderName="DateTime">
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />

@@ -385,7 +385,7 @@ abstract class ObjectDataFilesProcessor {
     const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
         RawObjectDataProcessor.process(parsedData, validDataSpecification);
 
-    if (processingResult.rawDataIsInvalid) {
+    if (processingResult.isRawDataInvalid) {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidExternalDataError({
           customMessage: `The contents of file '${ filePathForLogging }' does not matching with valid data specification:\n` +

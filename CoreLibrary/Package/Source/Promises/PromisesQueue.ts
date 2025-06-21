@@ -1,6 +1,6 @@
 import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 class PromisesQueue {

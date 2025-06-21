@@ -2,7 +2,7 @@ import isString from "../TypeGuards/Strings/isString";
 import isNonNullObject from "../TypeGuards/Objects/isNonNullObject";
 import isNumber from "../TypeGuards/Numbers/isNumber";
 import isBoolean from "../TypeGuards/isBoolean";
-import isEitherUndefinedOrNull from "../TypeGuards/Nullables/isEitherUndefinedOrNull";
+import isEitherUndefinedOrNull from "../TypeGuards/EmptyTypes/isEitherUndefinedOrNull";
 
 
 export default function stringifyAndFormatArbitraryValue(rawEntity: unknown): string {

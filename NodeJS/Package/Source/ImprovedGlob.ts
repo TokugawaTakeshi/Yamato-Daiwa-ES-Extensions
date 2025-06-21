@@ -105,19 +105,26 @@ export default class ImprovedGlob {
   }
 
   public static buildAllFilesInCurrentDirectoryAndBelowGlobSelector(
-      compoundParameter: Readonly<{
-        basicDirectoryPath: string;
-        fileNamesExtensions?: ReadonlyArray<string>;
-      }>
+     {
+      basicDirectoryPath,
+      fileNamePostfixes,
+      fileNamesExtensions
+    }: Readonly<{
+      basicDirectoryPath: string;
+      fileNamePostfixes?: ReadonlyArray<string>;
+      fileNamesExtensions?: ReadonlyArray<string>;
+    }>
   ): string {
     return [
       appendCharacterIfItDoesNotPresentInLastPosition({
-        targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
+        targetString: replaceDoubleBackslashesWithForwardSlashes(basicDirectoryPath),
         trailingCharacter: "/"
       }),
       "**/*",
-      ...isNonEmptyArray(compoundParameter.fileNamesExtensions) ?
-          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.fileNamesExtensions) ] : []
+      ...isNonEmptyArray(fileNamePostfixes) ?
+          [ `@(${ fileNamePostfixes.join("|").replace(/\./gu, "") })` ] : [],
+      ...isNonEmptyArray(fileNamesExtensions) ?
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
     ].join("");
   }
 

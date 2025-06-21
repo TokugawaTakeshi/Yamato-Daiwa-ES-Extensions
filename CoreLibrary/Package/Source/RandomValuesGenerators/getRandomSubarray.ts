@@ -1,7 +1,7 @@
 import getRandomInteger from "./getRandomInteger";
 import getRandomArrayElement from "./getRandomArrayElement";
 import removeRandomArrayElement from "./removeRandomArrayElement";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";

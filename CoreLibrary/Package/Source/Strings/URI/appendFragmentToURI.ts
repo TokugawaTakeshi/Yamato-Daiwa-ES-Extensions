@@ -1,6 +1,6 @@
 import isNonEmptyString from "../../TypeGuards/Strings/isNonEmptyString";
-import isUndefined from "../../TypeGuards/Nullables/isUndefined";
-import isNotNull from "../../TypeGuards/Nullables/isNotNull";
+import isUndefined from "../../TypeGuards/EmptyTypes/isUndefined";
+import isNotNull from "../../TypeGuards/EmptyTypes/isNotNull";
 import getURI_Fragment from "./getURI_Fragment";
 
 

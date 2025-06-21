@@ -956,23 +956,12 @@ Promise.all([
                     mutably: true
                   });
 
-                  await Promise.all([
-
-                    test(
-                      "Updated Array is Matching with Expected One",
-                      (): void => {
-                        Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
-                      }
-                    ),
-
-                    test(
-                      "Initial Array has Mutated",
-                      (): void => {
-                        Assert.notDeepStrictEqual(experimentalSample, generateConstantSample());
-                      }
-                    )
-
-                  ]);
+                  return test(
+                    "Updated Array is Matching with Expected One",
+                    (): void => {
+                      Assert.deepStrictEqual(experimentalSample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA", "GOLF" ]);
+                    }
+                  );
 
                 }
               ),

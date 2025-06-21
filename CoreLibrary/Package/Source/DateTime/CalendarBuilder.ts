@@ -12,7 +12,7 @@ import twoDimensionalizeArray from "../Arrays/08-Restructuring/twoDimensionalize
 import getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne from
     "../Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 class CalendarBuilder {

@@ -181,7 +181,6 @@ coreLibrary:
                       japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.japanese.yaml
                       russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/TableOfContents/swapArrayElements.toc.russian.yaml
 
-            # === TODO =================================================================================================
             removingOfElements:
 
               $heading: `coreLibrary.functionality.arrays.removingOfElements.$heading`
@@ -189,32 +188,24 @@ coreLibrary:
               $children:
 
                 removeArrayElementsByIndexes:
-
                   $heading: "<code>removeArrayElementsByIndexes</code>"
-
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md"
-
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.russian.yaml
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/TableOfContents/removeArrayElementsByIndexes.toc.russian.yaml
 
                 removeArrayElementsByPredicates:
-
                   $heading: "<code>removeArrayElementsByPredicates</code>"
-
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md"
-
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.russian.yaml
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/TableOfContents/removeArrayElementsByPredicates.toc.russian.yaml
 
             restructuring:
 
@@ -223,18 +214,14 @@ coreLibrary:
               $children:
 
                 twoDimensionalizeArray:
-
                   $heading: "<code>twoDimensionalizeArray</code>"
-
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/08-Restructuring/twoDimensionalizeArray.ts"
-
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/twoDimensionalizeArray.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.russian.yaml
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/twoDimensionalizeArray.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/TableOfContents/twoDimensionalizeArray.toc.russian.yaml
 
             other:
 
@@ -243,18 +230,35 @@ coreLibrary:
               $children:
 
                 addElementsToArrayIfTheyAreNotPresentOtherwiseRemove:
-
                   $heading: "<code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
 
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.ts"
+                readonlyArrayToMutableOne:
+                  $heading: "<code>readonlyArrayToMutableOne</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/readonlyArrayToMutableOne.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.russian.yaml
 
-#                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
-#                  $sectioning:
-#                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
-#                    $localizations:
-#                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
-#                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
-#                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
+
+                addElementsToArrayIfTheyAreNotPresentOtherwiseRemove:
+                  $heading: "<code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code>"
+                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
+                  $sectioning:
+                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
+                    $localizations:
+                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
+                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
+                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
 
         constantsAndEnumerations:
 
@@ -714,16 +718,75 @@ coreLibrary:
         RawObjectDataProcessor:
 
           $heading: "<code>RawObjectDataProcessor</code>"
-
-          #$URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md"
-
           $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.${ fileNameLocalizationExtensions }`
-          $sectioning:
-            $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.yaml
-            $localizations:
-              english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.english.yaml
-              japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.japanese.yaml
-              russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/TableOfContents/RawObjectDataProcessor.toc.russian.yaml
+
+          $children:
+
+            demo:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.demo.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/01-Demo/RawObjectDataProcessor-Demo.toc.russian.yaml
+
+            problemOverview:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.problemOverview.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/RawObjectDataProcessor-ProblemOverview.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/TableOfContents/RawObjectDataProcessor-ProblemOverview.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/TableOfContents/RawObjectDataProcessor-ProblemOverview.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/TableOfContents/RawObjectDataProcessor-ProblemOverview.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/02-ProblemOverview/TableOfContents/RawObjectDataProcessor-ProblemOverview.toc.russian.yaml
+
+            theoreticalMinimum:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.theoreticalMinimum.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.russian.yaml
+
+            commonScenarios:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.commonScenarios.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/RawObjectDataProcessor-CommonScenarios.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/04-CommonScenarios/TableOfContents/RawObjectDataProcessor-CommonScenarios.toc.russian.yaml
+
+            API:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.API.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/RawObjectDataProcessor-API.${ fileNameLocalizationExtensions }`
+#              $sectioning:
+#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.yaml
+#                $localizations:
+#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.english.yaml
+#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.japanese.yaml
+#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/05-API/TableOfContents/RawObjectDataProcessor-API.toc.russian.yaml
+
+            validationIssues:
+
+              $heading: `coreLibrary.functionality.rawObjectDataProcessor.validationIssues.$heading`
+              $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/TableOfContents/RawObjectDataProcessor-ValidationIssues.toc.russian.yaml
 
         sets:
 
@@ -935,172 +998,17 @@ coreLibrary:
               $heading: "<code>trimSpaces</code>"
               $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Strings/trimSpaces/trimSpaces.md"
 
-##         typeGuards:
-##
-##           $heading: `coreLibrary.functionality.typeGuards.$heading`
-##
-##           arrays:
-##
-##             $heading: `coreLibrary.functionality.typeGuards.arrays.$heading`
-##             $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Arrays/ArrayTypeGuards.md"
-##
-##             $children:
-##
-##               isArrayOfCertainTypeElements:
-##                 $heading: "<code>isArrayOfCertainTypeElements</code>"
-##                 $URI: "#"
-##
-##               isArrayOfLength:
-##                 $heading: "<code>isArrayOfLength</code>"
-##                 $URI: "#"
-##
-##               isEmptyArray:
-##                 $heading: "<code>isEmptyArray</code>"
-##                 $URI: "#"
-##
-##               isNonEmptyArray:
-##                 $heading: "<code>isNonEmptyArray</code>"
-##                 $URI: "#"
+        typeGuards:
 
-##         nullables:
-##
-##           $heading: `coreLibrary.functionality.typeGuards.nullables.$heading`
-##           $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Nullables/NullableTypeGuards.md"
-##
-##           $children:
-##
-##             isEitherUndefinedOrNull:
-##               $heading: "<code>isEitherUndefinedOrNull</code>"
-##               $URI: "#"
-##
-##             isNeitherUndefinedNorNull:
-##               $heading: "<code>isNeitherUndefinedNorNull</code>"
-##               $URI: "#"
-##
-##             isNotNull:
-##               $heading: "<code>isNotNull</code>"
-##               $URI: "#"
-##
-##             isNotUndefined:
-##               $heading: "<code>isNotUndefined</code>"
-##               $URI: "#"
-##
-##             isNull:
-##               $heading: "<code>isNull</code>"
-##               $URI: "#"
-##
-##             isUndefined:
-##               $heading: "<code>isUndefined</code>"
-##               $URI: "#"
+         $heading: `coreLibrary.functionality.typeGuards.$heading`
+         $URI: `@All/CoreLibrary/Functionality/TypeGuards/TypeGuards.${ fileNameLocalizationExtensions }`
+         $sectioning:
+           $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/TypeGuards/TableOfContents/TypeGuards.toc.yaml
+           $localizations:
+             english: 01-Source/Pages/CoreLibrary/Functionality/TypeGuards/TableOfContents/TypeGuards.toc.english.yaml
+             japanese: 01-Source/Pages/CoreLibrary/Functionality/TypeGuards/TableOfContents/TypeGuards.toc.japanese.yaml
+             russian: 01-Source/Pages/CoreLibrary/Functionality/TypeGuards/TableOfContents/TypeGuards.toc.russian.yaml
 
-#        #   numbers:
-#        #
-#        #     $heading: `coreLibrary.functionality.typeGuards.numbers.$heading`
-#        #     $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Numbers/NumberTypeGuards.md"
-#        #
-#        #     $children:
-#        #
-#        #       isDecimalFractionOfAnySign:
-#        #         $heading: "<code>isDecimalFractionOfAnySign</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNaturalNumber:
-#        #         $heading: "<code>isNaturalNumber</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNegativeDecimalFraction:
-#        #         $heading: "<code>isNegativeDecimalFraction</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNegativeInteger:
-#        #         $heading: "<code>isNegativeInteger</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNegativeIntegerOrZero:
-#        #         $heading: "<code>isNegativeIntegerOrZero</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNonNegativeInteger:
-#        #         $heading: "<code>isNonNegativeInteger</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNumber:
-#        #         $heading: "<code>isNumber</code>"
-#        #         $URI: "#"
-#        #
-#        #       isPositiveDecimalFraction:
-#        #         $heading: "<code>isPositiveDecimalFraction</code>"
-#        #         $URI: "#"
-#        #
-#        #   objects:
-#        #
-#        #     $heading: `coreLibrary.functionality.typeGuards.objects`
-#        #     $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Objects/ObjectTypeGuards.md"
-#        #
-#        #     $children:
-#        #
-#        #       isArbitraryObject:
-#        #         $heading: "<code>isArbitraryObject</code>"
-#        #         $URI: "#"
-#        #
-#        #       isEmptyObject:
-#        #         $heading: "<code>isEmptyObject</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNonEmptyArbitraryObject:
-#        #         $heading: "<code>isNonEmptyArbitraryObject</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNonEmptyObject:
-#        #         $heading: "<code>isNonEmptyObject</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNonNullObject:
-#        #         $heading: "<code>isNonNullObject</code>"
-#        #         $URI: "#"
-#        #
-#        #   strings:
-#        #
-#        #     $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Strings/StringTypeGuards.md"
-#        #     $heading: `coreLibrary.functionality.typeGuards.strings.$heading`
-#        #
-#        #     $children:
-#        #
-#        #       isEmptyString:
-#        #         $heading: "<code>isEmptyString</code>"
-#        #         $URI: "#"
-#        #
-#        #       isNonEmptyString:
-#        #         $heading: "<code>isNonEmptyString</code>"
-#        #         $URI: "#"
-#        #
-#        #       isString:
-#        #         $heading: "<code>isString</code>"
-#        #         $URI: "#"
-#        #
-#        #       isStringOfLength:
-#        #         $heading: "<code>isStringOfLength</code>"
-#        #         $URI: "#"
-#        #
-#        #   other:
-#        #
-#        #     $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md"
-#        #     $heading: `coreLibrary.functionality.typeGuards.others.$heading`
-#        #
-#        #     $children:
-#        #
-#        #       isBoolean:
-#        #         $heading: "<code>isBoolean</code>"
-#        #         $URI: "#"
-#        #
-#        #       isElementOfEnumeration:
-#        #         $heading: "<code>isElementOfEnumeration</code>"
-#        #         $URI: "#"
-#        #
-#        #       isFunctionLike:
-#        #         $heading: "<code>isFunctionLike</code>"
-#        #         $URI: "#"
-#
         types:
 
           $heading: `coreLibrary.functionality.types.$heading`

@@ -1,0 +1,12 @@
+validationErrorsMessages:
+
+  $heading: "妥当性違反メッセージ"
+
+throwableErrors:
+
+  $heading: "投げられるエラー"
+
+warnings:
+
+  $heading: "警告"
+

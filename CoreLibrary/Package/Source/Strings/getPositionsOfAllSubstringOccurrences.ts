@@ -18,4 +18,5 @@ export default function getPositionsOfAllSubstringOccurrences(targetString: stri
   } while (indexOfCurrentSubstringOccurrence !== -1);
 
   return indexesOfAllSubstringOccurrences;
+
 }

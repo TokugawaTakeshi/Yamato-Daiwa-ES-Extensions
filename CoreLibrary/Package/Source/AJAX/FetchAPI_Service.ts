@@ -7,7 +7,7 @@ import type { PossiblyReadonlyParsedJSON } from "../Types/ParsedJSON";
 import isPossiblyReadonlyParsedJSON from "../TypeGuards/ParsedJSON/isPossiblyReadonlyParsedJSON";
 import HTTP_ResponseBodyParsingFailureError from
     "../Errors/HTTP/ResponseBodyParsingFailure/HTTP_ResponseBodyParsingFailureError";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 export default class FetchAPI_Service extends AJAX_Service {

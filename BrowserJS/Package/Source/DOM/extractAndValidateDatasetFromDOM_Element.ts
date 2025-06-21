@@ -38,12 +38,12 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
     targetDOM_Element.dataset,
     {
       nameForLogging: targetDOM_ElementNameOrSelectorForLogging,
-      subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+      subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
       properties: validDataSpecification
     }
   );
 
-  if (datasetProcessingResult.rawDataIsInvalid) {
+  if (datasetProcessingResult.isRawDataInvalid) {
     Logger.throwErrorAndLog({
       errorInstance: new InvalidExternalDataError({
         mentionToExpectedData: targetDOM_ElementNameOrSelectorForLogging,

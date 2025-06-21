@@ -40,7 +40,7 @@ export { default as replaceArrayElementsByIndexesImmutably } from
     "./Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably";
 export {
   default as replaceArrayElementsByPredicates,
-  type ReplacingArrayElementsByPredicatesOperation
+  type ReplacingArrayElementsByPredicates
 } from "./Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates";
 
 /* ─── Permutations of Elements ───────────────────────────────────────────────────────────────────────────────────── */
@@ -219,18 +219,6 @@ export { default as encodeFileToBase64 } from "./Files/encodeFileToBase64";
 export { default as StringTypeID_Generator } from "./IDsGenerators/StringTypeID_Generator";
 
 
-/* ━━━ Linear Algebra ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* ─── Classes ────────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as ColumnVector } from "./LinearAlgebra/Classes/ColumnVector";
-export { default as Matrix } from "./LinearAlgebra/Classes/Matrix";
-export type { default as ReadonlyColumnVector } from "./LinearAlgebra/Classes/ReadonlyColumnVector";
-export type { default as ReadonlyRowVector } from "./LinearAlgebra/Classes/ReadonlyRowVector";
-export { default as RowVector } from "./LinearAlgebra/Classes/RowVector";
-
-/* ─── Operations ─────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as computeDotProduct } from "./LinearAlgebra/Operations/computeDotProduct";
-export { default as multiplyMatrices } from "./LinearAlgebra/Operations/multiplyMatrices";
-
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── PoliteErrorsMessageBuilder ─────────────────────────────────────────────────────────────────────────────────── */
 export { default as PoliteErrorsMessagesBuilder } from "./Logging/PoliteErrorsMessagesBuilder/PoliteErrorsMessagesBuilder";
@@ -266,6 +254,7 @@ export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
     "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
 export { default as limitMaximalValue } from "./Numbers/limitMaximalValue";
+export { default as limitMinimalAndMaximalValues } from "./Numbers/limitMinimalAndMaximalValues";
 export { default as limitMinimalValue } from "./Numbers/limitMinimalValue";
 export { default as roundDownToSpecificIntegerPlaceValue } from "./Numbers/roundDownToSpecificIntegerPlaceValue";
 export { default as roundToSpecificNearestIntegerPlaceValue } from "./Numbers/roundToSpecificNearestIntegerPlaceValue";
@@ -378,8 +367,10 @@ export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/rem
 export { default as replaceLastURI_PathSegment } from "./Strings/URI/replaceLastURI_PathSegment";
 
 /* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as adjustCharactersCount } from "./Strings/adjustCharactersCount";
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
+export { default as ArbitraryValueFormatter } from "./Strings/ArbitraryValueFormatter";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as cropString } from "./Strings/cropString";
 export { default as EmailAddress } from "./Strings/EmailAddress";
@@ -389,6 +380,7 @@ export { default as getEnglishAbbreviatedOrdinalNumber } from "./Strings/getEngl
 export { default as getLastCharacter } from "./Strings/getLastCharacter";
 export { default as getPositionsOfAllSubstringOccurrences } from "./Strings/getPositionsOfAllSubstringOccurrences";
 export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringOnlySpecificCharacters";
+export { default as IndentationCoordinator } from "./Strings/IndentationCoordinator";
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
 export { default as isIPv4AddressLiesInRange } from "./Strings/isIPv4AddressLiesInRange";
@@ -418,16 +410,18 @@ export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./
 export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
 export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
 
-/* ─── Nullables ──────────────────────────────────────────────────────────────────────────────────────────────────── */
-export { default as isNeitherUndefinedNorNull } from "./TypeGuards/Nullables/isNeitherUndefinedNorNull";
-export { default as isEitherUndefinedOrNull } from "./TypeGuards/Nullables/isEitherUndefinedOrNull";
-export { default as isNotNull } from "./TypeGuards/Nullables/isNotNull";
-export { default as isNotUndefined } from "./TypeGuards/Nullables/isNotUndefined";
-export { default as isNull } from "./TypeGuards/Nullables/isNull";
-export { default as isUndefined } from "./TypeGuards/Nullables/isUndefined";
+/* ─── EmptyTypes ──────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as isNeitherUndefinedNorNull } from "./TypeGuards/EmptyTypes/isNeitherUndefinedNorNull";
+export { default as isEitherUndefinedOrNull } from "./TypeGuards/EmptyTypes/isEitherUndefinedOrNull";
+export { default as isNotNull } from "./TypeGuards/EmptyTypes/isNotNull";
+export { default as isNotUndefined } from "./TypeGuards/EmptyTypes/isNotUndefined";
+export { default as isNull } from "./TypeGuards/EmptyTypes/isNull";
+export { default as isUndefined } from "./TypeGuards/EmptyTypes/isUndefined";
 
 /* ─── Numbers ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+export { default as isBigInt } from "./TypeGuards/Numbers/isBigInt";
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
+export { default as isIntegerOnAnySign } from "./TypeGuards/Numbers/isIntegerOnAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
 export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";
 export { default as isNegativeDecimalFraction } from "./TypeGuards/Numbers/isNegativeDecimalFraction";
@@ -435,6 +429,7 @@ export { default as isNegativeInteger } from "./TypeGuards/Numbers/isNegativeInt
 export { default as isNegativeIntegerOrZero } from "./TypeGuards/Numbers/isNegativeIntegerOrZero";
 export { default as isNumber } from "./TypeGuards/Numbers/isNumber";
 export { default as isPositiveDecimalFraction } from "./TypeGuards/Numbers/isPositiveDecimalFraction";
+export { default as isPositiveIntegerOrZero } from "./TypeGuards/Numbers/isPositiveIntegerOrZero";
 
 /* ─── Objects ────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArbitraryObject } from "./TypeGuards/Objects/isArbitraryObject";
@@ -489,3 +484,6 @@ export { default as undefinedToEmptyArray } from "./ValueTransformers/undefinedT
 export { default as undefinedToEmptyString } from "./ValueTransformers/undefinedToEmptyString";
 export { default as undefinedToFalse } from "./ValueTransformers/undefinedToFalse";
 export { default as undefinedToNull } from "./ValueTransformers/undefinedToNull";
+
+/* ━━━ Other ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+export { default as ValuesDeepCopier } from "./ValuesDeepCopier";

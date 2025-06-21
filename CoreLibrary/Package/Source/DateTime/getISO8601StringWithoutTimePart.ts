@@ -69,7 +69,7 @@ export default function getISO8601StringWithoutTimePart(
     if (sourceDataAndOptions.mustAssociateOutputWithLocalDate) {
       return `${ nativeDateInstance.getFullYear() }-` +
           `${ String(nativeDateInstance.getMonth() + 1).padStart(2, "0") }-` +
-          `${ String(nativeDateInstance.getDate()).padStart(2, "0") }`;
+          String(nativeDateInstance.getDate()).padStart(2, "0");
     }
 
 
@@ -120,7 +120,7 @@ export default function getISO8601StringWithoutTimePart(
 
       return `${ nativeDateInstance.getFullYear() }-` +
           `${ String(nativeDateInstance.getMonth() + 1).padStart(2, "0") }-` +
-          `${ String(nativeDateInstance.getDate()).padStart(2, "0") }`;
+          String(nativeDateInstance.getDate()).padStart(2, "0");
 
     }
 
@@ -134,7 +134,7 @@ export default function getISO8601StringWithoutTimePart(
 
     return `${ sourceDataAndOptions.nativeDateInstance.getFullYear() }-` +
         `${ String(sourceDataAndOptions.nativeDateInstance.getMonth() + 1).padStart(2, "0") }-` +
-        `${ String(sourceDataAndOptions.nativeDateInstance.getDate()).padStart(2, "0") }`;
+        String(sourceDataAndOptions.nativeDateInstance.getDate()).padStart(2, "0");
 
   }
 

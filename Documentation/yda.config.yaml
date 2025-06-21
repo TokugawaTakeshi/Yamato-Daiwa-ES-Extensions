@@ -4,35 +4,34 @@ $projectBuilding:
 
     $publicDirectoriesRelativePaths:
 
-      $localDevelopment: 02-LocalDevelopmentBuild
       $production: 03-ProductionBuild
 
 
-  # ━━━ Markup ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # ━━━ Markup Processing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   $markupProcessing:
 
     $common:
       $buildingModeDependent:
-        $localDevelopment: { mustUseResolveResourceReferencesToRelativePaths: true }
+        $localDevelopment: { $mustResolveResourcesPointersToRelativePaths: true }
 
-    entryPointsGroups:
+    $entryPointsGroups:
 
       All:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
+        $sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
-        partialsRecognition:
-          excludeFilesWithPrefixes: "_"
-          excludeSubdirectoriesWithPrefixes: "_"
-          excludeSubdirectoriesWithNames: [ TableOfContents ]
+        $partialsRecognition:
+          $excludeFilesWithPrefixes: "_"
+          $excludeSubdirectoriesWithPrefixes: "_"
+          $excludeSubdirectoriesWithNames: [ TableOfContents, Data, ReusableFragments ]
 
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild
 
-    routing:
+    $routing:
 
       $specificationFileRelativePath: 01-Source/Pages/Routing.yaml
       $variable: routing
@@ -42,127 +41,128 @@ $projectBuilding:
         russian: 01-Source/SharedAssets/Markup/Localizations/Russian/RoutingLocalization.russian.yaml
 
 
-  # ━━━ Styles ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # ━━━ Styles Processing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   $stylesProcessing:
 
-    entryPointsGroups:
+    $entryPointsGroups:
 
       CustomizedExternalComponents:
 
-        singleEntryPointSourceFileRelativePath: 01-Source/SharedAssets/CustomizedExternalComponents.styl
+        $singleEntryPointSourceFileRelativePath: 01-Source/SharedAssets/CustomizedExternalComponents.styl
 
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild/styles
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild/styles
 
       Pages:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
+        $sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
-        partialsRecognition:
-          excludeFilesWithPrefixes: "_"
-          excludeSubdirectoriesWithPrefixes: "_"
+        $partialsRecognition:
+          $excludeFilesWithPrefixes: "_"
+          $excludeSubdirectoriesWithPrefixes: "_"
 
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
-  # ━━━ Images ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  imagesProcessing:
+  # ━━━ Images Processing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  $imagesProcessing:
 
-    assetsGroups:
+    $assetsGroups:
 
       MustBeInPublicRoot:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInPublicRoot
+        $sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/MustBeInPublicRoot
 
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild
 
       Shared:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/Images
+        $sourceFilesTopDirectoryRelativePath: 01-Source/SharedAssets/Images
 
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/images
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild/images
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/images
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild/images
 
       AssociatedWithPages:
 
-        sourceFilesTopDirectoryRelativePath: 01-Source/Pages
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT:
-            outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild
+        $sourceFilesTopDirectoryRelativePath: 01-Source/Pages
+        $buildingModeDependent:
+          $localDevelopment:
+            $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild
 
 
-  # ━━━ Plain copying ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  plainCopying:
+  # ━━━ Plain Copying ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  $plainCopying:
 
-    filesGroups:
+    $filesGroups:
 
       CommonStyles:
-        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-Common.css
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
-          PRODUCTION:
-            outputDirectoryRelativePath: 03-ProductionBuild/styles
-            revisioning: { enable: true }
+        $sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-Common.css
+        $buildingModeDependent:
+          $localDevelopment: { $outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
+          $production:
+            $outputDirectoryRelativePath: 03-ProductionBuild/styles
+            $revisioning: { $enable: true }
 
       LayoutsStyles:
-        sourceTopDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
-        fileNameLastExtensions: [ "css" ]
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles/layouts }
-          PRODUCTION:
-            outputTopDirectoryRelativePath: 03-ProductionBuild/styles/layouts
-            outputDirectoryPathTransformations: { segmentsCountRelativeToGroupTopDirectoryWhichMustBeRemoved: 1 }
-            revisioning: { enable: true }
+        $sourceTopDirectoryRelativePath: node_modules/@yamato-daiwa/programming_documentation/Layouts
+        $fileNameLastExtensions: [ "css" ]
+        $buildingModeDependent:
+          $localDevelopment: { $outputTopDirectoryRelativePath: 02-LocalDevelopmentBuild/styles/layouts }
+          $production:
+            $outputTopDirectoryRelativePath: 03-ProductionBuild/styles/layouts
+            $outputDirectoryPathTransformations: { segmentsCountRelativeToGroupTopDirectoryWhichMustBeRemoved: 1 }
+            $revisioning: { $enable: true }
 
       PreMadesStyles:
-        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-PreMades.css
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
-          PRODUCTION:
-            outputDirectoryRelativePath: 03-ProductionBuild/styles
-            revisioning: { enable: true }
+        $sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/YDPD-PreMades.css
+        $buildingModeDependent:
+          $localDevelopment: { $outputDirectoryRelativePath: 02-LocalDevelopmentBuild/styles }
+          $production:
+            $outputDirectoryRelativePath: 03-ProductionBuild/styles
+            $revisioning: { $enable: true }
 
       CommonLogic:
-        sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/LogicDistributable/YDPD-Common.js
-        buildingModeDependent:
-          LOCAL_DEVELOPMENT: { outputDirectoryRelativePath: 02-LocalDevelopmentBuild }
-          PRODUCTION:
-            outputDirectoryRelativePath: 03-ProductionBuild
-            revisioning: { enable: true }
+        $sourceFileRelativePath: node_modules/@yamato-daiwa/programming_documentation/LogicDistributable/YDPD-Common.js
+        $buildingModeDependent:
+          $localDevelopment: { $outputDirectoryRelativePath: 02-LocalDevelopmentBuild }
+          $production:
+            $outputDirectoryRelativePath: 03-ProductionBuild
+            $revisioning: { $enable: true }
 
 
-  # ━━━ Development server ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  browserLiveReloading:
 
-    setups:
+  # ━━━ Browser Live Reloading ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  $browserLiveReloading:
+
+    $setups:
 
       StylesAndComponentsTesting:
 
-        localServer:
+        $localServer:
 
-          rootDirectoryRelativePath: 02-LocalDevelopmentBuild
+          $rootDirectoryRelativePath: 02-LocalDevelopmentBuild
 
-        openInBrowsers: chrome
+        $openInBrowsers: chrome
 
 
   # ━━━ Files Watching ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  filesWatching:
+  $filesWatching:
 
-    relativePathsOfExcludeDirectories:
+    $relativePathsOfExcludeDirectories:
       - 03-ProductionBuild

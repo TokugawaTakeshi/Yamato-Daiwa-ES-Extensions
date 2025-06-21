@@ -37,7 +37,7 @@ await suite("getMatchingWithFirstRegularExpressionCapturingGroup", async (): Pro
       );
     });
 
-    await test("Throwing of error", async (): Promise<void> => {
+    await test("Throwing of error", (): void => {
 
       Assert.throws(
         (): void => {

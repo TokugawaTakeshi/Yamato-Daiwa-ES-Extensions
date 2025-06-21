@@ -1,0 +1,9 @@
+nativeApproaches:
+
+  $heading: `nativeApproaches.$heading`
+  $anchor: NATIVE_APPROACHES--SECTION
+
+rawObjectDataProcessorApproach:
+
+  $heading: `rawObjectDataProcessorApproach.$heading`
+  $anchor: RAW_OBJECT_DATA_PROCESSOR_APPROACH--SECTION

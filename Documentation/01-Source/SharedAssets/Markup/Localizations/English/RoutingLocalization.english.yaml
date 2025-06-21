@@ -149,9 +149,9 @@ coreLibrary:
 
     rawObjectDataProcessor:
 
-      quickExample:
+      demo:
 
-        $heading: "Quick Example"
+        $heading: "Demo"
 
       problemOverview:
 
@@ -161,13 +161,17 @@ coreLibrary:
 
         $heading: "Theoretical Minimum"
 
-      gettingStarted:
+      commonScenarios:
 
-        $heading: "Getting Started"
+        $heading: "Common Scenarios"
 
-      helpers:
+      API:
 
-        $heading: "Helpers"
+        $heading: "API"
+
+      validationIssues:
+
+        $heading: "Validation Issues"
 
     sets:
 
@@ -198,30 +202,6 @@ coreLibrary:
     typeGuards:
 
       $heading: "Type Guards"
-
-      arrays:
-
-        $heading: "Arrays"
-
-      nullables:
-
-        $heading: "Nullables"
-
-      numbers:
-
-        $heading: "Numbers"
-
-      objects:
-
-        $heading: "Objects"
-
-      strings:
-
-        $heading: "Strings"
-
-      others:
-
-        $heading: "Others"
 
     types:
 

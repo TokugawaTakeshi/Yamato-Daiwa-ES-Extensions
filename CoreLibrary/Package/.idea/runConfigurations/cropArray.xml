@@ -1,7 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="cropArray" type="NodeJsTestRunner" folderName="Arrays">
     <node-interpreter value="project" />
-    <node-options value="--require ts-node/register" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />
     <typescript-loader value="TSX" />

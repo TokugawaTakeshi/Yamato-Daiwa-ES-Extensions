@@ -8,7 +8,7 @@ function getInitialSampleArray(): Array<number> {
 }
 
 
-await Promise.all([
+Promise.all([
 
   suite(
     "Moving to Left",

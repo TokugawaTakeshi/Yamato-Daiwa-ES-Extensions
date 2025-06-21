@@ -149,25 +149,29 @@ coreLibrary:
 
     rawObjectDataProcessor:
 
-      quickExample:
+      demo:
 
-        $heading: "Пример"
+        $heading: "Демо"
 
       problemOverview:
 
-        $heading: "Обзор задачи"
+        $heading: "Обзор проблематики"
 
       theoreticalMinimum:
 
         $heading: "Теоретический минимум"
 
-      gettingStarted:
+      commonScenarios:
 
-        $heading: "Начало использования"
+        $heading: "Типовые сценарии"
 
-      helpers:
+      API:
 
-        $heading: "Вспомогательная функциональность"
+        $heading: "Программный интерфейс"
+
+      validationIssues:
+
+        $heading: "Ошибки и предупреждения о невалидных данных"
 
     sets:
 
@@ -198,30 +202,6 @@ coreLibrary:
     typeGuards:
 
       $heading: "Проверяющие типов данных"
-
-      arrays:
-
-        $heading: "Массивы"
-
-      nullables:
-
-        $heading: "Пустые типы"
-
-      numbers:
-
-        $heading: "Числа"
-
-      objects:
-
-        $heading: "Объекты"
-
-      strings:
-
-        $heading: "Строки"
-
-      others:
-
-        $heading: "Другие"
 
     types:
 

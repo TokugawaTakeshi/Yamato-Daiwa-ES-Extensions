@@ -8,6 +8,7 @@ export const loggerLocalization__japanese: Logger.Localization = {
     warning: "警告",
     info: "通知",
     success: "成功",
+    debug: "デバッグ",
     generic: "一般"
   },
 

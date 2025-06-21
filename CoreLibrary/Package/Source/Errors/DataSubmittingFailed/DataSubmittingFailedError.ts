@@ -1,5 +1,5 @@
 import dataSubmittingFailedErrorLocalization__english from "./DataSubmittingFailedErrorLocalization.english";
-import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
 import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
 
 

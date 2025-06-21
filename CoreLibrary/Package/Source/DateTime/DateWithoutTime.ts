@@ -224,6 +224,7 @@ class DateWithoutTime {
     }
 
   }
+  /* eslint-enable no-underscore-dangle */
 
 
   /* ─── Routines ─────────────────────────────────────────────────────────────────────────────────────────────────── */

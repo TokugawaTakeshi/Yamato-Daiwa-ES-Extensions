@@ -1,0 +1,23 @@
+{
+
+  "compilerOptions": {
+
+    "target": "ES2022",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+
+    "removeComments": true,
+
+    "outDir": "Distributable/",
+    "declaration": true
+  },
+
+  "include": [ "Source/**/*" ]
+
+}

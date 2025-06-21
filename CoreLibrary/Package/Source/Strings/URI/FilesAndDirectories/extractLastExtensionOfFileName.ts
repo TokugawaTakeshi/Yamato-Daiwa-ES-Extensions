@@ -1,4 +1,4 @@
-import isUndefined from "../../../TypeGuards/Nullables/isUndefined";
+import isUndefined from "../../../TypeGuards/EmptyTypes/isUndefined";
 import Logger from "../../../Logging/Logger";
 import UnexpectedEventError from "../../../Errors/UnexpectedEvent/UnexpectedEventError";
 

@@ -3,6 +3,7 @@ import type { ExtractingOfMatchingsWithRegularExpression } from
 import extractMatchingsWithRegularExpression from "../RegularExpressions/extractMatchingsWithRegularExpression";
 import splitString from "../splitString";
 import replaceDoubleBackslashesWithForwardSlashes from "../replaceDoubleBackslashesWithForwardSlashes";
+import isNotNull from "../../TypeGuards/EmptyTypes/isNotNull";
 
 
 export default function replaceLastURI_PathSegment(
@@ -22,7 +23,7 @@ export default function replaceLastURI_PathSegment(
   return [
     ...pathSegments.slice(0, pathSegments.length - 1),
     compoundParameter.newLastPathSegment,
-    ...targetPathFragmentWithLeadingHash ?? []
+    ...isNotNull(targetPathFragmentWithLeadingHash) ? [ targetPathFragmentWithLeadingHash ] : []
   ].join("/");
 
 }

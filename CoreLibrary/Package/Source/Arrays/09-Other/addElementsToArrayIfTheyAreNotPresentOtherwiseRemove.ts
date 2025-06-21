@@ -15,8 +15,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<
         (
           { targetElement: ArrayElement; } |
           { targetElements: ReadonlyArray<ArrayElement>; }
-        )
-        &
+        ) &
         (
           {
             addingToStart: true;
@@ -70,8 +69,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<
             targetElements: ReadonlyArray<ArrayElement>;
             targetElementsFinder: (arrayElement: ArrayElement) => boolean;
           }
-        )
-        &
+        ) &
         (
           {
             addingToStart: true;

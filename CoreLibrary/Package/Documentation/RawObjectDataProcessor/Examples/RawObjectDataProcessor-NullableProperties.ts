@@ -8,7 +8,7 @@ import {
 
 const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     foo: {
       type: String,
@@ -50,7 +50,7 @@ const sample: unknown = {
 const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
     RawObjectDataProcessor.process(sample, validDataSpecification);
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
     title: InvalidExternalDataError.localization.defaultTitle,

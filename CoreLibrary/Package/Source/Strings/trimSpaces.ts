@@ -1,5 +1,5 @@
 import SpaceCharacters from "./CharactersAssets/SpaceCharacters";
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 
 
 export default function trimSpaces(targetString: string, options: TrimSpacesOperation.Options = {}): string {

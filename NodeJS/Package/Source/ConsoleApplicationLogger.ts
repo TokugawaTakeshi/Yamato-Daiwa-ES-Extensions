@@ -210,6 +210,40 @@ abstract class ConsoleApplicationLogger {
 
   }
 
+  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.debug(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.debug(
+      ...ConsoleApplicationLogger.formatGenericLog({
+        genericLog: polymorphicPayload,
+        badgeContentAndFormatting: {
+          defaultText: ConsoleApplicationLogger.localization.badgesDefaultTitles.debug,
+          foregroundColor: { red: 0, green: 0, blue: 0 },
+          backgroundColor: { red: 255, green: 255, blue: 255 }
+        },
+        mainColor: { red: 255, green: 255, blue: 255 },
+        titleColor: { red: 255, green: 255, blue: 255 }
+      })
+    );
+
+  }
+
   public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
 
     if (
@@ -638,6 +672,7 @@ namespace ConsoleApplicationLogger {
         isNaturalNumberOrZero(rawValue.green) &&
         isNaturalNumberOrZero(rawValue.blue);
   }
+
 }
 
 

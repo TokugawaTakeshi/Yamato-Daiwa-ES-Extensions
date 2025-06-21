@@ -50,13 +50,13 @@ export default function addElementsToArray<ArrayElement>(
   const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
       compoundParameter.targetArray : [ ...compoundParameter.targetArray ];
 
-  if ("toStart" in compoundParameter) {
+  if (compoundParameter.toStart === true) {
     workpiece.unshift(...compoundParameter.newElements);
     return workpiece;
   }
 
 
-  if ("toEnd" in compoundParameter) {
+  if (compoundParameter.toEnd === true) {
     workpiece.push(...compoundParameter.newElements);
     return workpiece;
   }

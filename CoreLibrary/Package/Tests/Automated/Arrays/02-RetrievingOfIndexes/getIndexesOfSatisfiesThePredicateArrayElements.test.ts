@@ -13,20 +13,23 @@ const sample: Array<Product> = [
 ];
 
 
-test("Works as Intended", (): void => {
+test(
+  "Works as Intended",
+  (): void => {
 
-  Assert.deepStrictEqual(
-    getIndexesOfSatisfiesThePredicateArrayElements(
-      sample, (arrayElement: Product): boolean => arrayElement.price > 500
-    ),
-    [ 2, 3 ]
-  );
+    Assert.deepStrictEqual(
+      getIndexesOfSatisfiesThePredicateArrayElements(
+        sample, (arrayElement: Product): boolean => arrayElement.price > 500
+      ),
+      [ 2, 3 ]
+    );
 
-  Assert.deepStrictEqual(
-    getIndexesOfSatisfiesThePredicateArrayElements(
-      sample, (arrayElement: Product): boolean => arrayElement.price > 1500
-    ),
-    []
-  );
+    Assert.deepStrictEqual(
+      getIndexesOfSatisfiesThePredicateArrayElements(
+        sample, (arrayElement: Product): boolean => arrayElement.price > 1500
+      ),
+      []
+    );
 
-}).catch(Logger.logPromiseError);
+  }
+).catch(Logger.logPromiseError);

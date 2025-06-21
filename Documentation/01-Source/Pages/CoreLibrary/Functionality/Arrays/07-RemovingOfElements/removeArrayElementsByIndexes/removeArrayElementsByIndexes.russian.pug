@@ -1,0 +1,104 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("removeArrayElementsByIndexes"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "removeArrayElementsByIndexes",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.removingOfElements.removeArrayElementsByIndexes");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
+          removingOfElements.$children.removeArrayElementsByIndexes.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          removingOfElements.$children.removeArrayElementsByIndexes.$URI
+    });
+
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+        removingOfElements.$children.removeArrayElementsByIndexes;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1!= "<code>removeArrayElementsByIndexes</code>"
+
+    +CodeViewer--YDF({ title: "Сигнатура" })
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        <ArrayElement>(
+          sourceData: Readonly<
+            (
+              {
+                mutably: true;
+                targetArray: Array<ArrayElement>;
+              } |
+              {
+                mutably: false;
+                targetArray: ReadonlyArray<ArrayElement>;
+              }
+            ) &
+            { indexes: number | ReadonlyArray<number>; }
+          >
+        ): Readonly<{
+          updatedArray: Array<ArrayElement>;
+          removedElements: Array<ArrayElement>;
+        }>
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

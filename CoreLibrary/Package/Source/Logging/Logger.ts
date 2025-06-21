@@ -7,10 +7,10 @@ import isString from "../TypeGuards/Strings/isString";
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
 import isNumber from "../TypeGuards/Numbers/isNumber";
 import isBoolean from "../TypeGuards/isBoolean";
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
-import isNull from "../TypeGuards/Nullables/isNull";
-import isNotNull from "../TypeGuards/Nullables/isNotNull";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
+import isNull from "../TypeGuards/EmptyTypes/isNull";
+import isNotNull from "../TypeGuards/EmptyTypes/isNotNull";
 
 import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
 
@@ -202,6 +202,35 @@ abstract class Logger {
 
   }
 
+  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logDebug(polymorphicPayload);
+      return;
+    }
+
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.debug(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.debug(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.debug));
+
+  }
+
   public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
 
     if (isNotNull(Logger.implementation)) {
@@ -353,6 +382,7 @@ namespace Logger {
       warning: string;
       info: string;
       success: string;
+      debug: string;
       generic: string;
     }>;
 

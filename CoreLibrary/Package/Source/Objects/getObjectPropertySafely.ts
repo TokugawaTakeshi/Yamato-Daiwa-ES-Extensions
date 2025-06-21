@@ -74,7 +74,7 @@ export default function getObjectPropertySafely(
   }
 
 
-  /* eslint-disable no-useless-return --
+  /* eslint-disable-next-line no-useless-return --
   * TypeScript could not see that this function will return value once `isLastDepthLevel` become truthy.
   * If no bugs, `isLastDepthLevel` inevitably will become truthy because the requested property is in certain depth level. */
   return;

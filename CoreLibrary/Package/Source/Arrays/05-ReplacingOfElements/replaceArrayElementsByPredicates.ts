@@ -2,7 +2,7 @@ import getIndexesOfSatisfiesThePredicateArrayElements from
     "../02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements";
 
 
-export namespace ReplacingArrayElementsByPredicatesOperation {
+export namespace ReplacingArrayElementsByPredicates {
 
   export type SourceData<ArrayElement> =
     Readonly<(
@@ -41,13 +41,13 @@ export default function replaceArrayElementsByPredicates<ArrayElement>(
     targetArray,
     mutably,
     ...sourceData
-  }: ReplacingArrayElementsByPredicatesOperation.SourceData<ArrayElement>
-): ReplacingArrayElementsByPredicatesOperation.Result<ArrayElement> {
+  }: ReplacingArrayElementsByPredicates.SourceData<ArrayElement>
+): ReplacingArrayElementsByPredicates.Result<ArrayElement> {
 
   const indexesOfElementsWhichWillBeReplacedAndNewValuesMap: Map<number, ArrayElement> = new Map<number, ArrayElement>();
   const indexesOfElementsWhichAlreadyHasBeenReplaced: Array<number> = [];
 
-  let replacements: ReadonlyArray<ReplacingArrayElementsByPredicatesOperation.Replacement<ArrayElement>>;
+  let replacements: ReadonlyArray<ReplacingArrayElementsByPredicates.Replacement<ArrayElement>>;
 
   if ("replacements" in sourceData) {
     replacements = sourceData.replacements;
@@ -74,7 +74,9 @@ export default function replaceArrayElementsByPredicates<ArrayElement>(
             replacement.newValue :
             replacement.replacer(targetArray[indexOfElementWhichSatisfiedToCurrentPredicate])
       );
+
     }
+
   }
 
 

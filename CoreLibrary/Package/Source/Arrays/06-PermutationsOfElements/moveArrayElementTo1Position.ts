@@ -1,5 +1,7 @@
 import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
+import isNaturalNumberOrZero from "../../TypeGuards/Numbers/isNaturalNumberOrZero";
+import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
 
 
 export default function moveArrayElementTo1Position<ArrayElement>(
@@ -8,7 +10,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
     targetArray,
     toLeft,
     errorMustBeThrownIf,
-    ...compoundParameter
+    ...sourceDataAndOptions
   }: Readonly<
     (
       {
@@ -21,8 +23,14 @@ export default function moveArrayElementTo1Position<ArrayElement>(
       }
     ) &
     (
-      { targetElementNumber__numerationFrom0: number; } |
-      { targetElementNumber__numerationFrom1: number; }
+      {
+        targetElementNumber__numerationFrom0: number;
+        targetElementNumber__numerationFrom1?: never;
+      } |
+      {
+        targetElementNumber__numerationFrom0?: never;
+        targetElementNumber__numerationFrom1: number;
+      }
     ) &
     {
       toLeft: boolean;
@@ -41,14 +49,14 @@ export default function moveArrayElementTo1Position<ArrayElement>(
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
-          parameterName: "compoundParameter",
+          parameterName: "sourceDataAndOptions",
           messageSpecificPart:
               `Target array must contain at least 2 elements while actually contains ${ targetArray.length }. ` +
               "This case is being considered as an error when \"errorMustBeThrownIf.elementsCountIsLessThan2\" " +
                 "flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "moveArrayElementTo1Position(compoundParameter)"
+        occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
       });
 
     }
@@ -64,10 +72,34 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
   const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...targetArray ];
 
-  const targetElementNumber__numerationFrom0: number =
-      "targetElementNumber__numerationFrom0" in compoundParameter ?
-          compoundParameter.targetElementNumber__numerationFrom0 :
-          compoundParameter.targetElementNumber__numerationFrom1 - 1;
+  let targetElementNumber__numerationFrom0: number;
+
+  if (isNaturalNumberOrZero(sourceDataAndOptions.targetElementNumber__numerationFrom0)) {
+
+    targetElementNumber__numerationFrom0 = sourceDataAndOptions.targetElementNumber__numerationFrom0;
+
+  } else if (isNaturalNumber(sourceDataAndOptions.targetElementNumber__numerationFrom1)) {
+
+    targetElementNumber__numerationFrom0 = sourceDataAndOptions.targetElementNumber__numerationFrom1 - 1;
+
+  } else {
+
+    Logger.throwErrorAndLog({
+      errorInstance: new InvalidParameterValueError({
+        parameterNumber: 1,
+        parameterName: "sourceDataAndOptions",
+        messageSpecificPart:
+            "The target element number has not been correctly specified. " +
+            "The valid alternatives are:\n" +
+            "● \"targetElementNumber__numerationFrom0\": must be the natural number or zero\n" +
+            "● \"targetElementNumber__numerationFrom1\": must be the natural number\n"
+      }),
+      title: InvalidParameterValueError.localization.defaultTitle,
+      occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
+    });
+
+  }
+
 
   if (targetElementNumber__numerationFrom0 < 0 || targetElementNumber__numerationFrom0 > workpiece.length) {
 
@@ -76,14 +108,14 @@ export default function moveArrayElementTo1Position<ArrayElement>(
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
-          parameterName: "compoundParameter",
+          parameterName: "sourceDataAndOptions",
           messageSpecificPart:
               "Target element number is out of range. " +
               "This case is being considered as an error when " +
                   "\"errorMustBeThrownIf.targetElementNumberIsOutOfRange\" flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "moveArrayElementTo1Position(compoundParameter)"
+        occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
       });
 
     }
