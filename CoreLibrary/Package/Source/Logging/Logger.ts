@@ -1,7 +1,7 @@
 /* eslint-disable no-console -- This class using native "console" because of its specialization. */
 
 import type { Log, ErrorLog, ThrownErrorLog, WarningLog, InfoLog, SuccessLog } from "./Logs";
-import type { ILogger } from "./ILogger";
+import type ILogger from "./ILogger";
 
 import isString from "../TypeGuards/Strings/isString";
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
@@ -38,6 +38,58 @@ abstract class Logger {
 
 
   /* ─── Methods of `ILogger` Interface ───────────────────────────────────────────────────────────────────────────── */
+  public static throwErrorWithFormattedMessage<CustomError extends Error>(
+    thrownErrorLog: ThrownErrorLog<CustomError>,
+    options: ILogger.ThrowingErrorWithFormattedMessage.Options = {}
+  ): never {
+
+    if (isNotUndefined(Logger.implementation?.throwErrorWithFormattedMessage)) {
+      return Logger.implementation.throwErrorWithFormattedMessage(thrownErrorLog, options);
+    }
+
+
+    let stringifiedInnerError: string | undefined;
+
+    if (isNotUndefined(thrownErrorLog.innerError)) {
+
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(thrownErrorLog.innerError);
+
+      if (thrownErrorLog.innerError instanceof Error && isNonEmptyString(thrownErrorLog.innerError.stack)) {
+
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(thrownErrorLog.innerError)`,
+         *    but it is runtime dependent because the `stack` property is non-standard. */
+
+        stringifiedInnerError = thrownErrorLog.innerError.stack.includes(stringifiedInnerError) ?
+            thrownErrorLog.innerError.stack :
+            `${ stringifiedInnerError }\n${ thrownErrorLog.innerError.stack }`;
+
+      }
+
+    }
+
+    const errorMessage: string = Logger.
+        generateFormattedErrorFromThrownErrorLog(thrownErrorLog, stringifiedInnerError);
+
+    if ("errorInstance" in thrownErrorLog) {
+      thrownErrorLog.errorInstance.message = errorMessage;
+      throw thrownErrorLog.errorInstance;
+    }
+
+
+    const errorWillBeThrown: Error = new Error(errorMessage);
+    errorWillBeThrown.name = thrownErrorLog.errorType;
+
+    if (options.mustLogErrorBeforeThrowing === true) {
+      Logger.logErrorLikeMessage({
+        title: errorWillBeThrown.name,
+        description: errorWillBeThrown.message
+      });
+    }
+
+    throw errorWillBeThrown;
+
+  }
+
   public static throwErrorAndLog<CustomError extends Error>(
     polymorphicPayload: Error | ThrownErrorLog<CustomError>
   ): never {

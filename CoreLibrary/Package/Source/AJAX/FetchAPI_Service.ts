@@ -34,7 +34,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DataRetrievingFailedError({
           customMessage: "The error has occurred before response has been retrieved."
         }),
@@ -94,7 +94,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DataSubmittingFailedError({
           customMessage: "The error has occurred before server response has been retrieved."
         }),
@@ -152,7 +152,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DataRetrievingFailedError({
           customMessage: "The error has occurred before response has been retrieved."
         }),
@@ -171,7 +171,7 @@ export default class FetchAPI_Service extends AJAX_Service {
       try {
         decodedText = await response.text();
       } catch (error: unknown) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(
               "The HTTP response body could not be represented as text."
           ),
@@ -213,7 +213,7 @@ export default class FetchAPI_Service extends AJAX_Service {
     try {
       responseRawData = await response.json();
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new HTTP_ResponseBodyParsingFailureError(
           "The HTTP response body could not be represented as JSON."
         ),
@@ -225,7 +225,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     if (!isPossiblyReadonlyParsedJSON(responseRawData)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnsupportedScenarioError(
           `The data has type "${ typeof responseRawData }" while currently non-object data in not supported.`
         ),
@@ -253,7 +253,7 @@ export default class FetchAPI_Service extends AJAX_Service {
       try {
         objectTypeData = await response.json();
       } catch (error: unknown) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(
             "The HTTP response body could not be represented as JSON while \"content-type\" HTTP header is includes " +
               "\"application/json\"."
@@ -266,7 +266,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
       if (!isPossiblyReadonlyParsedJSON(objectTypeData)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new UnsupportedScenarioError(
             `The data has type "${ typeof objectTypeData }" while currently non-object data in not supported.`
           ),
@@ -288,7 +288,7 @@ export default class FetchAPI_Service extends AJAX_Service {
       try {
         decodedText = await response.text();
       } catch (error: unknown) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(
             "The HTTP response body could not be represented as text while \"content-type\" HTTP header is includes " +
               "\"text\"."

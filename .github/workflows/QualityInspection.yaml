@@ -4,7 +4,7 @@ on: [ push ]
 
 jobs:
 
-  build:
+  qualityInspection:
 
     name: Quality Inspection
 

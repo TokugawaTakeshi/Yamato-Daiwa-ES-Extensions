@@ -19,13 +19,13 @@ export default class Matrix<Element> {
     { rowsCount, columnsCount }: Readonly<{ rowsCount: number; columnsCount: number; }>
   ): Matrix<Element> {
     return new Matrix(
-      Array.from(Array(rowsCount).keys()).map(
+      ...Array.from(Array(rowsCount).keys()).map(
         (): Array<Element> => new Array(columnsCount)
       )
     );
   }
 
-  public constructor(rowsDefinition: Array<Array<Element>>) {
+  public constructor(...rowsDefinition: Array<Array<Element>>) {
 
     if (rowsDefinition.length === 0) {
       Logger.throwErrorAndLog({
@@ -195,14 +195,14 @@ export default class Matrix<Element> {
     coordinate: Readonly<{ index: number; } | { number__numerationFrom1: number; }>
   ): RowVector<Element> {
     const targetRowIndex: number = "index" in coordinate ? coordinate.index : coordinate.number__numerationFrom1;
-    return RowVector.fromArray(this.rows[targetRowIndex]);
+    return new RowVector(this.rows[targetRowIndex]);
   }
 
   public getColumn(
     coordinate: Readonly<{ index: number; } | { number__numerationFrom1: number; }>
   ): ColumnVector<Element> {
     const targetColumnIndex: number = "index" in coordinate ? coordinate.index : coordinate.number__numerationFrom1;
-    return ColumnVector.fromArray(
+    return new ColumnVector(
       /* eslint-disable-next-line id-length -- Nothing specific required for name of iterated variable in this case. */
       this.rows.map((row: Array<Element>): Element => row[targetColumnIndex])
     );

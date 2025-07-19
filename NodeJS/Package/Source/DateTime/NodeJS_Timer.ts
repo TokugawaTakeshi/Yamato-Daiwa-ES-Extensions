@@ -27,9 +27,6 @@ export default class NodeJS_Timer extends Timer {
   ): void;
 
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * In this case, the function could return or not return the promise. If to make this function async, the return type signature
-   * will become invalid. */
   public countDown(
     {
       asynchronousCompletion = Timer.AsynchronousCompletions.promise
@@ -38,8 +35,6 @@ export default class NodeJS_Timer extends Timer {
     } | {
       asynchronousCompletion: Timer.AsynchronousCompletions.callback;
     } = {}
-    /* eslint-disable-next-line @typescript-eslint/no-invalid-void-type --
-     *  In this case function could return or not return the value depending on parameter. */
   ): Promise<Timer.Outcomes> | void {
 
     if (this.isActive) {
@@ -114,9 +109,6 @@ export default class NodeJS_Timer extends Timer {
     compoundParameter: Readonly<{ asynchronousCompletion: Timer.AsynchronousCompletions.callback; }>
   ): void;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * In this case, the function could return or not return the promise.
-   * If to make this function async, the return type signature will become invalid. */
   public resetAndRestart(
     {
       asynchronousCompletion = Timer.AsynchronousCompletions.promise
@@ -125,8 +117,6 @@ export default class NodeJS_Timer extends Timer {
     } | {
       asynchronousCompletion: Timer.AsynchronousCompletions.callback;
     } = {}
-    /* eslint-disable-next-line @typescript-eslint/no-invalid-void-type --
-    *  In this case function could return or not return the value depending on parameter. */
   ): Promise<Timer.Outcomes> | void {
 
     clearInterval(this.#nativeTimeout);

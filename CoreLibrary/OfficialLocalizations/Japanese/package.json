@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-japanese",
-  "version": "1.8.0-rc.1",
+  "version": "1.8.0-rc.2",
   "description": "Japanese localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -27,15 +27,15 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.0-rc.0"
+    "@yamato-daiwa/es-extensions": "1.8.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "22.7.4",
-    "@yamato-daiwa/es-extensions": "1.8.0-rc.0",
-    "@yamato-daiwa/style_guides": "0.8.0",
+    "@yamato-daiwa/es-extensions": "1.8.0-rc.2",
+    "@yamato-daiwa/style_guides": "0.9.0",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "scripts": {
     "Check Types": "tsc -p tsconfig-cjs.json --noEmit",

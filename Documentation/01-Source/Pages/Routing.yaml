@@ -748,12 +748,12 @@ coreLibrary:
 
               $heading: `coreLibrary.functionality.rawObjectDataProcessor.theoreticalMinimum.$heading`
               $URI: `@All/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.${ fileNameLocalizationExtensions }`
-#              $sectioning:
-#                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.yaml
-#                $localizations:
-#                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.english.yaml
-#                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.japanese.yaml
-#                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/_03-TheoreticalMinimum/RawObjectDataProcessor-TheoreticalMinimum.toc.russian.yaml
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/TableOfContents/RawObjectDataProcessor-TheoreticalMinimum.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/TableOfContents/RawObjectDataProcessor-TheoreticalMinimum.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/TableOfContents/RawObjectDataProcessor-TheoreticalMinimum.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/RawObjectDataProcessor/Children/03-TheoreticalMinimum/TableOfContents/RawObjectDataProcessor-TheoreticalMinimum.toc.russian.yaml
 
             commonScenarios:
 

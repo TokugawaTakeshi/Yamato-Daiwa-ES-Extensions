@@ -221,7 +221,7 @@ export default class ImprovedGlob {
       "**/",
       `@(${ compoundParameter.subdirectoriesPrefixes.join("|") })*/**/*`,
       ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
-          ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) : []
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) ] : []
     ].join("");
 
   }
@@ -255,7 +255,7 @@ export default class ImprovedGlob {
       }),
       `**/@(${ compoundParameter.subdirectoriesNames.join("|") })/**/*`,
       ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
-          ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) : []
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) ] : []
     ].join("");
 
   }

@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="roundDownToSpecificIntegerPlaceValue" type="NodeJsTestRunner" folderName="Numbers">
+    <node-interpreter value="project" />
+    <working-dir value="$PROJECT_DIR$" />
+    <language value="TYPE_SCRIPT" />
+    <typescript-loader value="TSX" />
+    <envs />
+    <scope-kind value="TEST_FILE" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Numbers/roundDownToSpecificIntegerPlaceValue.test.ts" />
+    <method v="2" />
+  </configuration>
+</component>

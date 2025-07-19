@@ -1158,9 +1158,6 @@ namespace ConsoleCommandsParser {
 
   export type StringOptionSpecification =
       Readonly<{
-        /* eslint-disable-next-line id-denylist --
-         * The "id-denylist" is not unsolicited for object properties, but the applying to add respective option
-         * has been denied. https://github.com/eslint/eslint/issues/15504 */
         type: ParametersTypes.string;
         allowedAlternatives?: ReadonlyArray<string>;
       }> &
@@ -1196,9 +1193,6 @@ namespace ConsoleCommandsParser {
       );
 
   export enum ParametersTypes {
-    /* eslint-disable-next-line id-denylist --
-     * The "id-denylist" is not unsolicited for object properties, but the applying to add respective option
-     * has been denied. https://github.com/eslint/eslint/issues/15504 */
     string = "string",
     number = "number",
     boolean = "boolean",

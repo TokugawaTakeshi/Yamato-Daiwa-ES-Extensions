@@ -65,6 +65,18 @@ block append SpecificContent
       HTML_ID: localizedSectioning.validationErrorsMessages.$anchor
     }).Article-Heading2
 
+    p.Article-Paragraph.
+      Термин #[+Term--YDID «ошибка валидации»] является #[+Keyword--YDID неоднозначным] и
+        #[+Keyword__Contrast--YDID не]&nbsp;обязательно подразумевает, что будет брошено #[+Term--YDID исключение].
+      Если реальные данные, переданные через #[+Keyword--YDID первый] #[+Term__Contrast--YDID параметр]
+        #[+Term--YDID метода] #[+ImportantEntity__Code--YDID process] не&nbsp;соответствуют указанной спецификации,
+        то будет возвращён #[+Term--YDID объект] со #[+Term__Contrast--YDID свойствами]
+        #[+ImportantEntity__Code--YDID isRawDataInvalid: true] и #[+ImportantEntity__Code--YDID validationErrorsMessages],
+        #[+Keyword--YDID последнее] из которых будет содержать #[+Keyphrase--YDID как минимум] #[+Keyword--YDID одно]
+        сообщение о несоответствии реальных данных ожидаемым, а что в этом случае делать (в частности бросать
+        #[+Term--YDID исключение] или #[+Keyword--YDID нет]) — решает технического задания и/или программист.
+
+
     //- ─── RAW_DATA_IS_NOT_OBJECT ─────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
@@ -72,6 +84,15 @@ block append SpecificContent
       HTML_ID: localizedSectioning.validationErrorsMessages.$children.rawDataIsNotObject.$anchor
     }).Article-Heading3
 
+    p.Article-Paragraph.
+      Возникает, когда переданные через #[+Keyword--YDID первый] #[+Term--YDID параметр] #[+Term--YDID метода]
+        #[+ImportantEntity__Code--YDID process] данные #[+Keyword--YDID не]&nbsp;являются #[+Term--YDID объектом].
+
+    p.Article-Paragraph.
+      #[+Term--YDID Класс] #[+ImportantEntity--YDID RawObjectDataProcessor] предназначен для обработки
+        #[+Keyword--YDID только] данных #[+Term--YDID типа] #[+Term__Contrast--YDID «объект»] (в том числе
+        #[+Term--YDID индексных массивов]), потому если передать данные какого-либо другого #[+Term--YDID типа]
+        (например, #[+Term--YDID строку]), то обработка данных тут же завершится:
     //- ─── RAW_DATA_IS_NULL ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,

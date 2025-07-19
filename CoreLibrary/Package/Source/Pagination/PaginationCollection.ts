@@ -21,6 +21,7 @@ class PaginationCollection<Item> {
 
       itemsByPages[pageIndex] = cropArray({
         targetArray: compoundParameter.items,
+        fromStart: true,
         startingElementNumber__numerationFrom0: pageIndex * itemsCountPerPaginationPage,
         elementsCount: compoundParameter.itemsCountPerPaginationPage,
         mutably: false,

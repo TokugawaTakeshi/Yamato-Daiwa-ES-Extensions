@@ -9,13 +9,13 @@ import {
 
 export default class RowVector<ElementType> extends Array<ElementType> implements ReadonlyRowVector<ElementType> {
 
-  public static fromArray<ElementType>(array: ReadonlyArray<ElementType>): RowVector<ElementType> {
-    return new RowVector(...array);
-  }
+  public constructor(elements: ReadonlyArray<ElementType>) {
 
+    /* [ Theory ] `super(...elements)` can cause error when `elements` has only one non-integer element. */
+    super();
 
-  public constructor(...elements: ReadonlyArray<ElementType>) {
-    super(...elements);
+    this.push(...elements);
+
   }
 
 

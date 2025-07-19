@@ -65,13 +65,13 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateMessage:
         ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
           "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is not the object and actually has " +
-            `type "${ actualNativeType }". ` +
+            `type "${ actualNativeType }".\n` +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     rawDataIsNull: {
       generateMessage: ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-          "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is null while non-null object expected. " +
+          "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is null while non-null object expected.\n" +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
@@ -267,16 +267,58 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       ): string =>
           "The values of the following keys are either null or explicit undefined while for these keys such values has " +
             "been explicitly forbidden:\n" +
-          stringifyAndFormatArbitraryValue(keysOfEitherUndefinedOrNullValues)
+          keysOfEitherUndefinedOrNullValues.
+              map((keyOfEitherUndefinedOrNullValue: string): string => `  ● ${ keyOfEitherUndefinedOrNullValue }`).
+              join("\n")
     },
 
     disallowedKeysFoundInAssociativeArray: {
-      title: "Disallowed key(s) Found in Associative Array",
+      title: "Disallowed Key(s) Found in Associative Array",
       generateDescription: (
           { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
       ): string =>
-          "Below keys presents in this associative array type value while these keys are disallowed.\n" +
-            stringifyAndFormatArbitraryValue(foundDisallowedKeys)
+          "Below keys presents in this associative array while these keys are disallowed.\n" +
+        foundDisallowedKeys.
+              map((foundDisallowedKey: string): string => `  ● ${ foundDisallowedKey }`).
+              join("\n")
+    },
+
+
+    /* ─── Indexed Arrays and Tuples ──────────────────────────────────────────────────────────────────────────────── */
+    indexedArrayElementsCountIsLessThanRequiredMinimum: {
+      title: "Indexed Array has Less Elements than Expected Minimum",
+      generateDescription: (
+        {
+          minimalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
+            `${ minimalElementsCount } expected.`
+    },
+
+    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
+      title: "Indexed Array has More Elements than Expected Maximum",
+      generateDescription: (
+        {
+          maximalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `This value of indexed array type has ${ actualElementsCount } elements while maximally ` +
+            `${ maximalElementsCount } expected.`
+    },
+
+    indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "The Count of Elements of Indexed Array or Tuple does not Match with Expected Fixed Value",
+      generateDescription: (
+        {
+          exactElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `This value of indexed array or tuple type has ${ actualElementsCount } elements while exactly ` +
+            `${ exactElementsCount } expected.`
     },
     // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -351,43 +393,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `This string value does not match with specified regular expression:\n ${ regularExpression.toString() }`
     },
 
-
-    /* ─── Indexed Arrays ─────────────────────────────────────────────────────────────────────────────────────────── */
-    indexedArrayElementsCountIsLessThanRequiredMinimum: {
-      title: "Indexed Array has Less Elements than Expected Minimum",
-      generateDescription: (
-        {
-          minimalElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
-      ): string =>
-          `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
-            `${ minimalElementsCount } expected.`
-    },
-
-    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
-      title: "Indexed Array has More Elements than Expected Maximum",
-      generateDescription: (
-        {
-          maximalElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
-      ): string =>
-          `This value of indexed array type has ${ actualElementsCount } elements while ` +
-            `maximally ${ maximalElementsCount } expected.`
-    },
-
-    indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber: {
-      title: "The Count of Elements of Indexed Array does not Match with Expected Fixed Value",
-      generateDescription: (
-        {
-          exactElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
-      ): string =>
-          `This value of indexed array type has ${ actualElementsCount } elements while ` +
-            `exactly ${ exactElementsCount } expected.`
-    },
 
     /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────── */
     disallowedBooleanValueVariant: {
@@ -488,14 +493,14 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
-    // TODO Link Injection
     dataTypeNotSpecified: {
 
       title: "Data Type not Specified",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          specifiedStringifiedType
+          specifiedStringifiedType,
+          documentationPageAnchor
         }: ThrowableErrors.DataTypeNotSpecified.TemplateVariables
       ): string =>
           (
@@ -504,11 +509,11 @@ const rawObjectDataProcessorLocalization__english: Localization = {
                 `Unsupported data type "${ specifiedStringifiedType } has been"`
           ) +
           `specified for property/element "${ targetPropertyDotSeparatedQualifiedName }". ` +
-          "It is possible only with TypeScript error."
+          "It is possible only with TypeScript error. " +
+          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
 
-    // TODO Link Injections
     unableToDeletePropertyWithOutdatedKey: {
 
       title: "Unable to Delete Property With Outdated Key",
@@ -516,77 +521,49 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          propertyNewKey
+          propertyNewKey,
+          documentationPageAnchor
         }: ThrowableErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
           `Unable to delete the property "${ targetPropertyDotSeparatedQualifiedName }" after renaming to ` +
             `"${ propertyNewKey }" because it is not configurable while the processing approach is the manipulations ` +
-            "with source object and \"mustLeaveEvenRenamed\" has not been set to true."
-          // "If , it " +
-          //   "means the defining of new property and, while  option has not been specified with " +
-          //   "\"true\" boolean value for target property, the deleting of the outdated one. " +
-          // "However, because the target property is not configurable (https://developer.mozilla.org/en-US/docs/Web/JavaScript/" +
-          //   "Reference/Global_Objects/Object/defineProperty#configurable), it could not be deleted.\n" +
-          // "This error has been thrown because the error handling strategy \"onUnableToDeletePropertyWithOutdatedValue\" is " +
-          //   "\"ErrorHandlingStrategies.throwingOfError\" which is default. " +
-          // "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
-          //   "select the one matching with your case:\n" +
-          // "● If you are have access to the data source, consider the making of this property configurable.\n" +
-          // "● If it is fine to keep the old property alongside with the new one, set \"mustLeaveEvenRenamed\" option to " +
-          //   "\"true\" for this property.\n" +
-          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          //   "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-          //   "valid data specification will not be added to new object."
+            "with source object and \"mustLeaveEvenRenamed\" has not been set to true. " +
+            rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
+
     },
 
-    // TODO Link Injections
     unableToChangePropertyDescriptors: {
 
       title: "Unable to Change Property Descriptors",
 
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
           `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }" because this ` +
             "property is not configurable while the processing approach is the manipulations with source object and " +
-            "\"mustLeaveEvenRenamed\" has not been set to true."
-          // "This error has been thrown because the error handling strategy \"onUnableToChangePropertyDescriptors\" is " +
-          //   "\"ErrorHandlingStrategies.throwingOfError\" which is the default one. " +
-          //  "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to " +
-          //   "select the one matching with your case:\n" +
-          // "● If you are have access to the data source, consider the making of this property configurable.\n" +
-          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          //   "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +
-          //   "valid data specification will not be added to new object.\n" +
-          // "● If none of this solutions fits to your case, it means that you should no to interfere to the source data. " +
-          //   "Consider the creating of derived from the source one object　instead."
+            "\"mustLeaveEvenRenamed\" has not been set to true. " +
+          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
 
-    // TODO Link Injections
     unableToUpdatePropertyValue: {
 
       title: "Unable to Update Property Value",
 
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
       ): string =>
           `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
             "value substitution or pre-validation modification while this property is read-only. " +
           "This error has been thrown because the error handling strategy \"onUnableToUnableToUpdatePropertyValue\" " +
-            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. "
-          // "It is recommended to keep this strategy, but there is no single right solution for all cases, so you need to " +
-          //   "select the one matching with your case:\n" +
-          // "● If you are have access to data source, first of all try to avoid the explicit `undefined` values. " +
-          // "Alternatively, consider the making of this property writable. " +
-          // "You can make it readonly again after substitution of the default value by `mustMakeReadonly` if this " +
-          //   "property is configurable. \n" +
-          // "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
-          //   "option with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was " +
-          //   "not specified via valid data specification will not be added to new object. \n" +
-          // "● If none of above solutions are satisfying with your requirements, it means you can not write this property " +
-          //   "neither by RawObjectDataProcessor nor manually by assignment. You can prepare the default value outside of " +
-          //   "the processed object, or rename this property, or add the getter by post validation modifications."
+            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
+          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
 

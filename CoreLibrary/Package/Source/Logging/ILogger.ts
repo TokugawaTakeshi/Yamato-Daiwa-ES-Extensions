@@ -1,7 +1,12 @@
 import type { Log, ErrorLog, InfoLog, SuccessLog, ThrownErrorLog, WarningLog } from "./Logs";
 
 
-export interface ILogger {
+interface ILogger {
+
+  readonly throwErrorWithFormattedMessage?: <CustomError extends Error = Error>(
+    polymorphicPayload: Error | ThrownErrorLog<CustomError>,
+    options?: ILogger.ThrowingErrorWithFormattedMessage.Options
+  ) => never;
 
   readonly throwErrorAndLog?: <CustomError extends Error = Error>(
     polymorphicPayload: Error | ThrownErrorLog<CustomError>
@@ -23,3 +28,19 @@ export interface ILogger {
   readonly logPromiseError?: (error: unknown) => void;
 
 }
+
+
+namespace ILogger {
+
+  export namespace ThrowingErrorWithFormattedMessage {
+
+    export type Options = Readonly<{
+      mustLogErrorBeforeThrowing?: boolean;
+    }>;
+
+  }
+
+}
+
+
+export default ILogger;

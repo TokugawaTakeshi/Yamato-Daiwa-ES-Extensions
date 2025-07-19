@@ -35,6 +35,15 @@ class DateWithoutTime {
   protected computingOnDemandSettings: DateWithoutTime.ComputingOnDemandSettings;
 
 
+  /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static format(
+    dateDefinition: DateWithoutTime.DateDefinition,
+    formatter: (selfInstance: DateWithoutTime) => string
+  ): string {
+    return new DateWithoutTime({ ...dateDefinition, computingOnDemand: true }).format(formatter);
+  }
+
+
   /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public constructor(
     sourceDataAndOptions:
@@ -135,7 +144,7 @@ class DateWithoutTime {
   }
 
 
-  /* ━━━ Public Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Public Instance Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public format(formatter: (selfInstance: DateWithoutTime) => string): string {
     return formatter(this);
   }

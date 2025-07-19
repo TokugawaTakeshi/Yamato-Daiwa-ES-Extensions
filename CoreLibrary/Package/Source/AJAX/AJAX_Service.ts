@@ -127,7 +127,7 @@ abstract class AJAX_Service {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DataRetrievingFailedError({
           customMessage: "The retrieving data by AJAX has failed."
         }),
@@ -179,7 +179,7 @@ abstract class AJAX_Service {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DataSubmittingFailedError({
           customMessage: "The submitting of the data by AJAX has failed."
         }),
@@ -268,7 +268,7 @@ abstract class AJAX_Service {
     if (isNonEmptyString(URI_PathRawDefinition.alternatingURI_PathPart)) {
 
       if (isNull(AJAX_Service.API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConfigError({
             customMessage:
                 "The \"alternatingURI_PathPart\" has been specified while the static field " +
@@ -297,7 +297,7 @@ abstract class AJAX_Service {
     }
 
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         customMessage:
             "Either \"alternatingURI_PathPart\" or \"specificURI_UntilPath\" must be specified with non-empty " +
@@ -320,7 +320,7 @@ abstract class AJAX_Service {
           RawObjectDataProcessor.process(rawObjectDataResponse.data, validResponseDataSpecification);
 
       if (responseRawDataProcessingResult.isRawDataInvalid) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidExternalDataError({
             mentionToExpectedData: "HTTP_ResponseData",
             messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(
@@ -358,7 +358,7 @@ abstract class AJAX_Service {
   protected static getExpectedToBeInitializedImplementation(): AJAX_Service {
 
     if (isNull(AJAX_Service.implementation)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorType: "ImplementationHasNotBeenSetError",
         title: "Implementation has not been set",
         description:

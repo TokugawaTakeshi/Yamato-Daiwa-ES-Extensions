@@ -22,7 +22,7 @@ export default function createArrayOfNaturalNumbers(
 ): Array<number> {
 
   if (!isNaturalNumberOrZero(elementsCount)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "options",
@@ -36,7 +36,7 @@ export default function createArrayOfNaturalNumbers(
 
 
   if (!isNaturalNumber(startingNumber)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "options",
@@ -50,7 +50,7 @@ export default function createArrayOfNaturalNumbers(
 
 
   if (isDescendingOrder && startingNumber < elementsCount) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "options",

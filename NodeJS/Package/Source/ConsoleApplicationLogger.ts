@@ -35,6 +35,52 @@ abstract class ConsoleApplicationLogger {
 
 
   /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static throwErrorWithFormattedMessage<CustomError extends Error>(
+    polymorphicPayload: Error | ThrownErrorLog<CustomError>
+  ): never {
+
+    if (polymorphicPayload instanceof Error) {
+      throw polymorphicPayload;
+    }
+
+
+    let stringifiedInnerError: string | undefined;
+
+    if (isNotUndefined(polymorphicPayload.innerError)) {
+
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(polymorphicPayload.innerError);
+
+      if (polymorphicPayload.innerError instanceof Error && isNonEmptyString(polymorphicPayload.innerError.stack)) {
+
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(polymorphicPayload.innerError)`,
+         *    but it is runtime dependent because the `stack` property is non-standard. */
+
+        stringifiedInnerError = polymorphicPayload.innerError.stack.includes(stringifiedInnerError) ?
+            polymorphicPayload.innerError.stack :
+            `${ stringifiedInnerError }\n${ polymorphicPayload.innerError.stack }`;
+
+      }
+
+    }
+
+    const errorMessage: string = ConsoleApplicationLogger.
+        generateFormattedErrorFromThrownErrorLog(polymorphicPayload, stringifiedInnerError);
+
+    /* [ Theory ] Although the formatting of error `name` is possible, it could break the error handling so it is
+     *    better to keep it as is. */
+    if ("errorInstance" in polymorphicPayload) {
+      polymorphicPayload.errorInstance.message = errorMessage;
+      throw polymorphicPayload.errorInstance;
+    }
+
+
+    const errorWillBeThrown: Error = new Error(errorMessage);
+    errorWillBeThrown.name = polymorphicPayload.errorType;
+
+    throw errorWillBeThrown;
+
+  }
+
   public static throwErrorAndLog<CustomError extends Error>(
     polymorphicPayload: Error | ThrownErrorLog<CustomError>
   ): never {

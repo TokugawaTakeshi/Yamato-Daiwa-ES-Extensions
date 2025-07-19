@@ -234,7 +234,7 @@ export type {
   SuccessLog,
   InfoLog
 } from "./Logging/Logs";
-export type { ILogger } from "./Logging/ILogger";
+export type { default as ILogger } from "./Logging/ILogger";
 export { default as Logger } from "./Logging/Logger";
 export { default as loggerLocalization__english } from "./Logging/LoggerLocalization.english";
 
@@ -314,6 +314,7 @@ export { default as destringifyBooleanValueIfPossible } from
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
 export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
+export { default as removeMultipleElementsFromSetByPredicate } from "./Sets/removeMultipleElementsFromSetByPredicate";
 
 
 /* ━━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

@@ -9,7 +9,7 @@ import getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne from
 
 
 export default function swapArrayElements<ArrayElement>(
-  compoundParameter:
+  sourceDataAndOptions:
       Readonly<
         (
           {
@@ -89,62 +89,64 @@ export default function swapArrayElements<ArrayElement>(
       >
 ): Array<ArrayElement> {
 
-  if (compoundParameter.targetArray.length === 0) {
+  if (sourceDataAndOptions.targetArray.length === 0) {
 
-    if (compoundParameter.mustThrowErrorIfTargetArrayIsEmpty) {
+    if (sourceDataAndOptions.mustThrowErrorIfTargetArrayIsEmpty) {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
-          parameterName: "compoundParameter",
+          parameterName: "sourceDataAndOptions",
           parameterNumber: 1,
           messageSpecificPart:
               "Target array is empty, nothing to swap. " +
               "This error has been thrown because the `mustThrowErrorIfTargetArrayIsEmpty` option has been set to true."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "swapArrayElements(compoundParameter)"
+        occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
       });
 
     }
 
 
-    return compoundParameter.mutably ? compoundParameter.targetArray : [];
+    return sourceDataAndOptions.mutably ? sourceDataAndOptions.targetArray : [];
 
   }
 
 
-  const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
-      compoundParameter.targetArray : [ ...compoundParameter.targetArray ];
+  const workpiece: Array<ArrayElement> = sourceDataAndOptions.mutably ?
+      sourceDataAndOptions.targetArray : [ ...sourceDataAndOptions.targetArray ];
 
   let oneElementPosition__numerationFrom0: number;
 
-  if (isNaturalNumberOrZero(compoundParameter.oneElement.position__numerationFrom0)) {
-    oneElementPosition__numerationFrom0 = compoundParameter.oneElement.position__numerationFrom0;
-  } else if (isNaturalNumber(compoundParameter.oneElement.position__numerationFrom1)) {
-    oneElementPosition__numerationFrom0 = compoundParameter.oneElement.position__numerationFrom1 - 1;
-  } else if (compoundParameter.oneElement.isLastOne === true) {
+  if (isNaturalNumberOrZero(sourceDataAndOptions.oneElement.position__numerationFrom0)) {
+    oneElementPosition__numerationFrom0 = sourceDataAndOptions.oneElement.position__numerationFrom0;
+  } else if (isNaturalNumber(sourceDataAndOptions.oneElement.position__numerationFrom1)) {
+    oneElementPosition__numerationFrom0 = sourceDataAndOptions.oneElement.position__numerationFrom1 - 1;
+  } else if (sourceDataAndOptions.oneElement.isLastOne === true) {
     oneElementPosition__numerationFrom0 = workpiece.length - 1;
-  } else if (isNotUndefined(compoundParameter.oneElement.finder)) {
+  } else if (isNotUndefined(sourceDataAndOptions.oneElement.finder)) {
 
     const oneElementPosition__numerationFrom0__nullIfMatchesAreNotExactlyOne: number | null =
         getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-          workpiece, compoundParameter.oneElement.finder
+          workpiece, sourceDataAndOptions.oneElement.finder
         );
 
     if (isNull(oneElementPosition__numerationFrom0__nullIfMatchesAreNotExactlyOne)) {
 
-      /* [ Theory ]
-       * The `in` check is required only to make TypeScript not complain because it does not see that if
-       *   `compoundParameter.oneElement.finder` is defined, the `mustThrowErrorIfElementNotFoundOrMatchesAreMultiple`
-       *   defined too (while TypeScript does not threat any errors). */
-      if (
-        "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple" in compoundParameter.oneElement &&
-        compoundParameter.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple
-      ) {
+      /* [ Approach ] ※
+       * Non-standard method of accessing to property but
+       *   `sourceDataAndOptions.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` is the invalid
+       *    TypeScript and
+       *    ```
+       *    "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple" in sourceDataAndOptions.oneElement &&
+       *       sourceDataAndOptions.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple
+       *     ```
+       *     requires two more checks one of which is redundant from the viewpoint of JavaScrit. */
+      if (Reflect.get(sourceDataAndOptions.oneElement, "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple") === true) {
 
         Logger.throwErrorAndLog({
           errorInstance: new InvalidParameterValueError({
-            parameterName: "compoundParameter",
+            parameterName: "sourceDataAndOptions",
             parameterNumber: 1,
             messageSpecificPart:
                 "The elements count satisfying to `oneElement.finder` predicate are not exactly one. " +
@@ -152,7 +154,7 @@ export default function swapArrayElements<ArrayElement>(
                   "option has been set to true."
           }),
           title: InvalidParameterValueError.localization.defaultTitle,
-          occurrenceLocation: "swapArrayElements(compoundParameter)"
+          occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
         });
 
       }
@@ -169,7 +171,7 @@ export default function swapArrayElements<ArrayElement>(
 
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
-        parameterName: "compoundParameter",
+        parameterName: "sourceDataAndOptions",
         parameterNumber: 1,
         messageSpecificPart:
             "No valid option has specified about how to get the first element of array. " +
@@ -181,7 +183,7 @@ export default function swapArrayElements<ArrayElement>(
               "`mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` with boolean value\n"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "swapArrayElements(compoundParameter)"
+      occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
     });
 
   }
@@ -189,33 +191,27 @@ export default function swapArrayElements<ArrayElement>(
 
   let otherElementPosition__numerationFrom0: number;
 
-  if (isNaturalNumberOrZero(compoundParameter.otherElement.position__numerationFrom0)) {
-    otherElementPosition__numerationFrom0 = compoundParameter.otherElement.position__numerationFrom0;
-  } else if (isNaturalNumber(compoundParameter.otherElement.position__numerationFrom1)) {
-    otherElementPosition__numerationFrom0 = compoundParameter.otherElement.position__numerationFrom1 - 1;
-  } else if (compoundParameter.otherElement.isLastOne === true) {
+  if (isNaturalNumberOrZero(sourceDataAndOptions.otherElement.position__numerationFrom0)) {
+    otherElementPosition__numerationFrom0 = sourceDataAndOptions.otherElement.position__numerationFrom0;
+  } else if (isNaturalNumber(sourceDataAndOptions.otherElement.position__numerationFrom1)) {
+    otherElementPosition__numerationFrom0 = sourceDataAndOptions.otherElement.position__numerationFrom1 - 1;
+  } else if (sourceDataAndOptions.otherElement.isLastOne === true) {
     otherElementPosition__numerationFrom0 = workpiece.length - 1;
-  } else if (isNotUndefined(compoundParameter.otherElement.finder)) {
+  } else if (isNotUndefined(sourceDataAndOptions.otherElement.finder)) {
 
     const otherElementPosition__numerationFrom0__nullIfMatchesAreNotExactlyOne: number | null =
         getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-          workpiece, compoundParameter.otherElement.finder
+          workpiece, sourceDataAndOptions.otherElement.finder
         );
 
     if (isNull(otherElementPosition__numerationFrom0__nullIfMatchesAreNotExactlyOne)) {
 
-      /* [ Theory ]
-       * The `in` check is required only to make TypeScript not complain because it does not see that if
-       *   `compoundParameter.otherElement.finder` is defined, the `mustThrowErrorIfElementNotFoundOrMatchesAreMultiple`
-       *   defined too (while TypeScript does not threat any errors). */
-      if (
-        "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple" in compoundParameter.otherElement &&
-        compoundParameter.otherElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple
-      ) {
+      /* [ Approach ] See ※. */
+      if (Reflect.get(sourceDataAndOptions.otherElement, "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple") === true) {
 
         Logger.throwErrorAndLog({
           errorInstance: new InvalidParameterValueError({
-            parameterName: "compoundParameter",
+            parameterName: "sourceDataAndOptions",
             parameterNumber: 1,
             messageSpecificPart:
                 "The elements count satisfying to `otherElement.finder` predicate are not exactly one. " +
@@ -223,7 +219,7 @@ export default function swapArrayElements<ArrayElement>(
                   "option has been set to true."
           }),
           title: InvalidParameterValueError.localization.defaultTitle,
-          occurrenceLocation: "swapArrayElements(compoundParameter)"
+          occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
         });
 
       }
@@ -239,7 +235,7 @@ export default function swapArrayElements<ArrayElement>(
 
     Logger.throwErrorAndLog({
       errorInstance: new InvalidParameterValueError({
-        parameterName: "compoundParameter",
+        parameterName: "sourceDataAndOptions",
         parameterNumber: 1,
         messageSpecificPart:
             "No valid option has specified about how to get the second element of array. " +
@@ -251,7 +247,7 @@ export default function swapArrayElements<ArrayElement>(
               "`mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` with boolean value\n"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "swapArrayElements(compoundParameter)"
+      occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
     });
 
   }
@@ -259,11 +255,11 @@ export default function swapArrayElements<ArrayElement>(
 
   if (oneElementPosition__numerationFrom0 === otherElementPosition__numerationFrom0) {
 
-    if (compoundParameter.mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition) {
+    if (sourceDataAndOptions.mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition) {
 
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({
-          parameterName: "compoundParameter",
+          parameterName: "sourceDataAndOptions",
           parameterNumber: 1,
           messageSpecificPart:
               "The specified positions of both elements are referring to same position. " +
@@ -271,7 +267,7 @@ export default function swapArrayElements<ArrayElement>(
                 "option has been set to true."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "swapArrayElements(compoundParameter)"
+        occurrenceLocation: "swapArrayElements(sourceDataAndOptions)"
       });
 
     }

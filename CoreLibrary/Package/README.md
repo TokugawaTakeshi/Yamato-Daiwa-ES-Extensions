@@ -30,18 +30,85 @@ npm i @yamato-daiwa/es-extensions -E
 
 ## Documentation
 
-+ [Getting Started](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html)
+### Getting Started
+
++ [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
++ [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
++ [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
++ [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
+
+
+### AJAX
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a></dt>
+  <dd>
+    <p>
+      Facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
+        maximal type-safety and less code.
+    </p>
+    <ul>
+      <li>
+        Integrated with <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html"><code>RawObjectDataProcessor</code></a>
+          for validation of response data.
+      </li>
+      <li>
+        Needs some implementation, but there is the pre-made one:
+          <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a>.
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a></dt>
+  <dd>
+    Implementation for <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
+    Works will all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/URI_QueryParametersSerializer.ts"><code>URI_QueryParametersSerializer</code></a><dt>
+  <dd>
+    The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
+      used by <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      and should be used to implement the custom serializing algorithm for URI query parameters.  
+  </dd>
+
+</dl>
+
 
 ### Arrays
 #### Creating
 
-+ [createArrayOfNaturalNumbers](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html"><code>createArrayOfNaturalNumbers</code></a></dt>
+  <dd>
+    Obviously from the function name, created the array of natural numbers.
+    Elements count, assessing/descending and starting number can be specified.
+  </dd>
+
+</dl>
 
 
 #### Retrieving of Elements
 
-+ [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
-+ [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
+  <dd>
+    Returns the element of a specified array matching with the predicate if such an element is exactly one, 
+      otherwise error will be thrown or null will be returned depending on dedicated option's value.
+  </dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
+  <dd>
+    Returns the last element of an array if such element is exists, other will otherwise error will be thrown as default
+      or null will be returned if dedicated option has been specified.
+  </dd>
+
+</dl>
 
 
 #### Retrieving of Indexes

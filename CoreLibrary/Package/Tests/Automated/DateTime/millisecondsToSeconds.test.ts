@@ -1,21 +1,25 @@
-import { millisecondsToSeconds } from "../../../Source";
+import { Logger, millisecondsToSeconds } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("millisecondsToSeconds", (): void => {
+type Sample = Readonly<{ millisecondsAmount: number; secondsAmount: number; }>;
 
-  const samples: ReadonlyArray<{ millisecondsAmount: number; secondsAmount: number; }> = [
-    { millisecondsAmount: 5, secondsAmount: 0.005 },
-    { millisecondsAmount: 50, secondsAmount: 0.05 },
-    { millisecondsAmount: 500, secondsAmount: 0.5 },
-    { millisecondsAmount: 1000, secondsAmount: 1 },
-    { millisecondsAmount: 2000, secondsAmount: 2 }
-  ];
+const samples: ReadonlyArray<Sample> = [
+  { millisecondsAmount: 5, secondsAmount: 0.005 },
+  { millisecondsAmount: 50, secondsAmount: 0.05 },
+  { millisecondsAmount: 500, secondsAmount: 0.5 },
+  { millisecondsAmount: 1000, secondsAmount: 1 },
+  { millisecondsAmount: 2000, secondsAmount: 2 }
+];
 
-  for (const sample of samples) {
-    it(`${ sample.millisecondsAmount } milliseconds is ${ sample.secondsAmount } seconds`, (): void => {
-      Assert.strictEqual(millisecondsToSeconds(sample.millisecondsAmount), sample.secondsAmount);
-    });
-  }
-
-});
+Promise.all([
+  samples.map(
+    async ({ millisecondsAmount, secondsAmount }: Sample): Promise<void> => Testing.test(
+      `${ millisecondsAmount } milliseconds is ${ secondsAmount } seconds`,
+      (): void => {
+        Assert.strictEqual(millisecondsToSeconds(millisecondsAmount), secondsAmount);
+      }
+    )
+  )
+]).catch(Logger.logPromiseError);

@@ -50,3 +50,236 @@ block append SpecificContent
 
     //- ━━━ `RawObjectDataProcessor` — Теоретический минимум ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
+
+    p.Article-Paragraph.
+      При работе в #[+ImportantEntity--YDID RawObjectDataProcessor] необходимо учитывать некоторые нюансы
+        #[+ImportantEntity--YDID JavaScript]/#[+ImportantEntity--YDID TypeScript], а вернее, стандарта
+        #[+ImportantEntity--YDID ECMAScript] и связанных с ним.
+      Такие нюансы, разумеется, документированы в официальных и неофициальных источниках, однако начинающие программисты
+        которых немало их часто не&nbsp;знают.
+
+
+    //- ━━━ Классификация объектных данных ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.objectLikeDataClassification.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      Как видно из названия #[+ImportantEntity--YDID «RawObjectDataProcessor»], этот утилитарный #[+Term--YDID класс]
+        предназначен для работы с #[+Keyword--YDID объектными] данными, то есть данными, удовлетворяющими условию
+        #[+ImportantEntity--YDID typeof N === "object"], при этом #[+Keyword--YDID не]&nbsp;являющимися
+        #[+ImportantEntity__Code--YDID null] (а #[+ImportantEntity__Code--YDID typeof null] #[+Keyword--YDID тоже]
+        является #[+ImportantEntity__Code--YDID "object"]
+        #[+Keyphrase--YDID с точки зрения стандарта #[+ImportantEntity--YDID ECMAScript]]).
+      Однако, #[+Keyword--YDID дочерние] #[+Term--YDID свойства] могут иметь и другие типы:
+        #[+ImportantEntity__Code--YDID Number], #[+ImportantEntity__Code--YDID String],
+        #[+ImportantEntity__Code--YDID Boolean],
+      Тем не менее, на данный момент #[+Keyword--YDID полностью] поддерживаются только #[+Keyword--YDID входные] данные,
+        совместимые с #[+ImportantEntity--YDID JSON].
+      Соответствующий #[+Term--YDID тип] имеет следующее определение:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;
+
+        export type ParsedJSON_Object = { [key: string]: ParsedJSON_NestedProperty; };
+
+        export type ParsedJSON_Array = Array<ParsedJSON_NestedProperty>;
+
+        export type ParsedJSON_NestedProperty =
+          number |
+          string |
+          boolean |
+          null |
+          ParsedJSON_Object |
+          ParsedJSON_Array |
+          undefined;
+
+    +AdmonitionBlock--YDF({
+      title: "JSON и объекты",
+      SVG_Icon: true,
+      areThemesCSS_ClassesCommon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    })
+
+      p.Article-Paragraph.
+        Хотя такие термины, как #[+Term--YDID «объекты»] и #[+Term--YDID «массивы»] часто применяются по отношению к
+          #[+ImportantEntity--YDID JSON], необходимо понимать, что #[+ImportantEntity--YDID JSON] — это
+          #[+Keyword--YDID строка], а #[+Keyword--YDID не]&nbsp;#[+Term--YDID объект].
+        Именно поэтому приведённые выше имена #[+Term--YDID алиасов] начинаются с #[+Term--YDID «parsed»], а
+          не&nbsp;просто #[+SecondaryEntity__Code--YDID JSON_Object] или #[+SecondaryEntity__Code--YDID JSON_Array].
+
+      p.Article-Paragraph.
+        В случае #[+Term--YDID ECMAScript-языков] для того, чтобы получить из #[+Term--YDID JSON-строки] обычный
+          #[+Term--YDID объект], чаще всего используется #[+ImportantEntity__Code--YDID JSON.parse()].
+        Но хотя формат #[+ImportantEntity--YDID JSON] и произошёл от #[+ImportantEntity--YDID JavaScript] (что понятно из
+          расшифровки — #[+Term--YDID «JavaScript Object Notation»]), с этим форматом данных работают и большинство
+          других популярных языков программирования, но там #[+Term--YDID JSON-строка] преобразуется в типы данных,
+          поддерживаемые соответствующим языком программирования.
+
+    p.Article-Paragraph.
+      В будущем возможно будет добавлена поддержка и других #[+Term--YDID типов] #[+Keyword__Contrast--YDID дочерних]
+        #[+Term--YDID свойств], например #[+ImportantEntity--YDID Date] или #[+ImportantEntity--YDID BigInt].
+      Но на данный момент эта функциональность востребована мало, так как обычно при чтении данных из внешних источников
+        и при образовании их в #[+Term--YDID JavaScript-объект] они совместимы с #[+ImportantEntity--YDID JSON], а
+        если нужны свойства типа #[+ImportantEntity__Code--YDID Date] или #[+ImportantEntity__Code--YDID BigInt], то
+        их можно преобразовать из строк в ходе постобработки.
+
+    p.Article-Paragraph.
+      Итак, #[+ImportantEntity--YDID RawObjectDataProcessor] работает со следующими #[+Keyword--YDID четырьмя] подтипами
+        #[+Term--YDID объектов]:
+
+    +Table--YDF({
+      decorativeVariation: Table__YDF.DecorativeVariations.modestlyCalmingPastelSolid
+    })
+
+      thead
+
+        tr
+
+          th(scope="col") ↓ Тип ключей / ➝ Число элементов
+          th(scope="col") Фиксированное
+          th(scope="col") Произвольное
+
+      tbody
+
+        tr
+
+          th(scope="row") Строковые
+          td Объект фиксированной структуры
+          td Ассоциативный массив
+
+        tr
+
+          th(scope="row") Неотрицательные целочисленные
+          td Кортеж
+          td Индексный массив
+
+
+
+    //- ─── Объекты фиксированной структуры ────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      Для этих подтипов #[+Term--YDID объектов] подразумевается, что имена #[+Keyword--YDID всех]
+        #[+Keyword__Contrast--YDID возможных] #[+Term--YDID свойств] известны #[+Term--YDID заранее].
+      #[+Term--YDID Тип] #[+SecondaryEntity__Code--YDID SampleType] из демо является примером такого подтипа
+        #[+Term--YDID объектов]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    p.Article-Paragraph.
+      #[+Term--YDID Фиксированная структура] #[+Keyword--YDID не]&nbsp;является запретом на
+        #[+Term--YDID полиморфные свойства], однако возможные варианты #[+Keyword--YDID должны] быть
+        #[+Keyword--YDID заранее] известны, как в примере ниже.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleTypeWithPolymopthocProperties = {
+          foo:
+              { hoge: string; } |
+              { fuga: number: }
+          bar: number:
+          baz: string;
+        };
+
+    p.Article-Paragraph.
+      Такой тип #[+Term--YDID объектов] является #[+Keyword--YDID наиболее] #[+Keyword__Contrast--YDID популярным],
+        потому что чаще всего именно такое данные в сериализованном виде данные отправляются с клиента на сервер и
+        наоборот.
+      Такой же тип данный обычно представляют собой настройки, хранящиеся в файлах наподобие
+        #[+ImportantEntity--YDID JSON], #[+ImportantEntity--YDID YAML] и так далее (например, конфигурация
+        #[+SecondaryEntity--YDID TypeScript] — обычно #[+SecondaryEntity--YDID tsconfig.json]).
+
+
+    //- ─── Объекты типа «ассоциативный массив» ────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Term--YDID Ассоциативные массивы] в отличие от #[+Term--YDID объектов фиксированной структуры] могут иметь
+        #[+Keyphrase--YDID произвольное] количество #[+Term--YDID свойств], имена которых #[+Keyword--YDID заранее]
+        #[+SecondaryEntity__Code--YDID не]&nbsp;известны.
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID До] стандарта #[+ImportantEntity--YDID ESMAScript 2015] в качестве таких #[+Term--YDID массивов]
+        использовались #[+Keyword--YDID обычные] #[+Term--YDID объекты],
+        #[+Keyphrase--YDID с точки зрения #[+Keyword--YDID выходного] #[+Term--YDID JavaScript-кода]]
+        #[+Keyword--YDID ничем] #[+Keyword__Contrast--YDID не]&nbsp;отличающиеся от
+        #[+Term--YDID объектов фиксированной структуры].
+      В #[+ImportantEntity--YDID TypeScript] подобные #[+Term--YDID ассоциативные массивы] аннотируются
+        #[+Keyphrase--YDID одним из] следующих способов:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type AssociativeArray<ValueType> = { [ key: string ]: ValueType };
+
+        // Или
+
+        type AssociativeArray<ValueType> = Record<string, ValueType>;
+
+    p.Article-Paragraph.
+      Введённый в #[+Term--YDID стандарте] #[+ImportantEntity--YDID ESMAScript 2015] #[+Term--YDID тип данных]
+        #[+ImportantEntity--YDID Map] можно или не&nbsp;нельзя называть #[+Term--YDID ассоциативным массивом] в
+        зависимости от того, допускать ли у такого типа #[+Term--YDID массивов] #[+Term__Contrast--YDID ключи]
+        #[+Keyword--YDID произвольного] типа (в частности, #[+ImportantEntity--YDID Map] не&nbsp;запрещает
+        #[+Term--YDID объектные] #[+Term--YDID ключи]).
+      Так или иначе, #[+Term--YDID тип данных] #[+ImportantEntity--YDID Map] #[+Keyword--YDID несовместим] с
+        #[+ImportantEntity--YDID JSON], однако такой совместимости можно достичь, преобразовав
+        #[+ImportantEntity--YDID Map] в #[+Keyphrase--YDID двумерный] #[+Term--YDID индексный массив], где
+        #[+Keyphrase--YDID в каждом #[+Keyword--YDID дочернем]] массиве #[+Keyword--YDID первый] элемент —
+        #[+Term--YDID ключ], а #[+Keyword--YDID второй] — #[+Term--YDID значение]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const sampleMap: Map<string, number> = new Map([
+          [ "alpha", 1 ],
+          [ "bravo", 2 ],
+          [ "charlie", 3 ]
+        ]);
+
+        const serializedMap: string = JSON.stringify(Array.from(sampleMap.entries()));
+
+    +AdmonitionBlock--YDF({
+      title: "Осторожнее с терминологий",
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    }).
+      Как по отношению к #[+Term--YDID объектам фиксированной структуры], так и к #[+Term--YDID ассоциативным массивам]
+        применяются термины #[+Term--YDID «ключ»] и #[+Term--YDID «значение»].
+      С #[+Term--YDID ключами] всё более-менее понятно, а термин #[+Term--YDID «значение»] слишком широкий, потому что
+        он может применяться #[+Keyword--YDID вне]&nbsp;#[+Term--YDID объектов] по отношению к #[+Keyword--YDID любым]
+        #[+Term--YDID типам данных].
+
+    p.Article-Paragraph.
+      Другими примерами часто используемых #[+Term--YDID ассоциативных массивов] являются многие поля
+        #[+ImportantEntity--YDID package.json] — #[+SecondaryEntity__Code--YDID scripts],
+        #[+SecondaryEntity__Code--YDID dependencies], #[+SecondaryEntity__Code--YDID devDependencies],
+        #[+SecondaryEntity__Code--YDID peerDependencies] и так далее.
+
+
+
+

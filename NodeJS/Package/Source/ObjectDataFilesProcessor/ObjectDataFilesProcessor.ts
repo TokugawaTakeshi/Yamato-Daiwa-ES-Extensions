@@ -69,8 +69,6 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): unknown;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-  * This function returns or not returns the promise dependent of overloading. */
   public static processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
@@ -78,8 +76,8 @@ abstract class ObjectDataFilesProcessor {
       schema?: ObjectDataFilesProcessor.SupportedSchemas;
       synchronously: boolean;
     }>
-  /* eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents --
-   * In this case (the implementation of the overloading) each alternative matters. */
+    /* eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents --
+     * In this case (the implementation of the overloading) each alternative matters. */
   ): ValidData | unknown | Promise<ValidData> | Promise<unknown> {
 
     const filePath: string = compoundParameter.filePath;

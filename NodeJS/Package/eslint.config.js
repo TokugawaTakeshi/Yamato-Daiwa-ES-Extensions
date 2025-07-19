@@ -14,5 +14,19 @@ module.exports = [
         project: "tsconfig.test.json"
       }
     }
+  },
+  {
+    files: [ "Tests/Automated/**/*.test.ts" ],
+    rules: {
+
+      /* Higher version of Node.js is required for developers. */
+      "n/no-unsupported-features/node-builtins": [
+        "error",
+        {
+          version: ">=22.0.0"
+        }
+      ]
+
+    }
   }
 ];

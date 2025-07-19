@@ -327,87 +327,198 @@ block append SpecificContent
       }) демо
       |   в свете описанной выше теории.
 
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
         function onDataRetrieved(externalData: unknown): void {
 
           const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
-              process(
-                externalData,
-                {
-                  nameForLogging: "Example",
-                  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
-                  properties: {
-                    foo: {
-                      type: Number,
-                      isUndefinedForbidden: true,
-                      isNullForbidden: true,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
-                    },
-                    bar: {
-                      type: String,
-                      isUndefinedForbidden: true,
-                      isNullForbidden: true,
-                      minimalCharactersCount: 5
-                    },
-                    baz: {
-                      type: Boolean,
-                      isUndefinedForbidden: true,
-                      isNullForbidden: true
-                    },
-                    hoge: {
-                      type: Number,
-                      isUndefinedForbidden: false,
-                      isNullForbidden: true,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
-                    },
-                    fuga: {
-                      type: Number,
-                      isUndefinedForbidden: true,
-                      isNullForbidden: false,
-                      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
-                    },
-                    quux: {
-                      type: Object,
-                      isUndefinedForbidden: true,
-                      isNullForbidden: true,
-                      properties: {
-                        alpha: {
-                          type: Number,
-                          isUndefinedForbidden: true,
-                          isNullForbidden: true,
-                          numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
-                          minimalValue: 3
-                        },
-                        bravo: {
-                          type: String,
-                          isUndefinedForbidden: true,
-                          isNullForbidden: true,
-                          minimalCharactersCount: 5,
-                          allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
-                        }
-                      }
-                    }
-                  }
-                }
-              );
+              process(externalData, validDataSpecification);
 
         }
+
+    ol.Article-OrderedList
+
+      li.
+        Сначала #[+ImportantEntity--YDID RawObjectDataProcessor] проверит, является ли вообще
+          #[+SecondaryEntity__Code--YDID externalData] #[+Term--YDID объектом].
+        #[+Keyphrase--YDID Если нет], то дальше валидировать и обрабатывать #[+Keyword--YDID уже]
+          #[+Keyword__Contrast--YDID нечего].
+
+      li
+
+        p.Article-Paragraph.
+          Далее #[+ImportantEntity--YDID RawObjectDataProcessor] проверит в #[+Term--YDID объекте]
+            #[+SecondaryEntity__Code--YDID externalData] #[+Keyword--YDID каждое] #[+Term--YDID свойство], упомянутое
+            в спецификации валидных данных #[+SecondaryEntity__Code--YDID validDataSpecification], включая
+            вложенные #[+Term--YDID объекты] и #[+Term--YDID массивы] (#[+Keyphrase--YDID частный случай]
+            #[+Term--YDID объектов] #[+Keyphrase--YDID с точки зрения #[+ImportantEntity--YDID ECMAScript]]).
+
+        ul.Article-UnorderedList
+
+          li.
+            Помимо проверки на #[+Term--YDID тип данных], в спецификации валидных данных для примера указаны
+              дополнительные ограничения.
+            Например, свойство #[+SecondaryEntity__Code--YDID bar] должно не&nbsp;просто быть #[+Term--YDID строкой],
+              но при этом иметь минимум #[+SecondaryEntity__Code--YDID 5] символов.
+
+          li.
+            На каждое ограничение, указанное в спецификации валидных данных #[+ImportantEntity--YDID RawObjectDataProcessor]
+              производит конкретную проверку, и если в ходе этой проверке будет выявлено несоответствие реальных данных
+              ожидаемым, то проверка #[+Keyword--YDID не]&nbsp;завершится тут же (за исключением случая, когда сами
+              входные данные не&nbsp;являются #[+Term--YDID объектом]), а будет сохранено сообщение о несоответствии в
+              #[+Term--YDID массив], к которому можно будет обратиться через возвращаемое #[+Term--YDID методом]
+              #[+ImportantEntity__Code--YDID process] значение.
+
+      li.
+
+        Если в ходе валидации #[+Keyword--YDID не]&nbsp;будет выявлено ни одного несоответствия реальных данных
+          установленным ограничениям, то тогда #[+ImportantEntity--YDID RawObjectDataProcessor] возьмёт на себя грех
+          пометить с помощью #[+Term--YDID ключевого слова] #[+ImportantEntity__Code--YDID as] входные данные тем
+          #[+Term--YDID типом], которые передан через #[+Term--YDID параметр обобщения]
+          (#[+SecondaryEntity__Code--YDID SampleType] в примере выше).
 
     p.Article-Paragraph.
-      Сначала #[+ImportantEntity--YDID RawObjectDataProcessor] проверит, соответствует ли реальное значение
-        #[+SecondaryEntity__Code--YDID externalData] спецификации, переданной через второй параметр.
-      Как и обычный #[+Term--YDID защитник типов], #[+ImportantEntity--YDID RawObjectDataProcessor] программно
-        проверяет свойства, однако если что-то не так, то не прекращает проверку немедленно (за исключением случаев,
-        когда сам #[+SecondaryEntity__Code--YDID externalData] не является объектом), а сохраняет сообщение о
-        несоответствии в #[+SecondaryEntity__Code--YDID externalDataProcessingResult.validationErrorsMessages]:
+      Между #[+ImportantEntity--YDID RawObjectDataProcessor] и #[+Term--YDID защитниками типов] (разумеется,
+        реализованными согласно концепции без дополнительной функциональности) имеются следующие
+        #[+Keyword--YDID сходства]:
 
-    +CodeViewer--YDF
-      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
-        if (externalDataProcessingResult.isRawDataInvalid) {
+    ol.Article-OrderedList
 
-          throw new InvalidExternalDataError({
-            mentionToExpectedData: "N External Data",
-            messageSpecificPart: RawObjectDataProcessor.
-                formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
-          });
+      li Проверяют исходные данные ожидаемым
+      li.
+        #[+Keyword--YDID Не]&nbsp;могут полностью гарантировать соответствие конкретному #[+Term--YDID типу] в силу
+          фундаментальных ограничений #[+ImportantEntity--YDID TypeScript]
 
-        }
+    p.Article-Paragraph.
+      Что касается различий, то их гораздо больше:
+
+    ol.Article-OrderedList
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] рассчитан на работу #[+Keyword--YDID только] с
+          #[+Term--YDID объектами] (в частности, с #[+Term--YDID индексными массивами]), хотя их
+          #[+Term--YDID свойства]/#[+Term--YDID элементы] могут иметь быть
+          #[+Keyphrase--YDID любого совместимого с #[+ImportantEntity--YDID JSON]] #[+Term--YDID типа].
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] возвращает #[+Keyword--YDID не]&nbsp;
+          #[+Term--YDID булевское значение], а #[+Keyword--YDID полиморфный] #[+Term--YDID объект].
+        На вопрос, являются ли данные невалидными, отвечает свойство #[+ImportantEntity__Code--YDID isRawDataInvalid].
+        Когда это #[+Term--YDID свойство] имеет значение #[+ImportantEntity__Code--YDID false], можно обратиться
+          к приведённому к желаемому #[+Term--YDID типу] #[+Term--YDID объекту] через свойство
+          #[+ImportantEntity__Code--YDID processedData], в противном случае #[+Keyphrase--YDID вместо него] будет
+          #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID validationErrorsMessages], содержащее сообщения
+          о всех несоответствиях реальных данных ожидаемым.
+
+      li.
+        Имеет декларативный #[+ImportantEntity--YDID API], хотя при необходимости можно объявить дополнительные
+          валидации в императивном стиле.
+
+      li.
+        Может проверить #[+Term--YDID свойства]/#[+Term--YDID элементы] не&nbsp;только на #[+Term--YDID тип], но и на
+          другие ограничения.
+
+      li.
+        При необходимости, помимо валидации может внести изменения в исходный объект.
+        Эта функциональность #[+Keyword--YDID не]&nbsp;является не&nbsp;рекомендуемой, потому что в некоторых случаях
+          она крайне полезна (например, если нужно преобразовать хранящиеся в виде #[+Term--YDID строк] числа в
+          #[+Term--YDID тип] #[+ImportantEntity__Code--YDID BigInt], с которым #[+ImportantEntity--YDID JSON] пока
+          что #[+Keyword--YDID несовместим], или же переименовать #[+Term--YDID свойства]), её следует использовать
+          с осторожностью, так как она может поломать валидацию либо сделать помеченные как валидные данные невалидными.
+        Важно, в у #[+ImportantEntity--YDID RawObjectDataProcessor] есть #[+ImportantEntity--YDID 2] стратегии при работе
+          с объектами: манипуляции с исходным #[+Term--YDID объектом] (по умолчанию) и построение нового
+          #[+Term--YDID объекта] на основе исходного.
+        Когда данные нужно просто валидировать, об этих стратегиях можно #[+Keyword--YDID не]&nbsp;задумываться, но когда
+          помимо валидации нужно внести изменения в объект, то здесь уже стратегия имеет значение.
+
+    p.Article-Paragraph
+      | Наконец, #[+ImportantEntity--YDID RawObjectDataProcessor] имеет качественные шаблоны сообщений о несоответствиях
+      |  реальных данных ожидаемым, и хотя они
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          validationIssues.$URI,
+      }) документированы,
+      |    сообщения написаны так, чтобы можно было без документации понять, что не&nbsp;так.
+      | Посмотрите
+      |
+      +Link--YDF({
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
+      }) исходный код этих сообщений
+      |   (кстати,
+      |
+      +Link--YDF({
+        endorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.localizations.russian
+      }) есть и на русском языке)
+      |   и представьте, сколько бы времени у Вас ушло на самостоятельную подготовку этих сообщений, включая
+      |   организацию повторного использования в нескольких проектах.

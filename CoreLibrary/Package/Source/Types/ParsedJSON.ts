@@ -14,7 +14,8 @@ export type ParsedJSON_NestedProperty =
     number |
     string |
     boolean |
-    null | ParsedJSON_Object |
+    null |
+    ParsedJSON_Object |
     ParsedJSON_Array |
     undefined;
 

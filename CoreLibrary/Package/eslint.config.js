@@ -19,6 +19,17 @@ module.exports = [
   },
 
   {
+    files: [ "**/*.ts" ],
+    rules: {
+
+      /* No Node.js limitations desired for core package because it can be used for browser only. */
+      "n/no-unsupported-features/node-builtins": "off"
+
+    }
+
+  },
+
+  {
     files: [ "Tests/Manual/**/*.ts", "Documentation/**/*.ts" ],
     rules: {
 

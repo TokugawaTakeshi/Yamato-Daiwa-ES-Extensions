@@ -1,9 +1,0 @@
-extension:
-
-  - ts
-
-spec: "Tests/Automated/**/*.test.ts"
-
-require:
-
-  - ts-node/register

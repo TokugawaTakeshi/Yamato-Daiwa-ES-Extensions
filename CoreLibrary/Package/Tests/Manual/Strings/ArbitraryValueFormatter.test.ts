@@ -60,11 +60,19 @@ console.log(ArbitraryValueFormatter.stringifyAndFormat(String));
 console.log("=========================================================");
 
 const sampleObject1: Readonly<{
-  alpha: string;
-  bravo: Set<string>;
+  alpha1: string;
+  bravo1: number;
+  charlie1: {
+    alpha1: string;
+    bravo2: number;
+  };
 }> = {
-  alpha: "FOO",
-  bravo: new Set<string>([ "BAR", "BAZ" ])
+  alpha1: "FOO",
+  bravo1: 1,
+  charlie1: {
+    alpha1: "BAR",
+    bravo2: 2
+  }
 };
 
 console.log(sampleObject1);

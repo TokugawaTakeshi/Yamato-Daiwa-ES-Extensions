@@ -7,6 +7,8 @@ import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
+const NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT: number = 12;
+
 /* [ Approach ]
  * This class appears very similar with `DateWithoutTime`, but there is the significant difference because of which
  *    `TimePoint` could not be extended from `DateWithoutTime`. `DateWithoutTime` is the interval of 24 hours length
@@ -39,8 +41,8 @@ class TimePoint {
   protected _hours__24Format__local: number | null = null;
   protected _hours__24Format__2Digits__local: string | null = null;
   protected _hours__12Format__local: number | null = null;
-  protected _isBeforeMidday__local: boolean | null = null;
-  protected _isAfterMidday__local: boolean | null = null;
+  protected _isBeforeNoon__local: boolean | null = null;
+  protected _isAfterNoon__local: boolean | null = null;
 
   protected _minutes__local: number | null = null;
   protected _minutes__2Digits__local: string | null = null;
@@ -70,8 +72,8 @@ class TimePoint {
   protected _hours__24Format__UTC: number | null = null;
   protected _hours__24Format__2Digits__UTC: string | null = null;
   protected _hours__12Format__UTC: number | null = null;
-  protected _isBeforeMidday__UTC: boolean | null = null;
-  protected _isAfterMidday__UTC: boolean | null = null;
+  protected _isBeforeNoon__UTC: boolean | null = null;
+  protected _isAfterNoon__UTC: boolean | null = null;
 
   protected _minutes__UTC: number | null = null;
   protected _minutes__2Digits__UTC: string | null = null;
@@ -84,6 +86,15 @@ class TimePoint {
 
 
   protected computingOnDemandSettings: TimePoint.ComputingOnDemandSettings;
+
+
+  /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static format(
+    dateTimeDefinition: TimePoint.DateTimeDefinition,
+    formatter: (selfInstance: TimePoint) => string
+  ): string {
+    return new TimePoint({ ...dateTimeDefinition, computingOnDemand: true }).format(formatter);
+  }
 
 
   /* ━━━ Constructor ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -301,20 +312,24 @@ class TimePoint {
         (this._hours__12Format__UTC = convert24HoursFormatTo12HoursFormat(this._nativeDateObject.getUTCHours()));
   }
 
-  public get isBeforeMidday__local(): boolean {
-    return this._isBeforeMidday__local ?? (this._isBeforeMidday__local = this._nativeDateObject.getHours() < 13);
+  public get isBeforeNoon__local(): boolean {
+    return this._isBeforeNoon__local ??
+        (this._isBeforeNoon__local = this._nativeDateObject.getHours() < NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT);
   }
 
-  public get isBeforeMidday__UTC(): boolean {
-    return this._isBeforeMidday__UTC ?? (this._isBeforeMidday__UTC = this._nativeDateObject.getUTCHours() < 13);
+  public get isBeforeNoon__UTC(): boolean {
+    return this._isBeforeNoon__UTC ??
+        (this._isBeforeNoon__UTC = this._nativeDateObject.getUTCHours() < NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT);
   }
 
-  public get isAfterMidday__local(): boolean {
-    return this._isAfterMidday__local ?? (this._isAfterMidday__local = this._nativeDateObject.getHours() >= 13);
+  public get isAfterNoon__local(): boolean {
+    return this._isAfterNoon__local ??
+        (this._isAfterNoon__local = this._nativeDateObject.getHours() >= NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT);
   }
 
-  public get isAfterMidday__UTC(): boolean {
-    return this._isAfterMidday__UTC ?? (this._isAfterMidday__UTC = this._nativeDateObject.getUTCHours() >= 13);
+  public get isAfterNoon__UTC(): boolean {
+    return this._isAfterNoon__UTC ??
+        (this._isAfterNoon__UTC = this._nativeDateObject.getUTCHours() >= NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT);
   }
 
   public get minutes__local(): number {
@@ -378,7 +393,7 @@ class TimePoint {
   }
 
 
-  /* ━━━ Public Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Public Instance Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public format(formatter: (selfInstance: TimePoint) => string): string {
     return formatter(this);
   }
@@ -517,15 +532,15 @@ class TimePoint {
       this._hours__24Format__local = this._nativeDateObject.getHours();
       this._hours__24Format__2Digits__local = this._hours__24Format__local.toString().padStart(2, "0");
 
-      this._isBeforeMidday__local = this._hours__24Format__local < 13;
-      this._isAfterMidday__local = !this._isBeforeMidday__local;
+      this._isBeforeNoon__local = this._hours__24Format__local < NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT;
+      this._isAfterNoon__local = !this._isBeforeNoon__local;
 
       if (this._hours__24Format__local === 0) {
         this._hours__12Format__local = 12;
-      } else if (this._hours__24Format__local < 13) {
+      } else if (this._hours__24Format__local <= NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT) {
         this._hours__12Format__local = this._hours__24Format__local;
       } else {
-        this._hours__12Format__local = this._hours__24Format__local - 12;
+        this._hours__12Format__local = this._hours__24Format__local - NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT;
       }
 
     }
@@ -535,15 +550,15 @@ class TimePoint {
       this._hours__24Format__UTC = this._nativeDateObject.getUTCHours();
       this._hours__24Format__2Digits__UTC = this._hours__24Format__UTC.toString().padStart(2, "0");
 
-      this._isBeforeMidday__UTC = this._hours__24Format__UTC < 13;
-      this._isAfterMidday__UTC = !this._isBeforeMidday__UTC;
+      this._isBeforeNoon__UTC = this._hours__24Format__UTC <= NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT;
+      this._isAfterNoon__UTC = !this._isBeforeNoon__UTC;
 
       if (this._hours__24Format__UTC === 0) {
         this._hours__12Format__UTC = 12;
-      } else if (this._hours__24Format__UTC < 13) {
+      } else if (this._hours__24Format__UTC <= NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT) {
         this._hours__12Format__UTC = this._hours__24Format__UTC;
       } else {
-        this._hours__12Format__UTC = this._hours__24Format__UTC - 12;
+        this._hours__12Format__UTC = this._hours__24Format__UTC - NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT;
       }
 
     }
@@ -667,8 +682,6 @@ class TimePoint {
               )
             );
 
-    // TODO その他
-    // TODO DWTとの書き方の統一
     if (normalizedDateTime.toString() === "Invalid Date") {
       Logger.throwErrorAndLog({
         errorInstance: new InvalidParameterValueError({

@@ -274,13 +274,13 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
         `この配列は ${ actualElementsCount } 要素ですが、最大で ${ maximalElementsCount } 要素まで許容されます。`
     },
 
-    indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber: {
+    indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
       title: "インデックス配列の要素数が固定値と一致しない",
       generateDescription: (
         {
           exactElementsCount,
           actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+        }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
       ): string =>
         `この配列は ${ actualElementsCount } 要素ですが、ちょうど ${ exactElementsCount } 要素である必要があります。`
     },

@@ -51,6 +51,7 @@ export default function getItemsOfPaginationPage<Item>(
 
   return cropArray({
     targetArray: compoundParameter.items,
+    fromStart: true,
     startingElementNumber__numerationFrom0: targetPageNumber__numerationFrom0 * compoundParameter.itemsCountPerPaginationPage,
     elementsCount: compoundParameter.itemsCountPerPaginationPage,
     mutably: false,

@@ -1,36 +1,55 @@
-import { isValidNativeDate } from "../../../Source";
+import { isValidNativeDate, Logger } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("isValidNativeDate", (): void => {
+Promise.all([
 
-  describe("Valid samples has been identified correctly", (): void => {
+  Testing.suite(
+    "Valid Samples has been Identified Correctly",
+    async (): Promise<void> => {
 
-    const validSamples: ReadonlyArray<Date> = [
-      new Date()
-    ];
+      const validSamples: ReadonlyArray<Date> = [
+        new Date()
+      ];
 
-    for (const validSample of validSamples) {
-      it(`Sample "${ validSample.toString() }" is valid`, (): void => {
-        Assert.strictEqual(isValidNativeDate(validSample), true);
-      });
+      await Promise.all(
+        validSamples.map(
+          async (validSample: Date): Promise<void> =>
+            Testing.test(
+              validSample.toString(),
+              (): void => {
+                Assert.strictEqual(isValidNativeDate(validSample), true);
+              }
+            )
+        )
+      );
+
     }
+  ),
 
-  });
+  Testing.suite(
+    "Invalid Samples has been Identified Correctly",
+    async (): Promise<void> => {
 
-  describe("Invalid samples has been identified correctly", (): void => {
+      const invalidSamples: ReadonlyArray<Date> = [
+        new Date("---"),
+        new Date("SD-XD-SE")
+      ];
 
-    const invalidSamples: ReadonlyArray<Date> = [
-      new Date("---"),
-      new Date("SD-XD-SE")
-    ];
+      await Promise.all(
+        invalidSamples.map(
+          async (invalidSample: Date): Promise<void> =>
+            Testing.test(
+              invalidSample.toString(),
+              (): void => {
+                Assert.strictEqual(isValidNativeDate(invalidSample), false);
+              }
+            )
+        )
+      );
 
-    for (const invalidSample of invalidSamples) {
-      it(`Sample "${ invalidSample.toString() }" is invalid`, (): void => {
-        Assert.strictEqual(isValidNativeDate(invalidSample), false);
-      });
     }
+  )
 
-  });
-
-});
+]).catch(Logger.logPromiseError);

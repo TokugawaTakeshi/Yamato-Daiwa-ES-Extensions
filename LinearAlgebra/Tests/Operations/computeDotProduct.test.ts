@@ -10,8 +10,8 @@ test(
 
     Assert.strictEqual(
       computeDotProduct(
-        RowVector.fromArray([ 4, -1, 2 ]),
-        RowVector.fromArray([ 2, -2, -1 ])
+        new RowVector([ 4, -1, 2 ]),
+        new RowVector([ 2, -2, -1 ])
       ),
       8
     );

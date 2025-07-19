@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.8.0-rc.1",
+  "version": "1.8.0-rc.2",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -28,22 +28,17 @@
   "files": [
     "Distributable"
   ],
-  "engines": {
-    "node": ">=22.0.0"
-  },
   "dependencies": {
     "fundamental-constants": "0.8.0"
   },
   "devDependencies": {
-    "@types/mocha": "10.0.10",
     "@types/node": "22.15.31",
-    "@yamato-daiwa/style_guides": "0.8.0",
-    "mocha": "10.7.3",
+    "@yamato-daiwa/style_guides": "0.9.0",
     "rimraf": "6.0.1",
     "timezone-mock": "1.3.6",
     "ts-node": "10.9.2",
     "tsx": "4.20.3",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "scripts": {
     "Check Types": "tsc -p tsconfig-cjs.json --noEmit",

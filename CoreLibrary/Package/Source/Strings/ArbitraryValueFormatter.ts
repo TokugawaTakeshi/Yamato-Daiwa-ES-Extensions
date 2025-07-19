@@ -1,3 +1,6 @@
+import IndentationCoordinator from "./IndentationCoordinator";
+
+
 export default abstract class ArbitraryValueFormatter {
 
   public static stringifyAndFormat(rawEntity: unknown): string {
@@ -28,12 +31,17 @@ export default abstract class ArbitraryValueFormatter {
           return "null";
         }
 
+
+        if (rawEntity instanceof Set) {
+          ArbitraryValueFormatter.stringifyAndFormatSet(rawEntity);
+        }
+
         if (rawEntity instanceof Map) {
           return ArbitraryValueFormatter.stringifyAndFormatMap(rawEntity);
         }
 
 
-        return JSON.stringify(rawEntity, ArbitraryValueFormatter.stringifyNonCompatibleWithJSON_KeyAndValue, 2);
+        return ArbitraryValueFormatter.stringifyAsPlainObject(rawEntity);
 
       }
 
@@ -41,15 +49,29 @@ export default abstract class ArbitraryValueFormatter {
 
   }
 
+  private static stringifyAsPlainObject(
+    targetObject: object,
+    indentationCoordinator: IndentationCoordinator = new IndentationCoordinator()
+  ): string {
 
-  private static stringifyNonCompatibleWithJSON_KeyAndValue(_key: string, value: unknown): string {
+    let accumulatingResult: string = "{";
 
-    if (value instanceof Set) {
-      return `Set(${ value.size }) { ${ Array.from(value).toString() } }`;
+    indentationCoordinator.incrementIndent();
+
+    for (const [ key, value ] of Object.entries(targetObject)) {
+      accumulatingResult = accumulatingResult +
+          `\n${ indentationCoordinator.insertIndent() }` +
+          `${ key }: ${ ArbitraryValueFormatter.stringifyAndFormat(value) }`;
     }
 
-    return String(value);
+    indentationCoordinator.decrementIndent();
 
+    return `${ accumulatingResult }\n}`;
+
+  }
+
+  private static stringifyAndFormatSet(targetSet: ReadonlySet<unknown>): string {
+    return `Set(${ targetSet.size }) { ${ Array.from(targetSet).toString() } }`;
   }
 
   private static stringifyAndFormatMap<Key, Value>(targetMap: Map<Key, Value>): string {

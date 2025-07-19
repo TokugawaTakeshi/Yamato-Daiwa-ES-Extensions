@@ -17,8 +17,6 @@ export default class ImprovedFileSystem {
     compoundParameter: Readonly<{ targetPath: string; synchronously: true; }>
   ): boolean;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-  * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static isFileOrDirectoryExists(
     { targetPath, synchronously }: Readonly<{ targetPath: string; synchronously: boolean; }>
   ): Promise<boolean> | boolean {
@@ -57,8 +55,6 @@ export default class ImprovedFileSystem {
     }>
   ): void;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static createDirectory(
     {
       targetPath,
@@ -146,6 +142,7 @@ export default class ImprovedFileSystem {
 
 
   /* ─── Removing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ╍╍╍ Removing of Directory ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
   public static removeDirectoryWithFiles(
     compoundParameter: Readonly<{ targetPath: string; mustThrowErrorIfOneOrMoreFilesCouldNotBeDeleted: boolean; }>
   ): void {
@@ -175,6 +172,42 @@ export default class ImprovedFileSystem {
     }
 
     FileSystem.rmdirSync(targetDirectoryPath);
+
+  }
+
+
+  /* ╍╍╍ Removing of Files from Directory ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+  public static removeFilesFromDirectory(
+    compoundParameter: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: true;
+    }>
+  ): void;
+
+  public static removeFilesFromDirectory(
+    compoundParameter: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: false;
+    }>
+  ): Promise<void>;
+
+  public static removeFilesFromDirectory(
+    {
+      directoryPath__absoluteOrRelative,
+      synchronously
+    }: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: boolean;
+    }>
+  ): void | Promise<void> {
+
+    if (synchronously) {
+      FileSystem.rmSync(directoryPath__absoluteOrRelative, { recursive: true, force: true });
+      return;
+    }
+
+
+    return PromisfiedFileSystem.rm(directoryPath__absoluteOrRelative, { recursive: true, force: true });
 
   }
 
