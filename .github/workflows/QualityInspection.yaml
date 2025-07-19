@@ -23,7 +23,7 @@ jobs:
         run: node --version
 
       - name: Dependencies Installation
-        run: pwd && cd CoreLibrary/Package && npm install
+        run: cd CoreLibrary/Package && pwd && npm install
 
       - name: Types Checking
         run: npm run "Check Types"
