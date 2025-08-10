@@ -36,7 +36,7 @@ export default function getMatchingWithFirstRegularExpressionCapturingGroup(
 ): string | null {
 
   if (options.mustExpectAtLeastOneMatching === true && options.mustExpectExactlyOneMatching === true) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 3,
         parameterName: "options",
@@ -63,7 +63,7 @@ export default function getMatchingWithFirstRegularExpressionCapturingGroup(
   if (isNull(firstMatchingWithRegularExpression)) {
 
     if (options.mustExpectAtLeastOneMatching === true || options.mustExpectExactlyOneMatching === true) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           "Contrary to expectations, the below following has no matchings with the regular expression " +
             `"${ regularExpression.toString() }":\n${ targetString }`
@@ -79,11 +79,11 @@ export default function getMatchingWithFirstRegularExpressionCapturingGroup(
   }
 
 
-  /* [ Optimization ] No need to get all matchings - it is enough to know is there the second on or no. */
+  /* [ Optimization ] No need to get all matches - it is enough to know is there the second on or no. */
   if (regularExpressionWithGlobalFlag.exec(targetString)) {
 
     if (options.mustExpectExactlyOneMatching === true) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           "Contrary to expectations, the below following has more than one matchings with the regular expression " +
             `"${ regularExpression.toString() }":\n${ targetString }`

@@ -34,10 +34,14 @@ Promise.all(
                 elements: {
                   0: {
                     type: String,
-                    allowedAlternatives: [ "off", "warn", "error" ]
+                    allowedAlternatives: [ "off", "warn", "error" ],
+                    isUndefinedForbidden: true,
+                    isNullForbidden: true
                   },
                   1: {
                     type: Object,
+                    isUndefinedForbidden: true,
+                    isNullForbidden: true,
                     properties: {
                       allowSingleLine: {
                         type: Boolean,

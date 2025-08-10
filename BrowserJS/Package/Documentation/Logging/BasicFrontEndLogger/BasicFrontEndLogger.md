@@ -19,10 +19,10 @@ Later you may want to add:
 
 ## Methods
 
-### `throwErrorAndLog`: throw the error and make log
+### `throwErrorWithFormattedMessage`: throw the error and make log
 
 ```
-throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never
+throwErrorWithFormattedMessage<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never
 ```
 
 Because this method does not use the `console`, it has not some additional formatting and displays the error as regular
@@ -32,7 +32,7 @@ Because this method does not use the `console`, it has not some additional forma
 try {
   throw new Error("Example error");
 } catch (error: unknown) {
-  Logger.throwErrorAndLog({
+  Logger.throwErrorWithFormattedMessage({
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
     title: UnexpectedEventError.DEFAULT_TITLE,
     occurrenceLocation: "className.methodName(parametersObject)",
@@ -46,7 +46,7 @@ try {
 }
 ```
 
-![throwErrorAndLog](Images/throwErrorAndLog-Example.png)
+![throwErrorWithFormattedMessage](Images/throwErrorWithFormattedMessage-Example.png)
 
 
 ### `logError`: error logging without throwing
@@ -217,7 +217,7 @@ Using this method, you can redefine the default formatting of `logInfo`, `logSuc
 The common concept is:
 
 * On production building mode (`__IS_PRODUCTION_BUILDING_MODE__` global variable) we are submitting the log by Sentry API.
-  In the case of `throwErrorAndLog`, we should erase the error's message to hide it from users but still need to trow it.
+  In the case of `throwErrorWithFormattedMessage`, we should erase the error's message to hide it from users but still need to trow it.
 * On other project building modes basically no need to submit the data, so you can delegate the console output to
   `BasicFrontEndLogger`.
   
@@ -250,10 +250,10 @@ import * as Sentry from "@sentry/browser";
 
 abstract class FrontEndLogger {
 
-  public static throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
+  public static throwErrorWithFormattedMessage<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
 
     if (!__IS_PRODUCTION_BUILDING_MODE__) {
-      BasicFrontEndLogger.throwErrorAndLog(errorLog);
+      BasicFrontEndLogger.throwErrorWithFormattedMessage(errorLog);
     }
 
     

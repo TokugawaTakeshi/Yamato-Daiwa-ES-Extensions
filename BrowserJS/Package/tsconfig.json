@@ -16,12 +16,15 @@
 
     "outDir": "Distributable/",
     "declaration": true
+
   },
 
   "include": [ "Source/**/*" ],
+
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
   }
+
 }

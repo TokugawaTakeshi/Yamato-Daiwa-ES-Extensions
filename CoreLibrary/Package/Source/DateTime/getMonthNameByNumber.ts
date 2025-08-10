@@ -14,7 +14,7 @@ export default function getMonthNameByNumber(
   }: Readonly<{ targetMonthNumber: number; numerationFrom: number; }> = sourceData;
 
   if (numerationFrom !== 0 && numerationFrom !== 1) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceData.numerationFrom",
@@ -35,7 +35,7 @@ export default function getMonthNameByNumber(
       }
 
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "sourceData",
@@ -71,7 +71,7 @@ export default function getMonthNameByNumber(
       }
 
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "sourceData",
@@ -88,7 +88,7 @@ export default function getMonthNameByNumber(
      * The @typescript-eslint does not see the "never" type from previous case (checked for v 5.46.0) */
     default: {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "sourceData.targetMonthNumber",

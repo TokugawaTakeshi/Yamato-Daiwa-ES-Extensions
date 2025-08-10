@@ -49,4 +49,8 @@ block append SpecificContent
   article
 
     //- ━━━ `RawObjectDataProcessor` — Demo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= topHeading
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })

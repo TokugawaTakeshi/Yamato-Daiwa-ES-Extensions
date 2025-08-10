@@ -35,7 +35,7 @@ export default function extractLastExtensionOfFileName(
   if (isUndefined(lastFileNameExtensionWithoutLeadingDot)) {
 
     if (compoundParameter.mustThrowErrorIfLastPathSegmentHasNotDots === true) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           `Contrary to expectations, the path ${ compoundParameter.targetPath } has not the file name extension.`
         ),

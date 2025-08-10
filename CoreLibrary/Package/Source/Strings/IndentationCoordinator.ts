@@ -5,19 +5,22 @@ export default class IndentationCoordinator {
 
   private static readonly DOUBLE_SPACE: string = "\u0020\u0020";
 
-  private currentIndentationMultiplier: number = 0;
+  #currentIndentationMultiplier: number = 0;
 
+  public get currentIndentationMultiplier(): number {
+    return this.#currentIndentationMultiplier;
+  }
 
   public incrementIndent(): void {
-    this.currentIndentationMultiplier++;
+    this.#currentIndentationMultiplier++;
   }
 
   public decrementIndent(): void {
-    this.currentIndentationMultiplier--;
+    this.#currentIndentationMultiplier--;
   }
 
   public insertIndent(): string {
-    return IndentationCoordinator.DOUBLE_SPACE.repeat(this.currentIndentationMultiplier);
+    return IndentationCoordinator.DOUBLE_SPACE.repeat(this.#currentIndentationMultiplier);
   }
 
   public incrementIndentAndInsert(): string {
@@ -31,7 +34,7 @@ export default class IndentationCoordinator {
   }
 
   public insertIncrementedIndentWithoutUpdatingOfIndentationMultiplier(): string {
-    return IndentationCoordinator.DOUBLE_SPACE.repeat(this.currentIndentationMultiplier + 1);
+    return IndentationCoordinator.DOUBLE_SPACE.repeat(this.#currentIndentationMultiplier + 1);
   }
 
   public addCurrentIndentationToEachLineOf(targetString: string): string {

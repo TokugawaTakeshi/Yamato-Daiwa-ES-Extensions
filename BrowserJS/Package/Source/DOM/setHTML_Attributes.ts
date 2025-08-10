@@ -6,7 +6,10 @@ export default function setHTML_Attributes(
 ): void {
 
   for (const [ attributeKey, attributeValue ] of Object.entries(attributes)) {
-    targetElement.setAttribute(attributeKey, isNumber(attributeValue) ? attributeValue.toString() : attributeValue);
+    targetElement.setAttribute(
+      attributeKey,
+      isNumber(attributeValue, { mustConsiderNaN_AsNumber: true }) ? attributeValue.toString() : attributeValue
+    );
   }
 
 }

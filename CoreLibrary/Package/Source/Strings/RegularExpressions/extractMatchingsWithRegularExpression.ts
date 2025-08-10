@@ -52,7 +52,7 @@ export default function extractMatchingsWithRegularExpression(
   if (isNull(searchingResults)) {
 
     if (options.mustExpectExactlyOneMatching === true) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           "Contrary to expectations, there is no matchings with regular expression:\n" +
           `${ regularExpression.toString() }\n` +
@@ -81,7 +81,7 @@ export default function extractMatchingsWithRegularExpression(
   } else if (searchingResults.length > 1) {
 
     if (options.mustExpectOneOrZeroMatchings === true || options.mustExpectExactlyOneMatching) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
             "Contrary to expectations, there are more that one matchings with regular expression:\n" +
             `${ regularExpression.toString() }\n` +

@@ -1,8 +1,10 @@
 import { DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
 import getMonthNameByNumber from "./getMonthNameByNumber";
 import getMonthNumberByName from "./getMonthNumberByName";
-import convert24HoursFormatTo12HoursFormat from "./convert24HoursFormatTo12HoursFormat";
+import convert24_HoursFormatTo12_HoursFormat, { type ConvertingOf24_HoursFormatTo12_HoursFormat } from
+    "./convert24_HoursFormatTo12_HoursFormat";
 import isBoolean from "../TypeGuards/isBoolean";
+import isNotNull from "../TypeGuards/EmptyTypes/isNotNull";
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
@@ -10,9 +12,9 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 const NOON_HOUR_NUMBER_IN_24_HOUR_FORMAT: number = 12;
 
 /* [ Approach ]
- * This class appears very similar with `DateWithoutTime`, but there is the significant difference because of which
+ * This class appears very similar to `DateWithoutTime`, but there is a significant difference because of which
  *    `TimePoint` could not be extended from `DateWithoutTime`. `DateWithoutTime` is the interval of 24 hours length
- *    which is not bound to specific time zone while `TimePoint` is being considered as point, not interval, and
+ *    which is not bound to a specific time zone while `TimePoint` is being considered as point, not interval, and
  *    respects the time zone. */
 class TimePoint {
 
@@ -303,13 +305,47 @@ class TimePoint {
   }
 
   public get hours__12Format__local(): number {
-    return this._hours__12Format__local ??
-        (this._hours__12Format__local = convert24HoursFormatTo12HoursFormat(this._nativeDateObject.getHours()));
+
+    if (isNotNull(this._hours__12Format__local)) {
+      return this._hours__12Format__local;
+    }
+
+
+    const {
+      hoursAmount__12HoursFormat,
+      isAfterNoon,
+      isBeforeNoon
+    }: ConvertingOf24_HoursFormatTo12_HoursFormat.Result =
+        convert24_HoursFormatTo12_HoursFormat(this._nativeDateObject.getHours());
+
+    this._hours__12Format__local = hoursAmount__12HoursFormat;
+    this._isAfterNoon__local = isAfterNoon;
+    this._isBeforeNoon__local = isBeforeNoon;
+
+    return this._hours__12Format__local;
+
   }
 
   public get hours__12Format__UTC(): number {
-    return this._hours__12Format__UTC ??
-        (this._hours__12Format__UTC = convert24HoursFormatTo12HoursFormat(this._nativeDateObject.getUTCHours()));
+
+    if (isNotNull(this._hours__12Format__UTC)) {
+      return this._hours__12Format__UTC;
+    }
+
+
+    const {
+      hoursAmount__12HoursFormat,
+      isAfterNoon,
+      isBeforeNoon
+    }: ConvertingOf24_HoursFormatTo12_HoursFormat.Result =
+        convert24_HoursFormatTo12_HoursFormat(this._nativeDateObject.getUTCHours());
+
+    this._hours__12Format__UTC = hoursAmount__12HoursFormat;
+    this._isAfterNoon__UTC = isAfterNoon;
+    this._isBeforeNoon__UTC = isBeforeNoon;
+
+    return this._hours__12Format__UTC;
+
   }
 
   public get isBeforeNoon__local(): boolean {
@@ -605,7 +641,7 @@ class TimePoint {
       normalizedDateTime = new Date(dateTimeDefinition.ISO8601String);
 
       if (normalizedDateTime.toString() === "Invalid Date") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             customMessage:
                 `The passed value "${ dateTimeDefinition.ISO8601String }" of "ISO8601String" is not valid ISO8601 ` +
@@ -626,7 +662,7 @@ class TimePoint {
       normalizedDateTime = new Date(dateTimeDefinition.millisecondsElapsedSinceUNIX_Epoch);
 
       if (normalizedDateTime.toString() === "Invalid Date") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             customMessage:
                 `The passed value ${ dateTimeDefinition.millisecondsElapsedSinceUNIX_Epoch } of ` +
@@ -683,7 +719,7 @@ class TimePoint {
             );
 
     if (normalizedDateTime.toString() === "Invalid Date") {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           customMessage:
               "Below date and time definition does not corresponding to valid Date object." +

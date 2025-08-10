@@ -15,10 +15,10 @@ Logger.setImplementation(ConsoleApplicationLogger);
 
 ## Methods
 
-### `throwErrorAndLog`: throw the error and make log
+### `throwErrorWithFormattedMessage`: throw the error and make log
 
 ```
-throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never
+throwErrorWithFormattedMessage<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never
 ```
 
 Because this method does not use the `console`, it has not some additional formatting and displays the error as regular
@@ -28,7 +28,7 @@ Because this method does not use the `console`, it has not some additional forma
 try {
   throw new Error("Example error");
 } catch (error: unknown) {
-  Logger.throwErrorAndLog({
+  Logger.throwErrorWithFormattedMessage({
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
     title: UnexpectedEventError.localization.defaultTitle,
     occurrenceLocation: "className.methodName(parametersObject)",
@@ -41,7 +41,7 @@ try {
 }
 ```
 
-![throwErrorAndLog](Images/throwErrorAndLog-Example.png)
+![throwErrorWithFormattedMessage](Images/throwErrorWithFormattedMessage-Example.png)
 
 
 ### `logError`: error logging without throwing

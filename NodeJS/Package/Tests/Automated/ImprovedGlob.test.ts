@@ -26,4 +26,4 @@ Promise.all([
     }
   )
 
-]).catch(Logger.throwErrorAndLog);
+]).catch(Logger.throwErrorWithFormattedMessage);

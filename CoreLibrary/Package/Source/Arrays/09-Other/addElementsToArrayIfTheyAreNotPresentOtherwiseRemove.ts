@@ -205,7 +205,7 @@ export default function addElementsToArrayIfTheyAreNotPresentOtherwiseRemove<Arr
   } else if (isNaturalNumber(compoundParameter.addingToPosition__numerationFrom1)) {
     positionOfNewElement__numerationFrom0 = compoundParameter.addingToPosition__numerationFrom1 - 1;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

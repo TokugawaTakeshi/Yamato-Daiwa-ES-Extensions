@@ -36,7 +36,7 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
   const DOM_ElementsHTML_Collection: HTMLCollection = createHTML_CollectionFromHTML_Code(HTML_Code);
 
   if (DOM_ElementsHTML_Collection.length === 0) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         customMessage: "Unable to create the single DOM element because below HTML code does not include the root element. " +
             `\n${ HTML_Code }`
@@ -48,7 +48,7 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
 
 
   if (DOM_ElementsHTML_Collection.length > 1) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new ImproperUsageError(
         "Unable to create the single DOM element because below HTML code has multiple root elements. " +
         "If you want to support multiple root elements scenario, use \"createHTML_CollectionFromHTML_Code\" function instead." +
@@ -68,7 +68,7 @@ export default function createDOM_ElementFromHTML_Code<DOM_ElementSubtype extend
   const rootDOM_Element: Element = DOM_ElementsHTML_Collection[0];
 
   if (!(rootDOM_Element instanceof RootDOM_ElementSubtype)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         customMessage: `The root element in below HTML code is not instance of "${ RootDOM_ElementSubtype.name }".` +
             `\n${ HTML_Code }`

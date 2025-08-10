@@ -280,6 +280,116 @@ block append SpecificContent
         #[+SecondaryEntity__Code--YDID dependencies], #[+SecondaryEntity__Code--YDID devDependencies],
         #[+SecondaryEntity__Code--YDID peerDependencies] и так далее.
 
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID RawObjectDataProcessor], разумеется, работает с #[+Keyword--YDID обычными]
+        #[+ImportantEntity--YDID ассоциативными массивами], которые представляют собой #[+Term--YDID объекты]
+        со #[+Keyword--YDID строковыми] #[+Term--YDID ключами], однако #[+Keyword--YDID не]&nbsp;поддерживает
+        входные даынне типа #[+ImportantEntity--YDID Map] ввиду их несовместимости с #[+ImportantEntity--YDID JSON].
+      Тем #[+Keyword--YDID не]&nbsp;менее, с помощью функциональности #[+Term--YDID постобработки] можно преобразовать
+        желаемые данные и к #[+ImportantEntity--YDID Map].
 
 
+    //- ─── Индексные массивы ──────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$anchor
+    }).Article-Heading3
 
+    p.Article-Paragraph.
+      Набор данных, расположенных в памяти непосредственно друг за другом, доступ к которым осуществляется по
+        #[+Term--YDID индексам] — #[+Term--YDID целым числам] #[+Keyphrase--YDID начиная с #[+ImportantEntity__Code--YDID 0]],
+      Как в русском, так и в английском языках так сложилось, что просто #[+Term--YDID «массивами»]
+        (#[+Term--YDID array(s)]) часто называют #[+Keyword--YDID именно] #[+Keyword__Contrast--YDID индексные],
+        а #[+Keyword--YDID не]&nbsp;#[+Term--YDID ассоциативные массивы].
+
+    p.Article-Paragraph.
+      Во многих жёстко типизированных языках программирования (в частности, #[+SecondaryEntity--YDID C++],
+        #[+SecondaryEntity--YDID C#] и #[+SecondaryEntity--YDID Java]) #[+Keyword--YDID обычные]
+        #[+Keyword__Contrast--YDID индексные] #[+Term--YDID массивы] имеют #[+Keyword--YDID фиксированное] количество
+         элементов и #[+Keyword--YDID часто] #[+Keyword__Contrast--YDID единый] #[+Keyword__Contrast--YDID тип]
+         #[+Term--YDID элементов].
+      Если требуется добавление и/или удаление #[+Term--YDID элементов], то используются специализированные
+      #[+Term--YDID коллекции] — с #[+Keyphrase--YDID точки зрения концепции] те же самые
+        #[+Term--YDID индексные массивы], но обеспечивающие возможность добавления и/или удаления
+        #[+Term--YDID элементов] за счёт замены одного #[+Keyword--YDID стандартного] #[+Term--YDID массива] на другой
+        внутри себя.
+
+    p.Article-Paragraph.
+      В же отношении #[+ImportantEntity--YDID ECMAScript], #[+Term--YDID индексный массив] —
+      #[+Term__Contrast--YDID экземпляр] класснопободного #[+Term--YDID объекта] #[+ImportantEntity--YDID Array]
+      (утверждение #[+ImportantEntity--YDID X instanceof Array] истинно).
+      Поскольку такими #[+Term--YDID индексными массивами] можно гибко манипулировать (в частности, указывать
+        #[+Term--YDID элементы] совершенно разных #[+Term--YDID типов], добавлять #[+Term--YDID элементы] и
+        #[+Term--YDID удалять] их), то нужды в дополнительных #[+Term--YDID коллекциях] пока что #[+Keyword--YDID нет].
+
+    p.Article-Paragraph.
+      Аннотировать #[+Term--YDID индексный массив] в #[+ImportantEntity--YDID TypeScript] можно одним из следующих
+        способов:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const indexedArray: string[] = [ "Alpha", "Bravo" ];
+
+        // Или
+
+        const indexedArray: Array<string> = [ "Alpha", "Bravo" ];
+
+    p.Article-Paragraph.
+      Как и #[+Term--YDID объекты фиксированной структуры], #[+Term__Contrast--YDID индексные массивы] являются одним
+        из самых популярных #[+Term--YDID типов данных], потому широко используется всюду.
+      В отличие #[+Term--YDID объектов фиксированной структуры] и #[+Term--YDID ассоциативных массивов],
+        #[+Keyword--YDID индексные] #[+Term--YDID массивы] #[+Keyword--YDID гарантируют] порядок #[+Term--YDID элементов],
+        что и делает их очень ценными.
+
+
+    //- ─── Кортежи ────────────────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.tuple.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.tuple.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID С точки зрения концепции], #[+Term--YDID кортежи] — #[+Term__Contrast--YDID массивы]
+        (вообще-то говоря, #[+Keyword--YDID не]&nbsp;только #[+Term--YDID индексные]) #[+Keyword--YDID фиксированного]
+        количества #[+Term--YDID элементов].
+
+    p.Article-Paragraph.
+      До стандарта #[+ImportantEntity--YDID ECMAScript 2025] (не&nbsp;путать с упомянутым выше
+        #[+ImportantEntity--YDID ECMAScript 2015]), в #[+ImportantEntity--YDID JavaScript]
+        #[+Keyword--YDID не]&nbsp;было специализированного инструмента для создания #[+Term--YDID массивов] ограниченной
+        длины.
+      В #[+ImportantEntity--YDID TypeScript] термин #[+Term--YDID «кортеж»] (#[+Term--YDID «tuple»]) применялся
+        #[+Keyword--YDID только] к #[+Keyword__Contrast--YDID индексным] #[+Term--YDID массивам], аннотируемым
+        следующим образом:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const tupleOfTwoElements: [ string, number ] = [ "ALPHA", 1 ];
+        const tupleOfThreeElements: [ string, number, boolean ] = [ "BRAVO", 2, true ];
+
+    p.Article-Paragraph.
+      В стандарте #[+ImportantEntity--YDID ECMAScript 2025] появился новый тип данных #[+Term--YDID Tuple] который
+        помимо того, что должен иметь фиксированное количество #[+Term--YDID элементов], #[+Keyword--YDID также]
+        после инициализации является доступным #[+Keyword--YDID только]&nbsp;доступен для чтения, а потому для
+        #[+Keyword--YDID гарантии] неизменяемости #[+Keyword--YDID не]&nbsp;может содержать в себе
+        #[+Term--YDID объектов] #[+Keyword--YDID никаких] подтипов, будь то #[+ImportantEntity--YDID Array],
+        #[+ImportantEntity--YDID Map], #[+ImportantEntity--YDID Set] или #[+Keyword--YDID любой]
+        #[+Keyword--YDID другой] #[+Term--YDID объект].
+      Этот тип данных слишком молодой, потому пройдёт некоторое время, прежде чем он станет широко поддерживаться
+        в различных средах выполнения.
+      Также можно предположить, что из-за своих ограничений он не&nbsp;получит широкого распространения, и естественно,
+        #[+ImportantEntity--YDID RawObjectDataProcessor] такой тип данных #[+Keyword--YDID не]&nbsp;поддерживает.
+      Ввиду этого, далее речь будет идти о #[+Keyword--YDID TypeScript-кортежах], которые уже #[+Keyword--YDID совместимы]
+        с #[+ImportantEntity--YDID RawObjectDataProcessor].
+
+    p.Article-Paragraph.
+      #[+Term--YDID Кортежи] #[+Keyword--YDID не]&nbsp;очень популярны, однако примеры использования имеются.
+      Так, #[+Term--YDID функция] #[+SecondaryEntity__Code--YDID useState] из #[+SecondaryEntity--YDID React] возвращает
+        #[+Term--YDID кортеж] из двух элементов.
+      #[+Keyphrase--YDID С натяжкой] можно назвать #[+Term--YDID «кортежами»] конфигурацию #[+Keyword--YDID многих]
+        (#[+Keyphrase--YDID но #[+Keyword--YDID не]&nbsp;всех]) #[+Term--YDID ESLint-правил], в которых
+        #[+Keyword--YDID второй] #[+Term--YDID элемент] #[+Keyword--YDID опциональный].
+      Тем не&nbsp;менее, на каждой из двух позиций ожидается #[+Term--YDID элемент] #[+Keyword--YDID конкретного]
+        #[+Term--YDID типа], что является основным признаком #[+Term--YDID кортежей].

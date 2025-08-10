@@ -5,7 +5,7 @@ import DataSubmittingFailedError from "../../Errors/DataSubmittingFailed/DataSub
 
 import getRandomInteger from "../../RandomValuesGenerators/getRandomInteger";
 import secondsToMilliseconds from "../../DateTime/secondsToMilliseconds";
-import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
+import { stringifyAndFormatArbitraryValue } from "../../Strings/ArbitraryValueFormatter";
 import isNeitherUndefinedNorNull from "../../TypeGuards/EmptyTypes/isNeitherUndefinedNorNull";
 
 import MockGatewayHelperLocalization__English from "./MockGatewayHelperLocalization.english";

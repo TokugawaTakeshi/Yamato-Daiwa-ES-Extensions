@@ -44,7 +44,7 @@ export {
 } from "./Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates";
 
 /* ─── Permutations of Elements ───────────────────────────────────────────────────────────────────────────────────── */
-export { default as moveArrayElementTo1Position } from "./Arrays/06-PermutationsOfElements/moveArrayElementTo1Position";
+export { default as moveArrayElementToOnePosition } from "./Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition";
 export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
 
 /* ─── Removing of Elements ───────────────────────────────────────────────────────────────────────────────────────── */
@@ -117,10 +117,11 @@ export { default as MockGatewayHelperLocalization__English } from
 
 /* ━━━ Date & Time ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as CalendarBuilder } from "./DateTime/CalendarBuilder";
-export { default as convert24HoursFormatTo12HoursFormat } from "./DateTime/convert24HoursFormatTo12HoursFormat";
+export { default as convert24_HoursFormatTo12_HoursFormat, type ConvertingOf24_HoursFormatTo12_HoursFormat } from
+      "./DateTime/convert24_HoursFormatTo12_HoursFormat";
 export { default as DateWithoutTime } from "./DateTime/DateWithoutTime";
 export { default as getDaysCountInSpecificMonth } from "./DateTime/getDaysCountInSpecificMonth";
-export { default as getISO8601StringWithoutTimePart } from "./DateTime/getISO8601StringWithoutTimePart";
+export { default as getISO8601_StringWithoutTimePart } from "./DateTime/getISO8601_StringWithoutTimePart";
 export { default as getMonthNameByNumber } from "./DateTime/getMonthNameByNumber";
 export { default as getMonthNumberByName } from "./DateTime/getMonthNumberByName";
 export { default as getNextMonthNumber } from "./DateTime/getNextMonthNumber";
@@ -128,8 +129,6 @@ export { default as getPreviousMonthNumber } from "./DateTime/getPreviousMonthNu
 export { default as getYearOfNextMonth } from "./DateTime/getYearOfNextMonth";
 export { default as getYearOfPreviousMonth } from "./DateTime/getYearOfPreviousMonth";
 export { default as hasTimeCome } from "./DateTime/hasTimeCome";
-export { default as isValidISO8601DateAndPossiblyTimeDefinition } from
-    "./DateTime/isValidISO8601DateAndPossiblyTimeDefinition";
 export { default as isValidNativeDate } from "./DateTime/isValidNativeDate";
 export { default as millisecondsToSeconds } from "./DateTime/millisecondsToSeconds";
 export { default as secondsToMilliseconds } from "./DateTime/secondsToMilliseconds";
@@ -313,8 +312,8 @@ export { default as destringifyBooleanValueIfPossible } from
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
-export { default as addMultipleElementsToSet } from "./Sets/addMultipleElementsToSet";
-export { default as removeMultipleElementsFromSetByPredicate } from "./Sets/removeMultipleElementsFromSetByPredicate";
+export { default as addElementsToSet } from "./Sets/addElementsToSet";
+export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
 
 
 /* ━━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -362,6 +361,7 @@ export { default as removeAllFileNameExtensions } from "./Strings/URI/FilesAndDi
 /* --- Rest --------------------------------------------------------------------------------------------------------- */
 export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
 export { default as explodeURI_PathToSegments } from "./Strings/URI/explodeURI_PathToSegments";
+export { default as generateMailtoURI_Scheme } from "./Strings/URI/generateMailtoURI_Scheme";
 export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
 export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
 export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/removeSpecificSegmentsFromURI_Path";
@@ -371,7 +371,7 @@ export { default as replaceLastURI_PathSegment } from "./Strings/URI/replaceLast
 export { default as adjustCharactersCount } from "./Strings/adjustCharactersCount";
 export { default as appendCharacterIfItDoesNotPresentInLastPosition } from
     "./Strings/appendCharacterIfItDoesNotPresentInLastPosition";
-export { default as ArbitraryValueFormatter } from "./Strings/ArbitraryValueFormatter";
+export { default as ArbitraryValueFormatter, stringifyAndFormatArbitraryValue } from "./Strings/ArbitraryValueFormatter";
 export { default as capitalizeFirstCharacter } from "./Strings/capitalizeFirstCharacter";
 export { default as cropString } from "./Strings/cropString";
 export { default as EmailAddress } from "./Strings/EmailAddress";
@@ -396,7 +396,6 @@ export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/r
 export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings/replaceDoubleBackslashesWithForwardSlashes";
 export { default as reverseString } from "./Strings/reverseString";
 export { default as splitString } from "./Strings/splitString";
-export { default as stringifyAndFormatArbitraryValue } from "./Strings/stringifyAndFormatArbitraryValue";
 export { default as surroundLabelByOrnament } from "./Strings/surroundLabelByOrnament";
 export { default as toLowerCamelCase } from "./Strings/toLowerCamelCase";
 export { default as toScreamingSnakeCase } from "./Strings/toScreamingSnakeCase";

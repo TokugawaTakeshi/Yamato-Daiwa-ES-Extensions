@@ -4,7 +4,7 @@ import ValidationErrors = Localization.ValidationErrors;
 import ThrowableErrors = Localization.ThrowableErrors;
 import Warnings = Localization.Warnings;
 
-import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
+import { stringifyAndFormatArbitraryValue } from "../Strings/ArbitraryValueFormatter";
 import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 import isNull from "../TypeGuards/EmptyTypes/isNull";
@@ -15,8 +15,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
   generateSeeMoreSentence: ({ documentationPageAnchor }: Localization.SeeDocumentationSentence.TemplateVariables): string =>
       "See documentation for details: " +
-        "http://localhost:3000/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
-        `RawObjectDataProcessor-ValidationIssues.english.html#${ documentationPageAnchor }`,
+        "https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
+          `RawObjectDataProcessor-ValidationIssues.english.html#${ documentationPageAnchor }`,
 
   generateValidationErrorMessage(
     {
@@ -63,16 +63,18 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     rawDataIsNotObject: {
       generateMessage:
-        ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-          "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is not the object and actually has " +
-            `type "${ actualNativeType }".\n` +
-          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
+          ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
+              "The raw data passed via first parameter of \"RawObjectDataProcessor.process()\" is not the object and " +
+                `actually has type "${ actualNativeType }".\n` +
+              rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     rawDataIsNull: {
-      generateMessage: ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-          "Raw data, the first argument of \"RawObjectDataProcessor.process()\" is null while non-null object expected.\n" +
-          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
+      generateMessage:
+          ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
+              "The raw data passed via first parameter of \"RawObjectDataProcessor.process()\" is null while non-null " +
+                "object expected.\n" +
+              rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     valueTypeDoesNotMatchWithExpected: {
@@ -95,16 +97,16 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "The following error has occurred during the pre-validation modification of this property/element. \n" +
             `${ stringifiedCaughtError }\n` +
           "The data has been marked as invalid because the error handling strategy \"onPreValidationModificationFailed\" " +
-            "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended because the problem could " +
+            "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended because the problem can " +
             "be in pre-validation modification function, not always in the data. "
 
     },
 
 
-    /* ─── Fixed Schema Objects ───────────────────────────────────────────────────────────────────────────────────── */
-    /* ┄┄┄ Undefinedability ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ */
+    /* ┅┅┅ Fixed Schema Objects ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    /* ╍╍╍ Undefinedability ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenUndefinedValue: {
-      title: "Forbidden Undefined Value Of Property/Element",
+      title: "Forbidden Undefined Value",
       description:
           "This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden."
     },
@@ -136,7 +138,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
 
-    /* ┄┄┄ Nullability ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ */
+    /* ╍╍╍ Nullability ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenNullValue: {
       title: "Forbidden Null Value Of Property/Element",
       description: "This property/element has `null` value what has been explicitly forbidden."
@@ -169,7 +171,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
 
-    /* ┄┄┄ Other ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄ */
+    /* ╍╍╍ Other ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     unableToDeletePropertyWithOutdatedKey: {
 
       title: "Unable to Delete Property With Outdated Key",
@@ -218,12 +220,13 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     customValidationFailed: {
       title: "Custom Validation has not Passed",
-      generateDescription: ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
-          `This value has not passed the custom validation "${ customValidationDescription }".`
+      generateDescription:
+          ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
+              `This value has not passed the custom validation "${ customValidationDescription }".`
     },
 
 
-    /* ─── Associative Arrays ─────────────────────────────────────────────────────────────────────────────────────── */
+    /* ┅┅┅ Associative Arrays ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     associativeArrayEntriesCountIsLessThanRequiredMinimum: {
       title: "Associative Array has Less Entries than Expected Minimum",
       generateDescription: (
@@ -284,7 +287,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
 
-    /* ─── Indexed Arrays and Tuples ──────────────────────────────────────────────────────────────────────────────── */
+    /* ┅┅┅ Indexed Arrays and Tuples ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     indexedArrayElementsCountIsLessThanRequiredMinimum: {
       title: "Indexed Array has Less Elements than Expected Minimum",
       generateDescription: (
@@ -320,15 +323,21 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `This value of indexed array or tuple type has ${ actualElementsCount } elements while exactly ` +
             `${ exactElementsCount } expected.`
     },
-    // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    /* ─── Numeric Value ──────────────────────────────────────────────────────────────────────────────────────────── */
+
+    /* ┅┅┅ Numbers ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    forbiddenNaN_Value: {
+      title: "Forbidden NaN Value Of Numeric Property/Element",
+      description:
+          "The value of this numeric property/element is NaN while NaN has been explicitly forbidden. "
+    },
+
     numericValueIsNotBelongToExpectedNumbersSet: {
       title: "Expected and Actual Numbers Set Mismatch",
       generateDescription: (
         { expectedNumberSet }: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
-          "Contrary to expectations, this numeric value is in not member of " +
+          "Contrary to expectations, this numeric value is not member of " +
             `"${ rawObjectDataProcessorLocalization__english.getLocalizedNumbersSet(expectedNumberSet) }"`
     },
 
@@ -360,20 +369,25 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
 
-    /* ─── String Value ───────────────────────────────────────────────────────────────────────────────────────────── */
+    /* ╍╍╍ Strings ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     charactersCountIsLessThanRequired: {
       title: "Minimal Characters Count Fall Short",
       generateDescription: (
-        { minimalCharactersCount, realCharactersCount }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
+        {
+          minimalCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
       ): string =>
           `This string value has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`
-
     },
 
     charactersCountIsMoreThanAllowed: {
       title: "Maximal Characters Count Exceeding",
       generateDescription: (
-          { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
+        {
+          maximalCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountIsMoreThanAllowed.TemplateVariables
       ): string =>
           `This string value has ${ realCharactersCount } characters while ${ maximalCharactersCount } allowed ` +
             "as maximum."
@@ -382,9 +396,21 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     charactersCountDoesNotMatchWithSpecified: {
       title: "Fixed Characters Count Mismatch",
       generateDescription: (
-          { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
+        {
+          fixedCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountDoesNotMatchWithSpecified.TemplateVariables
       ): string =>
-          `The value has ${ realCharactersCount } characters exactly ${ fixedCharactersCount } required.`
+          `The value has ${ realCharactersCount } characters while exactly ${ fixedCharactersCount } required.`
+    },
+
+    forbiddenCharactersFound: {
+      title: "Forbidden Characters Found",
+      generateDescription: (
+        { foundForbiddenCharacters }: ValidationErrors.ForbiddenCharactersFound.TemplateVariables
+      ): string =>
+          "The following characters are forbidden:\n" +
+            foundForbiddenCharacters.map((character: string): string => `● ${ character }`).join("\n")
     },
 
     regularExpressionMismatch: {
@@ -394,20 +420,21 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
 
-    /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────── */
+    /* ╍╍╍ Other ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     disallowedBooleanValueVariant: {
       title: "Disallowed Boolean Variant",
       generateDescription: (
         { disallowedVariant }: ValidationErrors.DisallowedBooleanValueVariant.TemplateVariables
       ): string =>
-          `This boolean value is '${ disallowedVariant }' while only '${ !disallowedVariant }' allowed.`
+          `This boolean value is ${ disallowedVariant } while only ${ !disallowedVariant } allowed.`
     },
 
     unsupportedValueType: {
       title: "Unsupported Value Type",
       generateDescription:
-          ({ targetPropertyValue }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
-              `This value has type ${ typeof targetPropertyValue } which is not a valid parsed JSON`
+          ({ targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
+              `This value has type ${ targetPropertyType } which currently not supported as any other type incompatible ` +
+                " with parsed JSON"
     }
 
   },
@@ -567,15 +594,14 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     },
 
-    // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
     mutuallyExclusiveAssociativeArrayKeysLimitations: {
 
       title: "Mutually Exclusive Associative Array Keys Limitations",
 
       generateDescription: (
         {
-          targetPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
         }: ThrowableErrors.
             MutuallyExclusiveAssociativeArrayKeysLimitations.TemplateVariables
       ): string =>
@@ -586,11 +612,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
                   `associative array "${ targetPropertyDotSeparatedQualifiedName }" `
               ) +
               "what it the contradiction. " +
-              "You can specify allowed keys or forbidden keys but not both."
+              "You can specify allowed keys or forbidden keys but not both." +
+              rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     incompatibleValuesTypesAlternatives: {
-      title: "",
+      title: "Incompatible Values Types Alternatives",
       generateDescription: (
         { targetValueStringifiedSpecification }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
       ): string =>
@@ -598,6 +625,19 @@ const rawObjectDataProcessorLocalization__english: Localization = {
             "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
             "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. " +
           `Please fix the specification of this property.\n ${ targetValueStringifiedSpecification }`
+    },
+
+    bothAllowedAndForbiddenCharactersSpecified: {
+      title: "Both Allowed And Forbidden Characters Specified",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
+      ): string =>
+          "Both allowed and forbidden characters has been specified for property/element " +
+              `${ targetPropertyDotSeparatedQualifiedName } what it the contradiction.` +
+          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
   },
@@ -686,7 +726,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
   },
 
 
-  /* === Value type ================================================================================================= */
+  /* ━━━ Value Type ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   getLocalizedValueType(valueTypeID: RawObjectDataProcessor.ValuesTypesIDs): string {
 
     switch (valueTypeID) {

@@ -5,7 +5,7 @@ import {
 } from "../../../Source";
 
 
-Logger.throwErrorAndLog({
+Logger.throwErrorWithFormattedMessage({
   errorType: "Markup linting error",
   title: AlgorithmMismatchError.localization.defaultTitle,
   description: PoliteErrorsMessagesBuilder.buildMessage({

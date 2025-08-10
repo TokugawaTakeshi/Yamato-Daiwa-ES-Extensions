@@ -18,7 +18,7 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle(`RawObjectDataProcessor ${ topHeading }`),
+        title: buildHTML_PageTitle(`RawObjectDataProcessorの${ topHeading }`),
         description: ""
       },
       stylesSheetsURIs: [
@@ -48,5 +48,9 @@ block append SpecificContent
 
   article
 
-    //- ━━━ `RawObjectDataProcessor` — デモ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= `RawObjectDataProcessor ${ topHeading }`
+    //- ━━━ `RawObjectDataProcessor`のデモ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code>の${ topHeading }`
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.notTranslated
+    })

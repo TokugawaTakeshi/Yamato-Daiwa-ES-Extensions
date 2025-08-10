@@ -1,16 +1,16 @@
 import { adjustCharactersCount, Logger } from "../../../Source";
-import { suite, test } from "node:test";
+import Testing from "node:test";
 import Assert from "assert";
 
 
 Promise.all([
 
-  suite(
+  Testing.suite(
     "Has been Adjusted as Expected",
     async (): Promise<void> => {
       await Promise.all([
 
-        test(
+        Testing.test(
           "Filling",
           (): void => {
 
@@ -34,13 +34,13 @@ Promise.all([
           }
         ),
 
-        suite(
+        Testing.suite(
           "Cropping",
           async (): Promise<void> => {
 
             await Promise.all([
 
-              test(
+              Testing.test(
                 "From Start",
                 (): void => {
 
@@ -64,7 +64,7 @@ Promise.all([
                 }
               ),
 
-              test(
+              Testing.test(
                 "From End",
                 (): void => {
 

@@ -10,7 +10,7 @@ export default function getExpectedToBeNonUndefinedMapValue<Key, Value extends E
   const targetValue: Value | undefined = targetMap.get(targetKey);
 
   if (isUndefined(targetValue)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new UnexpectedEventError(
         `Contrary to expectations, there is no pair with key "${ String(targetKey) }" in target map.`
       ),

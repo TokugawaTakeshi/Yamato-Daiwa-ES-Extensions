@@ -4,7 +4,7 @@ import isNaturalNumberOrZero from "../../TypeGuards/Numbers/isNaturalNumberOrZer
 import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
 
 
-export default function moveArrayElementTo1Position<ArrayElement>(
+export default function moveArrayElementToOnePosition<ArrayElement>(
   {
     mutably,
     targetArray,
@@ -46,7 +46,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
     if (errorMustBeThrownIf.elementsCountIsLessThan2) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "sourceDataAndOptions",
@@ -56,7 +56,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
                 "flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
+        occurrenceLocation: "moveArrayElementToOnePosition(sourceDataAndOptions)"
       });
 
     }
@@ -84,7 +84,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceDataAndOptions",
@@ -95,7 +95,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
             "● \"targetElementNumber__numerationFrom1\": must be the natural number\n"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
+      occurrenceLocation: "moveArrayElementToOnePosition(sourceDataAndOptions)"
     });
 
   }
@@ -105,7 +105,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
 
     if (errorMustBeThrownIf.targetElementNumberIsOutOfRange) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "sourceDataAndOptions",
@@ -115,7 +115,7 @@ export default function moveArrayElementTo1Position<ArrayElement>(
                   "\"errorMustBeThrownIf.targetElementNumberIsOutOfRange\" flag has been set to \"true\"."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "moveArrayElementTo1Position(sourceDataAndOptions)"
+        occurrenceLocation: "moveArrayElementToOnePosition(sourceDataAndOptions)"
       });
 
     }

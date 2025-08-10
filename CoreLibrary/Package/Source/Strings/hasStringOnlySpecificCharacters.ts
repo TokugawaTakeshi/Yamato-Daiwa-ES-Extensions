@@ -1,6 +1,6 @@
 import isString from "../TypeGuards/Strings/isString";
 import splitString from "./splitString";
-import addMultipleElementsToSet from "../Sets/addMultipleElementsToSet";
+import addElementsToSet from "../Sets/addElementsToSet";
 import lowercaseLatinCharacters from "./CharactersAssets/lowercaseLatinCharacters";
 import uppercaseLatinCharacters from "./CharactersAssets/uppercaseLatinCharacters";
 import stringifiedDigits from "./CharactersAssets/stringifiedDigits";
@@ -24,36 +24,36 @@ export default function hasStringOnlySpecificCharacters(
       if (character.length === 1) {
         allowedCharactersSet.add(character);
       } else {
-        addMultipleElementsToSet(allowedCharactersSet, splitString(character, ""));
+        addElementsToSet({ targetSet: allowedCharactersSet, newElements: splitString(character, "") });
       }
     }
 
   } else if (isString(characters)) {
 
-    addMultipleElementsToSet(allowedCharactersSet, splitString(characters, ""));
+    addElementsToSet({ targetSet: allowedCharactersSet, newElements: splitString(characters, "") });
 
   } else {
 
     if (characters.latinUppercase === true) {
-      addMultipleElementsToSet(allowedCharactersSet, uppercaseLatinCharacters);
+      addElementsToSet({ targetSet: allowedCharactersSet, newElements: uppercaseLatinCharacters });
     }
 
     if (characters.latinLowercase === true) {
-      addMultipleElementsToSet(allowedCharactersSet, lowercaseLatinCharacters);
+      addElementsToSet({ targetSet: allowedCharactersSet, newElements: lowercaseLatinCharacters });
     }
 
     if (characters.digits === true) {
-      addMultipleElementsToSet(allowedCharactersSet, stringifiedDigits);
+      addElementsToSet({ targetSet: allowedCharactersSet, newElements: stringifiedDigits });
     }
 
     if (Array.isArray(characters.other)) {
 
       for (const characterOrMultipleOfThem of characters.other) {
-        addMultipleElementsToSet(allowedCharactersSet, splitString(characterOrMultipleOfThem, ""));
+        addElementsToSet({ targetSet: allowedCharactersSet, newElements: splitString(characterOrMultipleOfThem, "") });
       }
 
     } else if (isString(characters.other)) {
-      addMultipleElementsToSet(allowedCharactersSet, splitString(characters.other, ""));
+      addElementsToSet({ targetSet: allowedCharactersSet, newElements: splitString(characters.other, "") });
     }
   }
 

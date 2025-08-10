@@ -21,7 +21,7 @@ export default function getLastElementOfArray<ArrayElement>(
   if (isUndefined(lastElementOfTargetArray)) {
 
     if (options?.mustThrowErrorIfArrayIsEmpty === true) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           "Contrary to expectations, target array is empty thus there is no the last element could be accessed."
         ),

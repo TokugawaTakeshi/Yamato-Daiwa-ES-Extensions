@@ -9,6 +9,7 @@ import {
   type Log,
   isString,
   isNumber,
+  isBigInt,
   isBoolean,
   isUndefined,
   isNull,
@@ -158,11 +159,12 @@ abstract class BasicFrontEndLogger {
 
   }
 
-  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logDebug(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)
@@ -192,11 +194,12 @@ abstract class BasicFrontEndLogger {
 
   }
 
-  public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logGeneric(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)

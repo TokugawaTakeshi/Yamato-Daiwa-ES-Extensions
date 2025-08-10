@@ -153,7 +153,7 @@ export default class ImprovedGlob {
   ): string {
 
     if (compoundParameter.filesNamesPrefixes.length === 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.filesNamesPrefixes",
           parameterNumber: 1,
@@ -166,7 +166,7 @@ export default class ImprovedGlob {
 
 
     if (compoundParameter.filesNamesExtensions.length === 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.filesNamesExtensions",
           parameterNumber: 1,
@@ -200,7 +200,7 @@ export default class ImprovedGlob {
   ): string {
 
     if (compoundParameter.subdirectoriesPrefixes.length === 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.subdirectoriesPrefixes",
           parameterNumber: 1,
@@ -236,7 +236,7 @@ export default class ImprovedGlob {
   ): string {
 
     if (compoundParameter.subdirectoriesNames.length === 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.subdirectoriesNames",
           parameterNumber: 1,

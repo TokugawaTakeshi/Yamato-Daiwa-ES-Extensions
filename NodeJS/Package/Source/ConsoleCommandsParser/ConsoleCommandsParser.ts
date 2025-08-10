@@ -73,7 +73,7 @@ class ConsoleCommandsParser<
 
     /* [ Additional dynamic validation for compiled JavaScript ] */
     if (!Array.isArray(argumentsVector)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.argumentsVectorIsNotArray.
@@ -86,7 +86,7 @@ class ConsoleCommandsParser<
 
 
     if (argumentsVector.length < ConsoleCommandsParser.MINIMAL_ARGUMENTS_COUNT_IN_VALID_CONSOLE_COMMAND) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -139,7 +139,7 @@ class ConsoleCommandsParser<
     }
 
     if (nonStringArguments.length > 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -242,7 +242,7 @@ class ConsoleCommandsParser<
     if (isUndefined(firstConsciouslyInputtedArgument)) {
 
       if (isUndefined(defaultCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -260,7 +260,7 @@ class ConsoleCommandsParser<
     } else if (ConsoleCommandsParser.isCommandArgumentTheOption(firstConsciouslyInputtedArgument)) {
 
       if (isUndefined(defaultCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -280,7 +280,7 @@ class ConsoleCommandsParser<
     } else {
 
       if (isUndefined(commandLineInterfaceSpecification.commandPhrases)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -311,7 +311,7 @@ class ConsoleCommandsParser<
 
       /* [ Approach ] If no options for the current command phrase available, it will be the empty object but not "undefined". */
       if (isUndefined(optionsSpecificationForRecognizedCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unknownCommandPhrase.generate({
@@ -391,7 +391,7 @@ class ConsoleCommandsParser<
 
 
         if ("required" in optionSpecification && optionSpecification.required) {
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorInstance: new InvalidConsoleCommandError({
               applicationName: this.applicationName,
               messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.requiredOptionKeyIsMissing.generate({
@@ -426,7 +426,7 @@ class ConsoleCommandsParser<
 
         /* [ Theory ] Although the option could be optional, the value is expected to be specified because flag has been
         *     specified. */
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: this.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -493,7 +493,7 @@ class ConsoleCommandsParser<
         }
 
         default: {
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorType: "InvalidConsoleCommandOptionSpecification",
             title: "Invalid console command option specification",
             description: ConsoleCommandsParser.localization.errorsMessages.invalidCommandOptionTypeAtSpecification.generate({
@@ -513,7 +513,7 @@ class ConsoleCommandsParser<
     }
 
     if (this.targetCommandOptionsWhichHasNotBeenProcessedYet.length > 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unknownOptionsFoundForSpecificCommand.generate({
@@ -557,7 +557,7 @@ class ConsoleCommandsParser<
     const { allowedAlternatives }: ConsoleCommandsParser.StringOptionSpecification = optionSpecification;
 
     if (isNonEmptyArray(allowedAlternatives) && !allowedAlternatives.includes(targetOptionRawValue)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -604,7 +604,7 @@ class ConsoleCommandsParser<
     const targetOptionParsedValue: number = Number(targetOptionRawValue);
 
     if (Number.isNaN(targetOptionParsedValue)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unparsableNumericOptionValue.generate({
@@ -716,7 +716,7 @@ class ConsoleCommandsParser<
     }
 
     if (!isOptionValueMatchingWithExpectedNumberSet) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -741,7 +741,7 @@ class ConsoleCommandsParser<
 
 
     if (isNotUndefined(minimalValue) && targetOptionParsedValue <= minimalValue) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -766,7 +766,7 @@ class ConsoleCommandsParser<
 
 
     if (isNotUndefined(maximalValue) && targetOptionParsedValue >= maximalValue) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -812,7 +812,7 @@ class ConsoleCommandsParser<
     try {
       targetParameterParsedValue = JSON5.parse(targetOptionRawValue);
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.malformedJSON5_Option.generate({
@@ -845,7 +845,7 @@ class ConsoleCommandsParser<
         );
 
     if (validationResult.isRawDataInvalid) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({
           customMessage: ConsoleCommandsParser.localization.errorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.generate({
             targetOptionKey: optionKeyWithLeading2NDashes,
@@ -1096,7 +1096,7 @@ class ConsoleCommandsParser<
     if (
       Object.entries(specificationsOfCommandsMarkedAsDefault).length > 1
     ) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorType: "InvalidConsoleCommandSpecification",
         title: "Invalid console command specification",
         description: ConsoleCommandsParser.localization.errorsMessages.moreThanOneCommandPhrasesMarkedAsDefault.generate({

@@ -1,5 +1,6 @@
 import isNaturalNumberOrZero from "../../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../../TypeGuards/Numbers/isNaturalNumber";
+import limitMinimalValue from "../../Numbers/limitMinimalValue";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 import Logger from "../../Logging/Logger";
 
@@ -97,68 +98,68 @@ export default function cropArray<ArrayElement>(
         } &
         (
           {
-            rightElementNumber__numerationFrom0: number;
-            rightElementNumber__numerationFrom1?: undefined;
-            fromLastElement?: undefined;
+            rightElementNumber__numerationFrom0_AndRight: number;
+            rightElementNumber__numerationFrom1_AndRight?: undefined;
+            fromRightmostElement?: undefined;
           } |
           {
-            rightElementNumber__numerationFrom1: number;
-            rightElementNumber__numerationFrom0?: undefined;
-            fromLastElement?: undefined;
+            rightElementNumber__numerationFrom1_AndRight: number;
+            rightElementNumber__numerationFrom0_AndRight?: undefined;
+            fromRightmostElement?: undefined;
           } |
           {
-            fromLastElement: true;
-            rightElementNumber__numerationFrom1?: undefined;
-            rightElementNumber__numerationFrom0?: undefined;
+            fromRightmostElement: true;
+            rightElementNumber__numerationFrom1_AndRight?: undefined;
+            rightElementNumber__numerationFrom0_AndRight?: undefined;
           }
         ) &
         (
           {
-            leftElementNumber__numerationFrom0__including: number;
-            leftElementNumber__numerationFrom1__including?: undefined;
-            leftElementNumber__numerationFrom0__notIncluding?: undefined;
-            leftElementNumber__numerationFrom1__notIncluding?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__including: number;
+            leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
             elementsCount?: undefined;
-            untilFirstElement?: undefined;
+            untilLeftmostElement?: undefined;
           } |
           {
-            leftElementNumber__numerationFrom1__including: number;
-            leftElementNumber__numerationFrom0__including?: undefined;
-            leftElementNumber__numerationFrom0__notIncluding?: undefined;
-            leftElementNumber__numerationFrom1__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__including: number;
+            leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
             elementsCount?: undefined;
-            untilFirstElement?: undefined;
+            untilLeftmostElement?: undefined;
           } |
           {
-            leftElementNumber__numerationFrom0__notIncluding: number;
-            leftElementNumber__numerationFrom0__including?: undefined;
-            leftElementNumber__numerationFrom1__including?: undefined;
-            leftElementNumber__numerationFrom1__notIncluding?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding: number;
+            leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
             elementsCount?: undefined;
-            untilFirstElement?: undefined;
+            untilLeftmostElement?: undefined;
           } |
           {
-            leftElementNumber__numerationFrom1__notIncluding: number;
-            leftElementNumber__numerationFrom0__including?: undefined;
-            leftElementNumber__numerationFrom1__including?: undefined;
-            leftElementNumber__numerationFrom0__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding: number;
+            leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
             elementsCount?: undefined;
-            untilFirstElement?: undefined;
+            untilLeftmostElement?: undefined;
           } |
           {
             elementsCount: number;
-            leftElementNumber__numerationFrom0__including?: undefined;
-            leftElementNumber__numerationFrom1__including?: undefined;
-            leftElementNumber__numerationFrom0__notIncluding?: undefined;
-            leftElementNumber__numerationFrom1__notIncluding?: undefined;
-            untilFirstElement?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+            untilLeftmostElement?: undefined;
           } |
           {
-            untilFirstElement: true;
-            leftElementNumber__numerationFrom0__including?: undefined;
-            leftElementNumber__numerationFrom1__including?: undefined;
-            leftElementNumber__numerationFrom0__notIncluding?: undefined;
-            leftElementNumber__numerationFrom1__notIncluding?: undefined;
+            untilLeftmostElement: true;
+            leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+            leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+            leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
             elementsCount?: undefined;
           }
         )
@@ -177,13 +178,20 @@ export default function cropArray<ArrayElement>(
   if (compoundParameter.fromStart) {
 
     if (isNaturalNumberOrZero(compoundParameter.startingElementNumber__numerationFrom0)) {
+
       startingElementNumber__numerationFrom0 = compoundParameter.startingElementNumber__numerationFrom0;
+
     } else if (isNaturalNumber(compoundParameter.startingElementNumber__numerationFrom1)) {
+
       startingElementNumber__numerationFrom0 = compoundParameter.startingElementNumber__numerationFrom1 - 1;
+
     } else if (compoundParameter.fromFirstElement === true) {
+
       startingElementNumber__numerationFrom0 = 0;
+
     } else {
-      Logger.throwErrorAndLog({
+
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",
@@ -197,22 +205,36 @@ export default function cropArray<ArrayElement>(
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "cropArray(compoundParameter)"
       });
+
     }
 
     if (isNaturalNumberOrZero(compoundParameter.endingElementNumber__numerationFrom0__including)) {
+
       endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom0__including + 1;
+
     } else if (isNaturalNumber(compoundParameter.endingElementNumber__numerationFrom1__including)) {
+
       endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom1__including;
+
     } else if (isNaturalNumberOrZero(compoundParameter.endingElementNumber__numerationFrom0__notIncluding)) {
+
       endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom0__notIncluding;
+
     } else if (isNaturalNumber(compoundParameter.endingElementNumber__numerationFrom1__notIncluding)) {
+
       endingElementNumber__numerationFrom1 = compoundParameter.endingElementNumber__numerationFrom1__notIncluding - 1;
+
     } else if (isNaturalNumber(compoundParameter.elementsCount)) {
+
       endingElementNumber__numerationFrom1 = startingElementNumber__numerationFrom0 + compoundParameter.elementsCount;
+
     } else if (compoundParameter.untilLastElement === true) {
+
       endingElementNumber__numerationFrom1 = elementsCountInTargetArray;
+
     } else {
-      Logger.throwErrorAndLog({
+
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",
@@ -229,18 +251,31 @@ export default function cropArray<ArrayElement>(
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "cropArray(compoundParameter)"
       });
+
     }
 
   } else {
 
-    if (isNaturalNumberOrZero(compoundParameter.rightElementNumber__numerationFrom0)) {
-      endingElementNumber__numerationFrom1 = compoundParameter.rightElementNumber__numerationFrom0 + 1;
-    } else if (isNaturalNumber(compoundParameter.rightElementNumber__numerationFrom1)) {
-      endingElementNumber__numerationFrom1 = compoundParameter.rightElementNumber__numerationFrom1;
-    } else if (compoundParameter.fromLastElement === true) {
+    if (isNaturalNumberOrZero(compoundParameter.rightElementNumber__numerationFrom0_AndRight)) {
+
+      endingElementNumber__numerationFrom1 =
+          elementsCountInTargetArray -
+          compoundParameter.rightElementNumber__numerationFrom0_AndRight;
+
+    } else if (isNaturalNumber(compoundParameter.rightElementNumber__numerationFrom1_AndRight)) {
+
+      endingElementNumber__numerationFrom1 =
+          elementsCountInTargetArray -
+          compoundParameter.rightElementNumber__numerationFrom1_AndRight +
+          1;
+
+    } else if (compoundParameter.fromRightmostElement === true) {
+
       endingElementNumber__numerationFrom1 = elementsCountInTargetArray;
+
     } else {
-      Logger.throwErrorAndLog({
+
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",
@@ -254,22 +289,46 @@ export default function cropArray<ArrayElement>(
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "cropArray(compoundParameter)"
       });
+
     }
 
-    if (isNaturalNumberOrZero(compoundParameter.leftElementNumber__numerationFrom0__including)) {
-      startingElementNumber__numerationFrom0 = compoundParameter.leftElementNumber__numerationFrom0__including;
-    } else if (isNaturalNumber(compoundParameter.leftElementNumber__numerationFrom1__including)) {
-      startingElementNumber__numerationFrom0 = compoundParameter.leftElementNumber__numerationFrom1__including - 1;
-    } else if (isNaturalNumberOrZero(compoundParameter.leftElementNumber__numerationFrom0__notIncluding)) {
-      startingElementNumber__numerationFrom0 = compoundParameter.leftElementNumber__numerationFrom0__notIncluding + 1;
-    } else if (isNaturalNumber(compoundParameter.leftElementNumber__numerationFrom1__notIncluding)) {
-      startingElementNumber__numerationFrom0 = compoundParameter.leftElementNumber__numerationFrom1__notIncluding;
+    if (isNaturalNumberOrZero(compoundParameter.leftElementNumber__numerationFrom0_AndRight__including)) {
+
+      startingElementNumber__numerationFrom0 =
+          elementsCountInTargetArray -
+          compoundParameter.leftElementNumber__numerationFrom0_AndRight__including -
+          1;
+
+    } else if (isNaturalNumber(compoundParameter.leftElementNumber__numerationFrom1_AndRight__including)) {
+
+      startingElementNumber__numerationFrom0 =
+          elementsCountInTargetArray -
+          compoundParameter.leftElementNumber__numerationFrom1_AndRight__including;
+
+    } else if (isNaturalNumberOrZero(compoundParameter.leftElementNumber__numerationFrom0_AndRight__notIncluding)) {
+
+      startingElementNumber__numerationFrom0 =
+          elementsCountInTargetArray -
+          compoundParameter.leftElementNumber__numerationFrom0_AndRight__notIncluding;
+
+    } else if (isNaturalNumber(compoundParameter.leftElementNumber__numerationFrom1_AndRight__notIncluding)) {
+
+      startingElementNumber__numerationFrom0 =
+          elementsCountInTargetArray -
+          compoundParameter.leftElementNumber__numerationFrom1_AndRight__notIncluding +
+          1;
+
     } else if (isNaturalNumber(compoundParameter.elementsCount)) {
-      startingElementNumber__numerationFrom0 = endingElementNumber__numerationFrom1 - compoundParameter.elementsCount - 1;
-    } else if (compoundParameter.untilFirstElement === true) {
+
+      startingElementNumber__numerationFrom0 = endingElementNumber__numerationFrom1 - compoundParameter.elementsCount;
+
+    } else if (compoundParameter.untilLeftmostElement === true) {
+
       startingElementNumber__numerationFrom0 = 0;
+
     } else {
-      Logger.throwErrorAndLog({
+
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",
@@ -286,6 +345,7 @@ export default function cropArray<ArrayElement>(
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "cropArray(compoundParameter)"
       });
+
     }
 
   }
@@ -295,7 +355,7 @@ export default function cropArray<ArrayElement>(
     startingElementNumber__numerationFrom0 >= elementsCountInTargetArray &&
         compoundParameter.mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange
   ) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -312,10 +372,30 @@ export default function cropArray<ArrayElement>(
 
 
   if (
+    startingElementNumber__numerationFrom0 < 0 &&
+        compoundParameter.mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange
+  ) {
+    Logger.throwErrorWithFormattedMessage({
+      errorInstance: new InvalidParameterValueError({
+        parameterNumber: 1,
+        parameterName: "compoundParameter",
+        messageSpecificPart:
+          "Starting (left) element has been specified such as it has the negative index if to recompute it to " +
+            "numeration from zero and left. " +
+          "The error has been thrown because the \"mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange\" option " +
+            "has been set to \"true\"."
+      }),
+      title: InvalidParameterValueError.localization.defaultTitle,
+      occurrenceLocation: "cropArray(compoundParameter)"
+    });
+  }
+
+
+  if (
     endingElementNumber__numerationFrom1 > elementsCountInTargetArray &&
         compoundParameter.mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange
   ) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -346,6 +426,9 @@ export default function cropArray<ArrayElement>(
   }
 
 
-  return targetArray.slice(startingElementNumber__numerationFrom0, endingElementNumber__numerationFrom1);
+  return targetArray.slice(
+    limitMinimalValue({ targetNumber: startingElementNumber__numerationFrom0, minimalValue: 0 }),
+    endingElementNumber__numerationFrom1
+  );
 
 }

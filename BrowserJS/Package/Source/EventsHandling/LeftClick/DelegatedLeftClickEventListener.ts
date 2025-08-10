@@ -72,7 +72,7 @@ class DelegatedLeftClickEventListener {
 
         if (elementsCorrespondingToContextElementSelector.length === 0) {
 
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorInstance: new DOM_ElementRetrievingFailedError({
               customMessage:
                   "The context element has not been found by the selector " +

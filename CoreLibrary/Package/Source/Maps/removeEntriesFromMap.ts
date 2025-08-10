@@ -6,7 +6,7 @@ export namespace RemovingEntriesFromMapOperation {
   export type SourceData<Key, Value> = Readonly<
     (
       {
-        mutably: true;
+        mutably?: true;
         targetMap: Map<Key, Value>;
       } |
       {
@@ -38,7 +38,7 @@ export function removeEntriesFromMap<Key, Value>(
   }: RemovingEntriesFromMapOperation.SourceData<Key, Value> = sourceData;
 
   const removedEntries: Map<Key, Value> = new Map<Key, Value>();
-  const workpiece: Map<Key, Value> = mutably ? targetMap : new Map<Key, Value>(targetMap);
+  const workpiece: Map<Key, Value> = mutably === true ? targetMap : new Map<Key, Value>(targetMap);
   const targetKeys: ReadonlyArray<Key> = "key" in sourceData ? [ sourceData.key ] : sourceData.keys;
 
   for (const key of targetKeys) {

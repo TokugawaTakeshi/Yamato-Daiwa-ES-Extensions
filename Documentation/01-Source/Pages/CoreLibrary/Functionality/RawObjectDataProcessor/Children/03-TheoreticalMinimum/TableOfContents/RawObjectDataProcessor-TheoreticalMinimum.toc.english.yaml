@@ -1,3 +1,19 @@
 objectLikeDataClassification:
 
   $heading: "Object Like Data Classification"
+
+  fixedSchema:
+
+    $heading: "Fixed Schemas Objects"
+
+  associativeArrays:
+
+    $heading: "Associative Array-like Objects"
+
+  indexedArrays:
+
+    $heading: "Indexed Arrays"
+
+  tuples:
+
+    $heading: "Tuples"

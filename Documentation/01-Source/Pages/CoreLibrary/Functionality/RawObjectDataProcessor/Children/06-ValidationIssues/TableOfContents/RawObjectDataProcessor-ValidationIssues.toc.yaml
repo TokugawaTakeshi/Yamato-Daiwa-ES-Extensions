@@ -117,8 +117,8 @@ validationErrorsMessages:
 
     indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber:
 
-      $heading: "<code>INDEXED_ARRAY_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER</code>"
-      $anchor: "VALIDATION_ERRORS_MESSAGES-INDEXED_ARRAY_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER"
+      $heading: "<code>INDEXED_ARRAY_OR_TUPLE_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-INDEXED_ARRAY_OR_TUPLE_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER"
 
 
     # ─── Numeric ──────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -126,6 +126,10 @@ validationErrorsMessages:
 
       $heading: "<code>NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET</code>"
       $anchor: "VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET"
+
+    forbiddenNaN_Value:
+      $heading: "<code>VALIDATION_ERRORS_MESSAGES-FORBIDDEN_NAN_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-FORBIDDEN_NAN_VALUE"
 
     valueIsNotAmongAllowedAlternatives:
 
@@ -155,6 +159,10 @@ validationErrorsMessages:
     charactersCountDoesNotMatchWithSpecified:
       $heading: "<code>CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED</code>"
       $anchor: "VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED"
+
+    forbiddenCharactersFound:
+      $heading: "FORBIDDEN_CHARACTERS_FOUND"
+      $anchor: "FORBIDDEN_CHARACTERS_FOUND"
 
     regularExpressionMismatch:
       $heading: "<code>REGULAR_EXPRESSION_MISMATCH</code>"
@@ -217,6 +225,10 @@ throwableErrors:
     incompatibleValuesTypesAlternatives:
       $heading: "<code>incompatibleValuesTypesAlternatives</code>"
       $anchor: THROWABLE_ERRORS-INCOMPATIBLE_VALUES_TYPES_ALTERNATIVES
+
+    bothAllowedAndForbiddenCharactersSpecified:
+      $heading: "<code>bothAllowedAndForbiddenCharactersSpecified</code>"
+      $anchor: THROWABLE_ERRORS-BOTH_ALLOWED_AND_FORBIDDEN_CHARACTERS_SPECIFIED
 
 
 warnings:

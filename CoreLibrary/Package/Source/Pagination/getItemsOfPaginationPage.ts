@@ -34,7 +34,7 @@ export default function getItemsOfPaginationPage<Item>(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

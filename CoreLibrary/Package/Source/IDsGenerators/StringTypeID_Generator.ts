@@ -30,6 +30,8 @@ abstract class StringTypeID_Generator {
   protected abstract generateID_ButNotValidateYet(): string;
   protected abstract isGeneratedID_AvailableForUsage(generatedID: string): Promise<boolean>;
 
+  protected onID_Decided?(ID: string): void;
+
 
   /** @throws StringTypeID_Generator.CollisionsLimitReachedError */
   public async generateID(): Promise<string> {
@@ -45,6 +47,7 @@ abstract class StringTypeID_Generator {
        * It is completely useless to execute multiple check simultaneously in this case, each check must be executed
        * on demand. */
       if (await this.isGeneratedID_AvailableForUsage(ID)) {
+        this.onID_Decided?.(ID);
         break;
       }
 
@@ -53,7 +56,7 @@ abstract class StringTypeID_Generator {
 
       if (collisionsCount >= this.COLLISIONS_COUNT_LIMIT) {
 
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new StringTypeID_Generator.CollisionsLimitReachedError({
             targetEntityName: this.RELATED_ENTITY_NAME,
             collisionsCountLimit: this.COLLISIONS_COUNT_LIMIT
@@ -78,7 +81,7 @@ abstract class StringTypeID_Generator {
   protected validateID(ID: string): void {
 
     if (ID.length !== this.ID_CHARACTERS_COUNT) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({
           customMessage:
             `Generated ID "${ ID }" for "${ this.RELATED_ENTITY_NAME }" consists from ${ ID.length } characters while ` +

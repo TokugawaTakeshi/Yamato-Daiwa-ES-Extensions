@@ -2,11 +2,10 @@ import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import { type MonthsNames, MAXIMAL_CHARACTERS_COUNT_IN_DATE_PART_OF_ISO8601_STRING } from "fundamental-constants";
 import getMonthNumberByName from "./getMonthNumberByName";
-import isValidISO8601DateAndPossiblyTimeDefinition from "./isValidISO8601DateAndPossiblyTimeDefinition";
 import isValidNativeDate from "./isValidNativeDate";
 
 
-export default function getISO8601StringWithoutTimePart(
+export default function getISO8601_StringWithoutTimePart(
   sourceDataAndOptions: Readonly<
     (
       {
@@ -29,20 +28,6 @@ export default function getISO8601StringWithoutTimePart(
 ): string {
 
   if ("ISO8601Definition" in sourceDataAndOptions) {
-
-    if (!isValidISO8601DateAndPossiblyTimeDefinition(sourceDataAndOptions.ISO8601Definition)) {
-
-      Logger.throwErrorAndLog({
-        errorInstance: new InvalidParameterValueError({
-          parameterName: "sourceDataAndOptions",
-          parameterNumber: 1,
-          messageSpecificPart: "The value of \"ISO8601Definition\" property does not obey to ISO8601 standard."
-        }),
-        title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "getISO8601StringWithoutTimePart(sourceDataAndOptions)"
-      });
-
-    }
 
     let nativeDateInstance: Date;
 
@@ -103,14 +88,14 @@ export default function getISO8601StringWithoutTimePart(
 
     if (!isValidNativeDate(nativeDateInstance)) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "sourceDataAndOptions",
           parameterNumber: 1,
           messageSpecificPart: "The specified UTC date is invalid."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "getISO8601StringWithoutTimePart(sourceDataAndOptions)"
+        occurrenceLocation: "getISO8601_StringWithoutTimePart(sourceDataAndOptions)"
       });
 
     }

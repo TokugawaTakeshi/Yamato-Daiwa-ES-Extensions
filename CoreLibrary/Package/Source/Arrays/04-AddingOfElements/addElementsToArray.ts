@@ -69,7 +69,7 @@ export default function addElementsToArray<ArrayElement>(
   } else if (isNaturalNumber(compoundParameter.toPosition__numerationFrom1)) {
     positionOfFirstNewElement__numerationFrom0 = compoundParameter.toPosition__numerationFrom1 - 1;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

@@ -38,7 +38,7 @@ export default function getURI_Fragment(
 
     if (sourceDataAndOptions.mustThrowErrorIfNoFragmentPresents) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           `Contrary to expectations, below URI has not the fragment.\n${ sourceDataAndOptions.targetURI }`
         ),

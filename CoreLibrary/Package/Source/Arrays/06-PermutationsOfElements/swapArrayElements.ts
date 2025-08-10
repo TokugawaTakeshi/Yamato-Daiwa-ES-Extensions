@@ -93,7 +93,7 @@ export default function swapArrayElements<ArrayElement>(
 
     if (sourceDataAndOptions.mustThrowErrorIfTargetArrayIsEmpty) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "sourceDataAndOptions",
           parameterNumber: 1,
@@ -144,7 +144,7 @@ export default function swapArrayElements<ArrayElement>(
        *     requires two more checks one of which is redundant from the viewpoint of JavaScrit. */
       if (Reflect.get(sourceDataAndOptions.oneElement, "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple") === true) {
 
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             parameterName: "sourceDataAndOptions",
             parameterNumber: 1,
@@ -169,7 +169,7 @@ export default function swapArrayElements<ArrayElement>(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterName: "sourceDataAndOptions",
         parameterNumber: 1,
@@ -209,7 +209,7 @@ export default function swapArrayElements<ArrayElement>(
       /* [ Approach ] See ※. */
       if (Reflect.get(sourceDataAndOptions.otherElement, "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple") === true) {
 
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             parameterName: "sourceDataAndOptions",
             parameterNumber: 1,
@@ -233,7 +233,7 @@ export default function swapArrayElements<ArrayElement>(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterName: "sourceDataAndOptions",
         parameterNumber: 1,
@@ -257,7 +257,7 @@ export default function swapArrayElements<ArrayElement>(
 
     if (sourceDataAndOptions.mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "sourceDataAndOptions",
           parameterNumber: 1,

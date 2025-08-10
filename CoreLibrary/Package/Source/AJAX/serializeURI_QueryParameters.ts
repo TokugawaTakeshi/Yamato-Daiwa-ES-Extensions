@@ -11,7 +11,7 @@ const serializeURI_QueryParameters: URI_QueryParametersSerializer = (URI_QueryPa
 
   for (const [ key, value ] of Object.entries(URI_QueryParameters)) {
 
-    if (isString(value) || isNumber(value) || isBoolean(value)) {
+    if (isString(value) || isNumber(value, { mustConsiderNaN_AsNumber: true }) || isBoolean(value)) {
       stringifiedKeysAndValueParis.push(`${ key }=${ value }`);
     }
 

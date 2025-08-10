@@ -22,7 +22,7 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
 ): ExtractedDataset {
 
   if (!(targetDOM_Element instanceof HTMLElement)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.targetDOM_Element",
@@ -44,7 +44,7 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
   );
 
   if (datasetProcessingResult.isRawDataInvalid) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidExternalDataError({
         mentionToExpectedData: targetDOM_ElementNameOrSelectorForLogging,
         messageSpecificPart: RawObjectDataProcessor.formatValidationErrorsList(datasetProcessingResult.validationErrorsMessages)

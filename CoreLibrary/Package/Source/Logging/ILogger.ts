@@ -4,12 +4,8 @@ import type { Log, ErrorLog, InfoLog, SuccessLog, ThrownErrorLog, WarningLog } f
 interface ILogger {
 
   readonly throwErrorWithFormattedMessage?: <CustomError extends Error = Error>(
-    polymorphicPayload: Error | ThrownErrorLog<CustomError>,
+    thrownErrorLog: ThrownErrorLog<CustomError>,
     options?: ILogger.ThrowingErrorWithFormattedMessage.Options
-  ) => never;
-
-  readonly throwErrorAndLog?: <CustomError extends Error = Error>(
-    polymorphicPayload: Error | ThrownErrorLog<CustomError>
   ) => never;
 
   readonly logError: (polymorphicPayload: ErrorLog | string) => void;
@@ -20,8 +16,8 @@ interface ILogger {
   readonly logInfo: (polymorphicPayload: InfoLog | string) => void;
   readonly logSuccess: (polymorphicPayload: SuccessLog | string) => void;
 
-  readonly logDebug: (polymorphicPayload: Log | string | number | boolean | null | undefined) => void;
-  readonly logGeneric: (polymorphicPayload: Log | string | number | boolean | null | undefined) => void;
+  readonly logDebug: (polymorphicPayload: Log | string | number | bigint | boolean | null | undefined) => void;
+  readonly logGeneric: (polymorphicPayload: Log | string | number | bigint | boolean | null | undefined) => void;
 
   readonly highlightText: (targetString: string) => string;
 

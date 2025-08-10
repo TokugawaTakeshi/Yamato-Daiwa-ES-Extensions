@@ -13,7 +13,7 @@ export default function isIPv4AddressLiesInRange(
 ): boolean {
 
   if (!isArbitraryObject(compoundParameter)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -26,7 +26,7 @@ export default function isIPv4AddressLiesInRange(
 
 
   if (!isString(compoundParameter.comparedIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.comparedIP_Address",
@@ -40,7 +40,7 @@ export default function isIPv4AddressLiesInRange(
 
 
   if (!isString(compoundParameter.minimalIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.minimalIP_Address",
@@ -54,7 +54,7 @@ export default function isIPv4AddressLiesInRange(
 
 
   if (!isString(compoundParameter.maximalIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "maximalIP_Address.minimalIP_Address",
@@ -70,7 +70,7 @@ export default function isIPv4AddressLiesInRange(
   const VALID_IP_ADDRESS_PATTERN: RegExp = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/u;
 
   if (!VALID_IP_ADDRESS_PATTERN.test(compoundParameter.comparedIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.comparedIP_Address",
@@ -84,7 +84,7 @@ export default function isIPv4AddressLiesInRange(
 
 
   if (!VALID_IP_ADDRESS_PATTERN.test(compoundParameter.minimalIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.minimalIP_Address",
@@ -98,7 +98,7 @@ export default function isIPv4AddressLiesInRange(
 
 
   if (!VALID_IP_ADDRESS_PATTERN.test(compoundParameter.maximalIP_Address)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter.maximalIP_Address",

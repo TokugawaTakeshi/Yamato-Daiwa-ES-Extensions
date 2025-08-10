@@ -11,7 +11,7 @@ export default function getMonthNumberByName(
   const numerationFrom: number = sourceData.numerationFrom;
 
   if (numerationFrom !== 0 && numerationFrom !== 1) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceData.numerationFrom",

@@ -6,13 +6,14 @@ import type ILogger from "./ILogger";
 import isString from "../TypeGuards/Strings/isString";
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
 import isNumber from "../TypeGuards/Numbers/isNumber";
+import isBigInt from "../TypeGuards/Numbers/isBigInt";
 import isBoolean from "../TypeGuards/isBoolean";
 import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 import isNull from "../TypeGuards/EmptyTypes/isNull";
 import isNotNull from "../TypeGuards/EmptyTypes/isNotNull";
 
-import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
+import { stringifyAndFormatArbitraryValue } from "../Strings/ArbitraryValueFormatter";
 
 import loggerLocalization__english from "./LoggerLocalization.english";
 
@@ -85,55 +86,6 @@ abstract class Logger {
         description: errorWillBeThrown.message
       });
     }
-
-    throw errorWillBeThrown;
-
-  }
-
-  public static throwErrorAndLog<CustomError extends Error>(
-    polymorphicPayload: Error | ThrownErrorLog<CustomError>
-  ): never {
-
-    if (isNotNull(Logger.implementation) && isNotUndefined(Logger.implementation.throwErrorAndLog)) {
-      return Logger.implementation.throwErrorAndLog(polymorphicPayload);
-    }
-
-
-    if (polymorphicPayload instanceof Error) {
-      throw polymorphicPayload;
-    }
-
-
-    let stringifiedInnerError: string | undefined;
-
-    if (isNotUndefined(polymorphicPayload.innerError)) {
-
-      stringifiedInnerError = stringifyAndFormatArbitraryValue(polymorphicPayload.innerError);
-
-      if (polymorphicPayload.innerError instanceof Error && isNonEmptyString(polymorphicPayload.innerError.stack)) {
-
-        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(polymorphicPayload.innerError)`,
-         *    but it is runtime dependent because the `stack` property is non-standard. */
-
-        stringifiedInnerError = polymorphicPayload.innerError.stack.includes(stringifiedInnerError) ?
-            polymorphicPayload.innerError.stack :
-            `${ stringifiedInnerError }\n${ polymorphicPayload.innerError.stack }`;
-
-      }
-
-    }
-
-    const errorMessage: string = Logger.
-        generateFormattedErrorFromThrownErrorLog(polymorphicPayload, stringifiedInnerError);
-
-    if ("errorInstance" in polymorphicPayload) {
-      polymorphicPayload.errorInstance.message = errorMessage;
-      throw polymorphicPayload.errorInstance;
-    }
-
-
-    const errorWillBeThrown: Error = new Error(errorMessage);
-    errorWillBeThrown.name = polymorphicPayload.errorType;
 
     throw errorWillBeThrown;
 
@@ -254,7 +206,7 @@ abstract class Logger {
 
   }
 
-  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logDebug(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logDebug(polymorphicPayload);
@@ -264,7 +216,8 @@ abstract class Logger {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)
@@ -283,7 +236,7 @@ abstract class Logger {
 
   }
 
-  public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logGeneric(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (isNotNull(Logger.implementation)) {
       Logger.implementation.logGeneric(polymorphicPayload);
@@ -293,7 +246,8 @@ abstract class Logger {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)

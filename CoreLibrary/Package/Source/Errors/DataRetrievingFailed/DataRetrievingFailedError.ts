@@ -1,6 +1,6 @@
 import dataRetrievingFailedErrorLocalization__english from "./DataRetrievingFailedErrorLocalization.english";
 import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
-import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
+import { stringifyAndFormatArbitraryValue } from "../../Strings/ArbitraryValueFormatter";
 
 
 class DataRetrievingFailedError extends Error {

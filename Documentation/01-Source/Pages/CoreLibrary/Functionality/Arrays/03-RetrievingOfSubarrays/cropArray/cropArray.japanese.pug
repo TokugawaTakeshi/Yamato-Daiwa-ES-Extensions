@@ -51,119 +51,173 @@ block append SpecificContent
 
   article
 
-    +CallableExpressionScheme--YDF_DK({
-      technicalName: "cropArray",
-      headingTag: "h1",
-      genericParameters: [ "ArrayElement" ],
-      localizedDescriptiveHeading: "配列を切り抜く",
-      parametersSpecification: [
-        {
-          localizedName: "ソースデータ",
-          genericTechnicalName: "sourceData",
-          type: "SourceData",
-          required: true
-        }
-      ],
-      returnedValue: "Array<ArrayElement>"
-    })
-      +ObjectTypeAbstract--YDF_DK({
-        typeName: "SourceData",
-        propertiesSpecification: {
-          $intersection: [
-            [
+    h1.Article-Heading1!= "<code>cropArray</code>"
+
+    +CodeViewer--YDF({ title: "シグネチャ" })
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        <ArrayElement>(
+          compoundParameter: Readonly<
+            (
               {
-                mutably: {
-                  localizedInterpretation: "変更の有無",
-                  type: "boolean (trueのみ)",
-                  required: true
-                },
-                targetArray: {
-                  localizedInterpretation: "目標の配列",
-                  type: "Array<ArrayElement>",
-                  required: true
-                }
-              },
+                mutably: true;
+                targetArray: Array<ArrayElement>;
+              } |
               {
-                mutably: {
-                  localizedInterpretation: "変更の有無",
-                  type: "boolean (falseのみ)",
-                  required: true
-                },
-                targetArray: {
-                  localizedInterpretation: "目標の配列",
-                  type: "Array<ArrayElement>",
-                  required: true
-                }
+                mutably: false;
+                targetArray: ReadonlyArray<ArrayElement>;
               }
-            ],
-            [
-              {
-                startingElementNumber__numerationFrom0: {
-                  localizedInterpretation: "一つ目の要素の番号（０からの計算）",
-                  type: Number,
-                  required: true,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
-                }
-              },
-              {
-                startingElementNumber__numerationFrom1: {
-                  localizedInterpretation: "一つ目の要素の番号（１からの計算）",
-                  type: Number,
-                  required: true,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
-                }
-              },
-              {
-                fromStart: {
-                  localizedInterpretation: "最初の要素から切り抜く真偽",
-                  type: "boolean (только only)",
-                  required: true
-                }
-              }
-            ],
-            [
-              {
-                endingElementNumber__numerationFrom0: {
-                  localizedInterpretation: "最後の要素の番号（０からの計算）",
-                  type: Number,
-                  required: true,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger
-                }
-              },
-              {
-                endingElementNumber__numerationFrom1: {
-                  localizedInterpretation: "最後の要素の番号（１からの計算）",
-                  type: Number,
-                  required: true,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber
-                }
-              },
-              {
-                untilEnd: {
-                  localizedInterpretation: "最後の要素迄切り抜く真偽",
-                  type: "boolean (true only)",
-                  required: true
-                }
-              },
-              {
-                elementsCount: {
-                  type: "部分配列の要素数",
-                  required: true
-                }
-              }
-            ],
-            [
-              {
-                mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: {
-                  localizedInterpretation: "指定された要素番号が配列の要素数が配列の大小に該当している場合エラーを投げる真偽",
-                  type: "boolean",
-                  required: true
-                }
-              }
-            ]
-          ]
-        }
-      })
+            ) &
+            (
+              (
+                {
+                  fromStart: true;
+                  fromEnd?: undefined;
+                } &
+                (
+                  {
+                    startingElementNumber__numerationFrom0: number;
+                    startingElementNumber__numerationFrom1?: undefined;
+                    fromFirstElement?: undefined;
+                  } |
+                  {
+                    startingElementNumber__numerationFrom1: number;
+                    startingElementNumber__numerationFrom0?: undefined;
+                    fromFirstElement?: undefined;
+                  } |
+                  {
+                    fromFirstElement: true;
+                    startingElementNumber__numerationFrom1?: undefined;
+                    startingElementNumber__numerationFrom0?: undefined;
+                  }
+                ) &
+                (
+                  {
+                    endingElementNumber__numerationFrom0__including: number;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom1__including: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom0__notIncluding: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom1__notIncluding: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    elementsCount: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    untilLastElement: true;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                  }
+                )
+              ) |
+              (
+                {
+                  fromEnd: true;
+                  fromStart?: undefined;
+                } &
+                (
+                  {
+                    rightElementNumber__numerationFrom0: number;
+                    rightElementNumber__numerationFrom1?: undefined;
+                    fromLastElement?: undefined;
+                  } |
+                  {
+                    rightElementNumber__numerationFrom1: number;
+                    rightElementNumber__numerationFrom0?: undefined;
+                    fromLastElement?: undefined;
+                  } |
+                  {
+                    fromLastElement: true;
+                    rightElementNumber__numerationFrom1?: undefined;
+                    rightElementNumber__numerationFrom0?: undefined;
+                  }
+                ) &
+                (
+                  {
+                    leftElementNumber__numerationFrom0__including: number;
+                    leftElementNumber__numerationFrom1__including?: undefined;
+                    leftElementNumber__numerationFrom0__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilFirstElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom1__including: number;
+                    leftElementNumber__numerationFrom0__including?: undefined;
+                    leftElementNumber__numerationFrom0__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilFirstElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom0__notIncluding: number;
+                    leftElementNumber__numerationFrom0__including?: undefined;
+                    leftElementNumber__numerationFrom1__including?: undefined;
+                    leftElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilFirstElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom1__notIncluding: number;
+                    leftElementNumber__numerationFrom0__including?: undefined;
+                    leftElementNumber__numerationFrom1__including?: undefined;
+                    leftElementNumber__numerationFrom0__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilFirstElement?: undefined;
+                  } |
+                  {
+                    elementsCount: number;
+                    leftElementNumber__numerationFrom0__including?: undefined;
+                    leftElementNumber__numerationFrom1__including?: undefined;
+                    leftElementNumber__numerationFrom0__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1__notIncluding?: undefined;
+                    untilFirstElement?: undefined;
+                  } |
+                  {
+                    untilFirstElement: true;
+                    leftElementNumber__numerationFrom0__including?: undefined;
+                    leftElementNumber__numerationFrom1__including?: undefined;
+                    leftElementNumber__numerationFrom0__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                  }
+                )
+              )
+            ) &
+            { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+          >
+        ): Array<ArrayElement>
 
     +PageNotReadyApology--YDPD({
       currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten

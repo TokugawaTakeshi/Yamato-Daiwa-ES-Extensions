@@ -44,7 +44,7 @@ class PaginationCollection<Item> {
     const itemsOfTargetPage: Array<Item> | undefined = this.itemsByPages[targetPageIndex];
 
     if (isUndefined(itemsOfTargetPage)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",

@@ -8,8 +8,6 @@ export default function multiplyMatrixToColumnVector(
   matrix: Matrix<number>, columnVector: ReadonlyColumnVector<number>
 ): ColumnVector<number> {
 
-  console.log("CHECKPOINT 2");
-
   if (matrix.columnsCount !== columnVector.length) {
     throw new Error("LinearAlgebraViolation");
   }

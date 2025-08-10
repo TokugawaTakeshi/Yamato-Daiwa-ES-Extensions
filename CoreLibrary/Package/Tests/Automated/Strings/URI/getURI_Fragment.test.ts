@@ -1,71 +1,97 @@
-import { getURI_Fragment, UnexpectedEventError } from "../../../../Source";
+import { getURI_Fragment, Logger, UnexpectedEventError } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("getURI_Fragment", (): void => {
+Promise.all([
 
-  describe("Presenting fragment case", (): void => {
+  Testing.suite(
+    "Presenting fragment case",
+    async (): Promise<void> => {
 
-    const sampleURI: string = "path/to/file.html#intro";
+      const sampleURI: string = "path/to/file.html#intro";
 
-    it("Fragment with leading hash has been retrieved correctly", (): void => {
+      await Promise.all([
 
-      Assert.strictEqual(
-        getURI_Fragment({
-          targetURI: sampleURI,
-          withLeadingHash: true
-        }),
-        "#intro"
-      );
+        Testing.test(
+          "Fragment with leading hash has been retrieved correctly",
+          (): void => {
 
-    });
+            Assert.strictEqual(
+              getURI_Fragment({
+                targetURI: sampleURI,
+                withLeadingHash: true
+              }),
+              "#intro"
+            );
 
-    it("Fragment without leading hash has been retrieved correctly", (): void => {
+          }
+        ),
 
-      Assert.strictEqual(
-        getURI_Fragment({
-          targetURI: sampleURI,
-          withLeadingHash: false
-        }),
-        "intro"
-      );
+        Testing.test(
+          "Fragment without leading hash has been retrieved correctly",
+          (): void => {
 
-    });
+            Assert.strictEqual(
+              getURI_Fragment({
+                targetURI: sampleURI,
+                withLeadingHash: false
+              }),
+              "intro"
+            );
 
+          }
+        )
 
-  });
+      ]);
 
-  describe("Missing fragment case", (): void => {
+    }
+  ),
 
-    const sampleURI: string = "path/to/file.html";
+  Testing.suite(
+    "Missing fragment case",
+    async (): Promise<void> => {
 
-    it("Null value", (): void => {
+      const sampleURI: string = "path/to/file.html";
 
-      Assert.strictEqual(
-        getURI_Fragment({
-          targetURI: sampleURI,
-          withLeadingHash: true
-        }),
-        null
-      );
+      await Promise.all([
 
-    });
+        Testing.test(
+          "Null value",
+          (): void => {
 
-    it("Error throwing", (): void => {
+            Assert.strictEqual(
+              getURI_Fragment({
+                targetURI: sampleURI,
+                withLeadingHash: true
+              }),
+              null
+            );
 
-      Assert.throws(
-        (): void => {
-          getURI_Fragment({
-           targetURI: sampleURI,
-           withLeadingHash: true,
-            mustThrowErrorIfNoFragmentPresents: true
-          });
-        },
-        UnexpectedEventError
-      );
+          }
+        ),
 
-    });
+        Testing.test(
+          "Error throwing",
+          (): void => {
 
-  });
+            Assert.throws(
+              (): void => {
+                getURI_Fragment({
+                 targetURI: sampleURI,
+                 withLeadingHash: true,
+                  mustThrowErrorIfNoFragmentPresents: true
+                });
+              },
+              UnexpectedEventError
+            );
 
-});
+          }
+        )
+
+      ]);
+
+    }
+  )
+
+]).catch(Logger.logPromiseError);

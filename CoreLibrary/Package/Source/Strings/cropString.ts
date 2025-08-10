@@ -63,7 +63,7 @@ export default function cropString(
   } else if (compoundParameter.fromStart === true) {
     startingCharacterNumber__numerationFrom0 = 0;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -91,7 +91,7 @@ export default function cropString(
   } else if (compoundParameter.untilEnd === true) {
     endingCharacterNumber__numerationFrom1 = targetString.length;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -114,7 +114,7 @@ export default function cropString(
     endingCharacterNumber__numerationFrom1 > targetString.length &&
         compoundParameter.mustThrowErrorIfSpecifiedCharactersNumbersIsOutOfRange
   ) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

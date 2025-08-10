@@ -30,7 +30,7 @@ abstract class ImprovedPath {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.joinPathSegments(pathSegments, options)",
@@ -50,7 +50,7 @@ abstract class ImprovedPath {
         filter((pathSegment: string): boolean => Path.isAbsolute(pathSegment));
 
     if (segmentsIncludingAbsolutePaths.length > 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "pathSegments",
           parameterNumber: 1,
@@ -74,7 +74,7 @@ abstract class ImprovedPath {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)",
@@ -99,7 +99,7 @@ abstract class ImprovedPath {
 
     } catch (error: unknown) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({ parameterName: "namedParameters", parameterNumber: 1 }),
         title: InvalidParameterValueError.localization.defaultTitle,
         occurrenceLocation: "ImprovedPath.computeRelativePath(namedParameters)",
@@ -216,7 +216,7 @@ abstract class ImprovedPath {
 
 
     if (namedParameters.mustThrowErrorIfLastPathSegmentHasNoDots) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           `Contrary to expectations, the last segment of '${ namedParameters.targetPath }' does not look like the ` +
           "file name with extension."
@@ -367,7 +367,7 @@ namespace ImprovedPath {
           this.#root__forwardSlashesSeparators : this.#root;
 
       if (isNull(root)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new UnexpectedEventError(
             `Contrary to expectations, the root is not exists on path '${ this.#rawPath }'.`
           ),
@@ -397,7 +397,7 @@ namespace ImprovedPath {
           this.#directory__forwardSlashesSeparators : this.#directory;
 
       if (isNull(directory)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new UnexpectedEventError(
               `Contrary to expectations, the directory is not exists on path '${ this.#rawPath }'.`
           ),

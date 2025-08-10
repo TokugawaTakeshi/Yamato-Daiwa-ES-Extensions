@@ -14,7 +14,7 @@ export default function replaceValuesInMap<Key, Value>(
   compoundParameter: Readonly<
     (
       {
-        mutably: true;
+        mutably?: true;
         targetMap: Map<Key, Value>;
       } |
       {
@@ -29,7 +29,7 @@ export default function replaceValuesInMap<Key, Value>(
   >
 ): Map<Key, Value> {
 
-  const workpiece: Map<Key, Value> = compoundParameter.mutably ?
+  const workpiece: Map<Key, Value> = compoundParameter.mutably === true ?
       compoundParameter.targetMap : new Map(compoundParameter.targetMap);
 
   let replacements: ReadonlyArray<ReplaceOfValuesInMapOperation.Replacement<Key, Value>>;

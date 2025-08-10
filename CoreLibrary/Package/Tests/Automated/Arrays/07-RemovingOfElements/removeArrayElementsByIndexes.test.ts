@@ -1,129 +1,215 @@
-import { removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from "../../../../Source";
-
+import { removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation, Logger } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("removeArrayElementsByIndexes", (): void => {
+Promise.all([
 
-  describe("Removing of one element", (): void => {
+  Testing.suite(
+    "Removing of one element",
+    async (): Promise<void> => {
 
-    function getSampleArray(): Array<string> {
-      return [ "alpha", "bravo", "charlie", "delta", "echo" ];
+      function getSampleArray(): Array<string> {
+        return [ "alpha", "bravo", "charlie", "delta", "echo" ];
+      }
+
+      const indexOfArrayElementWhichWillBeRemoved: number = 2;
+
+      await Promise.all([
+
+        Testing.suite(
+          "Mutable Removing",
+          async (): Promise<void> => {
+
+            const experimentalSample: Array<string> = getSampleArray();
+
+            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+                removeArrayElementsByIndexes({
+                  targetArray: experimentalSample,
+                  indexes: indexOfArrayElementWhichWillBeRemoved,
+                  mutably: true
+                });
+
+            await Promise.all([
+
+              Testing.test(
+                "Updated array is matching with expected",
+                (): void => {
+                Assert.deepStrictEqual(
+                  removingArrayElementsByIndexesOperationResult.updatedArray,
+                  [ "alpha", "bravo", "delta", "echo" ]
+                );
+                }
+              ),
+
+              Testing.test(
+                "Removed element is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
+                }
+              )
+
+            ]);
+
+          }
+        ),
+
+        Testing.suite(
+          "Immutable removing",
+          async (): Promise<void> => {
+
+            const experimentalSample: Array<string> = getSampleArray();
+            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+                removeArrayElementsByIndexes({
+                  targetArray: experimentalSample,
+                  indexes: indexOfArrayElementWhichWillBeRemoved,
+                  mutably: false
+                });
+
+            await Promise.all([
+
+              Testing.test(
+                "Updated array is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(
+                    removingArrayElementsByIndexesOperationResult.updatedArray,
+                    [ "alpha", "bravo", "delta", "echo" ]
+                  );
+                }
+              ),
+
+              Testing.test(
+                "Removed element is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
+                }
+              ),
+
+              Testing.test(
+                "Initial array has not mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getSampleArray());
+                }
+              )
+
+            ]);
+
+          }
+        )
+
+      ]);
+
     }
-    const indexOfArrayElementWhichWillBeRemoved: number = 2;
+  ),
 
+  Testing.suite(
+    "Removing of multiple elements",
+    async (): Promise<void> => {
 
-    describe("Mutable removing", (): void => {
+      function getSampleArray(): Array<string> {
+        return [ "alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf" ];
+      }
 
-      const experimentalSample: Array<string> = getSampleArray();
+      const indexesOfArrayElementsWhichWIllBeRemoved: Array<number> = [ 1, 3, 5 ];
 
-      const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
-          removeArrayElementsByIndexes({
-            targetArray: experimentalSample,
-            indexes: indexOfArrayElementWhichWillBeRemoved,
-            mutably: true
-          });
+      await Promise.all([
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
-      });
+        Testing.suite(
+          "Mutable removing",
+          async (): Promise<void> => {
 
-      it("Removed element is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
-      });
+            const experimentalSample: Array<string> = getSampleArray();
 
-    });
+            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+                removeArrayElementsByIndexes<string>({
+                  targetArray: experimentalSample,
+                  indexes: indexesOfArrayElementsWhichWIllBeRemoved,
+                  mutably: true
+                });
 
-    describe("Immutable removing", (): void => {
+            await Promise.all([
 
-      const experimentalSample: Array<string> = getSampleArray();
-      const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
-          removeArrayElementsByIndexes({
-            targetArray: experimentalSample,
-            indexes: indexOfArrayElementWhichWillBeRemoved,
-            mutably: false
-          });
+              Testing.test(
+                "Updated array is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(
+                    removingArrayElementsByIndexesOperationResult.updatedArray,
+                    [ "alpha", "charlie", "echo", "golf" ]
+                  );
+                }
+              ),
 
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.updatedArray, [ "alpha", "bravo", "delta", "echo" ]);
-      });
+              Testing.test(
+                "Removed element is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(
+                    removingArrayElementsByIndexesOperationResult.removedElements,
+                    [ "bravo", "delta", "foxtrot" ]
+                  );
+                }
+              ),
 
-      it("Removed element is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "charlie" ]);
-      });
+              Testing.test(
+                "Initial array has mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, [ "alpha", "charlie", "echo", "golf" ]);
+                }
+              )
 
-      it("Initial array has not mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getSampleArray());
-      });
+            ]);
 
-    });
+          }
+        ),
 
-  });
+        Testing.suite(
+          "Immutable removing",
+          async (): Promise<void> => {
 
+            const experimentalSample: Array<string> = getSampleArray();
 
-  describe("Removing of multiple elements", (): void => {
+            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+                removeArrayElementsByIndexes<string>({
+                  targetArray: experimentalSample,
+                  indexes: indexesOfArrayElementsWhichWIllBeRemoved,
+                  mutably: false
+                });
 
-    function getSampleArray(): Array<string> {
-      return [ "alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf" ];
+            await Promise.all([
+
+              Testing.test(
+                "Updated array is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(
+                    removingArrayElementsByIndexesOperationResult.updatedArray,
+                    [ "alpha", "charlie", "echo", "golf" ]
+                  );
+                }
+              ),
+
+              Testing.test(
+                "Removed element is matching with expected",
+                (): void => {
+                  Assert.deepStrictEqual(
+                    removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]
+                  );
+                }
+              ),
+
+              Testing.test(
+                "Initial array has not mutated",
+                (): void => {
+                  Assert.deepStrictEqual(experimentalSample, getSampleArray());
+                }
+              )
+
+            ]);
+
+          }
+        )
+
+      ]);
+
     }
-    const indexesOfArrayElementsWhichWIllBeRemoved: Array<number> = [ 1, 3, 5 ];
+  )
 
-
-    describe("Mutable removing", (): void => {
-
-      const experimentalSample: Array<string> = getSampleArray();
-
-      const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
-          removeArrayElementsByIndexes<string>({
-            targetArray: experimentalSample,
-            indexes: indexesOfArrayElementsWhichWIllBeRemoved,
-            mutably: true
-          });
-
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(
-          removingArrayElementsByIndexesOperationResult.updatedArray,
-          [ "alpha", "charlie", "echo", "golf" ]
-        );
-      });
-
-      it("Removed element is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
-      });
-
-      it("Initial array has mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, [ "alpha", "charlie", "echo", "golf" ]);
-      });
-
-    });
-
-    describe("Immutable removing", (): void => {
-
-      const experimentalSample: Array<string> = getSampleArray();
-      const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
-          removeArrayElementsByIndexes<string>({
-            targetArray: experimentalSample,
-            indexes: indexesOfArrayElementsWhichWIllBeRemoved,
-            mutably: false
-          });
-
-      it("Updated array is matching with expected", (): void => {
-        Assert.deepStrictEqual(
-          removingArrayElementsByIndexesOperationResult.updatedArray,
-          [ "alpha", "charlie", "echo", "golf" ]
-        );
-      });
-
-      it("Removed element is matching with expected", (): void => {
-        Assert.deepStrictEqual(removingArrayElementsByIndexesOperationResult.removedElements, [ "bravo", "delta", "foxtrot" ]);
-      });
-
-      it("Initial array has not mutated", (): void => {
-        Assert.deepStrictEqual(experimentalSample, getSampleArray());
-      });
-
-    });
-
-  });
-
-});
+]).catch(Logger.logPromiseError);

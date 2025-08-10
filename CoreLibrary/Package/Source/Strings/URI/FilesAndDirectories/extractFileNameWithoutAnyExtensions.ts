@@ -22,7 +22,7 @@ export default function extractFileNameWithoutAnyExtensions(
 
     if (compoundParameter.mustThrowErrorIfLastPathSegmentHasNoDots) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           `Contrary to expectations, the last segment of "${ targetPath }" path does not include the dots.`
         ),

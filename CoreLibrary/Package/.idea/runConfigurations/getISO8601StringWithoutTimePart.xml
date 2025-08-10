@@ -6,7 +6,7 @@
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/DateTime/getISO8601StringWithoutTimePart.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/DateTime/getISO8601_StringWithoutTimePart.test.ts" />
     <method v="2" />
   </configuration>
 </component>

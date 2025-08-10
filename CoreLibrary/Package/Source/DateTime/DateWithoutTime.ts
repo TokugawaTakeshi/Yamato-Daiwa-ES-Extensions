@@ -4,7 +4,7 @@ import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 import getMonthNameByNumber from "./getMonthNameByNumber";
 import getMonthNumberByName from "./getMonthNumberByName";
-import getISO8601StringWithoutTimePart from "./getISO8601StringWithoutTimePart";
+import getISO8601_StringWithoutTimePart from "./getISO8601_StringWithoutTimePart";
 import isBoolean from "../TypeGuards/isBoolean";
 
 
@@ -150,7 +150,7 @@ class DateWithoutTime {
   }
 
   public toISO8601String(): string {
-    return getISO8601StringWithoutTimePart({
+    return getISO8601_StringWithoutTimePart({
       nativeDateInstance: this._nativeDateObject,
       mustAssociateOutputWithLocalDate: false
     });
@@ -246,7 +246,7 @@ class DateWithoutTime {
       normalizedDate = new Date(dateDefinition.ISO8601String);
 
       if (normalizedDate.toString() === "Invalid Date") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             customMessage:
                 `The passed value "${ dateDefinition.ISO8601String }" of "ISO8601String" is not valid ISO8601 ` +
@@ -267,7 +267,7 @@ class DateWithoutTime {
       normalizedDate = new Date(dateDefinition.millisecondsElapsedSinceUNIX_Epoch);
 
       if (normalizedDate.toString() === "Invalid Date") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             customMessage:
                 `The passed value ${ dateDefinition.millisecondsElapsedSinceUNIX_Epoch } of ` +
@@ -311,7 +311,7 @@ class DateWithoutTime {
     );
 
     if (normalizedDate.toString() === "Invalid Date") {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           customMessage:
               "Below date definition does not corresponding to valid Date." +

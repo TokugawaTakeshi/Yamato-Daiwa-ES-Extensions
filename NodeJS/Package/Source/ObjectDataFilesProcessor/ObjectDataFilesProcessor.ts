@@ -92,7 +92,7 @@ abstract class ObjectDataFilesProcessor {
       });
 
       if (isNull(fileNameLastExtensionWithoutLeadingDot)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             parameterName: "compoundParameter",
             parameterNumber: 1,
@@ -125,7 +125,7 @@ abstract class ObjectDataFilesProcessor {
 
         default: {
 
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorInstance: new InvalidParameterValueError({
               parameterName: "compoundParameter.filePath",
               parameterNumber: 1,
@@ -201,7 +201,7 @@ abstract class ObjectDataFilesProcessor {
     } catch (error: unknown) {
 
       if (isErrnoException(error) && error.code === "ENOENT") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -215,7 +215,7 @@ abstract class ObjectDataFilesProcessor {
 
 
     if (!targetFileStatistics.isFile()) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new PathRefersToDirectoryNotFileError({ targetPath: filePath }),
         title: PathRefersToDirectoryNotFileError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
@@ -230,7 +230,7 @@ abstract class ObjectDataFilesProcessor {
       rawData = FileSystem.readFileSync(filePath, "utf-8");
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -256,7 +256,7 @@ abstract class ObjectDataFilesProcessor {
     } catch (error: unknown) {
 
       if (isErrnoException(error) && error.code === "ENOENT") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -270,7 +270,7 @@ abstract class ObjectDataFilesProcessor {
 
 
     if (!targetFileStatistics.isFile()) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new PathRefersToDirectoryNotFileError({ targetPath: filePath }),
         title: PathRefersToDirectoryNotFileError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
@@ -285,7 +285,7 @@ abstract class ObjectDataFilesProcessor {
       rawData = await PromisfiedFileSystem.readFile(filePath, "utf-8");
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -366,7 +366,7 @@ abstract class ObjectDataFilesProcessor {
       }
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({ mentionToExpectedData: filePathForLogging }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -384,7 +384,7 @@ abstract class ObjectDataFilesProcessor {
         RawObjectDataProcessor.process(parsedData, validDataSpecification);
 
     if (processingResult.isRawDataInvalid) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({
           customMessage: `The contents of file '${ filePathForLogging }' does not matching with valid data specification:\n` +
               RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)

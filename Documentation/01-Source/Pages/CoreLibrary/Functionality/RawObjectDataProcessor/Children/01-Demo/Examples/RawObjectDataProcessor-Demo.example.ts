@@ -24,7 +24,8 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
       type: Number,
       isUndefinedForbidden: true,
       isNullForbidden: true,
-      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+      isNaN_Forbidden: true
     },
     bar: {
       type: String,
@@ -41,13 +42,15 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
       type: Number,
       isUndefinedForbidden: false,
       isNullForbidden: true,
+      isNaN_Forbidden: true,
       numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
     },
     fuga: {
       type: Number,
       isUndefinedForbidden: true,
       isNullForbidden: false,
-      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+      numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+      isNaN_Forbidden: true
     },
     quux: {
       type: Object,
@@ -59,6 +62,7 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
           isUndefinedForbidden: true,
           isNullForbidden: true,
           numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+          isNaN_Forbidden: true,
           minimalValue: 3
         },
         bravo: {

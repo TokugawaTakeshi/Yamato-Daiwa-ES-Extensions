@@ -52,7 +52,7 @@ block append SpecificContent
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
     +PageNotReadyApology--YDPD({
-      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotComplete
     })
 
     +CompactTableOfContents--YDF_DK(localizedSectioning, { mustApplyAnchorsInsteadOfURIs: true })
@@ -85,14 +85,49 @@ block append SpecificContent
     }).Article-Heading3
 
     p.Article-Paragraph.
-      Возникает, когда переданные через #[+Keyword--YDID первый] #[+Term--YDID параметр] #[+Term--YDID метода]
+      Возникает, когда переданные через #[+Keyword--YDID первый] #[+Term--YDID параметр] #[+Term__Contrast--YDID метода]
         #[+ImportantEntity__Code--YDID process] данные #[+Keyword--YDID не]&nbsp;являются #[+Term--YDID объектом].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
+
+
+        type SampleType = { alpha: string; };
+
+        const dataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+
+            process(
+              "NON_OBJECT",
+              {
+                nameForLogging: "Example",
+                subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+                properties: {
+                  foo: {
+                    type: String,
+                    isUndefinedForbidden: true,
+                    isNullForbidden: true
+                  }
+                }
+              }
+            );
+
+        if (dataProcessingResult.isRawDataInvalid) {
+          console.error(RawObjectDataProcessor.formatValidationErrorsList(dataProcessingResult.validationErrorsMessages));
+        }
 
     p.Article-Paragraph.
       #[+Term--YDID Класс] #[+ImportantEntity--YDID RawObjectDataProcessor] предназначен для обработки
         #[+Keyword--YDID только] данных #[+Term--YDID типа] #[+Term__Contrast--YDID «объект»] (в том числе
         #[+Term--YDID индексных массивов]), потому если передать данные какого-либо другого #[+Term--YDID типа]
         (например, #[+Term--YDID строку]), то обработка данных тут же завершится:
+
+    +ConsoleOutput--YDF: :code_listing--yda
+      ─── Error No. 1 ────────────────────────────────────────────────────────────────
+      Raw data, the first argument of "RawObjectDataProcessor.process()" is not the object and actually has type "string".
+      See documentation for details: http://localhost:3000/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-RAW_DATA_IS_NOT_OBJECT
+
+
     //- ─── RAW_DATA_IS_NULL ───────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
@@ -280,11 +315,18 @@ block append SpecificContent
       HTML_ID: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountIsMoreThanAllowedMaximum.$anchor
     }).Article-Heading3
 
-    //- ─── INDEXED_ARRAY_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER ────────────────────────────────────
+    //- ─── INDEXED_ARRAY_OR_TUPLE_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER ───────────────────────────
     +Heading--YDF({
       level: 3,
       innerHTML: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.$heading,
       HTML_ID: localizedSectioning.validationErrorsMessages.$children.indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber.$anchor
+    }).Article-Heading3
+
+    //- ─── FORBIDDEN_NAN_VALUE ────────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.forbiddenNaN_Value.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.forbiddenNaN_Value.$anchor
     }).Article-Heading3
 
     //- ─── NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET ────────────────────────────────────────────────────────
@@ -334,6 +376,13 @@ block append SpecificContent
       level: 3,
       innerHTML: localizedSectioning.validationErrorsMessages.$children.charactersCountDoesNotMatchWithSpecified.$heading,
       HTML_ID: localizedSectioning.validationErrorsMessages.$children.charactersCountDoesNotMatchWithSpecified.$anchor
+    }).Article-Heading3
+
+    //- ─── CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED ─────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.validationErrorsMessages.$children.forbiddenCharactersFound.$heading,
+      HTML_ID: localizedSectioning.validationErrorsMessages.$children.forbiddenCharactersFound.$anchor
     }).Article-Heading3
 
     //- ─── REGULAR_EXPRESSION_MISMATCH ────────────────────────────────────────────────────────────────────────────────
@@ -392,7 +441,55 @@ block append SpecificContent
       innerHTML: localizedSectioning.throwableErrors.$children.propertyNullabilityNotSpecified.$heading,
       HTML_ID: localizedSectioning.throwableErrors.$children.propertyNullabilityNotSpecified.$anchor
     }).Article-Heading3
-    //- TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    //- ─── DATA_TYPE_NOT_SPECIFIED ────────────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.dataTypeNotSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.dataTypeNotSpecified.$anchor
+    }).Article-Heading3
+
+    //- ─── UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY ────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.unableToDeletePropertyWithOutdatedKey.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.unableToDeletePropertyWithOutdatedKey.$anchor
+    }).Article-Heading3
+
+    //- ─── UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS ──────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.unableToChangePropertyDescriptors.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.unableToChangePropertyDescriptors.$anchor
+    }).Article-Heading3
+
+    //- ─── UNABLE_TO_UPDATE_PROPERTY_VALUE ────────────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.unableToUpdatePropertyValue.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.unableToUpdatePropertyValue.$anchor
+    }).Article-Heading3
+
+    //- ─── MUTUALLY_EXCLUSIVE_ASSOCIATIVE_ARRAY_KEYS_LIMITATIONS ──────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.mutuallyExclusiveAssociativeArrayKeysLimitations.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.mutuallyExclusiveAssociativeArrayKeysLimitations.$anchor
+    }).Article-Heading3
+
+    //- ─── INCOMPATIBLE_VALUES_TYPES_ALTERNATIVES ─────────────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.incompatibleValuesTypesAlternatives.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.incompatibleValuesTypesAlternatives.$anchor
+    }).Article-Heading3
+
+    //- ─── BOTH_ALLOWED_AND_FORBIDDEN_CHARACTERS_SPECIFIED ────────────────────────────────────────────────────────────
+    +Heading--YDF({
+      level: 3,
+      innerHTML: localizedSectioning.throwableErrors.$children.bothAllowedAndForbiddenCharactersSpecified.$heading,
+      HTML_ID: localizedSectioning.throwableErrors.$children.bothAllowedAndForbiddenCharactersSpecified.$anchor
+    }).Article-Heading3
 
 
     //- ━━━ Предупреждения ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -447,6 +544,8 @@ block append SpecificContent
     }).Article-Heading3
 
     //-
+      "It is recommended to keep this strategy, but there is no single right solution for all cases, thus you need to
+        "\"ErrorHandlingStrategies.throwingOfError\" which is the default one.
       "● If you are have access to the data source, consider the making of this property configurable.\n" +
       "● If the creating of new object based on the source one is fine, specify \"processingApproach\" option " +
         "with `ProcessingApproaches.assemblingOfNewObject` value, herewith everything that was not specified via " +

@@ -51,6 +51,26 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor` — Типовые сценарии ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotComplete
+    })
+
+    +AdmonitionBlock--YDF({
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    })
+      | Далее подразумевается, что Вы знаете
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+            theoreticalMinimum.$URI
+      }) теоретический минимум
+      |   для использования #[+ImportantEntity--YDID RawObjectDataProcessor].
+
+    +CompactTableOfContents--YDF_DK(localizedSectioning)
+
+
     //- ━━━ Объекты фиксированной структуры ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
@@ -58,7 +78,88 @@ block append SpecificContent
       HTML_ID: localizedSectioning.fixedSchemaObjects.$anchor
     }).Article-Heading2
 
-    //- TODO Оглавление ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    p.Article-Paragraph
+      | Если ожидаются данные типа
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.
+          $children.functionality.$children.RawObjectDataProcessor.$children.theoreticalMinimum.$sectioning.
+          objectLikeDataClassification.$children.fixedSchema.$URI
+      }) «объект фиксированной структуры»
+      | , #[+Keyword--YDID необходимо] в #[+Term--YDID спецификации валидных данных] указать
+      |   #[+ImportantEntity__Code--YDID subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema], а через
+      |   в #[+ImportantEntity__Code--YDID properties] указать спецификацию #[+Keyword--YDID каждого]
+      |   #[+Keyword__Contrast--YDID свойства]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<TargetType> = RawObjectDataProcessor.
+            process(
+              externalData,
+              {
+                nameForLogging: "Example",
+                subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+                properties: {
+                  property1: { /* ... */ },
+                  property1: { /* ... */ },
+                  // ...
+                  propertyN: { /* ... */ }
+                }
+              }
+            );
+
+    p.Article-Paragraph.
+      Разумеется, поддерживаются #[+Keyword--YDID вложенные] #[+Term--YDID объекты], причём глубина
+        #[+Keyword--YDID может] быть #[+Keyword--YDID произвольной]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type TargetType = {
+          alpha1: {
+            alpha2: number;
+            bravo2: string;
+          };
+        };
+
+        const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<TargetType> = RawObjectDataProcessor.
+
+            process(
+              externalData,
+              {
+
+                nameForLogging: "Example",
+                subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+
+                properties: {
+                  alpha1: {
+
+                    type: Object,
+                    isUndefinedForbidden: true,
+                    isNullForbidden: true,
+
+                    properties: {
+
+                      alpha2: {
+                        type: Number,
+                        isUndefinedForbidden: true,
+                        isNullForbidden: true,
+                        numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber
+                      },
+
+                      bravo2: {
+                        type: String
+                        isUndefinedForbidden: true,
+                        isNullForbidden: true,
+                      }
+
+                    }
+
+                  }
+
+                }
+              }
+            );
+
     //- ─── Обязательность свойств ─────────────────────────────────────────────────────────────────────────────────────
     h3.Article-Heading3 Обязательность свойств
 
@@ -80,7 +181,7 @@ block append SpecificContent
     }).
       Между прочим, по этой же причине расплывчатыми являются и такие родственные понятия, как
         #[+Term--YDID «опциональное свойство»] или #[+Term--YDID «подстановка значения по умолчанию»] (в каких случаях
-        эту постановка осуществляется?).
+        эта постановка осуществляется?).
 
     p.Article-Paragraph.
       #[+Keyword--YDID До] версии #[+ImportantEntity--YDID 1.8] библиотеки #[+ImportantEntity--YDID YDEE], в
@@ -202,7 +303,7 @@ block append SpecificContent
 
         +CodeViewer-PartialListing--YDF: :code_listing--yda
           const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> = RawObjectDataProcessor.
-              process({ alpha: underfined }, validDataSpecification);
+              process({ alpha: undefined}, validDataSpecification);
         +CodeViewer-Explanation--YDF.
           В данном случае исходный объект тоже #[+Keyword--YDID невалиден], потому что #[+Term--YDID свойство]
             #[+SecondaryEntity__Code--YDID alpha] хотя и указано, но указанным значением является #[+Keyword--YDID явный]

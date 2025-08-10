@@ -3,8 +3,8 @@ extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentatio
 
 block append Requirements
 
-  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
-  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
 
 
 block append Metadata
@@ -13,9 +13,9 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle("moveArrayElementTo1Position"),
+        title: buildHTML_PageTitle("moveArrayElementToOnePosition"),
         description: MetaDescriptionTemplates.function({
-          functionName: "moveArrayElementTo1Position",
+          functionName: "moveArrayElementToOnePosition",
           whatFunctionDoes: ""
         })
       },
@@ -27,17 +27,17 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.permutationsOfElements.moveArrayElementTo1Position");
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.permutationsOfElements.moveArrayElementToOnePosition");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
-          permutationsOfElements.$children.moveArrayElementTo1Position.$URI,
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
-          permutationsOfElements.$children.moveArrayElementTo1Position.$URI
+          permutationsOfElements.$children.moveArrayElementToOnePosition.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          permutationsOfElements.$children.moveArrayElementToOnePosition.$URI
     });
 
-    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.arrays.
-        $children.permutationsOfElements.$children.moveArrayElementTo1Position;
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.permutationsOfElements.$children.moveArrayElementToOnePosition;
 
 
 block append HeadScripts
@@ -51,9 +51,9 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1!= "<code>moveArrayElementTo1Position</code>"
+    h1.Article-Heading1!= "<code>moveArrayElementToOnePosition</code>"
 
-    +CodeViewer--YDF({ title: "Сигнатура" })
+    +CodeViewer--YDF({ title: "Signature" })
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
         <ArrayElement>(
           sourceDataAndOptions: Readonly<
@@ -92,7 +92,7 @@ block append SpecificContent
     })
 
 
-    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
       text: localizedSectioning.externalLinks.$heading,
@@ -103,12 +103,12 @@ block append SpecificContent
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
         unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
-            "CoreLibrary/Package/Source/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position.ts",
-        title: "Исходный код"
+            "CoreLibrary/Package/Source/Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition.ts",
+        title: "Source code"
       }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
 
       +LinksCardsFlow-ItemWithSVG_Icon--YDF({
         unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
-            "CoreLibrary/Package/Tests/Automated/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position.test.ts",
-        title: "Код тестов"
+            "CoreLibrary/Package/Tests/Automated/Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition.test.ts",
+        title: "Tests code"
       }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

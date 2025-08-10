@@ -1,4 +1,4 @@
-import { moveArrayElementTo1Position, InvalidParameterValueError, Logger } from "../../../../Source";
+import { moveArrayElementToOnePosition, InvalidParameterValueError, Logger } from "../../../../Source";
 import Assert from "assert";
 import { test, suite } from "node:test";
 
@@ -22,7 +22,7 @@ Promise.all([
 
             const experimentalSample: Array<number> = getInitialSampleArray();
 
-            moveArrayElementTo1Position({
+            moveArrayElementToOnePosition({
               mutably: true,
               targetArray: experimentalSample,
               targetElementNumber__numerationFrom1: 3,
@@ -57,7 +57,7 @@ Promise.all([
 
             const experimentalSample: Array<number> = getInitialSampleArray();
 
-            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
+            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementToOnePosition({
               mutably: false,
               targetArray: experimentalSample,
               targetElementNumber__numerationFrom1: 3,
@@ -103,7 +103,7 @@ Promise.all([
 
             const experimentalSample: Array<number> = getInitialSampleArray();
 
-            moveArrayElementTo1Position({
+            moveArrayElementToOnePosition({
               mutably: true,
               targetArray: experimentalSample,
               targetElementNumber__numerationFrom1: 3,
@@ -138,7 +138,7 @@ Promise.all([
 
             const experimentalSample: Array<number> = getInitialSampleArray();
 
-            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementTo1Position({
+            const updatedCopyOfExperimentalSample: Array<number> = moveArrayElementToOnePosition({
               mutably: false,
               targetArray: experimentalSample,
               targetElementNumber__numerationFrom1: 3,
@@ -186,7 +186,7 @@ Promise.all([
 
             Assert.throws(
               (): void => {
-                moveArrayElementTo1Position({
+                moveArrayElementToOnePosition({
                   mutably: true,
                   targetArray: experimentalSample,
                   targetElementNumber__numerationFrom1: 1,
@@ -207,7 +207,7 @@ Promise.all([
             const experimentalSample: Array<number> = [ 1 ];
 
             Assert.doesNotThrow((): void => {
-              moveArrayElementTo1Position({
+              moveArrayElementToOnePosition({
                 mutably: true,
                 targetArray: experimentalSample,
                 targetElementNumber__numerationFrom1: 1,
@@ -227,7 +227,7 @@ Promise.all([
 
             Assert.throws(
               (): void => {
-                moveArrayElementTo1Position({
+                moveArrayElementToOnePosition({
                   mutably: true,
                   targetArray: experimentalSample,
                   targetElementNumber__numerationFrom1: experimentalSample.length + 2,
@@ -249,7 +249,7 @@ Promise.all([
 
             Assert.doesNotThrow(
               (): void => {
-                moveArrayElementTo1Position({
+                moveArrayElementToOnePosition({
                   mutably: true,
                   targetArray: experimentalSample,
                   targetElementNumber__numerationFrom1: experimentalSample.length + 2,

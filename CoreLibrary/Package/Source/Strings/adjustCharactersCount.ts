@@ -86,7 +86,7 @@ export default function adjustCharactersCount(
 
   if (minimalCharactersCount > maximalCharactersCount) {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceDataAndOptions",
@@ -141,7 +141,7 @@ export default function adjustCharactersCount(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceDataAndOptions",
@@ -203,7 +203,7 @@ export default function adjustCharactersCount(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceDataAndOptions",

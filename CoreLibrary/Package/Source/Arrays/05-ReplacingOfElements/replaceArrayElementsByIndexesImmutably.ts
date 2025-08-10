@@ -39,7 +39,7 @@ export default function replaceArrayElementsByIndexesImmutably<ArrayElement>(
 
   } else {
 
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "sourceDataAndOptions",

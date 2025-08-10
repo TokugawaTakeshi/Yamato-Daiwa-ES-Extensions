@@ -1,6 +1,6 @@
 import dataSubmittingFailedErrorLocalization__english from "./DataSubmittingFailedErrorLocalization.english";
 import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
-import stringifyAndFormatArbitraryValue from "../../Strings/stringifyAndFormatArbitraryValue";
+import { stringifyAndFormatArbitraryValue } from "../../Strings/ArbitraryValueFormatter";
 
 
 class DataSubmittingFailedError extends Error {

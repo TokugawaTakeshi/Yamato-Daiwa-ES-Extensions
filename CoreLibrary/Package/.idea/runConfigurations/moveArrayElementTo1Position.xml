@@ -6,7 +6,7 @@
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/06-PermutationsOfElements/moveArrayElementTo1Position.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition.test.ts" />
     <method v="2" />
   </configuration>
 </component>

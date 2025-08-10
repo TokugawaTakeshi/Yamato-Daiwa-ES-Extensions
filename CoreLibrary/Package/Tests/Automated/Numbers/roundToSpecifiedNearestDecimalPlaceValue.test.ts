@@ -1,51 +1,71 @@
-import { strictEqual } from "assert";
-import { roundToSpecifiedNearestDecimalPlaceValue } from "../../../Source";
+import { roundToSpecifiedNearestDecimalPlaceValue, Logger } from "../../../Source";
+import Testing from "node:test";
+import Assert from "assert";
 
 
-describe("roundToSpecifiedNearestDecimalPlaceValue", (): void => {
+Promise.all([
 
-  it("To tens", (): void => {
+  Testing.test(
+    "To tens",
+    (): void => {
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.11, digitsCountAfterDecimalPoint: 1 }
-    ), 1.1);
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.11, digitsCountAfterDecimalPoint: 1 }),
+        1.1
+      );
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.15, digitsCountAfterDecimalPoint: 1 }
-    ), 1.2);
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.15, digitsCountAfterDecimalPoint: 1 }),
+        1.2
+      );
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.19, digitsCountAfterDecimalPoint: 1 }
-    ), 1.2);
-  });
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.19, digitsCountAfterDecimalPoint: 1 }),
+        1.2
+      );
 
-  it("To thousands", (): void => {
+    }
+  ),
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.111, digitsCountAfterDecimalPoint: 2 }
-    ), 1.11);
+  Testing.test(
+    "To thousands",
+      (): void => {
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.115, digitsCountAfterDecimalPoint: 2 }
-    ), 1.12);
+        Assert.strictEqual(
+          roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.111, digitsCountAfterDecimalPoint: 2 }),
+          1.11
+        );
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.119, digitsCountAfterDecimalPoint: 2 }
-    ), 1.12);
-  });
+        Assert.strictEqual(
+          roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.115, digitsCountAfterDecimalPoint: 2 }),
+          1.12
+        );
 
-  it("To integer", (): void => {
+        Assert.strictEqual(
+          roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.119, digitsCountAfterDecimalPoint: 2 }),
+          1.12
+        );
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.1, digitsCountAfterDecimalPoint: 0 }
-    ), 1);
+    }
+  ),
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.5, digitsCountAfterDecimalPoint: 0 }
-    ), 2);
+  Testing.test(
+    "To integer",
+    (): void => {
 
-    strictEqual(roundToSpecifiedNearestDecimalPlaceValue(
-      { targetNumber: 1.9, digitsCountAfterDecimalPoint: 0 }
-    ), 2);
-  });
-});
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.1, digitsCountAfterDecimalPoint: 0 }), 1
+      );
+
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.5, digitsCountAfterDecimalPoint: 0 }), 2
+      );
+
+      Assert.strictEqual(
+        roundToSpecifiedNearestDecimalPlaceValue({ targetNumber: 1.9, digitsCountAfterDecimalPoint: 0 }), 2
+      );
+
+    }
+  )
+
+]).catch(Logger.logPromiseError);

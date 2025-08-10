@@ -44,7 +44,7 @@ export default function getRandomSubarray<ArrayElement>(
   if (isNotUndefined(options.minimalElementsCount)) {
 
     if (!Number.isInteger(options.minimalElementsCount)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
@@ -58,7 +58,7 @@ export default function getRandomSubarray<ArrayElement>(
 
 
     if (options.minimalElementsCount < 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
@@ -71,7 +71,7 @@ export default function getRandomSubarray<ArrayElement>(
     }
 
     if (options.minimalElementsCount >= targetArray.length) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
@@ -95,7 +95,7 @@ export default function getRandomSubarray<ArrayElement>(
   if (isNotUndefined(options.maximalElementsCount)) {
 
     if (!Number.isInteger(options.maximalElementsCount)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.maximalElementsCount",
@@ -109,7 +109,7 @@ export default function getRandomSubarray<ArrayElement>(
 
 
     if (options.maximalElementsCount < minimalElementsCount) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
@@ -123,7 +123,7 @@ export default function getRandomSubarray<ArrayElement>(
     }
 
     if (options.maximalElementsCount > targetArray.length) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.maximalElementsCount",

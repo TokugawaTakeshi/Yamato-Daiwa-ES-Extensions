@@ -1,75 +1,115 @@
 import {
   RawObjectDataProcessor,
   stringifyAndFormatArbitraryValue,
-  insertSubstring
+  isUndefined,
+  isNotUndefined,
+  isNull,
+  isNotNull
 } from "@yamato-daiwa/es-extensions";
+
 import Localization = RawObjectDataProcessor.Localization;
+import ValidationErrors = Localization.ValidationErrors;
+import ThrowableErrors = Localization.ThrowableErrors;
+import Warnings = Localization.Warnings;
 
 
 export const rawObjectDataProcessorLocalization__russian: Localization = {
 
-  errorMessageBasicTemplate(
+  generateSeeMoreSentence: ({ documentationPageAnchor }: Localization.SeeDocumentationSentence.TemplateVariables): string =>
+      "Подробнее см. " +
+        "https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
+        `RawObjectDataProcessor-ValidationIssues.russian.html#${ documentationPageAnchor }`,
+
+  generateValidationErrorMessage(
     {
-      targetPropertyDotSeparatedQualifiedName,
-      targetPropertyNewName,
-      targetPropertyValue,
-      targetPropertyValueSpecification,
-      targetPropertyStringifiedValueBeforeFirstPreValidationModification,
       title,
-      specificMessagePart
+      targetPropertyDotSeparatedQualifiedInitialName,
+      targetPropertyNewName,
+      description,
+      targetPropertyValueSpecification,
+      targetPropertyValue,
+      targetPropertyStringifiedValueBeforeFirstPreValidationModification,
+      documentationPageAnchor
     }: Localization.DataForMessagesBuilding
   ): string {
-
-    const propertyOrElementSpecification__stringified: string = stringifyAndFormatArbitraryValue({
-      ...targetPropertyValueSpecification,
-      type: this.valueType(targetPropertyValueSpecification.type)
-    });
-
-    return title +
-        `\n\n●　Свойство / элемент: '${ targetPropertyDotSeparatedQualifiedName }'` +
-        insertSubstring(
-          targetPropertyNewName,
-          { modifier: (targetSubstring: string): string => ` (новое имя: ${ targetSubstring })` }
-        ) +
-        `\n${ specificMessagePart }` +
-        `\n\n●　Спецификация свойства / элемента: \n${ propertyOrElementSpecification__stringified }` +
-        `\n●　Действительное значение: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }` +
-        insertSubstring(
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification,
-          {
-            modifier: (targetSubstring: string): string =>
-                `\n●　Значение свойства перед первой предвалидационной модификацией: ${ targetSubstring }`
-          }
-        );
-
+    return [
+      `${ title } [ ${ documentationPageAnchor } ]`,
+      `\n\n● Свойство/элемент: ${ targetPropertyDotSeparatedQualifiedInitialName ?? "(кореневой)" }`,
+      ...isNotNull(targetPropertyNewName) ? [ ` (переименовано в "${ targetPropertyNewName }")` ] : [],
+      `\n${ description }`,
+      `\n${ this.generateSeeMoreSentence({ documentationPageAnchor }) }`,
+      "\n\n●　Спецификация свойства/элемента: ",
+      `\n${
+        stringifyAndFormatArbitraryValue({
+          ...targetPropertyValueSpecification,
+          type: this.getLocalizedValueType(RawObjectDataProcessor.normalizeDataType(targetPropertyValueSpecification))
+        })
+      }`,
+      `\n● Реальное значение: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
+      ...isNotUndefined(targetPropertyStringifiedValueBeforeFirstPreValidationModification) ? [
+        "\n●　Значение перед первой предвалидационным преобразованием: " +
+          targetPropertyStringifiedValueBeforeFirstPreValidationModification
+      ] : []
+    ].join("");
   },
 
-  buildErrorMessagesListItemHeading({ messageNumber }: Readonly<{ messageNumber: number; }>): string {
-    return `=== Ошибка №${ messageNumber } ==========`;
-  },
+  generateLanguageDependentErrorNumberHeadingPart: ({ messageNumber }: Readonly<{ messageNumber: number; }>): string =>
+      `Ошибка №${ messageNumber }`,
 
-  rawDataIsNullErrorMessage: "Первый параметр 'RawObjectDataProcessor.process' имеет значение null.",
 
-  buildRawDataIsNotObjectErrorMessage: (actualType: string): string =>
-      `Первый параметр 'RawObjectDataProcessor.process' не является объектом (object) имеет и тип '${ actualType }'.`,
+  /* ━━━ Ошибки валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  validationErrors: {
 
-  buildValueTypeDoesNotMatchWithExpectedErrorMessageTextData(
-    {
-      targetPropertyValue,
-      targetPropertyValueSpecification
-    }: Pick<Localization.PropertyDataForMessagesBuilding, "targetPropertyValue"> & {
-      targetPropertyValueSpecification: Exclude<
-        RawObjectDataProcessor.CertainTypeValueSpecification,
-        RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
-      >;
-    }
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
+    rawDataIsNotObject: {
+      generateMessage:
+          ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
+              "Сырые данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" не являются объектом " +
+                `и в действительности имеют тип "${ actualNativeType }".\n` +
+              rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    rawDataIsNull: {
+      generateMessage:
+          ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
+              "Сырые данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" являются null в то " +
+                "время как ожидался объект, не являются null.\n" +
+              rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    valueTypeDoesNotMatchWithExpected: {
       title: "Несоответствие ожидаемого и реального типов значения",
-      specificMessagePart:
-          `Ожидалось, что это значение будет иметь тип '${ this.valueType(targetPropertyValueSpecification.type) }, ' ` +
-          `в то время как на самом деле оно имеет тип '${ typeof targetPropertyValue }'.`
-    };
+      generateDescription: (
+        { expectedTypeID, actualNativeType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
+      ): string =>
+          "Ожидалось, что это значение будет иметь тип " +
+            `"${ rawObjectDataProcessorLocalization__russian.getLocalizedValueType(expectedTypeID) }", в то время как ` +
+            `на самом деле оно имеет тип "${ actualNativeType }".`
+    },
+
+    preValidationModificationFailed: {
+
+      title: "Возникновение ошибки при предвалидационном преобразовании",
+
+      generateDescription: (
+        { stringifiedCaughtError }: ValidationErrors.PreValidationModificationFailed.TemplateVariables
+      ): string =>
+          "Предвалидационное преобразование этого свойства/элемента повлекло за собой следующую ошибку. \n" +
+            `${ stringifiedCaughtError }\n` +
+          "Данные были помечены как невалидные потому что было выбрано \"ErrorHandlingStrategies.markingOfDataAsInvalid\" " +
+            "в качестве стратегии обработки ошибки \"onPreValidationModificationFailed\" что не рекомендуется, как как " +
+            "проблема момент быть не в данных, а функции, осуществляющей предвалидационные преобразования."
+
+    },
+
+
+    /* ┅┅┅ Объекты фиксированной схемы ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    /* ╍╍╍ Разрешение на undefined ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+    forbiddenUndefinedValue: {
+      title: "Запрещённое значение undefined",
+      description:
+          "Это свойство/элемент не определено или имеет явное значение `undefied`, что было явно запрещено."
+    },
+
   },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {

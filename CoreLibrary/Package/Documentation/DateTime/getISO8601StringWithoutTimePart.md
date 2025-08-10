@@ -1,4 +1,4 @@
-# `getISO8601StringWithoutTimePart` - extract date part from ISO8601 string
+# `getISO8601_StringWithoutTimePart` - extract date part from ISO8601 string
 
 Returns the [ISO8601 string](https://en.wikipedia.org/wiki/ISO_8601) including date part only.
 Because the time zones is very tricky park of ECMAScript, it is required to ask you by the compound parameter
@@ -10,13 +10,13 @@ Because the time zones is very tricky park of ECMAScript, it is required to ask 
 
 
 ```typescript
-console.log(getISO8601StringWithoutTimePart("2013-03-10T02:00:00Z"), "2013-03-10")
+console.log(getISO8601_StringWithoutTimePart("2013-03-10T02:00:00Z"), "2013-03-10")
 ```
 
 In `"2013-03-10T02:00:00Z"` case returned value will be `"2013-03-10"`.
 
 ```typescript
-console.log(getISO8601StringWithoutTimePart(new Date(2013, 11, 13)));
+console.log(getISO8601_StringWithoutTimePart(new Date(2013, 11, 13)));
 ```
 
 In above case, the returned value could be not `"2013-12-13"`.
@@ -26,14 +26,14 @@ Thus, the return value depends on time zone of machine executed the JavaScript.
 
 
 ```typescript
-console.log(getISO8601StringWithoutTimePart("2013-03-10"));
+console.log(getISO8601_StringWithoutTimePart("2013-03-10"));
 ```
 
 Nothing to remove from the string - `2013-03-10` will be returned.
 
 
 ```typescript
-console.log(getISO8601StringWithoutTimePart("2013-03"));
+console.log(getISO8601_StringWithoutTimePart("2013-03"));
 ```
 
 The day of month is unknown - the `2013-03` will be returned.
@@ -42,7 +42,7 @@ Note that `new Date("2013-03").toISOString()` will append the date of month equa
 
 
 ```typescript
-console.log(getISO8601StringWithoutTimePart("2013-033-103T02:00:00Z"));
+console.log(getISO8601_StringWithoutTimePart("2013-033-103T02:00:00Z"));
 ```
 
 Above string is not valid ISO8601 string - the `InvalidParameterValueError` will be thrown.

@@ -73,7 +73,7 @@ export default class ImprovedFileSystem {
 
         if (mustThrowErrorIfTargetDirectoryExists) {
 
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorType: "DirectoryAlreadyExistsError",
             title: "Directory already exists",
             description: `The directory "${ targetPath }" is already exists.`,
@@ -104,7 +104,7 @@ export default class ImprovedFileSystem {
 
             if (mustThrowErrorIfTargetDirectoryExists) {
 
-              Logger.throwErrorAndLog({
+              Logger.throwErrorWithFormattedMessage({
                 errorType: "DirectoryAlreadyExistsError",
                 title: "Directory already exists",
                 description: `The directory "${ targetPath }" is already exists.`,

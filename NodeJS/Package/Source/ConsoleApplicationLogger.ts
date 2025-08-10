@@ -1,6 +1,7 @@
 /* eslint-disable no-console -- This class using native "console" because of its specialization. */
 
 import {
+  type ILogger,
   type Logger,
   type ErrorLog,
   type ThrownErrorLog,
@@ -11,6 +12,7 @@ import {
   isString,
   isNonEmptyString,
   isNumber,
+  isBigInt,
   isNaturalNumberOrZero,
   isBoolean,
   isArbitraryObject,
@@ -36,92 +38,49 @@ abstract class ConsoleApplicationLogger {
 
   /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static throwErrorWithFormattedMessage<CustomError extends Error>(
-    polymorphicPayload: Error | ThrownErrorLog<CustomError>
+    thrownErrorLog: ThrownErrorLog<CustomError>,
+    options: ILogger.ThrowingErrorWithFormattedMessage.Options = {}
   ): never {
-
-    if (polymorphicPayload instanceof Error) {
-      throw polymorphicPayload;
-    }
-
 
     let stringifiedInnerError: string | undefined;
 
-    if (isNotUndefined(polymorphicPayload.innerError)) {
+    if (isNotUndefined(thrownErrorLog.innerError)) {
 
-      stringifiedInnerError = stringifyAndFormatArbitraryValue(polymorphicPayload.innerError);
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(thrownErrorLog.innerError);
 
-      if (polymorphicPayload.innerError instanceof Error && isNonEmptyString(polymorphicPayload.innerError.stack)) {
+      if (thrownErrorLog.innerError instanceof Error && isNonEmptyString(thrownErrorLog.innerError.stack)) {
 
-        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(polymorphicPayload.innerError)`,
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(thrownErrorLog.innerError)`,
          *    but it is runtime dependent because the `stack` property is non-standard. */
 
-        stringifiedInnerError = polymorphicPayload.innerError.stack.includes(stringifiedInnerError) ?
-            polymorphicPayload.innerError.stack :
-            `${ stringifiedInnerError }\n${ polymorphicPayload.innerError.stack }`;
+        stringifiedInnerError = thrownErrorLog.innerError.stack.includes(stringifiedInnerError) ?
+            thrownErrorLog.innerError.stack :
+            `${ stringifiedInnerError }\n${ thrownErrorLog.innerError.stack }`;
 
       }
 
     }
 
     const errorMessage: string = ConsoleApplicationLogger.
-        generateFormattedErrorFromThrownErrorLog(polymorphicPayload, stringifiedInnerError);
+        generateFormattedErrorFromThrownErrorLog(thrownErrorLog, stringifiedInnerError);
 
     /* [ Theory ] Although the formatting of error `name` is possible, it could break the error handling so it is
      *    better to keep it as is. */
-    if ("errorInstance" in polymorphicPayload) {
-      polymorphicPayload.errorInstance.message = errorMessage;
-      throw polymorphicPayload.errorInstance;
+    if ("errorInstance" in thrownErrorLog) {
+      thrownErrorLog.errorInstance.message = errorMessage;
+      throw thrownErrorLog.errorInstance;
     }
 
 
     const errorWillBeThrown: Error = new Error(errorMessage);
-    errorWillBeThrown.name = polymorphicPayload.errorType;
+    errorWillBeThrown.name = thrownErrorLog.errorType;
 
-    throw errorWillBeThrown;
-
-  }
-
-  public static throwErrorAndLog<CustomError extends Error>(
-    polymorphicPayload: Error | ThrownErrorLog<CustomError>
-  ): never {
-
-    if (polymorphicPayload instanceof Error) {
-      throw polymorphicPayload;
+    if (options.mustLogErrorBeforeThrowing === true) {
+      ConsoleApplicationLogger.logErrorLikeMessage({
+        title: errorWillBeThrown.name,
+        description: errorWillBeThrown.message
+      });
     }
-
-
-    let stringifiedInnerError: string | undefined;
-
-    if (isNotUndefined(polymorphicPayload.innerError)) {
-
-      stringifiedInnerError = stringifyAndFormatArbitraryValue(polymorphicPayload.innerError);
-
-      if (polymorphicPayload.innerError instanceof Error && isNonEmptyString(polymorphicPayload.innerError.stack)) {
-
-        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(polymorphicPayload.innerError)`,
-         *    but it is runtime dependent because the `stack` property is non-standard. */
-
-        stringifiedInnerError = polymorphicPayload.innerError.stack.includes(stringifiedInnerError) ?
-            polymorphicPayload.innerError.stack :
-            `${ stringifiedInnerError }\n${ polymorphicPayload.innerError.stack }`;
-
-      }
-
-    }
-
-    const errorMessage: string = ConsoleApplicationLogger.
-        generateFormattedErrorFromThrownErrorLog(polymorphicPayload, stringifiedInnerError);
-
-    /* [ Theory ] Although the formatting of error `name` is possible, it could break the error handling so it is
-     *    better to keep it as is. */
-    if ("errorInstance" in polymorphicPayload) {
-      polymorphicPayload.errorInstance.message = errorMessage;
-      throw polymorphicPayload.errorInstance;
-    }
-
-
-    const errorWillBeThrown: Error = new Error(errorMessage);
-    errorWillBeThrown.name = polymorphicPayload.errorType;
 
     throw errorWillBeThrown;
 
@@ -256,11 +215,12 @@ abstract class ConsoleApplicationLogger {
 
   }
 
-  public static logDebug(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logDebug(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)
@@ -290,11 +250,12 @@ abstract class ConsoleApplicationLogger {
 
   }
 
-  public static logGeneric(polymorphicPayload: Log | string | number | boolean | null | undefined): void {
+  public static logGeneric(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
 
     if (
       isString(polymorphicPayload) ||
-      isNumber(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
       isBoolean(polymorphicPayload) ||
       isNull(polymorphicPayload) ||
       isUndefined(polymorphicPayload)
@@ -418,9 +379,24 @@ abstract class ConsoleApplicationLogger {
           { bold: true, foregroundColor: { red: 231, green: 76, blue: 60 } }
         ],
         [
-          errorLog.caughtError instanceof Error ?
-              `\n${ errorLog.caughtError.toString() }\n${ errorLog.caughtError.stack }` :
-              `\n${ stringifyAndFormatArbitraryValue(errorLog.caughtError) }`,
+          ((): string => {
+
+            let stringifiedInnerError: string | undefined = stringifyAndFormatArbitraryValue(errorLog.caughtError);
+
+            if (errorLog.caughtError instanceof Error && isNotUndefined(errorLog.caughtError.stack)) {
+
+             /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(thrownErrorLog.innerError)`,
+              *    but it is runtime dependent because the `stack` property is non-standard. */
+              stringifiedInnerError = errorLog.caughtError.stack.includes(stringifiedInnerError) ?
+                  errorLog.caughtError.stack :
+                  `${ stringifiedInnerError }\n${ errorLog.caughtError.stack }`;
+
+            }
+
+
+            return `\n${ stringifiedInnerError }`;
+
+          })(),
           { foregroundColor: { red: 231, green: 76, blue: 60 } }
         ]
       ] : []) as ConsoleApplicationLogger.FormattedOutputData,

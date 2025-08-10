@@ -17,8 +17,8 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   generateSeeMoreSentence: ({ documentationPageAnchor }: Localization.SeeDocumentationSentence.TemplateVariables): string =>
       "詳しくは " +
-        "http://localhost:3000/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
-        `RawObjectDataProcessor-ValidationIssues.english.html#${ documentationPageAnchor }`,
+        "https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
+        `RawObjectDataProcessor-ValidationIssues.japanese.html#${ documentationPageAnchor } 参照`,
 
   generateValidationErrorMessage(
     {
@@ -66,45 +66,45 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
     rawDataIsNotObject: {
       generateMessage:
-        ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-          "「RawObjectDataProcessor.process()」関数の第1引数である raw data がオブジェクトではなく、" +
-          `実際には "${ actualNativeType }" 型でした。` +
-          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
+          ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
+              `「RawObjectDataProcessor.process()」の１引数目として渡された生データがオブジェクトではなく、「${ actualNativeType }」である。\n` +
+              rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     rawDataIsNull: {
-      generateMessage: ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-        "「RawObjectDataProcessor.process()」関数の第1引数である raw data が `null` であり、非 `null` のオブジェクトが期待されていました。" +
-        rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
+      generateMessage:
+          ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
+              "「RawObjectDataProcessor.process()」の１引数目として渡された生データがnullになっているか、非nullオブジェクトが期待。\n" +
+              rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     valueTypeDoesNotMatchWithExpected: {
-      title: "期待される型と実際の型が一致しません",
+      title: "期待型・実際型の不一致",
       generateDescription: (
         { expectedTypeID, actualNativeType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
       ): string =>
         "この値には " +
-        `"${ rawObjectDataProcessorLocalization__japanese.getLocalizedValueType(expectedTypeID) }" 型が期待されていましたが、` +
-        `実際には "${ actualNativeType }" 型です。`
+          `「${ rawObjectDataProcessorLocalization__japanese.getLocalizedValueType(expectedTypeID) }」型が期待されたが、` +
+          `実際には「${ actualNativeType }」型。`
     },
 
     preValidationModificationFailed: {
-      title: "事前バリデーション修正の失敗",
+      title: "バリデーション前の変換中エラー発生",
       generateDescription: (
         { stringifiedCaughtError }: ValidationErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-        "このプロパティ／要素に対して事前バリデーション修正中に以下のエラーが発生しました。\n" +
+        "このプロパティ・要素のバリデーション前の変換中に以下のエラーが発生。\n" +
         `${ stringifiedCaughtError }\n` +
-        "エラーハンドリング戦略 \"onPreValidationModificationFailed\" が " +
-        "\"ErrorHandlingStrategies.markingOfDataAsInvalid\" に設定されていたため、データは無効としてマークされました。" +
-        "ただし、問題は必ずしもデータ側ではなく、修正処理関数自体にある可能性もあります。"
+        "エラーハンドリング戦略「onPreValidationModificationFailed」が「ErrorHandlingStrategies.markingOfDataAsInvalid」に設定されていた" +
+          "ため、データは不正としてマークされまたが、問題は必ずしもデータ側にあるとは限らず、変換関数自体にある可能性もあるので、当戦略は非推薦。"
     },
 
 
-    /* ─── undefined値可否 ─────────────────────────────────────────────────────────────────────────────────────────── */
+    /* ┅┅┅ 固定構成のオブジェクト ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    /* ╍╍╍ undefined可否 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenUndefinedValue: {
-      title: "プロパティ／要素の undefined 値は許可されていません",
-      description: "このプロパティ／要素は未定義、または明示的に `undefined` に設定されていますが、これは明示的に禁止されています。"
+      title: "禁止undefined",
+      description: "このプロパティ・要素は未定義、または明示的に「undefined」に設定されていますが、これは明示的に禁止された。"
     },
 
     conditionallyForbiddenUndefinedValue: {
@@ -183,6 +183,11 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       ): string =>
         "以下のプロパティは想定されていません：\n" +
         unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
+    },
+
+    forbiddenNaN_Value: {
+      title: "数型プロパティー・要素の禁じたNaN値",
+      description: "このプロパティー・要素の値はNaNになっているが、NaNが明示的に禁じてある。"
     },
 
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -348,9 +353,9 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
     unsupportedValueType: {
       title: "サポートされていない値の型",
       generateDescription: (
-        { targetPropertyValue }: ValidationErrors.UnsupportedValueType.TemplateVariables
+        { targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables
       ): string =>
-        `この値の型は ${ typeof targetPropertyValue } であり、パースされた JSON として無効です。`
+        `この値の型は ${ targetPropertyType } であり、パースされた JSON として無効です。`
     },
 
     customValidationFailed: {
