@@ -45,7 +45,7 @@ npm i @yamato-daiwa/es-extensions -E
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a></dt>
   <dd>
     <p>
-      Facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
+      The facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
         maximal type-safety and less code.
     </p>
     <ul>
@@ -62,8 +62,8 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a></dt>
   <dd>
-    Implementation for <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
-      based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
+    Implementation of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      abstract class based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
     Works will all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
   </dd>
 
@@ -104,7 +104,7 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
   <dd>
-    Returns the last element of an array if such element is exists, other will otherwise error will be thrown as default
+    Returns the last element of an array if such element exists, otherwise error will be thrown as default
       or null will be returned if the dedicated option has been specified.
   </dd>
 
@@ -138,7 +138,7 @@ npm i @yamato-daiwa/es-extensions -E
   <dd>
     <p>
       Creates the subarray of the specified array.
-      In comparison with native <code>slice</code> and <code>splice</code>, suggests the extremely flexible API.
+      In comparison with native <code>slice</code> and <code>splice</code> methods, suggests the extremely flexible API.
     </p>
     <ul>
       <li>Mutable and immutable cropping</li>

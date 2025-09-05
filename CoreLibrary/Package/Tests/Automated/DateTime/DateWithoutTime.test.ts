@@ -1,10 +1,10 @@
-import { DateWithoutTime } from "../../../Source";
+import { DateWithoutTime, Logger } from "../../../Source";
 import Assert from "assert";
 import { suite, test } from "node:test";
 import TimezoneMock from "timezone-mock";
 
 
-await suite(
+suite(
   "Date is Same for Each Time Zone",
   async (): Promise<void> => {
 
@@ -96,4 +96,4 @@ await suite(
     TimezoneMock.unregister();
 
   }
-);
+).catch(Logger.logPromiseError);

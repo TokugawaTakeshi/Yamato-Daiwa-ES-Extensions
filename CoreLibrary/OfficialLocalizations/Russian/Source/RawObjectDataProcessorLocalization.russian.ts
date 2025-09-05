@@ -110,7 +110,33 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           "Это свойство/элемент не определено или имеет явное значение `undefied`, что было явно запрещено."
     },
 
-  },
+    conditionallyForbiddenUndefinedValue: {
+
+      title: "Условно запрещённое значение `undefined` свойства/элемента",
+
+      generateDescription: (
+        {
+          verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
+      ): string =>
+          "Данное свойство/элемент имеет значение `undefined`, что запрещено если " +
+            `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }, и это условие выполнено.`
+
+    },
+
+    conditionallyForbiddenNonUndefinedValue: {
+
+      title: "Условно запрещённое не-undefined значение свойства/элемента",
+
+      generateDescription: (
+        {
+          conditionWhenMustBeUndefined
+        }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
+      ): string =>
+          `Данное свойство/элемент имеет значение, отличное от \`undefined\`, что запрещено если ` +
+            ` ${ conditionWhenMustBeUndefined }, и это условие выполнено.`
+
+    },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
     return {

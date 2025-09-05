@@ -4,9 +4,21 @@ import Logger from "../../Logging/Logger";
 import InvalidParameterValueError from "../../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
-export namespace RemovingArrayElementsByIndexesOperation {
+export namespace RemovingOfArrayElementsByIndexes {
 
-  export type SourceData<ArrayElement> = Readonly<
+  export type Result<ArrayElement> = Readonly<{
+    updatedArray: Array<ArrayElement>;
+    removedElements: Array<ArrayElement>;
+  }>;
+
+}
+
+export default function removeArrayElementsByIndexes<ArrayElement>(
+  {
+    targetArray,
+    mutably,
+    ...sourceData
+  }: Readonly<
     (
       {
         mutably: true;
@@ -18,23 +30,8 @@ export namespace RemovingArrayElementsByIndexesOperation {
       }
     ) &
     { indexes: number | ReadonlyArray<number>; }
-  >;
-
-  export type Result<ArrayElement> = Readonly<{
-    updatedArray: Array<ArrayElement>;
-    removedElements: Array<ArrayElement>;
-  }>;
-
-}
-
-export default function removeArrayElementsByIndexes<ArrayElement>(
-  sourceData: RemovingArrayElementsByIndexesOperation.SourceData<ArrayElement>
-): RemovingArrayElementsByIndexesOperation.Result<ArrayElement> {
-
-  const {
-    targetArray,
-    mutably
-  }: RemovingArrayElementsByIndexesOperation.SourceData<ArrayElement> = sourceData;
+  >
+): RemovingOfArrayElementsByIndexes.Result<ArrayElement> {
 
   const initialElementsCount: number = targetArray.length;
   const indexesOfArrayElementsWhichWillBeRemoved__fromLast__actualForArrayInInitialStateOnly: ReadonlyArray<number> =
@@ -46,7 +43,7 @@ export default function removeArrayElementsByIndexes<ArrayElement>(
 
   const removedArrayElements: Array<ArrayElement> = [];
   const indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly: Array<number> = [];
-  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...sourceData.targetArray ];
+  const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...targetArray ];
 
 
   for (

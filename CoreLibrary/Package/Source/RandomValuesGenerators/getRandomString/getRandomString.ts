@@ -15,12 +15,12 @@ import InvalidParameterValueError from "../../Errors/InvalidParameterValue/Inval
 import IncompatiblePropertiesInObjectTypeParameterError from
     "../../Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
 
-import GetRandomStringOperationLocalization__English from "./GetRandomStringOperationLocalization__English";
+import gettingOfRandomStringLocalization__english from "./gettingOfRandomStringLocalization__english";
 
 
 export class RandomStringsGenerator {
 
-  public static localization: RandomStringsGenerator.Localization = GetRandomStringOperationLocalization__English;
+  public static localization: RandomStringsGenerator.Localization = gettingOfRandomStringLocalization__english;
 
   private static readonly DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO: number = 2;
 

@@ -1,9 +1,22 @@
 import { isUndefined } from "../index";
 
 
-export namespace RemovingEntriesFromMapOperation {
+export namespace RemovingEntriesFromMap {
 
-  export type SourceData<Key, Value> = Readonly<
+  export type Result<Key, Value> = Readonly<{
+    updatedMap: Map<Key, Value>;
+    removedEntries: Map<Key, Value>;
+  }>;
+
+}
+
+
+export function removeEntriesFromMap<Key, Value>(
+  {
+    targetMap,
+    mutably,
+    ...sourceData
+  }: Readonly<
     (
       {
         mutably?: true;
@@ -18,27 +31,11 @@ export namespace RemovingEntriesFromMapOperation {
       { key: Key; } |
       { keys: ReadonlyArray<Key>; }
     )
-  >;
-
-  export type Result<Key, Value> = Readonly<{
-    updatedMap: Map<Key, Value>;
-    removedEntries: Map<Key, Value>;
-  }>;
-
-}
-
-
-export function removeEntriesFromMap<Key, Value>(
-  sourceData: RemovingEntriesFromMapOperation.SourceData<Key, Value>
-): RemovingEntriesFromMapOperation.Result<Key, Value> {
-
-  const {
-    targetMap,
-    mutably
-  }: RemovingEntriesFromMapOperation.SourceData<Key, Value> = sourceData;
+  >
+): RemovingEntriesFromMap.Result<Key, Value> {
 
   const removedEntries: Map<Key, Value> = new Map<Key, Value>();
-  const workpiece: Map<Key, Value> = mutably === true ? targetMap : new Map<Key, Value>(targetMap);
+  const workpiece: Map<Key, Value> = mutably === false ? new Map<Key, Value>(targetMap) : targetMap;
   const targetKeys: ReadonlyArray<Key> = "key" in sourceData ? [ sourceData.key ] : sourceData.keys;
 
   for (const key of targetKeys) {

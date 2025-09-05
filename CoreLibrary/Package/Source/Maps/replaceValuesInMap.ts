@@ -1,4 +1,4 @@
-export namespace ReplaceOfValuesInMapOperation {
+export namespace ReplacingOfValuesInMap {
 
   export type Replacement<Key, Value> = Readonly<
     { key: Key; } &
@@ -23,16 +23,16 @@ export default function replaceValuesInMap<Key, Value>(
       }
     ) &
     (
-      ReplaceOfValuesInMapOperation.Replacement<Key, Value> |
-      { replacements: ReadonlyArray<ReplaceOfValuesInMapOperation.Replacement<Key, Value>>; }
+      ReplacingOfValuesInMap.Replacement<Key, Value> |
+      { replacements: ReadonlyArray<ReplacingOfValuesInMap.Replacement<Key, Value>>; }
     )
   >
 ): Map<Key, Value> {
 
-  const workpiece: Map<Key, Value> = compoundParameter.mutably === true ?
-      compoundParameter.targetMap : new Map(compoundParameter.targetMap);
+  const workpiece: Map<Key, Value> = compoundParameter.mutably === false ?
+      new Map(compoundParameter.targetMap) : compoundParameter.targetMap;
 
-  let replacements: ReadonlyArray<ReplaceOfValuesInMapOperation.Replacement<Key, Value>>;
+  let replacements: ReadonlyArray<ReplacingOfValuesInMap.Replacement<Key, Value>>;
 
   if ("replacements" in compoundParameter) {
     replacements = compoundParameter.replacements;

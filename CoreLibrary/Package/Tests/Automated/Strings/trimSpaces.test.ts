@@ -20,19 +20,33 @@ Promise.all([
     }
   ),
 
-  Testing.test(
-    "'trimSpaces' remove all leading and trailing spaces",
-    (): void => {
+  Testing.suite(
+    "'trimSpaces' removed all leading and trailing spaces",
+    async (): Promise<void> => {
+      await Promise.all(
+        Object.entries(SpaceCharacters).map(
+          async ([ spaceCharacterName, spaceCharacter ]: [ string, string ]): Promise<void> => {
 
-      Object.entries(SpaceCharacters).forEach(([ , spaceCharacter ]: [ string, string ]): void => {
+            await Testing.test(
+              spaceCharacterName,
+              (): void => {
 
-        const testStringWithLeadingAndTrailingSpaces: string =
-            `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +
-            `${ spaceCharacter }${ spaceCharacter }`;
+                const testStringWithLeadingAndTrailingSpaces: string =
+                    `${ spaceCharacter }${ spaceCharacter }${ stringSampleWithNonSpaceCharactersOnly }` +
+                    `${ spaceCharacter }${ spaceCharacter }`;
 
-        Assert.strictEqual(trimSpaces(testStringWithLeadingAndTrailingSpaces).length, nonSpaceCharactersCountInSample);
+                Assert.strictEqual(
+                  trimSpaces(testStringWithLeadingAndTrailingSpaces).length,
+                  nonSpaceCharactersCountInSample
+                );
 
-      });
+              }
+            );
+
+          }
+        )
+      );
+
     }
   ),
 

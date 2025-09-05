@@ -1,5 +1,5 @@
 import getLastElementOfArray from "../../../Arrays/01-RetrievingOfElements/getLastElementOfArray";
-import explodeURI_PathToSegments from "../explodeURI_PathToSegments";
+import explodeURI_PathToSegments from "../PathSegments/explodeURI_PathToSegments";
 import isNull from "../../../TypeGuards/EmptyTypes/isNull";
 
 

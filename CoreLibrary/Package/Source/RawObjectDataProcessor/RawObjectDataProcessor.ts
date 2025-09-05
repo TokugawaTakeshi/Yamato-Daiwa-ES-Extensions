@@ -561,7 +561,8 @@ class RawObjectDataProcessor {
         this.registerValidationError({
           title: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.title,
           description: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.generateDescription({
-            conditionWhenMustBeUndefined: childPropertySpecification.mustBeUndefinedIf.descriptionForLogging
+            verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark:
+                childPropertySpecification.mustBeUndefinedIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
@@ -2294,7 +2295,8 @@ class RawObjectDataProcessor {
         this.registerValidationError({
           title: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.title,
           description: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.generateDescription({
-            conditionWhenMustBeUndefined: elementSpecification.mustBeUndefinedIf.descriptionForLogging
+            verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark:
+                elementSpecification.mustBeUndefinedIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
           targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
@@ -4834,7 +4836,7 @@ namespace RawObjectDataProcessor {
 
       export namespace ConditionallyForbiddenNonUndefinedValue {
         export type TemplateVariables = Readonly<{
-          conditionWhenMustBeUndefined: string;
+          verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark: string;
         }>;
       }
 

@@ -1,7 +1,7 @@
 import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
-export namespace IsArrayOfLengthCheckingOperation {
+export namespace IsArrayOfLengthCheck {
 
   export type Options__ExactElementsCountCase = Readonly<{
     exactElementsCount: number;
@@ -68,4 +68,4 @@ export namespace IsArrayOfLengthCheckingOperation {
 }
 
 
-export default IsArrayOfLengthCheckingOperation.isArrayOfLength;
+export default IsArrayOfLengthCheck.isArrayOfLength;

@@ -1,23 +1,29 @@
-import { extractAllFileNameExtensions } from "../../../../../Source";
+import { extractAllFileNameExtensions, Logger } from "../../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("extractAllFileNameExtensions", (): void => {
+Promise.all([
 
-  describe("Partial cases", (): void => {
-
-    it("Empty path has been processed correctly", (): void => {
+  Testing.test(
+    "Empty path has been processed correctly",
+    (): void => {
       Assert.deepStrictEqual(extractAllFileNameExtensions({ targetPath: "", withLeadingDots: true }), []);
-    });
+    }
+  ),
 
-    it("Root-only path has been processed correctly", (): void => {
+  Testing.test(
+    "Root-only path has been processed correctly",
+    (): void => {
       Assert.deepStrictEqual(extractAllFileNameExtensions({ targetPath: "/", withLeadingDots: true }), []);
-    });
+    }
+  ),
 
-    it("Dot-only path has been processed correctly", (): void => {
+  Testing.test(
+    "Dot-only path has been processed correctly",
+    (): void => {
       Assert.deepStrictEqual(extractAllFileNameExtensions({ targetPath: ".", withLeadingDots: true }), []);
-    });
+    }
+  )
 
-  });
-
-});
+]).catch(Logger.logPromiseError);

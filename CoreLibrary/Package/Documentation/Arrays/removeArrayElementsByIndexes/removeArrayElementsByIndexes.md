@@ -19,7 +19,7 @@
         ) &
         { indexes: number | ReadonlyArray<number>; }
       >
-): RemovingArrayElementsByIndexesOperation.Result<ArrayElement>
+): RemovingOfArrayElementsByIndexes.Result<ArrayElement>
 ```
 
 ```typescript

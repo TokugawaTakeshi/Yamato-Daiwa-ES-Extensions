@@ -1,7 +1,7 @@
 import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
-export namespace IsStringOfLengthCheckingOperation {
+export namespace IsStringOfLengthCheck {
 
   export type Options__ExactCharactersCountCase = Readonly<{
     exactCharactersCount: number;
@@ -66,4 +66,4 @@ export namespace IsStringOfLengthCheckingOperation {
 }
 
 
-export default IsStringOfLengthCheckingOperation.isStringOfLength;
+export default IsStringOfLengthCheck.isStringOfLength;

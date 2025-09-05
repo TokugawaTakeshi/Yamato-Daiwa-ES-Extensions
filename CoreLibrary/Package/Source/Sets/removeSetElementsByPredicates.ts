@@ -16,7 +16,7 @@ export function removeSetElementsByPredicates<SetElement>(
   }: Readonly<
     (
       {
-        mutably: true;
+        mutably?: true;
         targetSet: Set<SetElement>;
       } |
       {
@@ -31,7 +31,7 @@ export function removeSetElementsByPredicates<SetElement>(
   >
 ): RemovingSetElementsByPredicates.Result<SetElement> {
 
-  const workpiece: Set<SetElement> = mutably ? targetSet : new Set<SetElement>(targetSet);
+  const workpiece: Set<SetElement> = mutably === false ? new Set<SetElement>(targetSet) : targetSet;
   const removedElements: Set<SetElement> = new Set();
 
   for (

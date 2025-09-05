@@ -3,7 +3,7 @@ import Testing from "node:test";
 import Assert from "assert";
 
 
-await Promise.all([
+Promise.all([
 
   Testing.suite(
     "3 elements per nested array, full nested arrays",

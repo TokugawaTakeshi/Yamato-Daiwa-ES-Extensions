@@ -1,4 +1,4 @@
-import { removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation, Logger } from "../../../../Source";
+import { removeArrayElementsByIndexes, type RemovingOfArrayElementsByIndexes, Logger } from "../../../../Source";
 import Testing from "node:test";
 import Assert from "assert";
 
@@ -23,7 +23,7 @@ Promise.all([
 
             const experimentalSample: Array<string> = getSampleArray();
 
-            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+            const removingArrayElementsByIndexesOperationResult: RemovingOfArrayElementsByIndexes.Result<string> =
                 removeArrayElementsByIndexes({
                   targetArray: experimentalSample,
                   indexes: indexOfArrayElementWhichWillBeRemoved,
@@ -59,7 +59,7 @@ Promise.all([
           async (): Promise<void> => {
 
             const experimentalSample: Array<string> = getSampleArray();
-            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+            const removingArrayElementsByIndexesOperationResult: RemovingOfArrayElementsByIndexes.Result<string> =
                 removeArrayElementsByIndexes({
                   targetArray: experimentalSample,
                   indexes: indexOfArrayElementWhichWillBeRemoved,
@@ -120,7 +120,7 @@ Promise.all([
 
             const experimentalSample: Array<string> = getSampleArray();
 
-            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+            const removingArrayElementsByIndexesOperationResult: RemovingOfArrayElementsByIndexes.Result<string> =
                 removeArrayElementsByIndexes<string>({
                   targetArray: experimentalSample,
                   indexes: indexesOfArrayElementsWhichWIllBeRemoved,
@@ -167,7 +167,7 @@ Promise.all([
 
             const experimentalSample: Array<string> = getSampleArray();
 
-            const removingArrayElementsByIndexesOperationResult: RemovingArrayElementsByIndexesOperation.Result<string> =
+            const removingArrayElementsByIndexesOperationResult: RemovingOfArrayElementsByIndexes.Result<string> =
                 removeArrayElementsByIndexes<string>({
                   targetArray: experimentalSample,
                   indexes: indexesOfArrayElementsWhichWIllBeRemoved,

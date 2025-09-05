@@ -14,7 +14,7 @@ const paginationCollection: PaginationCollection<string> = new PaginationCollect
 });
 
 
-await Promise.all([
+Promise.all([
 
   Testing.test(
     "Has 3 pages",

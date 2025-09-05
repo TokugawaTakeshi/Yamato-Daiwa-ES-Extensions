@@ -20,7 +20,7 @@ export default function addElementsToSet<SetElement>(
   >
 ): Set<SetElement> {
 
-  const workpiece: Set<SetElement> = mutably === true ? targetSet : new Set(targetSet);
+  const workpiece: Set<SetElement> = mutably === false ? new Set(targetSet) : targetSet;
 
   for (const element of newElements) {
     workpiece.add(element);

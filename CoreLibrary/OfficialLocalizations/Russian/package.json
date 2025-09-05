@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.8.0-alpha.0",
+  "version": "1.8.0",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -27,16 +27,15 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.0-alpha.0"
+    "@yamato-daiwa/es-extensions": "1.8.0-rc.6"
   },
   "devDependencies": {
     "@types/node": "22.7.4",
     "@yamato-daiwa/es-extensions": "../../Package",
-    "@yamato-daiwa/style_guides": "0.3.0-alpha.12",
-    "mocha": "10.7.3",
+    "@yamato-daiwa/style_guides": "0.9.0",
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
-    "typescript": "5.6.3"
+    "typescript": "5.9.2"
   },
   "scripts": {
     "Lint": "eslint Source",

@@ -4094,13 +4094,13 @@ Promise.all([
                               cropArray({
                                 targetArray: sample,
                                 fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                rightElementNumber__numerationFrom0_AndRight: 1,
+                                leftElementNumber__numerationFrom0_AndRight__notIncluding: 3,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: true
                               });
 
-                              Assert.deepStrictEqual(sample, [ "BRAVO", "CHARLIE" ]);
+                              Assert.deepStrictEqual(sample, [ "CHARLIE", "DELTA" ]);
 
                             }
                           ),
@@ -4119,8 +4119,8 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                          rightElementNumber__numerationFrom0_AndRight: 3,
+                                          leftElementNumber__numerationFrom0_AndRight__notIncluding: 6,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: true
                                         });
@@ -4139,13 +4139,13 @@ Promise.all([
                                     cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                      rightElementNumber__numerationFrom0_AndRight: 3,
+                                      leftElementNumber__numerationFrom0_AndRight__notIncluding: 6,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: true
                                     });
 
-                                    Assert.deepStrictEqual(sample, [ "BRAVO", "CHARLIE", "ECHO" ]);
+                                    Assert.deepStrictEqual(sample, [ "ALPHA", "BRAVO" ]);
 
                                   }
                                 )
@@ -4175,8 +4175,8 @@ Promise.all([
                               let croppedArray: Array<string> = cropArray({
                                 targetArray: sample,
                                 fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                rightElementNumber__numerationFrom0_AndRight: 1,
+                                leftElementNumber__numerationFrom0_AndRight__notIncluding: 3,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: false
                               });
@@ -4185,7 +4185,7 @@ Promise.all([
                                 test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
-                                    Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE" ]);
+                                    Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
                                   }
                                 ),
                                 test(
@@ -4200,9 +4200,9 @@ Promise.all([
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
-                                  sample[1] = "__NEW_ELEMENT__";
+                                  sample[2] = "__NEW_ELEMENT__";
 
-                                  Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE" ]);
+                                  Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
 
                                 }
                               );
@@ -4216,8 +4216,8 @@ Promise.all([
                                   croppedArray = cropArray({
                                     targetArray: sample,
                                     fromEnd: true,
-                                    rightElementNumber__numerationFrom0_AndRight: 3,
-                                    leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                    rightElementNumber__numerationFrom0_AndRight: 1,
+                                    leftElementNumber__numerationFrom0_AndRight__notIncluding: 3,
                                     mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                     mutably: false
                                   });
@@ -4246,8 +4246,8 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                          rightElementNumber__numerationFrom0_AndRight: 3,
+                                          leftElementNumber__numerationFrom0_AndRight__notIncluding: 6,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: false
                                         });
@@ -4266,13 +4266,13 @@ Promise.all([
                                     const result: Array<string> = cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      leftElementNumber__numerationFrom0_AndRight__notIncluding: 1,
+                                      rightElementNumber__numerationFrom0_AndRight: 3,
+                                      leftElementNumber__numerationFrom0_AndRight__notIncluding: 6,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: false
                                     });
 
-                                    Assert.deepStrictEqual(result, [ "BRAVO", "CHARLIE", "ECHO" ]);
+                                    Assert.deepStrictEqual(result, [ "ALPHA", "BRAVO" ]);
                                     Assert.deepStrictEqual(sample, generateConstantSample());
 
                                   }
@@ -4314,13 +4314,13 @@ Promise.all([
                               cropArray({
                                 targetArray: sample,
                                 fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                rightElementNumber__numerationFrom0_AndRight: 1,
+                                leftElementNumber__numerationFrom1_AndRight__notIncluding: 3,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: true
                               });
 
-                              Assert.deepStrictEqual(sample, [ "BRAVO", "CHARLIE" ]);
+                              Assert.deepStrictEqual(sample, [ "DELTA" ]);
 
                             }
                           ),
@@ -4339,8 +4339,8 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                          rightElementNumber__numerationFrom0_AndRight: 3,
+                                          leftElementNumber__numerationFrom1_AndRight__notIncluding: 7,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: true
                                         });
@@ -4359,13 +4359,13 @@ Promise.all([
                                     cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                      rightElementNumber__numerationFrom0_AndRight: 3,
+                                      leftElementNumber__numerationFrom1_AndRight__notIncluding: 7,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: true
                                     });
 
-                                    Assert.deepStrictEqual(sample, [ "BRAVO", "CHARLIE", "ECHO" ]);
+                                    Assert.deepStrictEqual(sample, [ "ALPHA", "BRAVO" ]);
 
                                   }
                                 )
@@ -4395,8 +4395,8 @@ Promise.all([
                               let croppedArray: Array<string> = cropArray({
                                 targetArray: sample,
                                 fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                rightElementNumber__numerationFrom0_AndRight: 1,
+                                leftElementNumber__numerationFrom1_AndRight__notIncluding: 3,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: false
                               });
@@ -4405,7 +4405,7 @@ Promise.all([
                                 test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
-                                    Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE" ]);
+                                    Assert.deepStrictEqual(croppedArray, [ "DELTA" ]);
                                   }
                                 ),
                                 test(
@@ -4420,9 +4420,9 @@ Promise.all([
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
-                                  sample[1] = "__NEW_ELEMENT__";
+                                  sample[3] = "__NEW_ELEMENT__";
 
-                                  Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE" ]);
+                                  Assert.deepStrictEqual(croppedArray, [ "DELTA" ]);
 
                                 }
                               );
@@ -4436,8 +4436,8 @@ Promise.all([
                                   croppedArray = cropArray({
                                     targetArray: sample,
                                     fromEnd: true,
-                                    rightElementNumber__numerationFrom0_AndRight: 3,
-                                    leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                    rightElementNumber__numerationFrom0_AndRight: 1,
+                                    leftElementNumber__numerationFrom1_AndRight__notIncluding: 3,
                                     mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                     mutably: false
                                   });
@@ -4466,8 +4466,8 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                          rightElementNumber__numerationFrom0_AndRight: 3,
+                                          leftElementNumber__numerationFrom1_AndRight__notIncluding: 7,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: false
                                         });
@@ -4486,13 +4486,13 @@ Promise.all([
                                     const result: Array<string> = cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      leftElementNumber__numerationFrom1_AndRight__notIncluding: 2,
+                                      rightElementNumber__numerationFrom0_AndRight: 3,
+                                      leftElementNumber__numerationFrom1_AndRight__notIncluding: 7,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: false
                                     });
 
-                                    Assert.deepStrictEqual(result, [ "BRAVO", "CHARLIE", "ECHO" ]);
+                                    Assert.deepStrictEqual(result, [ "ALPHA", "BRAVO" ]);
                                     Assert.deepStrictEqual(sample, generateConstantSample());
 
                                   }
@@ -4514,7 +4514,7 @@ Promise.all([
               ),
 
               suite(
-                "... and `elementsCount` Options",
+                "... and `elementsCount` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
@@ -4535,12 +4535,12 @@ Promise.all([
                                 targetArray: sample,
                                 fromEnd: true,
                                 rightElementNumber__numerationFrom0_AndRight: 1,
-                                elementsCount: 3,
+                                elementsCount: 2,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: true
                               });
 
-                              Assert.deepStrictEqual(sample, [ "BRAVO", "CHARLIE", "DELTA" ]);
+                              Assert.deepStrictEqual(sample, [ "CHARLIE", "DELTA" ]);
 
                             }
                           ),
@@ -4559,7 +4559,7 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 5,
+                                          rightElementNumber__numerationFrom0_AndRight: 1,
                                           elementsCount: 10,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: true
@@ -4579,13 +4579,13 @@ Promise.all([
                                     cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 5,
+                                      rightElementNumber__numerationFrom0_AndRight: 1,
                                       elementsCount: 10,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: true
                                     });
 
-                                    Assert.deepStrictEqual(sample, [ "CHARLIE", "DELTA", "ECHO" ]);
+                                    Assert.deepStrictEqual(sample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
 
                                   }
                                 )
@@ -4615,8 +4615,8 @@ Promise.all([
                               let croppedArray: Array<string> = cropArray({
                                 targetArray: sample,
                                 fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 4,
-                                elementsCount: 3,
+                                rightElementNumber__numerationFrom0_AndRight: 1,
+                                elementsCount: 2,
                                 mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                 mutably: false
                               });
@@ -4625,7 +4625,7 @@ Promise.all([
                                 test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
-                                    Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA", "ECHO" ]);
+                                    Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
                                   }
                                 ),
                                 test(
@@ -4642,7 +4642,7 @@ Promise.all([
 
                                   sample[2] = "__NEW_ELEMENT__";
 
-                                  Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA", "ECHO" ]);
+                                  Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
 
                                 }
                               );
@@ -4656,8 +4656,8 @@ Promise.all([
                                   croppedArray = cropArray({
                                     targetArray: sample,
                                     fromEnd: true,
-                                    rightElementNumber__numerationFrom0_AndRight: 4,
-                                    elementsCount: 3,
+                                    rightElementNumber__numerationFrom0_AndRight: 1,
+                                    elementsCount: 2,
                                     mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                     mutably: false
                                   });
@@ -4686,7 +4686,7 @@ Promise.all([
                                         cropArray({
                                           targetArray: generateConstantSample(),
                                           fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 5,
+                                          rightElementNumber__numerationFrom0_AndRight: 1,
                                           elementsCount: 10,
                                           mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
                                           mutably: false
@@ -4706,13 +4706,13 @@ Promise.all([
                                     const result: Array<string> = cropArray({
                                       targetArray: sample,
                                       fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 5,
+                                      rightElementNumber__numerationFrom0_AndRight: 1,
                                       elementsCount: 10,
                                       mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
                                       mutably: false
                                     });
 
-                                    Assert.deepStrictEqual(result, [ "CHARLIE", "DELTA", "ECHO" ]);
+                                    Assert.deepStrictEqual(result, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
                                     Assert.deepStrictEqual(sample, generateConstantSample());
 
                                   }
@@ -4743,79 +4743,25 @@ Promise.all([
                       "Mutably",
                       async (): Promise<void> => {
 
-                        await Promise.all([
+                        await test(
+                          "In-range Request",
+                          (): void => {
 
-                          test(
-                            "In-range Request",
-                            (): void => {
+                            const sample: Array<string> = generateConstantSample();
 
-                              const sample: Array<string> = generateConstantSample();
+                            cropArray({
+                              targetArray: sample,
+                              fromEnd: true,
+                              rightElementNumber__numerationFrom0_AndRight: 2,
+                              untilLeftmostElement: true,
+                              mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                              mutably: true
+                            });
 
-                              cropArray({
-                                targetArray: sample,
-                                fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                untilLeftmostElement: true,
-                                mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-                                mutably: true
-                              });
+                            Assert.deepStrictEqual(sample, [ "ALPHA", "BRAVO", "CHARLIE" ]);
 
-                              Assert.deepStrictEqual(sample, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
-
-                            }
-                          ),
-
-                          suite(
-                            "Out-of-range Request",
-                            async (): Promise<void> => {
-
-                              await Promise.all([
-
-                                test(
-                                  "Throwing of Error",
-                                  (): void => {
-                                    Assert.throws(
-                                      (): void => {
-                                        cropArray({
-                                          targetArray: generateConstantSample(),
-                                          fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          untilLeftmostElement: true,
-                                          mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-                                          mutably: true
-                                        });
-                                      },
-                                      InvalidParameterValueError
-                                    );
-                                  }
-                                ),
-
-                                test(
-                                  "Ignoring of Invalid Range",
-                                  (): void => {
-
-                                    const sample: Array<string> = generateConstantSample();
-
-                                    cropArray({
-                                      targetArray: sample,
-                                      fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      untilLeftmostElement: true,
-                                      mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
-                                      mutably: true
-                                    });
-
-                                    Assert.deepStrictEqual(sample, generateConstantSample());
-
-                                  }
-                                )
-
-                              ]);
-
-                            }
-                          )
-
-                        ]);
+                          }
+                        );
 
                       }
                     ),
@@ -4824,126 +4770,71 @@ Promise.all([
                       "Immutably",
                       async (): Promise<void> => {
 
-                        await Promise.all([
+                        await suite(
+                          "In-range Request",
+                          async (): Promise<void> => {
 
-                          suite(
-                            "In-range Request",
-                            async (): Promise<void> => {
+                            let sample: Array<string> = generateConstantSample();
 
-                              let sample: Array<string> = generateConstantSample();
+                            let croppedArray: Array<string> = cropArray({
+                              targetArray: sample,
+                              fromEnd: true,
+                              rightElementNumber__numerationFrom0_AndRight: 2,
+                              untilLeftmostElement: true,
+                              mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                              mutably: false
+                            });
 
-                              let croppedArray: Array<string> = cropArray({
-                                targetArray: sample,
-                                fromEnd: true,
-                                rightElementNumber__numerationFrom0_AndRight: 3,
-                                untilLeftmostElement: true,
-                                mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-                                mutably: false
-                              });
-
-                              await Promise.all([
-                                test(
-                                  "Cropped Array is Matching with Expected One",
-                                  (): void => {
-                                    Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
-                                  }
-                                ),
-                                test(
-                                  "Source Array has Not Changed",
-                                  (): void => {
-                                    Assert.deepStrictEqual(sample, generateConstantSample());
-                                  }
-                                )
-                              ]);
-
-                              await test(
-                                "Changing of Primitive-type Element of Source Array does Not Affect to New one",
+                            await Promise.all([
+                              test(
+                                "Cropped Array is Matching with Expected One",
                                 (): void => {
-
-                                  sample[0] = "__NEW_ELEMENT__";
-
-                                  Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
-
+                                  Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE" ]);
                                 }
-                              );
-
-                              await test(
-                                "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
+                              ),
+                              test(
+                                "Source Array has Not Changed",
                                 (): void => {
-
-                                  sample = generateConstantSample();
-
-                                  croppedArray = cropArray({
-                                    targetArray: sample,
-                                    fromEnd: true,
-                                    rightElementNumber__numerationFrom0_AndRight: 3,
-                                    untilLeftmostElement: true,
-                                    mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-                                    mutably: false
-                                  });
-
-                                  croppedArray[0] = "__NEW_ELEMENT__";
-
                                   Assert.deepStrictEqual(sample, generateConstantSample());
-
                                 }
-                              );
+                              )
+                            ]);
 
-                            }
-                          ),
+                            await test(
+                              "Changing of Primitive-type Element of Source Array does Not Affect to New one",
+                              (): void => {
 
-                          suite(
-                            "Out-of-range Request",
-                            async (): Promise<void> => {
+                                sample[0] = "__NEW_ELEMENT__";
 
-                              await Promise.all([
+                                Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE" ]);
 
-                                test(
-                                  "Throwing of Error",
-                                  (): void => {
-                                    Assert.throws(
-                                      (): void => {
-                                        cropArray({
-                                          targetArray: generateConstantSample(),
-                                          fromEnd: true,
-                                          rightElementNumber__numerationFrom0_AndRight: 10,
-                                          untilLeftmostElement: true,
-                                          mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
-                                          mutably: false
-                                        });
-                                      },
-                                      InvalidParameterValueError
-                                    );
-                                  }
-                                ),
+                              }
+                            );
 
-                                test(
-                                  "Ignoring of Invalid Range",
-                                  (): void => {
+                            await test(
+                              "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
+                              (): void => {
 
-                                    const sample: Array<string> = generateConstantSample();
+                                sample = generateConstantSample();
 
-                                    const result: Array<string> = cropArray({
-                                      targetArray: sample,
-                                      fromEnd: true,
-                                      rightElementNumber__numerationFrom0_AndRight: 10,
-                                      untilLeftmostElement: true,
-                                      mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false,
-                                      mutably: false
-                                    });
+                                croppedArray = cropArray({
+                                  targetArray: sample,
+                                  fromEnd: true,
+                                  rightElementNumber__numerationFrom0_AndRight: 2,
+                                  untilLeftmostElement: true,
+                                  mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: true,
+                                  mutably: false
+                                });
 
-                                    Assert.deepStrictEqual(result, generateConstantSample());
-                                    Assert.deepStrictEqual(sample, generateConstantSample());
+                                croppedArray[0] = "__NEW_ELEMENT__";
 
-                                  }
-                                )
+                                Assert.deepStrictEqual(sample, generateConstantSample());
 
-                              ]);
+                              }
+                            );
 
-                            }
-                          )
-
-                        ]);
+                          }
+                        );
 
                       }
                     )

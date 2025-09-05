@@ -129,6 +129,7 @@ namespace ApplicationConsoleLineInterface {
               bar: {
                 type: RawObjectDataProcessor.ValuesTypesIDs.number,
                 numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                isNaN_Forbidden: true,
                 isUndefinedForbidden: false,
                 isNullForbidden: true,
                 minimalValue: 1

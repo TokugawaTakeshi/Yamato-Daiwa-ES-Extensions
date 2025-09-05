@@ -1,9 +1,9 @@
-import { getMatchingWithFirstRegularExpressionCapturingGroup, UnexpectedEventError } from "../../../../Source";
+import { getMatchingWithFirstRegularExpressionCapturingGroup, Logger, UnexpectedEventError } from "../../../../Source";
 import { suite, test } from "node:test";
 import Assert from "assert";
 
 
-await suite("getMatchingWithFirstRegularExpressionCapturingGroup", async (): Promise<void> => {
+suite("getMatchingWithFirstRegularExpressionCapturingGroup", async (): Promise<void> => {
 
   await suite("Normal scenario", async (): Promise<void> => {
 
@@ -42,7 +42,7 @@ await suite("getMatchingWithFirstRegularExpressionCapturingGroup", async (): Pro
       Assert.throws(
         (): void => {
           getMatchingWithFirstRegularExpressionCapturingGroup(
-            experimentalSample, regularExpression, { mustExpectAtLeastOneMatching: true }
+            experimentalSample, regularExpression, { mustExpectExactlyOneMatching: true }
           );
         },
         UnexpectedEventError
@@ -52,4 +52,4 @@ await suite("getMatchingWithFirstRegularExpressionCapturingGroup", async (): Pro
 
   });
 
-});
+}).catch(Logger.logPromiseError);

@@ -6,7 +6,7 @@
     <typescript-loader value="TSX" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/Tests/Automated/Numbers/formatNumberWith4KetaKanji.test.ts" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/Numbers/formatNumberWith4_KetaKanji.test.ts" />
     <method v="2" />
   </configuration>
 </component>

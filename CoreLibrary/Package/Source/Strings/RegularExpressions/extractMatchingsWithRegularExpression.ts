@@ -93,6 +93,7 @@ export default function extractMatchingsWithRegularExpression(
       });
     }
 
+
     return {
       updatedString: targetString.replaceAll(new RegExp(regularExpression, "gu"), ""),
       extractedMatchings: searchingResults

@@ -104,28 +104,29 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
     /* ╍╍╍ undefined可否 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenUndefinedValue: {
       title: "禁止undefined",
-      description: "このプロパティ・要素は未定義、または明示的に「undefined」に設定されていますが、これは明示的に禁止された。"
+      description: "このプロパティ・要素は未定義か明示的に「undefined」で指定されたが、これは明示的に禁止された。"
     },
 
     conditionallyForbiddenUndefinedValue: {
-      title: "条件付きで undefined 値が禁止されています",
+      title: "条件付きundefined禁止",
       generateDescription: (
         {
           verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
-        "このプロパティ／要素は未定義、または明示的に `undefined` に設定されていますが、" +
-        `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark } 場合にはこれが禁止されており、` +
-        "その条件が満たされています。"
+        "このプロパティ・要素は未定義か明示的に「undefined」で指定されたが、" +
+          `これが${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }の場合には禁じられ、` +
+          "この条件が満たされている。"
     },
 
     conditionallyForbiddenNonUndefinedValue: {
-      title: "条件付きで `undefined` 以外の値が禁止されています",
+      title: "条件付き非`undefined`禁止",
       generateDescription: (
-        { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
+        {
+          conditionWhenMustBeUndefined
+        }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-        `このプロパティ／要素は \`undefined\` ではありませんが、${ conditionWhenMustBeUndefined } 場合には ` +
-        "`undefined` である必要があり、その条件が満たされています。"
+        `このプロパティ・要素は「undefined」になっていないが、${ conditionWhenMustBeUndefined }の時「undefined」でなければいけなく、この条件が満たされている。`
     },
 
     forbiddenNullValue: {

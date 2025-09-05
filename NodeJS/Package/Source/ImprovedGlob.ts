@@ -3,6 +3,7 @@ import { minimatch } from "minimatch";
 import {
   replaceDoubleBackslashesWithForwardSlashes,
   removeSpecificCharacterFromCertainPosition,
+  isUndefined,
   isNonEmptyArray,
   Logger,
   InvalidParameterValueError
@@ -90,40 +91,71 @@ export default class ImprovedGlob {
   public static buildAllFilesInCurrentDirectoryButNotBelowGlobSelector(
     compoundParameter: {
       basicDirectoryPath: string;
-      fileNamesExtensions?: ReadonlyArray<string>;
+      fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
     }
   ): string {
+
+    let fileNamesExtensions: ReadonlySet<string>;
+
+    if (isUndefined(compoundParameter.fileNamesExtensions)) {
+      fileNamesExtensions = new Set();
+    } else if (compoundParameter.fileNamesExtensions instanceof Set) {
+      fileNamesExtensions = compoundParameter.fileNamesExtensions;
+    } else {
+      fileNamesExtensions = new Set(compoundParameter.fileNamesExtensions);
+    }
+
     return [
       appendCharacterIfItDoesNotPresentInLastPosition({
         targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
         trailingCharacter: "/"
       }),
       "*",
-      ...isNonEmptyArray(compoundParameter.fileNamesExtensions) ?
-          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.fileNamesExtensions) ] : []
+      ...fileNamesExtensions.size > 0 ?
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
     ].join("");
+
   }
 
   public static buildAllFilesInCurrentDirectoryAndBelowGlobSelector(
-     {
-      basicDirectoryPath,
-      fileNamePostfixes,
-      fileNamesExtensions
-    }: Readonly<{
+    compoundParameter: Readonly<{
       basicDirectoryPath: string;
-      fileNamePostfixes?: ReadonlyArray<string>;
-      fileNamesExtensions?: ReadonlyArray<string>;
+      fileNamePostfixes?: ReadonlyArray<string> | ReadonlySet<string>;
+      fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
     }>
   ): string {
+
+    let fileNamePostfixes: ReadonlySet<string>;
+
+    if (isUndefined(compoundParameter.fileNamePostfixes)) {
+      fileNamePostfixes = new Set();
+    } else if (compoundParameter.fileNamePostfixes instanceof Set) {
+      fileNamePostfixes = compoundParameter.fileNamePostfixes;
+    } else {
+      fileNamePostfixes = new Set(compoundParameter.fileNamePostfixes);
+    }
+
+
+    let fileNamesExtensions: ReadonlySet<string>;
+
+    if (isUndefined(compoundParameter.fileNamesExtensions)) {
+      fileNamesExtensions = new Set();
+    } else if (compoundParameter.fileNamesExtensions instanceof Set) {
+      fileNamesExtensions = compoundParameter.fileNamesExtensions;
+    } else {
+      fileNamesExtensions = new Set(compoundParameter.fileNamesExtensions);
+    }
+
+
     return [
       appendCharacterIfItDoesNotPresentInLastPosition({
-        targetString: replaceDoubleBackslashesWithForwardSlashes(basicDirectoryPath),
+        targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
         trailingCharacter: "/"
       }),
       "**/*",
-      ...isNonEmptyArray(fileNamePostfixes) ?
-          [ `@(${ fileNamePostfixes.join("|").replace(/\./gu, "") })` ] : [],
-      ...isNonEmptyArray(fileNamesExtensions) ?
+      ...fileNamePostfixes.size > 0 ?
+          [ `@(${ Array.from(fileNamePostfixes).join("|").replace(/\./gu, "") })` ] : [],
+      ...fileNamesExtensions.size > 0 ?
           [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
     ].join("");
   }
@@ -147,12 +179,16 @@ export default class ImprovedGlob {
   public static buildExcludingOfFilesWithSpecificPrefixesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
-      filesNamesPrefixes: ReadonlyArray<string>;
-      filesNamesExtensions: ReadonlyArray<string>;
+      filesNamesPrefixes: ReadonlyArray<string> | ReadonlySet<string>;
+      filesNamesExtensions: ReadonlyArray<string> | ReadonlySet<string>;
     }>
   ): string {
 
-    if (compoundParameter.filesNamesPrefixes.length === 0) {
+    const filesNamesPrefixes: ReadonlySet<string> =
+        compoundParameter.filesNamesPrefixes instanceof Set ?
+            compoundParameter.filesNamesPrefixes : new Set(compoundParameter.filesNamesPrefixes);
+
+    if (filesNamesPrefixes.size === 0) {
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.filesNamesPrefixes",
@@ -165,7 +201,11 @@ export default class ImprovedGlob {
     }
 
 
-    if (compoundParameter.filesNamesExtensions.length === 0) {
+    const filesNamesExtensions: ReadonlySet<string> =
+        compoundParameter.filesNamesExtensions instanceof Set ?
+            compoundParameter.filesNamesExtensions : new Set(compoundParameter.filesNamesExtensions);
+
+    if (filesNamesExtensions.size === 0) {
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.filesNamesExtensions",
@@ -184,7 +224,7 @@ export default class ImprovedGlob {
         trailingCharacter: "/"
       }),
       "**/",
-      `@(${ compoundParameter.filesNamesPrefixes.join("|") })*`,
+      `@(${ Array.from(filesNamesPrefixes).join("|") })*`,
       ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions)
     ].join("");
 
@@ -194,12 +234,26 @@ export default class ImprovedGlob {
   public static buildExcludingOfFilesInSubdirectoriesWithSpecificPrefixesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
-      subdirectoriesPrefixes: ReadonlyArray<string>;
-      filesNamesExtensions?: ReadonlyArray<string>;
+      subdirectoriesPrefixes: ReadonlyArray<string> | ReadonlySet<string>;
+      filesNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
     }>
   ): string {
 
-    if (compoundParameter.subdirectoriesPrefixes.length === 0) {
+    const subdirectoriesPrefixes: ReadonlySet<string> =
+        compoundParameter.subdirectoriesPrefixes instanceof Set ?
+            compoundParameter.subdirectoriesPrefixes : new Set(compoundParameter.subdirectoriesPrefixes);
+
+    let filesNamesExtensions: ReadonlySet<string>;
+
+    if (isUndefined(compoundParameter.filesNamesExtensions)) {
+      filesNamesExtensions = new Set();
+    } else if (compoundParameter.filesNamesExtensions instanceof Set) {
+      filesNamesExtensions = compoundParameter.filesNamesExtensions;
+    } else {
+      filesNamesExtensions = new Set(compoundParameter.filesNamesExtensions);
+    }
+
+    if (filesNamesExtensions.size === 0) {
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.subdirectoriesPrefixes",
@@ -219,7 +273,7 @@ export default class ImprovedGlob {
         trailingCharacter: "/"
       }),
       "**/",
-      `@(${ compoundParameter.subdirectoriesPrefixes.join("|") })*/**/*`,
+      `@(${ Array.from(subdirectoriesPrefixes).join("|") })*/**/*`,
       ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
           [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) ] : []
     ].join("");
@@ -230,12 +284,16 @@ export default class ImprovedGlob {
   public static buildExcludingOfFilesInSpecificSubdirectoriesGlobSelector(
     compoundParameter: Readonly<{
       basicDirectoryPath: string;
-      subdirectoriesNames: ReadonlyArray<string>;
-      filesNamesExtensions?: ReadonlyArray<string>;
+      subdirectoriesNames: ReadonlyArray<string> | ReadonlySet<string>;
+      filesNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
     }>
   ): string {
 
-    if (compoundParameter.subdirectoriesNames.length === 0) {
+    const subdirectoriesNames: ReadonlySet<string> =
+        compoundParameter.subdirectoriesNames instanceof Set ?
+            compoundParameter.subdirectoriesNames : new Set(compoundParameter.subdirectoriesNames);
+
+    if (subdirectoriesNames.size === 0) {
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "compoundParameter.subdirectoriesNames",
@@ -247,15 +305,26 @@ export default class ImprovedGlob {
       });
     }
 
+
+    let filesNamesExtensions: ReadonlySet<string>;
+
+    if (isUndefined(compoundParameter.filesNamesExtensions)) {
+      filesNamesExtensions = new Set();
+    } else if (compoundParameter.filesNamesExtensions instanceof Set) {
+      filesNamesExtensions = compoundParameter.filesNamesExtensions;
+    } else {
+      filesNamesExtensions = new Set(compoundParameter.filesNamesExtensions);
+    }
+
     return [
       "!",
       appendCharacterIfItDoesNotPresentInLastPosition({
         targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
         trailingCharacter: "/"
       }),
-      `**/@(${ compoundParameter.subdirectoriesNames.join("|") })/**/*`,
-      ...isNonEmptyArray(compoundParameter.filesNamesExtensions) ?
-          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(compoundParameter.filesNamesExtensions) ] : []
+      `**/@(${ Array.from(subdirectoriesNames).join("|") })/**/*`,
+      ...filesNamesExtensions.size > 0 ?
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(filesNamesExtensions) ] : []
     ].join("");
 
   }
@@ -265,9 +334,9 @@ export default class ImprovedGlob {
    * `[ ".js", ".ts" ]` case: `".+(js|ts)"`
    * `[ ".js", ".ts", ".dart" ]` case: `".+(js|ts|dart)"` */
   public static createMultipleFilenameExtensionsGlobPostfix(
-    fileNamesExtensions: ReadonlyArray<string>
+    fileNamesExtensions: ReadonlyArray<string> | ReadonlySet<string>
   ): string {
-    return `.@(${ fileNamesExtensions.join("|").replace(/\./gu, "") })`;
+    return `.@(${ (Array.isArray(fileNamesExtensions) ? fileNamesExtensions : Array.from(fileNamesExtensions)).join("|").replace(/\./gu, "") })`;
   }
 
   public static buildAbsolutePathBasedGlob(

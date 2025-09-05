@@ -3,9 +3,23 @@ import getIndexesOfSatisfiesThePredicateArrayElements from
     "../02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements";
 
 
-export namespace RemovingArrayElementsByPredicatesOperation {
+export namespace RemovingOfArrayElementsByPredicates {
 
-  export type SourceData<ArrayElement> = Readonly<
+  export type Result<ArrayElement> = Readonly<{
+    updatedArray: Array<ArrayElement>;
+    removedElements: Array<ArrayElement>;
+    indexesOfRemovedElements: Array<number>;
+  }>;
+
+}
+
+
+export default function removeArrayElementsByPredicates<ArrayElement>(
+  {
+    targetArray,
+    mutably,
+    ...sourceData
+  }: Readonly<
     (
       {
         mutably: true;
@@ -20,25 +34,8 @@ export namespace RemovingArrayElementsByPredicatesOperation {
       { predicate: (arrayElement: ArrayElement) => boolean; } |
       { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
     )
-  >;
-
-  export type Result<ArrayElement> = Readonly<{
-    updatedArray: Array<ArrayElement>;
-    removedElements: Array<ArrayElement>;
-    indexesOfRemovedElements: Array<number>;
-  }>;
-
-}
-
-
-export default function removeArrayElementsByPredicates<ArrayElement>(
-  sourceData: RemovingArrayElementsByPredicatesOperation.SourceData<ArrayElement>
-): RemovingArrayElementsByPredicatesOperation.Result<ArrayElement> {
-
-  const {
-    targetArray,
-    mutably
-  }: RemovingArrayElementsByPredicatesOperation.SourceData<ArrayElement> = sourceData;
+  >
+): RemovingOfArrayElementsByPredicates.Result<ArrayElement> {
 
   const indexesOfElementsWhichWillBeRemoved: Array<number> = [];
 

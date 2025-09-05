@@ -48,9 +48,9 @@ export { default as moveArrayElementToOnePosition } from "./Arrays/06-Permutatio
 export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
 
 /* ─── Removing of Elements ───────────────────────────────────────────────────────────────────────────────────────── */
-export { default as removeArrayElementsByIndexes, type RemovingArrayElementsByIndexesOperation } from
+export { default as removeArrayElementsByIndexes, type RemovingOfArrayElementsByIndexes } from
     "./Arrays/07-RemovingOfElements/removeArrayElementsByIndexes";
-export { default as removeArrayElementsByPredicates, type RemovingArrayElementsByPredicatesOperation } from
+export { default as removeArrayElementsByPredicates, type RemovingOfArrayElementsByPredicates } from
     "./Arrays/07-RemovingOfElements/removeArrayElementsByPredicates";
 
 /* ─── Restructuring ──────────────────────────────────────────────────────────────────────────────────────────────── */
@@ -244,11 +244,12 @@ export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOthe
 export { default as filterMap } from "./Maps/filterMap";
 export { default as getExpectedToBeNonUndefinedMapValue } from "./Maps/getExpectedToBeNonUndefinedMapValue";
 export { default as invertMapImmutably } from "./Maps/invertMapImmutably";
-export { removeEntriesFromMap, type RemovingEntriesFromMapOperation } from "./Maps/removeEntriesFromMap";
-export { default as replaceValuesInMap, type ReplaceOfValuesInMapOperation } from "./Maps/replaceValuesInMap";
+export { default as mergeMaps } from "./Maps/mergeMaps";
+export { removeEntriesFromMap, type RemovingEntriesFromMap } from "./Maps/removeEntriesFromMap";
+export { default as replaceValuesInMap, type ReplacingOfValuesInMap } from "./Maps/replaceValuesInMap";
 
 /* ━━━ Numbers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as formatNumberWith4KetaKanji } from "./Numbers/formatNumberWith4KetaKanji";
+export { default as formatNumberWith4_KetaKanji } from "./Numbers/formatNumberWith4_KetaKanji";
 export { default as getArithmeticMean } from "./Numbers/getArithmeticMean";
 export { default as isStringifiedNonNegativeIntegerOfRegularNotation } from
     "./Numbers/isStringifiedNonNegativeIntegerOfRegularNotation";
@@ -259,8 +260,8 @@ export { default as roundDownToSpecificIntegerPlaceValue } from "./Numbers/round
 export { default as roundToSpecificNearestIntegerPlaceValue } from "./Numbers/roundToSpecificNearestIntegerPlaceValue";
 export { default as roundToSpecifiedNearestDecimalPlaceValue } from "./Numbers/roundToSpecifiedNearestDecimalPlaceValue";
 export { default as roundUpToSpecificIntegerPlaceValue } from "./Numbers/roundUpToSpecificIntegerPlaceValue";
-export { default as separateEach3DigitsGroupWithComma } from "./Numbers/separateEach3DigitsGroupWithComma";
-export { default as separateEach4DigitsGroupWithComma } from "./Numbers/separateEach4DigitsGroupWithComma";
+export { default as separateEach3_DigitsGroupWithComma } from "./Numbers/separateEach3_DigitsGroupWithComma";
+export { default as separateEach4_DigitsGroupWithComma } from "./Numbers/separateEach4_DigitsGroupWithComma";
 
 
 /* ━━━ Objects ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -311,8 +312,9 @@ export { default as destringifyBooleanValueIfPossible } from
 
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
 export { default as addElementsToSet } from "./Sets/addElementsToSet";
+export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
+export { default as mergeSets } from "./Sets/mergeSets";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
 
 
@@ -347,25 +349,29 @@ export {
 
 /* ─── URI ────────────────────────────────────────────────────────────────────────────────────────────────────────── */
 /* --- Files and directories ---------------------------------------------------------------------------------------- */
-export { default as appendLastFileNameExtension } from "./Strings/URI/FilesAndDirectories/appendLastFileNameExtension";
-export { default as extractAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/extractAllFileNameExtensions";
+export { default as appendLastFileNameExtension } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/appendLastFileNameExtension";
+export { default as extractAllFileNameExtensions } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractAllFileNameExtensions";
 export { default as extractFileNameWithAllExtensionsFromPath } from
     "./Strings/URI/FilesAndDirectories/extractFileNameWithAllExtensionsFromPath";
 export { default as extractFileNameWithoutAnyExtensions } from
-    "./Strings/URI/FilesAndDirectories/extractFileNameWithoutAnyExtensions";
+    "./Strings/URI/FilesAndDirectories/Stem/extractFileNameWithoutAnyExtensions";
 export { default as extractFileNameWithoutLastExtension } from
     "./Strings/URI/FilesAndDirectories/extractFileNameWithoutLastExtension";
-export { default as extractLastExtensionOfFileName } from "./Strings/URI/FilesAndDirectories/extractLastExtensionOfFileName";
-export { default as removeAllFileNameExtensions } from "./Strings/URI/FilesAndDirectories/removeAllFileNameExtensions";
+export { default as extractLastExtensionOfFileName } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractLastExtensionOfFileName";
+export { default as removeAllFileNameExtensions } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeAllFileNameExtensions";
 
 /* --- Rest --------------------------------------------------------------------------------------------------------- */
-export { default as appendFragmentToURI } from "./Strings/URI/appendFragmentToURI";
-export { default as explodeURI_PathToSegments } from "./Strings/URI/explodeURI_PathToSegments";
+export { default as appendFragmentToURI } from "./Strings/URI/Fragment/appendFragmentToURI";
+export { default as explodeURI_PathToSegments } from "./Strings/URI/PathSegments/explodeURI_PathToSegments";
 export { default as generateMailtoURI_Scheme } from "./Strings/URI/generateMailtoURI_Scheme";
-export { default as getURI_Fragment } from "./Strings/URI/getURI_Fragment";
+export { default as getURI_Fragment } from "./Strings/URI/Fragment/getURI_Fragment";
 export { default as getURI_PartWithoutFragment } from "./Strings/URI/getURI_PartWithoutFragment";
 export { default as removeSpecificSegmentsFromURI_Path } from "./Strings/URI/removeSpecificSegmentsFromURI_Path";
-export { default as replaceLastURI_PathSegment } from "./Strings/URI/replaceLastURI_PathSegment";
+export { default as replaceLastURI_PathSegment } from "./Strings/URI/PathSegments/replaceLastURI_PathSegment";
 
 /* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as adjustCharactersCount } from "./Strings/adjustCharactersCount";
@@ -384,14 +390,14 @@ export { default as hasStringOnlySpecificCharacters } from "./Strings/hasStringO
 export { default as IndentationCoordinator } from "./Strings/IndentationCoordinator";
 export { default as insertSubstring } from "./Strings/insertSubstring";
 export { default as insertSubstringIf } from "./Strings/insertSubstringIf";
-export { default as isIPv4AddressLiesInRange } from "./Strings/isIPv4AddressLiesInRange";
+export { default as isIPv4_AddressLiesInRange } from "./Strings/isIPv4_AddressLiesInRange";
 export { default as isStringIncludingAtLeastOneOfSubstrings } from "./Strings/isStringIncludingAtLeastOneOfSubstrings";
 export { default as removeAllSpecifiedCharacters } from "./Strings/removeAllSpecifiedCharacters";
 export { default as removeLastCharacter } from "./Strings/removeLastCharacter";
 export { default as removeNonDigitsCharacters } from "./Strings/removeNonDigitsCharacters";
 export { default as removeNthCharacter } from "./Strings/removeNthCharacter";
 export { default as removeSpecificCharacterFromCertainPosition } from "./Strings/removeSpecificCharacterFromCertainPosition";
-export { default as replace2OrMoreSpacesTo1 } from "./Strings/replace2OrMoreSpacesTo1";
+export { default as replace2_OrMoreSpacesTo1 } from "./Strings/replace2_OrMoreSpacesTo1";
 export { default as replaceBrHTML_TagToNewLineEscapeSequence } from "./Strings/replaceBrHTML_TagToNewLineEscapeSequence";
 export { default as replaceDoubleBackslashesWithForwardSlashes } from "./Strings/replaceDoubleBackslashesWithForwardSlashes";
 export { default as reverseString } from "./Strings/reverseString";
@@ -400,13 +406,13 @@ export { default as surroundLabelByOrnament } from "./Strings/surroundLabelByOrn
 export { default as toLowerCamelCase } from "./Strings/toLowerCamelCase";
 export { default as toScreamingSnakeCase } from "./Strings/toScreamingSnakeCase";
 export { default as toUpperCamelCase } from "./Strings/toUpperCamelCase";
-export { default as trimSpaces } from "./Strings/trimSpaces";
+export { default as trimSpaces, type SpacesTrimming } from "./Strings/trimSpaces";
 
 
 /* ━━━ Type Guards ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* ─── Arrays ─────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isArrayOfCertainTypeElements } from "./TypeGuards/Arrays/isArrayOfCertainTypeElements";
-export { default as isArrayOfLength, IsArrayOfLengthCheckingOperation } from "./TypeGuards/Arrays/isArrayOfLength";
+export { default as isArrayOfLength, IsArrayOfLengthCheck } from "./TypeGuards/Arrays/isArrayOfLength";
 export { default as isEmptyArray } from "./TypeGuards/Arrays/isEmptyArray";
 export { default as isNonEmptyArray } from "./TypeGuards/Arrays/isNonEmptyArray";
 
@@ -447,7 +453,7 @@ export { default as areStringifiedDigitsOnly } from "./TypeGuards/Strings/areStr
 export { default as isEmptyString } from "./TypeGuards/Strings/isEmptyString";
 export { default as isNonEmptyString } from "./TypeGuards/Strings/isNonEmptyString";
 export { default as isString } from "./TypeGuards/Strings/isString";
-export { default as isStringOfLength, IsStringOfLengthCheckingOperation } from "./TypeGuards/Strings/isStringOfLength";
+export { default as isStringOfLength, IsStringOfLengthCheck } from "./TypeGuards/Strings/isStringOfLength";
 
 /* ─── Rest ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as isBoolean } from "./TypeGuards/isBoolean";

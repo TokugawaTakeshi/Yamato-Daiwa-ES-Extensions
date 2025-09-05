@@ -249,100 +249,6 @@ coreLibrary:
                       japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.japanese.yaml
                       russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/TableOfContents/readonlyArrayToMutableOne.toc.russian.yaml
 
-
-                addElementsToArrayIfTheyAreNotPresentOtherwiseRemove:
-                  $heading: "<code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code>"
-                  $URI: `@All/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.${ fileNameLocalizationExtensions }`
-                  $sectioning:
-                    $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.yaml
-                    $localizations:
-                      english: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.english.yaml
-                      japanese: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.japanese.yaml
-                      russian: 01-Source/Pages/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/TableOfContents/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.toc.russian.yaml
-
-        constantsAndEnumerations:
-
-          $heading: `coreLibrary.functionality.constantsAndEnumerations.$heading`
-
-          $children:
-
-            dateTime:
-
-              $heading: `coreLibrary.functionality.constantsAndEnumerations.dateTime.$heading`
-
-              $children:
-
-#                CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING:
-#                  $heading: "<code>CHARACTERS_COUNT_OF_DATE_PART_IN_ISO8601_STRING</code>"
-#                  $URI: "#"
-
-                DaysOfWeek:
-                  $heading: "<code>DaysOfWeek</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md"
-
-#                HOURS_PER_STELLAR_DAY:
-#                 $heading: "<code>HOURS_PER_STELLAR_DAY</code>"
-#                 $URI: "#"
-#
-#                MAXIMAL_DAYS_IN_MONTH:
-#                 $heading: "<code>MAXIMAL_DAYS_IN_MONTH</code>"
-#                 $URI: "#"
-#
-#                MINUTES_PER_HOUR:
-#                 $heading: "<code>MINUTES_PER_HOUR</code>"
-#                 $URI: "#"
-#
-#                MONTHS_PER_YEAR:
-#                 $heading: "<code>MONTHS_PER_YEAR</code>"
-#                 $URI: "#"
-
-                MonthsNames:
-                  $heading: "<code>MonthsNames</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"
-
-#                SECONDS_PER_MINUTE:
-#                  $heading: "<code>SECONDS_PER_MINUTE</code>"
-#                  $URI: "#"
-
-            HTTP:
-
-              $heading: "HTTP"
-
-              $children:
-
-                HTTP_Methods:
-                  $heading: "<code>HTTP_Methods</code>"
-                  $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_Methods.md"
-
-                HTTP_StatusCodes:
-
-                  $heading: `coreLibrary.functionality.constantsAndEnumerations.HTTP.HTTP_StatusCodes.$heading`
-                  $children:
-
-                    all:
-                      $heading: "All (<code>HTTP_StatusCodes</code>)"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#http_statuscodes---all-http-status-codes"
-
-                    InformationalResponsesHTTP_StatusCodes:
-                      $heading: "<code>InformationalResponsesHTTP_StatusCodes</code>"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#informationalresponseshttp_statuscodes---information-responses"
-
-                    SuccessfulResponsesHTTP_StatusCodes:
-                      $heading: "<code>SuccessfulResponsesHTTP_StatusCodes</code>"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#successfulresponseshttp_statuscodes---successful-responses"
-
-                    RedirectionResponsesHTTP_StatusCodes:
-                      $heading: "<code>RedirectionResponsesHTTP_StatusCodes</code>"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#redirectionresponseshttp_statuscodes---redirection-messages"
-
-                    ClientErrorsHTTP_StatusCodes:
-                      $heading: "<code>ClientErrorsHTTP_StatusCodes</code>"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#clienterrorshttp_statuscodes---client-error-responses"
-
-                    ServerErrorsHTTP_StatusCodes:
-                      $heading: "<code>ServerErrorsHTTP_StatusCodes</code>"
-                      $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#servererrorshttp_statuscodes---server-error-responses"
-
 #        dataMocking:
 #
 #          $heading: `coreLibrary.functionality.dataMocking.$heading`
@@ -452,19 +358,19 @@ coreLibrary:
               $heading: "<code>TimePoint</code>"
               $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md"
 
-        defaultValueSubstituters:
-
-          $heading: `coreLibrary.functionality.defaultValueSubstituters.$heading`
-
-          $children:
-
-            substituteWhenNull:
-              $heading: "<code>substituteWhenNull</code>"
-              $URI: "#"
-
-            substituteWhenUndefined:
-              $heading: "<code>substituteWhenUndefined</code>"
-              $URI: "#"
+#        defaultValueSubstituters:
+#
+#          $heading: `coreLibrary.functionality.defaultValueSubstituters.$heading`
+#
+#          $children:
+#
+#            substituteWhenNull:
+#              $heading: "<code>substituteWhenNull</code>"
+#              $URI: "#"
+#
+#            substituteWhenUndefined:
+#              $heading: "<code>substituteWhenUndefined</code>"
+#              $URI: "#"
 
 #        errors:
 #

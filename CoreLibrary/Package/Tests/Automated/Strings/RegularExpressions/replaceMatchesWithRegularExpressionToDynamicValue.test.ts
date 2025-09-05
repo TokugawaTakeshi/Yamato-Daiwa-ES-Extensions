@@ -1,16 +1,17 @@
 import {
+  Logger,
   replaceMatchesWithRegularExpressionToDynamicValue,
   type ReplacingOfMatchesWithRegularExpressionToDynamicValue
 } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("replaceMatchesWithRegularExpressionToDynamicValue", (): void => {
+const sample: string = "Meta description is [very important](https://www.orange-sha.co.jp/blog/web01_description/) for SEO.";
 
-  const sample: string =
-      "Meta description is [very important](https://www.orange-sha.co.jp/blog/web01_description/) for SEO.";
-
-  it("Works as intended", (): void => {
+Testing.test(
+  "Works as intended",
+  (): void => {
     Assert.strictEqual(
       replaceMatchesWithRegularExpressionToDynamicValue<
         Readonly<{ URI: string; anchorText: string; }>,
@@ -27,8 +28,7 @@ describe("replaceMatchesWithRegularExpressionToDynamicValue", (): void => {
           >
         ): string => `<a href="${ namedCapturingGroups.URI }">${ namedCapturingGroups.anchorText }</a>`
       }),
-        "Meta description is <a href=\"https://www.orange-sha.co.jp/blog/web01_description/\">very important</a> for SEO."
+      "Meta description is <a href=\"https://www.orange-sha.co.jp/blog/web01_description/\">very important</a> for SEO."
     );
-  });
-
-});
+  }
+).catch(Logger.logPromiseError);

@@ -2,14 +2,14 @@ import SpaceCharacters from "./CharactersAssets/SpaceCharacters";
 import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 
 
-export default function trimSpaces(targetString: string, options: TrimSpacesOperation.Options = {}): string {
+export default function trimSpaces(targetString: string, options: SpacesTrimming.Options = {}): string {
 
   const {
     skipLeadingOnes = false,
     skipTrailingOnes = false,
     targetSpacesKinds = Object.values(SpaceCharacters),
     excludeKinds = []
-  }: TrimSpacesOperation.Options = options;
+  }: SpacesTrimming.Options = options;
 
   if (skipTrailingOnes && skipLeadingOnes) {
     return targetString;
@@ -40,11 +40,11 @@ export default function trimSpaces(targetString: string, options: TrimSpacesOper
   let mutatingResult: string = targetString;
 
   if (!skipLeadingOnes) {
-    mutatingResult = targetString.replace(new RegExp(`^[${ charactersSetExpression }]+`, "u"), "");
+    mutatingResult = mutatingResult.replace(new RegExp(`^[${ charactersSetExpression }]+`, "u"), "");
   }
 
   if (!skipTrailingOnes) {
-    mutatingResult = targetString.replace(new RegExp(`[${ charactersSetExpression }]+$`, "u"), "");
+    mutatingResult = mutatingResult.replace(new RegExp(`[${ charactersSetExpression }]+$`, "u"), "");
   }
 
 
@@ -53,7 +53,7 @@ export default function trimSpaces(targetString: string, options: TrimSpacesOper
 }
 
 
-export namespace TrimSpacesOperation {
+export namespace SpacesTrimming {
 
   export type Options = Readonly<{
     skipLeadingOnes?: boolean;

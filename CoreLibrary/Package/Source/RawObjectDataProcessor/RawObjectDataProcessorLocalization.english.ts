@@ -130,10 +130,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Conditionally Forbidden non-undefined Value",
 
       generateDescription: (
-        { conditionWhenMustBeUndefined }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
+        {
+          verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-          `This property/element is not \`undefined\` while must be \`undefined\` when ${ conditionWhenMustBeUndefined }, ` +
-            "and this condition has been satisfied."
+          "This property/element is not `undefined` while must be `undefined` when " +
+            `${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, and this condition has been satisfied.`
 
     },
 

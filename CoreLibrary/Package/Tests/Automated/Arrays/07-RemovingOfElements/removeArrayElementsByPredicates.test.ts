@@ -1,6 +1,6 @@
 import {
   removeArrayElementsByPredicates,
-  type RemovingArrayElementsByPredicatesOperation,
+  type RemovingOfArrayElementsByPredicates,
   Logger
 } from "../../../../Source";
 import Testing from "node:test";
@@ -29,7 +29,7 @@ Promise.all([
 
             const experimentalSample: Array<string> = getSampleArray();
             const removingArrayElementsByPredicatesOperationResult:
-                RemovingArrayElementsByPredicatesOperation.Result<string> =
+                RemovingOfArrayElementsByPredicates.Result<string> =
                     removeArrayElementsByPredicates({
                       targetArray: experimentalSample,
                       predicate,
@@ -70,7 +70,7 @@ Promise.all([
 
             const experimentalSample: ReadonlyArray<string> = getSampleArray();
             const removingArrayElementsByPredicatesOperationResult:
-                RemovingArrayElementsByPredicatesOperation.Result<string> =
+                RemovingOfArrayElementsByPredicates.Result<string> =
                     removeArrayElementsByPredicates({
                       targetArray: experimentalSample,
                       predicate,
@@ -138,7 +138,7 @@ Promise.all([
 
             const experimentalSample: Array<string> = getSampleArray();
             const removingArrayElementsByPredicatesOperationResult:
-                RemovingArrayElementsByPredicatesOperation.Result<string> =
+                RemovingOfArrayElementsByPredicates.Result<string> =
                     removeArrayElementsByPredicates({
                       targetArray: experimentalSample,
                       predicates,
@@ -187,7 +187,7 @@ Promise.all([
           async (): Promise<void> => {
 
             const experimentalSample: ReadonlyArray<string> = getSampleArray();
-            const removingArrayElementsByPredicatesOperationResult: RemovingArrayElementsByPredicatesOperation.Result<string> =
+            const removingArrayElementsByPredicatesOperationResult: RemovingOfArrayElementsByPredicates.Result<string> =
                 removeArrayElementsByPredicates({
                   targetArray: experimentalSample,
                   predicates,
