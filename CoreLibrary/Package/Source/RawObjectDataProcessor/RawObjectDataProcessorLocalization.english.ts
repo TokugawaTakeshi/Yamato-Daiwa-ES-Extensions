@@ -638,7 +638,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
       ): string =>
           "Both allowed and forbidden characters has been specified for property/element " +
-              `${ targetPropertyDotSeparatedQualifiedName } what it the contradiction.` +
+              `${ targetPropertyDotSeparatedQualifiedName } what it the contradiction. ` +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     }
 

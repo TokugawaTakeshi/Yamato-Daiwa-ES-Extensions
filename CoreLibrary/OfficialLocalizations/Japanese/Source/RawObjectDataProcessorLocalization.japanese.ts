@@ -123,10 +123,11 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       title: "条件付き非`undefined`禁止",
       generateDescription: (
         {
-          conditionWhenMustBeUndefined
+          verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-        `このプロパティ・要素は「undefined」になっていないが、${ conditionWhenMustBeUndefined }の時「undefined」でなければいけなく、この条件が満たされている。`
+        "このプロパティ・要素は「undefined」になっていないが、" +
+          `${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }の時「undefined」でなければいけなく、この条件が満たされている。`
     },
 
     forbiddenNullValue: {
@@ -248,6 +249,15 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
         { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
       ): string =>
         `この値は ${ realCharactersCount } 文字であり、ちょうど ${ fixedCharactersCount } 文字である必要があります。`
+    },
+
+    forbiddenCharactersFound: {
+      title: "禁じられた文字発見",
+      generateDescription: (
+        { foundForbiddenCharacters }: ValidationErrors.ForbiddenCharactersFound.TemplateVariables
+      ): string =>
+          "下記の記事られた文字列が発見された。\n" +
+            foundForbiddenCharacters.map((character: string): string => `● ${ character }`).join("\n")
     },
 
     regularExpressionMismatch: {
@@ -496,6 +506,18 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
           "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（別名: Map）は、" +
           "どちらも ECMAScript の観点では `object` 型であり、`ValuesTypesIDs.oneOf` の代替として互換性がありません。\n" +
           `このプロパティの仕様を修正してください。\n${ targetValueStringifiedSpecification }`
+    },
+
+    bothAllowedAndForbiddenCharactersSpecified: {
+      title: "許可文字・禁止文字矛盾",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
+      ): string =>
+          `文字列型のプロパティー・要素${ targetPropertyDotSeparatedQualifiedName }にとって許可文字も、禁止文字も定義されたが事矛盾。` +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
   },
