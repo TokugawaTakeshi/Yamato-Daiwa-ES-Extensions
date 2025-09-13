@@ -32,13 +32,13 @@ npm i @yamato-daiwa/es-extensions-localization-japanese @yamato-daiwa/es-extensi
 クラスは [`process` メソッド](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#process)
 を呼び出すことで日本語化出来、アプリケーションが実行されている限り、間接的ではあるが日本語化への対応が可能だ。
 
-但し此の方法には、 **RawObjectDataProcessorLocalization__Japanese** という日本語化用オブジェクトが必要だ。
+但し此の方法には、 **rawObjectDataProcessorLocalization__japanese** という日本語化用オブジェクトが必要だ。
 
-`process` メソッドの実行で日本語化する場合、次の様に第３引数の **localization** プロパティで **RawObjectDataProcessorLocalization__Japanese** を指定すればよい。
+`process` メソッドの実行で日本語化する場合、次の様に第３引数の **localization** プロパティで **rawObjectDataProcessorLocalization__japanese** を指定すればよい。
 
 ```typescript
 import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
+import { rawObjectDataProcessorLocalization__japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
 
 type User = {
   ID: string;
@@ -54,7 +54,7 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
     subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
     properties: { /* */ }
   },
-  { localization: RawObjectDataProcessorLocalization__Japanese }
+  { localization: rawObjectDataProcessorLocalization__japanese }
 );
 ```
 
@@ -62,26 +62,26 @@ const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjec
 
 ```typescript
 import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
+import { rawObjectDataProcessorLocalization__japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
 
 
-RawObjectDataProcessor.setDefaultLocalization(RawObjectDataProcessorLocalization__Japanese);
+RawObjectDataProcessor.setDefaultLocalization(rawObjectDataProcessorLocalization__japanese);
 ```
 
 
 ### Loggerファサードの日本語化
 
-**LoggerLocalization__Japanese** オブジェクトは [**Logger**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md)
+**loggerLocalization__japanese** オブジェクトは [**Logger**](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md)
  クラスに属する文字列を日本語化するが、これらの総数は[少ない](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/Logging/LoggerLocalization__English.ts)。
 各エラーメッセージは別途日本語化する必要があり、**YDEE** のエラークラスの日本語化方法については以下の通りだ。
 
 
 ```typescript
 import { Logger } from "@yamato-daiwa/es-extensions";
-import LoggerLocalization__Japanese from "@yamato-daiwa/es-extensions-localization-japanese";
+import loggerLocalization__japanese from "@yamato-daiwa/es-extensions-localization-japanese";
 
 
-Logger.setLocalization(LoggerLocalization__Japanese);
+Logger.setLocalization(loggerLocalization__japanese);
 ```
 
 
@@ -90,10 +90,10 @@ Logger.setLocalization(LoggerLocalization__Japanese);
 特定のエラーのクラスの日本語化オブジェクト名は、下記の命名規則に従っている。
 
 ```
-[ エラークラス名 ]＋Lozalization__Japanese
+[ エラークラス名 ]＋Localization__japanese
 ```
 
-例えば **AlgorithmMismatchError** エラーの日本語化オブジェクトは、**AlgorithmMismatchErrorLocalization__Japanese** という名前になる。
+例えば **AlgorithmMismatchError** エラーの日本語化オブジェクトは、**algorithmMismatchErrorLocalization__japanese** という名前になる。
 
 全てのエラークラス名は、**@ydee** の[公式説明書](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/README.md#logging)
 で確認可能だ。
@@ -104,9 +104,9 @@ Logger.setLocalization(LoggerLocalization__Japanese);
 
 ```typescript
 import { AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
-import { AlgorithmMismatchErrorLocalization__Japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
+import { algorithmMismatchErrorLocalization__japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
 
-AlgorithmMismatchError.localization = AlgorithmMismatchErrorLocalization__Japanese;
+AlgorithmMismatchError.localization = algorithmMismatchErrorLocalization__japanese;
 ```
 
 の様に記述して割り当てる。

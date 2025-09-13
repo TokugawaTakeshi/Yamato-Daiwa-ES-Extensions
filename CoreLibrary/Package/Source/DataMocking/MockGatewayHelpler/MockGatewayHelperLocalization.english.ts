@@ -27,7 +27,7 @@ const MockGatewayHelperLocalization__English: MockGatewayHelper.Localization = {
             "The \"MockGatewayHelper\" class has finished the simulation of the data retrieving for the transaction " +
               `"${ gatewayName }.${ transactionName }".` +
             (isNonEmptyString(formattedRequestParameters) ? `\n\nRequest parameters:\n${ formattedRequestParameters }` : "") +
-            isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : ""
+            (isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : "")
       }),
 
   generateDataSubmittingSimulationCompletedLog: (
@@ -44,7 +44,7 @@ const MockGatewayHelperLocalization__English: MockGatewayHelper.Localization = {
             "The \"MockGatewayHelper\" class has finished the simulation of the data submitting for the transaction " +
               `"${ gatewayName }.${ transactionName }"` +
             (isNonEmptyString(formattedRequestData) ? `\n\nRequest data:\n${ formattedRequestData }` : "") +
-            isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : ""
+            (isNonEmptyString(formattedResponseData) ? `\n\nResponse data:\n${ formattedResponseData }` : "")
       })
 
 };
