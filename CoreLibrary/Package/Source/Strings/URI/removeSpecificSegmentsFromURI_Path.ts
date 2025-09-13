@@ -1,5 +1,5 @@
-import removeArrayElementsByPredicates from "../../Arrays/removeArrayElementsByPredicates";
-import explodeURI_PathToSegments from "./explodeURI_PathToSegments";
+import removeArrayElementsByPredicates from "../../Arrays/07-RemovingOfElements/removeArrayElementsByPredicates";
+import explodeURI_PathToSegments from "./PathSegments/explodeURI_PathToSegments";
 
 
 export default function removeSpecificSegmentsFromURI_Path(

@@ -9,7 +9,7 @@ import isString from "../TypeGuards/Strings/isString";
 export default function toUpperCamelCase(targetString: string): string {
 
   if (!isString(targetString)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "targetString",

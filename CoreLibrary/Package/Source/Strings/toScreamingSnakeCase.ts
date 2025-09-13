@@ -8,7 +8,7 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 export default function toScreamingSnakeCase(targetString: string): string {
 
   if (!isString(targetString)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "targetString",

@@ -1,0 +1,17 @@
+example:
+
+  $heading: "Пример"
+
+comparisonWithNativeMethods:
+
+  $heading: "Сравнение с нативными методами"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: "Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA"
+
+  steps:
+
+    $heading: "Пошаговое описание процесса использования шаблона"
+
+externalLinks: { $heading: "Внешние ссылки" }

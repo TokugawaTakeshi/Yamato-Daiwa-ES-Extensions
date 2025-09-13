@@ -1,0 +1,17 @@
+examples:
+  $heading: `examples.$heading`
+  $anchor: "EXAMPLES--SECTION"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: `IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance.$heading`
+  $anchor: "INTELLIJ_IDEA_IDES_LIVE_TEMPLATE_USAGE_GUIDANCE--SECTION"
+
+  $children:
+    steps:
+      $heading: `IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance.steps.$heading`
+      $anchor: "INTELLIJ_IDEA_IDES_LIVE_TEMPLATE_USAGE_GUIDANCE-STEPS--SECTION"
+
+externalLinks:
+  $heading: `externalLinks.$heading`
+  $anchor: "EXTERNAL_LINKS--SECTION"

@@ -1,0 +1,24 @@
+numericTypes:
+
+  $heading: "Numeric Types"
+
+stringTypes:
+
+  $heading: "String Types"
+
+objectTypes:
+
+  $heading: "Object Types"
+
+arrayedTypes:
+
+  $heading: "Arrayed Types"
+
+emptyTypes:
+
+  $heading: "Empty Types"
+
+otherTypes:
+
+  $heading: "Other Types"
+

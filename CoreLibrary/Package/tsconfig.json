@@ -1,4 +1,5 @@
 {
+
   "compilerOptions": {
 
     "target": "ES2022",
@@ -15,7 +16,9 @@
 
     "outDir": "Distributable/",
     "declaration": true
+
   },
 
   "include": [ "Source/**/*" ]
+
 }

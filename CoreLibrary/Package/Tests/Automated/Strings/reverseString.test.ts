@@ -1,15 +1,22 @@
-import { reverseString } from "../../../Source";
+import { reverseString, Logger } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("reverseString", (): void => {
+Promise.all([
 
-  it("Basic functionality", (): void => {
-    Assert.deepStrictEqual("ABC", reverseString("CBA"));
-  });
+  Testing.test(
+    "Basic functionality",
+    (): void => {
+      Assert.deepStrictEqual("ABC", reverseString("CBA"));
+    }
+  ),
 
-  it("Surrogate pairs support", (): void => {
-    Assert.deepStrictEqual("𝟙𝟚𝟛", reverseString("𝟛𝟚𝟙"));
-  });
+  Testing.test(
+    "Surrogate pairs support",
+    (): void => {
+      Assert.deepStrictEqual("𝟙𝟚𝟛", reverseString("𝟛𝟚𝟙"));
+    }
+  )
 
-});
+]).catch(Logger.logPromiseError);

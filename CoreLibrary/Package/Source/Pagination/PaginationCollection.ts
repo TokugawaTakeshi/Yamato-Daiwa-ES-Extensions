@@ -1,7 +1,7 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import cropArray from "../Arrays/cropArray";
-import isUndefined from "../TypeGuards/Nullables/isUndefined";
+import cropArray from "../Arrays/03-RetrievingOfSubarrays/cropArray";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 
 
 class PaginationCollection<Item> {
@@ -21,6 +21,7 @@ class PaginationCollection<Item> {
 
       itemsByPages[pageIndex] = cropArray({
         targetArray: compoundParameter.items,
+        fromStart: true,
         startingElementNumber__numerationFrom0: pageIndex * itemsCountPerPaginationPage,
         elementsCount: compoundParameter.itemsCountPerPaginationPage,
         mutably: false,
@@ -43,7 +44,7 @@ class PaginationCollection<Item> {
     const itemsOfTargetPage: Array<Item> | undefined = this.itemsByPages[targetPageIndex];
 
     if (isUndefined(itemsOfTargetPage)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "compoundParameter",

@@ -1,0 +1,15 @@
+installation:
+
+  $heading: "Installation"
+
+distributiveVolumeNotice:
+
+  $heading: "Information About Distribution Size"
+
+nonTypeScriptUsageWarning:
+
+  $heading: "Precautions for Non-Users of TypeScript"
+
+importingFunctionality:
+
+  $heading: "Importing Functionality"

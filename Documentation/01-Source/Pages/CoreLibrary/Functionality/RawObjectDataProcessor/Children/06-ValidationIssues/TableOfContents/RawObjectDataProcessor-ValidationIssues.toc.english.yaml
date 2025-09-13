@@ -1,0 +1,11 @@
+validationErrorsMessages:
+
+  $heading: "Validation Errors Messages"
+
+throwableErrors:
+
+  $heading: "Throwable Errors"
+
+warnings:
+
+  $heading: "Warnings"

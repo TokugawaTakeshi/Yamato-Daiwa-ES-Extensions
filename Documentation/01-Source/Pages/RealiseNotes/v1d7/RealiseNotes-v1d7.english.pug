@@ -27,8 +27,8 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("realiseNotes.v1d7");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./RealiseNotes-v1d7.japanese.html",
-      russian: "./RealiseNotes-v1d7.russian.html"
+      japanese: routing.japanese.realiseNotes.$children.v1d7.$URI,
+      russian: routing.russian.realiseNotes.$children.v1d7.$URI
     });
 
 
@@ -46,6 +46,27 @@ block append SpecificContent
     h1.Article-Heading1 Version 1.7 — Realize Notes
 
     h2.Article-Heading2 Core Package (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 New Functionality
+
+    h4.Article-Heading4 Working With Arrays
+
+    ul.Article-UnorderedList
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            other.$children.addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.$URI
+      }) addElementsToArrayIfTheyAreNotPresentOtherwiseRemove
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            creating.$children.createArrayOfNaturalNumbers.$URI
+      }) createArrayOfNaturalNumbers
+
+      li: +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.arrays.$children.
+            retrievingOfSubarrays.$children.cropArray.$URI
+      }) cropArray
 
     h3.Article-Heading3 Breaking Changes
 
@@ -104,25 +125,27 @@ block append SpecificContent
         and #[code getExpectedToBeSingleChildOfTemplateElement]
 
     p.Article-Paragraph.
-      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] has
+      Previously, the #[+Keyword--YDID sole] #[+Keyword--YDID object-type] #[+Term--YDID parameter] had
         #[+Keyword__Contrast--YDID optional] #[+Keyword--YDID polymorphic] #[+Term--YDID property]
         #[+ImportantEntity__Code--YDID context] which, if defined, #[+Keyword--YDID must] have #[+Term--YDID type]
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }).Article-Link Element],
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }).Article-Link Document] or
-        derived from them.
-      Now, this #[+Term--YDID property] has been replaced with #[+ImportantEntity__Code--YDID contextElement],
-        which #[+Keyword--YDID also] #[+Keyword__Contrast--YDID polymorphic], but now has
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Element }) Element],
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.mdn.DOM.Document }) Document] or the one
+        derived from the one of them.
+      Now, this #[+Term--YDID property] has been #[+Keyword--YDID replaced] with
+        #[+ImportantEntity__Code--YDID contextElement], which #[+Keyword--YDID also]
+        #[+Keyword__Contrast--YDID polymorphic], but now has
         #[+ImportantEntity__Code--YDID ParentNode | Readonly&lt;{ selector: string; }&gt;] type, due to what besides
         the specifying of the context #[+Term--YDID element] itself it has become possible to specify its
         #[+Term--YDID selector].
       However, if the #[+Term--YDID selector] of context #[+Term__Contrast--YDID element] specified,
         #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to it,
-        otherwise #[+Term--YDID error] will be thrown (#[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError]
-        if #[+Term--YDID element] not&nbsp;found, or #[+ImportantEntity__Code--YDID UnexpectedEventError], if two
-        or more #[+Term--YDID elements] found).
+        #[+Keyphrase--YDID otherwise #[+Term--YDID error] will be thrown] (
+        #[+ImportantEntity__Code--YDID DOM_ElementRetrievingFailedError] if #[+Term--YDID element] not&nbsp;found,
+        or #[+ImportantEntity__Code--YDID UnexpectedEventError], if #[+Keyword--YDID two] #[+Keyword__Contrast--YDID or]
+        #[+Keyword--YDID more] #[+Term--YDID elements] found).
       Because #[+Keyword--YDID both] #[+ImportantEntity__Code--YDID Element] and #[+ImportantEntity__Code--YDID Document]
-        are inherited from #[+ImportantEntity__Code--YDID ParentNode], the new type of new #[+Term--YDID property] is
-        compatible with old one.
+        are #[+Term--YDID inherited] from #[+ImportantEntity__Code--YDID ParentNode], the new #[+Term--YDID type] of the
+        #[+Keyword--YDID new] #[+Term--YDID property] is #[+Keyword--YDID compatible] with the old one.
 
     dl.Article-DescriptionList
 
@@ -136,7 +159,7 @@ block append SpecificContent
         |
         +Link--YDF({
           endorsedExternalURI: sharedExternalLinks.otherLibraries.yamatoDaiwa.frontend
-        }).Article-Link Yamato Daiwa Frontend
+        }) Yamato Daiwa Frontend
         |
         | library for the frontend development).
 
@@ -151,34 +174,107 @@ block append SpecificContent
         Rename #[+ImportantEntity__Code--YDID context] #[+Term--YDID property] to
           #[+ImportantEntity__Code--YDID contextElement] in all files of your project.
         If it will be good for you to specify the #[+Term--YDID selector] of the context #[+Term--YDID element] instead
-          of context #[+Term--YDID element] itself, you may refactor the calling of these function using the newest
-          #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one]
-          #[+Term--YDID element] must correspond to specified #[+Term--YDID selector],
-          #[+Keyphrase--YDID otherwise the error will be thrown].
+          of context #[+Term--YDID element] itself, you may refactor the occurrences of the calling of this
+          #[+Term--YDID function] using the newest #[+ImportantEntity--YDID API], herewith #[+Keyword--YDID exactly]
+          #[+Keyword__Contrast--YDID one] #[+Term--YDID element] must correspond to specified #[+Term--YDID selector] of
+          the #[+Keyword--YDID context] #[+Term--YDID element],
+          #[+Keyphrase--YDID otherwise the #[+Term--YDID error] will be thrown].
 
+
+    h4.Article-Heading4 Events Handling
+
+    h5.Article-Heading5 Changes of #[code addLeftClickEventHandler] Parameter
+
+    p.Article-Paragraph.
+      As previously, this #[+Term--YDID function] has #[+Keyword--YDID single] #[+Term--YDID parameter] of the
+        #[+Term--YDID «object»] type, but its #[+Term--YDID properties] has #[+Keyword--YDID changed]:
+
+    dl.Article-DescriptionList
+
+      dt Removing of #[+ImportantEntity__Code--YDID targetElementSelector]
+      dd.
+        #[+Keyword--YDID Deleted] in exchange to the turing of #[+ImportantEntity__Code--YDID targetElement]
+          #[+Term--YDID property] to #[+Keyword--YDID polymorphic].
+        Now the #[+Term--YDID selector] of target #[+Term--YDID element] #[+Keyword--YDID must] be specified via
+          #[+Keyword--YDID string] #[+Term--YDID property] #[+ImportantEntity__Code--YDID selector] of the
+          #[+ImportantEntity__Code--YDID targetElement] #[+Term--YDID object].
+        Herewith #[+Keyphrase--YDID as previously], if target #[+Term--YDID element] is been specified via
+          #[+Term--YDID selector], it is #[+Keyword--YDID required] to specify via #[+Keyphrase--YDID one of]
+          #[+ImportantEntity__Code--YDID mustApplyToAllMatchingsWithSelector],
+          #[+ImportantEntity__Code--YDID mustIgnoreSubsequentMatchingsWithSelector] or
+          #[+ImportantEntity__Code--YDID mustExpectExactlyOneMatchingWithSelector] #[+Term--YDID properties]
+          how the #[+Term--YDID function] must to behave when more than one #[+Term--YDID element] detected for
+          specified #[+Term--YDID selector].
+
+      dt Adding of #[+ImportantEntity__Code--YDID contextElement]
+      dd.
+        If #[+ImportantEntity__Code--YDID targetElementSelector] #[+Term--YDID property] has been specified then it is
+          possible to specify #[+Keyword--YDID additionally] the #[+Keyword--YDID context] #[+Term--YDID element] inside
+          which target #[+Term--YDID element] will be searched via new #[+ImportantEntity__Code--YDID contextElement]
+          #[+Term--YDID property].
+        As in the #[+ImportantEntity__Code--YDID targetElementSelector] case, it is possible to specify either the
+          #[+Term--YDID instance] of #[+Term__Contrast--YDID element] or the #[+Term--YDID selector], however
+          in the #[+Keyword--YDID second] scenario the #[+Term__Contrast--YDID selector] #[+Keyword--YDID must] refer to
+          #[+Keyword--YDID exactly] #[+Keyword__Contrast--YDID one] #[+Term--YDID element],
+          #[+Keyphrase--YDID otherwise the #[+Term--YDID error] will be thrown].
+
+      dt.
+        Replacing of #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers] with
+          #[+ImportantEntity__Code--YDID eventPropagation]
+      dd.
+
+        Thanks to the new #[+Keyword--YDID polymorphic] #[+Term--YDID property]
+          #[+ImportantEntity__Code--YDID eventPropagation] it is possible to specify not&nbsp;only the type of the
+          #[+Term--YDID event propagation], but also #[+Keyword--YDID prevent] this #[+Term--YDID event propagation].
+        Although the #[+Term--YDID elements] of #[+ImportantEntity__Code--YDID eventPropagation]
+          #[+Term--YDID enumeration] namely #[+ImportantEntity__Code--YDID EventPropagationTypes.capturing]
+          and #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling] seems to be less
+          understandable, the #[+Term--YDID capturing] (moving #[+Keyword--YDID down] of the #[+Term--YDID DOM tree])
+          and #[+Term--YDID bubbling] (moving #[+Keyword--YDID up] of the #[+Term--YDID DOM tree]) are the
+          #[+Keyword--YDID canonical] terms, and the usage of canonical terminology
+          does #[+Keyword--YDID not]&nbsp;indicate the low quality of #[+ImportantEntity--YDID API].
+
+      dt Reasons
+      dd
+
+        ul.Article-UnorderedList
+
+          li Partial unification with the #[+ImportantEntity--YDID API] of another #[+Term--YDID functions]
+          li.
+            The demand in specifying of the #[+Term--YDID selector] of target element inside the specific parent element.
+          li The demand in more flexible control on #[+Term--YDID event propagation]
+
+      dt Changes in your code will required if
+      dd
+
+        p.Article-Paragraph.
+          One ore more of the following #[+Term--YDID properties] of the single #[+Term--YDID parameter] are being used:
+
+        ul.Article-UnorderedList
+          li #[+ImportantEntity__Code--YDID targetElementSelector]
+          li #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers]
+
+      dt Migration
+      dd
+
+        ul.Article-UnorderedList
+
+          li.
+            Rename the #[+ImportantEntity__Code--YDID targetElementSelector] #[+Term--YDID property] to
+              #[+ImportantEntity__Code--YDID targetElement], then place the #[+Term--YDID string literal] with the
+              #[+Term__Contrast--YDID selector] or the #[+Term--YDID variable] containing this #[+Term--YDID literal]
+              to the child #[+Term--YDID object] with #[+ImportantEntity__Code--YDID selector] #[+Term--YDID property].
+            For example, #[+SecondaryEntity__Code--YDID targetElementSelector: ".Card-SavingButton"] will become to
+              #[+SecondaryEntity__Code--YDID targetElement: { selector: ".Card-SavingButton"}].
+
+          li.
+            If #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true] has been specified in your code,
+              then replace it with #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.capturing].
+
+          li.
+            If #[+ImportantEntity__Code--YDID mustInvokeBeforeChildren_sHandlers: true] has been specified in your code,
+              then то замените это на #[+ImportantEntity__Code--YDID eventPropagation: EventPropagationTypes.bubbling].
     //-
-
-      h3.Article-Heading3 New Functionality
-
-      h4.Article-Heading4 Working With Arrays
-
-      ul.Article-UnorderedList
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              creating.$children.
-              createArrayOfNaturalNumbers.$URI
-        }).Article-Link createArrayOfNaturalNumbers
-
-        li: +Link--YDF({
-          internalURI: localizedRouting.coreLibrary.$children.
-              functionality.$children.
-              arrays.$children.
-              removingOfElements.$children.
-              cropArray.$URI
-        }).Article-Link cropArray
 
       h4.Article-Heading4 Pagination
 
@@ -189,14 +285,14 @@ block append SpecificContent
               functionality.$children.
               pagination.$children.
               PaginationCollection.$URI
-        }).Article-Link getItemsOfPaginationPage
+        }) getItemsOfPaginationPage
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.
               functionality.$children.
               pagination.$children.
               PaginationCollection.$URI
-        }).Article-Link PaginationCollection
+        }) PaginationCollection
 
 
       h4.Article-Heading4 Working with strings
@@ -205,7 +301,7 @@ block append SpecificContent
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.functionality.$children.strings.$children.other.cropString.$URI
-        }).Article-Link cropString
+        }) cropString
 
 
       h4.Article-Heading4 Working with files
@@ -214,7 +310,7 @@ block append SpecificContent
 
         li: +Link--YDF({
           internalURI: localizedRouting.coreLibrary.$children.functionality.$children.files.$children.encodeFileToBase64.$URI
-        }).Article-Link encodeFileToBase64
+        }) encodeFileToBase64
 
 
       h3.Article-Heading3 Improvements

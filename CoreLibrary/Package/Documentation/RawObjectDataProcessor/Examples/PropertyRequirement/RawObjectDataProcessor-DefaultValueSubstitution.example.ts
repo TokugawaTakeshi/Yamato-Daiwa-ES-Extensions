@@ -11,7 +11,7 @@ const sample: unknown = {};
 
 const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     foo: {
       type: String,
@@ -23,7 +23,7 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
 const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
     RawObjectDataProcessor.process(sample, validDataSpecification);
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   // Process the validation errors ...
 } else {
   console.log(processingResult.processedData.foo);

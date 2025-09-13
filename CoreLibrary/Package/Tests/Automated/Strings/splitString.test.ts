@@ -1,10 +1,11 @@
-import { splitString } from "../../../Source";
+import { splitString, Logger } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("splitString", (): void => {
-
-  it("Surrogate pairs support works", (): void => {
+Testing.test(
+  "Surrogate pairs support works",
+  (): void => {
 
     const sample: string = "😀😃😁😆";
 
@@ -12,6 +13,5 @@ describe("splitString", (): void => {
 
     Assert.notDeepStrictEqual(splitString(sample, ""), sample.split(""));
 
-  });
-
-});
+  }
+).catch(Logger.logPromiseError);

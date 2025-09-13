@@ -16,7 +16,9 @@
 
     "outDir": "Distributable/",
     "declaration": true
+
   },
 
   "include": [ "Source/**/*" ]
+
 }

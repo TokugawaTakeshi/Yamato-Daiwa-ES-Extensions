@@ -1,4 +1,4 @@
-import removeArrayElementsByIndexes from "../Arrays/removeArrayElementsByIndexes";
+import removeArrayElementsByIndexes from "../Arrays/07-RemovingOfElements/removeArrayElementsByIndexes";
 
 
 export default function removeSpecificCharacterFromCertainPosition(

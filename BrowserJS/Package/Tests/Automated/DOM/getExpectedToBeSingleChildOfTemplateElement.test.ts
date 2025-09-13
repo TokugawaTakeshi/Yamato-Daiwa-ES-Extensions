@@ -3,23 +3,27 @@ import {
   createDOM_ElementFromHTML_Code,
   getExpectedToBeSingleDOM_Element
 } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
+import { Logger } from "@yamato-daiwa/es-extensions";
 import provideMockBrowserEnvironment from "jsdom-global";
 
 
 /* [ Waring ] Currently, the tests does not work because of JSDOM issue.
 *  https://github.com/jsdom/jsdom/issues/1769  */
-describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
 
-  provideMockBrowserEnvironment();
+provideMockBrowserEnvironment();
 
-  const sampleDOM: Element = createDOM_ElementFromHTML_Code(
-    "<div><template id='CardTemplate'><li class='Card'></li></template></div>"
-  );
 
-  describe("Simplest usage", (): void => {
+const sampleDOM: Element = createDOM_ElementFromHTML_Code(
+  "<div><template id='CardTemplate'><li class='Card'></li></template></div>"
+);
 
-    it("Retrieving by pre-picked HTML element", (): void => {
+Promise.all([
+
+  Testing.test(
+    "Retrieving by pre-picked HTML element",
+    (): void => {
 
       const templateElement: HTMLTemplateElement = getExpectedToBeSingleDOM_Element({
         selector: "#CardTemplate",
@@ -32,9 +36,12 @@ describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
         "Card"
       );
 
-    });
+    }
+  ),
 
-    it("Retrieving by selector", (): void => {
+  Testing.test(
+    "Retrieving by selector",
+    (): void => {
 
       Assert.strictEqual(
         getExpectedToBeSingleChildOfTemplateElement({
@@ -44,8 +51,7 @@ describe("getExpectedToBeSingleChildOfTemplateElement", (): void => {
         "Card"
       );
 
-    });
+    }
+  )
 
-  });
-
-});
+]).catch(Logger.logPromiseError);

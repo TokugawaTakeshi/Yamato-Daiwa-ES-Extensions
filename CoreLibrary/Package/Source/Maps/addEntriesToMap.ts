@@ -2,7 +2,7 @@ export default function addEntriesToMap<Key, Value>(
   compoundParameter: Readonly<
     (
       {
-        mutably: true;
+        mutably?: true;
         targetMap: Map<Key, Value>;
       } |
       {
@@ -32,8 +32,8 @@ export default function addEntriesToMap<Key, Value>(
     newEntries = [ [ compoundParameter.newKey, compoundParameter.newValue ] ];
   }
 
-  const workpiece: Map<Key, Value> = compoundParameter.mutably ?
-      compoundParameter.targetMap : new Map(compoundParameter.targetMap);
+  const workpiece: Map<Key, Value> = compoundParameter.mutably === false ?
+      new Map(compoundParameter.targetMap) : compoundParameter.targetMap;
 
   for (const [ key, value ] of newEntries) {
     workpiece.set(key, value);

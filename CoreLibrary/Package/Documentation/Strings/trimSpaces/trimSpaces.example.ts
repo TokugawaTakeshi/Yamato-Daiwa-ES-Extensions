@@ -1,5 +1,4 @@
-/* [ ESLint muting rationale ] Comments are for documentation. */
-/* eslint-disable no-inline-comments */
+/* eslint-disable no-inline-comments -- Comments are for documentation. */
 
 import { trimSpaces, SpaceCharacters } from "../../../Source";
 

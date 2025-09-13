@@ -2,7 +2,7 @@ import {
   RawObjectDataProcessor,
   Logger,
   InvalidExternalDataError,
-  ArbitraryObject
+  type ArbitraryObject
 } from "../../../../Source";
 
 
@@ -15,7 +15,7 @@ const sample: unknown = { hasSwimmingPool: true };
 
 const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   nameForLogging: "Example",
-  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+  subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
   properties: {
     hasSwimmingPool: {
       type: Boolean,
@@ -37,12 +37,12 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
 const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
     RawObjectDataProcessor.process(sample, validDataSpecification);
 
-if (processingResult.rawDataIsInvalid) {
+if (processingResult.isRawDataInvalid) {
   Logger.logError({
     errorType: InvalidExternalDataError.NAME,
-    title: InvalidExternalDataError.DEFAULT_TITLE,
+    title: InvalidExternalDataError.localization.defaultTitle,
     description: "The 'sample' is invalid.\n" +
-        `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
+        RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages),
     occurrenceLocation: "Top-level scope"
   });
 }

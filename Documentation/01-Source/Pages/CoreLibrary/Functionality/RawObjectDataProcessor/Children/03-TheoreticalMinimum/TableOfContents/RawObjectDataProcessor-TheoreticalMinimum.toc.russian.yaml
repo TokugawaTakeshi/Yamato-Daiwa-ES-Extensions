@@ -1,0 +1,19 @@
+objectLikeDataClassification:
+
+  $heading: "Классификация объектных данных"
+
+  fixedSchema:
+
+    $heading: "Объекты фиксированной структуры"
+
+  associativeArrays:
+
+    $heading: "Объекты типа «ассоциативный массив»"
+
+  indexedArrays:
+
+    $heading: "Индексные массивы"
+
+  tuples:
+
+    $heading: "Кортежи"

@@ -1,0 +1,7 @@
+nativeApproaches:
+
+  $heading: "ライブ無しの方法"
+
+rawObjectDataProcessorApproach:
+
+  $heading: "<code>RawObjectDataProcessor</code>方法論"

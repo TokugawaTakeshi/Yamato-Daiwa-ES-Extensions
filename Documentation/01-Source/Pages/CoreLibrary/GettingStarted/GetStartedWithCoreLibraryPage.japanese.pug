@@ -29,11 +29,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./GetStartedWithCoreLibraryPage.english.html",
-      russian: "./GetStartedWithCoreLibraryPage.russian.html"
+      english: routing.english.coreLibrary.$children.gettingStarted.$URI,
+      russian: routing.russian.coreLibrary.$children.gettingStarted.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.gettingStarted;
 
     const externalLinks = {
       stackOverflow: {
@@ -56,18 +59,18 @@ block append SpecificContent
     //- ━━━ 早速着手 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 1,
-      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading
     }).Article-Heading1
 
-    //- ━━━ 導入 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ 導入 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.installation.$heading,
-      HTML_ID: pageTableOfContents.installation.$anchor
+      text: localizedSectioning.installation.$heading,
+      HTML_ID: localizedSectioning.installation.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
-      導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm]
+      導入手順は通常の方法であり、#[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }) npm]
         #[+Term--YDID パッケージマネージャー]に依り実行。
 
     +CodeViewer--YDF({
@@ -78,19 +81,19 @@ block append SpecificContent
       }) npm i @yamato-daiwa/es-extensions -E
 
 
-    //- ━━━ 配布容量関連 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ 配布容量関連 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.distributiveVolumeNotice.$heading,
-      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+      text: localizedSectioning.distributiveVolumeNotice.$heading,
+      HTML_ID: localizedSectioning.distributiveVolumeNotice.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph
-      +Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions" }).Article-Link npm公式サイト
+      +Link--YDF({ unendorsedExternalURI: "sharedExternalLinks.npm.YDES_Extensions.corePackage" }) npm公式サイト
       | の
       +Link--YDF({
-        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions
-      }).Article-Link @yamato-daiwa/es-extensionsのページ
+        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.corePackage
+      }) @yamato-daiwa/es-extensionsのページ
       | では、当#[+Term--YDID パッケージ]の圧縮されていない状態の容量（「Unpacked Size」）が表示されている。
       | 例えば、バージョン#[+SecondaryEntity--YDID 1.5.8]の場合は698キロバイトである。
 
@@ -119,8 +122,8 @@ block append SpecificContent
         #[+Term--YDID 本番用構成]からライブラリで使われなかった機能を#[+Keyword--YDID 除外]する事が重要だ。
 
     p.Article-Paragraph.
-      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack]の場合、此の機能は
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link 「Tree shaking」]と呼ぶ。
+      #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }) Webpack]の場合、此の機能は
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }) 「Tree shaking」]と呼ぶ。
       #[+Keyphrase--YDID 本番用構成モードで]此れを有効化するには、
         #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference }) TypeScript設定]
         で#[+ImportantEntity--YDID ES系]の#[+Term--YDID モジュール]を指定しなければいけない。
@@ -137,11 +140,11 @@ block append SpecificContent
       特に、ライブラリのごく一部分のみ使われている様な場合だ。
 
 
-    //- ━━━ TypeScriptの非利用者に対する注意事項 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ TypeScriptの非利用者に対する注意事項 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
-      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+      text: localizedSectioning.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: localizedSectioning.nonTypeScriptUsageWarning.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
@@ -173,7 +176,7 @@ block append SpecificContent
       |   #[+Keyphrase--YDID 数倍に膨れ上がると言っても過言ではない]（
       +Link--YDF({
         unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript
-      }).Article-Link 具体例を参照
+      }) 具体例を参照
       |   )。
 
     p.Article-Paragraph.
@@ -185,11 +188,11 @@ block append SpecificContent
       だが#[+Keyphrase--YDID エラーメッセージから原因が判明するとは限らず]、「ライブラリのせいだ」等と#[+Keyword--YDID 誤解]される事態も予想される。
 
 
-    //- ━━━ 機能のインポート ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    //- ━━━ 機能のインポート ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.importingFunctionality.$heading,
-      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+      text: localizedSectioning.importingFunctionality.$heading,
+      HTML_ID: localizedSectioning.importingFunctionality.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.

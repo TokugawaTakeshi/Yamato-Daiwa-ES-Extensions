@@ -4,7 +4,7 @@ import hasStringOnlySpecificCharacters from "../../Strings/hasStringOnlySpecific
 
 export default function convertPotentialStringToNumberIfPossible(rawValue: unknown): unknown {
 
-  if (!isString(rawValue) || !hasStringOnlySpecificCharacters(rawValue, { digits: true, other: "." })) {
+  if (!isString(rawValue) || !hasStringOnlySpecificCharacters(rawValue, { digits: true, other: [ "-", "." ] })) {
     return rawValue;
   }
 

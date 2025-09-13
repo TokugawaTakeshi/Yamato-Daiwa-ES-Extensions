@@ -34,11 +34,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("nodeJS.utils.ConsoleCommandsParser");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./ConsoleCommandsParser.english.html",
-      russian: "./ConsoleCommandsParser.russian.html"
+      english: routing.english.nodeJS.$children.utils.$children.ConsoleCommandsParser.$URI,
+      russian: routing.russian.nodeJS.$children.utils.$children.ConsoleCommandsParser.$URI
     });
 
-    const pageTableOfContents = localizedRouting.nodeJS.$children.utils.$children.ConsoleApplicationLogger.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.nodeJS.$children.utils.$children.ConsoleCommandsParser;
 
 
 block append HeadScripts
@@ -52,9 +55,10 @@ block append SpecificContent
 
   article
 
-    h1.Article-Heading1 #[code ConsoleCommandsParser]クラス
+    //- ━━━ ConsoleCommandsParser`クラス` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= topHeading
 
-    +CompactTableOfContents--YDF_DK(pageTableOfContents, { mustApplyAnchorsInsteadOfURIs: true })
+    +CompactTableOfContents--YDF_DK(localizedSectioning, { mustApplyAnchorsInsteadOfURIs: true })
 
     p.Article-Paragraph.
       #[+Term--YDID コンソールコマンド]の#[+Term__Contrast--YDID 引数ベクトル]の処理、バリデーションそして#[+Term--YDID オブジェクト系]の特定の
@@ -65,8 +69,8 @@ block append SpecificContent
     //- ━━━ デモ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.demo.$heading,
-      HTML_ID: pageTableOfContents.demo.$anchor
+      text: localizedSectioning.demo.$heading,
+      HTML_ID: localizedSectioning.demo.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
@@ -82,8 +86,8 @@ block append SpecificContent
     //- ━━━ 最低限の理論 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.minimalTheory.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$anchor
+      text: localizedSectioning.minimalTheory.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph
@@ -92,7 +96,7 @@ block append SpecificContent
       | 事実上、#[+ImportantEntity--YDID Node.js]の#[+ImportantEntity__Code--YDID process.argv]（#[+Term--YDID 「引数ベクトル」]、
       +Link--YDF({
         unendorsedExternalURI: "https://stackoverflow.com/q/3024197/4818123"
-      }).Article-Link C++言語から継承された概念
+      }) C++言語から継承された概念
       | ）は#[+Term--YDID 文字列]の#[+Term__Contrast--YDID 配列]に過ぎない。
       | 此れをどうすれば良いか、開発者か其の依頼側か（其の両方か）が決めている。
 
@@ -108,8 +112,8 @@ block append SpecificContent
     //- ─── 条約的な用語 ─────────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$anchor
+      text: localizedSectioning.minimalTheory.$children.conventionalTerminology.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.conventionalTerminology.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -180,8 +184,8 @@ block append SpecificContent
     //- ─── 「コマンドフレーズ」用語 ────────────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$anchor
+      text: localizedSectioning.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.conventionalTerminology.$children.commandPhrase.$anchor
     }).Article-Heading4
 
     p.Article-Paragraph.
@@ -209,8 +213,8 @@ block append SpecificContent
     //- ─── TypeScriptの差別化組合せ ──────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$heading,
-      HTML_ID: pageTableOfContents.minimalTheory.$children.TypeScriptDiscriminatedUnions.$anchor
+      text: localizedSectioning.minimalTheory.$children.TypeScriptDiscriminatedUnions.$heading,
+      HTML_ID: localizedSectioning.minimalTheory.$children.TypeScriptDiscriminatedUnions.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -371,15 +375,15 @@ block append SpecificContent
     //- ━━━ コマンドラインインターフェース（CLI）開発　｜　段階的な案内 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.stepwiseGuide.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$anchor
+      text: localizedSectioning.stepwiseGuide.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$anchor
     }).Article-Heading2
 
     //- ─── ①　コマンドフレーズの初期揃いの決定 ─────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.initialCommandPhrasesSet.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.initialCommandPhrasesSet.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.initialCommandPhrasesSet.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -432,8 +436,8 @@ block append SpecificContent
     //- ─── ②　各コマンドフレーズのオプションの決定 ────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.commandPhrasesOptions.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.commandPhrasesOptions.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.commandPhrasesOptions.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -490,7 +494,7 @@ block append SpecificContent
                   functionality.$children.
                   types.$children.
                   ParsedJSON_AndRelated.$URI
-            }).Article-Link ParsedJSON
+            }) ParsedJSON
             | 系の#[+Term--YDID オブジェクト]
 
         p.Article-Paragraph.
@@ -525,8 +529,8 @@ block append SpecificContent
     //- ─── ③　コンソールアプリケーションの仕様を定義 ──────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.consoleApplicationSpecification.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.consoleApplicationSpecification.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.consoleApplicationSpecification.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -598,9 +602,9 @@ block append SpecificContent
     //- ─── 各コマンドフレーズのオプションの定義 ───────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 4,
-      text: pageTableOfContents.
+      text: localizedSectioning.
           stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$heading,
-      HTML_ID: pageTableOfContents.
+      HTML_ID: localizedSectioning.
           stepwiseGuide.$children.consoleApplicationSpecification.$children.optionsSpecification.$anchor
     }).Article-Heading4
 
@@ -648,11 +652,11 @@ block append SpecificContent
     //- ─── 文字列型オプションの特別なプロパティ ─────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfStringOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfStringOptions.$anchor
@@ -668,11 +672,11 @@ block append SpecificContent
     //- ─── 数型オプションの特別なプロパティ ─────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfNumericOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfNumericOptions.$anchor
@@ -725,11 +729,11 @@ block append SpecificContent
     //- ─── オブジェクト型オプションの特別なプロパティ ───────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 5,
-      text: pageTableOfContents.stepwiseGuide.$children.
+      text: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfObjectOptions.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.
           consoleApplicationSpecification.$children.
           optionsSpecification.$children.
           specialPropertiesOfObjectOptions.$anchor
@@ -743,14 +747,10 @@ block append SpecificContent
     p.Article-Paragraph
       | 当#[+Term--YDID プロパティ]は
       |
+      //- TODO Replace to internal link once ready
       +Link--YDF({
-        endorsedExternalURI: localizedRouting.coreLibrary.$children.
-            functionality.$children.
-            RawObjectDataProcessor.$sectioning.
-            API.$children.
-            types.$children.
-            PropertiesSpecification.$URI
-      }).Article-Link RawObjectDataProcessor.PropertiesSpecification型
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#propertiesspecification-and-related---object-properties-specification"
+      }) RawObjectDataProcessor.PropertiesSpecification型
       |   と成り、主要パッケージから再利用され、#[+Term--YDID コマンドフレーズ]の#[+Term__Contrast--YDID オプション]の定義に似ているが、
       |   #[+ImportantEntity--YDID RawObjectDataProcessor]#[+Term--YDID クラス]の#[+Term__Contrast--YDID API]
       |   が使われている。
@@ -759,8 +759,8 @@ block append SpecificContent
     //- ─── ④　コンソールコマンド処理ロジックの作成 ────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.logic.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.logic.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.logic.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.logic.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph.
@@ -837,14 +837,14 @@ block append SpecificContent
     //- ─── ⑤ 名前でアプリケーションを実行 ─────────────────────────────────────────────────────────────────────────────────────
     +Heading--YDF({
       level: 3,
-      text: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
-      HTML_ID: pageTableOfContents.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
+      text: localizedSectioning.stepwiseGuide.$children.launchingOfApplicationByName.$heading,
+      HTML_ID: localizedSectioning.stepwiseGuide.$children.launchingOfApplicationByName.$anchor
     }).Article-Heading3
 
     p.Article-Paragraph
       | 現在、アプリケーションが#[+Keyphrase--YDID ファイルパスを指定し]
       |
-      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.tsNode.homePage.top }).Article-Link ts-node
+      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.tsNode.homePage.top }) ts-node
       |   で既に実行出来る、例えば
 
     +CodeViewer--YDF
@@ -981,7 +981,7 @@ block append SpecificContent
       |
       +Link--YDF({
         unendorsedExternalURI: sharedExternalLinks.npm.packageJSON.bin
-      }).Article-Link npmのオフィシャル説明サイト
+      }) npmのオフィシャル説明サイト
       | で確認可能。
 
     p.Article-Paragraph
@@ -992,7 +992,7 @@ block append SpecificContent
       | #[+ImportantEntity--YDID npm]のオフィシャルサイトでは、
       +Link--YDF({
         unendorsedExternalURI: sharedExternalLinks.npm.guides.minimalPackageJSON
-      }).Article-Link 関連している案内
+      }) 関連している案内
       | が有る。
 
     //-
@@ -1002,11 +1002,11 @@ block append SpecificContent
         |   で導入可能に成り、
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfLocalNPM_PackageByRelativePath
-        }).Article-Link 相対パス
+        }) 相対パス
         | や#[+Term--YDID バージョン管理システム]の
         +Link--YDF({
           unendorsedExternalURI: sharedExternalLinks.stackOverflow.installationOfNPM_PackageByCommitNumber
-        }).Article-Link コミットに参照
+        }) コミットに参照
         | する事も可能。
         | 何れかの方法でユーティリテを別のプロジェクトに導入すれば、下記の様に当プロジェクトの#[+ImportantEntity--YDID package.json]で宣言された
         |   #[+Term--YDID npmスクリプト]を介して、呼び出す事が出来る様に成る。

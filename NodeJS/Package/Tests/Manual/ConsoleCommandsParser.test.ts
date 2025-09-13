@@ -122,13 +122,16 @@ namespace ApplicationConsoleLineInterface {
             validValueSpecification: {
               foo: {
                 type: RawObjectDataProcessor.ValuesTypesIDs.string,
-                required: true,
+                isUndefinedForbidden: true,
+                isNullForbidden: true,
                 minimalCharactersCount: 1
               },
               bar: {
                 type: RawObjectDataProcessor.ValuesTypesIDs.number,
                 numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
-                required: false,
+                isNaN_Forbidden: true,
+                isUndefinedForbidden: false,
+                isNullForbidden: true,
                 minimalValue: 1
               }
             }

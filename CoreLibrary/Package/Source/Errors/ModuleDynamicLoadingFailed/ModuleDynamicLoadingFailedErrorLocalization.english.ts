@@ -2,7 +2,7 @@ import type ModuleDynamicLoadingFailedError from "./ModuleDynamicLoadingFailedEr
 
 
 const moduleDynamicLoadingFailedErrorLocalization__english: ModuleDynamicLoadingFailedError.Localization = {
-  defaultTitle: "Module dynamic loading failure",
+  defaultTitle: "Module Dynamic Loading Failed",
   generateDescription: (
     { modulePath }: ModuleDynamicLoadingFailedError.Localization.DescriptionTemplateNamedParameters
   ): string => `The dynamic loading of module "${ modulePath }" failed.`

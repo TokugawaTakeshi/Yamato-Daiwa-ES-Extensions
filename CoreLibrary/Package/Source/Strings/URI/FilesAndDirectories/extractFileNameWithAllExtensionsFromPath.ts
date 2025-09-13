@@ -1,7 +1,7 @@
 import replaceDoubleBackslashesWithForwardSlashes from "../../replaceDoubleBackslashesWithForwardSlashes";
 import splitString from "../../splitString";
-import getLastElementOfArray from "../../../Arrays/getLastElementOfArray";
-import isNull from "../../../TypeGuards/Nullables/isNull";
+import getLastElementOfArray from "../../../Arrays/01-RetrievingOfElements/getLastElementOfArray";
+import isNull from "../../../TypeGuards/EmptyTypes/isNull";
 import Logger from "../../../Logging/Logger";
 import UnexpectedEventError from "../../../Errors/UnexpectedEvent/UnexpectedEventError";
 
@@ -22,7 +22,7 @@ export default function extractFileNameWithAllExtensionsFromPath(
 
     if (compoundParameter.mustThrowErrorIfLastPathSegmentHasNoDots) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new UnexpectedEventError(
           `Contrary to expectations, the last segment of "${ targetPath }" path does not include the dots.`
         ),

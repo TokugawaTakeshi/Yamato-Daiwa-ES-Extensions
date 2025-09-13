@@ -1,0 +1,528 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview;
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
+        description: ""
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.problemOverview");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- ━━━ `RawObjectDataProcessor` — Обзор проблематики ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
+
+    p.Article-Paragraph.
+      Работа с #[+Keyword--YDID неизвестными] #[+Term--YDID заранее] #[+Keyphrase--YDID внешними] данными — одна из
+        #[+Keyword--YDID базовых] задач программирования.
+      Такими внешними данными могут быть:
+
+    ul.Article-UnorderedList
+      li Данные, полученные с клиентской части в клиент-серверном взаимодействии
+      li Наоборот, данные с серверной части в клиент-серверном взаимодействии
+      li Данные из базы данных
+      li Данные из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+
+    p.Article-Paragraph.
+      Поскольку такие данные находятся вне досягаемости #[+ImportantEntity--YDID TypeScript], то
+        #[+Keyword--YDID изначально] имеют #[+Term--YDID тип] #[+ImportantEntity__Code--YDID unknown] или, что ещё хуже,
+        #[+ImportantEntity__Code--YDID any].
+
+    p.Article-Paragraph.
+      Как обычно действуют в данной ситуации?
+      К сожалению, зачастую не так, как надлежит при написании качественного кода.
+      Если при получении данных с клиентской части при клиент-серверном взаимодействии #[+Term--YDID валидация] данных
+        считается #[+Keyphrase--YDID мерой безопасности], а потому осуществляется, то во многих других случаях, например
+        при получении данных с сервера этим данным просто доверяют, а потому помечают их желаемым типом:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+
+        fetch("http://example.com/users/1").
+            then((response: Response): void => response.json()).
+            then((data: unknown) => {
+
+              // Это пример ПЛОХОГО кода. НЕ ПОДРАЖАЙТЕ ЕМУ!!!
+              const user: User = data as User;
+
+              const fullName: string = `${user.givenName} ${user.familyName}`;
+              console.log(fullName);
+
+            });
+
+    p.Article-Paragraph.
+      Как показывает практика, #[+Keyphrase--YDID в подавляющем большинстве] проектов среднего и крупного масштабов
+        случается расхождение между ожидаемыми и реальными данными, особенно если клиентская и серверная часть
+        разрабатываются на разных языках программирования и отдельными командами.
+      Число таких расхождений может быть очень большим — от нескольких десятков до нескольких сотен и даже тысяч.
+      Причиной тому может быть как элементарный человеческий фактор, так и отсутствие своевременного уведомления
+        причастных инженеров об изменении в данных.
+
+    p.Article-Paragraph.
+      А если Вы создаёте какую-либо утилиту с декларативной конфигурацией через файл
+        (обычно #[+ImportantEntity--YDID JSON], #[+ImportantEntity--YDID YAML] и т. д.) наподобие
+        #[+SecondaryEntity__Code--YDID docker compose], то там неверно указанная конфигурация является
+        #[+Keyword--YDID обычным] сценарием.
+      Поэтому перед тем, как работать в внешними данными, их #[+Keyword--YDID необходимо] валидировать, то есть проверить,
+        соответствуют ли реальные данные установленным ограничениям.
+
+
+    //- ━━━ Подходы без использования библиотек ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.nativeApproaches.$heading,
+      HTML_ID: localizedSectioning.nativeApproaches.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      #[+Term--YDID Защитники типов] — #[+Keyword--YDID нативная] функциональность #[+ImportantEntity--YDID TypeScript].
+      #[+Term--YDID Защитники типов] представляют собой #[+Term--YDID функции], возвращающие
+        #[+Keyword--YDID булевское] значение, при этом возвращаемое значение аннотируется #[+Keyword--YDID не]&nbsp;как
+        #[+ImportantEntity__Code--YDID boolean], а наподобие #[+ImportantEntity--YDID x is T], где
+        #[+ImportantEntity--YDID x] — #[+Term--YDID параметр], #[+Term__Contrast--YDID тип] которого предстоит
+        проверить, #[+ImportantEntity--YDID T] — желаемый #[+Term--YDID тип]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "ID" in rawData && rawData.ID === "string" &&
+              "familyName" in rawData && rawData.familyName === "string" &&
+              "givenName" in rawData && rawData.givenName === "string";
+        }
+
+    p.Article-Paragraph
+      | Помимо
+      |
+      +Link--YDF({
+        unendorsedExternalURI: "https://www.typescriptlang.org/docs/handbook/advanced-types.html"
+      }) документации TypeScript,
+      |
+      | #[+Term--YDID защитники типов] были хорошо разобраны в
+      |
+      +Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/blog/the-unknown-type-in-typescript" }) статье
+      |
+      | фронтенд-иженера #[+Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/about" }) Marius Schulz].
+      | Для нас важно что:
+
+    +AdmonitionBlock--YDF({
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.error
+    }).
+      Защитники типов #[+Keyword--YDID не]&nbsp;гарантируют, что в случае возврата #[+ImportantEntity__Code--YDID true]
+        #[+Keyword--YDID реальный] #[+Term--YDID тип] параметра будет соответствовать желаемому — это лишь
+        #[+Keyword--YDID просьба] #[+ImportantEntity--YDID TypeScript]-у поверить, что это так.
+      В реальности же всё то, что осуществляются в #[+Term--YDID теле] #[+Term__Contrast--YDID функции-защитника],
+        #[+Keyphrase--YDID может вообще #[+Keyword--YDID не]&nbsp;иметь никакого отношения к желаемому #[+Term--YDID типу]].
+
+    p.Article-Paragraph.
+      Вот пример #[+Keyword--YDID ошибочного] кода, в котором #[+Term--YDID защитник]
+        #[+SecondaryEntity__Code--YDID isUser] #[+Term--YDID типа] #[+SecondaryEntity__Code--YDID User] проверят у
+        #[+Term--YDID параметра] те #[+Term__Contrast--YDID поля], которые вообще #[+Keyword--YDID не]&nbsp;имеют
+        отношения к желаемому #[+Term--YDID типу] #[+SecondaryEntity--YDID User]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        // НАМЕРЕННО ОШИБОЧНЫЙ ПРИМЕР!!!
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "title" in rawData && rawData.title === "string" &&
+              "price" in rawData && rawData.price === "string";
+        }
+
+
+        const potentialUser: unknown = { title: "Shampoo", price: 1000 };
+
+        if (isUser(potentialUser)) {
+          console.log(potentialUser.familyName);
+        }
+
+    p.Article-Paragraph.
+      Несмотря на то, что содержимое #[+Term--YDID переменной] #[+SecondaryEntity__Code--YDID potentialUser] и близко
+        не&nbsp;имеет отношение к типу #[+SecondaryEntity__Code--YDID User], #[+SecondaryEntity__Code--YDID isUser]
+        вернёт #[+SecondaryEntity__Code--YDID true] и #[+ImportantEntity--YDID TypeScript]
+        #[+Keyphrase--YDID даже не&nbsp;заподозрит, что что-то не&nbsp;так].
+      Более того, #[+ImportantEntity--YDID TypeScript] не&nbsp;выразит не&nbsp;малейшего недовольства, если в
+        #[+Term--YDID теле] #[+Term__Contrast--YDID функции-защитника] вообще ничего не&nbsp;будет проверяться:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        // НАМЕРЕННО ОШИБОЧНЫЙ ПРИМЕР!!!
+        function isUser(rawData: unknown): rawData is User {
+          console.log(rawData);
+          return Math.random() >= 0.5;
+        }
+
+    p.Article-Paragraph.
+      Почему же всё так плохо?
+      Если кратко, то из-за #[+Keyword--YDID фундаментальных] ограничений #[+ImportantEntity--YDID TypeScript].
+      Валидация данных (в том числе с помощью #[+Term--YDID защитников типов]) осуществляется
+        #[+Keyphrase--YDID во время выполнения #[+ImportantEntity--YDID JavaScript-а]], когда #[+Keyword--YDID исходного]
+        #[+Term--YDID TypeScript-кода] #[+Keyword--YDID уже] #[+Keyword__Contrast--YDID нет].
+      В #[+Keyword--YDID выходном] #[+Term--YDID JavaScript-коде] #[+Term--YDID защитник типов] — #[+Keyword--YDID уже]
+        #[+Keyword__Contrast--YDID обычная] #[+Term--YDID JavaScript-функция], ничем
+        #[+Keyword--YDID не]&nbsp;отличающаяся по своей природе от других #[+Term--YDID функций], возвращающих
+        #[+Term--YDID булевское значение].
+
+    p.Article-Paragraph.
+      Такие особенности языка #[+ImportantEntity--YDID TypeScript], как #[+Term--YDID алиас типов]
+        (#[+Term--YDID ключевое слово] #[+ImportantEntity__Code--YDID type]) или #[+Term--YDID интерфейсы] существуют
+        #[+Keyword--YDID только] в рамках #[+Keyword--YDID исходного] #[+Term--YDID TypeScript-кода], но в
+        #[+Keyword--YDID выходном] #[+Term--YDID JavaScript-коде] их нет, следовательно какого-либо способа сослаться
+        на них #[+Keyword--YDID тоже] #[+Keyword__Contrast--YDID нет].
+      #[+Keyword--YDID Теоретически], можно было бы реализовать генерацию вспомогательных #[+Term--YDID функций] и/или
+        #[+Term__Contrast--YDID объектов] на основе #[+Term--YDID алиасов типов] и #[+Term--YDID интерфейсов] в исходном
+        #[+Term--YDID TypeScript-коде], чтобы потом использовать их для валидации без ручного написания кода, однако
+        #[+Keyword--YDID маловероятно], что команда разработки #[+ImportantEntity--YDID TypeScript] в ближайшем будущем
+        реализует что-то подобное.
+
+    p.Article-Paragraph.
+      Помимо выше описанной, у #[+Term--YDID защитников типов] есть ещё #[+Keyword--YDID несколько]
+        #[+Keyword__Contrast--YDID существенных] проблем:
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+Term--YDID Защитники типов] #[+Keyphrase--YDID по своей концепции] #[+Keyword--YDID только] отвечают на
+          вопрос, валиден ли #[+Term--YDID параметр] или нет, при этом где именно имеются нарушения, сообщено
+          #[+Keyword--YDID не]&nbsp;будет.
+
+      li.
+        #[+Term--YDID Защитник типов] вернёт #[+ImportantEntity__Code--YDID false] #[+Keyphrase--YDID при первом же]
+          #[+Keyword--YDID ложном] условии, хотя могут быть и другие #[+Keyword--YDID ложные] условия.
+
+    p.Article-Paragraph.
+      Вообще-то говоря, эти проблемы являются таковым лишь #[+Keyword--YDID де-факто], потому что как уже было упомянуто
+        выше, при реализации #[+Term--YDID защитников типов] #[+ImportantEntity--YDID TypeScript] требует
+        #[+Keyword--YDID только] #[+Keyword__Contrast--YDID две] вещи: обязательного возврата
+        #[+Term--YDID булевского значения] и особой аннотации возвращаемого #[+Term--YDID типа], а в
+        #[+Term--YDID теле функции] можно реализовать #[+Keyphrase--YDID всё, что угодно], включая логирование,
+        полную проверку всех #[+Term--YDID свойств] и так далее.
+      Проблема лишь в том, что #[+Keyphrase--YDID в реальности] так #[+Keyword--YDID почти]
+        #[+Keyword__Contrast--YDID никто] #[+Keyword--YDID не]&nbsp;делает, и на то есть веская причина.
+      Если Вы #[+Keyphrase--YDID в реальном] (не&nbsp;учебном) проекте среднего или большого масштаба начать
+        реализовывать #[+Term--YDID защитники типов] с выше перечисленной функциональностью, то очень быстро возникнет
+        ещё одна неприятная проблема: слишком много рутинного кода, причём местами он почти одинаковый.
+      Особенно это касается качественного логирования: будет много однотипных сообщений, и их придётся либо каждый раз
+        писать заново, либо организовывать вынос сообщений в отельные объекты и/или файлы, пока не&nbsp;встанет вопрос
+        о вынесении всего этого кода в библиотеку.
+      А #[+Keyphrase--YDID в реальном] проекте объекты будут отнюдь не&nbsp;такие простые, как
+        #[+SecondaryEntity--YDID User] из примера выше, а могу иметь по
+        #[+SecondaryEntity--YDID 20]-#[+SecondaryEntity--YDID 30] свойств, и это не&nbsp;предел, причём часто будут и
+        #[+Keyword--YDID вложенные] #[+Term--YDID объекты], в частности #[+Term--YDID массивы], и зачастую с
+        #[+Term--YDID элементами] типа #[+Term--YDID «объект»], которые тоже надо валидировать.
+      Обилие рутинного кода повышает вероятность ошибок из-за усталости, потому нативное решение задачи хотя имеется,
+        но #[+Keyword--YDID не]&nbsp;является практичным.
+
+    p.Article-Paragraph.
+      Однако, это #[+Keyword--YDID не]&nbsp;делает #[+Term--YDID защитники типов] бесполезными — просто они плохо
+        справляются с валидацией #[+Term--YDID объектов] #[+Keyphrase--YDID с большим количеством свойств], но для
+        других типов значений (#[+Term--YDID строки], #[+Term--YDID числа] и так далее) они
+        #[+Keyword--YDID не]&nbsp;просто подходят, но обычно используются в большом количестве.
+      #[+ImportantEntity--YDID YDEE] также предлагает набор #[+Term--YDID защитников типов], многие из которых
+        используются и внутри библиотеки:
+
+    +CompactTableOfContents--YDF_DK(localizedRouting.coreLibrary.$children.functionality.$children.typeGuards.$sectioning)
+
+
+    //- ━━━ Подход `RawObjectDataProcessor` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      innerHTML: localizedSectioning.rawObjectDataProcessorApproach.$heading,
+      HTML_ID: localizedSectioning.rawObjectDataProcessorApproach.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      Итак, ввиду того что при #[+Term--YDID транспайлинге] #[+ImportantEntity--YDID TypeScript] в
+        #[+ImportantEntity--YDID JavaScript] #[+Term--YDID интерфейсы] и #[+Term--YDID алиасы типов] (
+        #[+Term--YDID ключевое слово] #[+ImportantEntity--YDID type]) прекращают своё существование,
+        на них во время выполнения #[+Term--YDID JavaScript-кода] сослаться #[+Keyword--YDID никак]
+        #[+Keyword__Contrast--YDID нельзя], потому исчерпывающе доказать, что конкретный #[+Term--YDID объект] имеет
+        конкретный тип #[+Keyword--YDID невозможно] — ведь даже если есть соответствующий #[+Term--YDID защитник типа],
+        находящаяся внутри него логика может вообще #[+Keyword--YDID не]&nbsp;иметь отношения к проверке на нужные
+        #[+Term--YDID свойства].
+      Однако перед тем, как использовать ключевое слово #[+ImportantEntity__Code--YDID as], следует это использование
+        чем-либо #[+Keyword--YDID подкрепить], а именно валидацией, при этом в целях #[+Term--YDID поддерживаемости]
+        валидатор должен детально логировать #[+Keyword--YDID все] несоответствия установленным,
+        а #[+Keyphrase--YDID не&nbsp;только первое из них].
+      При таком раскладе, даже если указанные правил валидации и #[+Keyword--YDID не]&nbsp;будут соответствовать
+        реальному типу (например, из-за допущенной по усталости ошибки), как показывает практика, это очень быстро
+        обнаруживается.
+
+    p.Article-Paragraph
+      | Таким образом, #[+ImportantEntity--YDID RawObjectDataProcessor] берёт на себя #[+Keyword--YDID грех] использования
+      |   #[+ImportantEntity--YDID as], требуя взамен указать спецификацию валидных данных почти что в декларативном
+      |   виде.
+      | Рассмотрим ещё раз
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.
+            $children.demo.$URI
+      }) демо
+      |   в свете описанной выше теории.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              isNaN_Forbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  isNaN_Forbidden: true,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    ol.Article-OrderedList
+
+      li.
+        Сначала #[+ImportantEntity--YDID RawObjectDataProcessor] проверит, является ли вообще
+          #[+SecondaryEntity__Code--YDID externalData] #[+Term--YDID объектом].
+        #[+Keyphrase--YDID Если нет], то дальше валидировать и обрабатывать #[+Keyword--YDID уже]
+          #[+Keyword__Contrast--YDID нечего].
+
+      li
+
+        p.Article-Paragraph.
+          Далее #[+ImportantEntity--YDID RawObjectDataProcessor] проверит в #[+Term--YDID объекте]
+            #[+SecondaryEntity__Code--YDID externalData] #[+Keyword--YDID каждое] #[+Term--YDID свойство], упомянутое
+            в спецификации валидных данных #[+SecondaryEntity__Code--YDID validDataSpecification], включая
+            вложенные #[+Term--YDID объекты] и #[+Term--YDID массивы] (#[+Keyphrase--YDID частный случай]
+            #[+Term--YDID объектов] #[+Keyphrase--YDID с точки зрения #[+ImportantEntity--YDID ECMAScript]]).
+
+        ul.Article-UnorderedList
+
+          li.
+            Помимо проверки на #[+Term--YDID тип данных], в спецификации валидных данных для примера указаны
+              дополнительные ограничения.
+            Например, свойство #[+SecondaryEntity__Code--YDID bar] должно не&nbsp;просто быть #[+Term--YDID строкой],
+              но при этом иметь минимум #[+SecondaryEntity__Code--YDID 5] символов.
+
+          li.
+            На каждое ограничение, указанное в спецификации валидных данных #[+ImportantEntity--YDID RawObjectDataProcessor]
+              производит конкретную проверку, и если в ходе этой проверке будет выявлено несоответствие реальных данных
+              ожидаемым, то проверка #[+Keyword--YDID не]&nbsp;завершится тут же (за исключением случая, когда сами
+              входные данные не&nbsp;являются #[+Term--YDID объектом]), а будет сохранено сообщение о несоответствии в
+              #[+Term--YDID массив], к которому можно будет обратиться через возвращаемое #[+Term--YDID методом]
+              #[+ImportantEntity__Code--YDID process] значение.
+
+      li.
+
+        Если в ходе валидации #[+Keyword--YDID не]&nbsp;будет выявлено ни одного несоответствия реальных данных
+          установленным ограничениям, то тогда #[+ImportantEntity--YDID RawObjectDataProcessor] возьмёт на себя грех
+          пометить с помощью #[+Term--YDID ключевого слова] #[+ImportantEntity__Code--YDID as] входные данные тем
+          #[+Term--YDID типом], которые передан через #[+Term--YDID параметр обобщения]
+          (#[+SecondaryEntity__Code--YDID SampleType] в примере выше).
+
+    p.Article-Paragraph.
+      Между #[+ImportantEntity--YDID RawObjectDataProcessor] и #[+Term--YDID защитниками типов] (разумеется,
+        реализованными согласно концепции без дополнительной функциональности) имеются следующие
+        #[+Keyword--YDID сходства]:
+
+    ol.Article-OrderedList
+
+      li Проверяют исходные данные ожидаемым
+      li.
+        #[+Keyword--YDID Не]&nbsp;могут полностью гарантировать соответствие конкретному #[+Term--YDID типу] в силу
+          фундаментальных ограничений #[+ImportantEntity--YDID TypeScript]
+
+    p.Article-Paragraph.
+      Что касается различий, то их гораздо больше:
+
+    ol.Article-OrderedList
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] рассчитан на работу #[+Keyword--YDID только] с
+          #[+Term--YDID объектами] (в частности, с #[+Term--YDID индексными массивами]), хотя их
+          #[+Term--YDID свойства]/#[+Term--YDID элементы] могут иметь быть
+          #[+Keyphrase--YDID любого совместимого с #[+ImportantEntity--YDID JSON]] #[+Term--YDID типа].
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] возвращает #[+Keyword--YDID не]&nbsp;
+          #[+Term--YDID булевское значение], а #[+Keyword--YDID полиморфный] #[+Term--YDID объект].
+        На вопрос, являются ли данные невалидными, отвечает свойство #[+ImportantEntity__Code--YDID isRawDataInvalid].
+        Когда это #[+Term--YDID свойство] имеет значение #[+ImportantEntity__Code--YDID false], можно обратиться
+          к приведённому к желаемому #[+Term--YDID типу] #[+Term--YDID объекту] через свойство
+          #[+ImportantEntity__Code--YDID processedData], в противном случае #[+Keyphrase--YDID вместо него] будет
+          #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID validationErrorsMessages], содержащее сообщения
+          о всех несоответствиях реальных данных ожидаемым.
+
+      li.
+        Имеет декларативный #[+ImportantEntity--YDID API], хотя при необходимости можно объявить дополнительные
+          валидации в императивном стиле.
+
+      li.
+        Может проверить #[+Term--YDID свойства]/#[+Term--YDID элементы] не&nbsp;только на #[+Term--YDID тип], но и на
+          другие ограничения.
+
+      li.
+        При необходимости, помимо валидации может внести изменения в исходный объект.
+        Эта функциональность #[+Keyword--YDID не]&nbsp;является не&nbsp;рекомендуемой, потому что в некоторых случаях
+          она крайне полезна (например, если нужно преобразовать хранящиеся в виде #[+Term--YDID строк] числа в
+          #[+Term--YDID тип] #[+ImportantEntity__Code--YDID BigInt], с которым #[+ImportantEntity--YDID JSON] пока
+          что #[+Keyword--YDID несовместим], или же переименовать #[+Term--YDID свойства]), её следует использовать
+          с осторожностью, так как она может поломать валидацию либо сделать помеченные как валидные данные невалидными.
+        Важно, в у #[+ImportantEntity--YDID RawObjectDataProcessor] есть #[+ImportantEntity--YDID 2] стратегии при работе
+          с объектами: манипуляции с исходным #[+Term--YDID объектом] (по умолчанию) и построение нового
+          #[+Term--YDID объекта] на основе исходного.
+        Когда данные нужно просто валидировать, об этих стратегиях можно #[+Keyword--YDID не]&nbsp;задумываться, но когда
+          помимо валидации нужно внести изменения в объект, то здесь уже стратегия имеет значение.
+
+    p.Article-Paragraph
+      | Наконец, #[+ImportantEntity--YDID RawObjectDataProcessor] имеет качественные шаблоны сообщений о несоответствиях
+      |  реальных данных ожидаемым, и хотя они
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          validationIssues.$URI,
+      }) документированы,
+      |    сообщения написаны так, чтобы можно было без документации понять, что не&nbsp;так.
+      | Посмотрите
+      |
+      +Link--YDF({
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
+      }) исходный код этих сообщений
+      |   (кстати,
+      |
+      +Link--YDF({
+        endorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.localizations.russian
+      }) есть и на русском языке)
+      |   и представьте, сколько бы времени у Вас ушло на самостоятельную подготовку этих сообщений, включая
+      |   организацию повторного использования в нескольких проектах.

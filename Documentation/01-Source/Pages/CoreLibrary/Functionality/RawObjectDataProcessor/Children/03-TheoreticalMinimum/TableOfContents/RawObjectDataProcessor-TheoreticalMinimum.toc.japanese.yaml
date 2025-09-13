@@ -1,0 +1,19 @@
+objectLikeDataClassification:
+
+  $heading: "オブジェクト系データ分類化"
+
+  fixedSchema:
+
+    $heading: "固定構成のオブジェクト"
+
+  associativeArrays:
+
+    $heading: "連想配列型のオブジェクト"
+
+  indexedArrays:
+
+    $heading: "指数配列"
+
+  tuples:
+
+    $heading: "タプル"

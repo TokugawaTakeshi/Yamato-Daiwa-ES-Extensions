@@ -1,0 +1,22 @@
+objectLikeDataClassification:
+
+  $heading: `objectLikeDataClassification.$heading`
+  $anchor: OBJECT_LIKE_DATA_CLASSIFICATION--SECTION
+
+  $children:
+
+    fixedSchema:
+      $heading: `objectLikeDataClassification.fixedSchema.$heading`
+      $anchor: OBJECT_LIKE_DATA_CLASSIFICATION-FIXED_SCHEMA--SECTION
+
+    associativeArrays:
+      $heading: `objectLikeDataClassification.associativeArrays.$heading`
+      $anchor: OBJECT_LIKE_DATA_CLASSIFICATION-ASSOCIATIVE_ARRAYS--SECTION
+
+    indexedArrays:
+      $heading: `objectLikeDataClassification.indexedArrays.$heading`
+      $anchor: OBJECT_LIKE_DATA_CLASSIFICATION-INDEXED_ARRAYS--SECTION
+
+    tuple:
+      $heading: `objectLikeDataClassification.tuples.$heading`
+      $anchor: OBJECT_LIKE_DATA_CLASSIFICATION-TUPLES--SECTION

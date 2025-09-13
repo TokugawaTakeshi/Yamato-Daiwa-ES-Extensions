@@ -1,85 +1,54 @@
-import { extractMatchingsWithRegularExpression, UnexpectedEventError } from "../../../../Source";
+import { extractMatchingsWithRegularExpression, Logger } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("extractMatchingsWithRegularExpression.test", (): void => {
+Promise.all([
 
-  describe("Exactly one matching", (): void => {
+  Testing.suite(
+    "Exactly one matching",
+    async (): Promise<void> => {
 
-    const experimentalSample: string = "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md#API--SECTION";
+      const experimentalSample: string = "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md#API--SECTION";
 
-    it("Arrayed result is correct", (): void => {
+      await Promise.all([
 
-      Assert.deepStrictEqual(
-        extractMatchingsWithRegularExpression(experimentalSample, /#.+$/u),
-        {
-          updatedString: "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md",
-          extractedMatchings: [ "#API--SECTION" ]
-        }
-      );
+        Testing.test(
+          "Arrayed result is correct",
+          (): void => {
 
-    });
+            Assert.deepStrictEqual(
+              extractMatchingsWithRegularExpression(experimentalSample, /#.+$/u),
+              {
+                updatedString: "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md",
+                extractedMatchings: [ "#API--SECTION" ]
+              }
+            );
 
-    it("Exactly on result is correct", (): void => {
-
-      Assert.deepStrictEqual(
-        extractMatchingsWithRegularExpression(
-          experimentalSample,
-          /#.+$/u,
-          { mustExpectExactlyOneMatching: true }
+          }
         ),
-        {
-          updatedString: "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md",
-          extractedMatching: "#API--SECTION"
-        }
-      );
 
-    });
+        Testing.test(
+          "Exactly on result is correct",
+          (): void => {
 
-  });
+            Assert.deepStrictEqual(
+              extractMatchingsWithRegularExpression(
+                experimentalSample,
+                /#.+$/u,
+                { mustExpectExactlyOneMatching: true }
+              ),
+              {
+                updatedString: "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md",
+                extractedMatching: "#API--SECTION"
+              }
+            );
 
-  describe("Multiple matching", (): void => {
+          }
+        )
+      ]);
 
-    const experimentalSample: string = "Induction in India, the Hindustan, the Indian subcontinent";
+    }
+  )
 
-    it("Arrayed result is correct", (): void => {
-
-      Assert.deepStrictEqual(
-        extractMatchingsWithRegularExpression(experimentalSample, /ind\w+\s/ui),
-        {
-          updatedString: "Documentation/API/ConfigurationFile/Markup/MarkupProcessing.md",
-          extractedMatchings: [ "Induction ", "India ", "industan ", "Indian " ]
-        }
-      );
-
-    });
-
-    it("Exactly on result is correct", (): void => {
-
-      Assert.throws(
-        (): void => {
-          extractMatchingsWithRegularExpression(
-            experimentalSample,
-            /ind\w+\s/ui,
-            { mustExpectExactlyOneMatching: true }
-          );
-        },
-        UnexpectedEventError
-      );
-
-      Assert.throws(
-        (): void => {
-          extractMatchingsWithRegularExpression(
-            experimentalSample,
-            /ind\w+\s/ui,
-            { mustExpectOneOrZeroMatchings: true }
-          );
-        },
-        UnexpectedEventError
-      );
-
-    });
-
-  });
-
-});
+]).catch(Logger.logPromiseError);

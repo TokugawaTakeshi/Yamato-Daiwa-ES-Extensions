@@ -1,9 +1,8 @@
+include _Constants.pug
 include _HTML_PageMetadata.pug
-include _generateLocalizedRouting.pug
 include _generateSharedExternalLinks.pug
 
 include Localizations/English/MetaDescriptionTemplates.english.pug
-include Localizations/English/RoutingLocalization.english.pug
 include Localizations/English/SharedExternalLinksLocalization.english.pug
 include Localizations/English/ReusableFragments.english.pug
 
@@ -14,21 +13,7 @@ include ThirdPartyEmbeddableScripts/GoogleAnalyticsScript.pug
 
   RegularWebPageTemplate__YDF.metadata.locale = "en";
 
-  const localizedRouting = generateLocalizedRouting(routingEnglishLocalization);
-  let generatePageTableOfContents;
-
-
-include ../../Pages/CoreLibrary/GettingStarted/TableOfContents/GetStartedWithCoreLibraryPage.toc.english.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/addElementsToArray/TableOfContents/addElementsToArray.toc.english.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/TableOfContents/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.toc.english.pug
-include ../../Pages/CoreLibrary/Functionality/Arrays/getLastElementOfArray/TableOfContents/getLastElementOfArray.toc.english.pug
-include ../../Pages/NodeJS/ConsoleCommandsParser/TableOfContents/ConsoleCommandsParser.toc.english.pug
-
-
--
-
-  generatePageTableOfContents = null;
-
+  const localizedRouting = routing.english;
   RoutingEmulator.initialize(localizedRouting);
 
   const sharedExternalLinks = generateSharedExternalLinks(sharedExternalLinksEnglishLocalization);

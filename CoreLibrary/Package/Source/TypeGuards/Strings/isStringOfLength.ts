@@ -1,7 +1,7 @@
-import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
-export namespace IsStringOfLengthCheckingOperation {
+export namespace IsStringOfLengthCheck {
 
   export type Options__ExactCharactersCountCase = Readonly<{
     exactCharactersCount: number;
@@ -34,25 +34,30 @@ export namespace IsStringOfLengthCheckingOperation {
       Options__MinimalAndMaximalCharactersCountCase;
 
 
+  export function isStringOfLength(potentialString: unknown, options: Options): potentialString is string;
+
+  export function isStringOfLength(definiteString: string, options: Options): boolean;
+
+
   export function isStringOfLength(potentialString: unknown, options: Options): potentialString is string {
 
     if (typeof potentialString !== "string") {
       return false;
     }
 
-    if (isNonNegativeInteger(options.exactCharactersCount)) {
+    if (isNaturalNumberOrZero(options.exactCharactersCount)) {
       return potentialString.length === options.exactCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.minimalCharactersCount) && isNonNegativeInteger(options.maximalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.minimalCharactersCount) && isNaturalNumberOrZero(options.maximalCharactersCount)) {
       return potentialString.length >= options.minimalCharactersCount && potentialString.length <= options.maximalCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.minimalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.minimalCharactersCount)) {
       return potentialString.length >= options.minimalCharactersCount;
     }
 
-    if (isNonNegativeInteger(options.maximalCharactersCount)) {
+    if (isNaturalNumberOrZero(options.maximalCharactersCount)) {
       return potentialString.length <= options.maximalCharactersCount;
     }
 
@@ -61,4 +66,4 @@ export namespace IsStringOfLengthCheckingOperation {
 }
 
 
-export default IsStringOfLengthCheckingOperation.isStringOfLength;
+export default IsStringOfLengthCheck.isStringOfLength;

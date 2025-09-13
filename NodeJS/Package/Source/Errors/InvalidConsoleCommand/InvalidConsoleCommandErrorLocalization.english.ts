@@ -2,7 +2,7 @@ import type InvalidConsoleCommandError from "./InvalidConsoleCommandError";
 
 
 const invalidConsoleCommandErrorLocalization__english: InvalidConsoleCommandError.Localization = {
-  defaultTitle: "Invalid console command",
+  defaultTitle: "Invalid Console Command",
   generateDescriptionCommonPart:
       ({ applicationName }: InvalidConsoleCommandError.Localization.CommonDescription.TemplateVariables): string =>
           `Invalid console command for the application "${ applicationName }".`

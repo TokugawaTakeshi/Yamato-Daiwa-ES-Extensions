@@ -1,7 +1,7 @@
-import isNonNegativeInteger from "../Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../Numbers/isNaturalNumberOrZero";
 
 
-export namespace IsArrayOfLengthCheckingOperation {
+export namespace IsArrayOfLengthCheck {
 
   export type Options__ExactElementsCountCase = Readonly<{
     exactElementsCount: number;
@@ -35,7 +35,7 @@ export namespace IsArrayOfLengthCheckingOperation {
 
 
   export function isArrayOfLength<ArrayElement>(
-      potentialArray: unknown, options: Options
+    potentialArray: unknown, options: Options
   ): potentialArray is Array<ArrayElement> {
 
     if (!Array.isArray(potentialArray)) {
@@ -43,22 +43,22 @@ export namespace IsArrayOfLengthCheckingOperation {
     }
 
 
-    if (isNonNegativeInteger(options.exactElementsCount)) {
+    if (isNaturalNumberOrZero(options.exactElementsCount)) {
       return potentialArray.length === options.exactElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.minimalElementsCount) && isNonNegativeInteger(options.maximalElementsCount)) {
+    if (isNaturalNumberOrZero(options.minimalElementsCount) && isNaturalNumberOrZero(options.maximalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount && potentialArray.length <= options.maximalElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.minimalElementsCount)) {
+    if (isNaturalNumberOrZero(options.minimalElementsCount)) {
       return potentialArray.length >= options.minimalElementsCount;
     }
 
 
-    if (isNonNegativeInteger(options.maximalElementsCount)) {
+    if (isNaturalNumberOrZero(options.maximalElementsCount)) {
       return potentialArray.length <= options.maximalElementsCount;
     }
 
@@ -68,4 +68,4 @@ export namespace IsArrayOfLengthCheckingOperation {
 }
 
 
-export default IsArrayOfLengthCheckingOperation.isArrayOfLength;
+export default IsArrayOfLengthCheck.isArrayOfLength;

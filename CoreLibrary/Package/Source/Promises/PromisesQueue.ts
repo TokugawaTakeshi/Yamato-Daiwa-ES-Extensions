@@ -1,5 +1,6 @@
 import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 class PromisesQueue {
@@ -38,7 +39,14 @@ class PromisesQueue {
 
     this.isExecutingNow = true;
 
-    for (const asynchronousFunction of this.asynchronousFunctionsQueue) {
+    /* [ Approach ]
+     * The loop must support the changing of elements could during execution herewith:
+     * + Adding to the end of array
+     * + Removing from the start of array */
+    let asynchronousFunction: ((...parameter: ReadonlyArray<unknown>) => Promise<void>) | undefined =
+        this.asynchronousFunctionsQueue[0];
+
+    while (isNotUndefined(asynchronousFunction)) {
 
       try {
 
@@ -73,21 +81,32 @@ class PromisesQueue {
 
 
       if (!this.mustExecuteNextAsynchronousFunction) {
+
         this.isExecutingNow = false;
         this.asynchronousFunctionsQueue = [];
+
         break;
+
       }
+
+
+      /* [ Approach ] Must be removing from the start of array for the correct looping. */
+      this.asynchronousFunctionsQueue.shift();
+
+      asynchronousFunction = this.asynchronousFunctionsQueue[0];
 
     }
 
 
     this.isExecutingNow = false;
-    this.asynchronousFunctionsQueue = [];
 
   }
 
   public addFunctionToQueue(newAsynchronousFunction: (...parameters: ReadonlyArray<unknown>) => Promise<void>): void {
+
+    /* [ Approach ] Must be added to the end of array for the correct looping. */
     this.asynchronousFunctionsQueue.push(newAsynchronousFunction);
+
   }
 
 

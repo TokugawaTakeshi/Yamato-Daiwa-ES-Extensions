@@ -1,0 +1,212 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview;
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
+        description: ""
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.problemOverview");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- ━━━ `RawObjectDataProcessor` — Problem Overview ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= "<code>RawObjectDataProcessor</code>"
+
+    p.Article-Paragraph.
+
+    //-
+
+      ### Native approaches
+
+      The **Type guards** is a native TypeScript conception. The **Type guard** is a function returning boolean value, but
+      returning value annotation is a little unusual:
+
+      ```typescript
+      type User = {
+        ID: string;
+        familyName: string;
+        givenName: string;
+      };
+
+      function isUser(rawData: unknown): rawData is User {
+        return typeof rawData === "object" &&
+            rawData !== null &&
+            typeof((rawData as { ID: unknown; }).ID ) === "string" &&
+            typeof((rawData as { familyName: unknown; }).familyName) === "string" &&
+            typeof((rawData as { givenName: unknown; }).givenName) === "string";
+      }
+      ```
+
+      The native TypeScript approaches including type guards well described in
+      [The unknown Type in TypeScript](https://mariusschulz.com/blog/the-unknown-type-in-typescript), the
+      front end engineer [Marius Schulz](https://mariusschulz.com/about) 's article.
+      Here is important that:
+
+      **Type guards actually does not to guarantee what the value has specified type - this is just an asking to TypeScript
+      to believe that it is such as.**
+
+      For example, the below type guard is doing the checks completely unrelated with `User` type:
+
+      ```typescript
+      type User = {
+        ID: string;
+        familyName: string;
+        givenName: string;
+      };
+
+      function isUser(rawData: unknown): rawData is User {
+        return isArbitraryObject(rawData) &&
+            typeof((rawData as { title: unknown }).title) === "string" &&
+            typeof((rawData as { price: unknown }).price) === "number";
+      }
+
+      const potentialUser: unknown = { title: "Shampoo", price: 1000 };
+
+      if (isUser(potentialUser)) { // it will be truthy for "potentialUser"
+        console.log(potentialUser.familyName); // Of course, "undefined"
+      }
+      ```
+
+      Why so poor? The TypeScript is being compiling to JavaScript, but neither `type`s nor `interface`s exists on JavaScript.
+      The validation is being executed when TypeScript already has been compiled to JavaScript, so no way to refer on `User`
+      type's properties names/values/types (to be more precise, TypeScript does not provide the concept such as saving the accessible
+      metadata of `type`s and `interface`s on compiled JavaScript). This is a **first problem**.
+
+      But there are at least two more problems:
+
+      * **Second problem** Ever type guard as `isUser` returned `false`, we will not know which property is invalid. Unlike
+        `User` with only three properties (`ID`, `familyName`, `givenName`) the object type from real project could have a couple
+        tens of properties and also nested ones.
+      * **Third problem** Type guard returns `false` on first falsy condition. But there could be a multiple properties
+        not satisfying to type guard's condition. To debug it quickly, we need to know all violations, not just first one.
+
+
+      ### `RawObjectDataProcessor` solution
+
+      Conceptually `RawObjectProcessor` is a huge configurable type guard with logging a lot of additional functionality.
+      Therefore, it is the time to clearly state that **`RawObjectProcessor` does not solve the first problem**:
+
+      ```typescript
+      type User = {
+        ID: string;
+        familyName: string;
+        givenName: string;
+      };
+
+      const rawData: unknown = { ID: 1, familyName: "John", title: "Shampoo" };
+
+      /* It just casts the raw data to `User` when it obeys the specified validation rules, but this validation rules could
+      *    have a mistake or simply be unrelated with `User`. */
+      const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjectDataProcessor.process(rawData, {
+        nameForLogging: "User",
+        subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+        properties: {
+          ID: {
+            required: true,
+            type: String
+          },
+          familyName: {
+            required: true,
+            type: String
+          },
+          givenName: {
+            required: true,
+            type: String
+          }
+        }
+      });
+
+      if (processingResult.rawDataIsInvalid) {
+        Logger.logError({
+          errorType: InvalidExternalDataError.NAME,
+          title: InvalidExternalDataError.DEFAULT_TITLE,
+          description: "The raw data is invalid:\n" +
+              `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
+          occurrenceLocation: "upper scope"
+        });
+      }
+      ```
+
+      But `RawObjectProcessor` solves the **second problem** and **third problem**. In the case of below example,
+      the errored log will be:
+
+      ```
+      [ Error ] Invalid external data
+      The raw data is invalid:
+
+      === Error No. 1 ==========
+      Expected and actual value types mismatch
+
+      ●　Property / element: 'User.ID'
+      This value must have type 'string' while actually it's type is: 'number'.
+
+      ●　Property / element specification:
+      {
+        "required": true,
+        "type": "string"
+      }
+      ●　Actual value: 1
+
+      === Error No. 2 ==========
+      Required property is missing
+
+      ●　Property / element: 'User.givenName'
+      This property has been marked as 'required' while actual value is 'undefined'.
+
+      ●　Property / element specification:
+      {
+        "required": true,
+        "type": "string"
+      }
+      ●　Actual value: undefined
+
+      Error type: InvalidExternalDataError
+      Occurrence location: upper scope
+      ```
+
+      But `RawObjectDataProcessor` is not just a validator; it has some additional functionality, for example:
+
+      * Pre-validation and post-validation modifications of the properties
+      * Renaming of object keys
+      * Substitution of default values
+
+      And much more - here what is below documentation about.

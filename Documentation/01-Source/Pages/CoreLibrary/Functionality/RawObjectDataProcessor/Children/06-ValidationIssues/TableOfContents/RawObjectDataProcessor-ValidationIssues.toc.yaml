@@ -1,0 +1,259 @@
+# ━━━ Validation Errors Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+validationErrorsMessages:
+
+  $heading: `validationErrorsMessages.$heading`
+  $anchor: VALIDATION_ERRORS_MESSAGES--SECTION
+
+  $children:
+
+    rawDataIsNotObject:
+
+      $heading: "<code>RAW_DATA_IS_NOT_OBJECT</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-RAW_DATA_IS_NOT_OBJECT"
+
+    rawDataIsNull:
+
+      $heading: "<code>RAW_DATA_IS_NULL</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-RAW_DATA_IS_NULL"
+
+    valueTypeDoesNotMatchWithExpected:
+
+      $heading: "<code>VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-VALUE_TYPE_DOES_NOT_MATCH_WITH_EXPECTED"
+
+    preValidationModificationFailed:
+
+      $heading: "<code>PRE_VALIDATION_MODIFICATION_FAILED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-PRE_VALIDATION_MODIFICATION_FAILED"
+
+    # ─── Fixed Schema Objects ─────────────────────────────────────────────────────────────────────────────────────────
+    # ┄┄┄ Undefinedability ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+    forbiddenUndefinedValue:
+
+      $heading: "<code>FORBIDDEN_UNDEFINED_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE"
+
+    conditionallyForbiddenUndefinedValue:
+      $heading: "<code>CONDITIONALLY_FORBIDDEN_UNDEFINED_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_UNDEFINED_VALUE"
+
+    conditionallyForbiddenNonUndefinedValue:
+      $heading: "<code>CONDITIONALLY_FORBIDDEN_NON_UNDEFINED_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_UNDEFINED_VALUE"
+
+    # ┄┄┄ Nullability ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+    forbiddenNullValue:
+      $heading: "<code>FORBIDDEN_NULL_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-FORBIDDEN_NULL_VALUE"
+
+    conditionallyForbiddenNullValue:
+      $heading: "<code>CONDITIONALLY_FORBIDDEN_NULL_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NULL_VALUE"
+
+    conditionallyForbiddenNonNullValue:
+      $heading: "<code>CONDITIONALLY_FORBIDDEN_NON_NULL_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_NULL_VALUE"
+
+    # ┄┄┄ Other ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+    unableToDeletePropertyWithOutdatedKey:
+      $heading: "<code>UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY"
+
+    unableToChangePropertyDescriptors:
+      $heading: "<code>UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS"
+
+    unableToUpdatePropertyValue:
+      $heading: "<code>UNABLE_TO_UPDATE_PROPERTY_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-UNABLE_TO_UPDATE_PROPERTY_VALUE"
+
+    # ┄┄┄ Other ┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄
+    unexpectedProperties:
+      $heading: "<code>UNEXPECTED_PROPERTIES</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-UNEXPECTED_PROPERTIES"
+
+    customValidationFailed:
+      $heading: "<code>CUSTOM_VALIDATION_FAILED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CUSTOM_VALIDATION_FAILED"
+
+
+    # ─── Associative Arrays ───────────────────────────────────────────────────────────────────────────────────────────
+    associativeArrayEntriesCountIsLessThanRequiredMinimum:
+
+      $heading: "<code>ASSOCIATIVE_ARRAY_ENTRIES_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-ASSOCIATIVE_ARRAY_ENTRIES_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM"
+
+    associativeArrayPairsCountIsMoreThanAllowedMaximum:
+
+      $heading: "<code>ASSOCIATIVE_ARRAY_PAIRS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-ASSOCIATIVE_ARRAY_PAIRS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM"
+
+    associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber:
+
+      $heading: "<code>ASSOCIATIVE_ARRAY_PAIRS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-ASSOCIATIVE_ARRAY_PAIRS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER"
+
+    forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject:
+
+      $heading: "<code>FORBIDDEN_FOR_SPECIFIC_KEYS_UNDEFINED_OR_NULL_VALUES_FOUND_IN_ASSOCIATIVE_ARRAY_TYPE_OBJECT</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-FORBIDDEN_FOR_SPECIFIC_KEYS_UNDEFINED_OR_NULL_VALUES_FOUND_IN_ASSOCIATIVE_ARRAY_TYPE_OBJECT"
+
+    disallowedKeysFoundInAssociativeArray:
+
+      $heading: "<code>DISALLOWED_KEYS_FOUND_IN_ASSOCIATIVE_ARRAY</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-DISALLOWED_KEYS_FOUND_IN_ASSOCIATIVE_ARRAY"
+
+
+    # ─── Indexed Arrays ───────────────────────────────────────────────────────────────────────────────────────────────
+    indexedArrayElementsCountIsLessThanRequiredMinimum:
+
+      $heading: "<code>INDEXED_ARRAY_ELEMENTS_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-INDEXED_ARRAY_ELEMENTS_COUNT_IS_LESS_THAN_REQUIRED_MINIMUM"
+
+    indexedArrayElementsCountIsMoreThanAllowedMaximum:
+
+      $heading: "<code>INDEXED_ARRAY_ELEMENTS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-INDEXED_ARRAY_ELEMENTS_COUNT_IS_MORE_THAN_ALLOWED_MAXIMUM"
+
+    indexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumber:
+
+      $heading: "<code>INDEXED_ARRAY_OR_TUPLE_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-INDEXED_ARRAY_OR_TUPLE_ELEMENTS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED_EXACT_NUMBER"
+
+
+    # ─── Numeric ──────────────────────────────────────────────────────────────────────────────────────────────────────
+    numericValueIsNotBelongToExpectedNumbersSet:
+
+      $heading: "<code>NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET"
+
+    forbiddenNaN_Value:
+      $heading: "<code>VALIDATION_ERRORS_MESSAGES-FORBIDDEN_NAN_VALUE</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-FORBIDDEN_NAN_VALUE"
+
+    valueIsNotAmongAllowedAlternatives:
+
+      $heading: "<code>VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES"
+
+    numericValueIsSmallerThanRequiredMinimum:
+
+      $heading: "<code>NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM"
+
+    numericValueIsGreaterThanAllowedMaximum:
+
+      $heading: "<code>NUMERIC_VALUE_IS_GREATER_THAN_ALLOWED_MAXIMUM</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_GREATER_THAN_ALLOWED_MAXIMUM"
+
+
+    # ─── String ───────────────────────────────────────────────────────────────────────────────────────────────────────
+    charactersCountIsLessThanRequired:
+      $heading: "<code>CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED"
+
+    charactersCountIsMoreThanAllowed:
+      $heading: "<code>CHARACTERS_COUNT_IS_MORE_THAN_ALLOWED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_MORE_THAN_ALLOWED"
+
+    charactersCountDoesNotMatchWithSpecified:
+      $heading: "<code>CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_DOES_NOT_MATCH_WITH_SPECIFIED"
+
+    forbiddenCharactersFound:
+      $heading: "FORBIDDEN_CHARACTERS_FOUND"
+      $anchor: "FORBIDDEN_CHARACTERS_FOUND"
+
+    regularExpressionMismatch:
+      $heading: "<code>REGULAR_EXPRESSION_MISMATCH</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-REGULAR_EXPRESSION_MISMATCH"
+
+
+    # ─── Boolean ────────────────────────────────────────────────────────────────────────────────────────────────────
+    disallowedBooleanValueVariant:
+      $heading: "<code>DISALLOWED_BOOLEAN_VALUE_VARIANT</code>"
+      $anchor: "VALIDATION_ERRORS_MESSAGES-DISALLOWED_BOOLEAN_VALUE_VARIANT"
+
+
+throwableErrors:
+
+  $heading: `throwableErrors.$heading`
+  $anchor: THROWABLE_ERRORS
+
+  $children:
+
+    objectSchemaNotSpecified:
+      $heading: "<code>objectSchemaNotSpecified</code>"
+      $anchor: "THROWABLE_ERRORS-OBJECT_SCHEMA_NOT_SPECIFIED"
+
+    mutuallyExclusiveTransformationsBetweenUndefinedAndNull:
+      $heading: "<code>mutuallyExclusiveTransformationsBetweenUndefinedAndNull</code>"
+      $anchor: "THROWABLE_ERRORS-MUTUALLY_EXCLUSIVE_TRANSFORMATIONS_BETWEEN_UNDEFINED_AND_NULL"
+
+    preValidationModificationFailed:
+      $heading: "<code>preValidationModificationFailed</code>"
+      $anchor: "THROWABLE_ERRORS-PRE_VALIDATION_MODIFICATION_FAILED"
+
+    propertyUndefinedabilityNotSpecified:
+      $heading: "<code>propertyUndefinedabilityNotSpecified</code>"
+      $anchor: THROWABLE_ERRORS-PROPERTY_UNDEFINEDABILITY_NOT_SPECIFIED
+
+    propertyNullabilityNotSpecified:
+      $heading: "<code>propertyNullabilityNotSpecified</code>"
+      $anchor: THROWABLE_ERRORS-PROPERTY_NULLABILITY_NOT_SPECIFIED
+
+    dataTypeNotSpecified:
+      $heading: "<code>dataTypeNotSpecified</code>"
+      $anchor: THROWABLE_ERRORS-DATA_TYPE_NOT_SPECIFIED
+
+    unableToDeletePropertyWithOutdatedKey:
+      $heading: "<code>unableToDeletePropertyWithOutdatedKey</code>"
+      $anchor: THROWABLE_ERRORS-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY
+
+    unableToChangePropertyDescriptors:
+      $heading: "<code>unableToChangePropertyDescriptors</code>"
+      $anchor: THROWABLE_ERRORS-UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS
+
+    unableToUpdatePropertyValue:
+      $heading: "<code>unableToUpdatePropertyValue</code>"
+      $anchor: THROWABLE_ERRORS-UNABLE_TO_UPDATE_PROPERTY_VALUE
+
+    mutuallyExclusiveAssociativeArrayKeysLimitations:
+      $heading: "<code>mutuallyExclusiveAssociativeArrayKeysLimitations</code>"
+      $anchor: THROWABLE_ERRORS-MUTUALLY_EXCLUSIVE_ASSOCIATIVE_ARRAY_KEYS_LIMITATIONS
+
+    incompatibleValuesTypesAlternatives:
+      $heading: "<code>incompatibleValuesTypesAlternatives</code>"
+      $anchor: THROWABLE_ERRORS-INCOMPATIBLE_VALUES_TYPES_ALTERNATIVES
+
+    bothAllowedAndForbiddenCharactersSpecified:
+      $heading: "<code>bothAllowedAndForbiddenCharactersSpecified</code>"
+      $anchor: THROWABLE_ERRORS-BOTH_ALLOWED_AND_FORBIDDEN_CHARACTERS_SPECIFIED
+
+
+warnings:
+
+  $heading: `warnings.$heading`
+  $anchor: WARNINGS
+
+  $children:
+
+    preValidationModificationFailed:
+
+      $heading: "<code>preValidationModificationFailed</code>"
+      $anchor: "WARNINGS-PRE_VALIDATION_MODIFICATION_FAILED"
+
+    unableToDeletePropertyWithOutdatedKey:
+
+      $heading: "<code>unableToDeletePropertyWithOutdatedKey</code>"
+      $anchor: "WARNINGS-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY"
+
+    unableToChangePropertyDescriptors:
+
+      $heading: "<code>unableToChangePropertyDescriptors</code>"
+      $anchor: "WARNINGS-UNABLE_TO_CHANGE_PROPERTY_DESCRIPTORS"
+
+    unableToUpdatePropertyValue:
+
+      $heading: "<code>unableToUpdatePropertyValue</code>"
+      $anchor: "WARNINGS-UNABLE_TO_UPDATE_PROPERTY_VALUE"

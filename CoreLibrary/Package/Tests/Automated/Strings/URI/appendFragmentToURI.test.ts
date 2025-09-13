@@ -1,120 +1,160 @@
-import { appendFragmentToURI } from "../../../../Source";
+import { appendFragmentToURI, Logger } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("appendFragmentToURI", (): void => {
+Promise.all([
 
-  describe("Appending of previously non existed fragment", (): void => {
+  Testing.suite(
+    "Appending of previously non existed fragment",
+    async (): Promise<void> => {
 
-    const sampleURI: string = "sample/path";
+      const sampleURI: string = "sample/path";
 
-    it("Parameter with leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "#test",
-          mustReplaceFragmentIfThereIsOneAlready: true
+      await Promise.all([
+
+        Testing.test(
+          "Parameter with leading hash",
+          (): void => {
+            Assert.strictEqual(
+              appendFragmentToURI({
+                targetURI: sampleURI,
+                targetFragmentWithOrWithoutLeadingHash: "#test",
+                mustReplaceFragmentIfThereIsOneAlready: true
+              }),
+              "sample/path#test"
+            );
+          }
+        ),
+
+        Testing.test(
+          "Parameter without leading hash",
+          (): void => {
+            Assert.strictEqual(
+              appendFragmentToURI({
+                targetURI: sampleURI,
+                targetFragmentWithOrWithoutLeadingHash: "test",
+                mustReplaceFragmentIfThereIsOneAlready: true
+              }),
+              "sample/path#test"
+            );
+          }
+        )
+
+      ]);
+
+    }
+  ),
+
+  Testing.suite(
+    "Replacing of previously existed fragment",
+    async (): Promise<void> => {
+
+      const sampleURI: string = "sample/path#previous";
+
+      await Promise.all([
+
+        Testing.test("Parameter with leading hash", (): void => {
+          Assert.strictEqual(
+            appendFragmentToURI({
+              targetURI: sampleURI,
+              targetFragmentWithOrWithoutLeadingHash: "#test",
+              mustReplaceFragmentIfThereIsOneAlready: true
+            }),
+            "sample/path#test"
+          );
         }),
-        "sample/path#test"
-      );
-    });
 
-    it("Parameter without leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "test",
-          mustReplaceFragmentIfThereIsOneAlready: true
+        Testing.test("Parameter without leading hash", (): void => {
+          Assert.strictEqual(
+            appendFragmentToURI({
+              targetURI: sampleURI,
+              targetFragmentWithOrWithoutLeadingHash: "test",
+              mustReplaceFragmentIfThereIsOneAlready: true
+            }),
+            "sample/path#test"
+          );
+        })
+
+      ]);
+
+    }
+  ),
+
+  Testing.suite(
+    "Ignoring of previously existed fragment",
+    async (): Promise<void> => {
+
+      const sampleURI: string = "sample/path#previous";
+
+      await Promise.all([
+
+        Testing.test("Parameter with leading hash", (): void => {
+          Assert.strictEqual(
+            appendFragmentToURI({
+              targetURI: sampleURI,
+              targetFragmentWithOrWithoutLeadingHash: "#test",
+              mustReplaceFragmentIfThereIsOneAlready: false
+            }),
+            sampleURI
+          );
         }),
-        "sample/path#test"
-      );
-    });
 
-  });
+        Testing.test("Parameter without leading hash", (): void => {
+          Assert.strictEqual(
+            appendFragmentToURI({
+              targetURI: sampleURI,
+              targetFragmentWithOrWithoutLeadingHash: "test",
+              mustReplaceFragmentIfThereIsOneAlready: false
+            }),
+            sampleURI
+          );
+        })
 
-  describe("Replacing of previously existed fragment", (): void => {
+      ]);
 
-    const sampleURI: string = "sample/path#previous";
+    }
+  ),
 
-    it("Parameter with leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "#test",
-          mustReplaceFragmentIfThereIsOneAlready: true
-        }),
-        "sample/path#test"
-      );
-    });
+  Testing.suite(
+    "Surrogate pairs support",
+    async (): Promise<void> => {
 
-    it("Parameter without leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "test",
-          mustReplaceFragmentIfThereIsOneAlready: true
-        }),
-        "sample/path#test"
-      );
-    });
+      const sampleURI: string = "sample/path#😀previous";
 
-  });
+      await Promise.all([
 
-  describe("Ignoring of previously existed fragment", (): void => {
+        Testing.test(
+          "Parameter with leading hash",
+          (): void => {
+            Assert.strictEqual(
+              appendFragmentToURI({
+                targetURI: sampleURI,
+                targetFragmentWithOrWithoutLeadingHash: "#😆test",
+                mustReplaceFragmentIfThereIsOneAlready: true
+              }),
+              "sample/path#😆test"
+            );
+          }
+        ),
 
-    const sampleURI: string = "sample/path#previous";
+        Testing.test(
+          "Parameter without leading hash",
+          (): void => {
+            Assert.strictEqual(
+              appendFragmentToURI({
+                targetURI: sampleURI,
+                targetFragmentWithOrWithoutLeadingHash: "😆test",
+                mustReplaceFragmentIfThereIsOneAlready: true
+              }),
+              "sample/path#😆test"
+            );
+          }
+        )
 
-    it("Parameter with leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "#test",
-          mustReplaceFragmentIfThereIsOneAlready: false
-        }),
-        sampleURI
-      );
-    });
+      ]);
 
-    it("Parameter without leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "test",
-          mustReplaceFragmentIfThereIsOneAlready: false
-        }),
-        sampleURI
-      );
-    });
+    }
+  )
 
-  });
-
-
-  describe("Surrogate pairs support", (): void => {
-
-    const sampleURI: string = "sample/path#😀previous";
-
-    it("Parameter with leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "#😆test",
-          mustReplaceFragmentIfThereIsOneAlready: true
-        }),
-        "sample/path#😆test"
-      );
-    });
-
-    it("Parameter without leading hash", (): void => {
-      Assert.strictEqual(
-        appendFragmentToURI({
-          targetURI: sampleURI,
-          targetFragmentWithOrWithoutLeadingHash: "😆test",
-          mustReplaceFragmentIfThereIsOneAlready: true
-        }),
-        "sample/path#😆test"
-      );
-    });
-
-  });
-
-});
+]).catch(Logger.logPromiseError);

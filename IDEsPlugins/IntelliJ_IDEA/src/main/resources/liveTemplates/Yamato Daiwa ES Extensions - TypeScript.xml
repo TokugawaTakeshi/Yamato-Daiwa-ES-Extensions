@@ -40,7 +40,6 @@
     <variable name="PARAMETER" expression="clipboard()" defaultValue="&quot;Date.now()&quot;" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$,&#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $ARRAY_ELEMENT$$END$,&#10;  // TODO Remove next line if you want to be returned 'null' when target element is not exatctly one instead of the throwing of error&#10;  { mustThrowErrorIfElementNotFoundOrMoreThan1: true }&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -49,7 +48,6 @@
     <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="sps" value="{&#10;  type: $PROPERTY_ACCESS$.TYPE,&#10;  required: $PROPERTY_ACCESS$.REQUIRED,&#10;  minimalCharactersCount: $PROPERTY_ACCESS$.MINIMAL_CHARACTERS_COUNT,&#10;  maximalCharactersCount: $PROPERTY_ACCESS$.MAXIMAL_CHARACTERS_COUNT,&#10;  // OR&#10;  allowedAlternatives: $PROPERTY_ACCESS$.ALLOWED_VALUES&#10;}" description="Logger.logWarning()" toReformat="false" toShortenFQNames="true">
@@ -65,13 +63,12 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getExpectedToBeSingleDOM_Element" value="getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  contextElement: $CONTEXT$, // `ParentNode` or `{ selector: &quot;#SELECTOR&quot; }`&#10;  expectedDOM_ElementSubtype: $DOM_ELEMENT_SUBTYPE$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="getExpectedToBeSingleDOM_Element" value="getExpectedToBeSingleDOM_Element({&#10;  selector: $SELECTOR$,&#10;  context: $CONTEXT$,&#10;  expectedDOM_ElementSubtype: $DOM_ELEMENT_SUBTYPE$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <variable name="SELECTOR" expression="" defaultValue="&quot;\&quot;.Button\&quot;&quot;" alwaysStopAt="true" />
     <variable name="CONTEXT" expression="" defaultValue="&quot;createDOM_ElementFromHTML_Code(\&quot;&lt;div class='ActionBar'&gt;&lt;button type='button' class='Button'&gt;&lt;/button&gt;&lt;/div&gt;\&quot;)&quot;" alwaysStopAt="true" />
     <variable name="DOM_ELEMENT_SUBTYPE" expression="" defaultValue="&quot;HTMLButtonElement&quot;" alwaysStopAt="true" />
     <context>
       <option name="JS_EXPRESSION" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
     </context>
   </template>
   <template name="raebi" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByIndexes } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="The alias of  `removeArrayElementsByIndexes`" toReformat="false" toShortenFQNames="true">
@@ -81,8 +78,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="rmaebp" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="The alias of  `removeArrayElementsByPredicates`" toReformat="false" toShortenFQNames="true">
@@ -94,8 +89,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="getIndexesOfArrayElementsWhichSatisfiesThePredicate" value="getIndexesOfArrayElementsWhichSatisfiesThePredicate(&#10;  $TARGET_ARRAY$, ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getIndexesOfArrayElementsWhichSatisfiesThePredicate } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -104,7 +97,6 @@
     <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne" value="getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(&#10;  $TARGET_ARRAY$, &#10;  ($ARRAY_ELEMENT$: $ARRAY_ELEMENT_TYPE$): boolean =&gt; $END$,&#10;  // TODO Remove it if you need to be returned 'null' when desired element is not exatly one&#10;  { mustThrowErrorIfElementNotFoundOrMoreThan1: true } &#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;)" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -113,7 +105,6 @@
     <variable name="ARRAY_ELEMENT_TYPE" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="raebii" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByIndexesImmutably } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="The alias of  `replaceArrayElementsByIndexesImmutably`" toReformat="false" toShortenFQNames="true">
@@ -123,8 +114,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="aeta" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: $POSITION$,&#10;  toPosition__numerationFrom1: $POSITION$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `addElementsToArray`" toReformat="false" toShortenFQNames="true">
@@ -135,8 +124,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="rpaebp" value="replaceArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  &#10;  // === Replacing of one element&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  &#10;  newValue: $NEW_VALUE$,&#10;  // or&#10;  replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$,&#10;&#10;  // === Replacing of multiple elements&#10;  replacements: [&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    },&#10;    {&#10;      predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;      newValue: $NEW_VALUE$,&#10;      // or&#10;      replacer: ($ELEMENT$: $ELEMENT_TYPE$): $ELEMENT_TYPE$ =&gt; $REPLACEMENT$&#10;    }&#10;  ],&#10;  &#10;  &#10;  mutably: $MUTABLY$&#10;  &#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="The alias of  `replaceArrayElementsByPredicates`" toReformat="false" toShortenFQNames="true">
@@ -150,8 +137,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="createDOM_ElementFromHTML_Code" value="// Returns &quot;Element&quot;: &#10;createDOM_ElementFromHTML_Code($HTML_CODE$);&#10;&#10;// Returns specific subtype of &quot;Element&quot;:&#10;createDOM_ElementFromHTML_Code&lt;$ELEMENT_SUBTYPE$&gt;({&#10;  HTML_Code: $HTML_CODE$,&#10;  rootDOM_ElementSubtype: $ELEMENT_SUBTYPE$&#10;});&#10;// === END OF AUTOMATICALLY GENERATED CODE =============================================================================" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -169,12 +154,10 @@
       <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="getExpectedToBeSingleChildOfTemplateElement" value="getExpectedToBeSingleChildOfTemplateElement({&#10;&#10;  // === How you want to retrieve the template element?  &#10;  $END$templateElement: sampleTemplateElement,&#10;  &#10;  // or&#10;  &#10;  templateElementSelector: &quot;#TEMPLATE_ELEMENT&quot;,&#10;  &#10;  // optional&#10;  contextElement: parentElement,&#10;  // or:&#10;  contextElement: { selector: &quot;#PRODUCT_CARD&quot; } // must refer to exactly one element&#10;  &#10;  &#10;  // === If you want the specific subtype of &quot;Element&quot;, specify it:&#10;  expectedChildElementSubtype: HTMLElement,&#10;  &#10;  &#10;  // === If you don't need the template element anymore, you can remove or replace it:&#10;  mustRemoveTemplateElementOnceDone: true,&#10;  &#10;  // or&#10;  &#10;  mustReplaceTemplateElementOnceDoneWith: newElement,&#10;  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
+  <template name="getExpectedToBeSingleChildOfTemplateElement" value="getExpectedToBeSingleChildOfTemplateElement({&#10;&#10;  // === How you want to retrieve the template element?  &#10;  $END$templateElement: sampleTemplateElement,&#10;  &#10;  // or&#10;  &#10;  templateElementSelector: &quot;#TEMPLATE_ELEMENT&quot;,&#10;  context: parentElement, // optional&#10;&#10;  &#10;  // === If you want the specific subtype of &quot;Element&quot;, specify it:&#10;  expectedChildElementSubtype: HTMLElement,&#10;  &#10;  &#10;  // === If you don't need the template element anymore, you can remove or replace it:&#10;  mustRemoveTemplateElementOnceDone: true,&#10;  &#10;  // or&#10;  &#10;  mustReplaceTemplateElementOnceDoneWith: newElement,&#10;  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="addElementsToArray" value="addElementsToArray({&#10;  targetArray: $TARGET_ARRAY$,&#10;  newElements: [ $NEW_ELEMENTS$ ],&#10;  mutably: $MUTABLY$,&#10;  &#10;  // TODO Leave one, delete remain&#10;  $END$toStart: true,&#10;  toEnd: true,&#10;  toPosition__numerationFrom0: $POSITION$,&#10;  toPosition__numerationFrom1: $POSITION$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { addElementsToArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -185,8 +168,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="removeArrayElementsByIndexes" value="removeArrayElementsByIndexes({&#10;  targetArray: $TARGET_ARRAY$,&#10;  indexes: $INDEXES$,&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByIndexes } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -196,8 +177,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="replaceArrayElementsByIndexesImmutably" value="replaceArrayElementsByIndexesImmutably({&#10;  targetArray: $TARGET_ARRAY$,&#10;  // one replacement:&#10;  index: $INDEX$,&#10;  newElement: $NEW_ELEMENT$&#10;  // multiple replacements:&#10;  replacements: [&#10;    { index: $INDEX$, newElement: $NEW_ELEMENT$ },&#10;    { index: 3, newElement: $NEW_ELEMENT$ }&#10;  ]&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { replaceArrayElementsByIndexesImmutably } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -207,8 +186,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="getLastElementOfArray" value="getLastElementOfArray($TARGET_ARRAY$, { mustThrowErrorIfArrayIsEmpty: true })$END$&#10;// TODO Remove the second parameter if you need to be returned null instead of throwing of error when array is empty&#10;/* &#10;&#10;// Multiline version&#10;getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // TODO Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true }&#10;)&#10;&#10;// TODO Import if has not imported yet&#10;// import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;*/" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -217,15 +194,12 @@
       <option name="JS_CLASS_MEMBER_EXPRESSION" value="false" />
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="gleoa" value="getLastElementOfArray($TARGET_ARRAY$, { mustThrowErrorIfArrayIsEmpty: true })$END$&#10;// TODO Remove the second parameter if you need to be returned null instead of throwing of error when array is empty&#10;/* &#10;&#10;// Multiline version&#10;getLastElementOfArray(&#10;  $TARGET_ARRAY$,&#10;  // TODO Remove it if you need to be returned null instead of throwing of error when array is empty&#10;  { mustThrowErrorIfArrayIsEmpty: true }&#10;)&#10;&#10;// TODO Import if has not imported yet&#10;// import { getLastElementOfArray } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;*/" description="The alias of  `getLastElementOfArray`" toReformat="false" toShortenFQNames="true">
     <variable name="TARGET_ARRAY" expression="clipboard()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="removeArrayElementsByPredicates" value="removeArrayElementsByPredicates({&#10;  targetArray: $TARGET_ARRAY$,&#10;  predicate: ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;  // or if multiple:&#10;  predicates: [&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $BOOLEAN_EXPRESSION$,&#10;    ($ELEMENT$: $ELEMENT_TYPE$): boolean =&gt; $ELEMENT$.length &lt; 5&#10;  ],&#10;  mutably: $MUTABLY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { removeArrayElementsByPredicates } from &quot;@yamato-daiwa/es-extensions&quot;;&#10;})&#10;" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -237,8 +211,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="twoDimensionalizeArray" value="twoDimensionalizeArray&lt;$ARRAY_ELEMENT_TYPE$&gt;({&#10;  targetFlatArray: $TARGET_FLAT_ARRAY$,&#10;  elementsCountPerNestedArray: $ELEMENTS_COUNT_PER_NESTED_ARRAY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { twoDimensionalizeArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -248,8 +220,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="tda" value="twoDimensionalizeArray&lt;$ARRAY_ELEMENT_TYPE$&gt;({&#10;  targetFlatArray: $TARGET_FLAT_ARRAY$,&#10;  elementsCountPerNestedArray: $ELEMENTS_COUNT_PER_NESTED_ARRAY$&#10;  &#10;  // TODO Import if has not been imported yet&#10;  // import { twoDimensionalizeArray } from &quot;@yamato-daiwa/es-extensions&quot;; &#10;})" description="The alias of  `twoDimensionalizeArray`" toReformat="false" toShortenFQNames="true">
@@ -259,8 +229,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="addLeftClickEventHandler" value="addLeftClickEventHandler({&#10;&#10;  targetElement: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;&#10;  // &lt; === OR ==============================================&#10;  targetElementSelector: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;  // &lt; --- Leave one, delete remain ------------------------&#10;  mustApplyToAllMatchingsWithSelector: true,&#10;  mustIgnoreSubsequentMatchingsWithSelector: true,&#10;  mustExpectExactlyOneMatchingWithSelector: true,&#10;  // &gt; -----------------------------------------------------&#10;  // &gt; =====================================================&#10;&#10;  handler: (): void =&gt; { console.log(&quot;Clicked&quot;); },&#10;  mustInvokeBeforeChildren_sHandlers: true // false as default  &#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -268,8 +236,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="alceh" value="addLeftClickEventHandler({&#10;&#10;  targetElement: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;&#10;  // &lt; === OR ==============================================&#10;  targetElementSelector: $TARGET_ELEMENT_OR_ITS_SELECTOR$,&#10;  // &lt; --- Leave one, delete remain ------------------------&#10;  mustApplyToAllMatchingsWithSelector: true,&#10;  mustIgnoreSubsequentMatchingsWithSelector: true,&#10;  mustExpectExactlyOneMatchingWithSelector: true,&#10;  // &gt; -----------------------------------------------------&#10;  // &gt; =====================================================&#10;&#10;  handler: (): void =&gt; { console.log(&quot;Clicked&quot;); },&#10;  mustInvokeBeforeChildren_sHandlers: true // false as default  &#10;})" description="The alias of  `addLeftClickEventHandler`" toReformat="false" toShortenFQNames="true">
@@ -277,8 +243,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="cloneDOM_Element" value="cloneDOM_Element({&#10;  targetElement: $TARGET_ELEMENT$,&#10;  mustCopyAllChildren: $MUST_COPY_ALL_CHILDREN$&#10;})" description="Eponymous function calling" toReformat="false" toShortenFQNames="true">
@@ -287,8 +251,6 @@
     <context>
       <option name="JS_EXPRESSION" value="true" />
       <option name="JS_STATEMENT" value="true" />
-      <option name="TS_EXPRESSION" value="true" />
-      <option name="TS_STATEMENT" value="true" />
     </context>
   </template>
 </templateSet>

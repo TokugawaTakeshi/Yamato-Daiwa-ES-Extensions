@@ -7,7 +7,7 @@ Logger.setImplementation(ConsoleApplicationLogger);
 try {
   throw new Error("Example error");
 } catch (error: unknown) {
-  Logger.throwErrorAndLog({
+  Logger.throwErrorWithFormattedMessage({
     errorInstance: new UnexpectedEventError("'foo' is 'null'. With correctly working validation it could not be."),
     title: UnexpectedEventError.localization.defaultTitle,
     occurrenceLocation: "className.methodName(parametersObject)",

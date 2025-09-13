@@ -1,6 +1,6 @@
 import { ConsoleCommandsParser } from "@yamato-daiwa/es-extensions-nodejs";
 import { isNotUndefined, insertSubstringIf } from "@yamato-daiwa/es-extensions";
-import { RawObjectDataProcessorLocalization__Japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
+import { rawObjectDataProcessorLocalization__japanese } from "@yamato-daiwa/es-extensions-localization-japanese";
 
 import Localization = ConsoleCommandsParser.Localization;
 import ErrorsMessages = Localization.ErrorsMessages;
@@ -28,7 +28,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
 
     numbersSet: {
       key: "数集合",
-      generateValue: RawObjectDataProcessorLocalization__Japanese.numbersSet
+      generateValue: rawObjectDataProcessorLocalization__japanese.numbersSet
     },
 
     minimalValue: "最小限",
@@ -190,7 +190,7 @@ const consoleCommandsParserLocalization__japanese: Localization = {
         }: ErrorsMessages.NumericOptionValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
           `数型の「${ targetOptionKey }」オプションの「${ actualOptionValue }」値は数集合` +
-            `「${ RawObjectDataProcessorLocalization__Japanese.numbersSet(expectedNumbersSet) }」に所属していない。\n` +
+            `「${ rawObjectDataProcessorLocalization__japanese.numbersSet(expectedNumbersSet) }」に所属していない。\n` +
           `${ consoleCommandsParserLocalization__japanese.generateCheckTheCommandReferenceAsking(commandHelpReference) }`
     },
 

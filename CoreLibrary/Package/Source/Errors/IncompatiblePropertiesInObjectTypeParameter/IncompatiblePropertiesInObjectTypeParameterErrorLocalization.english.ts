@@ -4,7 +4,7 @@ import type IncompatiblePropertiesInObjectTypeParameterError from "./Incompatibl
 const incompatiblePropertiesInObjectTypeParameterErrorLocalization__english:
     IncompatiblePropertiesInObjectTypeParameterError.Localization =
 {
-  defaultTitle: "Incompatible properties in object-type parameter",
+  defaultTitle: "Incompatible Properties in Object-type Parameter",
   generateDescription: (
     {
       parameterName,

@@ -2,7 +2,7 @@ import type PathRefersToDirectoryNotFileError from "./PathRefersToDirectoryNotFi
 
 
 const pathRefersToDirectoryNotFileErrorLocalization__english: PathRefersToDirectoryNotFileError.Localization = {
-  defaultTitle: "Desired file actually is the directory",
+  defaultTitle: "Desired File Actually is the Directory",
   genericDescription:
       ({ targetPath }: PathRefersToDirectoryNotFileError.Localization.CommonDescription.TemplateVariables): string =>
           `Contrary to expectations, path "${ targetPath }" refers to directory, not file.`

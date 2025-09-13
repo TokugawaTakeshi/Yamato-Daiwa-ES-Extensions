@@ -1,0 +1,73 @@
+extends ../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("Что нового в 1.8"),
+        description: MetaDescriptionTemplates.realiseNotes({ version: "1.8" })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("realiseNotes.v1d8");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.realiseNotes.$children.v1d8.$URI,
+      japanese: routing.japanese.realiseNotes.$children.v1d8.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1 Версия 1.8 — Что нового
+
+    h2.Article-Heading2 Основной пакет (@yamato-daiwa/es-extensions)
+
+    h3.Article-Heading3 Критические изменения
+
+    h4.Article-Heading4 Работа с массивами
+
+    h5.Article-Heading5.
+      Переименование #[code getIndexesOfArrayElementsWhichSatisfiesThePredicate] и
+        #[code getIndexesOfSatisfiesThePredicateArrayElements]
+
+    dl.Article-DescriptionList
+
+      dt Причина
+      dd.
+        Возможность выразить то, что делает функция меньшим количеством символов без потери смысла
+
+      dt Потребуются редактирование Вашего исходного кода, если
+      dd.
+        Вы напрямую использовали функцию
+          #[+ImportantEntity__Code--YDID getIndexesOfArrayElementsWhichSatisfiesThePredicate]
+
+      dt Миграция
+      dd.
+        Используя соответствующую функциональность редактора кода или #[+Term--YDID интегрированной среды разработки],
+          замените #[+ImportantEntity__Code--YDID getIndexesOfArrayElementsWhichSatisfiesThePredicate] на
+          #[+ImportantEntity__Code--YDID getIndexesOfSatisfiesThePredicateArrayElements] во всех файлах проекта.

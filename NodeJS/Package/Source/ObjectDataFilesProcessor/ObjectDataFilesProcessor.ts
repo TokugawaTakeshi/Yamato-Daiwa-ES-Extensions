@@ -17,7 +17,7 @@ import {
   isNotUndefined,
   isNull
 } from "@yamato-daiwa/es-extensions";
-import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
+import type { PossiblyReadonlyParsedJSON } from "@yamato-daiwa/es-extensions";
 import extractLastExtensionOfFileName from "../Temporary/extractLastExtensionOfFileName";
 
 /* --- YDEE Node.js ------------------------------------------------------------------------------------------------- */
@@ -35,7 +35,7 @@ abstract class ObjectDataFilesProcessor {
   public static localization: ObjectDataFilesProcessor.Localization = objectDataFilesProcessorLocalization__english;
 
 
-  public static async processFile<ValidData extends ParsedJSON>(
+  public static async processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -44,7 +44,7 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): Promise<ValidData>;
 
-  public static processFile<ValidData extends ParsedJSON>(
+  public static processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
@@ -69,17 +69,15 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): unknown;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-  * This function returns or not returns the promise dependent of overloading. */
-  public static processFile<ValidData extends ParsedJSON>(
+  public static processFile<ValidData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: Readonly<{
       filePath: string;
       validDataSpecification?: RawObjectDataProcessor.ObjectDataSpecification;
       schema?: ObjectDataFilesProcessor.SupportedSchemas;
       synchronously: boolean;
     }>
-  /* eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents --
-   * In this case (the implementation of the overloading) each alternative matters. */
+    /* eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents --
+     * In this case (the implementation of the overloading) each alternative matters. */
   ): ValidData | unknown | Promise<ValidData> | Promise<unknown> {
 
     const filePath: string = compoundParameter.filePath;
@@ -94,7 +92,7 @@ abstract class ObjectDataFilesProcessor {
       });
 
       if (isNull(fileNameLastExtensionWithoutLeadingDot)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidParameterValueError({
             parameterName: "compoundParameter",
             parameterNumber: 1,
@@ -127,7 +125,7 @@ abstract class ObjectDataFilesProcessor {
 
         default: {
 
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorInstance: new InvalidParameterValueError({
               parameterName: "compoundParameter.filePath",
               parameterNumber: 1,
@@ -203,7 +201,7 @@ abstract class ObjectDataFilesProcessor {
     } catch (error: unknown) {
 
       if (isErrnoException(error) && error.code === "ENOENT") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -217,7 +215,7 @@ abstract class ObjectDataFilesProcessor {
 
 
     if (!targetFileStatistics.isFile()) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new PathRefersToDirectoryNotFileError({ targetPath: filePath }),
         title: PathRefersToDirectoryNotFileError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
@@ -232,10 +230,11 @@ abstract class ObjectDataFilesProcessor {
       rawData = FileSystem.readFileSync(filePath, "utf-8");
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
-        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
+        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
+        innerError: error
       });
     }
 
@@ -257,7 +256,7 @@ abstract class ObjectDataFilesProcessor {
     } catch (error: unknown) {
 
       if (isErrnoException(error) && error.code === "ENOENT") {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new FileNotFoundError({ filePath }),
           title: FileNotFoundError.localization.defaultTitle,
           occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -271,7 +270,7 @@ abstract class ObjectDataFilesProcessor {
 
 
     if (!targetFileStatistics.isFile()) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new PathRefersToDirectoryNotFileError({ targetPath: filePath }),
         title: PathRefersToDirectoryNotFileError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
@@ -286,10 +285,11 @@ abstract class ObjectDataFilesProcessor {
       rawData = await PromisfiedFileSystem.readFile(filePath, "utf-8");
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new FileReadingFailedError({ filePath }),
         title: FileReadingFailedError.localization.defaultTitle,
-        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION
+        occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
+        innerError: error
       });
     }
 
@@ -298,7 +298,7 @@ abstract class ObjectDataFilesProcessor {
   }
 
 
-  private static parseRawData<ValidData extends ParsedJSON>(
+  private static parseRawData<ValidData extends PossiblyReadonlyParsedJSON>(
     {
       rawData,
       validDataSpecification,
@@ -324,7 +324,7 @@ abstract class ObjectDataFilesProcessor {
     }>
   ): unknown;
 
-  private static parseRawData<ValidData extends ParsedJSON>(
+  private static parseRawData<ValidData extends PossiblyReadonlyParsedJSON>(
     {
       rawData,
       validDataSpecification,
@@ -366,7 +366,7 @@ abstract class ObjectDataFilesProcessor {
       }
 
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({ mentionToExpectedData: filePathForLogging }),
         title: InvalidExternalDataError.localization.defaultTitle,
         occurrenceLocation: POTENTIAL_ERROR_OCCURRENCE_LOCATION,
@@ -383,8 +383,8 @@ abstract class ObjectDataFilesProcessor {
     const processingResult: RawObjectDataProcessor.ProcessingResult<ValidData> =
         RawObjectDataProcessor.process(parsedData, validDataSpecification);
 
-    if (processingResult.rawDataIsInvalid) {
-      Logger.throwErrorAndLog({
+    if (processingResult.isRawDataInvalid) {
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({
           customMessage: `The contents of file '${ filePathForLogging }' does not matching with valid data specification:\n` +
               RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)

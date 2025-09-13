@@ -41,7 +41,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
 
     if (elementsCorrespondingToContextElementSelector.length === 0) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new DOM_ElementRetrievingFailedError({
           customMessage:
               `The context element has not been found by the selector "${ compoundParameter.contextElement.selector }".`
@@ -76,7 +76,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
       contextElement.querySelectorAll(targetElementSelector);
 
   if (elementsCorrespondingToTargetElementSelector.length === 0) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new DOM_ElementRetrievingFailedError({ selector: targetElementSelector }),
       title: DOM_ElementRetrievingFailedError.localization.defaultTitle,
       occurrenceLocation: "getExpectedToBeSingleDOM_Element(compoundParameter)"
@@ -105,7 +105,7 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
 
 
   if (!(targetElement instanceof compoundParameter.expectedDOM_ElementSubtype)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new UnexpectedEventError(
         "Contrary to expectations, the picked element in not instance of " +
             `"${ compoundParameter.expectedDOM_ElementSubtype.name }".`

@@ -1,0 +1,15 @@
+examples:
+
+  $heading: "Examples"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: "Quick Input in IntelliJ IDEA Family of IDEs"
+
+  steps:
+
+    $heading: "Steps for Using the Live Templates"
+
+externalLinks:
+
+  $heading: "External Links"

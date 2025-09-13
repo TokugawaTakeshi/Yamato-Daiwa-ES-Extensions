@@ -1,5 +1,4 @@
-import { DAYS_COUNT_IN_WEEK, DaysOfWeekNames } from "fundamental-constants";
-import type { MonthsNames } from "fundamental-constants";
+import { DAYS_COUNT_IN_WEEK, DaysOfWeekNames, type MonthsNames } from "fundamental-constants";
 
 import getDaysCountInSpecificMonth from "./getDaysCountInSpecificMonth";
 import getYearOfPreviousMonth from "./getYearOfPreviousMonth";
@@ -9,11 +8,11 @@ import getNextMonthNumber from "./getNextMonthNumber";
 import getMonthNameByNumber from "./getMonthNameByNumber";
 import getMonthNumberByName from "./getMonthNumberByName";
 
-import twoDimensionalizeArray from "../Arrays/twoDimensionalizeArray";
+import twoDimensionalizeArray from "../Arrays/08-Restructuring/twoDimensionalizeArray";
 import getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne from
-    "../Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
+    "../Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne";
 
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
 class CalendarBuilder {

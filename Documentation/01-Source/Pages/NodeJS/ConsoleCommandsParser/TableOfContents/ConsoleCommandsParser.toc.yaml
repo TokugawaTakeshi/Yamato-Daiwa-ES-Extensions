@@ -1,0 +1,75 @@
+demo:
+
+  $heading: `demo.$heading`
+  $anchor: "DEMO--SECTION"
+
+minimalTheory:
+
+  $heading: `minimalTheory.$heading`
+  $anchor: "MINIMAL_THEORY--SECTION"
+
+  $children:
+
+    conventionalTerminology:
+
+      $heading: `minimalTheory.conventionalTerminology.$heading`
+      $anchor: "CONVENTIONAL_TERMINOLOGY--SECTION"
+
+      $children:
+
+        commandPhrase:
+          $heading: `minimalTheory.conventionalTerminology.commandPhrase.$heading`
+          $anchor: "COMMAND_PHRASE--SECTION"
+
+    TypeScriptDiscriminatedUnions:
+      $heading: `minimalTheory.TypeScriptDiscriminatedUnions.$heading`
+      $anchor: "TYPESCRIPT_DISCRIMINATED_UNIONS--SECTION"
+
+stepwiseGuide:
+
+  $heading: `stepwiseGuide.$heading`
+  $anchor: "STEPWISE_GUIDE--SECTION"
+
+  $children:
+
+    initialCommandPhrasesSet:
+      $heading: `stepwiseGuide.initialCommandPhrasesSet.$heading`
+      $anchor: "STEPWISE_GUIDE-COMMAND_PHRASES--SECTION"
+
+    commandPhrasesOptions:
+      $heading: `stepwiseGuide.commandPhrasesOptions.$heading`
+      $anchor: "STEPWISE_GUIDE-COMMAND_PHRASES_OPTIONS--SECTION"
+
+    consoleApplicationSpecification:
+
+      $heading: `stepwiseGuide.consoleApplicationSpecification.$heading`
+      $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION--SECTION"
+
+      $children:
+
+        optionsSpecification:
+
+          $heading: `stepwiseGuide.consoleApplicationSpecification.optionsSpecification.$heading`
+          $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION--SECTION"
+
+          $children:
+
+            specialPropertiesOfStringOptions:
+              $heading: `stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfStringOptions.$heading`
+              $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_STRING_OPTIONS--SECTION"
+
+            specialPropertiesOfNumericOptions:
+              $heading: `stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfNumericOptions.$heading`
+              $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_NUMERIC_OPTIONS--SECTION"
+
+            specialPropertiesOfObjectOptions:
+              $heading: `stepwiseGuide.consoleApplicationSpecification.optionsSpecification.specialPropertiesOfObjectOptions.$heading`
+              $anchor: "STEPWISE_GUIDE-CONSOLE_APPLICATION_SPECIFICATION-OPTIONS_SPECIFICATION-SPECIAL_PROPERTIES_OF_OBJECT_OPTIONS--SECTION"
+
+    logic:
+      $heading: `stepwiseGuide.logic.$heading`
+      $anchor: "STEPWISE_GUIDE-LOGIC--SECTION"
+
+    launchingOfApplicationByName:
+      $heading: `stepwiseGuide.launchingOfApplicationByName.$heading`
+      $anchor: "STEPWISE_GUIDE-LAUNCHING_OF_APPLICATION_BY_NAME--SECTION"

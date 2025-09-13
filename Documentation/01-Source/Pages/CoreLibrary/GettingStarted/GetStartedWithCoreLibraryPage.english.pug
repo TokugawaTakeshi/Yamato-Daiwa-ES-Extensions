@@ -29,11 +29,14 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.gettingStarted");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      japanese: "./GetStartedWithCoreLibraryPage.japanese.html",
-      russian: "./GetStartedWithCoreLibraryPage.russian.html"
+      japanese: routing.japanese.coreLibrary.$children.gettingStarted.$URI,
+      russian: routing.russian.coreLibrary.$children.gettingStarted.$URI
     });
 
-    const pageTableOfContents = localizedRouting.coreLibrary.$children.gettingStarted.$sectioning;
+    const {
+      $sectioning: localizedSectioning,
+      $heading: topHeading
+    } = localizedRouting.coreLibrary.$children.gettingStarted;
 
     const externalLinks = {
       stackOverflow: {
@@ -56,19 +59,19 @@ block append SpecificContent
     //- ━━━ Starting Use ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 1,
-      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading,
+      text: localizedRouting.coreLibrary.$children.gettingStarted.$heading
     }).Article-Heading1
 
     //- ━━━ Installation ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.installation.$heading,
-      HTML_ID: pageTableOfContents.installation.$anchor
+      text: localizedSectioning.installation.$heading,
+      HTML_ID: localizedSectioning.installation.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
       The normal installation method is to execute from the
-        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }).Article-Link npm]
+        #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.top }) npm]
         #[+Term--YDID package manager].
 
     +CodeViewer--YDF({
@@ -82,19 +85,19 @@ block append SpecificContent
     //- ━━━ Information About Distribution Size ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.distributiveVolumeNotice.$heading,
-      HTML_ID: pageTableOfContents.distributiveVolumeNotice.$anchor
+      text: localizedSectioning.distributiveVolumeNotice.$heading,
+      HTML_ID: localizedSectioning.distributiveVolumeNotice.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph
       | On the
       |
-      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions }).Article-Link npm official site
+      +Link--YDF({ unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.corePackage }) npm official site
       |
       |
       +Link--YDF({
-        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions
-      }).Article-Link @yamato-daiwa/es-extensions page
+        unendorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.corePackage
+      }) @yamato-daiwa/es-extensions page
       | , the uncompressed size (“Unpacked Size”) of the #[+Term--YDID package] is displayed.
       | For example, version #[+SecondaryEntity--YDID 1.5.8] is 698 kilobytes in size.
 
@@ -130,15 +133,15 @@ block append SpecificContent
         #[+Keyword__Contrast--YDID not]&nbsp;used in the library from the #[+Term--YDID production build].
 
     p.Article-Paragraph
-      | In the case of #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }).Article-Link Webpack],
+      | In the case of #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.top }) Webpack],
       |   the functionality is called
-      |   #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }).Article-Link “tree shaking”].
+      |   #[+Link--YDF({ unendorsedExternalURI: sharedExternalLinks.webpack.treeShaking }) “tree shaking”].
       | To enable this #[+Keyphrase--YDID in the production build mode], you need to specify #[+ImportantEntity--YDID ES]
       |   type #[+Term--YDID modules] in the
       |
       +Link--YDF({
         unendorsedExternalURI: sharedExternalLinks.typescript.configurationReference
-      }).Article-Link TypeScript configuration
+      }) TypeScript configuration
       |   .
       | The second requirement, which is specifying #[+ImportantEntity__Code--YDID sideEffects: false] in
       |   #[+ImportantEntity--YDID package.json] (the #[+ImportantEntity--YDID "package.json"] file of the
@@ -160,8 +163,8 @@ block append SpecificContent
     //- ━━━ Precautions for Non-Users of TypeScript ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.nonTypeScriptUsageWarning.$heading,
-      HTML_ID: pageTableOfContents.nonTypeScriptUsageWarning.$anchor
+      text: localizedSectioning.nonTypeScriptUsageWarning.$heading,
+      HTML_ID: localizedSectioning.nonTypeScriptUsageWarning.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.
@@ -198,7 +201,7 @@ block append SpecificContent
       | (
       +Link--YDF({
         unendorsedExternalURI: externalLinks.stackOverflow.parametersValidationInTypeScript
-      }).Article-Link Reference: Specific Example
+      }) Reference: Specific Example
       | ).
 
     p.Article-Paragraph.
@@ -218,8 +221,8 @@ block append SpecificContent
     //- ━━━ Importing functionality ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     +Heading--YDF({
       level: 2,
-      text: pageTableOfContents.importingFunctionality.$heading,
-      HTML_ID: pageTableOfContents.importingFunctionality.$anchor
+      text: localizedSectioning.importingFunctionality.$heading,
+      HTML_ID: localizedSectioning.importingFunctionality.$anchor
     }).Article-Heading2
 
     p.Article-Paragraph.

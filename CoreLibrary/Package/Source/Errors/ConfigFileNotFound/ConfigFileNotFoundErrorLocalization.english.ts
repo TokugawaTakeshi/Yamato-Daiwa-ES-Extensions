@@ -5,7 +5,7 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 const configFileNotFoundErrorLocalization__english: ConfigFileNotFoundError.Localization = {
 
-  defaultTitle: "Configuration file not found",
+  defaultTitle: "Configuration File not Found",
 
   generateDescription(
     {

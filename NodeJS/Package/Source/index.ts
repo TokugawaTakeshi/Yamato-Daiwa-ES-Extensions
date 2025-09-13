@@ -1,11 +1,12 @@
 /*!
- * @yamato-daiwa/es-extensions-nodejs v1.7
+ * @yamato-daiwa/es-extensions-nodejs v1.8
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
 
 export { default as NodeJS_Timer } from "./DateTime/NodeJS_Timer";
 export { default as ConsoleApplicationLogger } from "./ConsoleApplicationLogger";
+export { default as DotEnvFilesGenerator } from "./DotEnvFilesGenerator";
 
 export { default as ConsoleCommandsParser } from "./ConsoleCommandsParser/ConsoleCommandsParser";
 export { default as consoleCommandsParserLocalization__english } from

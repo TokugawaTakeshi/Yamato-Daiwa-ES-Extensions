@@ -72,7 +72,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
   const childrenNodes: HTMLCollection = templateElement.content.children;
 
   if (childrenNodes.length === 0) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -85,7 +85,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
 
 
   if (childrenNodes.length > 1) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
@@ -108,7 +108,7 @@ export default function getExpectedToBeSingleChildOfTemplateElement<DOM_ElementS
     !isString(compoundParameter) &&
     !(directChildOfTemplateElement instanceof compoundParameter.expectedChildElementSubtype)
   ) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

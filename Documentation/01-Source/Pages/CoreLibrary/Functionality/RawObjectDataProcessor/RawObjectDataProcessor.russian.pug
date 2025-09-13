@@ -1,0 +1,71 @@
+extends ../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../SharedAssets/Markup/SharedAssets.russian.pug
+  include ../../../../SharedComponents/SharedComponents.russian.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor;
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(topHeading),
+        description: "",
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$URI,
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- ━━━ `RawObjectDataProcessor` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= topHeading
+
+    p.Article-Paragraph.
+      #[+Term--YDID Класс] для валидации и обработки данных типа #[+Term--YDID «объект»] (в частности
+        #[+Term--YDID массивов]) с привидением их к конкретному #[+Term--YDID TypeScript-типу].
+
+    p.Article-Paragraph.
+      Востребован в большинстве случаев, когда данные приходят из источника, недосягаемого для проверки типов с помощью
+        #[+ImportantEntity--YDID TypeScript].
+      В частности, это могут быть следующие сценарии:
+
+    ul.Article-UnorderedList
+      li Полученные данных с клиентской части в клиент-серверном взаимодействии
+      li Наоборот, полученные данных с серверной части в клиент-серверном взаимодействии
+      li Получение данных из базы данных
+      li Чтение данных из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+
+    +CompactTableOfContents--YDF_DK(
+      localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children
+    )

@@ -1,22 +1,32 @@
 /* eslint-disable no-console -- This class using native "console" because of its specialization. */
 
 import type { Log, ErrorLog, ThrownErrorLog, WarningLog, InfoLog, SuccessLog } from "./Logs";
-import type { ILogger } from "./ILogger";
+import type ILogger from "./ILogger";
 
-import isNotNull from "../TypeGuards/Nullables/isNotNull";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isString from "../TypeGuards/Strings/isString";
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
-import stringifyAndFormatArbitraryValue from "../Strings/stringifyAndFormatArbitraryValue";
+import isNumber from "../TypeGuards/Numbers/isNumber";
+import isBigInt from "../TypeGuards/Numbers/isBigInt";
+import isBoolean from "../TypeGuards/isBoolean";
+import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
+import isNull from "../TypeGuards/EmptyTypes/isNull";
+import isNotNull from "../TypeGuards/EmptyTypes/isNotNull";
+
+import { stringifyAndFormatArbitraryValue } from "../Strings/ArbitraryValueFormatter";
 
 import loggerLocalization__english from "./LoggerLocalization.english";
 
 
 abstract class Logger {
 
-  private static implementation: ILogger | null = null;
-  private static localization: Logger.Localization = loggerLocalization__english;
+  /* ━━━ Protected Static Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  protected static implementation: ILogger | null = null;
+  protected static localization: Logger.Localization = loggerLocalization__english;
 
 
+  /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ─── Configuration ────────────────────────────────────────────────────────────────────────────────────────────── */
   public static setImplementation(implementation: ILogger): typeof Logger {
     Logger.implementation = implementation;
     return Logger;
@@ -28,97 +38,286 @@ abstract class Logger {
   }
 
 
-  public static throwErrorAndLog<CustomError extends Error>(errorLog: ThrownErrorLog<CustomError>): never {
+  /* ─── Methods of `ILogger` Interface ───────────────────────────────────────────────────────────────────────────── */
+  public static throwErrorWithFormattedMessage<CustomError extends Error>(
+    thrownErrorLog: ThrownErrorLog<CustomError>,
+    options: ILogger.ThrowingErrorWithFormattedMessage.Options = {}
+  ): never {
 
-    if (isNotNull(Logger.implementation) && isNotUndefined(Logger.implementation.throwErrorAndLog)) {
-      return Logger.implementation.throwErrorAndLog(errorLog);
+    if (isNotUndefined(Logger.implementation?.throwErrorWithFormattedMessage)) {
+      return Logger.implementation.throwErrorWithFormattedMessage(thrownErrorLog, options);
     }
 
 
     let stringifiedInnerError: string | undefined;
 
-    if (isNotUndefined(errorLog.innerError)) {
+    if (isNotUndefined(thrownErrorLog.innerError)) {
 
-      stringifiedInnerError = stringifyAndFormatArbitraryValue(errorLog.innerError);
+      stringifiedInnerError = stringifyAndFormatArbitraryValue(thrownErrorLog.innerError);
 
-      if (errorLog.innerError instanceof Error && isNonEmptyString(errorLog.innerError.stack)) {
+      if (thrownErrorLog.innerError instanceof Error && isNonEmptyString(thrownErrorLog.innerError.stack)) {
 
-        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(errorLog.innerError)`,
+        /* [ Theory ] The first line could be even with `stringifyAndFormatArbitraryValue(thrownErrorLog.innerError)`,
          *    but it is runtime dependent because the `stack` property is non-standard. */
 
-        stringifiedInnerError = errorLog.innerError.stack.includes(stringifiedInnerError) ?
-            errorLog.innerError.stack :
-            `${ stringifiedInnerError }\n${ errorLog.innerError.stack }`;
+        stringifiedInnerError = thrownErrorLog.innerError.stack.includes(stringifiedInnerError) ?
+            thrownErrorLog.innerError.stack :
+            `${ stringifiedInnerError }\n${ thrownErrorLog.innerError.stack }`;
 
       }
 
     }
 
-    const errorMessage: string = [
+    const errorMessage: string = Logger.
+        generateFormattedErrorFromThrownErrorLog(thrownErrorLog, stringifiedInnerError);
 
-      errorLog.title,
-      ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
+    if ("errorInstance" in thrownErrorLog) {
+      thrownErrorLog.errorInstance.message = errorMessage;
+      throw thrownErrorLog.errorInstance;
+    }
 
-      ..."errorInstance" in errorLog ? [ errorLog.errorInstance.message ] : [ errorLog.description ],
 
-      `\n\n${ Logger.localization.occurrenceLocation }: ${ errorLog.occurrenceLocation }`,
+    const errorWillBeThrown: Error = new Error(errorMessage);
+    errorWillBeThrown.name = thrownErrorLog.errorType;
+
+    if (options.mustLogErrorBeforeThrowing === true) {
+      Logger.logErrorLikeMessage({
+        title: errorWillBeThrown.name,
+        description: errorWillBeThrown.message
+      });
+    }
+
+    throw errorWillBeThrown;
+
+  }
+
+  public static logError(polymorphicPayload: ErrorLog | string): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logError(polymorphicPayload);
+      return;
+    }
+
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.error(Logger.formatErrorLog(polymorphicPayload));
+
+  }
+
+  public static logErrorLikeMessage(polymorphicPayload: Log | string): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logErrorLikeMessage(polymorphicPayload);
+      return;
+    }
+
+
+    if (isString(polymorphicPayload)) {
+      console.error(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.error(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.error));
+
+  }
+
+  public static logWarning(polymorphicPayload: WarningLog | string): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logWarning(polymorphicPayload);
+      return;
+    }
+
+
+    if (isString(polymorphicPayload)) {
+      console.warn(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.warn(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.warning));
+
+  }
+
+  public static logInfo(polymorphicPayload: InfoLog | string): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logInfo(polymorphicPayload);
+      return;
+    }
+
+
+    if (isString(polymorphicPayload)) {
+      console.info(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.info(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.info));
+
+  }
+
+  public static logSuccess(polymorphicPayload: SuccessLog | string): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logSuccess(polymorphicPayload);
+      return;
+    }
+
+
+    if (isString(polymorphicPayload)) {
+      console.info(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.info(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.success));
+
+  }
+
+  public static logDebug(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logDebug(polymorphicPayload);
+      return;
+    }
+
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.debug(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.debug(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.debug));
+
+  }
+
+  public static logGeneric(polymorphicPayload: Log | string | number | bigint | boolean | null | undefined): void {
+
+    if (isNotNull(Logger.implementation)) {
+      Logger.implementation.logGeneric(polymorphicPayload);
+      return;
+    }
+
+
+    if (
+      isString(polymorphicPayload) ||
+      isNumber(polymorphicPayload, { mustConsiderNaN_AsNumber: true }) ||
+      isBigInt(polymorphicPayload) ||
+      isBoolean(polymorphicPayload) ||
+      isNull(polymorphicPayload) ||
+      isUndefined(polymorphicPayload)
+    ) {
+      console.log(polymorphicPayload);
+      return;
+    }
+
+
+    if (polymorphicPayload.mustOutputIf === false) {
+      return;
+    }
+
+
+    console.log(Logger.formatGenericLog(polymorphicPayload, Logger.localization.badgesDefaultTitles.generic));
+
+  }
+
+  public static logPromiseError(error: unknown): void {
+
+    if (isNotNull(Logger.implementation) && isNotUndefined(Logger.implementation.logPromiseError)) {
+      Logger.implementation.logPromiseError(error);
+      return;
+    }
+
+
+    console.error(error);
+
+  }
+
+
+  /* ─── Formatters ───────────────────────────────────────────────────────────────────────────────────────────────── */
+  public static highlightText(targetString: string): string {
+    return isNotNull(Logger.implementation) ? Logger.implementation.highlightText(targetString) : targetString;
+  }
+
+  public static generateFormattedErrorFromThrownErrorLog(
+    thrownErrorLog: ThrownErrorLog, stringifiedInnerError?: string
+  ): string {
+    return [
+
+      thrownErrorLog.title,
+      ...thrownErrorLog.compactLayout === true ? [ " " ] : [ "\n" ],
+
+      ..."errorInstance" in thrownErrorLog ?
+          [ thrownErrorLog.errorInstance.message ] :
+          [ thrownErrorLog.description ],
+
+      `\n\n${ Logger.localization.occurrenceLocation }: ${ thrownErrorLog.occurrenceLocation }`,
 
       ...isNotUndefined(stringifiedInnerError) ?
           [ `\n\n${ Logger.localization.innerError }:\n${ stringifiedInnerError }` ] : [ ],
 
-      ...isNotUndefined(errorLog.additionalData) ?
+      ...isNotUndefined(thrownErrorLog.additionalData) ?
           [
             `\n\n${ Logger.localization.appendedData }:` +
-              `\n${ stringifyAndFormatArbitraryValue(errorLog.additionalData) }`
+              `\n${ stringifyAndFormatArbitraryValue(thrownErrorLog.additionalData) }`
           ] :
           [ ],
 
         /* Divider before stack trace */
         "\n"
 
-      ].join("");
-
-    if ("errorInstance" in errorLog) {
-
-      errorLog.errorInstance.message = errorMessage;
-
-      /* eslint-disable-next-line @typescript-eslint/no-throw-literal --
-      *  In this case the `errorInstance` is the instance of `Error` or its inheritor.
-      *  Although `@typescript-eslint` considers the throwing of it as the violation, this scenario has not been mentioned
-      *    in incorrect code example of `no-throw-literal` rule documentation.
-      *    https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
-      *  */
-      throw errorLog.errorInstance;
-
-    }
-
-
-    const errorWillBeThrown: Error = new Error(errorMessage);
-    errorWillBeThrown.name = errorLog.errorType;
-
-    throw errorWillBeThrown;
-
+    ].join("");
   }
 
-  public static logError(errorLog: ErrorLog): void {
+  public static formatErrorLog(errorLog: ErrorLog): string {
+    return [
 
-    if (errorLog.mustOutputIf === false) {
-      return;
-    }
-
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logError(errorLog);
-      return;
-    }
-
-
-    console.error(
-      [
-
-        ...errorLog.badge === false ?
-            [ ] :
-            [ `[ ${ errorLog.badge?.customText ?? Logger.localization.badgesDefaultTitles.error } ] ` ],
+      ...Logger.generateBadgeIfMust(errorLog.badge, Logger.localization.badgesDefaultTitles.error),
 
         errorLog.title,
         ...errorLog.compactLayout === true ? [ " " ] : [ "\n" ],
@@ -145,138 +344,38 @@ abstract class Logger {
             ] :
             [ ]
 
-      ].join("")
-    );
-
+    ].join("");
   }
 
-  public static logErrorLikeMessage(errorLikeLog: Log): void {
-
-    if (errorLikeLog.mustOutputIf === false) {
-      return;
-    }
-
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logErrorLikeMessage(errorLikeLog);
-      return;
-    }
-
-    console.error(Logger.formatGenericLog(errorLikeLog, Logger.localization.badgesDefaultTitles.error));
-
-  }
-
-  public static logWarning(warningLog: WarningLog): void {
-
-    if (warningLog.mustOutputIf === false) {
-      return;
-    }
-
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logWarning(warningLog);
-      return;
-    }
-
-    console.warn(
-      [
-
-      ...warningLog.badge === false ?
-          [ ] :
-          [ `[ ${ warningLog.badge?.customText ?? Logger.localization.badgesDefaultTitles.error } ] ` ],
-
-        warningLog.title,
-        ...warningLog.compactLayout === true ? [ " " ] : [ "\n" ],
-        warningLog.description,
-
-        `\n${ Logger.localization.occurrenceLocation }: ${ warningLog.occurrenceLocation }`,
-
-        ...isNotUndefined(warningLog.additionalData) ?
-          [
-            `\n\n${ Logger.localization.appendedData }:` +
-              `\n${ stringifyAndFormatArbitraryValue(warningLog.additionalData) }`
-          ] :
-          [ ]
-
-      ].join("")
-    );
-
-  }
-
-  public static logInfo(infoLog: InfoLog): void {
-
-    if (infoLog.mustOutputIf === false) {
-      return;
-    }
-
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logInfo(infoLog);
-      return;
-    }
-
-
-    console.info(Logger.formatGenericLog(infoLog, Logger.localization.badgesDefaultTitles.info));
-
-  }
-
-  public static logSuccess(successLog: SuccessLog): void {
-
-    if (successLog.mustOutputIf === false) {
-      return;
-    }
-
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logSuccess(successLog);
-      return;
-    }
-
-
-    console.info(Logger.formatGenericLog(successLog, Logger.localization.badgesDefaultTitles.success));
-
-  }
-
-  public static logGeneric(genericLog: Log): void {
-
-    if (genericLog.mustOutputIf === false) {
-      return;
-    }
-
-    if (isNotNull(Logger.implementation)) {
-      Logger.implementation.logGeneric(genericLog);
-      return;
-    }
-
-
-    console.log(Logger.formatGenericLog(genericLog, Logger.localization.badgesDefaultTitles.generic));
-
-
-  }
-
-  public static highlightText(targetString: string): string {
-    return isNotNull(Logger.implementation) ? Logger.implementation.highlightText(targetString) : targetString;
-  }
-
-
-  private static formatGenericLog(genericLog: Log, defaultBadgeText: string): string {
+  public static formatGenericLog(genericLog: Log | WarningLog, defaultBadgeText: string): string {
     return [
 
-      ...genericLog.badge === false ? [ ] : [ `[ ${ genericLog.badge?.customText ?? defaultBadgeText } ] ` ],
+      ...Logger.generateBadgeIfMust(genericLog.badge, defaultBadgeText),
 
       genericLog.title,
       ...genericLog.compactLayout === true ? [ " " ] : [ "\n" ],
       genericLog.description,
 
+      ..."occurrenceLocation" in genericLog ?
+          [ `\n${ Logger.localization.occurrenceLocation }: ${ genericLog.occurrenceLocation }` ] : [],
+
       ...isNotUndefined(genericLog.additionalData) ?
-            [
-              `\n\n${ Logger.localization.appendedData }:` +
-                `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`
-            ] :
-            [ ]
+          [
+            `\n\n${ Logger.localization.appendedData }:` +
+              `\n${ stringifyAndFormatArbitraryValue(genericLog.additionalData) }`
+          ] :
+          [ ]
 
     ].join("");
   }
+
+  public static generateBadgeIfMust(
+    badge: Readonly<{ customText: string; }> | false | undefined,
+    defaultBadgeText: string
+  ): Array<string> {
+    return badge === false ? [] : [ `[ ${ badge?.customText ?? defaultBadgeText } ] ` ];
+  }
+
 }
 
 
@@ -289,6 +388,7 @@ namespace Logger {
       warning: string;
       info: string;
       success: string;
+      debug: string;
       generic: string;
     }>;
 

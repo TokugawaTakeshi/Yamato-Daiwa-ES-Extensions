@@ -1,7 +1,7 @@
 import isString from "../TypeGuards/Strings/isString";
 import splitString from "./splitString";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
-import isNotNull from "../TypeGuards/Nullables/isNotNull";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
+import isNotNull from "../TypeGuards/EmptyTypes/isNotNull";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
@@ -10,7 +10,7 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 export default function explodeCasedPhraseToWords(targetString: string): Array<string> {
 
   if (!isString(targetString)) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "targetString",

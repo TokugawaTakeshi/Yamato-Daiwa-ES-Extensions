@@ -1,15 +1,25 @@
-# Yamato Daiwa ES Extensions 〔YDEE〕
+# Yamato Daiwa ES Extensions (YDEE)
 
-[![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)]()
-[![No dependencies](https://img.shields.io/badge/Dependencies-No_dependencies-brightgreen.svg?style=flat)]()
+[![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/README.md)
+![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+[![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+
 [![NPM Version](https://img.shields.io/npm/v/@yamato-daiwa/es-extensions)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
-[![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-Official_Plugin-088BF8.svg?style=flat)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
+![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)
+![No third-party dependencies](https://img.shields.io/badge/Dependencies-No--third_party_dependencies-brightgreen.svg?style=flat)
+
+[![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1)
+[![PAYPAL](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/tokugawatakeshi)
+[![LIBERAPAY](	https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black)](https://liberapay.com/TokugawaT-YD)
+
 
 Helper functions and classes aimed to reduce the routine code. 
 Build-in TypeScript type safety without `any` type.
 Oriented to TypeScript users investing the time to quality including type-safety.
 
-![Hero image of @yamato-daiwa/es-extensions](https://raw.githubusercontent.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/refs/heads/master/docs/Top/Images/TopPage-MainVisual.english--765238bc24.png)
+![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/ab848ff3-8bfb-4142-8b8f-fe191340bb3a)
 
 
 ## Installation
@@ -18,34 +28,508 @@ Oriented to TypeScript users investing the time to quality including type-safety
 npm i @yamato-daiwa/es-extensions -E
 ```
 
-
-## Notice about "Unpacked size" (displaying in npmjs.com)
-
-The displaying "Unpacked size" (for example, 633 kB for version 1.4.5 as in image below) is the 
-**total size of all built CommonJS and ECMAScript modules**.
-
-![image](https://user-images.githubusercontent.com/41653501/168949802-72554886-39b0-43b1-9813-43f7c4405f69.png)
-
-ECMAScript modules are preferred for the browser JavaScript while CommonJS - for Node.js.
-
-For the websites and web applications where each kilobyte on count it is possible to automatically exclude the unused 
-functionality of **@yamato-daiwa/es-extensions** (and possibly other dependencies) from built JavaScript.
-The JavaScript bundlers like [Webpack](https://webpack.js.org) can exclude the unused functionality under certain conditions.
-For the TypeScript and Webpack combination case, it is required to use ECMAScript modules to activate the
-[tree shaking](https://webpack.js.org/guides/tree-shaking/) functionality (works on production mode).
-
-
 ## Documentation
 
-### Get functionality
+### Getting Started
 
-All available functionality could be imported from `@yamato-daiwa/es-extensions`:
++ [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
++ [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
++ [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
++ [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
 
-```typescript
-export { isUndefined, isNull } from "@yamato-daiwa/es-extensions";
-```
 
-### Functionality reference
+### AJAX
+
+<dl>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a></dt>
+  <dd>
+    <p>
+      The facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
+        maximal type-safety and less code.
+    </p>
+    <ul>
+      <li>
+        Integrated with <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html"><code>RawObjectDataProcessor</code></a>
+          for validation of response data.
+      </li>
+      <li>
+        Needs some implementation, but there is the pre-made one:
+          <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a>.
+      </li>
+    </ul>
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a></dt>
+  <dd>
+    Implementation of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      abstract class based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
+    Works will all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
+  </dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/URI_QueryParametersSerializer.ts"><code>URI_QueryParametersSerializer</code></a><dt>
+  <dd>
+    The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
+      used by <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      and should be used to implement the custom serializing algorithm for URI query parameters.  
+  </dd>
+
+</dl>
+
+
+### Arrays
+#### Creating
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html"><code>createArrayOfNaturalNumbers</code></a></dt>
+  <dd>
+    Obviously from the function name, creates the array of natural numbers.
+    Elements count, assessing/descending and starting number can be specified.
+  </dd>
+
+</dl>
+
+
+#### Retrieving of Elements
+
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
+  <dd>
+    Returns the element of a specified array matching with the predicate if such an element is exactly one, 
+      otherwise error will be thrown or null will be returned depending on dedicated option's value.
+  </dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
+  <dd>
+    Returns the last element of an array if such element exists, otherwise error will be thrown as default
+      or null will be returned if the dedicated option has been specified.
+  </dd>
+
+</dl>
+
+
+#### Retrieving of Indexes
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html"><code>getIndexesOfSatisfiesThePredicateArrayElements</code></a></dt>
+  <dd>
+    Obviously from the function name, returns the array of indexes of array elements which are satisfied to specified 
+      predicate function.
+  </dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
+  <dd>
+    Returns the index of the array element satisfies the predicate if such element is exactly one, otherwise error will 
+      be thrown or null will be returned depending on dedicated option's value.
+  </dd>
+
+</dl>
+
+
+#### Retrieving of Subarrays
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html"><code>cropArray</code></a></dt>
+  <dd>
+    <p>
+      Creates the subarray of the specified array.
+      In comparison with native <code>slice</code> and <code>splice</code> methods, suggests the extremely flexible API.
+    </p>
+    <ul>
+      <li>Mutable and immutable cropping</li>
+      <li>Specifying of starting element and ending element either from the start or from the end of an array</li>
+      <li>Absolute and relative specifying of starting and ending elements of subarray</li>
+      <li>Inclusive and exclusive absolute specifying of last element of subarray</li>
+    </ul>
+      
+  </dd>
+
+</dl>
+
+
+#### Adding of Elements
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html"><code>addElementsToArray</code></a></dt>
+  <dd>
+    Adds one or more elements to the start, end or specified position of the target array, herewith the adding can be 
+      mutable or not depending on dedicated property of the named parameters object.
+  </dd>
+
+</dl>
+
+
+#### Replacing of Elements
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html"><code>replaceArrayElementsByIndexesImmutably</code></a></dt>
+  <dd>Creates the swallow copy of the target array and replaces the elements by specified indexes.</dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html"><code>replaceArrayElementsByPredicates</code></a></dt>
+  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or no depending on dedicated option.</dd>
+
+</dl>
+
+
+#### Permutations of Elements
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition/moveArrayElementToOnePosition.english.html"><code>moveArrayElementToOnePosition</code></a></dt>
+  <dd>
+    Moves specified by an index element to left or to right, herewith the ousted element will be placed to position of target one.
+    Mutable and immutable swapping are available.
+  </dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/swapArrayElements.english.html"><code>swapArrayElements</code></a></dt>
+  <dd>
+    <par>Swaps two array elements, not obligatory the siblings.</par>
+    <ul>
+      <li>Each element can be specified by index, by number from 1 or via predicate.</li>
+      <li>Mutable and immutable swapping are available</li>
+    </ul>
+
+  </dd>
+
+</dl>
+
+
+#### Removing of Elements
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.english.html"><code>removeArrayElementsByIndexes</code></a></dt>
+  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated option.</dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.english.html"><code>removeArrayElementsByPredicates</code></a></dt>
+  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated option.</dd>
+
+</dl>
+
+
+#### Restructuring
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/twoDimensionalizeArray.english.html"><code>twoDimensionalizeArray</code></a></dt>
+  <dd>Converts a flat array to 2-dimensional array with nested arrays of fixed elements count.</dd>
+
+</dl>
+
+
+##### Other
+
+<dl>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.english.html"><code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code></a></dt>
+  <dd>
+    <p>Obviously from the function name, add elements to array if they are nor present otherwise remove.</p>
+    <ul>
+      <li>
+        For all types of elements except numbers, bigints, strings and booleans the element finding predicate must be
+          specified.
+      </li>
+       <li>Mutable and immutable manipulations are available</li>
+    </ul>
+  </dd>
+
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/readonlyArrayToMutableOne.english.html"><code>readonlyArrayToMutableOne</code></a></dt>
+  <dd>
+    <ul>
+      <li>
+        From the viewpoint of TypeScript, allows to mutate the <code>ReadonlyArray</code> what basically not recommeded
+          but in some particular cases almost inevitably.
+      </li>
+      <li>Fron the viewpoint of JavaScript, does nothing.</li>
+    </ul>
+  </dd>
+  
+
+</dl>
+
+
+### Data Mocking
+
++ [`DataMocking` Class/Namespace](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/DataMocking/DataMocking.ts)
++ [`MockGatewayHelper` Class/Namespace](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/DataMocking/MockGatewayHelpler/MockGatewayHelper.ts)
+
+
+### Date and Time
+
+<dl>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/CalendarBuilder.ts">
+      <code>CalendarBuilder</code>
+    </a>
+  </dt>
+  <dd>
+    Generates a flat array of 42 elements or 6x7 two-dimensional array for filling of calendar page.
+    Besides, Sunday any day of week can be specified as first day of week.
+  </dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/convert24_HoursFormatTo12_HoursFormat.ts">
+      <code>convert24_HoursFormatTo12_HoursFormat</code>
+    </a>
+  </dt>
+  <dd>
+    As it obvious from the name, converts the hours amount from 24-hour format to 12-hour format.
+    Of course, besides the amount it also will be returned the boolean values to identify is amount corresponding to
+      before or after midnight.
+  </dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Documentation/DateTime/DateWithoutTime.md">
+      <code>DateWithoutTime</code>
+    </a>
+  </dt>
+  <dd>
+    An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
+    As it obvious from the name, works only with date not associated with specific time zone and does not work with time.
+    The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
+      target date with optimized computing.
+  </dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">
+      <code>getDaysCountInSpecificMonth</code>
+    </a>
+  </dt>
+  <dd>Returns days count in specified year and month.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/getISO8601_StringWithoutTimePart.ts">
+      <code>getISO8601_StringWithoutTimePart</code>
+    </a>
+  </dt>
+  <dd>
+    Obviously to function name, returns the date definition without time in ISO8601 format.
+    The parameters can be defined by various methods.
+  </dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md">
+      <code>getMonthNameByNumber</code>
+    </a>
+  </dt>
+  <dd>Converts the month number (from 0 or 1) to element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"><code>MonthsNames</code> enumeration</a>.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md">
+      <code>getMonthNumberByName</code>
+    </a>
+  </dt>
+  <dd>Converts the element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"><code>MonthsNames</code> enumeration</a> to number of month (from 0 or 1).</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getNextMonthNumber.md">
+      <code>getNextMonthNumber</code>
+    </a>
+  </dt>
+  <dd>Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md">
+      <code>getPreviousMonthNumber</code>
+    </a>
+  </dt>
+  <dd>Returns previous month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfNextMonth.md">
+      <code>getYearOfNextMonth</code>
+    </a>
+  </dt>
+  <dd>Returns the year of next month in relation to specified year and month.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfPreviousMonth.md">
+      <code>getYearOfPreviousMonth</code>
+    </a>
+  </dt>
+  <dd>Returns the year of previous month in relation to specified year and month.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/hasTimeCome.ts">
+      <code>hasTimeCome</code>
+    </a>
+  </dt>
+  <dd>
+    Returns boolean value indicates has specified date and time come. 
+    Native <code>Date</code> and <b>ISO8601</b> formats supported.
+  </dd>
+  
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/isValidNativeDate.ts">
+      <code>isValidNativeDate</code>
+    </a>
+  </dt>
+  <dd>Returns boolean value indicates does specified <code>Date</code> represents the valid date and time.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md">
+      <code>millisecondsToSeconds</code>
+    </a>
+  </dt>
+  <dd>Converts milliseconds amount to amount of seconds.</dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md">
+      <code>secondsToMilliseconds</code>
+    </a>
+  </dt>
+  <dd>Converts seconds amount to amount of milliseconds.</dd>
+
+  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md"><code>TimePoint</code></a></dt>
+  <dd>
+    An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
+    <ul>
+      <li>
+        Has similar API with <code>DateWithoutTime</code>, but it also has the conceptual difference: is 
+          <code>DateWithoutTime</code> is the date not associated with specific time zone and does not work with time,
+          <code>TimePoint</code> work with time and also has the accusation with specific time zone 
+      </li>
+      <li>
+        The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
+          target date with optimized computing.
+      </li>
+    </ul>
+  </dd>
+
+  <dt>
+    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/Timer.ts">
+      <code>Timer</code>
+    </a>
+  </dt>
+  <dd>Abstract class indented to be inherited and implemented with environment-dependent functionality.</dd>
+
+</dl>
+
+
+### Default value Subsituters
+
+Although the [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+  makes the below functions redundant, they still could be used in the environments with old ECMAScript versions.
+
+<dl>
+
+  <dt>substituteWhenNull</dt>
+  <dd>Substitutes the second argument's value when first one is null.</dd>
+
+  <dt>substituteWhenUndefined</dt>
+  <dd>Substitutes the second argument's value when first one is <b>undefined</b>.</dd>
+
+</dl>
+
+
+#### Errors
+
+<dl>
+
+  <dt><code>AlgorithmMismatchError</code></dt>
+  <dd>Intended to be used in general cases when actual behavior does not match with desired.</dd>
+
+  <dt><code>ClassRedundantSubsequentInitializationError</code></dt>
+  <dd>Intended to be used when the class developed as singleton has been attempted to initialize twice.</dd>
+
+  <dt><code>ClassRequiredInitializationHasNotBeenExecutedError</code></dt>
+  <dd>Intended to be used when the class beside the constructor requires the initialization but the initializing method has not been called.</dd>
+
+  <dt><code>ConfigFileNotFoundError</code></dt>
+  <dd>Intended to be used when some utility requires the config file, but it has not been found.</dd>
+
+  <dt><code>CrossBrowserIssueError</code></dt>
+  <dd>Intended to be used when some processing could not be executed because of certain browser's limitations.</dd>
+
+  <dt><code>DataRetrievingFailedError</code></dt>
+  <dd>Intended to be used when the data retrieving from some external resource (server, database, file, etc.) failed.</dd>
+
+  <dt><code>DataSubmittingFailed</code></dt>
+  <dd>Intended to be used when the data submitting to any external resource (server, database, etc.) failed.</dd>
+
+  <dt><code>DOM_ElementRetrievingFailedError</code></dt>
+  <dd>
+    Intended to used when expected to be existing DOM element has not been retrieved.
+    Related not only with browser JavaScript but also with processing of HTML code at server side.
+  </dd>
+
+  <dt><code>FileReadingFailedError</code></dt>
+  <dd>Intended to be used when the file reading has not gone as expected</dd>
+
+  <dt><code>FileWritingFailedError</code></dt>
+  <dd>Intended to be used when the file writing has not gone as expected</dd>
+
+  <dt><code>ImproperUsageError</code></dt>
+  <dd>
+    Intended to be used when the class/function has been attempted to use improperly. 
+    Herewith, try to name the function/methods such as it will be obvious how to use it and also limit the usage by 
+      TypeScript typing.
+  </dd>
+
+  <dt><code>IncompatiblePropertiesInObjectTypeParameterError</code></dt>
+  <dd>
+    Intended to be used when in parameter <b>exampleParameter</b> of object type one of properties 
+    <b>exampleParameter.propertyA</b> and <b>exampleParameter.propertyB</b> must be omitted but both has been specified.
+  </dd>
+
+  <dt><code>InterProcessInteractionFailedError</code></dt>
+  <dd>
+    Intended to be used when the interaction between NodeJS processed is not going as expected. 
+    Could be actual, for example, for the Electron.js where the main process and render process are exchanges by data.
+  </dd>
+
+  <dt><code>InvalidConfigError</code></dt>
+  <dd>
+    Intended to be used when config validation was not passed.
+    Appending of the validation errors messages to <b>InvalidConfigError</b>'s message is strongly recommended.
+  </dd>
+
+  <dt><code>InvalidExternalDataError</code></dt>
+  <dd>
+    Intended to be used when the data from the external data source does not match with expected. 
+    Appending of the validation errors messages to <b>InvalidExternalDataError</b>'s message is strongly recommended.</dd>
+
+  <dt><code>InvalidParameterValueError</code></dt>
+  <dd>
+    Intended to be used when the parameter's does not fit to some limitations.
+    Although the TypeScript allows to define and check the parameter's type, no type check will not be executed
+    once TypeScript will be compiled to JavaScript. Also, is the parameter has limitations like smallest numerical 
+    value or maximal characters count, <b>InvalidParameterValueError</b> has been developed for such cases.
+  </dd>
+
+  <dt><code>ModuleDynamicLoadingFailedError</code></dt>
+  <dd>Recommended to throw when the module dynamical loading failed. Actual for bundlers like Webpack.</dd>
+
+  <dt><code>UnexpectedEventError</code></dt>
+  <dd>
+    Intended to be used when the probability of the occurrence of some "else if" branch is very small and 
+      impossible for normal operation of the program.
+  </dd>
+
+  <dt><code>UnsupportedScenarioError</code></dt>
+  <dd>Intended to be used when occurred some scenario which is not supported yet.</dd>
+
+</dl>
+
+
+##### HTTPS
+
+<dl>
+
+  <dt><code>HTTP_ResponseBodyParsingFailureError</code></dt>
+  <dd>Intended to be used when HTTP response body has not been parsed successfully.</dd>
+
+</dl>
+
+[//]: # (todo =========================================================================================================&#41;)
 
 #### RawObjectDataProcessor
 
@@ -207,76 +691,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   </dd>
 </dl>
 
-
-#### Arrays
-##### Retrieving of elements
-
-<dl>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html">getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the element of specified array matching with the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/getLastElementOfArray/getLastElementOfArray.english.html">getLastElementOfArray</a></dt>
-  <dd>Returns the last element of array, herewith depending on dedicated parameter either <b>UnexpectedEventError</b> will be thrown of null will be returned if target array is empty.</dd>
-
-</dl>
-
-
-##### Retrieving of indexes 
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexesOfArrayElementsWhichSatisfiesThePredicate/getIndexesOfArrayElementsWhichSatisfiesThePredicate.md">getIndexesOfArrayElementsWhichSatisfiesThePredicate</a></dt>
-  <dd>Returns the array of indexes of array elements which are satisfies to predicate function.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.md">getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</a></dt>
-  <dd>Returns the index of array element satisfies the predicate if such element is exactly one, otherwise error will be thrown or null will be returned depending on dedicated option's value.</dd>
-
-</dl>
-
-
-##### Replacing of elements
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.md">replaceArrayElementsByIndexesImmutably</a></dt>
-  <dd>Creates the copy of target array and replaces the elements by specified indexes.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.md">replaceArrayElementsByPredicates</a></dt>
-  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or not depending on dedicated option.</dd>
-
-</dl>
-
-
-##### Adding of elements
-
-<dl>
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/addElementsToArray/addElementsToArray.english.html">addElementsToArray</a></dt>
-  <dd>Adds one or more elements to the start, end or specified position of target array, herewith the adding could be mutable or not depending on dedicated property of named parameters object.</dd>
-</dl>
-
-
-##### Removing of elements
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByIndexes/removeArrayElementsByIndexes.md">removeArrayElementsByIndexes</a></dt>
-  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated option.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/removeArrayElementsByPredicates/removeArrayElementsByPredicates.md">removeArrayElementsByPredicates</a></dt>
-  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated option.</dd>
-
-</dl>
-
-
-##### Other
-
-<dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Arrays/twoDimensionalizeArray.md">twoDimensionalizeArray</a></dt>
-  <dd>Converts flat array to 2-dimensional array with nested arrays of fixed elements count.</dd>
-</dl>
-
-
 #### Sets
 
 <dl>
@@ -298,43 +712,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md">filterMap</a></dt>
   <dd>Filters map by specified predicate.</dd>
-
-</dl>
-
-
-#### Date and Time
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">getDaysCountInSpecificMonth</a></dt>
-  <dd>Returns days count in specified year and month.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md">getMonthNameByNumber</a></dt>
-  <dd>Converts the month number (from 0 or 1) to element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a> enumeration.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md">getMonthNumberByName</a></dt>
-  <dd>Converts the element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md">MonthsNames</a> enumeration to number of month (from 0 or 1).</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getNextMonthNumber.md">getNextMonthNumber</a></dt>
-  <dd>Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md">getPreviousMonthNumber</a></dt>
-  <dd>Returns previous month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfNextMonth.md">getYearOfNextMonth</a></dt>
-  <dd>Returns the year of next month in relation to specified year and month.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfPreviousMonth.md">getYearOfPreviousMonth</a></dt>
-  <dd>Returns the year of previous month in relation to specified year and month.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md">millisecondsToSeconds</a></dt>
-  <dd>Converts milliseconds amount to amount of seconds.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md">secondsToMilliseconds</a></dt>
-  <dd>Converts seconds amount to amount of milliseconds.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md">TimePoint</a></dt>
-  <dd>The alternative to native <b>Date</b> allows to build the formatted date/time strings easily.</dd>
 
 </dl>
 
@@ -363,22 +740,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 * [Arrays](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Arrays/ArrayTypeGuards.md)
 * [Nullables](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Nullables/NullableTypeGuards.md)
 * [Other](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md)
-
-
-#### Default value subsituters
-
-The [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
-makes below functions redundant, but they still could be used in the environments with old ECMAScript versions.
-
-<dl>
-
-  <dt>substituteWhenNull</dt>
-  <dd>Substitutes the second argument's value when first one is null.</dd>
-
-  <dt>substituteWhenUndefined</dt>
-  <dd>Substitutes the second argument's value when first one is <b>undefined</b>.</dd>
-
-</dl>
 
 
 
@@ -431,7 +792,7 @@ makes below functions redundant, but they still could be used in the environment
   <dd>
     The character count represents the date without time in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601 string</a>. 
     Has value <b>10</b>; for example, in the <code>2013-03-10T02:00:00Z</code> case the first 10 characters will be <code>2013-03-10</code>.
-    If you need to extract this date part from ISO8601 string (not just know the characters count), use <a href="Documentation/DateTime/getISO8601StringWithoutTimePart.md"><code>getISO8601StringWithoutTimePart</code></a> function.
+    If you need to extract this date part from ISO8601 string (not just know the characters count), use <a href="Documentation/DateTime/getISO8601_StringWithoutTimePart.md"><code>getISO8601_StringWithoutTimePart</code></a> function.
   </dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/DaysOfWeek.md">DaysOfWeek</a></dt>

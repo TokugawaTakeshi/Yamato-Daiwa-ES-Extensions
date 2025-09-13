@@ -1,0 +1,177 @@
+numericTypes:
+
+  $heading: `numericTypes.$heading`
+  $anchor: "NUMERIC_TYPES--SECTION"
+
+  $children:
+
+    isBigInt:
+      $heading: "<code>isBigInt</code>"
+      $anchor: "isBigInt"
+
+    isDecimalFractionOfAnySign:
+      $heading: "<code>isDecimalFractionOfAnySign</code>"
+      $anchor: "isDecimalFractionOfAnySign"
+
+    isIntegerOnAnySign:
+      $heading: "<code>isIntegerOnAnySign</code>"
+      $anchor: "isIntegerOnAnySign"
+
+    isNaturalNumber:
+      $heading: "<code>isNaturalNumber</code>"
+      $anchor: "isNaturalNumber"
+
+    isNaturalNumberOrZero:
+      $heading: "<code>isNaturalNumberOrZero</code>"
+      $anchor: "isNaturalNumberOrZero"
+
+    isNegativeDecimalFraction:
+      $heading: "<code>isNegativeDecimalFraction</code>"
+      $anchor: "isNegativeDecimalFraction"
+
+    isNegativeInteger:
+      $heading: "<code>isNegativeInteger</code>"
+      $anchor: "isNegativeInteger"
+
+    isNegativeIntegerOrZero:
+      $heading: "<code>isNegativeIntegerOrZero</code>"
+      $anchor: "isNegativeIntegerOrZero"
+
+    isNumber:
+      $heading: "<code>isNumber</code>"
+      $anchor: "isNumber"
+
+    isPositiveDecimalFraction:
+      $heading: "<code>isPositiveDecimalFraction</code>"
+      $anchor: "isPositiveDecimalFraction"
+
+    isPositiveIntegerOrZero:
+      $heading: "<code>isPositiveDecimalFraction</code>"
+      $anchor: "isPositiveDecimalFraction"
+
+stringTypes:
+
+  $heading: "stringTypes.$heading"
+  $anchor: "STRING_TYPES--SECTION"
+
+  $children:
+
+    areStringifiedDigitsOnly:
+      $heading: "<code>areStringifiedDigitsOnly</code>"
+      $anchor: "areStringifiedDigitsOnly"
+
+    isEmptyString:
+      $heading: "<code>isEmptyString</code>"
+      $anchor: "isEmptyString"
+
+    isNonEmptyString:
+      $heading: "<code>isNonEmptyString</code>"
+      $anchor: "isNonEmptyString"
+
+    isString:
+      $heading: "<code>isString</code>"
+      $anchor: "isString"
+
+    isStringOfLength:
+      $heading: "<code>isStringOfLength</code>"
+      $anchor: "isStringOfLength"
+
+objectTypes:
+
+  $heading: `objectTypes.$heading`
+  $anchor: "OBJECT_TYPES--SECTION"
+
+  $children:
+
+    isArbitraryObject:
+      $heading: "<code>isArbitraryObject</code>"
+      $anchor: "isArbitraryObject"
+
+    isEmptyObject:
+      $heading: "<code>isEmptyObject</code>"
+      $anchor: "isEmptyObject"
+
+    isNonEmptyArbitraryObject:
+      $heading: "<code>isNonEmptyArbitraryObject</code>"
+      $anchor: "isNonEmptyArbitraryObject"
+
+    isNonEmptyObject:
+      $heading: "<code>isNonEmptyObject</code>"
+      $anchor: "isNonEmptyObject"
+
+    isNonNullObject:
+      $heading: "<code>isNonNullObject</code>"
+      $anchor: "isNonNullObject"
+
+arrayedTypes:
+
+  $heading: `arrayedTypes.$heading`
+  $anchor: "ARRAYED_TYPES--SECTION"
+
+  $children:
+
+    isArrayOfCertainTypeElements:
+      $heading: "<code>isArrayOfCertainTypeElements</code>"
+      $anchor: "isArrayOfCertainTypeElements"
+
+    isArrayOfLength:
+      $heading: "<code>isArrayOfLength</code>"
+      $anchor: "isArrayOfLength"
+
+    isEmptyArray:
+      $heading: "<code>isEmptyArray</code>"
+      $anchor: "isEmptyArray"
+
+    isNonEmptyArray:
+      $heading: "<code>isNonEmptyArray</code>"
+      $anchor: "isNonEmptyArray"
+
+emptyTypes:
+
+  $heading: `emptyTypes.$heading`
+  $anchor: "EMPTY_TYPES--SECTION"
+
+  $children:
+
+    isEitherUndefinedOrNull:
+      $heading: "<code>isEitherUndefinedOrNull</code>"
+      $anchor: "isEitherUndefinedOrNull"
+
+    isNeitherUndefinedNorNull:
+      $heading: "<code>isNeitherUndefinedNorNull</code>"
+      $anchor: "isNeitherUndefinedNorNull"
+
+    isNotNull:
+      $heading: "<code>isNotNull</code>"
+      $anchor: "isNotNull"
+
+    isNotUndefined:
+      $heading: "<code>isNotUndefined</code>"
+      $anchor: "isNotUndefined"
+
+    isNull:
+      $heading: "<code>isNull</code>"
+      $anchor: "isNull"
+
+    isUndefined:
+      $heading: "<code>isUndefined</code>"
+      $anchor: "isUndefined"
+
+otherTypes:
+
+  $anchor: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/TypeGuards/Others/OtherTypeGuards.md"
+  $heading: `otherTypes.$heading`
+
+  $children:
+
+    isBoolean:
+      $heading: "<code>isBoolean</code>"
+      $anchor: "isBoolean"
+
+    isElementOfEnumeration:
+      $heading: "<code>isElementOfEnumeration</code>"
+      $anchor: "isElementOfEnumeration"
+
+    isFunctionLike:
+      $heading: "<code>isFunctionLike</code>"
+      $anchor: "isFunctionLike"

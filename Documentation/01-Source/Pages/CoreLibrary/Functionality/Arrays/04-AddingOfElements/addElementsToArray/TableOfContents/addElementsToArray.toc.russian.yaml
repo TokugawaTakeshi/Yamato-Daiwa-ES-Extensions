@@ -1,0 +1,111 @@
+examples:
+
+  $heading: "Примеры"
+
+  addingOfOneElementToTheStartOfArray:
+
+    $heading: "Добавление одного элемента в начало массива"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfOneElementToTheEndOfArray:
+
+    $heading: "Добавление одного элемента в конец массива"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom0:
+
+    $heading: "Добавление одного элемента на конкретную позицию (нумерация с 0)"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfOneElementToTheSpecificPositionOfArrayNumerationFrom1:
+
+    $heading: "Добавление одного элемента на конкретную позицию (нумерация с 1)"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfMultipleElementsToTheStartOfArray:
+
+    $heading: "Добавление нескольких элементов в начало массива"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfMultipleElementsToTheEndOfArray:
+
+    $heading: "Добавление нескольких элементов в конец массива"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfMultipleElementsToTheSpecificPositionNumerationFrom0:
+
+    $heading: "Добавление нескольких элементов на конкретную позицию (нумерация с 0)"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+  addingOfMultipleElementsToTheSpecificPositionNumerationFrom1:
+
+    $heading: "Добавление нескольких элементов на конкретную позицию (нумерация с 1)"
+
+    mutableAdding:
+
+      $heading: "Мутирующее добавление"
+
+    immutableAdding:
+
+      $heading: "Немутирующее добавление"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: "Быстрый ввод в интегрированных средах разработки семейства IntelliJ IDEA"
+
+  steps:
+
+    $heading: "Пошаговое описание процесса использования шаблона"
+
+externalLinks:
+
+  $heading: "Внешние ссылки"

@@ -1,13 +1,13 @@
 import getRandomInteger from "./getRandomInteger";
 import getRandomArrayElement from "./getRandomArrayElement";
 import removeRandomArrayElement from "./removeRandomArrayElement";
-import isNotUndefined from "../TypeGuards/Nullables/isNotUndefined";
+import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
 
 
-export namespace GetRandomSubarrayOperation {
+export namespace GettingRandomSubarray {
 
   export type Localization = Readonly<{
     generateInvalidMinimalElementsCountErrorMessage: (namedParameters: Readonly<{ actualValue: number; }>) => string;
@@ -16,7 +16,7 @@ export namespace GetRandomSubarrayOperation {
         (namedParameters: Readonly<{ minimalElementsCount: number; maximalElementsCount: number; }>) => string;
   }>;
 
-  export const Localization__English: Localization = {
+  export const localization__english: Localization = {
     generateInvalidMinimalElementsCountErrorMessage: ({ actualValue }: { actualValue: number; }): string =>
         `The minimal elements count must the non-negative integer while it's actual value is ${ actualValue }.`,
     generateInvalidMaximalElementsCountErrorMessage: ({ actualValue }: { actualValue: number; }): string =>
@@ -27,7 +27,7 @@ export namespace GetRandomSubarrayOperation {
         `(${ minimalElementsCount }).`
   };
 
-  export let localization: Localization = Localization__English;
+  export let localization: Localization = localization__english;
 
   export function setLocalization(newLocalization: Localization): void {
     localization = newLocalization;
@@ -44,11 +44,11 @@ export default function getRandomSubarray<ArrayElement>(
   if (isNotUndefined(options.minimalElementsCount)) {
 
     if (!Number.isInteger(options.minimalElementsCount)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
-          messageSpecificPart: GetRandomSubarrayOperation.localization.
+          messageSpecificPart: GettingRandomSubarray.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
@@ -58,11 +58,11 @@ export default function getRandomSubarray<ArrayElement>(
 
 
     if (options.minimalElementsCount < 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
-          messageSpecificPart: GetRandomSubarrayOperation.localization.
+          messageSpecificPart: GettingRandomSubarray.localization.
               generateInvalidMinimalElementsCountErrorMessage({ actualValue: options.minimalElementsCount })
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
@@ -71,7 +71,7 @@ export default function getRandomSubarray<ArrayElement>(
     }
 
     if (options.minimalElementsCount >= targetArray.length) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
@@ -95,11 +95,11 @@ export default function getRandomSubarray<ArrayElement>(
   if (isNotUndefined(options.maximalElementsCount)) {
 
     if (!Number.isInteger(options.maximalElementsCount)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.maximalElementsCount",
-          messageSpecificPart: GetRandomSubarrayOperation.localization.
+          messageSpecificPart: GettingRandomSubarray.localization.
               generateInvalidMaximalElementsCountErrorMessage({ actualValue: options.maximalElementsCount })
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
@@ -109,11 +109,11 @@ export default function getRandomSubarray<ArrayElement>(
 
 
     if (options.maximalElementsCount < minimalElementsCount) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.minimalElementsCount",
-          messageSpecificPart: GetRandomSubarrayOperation.localization.generateMaximalElementCountIsSmallerThanMinimal({
+          messageSpecificPart: GettingRandomSubarray.localization.generateMaximalElementCountIsSmallerThanMinimal({
             minimalElementsCount, maximalElementsCount: options.maximalElementsCount
           })
         }),
@@ -123,7 +123,7 @@ export default function getRandomSubarray<ArrayElement>(
     }
 
     if (options.maximalElementsCount > targetArray.length) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 2,
           parameterName: "options.maximalElementsCount",

@@ -1,28 +1,36 @@
-import { removeNthCharacter } from "../../../Source";
+import { removeNthCharacter, Logger } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("removeNthCharacter", (): void => {
+Promise.all([
 
-  it("String without surrogate pairs", (): void => {
+  Testing.test(
+    "String without surrogate pairs",
+    (): void => {
 
-    Assert.strictEqual(
-      removeNthCharacter("abcde", { numerationFrom: 0, targetCharacterNumber: 1 }),
-      "acde"
-    );
+      Assert.strictEqual(
+        removeNthCharacter("abcde", { numerationFrom: 0, targetCharacterNumber: 1 }),
+        "acde"
+      );
 
-    Assert.strictEqual(
-      removeNthCharacter("abcde", { numerationFrom: 1, targetCharacterNumber: 1 }),
-      "bcde"
-    );
+      Assert.strictEqual(
+        removeNthCharacter("abcde", { numerationFrom: 1, targetCharacterNumber: 1 }),
+        "bcde"
+      );
 
-  });
+    }
+  ),
 
-  it("String with surrogate pairs", (): void => {
-    Assert.strictEqual(
-      removeNthCharacter("aあ😒🙂", { numerationFrom: 1, targetCharacterNumber: 3 }), "" +
-      "aあ🙂"
-    );
-  });
+  Testing.test(
+    "String with surrogate pairs",
+    (): void => {
+      Assert.strictEqual(
+        removeNthCharacter("aあ😒🙂", { numerationFrom: 1, targetCharacterNumber: 3 }),
+        "aあ🙂"
+      );
+    }
+  )
 
-});
+]).catch(Logger.logPromiseError);
+

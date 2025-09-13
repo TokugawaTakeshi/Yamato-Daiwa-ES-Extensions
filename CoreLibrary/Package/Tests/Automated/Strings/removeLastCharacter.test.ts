@@ -1,15 +1,22 @@
+import { removeLastCharacter, Logger } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
-import { removeLastCharacter } from "../../../Source";
 
 
-describe("removeLastCharacter", (): void => {
+Promise.all([
 
-  it("Simple case", (): void => {
-    Assert.strictEqual(removeLastCharacter("cats"), "cat");
-  });
+  Testing.test(
+    "Simple case",
+    (): void => {
+      Assert.strictEqual(removeLastCharacter("cats"), "cat");
+    }
+  ),
 
-  it("Surrogate pairs support", (): void => {
-    Assert.strictEqual(removeLastCharacter("aあ🙂😒"), "aあ🙂");
-  });
+  Testing.test(
+    "Surrogate pairs support",
+    (): void => {
+      Assert.strictEqual(removeLastCharacter("aあ🙂😒"), "aあ🙂");
+    }
+  )
 
-});
+]).catch(Logger.logPromiseError);

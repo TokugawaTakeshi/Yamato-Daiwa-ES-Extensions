@@ -1,0 +1,250 @@
+fileNameLocalizationExtensions: "english"
+
+topPage:
+
+  $heading: "Top"
+  $URI: "@All/index"
+
+coreLibrary:
+
+  $heading: "Core Library"
+
+  gettingStarted:
+
+    $heading: "Getting Started"
+
+  functionality:
+
+    $heading: "Functionality"
+
+    arrays:
+
+      $heading: "Arrays"
+
+      creating:
+
+        $heading: "Creating"
+
+      retrievingOfElements:
+
+        $heading: "Retrieving of Elements"
+
+      retrievingOfIndexes:
+
+        $heading: "Retrieving of Indexes"
+
+      retrievingOfSubarrays:
+
+        $heading: "Retrieving of Subarrays"
+
+      addingOfElements:
+
+        $heading: "Adding of Elements"
+
+      replacingOfElements:
+
+        $heading: "Replacing of Elements"
+
+      permutationsOfElements:
+
+        $heading: "Permutations Of Elements"
+
+      removingOfElements:
+
+        $heading: "Removing of Elements"
+
+      restructuring:
+
+        $heading: "Restructuring"
+
+      other:
+
+        $heading: "Other"
+
+    constantsAndEnumerations:
+
+      $heading: "Constants and Enumerations"
+
+      dateTime:
+
+        $heading: "Date and Time"
+
+      HTTP:
+
+        HTTP_StatusCodes:
+
+          $heading: "HTTP Response Status Codes"
+
+    dataMocking:
+
+      $heading: "Data Mocking"
+
+      guide:
+
+        $heading: "Data Mocking Guide"
+
+      DataMockingClass:
+
+        $heading: "<code>DataMocking</code> Class"
+
+    dateTime:
+
+      $heading: "Date and Time"
+
+      comparison:
+
+        $heading: "Comparison"
+
+      other:
+
+        $heading: "Other"
+
+    defaultValueSubstituters:
+
+      $heading: "Default Value Substituters"
+
+    errors:
+
+      $heading: "Errors Classes"
+
+    logging:
+
+      $heading: "Logging"
+
+      loggerFacade:
+
+        $heading: "<code>Logger</code>　Facade"
+
+      loggerInterface:
+
+        $heading: "<code>ILogger</code>　Interface"
+
+      relatedTypes:
+
+        $heading: "Related Types"
+
+    maps:
+
+      $heading: "Maps"
+
+    numbers:
+
+      $heading: "Numbers"
+
+    objects:
+
+      $heading: "Objects"
+
+    pagination:
+
+      $heading: "Pagination"
+
+    promises:
+
+      $heading: "Promises"
+
+    randomValuesGenerators:
+
+      $heading: "Random Values Generators"
+
+    rawObjectDataProcessor:
+
+      demo:
+
+        $heading: "Demo"
+
+      problemOverview:
+
+        $heading: "Problem Overview"
+
+      theoreticalMinimum:
+
+        $heading: "Theoretical Minimum"
+
+      commonScenarios:
+
+        $heading: "Common Scenarios"
+
+      API:
+
+        $heading: "API"
+
+      validationIssues:
+
+        $heading: "Validation Issues"
+
+    sets:
+
+      $heading: "Sets"
+
+    strings:
+
+      $heading: "Strings"
+
+      charactersAssets:
+
+        $heading: "Characters Assets"
+
+      regularExpressions:
+
+        $heading: "Regular Expressions"
+
+      URI:
+
+        filesAndDirectories:
+
+          $heading: "Files and Directories"
+
+      other:
+
+        $heading: "Other"
+
+    typeGuards:
+
+      $heading: "Type Guards"
+
+    types:
+
+      $heading: "Types"
+
+    valueTransformers:
+
+      $heading: "Value Transformers"
+
+browserJS:
+
+  $heading: "Browser JS"
+
+  DOM_Manipulations:
+
+    $heading: "DOM Manipulations"
+
+  eventsHandling:
+
+    $heading: "Events Handling"
+
+  logging:
+
+    $heading: "Logging"
+
+NodeJS:
+
+  utils:
+
+    $heading: "Utils"
+
+  errorsClasses:
+
+    $heading: "Errors Classes"
+
+  other:
+
+    $heading: "Other"
+
+realiseNotes:
+
+  $heading: "Realize Notes"
+
+supportProject:
+
+  $heading: "Support Project"

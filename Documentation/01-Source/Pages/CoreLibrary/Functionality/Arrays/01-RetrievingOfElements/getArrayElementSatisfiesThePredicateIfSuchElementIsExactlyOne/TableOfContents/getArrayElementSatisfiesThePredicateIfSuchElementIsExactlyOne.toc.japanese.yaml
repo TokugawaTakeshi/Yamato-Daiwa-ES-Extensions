@@ -1,0 +1,19 @@
+example:
+
+  $heading: "例"
+
+comparisonWithNativeMethods:
+
+  $heading: "ネイティブメソッドとの比較"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: "「IntelliJ IDEA」ファミリー統合開発環境に於ける高速入力"
+
+  steps:
+
+    $heading: "Live Templateの利用手順"
+
+externalLinks:
+
+  $heading: "外部リンク"

@@ -1,0 +1,19 @@
+example:
+
+  $heading: "Example"
+
+comparisonWithNativeMethods:
+
+  $heading: "Comparison with Native Methods"
+
+IntelliJ_IDEA_IDEs_LiveTemplateUsageGuidance:
+
+  $heading: "Quick Input in IntelliJ IDEA Family of IDEs"
+
+  steps:
+
+    $heading: "Steps for Using the Live Templates"
+
+externalLinks:
+
+  $heading: "External Links"

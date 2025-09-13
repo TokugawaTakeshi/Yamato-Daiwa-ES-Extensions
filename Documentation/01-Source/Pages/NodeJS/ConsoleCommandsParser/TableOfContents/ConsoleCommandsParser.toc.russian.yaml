@@ -1,0 +1,59 @@
+demo:
+
+  $heading: "Демо"
+
+minimalTheory:
+
+  $heading: "Минимальные теоретические знания"
+
+  conventionalTerminology:
+
+    $heading: "Соглашения по терминологии"
+
+    commandPhrase:
+
+      $heading: "Термин «командная фраза» («command phrase»)"
+
+  TypeScriptDiscriminatedUnions:
+
+    $heading: "Дискриминантное объединение в TypeScript"
+
+stepwiseGuide:
+
+  $heading: "Пошаговое руководство по созданию консольного интерфейса"
+
+  initialCommandPhrasesSet:
+
+    $heading: "Шаг 1 — Определение начального набора командных фраз"
+
+  commandPhrasesOptions:
+
+    $heading: "Шаг 2 — Определение опций для командных фраз"
+
+  consoleApplicationSpecification:
+
+    $heading: "Шаг 3 — Определение спецификации консольного приложения"
+
+    optionsSpecification:
+
+      $heading: "Определение опций командных фраз"
+
+      specialPropertiesOfStringOptions:
+
+        $heading: "Специальные свойства строчных опций"
+
+      specialPropertiesOfNumericOptions:
+
+        $heading: "Специальные свойства числовых опций"
+
+      specialPropertiesOfObjectOptions:
+
+        $heading: "Специальные свойства объектных опций"
+
+  logic:
+
+    $heading: "Шаг 4 — Создание логики разбора консольных команд"
+
+  launchingOfApplicationByName:
+
+    $heading: "Шаг 5 — Обеспечение запуска приложения по имени"

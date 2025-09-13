@@ -1,16 +1,23 @@
-import { removeAllSpecifiedCharacters } from "../../../Source";
+import { Logger, removeAllSpecifiedCharacters } from "../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-describe("removeAllSpecifiedCharacters", (): void => {
+Promise.all([
 
-  it("Basic case", (): void => {
-    Assert.deepStrictEqual(removeAllSpecifiedCharacters("AB*CD*E", "*"), "ABCDE");
-    Assert.deepStrictEqual(removeAllSpecifiedCharacters("A#B*CD*E#", "*#"), "ABCDE");
-  });
+  Testing.test(
+    "Basic case",
+    (): void => {
+      Assert.deepStrictEqual(removeAllSpecifiedCharacters("AB*CD*E", "*"), "ABCDE");
+      Assert.deepStrictEqual(removeAllSpecifiedCharacters("A#B*CD*E#", "*#"), "ABCDE");
+    }
+  ),
 
-  it("Surrogate pairs support", (): void => {
-    Assert.deepStrictEqual(removeAllSpecifiedCharacters("😆AB😀CD😀E😆", "😀😆"), "ABCDE");
-  });
+  Testing.test(
+    "Surrogate pairs support",
+    (): void => {
+      Assert.deepStrictEqual(removeAllSpecifiedCharacters("😆AB😀CD😀E😆", "😀😆"), "ABCDE");
+    }
+  )
 
-});
+]).catch(Logger.logPromiseError);

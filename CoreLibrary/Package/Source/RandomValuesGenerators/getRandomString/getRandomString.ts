@@ -3,8 +3,8 @@ import uppercaseLatinCharacters from "../../Strings/CharactersAssets/uppercaseLa
 import stringifiedDigits from "../../Strings/CharactersAssets/stringifiedDigits";
 
 import isString from "../../TypeGuards/Strings/isString";
-import isUndefined from "../../TypeGuards/Nullables/isUndefined";
-import isNotUndefined from "../../TypeGuards/Nullables/isNotUndefined";
+import isUndefined from "../../TypeGuards/EmptyTypes/isUndefined";
+import isNotUndefined from "../../TypeGuards/EmptyTypes/isNotUndefined";
 import undefinedToEmptyString from "../../ValueTransformers/undefinedToEmptyString";
 import substituteWhenUndefined from "../../DefaultValueSubstituters/substituteWhenUndefined";
 import getRandomInteger from "../getRandomInteger";
@@ -15,12 +15,12 @@ import InvalidParameterValueError from "../../Errors/InvalidParameterValue/Inval
 import IncompatiblePropertiesInObjectTypeParameterError from
     "../../Errors/IncompatiblePropertiesInObjectTypeParameter/IncompatiblePropertiesInObjectTypeParameterError";
 
-import GetRandomStringOperationLocalization__English from "./GetRandomStringOperationLocalization__English";
+import gettingOfRandomStringLocalization__english from "./gettingOfRandomStringLocalization__english";
 
 
 export class RandomStringsGenerator {
 
-  public static localization: RandomStringsGenerator.Localization = GetRandomStringOperationLocalization__English;
+  public static localization: RandomStringsGenerator.Localization = gettingOfRandomStringLocalization__english;
 
   private static readonly DEFAULT_MAXIMAL_TO_MINIMAL_CHARACTERS_COUNT_RATIO: number = 2;
 
@@ -121,7 +121,7 @@ export class RandomStringsGenerator {
 
 
     if (isNotUndefined(fixedCharactersCount__explicitlySpecified)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new IncompatiblePropertiesInObjectTypeParameterError({
           parameterName: "parametersObject",
           conflictingPropertyName: "fixedCharactersCount__explicitlySpecified",
@@ -134,7 +134,7 @@ export class RandomStringsGenerator {
 
 
     if (minimalCharactersCount__explicitlySpecified < 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "parametersObject.minimalCharactersCount",
@@ -165,7 +165,7 @@ export class RandomStringsGenerator {
     }
 
     if (isNotUndefined(namedParameters.fixedCharactersCount)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new IncompatiblePropertiesInObjectTypeParameterError({
           parameterName: "namedParameters",
           conflictingPropertyName: "fixedCharactersCount",
@@ -186,7 +186,7 @@ export class RandomStringsGenerator {
       maximalCharactersCount
     ) {
 
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "namedParameters.minimalCharactersCount",
@@ -202,7 +202,7 @@ export class RandomStringsGenerator {
     } else if (namedParameters.minimalCharactersCount > maximalCharactersCount) {
 
       /* [ Theory ] The case when the 'minimalCharactersCount' has been explicitly specified.  */
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
           parameterName: "namedParameters.minimalCharactersCount",
@@ -254,7 +254,7 @@ export class RandomStringsGenerator {
     charactersForRandomStringGeneration.push(...otherCharacters);
 
     if (charactersForRandomStringGeneration.length === 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterName: "parametersObject.allowedCharacters",
           customMessage: RandomStringsGenerator.localization.errors.noAllowedCharactersForRandomGeneration
@@ -288,7 +288,7 @@ export namespace RandomStringsGenerator {
       latinUppercase?: boolean;
       latinLowercase?: boolean;
       digits?: boolean;
-      other?: Array<string> | string;
+      other?: ReadonlyArray<string> | string;
     }>;
   }
 

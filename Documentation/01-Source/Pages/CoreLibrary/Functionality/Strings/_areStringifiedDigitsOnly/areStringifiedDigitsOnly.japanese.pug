@@ -20,7 +20,7 @@ block append Metadata
             functionName: "areStringifiedDigitsOnly",
             whatFunctionDoes: "対象文字列が数字のみかどうかを確認して真/偽を返す。"
           })
-        }),
+        })
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -33,8 +33,10 @@ block append Metadata
     RoutingEmulator.setCurrentRoute("coreLibrary.children.functionality.children.strings.children.areStringifiedDigitsOnly");
 
     LanguageDropDownList__YDF_DK.setLinks({
-      english: "./areStringifiedDigitsOnly.english.html",
-      russian: "./areStringifiedDigitsOnly.russian.html"
+      english: routing.english.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.strings.$children.
+          areStringifiedDigitsOnly.$URI
     });
 
 

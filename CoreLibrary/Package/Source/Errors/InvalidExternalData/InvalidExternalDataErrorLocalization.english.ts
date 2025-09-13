@@ -3,11 +3,11 @@ import insertSubstring from "../../Strings/insertSubstring";
 
 
 export const invalidExternalDataErrorLocalization__english: InvalidExternalDataError.Localization = {
-  defaultTitle: "Invalid external data",
+  defaultTitle: "Invalid External Data",
   generateDescription: (
     { mentionToExpectedData, messageSpecificPart }: InvalidExternalDataError.Localization.DescriptionTemplateVariables
-  ): string => `
-      The data "${ mentionToExpectedData }" does not match with expected.` +
+  ): string =>
+      `The data "${ mentionToExpectedData }" does not match with expected.` +
       insertSubstring(
         messageSpecificPart,
         { modifier: (definedMessageSpecificPart: string): string => `\n${ definedMessageSpecificPart }` }

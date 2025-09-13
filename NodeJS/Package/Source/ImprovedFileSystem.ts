@@ -8,7 +8,7 @@ import { isNull, Logger } from "@yamato-daiwa/es-extensions";
 
 export default class ImprovedFileSystem {
 
-  /* ━━━ Existence check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Existence Check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static isFileOrDirectoryExists(
     compoundParameter: Readonly<{ targetPath: string; synchronously: false; }>
   ): Promise<boolean>;
@@ -17,8 +17,6 @@ export default class ImprovedFileSystem {
     compoundParameter: Readonly<{ targetPath: string; synchronously: true; }>
   ): boolean;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-  * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static isFileOrDirectoryExists(
     { targetPath, synchronously }: Readonly<{ targetPath: string; synchronously: boolean; }>
   ): Promise<boolean> | boolean {
@@ -29,15 +27,11 @@ export default class ImprovedFileSystem {
 
 
     return new Promise<boolean>((resolve: (isExists: boolean) => void): void => {
-
-      /* eslint-disable-next-line node/prefer-promises/fs --
-      *  `PromisfiedFileSystem.access()` returns the promise with empty payload. */
       FileSystem.access(
         targetPath,
         FileSystemConstants.F_OK,
         (error: NodeJS.ErrnoException | null): void => { resolve(isNull(error)); }
       );
-
     });
 
   }
@@ -61,8 +55,6 @@ export default class ImprovedFileSystem {
     }>
   ): void;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static createDirectory(
     {
       targetPath,
@@ -81,7 +73,7 @@ export default class ImprovedFileSystem {
 
         if (mustThrowErrorIfTargetDirectoryExists) {
 
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorType: "DirectoryAlreadyExistsError",
             title: "Directory already exists",
             description: `The directory "${ targetPath }" is already exists.`,
@@ -112,7 +104,7 @@ export default class ImprovedFileSystem {
 
             if (mustThrowErrorIfTargetDirectoryExists) {
 
-              Logger.throwErrorAndLog({
+              Logger.throwErrorWithFormattedMessage({
                 errorType: "DirectoryAlreadyExistsError",
                 title: "Directory already exists",
                 description: `The directory "${ targetPath }" is already exists.`,
@@ -134,7 +126,23 @@ export default class ImprovedFileSystem {
   }
 
 
+  /* ─── Ensuring ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  public static ensureDirectoriesCreated(targetDirectoryPathOrMultipleOfThem: string | ReadonlyArray<string>): void {
+    for (
+      const targetDirectory of Array.isArray(targetDirectoryPathOrMultipleOfThem) ?
+          targetDirectoryPathOrMultipleOfThem : [ targetDirectoryPathOrMultipleOfThem ]
+    ) {
+      ImprovedFileSystem.createDirectory({
+        targetPath: targetDirectory,
+        synchronously: true,
+        mustThrowErrorIfTargetDirectoryExists: false
+      });
+    }
+  }
+
+
   /* ─── Removing ─────────────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ╍╍╍ Removing of Directory ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
   public static removeDirectoryWithFiles(
     compoundParameter: Readonly<{ targetPath: string; mustThrowErrorIfOneOrMoreFilesCouldNotBeDeleted: boolean; }>
   ): void {
@@ -142,14 +150,7 @@ export default class ImprovedFileSystem {
     const targetDirectoryPath: string = compoundParameter.targetPath;
 
     if (!FileSystem.existsSync(targetDirectoryPath)) {
-
-      Logger.logInfo({
-        title: "The directory to delete does not exist",
-        description: `The directory "${ targetDirectoryPath }" does not exist; nothing to delete.`
-      });
-
       return;
-
     }
 
 
@@ -175,6 +176,42 @@ export default class ImprovedFileSystem {
   }
 
 
+  /* ╍╍╍ Removing of Files from Directory ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+  public static removeFilesFromDirectory(
+    compoundParameter: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: true;
+    }>
+  ): void;
+
+  public static removeFilesFromDirectory(
+    compoundParameter: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: false;
+    }>
+  ): Promise<void>;
+
+  public static removeFilesFromDirectory(
+    {
+      directoryPath__absoluteOrRelative,
+      synchronously
+    }: Readonly<{
+      directoryPath__absoluteOrRelative: string;
+      synchronously: boolean;
+    }>
+  ): void | Promise<void> {
+
+    if (synchronously) {
+      FileSystem.rmSync(directoryPath__absoluteOrRelative, { recursive: true, force: true });
+      return;
+    }
+
+
+    return PromisfiedFileSystem.rm(directoryPath__absoluteOrRelative, { recursive: true, force: true });
+
+  }
+
+
   /* ━━━ Files ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* ─── Creating / Updating ──────────────────────────────────────────────────────────────────────────────────────── */
   public static writeFileToPossiblyNotExistingDirectory(
@@ -193,8 +230,6 @@ export default class ImprovedFileSystem {
     }>
   ): Promise<void>;
 
-  /* eslint-disable-next-line @typescript-eslint/promise-function-async --
-   * Adding of the `async` keyword to this method will cause TS1064 error. */
   public static writeFileToPossiblyNotExistingDirectory(
     {
       filePath,
@@ -221,7 +256,7 @@ export default class ImprovedFileSystem {
             targetPath: ImprovedPath.extractDirectoryFromFilePath({
               targetPath: filePath,
               ambiguitiesResolution: {
-                mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: true,
                 mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
                 mustConsiderLastSegmentStartingWithDotAsDirectory: false
               }
@@ -251,7 +286,7 @@ export default class ImprovedFileSystem {
               targetPath: ImprovedPath.extractDirectoryFromFilePath({
                 targetPath: filePath,
                 ambiguitiesResolution: {
-                  mustConsiderLastSegmentWihtoutDotsAsFileNameWithoutExtension: true,
+                  mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension: true,
                   mustConsiderLastSegmentWithNonLeadingDotAsDirectory: false,
                   mustConsiderLastSegmentStartingWithDotAsDirectory: false
                 }

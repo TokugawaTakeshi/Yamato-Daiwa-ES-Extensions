@@ -1,0 +1,23 @@
+numericTypes:
+
+  $heading: "Числовые типы"
+
+stringTypes:
+
+  $heading: "Строковые типы"
+
+objectTypes:
+
+  $heading: "Объектные типы"
+
+arrayedTypes:
+
+  $heading: "Массивы"
+
+emptyTypes:
+
+  $heading: "Пустые типы"
+
+otherTypes:
+
+  $heading: "Другие типы"

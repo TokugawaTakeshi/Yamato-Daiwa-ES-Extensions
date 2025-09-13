@@ -6,11 +6,12 @@ import {
   RawObjectDataProcessor,
   InvalidExternalDataError,
   Logger,
+  IndentationCoordinator,
   stringifyAndFormatArbitraryValue,
   insertSubstring,
   isNaturalNumber,
   isNegativeInteger,
-  isNonNegativeInteger,
+  isNaturalNumberOrZero,
   isNegativeIntegerOrZero,
   isPositiveDecimalFraction,
   isNegativeDecimalFraction,
@@ -25,7 +26,6 @@ import type { ParsedJSON } from "@yamato-daiwa/es-extensions";
 
 /* ─── YDEE Node.js ───────────────────────────────────────────────────────────────────────────────────────────────── */
 import InvalidConsoleCommandError from "../Errors/InvalidConsoleCommand/InvalidConsoleCommandError";
-import IndentationCoordinator from "../Temporary/IndentationCoordinator";
 
 /* ─── Localization ───────────────────────────────────────────────────────────────────────────────────────────────── */
 import consoleCommandsParserLocalization__english from "./ConsoleCommandsParserLocalization.english";
@@ -73,7 +73,7 @@ class ConsoleCommandsParser<
 
     /* [ Additional dynamic validation for compiled JavaScript ] */
     if (!Array.isArray(argumentsVector)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.argumentsVectorIsNotArray.
@@ -86,7 +86,7 @@ class ConsoleCommandsParser<
 
 
     if (argumentsVector.length < ConsoleCommandsParser.MINIMAL_ARGUMENTS_COUNT_IN_VALID_CONSOLE_COMMAND) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -139,7 +139,7 @@ class ConsoleCommandsParser<
     }
 
     if (nonStringArguments.length > 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: commandLineInterfaceSpecification.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -242,7 +242,7 @@ class ConsoleCommandsParser<
     if (isUndefined(firstConsciouslyInputtedArgument)) {
 
       if (isUndefined(defaultCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -260,7 +260,7 @@ class ConsoleCommandsParser<
     } else if (ConsoleCommandsParser.isCommandArgumentTheOption(firstConsciouslyInputtedArgument)) {
 
       if (isUndefined(defaultCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -280,7 +280,7 @@ class ConsoleCommandsParser<
     } else {
 
       if (isUndefined(commandLineInterfaceSpecification.commandPhrases)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -311,7 +311,7 @@ class ConsoleCommandsParser<
 
       /* [ Approach ] If no options for the current command phrase available, it will be the empty object but not "undefined". */
       if (isUndefined(optionsSpecificationForRecognizedCommandPhrase)) {
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: commandLineInterfaceSpecification.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unknownCommandPhrase.generate({
@@ -391,7 +391,7 @@ class ConsoleCommandsParser<
 
 
         if ("required" in optionSpecification && optionSpecification.required) {
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorInstance: new InvalidConsoleCommandError({
               applicationName: this.applicationName,
               messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.requiredOptionKeyIsMissing.generate({
@@ -426,7 +426,7 @@ class ConsoleCommandsParser<
 
         /* [ Theory ] Although the option could be optional, the value is expected to be specified because flag has been
         *     specified. */
-        Logger.throwErrorAndLog({
+        Logger.throwErrorWithFormattedMessage({
           errorInstance: new InvalidConsoleCommandError({
             applicationName: this.applicationName,
             messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -493,7 +493,7 @@ class ConsoleCommandsParser<
         }
 
         default: {
-          Logger.throwErrorAndLog({
+          Logger.throwErrorWithFormattedMessage({
             errorType: "InvalidConsoleCommandOptionSpecification",
             title: "Invalid console command option specification",
             description: ConsoleCommandsParser.localization.errorsMessages.invalidCommandOptionTypeAtSpecification.generate({
@@ -513,7 +513,7 @@ class ConsoleCommandsParser<
     }
 
     if (this.targetCommandOptionsWhichHasNotBeenProcessedYet.length > 0) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unknownOptionsFoundForSpecificCommand.generate({
@@ -557,7 +557,7 @@ class ConsoleCommandsParser<
     const { allowedAlternatives }: ConsoleCommandsParser.StringOptionSpecification = optionSpecification;
 
     if (isNonEmptyArray(allowedAlternatives) && !allowedAlternatives.includes(targetOptionRawValue)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -604,7 +604,7 @@ class ConsoleCommandsParser<
     const targetOptionParsedValue: number = Number(targetOptionRawValue);
 
     if (Number.isNaN(targetOptionParsedValue)) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.unparsableNumericOptionValue.generate({
@@ -629,46 +629,94 @@ class ConsoleCommandsParser<
     let isOptionValueMatchingWithExpectedNumberSet: boolean;
 
     switch (numbersSet) {
+
       case RawObjectDataProcessor.NumbersSets.naturalNumber: {
         isOptionValueMatchingWithExpectedNumberSet = isNaturalNumber(targetOptionParsedValue);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: {
-        isOptionValueMatchingWithExpectedNumberSet = isNonNegativeInteger(targetOptionParsedValue);
+
+      case RawObjectDataProcessor.NumbersSets.naturalNumberOrZero:
+      case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = isNaturalNumberOrZero(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeInteger: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeInteger(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeIntegerOrZero(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.anyInteger: {
         isOptionValueMatchingWithExpectedNumberSet = Number.isInteger(targetOptionParsedValue);
         break;
       }
+
       case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isPositiveDecimalFraction(targetOptionParsedValue);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isPositiveDecimalFraction(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isNegativeDecimalFraction(targetOptionParsedValue);
         break;
       }
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: {
+
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isNegativeDecimalFraction(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFraction: {
         isOptionValueMatchingWithExpectedNumberSet = isDecimalFractionOfAnySign(targetOptionParsedValue);
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFractionOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet =
+            isDecimalFractionOfAnySign(targetOptionParsedValue) || targetOptionParsedValue === 0;
+        break;
+      }
+
       case RawObjectDataProcessor.NumbersSets.anyRealNumber: {
         isOptionValueMatchingWithExpectedNumberSet = true;
         break;
       }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumber: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue > 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumber: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue < 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumberOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue >= 0;
+        break;
+      }
+
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumberOrZero: {
+        isOptionValueMatchingWithExpectedNumberSet = targetOptionParsedValue <= 0;
+      }
+
     }
 
     if (!isOptionValueMatchingWithExpectedNumberSet) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -693,7 +741,7 @@ class ConsoleCommandsParser<
 
 
     if (isNotUndefined(minimalValue) && targetOptionParsedValue <= minimalValue) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -718,7 +766,7 @@ class ConsoleCommandsParser<
 
 
     if (isNotUndefined(maximalValue) && targetOptionParsedValue >= maximalValue) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.
@@ -764,7 +812,7 @@ class ConsoleCommandsParser<
     try {
       targetParameterParsedValue = JSON5.parse(targetOptionRawValue);
     } catch (error: unknown) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidConsoleCommandError({
           applicationName: this.applicationName,
           messageSpecificPart: ConsoleCommandsParser.localization.errorsMessages.malformedJSON5_Option.generate({
@@ -780,7 +828,8 @@ class ConsoleCommandsParser<
           })
         }),
         title: InvalidConsoleCommandError.localization.defaultTitle,
-        occurrenceLocation: ConsoleCommandsParser.PARSING_METHOD_INVOCATION_EXPRESSION
+        occurrenceLocation: ConsoleCommandsParser.PARSING_METHOD_INVOCATION_EXPRESSION,
+        innerError: error
       });
     }
 
@@ -790,13 +839,13 @@ class ConsoleCommandsParser<
           targetParameterParsedValue,
           {
             nameForLogging: optionKeyWithLeading2NDashes,
-            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
+            subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
             properties: optionSpecification.validValueSpecification
           }
         );
 
-    if (validationResult.rawDataIsInvalid) {
-      Logger.throwErrorAndLog({
+    if (validationResult.isRawDataInvalid) {
+      Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidExternalDataError({
           customMessage: ConsoleCommandsParser.localization.errorsMessages.JSON5_OptionDoesNotMatchWithValidDataSchema.generate({
             targetOptionKey: optionKeyWithLeading2NDashes,
@@ -849,7 +898,7 @@ class ConsoleCommandsParser<
 
     if (isNonEmptyString(commandPhraseSpecification.description)) {
       textSegments.push(
-        indentationCoordinator.insertIncrementedIndentWihtoutUpdatingOfIndentationMultiplier() +
+        indentationCoordinator.insertIncrementedIndentWithoutUpdatingOfIndentationMultiplier() +
             commandPhraseSpecification.description
       );
     }
@@ -925,7 +974,7 @@ class ConsoleCommandsParser<
     if ("required" in commandOptionSpecification) {
       textSegments.push(
         `\n${ indentationCoordinator.insertIndent() }◯ ${ helpReferenceLocalization.isRequired }: ` +
-          commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no
+          (commandOptionSpecification.required ? helpReferenceLocalization.yes : helpReferenceLocalization.no)
       );
     } else if ("defaultValue" in commandOptionSpecification) {
       textSegments.push(
@@ -1000,7 +1049,7 @@ class ConsoleCommandsParser<
         indentationCoordinator.incrementIndent();
 
         textSegments.push(
-          indentationCoordinator.addCurrentIntendationToEachLineOf(
+          indentationCoordinator.addCurrentIndentationToEachLineOf(
             stringifyAndFormatArbitraryValue(commandOptionSpecification.validValueSpecification.properties)
           )
         );
@@ -1047,7 +1096,7 @@ class ConsoleCommandsParser<
     if (
       Object.entries(specificationsOfCommandsMarkedAsDefault).length > 1
     ) {
-      Logger.throwErrorAndLog({
+      Logger.throwErrorWithFormattedMessage({
         errorType: "InvalidConsoleCommandSpecification",
         title: "Invalid console command specification",
         description: ConsoleCommandsParser.localization.errorsMessages.moreThanOneCommandPhrasesMarkedAsDefault.generate({
@@ -1109,9 +1158,6 @@ namespace ConsoleCommandsParser {
 
   export type StringOptionSpecification =
       Readonly<{
-        /* eslint-disable-next-line id-denylist --
-         * The "id-denylist" is not unsolicited for object properties, but the applying to add respective option
-         * has been denied. https://github.com/eslint/eslint/issues/15504 */
         type: ParametersTypes.string;
         allowedAlternatives?: ReadonlyArray<string>;
       }> &
@@ -1147,9 +1193,6 @@ namespace ConsoleCommandsParser {
       );
 
   export enum ParametersTypes {
-    /* eslint-disable-next-line id-denylist --
-     * The "id-denylist" is not unsolicited for object properties, but the applying to add respective option
-     * has been denied. https://github.com/eslint/eslint/issues/15504 */
     string = "string",
     number = "number",
     boolean = "boolean",

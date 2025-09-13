@@ -22,7 +22,7 @@
       { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
     )
   >;
-): RemovingArrayElementsByPredicatesOperation.Result<ArrayElement>
+): RemovingOfArrayElementsByPredicates.Result<ArrayElement>
 ```
 
 ```typescript

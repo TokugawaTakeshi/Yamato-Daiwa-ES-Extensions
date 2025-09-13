@@ -1,0 +1,246 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("cropArray"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "cropArray",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.retrievingOfSubarrays.cropArray");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          retrievingOfSubarrays.$children.cropArray.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.retrievingOfSubarrays.$children.cropArray;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    h1.Article-Heading1!= "<code>cropArray</code>"
+
+    +CodeViewer--YDF({ title: "Signature" })
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        <ArrayElement>(
+          compoundParameter: Readonly<
+            (
+              {
+                mutably: true;
+                targetArray: Array<ArrayElement>;
+              } |
+              {
+                mutably: false;
+                targetArray: ReadonlyArray<ArrayElement>;
+              }
+            ) &
+            (
+              (
+                {
+                  fromStart: true;
+                  fromEnd?: undefined;
+                } &
+                (
+                  {
+                    startingElementNumber__numerationFrom0: number;
+                    startingElementNumber__numerationFrom1?: undefined;
+                    fromFirstElement?: undefined;
+                  } |
+                  {
+                    startingElementNumber__numerationFrom1: number;
+                    startingElementNumber__numerationFrom0?: undefined;
+                    fromFirstElement?: undefined;
+                  } |
+                  {
+                    fromFirstElement: true;
+                    startingElementNumber__numerationFrom1?: undefined;
+                    startingElementNumber__numerationFrom0?: undefined;
+                  }
+                ) &
+                (
+                  {
+                    endingElementNumber__numerationFrom0__including: number;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom1__including: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom0__notIncluding: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    endingElementNumber__numerationFrom1__notIncluding: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    elementsCount: number;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    untilLastElement?: undefined;
+                  } |
+                  {
+                    untilLastElement: true;
+                    endingElementNumber__numerationFrom0__including?: undefined;
+                    endingElementNumber__numerationFrom1__including?: undefined;
+                    endingElementNumber__numerationFrom0__notIncluding?: undefined;
+                    endingElementNumber__numerationFrom1__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                  }
+                )
+              ) |
+              (
+                {
+                  fromEnd: true;
+                  fromStart?: undefined;
+                } &
+                (
+                  {
+                    rightElementNumber__numerationFrom0_AndRight: number;
+                    rightElementNumber__numerationFrom1_AndRight?: undefined;
+                    fromRightmostElement?: undefined;
+                  } |
+                  {
+                    rightElementNumber__numerationFrom1_AndRight: number;
+                    rightElementNumber__numerationFrom0_AndRight?: undefined;
+                    fromRightmostElement?: undefined;
+                  } |
+                  {
+                    fromRightmostElement: true;
+                    rightElementNumber__numerationFrom1_AndRight?: undefined;
+                    rightElementNumber__numerationFrom0_AndRight?: undefined;
+                  }
+                ) &
+                (
+                  {
+                    leftElementNumber__numerationFrom0_AndRight__including: number;
+                    leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLeftmostElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom1_AndRight__including: number;
+                    leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLeftmostElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding: number;
+                    leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLeftmostElement?: undefined;
+                  } |
+                  {
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding: number;
+                    leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                    untilLeftmostElement?: undefined;
+                  } |
+                  {
+                    elementsCount: number;
+                    leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+                    untilLeftmostElement?: undefined;
+                  } |
+                  {
+                    untilLeftmostElement: true;
+                    leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+                    leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+                    leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+                    elementsCount?: undefined;
+                  }
+                )
+              )
+            ) &
+            { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+          >
+        ): Array<ArrayElement>
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/03-RetrievingOfSubarrays/cropArray.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/03-RetrievingOfSubarrays/cropArray.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

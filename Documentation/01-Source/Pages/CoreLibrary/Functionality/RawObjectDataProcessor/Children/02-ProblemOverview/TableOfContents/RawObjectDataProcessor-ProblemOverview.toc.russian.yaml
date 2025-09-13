@@ -1,0 +1,7 @@
+nativeApproaches:
+
+  $heading: "Подходы без использования библиотек"
+
+rawObjectDataProcessorApproach:
+
+  $heading: "Подход <code>RawObjectDataProcessor</code>"

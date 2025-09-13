@@ -1,6 +1,6 @@
 import Logger from "../Logging/Logger";
 import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidParameterValueError";
-import isNonNegativeInteger from "../TypeGuards/Numbers/isNonNegativeInteger";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 import isNaturalNumber from "../TypeGuards/Numbers/isNaturalNumber";
 
 
@@ -56,23 +56,23 @@ export default function cropString(
   const targetString: string = compoundParameter.targetString;
   let startingCharacterNumber__numerationFrom0: number;
 
-  if (isNonNegativeInteger(compoundParameter.startingCharacterNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.startingCharacterNumber__numerationFrom0)) {
     startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.startingCharacterNumber__numerationFrom1)) {
     startingCharacterNumber__numerationFrom0 = compoundParameter.startingCharacterNumber__numerationFrom1 - 1;
   } else if (compoundParameter.fromStart === true) {
     startingCharacterNumber__numerationFrom0 = 0;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
         messageSpecificPart:
             "It has been incorrectly specified from which character target string must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"startingCharacterNumber__numerationFrom0\": must the positive integer\n" +
-            "● \"startingCharacterNumber__numerationFrom1\": must the natual number\n" +
-            "● \"fromStart\": must the boolean herewith \"true\" only"
+            "● \"startingCharacterNumber__numerationFrom0\": must be the positive integer\n" +
+            "● \"startingCharacterNumber__numerationFrom1\": must be the natural number\n" +
+            "● \"fromStart\": must be the boolean herewith \"true\" only"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
       occurrenceLocation: "cropString(compoundParameter)"
@@ -82,7 +82,7 @@ export default function cropString(
 
   let endingCharacterNumber__numerationFrom1: number;
 
-  if (isNonNegativeInteger(compoundParameter.endingCharacterNumber__numerationFrom0)) {
+  if (isNaturalNumberOrZero(compoundParameter.endingCharacterNumber__numerationFrom0)) {
     endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom0;
   } else if (isNaturalNumber(compoundParameter.endingCharacterNumber__numerationFrom1)) {
     endingCharacterNumber__numerationFrom1 = compoundParameter.endingCharacterNumber__numerationFrom1 - 1;
@@ -91,17 +91,17 @@ export default function cropString(
   } else if (compoundParameter.untilEnd === true) {
     endingCharacterNumber__numerationFrom1 = targetString.length;
   } else {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",
         messageSpecificPart:
             "It has been incorrectly specified until which character target string must be cropped. " +
             "The valid alternatives are:\n" +
-            "● \"endingCharacterNumber__numerationFrom0\": must the positive integer\n" +
-            "● \"endingCharacterNumber__numerationFrom1\": must the natual number\n" +
-            "● \"charactersCount\": must the natual number\n" +
-            "● \"untilEnd\": must the boolean herewith \"true\" only\n"
+            "● \"endingCharacterNumber__numerationFrom0\": must be the positive integer \n" +
+            "● \"endingCharacterNumber__numerationFrom1\": must be the natural number\n" +
+            "● \"charactersCount\": must be the natural number\n" +
+            "● \"untilEnd\": must be the boolean herewith \"true\" only\n"
 
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
@@ -114,7 +114,7 @@ export default function cropString(
     endingCharacterNumber__numerationFrom1 > targetString.length &&
         compoundParameter.mustThrowErrorIfSpecifiedCharactersNumbersIsOutOfRange
   ) {
-    Logger.throwErrorAndLog({
+    Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
         parameterName: "compoundParameter",

@@ -1,0 +1,155 @@
+extends ../../../../../../../node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include ../../../../../../SharedAssets/Markup/SharedAssets.english.pug
+  include ../../../../../../SharedComponents/SharedComponents.english.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle("replaceArrayElementsByIndexesImmutably"),
+        description: MetaDescriptionTemplates.function({
+          functionName: "replaceArrayElementsByIndexesImmutably",
+          whatFunctionDoes: ""
+        })
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute(
+      "coreLibrary.functionality.arrays.replacingOfElements.replaceArrayElementsByIndexesImmutably"
+    );
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.
+          replacingOfElements.$children.replaceArrayElementsByIndexesImmutably.$URI,
+      russian: routing.russian.coreLibrary.$children.functionality.$children.arrays.$children.
+          replacingOfElements.$children.replaceArrayElementsByIndexesImmutably.$URI
+    });
+
+    const { $sectioning: localizedSectioning } = localizedRouting.coreLibrary.$children.functionality.$children.
+        arrays.$children.replacingOfElements.$children.replaceArrayElementsByIndexesImmutably;
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    +CallableExpressionScheme--YDF_DK({
+      technicalName: "replaceArrayElementsByIndexesImmutably",
+      headingTag: "h1",
+      genericParameters: [ "ArrayElement" ],
+      parametersSpecification: [
+        {
+          genericTechnicalName: "sourceDataAndOptions",
+          type: "SourceDataAndOptions",
+          required: true
+        }
+      ],
+      returnedValue: "Array<ArrayElement>",
+    })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "SourceDataAndOptions",
+        propertiesSpecification: {
+          $intersection: [
+            {
+              targetArray: {
+                type: "ReadonlyArray<ArrayElement>",
+                required: true
+              }
+            },
+            [
+              {
+                index: {
+                  type: "number",
+                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+                  required: true
+                },
+                newElement: {
+                  type: "ArrayElement",
+                  required: true
+                }
+              },
+              {
+                replacements: {
+                  type: Array,
+                  required: true,
+                  element: {
+                    type: {
+                      name: "Replacement",
+                      anchorOrURI: "#REPLACEMENT"
+                    }
+                  }
+                }
+              }
+            ]
+          ]
+        }
+      })
+      +ObjectTypeAbstract--YDF_DK({
+        typeName: "Replacement",
+        propertiesSpecification: {
+          index: {
+            type: Number,
+            numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+            required: true
+          },
+          newElement: {
+            type: "ArrayElement",
+            required: true
+          }
+        }
+      })(
+        id="REPLACEMENT"
+      )
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ External Links ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Documentation/Arrays/replaceArrayElementsByIndexesImmutably/" +
+            "replaceArrayElementsByIndexesImmutably.md",
+        title: "Temporary markdown documentation"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably.ts",
+        title: "Source code"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably.test.ts",
+        title: "Tests code"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

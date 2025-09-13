@@ -1,0 +1,15 @@
+installation:
+  $heading: `installation.$heading`
+  $anchor: "INSTALLATION--SECTION"
+
+distributiveVolumeNotice:
+  $heading: `distributiveVolumeNotice.$heading`
+  $anchor: "DISTRIBUTIVE_VOLUME_NOTICE--SECTION"
+
+nonTypeScriptUsageWarning:
+  $heading: `nonTypeScriptUsageWarning.$heading`
+  $anchor: "NON_TYPE_SCRIPT_USAGE_WARNING--SECTION"
+
+importingFunctionality:
+  $heading: `importingFunctionality.$heading`
+  $anchor: "IMPORTING_OF_FUNCTIONALITY--SECTION"

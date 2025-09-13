@@ -1,0 +1,44 @@
+extends {{ $$PATH_RELATIVE_TO_PROJECT_ROOT_DIRECTORY }}/node_modules/@yamato-daiwa/programming_documentation/Layouts/TwoColumns/TwoColumnsLayout.pug
+
+
+block append Requirements
+
+  include {{ $$PATH_RELATIVE_TO_SOURCE_DIRECTORY }}/SharedAssets/Markup/SharedAssets.japanese.pug
+  include {{ $$PATH_RELATIVE_TO_SOURCE_DIRECTORY }}/SharedComponents/SharedComponents.japanese.pug
+
+
+block append Metadata
+
+  -
+
+    const {
+      $heading: topHeading,
+      $sectioning: localizedSectioning
+    } = localizedRouting.{{ $targetRouteWithChildrenPointers }};
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: buildHTML_PageTitle(topHeading),
+        description: ""
+      },
+      stylesSheetsURIs: [
+        "$CommonStyles",
+        "$LayoutsStyles/TwoColumns/TwoColumnsLayout.css",
+        "$PreMadesStyles",
+        "@CustomizedExternalComponents"
+      ]
+    });
+
+    RoutingEmulator.setCurrentRoute("{{ $targetRouteWithoutChildrenPointers }}");
+
+    LanguageDropDownList__YDF_DK.setLinks({
+      english: routing.english.{{ $targetRouteWithChildrenPointers }}.$URI,
+      russian: routing.russian.{{ $targetRouteWithChildrenPointers }}.$URI
+    });
+
+
+block append HeadScripts
+
+  if __IS_PRODUCTION_BUILDING_MODE__
+
+    +GoogleAnalyticsScript

@@ -2,7 +2,7 @@ import type FileNotFoundError from "./FileNotFoundError";
 
 
 const fileNotFoundErrorLocalization__english: FileNotFoundError.Localization = {
-  defaultTitle: "File not found error",
+  defaultTitle: "File Not Found",
   generateDescriptionCommonPart:
       ({ filePath }: FileNotFoundError.Localization.CommonDescription.TemplateVariables): string =>
           `File with path "${ filePath }" not found.`

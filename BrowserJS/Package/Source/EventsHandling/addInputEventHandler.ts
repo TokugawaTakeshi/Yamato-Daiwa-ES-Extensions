@@ -5,6 +5,7 @@ import {
 } from "@yamato-daiwa/es-extensions";
 
 
+/** @deprecated Use `InputEventListener` instead.  */
 export default function addInputEventHandler(
   compoundParameter: Readonly<
     (
