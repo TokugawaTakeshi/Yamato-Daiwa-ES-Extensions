@@ -42,3 +42,40 @@ block append HeadScripts
   if __IS_PRODUCTION_BUILDING_MODE__
 
     +GoogleAnalyticsScript
+
+
+block append SpecificContent
+
+  article
+
+    //- TODO ↓ Редактировать заголовок
+    //- ━━━ Функциональность Заголовок ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= topHeading
+
+    +PageNotReadyApology--YDPD({
+      currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten
+    })
+
+
+    //- ━━━ Внешние ссылки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.externalLinks.$heading,
+      HTML_ID: localizedSectioning.externalLinks.$anchor
+    }).Article-Heading2
+
+    +LinksCardsFlow--YDF
+
+      //- TODO ↓ Редактировать путь
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Source/Arrays/00-Creating/createArrayOfNaturalNumbers.ts",
+        title: "Исходный код"
+      }): +File__SourceCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon
+
+      //- TODO ↓ Редактировать путь
+      +LinksCardsFlow-ItemWithSVG_Icon--YDF({
+        unendorsedExternalURI: GIT_HUB_REPOSITORY_URI_COMMON_PART__ACTUAL_BRANCH__WITH_TRAILING_SLASH +
+            "CoreLibrary/Package/Tests/Automated/Arrays/00-Creating/createArrayOfNaturalNumbers.test.ts",
+        title: "Код тестов"
+      }): +File__TestCode--YDF_Icon.LinksCardsFlow--YDF-SVG_Icon

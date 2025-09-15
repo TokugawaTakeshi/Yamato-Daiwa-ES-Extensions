@@ -1,6 +1,5 @@
-import { InvalidParameterValueError, Logger } from "../../../../Source";
-import cropArray from "../../../../Source/Arrays/03-RetrievingOfSubarrays/cropArray";
-import { suite, test } from "node:test";
+import { cropArray, InvalidParameterValueError, Logger } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
@@ -11,31 +10,31 @@ function generateConstantSample(): Array<string> {
 
 Promise.all([
 
-  suite(
+  Testing.suite(
     "Cropping From Start To End",
     async (): Promise<void> => {
 
       await Promise.all([
 
-        suite(
+        Testing.suite(
           "With `startingElementNumber__numerationFrom0` ...",
           async (): Promise<void> => {
 
             await Promise.all([
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -55,13 +54,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -80,7 +79,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -110,13 +109,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -132,13 +131,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Mathing with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -146,7 +145,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -157,7 +156,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -182,13 +181,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -207,7 +206,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -243,19 +242,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom1__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -275,13 +274,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -300,7 +299,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -330,13 +329,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -353,14 +352,14 @@ Promise.all([
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Cropped Array is Mathing with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -369,7 +368,7 @@ Promise.all([
 
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -380,7 +379,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -405,13 +404,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -430,7 +429,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -466,19 +465,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -498,13 +497,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -525,7 +524,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -555,13 +554,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -578,14 +577,14 @@ Promise.all([
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -594,7 +593,7 @@ Promise.all([
 
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect New One",
                                 (): void => {
 
@@ -605,7 +604,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect Source One",
                                 (): void => {
 
@@ -630,13 +629,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -657,7 +656,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -693,19 +692,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom1__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -725,13 +724,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -750,7 +749,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -780,13 +779,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -803,14 +802,14 @@ Promise.all([
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE" ]);
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -819,7 +818,7 @@ Promise.all([
 
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -830,7 +829,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -855,13 +854,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -880,7 +879,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -916,19 +915,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `elementsCount` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -948,13 +947,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -976,7 +975,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1005,13 +1004,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1032,13 +1031,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1060,7 +1059,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1096,19 +1095,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `untilLastElement` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1128,13 +1127,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1156,7 +1155,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1186,13 +1185,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1212,13 +1211,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1240,7 +1239,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1282,25 +1281,25 @@ Promise.all([
 
         ),
 
-        suite(
+        Testing.suite(
           "With `startingElementNumber__numerationFrom1` ...",
           async (): Promise<void> => {
 
             await Promise.all([
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1320,13 +1319,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -1345,7 +1344,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1375,13 +1374,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -1397,13 +1396,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -1411,7 +1410,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect Cropped One",
                                 (): void => {
 
@@ -1422,7 +1421,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect Source One",
                                 (): void => {
 
@@ -1447,13 +1446,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -1472,7 +1471,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1508,19 +1507,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom1__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1540,13 +1539,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -1565,7 +1564,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1595,13 +1594,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -1617,13 +1616,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -1631,7 +1630,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect Cropped One",
                                 (): void => {
 
@@ -1642,7 +1641,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect Source One",
                                 (): void => {
 
@@ -1667,13 +1666,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -1692,7 +1691,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1728,19 +1727,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
 
                             (): void => {
@@ -1761,13 +1760,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1790,7 +1789,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1822,13 +1821,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1848,13 +1847,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1877,7 +1876,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -1912,19 +1911,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom1__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -1944,13 +1943,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -1973,7 +1972,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2003,13 +2002,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2030,13 +2029,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -2059,7 +2058,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2095,19 +2094,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `elementsCount` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2127,13 +2126,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -2156,7 +2155,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2186,13 +2185,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2213,13 +2212,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
 
@@ -2242,7 +2241,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2278,19 +2277,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `untilLastElement` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2310,7 +2309,7 @@ Promise.all([
                             }
                           ),
 
-                          test(
+                          Testing.test(
                             "Out-of-range Request",
                             (): void => {
 
@@ -2338,13 +2337,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2365,7 +2364,7 @@ Promise.all([
                             }
                           ),
 
-                          test(
+                          Testing.test(
                             "Out-of-range Request",
                             (): void => {
 
@@ -2403,25 +2402,25 @@ Promise.all([
           }
         ),
 
-        suite(
+        Testing.suite(
           "With `fromFirstElement` ...",
           async (): Promise<void> => {
 
             await Promise.all([
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2441,13 +2440,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -2466,7 +2465,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2496,13 +2495,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -2518,13 +2517,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -2532,7 +2531,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -2543,7 +2542,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -2568,13 +2567,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -2593,7 +2592,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2629,19 +2628,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                   "... and `endingElementNumber__numerationFrom1__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2661,13 +2660,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -2686,7 +2685,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2716,13 +2715,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -2738,13 +2737,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -2752,7 +2751,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -2763,7 +2762,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -2788,13 +2787,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -2813,7 +2812,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2849,19 +2848,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom0__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -2881,13 +2880,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -2906,7 +2905,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -2936,13 +2935,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -2958,13 +2957,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -2972,7 +2971,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -2983,7 +2982,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -3008,13 +3007,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3033,7 +3032,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3069,19 +3068,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `endingElementNumber__numerationFrom1__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -3101,13 +3100,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3126,7 +3125,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3156,13 +3155,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -3178,13 +3177,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3192,7 +3191,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -3203,7 +3202,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -3228,13 +3227,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3253,7 +3252,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3289,19 +3288,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `elementsCount` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -3321,13 +3320,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3346,7 +3345,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3376,13 +3375,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -3398,13 +3397,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3412,7 +3411,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -3423,7 +3422,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -3448,13 +3447,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3473,7 +3472,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3509,13 +3508,13 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `untilLastElement` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
@@ -3530,7 +3529,7 @@ Promise.all([
                           mutably: true
                         });
 
-                        await test(
+                        await Testing.test(
                           "Cropped Array is Matching with Expected One",
                           (): void => {
                             Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3540,7 +3539,7 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
@@ -3556,13 +3555,13 @@ Promise.all([
                         });
 
                         await Promise.all([
-                          test(
+                          Testing.test(
                             "Cropped Array is Matching with Expected One",
                             (): void => {
                               Assert.deepStrictEqual(croppedArray, generateConstantSample());
                             }
                           ),
-                          test(
+                          Testing.test(
                             "Source Array has Not Changed",
                             (): void => {
                               Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3570,7 +3569,7 @@ Promise.all([
                           )
                         ]);
 
-                        await test(
+                        await Testing.test(
                           "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                           (): void => {
 
@@ -3581,7 +3580,7 @@ Promise.all([
                           }
                         );
 
-                        await test(
+                        await Testing.test(
                           "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                           (): void => {
 
@@ -3621,31 +3620,31 @@ Promise.all([
     }
   ),
 
-  suite(
+  Testing.suite(
     "Cropping From End To Start",
     async (): Promise<void> => {
 
       await Promise.all([
 
-        suite(
+        Testing.suite(
           "With `rightElementNumber__numerationFrom0_AndRight` ...",
           async (): Promise<void> => {
 
             await Promise.all([
 
-              suite(
+              Testing.suite(
                 "... and `leftElementNumber__numerationFrom0_AndRight__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -3665,13 +3664,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3690,7 +3689,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3720,13 +3719,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -3742,13 +3741,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "BRAVO", "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3756,7 +3755,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -3767,7 +3766,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -3792,13 +3791,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3817,7 +3816,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3853,19 +3852,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `leftElementNumber__numerationFrom1_AndRight__including` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -3885,13 +3884,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -3910,7 +3909,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -3940,13 +3939,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -3962,13 +3961,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -3976,7 +3975,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -3987,7 +3986,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -4012,13 +4011,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4037,7 +4036,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4073,19 +4072,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `leftElementNumber__numerationFrom0_AndRight__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -4105,13 +4104,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4130,7 +4129,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4160,13 +4159,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -4182,13 +4181,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -4196,7 +4195,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -4207,7 +4206,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -4232,13 +4231,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4257,7 +4256,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4293,19 +4292,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `leftElementNumber__numerationFrom1_AndRight__notIncluding` Options",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -4325,13 +4324,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4350,7 +4349,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4380,13 +4379,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -4402,13 +4401,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -4416,7 +4415,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -4427,7 +4426,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -4452,13 +4451,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4477,7 +4476,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4513,19 +4512,19 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `elementsCount` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          test(
+                          Testing.test(
                             "In-range Request",
                             (): void => {
 
@@ -4545,13 +4544,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4570,7 +4569,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4600,13 +4599,13 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
                         await Promise.all([
 
-                          suite(
+                          Testing.suite(
                             "In-range Request",
                             async (): Promise<void> => {
 
@@ -4622,13 +4621,13 @@ Promise.all([
                               });
 
                               await Promise.all([
-                                test(
+                                Testing.test(
                                   "Cropped Array is Matching with Expected One",
                                   (): void => {
                                     Assert.deepStrictEqual(croppedArray, [ "CHARLIE", "DELTA" ]);
                                   }
                                 ),
-                                test(
+                                Testing.test(
                                   "Source Array has Not Changed",
                                   (): void => {
                                     Assert.deepStrictEqual(sample, generateConstantSample());
@@ -4636,7 +4635,7 @@ Promise.all([
                                 )
                               ]);
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                                 (): void => {
 
@@ -4647,7 +4646,7 @@ Promise.all([
                                 }
                               );
 
-                              await test(
+                              await Testing.test(
                                 "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                                 (): void => {
 
@@ -4672,13 +4671,13 @@ Promise.all([
                             }
                           ),
 
-                          suite(
+                          Testing.suite(
                             "Out-of-range Request",
                             async (): Promise<void> => {
 
                               await Promise.all([
 
-                                test(
+                                Testing.test(
                                   "Throwing of Error",
                                   (): void => {
                                     Assert.throws(
@@ -4697,7 +4696,7 @@ Promise.all([
                                   }
                                 ),
 
-                                test(
+                                Testing.test(
                                   "Ignoring of Invalid Range",
                                   (): void => {
 
@@ -4733,17 +4732,17 @@ Promise.all([
                 }
               ),
 
-              suite(
+              Testing.suite(
                 "... and `untilLeftmostElement` Option",
                 async (): Promise<void> => {
 
                   await Promise.all([
 
-                    suite(
+                    Testing.suite(
                       "Mutably",
                       async (): Promise<void> => {
 
-                        await test(
+                        await Testing.test(
                           "In-range Request",
                           (): void => {
 
@@ -4766,11 +4765,11 @@ Promise.all([
                       }
                     ),
 
-                    suite(
+                    Testing.suite(
                       "Immutably",
                       async (): Promise<void> => {
 
-                        await suite(
+                        await Testing.suite(
                           "In-range Request",
                           async (): Promise<void> => {
 
@@ -4786,13 +4785,13 @@ Promise.all([
                             });
 
                             await Promise.all([
-                              test(
+                              Testing.test(
                                 "Cropped Array is Matching with Expected One",
                                 (): void => {
                                   Assert.deepStrictEqual(croppedArray, [ "ALPHA", "BRAVO", "CHARLIE" ]);
                                 }
                               ),
-                              test(
+                              Testing.test(
                                 "Source Array has Not Changed",
                                 (): void => {
                                   Assert.deepStrictEqual(sample, generateConstantSample());
@@ -4800,7 +4799,7 @@ Promise.all([
                               )
                             ]);
 
-                            await test(
+                            await Testing.test(
                               "Changing of Primitive-type Element of Source Array does Not Affect to New one",
                               (): void => {
 
@@ -4811,7 +4810,7 @@ Promise.all([
                               }
                             );
 
-                            await test(
+                            await Testing.test(
                               "Changing of Primitive-type Element of Cropped Array does Not Affect to Source one",
                               (): void => {
 

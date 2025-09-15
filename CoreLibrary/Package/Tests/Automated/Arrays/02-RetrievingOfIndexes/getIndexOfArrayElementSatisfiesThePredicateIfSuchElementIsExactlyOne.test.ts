@@ -1,9 +1,10 @@
 import {
-  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne, Logger,
+  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne,
+  Logger,
   UnexpectedEventError
 } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
-import { suite, test } from "node:test";
 
 
 type Product = { ID: number; title: string; price: number; };
@@ -14,96 +15,104 @@ const sample: Array<Product> = [
 ];
 
 
-Promise.all([
+Testing.suite(
+  "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+  async (): Promise<void> => {
 
-  suite(
-    "Normal Scenarios",
-    async (): Promise<void> => {
+    await Promise.all([
 
-      await Promise.all([
+      Testing.suite(
+        "Normal Scenarios",
+        async (): Promise<void> => {
 
-        test(
-          "Retrieving of Index of Existing Element",
-          (): void => {
-            Assert.strictEqual(
-              getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-                sample, (product: Product): boolean => product.ID === 2
-              ),
-              1
-            );
-          }
-        ),
+          await Promise.all([
 
-        test(
-          "Retrieving of Null for non-exiting Element",
-          (): void => {
-            Assert.strictEqual(
-              getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-                sample, (product: Product): boolean => product.ID === 3
-              ),
-              null
-            );
-          }
-        ),
-
-        test(
-          "Retrieving of Null for More than One Elements Satisfies the Predicate",
-          (): void => {
-            Assert.strictEqual(
-              getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-                sample, (product: Product): boolean => product.price > 50
-              ),
-              null
-            );
-          }
-        )
-
-      ]);
-
-    }
-  ),
-
-  suite(
-    "Errored Scenarios",
-    async (): Promise<void> => {
-
-      await Promise.all([
-
-        test(
-          "Throwing of the Error for non-exiting Element",
-          (): void => {
-            Assert.throws(
+            Testing.test(
+              "Retrieving of Index of Existing Element",
               (): void => {
-                getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-                  sample,
-                  (product: Product): boolean => product.ID === 3,
-                  { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+                Assert.strictEqual(
+                  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+                    sample, (product: Product): boolean => product.ID === 2
+                  ),
+                  1
                 );
-              },
-              UnexpectedEventError
-            );
-          }
-        ),
+              }
+            ),
 
-        test(
-          "Throwing of the Error for More than One Elements Satisfies the Predicate",
-          (): void => {
-            Assert.throws(
+            Testing.test(
+              "Retrieving of Null for non-exiting Element",
               (): void => {
-                getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
-                  sample,
-                  (product: Product): boolean => product.price > 50,
-                  { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+                Assert.strictEqual(
+                  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+                    sample, (product: Product): boolean => product.ID === 3
+                  ),
+                  null
                 );
-              },
-              UnexpectedEventError
-            );
-          }
-        )
+              }
+            ),
 
-      ]);
+            Testing.test(
+              "Retrieving of Null for More than One Elements Satisfies the Predicate",
+              (): void => {
+                Assert.strictEqual(
+                  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+                    sample, (product: Product): boolean => product.price > 50
+                  ),
+                  null
+                );
+              }
+            )
 
-    }
-  )
+          ]);
 
-]).catch(Logger.logPromiseError);
+        }
+      ),
+
+      Testing.suite(
+        "Errored Scenarios",
+        async (): Promise<void> => {
+
+          await Promise.all([
+
+            Testing.test(
+              "Throwing of the Error for non-exiting Element",
+              (): void => {
+                Assert.throws(
+                  (): void => {
+                    getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+                      sample,
+                      (product: Product): boolean => product.ID === 3,
+                      { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+                    );
+                  },
+                  UnexpectedEventError
+                );
+              }
+            ),
+
+            Testing.test(
+              "Throwing of the Error for More than One Elements Satisfies the Predicate",
+              (): void => {
+                Assert.throws(
+                  (): void => {
+                    getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+                      sample,
+                      (product: Product): boolean => product.price > 50,
+                      { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+                    );
+                  },
+                  UnexpectedEventError
+                );
+              }
+            )
+
+          ]);
+
+        }
+      )
+
+    ]);
+
+  }
+
+).catch(Logger.logPromiseError);

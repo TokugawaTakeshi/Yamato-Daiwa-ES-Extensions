@@ -107,19 +107,19 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
     forbiddenUndefinedValue: {
       title: "Запрещённое значение undefined",
       description:
-          "Это свойство/элемент не определено или имеет явное значение `undefied`, что было явно запрещено."
+          "Это свойство/элемент не определено или имеет явное значение `undefined`, что было явно запрещено."
     },
 
     conditionallyForbiddenUndefinedValue: {
 
-      title: "Условно запрещённое значение `undefined` свойства/элемента",
+      title: "Условно запрещённое значение `undefined`",
 
       generateDescription: (
         {
           verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
-          "Данное свойство/элемент имеет значение `undefined`, что запрещено если " +
+          "Это свойство/элемент не определено или имеет явное значение `undefined`, что запрещено если " +
             `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }, и это условие выполнено.`
 
     },
@@ -130,12 +130,138 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
       generateDescription: (
         {
-          conditionWhenMustBeUndefined
+          verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
           `Данное свойство/элемент имеет значение, отличное от \`undefined\`, что запрещено если ` +
-            ` ${ conditionWhenMustBeUndefined }, и это условие выполнено.`
+            ` ${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, и это условие выполнено.`
 
+    },
+
+
+    /* ╍╍╍ Разрешение на null ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+    forbiddenNullValue: {
+      title: "Запрещённое значение null",
+      description: "Это свойство/элемент имеет явное значение `null`, что было явно запрещено."
+    },
+
+    conditionallyForbiddenNullValue: {
+
+      title: "Условно запрещённое значение `null`",
+
+      generateDescription: (
+        {
+          verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
+      ): string =>
+          "Данное свойство/элемент имеет значение `null`, что запрещено если " +
+            `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }, и это условие выполнено.`
+
+    },
+
+    conditionallyForbiddenNonNullValue: {
+
+      title: "Условно запрещённое не-null значение свойства/элемента",
+
+      generateDescription: (
+        {
+          conditionWhenMustBeNull
+        }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
+      ): string =>
+          `Данное свойство/элемент имеет значение, отличное от \`null\`, что запрещено если ` +
+            ` ${ conditionWhenMustBeNull }, и это условие выполнено.`
+
+    },
+
+
+    /* ╍╍╍ Другое ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+    unableToDeletePropertyWithOutdatedKey: {
+
+      title: "Невозможно удалить свойство с устаревшим именем",
+
+      generateDescription: (
+        { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
+      ): string =>
+          `Это свойство невозможно удалить после создания его копии с именем "${ propertyNewKey }" потому что оно ` +
+            "не конфигурируемо, а в качестве стратегии обработки объекта были выбраны манипуляции с уже существующим " +
+            "объектом, при этом опции \"mustLeaveEvenRenamed\" не было указано значение true."
+
+    },
+
+    unableToChangePropertyDescriptors: {
+
+      title: "Невозможно изменить дескрипторы свойства",
+
+      description:
+          "Невозможно изменить дескрипторы данного свойства, потому что оно неконфигурируемо, при этом в качестве " +
+            "стратегии обработки были выбраны манипуляции с уже существующим объектом."
+
+
+    },
+
+    unableToUpdatePropertyValue: {
+
+      title: "Невозможно обновить значение свойства",
+
+      description:
+          "Запрошено изменение значение этого свойства через подстановку значения по умолчанию либо предвалидационное " +
+            "преобразование, однако это свойство доступно только для чтения."
+
+    },
+
+    unexpectedProperties: {
+
+      title: "Неожидаемые свойства",
+
+      generateDescription:
+          ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
+              "Следующие свойства не ожидались:\n" +
+              unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
+    },
+
+    customValidationFailed: {
+      title: "Пользовательская валидация не удовлетворяется",
+      generateDescription:
+          ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
+              `Следующее значение не прошло пользовательскую валидацию "${ customValidationDescription }".`
+    },
+
+
+    /* ┅┅┅ Ассоциативные массивы ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    associativeArrayEntriesCountIsLessThanRequiredMinimum: {
+      title: "Недостаточно вхождений у ассоциативного массива",
+      generateDescription: (
+        {
+          actualEntriesCount,
+          minimalEntriesCount
+        }: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
+            `хотя затребовано не менее ${ minimalEntriesCount }.`
+    },
+
+    associativeArrayPairsCountIsMoreThanAllowedMaximum: {
+      title: "Слишком много вхождений у ассоциативного массива",
+      generateDescription: (
+        {
+          maximalEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
+            `хотя затребовано максимум ${ maximalEntriesCount }.`
+    },
+
+    associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "Несоответствие количества вхождений ассоциативного массива ожидаемому числу",
+      generateDescription: (
+        {
+          exactEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
+            `хотя затребовано ровно ${ exactEntriesCount }.`
     },
 
   buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
@@ -217,36 +343,6 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
 
   /* === Ассоциативные массивы ====================================================================================== */
-  buildAssociativeArrayEntriesCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalEntriesCount, actualEntriesCount }: Readonly<{ minimalEntriesCount: number; actualEntriesCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество вхождений ассоциативного массива не достигает минимального ожидаемого значения",
-      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
-          `хотя ожидалось не менее ${ minimalEntriesCount }.`
-    };
-  },
-
-  buildAssociativeArrayEntriesCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalEntriesCount, actualEntriesCount }: Readonly<{ maximalEntriesCount: number; actualEntriesCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество вхождений ассоциативного массива превышает максимальное ожидаемое значение",
-      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
-          `хотя ожидалось не более ${ maximalEntriesCount }.`
-    };
-  },
-
-  buildAssociativeArrayEntriesCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactEntriesCount, actualEntriesCount }: Readonly<{ exactEntriesCount: number; actualEntriesCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество вхождений ассоциативного массива отлично от ожидаемого фиксированного значения",
-      specificMessagePart: `Это значение типа 'ассоциативный массив' имеет ${ actualEntriesCount } вхождений, ` +
-          `хотя ожидалось ровно ${ exactEntriesCount }.`
-    };
-  },
-
   buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
     missingRequiredKeys: ReadonlyArray<string>
   ): Localization.TextDataForErrorMessagesBuilding {

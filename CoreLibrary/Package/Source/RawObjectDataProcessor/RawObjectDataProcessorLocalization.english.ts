@@ -113,7 +113,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     conditionallyForbiddenUndefinedValue: {
 
-      title: "Conditionally Forbidden Undefined Value of Property/Element",
+      title: "Conditionally Forbidden Undefined Value",
 
       generateDescription: (
         {
@@ -142,7 +142,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     /* ╍╍╍ Nullability ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenNullValue: {
-      title: "Forbidden Null Value Of Property/Element",
+      title: "Forbidden Null Value",
       description: "This property/element has `null` value what has been explicitly forbidden."
     },
 
@@ -181,9 +181,9 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `Unable to delete this property after renaming to "${ propertyNewKey }" because it is not configurable ` +
-            "while the processing approach is the manipulations with source object and \"mustLeaveEvenRenamed\" " +
-            "has not been set to true."
+          `Unable to delete this property after creating of its copy with name "${ propertyNewKey }", because it ` +
+            "is not configurable while the processing approach is the manipulations with source object and " +
+            "`mustLeaveEvenRenamed` option has not been set to true."
 
     },
 
@@ -193,7 +193,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
       description:
         "Unable to change the descriptions of this property because it is not configurable while the processing " +
-          "approach is the manipulations with source object and \"mustLeaveEvenRenamed\" has not been set to true."
+          "approach is the manipulations with source object."
 
     },
 
@@ -203,10 +203,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
       description:
           "The updating of this property has been requested via default value substitution or pre-validation " +
-            "modification while this property is read-only. " +
-          "The data has been marked as invalid because the error handling strategy " +
-            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what " +
-            "is recommended only if this property on source data actually expected to be writable. "
+            "modification while this property is read-only. "
 
     },
 
@@ -230,7 +227,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     /* ┅┅┅ Associative Arrays ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     associativeArrayEntriesCountIsLessThanRequiredMinimum: {
-      title: "Associative Array has Less Entries than Expected Minimum",
+      title: "Too Few Entries in Associative Array",
       generateDescription: (
         {
           actualEntriesCount,
@@ -242,7 +239,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
     associativeArrayPairsCountIsMoreThanAllowedMaximum: {
-      title: "Associative Array has More Entries than Expected Maximum",
+      title: "Too Many Entries in Associative Array",
       generateDescription: (
         {
           maximalEntriesCount,
@@ -254,7 +251,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
     associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
-      title: "The Count of Entries of Associative Array does not Match with Expected Fixed Value",
+      title: "Wrong Exact Number of Entries in Associative Array",
       generateDescription: (
         {
           exactEntriesCount,

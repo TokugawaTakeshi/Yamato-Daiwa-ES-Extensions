@@ -42,7 +42,7 @@ npm i @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a></dt>
   <dd>
     <p>
       The facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
@@ -55,22 +55,22 @@ npm i @yamato-daiwa/es-extensions -E
       </li>
       <li>
         Needs some implementation, but there is the pre-made one:
-          <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a>.
+          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a>.
       </li>
     </ul>
   </dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/FetchAPI_Service.ts"><code>FetchAPI_Service</code></a></dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a></dt>
   <dd>
-    Implementation of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+    The implementation of <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
       abstract class based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
-    Works will all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
+    Works with all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
   </dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/URI_QueryParametersSerializer.ts"><code>URI_QueryParametersSerializer</code></a><dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/AJAX/URI_QueryParametersSerializer/URI_QueryParametersSerializer.english.html"><code>URI_QueryParametersSerializer</code></a><dt>
   <dd>
     The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
-      used by <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/AJAX/AJAX_Service.ts"><code>AJAX_Service</code></a>
+      used by <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
       and should be used to implement the custom serializing algorithm for URI query parameters.  
   </dd>
 
@@ -84,7 +84,7 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html"><code>createArrayOfNaturalNumbers</code></a></dt>
   <dd>
-    Obviously from the function name, creates the array of natural numbers.
+    Obviously from the function name, creates an array of natural numbers.
     Elements count, assessing/descending and starting number can be specified.
   </dd>
 

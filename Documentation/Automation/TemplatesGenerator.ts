@@ -1,7 +1,5 @@
 import { TemplatesGenerator } from "@yamato-daiwa/documentation-files-templates";
 
-// tsx Automation/TemplatesGenerator.ts 'coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.commonScenarios' CoreLibrary/Functionality/DataMocking/Guide DataMockingGuide
-
 
 TemplatesGenerator.generate({
   main: [

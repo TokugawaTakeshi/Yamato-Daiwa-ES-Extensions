@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="getISO8601StringWithoutTimePart" type="NodeJsTestRunner" folderName="DateTime">
+  <configuration default="false" name="getISO8601_StringWithoutTimePart" type="NodeJsTestRunner" folderName="DateTime">
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />

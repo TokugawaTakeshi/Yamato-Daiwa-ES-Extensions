@@ -24,6 +24,43 @@ coreLibrary:
       $heading: `coreLibrary.functionality.$heading`
       $children:
 
+        AJAX:
+
+          $heading: "<code>AJAX</code>"
+          $children:
+
+            AJAX_Service:
+
+              $heading: "<code>AJAX_Service</code>"
+              $URI: `@All/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/AJAX/AJAX_Service/TableOfContents/AJAX_Service.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/AJAX/AJAX_Service/TableOfContents/AJAX_Service.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/AJAX/AJAX_Service/TableOfContents/AJAX_Service.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/AJAX/AJAX_Service/TableOfContents/AJAX_Service.toc.russian.yaml
+
+            FetchAPI_Service:
+
+              $heading: "<code>FetchAPI_Service</code>"
+              $URI: `@All/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/AJAX/FetchAPI_Service/TableOfContents/FetchAPI_Service.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/AJAX/FetchAPI_Service/TableOfContents/FetchAPI_Service.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/AJAX/FetchAPI_Service/TableOfContents/FetchAPI_Service.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/AJAX/FetchAPI_Service/TableOfContents/FetchAPI_Service.toc.russian.yaml
+
+            URI_QueryParametersSerializer:
+              $heading: "<code>URI_QueryParametersSerializer</code>"
+              $URI: `@All/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/URI_QueryParametersSerializer.${ fileNameLocalizationExtensions }`
+              $sectioning:
+                $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/TableOfContents/URI_QueryParametersSerializer.toc.yaml
+                $localizations:
+                  english: 01-Source/Pages/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/TableOfContents/URI_QueryParametersSerializer.toc.english.yaml
+                  japanese: 01-Source/Pages/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/TableOfContents/URI_QueryParametersSerializer.toc.japanese.yaml
+                  russian: 01-Source/Pages/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/TableOfContents/URI_QueryParametersSerializer.toc.russian.yaml
+
         arrays:
 
           $heading: `coreLibrary.functionality.arrays.$heading`

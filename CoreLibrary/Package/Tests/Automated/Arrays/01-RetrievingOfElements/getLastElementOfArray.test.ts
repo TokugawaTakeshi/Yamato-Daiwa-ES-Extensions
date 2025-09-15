@@ -1,43 +1,50 @@
 import { getLastElementOfArray, Logger, UnexpectedEventError } from "../../../../Source";
-import { suite, test } from "node:test";
+import Testing from "node:test";
 import Assert from "assert";
 
 
-Promise.all([
+Testing.suite(
+  "getLastElementOfArray",
+  async (): Promise<void> => {
 
-  test(
-    "Normal Scenario",
-    (): void => {
-      Assert.strictEqual(getLastElementOfArray([ "alpha", "bravo", "charlie" ]), "charlie");
-    }
-  ),
+    await Promise.all([
 
-  suite(
-    "Handling of Empty Array",
-    async (): Promise<void> => {
+      Testing.test(
+        "Normal Scenario",
+        (): void => {
+          Assert.strictEqual(getLastElementOfArray([ "alpha", "bravo", "charlie" ]), "charlie");
+        }
+      ),
 
-      await Promise.all([
+      Testing.suite(
+        "Handling of Empty Array",
+        async (): Promise<void> => {
 
-        test(
-          "Returning of Null",
-          (): void => {
-            Assert.strictEqual(getLastElementOfArray([]), null);
-          }
-        ),
+          await Promise.all([
 
-        test(
-          "Errored Scenario",
-          (): void => {
-            Assert.throws(
-              (): void => { getLastElementOfArray([], { mustThrowErrorIfArrayIsEmpty: true }); },
-              UnexpectedEventError
-            );
-          }
-        )
+            Testing.test(
+              "Returning of Null",
+              (): void => {
+                Assert.strictEqual(getLastElementOfArray([]), null);
+              }
+            ),
 
-      ]);
+            Testing.test(
+              "Errored Scenario",
+              (): void => {
+                Assert.throws(
+                  (): void => { getLastElementOfArray([], { mustThrowErrorIfArrayIsEmpty: true }); },
+                  UnexpectedEventError
+                );
+              }
+            )
 
-    }
-  )
+          ]);
 
-]).catch(Logger.logPromiseError);
+        }
+      )
+
+    ]);
+
+  }
+).catch(Logger.logPromiseError);

@@ -9,12 +9,12 @@
     "dist": "npm run \"Distributable Packing\""
   },
   "dependencies": {
-    "@yamato-daiwa/documentation-files-templates": "../../../../NativeDevelopmentProjects/YamatoDaiwaDocumentationFilesTemplater",
+    "@yamato-daiwa/documentation-files-templates": "../../../YamatoDaiwaDocumentationFilesTemplater",
     "@yamato-daiwa/es-extensions": "../CoreLibrary/Package",
     "@yamato-daiwa/es-extensions-browserjs": "../BrowserJS/Package",
     "@yamato-daiwa/frontend": "../../../../WebDevelopmentProjects/InHouseDevelopment/YamatoDaiwaFrontend/CoreLibrary/Package",
     "@yamato-daiwa/frontend-documenting-kit": "../../../../WebDevelopmentProjects/InHouseDevelopment/YamatoDaiwaFrontend/DocumentingKit/Package",
-    "@yamato-daiwa/programming_documentation": "../../YamatoDaiwaProgrammingDocumentation",
+    "@yamato-daiwa/programming_documentation": "../../../../IntelliJ IDEA/InHouseDevelopment/YamatoDaiwaProgrammingDocumentation",
     "prismjs": "1.30.0"
   },
   "devDependencies": {

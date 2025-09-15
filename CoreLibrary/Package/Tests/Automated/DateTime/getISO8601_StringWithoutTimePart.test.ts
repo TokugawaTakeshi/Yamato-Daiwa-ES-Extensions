@@ -1,6 +1,10 @@
 import { getISO8601_StringWithoutTimePart, Logger } from "../../../Source";
-import Assert from "assert";
 import { suite, test } from "node:test";
+import Assert from "assert";
+import TimezoneMock from "timezone-mock";
+
+
+TimezoneMock.register("Australia/Adelaide");
 
 
 Promise.all([
@@ -95,4 +99,8 @@ Promise.all([
     }
   )
 
-]).catch(Logger.logPromiseError);
+]).
+
+  catch(Logger.logPromiseError).
+
+  finally(TimezoneMock.unregister);

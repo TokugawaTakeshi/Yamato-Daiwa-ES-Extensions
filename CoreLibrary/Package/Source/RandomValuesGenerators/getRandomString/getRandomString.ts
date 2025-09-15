@@ -244,9 +244,20 @@ export class RandomStringsGenerator {
     const otherCharacters: Array<string> = [];
 
     if (Array.isArray(allowedCharacters.other)) {
-      for (const arrayElement__possiblyHasMoreThanOneCharacter of otherCharacters) {
+
+      for (const arrayElement__possiblyHasMoreThanOneCharacter of allowedCharacters.other) {
+
+        /* eslint-disable-next-line
+           @typescript-eslint/no-unsafe-argument,
+           @typescript-eslint/no-unsafe-call,
+           @typescript-eslint/no-unsafe-member-access
+           -- Type safety is guaranteed by `RandomStringsGenerator.ParametersObject` for TypeScript.
+              According to library policy, The exhaustive check for non-TypeScript users is not supported for
+                performance and volume optimization. */
         otherCharacters.push(...arrayElement__possiblyHasMoreThanOneCharacter.split(""));
+
       }
+
     } else if (isString(allowedCharacters.other)) {
       otherCharacters.push(...allowedCharacters.other.split(""));
     }
@@ -315,14 +326,19 @@ export namespace RandomStringsGenerator {
 
   export type Localization = Readonly<{
     errors: Readonly<{
+
       minimalCharactersCountMustBeGreaterThan0: (actualValue: number) => string;
+
       sumOfCharactersCountOfAffixesAndMinimalRandomlyGeneratedCharactersCountIsExceedsMaximalCharactersCount: (
-        namedParameters: MaximalCharactersCountComputing.ParametersObject
+        templateVariables: MaximalCharactersCountComputing.ParametersObject
       ) => string;
+
       explicitlySpecifiedMinimalCharactersCountExceedsMaximalCharactersCount: (
-        namedParameters: Readonly<{ minimalCharactersCount: number; maximalCharactersCount: number; }>
+        templateVariables: Readonly<{ minimalCharactersCount: number; maximalCharactersCount: number; }>
       ) => string;
+
       noAllowedCharactersForRandomGeneration: string;
+
     }>;
   }>;
 }

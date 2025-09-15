@@ -120,7 +120,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
     },
 
     conditionallyForbiddenNonUndefinedValue: {
-      title: "条件付き非`undefined`禁止",
+      title: "条件付き非undefined禁止",
       generateDescription: (
         {
           verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
@@ -130,52 +130,56 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
           `${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }の時「undefined」でなければいけなく、この条件が満たされている。`
     },
 
+
+    /* ╍╍╍ null可否 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenNullValue: {
-      title: "プロパティ／要素の null 値は許可されていません",
-      description: "このプロパティ／要素は `null` に設定されていますが、これは明示的に禁止されています。"
+      title: "禁止null",
+      description: "このプロパティ・要素は「null」で指定されたが、これは明示的に禁止された。"
     },
 
     conditionallyForbiddenNullValue: {
-      title: "条件付きで null 値が禁止されています",
+      title: "条件付きnull禁止",
       generateDescription: (
         {
           verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
       ): string =>
-        "このプロパティ／要素は `null` に設定されていますが、" +
-        `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark } 場合にはこれが禁止されており、` +
-        "その条件が満たされています。"
+        `このプロパティ・要素は「null」で指定されたが、これが${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }の場合には` +
+          "禁じられ、この条件が満たされている。"
     },
 
     conditionallyForbiddenNonNullValue: {
-      title: "条件付きで `null` 以外の値が禁止されています",
+      title: "条件付き非null禁止",
       generateDescription: (
         { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-        `このプロパティ／要素は \`null\` ではありませんが、${ conditionWhenMustBeNull } 場合には \`null\` ` +
-        "である必要があり、その条件が満たされています。"
+        `このプロパティ・要素は「null」になっていないが、${ conditionWhenMustBeNull }の時「null」でなければいけなく、この条件が満たされている。`
     },
 
+
+    /* ╍╍╍ その他 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     unableToDeletePropertyWithOutdatedKey: {
-      title: "古いキーのプロパティを削除できません",
+      title: "旧名プロパティ削除不可能",
       generateDescription: (
         { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-        `このプロパティの名前を「${ propertyNewKey }」に変更した後、削除を試みましたが、構成可能ではないため削除できません。` +
-        "現在の処理アプローチはソースオブジェクトの直接操作であり、`mustLeaveEvenRenamed` が `true` に設定されていません。"
+          `このプロパティのコピーの「${ propertyNewKey }」を作成してから、\`configurable: false\`の為削除不可能。` +
+          "その他に、処理アプローチは既存のオブジェクトの変更となり、`mustLeaveEvenRenamed`オプションに`true`が設定されていない。"
       },
 
     unableToChangePropertyDescriptors: {
-      title: "プロパティ記述子を変更できません",
+      title: "プロパティ記述子変更不可能",
       description:
-        "このプロパティは構成可能ではないため、記述子を変更できません。現在の処理アプローチはソースオブジェクトの直接操作であり、`mustLeaveEvenRenamed` が `true` に設定されていません。"
+        "このプロパティは`configurable: false`になっていると他に、処理アプローチは既存のオブジェクトの変更なので、記述子の変更は不可能。"
     },
 
     unableToUpdatePropertyValue: {
-      title: "プロパティ値を更新できません",
+
+      title: "プロパティー値変更不可能",
+
       description:
-        "既定値の代入または事前バリデーションによる修正によりこのプロパティの更新が要求されましたが、このプロパティは読み取り専用です。" +
-        "ソースデータにおいてこのプロパティが書き込み可能であると想定される場合のみ、このエラーが無効データとしてマークされます。"
+          "このプロパティーの変更が規定値の代入か、前バリデーションの変換により要求された、読み込み専用のプロパティーとして上書き不可能。"
+
     },
 
     unexpectedProperties: {
@@ -183,9 +187,52 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables
       ): string =>
-        "以下のプロパティは想定されていません：\n" +
+        "以下のプロパティは想定されていない。\n" +
         unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
     },
+
+    customValidationFailed: {
+      title: "カスタムなバリデーション不合格",
+      generateDescription:
+          ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
+              `この値は「${ customValidationDescription }」というカスタムなバリデーションに合格しなかった。`
+    },
+
+
+    /* ┅┅┅ 連想配列 ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    associativeArrayEntriesCountIsLessThanRequiredMinimum: {
+      title: "連想配列、組数不足",
+      generateDescription: (
+        {
+          actualEntriesCount,
+          minimalEntriesCount
+        }: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `この連想配列型の値は${ actualEntriesCount }組みを持っているが、少なくとも${ minimalEntriesCount }期待。`
+    },
+
+    associativeArrayPairsCountIsMoreThanAllowedMaximum: {
+      title: "連想配列、組数過度",
+      generateDescription: (
+        {
+          maximalEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `この連想配列型の値は${ actualEntriesCount }組みを持っているが、最大${ maximalEntriesCount }期待。`
+    },
+
+    associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "連想配列、組の期待数・実際数の不一致",
+      generateDescription: (
+        {
+          exactEntriesCount,
+          actualEntriesCount
+        }: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `この連想配列型の値は${ actualEntriesCount }組みを持っているが、丁度${ exactEntriesCount }期待。`
+    },
+
 
     forbiddenNaN_Value: {
       title: "数型プロパティー・要素の禁じたNaN値",
@@ -299,39 +346,6 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
         }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
       ): string =>
         `この配列は ${ actualElementsCount } 要素ですが、ちょうど ${ exactElementsCount } 要素である必要があります。`
-    },
-
-    associativeArrayEntriesCountIsLessThanRequiredMinimum: {
-      title: "連想配列のエントリ数が最小より少ない",
-      generateDescription: (
-        {
-          actualEntriesCount,
-          minimalEntriesCount
-        }: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
-      ): string =>
-        `この連想配列は ${ actualEntriesCount } 件のエントリを持ちますが、少なくとも ${ minimalEntriesCount } 件が必要です。`
-    },
-
-    associativeArrayPairsCountIsMoreThanAllowedMaximum: {
-      title: "連想配列のエントリ数が最大を超えている",
-      generateDescription: (
-        {
-          maximalEntriesCount,
-          actualEntriesCount
-        }: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
-      ): string =>
-        `この連想配列は ${ actualEntriesCount } 件のエントリを持ちますが、最大で ${ maximalEntriesCount } 件まで許容されます。`
-    },
-
-    associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
-      title: "連想配列のエントリ数が固定数と一致しない",
-      generateDescription: (
-        {
-          exactEntriesCount,
-          actualEntriesCount
-        }: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
-      ): string =>
-        `この連想配列は ${ actualEntriesCount } 件のエントリを持ちますが、ちょうど ${ exactEntriesCount } 件である必要があります。`
     },
 
     forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {

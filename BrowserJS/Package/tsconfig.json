@@ -19,12 +19,6 @@
 
   },
 
-  "include": [ "Source/**/*" ],
-
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "include": [ "Source/**/*" ]
 
 }

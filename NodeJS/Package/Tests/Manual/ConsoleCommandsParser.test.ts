@@ -5,12 +5,12 @@ import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";
 
 
 /* [ Execution ]
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts build --requiredStringOption test
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test --optionalStringOption sample
- * ts-node Tests/Manual/ConsoleCommandsParser.test.ts help
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts build
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts build --requiredStringOption test
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts --requiredStringOption test --optionalStringOption sample
+ * tsx Tests/Manual/ConsoleCommandsParser.test.ts help
  */
 namespace ApplicationConsoleLineInterface {
 
