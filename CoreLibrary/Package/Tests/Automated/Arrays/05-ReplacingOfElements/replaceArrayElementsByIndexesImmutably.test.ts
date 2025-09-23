@@ -1,5 +1,5 @@
-import { Logger, replaceArrayElementsByIndexesImmutably } from "../../../../Source";
-import { test } from "node:test";
+import { replaceArrayElementsByIndexesImmutably, Logger } from "../../../../Source";
+import Testing from "node:test";
 import Assert from "assert";
 
 
@@ -15,50 +15,58 @@ const sampleArray: Array<Product> = [
   { title: "DELTA", price: 1500 }
 ];
 
-Promise.all([
 
-  test(
-    "Single Replacement has been Executed According Expectations",
-    (): void => {
+Testing.suite(
+  replaceArrayElementsByIndexesImmutably.name,
+  async (): Promise<void> => {
 
-      Assert.deepStrictEqual(
-        replaceArrayElementsByIndexesImmutably({
-          targetArray: sampleArray,
-          index: 2,
-          newElement: { title: "GOLF", price: 2000 }
-        }),
-        [
-          { title: "ALPHA", price: 100 },
-          { title: "BRAVO", price: 500 },
-          { title: "GOLF", price: 2000 },
-          { title: "DELTA", price: 1500 }
-        ]
-      );
+    await Promise.all([
 
-    }
-  ),
+      Testing.test(
+        "Single Replacement has been Executed According Expectations",
+        (): void => {
 
-  test(
-    "Multiple Replacements has been Executed According Expectations",
-    (): void => {
+          Assert.deepStrictEqual(
+            replaceArrayElementsByIndexesImmutably({
+              targetArray: sampleArray,
+              index: 2,
+              newElement: { title: "GOLF", price: 2000 }
+            }),
+            [
+              { title: "ALPHA", price: 100 },
+              { title: "BRAVO", price: 500 },
+              { title: "GOLF", price: 2000 },
+              { title: "DELTA", price: 1500 }
+            ]
+          );
 
-      Assert.deepStrictEqual(
-        replaceArrayElementsByIndexesImmutably({
-          targetArray: sampleArray,
-          replacements: [
-            { index: 2, newElement: { title: "GOLF", price: 2000 } },
-            { index: 3, newElement: { title: "HOTEL", price: 5000 } }
-          ]
-        }),
-        [
-          { title: "ALPHA", price: 100 },
-          { title: "BRAVO", price: 500 },
-          { title: "GOLF", price: 2000 },
-          { title: "HOTEL", price: 5000 }
-        ]
-      );
+        }
+      ),
 
-    }
-  )
+      Testing.test(
+        "Multiple Replacements has been Executed According Expectations",
+        (): void => {
 
-]).catch(Logger.logPromiseError);
+          Assert.deepStrictEqual(
+            replaceArrayElementsByIndexesImmutably({
+              targetArray: sampleArray,
+              replacements: [
+                { index: 2, newElement: { title: "GOLF", price: 2000 } },
+                { index: 3, newElement: { title: "HOTEL", price: 5000 } }
+              ]
+            }),
+            [
+              { title: "ALPHA", price: 100 },
+              { title: "BRAVO", price: 500 },
+              { title: "GOLF", price: 2000 },
+              { title: "HOTEL", price: 5000 }
+            ]
+          );
+
+        }
+      )
+
+    ]);
+
+  }
+).catch(Logger.logPromiseError);

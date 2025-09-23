@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="moveArrayElementTo1Position" type="NodeJsTestRunner" folderName="Arrays">
+  <configuration default="false" name="moveArrayElementToOnePosition" type="NodeJsTestRunner" folderName="Arrays">
     <node-interpreter value="project" />
     <working-dir value="$PROJECT_DIR$" />
     <language value="TYPE_SCRIPT" />

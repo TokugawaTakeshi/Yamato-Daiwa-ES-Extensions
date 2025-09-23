@@ -67,7 +67,7 @@ npm i @yamato-daiwa/es-extensions -E
     Works with all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
   </dd>
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/AJAX/URI_QueryParametersSerializer/URI_QueryParametersSerializer.english.html"><code>URI_QueryParametersSerializer</code></a><dt>
+  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/URI_QueryParametersSerializer.english.html"><code>URI_QueryParametersSerializer</code></a><dt>
   <dd>
     The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
       used by <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
@@ -173,7 +173,7 @@ npm i @yamato-daiwa/es-extensions -E
   <dd>Creates the swallow copy of the target array and replaces the elements by specified indexes.</dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html"><code>replaceArrayElementsByPredicates</code></a></dt>
-  <dd>Replaces array elements by one or more predicates, herewith the replacing could be mutable or no depending on dedicated option.</dd>
+  <dd>Replaces array elements by one or more predicates, herewith the replacing can be mutable or no depending on dedicated option.</dd>
 
 </dl>
 
@@ -206,10 +206,10 @@ npm i @yamato-daiwa/es-extensions -E
 <dl>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.english.html"><code>removeArrayElementsByIndexes</code></a></dt>
-  <dd>Removes array elements by indexes, herewith the removing could be mutable or not depending on dedicated option.</dd>
+  <dd>Removes array elements by indexes, herewith the removing can be mutable or no depending on dedicated option.</dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.english.html"><code>removeArrayElementsByPredicates</code></a></dt>
-  <dd>Removes array elements by one or more predicates, herewith the removing could be mutable or not depending on dedicated option.</dd>
+  <dd>Removes array elements by one or more predicates, herewith the removing can be mutable or not depending on dedicated option.</dd>
 
 </dl>
 
@@ -230,7 +230,7 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.english.html"><code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code></a></dt>
   <dd>
-    <p>Obviously from the function name, add elements to array if they are nor present otherwise remove.</p>
+    <p>Obviously from the function name, add elements to an array if they do not present otherwise remove them.</p>
     <ul>
       <li>
         For all types of elements except numbers, bigints, strings and booleans the element finding predicate must be
@@ -247,10 +247,9 @@ npm i @yamato-daiwa/es-extensions -E
         From the viewpoint of TypeScript, allows to mutate the <code>ReadonlyArray</code> what basically not recommeded
           but in some particular cases almost inevitably.
       </li>
-      <li>Fron the viewpoint of JavaScript, does nothing.</li>
+      <li>From the viewpoint of JavaScript, does nothing.</li>
     </ul>
   </dd>
-  
 
 </dl>
 

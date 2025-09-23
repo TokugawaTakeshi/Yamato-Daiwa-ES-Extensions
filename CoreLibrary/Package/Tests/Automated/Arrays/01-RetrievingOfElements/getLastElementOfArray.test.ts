@@ -4,7 +4,7 @@ import Assert from "assert";
 
 
 Testing.suite(
-  "getLastElementOfArray",
+  getLastElementOfArray.name,
   async (): Promise<void> => {
 
     await Promise.all([

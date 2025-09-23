@@ -3580,25 +3580,19 @@ class RawObjectDataProcessor {
 
       case "object": {
 
-        if (Array.isArray(targetValue)) {
-
-          specificationForValueOfCurrentType = targetValueSpecification.alternatives.find(
-            (alternativeSpecification: RawObjectDataProcessor.ValueSpecification): boolean =>
-                alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.indexedArray ||
-                alternativeSpecification.type === Array
-          );
-
-          break;
-
-        }
-
+        const isIndexedArrayLikeType: boolean = Array.isArray(targetValue);
 
         const possibleSpecificationsForObjectValueTypes: Array<RawObjectDataProcessor.ValueSpecification> =
             targetValueSpecification.alternatives.filter(
-                (alternativeSpecification: RawObjectDataProcessor.ValueSpecification): boolean =>
-                    alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject ||
-                    alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.associativeArray ||
-                    alternativeSpecification.type === Object
+                (alternativeSpecification: RawObjectDataProcessor.ValueSpecification): boolean => (
+                  isIndexedArrayLikeType ?
+                      alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.indexedArray ||
+                          alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.tuple ||
+                          alternativeSpecification.type === Array :
+                      alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject ||
+                          alternativeSpecification.type === RawObjectDataProcessor.ValuesTypesIDs.associativeArray ||
+                          alternativeSpecification.type === Object
+                )
             );
 
         if (possibleSpecificationsForObjectValueTypes.length > 1) {
@@ -3606,7 +3600,7 @@ class RawObjectDataProcessor {
           Logger.throwErrorWithFormattedMessage({
             errorInstance: new InvalidParameterValueError({
               customMessage: this.localization.throwableErrors.incompatibleValuesTypesAlternatives.generateDescription({
-                targetValueStringifiedSpecification: stringifyAndFormatArbitraryValue(targetValueSpecification),
+                isIndexedArrayLikeType,
                 documentationPageAnchor: "THROWABLE_ERRORS-INCOMPATIBLE_VALUES_TYPES_ALTERNATIVES"
               })
             }),
@@ -5169,7 +5163,7 @@ namespace RawObjectDataProcessor {
 
       export namespace IncompatibleValuesTypesAlternatives {
         export type TemplateVariables = Readonly<{
-          targetValueStringifiedSpecification: string;
+          isIndexedArrayLikeType: boolean;
           documentationPageAnchor: string;
         }>;
       }

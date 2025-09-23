@@ -8,7 +8,7 @@ import Assert from "assert";
 
 
 Testing.suite(
-  "getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.name,
   async (): Promise<void> => {
 
     const sample: Array<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];

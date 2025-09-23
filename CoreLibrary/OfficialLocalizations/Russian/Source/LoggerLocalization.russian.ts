@@ -8,6 +8,7 @@ export const loggerLocalization__russian: Logger.Localization = {
     warning: "Предупреждение",
     info: "Оповещение",
     success: "Нормальное завершение",
+    debug: "Отладка",
     generic: "Общее"
   },
 

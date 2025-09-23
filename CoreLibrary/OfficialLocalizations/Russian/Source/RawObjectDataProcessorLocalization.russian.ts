@@ -58,6 +58,10 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
 
   /* ━━━ Ошибки валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* [ Примечание для рецензоров ]
+   * Большинство следующих сообщений являются частью шаблона, который включён в "generateValidationErrorMessage".
+   * В контексте этого шаблона, такие относительные выражения, как "это свойство" или "этот элемент", являются
+   *   однозначными. */
   validationErrors: {
 
     rawDataIsNotObject: {
@@ -96,8 +100,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           "Предвалидационное преобразование этого свойства/элемента повлекло за собой следующую ошибку. \n" +
             `${ stringifiedCaughtError }\n` +
           "Данные были помечены как невалидные потому что было выбрано \"ErrorHandlingStrategies.markingOfDataAsInvalid\" " +
-            "в качестве стратегии обработки ошибки \"onPreValidationModificationFailed\" что не рекомендуется, как как " +
-            "проблема момент быть не в данных, а функции, осуществляющей предвалидационные преобразования."
+            "в качестве стратегии обработки ошибки \"onPreValidationModificationFailed\" что не рекомендуется."
 
     },
 
@@ -133,7 +136,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-          `Данное свойство/элемент имеет значение, отличное от \`undefined\`, что запрещено если ` +
+          "Данное свойство/элемент имеет значение, отличное от `undefined`, что запрещено если " +
             ` ${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, и это условие выполнено.`
 
     },
@@ -168,7 +171,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           conditionWhenMustBeNull
         }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-          `Данное свойство/элемент имеет значение, отличное от \`null\`, что запрещено если ` +
+          "Данное свойство/элемент имеет значение, отличное от `null`, что запрещено если " +
             ` ${ conditionWhenMustBeNull }, и это условие выполнено.`
 
     },
@@ -264,280 +267,525 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
             `хотя затребовано ровно ${ exactEntriesCount }.`
     },
 
-  buildPreValidationModificationFailedErrorMessageTextData(thrownError: unknown): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Предвалидационная модификация повлекла ошибку",
-      specificMessagePart: "Предвалидационная модификация повлекла за собой возникновение ошибки:\n" +
-          `${ stringifyAndFormatArbitraryValue(thrownError) }\n` +
-          "Эта предвалидационная модификация будет проигнорирована."
-    };
-  },
+    forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {
+      title: "Запрещенные для определённых ключей значения undefined/null ассоциативного массива",
+      generateDescription: (
+        { keysOfEitherUndefinedOrNullValues }:
+            ValidationErrors.ForbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.TemplateVariables
+      ): string =>
+          "Значения следующих ключей ассоциативного массива либо имеют значение null, либо явный undefined, в то время " +
+            "как для этих ключей такие значения были запрещены:\n" +
+          keysOfEitherUndefinedOrNullValues.
+              map((keyOfEitherUndefinedOrNullValue: string): string => `  ● ${ keyOfEitherUndefinedOrNullValue }`).
+              join("\n")
+    },
 
-
-  /* === Обязательность свойств ===================================================================================== */
-  requiredPropertyIsMissingErrorMessageTextData: {
-    title: "Отсутствие обязательного свойства",
-    specificMessagePart: "Данное свойство имеет значение 'undefined', хотя помечено как обязательное."
-  },
-
-  buildConditionallyRequiredPropertyIsMissingErrorMessageTextData(
-    verbalRequirementCondition: string
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Отсутствие условно обязательно свойства",
-      specificMessagePart: "Данное свойство имеет значение 'undefined', хотя условие:\n" +
-          `'${ verbalRequirementCondition }'\n при котором оно обязательно, выполнено.`
-    };
-  },
-
-
-  /* === Тип данных null ============================================================================================ */
-  nonNullableValueIsNullErrorMessageTextData: {
-    title: "Запрещённое null-значение",
-    specificMessagePart: "Это значение - null, хотя такой вариант не был разрешён спецификацией."
-  },
-
-
-  /* === Индексные массивы ========================================================================================== */
-  buildIndexedArrayElementsCountIsLessThanRequiredMinimumErrorMessageTextData(
-    { minimalElementsCount, actualElementsCount }: Readonly<{ minimalElementsCount: number; actualElementsCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество элементов нумерованного массива не достигает минимального ожидаемого значения",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
-          `хотя ожидалось не менее ${ minimalElementsCount }.`
-    };
-  },
-
-  buildIndexedArrayElementsCountIsMoreThanAllowedMaximumErrorMessageTextData(
-    { maximalElementsCount, actualElementsCount }: Readonly<{ maximalElementsCount: number; actualElementsCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество элементов нумерованного массива превышает максимальное ожидаемое значение",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
-          `хотя ожидалось не более ${ maximalElementsCount }.`
-    };
-  },
-
-  buildIndexedArrayElementsCountDoesNotMatchWithSpecifiedExactNumberErrorMessageTextData(
-    { exactElementsCount, actualElementsCount }: Readonly<{ exactElementsCount: number; actualElementsCount: number; }>
-  ): RawObjectDataProcessor.Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Количество элементов нумерованного массива отлично от ожидаемого фиксированного значения",
-      specificMessagePart: `Это значение типа 'нумерованный массив' имеет ${ actualElementsCount } элементов, ` +
-          `хотя ожидалось ровно ${ exactElementsCount }.`
-    };
-  },
-
-  indexedArrayDisallowedUndefinedElementErrorMessageTextData: {
-    title: "Запрещённый пустой (undefined) элемент нумерованного массива",
-    specificMessagePart: "Это значение типа 'нумерованный массив' имеет пустой ('undefined') элемент, хотя" +
-        "хотя таковые не были разрешены спецификацией валидных данных."
-  },
-
-  indexedArrayDisallowedNullElementErrorMessageTextData: {
-    title: "Запрещённый пустой (null) элемент нумерованного массива",
-    specificMessagePart: "Это значение типа 'нумерованный массив' имеет пустой ('null') элемент, хотя" +
-        "хотя таковые не были разрешены спецификацией валидных данных."
-  },
-
-
-  /* === Ассоциативные массивы ====================================================================================== */
-  buildRequiredKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-    missingRequiredKeys: ReadonlyArray<string>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Отсутствуют объявленные обязательными ключи ассоциативного массива",
-      specificMessagePart: "Следующие ключи этого ассоциативного массива отсутствуют несмотря на то, что помечены как " +
-          `обязательные:\n ${ stringifyAndFormatArbitraryValue(missingRequiredKeys) }`
-    };
-  },
-
-  buildRequiredAlternativeKeysOfAssociativeArrayAreMissingErrorMessageTextData(
-    requiredKeysAlternatives: ReadonlyArray<string>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Отсутствуют альтернативно обязательные ключи",
-      specificMessagePart: "Один из следующих ключей обязан присутствовать в этом ассоциативном массиве, хотя на самом " +
-          `деле ни одного из них нет.\n${ stringifyAndFormatArbitraryValue(requiredKeysAlternatives) }`
-    };
-  },
-
-  buildDisallowedKeysFoundInAssociativeArrayErrorMessageTextData(
-    foundDisallowedKeys: ReadonlyArray<string>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
+    disallowedKeysFoundInAssociativeArray: {
       title: "Запрещённые ключи ассоциативного массива",
-      specificMessagePart: "Нижеследующие ключи присутствуют в этом значении типа 'ассоциативный массив', хотя они были " +
-          `запрещены.\n${ stringifyAndFormatArbitraryValue(foundDisallowedKeys) }`
-    };
-  },
-
-  associativeArrayDisallowedUndefinedValueErrorMessageTextData: {
-    title: "Неразрешённые значения ассоциативного массива типа 'undefined'",
-    specificMessagePart: "Это значение ассоциативного массива имеет тип 'undefined', хотя такие значение не были разрешены."
-  },
-
-  associativeArrayDisallowedNullValueErrorMessageTextData: {
-    title: "Неразрешённые значения ассоциативного массива типа 'null'",
-    specificMessagePart: "Это значение ассоциативного массива имеет тип 'null', хотя такие значение не были разрешены."
-  },
+      generateDescription: (
+        { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
+      ): string =>
+          "Следующие ключи присутствуют в данном ассоциативном массиве в то время как эти ключ были запрещены.\n" +
+          foundDisallowedKeys.
+              map((foundDisallowedKey: string): string => `  ● ${ foundDisallowedKey }`).
+              join("\n")
+    },
 
 
-  /* === Типы значений ============================================================================================== */
-  valueType(valueType: Localization.ValuesTypes): string {
+    /* ┅┅┅ Индексные массивы и кортежи ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    indexedArrayElementsCountIsLessThanRequiredMinimum: {
+      title: "Недостаточно элементов у индексного массива",
+      generateDescription: (
+        {
+          minimalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+         `Это значение типа "индексный массив" имеет ${ actualElementsCount } элементов, ` +
+            `хотя затребовано не менее ${ minimalElementsCount }.`
+    },
 
-    /* [ Теория ] Обычно блок switch/case нормально работает с конструкторами типа Number, String, однако есть редкие исключения.
-     * https://stackoverflow.com/q/69848208/4818123
-     * https://stackoverflow.com/q/69848689/4818123
-     *  */
-    const targetValueTypeID: RawObjectDataProcessor.ValuesTypesIDs = RawObjectDataProcessor.
-    getNormalizedValueTypeID(valueType);
+    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
+      title: "Слишком много элементов у индексного массива",
+      generateDescription: (
+        {
+          maximalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `Это значение типа "индексный массив" имеет ${ actualElementsCount } элементов, ` +
+            `хотя затребовано максимум ${ maximalElementsCount }.`
+    },
 
-    switch (targetValueTypeID) {
-      case RawObjectDataProcessor.ValuesTypesIDs.number: return "Число";
-      case RawObjectDataProcessor.ValuesTypesIDs.string: return "Строка";
-      case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "Булевский тип";
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArrayOfUniformElements: return "Индексный массив однородных элементов";
-      case RawObjectDataProcessor.ValuesTypesIDs.fixedKeyAndValuePairsObject: return "Объект с фиксированными ключами";
-      case RawObjectDataProcessor.ValuesTypesIDs.associativeArrayOfUniformTypeValues:
-          return "Ассоциативный массив однородных элементов";
-      case RawObjectDataProcessor.ValuesTypesIDs.oneOf: return "Позволено несколько типов";
-    }
-  },
-
-  numbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
-    switch (numberSet) {
-      case RawObjectDataProcessor.NumbersSets.naturalNumber: return "Натуральные числа";
-      case RawObjectDataProcessor.NumbersSets.nonNegativeInteger: return "Неотрицательные целые числа";
-      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "Отрицательный целый числа";
-      case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "Отрицательное целое число или ноль";
-      case RawObjectDataProcessor.NumbersSets.anyInteger: return "Целое число любого знака";
-      case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "Положительная десятичная дробь";
-      case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: return "Отрицательная десятичная дробь";
-      case RawObjectDataProcessor.NumbersSets.decimalFractionOfAnySign: return "Десятичная дробь любого знака";
-      case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "Любое действительное число";
-    }
-  },
-
-
-  /* === Числовые значения ========================================================================================== */
-  buildNumberValueIsNotBelongToExpectedNumbersSetErrorMessageTextData(
-    expectedNumberSet: RawObjectDataProcessor.NumbersSets
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Несоответствие реального подмножества чисел данных ожидаемому",
-      specificMessagePart: "Вопреки ожиданиям, данное значение не принадлежит множеству " +
-          `'${ this.numbersSet(expectedNumberSet) }'.`
-    };
-  },
-
-  buildValueIsNotAmongAllowedAlternativesErrorMessageTextData(
-    allowedAlternatives: ReadonlyArray<string>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Недопустимый вариант значения",
-      specificMessagePart:
-          "Это значение отсутствует среди перечисленных ниже допустимых вариантов.\n" +
-          allowedAlternatives.map((allowedAlternative: string): string => `  ○ ${ allowedAlternative }`).join("\n")
-    };
-  },
-
-  buildNumericValueIsSmallerThanRequiredMinimumErrorMessageTextData(
-    requiredMinimum: number
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Нехватка до наименьшего разрешённого значения",
-      specificMessagePart: `Это числовое значение не достигает минимально разрешённого ${ requiredMinimum }.`
-    };
-  },
-
-  buildNumericValueIsGreaterThanAllowedMaximumErrorMessageTextData(
-    allowedMaximum: number
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Превышение максимально разрешённого значения",
-      specificMessagePart: `Это числовое значение превышает максимально разрешённое ${ allowedMaximum }.`
-    };
-  },
+    indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "Несоответствие количества элементов индексного массива или кортежа ожидаемому числу",
+      generateDescription: (
+        {
+          exactElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `Это значение типа "индексный массив" или "кортеж" имеет ${ actualElementsCount } вхождений, ` +
+            `хотя затребовано ровно ${ exactElementsCount }.`
+    },
 
 
-  /* === Строковые значения ========================================================================================== */
-  buildCharactersCountIsLessThanRequiredErrorMessageTextData(
-    { minimalCharactersCount, realCharactersCount }: Readonly<{ minimalCharactersCount: number; realCharactersCount: number; }>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Нехватка количества символов",
-      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов, в то время как требуется минимум ` +
-          `${ minimalCharactersCount }.`
-    };
-  },
+    /* ┅┅┅ Числа ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    forbiddenNaN_Value: {
+      title: "Запрещённое значение NaN свойства/элемента",
+      description:
+          "Данное значение числового свойства или элемента имеет значение NaN, что было запрещено в явном виде."
+    },
 
-  buildCharactersCountIsMoreThanAllowedErrorMessageTextData(
-    { maximalCharactersCount, realCharactersCount }: Readonly<{ maximalCharactersCount: number; realCharactersCount: number; }>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
+    numericValueIsNotBelongToExpectedNumbersSet: {
+      title: "Неверное множество чисел",
+      generateDescription: (
+        { expectedNumberSet }: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
+      ): string =>
+          "Вопреки ожиданиям, данное значение не принадлежит множеству " +
+            `"${ rawObjectDataProcessorLocalization__russian.getLocalizedNumbersSet(expectedNumberSet) }"`
+    },
+
+    /* [ Подход ] Применимо также к строкам. */
+    valueIsNotAmongAllowedAlternatives: {
+      title: "Disallowed Alternative of Value",
+      generateDescription: (
+        { allowedAlternatives }: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
+      ): string =>
+          "Данное значение не является ни одним из допустимых вариантов:\n" +
+          allowedAlternatives.map((allowedAlternative: string | number): string =>
+              `  ○ ${ allowedAlternative }`).join("\n")
+    },
+
+    numericValueIsSmallerThanRequiredMinimum: {
+      title: "Недостижение минимального значения",
+      generateDescription: (
+        { requiredMinimum }: ValidationErrors.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
+      ): string =>
+          `Данное значение меньше минимального возможного ${ requiredMinimum }.`
+    },
+
+    numericValueIsGreaterThanAllowedMaximum: {
+      title: "Превышение максимального значения",
+      generateDescription: (
+        { allowedMaximum }: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `Данное значение больше минимального допустимого ${ allowedMaximum }.`
+    },
+
+
+    /* ╍╍╍ Строки ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+    charactersCountIsLessThanRequired: {
+      title: "Недостижение минимального количества символов",
+      generateDescription: (
+        {
+          minimalCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
+      ): string =>
+          `Данная строка имеет ${ realCharactersCount } символов в то время как затребовано минимум ${ minimalCharactersCount }.`
+    },
+
+    charactersCountIsMoreThanAllowed: {
       title: "Превышение максимального количества символов",
-      specificMessagePart: `Это строчное значение имеет ${ realCharactersCount } символов, в то время как позволено ` +
-          `максимум ${ maximalCharactersCount }.`
-    };
+      generateDescription: (
+        {
+          maximalCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountIsMoreThanAllowed.TemplateVariables
+      ): string =>
+          `Данная строка имеет ${ realCharactersCount } символов в то время как позволено не более ${ maximalCharactersCount }.`
+    },
+
+    charactersCountDoesNotMatchWithSpecified: {
+      title: "Несоответствие установленному фиксированному числу символов",
+      generateDescription: (
+        {
+          fixedCharactersCount,
+          realCharactersCount
+        }: ValidationErrors.CharactersCountDoesNotMatchWithSpecified.TemplateVariables
+      ): string =>
+          `Данная строка имеет ${ realCharactersCount } символов в ко время как затребовано ровно ${ fixedCharactersCount }.`
+    },
+
+    forbiddenCharactersFound: {
+      title: "Запрещённые символы",
+      generateDescription: (
+        { foundForbiddenCharacters }: ValidationErrors.ForbiddenCharactersFound.TemplateVariables
+      ): string =>
+          "Данная строка включает в себя следующие символы, которые были запрещены:\n" +
+            foundForbiddenCharacters.map((character: string): string => `● ${ character }`).join("\n")
+    },
+
+    regularExpressionMismatch: {
+      title: "Несоответствие регулярному выражения",
+      generateDescription: ({ regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables): string =>
+          `Данная строка не соответствует заданному регулярному выражению:\n ${ regularExpression.toString() }`
+    },
+
+
+    /* ╍╍╍ Другие ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
+    disallowedBooleanValueVariant: {
+      title: "Запрещённый булевский вариант",
+      generateDescription: (
+        { disallowedVariant }: ValidationErrors.DisallowedBooleanValueVariant.TemplateVariables
+      ): string =>
+          `Данное булевское значение является ${ disallowedVariant } в то время как позволено только ${ !disallowedVariant }.`
+    },
+
+    unsupportedValueType: {
+      title: "Неподдерживаемый тип значения",
+      generateDescription:
+          ({ targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
+              `Данное значение имеет тип ${ targetPropertyType }, который на данный момент не поддерживается как любой ` +
+                " другой несовместимый с JSON тип."
+    }
+
   },
 
-  buildCharactersCountDoesNotMatchWithSpecifiedErrorMessageTextData(
-    { fixedCharactersCount, realCharactersCount }: Readonly<{ fixedCharactersCount: number; realCharactersCount: number; }>
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Несоответствие требуемому фиксированному числу символов",
-      specificMessagePart: `Эта строка имеет ${ realCharactersCount } символов, в то время как требуется ровно ` +
-          `${ fixedCharactersCount }.`
-    };
+
+  /* ━━━ Бросаемые ошибки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* [ Примечание для рецензоров ]
+   * В отличие от сообщений об ошибках валидации, сообщения бросаемых ошибок не являются частью шаблона
+   *   "generateValidationErrorMessage", а потому такие выражения, как "это свойство" или "этот элемент" будут уже
+   *   неопределёнными. */
+  throwableErrors: {
+
+    objectSchemaNotSpecified: {
+
+      title: "Схема объект не определена",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
+      ): string =>
+          `Схема объекта не определена для "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    mutuallyExclusiveTransformationsBetweenUndefinedAndNull: {
+
+      title: "Взаимоисключающие преобразования между undefined и null",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
+      ): string =>
+        "Обоим опциям \"mustTransformUndefinedToNull\" и \"mustTransformNullToUndefined\" установлено булевское значение " +
+          `true для свойства "${ targetPropertyDotSeparatedQualifiedName }", что является противоречием. ` +
+        rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    preValidationModificationFailed: {
+
+      title: "Предвалидационное преобразование привело к ошибке",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PreValidationModificationFailed.TemplateVariables
+      ): string =>
+        "Произошла ошибка при предвалидационном преобразовании свойства/элемента  " +
+          `"${ targetPropertyDotSeparatedQualifiedName }". ` +
+        "Эта ошибка была брошена потому что активной стратегией обработки ошибки \"onPreValidationModificationFailed\" " +
+          "является \"ErrorHandlingStrategies.throwingOfError\", что по умолчанию. " +
+        rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    propertyUndefinedabilityNotSpecified: {
+
+      title: "Не указана стратегия обработки undefined-значений",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
+      ): string =>
+        `Не указано, как обрабатывать undefined-значения у свойства "${ targetPropertyDotSeparatedQualifiedName }". ` +
+        rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    propertyNullabilityNotSpecified: {
+
+      title: "Не указана стратегия обработки undefined-значений",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
+      ): string =>
+          `Не указано, как обрабатывать null-значения у свойства "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    dataTypeNotSpecified: {
+
+      title: "Неподдерживаемый либо неуказанный тип данных",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          specifiedStringifiedType,
+          documentationPageAnchor
+        }: ThrowableErrors.DataTypeNotSpecified.TemplateVariables
+      ): string =>
+          (
+            isUndefined(specifiedStringifiedType) ?
+                "Тип данных не был " :
+                `Неподдерживаемый тип данных "${ specifiedStringifiedType } был `
+          ) +
+          `указан для свойства/элемента "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToDeletePropertyWithOutdatedKey: {
+
+      title: "Невозможно удалить свойство с устаревшим ключом",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          propertyNewKey,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
+      ): string =>
+          `Невозможно удалить свойство "${ targetPropertyDotSeparatedQualifiedName }" после после создания его копии ` +
+            `с именем "${ propertyNewKey }" потому что оно не конфигурируемо, а в качестве стратегии обработки ` +
+            "объекта были выбраны манипуляции с уже существующим объектом, при этом опции \"mustLeaveEvenRenamed\" " +
+            "не было указано значение true." +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToChangePropertyDescriptors: {
+
+      title: "Невозможно обновить дескрипторы свойств",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
+      ): string =>
+          `Невозможно изменить дескрипторы свойства ${ targetPropertyDotSeparatedQualifiedName }, потому что оно ` +
+            "неконфигурируемо, при этом в качестве стратегии обработки были выбраны манипуляции с уже существующим объектом. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToUpdatePropertyValue: {
+
+      title: "Невозможно обновить значение свойства",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
+      ): string =>
+          `Запрошено изменение значение свойства "${ targetPropertyDotSeparatedQualifiedName }" через подстановку ` +
+            "значения по умолчанию либо предвалидационное преобразование, однако это свойство доступно только для чтения. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    mutuallyExclusiveAssociativeArrayKeysLimitations: {
+
+      title: "Взаимоисключающие ограничения ключей ассоциативного массива",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.
+            MutuallyExclusiveAssociativeArrayKeysLimitations.TemplateVariables
+      ): string =>
+          "Для " +
+              (
+                isNull(targetPropertyDotSeparatedQualifiedName) ?
+                  "корневого ассоциативного массива " :
+                  `ассоциативного массива "${ targetPropertyDotSeparatedQualifiedName }" `
+              ) +
+              "указаны как разрешённые, так и запрещённые ключи, что является противоречием. " +
+              "Возможно указать либо разрешённые ключи, либо запрещённые, но не оба вместе. " +
+              rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    incompatibleValuesTypesAlternatives: {
+      title: "Несовместимые варианты значений",
+      generateDescription: (
+        {
+          isIndexedArrayLikeType,
+          documentationPageAnchor
+        }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
+      ): string =>
+          (
+            isIndexedArrayLikeType ?
+                "`ValuesTypesIDs.indexedArray` (алиас: `Array`) и `ValuesTypesIDs.tuple`" :
+                "`ValuesTypesIDs.fixedSchemaObject` (алиса: `Object`) и `ValuesTypesIDs.associativeArray`"
+          ) +
+            "являются несовместимыми вариантами для `ValuesTypesIDs.polymorphic` потому что с точки зрения ECMAScript " +
+              "оба являются " +
+            (isIndexedArrayLikeType ? "`Array`" : "`Object`") +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    },
+
+    bothAllowedAndForbiddenCharactersSpecified: {
+      title: "Взаимоисключающие ограничения конкретных символов",
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
+      ): string =>
+          `Для строкового свойства/элемента "${ targetPropertyDotSeparatedQualifiedName }" указаны как разрешённые, ` +
+            "так и запрещённые символы, что является противоречием." +
+          "Возможно указать либо разрешённые символы, либо запрещённые, но не оба вместе. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+    }
+
   },
 
-  buildRegularExpressionMismatchErrorMessageTextData(regularExpression: RegExp): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Несоответствие регулярному выражению",
-      specificMessagePart: `Это значение не соответствует регулярному выражению \n ${ regularExpression.toString() }`
-    };
+
+  /* ━━━ Предупреждения ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  warnings: {
+
+    preValidationModificationFailed: {
+
+      title: "Предвалидационное преобразование привело к ошибке",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          stringifiedCaughtError,
+          documentationPageAnchor
+        }: Warnings.PreValidationModificationFailed.TemplateVariables
+      ): string =>
+          "Произошла ошибка при предвалидационном преобразовании свойства/элемента  " +
+            `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
+          `${ stringifiedCaughtError }\n` +
+          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
+            "\"onPreValidationModificationFailed\" было выбрано " +
+            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToDeletePropertyWithOutdatedKey: {
+
+      title: "Невозможно удалить свойство с устаревшим ключом",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          propertyNewKey,
+          documentationPageAnchor
+        }: Warnings.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
+      ): string =>
+          `Невозможно удалить свойство "${ targetPropertyDotSeparatedQualifiedName }" после после создания его копии ` +
+            `с именем "${ propertyNewKey }" потому что оно не конфигурируемо, а в качестве стратегии обработки ` +
+            "объекта были выбраны манипуляции с уже существующим объектом, при этом опции \"mustLeaveEvenRenamed\" " +
+            "не было указано значение true." +
+          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
+            "\"onPreValidationModificationFailed\" было выбрано " +
+            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToChangePropertyDescriptors: {
+
+      title: "Невозможно обновить дескрипторы свойств",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: Warnings.UnableToChangePropertyDescriptors.TemplateVariables
+      ): string =>
+            `Невозможно изменить дескрипторы свойства ${ targetPropertyDotSeparatedQualifiedName }, потому что оно ` +
+            "неконфигурируемо, при этом в качестве стратегии обработки были выбраны манипуляции с уже существующим объектом. " +
+          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
+            "\"onPreValidationModificationFailed\" было выбрано " +
+            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    },
+
+    unableToUpdatePropertyValue: {
+
+      title: "Невозможно обновить значение свойства",
+
+      generateDescription: (
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: Warnings.UnableToUpdatePropertyValue.TemplateVariables
+      ): string =>
+          `Запрошено изменение значение свойства "${ targetPropertyDotSeparatedQualifiedName }" через подстановку ` +
+            "значения по умолчанию либо предвалидационное преобразование, однако это свойство доступно только для чтения. " +
+          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
+            "\"onPreValidationModificationFailed\" было выбрано " +
+            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
+          rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
+
+    }
+
   },
 
+  getLocalizedValueType(valueTypeID: RawObjectDataProcessor.ValuesTypesIDs): string {
 
-  /* === Другое ====================================================================================================== */
-  buildDisallowedBooleanValueVariantErrorMessageTextData(
-    disallowedVariant: boolean
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Неразрешённый вариант булевского значения",
-      specificMessagePart: `Позволено только ${ !disallowedVariant }, но не ${ disallowedVariant }.`
-    };
+    switch (valueTypeID) {
+
+      case RawObjectDataProcessor.ValuesTypesIDs.number: return "число";
+      case RawObjectDataProcessor.ValuesTypesIDs.string: return "строка";
+      case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "булевский";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "индексный массив";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject: return "объект фиксированной структуры";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.associativeArray: return "объект типа «ассоциативный массив»";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.tuple: return "кортеж";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject: return "неоднозначный объект";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray: return "неоднозначный массив";
+
+      case RawObjectDataProcessor.ValuesTypesIDs.polymorphic: return "полиморфный";
+
+    }
+
   },
 
-  buildIncompatibleValuesTypesAlternativesErrorDescription(
-    targetValueSpecification: RawObjectDataProcessor.MultipleTypesAllowedValueSpecification
-  ): string {
-    return "Значения типа 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (алиас: 'Object'）и" +
-        "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（алиас: Map）не могут быть указанны одновременно как варианты " +
-        "'ValuesTypesIDs.oneOf', потому как точки зрения ECMAScript оба имеют тип 'object'. Значение помечено как невалидное.\n" +
-        stringifyAndFormatArbitraryValue(targetValueSpecification);
-  },
-
-  buildUnsupportedValueTypeErrorMessageTextData(
-    propertyDataForMessagesBuilding: RawObjectDataProcessor.Localization.PropertyDataForMessagesBuilding
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Неизвестное значение",
-      specificMessagePart: `Это значение типа ${ typeof propertyDataForMessagesBuilding.targetPropertyValue } не может ` +
-          "быть получено путём преобразования из JSON в нативный ECMAScript объект, а RawObjectDataProcessor поддерживает " +
-          "только данные, совместимые с форматом JSON."
-    };
-  },
-
-
-  buildCustomValidationFailedErrorMessageTextData(
-    customValidationDescription: string
-  ): Localization.TextDataForErrorMessagesBuilding {
-    return {
-      title: "Пользовательская валидация не пройдена",
-      specificMessagePart: `Это значение не прошло пользовательскую валидацию '${ customValidationDescription }'.`
-    };
+  getLocalizedNumbersSet(numberSet: RawObjectDataProcessor.NumbersSets): string {
+    switch (numberSet) {
+      case RawObjectDataProcessor.NumbersSets.naturalNumber: return "натуральное число";
+      case RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero: return "положительное целое число либо ноль";
+      case RawObjectDataProcessor.NumbersSets.naturalNumberOrZero: return "натуральное число либо ноль";
+      case RawObjectDataProcessor.NumbersSets.negativeInteger: return "отрицательное целое число";
+      case RawObjectDataProcessor.NumbersSets.negativeIntegerOrZero: return "отрицательное целое число либо ноль";
+      case RawObjectDataProcessor.NumbersSets.anyInteger: return "любое целое число";
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFraction: return "положительная десятичная дробь";
+      case RawObjectDataProcessor.NumbersSets.positiveDecimalFractionOrZero: return "положительная десятичная дробь либо ноль";
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFraction: return "отрицательная десятичная дробь";
+      case RawObjectDataProcessor.NumbersSets.negativeDecimalFractionOrZero: return "отрицательная десятичная дробь либо ноль";
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFraction: return "любая десятичная дробь";
+      case RawObjectDataProcessor.NumbersSets.anyDecimalFractionOrZero: return "любая десятичная дробь либо ноль";
+      case RawObjectDataProcessor.NumbersSets.anyRealNumber: return "любое действительное число";
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumber: return "положительное действительное число";
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumber: return "отрицательное действительное число";
+      case RawObjectDataProcessor.NumbersSets.positiveRealNumberOrZero: return "положительное действительное число либо ноль";
+      case RawObjectDataProcessor.NumbersSets.negativeRealNumberOrZero: return "отрицательное действительное число либо ноль";
+    }
   }
+
 };

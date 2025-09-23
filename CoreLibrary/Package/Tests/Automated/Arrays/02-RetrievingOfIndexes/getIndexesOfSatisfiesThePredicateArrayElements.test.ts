@@ -4,7 +4,7 @@ import Assert from "assert";
 
 
 Testing.suite(
-  "getIndexesOfSatisfiesThePredicateArrayElements",
+  getIndexesOfSatisfiesThePredicateArrayElements.name,
   async (): Promise<void> => {
 
     type Product = { title: string; price: number; };

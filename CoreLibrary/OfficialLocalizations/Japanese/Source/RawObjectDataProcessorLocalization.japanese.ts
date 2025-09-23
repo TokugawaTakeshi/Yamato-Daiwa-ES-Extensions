@@ -59,7 +59,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   /* ━━━ バリデーションエラー ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* 【 校閲者向け 】
-   * 殆どの下記のメッセージは上記の「generateValidationErrorMessage」原形の一部になっているので、曖昧「このプロパティ」の様に書かれても、
+   * 殆どの下記のメッセージは上記の「generateValidationErrorMessage」原形の一部になっているので、曖昧に「このプロパティ」や「この文字列」の様に書かれても、
    * 　　上記の原形に合わせて曖昧さが消える。 */
 
   validationErrors: {
@@ -96,7 +96,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
         "このプロパティ・要素のバリデーション前の変換中に以下のエラーが発生。\n" +
         `${ stringifiedCaughtError }\n` +
         "エラーハンドリング戦略「onPreValidationModificationFailed」が「ErrorHandlingStrategies.markingOfDataAsInvalid」に設定されていた" +
-          "ため、データは不正としてマークされまたが、問題は必ずしもデータ側にあるとは限らず、変換関数自体にある可能性もあるので、当戦略は非推薦。"
+          "ため、データは不正としてマークされまたが、当戦略は非推薦。"
     },
 
 
@@ -233,28 +233,87 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
           `この連想配列型の値は${ actualEntriesCount }組みを持っているが、丁度${ exactEntriesCount }期待。`
     },
 
+    forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {
+      title: "連想配列の特定キーに対して禁じたnull・undefined値",
+      generateDescription: (
+        { keysOfEitherUndefinedOrNullValues }:
+            ValidationErrors.ForbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.TemplateVariables
+      ): string =>
+        "連想配列の下記のキーはnullか明示的なundefinedになっているが、このような値は禁じられた。\n" +
+        keysOfEitherUndefinedOrNullValues.
+            map((keyOfEitherUndefinedOrNullValue: string): string => `  ● ${ keyOfEitherUndefinedOrNullValue }`).
+            join("\n")
+    },
 
+    disallowedKeysFoundInAssociativeArray: {
+      title: "連想配列の禁じたキー",
+      generateDescription: (
+        { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
+      ): string =>
+          "下記のキーは当連想配列に存在しているが、このキーは禁じられた。\n" +
+          foundDisallowedKeys.
+              map((foundDisallowedKey: string): string => `  ● ${ foundDisallowedKey }`).
+              join("\n")
+    },
+
+
+    /* ┅┅┅ 指数配列・タプル ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+    indexedArrayElementsCountIsLessThanRequiredMinimum: {
+      title: "指数配列、要素数不足",
+      generateDescription: (
+        {
+          minimalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
+      ): string =>
+         `この連想配列型の値は${ actualElementsCount }組みを持っているが、少なくとも${ minimalElementsCount }期待。`
+    },
+
+    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
+      title: "指数配列、要素数過度",
+      generateDescription: (
+        {
+          maximalElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
+      ): string =>
+          `この連想配列型の値は${ actualElementsCount }組みを持っているが、最大${ maximalElementsCount }期待。`
+    },
+
+    indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
+      title: "指数配列、要素の期待数・実際数の不一致",
+      generateDescription: (
+        {
+          exactElementsCount,
+          actualElementsCount
+        }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
+      ): string =>
+          `この連想配列型の値は${ actualElementsCount }組みを持っているが、丁度${ exactElementsCount }期待。`
+    },
+
+
+    /* ┅┅┅ 数 ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     forbiddenNaN_Value: {
-      title: "数型プロパティー・要素の禁じたNaN値",
+      title: "数型プロパティー・要素の禁止NaN値",
       description: "このプロパティー・要素の値はNaNになっているが、NaNが明示的に禁じてある。"
     },
 
     numericValueIsNotBelongToExpectedNumbersSet: {
-      title: "期待される数値セットとの不一致",
+      title: "期待数集合との不一致",
       generateDescription: (
         { expectedNumberSet }: ValidationErrors.NumericValueIsNotBelongToExpectedNumbersSet.TemplateVariables
       ): string =>
-        "この数値は、期待される「" +
-        rawObjectDataProcessorLocalization__japanese.getLocalizedNumbersSet(expectedNumberSet) +
-        "」セットのメンバーではありません。"
+        "期待に反し当値は" +
+          `${ rawObjectDataProcessorLocalization__japanese.getLocalizedNumbersSet(expectedNumberSet) } 集合に所属していない。`
     },
 
+    /* 【 方法論 】 文字列型プロパティーに再利用可能。 */
     valueIsNotAmongAllowedAlternatives: {
-      title: "値が許容された選択肢に含まれていません",
+      title: "許容選択肢に不所属",
       generateDescription: (
         { allowedAlternatives }: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
       ): string =>
-        "この値は以下の許容される選択肢に含まれていません：\n" +
+        "この値は以下の許容される選択肢に含まれていない。\n" +
         allowedAlternatives.map((allowedAlternative: string | number): string => `  ○ ${ allowedAlternative }`).join("\n")
     },
 
@@ -263,7 +322,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { requiredMinimum }: ValidationErrors.NumericValueIsSmallerThanRequiredMinimum.TemplateVariables
       ): string =>
-        `この値は最小値 ${ requiredMinimum } より小さいです。`
+          `この値は最小値${ requiredMinimum }より小さい。`
     },
 
     numericValueIsGreaterThanAllowedMaximum: {
@@ -271,15 +330,17 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { allowedMaximum }: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
       ): string =>
-        `この値は最大値 ${ allowedMaximum } を超えています。`
+          `この値は最大値${ allowedMaximum }を超えている。`
     },
 
+
+    /* ┅┅┅ 文字列 ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     charactersCountIsLessThanRequired: {
       title: "最小文字数未満",
       generateDescription: (
         { minimalCharactersCount, realCharactersCount }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
       ): string =>
-        `この文字列は ${ realCharactersCount } 文字であり、少なくとも ${ minimalCharactersCount } 文字必要です。`
+        `この文字列は${ realCharactersCount }文字を持っているが、少なくとも${ minimalCharactersCount }文字必要。`
     },
 
     charactersCountIsMoreThanAllowed: {
@@ -287,7 +348,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { maximalCharactersCount, realCharactersCount }: { maximalCharactersCount: number; realCharactersCount: number; }
       ): string =>
-        `この文字列は ${ realCharactersCount } 文字であり、最大で ${ maximalCharactersCount } 文字まで許容されます。`
+        `この文字列は${ realCharactersCount }文字を持っている、最大で${ maximalCharactersCount }文字まで許容。`
     },
 
     charactersCountDoesNotMatchWithSpecified: {
@@ -295,103 +356,52 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { fixedCharactersCount, realCharactersCount }: { fixedCharactersCount: number; realCharactersCount: number; }
       ): string =>
-        `この値は ${ realCharactersCount } 文字であり、ちょうど ${ fixedCharactersCount } 文字である必要があります。`
+        `この値は${ realCharactersCount }を見っているが、丁度${ fixedCharactersCount }期待。。`
     },
 
     forbiddenCharactersFound: {
-      title: "禁じられた文字発見",
+      title: "禁止文字",
       generateDescription: (
         { foundForbiddenCharacters }: ValidationErrors.ForbiddenCharactersFound.TemplateVariables
       ): string =>
-          "下記の記事られた文字列が発見された。\n" +
+          "この文字列は下記の記事られた文字を含めている。\n" +
             foundForbiddenCharacters.map((character: string): string => `● ${ character }`).join("\n")
     },
 
+
     regularExpressionMismatch: {
-      title: "正規表現との不一致",
+      title: "正規表現違反",
       generateDescription: (
         { regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables
       ): string =>
-        `この文字列は指定された正規表現に一致しません：\n ${ regularExpression.toString() }`
+          `この文字列は指定された正規表現に満たしていない。\n ${ regularExpression.toString() }`
     },
 
-    indexedArrayElementsCountIsLessThanRequiredMinimum: {
-      title: "インデックス配列の要素数が最小より少ない",
-      generateDescription: (
-        {
-          minimalElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
-      ): string =>
-        `この配列は ${ actualElementsCount } 要素ですが、少なくとも ${ minimalElementsCount } 要素が必要です。`
-    },
 
-    indexedArrayElementsCountIsMoreThanAllowedMaximum: {
-      title: "インデックス配列の要素数が最大を超えている",
-      generateDescription: (
-        {
-          maximalElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
-      ): string =>
-        `この配列は ${ actualElementsCount } 要素ですが、最大で ${ maximalElementsCount } 要素まで許容されます。`
-    },
-
-    indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
-      title: "インデックス配列の要素数が固定値と一致しない",
-      generateDescription: (
-        {
-          exactElementsCount,
-          actualElementsCount
-        }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
-      ): string =>
-        `この配列は ${ actualElementsCount } 要素ですが、ちょうど ${ exactElementsCount } 要素である必要があります。`
-    },
-
-    forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {
-      title: "特定キーに対して null または undefined の値が禁止されています",
-      generateDescription: (
-        { keysOfEitherUndefinedOrNullValues }:
-          ValidationErrors.ForbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.TemplateVariables
-      ): string =>
-        "以下のキーには null または undefined の値が含まれており、これらのキーに対してそのような値は明示的に禁止されています：\n" +
-        stringifyAndFormatArbitraryValue(keysOfEitherUndefinedOrNullValues)
-    },
-
-    disallowedKeysFoundInAssociativeArray: {
-      title: "許可されていないキーが含まれています",
-      generateDescription: (
-        { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
-      ): string =>
-        "以下のキーはこの連想配列に存在していますが、禁止されています：\n" +
-        stringifyAndFormatArbitraryValue(foundDisallowedKeys)
-    },
-
+    /* ╍╍╍ 其の他 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     disallowedBooleanValueVariant: {
-      title: "許可されていない真偽値",
+      title: "新規真偽選択肢",
       generateDescription: (
         { disallowedVariant }: ValidationErrors.DisallowedBooleanValueVariant.TemplateVariables
       ): string =>
-        `この真偽値は '${ disallowedVariant }' ですが、許可されているのは '${ !disallowedVariant }' のみです。`
+          `この真偽値は「${ disallowedVariant }」になっているが「${ !disallowedVariant }」のみ許可。`
     },
 
     unsupportedValueType: {
-      title: "サポートされていない値の型",
+      title: "未対応データ型",
       generateDescription: (
         { targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables
       ): string =>
-        `この値の型は ${ targetPropertyType } であり、パースされた JSON として無効です。`
-    },
-
-    customValidationFailed: {
-      title: "カスタムバリデーションに失敗しました",
-      generateDescription: (
-        { customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables
-      ): string =>
-        `この値はカスタムバリデーション "${ customValidationDescription }" に合格しませんでした。`
+          `この値の型は「${ targetPropertyType }」になっているが、JSONと非相互的型として未サポート。`
     }
 
   },
+
+
+  /* ━━━ 投げエラー ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* 【 校閲者向け 】
+   * バリデーションエラーの場合と違って、下記もメッセージが「generateValidationErrorMessage」原形の一部になっていないので、「このプロパティ」や「この文字列」
+   * 　　というような文脈依存表現が理解されてなくになってしまう。 */
 
   throwableErrors: {
 
@@ -399,138 +409,173 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       title: "オブジェクトスキーマが指定されていません",
       generateDescription: (
         {
-          targetPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
         }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" に対してオブジェクトスキーマが指定されていません。`
+          `「${ targetPropertyDotSeparatedQualifiedName }」にとってオブジェクトスキーマが指定されていない。` +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     mutuallyExclusiveTransformationsBetweenUndefinedAndNull: {
       title: "undefined と null に対する変換指定が矛盾しています",
       generateDescription: (
         {
-          targetPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
         }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
       ): string =>
-        "\"mustTransformUndefinedToNull\" と \"mustTransformNullToUndefined\" の両方が " +
-        `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" に対して true に設定されていますが、これらは相互に矛盾する指定です。`
+        `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」にとって「mustTransformUndefinedToNull」オプションにも` +
+          "「mustTransformNullToUndefined」にもtrue値が指定され、矛盾になっている。" +
+        rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     preValidationModificationFailed: {
-      title: "事前バリデーション修正の失敗",
+      title: "事バリデーション変換失敗",
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PreValidationModificationFailed.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          `プロパティ／要素 "${ targetPropertyDotSeparatedQualifiedName }" の事前バリデーション修正中にエラーが発生しました。` +
-          "エラーハンドリング戦略 \"onPreValidationModificationFailed\" が \"ErrorHandlingStrategies.throwingOfError\"" +
-          " に設定されており、これはデフォルトの動作です。"
+          `プロパティ・要素「${ targetPropertyDotSeparatedQualifiedName }」の前バリデーション変換の際エラーが発生。` +
+          "エラーハンドリング戦略「onPreValidationModificationFailed」が「ErrorHandlingStrategies.throwingOfError」に成っているので" +
+            "（規定）なので、エラーが投げられた。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     propertyUndefinedabilityNotSpecified: {
-      title: "undefined 許容性が指定されていません",
+      title: "undefined許容性が指定されず",
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
       ): string =>
-          `プロパティ／要素 \`${ targetPropertyDotSeparatedQualifiedName }\` に対して undefined 値をどのように扱うかが指定されていません。\n` +
-          "ドキュメントを参照し、有効なオプションのいずれかを指定してください: https://ee.yamato-daiwa.com/"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」にとってundefined値をの処理閃絡が指定されていない。\n` +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     propertyNullabilityNotSpecified: {
-      title: "null 許容性が指定されていません",
+      title: "null許容性が指定されず",
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
       ): string =>
-          `プロパティ／要素 \`${ targetPropertyDotSeparatedQualifiedName }\` に対して null 値をどのように扱うかが指定されていません。\n` +
-          "ドキュメントを参照し、有効なオプションのいずれかを指定してください: https://ee.yamato-daiwa.com/"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」にとってnull値をの処理閃絡が指定されていない。\n` +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     dataTypeNotSpecified: {
-      title: "データ型が指定されていません",
+      title: "非サポート・非指定データ型",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          specifiedStringifiedType
+          specifiedStringifiedType,
+          documentationPageAnchor
         }: ThrowableErrors.DataTypeNotSpecified.TemplateVariables
       ): string =>
+          `プロパティ・要素「${ targetPropertyDotSeparatedQualifiedName }」にとって` +
           (
             isUndefined(specifiedStringifiedType) ?
-              "データ型が" :
-              `サポートされていないデータ型 "${ specifiedStringifiedType }" が`
+              "データ型が指定されたなかった。" :
+              `対応トされていないデータ型「${ specifiedStringifiedType }」指定された。`
           ) +
-          `プロパティ／要素 "${ targetPropertyDotSeparatedQualifiedName }" に対して指定されました。` +
-          "これは TypeScript 側の型情報不足により発生する可能性があります。"
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     unableToDeletePropertyWithOutdatedKey: {
-      title: "古いキーを持つプロパティを削除できません",
+      title: "旧名プロパティ削除不可能",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          propertyNewKey
+          propertyNewKey,
+          documentationPageAnchor
         }: ThrowableErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" は "${ propertyNewKey }" にリネームされましたが、` +
-          "処理方法が元オブジェクトの操作であり、かつ \"mustLeaveEvenRenamed\" が true に設定されていないため、" +
-          "このプロパティを削除できません。"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」のコピーの「${ propertyNewKey }」を作成してから、` +
+            "`configurable: false`の為削除不可能。" +
+          "その他に、処理アプローチは既存のオブジェクトの変更となり、`mustLeaveEvenRenamed`オプションに`true`が設定されていない。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     unableToChangePropertyDescriptors: {
-      title: "プロパティディスクリプターの変更ができません",
+      title: "プロパティ記述子変更不可能",
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" のディスクリプターは変更できません。` +
-          "このプロパティは configurable ではなく、処理方法が元オブジェクトの操作であり、かつ \"mustLeaveEvenRenamed\" が true に設定されていません。"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」は\`configurable: false\`になっていると他に、処理アプローチは` +
+            "既存のオブジェクトの変更なので、記述子の変更は不可能。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     unableToUpdatePropertyValue: {
       title: "プロパティの値を更新できません",
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" に対して、デフォルト値の補完または事前修正を通じた更新が試みられましたが、` +
-          "このプロパティは読み取り専用のため、更新できません。\n" +
-          "このエラーは、エラーハンドリング戦略 \"onUnableToUnableToUpdatePropertyValue\" が " +
-          "\"ErrorHandlingStrategies.throwingOfError\" に設定されているために発生しました（これはデフォルトの動作です）。"
+          `プロパティー「${ targetPropertyDotSeparatedQualifiedName }」の変更が規定値の代入か、前バリデーションの変換により要求された、` +
+            "読み込み専用のプロパティーとして上書き不可能。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     mutuallyExclusiveAssociativeArrayKeysLimitations: {
       title: "連想配列キー制限の相互矛盾",
       generateDescription: (
         {
-          targetPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
         }: ThrowableErrors.MutuallyExclusiveAssociativeArrayKeysLimitations.TemplateVariables
       ): string =>
-          "許可されるキーと禁止されるキーの両方が " +
+          "許可されるキーと禁止されるキーの両方が" +
           (
             isNull(targetPropertyDotSeparatedQualifiedName) ?
               "ルート連想配列" :
-              `連想配列 "${ targetPropertyDotSeparatedQualifiedName }"`
+              `連想配列「${ targetPropertyDotSeparatedQualifiedName }」`
           ) +
-          " に対して同時に指定されていますが、これは矛盾しています。\n" +
-          "許可されるキーまたは禁止されるキーのいずれか一方のみを指定してください。"
+          "に対して同時に指定する事は矛盾である。\n" +
+          "許可されるキーだけか、禁止されるキーだけしても良いが、両方は禁止。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     incompatibleValuesTypesAlternatives: {
-      title: "互換性のない値型の代替指定",
+      title: "非相互的値の型",
       generateDescription: (
-        { targetValueStringifiedSpecification }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
+        {
+          isIndexedArrayLikeType,
+          documentationPageAnchor
+        }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
       ): string =>
-          "'ValuesTypesIDs.fixedKeyAndValuePairsObject'（別名: Object）と " +
-          "'ValuesTypesIDs.associativeArrayOfUniformTypeValues'（別名: Map）は、" +
-          "どちらも ECMAScript の観点では `object` 型であり、`ValuesTypesIDs.oneOf` の代替として互換性がありません。\n" +
-          `このプロパティの仕様を修正してください。\n${ targetValueStringifiedSpecification }`
+          (
+            isIndexedArrayLikeType ?
+                "「ValuesTypesIDs.indexedArray」（エイリアスは`Array`）と「`ValuesTypesIDs.tuple`」" :
+                "「ValuesTypesIDs.fixedSchemaObject」（エイリアスは`Object`）と「`ValuesTypesIDs.associativeArray`」"
+          ) +
+            "はECMAScript上両方" +
+            (isIndexedArrayLikeType ? "`Array`" : "`Object`") +
+            "になっているので、「`ValuesTypesIDs.polymorphic`」にとって、非相互的項目" +
+            rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     bothAllowedAndForbiddenCharactersSpecified: {
-      title: "許可文字・禁止文字矛盾",
+      title: "特定文字制限の相互矛盾",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
           documentationPageAnchor
         }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
       ): string =>
-          `文字列型のプロパティー・要素${ targetPropertyDotSeparatedQualifiedName }にとって許可文字も、禁止文字も定義されたが事矛盾。` +
+          `許可される文字と禁止される文字の両方が「${ targetPropertyDotSeparatedQualifiedName }」という文字列型のプロパティ・要素に対して` +
+            "同時に指定する事は矛盾である。" +
+          "許可される文字だけか、禁止される文字だけしても良いが、両方は禁止。" +
           rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
@@ -540,35 +585,40 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
     preValidationModificationFailed: {
 
-      title: "事前バリデーション修正の失敗",
+      title: "バリデーション前の変換中エラー発生",
 
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          stringifiedCaughtError
+          stringifiedCaughtError,
+          documentationPageAnchor
         }: Warnings.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          `プロパティ／要素 "${ targetPropertyDotSeparatedQualifiedName }" の事前バリデーション修正中に次のエラーが発生しました。\n` +
+          `プロパティ・要素の「${ targetPropertyDotSeparatedQualifiedName }」バリデーション前の変換中に以下のエラーが発生。\n` +
           `${ stringifiedCaughtError }\n` +
-          "このエラーは、エラーハンドリング戦略 \"onPreValidationModificationFailed\" が " +
-          "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" に設定されているため、警告として報告されました。" +
-          "ただしこれは推奨されません。なぜなら、事前バリデーションの失敗は、修正関数がソースデータの全ての可能なパターンを " +
-          "考慮していないことを意味し、後続の処理にエラーを引き起こす可能性があるためです。"
+          "エラー「onPreValidationModificationFailed」の処理の戦略「ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid」" +
+            "は非推薦だが、これが選ばれたので当エラーが警告として出力された。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
+
     },
 
     unableToDeletePropertyWithOutdatedKey: {
 
-      title: "古いキーを持つプロパティを削除できません",
+      title: "旧名プロパティ削除不可能",
 
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
-          propertyNewKey
+          propertyNewKey,
+          documentationPageAnchor
         }: Warnings.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" は "${ propertyNewKey }" にリネームされましたが、` +
-          "このプロパティは configurable ではなく、かつ処理方法が元オブジェクトの操作であり、" +
-          "\"mustLeaveEvenRenamed\" が true に設定されていないため、削除できません。"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」のコピーの「${ propertyNewKey }」を作成してから、` +
+            "`configurable: false`の為削除不可能。" +
+          "その他に、処理アプローチは既存のオブジェクトの変更となり、`mustLeaveEvenRenamed`オプションに`true`が設定されていない。" +
+          "エラー「onPreValidationModificationFailed」の処理の戦略「ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid」" +
+            "は非推薦だが、これが選ばれたので当エラーが警告として出力された。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     unableToChangePropertyDescriptors: {
@@ -576,12 +626,17 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       title: "プロパティディスクリプターの変更ができません",
 
       generateDescription: (
-        { targetPropertyDotSeparatedQualifiedName }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
+        {
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
+        }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" のディスクリプターを変更できませんでした。` +
-          "このエラーは、エラーハンドリング戦略 \"unableToChangePropertyDescriptors\" が " +
-          "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" に設定されているため、警告として報告されました。" +
-          "ただしこれは推奨されません。なぜなら、出力データが期待と異なるにも関わらず、有効と判定されてしまう可能性があるためです。"
+          `プロパティ「${ targetPropertyDotSeparatedQualifiedName }」は\`configurable: false\`になっていると他に、処理アプローチは` +
+            "既存のオブジェクトの変更なので、記述子の変更は不可能。" +
+          "エラー「onPreValidationModificationFailed」の処理の戦略「ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid」" +
+            "は非推薦だが、これが選ばれたので当エラーが警告として出力された。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
+
     },
 
     unableToUpdatePropertyValue: {
@@ -590,15 +645,15 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
       generateDescription: (
         {
-          targetPropertyDotSeparatedQualifiedName
+          targetPropertyDotSeparatedQualifiedName,
+          documentationPageAnchor
         }: ThrowableErrors.UnableToUpdatePropertyValue.TemplateVariables
       ): string =>
-          `プロパティ "${ targetPropertyDotSeparatedQualifiedName }" に対して、` +
-          "デフォルト値の補完または事前修正による更新が要求されましたが、" +
-          "このプロパティは読み取り専用であるため、更新できませんでした。\n" +
-          "このエラーは、エラーハンドリング戦略 \"onUnableToUnableToUpdatePropertyValue\" が " +
-          "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" に設定されているため、警告として報告されました。" +
-          "ただしこれは推奨されません。なぜなら、出力データが期待と異なるにも関わらず、有効と判定されてしまう可能性があるためです。"
+          `プロパティー「${ targetPropertyDotSeparatedQualifiedName }」の変更が規定値の代入か、前バリデーションの変換により要求された、` +
+            "読み込み専用のプロパティーとして上書き不可能。" +
+          "エラー「onPreValidationModificationFailed」の処理の戦略「ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid」" +
+            "は非推薦だが、これが選ばれたので当エラーが警告として出力された。" +
+          rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
   },

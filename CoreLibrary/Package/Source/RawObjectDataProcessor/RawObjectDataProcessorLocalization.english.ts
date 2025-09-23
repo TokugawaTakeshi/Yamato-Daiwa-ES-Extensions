@@ -56,9 +56,10 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
 
   /* ━━━ Validation Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  /* [ To Editor ]
-   * Most of the following messages will be the part of above `generateValidationErrorMessage` template.
-   * So, even the ambiguous expressions like "this property" will be clear as the part of above template. */
+  /* [ To English Native Speakers Editors ]
+   * Most of the following messages will be part of template including to above "generateValidationErrorMessage".
+   * So, even the ambiguous expressions like "this property" or "this string" will be clear as the part of the above
+   * template. */
   validationErrors: {
 
     rawDataIsNotObject: {
@@ -97,8 +98,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           "The following error has occurred during the pre-validation modification of this property/element. \n" +
             `${ stringifiedCaughtError }\n` +
           "The data has been marked as invalid because the error handling strategy \"onPreValidationModificationFailed\" " +
-            "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended because the problem can " +
-            "be in pre-validation modification function, not always in the data. "
+            "is \"ErrorHandlingStrategies.markingOfDataAsInvalid\" what is not recommended. "
 
     },
 
@@ -275,12 +275,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     },
 
     disallowedKeysFoundInAssociativeArray: {
-      title: "Disallowed Key(s) Found in Associative Array",
+      title: "Disallowed Keys of Associative Array",
       generateDescription: (
           { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
       ): string =>
-          "Below keys presents in this associative array while these keys are disallowed.\n" +
-        foundDisallowedKeys.
+          "The following keys presents in this associative array while these keys are disallowed.\n" +
+          foundDisallowedKeys.
               map((foundDisallowedKey: string): string => `  ● ${ foundDisallowedKey }`).
               join("\n")
     },
@@ -288,14 +288,14 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     /* ┅┅┅ Indexed Arrays and Tuples ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     indexedArrayElementsCountIsLessThanRequiredMinimum: {
-      title: "Indexed Array has Less Elements than Expected Minimum",
+      title: "Too Few Elements in Indexed Array",
       generateDescription: (
         {
           minimalElementsCount,
           actualElementsCount
         }: ValidationErrors.IndexedArrayElementsCountIsLessThanRequiredMinimum.TemplateVariables
       ): string =>
-          `This value of indexed array type has ${ actualElementsCount } elements while at least ` +
+         `This value of indexed array has ${ actualElementsCount } elements while at least ` +
             `${ minimalElementsCount } expected.`
     },
 
@@ -307,12 +307,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           actualElementsCount
         }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
       ): string =>
-          `This value of indexed array type has ${ actualElementsCount } elements while maximally ` +
+          `This value of indexed array has ${ actualElementsCount } elements while maximally ` +
             `${ maximalElementsCount } expected.`
     },
 
     indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
-      title: "The Count of Elements of Indexed Array or Tuple does not Match with Expected Fixed Value",
+      title: "Wrong Exact Number of Element in Indexed Array or Tuple",
       generateDescription: (
         {
           exactElementsCount,
@@ -328,7 +328,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     forbiddenNaN_Value: {
       title: "Forbidden NaN Value Of Numeric Property/Element",
       description:
-          "The value of this numeric property/element is NaN while NaN has been explicitly forbidden. "
+          "The value of this numeric property or element is NaN while it has been explicitly forbidden. "
     },
 
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -346,7 +346,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { allowedAlternatives }: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
       ): string =>
-          "This value is not among following allowed alternatives.\n" +
+          "This value is not among following allowed alternatives:\n" +
           allowedAlternatives.map((allowedAlternative: string | number): string =>
               `  ○ ${ allowedAlternative }`).join("\n")
     },
@@ -364,7 +364,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { allowedMaximum }: ValidationErrors.NumericValueIsGreaterThanAllowedMaximum.TemplateVariables
       ): string =>
-          `This value is greater than required maximal value ${ allowedMaximum }.`
+          `This value is greater than allowed maximal value ${ allowedMaximum }.`
     },
 
 
@@ -377,7 +377,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           realCharactersCount
         }: ValidationErrors.CharactersCountIsLessThanRequired.TemplateVariables
       ): string =>
-          `This string value has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`
+          `This string has ${ realCharactersCount } characters while at least ${ minimalCharactersCount } required.`
     },
 
     charactersCountIsMoreThanAllowed: {
@@ -388,8 +388,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           realCharactersCount
         }: ValidationErrors.CharactersCountIsMoreThanAllowed.TemplateVariables
       ): string =>
-          `This string value has ${ realCharactersCount } characters while ${ maximalCharactersCount } allowed ` +
-            "as maximum."
+          `This string has ${ realCharactersCount } characters while maximally ${ maximalCharactersCount } allowed.`
     },
 
     charactersCountDoesNotMatchWithSpecified: {
@@ -400,22 +399,22 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           realCharactersCount
         }: ValidationErrors.CharactersCountDoesNotMatchWithSpecified.TemplateVariables
       ): string =>
-          `The value has ${ realCharactersCount } characters while exactly ${ fixedCharactersCount } required.`
+          `The value has ${ realCharactersCount } characters while exactly ${ fixedCharactersCount } expected.`
     },
 
     forbiddenCharactersFound: {
-      title: "Forbidden Characters Found",
+      title: "Forbidden Characters",
       generateDescription: (
         { foundForbiddenCharacters }: ValidationErrors.ForbiddenCharactersFound.TemplateVariables
       ): string =>
-          "The following characters are forbidden:\n" +
+          "This string including the following characters which has been forbidden:\n" +
             foundForbiddenCharacters.map((character: string): string => `● ${ character }`).join("\n")
     },
 
     regularExpressionMismatch: {
       title: "Regular Expression Mismatch",
       generateDescription: ({ regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables): string =>
-          `This string value does not match with specified regular expression:\n ${ regularExpression.toString() }`
+          `This string does not match with specified regular expression:\n ${ regularExpression.toString() }`
     },
 
 
@@ -433,13 +432,17 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription:
           ({ targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
               `This value has type ${ targetPropertyType } which currently not supported as any other type incompatible ` +
-                " with parsed JSON"
+                "with JSON."
     }
 
   },
 
 
   /* ━━━ Throwable Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* [ To English Native Speakers Editors ]
+   * Unlike the validation errors case, the following messages are not the part of template including to above
+   *   `generateValidationErrorMessage`, thus the context-dependent expressions like "this property" or "this string"
+   *   will be unclear. */
   throwableErrors: {
 
     objectSchemaNotSpecified: {
@@ -498,7 +501,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           documentationPageAnchor
         }: ThrowableErrors.PropertyUndefinedabilityNotSpecified.TemplateVariables
       ): string =>
-        "It has not been specified how to process the undefined value of the property/element " +
+        "It has not been specified how to process the undefined value of the property " +
           `\`${ targetPropertyDotSeparatedQualifiedName }\`. ` +
         rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
@@ -513,7 +516,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           documentationPageAnchor
         }: ThrowableErrors.PropertyNullabilityNotSpecified.TemplateVariables
       ): string =>
-          "It has not been specified how to process the null value of the property/element " +
+          "It has not been specified how to process the null value of the property " +
             `\`${ targetPropertyDotSeparatedQualifiedName }\`. ` +
         rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
@@ -521,7 +524,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
     dataTypeNotSpecified: {
 
-      title: "Data Type not Specified",
+      title: "Unsupported or Not Specified Data Type",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
@@ -535,7 +538,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
                 `Unsupported data type "${ specifiedStringifiedType } has been"`
           ) +
           `specified for property/element "${ targetPropertyDotSeparatedQualifiedName }". ` +
-          "It is possible only with TypeScript error. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -569,8 +571,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
           `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }" because this ` +
-            "property is not configurable while the processing approach is the manipulations with source object and " +
-            "\"mustLeaveEvenRenamed\" has not been set to true. " +
+            "property is not configurable while the processing approach is the manipulations with source object. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -587,8 +588,6 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       ): string =>
           `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
             "value substitution or pre-validation modification while this property is read-only. " +
-          "This error has been thrown because the error handling strategy \"onUnableToUnableToUpdatePropertyValue\" " +
-            "is \"ErrorHandlingStrategies.throwingOfError\" which is default. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -611,19 +610,28 @@ const rawObjectDataProcessorLocalization__english: Localization = {
                   `associative array "${ targetPropertyDotSeparatedQualifiedName }" `
               ) +
               "what it the contradiction. " +
-              "You can specify allowed keys or forbidden keys but not both." +
+              "Either allowed keys or forbidden ones can be specified but not both." +
               rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     incompatibleValuesTypesAlternatives: {
       title: "Incompatible Values Types Alternatives",
       generateDescription: (
-        { targetValueStringifiedSpecification }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
+        {
+          isIndexedArrayLikeType,
+          documentationPageAnchor
+        }: ThrowableErrors.IncompatibleValuesTypesAlternatives.TemplateVariables
       ): string =>
-          "The 'ValuesTypesIDs.fixedKeyAndValuePairsObject' (aliased as Object) and " +
-            "'ValuesTypesIDs.associativeArrayOfUniformTypeValues' (aliased as Map) are incompatible alternatives of " +
-            "'ValuesTypesIDs.oneOf' because from the viewpoint of ECMAScript both are the 'object'. " +
-          `Please fix the specification of this property.\n ${ targetValueStringifiedSpecification }`
+          "The" +
+            (
+              isIndexedArrayLikeType ?
+                  "`ValuesTypesIDs.indexedArray` (aliased as `Array`) and `ValuesTypesIDs.tuple`" :
+                  "`ValuesTypesIDs.fixedSchemaObject` (aliased as `Object`) and `ValuesTypesIDs.associativeArray`"
+            ) +
+            "are incompatible alternatives of `ValuesTypesIDs.polymorphic` because from the viewpoint of ECMAScript " +
+            "both are the " +
+            (isIndexedArrayLikeType ? "`Array`" : "`Object`") +
+          rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     bothAllowedAndForbiddenCharactersSpecified: {
@@ -634,8 +642,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           documentationPageAnchor
         }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
       ): string =>
-          "Both allowed and forbidden characters has been specified for property/element " +
-              `${ targetPropertyDotSeparatedQualifiedName } what it the contradiction. ` +
+          "Both allowed and forbidden characters has been specified for string-type property/element " +
+            `${ targetPropertyDotSeparatedQualifiedName } what it the contradiction. ` +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
@@ -656,13 +664,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           documentationPageAnchor
         }: Warnings.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "The following error has occurred during the pre-validation modification of the property/element " +
+          "The error has occurred during the pre-validation modification of the property/element " +
             `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
           `${ stringifiedCaughtError }\n` +
           "This error has been reported as warning because the error handling strategy " +
             "\"onPreValidationModificationFailed\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because failed pre-validation means that the pre-validation modification function " +
-            "does not respect all possible variations of the source data and could cause the subsequent errors. " +
+            "what is not recommended. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -681,6 +688,9 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `Unable to delete the property "${ targetPropertyDotSeparatedQualifiedName }" after renaming to ` +
             `"${ propertyNewKey }" because it is not configurable while the processing approach is the manipulations ` +
             "with source object and \"mustLeaveEvenRenamed\" has not been set to true. " +
+          "This error has been reported as warning because the error handling strategy " +
+            "\"unableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+            "what is not recommended. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -695,10 +705,11 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           documentationPageAnchor
         }: Warnings.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }". ` +
+          `Unable to change the descriptions of property "${ targetPropertyDotSeparatedQualifiedName }" because this ` +
+            "property is not configurable while the processing approach is the manipulations with source object. " +
           "This error has been reported as warning because the error handling strategy " +
             "\"unableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
+            "what is not recommended. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -716,8 +727,8 @@ const rawObjectDataProcessorLocalization__english: Localization = {
           `The updating of the property "${ targetPropertyDotSeparatedQualifiedName }" has been requested via default ` +
             "value substitution or pre-validation modification while this property is read-only. " +
           "This error has been reported as warning because the error handling strategy " +
-            "\"onUnableToUnableToUpdatePropertyValue\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
-            "what is not recommended because the output data will differ with expected one while could be marked as valid. " +
+            "\"unableToChangePropertyDescriptors\" is \"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\" " +
+            "what is not recommended. " +
           rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
 
     }

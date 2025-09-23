@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "scripts": {
+    "Set Version and Symlinkify Internal Dependencies": "ydmh version",
+    "Desymlinky Internal Dependencies and Publish": "ydmh publish"
+  },
+  "devDependencies": {
+    "@yamato-daiwa/monorepo-helper": "../../YamatoDaiwaMonorepoHelper"
+  },
+  "ydmh": {
+    "packages": [
+      {
+        "relativePath": "CoreLibrary/Package",
+        "productionBuildingScript": "Rebuild Distributable"
+      },
+      {
+        "relativePath": "BrowserJS/Package",
+        "productionBuildingScript": "Rebuild Distributable"
+      },
+      {
+        "relativePath": "NodeJS/Package",
+        "productionBuildingScript": "Rebuild Distributable"
+      },
+      {
+        "relativePath": "CoreLibrary/OfficialLocalizations/Japanese",
+        "productionBuildingScript": "Rebuild Distributable"
+      },
+      {
+        "relativePath": "CoreLibrary/OfficialLocalizations/Russian",
+        "productionBuildingScript": "Rebuild Distributable"
+      }
+    ]
+  }
+}

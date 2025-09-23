@@ -4,7 +4,7 @@ import Assert from "assert";
 
 
 Testing.suite(
-  "createArrayOfNaturalNumbers",
+  createArrayOfNaturalNumbers.name,
   async (): Promise<void> => {
 
     await Promise.all([

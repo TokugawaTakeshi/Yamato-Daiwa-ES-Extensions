@@ -6,7 +6,10 @@ export default function isIntegerOnAnySign(potentialInteger: number): boolean;
 export default function isIntegerOnAnySign(potentialInteger: unknown): potentialInteger is number;
 
 
-/** @alias isPositiveIntegerOrZero */
+/**
+ * @alias isPositiveIntegerOrZero
+ * @deprecated Will be removed at 1.9. Use `isIntegerOfAnySign` instead.
+ * */
 export default function isIntegerOnAnySign(potentialInteger: unknown): potentialInteger is number {
   return typeof potentialInteger === "number" ? Number.isInteger(potentialInteger) : false;
 }

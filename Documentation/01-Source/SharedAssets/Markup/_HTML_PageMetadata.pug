@@ -3,7 +3,7 @@
   const HTML_PAGES_TITLE_POSTFIX = " - Yamato Daiwa ES Extensions (YDEE)";
 
   function buildHTML_PageTitle(dynamicPart) {
-    return `${ dynamicPart }${ HTML_PAGES_TITLE_POSTFIX }`;
+    return `${ dynamicPart.replaceAll(/<\/?code>/gu, "") }${ HTML_PAGES_TITLE_POSTFIX }`;
   }
 
   RegularWebPageTemplate__YDF.metadata.author = "Copyright (c) 2023-present, Yamato Daiwa Co., Ltd.";

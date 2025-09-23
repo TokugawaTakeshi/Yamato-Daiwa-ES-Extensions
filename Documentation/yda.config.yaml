@@ -6,6 +6,11 @@ $projectBuilding:
 
       $production: 03-ProductionBuild
 
+    $filesWatching:
+
+      $relativePathsOfExcludeDirectories:
+        - 03-ProductionBuild
+
 
   # ━━━ Markup Processing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   $markupProcessing:
@@ -159,10 +164,3 @@ $projectBuilding:
           $rootDirectoryRelativePath: 02-LocalDevelopmentBuild
 
         $openInBrowsers: chrome
-
-
-  # ━━━ Files Watching ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  $filesWatching:
-
-    $relativePathsOfExcludeDirectories:
-      - 03-ProductionBuild

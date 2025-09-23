@@ -16,7 +16,7 @@ const sample: Array<Product> = [
 
 
 Testing.suite(
-  "getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne",
+  getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.name,
   async (): Promise<void> => {
 
     await Promise.all([

@@ -55,6 +55,7 @@ export default function hasStringOnlySpecificCharacters(
     } else if (isString(characters.other)) {
       addElementsToSet({ targetSet: allowedCharactersSet, newElements: splitString(characters.other, "") });
     }
+
   }
 
   for (const character of splitString(targetString, "")) {
@@ -65,4 +66,5 @@ export default function hasStringOnlySpecificCharacters(
 
 
   return true;
+
 }
