@@ -5,7 +5,7 @@ module.exports = [
 
   {
     ignores: [
-      "Distributable/*"
+      "Distributable/"
     ]
   },
 

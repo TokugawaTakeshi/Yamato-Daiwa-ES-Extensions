@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: "",
+        description:
+            "Пример использования «RawObjectDataProcessor» — класса для валидации и обработки данных типа «объект» " +
+              "библиотеки «Yamato Daiwa ECMAScript Extensions» (сокращённо — «YDEE»)",
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -53,14 +55,8 @@ block append SpecificContent
 
     p.Article-Paragraph.
       Допустим, значение #[+Term--YDID параметра] #[+SecondaryEntity__Code--YDID externalData] получено
-        из внешнего источника данных, недосягаемого для проверки типов с помощью #[+ImportantEntity--YDID TypeScript].
-      В частности, это могут быть следующие сценарии:
-
-    ul.Article-UnorderedList
-      li Полученные данных с клиентской части в клиент-серверном взаимодействии
-      li Наоборот, полученные данных с серверной части в клиент-серверном взаимодействии
-      li Получение данных из базы данных
-      li Чтение данных из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+        из #[+Keyword--YDID внешнего] источника данных,
+        #[+Keyphrase--YDID недосягаемого для проверки #[+Term--YDID типов] с помощью #[+ImportantEntity--YDID TypeScript]].
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
@@ -69,10 +65,19 @@ block append SpecificContent
         }
 
     p.Article-Paragraph.
+      В частности, это могут быть следующие сценарии:
+
+    ul.Article-UnorderedList
+      li Полученные данных с клиентской части при клиент-серверном взаимодействии
+      li Наоборот, полученные данных с серверной части при клиент-серверном взаимодействии
+      li Получение данных из базы данных
+      li Чтение данных из файла (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] и подобных)
+
+    p.Article-Paragraph.
       Мы ожидаем, что полученные данные будут иметь #[+Term--YDID тип] #[+SecondaryEntity__Code--YDID SampleType],
-        однако какими будут эти данные в реальности при выполнении программы —
-        #[+Keyphrase--YDID на стадии написания кода мы знать не&nbsp;можем], поэтому #[+Term--YDID параметр] и имеет
-        #[+Term--YDID тип] #[+SecondaryEntity__Code--YDID unknown], а
+        однако какими будут эти данные на самом деле при выполнении программы —
+        #[+Keyphrase--YDID на стадии написания кода мы знать #[+Keyword--YDID не]&nbsp;можем], поэтому
+        #[+Term--YDID параметр] и имеет #[+Term--YDID тип] #[+ImportantEntity__Code--YDID unknown], а
         #[+Keyword--YDID не]&nbsp;#[+SecondaryEntity__Code--YDID SampleType].
 
     +CodeViewer--YDF
@@ -92,7 +97,7 @@ block append SpecificContent
     p.Article-Paragraph
       | Ввиду этого, просто взять и привести #[+Term--YDID тип] наподобие
       |   #[+SecondaryEntity__Code--YDID externalData as SampleType] #[+Keyword--YDID небезопасно].
-      | Хотя в силу природы #[+ImportantEntity--YDID TypeScript] в итоге так сделать и придётся
+      | Хотя в силу природы #[+ImportantEntity--YDID TypeScript] так сделать в итоге придётся
       |   (см.
       |
       +Link--YDF({
@@ -104,11 +109,12 @@ block append SpecificContent
     p.Article-Paragraph.
       Решая эту задачу с помощью #[+ImportantEntity--YDID RawObjectDataProcessor], #[+Keyword--YDID необходимо] определить
         #[+Term--YDID спецификацию валидных данных] — по сути это #[+Term--YDID объект], в котором описаны
-        #[+Term--YDID метаданные] для конкретных данных, в частности ожидаемые #[+Term--YDID типы] #[+Keyword--YDID каждого]
-        #[+Term--YDID свойства], их #[+Term--YDID обязательность] и прочие ограничения.
-      Для демонстрации, помимо указания ожидаемых #[+Term--YDID типов] добавлены и некоторые другие ограничения,
-        например ограничение по количеству символов или список возможных значений.
-      На практике, такая функциональность довольно востребована, потому она не&nbsp;сделает этот пример избыточным.
+        #[+Term--YDID метаданные] для конкретных данных, в частности ожидаемые #[+Term--YDID типы]
+        #[+Keyword--YDID каждого] #[+Term--YDID свойства], их #[+Term--YDID обязательность] и прочие ограничения.
+      Для демонстрации, помимо указания ожидаемых #[+Term--YDID типов] #[+Term__Contrast--YDID свойств] добавлены и
+        некоторые другие ограничения, максимальное количество символов для строковых #[+Term--YDID свойств]
+        или список возможных значений.
+      На практике такая валидация довольно востребована, потому она не&nbsp;сделает этот пример избыточным.
 
     +CodeViewer--YDF
       +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
@@ -176,7 +182,7 @@ block append SpecificContent
     p.Article-Paragraph.
       Когда #[+Term--YDID спецификация валидных данных] определена, нужно передать её через #[+Term--YDID параметр]
         #[+Keyword--YDID статическому] #[+Term--YDID методу] #[+ImportantEntity--YDID process]
-        #[+Term--YDID класса] #[+ImportantEntity--YDID RawObjectDataProcessor] вместе с данными пока ещё
+        #[+Term--YDID класса] #[+ImportantEntity--YDID RawObjectDataProcessor] вместе с исходными данными пока ещё
         #[+Term--YDID типа] #[+ImportantEntity__Code--YDID unknown]:
 
     +CodeViewer--YDF
@@ -208,8 +214,9 @@ block append SpecificContent
 
     p.Article-Paragraph.
       Особенность его том, что мы #[+Keyword--YDID не]&nbsp;можем обратиться к #[+Term--YDID свойству]
-        #[+ImportantEntity__Code--YDID processedData] до тех пор, пока не&nbsp;проверим #[+Term--YDID свойство]
-        #[+ImportantEntity__Code--YDID isInvalid]:
+        #[+ImportantEntity__Code--YDID processedData] до тех пор, пока не&nbsp;докажем
+        #[+ImportantEntity--YDID TypeScript]-у, что #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID isInvalid]
+        имеет значение #[+ImportantEntity__Code--YDID false]:
 
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
@@ -245,9 +252,9 @@ block append SpecificContent
         }
 
     p.Article-Paragraph.
-      Если же #[+ImportantEntity__Code--YDID isRawDataInvalid] имеет значение #[+ImportantEntity__Code--YDID true], то к
-        #[+ImportantEntity__Code--YDID processedData] обратиться всё ещё #[+Keyword--YDID нельзя], потому что его просто
-        #[+Keyword--YDID нет], а вместо него можно обратиться к #[+Term--YDID массиву], в котором содержатся сообщения
+      Но и если #[+ImportantEntity__Code--YDID isRawDataInvalid] имеет значение #[+ImportantEntity__Code--YDID true], то
+        к #[+Term--YDID свойству] #[+ImportantEntity__Code--YDID processedData] обратиться всё ещё #[+Keyword--YDID нельзя],
+        потому что его просто #[+Keyword--YDID нет], а вместо него можно обратиться к #[+Term--YDID массиву], в котором содержатся сообщения
         об ошибках валидации, то есть описания всех несоответствий реальных данных ожидаемым.
       Как на эти ошибки валидации реагировать — решает разработчик в зависимости от специфики его задачи, но обычно
         это оповещение пользователя и/или бросание ошибки:
@@ -265,8 +272,8 @@ block append SpecificContent
         }
 
     p.Article-Paragraph.
-      Как видно из примера выше, #[+ImportantEntity--YDID RawObjectDataProcessor] имеет также
-        #[+Term--YDID статический метод] для форматирования сообщений об ошибоках валидации.
+      Как видно из примера выше, #[+ImportantEntity--YDID RawObjectDataProcessor] также имеет
+        #[+Term--YDID статический метод] для форматирования сообщений об ошибках валидации.
       Например, при вызове функции #[+SecondaryEntity__Code--YDID onDataRetrieved] со следующими входными данными:
 
     +CodeViewer--YDF
@@ -289,15 +296,16 @@ block append SpecificContent
       Expected and Actual Numbers Set Mismatch [ VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET ]
 
       ● Property / Element: foo
-      Contrary to expectations, this numeric value is in not member of "positive integer or zero"
+      Contrary to expectations, this numeric value is not member of "positive integer or zero"
       See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET
 
       ●　Property / Element Specification:
       {
-        "type": "number",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": true,
-        "numbersSet": "POSITIVE_INTEGER_OR_ZERO"
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
       }
       ● Actual Value: -4
 
@@ -305,20 +313,20 @@ block append SpecificContent
       Minimal Characters Count Fall Short [ VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED ]
 
       ● Property / Element: bar
-      This string value has 3 characters while at least 5 required.
+      This string has 3 characters while at least 5 required.
       See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED
 
       ●　Property / Element Specification:
       {
-        "type": "string",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": true,
-        "minimalCharactersCount": 5
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5
       }
-      ● Actual Value: abc
+      ● Actual Value: "abc"
 
       ─── Error No. 3 ────────────────────────────────────────────────────────────────
-      Forbidden Undefined Value Of Property/Element [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
 
       ● Property / Element: baz
       This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
@@ -326,14 +334,14 @@ block append SpecificContent
 
       ●　Property / Element Specification:
       {
-        "type": "boolean",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": true
+        type: "boolean",
+        isUndefinedForbidden: true,
+        isNullForbidden: true
       }
       ● Actual Value: undefined
 
       ─── Error No. 4 ────────────────────────────────────────────────────────────────
-      Forbidden Undefined Value Of Property/Element [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
 
       ● Property / Element: fuga
       This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
@@ -341,10 +349,11 @@ block append SpecificContent
 
       ●　Property / Element Specification:
       {
-        "type": "number",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": false,
-        "numbersSet": "POSITIVE_INTEGER_OR_ZERO"
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: false,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
       }
       ● Actual Value: undefined
 
@@ -357,11 +366,12 @@ block append SpecificContent
 
       ●　Property / Element Specification:
       {
-        "type": "number",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": true,
-        "numbersSet": "ANY_INTEGER",
-        "minimalValue": 3
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "ANY_INTEGER",
+        isNaN_Forbidden: true,
+        minimalValue: 3
       }
       ● Actual Value: 2
 
@@ -369,7 +379,7 @@ block append SpecificContent
       Disallowed Alternative of Value [ VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES ]
 
       ● Property / Element: quux.bravo
-      This value is not among following allowed alternatives.
+      This value is not among following allowed alternatives:
         ○ PLATINUM
         ○ GOLD
         ○ SILVER
@@ -377,21 +387,20 @@ block append SpecificContent
 
       ●　Property / Element Specification:
       {
-        "type": "string",
-        "isUndefinedForbidden": true,
-        "isNullForbidden": true,
-        "minimalCharactersCount": 5,
-        "allowedAlternatives": [
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5,
+        allowedAlternatives: [
           "PLATINUM",
           "GOLD",
           "SILVER"
         ]
       }
-      ● Actual Value: BRONZE
-
-          at onDataRetrieved (D:\Demo.ts:85:11)
-          at <anonymous> (D:\Demo.ts:97:1)
-          at Object.<anonymous> (D:\Demo.ts:104:2)
+      ● Actual Value: "BRONZE"
+          at onDataRetrieved (D:\Demo.ts:87:11)
+          at <anonymous> (D:\Demo.ts:99:1)
+          at Object.<anonymous> (D:\Demo.ts:106:2)
           at Module._compile (node:internal/modules/cjs/loader:1730:14)
           at Object.transformer (C:\Users\I\AppData\Roaming\npm\node_modules\tsx\dist\register-DpmFHar1.cjs:2:1186)
           at Module.load (node:internal/modules/cjs/loader:1465:32)
@@ -440,7 +449,7 @@ block append SpecificContent
 
       li.
         #[+Term--YDID Ассоциативные массивы] — отличаются от #[+Term--YDID объектов фиксированной структуры]
-          #[+Keyword--YDID произвольным] количеством пар #[+Term--YDID ключ-значение], однако #[+Keyword--YDID все]
+          #[+Keyword--YDID произвольным] количеством пар #[+Term--YDID ключ-значение], но при этом #[+Keyword--YDID все]
           значения #[+Keyword--YDID должны] подчиняться #[+Keyword--YDID единой] закономерности.
 
       li #[+Term--YDID Индексные массивы]
@@ -450,8 +459,9 @@ block append SpecificContent
           особые ограничения.
 
     p.Article-Paragraph.
-      Почему же #[+Term--YDID класс] называется #[+ImportantEntity--YDID RawObjectDataProcessor], а
-        не&nbsp;#[+SecondaryEntity--YDID RawObjectDataValidator]?
+      Почему же #[+Term--YDID класс] называется #[+ImportantEntity--YDID RawObjectDataProcessor]
+        («обработчик сырых объектных данных»), а не&nbsp;#[+SecondaryEntity--YDID RawObjectDataValidator]
+        («валидатор сырах объектных данных»)?
       Потому что он может не&nbsp;только валидировать данные, но и вносить в них изменения, в частности переименовывать
         ключи и менять значения.
       Всё это и многое другое описано далее в настоящей документации.

@@ -1,9 +1,9 @@
-# Yamato Daiwa ES Extensions (YDEE)
+# Yamato Daiwa E(CMAScript) Extensions (YDEE)
 
 [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/README.md)
-![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package)
+[![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 [![NPM Version](https://img.shields.io/npm/v/@yamato-daiwa/es-extensions)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
@@ -51,7 +51,7 @@ npm i @yamato-daiwa/es-extensions -E
     <ul>
       <li>
         Integrated with <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html"><code>RawObjectDataProcessor</code></a>
-          for validation of response data.
+          for validation and, if required, processing of response data.
       </li>
       <li>
         Needs some implementation, but there is the pre-made one:
@@ -71,7 +71,7 @@ npm i @yamato-daiwa/es-extensions -E
   <dd>
     The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
       used by <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
-      and should be used to implement the custom serializing algorithm for URI query parameters.  
+      and intended be used to implement the custom serializing algorithm for URI query parameters.  
   </dd>
 
 </dl>

@@ -35,12 +35,22 @@ export default function extractAndValidateDatasetFromDOM_Element<ExtractedDatase
 
 
   const datasetProcessingResult: RawObjectDataProcessor.ProcessingResult<ExtractedDataset> = RawObjectDataProcessor.process(
+
     targetDOM_Element.dataset,
+
     {
       nameForLogging: targetDOM_ElementNameOrSelectorForLogging,
       subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
       properties: validDataSpecification
-    }
+    },
+
+    /* [ Theory ]
+     * The `targetDOM_Element.dataset` has `DOMStringMap`, it not a plain object.
+     * Because the renaming of some properties and/or another transformation may be requested, the manipulations with
+     *   source object will cause the bugs is nome cases.
+     * */
+    { processingApproach: RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject }
+
   );
 
   if (datasetProcessingResult.isRawDataInvalid) {
