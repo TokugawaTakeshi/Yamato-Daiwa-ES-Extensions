@@ -404,8 +404,8 @@ block append SpecificContent
       Node.js v22.15.0
 
     p.Article-Paragraph.
-      #[+ImportantEntity__Code--YDID isRawDataInvalid]が#[+ImportantEntity__Code--YDID false]の場合は、
-        #[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセスして利用できます。
+      #[+ImportantEntity__Code--YDID isRawDataInvalid]が#[+ImportantEntity__Code--YDID false]の場合、
+        #[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセスして利用可能。
 
     +CodeViewer--YDF
       +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
@@ -424,31 +424,31 @@ block append SpecificContent
 
           console.log(externalDataProcessingResult.processedData)
         +CodeViewer-Explanation--YDF.
-          ここではすでに#[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]に
-            アクセス #[+Keyword--YDID できます]。
-          直前の#[+Term--YDID if ブロック]内でエラーを投げることにより、
+          此処では既に#[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセス#[+Keyword--YDID 出来る]。
+          直前の#[+Term--YDID if ブロック]内でエラーを投げる事に依り、
             #[+ImportantEntity__Code--YDID { isRawDataInvalid: true; validationErrorsMessages: ReadonlyArray&lt;string&gt; }]
-            という#[+Term--YDID 部分型]が#[+Keyword--YDID 除外]されているためです。
-          もし上記のコードを含む#[+Term--YDID 関数]／#[+Term--YDID メソッド]が妥当なデータを返す必要がないなら、
-            エラー送出の代わりに#[+Term--YDID キーワード]#[+ImportantEntity__Code--YDID return]を使っても構いません。
+            という#[+Term--YDID 部分型]が#[+Keyword--YDID 除外]されている為。
+          もし上記のコードを含む#[+Term--YDID 関数]・#[+Term--YDID メソッド]が妥当なデータを返す必要がないなら、エラー投擲の代わりに
+            #[+ImportantEntity__Code--YDID return]#[+Term--YDID キーワード]を使っても良い場合が有る。
 
     p.Article-Paragraph.
-      上記の例のような#[+Term--YDID 固定スキーマのオブジェクト]以外にも、#[+ImportantEntity--YDID RawObjectDataProcessor]は他の種類の
-        オブジェクトも検証できます。
+      上記の例の様な#[+Term--YDID 固定スキーマのオブジェクト]以外にも、#[+ImportantEntity--YDID RawObjectDataProcessor]は他の種類の
+        #[+Term--YDID オブジェクト]も検証出来る。
 
     ul.Article-UnorderedList
 
       li.
-        #[+Term--YDID 連想配列] — #[+Term--YDID 固定スキーマのオブジェクト]と異なり、#[+Term--YDID キー—値]組の数が
-          #[+Keyword--YDID 任意]ですが、#[+Keyword--YDID すべての]値は#[+Keyword--YDID 単一の]パターンに従わなければなりません。
+        #[+Term--YDID 連想配列]。#[+Term__Contrast--YDID 固定スキーマのオブジェクト]と異なり、#[+Term--YDID キー・値]組数が
+          規制は無いが、#[+Keyword--YDID 全]値は#[+Keyword--YDID 共通の]規則に従わなければいけない。
 
-      li #[+Term--YDID インデックス付き配列]
+      li #[+Term--YDID 指数配列]
+
       li.
-        #[+Term--YDID タプル] — #[+Term--YDID インデックス付き配列] と異なり、要素数と順序が #[+Keyword--YDID 固定] で、
-          さらに #[+Keyword--YDID 各] 要素ごとに個別の制約を設定できます。
+        #[+Term--YDID タプル]。#[+Term--YDID 指数配列]と異なり、要素数と順序が#[+Keyword--YDID 固定]で、
+          更に#[+Keyword--YDID 各]#[+Term--YDID 要素]#[+Keyword--YDID 毎]に個別の制約を設定可能。
 
     p.Article-Paragraph.
-      なぜこの #[+Term--YDID クラス] 名が #[+ImportantEntity--YDID RawObjectDataProcessor] であり、
-        #[+SecondaryEntity--YDID RawObjectDataValidator] では #[+Keyword--YDID ない] のか？
-      それは検証だけでなく変換（特にキーのリネームや値の変換）も可能だからです。
-      これらの詳細はこの後のドキュメントで解説します。
+      何故此の#[+Term--YDID クラス]名が#[+SecondaryEntity--YDID RawObjectDataValidator]（「生オブジェクト型データのバリデータ」）ではなく、
+        #[+ImportantEntity--YDID RawObjectDataProcessor]（「生オブジェクト型データのプロセッサ」）になっているだろうか。
+      理由は、此のクラスが妥当性確認を行っているだけでなく、必用に応じて変換（例えばキーの名前の変更や値の変更）も可能という事。
+      今後詳細を当説明書に解説。
