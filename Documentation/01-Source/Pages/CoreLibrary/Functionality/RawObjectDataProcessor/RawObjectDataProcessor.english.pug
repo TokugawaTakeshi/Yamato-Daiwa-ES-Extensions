@@ -51,4 +51,24 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= topHeading
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      #[+Term--YDID Class] for #[+Term--YDID validating] and processing data of type #[+Term--YDID "object"] (in
+        particular #[+Term--YDID arrays]) with subsequent #[+Term--YDID casting] to a specific
+        #[+Term--YDID TypeScript] #[+Term__Contrast--YDID type].
+
+    p.Article-Paragraph.
+      Needed in most cases when data comes from a source unreachable for type checking with
+        #[+ImportantEntity--YDID TypeScript].
+      In particular, the following scenarios:
+
+    ul.Article-UnorderedList
+      li Retrieving of a data from the client side in client–server interactions
+      li Conversely, retrieving of a data from the server side in client–server interactions
+      li Retrieving data from a database
+      li Reading data from a file (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML] and similar)
+
+    +CompactTableOfContents--YDF_DK(
+      localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children
+    )

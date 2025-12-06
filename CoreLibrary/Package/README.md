@@ -1,4 +1,4 @@
-# Yamato Daiwa E(CMAScript) Extensions (YDEE)
+# Yamato Daiwa E(CMA)S(cript) Extensions [YDEE]
 
 [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package)
@@ -54,8 +54,9 @@ npm i @yamato-daiwa/es-extensions -E
           for validation and, if required, processing of response data.
       </li>
       <li>
-        Needs some implementation, but there is the pre-made one:
-          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a>.
+        Needs some implementation, but there is
+          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a>,
+          the pre-made one.
       </li>
     </ul>
   </dd>
@@ -82,10 +83,33 @@ npm i @yamato-daiwa/es-extensions -E
 
 <dl>
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html"><code>createArrayOfNaturalNumbers</code></a></dt>
+  <dt>
+    <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html">
+      <code>createArrayOfNaturalNumbers</code>
+    </a>
+  </dt>
+
   <dd>
-    Obviously from the function name, creates an array of natural numbers.
-    Elements count, assessing/descending and starting number can be specified.
+
+ Obviously from the function name, creates an array of natural numbers.
+ Elements count, ascending/descending and starting number can be specified.
+
+   ```
+   (
+     compoudParameter: Readonly<{
+  
+       elementsCount: number;
+  
+       /** @default false */
+       isDescendingOrder?: boolean;
+  
+       /** @default 1 */
+       startingNumber?: number;
+  
+     }>
+   ): Array<number>
+   ```
+
   </dd>
 
 </dl>
@@ -98,14 +122,40 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
   <dd>
-    Returns the element of a specified array matching with the predicate if such an element is exactly one, 
-      otherwise error will be thrown or null will be returned depending on dedicated option's value.
+
+   Returns the element of a specified array matching with the predicate if such an element is exactly one, 
+     otherwise error will be thrown or null will be returned depending on dedicated option's value.
+    
+   ```
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>, 
+     predicate: (arrayElement: ArrayElement) => boolean
+   ): ArrayElement | null
+    
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>,
+     predicate: (arrayElement: ArrayElement) => boolean,
+     options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
+   ): ArrayElement
+   ```
+
   </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
   <dd>
-    Returns the last element of an array if such element exists, otherwise error will be thrown as default
+
+ Returns the last element of an array if such element exists, otherwise error will be thrown as default
       or null will be returned if the dedicated option has been specified.
+
+   ```
+   <ArrayElement>(targetArray: ReadonlyArray<ArrayElement>): ArrayElement | null;
+    
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>,
+     options: Readonly<{ mustThrowErrorIfArrayIsEmpty: true; }>
+   ): ArrayElement
+   ```
+
   </dd>
 
 </dl>
@@ -117,14 +167,37 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html"><code>getIndexesOfSatisfiesThePredicateArrayElements</code></a></dt>
   <dd>
-    Obviously from the function name, returns the array of indexes of array elements which are satisfied to specified 
+
+ Obviously from the function name, returns the array of indexes of array elements which are satisfied to specified 
       predicate function.
+
+   ```
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>, 
+     predicate: (arrayElement: <ArrayElement) => boolean
+   ): Array<number>
+   ```
+
   </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
   <dd>
-    Returns the index of the array element satisfies the predicate if such element is exactly one, otherwise error will 
+
+ Returns the index of the array element satisfies the predicate if such element is exactly one, otherwise error will 
       be thrown or null will be returned depending on dedicated option's value.
+
+   ```
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>, 
+     predicate: (arrayElement: ArrayElement) => boolean
+   ): number | null;
+    
+   <ArrayElement>(
+     targetArray: ReadonlyArray<ArrayElement>,
+     predicate: (arrayElement: ArrayElement) => boolean,
+     options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
+   ): number;
+   ```
   </dd>
 
 </dl>
@@ -136,17 +209,183 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html"><code>cropArray</code></a></dt>
   <dd>
-    <p>
+   <p>
       Creates the subarray of the specified array.
-      In comparison with native <code>slice</code> and <code>splice</code> methods, suggests the extremely flexible API.
-    </p>
-    <ul>
-      <li>Mutable and immutable cropping</li>
-      <li>Specifying of starting element and ending element either from the start or from the end of an array</li>
-      <li>Absolute and relative specifying of starting and ending elements of subarray</li>
-      <li>Inclusive and exclusive absolute specifying of last element of subarray</li>
-    </ul>
-      
+      In comparison with native <code>slice</code> and <code>splice</code> methods, suggests the extremely flexible API:
+   </p>
+   <ul>
+     <li>Mutable and immutable cropping</li>
+     <li>Specifying of starting element and ending element either from the start or from the end of an array</li>
+     <li>Absolute and relative specifying of starting and ending elements of subarray</li>
+     <li>Inclusive and exclusive absolute specifying of last element of subarray</li>
+   </ul>
+
+   ```
+   <ArrayElement>(
+     compoundParameter: Readonly<
+       (
+         {
+           mutably: true;
+           targetArray: Array<ArrayElement>;
+         } |
+         {
+           mutably: false;
+           targetArray: ReadonlyArray<ArrayElement>;
+         }
+       ) &
+       (
+         (
+           {
+             fromStart: true;
+             fromEnd?: undefined;
+           } &
+           (
+             {
+               startingElementNumber__numerationFrom0: number;
+               startingElementNumber__numerationFrom1?: undefined;
+               fromFirstElement?: undefined;
+             } |
+             {
+               startingElementNumber__numerationFrom1: number;
+               startingElementNumber__numerationFrom0?: undefined;
+               fromFirstElement?: undefined;
+             } |
+             {
+               fromFirstElement: true;
+               startingElementNumber__numerationFrom1?: undefined;
+               startingElementNumber__numerationFrom0?: undefined;
+             }
+           ) &
+           (
+             {
+               endingElementNumber__numerationFrom0__including: number;
+               endingElementNumber__numerationFrom1__including?: undefined;
+               endingElementNumber__numerationFrom0__notIncluding?: undefined;
+               endingElementNumber__numerationFrom1__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLastElement?: undefined;
+             } |
+             {
+               endingElementNumber__numerationFrom1__including: number;
+               endingElementNumber__numerationFrom0__including?: undefined;
+               endingElementNumber__numerationFrom0__notIncluding?: undefined;
+               endingElementNumber__numerationFrom1__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLastElement?: undefined;
+             } |
+             {
+               endingElementNumber__numerationFrom0__notIncluding: number;
+               endingElementNumber__numerationFrom0__including?: undefined;
+               endingElementNumber__numerationFrom1__including?: undefined;
+               endingElementNumber__numerationFrom1__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLastElement?: undefined;
+             } |
+             {
+               endingElementNumber__numerationFrom1__notIncluding: number;
+               endingElementNumber__numerationFrom0__including?: undefined;
+               endingElementNumber__numerationFrom1__including?: undefined;
+               endingElementNumber__numerationFrom0__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLastElement?: undefined;
+             } |
+             {
+               elementsCount: number;
+               endingElementNumber__numerationFrom0__including?: undefined;
+               endingElementNumber__numerationFrom1__including?: undefined;
+               endingElementNumber__numerationFrom0__notIncluding?: undefined;
+               endingElementNumber__numerationFrom1__notIncluding?: undefined;
+               untilLastElement?: undefined;
+             } |
+             {
+               untilLastElement: true;
+               endingElementNumber__numerationFrom0__including?: undefined;
+               endingElementNumber__numerationFrom1__including?: undefined;
+               endingElementNumber__numerationFrom0__notIncluding?: undefined;
+               endingElementNumber__numerationFrom1__notIncluding?: undefined;
+               elementsCount?: undefined;
+             }
+           )
+         ) |
+         (
+           {
+             fromEnd: true;
+             fromStart?: undefined;
+           } &
+           (
+             {
+               rightElementNumber__numerationFrom0_AndRight: number;
+               rightElementNumber__numerationFrom1_AndRight?: undefined;
+               fromRightmostElement?: undefined;
+             } |
+             {
+               rightElementNumber__numerationFrom1_AndRight: number;
+               rightElementNumber__numerationFrom0_AndRight?: undefined;
+               fromRightmostElement?: undefined;
+             } |
+             {
+               fromRightmostElement: true;
+               rightElementNumber__numerationFrom1_AndRight?: undefined;
+               rightElementNumber__numerationFrom0_AndRight?: undefined;
+             }
+           ) &
+           (
+             {
+               leftElementNumber__numerationFrom0_AndRight__including: number;
+               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLeftmostElement?: undefined;
+             } |
+             {
+               leftElementNumber__numerationFrom1_AndRight__including: number;
+               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLeftmostElement?: undefined;
+             } |
+             {
+               leftElementNumber__numerationFrom0_AndRight__notIncluding: number;
+               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLeftmostElement?: undefined;
+             } |
+             {
+               leftElementNumber__numerationFrom1_AndRight__notIncluding: number;
+               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+               elementsCount?: undefined;
+               untilLeftmostElement?: undefined;
+             } |
+             {
+               elementsCount: number;
+               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+               untilLeftmostElement?: undefined;
+             } |
+             {
+               untilLeftmostElement: true;
+               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
+               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
+               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
+               elementsCount?: undefined;
+             }
+           )
+         )
+       ) &
+       { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+     >
+   ): Array<ArrayElement> 
+```
+
   </dd>
 
 </dl>
@@ -158,8 +397,55 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html"><code>addElementsToArray</code></a></dt>
   <dd>
-    Adds one or more elements to the start, end or specified position of the target array, herewith the adding can be 
+
+ Adds one or more elements to the start, end or specified position of the target array, herewith the adding can be 
       mutable or not depending on dedicated property of the named parameters object.
+
+  ```
+  <ArrayElement>(
+    compoundParameter:
+        Readonly<
+          { newElements: ReadonlyArray<ArrayElement>; } &
+          (
+            {
+              mutably: true;
+              targetArray: Array<ArrayElement>;
+            } |
+            {
+              mutably: false;
+              targetArray: ReadonlyArray<ArrayElement>;
+            }
+          ) &
+          (
+            {
+              toStart: true;
+              toEnd?: undefined;
+              toPosition__numerationFrom0?: undefined;
+              toPosition__numerationFrom1?: undefined;
+            } |
+            {
+              toEnd: true;
+              toStart?: undefined;
+              toPosition__numerationFrom0?: undefined;
+              toPosition__numerationFrom1?: undefined;
+            } |
+            {
+              toPosition__numerationFrom0: number;
+              toStart?: undefined;
+              toEnd?: undefined;
+              toPosition__numerationFrom1?: undefined;
+            } |
+            {
+              toPosition__numerationFrom1: number;
+              toStart?: undefined;
+              toEnd?: undefined;
+              toPosition__numerationFrom0?: undefined;
+            }
+          )
+        >
+    ): Array<ArrayElement>
+   ```
+
   </dd>
 
 </dl>
@@ -170,10 +456,69 @@ npm i @yamato-daiwa/es-extensions -E
 <dl>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html"><code>replaceArrayElementsByIndexesImmutably</code></a></dt>
-  <dd>Creates the swallow copy of the target array and replaces the elements by specified indexes.</dd>
+  <dd>
+
+ Creates the swallow copy of the target array and replaces the elements by specified indexes.
+    
+  ```
+  <ArrayElement>(
+    sourceDataAndOptions:
+      Readonly<
+        { targetArray: ReadonlyArray<ArrayElement>; } &
+        (
+          {
+            index: number;
+            newElement: ArrayElement;
+            replacements?: never;
+          } |
+          {
+            index?: never;
+            newElement?: never;
+            replacements: ReadonlyArray<{
+              index: number;
+              newElement: ArrayElement;
+            }>;
+          }
+        )
+      >
+  ): Array<ArrayElement>
+  ```
+
+  </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html"><code>replaceArrayElementsByPredicates</code></a></dt>
-  <dd>Replaces array elements by one or more predicates, herewith the replacing can be mutable or no depending on dedicated option.</dd>
+  <dd>
+
+ Replaces array elements by one or more predicates, herewith the replacing can be mutable or no depending on dedicated option.
+
+  ```
+  <ArrayElement>(
+    sourceDataAndOptions: 
+      Readonly<
+        (
+          {
+            mutably: true;
+            targetArray: Array<ArrayElement>;
+          } |
+          {
+            mutably: false;
+            targetArray: ReadonlyArray<ArrayElement>;
+          }
+        ) &
+        (
+          Replacement<ArrayElement> |
+          Readonly<{ replacements: ReadonlyArray<Replacement<ArrayElement>>; }>
+        )
+      >
+    ): Readonly<
+      { predicate: (arrayElement: ArrayElement) => boolean; } &
+      (
+        { newValue: ArrayElement; } |
+        { replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
+      )
+    >
+  ```
+  </dd>
 
 </dl>
 
@@ -184,17 +529,138 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition/moveArrayElementToOnePosition.english.html"><code>moveArrayElementToOnePosition</code></a></dt>
   <dd>
-    Moves specified by an index element to left or to right, herewith the ousted element will be placed to position of target one.
+
+ Moves specified by an index element to left or to right, herewith the ousted element will be placed to position of target one.
     Mutable and immutable swapping are available.
+
+   ```
+   <ArrayElement>(
+     sourceDataAndOptions: Readonly<
+       (
+         {
+           mutably: true;
+           targetArray: Array<ArrayElement>;
+         } |
+         {
+           mutably: false;
+           targetArray: ReadonlyArray<ArrayElement>;
+         }
+       ) &
+       (
+         {
+           targetElementNumber__numerationFrom0: number;
+           targetElementNumber__numerationFrom1?: never;
+         } |
+         {
+           targetElementNumber__numerationFrom0?: never;
+           targetElementNumber__numerationFrom1: number;
+         }
+       ) &
+       {
+         toLeft: boolean;
+         errorMustBeThrownIf: Readonly<{
+           elementsCountIsLessThan2: boolean;
+           targetElementNumberIsOutOfRange: boolean;
+         }>;
+       }
+   >
+): Array<ArrayElement>
+   ```
+
   </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/06-PermutationsOfElements/swapArrayElements/swapArrayElements.english.html"><code>swapArrayElements</code></a></dt>
   <dd>
-    <par>Swaps two array elements, not obligatory the siblings.</par>
+
+ <p>Swaps two array elements, not obligatory the siblings.</p>
     <ul>
       <li>Each element can be specified by index, by number from 1 or via predicate.</li>
       <li>Mutable and immutable swapping are available</li>
     </ul>
+
+   ```
+   <ArrayElement>(
+     sourceDataAndOptions:
+       Readonly<
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         ) &
+         {
+           oneElement: Readonly<(
+             {
+               position__numerationFrom0: number;
+               position__numerationFrom1?: undefined;
+               isLastOne?: undefined;
+               finder?: undefined;
+               mustThrowErrorIfNotFound: boolean;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1: number;
+               isLastOne?: undefined;
+               finder?: undefined;
+               mustThrowErrorIfNotFound: boolean;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1?: undefined;
+               isLastOne: true;
+               finder?: undefined;
+               mustThrowErrorIfNotFound?: undefined;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1?: undefined;
+               isLastOne?: undefined;
+               finder: (arrayElement: ArrayElement) => boolean;
+               mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+             }
+           )>;
+           otherElement: Readonly<(
+             {
+               position__numerationFrom0: number;
+               position__numerationFrom1?: undefined;
+               isLastOne?: undefined;
+               finder?: undefined;
+               mustThrowErrorIfNotFound: boolean;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1: number;
+               isLastOne?: undefined;
+               finder?: undefined;
+               mustThrowErrorIfNotFound: boolean;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1?: undefined;
+               isLastOne: true;
+               finder?: undefined;
+               mustThrowErrorIfNotFound?: undefined;
+             } |
+             {
+               position__numerationFrom0?: undefined;
+               position__numerationFrom1?: undefined;
+               isLastOne?: undefined;
+               finder: (arrayElement: ArrayElement) => boolean;
+               mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+             }
+           )>;
+         } & 
+         {
+           mustThrowErrorIfTargetArrayIsEmpty: boolean;
+           mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition: boolean;
+         }
+       >
+   ): Array<ArrayElement>
+   ```
 
   </dd>
 

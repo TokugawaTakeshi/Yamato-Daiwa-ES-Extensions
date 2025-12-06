@@ -117,11 +117,3 @@
 * Support for build **2022.X**
 * Drop support for build **2020.X**
 * Live template <kbd>prod</kbd> has been renamed to <kbd>rodp</kbd>
-
-
-## [0.0.2]
-
-### Added
-
-* [`prod`](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#rawobjectdataprocessor)
-  Working example with error handling for `RawObjectDataProcessor`

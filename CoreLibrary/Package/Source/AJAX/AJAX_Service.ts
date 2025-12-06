@@ -89,7 +89,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ━━━ Protected abstract methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ━━━ Protected Abstract Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   protected abstract retrieveResponseWithRawObjectData(
     compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.RawObjectDataResponse>;
@@ -262,7 +262,7 @@ abstract class AJAX_Service {
 
   /** @throws InvalidConfigError */
   /* eslint-disable-next-line @typescript-eslint/class-methods-use-this --
-  * This method do not need `this` but good to be here from the viewpoint of logic sequence. */
+  * This method does not need `this` but is good to be here from the viewpoint of a logic sequence. */
   protected normalizeURI_UntilPath(URI_PathRawDefinition: AJAX_Service.URI_PathRawDefinition): string {
 
     if (isNonEmptyString(URI_PathRawDefinition.alternatingURI_PathPart)) {
@@ -554,7 +554,6 @@ namespace AJAX_Service {
       HTTP_Headers: HTTP_Headers;
     }
   >;
-
 
 }
 

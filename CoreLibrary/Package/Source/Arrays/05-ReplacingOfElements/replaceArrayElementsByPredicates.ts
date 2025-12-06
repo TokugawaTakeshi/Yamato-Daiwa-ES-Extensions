@@ -4,8 +4,8 @@ import getIndexesOfSatisfiesThePredicateArrayElements from
 
 export namespace ReplacingArrayElementsByPredicates {
 
-  export type SourceData<ArrayElement> =
-    Readonly<(
+  export type SourceData<ArrayElement> = Readonly<
+    (
       {
         mutably: true;
         targetArray: Array<ArrayElement>;
@@ -14,11 +14,11 @@ export namespace ReplacingArrayElementsByPredicates {
         mutably: false;
         targetArray: ReadonlyArray<ArrayElement>;
       }
-    )> &
+    ) &
     (
       Replacement<ArrayElement> |
       Readonly<{ replacements: ReadonlyArray<Replacement<ArrayElement>>; }>
-    );
+    )>;
 
   export type Replacement<ArrayElement> = Readonly<
     { predicate: (arrayElement: ArrayElement) => boolean; } &

@@ -3423,7 +3423,7 @@ class RawObjectDataProcessor {
         description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
         generateDescription({
           actualNativeType: typeof targetValue__expectedToBeBoolean,
-          expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
+          expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.boolean
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
         targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
