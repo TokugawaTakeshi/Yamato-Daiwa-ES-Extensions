@@ -36,7 +36,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       ...isNotNull(targetPropertyNewName) ? [ ` (new name: "${ targetPropertyNewName }")` ] : [],
       `\n${ description }`,
       `\n${ this.generateSeeMoreSentence({ documentationPageAnchor }) }`,
-      "\n\n●　Property / Element Specification: ",
+      "\n\n● Property / Element Specification: ",
       `\n${
         stringifyAndFormatArbitraryValue({
           ...targetPropertyValueSpecification,
@@ -45,7 +45,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       }`,
       `\n● Actual Value: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
       ...isNotUndefined(targetPropertyStringifiedValueBeforeFirstPreValidationModification) ? [
-        "\n●　Value Before First Pre-validation Modification: " +
+        "\n● Value Before First Pre-validation Modification: " +
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
       ] : []
     ].join("");
@@ -745,16 +745,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       case RawObjectDataProcessor.ValuesTypesIDs.string: return "string";
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "boolean";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "indexed array";
-
       case RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject: return "object of fixed schema";
-
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArray: return "associative array type object";
-
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "indexed array";
       case RawObjectDataProcessor.ValuesTypesIDs.tuple: return "tuple";
 
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject: return "ambiguous object";
-
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray: return "ambiguous array";
 
       case RawObjectDataProcessor.ValuesTypesIDs.polymorphic: return "polymorphic";

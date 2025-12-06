@@ -660,17 +660,21 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   getLocalizedValueType(valueTypeID: RawObjectDataProcessor.ValuesTypesIDs): string {
     switch (valueTypeID) {
+
       case RawObjectDataProcessor.ValuesTypesIDs.number: return "数";
       case RawObjectDataProcessor.ValuesTypesIDs.string: return "文字列";
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "ブーリアン";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "指数配列";
       case RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject: return "固定スキーマのオブジェクト";
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArray: return "連想配列型のオブジェクト";
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "指数配列";
       case RawObjectDataProcessor.ValuesTypesIDs.tuple: return "タプル";
+
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject: return "曖昧オブジェクト";
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray: return "曖昧配列";
+
       case RawObjectDataProcessor.ValuesTypesIDs.polymorphic: return "多形性";
+
     }
   },
 

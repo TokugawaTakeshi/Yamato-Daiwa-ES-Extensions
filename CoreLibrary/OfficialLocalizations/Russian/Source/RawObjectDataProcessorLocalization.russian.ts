@@ -748,16 +748,12 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       case RawObjectDataProcessor.ValuesTypesIDs.string: return "строка";
       case RawObjectDataProcessor.ValuesTypesIDs.boolean: return "булевский";
 
-      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "индексный массив";
-
       case RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject: return "объект фиксированной структуры";
-
       case RawObjectDataProcessor.ValuesTypesIDs.associativeArray: return "объект типа «ассоциативный массив»";
-
+      case RawObjectDataProcessor.ValuesTypesIDs.indexedArray: return "индексный массив";
       case RawObjectDataProcessor.ValuesTypesIDs.tuple: return "кортеж";
 
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject: return "неоднозначный объект";
-
       case RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray: return "неоднозначный массив";
 
       case RawObjectDataProcessor.ValuesTypesIDs.polymorphic: return "полиморфный";

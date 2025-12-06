@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: ""
+        description:
+          "The example for usage of \"RawObjectDataProcessor\", the class for validating and processing of " +
+            "object type data from \"Yamato Daiwa ECMAScript extensions\" `(abbreviation: \"YDEE\") library."
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -51,4 +53,414 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor` — Demo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      Suppose the value of the #[+Term--YDID parameter] #[+SecondaryEntity__Code--YDID externalData] is obtained
+        from an #[+Keyword--YDID external] data source that is
+        #[+Keyphrase--YDID unreachable for #[+Term--YDID type] checking by #[+ImportantEntity--YDID TypeScript]].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+          // ...
+        }
+
+    p.Article-Paragraph.
+      In particular, the following scenarios are possible:
+
+    ul.Article-UnorderedList
+      li Data retrieving from the client side during client–server interaction
+      li Conversely, data retrieving from the server side during client–server interaction
+      li Retrieving data from a database
+      li Reading data from a file (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML], and similar)
+
+    p.Article-Paragraph.
+      We expect that the received data will have the #[+Term--YDID type] #[+SecondaryEntity__Code--YDID SampleType],
+        however, what these data will #[+Keyword--YDID actually] be at runtime is
+        #[+Keyphrase--YDID unknown at advance to us at the code-writing stage]; therefore, the
+        #[+Term--YDID parameter] has the #[+Term--YDID type] #[+ImportantEntity__Code--YDID unknown],
+        and #[+Keyword--YDID not] #[+SecondaryEntity__Code--YDID SampleType].
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    p.Article-Paragraph
+      | Because of this, simply forcing the #[+Term--YDID type] like
+      |   #[+SecondaryEntity__Code--YDID externalData as SampleType] is #[+Keyword--YDID unsafe].
+      | Although due to the nature of #[+ImportantEntity--YDID TypeScript] you will have to do it eventually
+      |   (see
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          problemOverview.$URI
+      }) "problem overview"
+      | ), this must be backed up by something — namely, by #[+Term--YDID validation].
+
+    p.Article-Paragraph.
+      Solving this problem with #[+ImportantEntity--YDID RawObjectDataProcessor], it is #[+Keyword--YDID necessary] to define
+        a #[+Term--YDID valid data specification] — essentially, an #[+Term--YDID object] that describes
+        #[+Term--YDID metadata] for specific data, in particular the expected #[+Term--YDID types]
+        of  #[+Keyword--YDID each] #[+Term--YDID property], their #[+Term--YDID requirements], and other limitations.
+      For demonstration, in addition to specifying the expected #[+Term--YDID types]
+        #[+Term__Contrast--YDID of the properties], some other restrictions are added as well, for example, the
+        maximal characters count for string #[+Term--YDID properties] or a list of possible values.
+      In practice, such validation is in considerable demand, so it will&nbsp;not make this example excessive.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              isNaN_Forbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  isNaN_Forbidden: true,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+    p.Article-Paragraph.
+      When the #[+Term--YDID valid data specification] is defined, pass it as a #[+Term--YDID parameter]
+        to the #[+Keyword--YDID static] #[+Term--YDID method] #[+ImportantEntity--YDID process]
+        of the #[+Term--YDID class] #[+ImportantEntity--YDID RawObjectDataProcessor] together with the raw input data
+        still of the #[+Term--YDID type] #[+ImportantEntity__Code--YDID unknown]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    p.Article-Paragraph.
+      The value returned by the #[+Term--YDID method] #[+ImportantEntity--YDID process] has the #[+Term--YDID type]
+        defined as follows:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ProcessingResult<ProcessedData> =
+            Readonly<
+              {
+                isRawDataInvalid: false;
+                processedData: ProcessedData;
+              } |
+              {
+                isRawDataInvalid: true;
+                validationErrorsMessages: ReadonlyArray<string>;
+              }
+            >;
+
+    p.Article-Paragraph.
+      A peculiarity here is that we #[+Keyword--YDID cannot] access the #[+Term--YDID property]
+        #[+ImportantEntity__Code--YDID processedData] until we will prove to #[+ImportantEntity--YDID TypeScript] that
+        #[+ImportantEntity__Code--YDID isRawDataInvalid] #[+Term--YDID property] is #[+Keyword--YDID falsy]:
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+          console.log(externalDataProcessingResult.processedData);
+
+        +CodeViewer-Explanation--YDF
+          | Accessing #[+SecondaryEntity__Code--YDID externalDataProcessingResult.processedData]
+          |
+          +Keyphrase--YDID
+            | without first checking #[+SecondaryEntity__Code--YDID externalDataProcessingResult.isRawDataInvalid]
+          |
+          |   sans violating #[+ImportantEntity--YDID TypeScript] is #[+Keyword--YDID impossible] — this will cause
+          |   the error “#[+SecondaryEntity--YDID TS2339]: Property #[+SecondaryEntity__Code--YDID processedData] does
+          |   not exist on type #[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;]”.
+          | The error message is imprecise because it is&nbsp;#[+Keyword--YDID not]&nbsp;that the #[+Term--YDID type]
+          |   #[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;] as a whole lacks the property, but
+          |   rather that #[+Keyphrase--YDID one of] its #[+Term--YDID subtypes] does — specifically the subtype with
+          |   #[+ImportantEntity__Code--YDID isRawDataInvalid: true].
+          | Accordingly, before accessing the #[+Term--YDID property]
+          |   #[+SecondaryEntity__Code--YDID processedData], you need to #[+Keyword--YDID exclude] the
+          |   #[+Term--YDID subtype] that lacks this #[+Term--YDID property].
+          | This can be done with a regular #[+Term--YDID conditional statement]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.isRawDataInvalid) {
+          console.log(externalDataProcessingResult.validationErrorsMessages);
+        }
+
+    p.Article-Paragraph.
+      But when #[+ImportantEntity__Code--YDID isRawDataInvalid] is #[+ImportantEntity__Code--YDID true], it is still
+        #[+Keyword--YDID impossible] to access #[+ImportantEntity__Code--YDID processedData] #[+Term--YDID property]
+        because it simply #[+Keyword--YDID does not exist]; instead, you can access the #[+Term--YDID array] that contains
+        validation error messages — that is, descriptions of all mismatches between the actual data and the expected one.
+      How to react to these validation errors depends on the specifics of your task, but usually it is
+        notifying the user and/or throwing an error:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.isRawDataInvalid) {
+
+          throw new InvalidExternalDataError({
+            mentionToExpectedData: "N External Data",
+            messageSpecificPart: RawObjectDataProcessor.
+                formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
+          });
+
+        }
+
+    p.Article-Paragraph.
+      As seen in the example above, #[+ImportantEntity--YDID RawObjectDataProcessor] also provides a
+        #[+Term--YDID static method] for formatting of validation error messages.
+      For example, when calling the function #[+SecondaryEntity__Code--YDID onDataRetrieved] with the following input data:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        onDataRetrieved({
+          foo: -4,
+          bar: "abc",
+          quux: {
+            alpha: 2,
+            bravo: "BRONZE"
+          }
+        });
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID Node.js] will output the following log:
+
+    +ConsoleOutput--YDF: :code_listing--yda
+      InvalidExternalDataError: The data "N External Data" does not match with expected.
+      ─── Error No. 1 ────────────────────────────────────────────────────────────────
+      Expected and Actual Numbers Set Mismatch [ VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET ]
+
+      ● Property / Element: foo
+      Contrary to expectations, this numeric value is not member of "positive integer or zero"
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
+      }
+      ● Actual Value: -4
+
+      ─── Error No. 2 ────────────────────────────────────────────────────────────────
+      Minimal Characters Count Fall Short [ VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED ]
+
+      ● Property / Element: bar
+      This string has 3 characters while at least 5 required.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED
+
+      ●　Property / Element Specification:
+      {
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5
+      }
+      ● Actual Value: "abc"
+
+      ─── Error No. 3 ────────────────────────────────────────────────────────────────
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+
+      ● Property / Element: baz
+      This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE
+
+      ●　Property / Element Specification:
+      {
+        type: "boolean",
+        isUndefinedForbidden: true,
+        isNullForbidden: true
+      }
+      ● Actual Value: undefined
+
+      ─── Error No. 4 ────────────────────────────────────────────────────────────────
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+
+      ● Property / Element: fuga
+      This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: false,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
+      }
+      ● Actual Value: undefined
+
+      ─── Error No. 5 ────────────────────────────────────────────────────────────────
+      Minimal Value Fall Short [ VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM ]
+
+      ● Property / Element: quux.alpha
+      This value is smaller than required minimal value 3.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "ANY_INTEGER",
+        isNaN_Forbidden: true,
+        minimalValue: 3
+      }
+      ● Actual Value: 2
+
+      ─── Error No. 6 ────────────────────────────────────────────────────────────────
+      Disallowed Alternative of Value [ VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES ]
+
+      ● Property / Element: quux.bravo
+      This value is not among following allowed alternatives:
+        ○ PLATINUM
+        ○ GOLD
+        ○ SILVER
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES
+
+      ●　Property / Element Specification:
+      {
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5,
+        allowedAlternatives: [
+          "PLATINUM",
+          "GOLD",
+          "SILVER"
+        ]
+      }
+      ● Actual Value: "BRONZE"
+          at onDataRetrieved (D:\Demo.ts:87:11)
+          at <anonymous> (D:\Demo.ts:99:1)
+          at Object.<anonymous> (D:\Demo.ts:106:2)
+          at Module._compile (node:internal/modules/cjs/loader:1730:14)
+          at Object.transformer (C:\Users\I\AppData\Roaming\npm\node_modules\tsx\dist\register-DpmFHar1.cjs:2:1186)
+          at Module.load (node:internal/modules/cjs/loader:1465:32)
+          at Function._load (node:internal/modules/cjs/loader:1282:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+          at cjsLoader (node:internal/modules/esm/translators:266:5)
+
+      Node.js v22.15.0
+
+    p.Article-Paragraph.
+      If #[+ImportantEntity__Code--YDID isInvalid] is #[+ImportantEntity__Code--YDID false], then you can
+        access the #[+Term--YDID property] #[+ImportantEntity__Code--YDID processedData] and use it:
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          if (externalDataProcessingResult.isRawDataInvalid) {
+
+            throw new InvalidExternalDataError({
+              mentionToExpectedData: "N External Data",
+              messageSpecificPart: RawObjectDataProcessor.
+                  formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
+            });
+
+          }
+
+
+          console.log(externalDataProcessingResult.processedData)
+        +CodeViewer-Explanation--YDF.
+          Here you can #[+Keyword--YDID already] access the #[+Term--YDID property]
+            #[+ImportantEntity__Code--YDID processedData], because the #[+Term--YDID subtype]
+            #[+ImportantEntity__Code--YDID { isRawDataInvalid: true; validationErrorsMessages: ReadonlyArray&lt;string&gt; }]
+            has been #[+Keyword--YDID excluded] by throwing an #[+Term__Contrast--YDID error] inside the preceding
+            #[+Term--YDID if-block].
+          If the #[+Term--YDID function] or #[+Term--YDID method] that contains the code above
+            is not required to return valid data, then instead of throwing an #[+Term--YDID error] you can
+            use the #[+Term--YDID keyword] #[+ImportantEntity__Code--YDID return].
+
+    p.Article-Paragraph.
+      Besides #[+Term--YDID fixed-structure objects] as in the example above,
+        #[+ImportantEntity--YDID RawObjectDataProcessor] can also validate other kinds of objects:
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+Term--YDID Associative arrays] — differ from #[+Term--YDID fixed-structure objects]
+          by an #[+Keyword--YDID arbitrary] number of #[+Term--YDID key–value] pairs; however, #[+Keyword--YDID all]
+          values #[+Keyword--YDID must] follow a #[+Keyword--YDID single] pattern.
+
+      li #[+Term--YDID Indexed arrays]
+      li.
+        #[+Term--YDID Tuples] — differ from #[+Term--YDID indexed arrays] by a #[+Keyword--YDID fixed]
+          number of #[+Term--YDID elements] and their order; moreover, #[+Keyword--YDID each] element may have
+          specific constraints defined.
+
+    p.Article-Paragraph.
+      Why is the #[+Term--YDID class] named #[+ImportantEntity--YDID RawObjectDataProcessor] and
+        #[+Keyword--YDID not] #[+SecondaryEntity--YDID RawObjectDataValidator]?
+      Because it can not only validate data but also transform it — in particular, rename keys and change values.
+      All this and much more is described further in this documentation.

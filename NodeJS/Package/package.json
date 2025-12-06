@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-nodejs",
-  "version": "1.8.2",
+  "version": "1.8.4",
   "description": "Additional to @yamato-daiwa/es-extensions functionality for Node.js environment. Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "nodejs",
@@ -32,11 +32,11 @@
     "node": ">=20.0.0"
   },
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.8.2"
+    "@yamato-daiwa/es-extensions": "1.8.4"
   },
   "dependencies": {
     "dotenv": "17.2.1",
-    "glob": "11.0.3",
+    "glob": "11.1.0",
     "json5": "2.2.3",
     "minimatch": "10.0.3",
     "yamljs": "0.3.0"
@@ -45,7 +45,7 @@
     "@types/json5": "0.0.30",
     "@types/node": "22.15.31",
     "@types/yamljs": "0.2.34",
-    "@yamato-daiwa/es-extensions": "1.8.2",
+    "@yamato-daiwa/es-extensions": "1.8.4",
     "@yamato-daiwa/style_guides": "0.9.0",
     "rimraf": "6.0.1",
     "tsx": "4.20.4",

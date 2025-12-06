@@ -74,6 +74,11 @@ export default abstract class ArbitraryValueFormatter {
     indentationCoordinator: IndentationCoordinator = new IndentationCoordinator()
   ): string {
 
+    if (targetArray.length === 0) {
+      return "[]";
+    }
+
+
     let accumulatingResult: string = "[";
 
     indentationCoordinator.incrementIndent();
@@ -97,6 +102,11 @@ export default abstract class ArbitraryValueFormatter {
     indentationCoordinator: IndentationCoordinator = new IndentationCoordinator()
   ): string {
 
+    if (targetSet.size === 0) {
+      return "Set(0) []";
+    }
+
+
     let accumulatingResult: string = `Set(${ targetSet.size }) [`;
 
     indentationCoordinator.incrementIndent();
@@ -119,6 +129,11 @@ export default abstract class ArbitraryValueFormatter {
     targetMap: Map<Key, Value>,
     indentationCoordinator: IndentationCoordinator = new IndentationCoordinator()
   ): string {
+
+    if (targetMap.size === 0) {
+      return "Map(0) []";
+    }
+
 
     let accumulatingResult: string = `Map(${ targetMap.size }) [`;
 
@@ -147,11 +162,18 @@ export default abstract class ArbitraryValueFormatter {
     indentationCoordinator: IndentationCoordinator = new IndentationCoordinator()
   ): string {
 
+    const objectEntries: ReadonlyArray<[ string, unknown ]> = Object.entries(targetObject);
+
+    if (objectEntries.length === 0) {
+      return "{}";
+    }
+
+
     let accumulatingResult: string = "{";
 
     indentationCoordinator.incrementIndent();
 
-    for (const [ key, value ] of Object.entries(targetObject)) {
+    for (const [ key, value ] of objectEntries) {
       accumulatingResult = accumulatingResult +
           `\n${ indentationCoordinator.insertIndent() }` +
           `${ key }: ${ ArbitraryValueFormatter.stringifyAndFormat(value, indentationCoordinator) },`;

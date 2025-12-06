@@ -3932,7 +3932,7 @@ namespace RawObjectDataProcessor {
         } |
         {
           isRawDataInvalid: true;
-          validationErrorsMessages: ReadonlyArray<string>;
+          validationErrorsMessages: Array<string>;
         }
       >;
 

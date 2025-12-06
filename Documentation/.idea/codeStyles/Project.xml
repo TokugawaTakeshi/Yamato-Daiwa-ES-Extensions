@@ -6,6 +6,7 @@
         <option name="TAB_SIZE" value="2" />
       </value>
     </option>
+    <option name="SOFT_MARGINS" value="120,130" />
     <JSCodeStyleSettings version="0">
       <option name="FORCE_SEMICOLON_STYLE" value="true" />
       <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACKETS" value="true" />

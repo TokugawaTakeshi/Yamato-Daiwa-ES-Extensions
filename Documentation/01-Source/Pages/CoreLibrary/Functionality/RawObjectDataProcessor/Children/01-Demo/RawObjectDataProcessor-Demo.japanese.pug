@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessorの${ topHeading }`),
-        description: ""
+        description:
+            `「RawObjectDataProcessor」という「Yamato Daiwa ECMAScript Extensions（YDEE）」ライブラリのオブジェクト型のデータのバリデーション・` +
+              `処理専用クラスの利用例。`
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -51,4 +53,402 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor`のデモ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= `<code>RawObjectDataProcessor</code>の${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      #[+Term--YDID 引数]#[+SecondaryEntity__Code--YDID externalData]の値が、
+        #[+Keyphrase--YDID #[+ImportantEntity--YDID TypeScript]に依る#[+Term--YDID 型]チェックが及ばない]
+        #[+Keyword--YDID 外部]データソースから取得されたものだとする。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+          // ...
+        }
+
+    p.Article-Paragraph.
+      例えば、次の様なシナリオがよくある。
+
+    ul.Article-UnorderedList
+      li クライアント・—サーバーモデルに於けるクライアント側からのデータ取得
+      li 逆に、クライアント—・サーバーモデルに於けるサーバー側からのデータ取得
+      li データベースからのデート取得
+      li ファイル（#[+SecondaryEntity--YDID JSON]、#[+SecondaryEntity--YDID YAML]等）からの読み取り
+
+    p.Article-Paragraph.
+      受け取るデータは#[+SecondaryEntity__Code--YDID SampleType]#[+Term--YDID 型]であると期待されているが、実行時に
+        #[+Keyword--YDID 実際]どの様なデータに成るかは#[+Keyphrase--YDID コード記述段階では不明]。
+      従って此の#[+Term--YDID 引数]の#[+Term--YDID 型]は#[+SecondaryEntity__Code--YDID SampleType]では#[+Keyword--YDID なく]、
+        #[+ImportantEntity__Code--YDID unknown]に成っている。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    p.Article-Paragraph
+      | 此の為、#[+SecondaryEntity__Code--YDID externalData as SampleType]の様に#[+Term--YDID 型]を強制するのは
+      |   #[+Keyword--YDID 危険]。
+      | とはいえ#[+ImportantEntity--YDID TypeScript]の自然上、最終的にはそうせざるを得ない
+      | （
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          problemOverview.$URI
+      }) 問題の概観
+      | を参照）が、#[+Term--YDID 型]を強制する上で何れかの安全性対策が必用、即ち#[+Term--YDID 妥当性確認]。
+
+    p.Article-Paragraph.
+      此の課題を#[+ImportantEntity--YDID RawObjectDataProcessor]で解決するには、#[+Term--YDID 妥当データ仕様]を定義する事が必要。
+      此れは本質的上特定のデータに該当している#[+Term--YDID メタデータ]と成り、とりわけ想定される各#[+Term--YDID プロパティ]の#[+Term--YDID 型]、
+        それらの#[+Term--YDID 必須性]や其の他の制約を記述した#[+Term--YDID オブジェクト]。
+      デモの為、期待される#[+Term--YDID プロパティ]毎#[+Term__Contrast--YDID 型]の指定に加え、文字列#[+Term--YDID プロパティ]の最大文字数
+        や許可される値の候補といった制約も幾つか加えてある。
+      上記の様な検証は実戦に於いて需要が高い為、此の例にとって余計な分に成らない。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              isNaN_Forbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  isNaN_Forbidden: true,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+    p.Article-Paragraph.
+      #[+Term--YDID 妥当データ仕様]を定義したら、其の仕様と、依然として#[+ImportantEntity__Code--YDID unknown]#[+Term--YDID 型]のままの
+        生データを併せて、#[+ImportantEntity--YDID RawObjectDataProcessor]の#[+Keyword--YDID static]な#[+Term--YDID メソッド]
+        #[+ImportantEntity--YDID process]に#[+Term--YDID パラメータ]として渡す事。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID process]#[+Term--YDID メソッド]の戻り値は、次の様に定義された#[+Term--YDID 型]に成る。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ProcessingResult<ProcessedData> =
+            Readonly<
+              {
+                isRawDataInvalid: false;
+                processedData: ProcessedData;
+              } |
+              {
+                isRawDataInvalid: true;
+                validationErrorsMessages: ReadonlyArray<string>;
+              }
+            >;
+
+    p.Article-Paragraph.
+      此処での大事な事は、先ず#[+ImportantEntity__Code--YDID isRawDataInvalid]#[+Term--YDID プロパティ]が
+        #[+ImportantEntity__Code--YDID false]値を持っていると#[+ImportantEntity--YDID TypeScript]に証明しないからには、
+        #[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセス#[+Keyword--YDID 不可能]という事だ。
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+          console.log(externalDataProcessingResult.processedData);
+
+        +CodeViewer-Explanation--YDF
+          | 事前に#[+SecondaryEntity__Code--YDID externalDataProcessingResult.isRawDataInvalid]を確認せずに
+          |
+          +Keyphrase--YDID
+            | #[+SecondaryEntity__Code--YDID externalDataProcessingResult.processedData]にアクセスする事は
+          |
+          |   #[+ImportantEntity--YDID TypeScript]の仕組み#[+Keyword--YDID 不可能]。
+          | しようとしたら、「#[+SecondaryEntity--YDID TS2339]: Property #[+SecondaryEntity__Code--YDID processedData] does
+          |   not exist on type #[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;]」エラーが発生する。
+          | 実は、此のエラーメッセージは少し不確定があり、即ち#[+SecondaryEntity__Code--YDID ProcessingResult&lt;SampleType&gt;]全体に
+          |  其の#[+Term--YDID プロパティ]が無いのではなく、#[+Term--YDID 部分型]の#[+Keyphrase--YDID 何方か一方]、具体的には
+          |   #[+ImportantEntity__Code--YDID isRawDataInvalid: true]を持つ方には其の#[+Term--YDID プロパティ]が存在しない方は厳密。
+          | 従って#[+SecondaryEntity__Code--YDID processedData]にアクセスする前に、
+          |   其の#[+Term--YDID プロパティ]を持たない#[+Term--YDID 部分型]を#[+Keyword--YDID 除外]する必要だ。
+          | 此れを通常の#[+Term--YDID 条件分岐]で実現出来る。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.isRawDataInvalid) {
+          console.log(externalDataProcessingResult.validationErrorsMessages);
+        }
+
+    p.Article-Paragraph.
+      #[+ImportantEntity__Code--YDID isRawDataInvalid]#[+Term--YDID プロパティ]が#[+ImportantEntity__Code--YDID true]になっている
+        場合に#[+Keyword--YDID も]#[+ImportantEntity__Code--YDID processedData]にはアクセス#[+Keyword--YDID 不可能]だ。
+      そもそも其の値が存在しない事が当然な理由で、代わりに実データと期待値の不一致を全て記述した検証エラーメッセージの#[+Term--YDID 配列]にアクセス出来る。
+      これらの検証エラーをどうすれば良いか、要件次第になっているが、通常はユーザーへの通知やエラー投げ。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        if (externalDataProcessingResult.isRawDataInvalid) {
+
+          throw new InvalidExternalDataError({
+            mentionToExpectedData: "N External Data",
+            messageSpecificPart: RawObjectDataProcessor.
+                formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
+          });
+
+        }
+
+    p.Article-Paragraph.
+      上の例の通り、#[+ImportantEntity--YDID RawObjectDataProcessor]は検証エラーメッセージを整形する為の#[+Term--YDID 静的メソッド]
+        も提供している。
+      例えば次の入力で#[+SecondaryEntity__Code--YDID onDataRetrieved]を呼び出すと、
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        onDataRetrieved({
+          foo: -4,
+          bar: "abc",
+          quux: {
+            alpha: 2,
+            bravo: "BRONZE"
+          }
+        });
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID Node.js]は下記ログを出力する。
+
+    +ConsoleOutput--YDF: :code_listing--yda
+      InvalidExternalDataError: The data "N External Data" does not match with expected.
+      ─── Error No. 1 ────────────────────────────────────────────────────────────────
+      Expected and Actual Numbers Set Mismatch [ VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET ]
+
+      ● Property / Element: foo
+      Contrary to expectations, this numeric value is not member of "positive integer or zero"
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_NOT_BELONG_TO_EXPECTED_NUMBERS_SET
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
+      }
+      ● Actual Value: -4
+
+      ─── Error No. 2 ────────────────────────────────────────────────────────────────
+      Minimal Characters Count Fall Short [ VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED ]
+
+      ● Property / Element: bar
+      This string has 3 characters while at least 5 required.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-CHARACTERS_COUNT_IS_LESS_THAN_REQUIRED
+
+      ●　Property / Element Specification:
+      {
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5
+      }
+      ● Actual Value: "abc"
+
+      ─── Error No. 3 ────────────────────────────────────────────────────────────────
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+
+      ● Property / Element: baz
+      This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE
+
+      ●　Property / Element Specification:
+      {
+        type: "boolean",
+        isUndefinedForbidden: true,
+        isNullForbidden: true
+      }
+      ● Actual Value: undefined
+
+      ─── Error No. 4 ────────────────────────────────────────────────────────────────
+      Forbidden Undefined Value [ VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE ]
+
+      ● Property / Element: fuga
+      This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-FORBIDDEN_UNDEFINED_VALUE
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: false,
+        numbersSet: "POSITIVE_INTEGER_OR_ZERO",
+        isNaN_Forbidden: true
+      }
+      ● Actual Value: undefined
+
+      ─── Error No. 5 ────────────────────────────────────────────────────────────────
+      Minimal Value Fall Short [ VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM ]
+
+      ● Property / Element: quux.alpha
+      This value is smaller than required minimal value 3.
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-NUMERIC_VALUE_IS_SMALLER_THAN_REQUIRED_MINIMUM
+
+      ●　Property / Element Specification:
+      {
+        type: "number",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        numbersSet: "ANY_INTEGER",
+        isNaN_Forbidden: true,
+        minimalValue: 3
+      }
+      ● Actual Value: 2
+
+      ─── Error No. 6 ────────────────────────────────────────────────────────────────
+      Disallowed Alternative of Value [ VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES ]
+
+      ● Property / Element: quux.bravo
+      This value is not among following allowed alternatives:
+        ○ PLATINUM
+        ○ GOLD
+        ○ SILVER
+      See documentation for details: https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/RawObjectDataProcessor-ValidationIssues.english.html#VALIDATION_ERRORS_MESSAGES-VALUE_IS_NOT_AMONG_ALLOWED_ALTERNATIVES
+
+      ●　Property / Element Specification:
+      {
+        type: "string",
+        isUndefinedForbidden: true,
+        isNullForbidden: true,
+        minimalCharactersCount: 5,
+        allowedAlternatives: [
+          "PLATINUM",
+          "GOLD",
+          "SILVER"
+        ]
+      }
+      ● Actual Value: "BRONZE"
+          at onDataRetrieved (D:\Demo.ts:87:11)
+          at <anonymous> (D:\Demo.ts:99:1)
+          at Object.<anonymous> (D:\Demo.ts:106:2)
+          at Module._compile (node:internal/modules/cjs/loader:1730:14)
+          at Object.transformer (C:\Users\I\AppData\Roaming\npm\node_modules\tsx\dist\register-DpmFHar1.cjs:2:1186)
+          at Module.load (node:internal/modules/cjs/loader:1465:32)
+          at Function._load (node:internal/modules/cjs/loader:1282:12)
+          at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+          at cjsLoader (node:internal/modules/esm/translators:266:5)
+
+      Node.js v22.15.0
+
+    p.Article-Paragraph.
+      #[+ImportantEntity__Code--YDID isRawDataInvalid]が#[+ImportantEntity__Code--YDID false]の場合、
+        #[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセスして利用可能。
+
+    +CodeViewer--YDF
+      +CodeViewer-TabPanel--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript })
+
+        +CodeViewer-PartialListing--YDF: :code_listing--yda
+          if (externalDataProcessingResult.isRawDataInvalid) {
+
+            throw new InvalidExternalDataError({
+              mentionToExpectedData: "N External Data",
+              messageSpecificPart: RawObjectDataProcessor.
+                  formatValidationErrorsList(externalDataProcessingResult.validationErrorsMessages)
+            });
+
+          }
+
+
+          console.log(externalDataProcessingResult.processedData)
+        +CodeViewer-Explanation--YDF.
+          此処では既に#[+ImportantEntity__Code--YDID processedData]#[+Term--YDID プロパティ]にアクセス#[+Keyword--YDID 出来る]。
+          直前の#[+Term--YDID if ブロック]内でエラーを投げる事に依り、
+            #[+ImportantEntity__Code--YDID { isRawDataInvalid: true; validationErrorsMessages: ReadonlyArray&lt;string&gt; }]
+            という#[+Term--YDID 部分型]が#[+Keyword--YDID 除外]されている為。
+          もし上記のコードを含む#[+Term--YDID 関数]・#[+Term--YDID メソッド]が妥当なデータを返す必要がないなら、エラー投擲の代わりに
+            #[+ImportantEntity__Code--YDID return]#[+Term--YDID キーワード]を使っても良い場合が有る。
+
+    p.Article-Paragraph.
+      上記の例の様な#[+Term--YDID 固定スキーマのオブジェクト]以外にも、#[+ImportantEntity--YDID RawObjectDataProcessor]は他の種類の
+        #[+Term--YDID オブジェクト]も検証出来る。
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+Term--YDID 連想配列]。#[+Term__Contrast--YDID 固定スキーマのオブジェクト]と異なり、#[+Term--YDID キー・値]組数が
+          規制は無いが、#[+Keyword--YDID 全]値は#[+Keyword--YDID 共通の]規則に従わなければいけない。
+
+      li #[+Term--YDID 指数配列]
+
+      li.
+        #[+Term--YDID タプル]。#[+Term--YDID 指数配列]と異なり、要素数と順序が#[+Keyword--YDID 固定]で、
+          更に#[+Keyword--YDID 各]#[+Term--YDID 要素]#[+Keyword--YDID 毎]に個別の制約を設定可能。
+
+    p.Article-Paragraph.
+      何故此の#[+Term--YDID クラス]名が#[+SecondaryEntity--YDID RawObjectDataValidator]（「生オブジェクト型データのバリデータ」）ではなく、
+        #[+ImportantEntity--YDID RawObjectDataProcessor]（「生オブジェクト型データのプロセッサ」）になっているだろうか。
+      理由は、此のクラスが妥当性確認を行っているだけでなく、必用に応じて変換（例えばキーの名前の変更や値の変更）も可能という事。
+      今後詳細を当説明書に解説。

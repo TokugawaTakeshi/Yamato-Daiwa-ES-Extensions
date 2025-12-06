@@ -271,7 +271,7 @@ Testing.suite(
         }
       )
 
-    ])
+    ]);
 
   }
 ).catch(Logger.logPromiseError);

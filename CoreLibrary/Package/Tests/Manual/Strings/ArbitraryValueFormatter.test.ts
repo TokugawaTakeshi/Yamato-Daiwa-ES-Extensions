@@ -14,19 +14,23 @@ const switches: Readonly<{
   date: boolean;
   nativeConstructor: boolean;
   objects: Readonly<{
-    simple: boolean;
+    empty: boolean;
+    nested: boolean;
   }>;
   arrays: Readonly<{
+    empty: boolean;
     simple: boolean;
     nestedWithPrimitives: boolean;
     nestedWithObjects: boolean;
   }>;
   sets: {
+    empty: boolean;
     simple: boolean;
     nestedWithPrimitives: boolean;
     nestedWithObjects: boolean;
   };
   maps: {
+    empty: boolean;
     simple: boolean;
     nestedWithPrimitives: boolean;
     nestedWithObjects: boolean;
@@ -40,25 +44,29 @@ const switches: Readonly<{
   undefined: false,
   null: false,
   function: false,
-  date: true,
-  nativeConstructor: true,
+  date: false,
+  nativeConstructor: false,
   objects: {
-    simple: false
+    empty: false,
+    nested: false
   },
   arrays: {
+    empty: false,
     simple: false,
     nestedWithPrimitives: false,
     nestedWithObjects: false
   },
   sets: {
+    empty: false,
     simple: false,
     nestedWithPrimitives: false,
     nestedWithObjects: false
   },
   maps: {
-    simple: false,
-    nestedWithPrimitives: false,
-    nestedWithObjects: false
+    empty: true,
+    simple: true,
+    nestedWithPrimitives: true,
+    nestedWithObjects: true
   }
 };
 
@@ -152,7 +160,13 @@ if (switches.nativeConstructor) {
 }
 
 console.log("=== Objects ====================================================================================");
-if (switches.objects.simple) {
+if (switches.objects.empty) {
+  console.log({});
+  console.log(ArbitraryValueFormatter.stringifyAndFormat({}));
+}
+
+
+if (switches.objects.nested) {
 
   const sampleObject1: Readonly<{
     alpha1: string;
@@ -176,6 +190,17 @@ if (switches.objects.simple) {
 }
 
 console.log("=== Arrays =====================================================================================");
+
+if (switches.arrays.empty) {
+
+  console.log("--- Empty ------------------------------------------------------------------------------------");
+
+  const emptyArray: Array<string> = [];
+
+  console.log(emptyArray);
+  console.log(ArbitraryValueFormatter.stringifyAndFormat(emptyArray));
+
+}
 
 if (switches.arrays.simple) {
 
@@ -240,143 +265,58 @@ if (switches.arrays.nestedWithObjects) {
 }
 
 
-console.log("=== Sets =======================================================================================");
+if (Object.values(switches.sets).includes(true)) {
 
-if (switches.sets.simple) {
+  console.log("=== Sets =====================================================================================");
 
-  console.log("--- Simple -----------------------------------------------------------------------------------");
+  if (switches.sets.empty) {
 
-  const simpleSet: Set<string> = new Set([ "ALPHA", "BRAVO", "CHARLIE" ]);
+    console.log("--- Empty ----------------------------------------------------------------------------------");
 
-  console.log(simpleSet);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(simpleSet));
+    const emptySet: Set<string> = new Set([]);
 
-}
+    console.log(emptySet);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(emptySet));
 
+  }
 
-if (switches.sets.nestedWithPrimitives) {
+  if (switches.sets.simple) {
 
-  console.log("--- Nested with Primitives -------------------------------------------------------------------");
+    console.log("--- Simple ---------------------------------------------------------------------------------");
 
-  const setWithNestedOneOfPrimitives: Set<Set<string | number>> = new Set([
-    new Set([ "ALPHA", "BRAVO", "CHARLIE" ]),
-    new Set([ 1, 2, 3 ])
-  ]);
+    const simpleSet: Set<string> = new Set([ "ALPHA", "BRAVO", "CHARLIE" ]);
 
-  console.log(setWithNestedOneOfPrimitives);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(setWithNestedOneOfPrimitives));
+    console.log(simpleSet);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(simpleSet));
 
-}
+  }
 
+  if (switches.sets.nestedWithPrimitives) {
 
-if (switches.sets.nestedWithObjects) {
+    console.log("--- Nested with Primitives -------------------------------------------------------------------");
 
-  console.log("--- Set with Nested Objects -----------------------------------------------------------------");
+    const setWithNestedOneOfPrimitives: Set<Set<string | number>> = new Set([
+      new Set([ "ALPHA", "BRAVO", "CHARLIE" ]),
+      new Set([ 1, 2, 3 ])
+    ]);
 
-  const arrayWithNestedObjects: Set<{
-    id: number;
-    name: string;
-    details: {
-      category: string;
-      active: boolean;
-    };
-  }> = new Set([
-    {
-      id: 1,
-      name: "First item",
+    console.log(setWithNestedOneOfPrimitives);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(setWithNestedOneOfPrimitives));
+
+  }
+
+  if (switches.sets.nestedWithObjects) {
+
+    console.log("--- Set with Nested Objects -----------------------------------------------------------------");
+
+    const arrayWithNestedObjects: Set<{
+      id: number;
+      name: string;
       details: {
-        category: "A",
-        active: true
-      }
-    },
-    {
-      id: 2,
-      name: "Second item",
-      details: {
-        category: "B",
-        active: false
-      }
-    }
-  ]);
-
-  console.log(arrayWithNestedObjects);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(arrayWithNestedObjects));
-
-}
-
-
-console.log("=== Maps =======================================================================================");
-
-if (switches.maps.simple) {
-
-  console.log("--- Simple -----------------------------------------------------------------------------------");
-
-  const sampleMap: Map<string, string> = new Map([
-    [ "ALPHA", "FOO" ],
-    [ "BRAVO", "BAR" ]
-  ]);
-
-  console.log(sampleMap);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(sampleMap));
-
-}
-
-
-if (switches.maps.nestedWithPrimitives) {
-
-  console.log("--- Nested with Primitives -------------------------------------------------------------------");
-
-  const setWithNestedOneOfPrimitives: Map<
-    Map<string | number, string | number>, Map<string | number, string | number>
-  > = new Map([
-    [
-      new Map<string | number, string | number>([
-        [ "key1", "value1" ],
-        [ 2, 100 ]
-      ]),
-      new Map<string | number, string | number>([
-        [ "innerKey", "innerValue" ],
-        [ 1, "mixed" ]
-      ])
-    ],
-    [
-     new Map<string | number, string | number>([
-       [ 1, "numeric key" ],
-       [ "string", 200 ]
-     ]),
-     new Map<string | number, string | number>([
-       [ 42, 42 ],
-       [ "test", "test" ]
-     ])
-    ]
-  ]);
-
-  console.log(setWithNestedOneOfPrimitives);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(setWithNestedOneOfPrimitives));
-
-}
-
-
-if (switches.maps.nestedWithObjects) {
-
-  console.log("--- Map With Nested Objects -----------------------------------------------------------------");
-
-  const mapWithNestedObjects: Map<{
-    id: number;
-    type: string;
-  }, {
-    id: number;
-    name: string;
-    details: {
-      category: string;
-      active: boolean;
-    };
-  }> = new Map([
-    [
-      {
-        id: 1,
-        type: "primary"
-      },
+        category: string;
+        active: boolean;
+      };
+    }> = new Set([
       {
         id: 1,
         name: "First item",
@@ -384,12 +324,6 @@ if (switches.maps.nestedWithObjects) {
           category: "A",
           active: true
         }
-      }
-    ],
-    [
-      {
-        id: 2,
-        type: "secondary"
       },
       {
         id: 2,
@@ -399,10 +333,128 @@ if (switches.maps.nestedWithObjects) {
           active: false
         }
       }
-    ]
-  ]);
+    ]);
 
-  console.log(mapWithNestedObjects);
-  console.log(ArbitraryValueFormatter.stringifyAndFormat(mapWithNestedObjects));
+    console.log(arrayWithNestedObjects);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(arrayWithNestedObjects));
+
+  }
+
+
+}
+
+
+if (Object.values(switches.maps).includes(true)) {
+
+  console.log("=== Maps =====================================================================================");
+
+  if (switches.maps.empty) {
+
+    console.log("--- Empty ----------------------------------------------------------------------------------");
+
+    const sampleMap: Map<string, string> = new Map();
+
+    console.log(sampleMap);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(sampleMap));
+
+  }
+
+  if (switches.maps.simple) {
+
+    console.log("--- Simple ---------------------------------------------------------------------------------");
+
+    const sampleMap: Map<string, string> = new Map([
+      [ "ALPHA", "FOO" ],
+      [ "BRAVO", "BAR" ]
+    ]);
+
+    console.log(sampleMap);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(sampleMap));
+
+  }
+
+  if (switches.maps.nestedWithPrimitives) {
+
+    console.log("--- Nested with Primitives -----------------------------------------------------------------");
+
+    const setWithNestedOneOfPrimitives: Map<
+      Map<string | number, string | number>, Map<string | number, string | number>
+    > = new Map([
+      [
+        new Map<string | number, string | number>([
+          [ "key1", "value1" ],
+          [ 2, 100 ]
+        ]),
+        new Map<string | number, string | number>([
+          [ "innerKey", "innerValue" ],
+          [ 1, "mixed" ]
+        ])
+      ],
+      [
+       new Map<string | number, string | number>([
+         [ 1, "numeric key" ],
+         [ "string", 200 ]
+       ]),
+       new Map<string | number, string | number>([
+         [ 42, 42 ],
+         [ "test", "test" ]
+       ])
+      ]
+    ]);
+
+    console.log(setWithNestedOneOfPrimitives);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(setWithNestedOneOfPrimitives));
+
+  }
+
+  if (switches.maps.nestedWithObjects) {
+
+    console.log("--- Map With Nested Objects ----------------------------------------------------------------");
+
+    const mapWithNestedObjects: Map<{
+      id: number;
+      type: string;
+    }, {
+      id: number;
+      name: string;
+      details: {
+        category: string;
+        active: boolean;
+      };
+    }> = new Map([
+      [
+        {
+          id: 1,
+          type: "primary"
+        },
+        {
+          id: 1,
+          name: "First item",
+          details: {
+            category: "A",
+            active: true
+          }
+        }
+      ],
+      [
+        {
+          id: 2,
+          type: "secondary"
+        },
+        {
+          id: 2,
+          name: "Second item",
+          details: {
+            category: "B",
+            active: false
+          }
+        }
+      ]
+    ]);
+
+    console.log(mapWithNestedObjects);
+    console.log(ArbitraryValueFormatter.stringifyAndFormat(mapWithNestedObjects));
+
+  }
 
 }
