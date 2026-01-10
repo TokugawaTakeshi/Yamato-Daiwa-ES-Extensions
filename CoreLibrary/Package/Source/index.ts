@@ -357,8 +357,11 @@ export { default as destringifyBooleanValueIfPossible } from
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addElementsToSet } from "./Sets/addElementsToSet";
+export { default as createSetBasedOnAnyArrayLikeCollection } from "./Sets/createSetBasedOnAnyArrayLikeCollection";
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
+export { default as getOneElementOfSet } from "./Sets/getOneElementOfSet";
 export { default as mergeSets } from "./Sets/mergeSets";
+export { default as removeOneElementFromSet, type RemoveOfOneElementFromSet } from "./Sets/removeOneElementOfSet";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
 
 
@@ -399,6 +402,8 @@ export { default as extractLastExtensionOfFileName } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractLastExtensionOfFileName";
 export { default as removeAllFileNameExtensions } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeAllFileNameExtensions";
+export { default as removeSpecifiedFileNameExtensionsFromPath } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeSpecifiedFileNameExtensionsFromPath";
 
 /* ─── Stem ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as extractFileNameWithoutAnyExtensions } from
@@ -478,7 +483,6 @@ export { default as isUndefined } from "./TypeGuards/EmptyTypes/isUndefined";
 /* ┅┅┅ Numbers ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as isBigInt } from "./TypeGuards/Numbers/isBigInt";
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-export { default as isIntegerOnAnySign } from "./TypeGuards/Numbers/isIntegerOnAnySign";
 export { default as isIntegerOfAnySign } from "./TypeGuards/Numbers/isIntegerOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
 export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";
