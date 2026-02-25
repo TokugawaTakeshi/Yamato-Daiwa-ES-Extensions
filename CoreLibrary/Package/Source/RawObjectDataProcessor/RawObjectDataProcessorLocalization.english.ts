@@ -33,7 +33,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     return [
       `${ title } [ ${ documentationPageAnchor } ]`,
       `\n\n● Property / Element: ${ targetPropertyDotSeparatedQualifiedInitialName ?? "(Root)" }`,
-      ...isNotNull(targetPropertyNewName) ? [ ` (new name: "${ targetPropertyNewName }")` ] : [],
+      ...isNotNull(targetPropertyNewName) ? [ ` (renamed to: "${ targetPropertyNewName }")` ] : [],
       `\n${ description }`,
       `\n${ this.generateSeeMoreSentence({ documentationPageAnchor }) }`,
       "\n\n● Property / Element Specification: ",
@@ -57,15 +57,14 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
   /* ━━━ Validation Errors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* [ To English Native Speakers Editors ]
-   * Most of the following messages will be part of template including to above "generateValidationErrorMessage".
-   * So, even the ambiguous expressions like "this property" or "this string" will be clear as the part of the above
-   * template. */
+   * Most of the following messages will be part of the above "generateValidationErrorMessage" template.
+   * In the context of this template, the expressions like "this property" or "this string" are completely unambiguous. */
   validationErrors: {
 
     rawDataIsNotObject: {
       generateMessage:
           ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-              "The raw data passed via first parameter of \"RawObjectDataProcessor.process()\" is not the object and " +
+              "The data passed via first parameter of \"RawObjectDataProcessor.process()\" is not the object and " +
                 `actually has type "${ actualNativeType }".\n` +
               rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
@@ -73,7 +72,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     rawDataIsNull: {
       generateMessage:
           ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-              "The raw data passed via first parameter of \"RawObjectDataProcessor.process()\" is null while non-null " +
+              "The data passed via first parameter of \"RawObjectDataProcessor.process()\" is null while non-null " +
                 "object expected.\n" +
               rawObjectDataProcessorLocalization__english.generateSeeMoreSentence({ documentationPageAnchor })
     },
@@ -108,7 +107,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
     forbiddenUndefinedValue: {
       title: "Forbidden Undefined Value",
       description:
-          "This property/element is not defined or have explicit `undefined` value what has been explicitly forbidden."
+          "This property/element is not defined or has explicit `undefined` value what has been explicitly forbidden."
     },
 
     conditionallyForbiddenUndefinedValue: {
@@ -121,7 +120,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         }: ValidationErrors.ConditionallyForbiddenUndefinedValue.TemplateVariables
       ): string =>
           "This property/element is not defined or has explicit `undefined` value what has been forbidden when " +
-            `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }, and this condition has been satisfied.`
+            `${ verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark }, and this condition satisfied.`
 
     },
 
@@ -135,7 +134,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
           "This property/element is not `undefined` while must be `undefined` when " +
-            `${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, and this condition has been satisfied.`
+            `${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, and this condition satisfied.`
 
     },
 
@@ -156,7 +155,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
         }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
       ): string =>
           "This property/element has `null` value what has been forbidden when " +
-            `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }, and this condition has been satisfied.`
+            `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }, and this condition satisfied.`
 
     },
 
@@ -165,10 +164,12 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       title: "Conditionally Forbidden non-null Value",
 
       generateDescription: (
-        { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
+        {
+          verbalConditionWhenMustBeNullWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-          `This property/element is not \`null\` while must be \`null\` when ${ conditionWhenMustBeNull }, and this ` +
-            "condition has been satisfied."
+          "This property/element is not `null` while must be `null` when " +
+            `${ verbalConditionWhenMustBeNullWithoutEndOfSentenceMark }, and this condition has satisfied.`
 
     },
 
@@ -181,19 +182,19 @@ const rawObjectDataProcessorLocalization__english: Localization = {
       generateDescription: (
         { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `Unable to delete this property after creating of its copy with name "${ propertyNewKey }", because it ` +
-            "is not configurable while the processing approach is the manipulations with source object and " +
-            "`mustLeaveEvenRenamed` option has not been set to true."
+          `Unable to delete this property after creating of its copy with name "${ propertyNewKey }" because it ` +
+            "is not configurable while the selected processing approach is the manipulations with source object and " +
+            "`mustLeaveEvenRenamed` option has not been set to `true`."
 
     },
 
     unableToChangePropertyDescriptors: {
 
-      title: "Usable to Change Property Descriptors",
+      title: "Unable to Change Property Descriptors",
 
       description:
-        "Unable to change the descriptions of this property because it is not configurable while the processing " +
-          "approach is the manipulations with source object."
+        "Unable to change the descriptions of this property because it is not configurable while the selected " +
+          "processing approach is the manipulations with source object."
 
     },
 
@@ -213,7 +214,7 @@ const rawObjectDataProcessorLocalization__english: Localization = {
 
       generateDescription:
           ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
-              "The following properties are unexpected ones:\n" +
+              "The following properties are the unexpected ones:\n" +
               unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
     },
 

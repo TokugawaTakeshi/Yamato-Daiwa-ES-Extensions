@@ -4,9 +4,9 @@ on: [ push ]
 
 jobs:
 
-  qualityInspection:
+  corePackageQualityInspection:
 
-    name: Quality Inspection
+    name: Core Package Quality Inspection
 
     runs-on: ubuntu-latest
 
@@ -33,3 +33,67 @@ jobs:
 
       - name: Tests
         run: cd CoreLibrary/Package && npm run "Run Tests"
+
+  browserJS_PackageQualityInspection:
+
+    name: BrowserJS Package Quality Inspection
+
+    needs: corePackageQualityInspection
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.15.0
+
+      - name: Node.js Version Checking
+        run: node --version
+
+      - name: Dependencies Installation
+        run: cd BrowserJS/Package && npm install
+
+      - name: Types Checking
+        run: cd BrowserJS/Package && npm run "Check Types"
+
+      - name: Linting
+        run: cd BrowserJS/Package && npm run "Lint"
+
+      - name: Tests
+        run: cd BrowserJS/Package && npm run "Run Tests"
+
+  nodeJS_PackageQualityInspection:
+
+    name: NodeJS Package Quality Inspection
+
+    needs: corePackageQualityInspection
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.15.0
+
+      - name: Node.js Version Checking
+        run: node --version
+
+      - name: Dependencies Installation
+        run: cd NodeJS/Package && npm install
+
+      - name: Types Checking
+        run: cd NodeJS/Package && npm run "Check Types"
+
+      - name: Linting
+        run: cd NodeJS/Package && npm run "Lint"
+
+      - name: Tests
+        run: cd NodeJS/Package && npm run "Run Tests"

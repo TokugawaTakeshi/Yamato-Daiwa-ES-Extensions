@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor ${ topHeading }`),
-        description: ""
+        description:
+          "「Yamato Daiwa ECMAScript extensions（YDEE）」ライブラリの「RawObjectDataProcessor」クラスと、オブジェクト型のデータをバリデーションする" +
+          "為のTypeScriptのネイティブな機能を比較する記事。",
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -410,16 +412,17 @@ block append SpecificContent
             #[+Keyword--YDID 全て]の#[+Term--YDID プロパティ]（入れ子の#[+Term--YDID オブジェクト]及び
             #[+ImportantEntity--YDID ECMAScript]視点上#[+Term--YDID オブジェクト]#[+Keyphrase--YDID 特別な場合]になっている
             #[+Term--YDID 配列]を含めて)を確認する。
+
         ul.Article-UnorderedList
 
           li.
-            デモ目的上、例の妥当なデータ仕様では#[+Term--YDID 型]の確認に加えて追加の制約も指定している。
-            たとえば#[+SecondaryEntity__Code--YDID bar]プロパティは#[+Term--YDID 文字列]であるだけでなく、
+            デモ目的上、例の妥当なデータ仕様では#[+Term--YDID 型]の確認に加えて追加の制約も指定してある。
+            たとえば#[+SecondaryEntity__Code--YDID bar]#[+Term--YDID プロパティ]は#[+Term--YDID 文字列]であるだけでなく、
               文字数が#[+SecondaryEntity__Code--YDID 5以上]でなければならない。
 
           li.
-            仕様に書いた各制約に対して#[+ImportantEntity--YDID RawObjectDataProcessor]は個別の検査を行い、
-              実データと期待の不一致を見つけても直ぐに検査を止めたりはしない(入力自体が#[+Term--YDID オブジェクト]でない場合を除いて)。
+            仕様に書いた#[+Keyword--YDID 各]制約に対して#[+ImportantEntity--YDID RawObjectDataProcessor]は個別の検査を行い、
+              実データと期待の不一致を見つけても直ぐに検査を止めたりはしない（入力自体が#[+Term--YDID オブジェクト]でない場合を除いて）。
             代わりに不一致のメッセージを#[+Term--YDID 配列]に蓄積し、其れは#[+ImportantEntity__Code--YDID process]#[+Term--YDID メソッド]
               の戻り値経由で参照出来る。
 
@@ -430,72 +433,69 @@ block append SpecificContent
           #[+Keyword--YDID 過失]を引き受ける。
 
     p.Article-Paragraph.
-      此処で#[+ImportantEntity--YDID RawObjectDataProcessor]と#[+Term--YDID 型ガード](但し概念通り実装されたが、追加機能無し)の
+      #[+ImportantEntity--YDID RawObjectDataProcessor]と#[+Term--YDID 型ガード](但し概念通り実装されたが、追加機能無し)の
         #[+Keyword--YDID 共通点]は次の通り。
 
     ol.Article-OrderedList
 
       li 生データが期待に合うかを確認する
-      li #[+ImportantEntity--YDID TypeScript]の根本制約に依り、特定の#[+Term--YDID 型]への完全一致を保証#[+Keyword--YDID 出来ない]
+      li.
+        #[+ImportantEntity--YDID TypeScript]の#[+Keyword--YDID 根本的な]制約に依り、特定の#[+Term--YDID 型]への完全一致を
+          保証#[+Keyword--YDID 不可能]
 
     p.Article-Paragraph.
-      相違点はもっと多い:
+      相違点だと、より多く有る。
 
     ol.Article-OrderedList
 
       li.
-        #[+ImportantEntity--YDID RawObjectDataProcessor]は#[+Term--YDID オブジェクト](特に#[+Term--YDID 添字配列])に
+        #[+ImportantEntity--YDID RawObjectDataProcessor]は#[+Term--YDID オブジェクト]（特に#[+Term--YDID 添字配列]）に
           #[+Keyword--YDID 限定]して動作する。
-        但し#[+Term--YDID プロパティ]・#[+Term--YDID 要素]の#[+Term__Contrast--YDID 型]は#[+ImportantEntity--YDID JSON]と互換
-          であれば#[+Keyphrase--YDID 何でも]良い。
+        但し#[+Term--YDID プロパティ]・#[+Term--YDID 要素]の#[+Term__Contrast--YDID 型]は
+          #[+Keyphrase--YDID #[+ImportantEntity--YDID JSON]と互換であれば]何でも良い。
 
       li.
-        戻り値は#[+Term--YDID 真偽値]では#[+Keyword--YDID なく]#[+Keyword--YDID 多相]#[+Term--YDID オブジェクト]。
-        データがか不正どうかは#[+ImportantEntity__Code--YDID isRawDataInvalid]#[+Term--YDID プロパティ]が表す。
-        これが#[+ImportantEntity__Code--YDID false]の時、望む#[+Term--YDID 型]にキャストされた#[+Term--YDID オブジェクト]を
+        #[+Term--YDID 戻り値]は#[+Term__Contrast--YDID 真偽値]では#[+Keyword--YDID なく]#[+SecondaryEntity__Code--YDID 多態の]
+          #[+Term--YDID オブジェクト]。
+        データが不正かどうかは#[+ImportantEntity__Code--YDID isRawDataInvalid]#[+Term--YDID プロパティ]が表す。
+        此れが#[+ImportantEntity__Code--YDID false]の時、望む#[+Term--YDID 型]にキャストされた#[+Term--YDID オブジェクト]を
           #[+ImportantEntity__Code--YDID processedData]で参照出来、さもなくば
           #[+ImportantEntity__Code--YDID validationErrorsMessages]#[+Term--YDID プロパティ]に
           期待データと実データの全不一について致メッセージが入る。
 
       li.
-        殆どの#[+ImportantEntity--YDID API]は宣言的だが、。必要なら命令的に追加検証や処理も定義できる。
+        #[+Keyword--YDID 殆どの]#[+ImportantEntity--YDID API]は宣言的だが、必要に応じて追加で検証や処理を命令的に定義出来る。
 
       li.
         各#[+Term--YDID プロパティー]・#[+Term--YDID 要素]の#[+Term__Contrast--YDID 型]だけではなく、必要に応じて其の他の制限に満たしているか
           検証可能。
 
       li.
-        必要なら検証に加えて#[+Keyword--YDID 元の]#[+Term--YDID オブジェクト]に変更も加えられる。
-        。
-
+        必要な時#[+Term--YDID 検証]に加えて#[+Keyword--YDID 元の]#[+Term--YDID オブジェクト]に変更も加えられる。
         例えば#[+Term--YDID 文字列]として保存されている#[+Term--YDID 数値]を#[+ImportantEntity--YDID JSON]と未だ
           #[+Keyword--YDID 非互換]な#[+ImportantEntity__Code--YDID BigInt]#[+Term--YDID 型]に変換する場合や、
-          #[+Term--YDID プロパティ]名を変更する等の場合に非常に役に立っているので、此の機能自体が非推奨#[+Keyword--YDID ではない]が、
+          #[+Term--YDID プロパティ]名を変更する等の場合に非常に役に立っているので、此の機能自体が非推奨#[+Keyword--YDID なってはいない]が、
           妥当性確認を壊すか、妥当として指示されたデータを不正にする事も出来るので、#[+Keyphrase--YDID 利用の際に注意を払わなければいけない]。
-        重要な点として#[+ImportantEntity--YDID RawObjectDataProcessor]には#[+ImportantEntity--YDID 2]つの戦略が有り、
-          一つ目は元の#[+Term--YDID オブジェクト]を操作する(規定)、二つ目は元から新しい#[+Term--YDID オブジェクト]を構築する流れ。
-        #[+Keyphrase--YDID 検証だけなら]戦略を気にする必要は#[+Keyword--YDID ない]が、#[+Term--YDID オブジェクト]を変更する場合は戦略の選択
-          を考える必要が有る。
+        重要な点として#[+ImportantEntity--YDID RawObjectDataProcessor]には#[+ImportantEntity--YDID 2つ]の戦略が有り、
+          一つ目は元の#[+Term--YDID オブジェクト]を操作する（規定）、二つ目は元から新しい#[+Term--YDID オブジェクト]を構築する流れ。
+        元の#[+Term--YDID オブジェクト]を変更したい時、特に此の戦略の選択を考えなければいけない。
 
     p.Article-Paragraph
       | 最後に#[+ImportantEntity--YDID RawObjectDataProcessor]は実データと期待の不一致を説明する高品質なメッセージの
       |  原形を備えている。
-      | これらは
+      | 此れらは
       |
       +Link--YDF({
         internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
           validationIssues.$URI,
       }) 文書化済み
-      |    だが、ドキュメントなしでも内容が理解出来る様に書かれている。
-      | 品質の雰囲気は
-      |
+      |    だが、ドキュメント無しでも内容が理解出来る様に書かれている。
       +Link--YDF({
         endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
             "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
-      }) ローカリゼーションのソースコード
-      |    を見るとつかめる。
-      | ところで、
+      }) 此のメッセージ原形のソースコード
+      | を御自身で確認可能で（ところで、
       +Link--YDF({
         endorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.localizations.japanese
       }) 日本語化も有る
-      | 。
+      | ）、仮に御自身で此の様なメッセージを用意し、複数のプロジェクトに於いて流用を確保するには時間がどれぐらい必要が、見極めてもらいたい。

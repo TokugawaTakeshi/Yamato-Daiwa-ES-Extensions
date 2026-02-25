@@ -36,6 +36,7 @@ import nullToUndefined from "../ValueTransformers/nullToUndefined";
 import isEitherUndefinedOrNull from "../TypeGuards/EmptyTypes/isEitherUndefinedOrNull";
 import isNeitherUndefinedNorNull from "../TypeGuards/EmptyTypes/isNeitherUndefinedNorNull";
 import emptyStringToNull from "../ValueTransformers/emptyStringToNull";
+import getLastElementOfArray from "../Arrays/01-RetrievingOfElements/getLastElementOfArray";
 
 
 class RawObjectDataProcessor {
@@ -48,9 +49,8 @@ class RawObjectDataProcessor {
   private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
 
   private readonly validationErrorsMessages: Array<string> = [];
-
   private readonly currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging: Array<string | number> = [];
-  private currentlyIteratedPropertyNewNameForLogging: string | null = null;
+  private readonly currentlyIteratedPropertyNewNamesByDepthLevelsForLogging: Array<string | null> = [];
 
 
   /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -306,7 +306,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.fixedSchemaObject
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.notCheckedForObjectYetNonNullValueOfSubsequentLevel__expectedToBeObject,
           targetPropertyValueSpecification: targetObjectTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -399,10 +399,11 @@ class RawObjectDataProcessor {
 
       if (isUndefined(childPropertySpecification.newName)) {
         childPropertyFinalName = childPropertyInitialName;
-        this.currentlyIteratedPropertyNewNameForLogging = null;
+        this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] = null;
       } else {
         childPropertyFinalName = childPropertySpecification.newName;
-        this.currentlyIteratedPropertyNewNameForLogging = childPropertyFinalName;
+        this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] =
+            childPropertyFinalName;
       }
 
       if (
@@ -494,7 +495,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenUndefinedValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: childPropertySpecification.newName ?? null,
             targetPropertyValue: childPropertyMutableValue,
             targetPropertyValueSpecification: childPropertySpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -526,7 +527,7 @@ class RawObjectDataProcessor {
                     undefinedForbiddenIf.descriptionForLogging
               }),
               targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+              targetPropertyNewName: childPropertySpecification.newName ?? null,
               targetPropertyValue: childPropertyMutableValue,
               targetPropertyValueSpecification: childPropertySpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -565,7 +566,7 @@ class RawObjectDataProcessor {
                 childPropertySpecification.mustBeUndefinedIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: childPropertySpecification.newName ?? null,
           targetPropertyValue: childPropertyMutableValue,
           targetPropertyValueSpecification: childPropertySpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -607,7 +608,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenNullValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: childPropertySpecification.newName ?? null,
             targetPropertyValue: childPropertyMutableValue,
             targetPropertyValueSpecification: childPropertySpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -639,7 +640,7 @@ class RawObjectDataProcessor {
                     nullForbiddenIf.descriptionForLogging
               }),
               targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+              targetPropertyNewName: childPropertySpecification.newName ?? null,
               targetPropertyValue: childPropertyMutableValue,
               targetPropertyValueSpecification: childPropertySpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -674,10 +675,10 @@ class RawObjectDataProcessor {
         this.registerValidationError({
           title: this.localization.validationErrors.conditionallyForbiddenNonNullValue.title,
           description: this.localization.validationErrors.conditionallyForbiddenNonNullValue.generateDescription({
-            conditionWhenMustBeNull: childPropertySpecification.mustBeNullIf.descriptionForLogging
+            verbalConditionWhenMustBeNullWithoutEndOfSentenceMark: childPropertySpecification.mustBeNullIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: childPropertySpecification.newName ?? null,
           targetPropertyValue: childPropertyMutableValue,
           targetPropertyValueSpecification: childPropertySpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -759,7 +760,7 @@ class RawObjectDataProcessor {
           const targetPropertyDescriptor: PropertyDescriptor | undefined = Object.
               getOwnPropertyDescriptor(processedValueWorkpiece, childPropertyInitialName);
 
-          if (isNotNull(this.currentlyIteratedPropertyNewNameForLogging)) {
+          if (isNotUndefined(childPropertySpecification.newName)) {
 
             /* [ Approach ]
              * Commonly, the omitted value is not equivalent to explicit `undefined`, thus explicit `undefined` must
@@ -767,7 +768,7 @@ class RawObjectDataProcessor {
             if (!(!(childPropertyInitialName in targetObjectTypeSourceValue) && isUndefined(childPropertyMutableValue))) {
               Object.defineProperty(
                 processedValueWorkpiece,
-                this.currentlyIteratedPropertyNewNameForLogging,
+                childPropertySpecification.newName,
                 {
                   value: childPropertyMutableValue,
                   configurable: childPropertySpecification.mustMakeNonConfigurable === true ?
@@ -796,7 +797,7 @@ class RawObjectDataProcessor {
                       title: this.localization.throwableErrors.unableToDeletePropertyWithOutdatedKey.title,
                       description: this.localization.throwableErrors.unableToDeletePropertyWithOutdatedKey.generateDescription({
                         targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                        propertyNewKey: this.currentlyIteratedPropertyNewNameForLogging,
+                        propertyNewKey: childPropertySpecification.newName,
                         documentationPageAnchor: "THROWABLE_ERRORS-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY"
                       }),
                       occurrenceLocation: "RawObjectDataProcessor.processFixedSchemaObjectTypeValue(compoundParameter)"
@@ -809,11 +810,10 @@ class RawObjectDataProcessor {
 
                     this.registerValidationError({
                       title: this.localization.validationErrors.unableToDeletePropertyWithOutdatedKey.title,
-                      description: this.localization.validationErrors.unableToDeletePropertyWithOutdatedKey.generateDescription({
-                        propertyNewKey: this.currentlyIteratedPropertyNewNameForLogging
-                      }),
+                      description: this.localization.validationErrors.unableToDeletePropertyWithOutdatedKey.
+                          generateDescription({ propertyNewKey: childPropertySpecification.newName }),
                       targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                      targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+                      targetPropertyNewName: childPropertySpecification.newName,
                       targetPropertyValue: processedValueWorkpiece,
                       targetPropertyValueSpecification: childPropertySpecification,
                       targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -830,7 +830,7 @@ class RawObjectDataProcessor {
                       title: this.localization.warnings.unableToDeletePropertyWithOutdatedKey.title,
                       description: this.localization.warnings.unableToDeletePropertyWithOutdatedKey.generateDescription({
                         targetPropertyDotSeparatedQualifiedName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                        propertyNewKey: this.currentlyIteratedPropertyNewNameForLogging,
+                        propertyNewKey: childPropertySpecification.newName,
                         documentationPageAnchor: "WARNINGS-UNABLE_TO_DELETE_PROPERTY_WITH_OUTDATED_KEY"
                       }),
                       occurrenceLocation: "RawObjectDataProcessor.processFixedSchemaObjectTypeValue(compoundParameter)"
@@ -887,7 +887,7 @@ class RawObjectDataProcessor {
                     title: this.localization.validationErrors.unableToChangePropertyDescriptors.title,
                     description: this.localization.validationErrors.unableToChangePropertyDescriptors.description,
                     targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                    targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+                    targetPropertyNewName: null,
                     targetPropertyValue: childPropertyMutableValue,
                     targetPropertyValueSpecification: childPropertySpecification,
                     targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -942,7 +942,7 @@ class RawObjectDataProcessor {
                       title: this.localization.validationErrors.unableToUpdatePropertyValue.title,
                       description: this.localization.validationErrors.unableToUpdatePropertyValue.description,
                       targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                      targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+                      targetPropertyNewName: null,
                       targetPropertyValue: childPropertyMutableValue,
                       targetPropertyValueSpecification: childPropertySpecification,
                       targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -981,6 +981,7 @@ class RawObjectDataProcessor {
     }
 
     this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging.splice(-1, 1);
 
     if (
       targetObjectTypeValueSpecification.mustExpectOnlySpecifiedProperties === true &&
@@ -996,7 +997,7 @@ class RawObjectDataProcessor {
         }),
         targetPropertyDotSeparatedQualifiedInitialName:
             emptyStringToNull(this.currentObjectPropertyDotSeparatedQualifiedName),
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetObjectTypeSourceValue,
         targetPropertyValueSpecification: targetObjectTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1028,7 +1029,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetObjectTypeSourceValue,
           targetPropertyValueSpecification: targetObjectTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1119,7 +1120,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.associativeArray
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.notCheckedForObjectYetNonNullValueOfSubsequentLevel__expectedToBeObject,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1164,7 +1165,7 @@ class RawObjectDataProcessor {
             }),
         targetPropertyDotSeparatedQualifiedInitialName:
             emptyStringToNull(this.currentObjectPropertyDotSeparatedQualifiedName),
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetObjectTypeSourceValue,
         targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1191,7 +1192,7 @@ class RawObjectDataProcessor {
             }),
         targetPropertyDotSeparatedQualifiedInitialName:
             emptyStringToNull(this.currentObjectPropertyDotSeparatedQualifiedName),
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetObjectTypeSourceValue,
         targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1218,7 +1219,7 @@ class RawObjectDataProcessor {
             }),
         targetPropertyDotSeparatedQualifiedInitialName:
             emptyStringToNull(this.currentObjectPropertyDotSeparatedQualifiedName),
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetObjectTypeSourceValue,
         targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1250,7 +1251,7 @@ class RawObjectDataProcessor {
               generateDescription({ keysOfEitherUndefinedOrNullValues }),
           targetPropertyDotSeparatedQualifiedInitialName:
               emptyStringToNull(this.currentObjectPropertyDotSeparatedQualifiedName),
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetObjectTypeSourceValue,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1311,9 +1312,15 @@ class RawObjectDataProcessor {
         foundDisallowedKeys.push(initialKey);
       }
 
-      const renamedKey: string = targetAssociativeArrayTypeValueSpecification.keysRenamings?.[initialKey] ?? initialKey;
+      const newNameOfKey: string | null = targetAssociativeArrayTypeValueSpecification.keysRenamings?.[initialKey] ?? null;
+      const finalKey: string = newNameOfKey ?? initialKey;
 
-      if (hasAllEntriesDefinitelyNotChanged && renamedKey !== initialKey) {
+      if (isNotNull(newNameOfKey)) {
+        this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] =
+            newNameOfKey;
+      }
+
+      if (hasAllEntriesDefinitelyNotChanged && finalKey !== initialKey) {
         hasAllEntriesDefinitelyNotChanged = false;
       }
 
@@ -1371,7 +1378,7 @@ class RawObjectDataProcessor {
             ...this.localization.validationErrors.forbiddenUndefinedValue,
             description: this.localization.validationErrors.forbiddenUndefinedValue.description,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: newNameOfKey,
             targetPropertyValue: targetObjectTypeSourceValue,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -1395,7 +1402,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenNullValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: newNameOfKey,
             targetPropertyValue: targetObjectTypeSourceValue,
             targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -1455,7 +1462,7 @@ class RawObjectDataProcessor {
 
             Object.defineProperty(
               processedValueWorkpiece,
-              renamedKey,
+              finalKey,
               {
                 value: mutableValue,
                 configurable: true,
@@ -1475,7 +1482,7 @@ class RawObjectDataProcessor {
           const targetPropertyDescriptor: PropertyDescriptor | undefined = Object.
               getOwnPropertyDescriptor(processedValueWorkpiece, initialKey);
 
-          if (isNotNull(this.currentlyIteratedPropertyNewNameForLogging)) {
+          if (isNotNull(newNameOfKey)) {
 
             /* [ Approach ]
              * Commonly, the omitted value is not equivalent to explicit `undefined`, thus explicit `undefined` must
@@ -1483,7 +1490,7 @@ class RawObjectDataProcessor {
             if (!(!(initialKey in targetObjectTypeSourceValue) && isUndefined(mutableValue))) {
               Object.defineProperty(
                 processedValueWorkpiece,
-                this.currentlyIteratedPropertyNewNameForLogging,
+                newNameOfKey,
                 {
                   value: mutableValue,
                   configurable: true,
@@ -1521,7 +1528,7 @@ class RawObjectDataProcessor {
                     title: this.localization.validationErrors.unableToUpdatePropertyValue.title,
                     description: this.localization.validationErrors.unableToUpdatePropertyValue.description,
                     targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-                    targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+                    targetPropertyNewName: newNameOfKey,
                     targetPropertyValue: mutableValue,
                     targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
                     targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1546,7 +1553,7 @@ class RawObjectDataProcessor {
 
               }
 
-              processedValueWorkpiece[renamedKey] = mutableValue;
+              processedValueWorkpiece[finalKey] = mutableValue;
 
             }
 
@@ -1560,6 +1567,7 @@ class RawObjectDataProcessor {
 
 
     this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging.splice(-1, 1);
 
     if (foundDisallowedKeys.length > 0) {
 
@@ -1570,7 +1578,7 @@ class RawObjectDataProcessor {
         description: this.localization.validationErrors.disallowedKeysFoundInAssociativeArray.
             generateDescription({ foundDisallowedKeys }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetObjectTypeSourceValue,
         targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1602,7 +1610,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetObjectTypeSourceValue,
           targetPropertyValueSpecification: targetAssociativeArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1676,7 +1684,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.topLevelObject,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1702,7 +1710,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.targetValueOfSubsequentLevel__expectedToBeArray,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1740,7 +1748,7 @@ class RawObjectDataProcessor {
               actualElementsCount: targetArrayedTypeSourceValue.length
             }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetArrayedTypeSourceValue,
         targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1765,7 +1773,7 @@ class RawObjectDataProcessor {
               actualElementsCount: targetArrayedTypeSourceValue.length
             }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetArrayedTypeSourceValue,
         targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1790,7 +1798,7 @@ class RawObjectDataProcessor {
               actualElementsCount: targetArrayedTypeSourceValue.length
             }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetArrayedTypeSourceValue,
         targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -1869,7 +1877,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenUndefinedValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: null,
             targetPropertyValue: targetArrayedTypeSourceValue,
             targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -1893,7 +1901,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenNullValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: null,
             targetPropertyValue: targetArrayedTypeSourceValue,
             targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -1991,7 +1999,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetArrayedTypeSourceValue,
           targetPropertyValueSpecification: targetIndexedArrayTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2065,7 +2073,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.topLevelObject,
           targetPropertyValueSpecification: targetTupleTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2091,7 +2099,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: compoundParameter.targetValueOfSubsequentLevel__expectedToBeArray,
           targetPropertyValueSpecification: targetTupleTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2128,7 +2136,7 @@ class RawObjectDataProcessor {
               actualElementsCount: targetArrayedTypeSourceValue.length
             }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetArrayedTypeSourceValue,
         targetPropertyValueSpecification: targetTupleTypeValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2228,7 +2236,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenUndefinedValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: null,
             targetPropertyValue: mutableElement,
             targetPropertyValueSpecification: elementSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2260,7 +2268,7 @@ class RawObjectDataProcessor {
                     undefinedForbiddenIf.descriptionForLogging
               }),
               targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+              targetPropertyNewName: null,
               targetPropertyValue: mutableElement,
               targetPropertyValueSpecification: elementSpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2299,7 +2307,7 @@ class RawObjectDataProcessor {
                 elementSpecification.mustBeUndefinedIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: null,
           targetPropertyValue: mutableElement,
           targetPropertyValueSpecification: elementSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2341,7 +2349,7 @@ class RawObjectDataProcessor {
           this.registerValidationError({
             ...this.localization.validationErrors.forbiddenNullValue,
             targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-            targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+            targetPropertyNewName: null,
             targetPropertyValue: mutableElement,
             targetPropertyValueSpecification: elementSpecification,
             targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2373,7 +2381,7 @@ class RawObjectDataProcessor {
                     nullForbiddenIf.descriptionForLogging
               }),
               targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-              targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+              targetPropertyNewName: null,
               targetPropertyValue: mutableElement,
               targetPropertyValueSpecification: elementSpecification,
               targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2408,10 +2416,10 @@ class RawObjectDataProcessor {
         this.registerValidationError({
           title: this.localization.validationErrors.conditionallyForbiddenNonNullValue.title,
           description: this.localization.validationErrors.conditionallyForbiddenNonNullValue.generateDescription({
-            conditionWhenMustBeNull: elementSpecification.mustBeNullIf.descriptionForLogging
+            verbalConditionWhenMustBeNullWithoutEndOfSentenceMark: elementSpecification.mustBeNullIf.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: null,
           targetPropertyValue: mutableElement,
           targetPropertyValueSpecification: elementSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -2506,7 +2514,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetArrayedTypeSourceValue,
           targetPropertyValueSpecification: targetTupleTypeValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2543,7 +2551,6 @@ class RawObjectDataProcessor {
     };
 
   }
-
 
   /* ┅┅┅ Processing of Internal Level Properties ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   private processSingleNeitherUndefinedNorNullValue(
@@ -2657,7 +2664,7 @@ class RawObjectDataProcessor {
                 expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.ambiguousObject
               }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2711,7 +2718,7 @@ class RawObjectDataProcessor {
               expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.ambiguousArray
             }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2796,7 +2803,7 @@ class RawObjectDataProcessor {
           expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2824,7 +2831,7 @@ class RawObjectDataProcessor {
         title: this.localization.validationErrors.forbiddenNaN_Value.title,
         description: this.localization.validationErrors.forbiddenNaN_Value.description,
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2934,7 +2941,7 @@ class RawObjectDataProcessor {
           expectedNumberSet: targetValueSpecification.numbersSet
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2971,7 +2978,7 @@ class RawObjectDataProcessor {
           )
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -2994,7 +3001,7 @@ class RawObjectDataProcessor {
           requiredMinimum: targetValueSpecification.minimalValue
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3017,7 +3024,7 @@ class RawObjectDataProcessor {
           allowedMaximum: targetValueSpecification.maximalValue
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3053,7 +3060,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue__expectedToBeNumber,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3114,7 +3121,7 @@ class RawObjectDataProcessor {
           expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3145,7 +3152,7 @@ class RawObjectDataProcessor {
           )
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3169,7 +3176,7 @@ class RawObjectDataProcessor {
           realCharactersCount: targetValue__expectedToBeString.length
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3193,7 +3200,7 @@ class RawObjectDataProcessor {
           realCharactersCount: targetValue__expectedToBeString.length
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3217,7 +3224,7 @@ class RawObjectDataProcessor {
           realCharactersCount: targetValue__expectedToBeString.length
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3253,7 +3260,7 @@ class RawObjectDataProcessor {
             foundForbiddenCharacters: Array.from(foundForbiddenCharacters)
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3305,7 +3312,7 @@ class RawObjectDataProcessor {
             foundForbiddenCharacters: Array.from(foundForbiddenCharacters)
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3330,7 +3337,7 @@ class RawObjectDataProcessor {
           regularExpression: targetValueSpecification.validValueRegularExpression
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3366,7 +3373,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue__expectedToBeString,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3426,7 +3433,7 @@ class RawObjectDataProcessor {
           expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.boolean
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeBoolean,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3449,7 +3456,7 @@ class RawObjectDataProcessor {
           disallowedVariant: !(targetValueSpecification.trueOnly === true)
         }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-        targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+        targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeBoolean,
         targetPropertyValueSpecification: targetValueSpecification,
         targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3485,7 +3492,7 @@ class RawObjectDataProcessor {
             customValidationDescription: customValidator.descriptionForLogging
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: targetValue__expectedToBeBoolean,
           targetPropertyValueSpecification: targetValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification,
@@ -3695,7 +3702,7 @@ class RawObjectDataProcessor {
             stringifiedCaughtError: stringifyAndFormatArbitraryValue(error)
           }),
           targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: this.currentlyIteratedPropertyNewNameForLogging,
+          targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
           targetPropertyValue: propertyOrElementMutableValue,
           targetPropertyValueSpecification: propertyOrElementValueSpecification,
           targetPropertyStringifiedValueBeforeFirstPreValidationModification:
@@ -4844,7 +4851,7 @@ namespace RawObjectDataProcessor {
 
       export namespace ConditionallyForbiddenNonNullValue {
         export type TemplateVariables = Readonly<{
-          conditionWhenMustBeNull: string;
+          verbalConditionWhenMustBeNullWithoutEndOfSentenceMark: string;
         }>;
       }
 

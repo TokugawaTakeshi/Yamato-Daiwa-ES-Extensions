@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: ""
+        description:
+          "Сравнение возможностей класса «RawObjectDataProcessor» из библиотеки «Yamato Daiwa ECMAScript extensions» " +
+            "(сокращённо: «YDEE») с нативными средствами валидации объектных данных в TypeScript."
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -442,19 +444,20 @@ block append SpecificContent
           li.
             Помимо проверки на #[+Term--YDID тип данных], в спецификации валидных данных для примера указаны
               дополнительные ограничения.
-            Например, свойство #[+SecondaryEntity__Code--YDID bar] должно не&nbsp;просто быть #[+Term--YDID строкой],
-              но при этом иметь минимум #[+SecondaryEntity__Code--YDID 5] символов.
+            Например, #[+Term--YDID свойство] #[+SecondaryEntity__Code--YDID bar] должно не&nbsp;просто быть
+            #[+Term--YDID строкой], но при этом иметь минимум #[+SecondaryEntity__Code--YDID 5] символов.
 
           li.
-            На каждое ограничение, указанное в спецификации валидных данных #[+ImportantEntity--YDID RawObjectDataProcessor]
-              производит конкретную проверку, и если в ходе этой проверке будет выявлено несоответствие реальных данных
+            Для #[+Keyword--YDID каждого] ограничения, указанное в спецификации валидных данных,
+              #[+ImportantEntity--YDID RawObjectDataProcessor] производит конкретную проверку, и если в ходе этой
+              проверки будет выявлено несоответствие реальных данных
               ожидаемым, то проверка #[+Keyword--YDID не]&nbsp;завершится тут же (за исключением случая, когда сами
               входные данные не&nbsp;являются #[+Term--YDID объектом]), а будет сохранено сообщение о несоответствии в
               #[+Term--YDID массив], к которому можно будет обратиться через возвращаемое #[+Term--YDID методом]
               #[+ImportantEntity__Code--YDID process] значение.
 
       li.
-        Если в ходе валидации #[+Keyword--YDID не]&nbsp;будет выявлено ни одного несоответствия реальных данных
+        Если в ходе валидации #[+Keyword--YDID не]&nbsp;будет выявлено ни&nbsp;одного несоответствия реальных данных
           установленным ограничениям, то тогда #[+ImportantEntity--YDID RawObjectDataProcessor] возьмёт на себя
           #[+Keyword--YDID грех] пометить с помощью #[+Term--YDID ключевого слова] #[+ImportantEntity__Code--YDID as]
           входные данные тем #[+Term--YDID типом], которые передан через #[+Term--YDID параметр обобщения]
@@ -470,7 +473,7 @@ block append SpecificContent
       li Проверяют исходные данные ожидаемым
       li.
         #[+Keyword--YDID Не]&nbsp;могут полностью гарантировать соответствие конкретному #[+Term--YDID типу] в силу
-          фундаментальных ограничений #[+ImportantEntity--YDID TypeScript]
+          #[+Keyword--YDID фундаментальных] ограничений #[+ImportantEntity--YDID TypeScript]
 
     p.Article-Paragraph.
       Что касается различий, то их гораздо больше:
@@ -489,13 +492,13 @@ block append SpecificContent
         На вопрос, являются ли данные невалидными, отвечает #[+Term--YDID свойство]
           #[+ImportantEntity__Code--YDID isRawDataInvalid].
         Когда это #[+Term--YDID свойство] имеет значение #[+ImportantEntity__Code--YDID false], можно обратиться
-          к приведённому к желаемому #[+Term--YDID типу] #[+Term__Contrast--YDID объекту] через свойство
+          к приведённому к желаемому #[+Term--YDID типу] #[+Term__Contrast--YDID объекту] через #[+Term--YDID свойство]
           #[+ImportantEntity__Code--YDID processedData], в противном случае #[+Keyphrase--YDID вместо него] будет
           #[+Term--YDID свойство] #[+ImportantEntity__Code--YDID validationErrorsMessages], содержащее сообщения
           о всех несоответствиях реальных данных ожидаемым.
 
       li.
-        #[+ImportantEntity--YDID API] в целом #[+Keyword--YDID декларативный], хотя при необходимости можно определить
+        #[+ImportantEntity--YDID API] #[+Keyphrase--YDID в целом] декларативный, хотя при необходимости можно определить
           дополнительные проверки и манипуляции в императивном стиле.
 
       li.
@@ -503,19 +506,19 @@ block append SpecificContent
           соответствие другим ограничениям.
 
       li.
-        При необходимости, помимо валидации может внести изменения в #[+Keyword--YDID исходный] #[+Term--YDID объект].
-        Жта функциональность #[+Keyword--YDID не]&nbsp;является нежелательной, потому что в некоторых случаях
+        При необходимости, помимо #[+Term--YDID валидации] может внести изменения в #[+Keyword--YDID исходный]
+          #[+Term--YDID объект].
+        Эта функциональность #[+Keyword--YDID не]&nbsp;является нежелательной, потому что в некоторых случаях
           она крайне полезна (например, если нужно преобразовать хранящиеся в виде #[+Term--YDID строк]
           #[+Term__Contrast--YDID числа] в #[+Term--YDID тип] #[+ImportantEntity__Code--YDID BigInt], с которым
           #[+ImportantEntity--YDID JSON] пока что #[+Keyword--YDID несовместим], или же переименовать
           #[+Term--YDID свойства]), её следует использовать #[+Keyphrase--YDID с осторожностью], так как она может
-          поломать валидацию либо сделать помеченные как валидные данные невалидными.
+          поломать #[+Term--YDID валидацию] либо сделать помеченные как валидные данные невалидными.
         Важно, что у #[+ImportantEntity--YDID RawObjectDataProcessor] есть #[+ImportantEntity--YDID 2] стратегии при
-          работе с объектами: манипуляции с исходным #[+Term--YDID объектом] (по умолчанию) и построение нового
-          #[+Term--YDID объекта] на основе исходного.
-        #[+Keyphrase--YDID Когда данные нужно просто валидировать], об этих стратегиях можно
-          #[+Keyword--YDID не]&nbsp;задумываться, но когда помимо валидации нужно внести изменения в #[+Term--YDID объект],
-          то здесь уже стратегия имеет значение.
+          работе с #[+Term--YDID объектами]: манипуляции с исходным #[+Term--YDID объектом] (по умолчанию) и построение
+          нового #[+Term--YDID объекта] на основе исходного.
+        Эти стратегии имеют значимость прежде всего в случаях, когда помимо #[+Term--YDID валидации] нужно внести
+          изменения в исходный #[+Term--YDID объект].
 
     p.Article-Paragraph
       | Наконец, #[+ImportantEntity--YDID RawObjectDataProcessor] имеет качественные шаблоны сообщений о несоответствиях

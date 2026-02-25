@@ -13,13 +13,14 @@ const samples: ReadonlyArray<Sample> = [
   { secondsAmount: 2, millisecondsAmount: 2000 }
 ];
 
-Promise.all([
+Promise.all(
   samples.map(
-    async ({ secondsAmount, millisecondsAmount }: Sample): Promise<void> => Testing.test(
-      `${ secondsAmount } seconds is ${ millisecondsAmount } seconds`,
-      (): void => {
-        Assert.strictEqual(secondsToMilliseconds(secondsAmount), millisecondsAmount);
-      }
-    )
+    async ({ secondsAmount, millisecondsAmount }: Sample): Promise<void> =>
+        Testing.test(
+          `${ secondsAmount } seconds is ${ millisecondsAmount } seconds`,
+          (): void => {
+            Assert.strictEqual(secondsToMilliseconds(secondsAmount), millisecondsAmount);
+          }
+        )
   )
-]).catch(Logger.logPromiseError);
+).catch(Logger.logPromiseError);

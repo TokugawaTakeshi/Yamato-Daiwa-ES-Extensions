@@ -672,10 +672,72 @@ npm i @yamato-daiwa/es-extensions -E
 <dl>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByIndexes/removeArrayElementsByIndexes.english.html"><code>removeArrayElementsByIndexes</code></a></dt>
-  <dd>Removes array elements by indexes, herewith the removing can be mutable or no depending on dedicated option.</dd>
+  <dd>
+
+ Removes array elements by indexes, herewith the removing can be mutable or no depending on the dedicated option.
+
+   ```
+   <ArrayElement>(
+     {
+       targetArray,
+       mutably,
+       ...sourceData
+     }: Readonly<
+       (
+         {
+           mutably: true;
+           targetArray: Array<ArrayElement>;
+         } |
+         {
+           mutably: false;
+           targetArray: ReadonlyArray<ArrayElement>;
+         }
+       ) &
+       { indexes: number | ReadonlyArray<number>; }
+     >
+   ): Readonly<{
+     updatedArray: Array<ArrayElement>;
+     removedElements: Array<ArrayElement>;
+   }>
+   ```
+
+  </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.english.html"><code>removeArrayElementsByPredicates</code></a></dt>
-  <dd>Removes array elements by one or more predicates, herewith the removing can be mutable or not depending on dedicated option.</dd>
+  <dd>
+
+ Removes array elements by one or more predicates, herewith the removing can be mutable or not depending on dedicated option.
+
+   ```
+   <ArrayElement>(
+     {
+       targetArray,
+       mutably,
+       ...sourceData
+     }: Readonly<
+       (
+         {
+           mutably: true;
+           targetArray: Array<ArrayElement>;
+         } |
+         {
+           mutably: false;
+           targetArray: ReadonlyArray<ArrayElement>;
+         }
+       ) &
+       (
+         { predicate: (arrayElement: ArrayElement) => boolean; } |
+         { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
+       )
+     >
+   ): Readonly<{
+     updatedArray: Array<ArrayElement>;
+     removedElements: Array<ArrayElement>;
+     indexesOfRemovedElements: Array<number>;
+   }>;    
+   ```
+
+  </dd>
 
 </dl>
 
@@ -685,7 +747,23 @@ npm i @yamato-daiwa/es-extensions -E
 <dl>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/08-Restructuring/twoDimensionalizeArray/twoDimensionalizeArray.english.html"><code>twoDimensionalizeArray</code></a></dt>
-  <dd>Converts a flat array to 2-dimensional array with nested arrays of fixed elements count.</dd>
+  <dd>
+    
+ Converts a flat array to a 2-dimensional array with nested arrays of fixed elements count.
+  
+   ```
+   <ArrayElement>(
+     {
+       targetFlatArray,
+       elementsCountPerNestedArray
+     }: Readonly<{
+       targetFlatArray: ReadonlyArray<ArrayElement>;
+       elementsCountPerNestedArray: number;
+     }>
+   ): Array<Array<ArrayElement>>
+   ```     
+    
+</dd>
 
 </dl>
 
@@ -696,7 +774,8 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.english.html"><code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code></a></dt>
   <dd>
-    <p>Obviously from the function name, add elements to an array if they do not present otherwise remove them.</p>
+
+ <p>Obviously from the function name, add elements to an array if they do not present otherwise remove them.</p>
     <ul>
       <li>
         For all types of elements except numbers, bigints, strings and booleans the element finding predicate must be
@@ -704,17 +783,84 @@ npm i @yamato-daiwa/es-extensions -E
       </li>
        <li>Mutable and immutable manipulations are available</li>
     </ul>
+
+   ```
+   <ArrayElement extends number | bigint | string | boolean>(
+     compoundParameter:
+       Readonly<
+         (
+           { targetElement: ArrayElement; } |
+           { targetElements: ReadonlyArray<ArrayElement>; }
+         ) &
+         (
+           { addingToStart: true; } |
+           { addingToEnd: true; } |
+           { addingToPosition__numerationFrom0: number; } |
+           { addingToPosition__numerationFrom1: number; }
+         ) &
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         )
+       >
+   ): Array<ArrayElement>;
+
+   <ArrayElement extends Exclude<unknown, number | bigint | string | boolean>>(
+     compoundParameter:
+       Readonly<
+         (
+           {
+             targetElement: ArrayElement;
+             targetElementFinder: (arrayElement: ArrayElement) => boolean;
+           } |
+           {
+             targetElements: ReadonlyArray<ArrayElement>;
+             targetElementsFinder: (arrayElement: ArrayElement) => boolean;
+           }
+         ) &
+         (
+           { addingToStart: true; } |
+           { addingToEnd: true; } |
+           { addingToPosition__numerationFrom0: number; } |
+           { addingToPosition__numerationFrom1: number; }
+         ) &
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         )
+       >
+   ): Array<ArrayElement>;
+   ```
+
   </dd>
 
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/readonlyArrayToMutableOne/readonlyArrayToMutableOne.english.html"><code>readonlyArrayToMutableOne</code></a></dt>
   <dd>
-    <ul>
+
+ <ul>
       <li>
         From the viewpoint of TypeScript, allows to mutate the <code>ReadonlyArray</code> what basically not recommeded
           but in some particular cases almost inevitably.
       </li>
       <li>From the viewpoint of JavaScript, does nothing.</li>
     </ul>
+
+   ```
+   <ArrayElement>(targetArray: ReadonlyArray<ArrayElement>): Array<ArrayElement>
+   ```
+
   </dd>
 
 </dl>

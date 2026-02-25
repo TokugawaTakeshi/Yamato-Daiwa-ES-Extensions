@@ -2,14 +2,13 @@ $projectBuilding:
 
   $commonSettings:
 
-    $publicDirectoriesRelativePaths:
+    $publicDirectoriesRelativePaths: { $production: 03-ProductionBuild }
 
-      $production: 03-ProductionBuild
+    $filesWatching: { $relativePathsOfExcludeDirectories: [ 03-ProductionBuild ] }
 
-    $filesWatching:
-
-      $relativePathsOfExcludeDirectories:
-        - 03-ProductionBuild
+    $processingOnDemand:
+      $enabled: false
+      $fullInitialBuilding: true
 
 
   # ━━━ Markup Processing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -25,10 +24,10 @@ $projectBuilding:
 
         $sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
-        $partialsRecognition:
-          $excludeFilesWithPrefixes: "_"
-          $excludeSubdirectoriesWithPrefixes: "_"
-          $excludeSubdirectoriesWithNames: [ TableOfContents, Data, ReusableFragments ]
+        $sourceFilesSelection:
+          $prefixesOfExcludeFiles: "_"
+          $prefixesOfExcludedSubdirectories: "_"
+          $namesOfExcludeSubdirectories: [ TableOfContents, Data ]
 
         $buildingModeDependent:
           $localDevelopment:
@@ -65,9 +64,9 @@ $projectBuilding:
 
         $sourceFilesTopDirectoryRelativePath: 01-Source/Pages
 
-        $partialsRecognition:
-          $excludeFilesWithPrefixes: "_"
-          $excludeSubdirectoriesWithPrefixes: "_"
+        $sourceFilesSelection:
+          $prefixesOfExcludeFiles: "_"
+          $prefixesOfExcludedSubdirectories: "_"
 
         $buildingModeDependent:
           $localDevelopment:

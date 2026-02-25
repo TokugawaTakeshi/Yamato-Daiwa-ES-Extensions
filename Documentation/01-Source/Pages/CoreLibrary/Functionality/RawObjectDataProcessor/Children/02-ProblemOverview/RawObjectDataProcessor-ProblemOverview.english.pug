@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: ""
+        description:
+            "The comparison of \"RawObjectDataProcessor\" class from the \"Yamato Daiwa ECMAScript extensions\" " +
+            "(abbreviation: \"YDEE\") library with TypeScript native functionality for validation of object type data."
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -442,21 +444,22 @@ block append SpecificContent
             in the valid data specification #[+SecondaryEntity__Code--YDID validDataSpecification] including
             nested #[+Term--YDID objects] and #[+Term--YDID arrays] (a #[+Keyphrase--YDID special case] of
             #[+Term--YDID objects] #[+Keyphrase--YDID from the #[+ImportantEntity--YDID ECMAScript] viewpoint]).
+
         ul.Article-UnorderedList
 
           li.
             In addition to checking the #[+Term--YDID data type], for the demonstration purposes the sample valid data
               specification is including additional constraints.
-            For example, the #[+SecondaryEntity__Code--YDID bar] property must&nbsp;not&nbsp;only be a
+            For example, the #[+SecondaryEntity__Code--YDID bar] #[+Term--YDID property] must&nbsp;not&nbsp;only be a
               #[+Term--YDID string], but also have at least #[+SecondaryEntity__Code--YDID 5] characters.
 
           li.
-            For each constraint specified in the valid data specification, #[+ImportantEntity--YDID RawObjectDataProcessor]
-              performs a specific check, and if a mismatch between actual and expected data is found during this check,
-              the checking #[+Keyword--YDID will not] stop immediately (except for the case where the input itself is not
-              an #[+Term--YDID object]); instead, a message about the mismatch will be saved into an #[+Term--YDID array]
-              which can be accessed via the value returned by the #[+ImportantEntity__Code--YDID process]
-              #[+Term--YDID method].
+            For #[+Keyword--YDID each] constraint specified in the valid data specification,
+              #[+ImportantEntity--YDID RawObjectDataProcessor] performs a specific check, and if a mismatch between
+              actual and expected data is found during this check, the checking will&nbsp;#[+Keyword--YDID  not] stop
+              immediately (except for the case where the input itself is not an #[+Term--YDID object]); instead,
+              a message about the mismatch will be saved into an #[+Term--YDID array] which can be accessed via the
+              value returned by the #[+ImportantEntity__Code--YDID process] #[+Term--YDID method].
 
       li.
         If no mismatches of actual data to the established constraints are found during validation, then
@@ -473,8 +476,8 @@ block append SpecificContent
 
       li They check whether the raw data matches expectations
       li.
-        Can&nbsp;#[+Keyword--YDID not] fully guarantee conformance to a particular #[+Term--YDID type] due to fundamental
-          limitations of #[+ImportantEntity--YDID TypeScript]
+        Can&nbsp;#[+Keyword--YDID not] fully guarantee conformance to a particular #[+Term--YDID type] due to
+          #[+Keyword--YDID fundamental] limitations of #[+ImportantEntity--YDID TypeScript]
 
     p.Article-Paragraph.
       As for the differences, there are many more of them:
@@ -485,7 +488,7 @@ block append SpecificContent
         #[+ImportantEntity--YDID RawObjectDataProcessor] is designed to work #[+Keyword--YDID only] with
           #[+Term--YDID objects] (in particular, with #[+Term--YDID index arrays]), although their
           #[+Term--YDID properties]/#[+Term--YDID elements] can be of
-          #[+Keyphrase--YDID any type compatible with #[+ImportantEntity--YDID JSON]].
+          #[+Keyphrase--YDID any compatible with #[+ImportantEntity--YDID JSON]]　#[+Term--YDID type].
 
       li.
         #[+ImportantEntity--YDID RawObjectDataProcessor] returns #[+Keyword--YDID not] a
@@ -493,33 +496,33 @@ block append SpecificContent
         The question of whether the data is invalid is answered by the #[+Term--YDID property]
           #[+ImportantEntity__Code--YDID isRawDataInvalid].
         When this #[+Term--YDID property] is #[+ImportantEntity__Code--YDID false], you can access the
-          #[+Term--YDID object] cast to the desired #[+Term--YDID type] via the property
+          #[+Term--YDID object] cast to the desired #[+Term--YDID type] via the #[+Term--YDID property]
           #[+ImportantEntity__Code--YDID processedData]; otherwise, #[+Keyphrase--YDID instead of it] there will be the
           #[+Term--YDID property] #[+ImportantEntity__Code--YDID validationErrorsMessages] containing messages about
           all mismatches between actual and expected data.
 
       li.
-        The majority of #[+ImportantEntity--YDID API] is declarative although if required it is possible to define
-          the additional checks or manipulations imperatively.
+        The #[+Keyword--YDID majority] of #[+ImportantEntity--YDID API] is declarative although if required it is
+          possible to define the additional checks or manipulations imperatively.
 
       li.
         It can check #[+Term--YDID properties]/#[+Term--YDID elements] not&nbsp;only for #[+Term--YDID type] but for
           satisfying to other constraints as well.
 
       li.
-        If necessary, in addition to validation it can make changes to the #[+Keyword--YDID original]
+        If necessary, in addition to #[+Term--YDID validation] it can make changes to the #[+Keyword--YDID original]
           #[+Term--YDID object].
-        This functionality #[+Keyword--YDID is]&nbsp;#[+Keyword--YDID not]&nbsp;discouraged, because in some cases it
+        This functionality is&nbsp;#[+Keyword--YDID not]&nbsp;discouraged, because in some cases it
           is extremely useful (for example, if you need to convert #[+Term--YDID numbers] stored as #[+Term--YDID strings]
           into the #[+Term--YDID type] #[+ImportantEntity__Code--YDID BigInt], which is currently
           #[+Keyword--YDID incompatible] with #[+ImportantEntity--YDID JSON], or rename #[+Term--YDID properties]);
-          however, it should be used #[+Keyphrase--YDID with care] since it may break validation or make data marked
-          as valid become invalid.
+          however, it should be used #[+Keyphrase--YDID with care] since it may break #[+Term--YDID validation] or make
+          data marked as valid become invalid.
         Importantly, #[+ImportantEntity--YDID RawObjectDataProcessor] has #[+ImportantEntity--YDID 2] strategies when
           working with #[+Term--YDID objects]: manipulating the original #[+Term--YDID object] (by default) and
           constructing a new #[+Term--YDID object] based on the original.
-        #[+Keyphrase--YDID When you only need to validate data], you can #[+Keyword--YDID not] think about these
-          strategies; but when you need to modify the object in addition to validation, the strategy matters.
+        These strategies are especially important when besides the validation it is required to modify the
+          source #[+Term--YDID object].
 
     p.Article-Paragraph
       | Finally, #[+ImportantEntity--YDID RawObjectDataProcessor] has high‑quality templates of messages describing
@@ -536,4 +539,5 @@ block append SpecificContent
         endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
             "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
       }) localization source code
-      |    to get an idea of their quality.
+      |  and try to estimate how much time you need to prepare there messages yourself including the providing
+      |  of the reusage of these messages across the projects.
