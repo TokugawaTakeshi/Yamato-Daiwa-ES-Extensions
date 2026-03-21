@@ -64,7 +64,7 @@ export default function moveArrayElementToOnePosition<ArrayElement>(
 
     /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
     * When the `mutably` option is falsy, it is being assumed that the array is immutable only for this function but
-    *   once val ue returned it must be a mutable array. */
+    *   once the value returned, it must be a mutable array. */
     return targetArray as Array<ArrayElement>;
 
   }

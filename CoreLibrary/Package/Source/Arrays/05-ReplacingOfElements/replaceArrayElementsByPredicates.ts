@@ -18,7 +18,8 @@ export namespace ReplacingArrayElementsByPredicates {
     (
       Replacement<ArrayElement> |
       Readonly<{ replacements: ReadonlyArray<Replacement<ArrayElement>>; }>
-    )>;
+    )
+  >;
 
   export type Replacement<ArrayElement> = Readonly<
     { predicate: (arrayElement: ArrayElement) => boolean; } &
