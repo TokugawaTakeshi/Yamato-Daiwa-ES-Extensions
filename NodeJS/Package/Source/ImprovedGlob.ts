@@ -336,7 +336,11 @@ export default class ImprovedGlob {
   public static createMultipleFilenameExtensionsGlobPostfix(
     fileNamesExtensions: ReadonlyArray<string> | ReadonlySet<string>
   ): string {
-    return `.@(${ (Array.isArray(fileNamesExtensions) ? fileNamesExtensions : Array.from(fileNamesExtensions)).join("|").replace(/\./gu, "") })`;
+    return `.@(${ 
+      (Array.isArray(fileNamesExtensions) ? 
+          fileNamesExtensions : 
+          Array.from(fileNamesExtensions)).join("|").replace(/\./gu, "") 
+    })`;
   }
 
   public static buildAbsolutePathBasedGlob(

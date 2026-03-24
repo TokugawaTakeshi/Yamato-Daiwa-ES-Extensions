@@ -1,3 +1,5 @@
+/* global NodeJS -- The`NodeJS` namespace isn't known by ESLint. */
+
 import { Timer, secondsToMilliseconds, Logger, AlgorithmMismatchError } from "@yamato-daiwa/es-extensions";
 import Timeout = NodeJS.Timeout;
 

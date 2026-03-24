@@ -26,7 +26,6 @@ module.exports = [
       "n/no-unsupported-features/node-builtins": "off"
 
     }
-
   },
 
   {

@@ -20,7 +20,7 @@ export namespace ReplacingOfMatchesWithRegularExpressionToDynamicValue {
   > = (matching: Matching<NamedCapturingGroups, NumeratedCapturingGroups>) => string | null;
 
   /* eslint-disable @stylistic/type-generic-spacing --
-   *  This rule should allow the line braking while currently is does not.  */
+   *  This rule should allow the line braking while currently it does not.  */
   export type Matching<
       NamedCapturingGroups extends Readonly<{ [groupName: string]: string | undefined; }> =
           Readonly<{ [groupName: string]: string | undefined; }>,

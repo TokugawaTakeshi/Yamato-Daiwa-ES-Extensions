@@ -47,7 +47,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       }`,
       `\n● 実際値: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
       ...isNotUndefined(targetPropertyStringifiedValueBeforeFirstPreValidationModification) ? [
-        "\n●　妥当性確認の前段階処理で変更される以前の初期値: " +
+        "\n●　妥当性確認前の処理以前の初期値: " +
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
       ] : []
     ].join("");
@@ -59,22 +59,22 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
   /* ━━━ バリデーションエラー ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* 【 校閲者向け 】
-   * 殆どの下記のメッセージは上記の「generateValidationErrorMessage」原形の一部になっているので、曖昧に「このプロパティ」や「この文字列」の様に書かれても、
-   * 　　上記の原形に合わせて曖昧さが消える。 */
+   * 殆どの下記のメッセージは上記の「generateValidationErrorMessage」原形の一部になっているので、「このプロパティ」や「この文字列」の様に書かれても、
+   * 　　上記の原形の一部としては曖昧になっていません。 */
 
   validationErrors: {
 
     rawDataIsNotObject: {
       generateMessage:
           ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-              `「RawObjectDataProcessor.process()」の１引数目として渡された生データがオブジェクトではなく、「${ actualNativeType }」である。\n` +
+              `「RawObjectDataProcessor.process()」の１引数目として渡されたデータがオブジェクトではなく「${ actualNativeType }」である。\n` +
               rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     rawDataIsNull: {
       generateMessage:
           ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-              "「RawObjectDataProcessor.process()」の１引数目として渡された生データがnullになっているか、非nullオブジェクトが期待。\n" +
+              "「RawObjectDataProcessor.process()」の１引数目として渡されたデータがnullになっているか、非nullオブジェクトが期待。\n" +
               rawObjectDataProcessorLocalization__japanese.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
@@ -83,8 +83,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       generateDescription: (
         { expectedTypeID, actualNativeType }: ValidationErrors.ValueTypeDoesNotMatchWithExpected.TemplateVariables
       ): string =>
-        "この値には " +
-          `「${ rawObjectDataProcessorLocalization__japanese.getLocalizedValueType(expectedTypeID) }」型が期待されたが、` +
+        `この値には「${ rawObjectDataProcessorLocalization__japanese.getLocalizedValueType(expectedTypeID) }」型が期待されたが、` +
           `実際には「${ actualNativeType }」型。`
     },
 
@@ -95,20 +94,20 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
       ): string =>
         "このプロパティ・要素のバリデーション前の変換中に以下のエラーが発生。\n" +
         `${ stringifiedCaughtError }\n` +
-        "エラーハンドリング戦略「onPreValidationModificationFailed」が「ErrorHandlingStrategies.markingOfDataAsInvalid」に設定されていた" +
-          "ため、データは不正としてマークされまたが、当戦略は非推薦。"
+        "エラーハンドリング戦略「onPreValidationModificationFailed」が「ErrorHandlingStrategies.markingOfDataAsInvalid」に設定してある" +
+          "ので、データは不正としてマークされまたが、当戦略は非推薦。"
     },
 
 
     /* ┅┅┅ 固定構成のオブジェクト ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
     /* ╍╍╍ undefined可否 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenUndefinedValue: {
-      title: "禁止undefined",
-      description: "このプロパティ・要素は未定義か明示的に「undefined」で指定されたが、これは明示的に禁止された。"
+      title: "禁止したundefined値",
+      description: "このプロパティ・要素は未定義か明示的に「undefined」で指定されたが、これは明示的に禁じられた。"
     },
 
     conditionallyForbiddenUndefinedValue: {
-      title: "条件付きundefined禁止",
+      title: "条件付きで禁止したundefined値",
       generateDescription: (
         {
           verbalConditionWhenUndefinedIsForbiddenWithoutEndOfSentenceMark
@@ -120,7 +119,7 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
     },
 
     conditionallyForbiddenNonUndefinedValue: {
-      title: "条件付き非undefined禁止",
+      title: "条件付きで禁止した非undefined値",
       generateDescription: (
         {
           verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
@@ -133,8 +132,8 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
 
     /* ╍╍╍ null可否 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     forbiddenNullValue: {
-      title: "禁止null",
-      description: "このプロパティ・要素は「null」で指定されたが、これは明示的に禁止された。"
+      title: "禁止したnull値",
+      description: "このプロパティ・要素は「null」で指定されたが、これは明示的に禁じられた。"
     },
 
     conditionallyForbiddenNullValue: {
@@ -151,35 +150,34 @@ export const rawObjectDataProcessorLocalization__japanese: Localization = {
     conditionallyForbiddenNonNullValue: {
       title: "条件付き非null禁止",
       generateDescription: (
-        { conditionWhenMustBeNull }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
+        {
+          verbalConditionWhenMustBeNullWithoutEndOfSentenceMark
+        }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-        `このプロパティ・要素は「null」になっていないが、${ conditionWhenMustBeNull }の時「null」でなければいけなく、この条件が満たされている。`
+        "このプロパティ・要素は「null」になっていないが、" +
+          `${ verbalConditionWhenMustBeNullWithoutEndOfSentenceMark }の時「null」でなければいけなく、この条件が満たされている。`
     },
 
 
     /* ╍╍╍ その他 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     unableToDeletePropertyWithOutdatedKey: {
-      title: "旧名プロパティ削除不可能",
+      title: "旧プロパティ削除不可能",
       generateDescription: (
         { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
-          `このプロパティのコピーの「${ propertyNewKey }」を作成してから、\`configurable: false\`の為削除不可能。` +
-          "その他に、処理アプローチは既存のオブジェクトの変更となり、`mustLeaveEvenRenamed`オプションに`true`が設定されていない。"
+          `このプロパティのコピーの「${ propertyNewKey }」が作成されたが、当プロパティーが\`configurable: false\`になっているので、削除不可能だった。` +
+          "削除の試しがあった理由は、戦略として既存のオブジェクトの変更が選択され、`mustLeaveEvenRenamed`オプションが`true`で指定されなかった事。"
       },
 
     unableToChangePropertyDescriptors: {
       title: "プロパティ記述子変更不可能",
       description:
-        "このプロパティは`configurable: false`になっていると他に、処理アプローチは既存のオブジェクトの変更なので、記述子の変更は不可能。"
+        "このプロパティは`configurable: false`になり、戦略も既存のオブジェクトの変化なので、記述子の変更は不可能。"
     },
 
     unableToUpdatePropertyValue: {
-
       title: "プロパティー値変更不可能",
-
-      description:
-          "このプロパティーの変更が規定値の代入か、前バリデーションの変換により要求された、読み込み専用のプロパティーとして上書き不可能。"
-
+      description: "このプロパティーの変更が規定値の代入か、前バリデーションの変換により要求されたが、読み込み専用のプロパティーになっているので上書き不可能。"
     },
 
     unexpectedProperties: {

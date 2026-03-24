@@ -51,4 +51,21 @@ block append SpecificContent
     //- ━━━ `RawObjectDataProcessor` ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     h1.Article-Heading1!= topHeading
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      #[+Term--YDID オブジェクト型]のデータの#[+Term--YDID 妥当性確認]及び其の後の処理専用の#[+Term--YDID クラス]。
+      最終的に特定の#[+Term--YDID TypeScript型]に#[+Term__Contrast--YDID キャスト]する。
+
+    p.Article-Paragraph.
+      データが#[+ImportantEntity--YDID TypeScript]の型検査にとって辿り着かないソースから来る大抵の場合に需要が有る、例え下記のシナリオ。
+
+    ul.Article-UnorderedList
+      li クライアント・サーバーの取引に於けるクライアント側からのデータ取得
+      li 逆にクライアント―サーバーの取引に於いてサーバー側からのデータ取得
+      li データベースからのデータ取得
+      li ファイルからのデータ読み込み(#[+SecondaryEntity--YDID JSON]、#[+SecondaryEntity--YDID YAML]等)
+
+    +CompactTableOfContents--YDF_DK(
+      localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children
+    )

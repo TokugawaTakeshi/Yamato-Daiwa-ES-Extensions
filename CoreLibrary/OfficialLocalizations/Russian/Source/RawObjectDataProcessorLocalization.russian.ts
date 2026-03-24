@@ -16,7 +16,7 @@ import Warnings = Localization.Warnings;
 export const rawObjectDataProcessorLocalization__russian: Localization = {
 
   generateSeeMoreSentence: ({ documentationPageAnchor }: Localization.SeeDocumentationSentence.TemplateVariables): string =>
-      "Подробнее см. " +
+      "См. подробнее " +
         "https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/Children/06-ValidationIssues/" +
         `RawObjectDataProcessor-ValidationIssues.russian.html#${ documentationPageAnchor }`,
 
@@ -34,7 +34,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
   ): string {
     return [
       `${ title } [ ${ documentationPageAnchor } ]`,
-      `\n\n● Свойство/элемент: ${ targetPropertyDotSeparatedQualifiedInitialName ?? "(кореневой)" }`,
+      `\n\n● Свойство/элемент: ${ targetPropertyDotSeparatedQualifiedInitialName ?? "(корневое)" }`,
       ...isNotNull(targetPropertyNewName) ? [ ` (переименовано в "${ targetPropertyNewName }")` ] : [],
       `\n${ description }`,
       `\n${ this.generateSeeMoreSentence({ documentationPageAnchor }) }`,
@@ -47,7 +47,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       }`,
       `\n● Реальное значение: ${ stringifyAndFormatArbitraryValue(targetPropertyValue) }`,
       ...isNotUndefined(targetPropertyStringifiedValueBeforeFirstPreValidationModification) ? [
-        "\n●　Значение перед первой предвалидационным преобразованием: " +
+        "\n●　Значение перед первым предвалидационным преобразованием: " +
           targetPropertyStringifiedValueBeforeFirstPreValidationModification
       ] : []
     ].join("");
@@ -59,7 +59,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
   /* ━━━ Ошибки валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* [ Примечание для рецензоров ]
-   * Большинство следующих сообщений являются частью шаблона, который включён в "generateValidationErrorMessage".
+   * Большинство следующих сообщений являются частью шаблона "generateValidationErrorMessage" выше.
    * В контексте этого шаблона, такие относительные выражения, как "это свойство" или "этот элемент", являются
    *   однозначными. */
   validationErrors: {
@@ -67,7 +67,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
     rawDataIsNotObject: {
       generateMessage:
           ({ actualNativeType, documentationPageAnchor }: ValidationErrors.RawDataIsNotObject.TemplateVariables): string =>
-              "Сырые данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" не являются объектом " +
+              "Данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" не являются объектом " +
                 `и в действительности имеют тип "${ actualNativeType }".\n` +
               rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     },
@@ -75,8 +75,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
     rawDataIsNull: {
       generateMessage:
           ({ documentationPageAnchor }: ValidationErrors.RawDataIsNull.TemplateVariables): string =>
-              "Сырые данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" являются null в то " +
-                "время как ожидался объект, не являются null.\n" +
+              "Данные, переданные через первый параметр \"RawObjectDataProcessor.process()\" являются null в то " +
+                "время как ожидался объект, не являющийся null.\n" +
               rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
@@ -92,12 +92,12 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
     preValidationModificationFailed: {
 
-      title: "Возникновение ошибки при предвалидационном преобразовании",
+      title: "Возникновение ошибки во время предвалидационных преобразований",
 
       generateDescription: (
         { stringifiedCaughtError }: ValidationErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
-          "Предвалидационное преобразование этого свойства/элемента повлекло за собой следующую ошибку. \n" +
+          "Предвалидационное преобразование этого свойства/элемента повлекло следующую ошибку: \n" +
             `${ stringifiedCaughtError }\n` +
           "Данные были помечены как невалидные потому что было выбрано \"ErrorHandlingStrategies.markingOfDataAsInvalid\" " +
             "в качестве стратегии обработки ошибки \"onPreValidationModificationFailed\" что не рекомендуется."
@@ -136,7 +136,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNonUndefinedValue.TemplateVariables
       ): string =>
-          "Данное свойство/элемент имеет значение, отличное от `undefined`, что запрещено если " +
+          "Это свойство/элемент имеет значение, отличное от `undefined`, что запрещено если " +
             ` ${ verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark }, и это условие выполнено.`
 
     },
@@ -157,7 +157,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNullValue.TemplateVariables
       ): string =>
-          "Данное свойство/элемент имеет значение `null`, что запрещено если " +
+          "Это свойство/элемент имеет значение `null`, что запрещено если " +
             `${ verbalConditionWhenNullIsForbiddenWithoutEndOfSentenceMark }, и это условие выполнено.`
 
     },
@@ -168,11 +168,11 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
       generateDescription: (
         {
-          conditionWhenMustBeNull
+          verbalConditionWhenMustBeNullWithoutEndOfSentenceMark
         }: ValidationErrors.ConditionallyForbiddenNonNullValue.TemplateVariables
       ): string =>
-          "Данное свойство/элемент имеет значение, отличное от `null`, что запрещено если " +
-            ` ${ conditionWhenMustBeNull }, и это условие выполнено.`
+          "Это свойство/элемент имеет значение, отличное от `null`, что запрещено если " +
+            ` ${ verbalConditionWhenMustBeNullWithoutEndOfSentenceMark }, и это условие выполнено.`
 
     },
 
@@ -186,8 +186,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         { propertyNewKey }: ValidationErrors.UnableToDeletePropertyWithOutdatedKey.TemplateVariables
       ): string =>
           `Это свойство невозможно удалить после создания его копии с именем "${ propertyNewKey }" потому что оно ` +
-            "не конфигурируемо, а в качестве стратегии обработки объекта были выбраны манипуляции с уже существующим " +
-            "объектом, при этом опции \"mustLeaveEvenRenamed\" не было указано значение true."
+            "неконфигурируемо, а в качестве стратегии обработки объекта были выбраны манипуляции с существующим " +
+            "объектом, при этом опции `mustLeaveEvenRenamed` не было указано значение `true`."
 
     },
 
@@ -196,8 +196,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       title: "Невозможно изменить дескрипторы свойства",
 
       description:
-          "Невозможно изменить дескрипторы данного свойства, потому что оно неконфигурируемо, при этом в качестве " +
-            "стратегии обработки были выбраны манипуляции с уже существующим объектом."
+          "Невозможно изменить дескрипторы данного свойства потому что оно неконфигурируемо, при этом в качестве " +
+            "стратегии обработки были выбраны манипуляции с существующим объектом."
 
 
     },
@@ -207,7 +207,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       title: "Невозможно обновить значение свойства",
 
       description:
-          "Запрошено изменение значение этого свойства через подстановку значения по умолчанию либо предвалидационное " +
+          "Запрошено изменение значения этого свойства через подстановку значения по умолчанию либо предвалидационное " +
             "преобразование, однако это свойство доступно только для чтения."
 
     },
@@ -219,11 +219,11 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       generateDescription:
           ({ unexpectedProperties }: ValidationErrors.UnexpectedProperties.TemplateVariables): string =>
               "Следующие свойства не ожидались:\n" +
-              unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
+                unexpectedProperties.map((propertyKey: string): string => `● ${ propertyKey }`).join("\n")
     },
 
     customValidationFailed: {
-      title: "Пользовательская валидация не удовлетворяется",
+      title: "Пользовательская валидация не пройдена",
       generateDescription:
           ({ customValidationDescription }: ValidationErrors.CustomValidationFailed.TemplateVariables): string =>
               `Следующее значение не прошло пользовательскую валидацию "${ customValidationDescription }".`

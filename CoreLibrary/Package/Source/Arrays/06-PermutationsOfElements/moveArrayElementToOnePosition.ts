@@ -51,7 +51,7 @@ export default function moveArrayElementToOnePosition<ArrayElement>(
           parameterNumber: 1,
           parameterName: "sourceDataAndOptions",
           messageSpecificPart:
-              `Target array must contain at least 2 elements while actually contains ${ targetArray.length }. ` +
+              `Target array must contain at least 2 elements while actually contains ${ targetArray.length } ones. ` +
               "This case is being considered as an error when \"errorMustBeThrownIf.elementsCountIsLessThan2\" " +
                 "flag has been set to \"true\"."
         }),
@@ -63,8 +63,8 @@ export default function moveArrayElementToOnePosition<ArrayElement>(
 
 
     /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-    * When `mutably` option is falsy, it is being assumed that array is immutable only for this function but
-    *   once value returned it must be a mutable array. */
+    * When the `mutably` option is falsy, it is being assumed that the array is immutable only for this function but
+    *   once the value returned, it must be a mutable array. */
     return targetArray as Array<ArrayElement>;
 
   }

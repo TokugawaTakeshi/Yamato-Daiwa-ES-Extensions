@@ -1027,7 +1027,13 @@ browserJS:
 
         cloneDOM_Element:
           $heading: "<code>cloneDOM_Element</code>"
-          $URI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/cloneDOM_Element.md"
+          $URI: `@All/BrowserJS/DOM/cloneDOM_Element/cloneDOM_Element.${ fileNameLocalizationExtensions }`
+          $sectioning:
+            $specificationFileRelativePath: 01-Source/Pages/CoreLibrary/Functionality/AJAX/AJAX_Service/TableOfContents/AJAX_Service.toc.yaml
+            $localizations:
+              english: 01-Source/Pages/BrowserJS/DOM/cloneDOM_Element/TableOfContents/cloneDOM_Element.toc.english.yaml
+              japanese: 01-Source/Pages/BrowserJS/DOM/cloneDOM_Element/TableOfContents/cloneDOM_Element.toc.japanese.yaml
+              russian: 01-Source/Pages/BrowserJS/DOM/cloneDOM_Element/TableOfContents/cloneDOM_Element.toc.russian.yaml
 
         createDOM_ElementFromHTML_Code:
           $heading: "<code>createDOM_ElementFromHTML_Code</code>"

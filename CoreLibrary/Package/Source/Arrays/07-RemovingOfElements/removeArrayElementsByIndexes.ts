@@ -45,7 +45,6 @@ export default function removeArrayElementsByIndexes<ArrayElement>(
   const indexesOfArrayElementsWhichAlreadyHasBeenRemoved__actualForArrayInInitialStateOnly: Array<number> = [];
   const workpiece: Array<ArrayElement> = mutably ? targetArray : [ ...targetArray ];
 
-
   for (
     const indexOfArrayElementWhichWillBeRemoved__actualForArrayInInitialStateOnly of
     indexesOfArrayElementsWhichWillBeRemoved__fromLast__actualForArrayInInitialStateOnly

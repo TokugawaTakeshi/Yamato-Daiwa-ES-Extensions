@@ -2,10 +2,10 @@
   "private": true,
   "scripts": {
     "Set Version and Symlinkify Internal Dependencies": "ydmh version",
-    "Desymlinky Internal Dependencies and Publish": "ydmh publish"
+    "Desymlinkify Internal Dependencies and Publish": "ydmh publish"
   },
   "devDependencies": {
-    "@yamato-daiwa/monorepo-helper": "0.0.1"
+    "@yamato-daiwa/monorepo-helper": "0.1.0"
   },
   "ydmh": {
     "packages": [

@@ -1,3 +1,5 @@
+/* global NodeJS -- The`NodeJS` namespace isn't known by ESLint. */
+
 import FileSystem, { constants as FileSystemConstants } from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";

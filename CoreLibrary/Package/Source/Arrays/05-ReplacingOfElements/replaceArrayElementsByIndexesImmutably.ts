@@ -49,11 +49,11 @@ export default function replaceArrayElementsByIndexesImmutably<ArrayElement>(
             "● The combination of:\n " +
               "○ \"index\": must the either natural number or 0\n" +
               "○ \"newElement\": must corresponding to type of elements of the target array\n" +
-            "● \"replacements\": The array of objects with above \"index\" and \"newElement\" properties and same " +
+            "● \"replacements\": the array of objects with above \"index\" and \"newElement\" properties and same " +
               "limitations"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "addElementsToArray(compoundParameter)"
+      occurrenceLocation: "replaceArrayElementsByIndexesImmutably(sourceDataAndOptions)"
     });
 
   }

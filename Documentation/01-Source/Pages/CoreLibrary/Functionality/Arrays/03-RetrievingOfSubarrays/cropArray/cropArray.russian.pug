@@ -16,7 +16,9 @@ block append Metadata
         title: buildHTML_PageTitle("cropArray"),
         description: MetaDescriptionTemplates.function({
           functionName: "cropArray",
-          whatFunctionDoes: ""
+          whatFunctionDoes:
+              "создаёт подмассив указанного массива. " +
+              "По сравнению с нативными методами (такими как \"slice\" or \"splice\") предлагает крайне гибкий API."
         })
       },
       stylesSheetsURIs: [

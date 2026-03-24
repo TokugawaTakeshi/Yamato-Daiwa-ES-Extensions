@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: ""
+        description:
+            "The comparison of \"RawObjectDataProcessor\" class from the \"Yamato Daiwa ECMAScript extensions\" " +
+            "(abbreviation: \"YDEE\") library with TypeScript native functionality for validation of object type data."
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -49,164 +51,493 @@ block append SpecificContent
   article
 
     //- ━━━ `RawObjectDataProcessor` — Problem Overview ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= "<code>RawObjectDataProcessor</code>"
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
 
-    //-
+    p.Article-Paragraph.
+      Working with #[+Keyword--YDID unknown] #[+Keyphrase--YDID at advance] data coming from #[+Keyword--YDID outside]
+        is one of the #[+Keyword--YDID basic] tasks of programming.
+      Such external data may be:
 
-      ### Native approaches
+    ul.Article-UnorderedList
+      li The data retrieved from the client side during #[+Term--YDID client–server interaction]
+      li Conversely, the data retrieving from the server side during #[+Term--YDID client–server interaction]
+      li The data retrieved from a database
+      li The data read from a file (#[+SecondaryEntity--YDID JSON], #[+SecondaryEntity--YDID YAML], and similar)
 
-      The **Type guards** is a native TypeScript conception. The **Type guard** is a function returning boolean value, but
-      returning value annotation is a little unusual:
+    p.Article-Paragraph.
+      Because such data lies outside the reach of #[+ImportantEntity--YDID TypeScript], it
+        #[+Keyword--YDID initially] has the #[+Term--YDID type] #[+ImportantEntity__Code--YDID unknown] or, even worse,
+        #[+ImportantEntity__Code--YDID any].
 
-      ```typescript
-      type User = {
-        ID: string;
-        familyName: string;
-        givenName: string;
-      };
+    p.Article-Paragraph.
+      How is this situation usually handled?
+      Unfortunately, often&nbsp;not&nbsp;in the way appropriate for writing quality code.
+      When receiving data from the client side in #[+Term--YDID client–server interaction], data #[+Term--YDID validation]
+        is regarded as a #[+Keyphrase--YDID security measure] and therefore is performed, but in many other cases — for
+        example, when receiving data from the server — this data is simply trusted and thus annotated with the desired type:
 
-      function isUser(rawData: unknown): rawData is User {
-        return typeof rawData === "object" &&
-            rawData !== null &&
-            typeof((rawData as { ID: unknown; }).ID ) === "string" &&
-            typeof((rawData as { familyName: unknown; }).familyName) === "string" &&
-            typeof((rawData as { givenName: unknown; }).givenName) === "string";
-      }
-      ```
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
 
-      The native TypeScript approaches including type guards well described in
-      [The unknown Type in TypeScript](https://mariusschulz.com/blog/the-unknown-type-in-typescript), the
-      front end engineer [Marius Schulz](https://mariusschulz.com/about) 's article.
-      Here is important that:
+        fetch("http://example.com/users/1").
+            then((response: Response): void => response.json()).
+            then((data: unknown) => {
 
-      **Type guards actually does not to guarantee what the value has specified type - this is just an asking to TypeScript
-      to believe that it is such as.**
+              // This is a BAD example. DO NOT IMITATE IT!!!
+              const user: User = data as User;
 
-      For example, the below type guard is doing the checks completely unrelated with `User` type:
+              const fullName: string = `${ user.givenName } ${ user.familyName }`;
+              console.log(fullName);
 
-      ```typescript
-      type User = {
-        ID: string;
-        familyName: string;
-        givenName: string;
-      };
+            });
 
-      function isUser(rawData: unknown): rawData is User {
-        return isArbitraryObject(rawData) &&
-            typeof((rawData as { title: unknown }).title) === "string" &&
-            typeof((rawData as { price: unknown }).price) === "number";
-      }
+    p.Article-Paragraph.
+      If you want to ask: "Why we need to validate the data when retrieving it from the server side?",
+        our counter question is: "Why we don't need to validate the data when retrieving it from the server side?".
+      Don't you think the answer like "Because there is only 100% correct data in the server side" does not&nbsp;
+        conforming to reality?
+      As practice shows, in #[+Keyphrase--YDID the overwhelming majority] of medium and large projects
+        discrepancies occur between expected and actual data, especially if the client and server parts
+        are developed in different programming languages by separate teams.
+      The number of such discrepancies can be very large — from several dozens to several hundreds or even thousands.
+      The reasons may range from simple human error to a lack of timely notification to relevant engineers
+        about changes in the data.
+      Also, the data may be saved to the database but the several ways: the GUI interface of the application,
+        database manager, #[+Term--YDID SQL requests], via data import etc.
+      Depending of the specific way, the data may #[+Keyword--YDID not]&nbsp;be validated in full what may entail
+        the saving of the invalid data.
+      Such discrepancies should be detected #[+Keyword--YDID ASAP].
 
-      const potentialUser: unknown = { title: "Shampoo", price: 1000 };
-
-      if (isUser(potentialUser)) { // it will be truthy for "potentialUser"
-        console.log(potentialUser.familyName); // Of course, "undefined"
-      }
-      ```
-
-      Why so poor? The TypeScript is being compiling to JavaScript, but neither `type`s nor `interface`s exists on JavaScript.
-      The validation is being executed when TypeScript already has been compiled to JavaScript, so no way to refer on `User`
-      type's properties names/values/types (to be more precise, TypeScript does not provide the concept such as saving the accessible
-      metadata of `type`s and `interface`s on compiled JavaScript). This is a **first problem**.
-
-      But there are at least two more problems:
-
-      * **Second problem** Ever type guard as `isUser` returned `false`, we will not know which property is invalid. Unlike
-        `User` with only three properties (`ID`, `familyName`, `givenName`) the object type from real project could have a couple
-        tens of properties and also nested ones.
-      * **Third problem** Type guard returns `false` on first falsy condition. But there could be a multiple properties
-        not satisfying to type guard's condition. To debug it quickly, we need to know all violations, not just first one.
+    p.Article-Paragraph.
+      And if you are creating a utility with #[+Keyword--YDID declarative] configuration via a file
+        (usually #[+ImportantEntity--YDID JSON], #[+ImportantEntity--YDID YAML], etc.) similar to
+        #[+SecondaryEntity__Code--YDID docker compose], then incorrectly specified configuration is
+        a #[+Keyword--YDID common] scenario, thus in this case the #[+Term--YDID validation] is #[+Keyword--YDID also]
+        #[+Keyword__Contrast--YDID required].
 
 
-      ### `RawObjectDataProcessor` solution
+    //- ┅┅┅ Approaches Without Libraries ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.nativeApproaches.$heading,
+      HTML_ID: localizedSectioning.nativeApproaches.$anchor
+    }).Article-Heading2
 
-      Conceptually `RawObjectProcessor` is a huge configurable type guard with logging a lot of additional functionality.
-      Therefore, it is the time to clearly state that **`RawObjectProcessor` does not solve the first problem**:
+    p.Article-Paragraph.
+      #[+Term--YDID Type guards] are a #[+Keyword--YDID native] feature of #[+ImportantEntity--YDID TypeScript].
+      #[+Term--YDID Type guards] are #[+Term--YDID functions] that return a
+        #[+Keyword--YDID booleans] values; however, the #[+Term--YDID type] a return value is annotated
+        #[+Keyword--YDID not]&nbsp;as&nbsp;#[+ImportantEntity__Code--YDID boolean], but according
+        #[+ImportantEntity--YDID x is T] template, where #[+ImportantEntity--YDID x] is the #[+Term--YDID parameter]
+        whose #[+Term__Contrast--YDID type] is to be checked, and #[+ImportantEntity--YDID T] is the desired
+        #[+Term--YDID type]:
 
-      ```typescript
-      type User = {
-        ID: string;
-        familyName: string;
-        givenName: string;
-      };
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
 
-      const rawData: unknown = { ID: 1, familyName: "John", title: "Shampoo" };
-
-      /* It just casts the raw data to `User` when it obeys the specified validation rules, but this validation rules could
-      *    have a mistake or simply be unrelated with `User`. */
-      const processingResult: RawObjectDataProcessor.ProcessingResult<User> = RawObjectDataProcessor.process(rawData, {
-        nameForLogging: "User",
-        subtype: RawObjectDataProcessor.ObjectSubtypes.fixedKeyAndValuePairsObject,
-        properties: {
-          ID: {
-            required: true,
-            type: String
-          },
-          familyName: {
-            required: true,
-            type: String
-          },
-          givenName: {
-            required: true,
-            type: String
-          }
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "ID" in rawData && rawData.ID === "string" &&
+              "familyName" in rawData && rawData.familyName === "string" &&
+              "givenName" in rawData && rawData.givenName === "string";
         }
-      });
 
-      if (processingResult.rawDataIsInvalid) {
-        Logger.logError({
-          errorType: InvalidExternalDataError.NAME,
-          title: InvalidExternalDataError.DEFAULT_TITLE,
-          description: "The raw data is invalid:\n" +
-              `${RawObjectDataProcessor.formatValidationErrorsList(processingResult.validationErrorsMessages)}`,
-          occurrenceLocation: "upper scope"
-        });
-      }
-      ```
+    p.Article-Paragraph
+      | In addition to the
+      |
+      +Link--YDF({
+        unendorsedExternalURI: "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+      }) TypeScript documentation,
+      |   #[+Term--YDID type guards] were well explained in the
+      |
+      +Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/blog/the-unknown-type-in-typescript" }) article
+      |   by #[+Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/about" }) Marius Schulz], the frontend
+      |   engineer.
+      | What matters to us for now is that:
 
-      But `RawObjectProcessor` solves the **second problem** and **third problem**. In the case of below example,
-      the errored log will be:
+    +AdmonitionBlock--YDF({
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.error
+    })
+      | Type guards do&nbsp;#[+Keyword--YDID not] guarantee that when #[+ImportantEntity__Code--YDID true]
+      |   is returned, the #[+Keyword--YDID actual] #[+Term--YDID type] of the parameter will match the desired one —
+      |   they is only a #[+Keyword--YDID request] for #[+ImportantEntity--YDID TypeScript] to believe that it so.
+      | #[+Keyphrase--YDID In reality], everything that executed in the #[+Term--YDID body] of a
+      |   #[+Term__Contrast--YDID guard function]
+      |
+      +Keyphrase--YDID.
+        may be completely #[+Keyword--YDID unrelated] with checking of #[+Term--YDID type] for desired one,
+          and TypeScript will&nbsp;#[+Keyword--YDID not]&nbsp;detect it.
 
-      ```
-      [ Error ] Invalid external data
-      The raw data is invalid:
+    p.Article-Paragraph.
+      Here is an #[+Keyword--YDID erroneous] example where the #[+Term--YDID guard]
+        #[+SecondaryEntity__Code--YDID isUser] checks on the #[+Term--YDID parameter] those
+        #[+Term__Contrast--YDID fields] which have #[+Keyword--YDID nothing] common with desired #[+Term--YDID type]
+        #[+SecondaryEntity--YDID User]:
 
-      === Error No. 1 ==========
-      Expected and actual value types mismatch
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
 
-      ●　Property / element: 'User.ID'
-      This value must have type 'string' while actually it's type is: 'number'.
+        // INTENTIONALLY WRONG EXAMPLE!!!
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "title" in rawData && rawData.title === "string" &&
+              "price" in rawData && rawData.price === "string";
+        }
 
-      ●　Property / element specification:
-      {
-        "required": true,
-        "type": "string"
-      }
-      ●　Actual value: 1
 
-      === Error No. 2 ==========
-      Required property is missing
+        const potentialUser: unknown = { title: "Shampoo", price: 1000 };
 
-      ●　Property / element: 'User.givenName'
-      This property has been marked as 'required' while actual value is 'undefined'.
+        if (isUser(potentialUser)) {
+          console.log(potentialUser.familyName);
+        }
 
-      ●　Property / element specification:
-      {
-        "required": true,
-        "type": "string"
-      }
-      ●　Actual value: undefined
+    p.Article-Paragraph.
+      Despite the fact that the value of the #[+Term--YDID parameter] #[+SecondaryEntity__Code--YDID potentialUser]
+        are #[+Keyword--YDID nowhere] #[+Keyword--YDID near] the #[+Term--YDID type]
+        #[+SecondaryEntity__Code--YDID User], #[+SecondaryEntity__Code--YDID isUser] will return
+        #[+SecondaryEntity__Code--YDID true], and #[+ImportantEntity--YDID TypeScript]
+        #[+Keyphrase--YDID will not&nbsp;even suspect that something is wrong].
+      Moreover, #[+ImportantEntity--YDID TypeScript] will not raise the slightest complaint even if
+        #[+Keyword--YDID nothing] is checked at all in the #[+Term--YDID body] of the
+        #[+Term__Contrast--YDID guard function]:
 
-      Error type: InvalidExternalDataError
-      Occurrence location: upper scope
-      ```
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
 
-      But `RawObjectDataProcessor` is not just a validator; it has some additional functionality, for example:
+        // INTENTIONALLY WRONG EXAMPLE!!!
+        function isUser(rawData: unknown): rawData is User {
+          console.log(rawData);
+          return Math.random() >= 0.5;
+        }
 
-      * Pre-validation and post-validation modifications of the properties
-      * Renaming of object keys
-      * Substitution of default values
+    p.Article-Paragraph.
+      Why is it so bad?
+      In short, because of #[+Keyword--YDID fundamental] limitations of #[+ImportantEntity--YDID TypeScript].
+      #[+Term--YDID Data validation] (including via #[+Term--YDID type guards]) happens
+        #[+Keyphrase--YDID at runtime of #[+ImportantEntity--YDID JavaScript]], when the #[+Keyword--YDID original]
+        #[+Term--YDID TypeScript code] #[+Keyword--YDID already] does&nbsp;#[+Keyword__Contrast--YDID not]&nbsp;exist.
+      In the #[+Keyword--YDID output] #[+Term--YDID JavaScript code], a #[+Term__Contrast--YDID type guard] is
+        #[+Keyword--YDID already] an #[+Keyword__Contrast--YDID ordinary] #[+Term--YDID JavaScript function],
+        in #[+Keyword--YDID no]&nbsp;way different in nature from other #[+Term--YDID functions] returning a
+        #[+Term--YDID boolean] value.
 
-      And much more - here what is below documentation about.
+    p.Article-Paragraph.
+      Such #[+ImportantEntity--YDID TypeScript] functionality as #[+Term--YDID type aliases]
+        (#[+ImportantEntity__Code--YDID type] #[+Term--YDID keyword]) or #[+Term--YDID interfaces] exist
+        #[+Keyword--YDID only] within the #[+Keyword--YDID source] #[+Term--YDID TypeScript code], but they are absent
+        in the #[+Keyword--YDID output] #[+Term--YDID JavaScript code], and therefore there is
+        #[+Keyword__Contrast--YDID no] way to refer to them.
+      #[+Keyword--YDID Theoretically], it is possible to implement the automatic generating of helper
+        #[+Term--YDID functions] and/or #[+Term__Contrast--YDID objects] based on #[+Term--YDID type aliases] and
+        #[+Term--YDID interfaces] in the source #[+Term--YDID TypeScript code] and then use them for validation without
+        manual coding, but it is #[+Keyword--YDID unlikely] that the #[+ImportantEntity--YDID TypeScript] team will
+        implement anything like that in the near future.
+
+    p.Article-Paragraph.
+      Besides the above one, #[+Term--YDID type guards] have #[+Keyword--YDID several] other
+        #[+Keyword__Contrast--YDID significant] problems:
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+Term--YDID Type guards] #[+Keyphrase--YDID by design] #[+Keyword--YDID only] answer the question
+          (herewith the answer truthfulness is #[+Keyphrase--YDID implementation dependent]) of whether
+          the #[+Term--YDID parameter] is valid or not; they report #[+Keyword--YDID neither] where exactly
+          the violations has been detected #[+Keyword--YDID nor] violations count.
+
+      li.
+        A #[+Term--YDID type guard] returns #[+ImportantEntity__Code--YDID false] #[+Keyphrase--YDID at the very first]
+          unmatching of the expected data with real, but the violations number may be arbitrary large.
+
+    p.Article-Paragraph.
+      Strictly speaking, these problems are such #[+Keyword--YDID de facto] only problems, because as already mentioned
+        above, when implementing #[+Term--YDID type guards], #[+ImportantEntity--YDID TypeScript] requires
+        #[+Keyword--YDID only] #[+Keyword__Contrast--YDID two] things: returning a #[+Term--YDID boolean] value and a
+        special annotation of the return #[+Term--YDID type].
+      In the #[+Term--YDID function body], it is possible to do #[+Keyword--YDID anything], including logging, complete
+        checking of all #[+Term--YDID properties], and so on.
+      However #[+Keyphrase--YDID in reality] almost #[+Keyword--YDID no]&nbsp;one does this, and there is a
+        strong reason for that.
+      If in a #[+Keyword--YDID real] (non‑educational) medium or large‑scale project you start implementing
+        #[+Term--YDID type guards] with the above functionality, a new problem will quickly arise: too much
+        boilerplate code, and parts of it are almost identical.
+      This is especially true for quality logging: there will be many uniform messages, and you will either have to write
+        them from scratch each time, or organize extracting messages into separate #[+Term--YDID objects] and/or files,
+        until the question of extracting all this code into a library arises.
+      And #[+Keyphrase--YDID in a real] project, #[+Term--YDID objects] will not be as simple as the
+        #[+SecondaryEntity--YDID User] from the example above: they can have
+        #[+SecondaryEntity--YDID 20]–#[+SecondaryEntity--YDID 30] properties, and this is
+        not&nbsp;the limit, and often there will be #[+Keyword--YDID nested] #[+Term--YDID objects], in particular
+        #[+Term--YDID arrays], often with #[+Term--YDID elements] of the #[+Term--YDID "object"] type to be validated too.
+      The abundance of boilerplate increases the likelihood of errors due to fatigue, therefore while the native solution
+        exists, it is #[+Keyword--YDID not]&nbsp;practical.
+
+    p.Article-Paragraph.
+      However, this does&nbsp;#[+Keyword--YDID not] make #[+Term--YDID type guards] useless — they just
+        #[+Keyword--YDID not]&nbsp;good for validating #[+Term--YDID objects] #[+Keyphrase--YDID with many properties],
+        but for other value types (#[+Term--YDID strings], #[+Term--YDID numbers], etc.) they are
+        #[+Keyword--YDID not]&nbsp;just suitable but are usually used a lot.
+      #[+ImportantEntity--YDID YDEE] also offers a set of #[+Term--YDID type guards], many of which are used inside the
+        library as well:
+
+    +CompactTableOfContents--YDF_DK(localizedRouting.coreLibrary.$children.functionality.$children.typeGuards.$sectioning)
+
+
+    //- ┅┅┅ `RawObjectDataProcessor` Approach ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      innerHTML: localizedSectioning.rawObjectDataProcessorApproach.$heading,
+      HTML_ID: localizedSectioning.rawObjectDataProcessorApproach.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      So, since during #[+Term--YDID transpilation] from #[+ImportantEntity--YDID TypeScript] to
+        #[+ImportantEntity--YDID JavaScript] #[+Term--YDID interfaces] and #[+Term--YDID type aliases]
+        (the #[+ImportantEntity--YDID type] #[+Term--YDID keyword]) #[+Keyword--YDID cease] to exist, there is
+        #[+Keyword--YDID no]&nbsp;way at all to refer to them at runtime of #[+Term--YDID JavaScript code]; therefore,
+        it is #[+Keyword--YDID impossible] to prove #[+Keyword--YDID conclusively] that a particular #[+Term--YDID object]
+        has a certain #[+Term--YDID type].
+       Even if there is a corresponding #[+Term--YDID type guard], the logic inside it may #[+Keyword--YDID not] relate
+       to checking the required #[+Term--YDID properties] at all.
+      However, before using the #[+ImportantEntity__Code--YDID as] #[+Term--YDID keyword], this usage should be
+        #[+Keyword--YDID substantiated] with something, that is the #[+Keyword--YDID validation].
+      For the sake of #[+Term--YDID maintainability], the validator #[+Keyword--YDID must] log in detail
+      #[+Keyword--YDID all] mismatches of the actual data with expected data,
+        #[+Keyphrase--YDID not&nbsp;only the first mismatch].
+      Under this arrangement, even if the specified validation rules #[+Keyword--YDID do]&nbsp;#[+Keyword--YDID not]
+        match the real type (for example, due to mistake because of the fatigue), practice shows it will surface
+        very quickly in most cases.
+
+    p.Article-Paragraph
+      | Thus, #[+ImportantEntity--YDID RawObjectDataProcessor] takes upon itself the #[+Keyword--YDID sin] of using
+      |   #[+ImportantEntity--YDID as], #[+Keyphrase--YDID in exchange] requiring that the specification of valid data
+      |   be given almost in a declarative form.
+      | Let us once again look at the
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.
+            $children.demo.$URI
+      }) demo
+      |   in light of the theory described above.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              isNaN_Forbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  isNaN_Forbidden: true,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    ol.Article-OrderedList
+
+      li.
+        First, #[+ImportantEntity--YDID RawObjectDataProcessor] will check whether
+        #[+SecondaryEntity__Code--YDID externalData] is an #[+Term--YDID object] at all.
+        If not, there is #[+Keyword--YDID already] #[+Keyword__Contrast--YDID nothing] further to
+          validate or process.
+
+      li
+
+        p.Article-Paragraph.
+          Next, #[+ImportantEntity--YDID RawObjectDataProcessor] will check in the #[+Term--YDID object]
+            #[+SecondaryEntity__Code--YDID externalData] #[+Keyword--YDID each] #[+Term--YDID property] mentioned
+            in the valid data specification #[+SecondaryEntity__Code--YDID validDataSpecification] including
+            nested #[+Term--YDID objects] and #[+Term--YDID arrays] (a #[+Keyphrase--YDID special case] of
+            #[+Term--YDID objects] #[+Keyphrase--YDID from the #[+ImportantEntity--YDID ECMAScript] viewpoint]).
+
+        ul.Article-UnorderedList
+
+          li.
+            In addition to checking the #[+Term--YDID data type], for the demonstration purposes the sample valid data
+              specification is including additional constraints.
+            For example, the #[+SecondaryEntity__Code--YDID bar] #[+Term--YDID property] must&nbsp;not&nbsp;only be a
+              #[+Term--YDID string], but also have at least #[+SecondaryEntity__Code--YDID 5] characters.
+
+          li.
+            For #[+Keyword--YDID each] constraint specified in the valid data specification,
+              #[+ImportantEntity--YDID RawObjectDataProcessor] performs a specific check, and if a mismatch between
+              actual and expected data is found during this check, the checking will&nbsp;#[+Keyword--YDID  not] stop
+              immediately (except for the case where the input itself is not an #[+Term--YDID object]); instead,
+              a message about the mismatch will be saved into an #[+Term--YDID array] which can be accessed via the
+              value returned by the #[+ImportantEntity__Code--YDID process] #[+Term--YDID method].
+
+      li.
+        If no mismatches of actual data to the established constraints are found during validation, then
+          #[+ImportantEntity--YDID RawObjectDataProcessor] will take upon itself the #[+Keyword--YDID sin] of marking
+          the input data with the #[+ImportantEntity__Code--YDID as] #[+Term--YDID keyword] by the #[+Term--YDID type]
+          passed via the #[+Term--YDID generic parameter] (#[+SecondaryEntity__Code--YDID SampleType] in the example
+          above).
+
+    p.Article-Paragraph.
+      There are the following #[+Keyword--YDID similarities] between #[+ImportantEntity--YDID RawObjectDataProcessor]
+        and #[+Term--YDID type guards] (of course, implemented per the concept but without additional functionality):
+
+    ol.Article-OrderedList
+
+      li They check whether the raw data matches expectations
+      li.
+        Can&nbsp;#[+Keyword--YDID not] fully guarantee conformance to a particular #[+Term--YDID type] due to
+          #[+Keyword--YDID fundamental] limitations of #[+ImportantEntity--YDID TypeScript]
+
+    p.Article-Paragraph.
+      As for the differences, there are many more of them:
+
+    ol.Article-OrderedList
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] is designed to work #[+Keyword--YDID only] with
+          #[+Term--YDID objects] (in particular, with #[+Term--YDID index arrays]), although their
+          #[+Term--YDID properties]/#[+Term--YDID elements] can be of
+          #[+Keyphrase--YDID any compatible with #[+ImportantEntity--YDID JSON]]　#[+Term--YDID type].
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor] returns #[+Keyword--YDID not] a
+          #[+Term--YDID boolean value], but a #[+Keyword--YDID polymorphic] #[+Term--YDID object].
+        The question of whether the data is invalid is answered by the #[+Term--YDID property]
+          #[+ImportantEntity__Code--YDID isRawDataInvalid].
+        When this #[+Term--YDID property] is #[+ImportantEntity__Code--YDID false], you can access the
+          #[+Term--YDID object] cast to the desired #[+Term--YDID type] via the #[+Term--YDID property]
+          #[+ImportantEntity__Code--YDID processedData]; otherwise, #[+Keyphrase--YDID instead of it] there will be the
+          #[+Term--YDID property] #[+ImportantEntity__Code--YDID validationErrorsMessages] containing messages about
+          all mismatches between actual and expected data.
+
+      li.
+        The #[+Keyword--YDID majority] of #[+ImportantEntity--YDID API] is declarative although if required it is
+          possible to define the additional checks or manipulations imperatively.
+
+      li.
+        It can check #[+Term--YDID properties]/#[+Term--YDID elements] not&nbsp;only for #[+Term--YDID type] but for
+          satisfying to other constraints as well.
+
+      li.
+        If necessary, in addition to #[+Term--YDID validation] it can make changes to the #[+Keyword--YDID original]
+          #[+Term--YDID object].
+        This functionality is&nbsp;#[+Keyword--YDID not]&nbsp;discouraged, because in some cases it
+          is extremely useful (for example, if you need to convert #[+Term--YDID numbers] stored as #[+Term--YDID strings]
+          into the #[+Term--YDID type] #[+ImportantEntity__Code--YDID BigInt], which is currently
+          #[+Keyword--YDID incompatible] with #[+ImportantEntity--YDID JSON], or rename #[+Term--YDID properties]);
+          however, it should be used #[+Keyphrase--YDID with care] since it may break #[+Term--YDID validation] or make
+          data marked as valid become invalid.
+        Importantly, #[+ImportantEntity--YDID RawObjectDataProcessor] has #[+ImportantEntity--YDID 2] strategies when
+          working with #[+Term--YDID objects]: manipulating the original #[+Term--YDID object] (by default) and
+          constructing a new #[+Term--YDID object] based on the original.
+        These strategies are especially important when besides the validation it is required to modify the
+          source #[+Term--YDID object].
+
+    p.Article-Paragraph
+      | Finally, #[+ImportantEntity--YDID RawObjectDataProcessor] has high‑quality templates of messages describing
+      |  mismatches between actual and expected data, and although they are
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          validationIssues.$URI,
+      }) documented,
+      |    the messages are written so that you can understand what is wrong even without documentation.
+      | See the
+      |
+      +Link--YDF({
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
+      }) localization source code
+      |  and try to estimate how much time you need to prepare there messages yourself including the providing
+      |  of the reusage of these messages across the projects.

@@ -478,6 +478,7 @@ export { default as isUndefined } from "./TypeGuards/EmptyTypes/isUndefined";
 /* ┅┅┅ Numbers ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as isBigInt } from "./TypeGuards/Numbers/isBigInt";
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
+/* eslint-disable-next-line @typescript-eslint/no-deprecated -- Will be removed in 1.0  */
 export { default as isIntegerOnAnySign } from "./TypeGuards/Numbers/isIntegerOnAnySign";
 export { default as isIntegerOfAnySign } from "./TypeGuards/Numbers/isIntegerOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
