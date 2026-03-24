@@ -14,7 +14,7 @@
     "@yamato-daiwa/es-extensions-browserjs": "../BrowserJS/Package",
     "@yamato-daiwa/frontend": "../../../../WebDevelopmentProjects/InHouseDevelopment/YamatoDaiwaFrontend/CoreLibrary/Package",
     "@yamato-daiwa/frontend-documenting-kit": "../../../../WebDevelopmentProjects/InHouseDevelopment/YamatoDaiwaFrontend/DocumentingKit/Package",
-    "@yamato-daiwa/programming_documentation": "../../../../IntelliJ IDEA/InHouseDevelopment/YamatoDaiwaProgrammingDocumentation",
+    "@yamato-daiwa/programming_documentation": "../../../../GeneralIT_Development/InHouse/YamatoDaiwaProgrammingDocumentation",
     "prismjs": "1.30.0"
   },
   "devDependencies": {
