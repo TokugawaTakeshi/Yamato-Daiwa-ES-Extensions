@@ -6,43 +6,41 @@
 
 <!-- Plugin description -->
 
+<!-- ⚠️ Don't use `kbd` tag because it has no appropriate styles in Jet Brains Marketplace -->
+<!-- ⚠️ Don't use `dl` tag because it has no appropriate styles in Jet Brains Marketplace -->
+
 [Live Templates](https://www.jetbrains.com/help/idea/using-live-templates.html) for 
 [@yamato-daiwa/es-extensions (**YDEE**)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions#readme) libraries.
 
 ## Core Package
 ### Arrays
-#### Creating
 
-+ **createArrayOfNaturalNumbers** — The autocomplete imitator type Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
+All functions on this group has autocomplete-like Live templates.
+Although they may be long as function name, no need to input them until last character.
+For some Live Templates, short aliases are available, but their disadvantage is need to be memorized.
 
-
-#### Retrieving of Elements
++ Creating
+  + [createArrayOfNaturalNumbers](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
++ Retrieving of Elements
+  + [getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html) 
+  + [getLastElementOfArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html) (alias: **gleoa**)
++ Retrieving of Indexes
+  + [getIndexesOfSatisfiesThePredicateArrayElements](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
+  + [getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
++ Retrieving of Subarrays
+  + [cropArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html) (alias: **ca**) 
++ Adding of Elements
+  + [addElementsToArray](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html) (alias: **aeta**) 
++ Replacing of Elements
+  + [replaceArrayElementsByIndexesImmutably](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html) (alias: **raebii**)
+  + [replaceArrayElementsByPredicates](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html) (alias: **rpaebp**) 
 
 + **getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne** — The autocomplete imitator type Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 + **getLastElementOfArray**, alias: **gleoa** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
 
 
-#### Retrieving of Indexes
-
-+ **getIndexesOfSatisfiesThePredicateArrayElements** — The Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
-+ **getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne** — The Live Template for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
 
-#### Retrieving of Subarrays
-
-+ **cropArray**, alis: **ca**　— The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html) 
-
-#### Adding of Elements
-
-+ **addElementsToArray**, alias: **aeta** — The Live Template and its alias respectively for the [eponymous](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html) function
-
-
-#### Replacing of Elements
-
-+ **replaceArrayElementsByIndexesImmutably**, **raebii** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByIndexesImmutably/replaceArrayElementsByIndexesImmutably.english.html)
-+ **replaceArrayElementsByPredicates**, **rpaebp** — The autocomplete imitator type Live Template and its alias respectively for the [eponymous function](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/05-ReplacingOfElements/replaceArrayElementsByPredicates/replaceArrayElementsByPredicates.english.html)
-
-[//]: # (todo ============================================================================================================)
 * Functions
   * Arrays
     

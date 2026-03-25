@@ -49,7 +49,6 @@ export default function removeArrayElementsByPredicates<ArrayElement>(
     );
   }
 
-
   return {
     ...removeArrayElementsByIndexes({
       ...mutably ? {

@@ -19,7 +19,9 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor ${ topHeading }`),
-        description: ""
+        description:
+          "「Yamato Daiwa ECMAScript extensions（YDEE）」ライブラリの「RawObjectDataProcessor」クラスと、オブジェクト型のデータをバリデーションする" +
+          "為のTypeScriptのネイティブな機能を比較する記事。",
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -49,6 +51,451 @@ block append SpecificContent
   article
 
     //- ━━━ `RawObjectDataProcessor` — 問題考察 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= `RawObjectDataProcessor ${ topHeading }`
+    h1.Article-Heading1!= `RawObjectDataProcessor　: ${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID 事前に]#[+Keyword__Contrast--YDID 不明]で、#[+Term--YDID 外部]から来るデータの扱いは
+        プログラミングの#[+Keyword--YDID 基本的な]課題の一つ。
+      データの事例は、
+
+    ul.Article-UnorderedList
+      li #[+Term--YDID クライアント・—サーバーモデル]に於けるクライアント側からの来るデータ
+      li 逆に、#[+Term--YDID クライアント—・サーバーモデル]に於けるサーバー側から来るのデータ
+      li #[+Term--YDID データベース]からの取得したデータ
+      li ファイル（#[+SecondaryEntity--YDID JSON]、#[+SecondaryEntity--YDID YAML]等）からの読み取ったデータ
+
+    p.Article-Paragraph.
+      其の様なデータは#[+ImportantEntity--YDID TypeScript]に届けられない源から来るので、
+        #[+Keyword--YDID 最初]は#[+Term--YDID 型]が#[+ImportantEntity__Code--YDID unknown]か、更に悪いと
+        #[+ImportantEntity__Code--YDID any]になっている。
+
+    p.Article-Paragraph.
+      一般的には此の様な状況に於いては何がされるだろうか?
+      残念なら、高品質のコードだと言えるやり方ではないない。
+      #[+Term--YDID クライアント—・サーバー]間の取引に於いて、クライアント側から受け取るデータの#[+Term--YDID 妥当性確認]が
+        #[+Keyphrase--YDID セキュリティ上の必須]対策と見做されているので、行われるが、其れ以外の多くの別の場合、例えば下記の様にサーバーから受け取る
+          データを其の儘信用して望む型が付けられてしまう。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        fetch("http://example.com/users/1").
+            then((response: Response): void => response.json()).
+            then((data: unknown) => {
+
+              // これは悪い例。真似しないこと!!!
+              const user: User = data as User;
+
+              const fullName: string = `${ user.givenName } ${ user.familyName }`;
+              console.log(fullName);
+
+            });
+
+    p.Article-Paragraph.
+      「サーバーからデータを取得する時、何の為データをバリデーションする必用が有るのか？」と聞きたいなら、我が逆質問は「サーバーからデータを取得する時、
+        データをバリデーションする必用が無い理由は何？」。
+      「サーバーに１００％正しいデータしかない」という回答は実戦から遠すぎると思わないだろうか？
+      実戦から見る、#[+Keyword--YDID 大抵の]中規模以上のプロジェクトには期待データと実データの食い違いが起きがち。
+      特にクライアント側とサーバーが違う言語で実装されたか、別の団体で開発されている場合によく起きる事。
+      其の食い違いの数は数十から数百、場合に依っては千単位にも成る事が有る。
+      原因は単純な人為ミスから、データ変更の通知が関係エンジニアに適時届かない事迄様々。
+      尚、データベースへのデータ保存が複数の方法で行われ、即ちアプリケーションのGUIを介した方法や、データベースマネージャーの利用や、#[+Term--YDID SQLクエリ]の
+        実行や、データのインポート等。
+      上記の方法に依って、データが完全なバリデーションを通っていない事が有る。
+      此の食い違いを#[+Keyphrase--YDID 可能な限り早く]検出する必用が有る。
+
+    p.Article-Paragraph.
+      更に、ファイルに依る宣言的な設定を持っている(普通は#[+ImportantEntity--YDID JSON]や#[+ImportantEntity--YDID YAML]等)
+        #[+SecondaryEntity__Code--YDID docker compose]の様なユーティリティを作るなら、
+        誤った設定は#[+Keyword--YDID 発生しがち]な流れなので、此の場合の妥当性確認#[+Keyword--YDID も]#[+Keyword__Contrast--YDID 必須]。
+
+
+    //- ┅┅┅ ライブラリ無しの方法 ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.nativeApproaches.$heading,
+      HTML_ID: localizedSectioning.nativeApproaches.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      #[+Term--YDID 型ガード]は#[+ImportantEntity--YDID TypeScript]の#[+Keyword--YDID ネイティブ]機能。
+      #[+Term--YDID 型ガード]は#[+Keyword--YDID ブーリアン]#[+Term--YDID 値]を返す#[+Term__Contrast--YDID 関数]だが、
+        戻る値のアノテーションは#[+ImportantEntity__Code--YDID boolean]では#[+Keyword--YDID なく]、
+        #[+ImportantEntity--YDID x is T]の原形通り。
+      此処で#[+ImportantEntity--YDID x]は型を検査しなければいけない対象#[+Term--YDID 引数]で、
+        #[+ImportantEntity--YDID T]は望む#[+Term--YDID 型]。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "ID" in rawData && rawData.ID === "string" &&
+              "familyName" in rawData && rawData.familyName === "string" &&
+              "givenName" in rawData && rawData.givenName === "string";
+        }
+
+    p.Article-Paragraph
+      | 公式の
+      +Link--YDF({
+        unendorsedExternalURI: "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards"
+      }) TypeScriptドキュメント
+      | の他、#[+Term--YDID 型ガード]はフロントエンドエンジニアの
+      | #[+Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/about" }) Marius Schulz]の
+      +Link--YDF({ unendorsedExternalURI: "https://mariusschulz.com/blog/the-unknown-type-in-typescript" }) 記事
+      | で丁寧に解説されている。
+      | 今我々にとって重要な事は、
+
+    +AdmonitionBlock--YDF({
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.error
+    })
+      | #[+Term--YDID 型ガード]は#[+ImportantEntity__Code--YDID true]を返した事は、実型は希望型と合っている事を意味している訳では
+      |   #[+Keyword--YDID なく]、#[+ImportantEntity--YDID TypeScript]に対して#[+Keyphrase--YDID 合っている事を信じる頼みに過ぎない]。
+      | #[+Keyword--YDID 事実上]、#[+Term--YDID 型ガード]の体に行われている処理は
+      +Keyphrase--YDID.
+        #[+Term--YDID 引数]は希望型に該当してるか、という確認に完全に関係無い事が#[+ImportantEntity--YDID TypeScript]には
+        検出・予防#[+Keyword--YDID 不可能]
+      | 。
+
+    p.Article-Paragraph.
+      下記は#[+Keyword--YDID 態と]#[+Keyword__Contrast--YDID 間違っている]例。
+      此れに於いて#[+SecondaryEntity__Code--YDID isUser]#[+Term--YDID ガード]は#[+Term__Contrast--YDID 引数]が
+        #[+SecondaryEntity__Code--YDID User]#[+Term--YDID 型]になっているか、検問するべきはずだが、#[+Keyword--YDID 事実上]
+        #[+SecondaryEntity__Code--YDID User]#[+Term--YDID 型]に関係#[+Keyword--YDID 無い]プロパティーを確認している。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        // 態と誤った例!!!
+        function isUser(rawData: unknown): rawData is User {
+          return typeof rawData === "object" &&
+              rawData !== null &&
+              "title" in rawData && rawData.title === "string" &&
+              "price" in rawData && rawData.price === "string";
+        }
+
+
+        const potentialUser: unknown = { title: "Shampoo", price: 1000 };
+
+        if (isUser(potentialUser)) {
+          console.log(potentialUser.familyName);
+        }
+
+    p.Article-Paragraph.
+      #[+SecondaryEntity__Code--YDID potentialUser]という#[+Term--YDID 引数]の値は#[+SecondaryEntity__Code--YDID User]
+        #[+Term--YDID 型]と#[+Keyword--YDID 完全に]関係#[+Keyword__Contrast--YDID 無い]
+        のに、#[+SecondaryEntity__Code--YDID isUser]は#[+SecondaryEntity__Code--YDID true]を返し、
+        #[+ImportantEntity--YDID TypeScript]は#[+Keyphrase--YDID 何か可笑しいとは#[+Keyword--YDID 気付かない]]。
+      更に下記の例通り、#[+Term--YDID ガード関数]の#[+Term__Contrast--YDID 本体]で何も検査していなくても、
+        #[+ImportantEntity--YDID TypeScript]は不満を言わない。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type User = {
+          ID: string;
+          familyName: string;
+          givenName: string;
+        };
+
+        // 態と誤った例!!!
+        function isUser(rawData: unknown): rawData is User {
+          console.log(rawData);
+          return Math.random() >= 0.5;
+        }
+
+    p.Article-Paragraph.
+      何故事情が其処迄悪いだろうか。
+      結論から言うと、原因は#[+ImportantEntity--YDID TypeScript]の#[+Keyword--YDID 根本的な]制約に在る。
+      上記の#[+Term--YDID 型ガード]を含めて、データの#[+Term--YDID 妥当性確認]は
+        #[+Keyphrase--YDID #[+ImportantEntity--YDID JavaScript]の実行時]に行われ、其の時点#[+Keyword--YDID 元の]
+        #[+Term--YDID TypeScriptコード]が#[+Keyword--YDID 最早]存在#[+Keyword__Contrast--YDID していない]。
+      #[+Keyword--YDID 出力]された#[+Term--YDID JavaScriptコード]では#[+Term__Contrast--YDID 型ガード]は#[+Keyword--YDID 既に]
+        #[+Keyword__Contrast--YDID 只の]#[+Term--YDID 真偽値]を返す#[+Term--YDID JavaScript関数]に#[+Keyword--YDID 過ぎない]。
+
+    p.Article-Paragraph.
+      #[+Term--YDID 型エイリアス](#[+ImportantEntity__Code--YDID type]#[+Term--YDID キーワード])や#[+Term--YDID インターフェース]の様な
+        #[+ImportantEntity--YDID TypeScript]の機能は#[+Keyword--YDID 元の]#[+Term--YDID TypeScriptコード]内に
+        #[+Keyword--YDID しか]存在せず、#[+Keyword--YDID 出力]#[+Term--YDID JavaScriptコード]には#[+Keyword--YDID 無い]ので、
+        #[+Keyword--YDID 実行時に]これ等に参照する手段も#[+Keyword--YDID 無い]。
+      #[+Keyword__Contrast--YDID 理論上]は、#[+Term--YDID TypeScriptコード]を#[+Term--YDID JavaScriptコード]へのトランスパイリングの際、
+        元の#[+Term--YDID TypeScriptコード]に有る#[+Term--YDID 型エイリアス]や#[+Term--YDID インターフェース]を元に補助#[+Term--YDID 関数]
+        や#[+Term__Contrast--YDID オブジェクト]の自動生成機能を実装すると、毎回態々手動で妥当性確認コードを書かなくても、妥当性確認が行われる。
+      残念ながら、#[+ImportantEntity--YDID TypeScript]開発チームが近い将来に此の様な機能を実装する可能性は#[+Keyword--YDID 低い]。
+
+    p.Article-Paragraph.
+      上述の問題に加えて、#[+Term--YDID 型ガード]には#[+Keyword--YDID 幾つか]の#[+Keyword__Contrast--YDID 重要]な問題が有る。
+
+    ul.Article-UnorderedList
+
+      li.
+        #[+Term--YDID 型ガード]は#[+Keyword__Contrast--YDID 設計上]#[+Keyword--YDID 単に]#[+Term--YDID 引数]が妥当かどうかを答える
+        　　だけで（然も正解・不正解は#[+Keyphrase--YDID 実装次第]）、具体的に何処で違反が起きているか、そして違反数は報告
+          #[+Keyword--YDID されない]。
+
+      li.
+        #[+Term--YDID 型ガード]は#[+Keyword--YDID 最初の]違反で#[+ImportantEntity__Code--YDID false]を返すが、
+          他に違反がいくら有っても当然。
+
+    p.Article-Paragraph.
+      厳密には、上記問題は#[+Term--YDID 型ガード]の概念に有る問題では#[+Keyword--YDID なく]、#[+Keyword--YDID 実践的な]の問題になっている。
+      上記通り、#[+Term--YDID 型ガード]の実装で#[+ImportantEntity--YDID TypeScript]が要求するのは#[+Term--YDID 真偽値]を返す事
+        #[+Keyword--YDID と]#[+Term--YDID 戻り型]の特別な注釈という#[+Keyword__Contrast--YDID 二つ]#[+Keyword--YDID だけ]で、
+        #[+Keyword--YDID 任意に]ロギングや全#[+Term--YDID プロパティ]の完全検問を含めて何でも実装可能。
+      とはいえ、#[+Keyphrase--YDID 実際には]そういった事が#[+Keyword--YDID 滅多に]されない事であり、其れに十分な理由が有る。
+      初心者専用の練習問題の話しでは#[+Keyword--YDID なく]、#[+Keyword__Contrast--YDID 実際の]プロジェクトだと、上記の機能を丁寧に実装
+        し始めるとボイラープレートコードが急増に膨らんで、所々ほぼ変わらない。
+      特に高品質のロギングに当たる事であり、同種のメッセージが大量に発生し、毎回丁寧な本文を考えて書くか、メッセージを別#[+Term--YDID オブジェクト]やファイルに
+        切り出し、やがてはライブラリ化を検討する事になる。
+      尚、#[+Keyword--YDID 実]プロジェクトの場合、#[+Term--YDID オブジェクト]は上の例に出た#[+SecondaryEntity--YDID User]の様に単純ではなく、
+        #[+SecondaryEntity--YDID 20]〜#[+SecondaryEntity--YDID 30]程度の#[+Term--YDID プロパティ]を持つ事も普通で、より多くのも珍しくない。
+      更に#[+Keyword--YDID 入れ子]の#[+Term--YDID オブジェクト]や#[+Term--YDID 配列](#[+Term__Contrast--YDID オブジェクト型]
+        #[+Term--YDID 要素]の#[+Term__Contrast--YDID 配列]の場合を含めて）も頻出。
+      ボイラープレートの大量は疲労に依る間違いを伴いがち。
+      故にネイティブ解決は存在してはいるが、実用的では#[+Keyword--YDID ない]。
+
+    p.Article-Paragraph.
+      とはいえ#[+Term--YDID 型ガード]が無用な訳では#[+Keyword--YDID なく]、#[+Keyphrase--YDID 多数のプロパティ]を持つ
+        #[+Term--YDID オブジェクト]の検証には良くないだけだ。
+      他の値の型(#[+Term--YDID 文字列]や#[+Term--YDID 数値]等)なら適しており、実践に大量に使われる。
+      #[+ImportantEntity--YDID YDEE]も#[+Term--YDID 型ガード]を提供しており、多くはライブラリ内部でも利用されている。
+
+    +CompactTableOfContents--YDF_DK(localizedRouting.coreLibrary.$children.functionality.$children.typeGuards.$sectioning)
+
+
+    //- ┅┅┅ `RawObjectDataProcessor`のアプローチ ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      innerHTML: localizedSectioning.rawObjectDataProcessorApproach.$heading,
+      HTML_ID: localizedSectioning.rawObjectDataProcessorApproach.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID TypeScript]から#[+ImportantEntity--YDID JavaScript]への#[+Term--YDID トランスパイル]際に
+        #[+Term--YDID インターフェース]や#[+Term--YDID 型エイリアス](#[+ImportantEntity--YDID type]#[+Term--YDID キーワード])は
+        #[+Keyword--YDID 消滅]する為、#[+Term--YDID JavaScriptコード]の実行時にそれらを参照する方法は#[+Keyword--YDID 全く]
+        #[+Keyword__Contrast--YDID 無い]ので、特定の#[+Term--YDID オブジェクト]が具体的な#[+Term--YDID 型]である事を
+        #[+Keyword--YDID 完全に]証明するのも#[+Keyword--YDID 不可能]。
+      たとえ専用の#[+Term--YDID 型ガード]が有ったとしても、其の内部のロジックが必要な#[+Term--YDID プロパティ]検査と
+        #[+Keyword--YDID 全く]#[+Keyword__Contrast--YDID 関係ない]迄有り得る。
+      然し、「だから#[+ImportantEntity__Code--YDID as]を使おう」という結論な訳では#[+Keyword--YDID なく]、
+        #[+ImportantEntity__Code--YDID as]を使う前に、其の使用に論証が#[+Keyword--YDID 必要]、即ち妥当性確認
+        （#[+Term--YDID バリデーション]）。
+      但し#[+Term--YDID 保守性]の為にバリデータは実際のデータの期待のデータとの不一致を、#[+Keyphrase--YDID 一件目だけではなく]、
+        #[+Keyword--YDID 皆]をログ#[+Keyword--YDID しなければいけません]。
+      此処迄対策を取ると、たとえ疲労等に依るミスでバリデーション規則に間違ったとしても、実践上其の間違いが発見させる事が早い場合は殆ど。
+
+    p.Article-Paragraph
+      | 此の様に#[+ImportantEntity--YDID RawObjectDataProcessor]は#[+ImportantEntity--YDID as]使用の#[+Keyword--YDID 過失]を
+      |   引き受ける#[+Keyword--YDID 代わりに]、妥当なデータの仕様をほぼ宣言的に与えることを要求する。
+      | 先述の理論の観点で
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.
+            $children.demo.$URI
+      }) デモ
+      |   をもう一度考察しておこう。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+        const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
+          nameForLogging: "Example",
+          subtype: RawObjectDataProcessor.ObjectSubtypes.fixedSchema,
+          properties: {
+            foo: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            bar: {
+              type: String,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              minimalCharactersCount: 5
+            },
+            baz: {
+              type: Boolean,
+              isUndefinedForbidden: true,
+              isNullForbidden: true
+            },
+            hoge: {
+              type: Number,
+              isUndefinedForbidden: false,
+              isNullForbidden: true,
+              isNaN_Forbidden: true,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+            },
+            fuga: {
+              type: Number,
+              isUndefinedForbidden: true,
+              isNullForbidden: false,
+              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              isNaN_Forbidden: true
+            },
+            quux: {
+              type: Object,
+              isUndefinedForbidden: true,
+              isNullForbidden: true,
+              properties: {
+                alpha: {
+                  type: Number,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  isNaN_Forbidden: true,
+                  minimalValue: 3
+                },
+                bravo: {
+                  type: String,
+                  isUndefinedForbidden: true,
+                  isNullForbidden: true,
+                  minimalCharactersCount: 5,
+                  allowedAlternatives: [ "PLATINUM", "GOLD", "SILVER" ]
+                }
+              }
+            }
+          }
+        };
+
+        function onDataRetrieved(externalData: unknown): void {
+
+          const externalDataProcessingResult: RawObjectDataProcessor.ProcessingResult<SampleType> = RawObjectDataProcessor.
+              process(externalData, validDataSpecification);
+
+        }
+
+    ol.Article-OrderedList
+
+      li.
+        先ず#[+ImportantEntity--YDID RawObjectDataProcessor]が#[+SecondaryEntity__Code--YDID externalData]が
+          #[+Term--YDID オブジェクト]かどうかを確認する。
+        #[+Term--YDID オブジェクト]になっていなければ、今後検証・処理するものは#[+Keyword--YDID 無い]。
+
+      li
+
+        p.Article-Paragraph.
+          次に#[+ImportantEntity--YDID RawObjectDataProcessor]が#[+SecondaryEntity__Code--YDID externalData]
+            #[+Term--YDID オブジェクト]の中で妥当なデータ仕様#[+SecondaryEntity__Code--YDID validDataSpecification]に挙げた
+            #[+Keyword--YDID 全て]の#[+Term--YDID プロパティ]（入れ子の#[+Term--YDID オブジェクト]及び
+            #[+ImportantEntity--YDID ECMAScript]視点上#[+Term--YDID オブジェクト]#[+Keyphrase--YDID 特別な場合]になっている
+            #[+Term--YDID 配列]を含めて)を確認する。
+
+        ul.Article-UnorderedList
+
+          li.
+            デモ目的上、例の妥当なデータ仕様では#[+Term--YDID 型]の確認に加えて追加の制約も指定してある。
+            たとえば#[+SecondaryEntity__Code--YDID bar]#[+Term--YDID プロパティ]は#[+Term--YDID 文字列]であるだけでなく、
+              文字数が#[+SecondaryEntity__Code--YDID 5以上]でなければならない。
+
+          li.
+            仕様に書いた#[+Keyword--YDID 各]制約に対して#[+ImportantEntity--YDID RawObjectDataProcessor]は個別の検査を行い、
+              実データと期待の不一致を見つけても直ぐに検査を止めたりはしない（入力自体が#[+Term--YDID オブジェクト]でない場合を除いて）。
+            代わりに不一致のメッセージを#[+Term--YDID 配列]に蓄積し、其れは#[+ImportantEntity__Code--YDID process]#[+Term--YDID メソッド]
+              の戻り値経由で参照出来る。
+
+      li.
+        検証で実データが定めた制約に一つも違反しなければ、#[+ImportantEntity--YDID RawObjectDataProcessor]が
+          入力データに#[+ImportantEntity__Code--YDID as]#[+Term--YDID キーワード]で#[+Term--YDID ジェネリック引数]で指定された
+          #[+Term--YDID 型]を(上の例では#[+SecondaryEntity__Code--YDID SampleType])#[+Term--YDID 型]付ける
+          #[+Keyword--YDID 過失]を引き受ける。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID RawObjectDataProcessor]と#[+Term--YDID 型ガード](但し概念通り実装されたが、追加機能無し)の
+        #[+Keyword--YDID 共通点]は次の通り。
+
+    ol.Article-OrderedList
+
+      li 生データが期待に合うかを確認する
+      li.
+        #[+ImportantEntity--YDID TypeScript]の#[+Keyword--YDID 根本的な]制約に依り、特定の#[+Term--YDID 型]への完全一致を
+          保証#[+Keyword--YDID 不可能]
+
+    p.Article-Paragraph.
+      相違点だと、より多く有る。
+
+    ol.Article-OrderedList
+
+      li.
+        #[+ImportantEntity--YDID RawObjectDataProcessor]は#[+Term--YDID オブジェクト]（特に#[+Term--YDID 添字配列]）に
+          #[+Keyword--YDID 限定]して動作する。
+        但し#[+Term--YDID プロパティ]・#[+Term--YDID 要素]の#[+Term__Contrast--YDID 型]は
+          #[+Keyphrase--YDID #[+ImportantEntity--YDID JSON]と互換であれば]何でも良い。
+
+      li.
+        #[+Term--YDID 戻り値]は#[+Term__Contrast--YDID 真偽値]では#[+Keyword--YDID なく]#[+SecondaryEntity__Code--YDID 多態の]
+          #[+Term--YDID オブジェクト]。
+        データが不正かどうかは#[+ImportantEntity__Code--YDID isRawDataInvalid]#[+Term--YDID プロパティ]が表す。
+        此れが#[+ImportantEntity__Code--YDID false]の時、望む#[+Term--YDID 型]にキャストされた#[+Term--YDID オブジェクト]を
+          #[+ImportantEntity__Code--YDID processedData]で参照出来、さもなくば
+          #[+ImportantEntity__Code--YDID validationErrorsMessages]#[+Term--YDID プロパティ]に
+          期待データと実データの全不一について致メッセージが入る。
+
+      li.
+        #[+Keyword--YDID 殆どの]#[+ImportantEntity--YDID API]は宣言的だが、必要に応じて追加で検証や処理を命令的に定義出来る。
+
+      li.
+        各#[+Term--YDID プロパティー]・#[+Term--YDID 要素]の#[+Term__Contrast--YDID 型]だけではなく、必要に応じて其の他の制限に満たしているか
+          検証可能。
+
+      li.
+        必要な時#[+Term--YDID 検証]に加えて#[+Keyword--YDID 元の]#[+Term--YDID オブジェクト]に変更も加えられる。
+        例えば#[+Term--YDID 文字列]として保存されている#[+Term--YDID 数値]を#[+ImportantEntity--YDID JSON]と未だ
+          #[+Keyword--YDID 非互換]な#[+ImportantEntity__Code--YDID BigInt]#[+Term--YDID 型]に変換する場合や、
+          #[+Term--YDID プロパティ]名を変更する等の場合に非常に役に立っているので、此の機能自体が非推奨#[+Keyword--YDID なってはいない]が、
+          妥当性確認を壊すか、妥当として指示されたデータを不正にする事も出来るので、#[+Keyphrase--YDID 利用の際に注意を払わなければいけない]。
+        重要な点として#[+ImportantEntity--YDID RawObjectDataProcessor]には#[+ImportantEntity--YDID 2つ]の戦略が有り、
+          一つ目は元の#[+Term--YDID オブジェクト]を操作する（規定）、二つ目は元から新しい#[+Term--YDID オブジェクト]を構築する流れ。
+        元の#[+Term--YDID オブジェクト]を変更したい時、特に此の戦略の選択を考えなければいけない。
+
+    p.Article-Paragraph
+      | 最後に#[+ImportantEntity--YDID RawObjectDataProcessor]は実データと期待の不一致を説明する高品質なメッセージの
+      |  原形を備えている。
+      | 此れらは
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.
+          validationIssues.$URI,
+      }) 文書化済み
+      |    だが、ドキュメント無しでも内容が理解出来る様に書かれている。
+      +Link--YDF({
+        endorsedExternalURI: "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/" +
+            "Package/Source/RawObjectDataProcessor/RawObjectDataProcessorLocalization.english.ts"
+      }) 此のメッセージ原形のソースコード
+      | を御自身で確認可能で（ところで、
+      +Link--YDF({
+        endorsedExternalURI: sharedExternalLinks.npm.YDES_Extensions.localizations.japanese
+      }) 日本語化も有る
+      | ）、仮に御自身で此の様なメッセージを用意し、複数のプロジェクトに於いて流用を確保するには時間がどれぐらい必要が、見極めてもらいたい。

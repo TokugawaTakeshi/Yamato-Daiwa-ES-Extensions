@@ -2,12 +2,15 @@ const YamatoDaiwaStyleGuides = require("@yamato-daiwa/style_guides/ECMAScript");
 
 
 module.exports = [
+
   {
     ignores: [
       "Distributable/*"
     ]
   },
+
   ...YamatoDaiwaStyleGuides,
+
   {
     languageOptions: {
       parserOptions: {
@@ -15,6 +18,7 @@ module.exports = [
       }
     }
   },
+
   {
     files: [ "Tests/Automated/**/*.test.ts" ],
     rules: {
@@ -29,4 +33,5 @@ module.exports = [
 
     }
   }
+
 ];

@@ -2,21 +2,22 @@ import {
   Logger,
   DOM_ElementRetrievingFailedError,
   UnexpectedEventError,
-  isUndefined
+  isUndefined,
+  isEitherUndefinedOrNull
 } from "@yamato-daiwa/es-extensions";
 
 
 export default function getExpectedToBeSingleDOM_Element(
   compoundParameter: Readonly<{
     selector: string;
-    contextElement?: ParentNode | Readonly<{ selector: string; }>;
+    contextElement?: ParentNode | Readonly<{ selector: string; }> | null;
   }>
 ): Element;
 
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<{
     selector: string;
-    contextElement?: ParentNode | Readonly<{ selector: string; }>;
+    contextElement?: ParentNode | Readonly<{ selector: string; }> | null;
     expectedDOM_ElementSubtype: new () => DOM_ElementSubtype;
   }>
 ): DOM_ElementSubtype;
@@ -25,14 +26,14 @@ export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype exte
 export default function getExpectedToBeSingleDOM_Element<DOM_ElementSubtype extends Element>(
   compoundParameter: Readonly<{
     selector: string;
-    contextElement?: ParentNode | Readonly<{ selector: string; }>;
+    contextElement?: ParentNode | Readonly<{ selector: string; }> | null;
     expectedDOM_ElementSubtype?: new () => DOM_ElementSubtype;
   }>
 ): Element | DOM_ElementSubtype {
 
   let contextElement: ParentNode;
 
-  if (isUndefined(compoundParameter.contextElement)) {
+  if (isEitherUndefinedOrNull(compoundParameter.contextElement)) {
     contextElement = document;
   } else if ("selector" in compoundParameter.contextElement) {
 

@@ -17,7 +17,6 @@ const serializeURI_QueryParameters: URI_QueryParametersSerializer = (URI_QueryPa
 
   }
 
-
   return stringifiedKeysAndValueParis.join("&");
 
 };

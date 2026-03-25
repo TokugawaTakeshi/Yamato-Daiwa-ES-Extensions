@@ -1,15 +1,18 @@
 export default function twoDimensionalizeArray<ArrayElement>(
-  sourceData: Readonly<{
+  {
+    targetFlatArray,
+    elementsCountPerNestedArray
+  }: Readonly<{
     targetFlatArray: ReadonlyArray<ArrayElement>;
     elementsCountPerNestedArray: number;
   }>
 ): Array<Array<ArrayElement>> {
 
   const twoDimensionalArray: Array<Array<ArrayElement>> = [];
-  const elementsCountInTargetFlatArray: number = sourceData.targetFlatArray.length;
+  const elementsCountInTargetFlatArray: number = targetFlatArray.length;
   let nestedArray: Array<ArrayElement> = [];
 
-  for (const [ index, arrayElement ] of sourceData.targetFlatArray.entries()) {
+  for (const [ index, arrayElement ] of targetFlatArray.entries()) {
 
     nestedArray.push(arrayElement);
 
@@ -17,7 +20,7 @@ export default function twoDimensionalizeArray<ArrayElement>(
 
     if (hasNextElement) {
 
-      if (nestedArray.length === sourceData.elementsCountPerNestedArray) {
+      if (nestedArray.length === elementsCountPerNestedArray) {
         twoDimensionalArray.push(nestedArray);
         nestedArray = [];
       }

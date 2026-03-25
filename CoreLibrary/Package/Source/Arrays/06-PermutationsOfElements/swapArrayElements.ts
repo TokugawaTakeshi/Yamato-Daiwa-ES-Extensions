@@ -135,13 +135,13 @@ export default function swapArrayElements<ArrayElement>(
 
       /* [ Approach ] ※
        * Non-standard method of accessing to property but
-       *   `sourceDataAndOptions.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` is the invalid
+       *   `sourceDataAndOptions.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple` is invalid
        *    TypeScript and
        *    ```
        *    "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple" in sourceDataAndOptions.oneElement &&
        *       sourceDataAndOptions.oneElement.mustThrowErrorIfElementNotFoundOrMatchesAreMultiple
        *     ```
-       *     requires two more checks one of which is redundant from the viewpoint of JavaScrit. */
+       *     requires two more checks, one of which is redundant from the viewpoint of JavaScript. */
       if (Reflect.get(sourceDataAndOptions.oneElement, "mustThrowErrorIfElementNotFoundOrMatchesAreMultiple") === true) {
 
         Logger.throwErrorWithFormattedMessage({
@@ -228,6 +228,7 @@ export default function swapArrayElements<ArrayElement>(
       return workpiece;
 
     }
+
 
     otherElementPosition__numerationFrom0 = otherElementPosition__numerationFrom0__nullIfMatchesAreNotExactlyOne;
 

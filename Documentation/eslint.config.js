@@ -17,6 +17,23 @@ module.exports = [
     rules: {
       "no-console": "off"
     }
+  },
+
+  {
+    files: [ "Automation/TemplatesGenerator.ts" ],
+    rules: [
+      {
+        "n/no-unpublished-import": [
+          "error",
+          {
+            allowModules: [
+              "@yamato-daiwa/documentation-files-templates",
+              "@yamato-daiwa/es-extensions-nodejs"
+            ]
+          }
+        ]
+      }
+    ]
   }
 
 ];

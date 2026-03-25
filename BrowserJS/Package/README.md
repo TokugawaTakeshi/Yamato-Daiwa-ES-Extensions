@@ -1,22 +1,25 @@
-# @yamato-daiwa/es-extensions-browserjs
+# Yamato Daiwa E(CMA)S(cript) Extensions [YDEE] - BrowserJS
 
-[![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions-browserjs)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/tree/master/BrowserJS/Package)
-![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+[![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package)
+[![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![IntelliJ IDEA plugin](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](https://plugins.jetbrains.com/plugin/17638-yamato-daiwa-es-extensions)
 
 [![NPM Version](https://img.shields.io/npm/v/@yamato-daiwa/es-extensions)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions-browserjs)
 ![No any type](https://img.shields.io/badge/Type_safety-No_any-brightgreen.svg?style=flat)
+![No third-party dependencies](https://img.shields.io/badge/Dependencies-No--third_party_dependencies-brightgreen.svg?style=flat)
 
 [![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1)
 [![PAYPAL](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/tokugawatakeshi)
 [![LIBERAPAY](	https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black)](https://liberapay.com/TokugawaT-YD)
 
 Additional to [@yamato-daiwa/es-extensions](https://www.npmjs.com/package/@yamato-daiwa/es-extensions) functionality 
-for browser environment. 
+  for the browser environment. 
 
 Helper functions and classes aimed to reduce the routine code. 
 Build-in TypeScript type safety without `any` type.
+Oriented to TypeScript users investing the time to quality including type-safety.
 
 
 ## Installation
@@ -25,20 +28,20 @@ Build-in TypeScript type safety without `any` type.
 npm i @yamato-daiwa/es-extensions-browserjs @yamato-daiwa/es-extensions -E
 ```
 
+Please install the same versions of the above dependencies. 
+
 
 ## Documentation
 
-### DOM manipulations
+### DOM Manipulations
 
 <dl>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/cloneDOM_Element.md">cloneDOM_Element</a></dt>
   <dd>
-    Clones DOM element herewith tells TypeScript that cloned element has same subtype of the 
-    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> as initial instance 
-    (it is natural, however the TypeScript typing for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode"><code>Node.cloneNode()</code></a> 
-    has <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">Node</a> as returned value type; 
-    it is the <a href="https://github.com/microsoft/TypeScript/issues/283">TypeScript issue</a>.
+    Clones target DOM element herewith
+      <a href="https://github.com/microsoft/TypeScript/issues/283">takes care about dealing with correct typing of a cloned element</a>.
+    It is required to explicitly specify must children nodes be cloned at once.
   </dd>
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/BrowserJS/Package/Documentation/DOM/createDOM_ElementFromHTML_Code.md">createDOM_ElementFromHTML_Code</a></dt>
