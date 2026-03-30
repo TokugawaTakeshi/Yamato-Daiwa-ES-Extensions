@@ -1,24 +1,12 @@
 {
   "compilerOptions": {
 
-    "target": "ES2018",
-    "module": "ES2020",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
+    "target": "ESNext",
 
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
 
-    "removeComments": true,
-
-    "outDir": "Distributable/",
-    "declaration": true
-
-  },
-
-  "include": [ "Source/**/*" ]
-
+  }
 }

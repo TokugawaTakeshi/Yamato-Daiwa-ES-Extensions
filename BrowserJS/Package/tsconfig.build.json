@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "Source",
+    "outDir": "Distributable",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "removeComments": true,
+    "declaration": true
+  },
+  "include": [ "Source/**/*" ]
+}

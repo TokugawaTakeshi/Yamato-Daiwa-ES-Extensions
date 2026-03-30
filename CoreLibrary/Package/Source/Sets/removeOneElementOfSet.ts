@@ -3,20 +3,20 @@ import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
 
 
-export namespace RemoveOfOneElementFromSet {
+export namespace RemovingOfOneElementFromSet {
 
   /* ━━━ Parameter ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   export type CompoundParameter<Element> =
-      CompoundParameter.MutableAdding<Element> |
-      CompoundParameter.ImmutableAdding<Element>;
+      CompoundParameter.MutableRemoving<Element> |
+      CompoundParameter.ImmutableRemoving<Element>;
 
   export namespace CompoundParameter {
 
-    export type MutableAdding<Element> =
-        MutableAdding.PossiblyEmptySet<Element> |
-        MutableAdding.ExpectedToBeNonEmptySet<Element>;
+    export type MutableRemoving<Element> =
+        MutableRemoving.PossiblyEmptySet<Element> |
+        MutableRemoving.ExpectedToBeNonEmptySet<Element>;
 
-    export namespace MutableAdding {
+    export namespace MutableRemoving {
 
       export type PossiblyEmptySet<Element> = Readonly<{
         targetSet: Set<Element>;
@@ -33,11 +33,11 @@ export namespace RemoveOfOneElementFromSet {
     }
 
 
-    export type ImmutableAdding<Element> =
-        ImmutableAdding.PossiblyEmptySet<Element> |
-        ImmutableAdding.ExpectedToBeNonEmptySet<Element>;
+    export type ImmutableRemoving<Element> =
+        ImmutableRemoving.PossiblyEmptySet<Element> |
+        ImmutableRemoving.ExpectedToBeNonEmptySet<Element>;
 
-    export namespace ImmutableAdding {
+    export namespace ImmutableRemoving {
 
       export type PossiblyEmptySet<Element> = Readonly<{
         targetSet: ReadonlySet<Element>;
@@ -80,15 +80,15 @@ export namespace RemoveOfOneElementFromSet {
 
 export default function removeOneElementFromSet<Element>(
   compoundParameter:
-      RemoveOfOneElementFromSet.CompoundParameter.MutableAdding.PossiblyEmptySet<Element> |
-      RemoveOfOneElementFromSet.CompoundParameter.ImmutableAdding.PossiblyEmptySet<Element>
-): RemoveOfOneElementFromSet.Result.ForPossiblyEmptySets<Element>;
+      RemovingOfOneElementFromSet.CompoundParameter.MutableRemoving.PossiblyEmptySet<Element> |
+      RemovingOfOneElementFromSet.CompoundParameter.ImmutableRemoving.PossiblyEmptySet<Element>
+): RemovingOfOneElementFromSet.Result.ForPossiblyEmptySets<Element>;
 
 export default function removeOneElementFromSet<Element>(
   compoundParameter:
-      RemoveOfOneElementFromSet.CompoundParameter.MutableAdding.ExpectedToBeNonEmptySet<Element> |
-      RemoveOfOneElementFromSet.CompoundParameter.ImmutableAdding.ExpectedToBeNonEmptySet<Element>
-): RemoveOfOneElementFromSet.Result.ForExpectedToBeNonEmptySets<Element>;
+      RemovingOfOneElementFromSet.CompoundParameter.MutableRemoving.ExpectedToBeNonEmptySet<Element> |
+      RemovingOfOneElementFromSet.CompoundParameter.ImmutableRemoving.ExpectedToBeNonEmptySet<Element>
+): RemovingOfOneElementFromSet.Result.ForExpectedToBeNonEmptySets<Element>;
 
 
 export default function removeOneElementFromSet<Element>(
@@ -96,8 +96,8 @@ export default function removeOneElementFromSet<Element>(
     targetSet,
     mustThrowErrorIfSetIsEmpty,
     mutably
-  }: RemoveOfOneElementFromSet.CompoundParameter<Element>
-): RemoveOfOneElementFromSet.Result<Element> {
+  }: RemovingOfOneElementFromSet.CompoundParameter<Element>
+): RemovingOfOneElementFromSet.Result<Element> {
 
   const element: Element | undefined = targetSet[Symbol.iterator]().next().value;
 

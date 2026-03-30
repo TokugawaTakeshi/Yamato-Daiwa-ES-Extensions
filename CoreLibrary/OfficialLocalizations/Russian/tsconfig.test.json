@@ -1,4 +1,7 @@
 {
   "extends": "./tsconfig.json",
-  "include": [ "Source/**/*" ]
+  "compilerOptions": {
+    "types": [ "node" ]
+  },
+  "include": [ "Tests/**/*" ]
 }

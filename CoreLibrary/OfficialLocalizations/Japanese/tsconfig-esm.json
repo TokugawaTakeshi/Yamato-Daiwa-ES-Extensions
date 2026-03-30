@@ -1,7 +1,9 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "module": "ES2020",
-    "outDir": "Distributable/esm"
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "outDir": "Distributable/esm",
+    "declaration": true
   }
 }
