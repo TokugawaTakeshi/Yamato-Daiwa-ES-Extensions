@@ -18,8 +18,10 @@ block append Metadata
 
     RegularWebPageTemplate__YDF.configure({
       metadata: {
-        title: buildHTML_PageTitle(`RawObjectDataProcessor ${ topHeading }`),
-        description: ""
+        title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
+        description:
+            "「Yamato Daiwa ECMAScript extensions（YDEE）」ライブラリの「RawObjectDataProcessor」ユーティリティクラスを取り扱う上で、" +
+              "ECMAScript規格側の方からの制限を考慮しなければいけない。",
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -48,7 +50,320 @@ block append SpecificContent
 
   article
 
-    //- ━━━ `RawObjectDataProcessor` — 最少理論 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= `RawObjectDataProcessor ${ topHeading }`
+    //- ━━━ `RawObjectDataProcessor` 理論的最小限 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID RawObjectDataProcessor]を利用する際は、
+        #[+ImportantEntity--YDID JavaScript]・#[+ImportantEntity--YDID TypeScript]、
+        正確には#[+ImportantEntity--YDID ECMAScript]規格考慮する必要が有る。
+      これらの注意点は当然、公式・非公式のリソースでドキュメント化されているが、多数の初心者プログラマーはそれらを知らない事も多い。
+
+
+    //- ┅┅┅ オブジェクト系データ分類化 ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.objectLikeDataClassification.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID 「RawObjectDataProcessor」]という名前の直訳から分かる通り、此のユーティリティ#[+Term--YDID クラス]は
+        #[+Keyword--YDID オブジェクト型]データ、つまり#[+ImportantEntity--YDID typeof N === "object"]という条件を満たした上で、
+        かつ#[+ImportantEntity__Code--YDID null]#[+Keyword--YDID ではない]データを扱う為のものである。
+      ところで、#[+Keyphrase--YDID #[+ImportantEntity--YDID ECMAScript]規格の観点では]、
+        #[+ImportantEntity__Code--YDID typeof null]#[+Keyword--YDID も]#[+ImportantEntity__Code--YDID "object"]となっている。
+      #[+Keyword--YDID 子]#[+Term--YDID プロパティ]なら、数型や文字列や真偽を含めて他の型を持つ事が出来る。
+      但し、現時点では#[+Keyphrase--YDID #[+ImportantEntity--YDID JSON]互換のデータ#[+Keyword--YDID のみ]]が
+        #[+Keyword--YDID 完全に]サポートされている。
+      該当している#[+Term--YDID 型]の定義は以下の通り。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;
+
+        export type ParsedJSON_Object = { [key: string]: ParsedJSON_NestedProperty; };
+
+        export type ParsedJSON_Array = Array<ParsedJSON_NestedProperty>;
+
+        export type ParsedJSON_NestedProperty =
+          number |
+          string |
+          boolean |
+          null |
+          ParsedJSON_Object |
+          ParsedJSON_Array |
+          undefined;
+
+    +AdmonitionBlock--YDF({
+      title: "JSONとオブジェクト",
+      SVG_Icon: true,
+      areThemesCSS_ClassesCommon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    })
+
+      p.Article-Paragraph.
+        #[+Term--YDID 「オブジェクト」]や#[+Term--YDID 「配列」]といった用語は#[+ImportantEntity--YDID JSON]に対してもよく使われるが、
+          #[+ImportantEntity--YDID JSON]は#[+Term--YDID オブジェクト]では#[+Keyword--YDID なく]#[+Keyword--YDID 文字列]である
+          事を意識しておく必要が有る。
+        其の為、上記の#[+Term--YDID エイリアス]名は、単なる#[+SecondaryEntity__Code--YDID JSON_Object]や
+          #[+SecondaryEntity__Code--YDID JSON_Array]では#[+Keyword--YDID なく]、#[+Term--YDID 「parsed」]（「処理済み」）単語
+          で始まっている。
+
+      p.Article-Paragraph.
+        #[+Term--YDID ECMAScript系言語]の場合、#[+Term--YDID JSON文字列]から通常の#[+Term--YDID オブジェクト]を取得するには、
+          一般的に#[+ImportantEntity__Code--YDID JSON.parse()]が使用される。
+        #[+Term--YDID 「JavaScript Object Notation」]という復号から分かる通り、#[+ImportantEntity--YDID JSON]形式は
+          #[+ImportantEntity--YDID JavaScript]に由来しているが、他の多くの人気なプログラミング言語でも此のデータ形式が扱われており、
+          そこでは#[+Term--YDID JSON文字列]は各言語がサポートするデータ型に変換される。
+
+    p.Article-Paragraph.
+      将来的に、#[+ImportantEntity--YDID Date]や#[+ImportantEntity--YDID BigInt]の様な他の#[+Term--YDID 型]の
+        #[+Keyword__Contrast--YDID 子]#[+Term--YDID プロパティ]のサポートが追加される可能性は有る。
+      然し現時点では、外部ソースからデータを読み込んで#[+Term--YDID JavaScriptオブジェクト]に変換する場合、それらは通常
+        #[+ImportantEntity--YDID JSON]互換であり、#[+ImportantEntity__Code--YDID Date]や#[+ImportantEntity__Code--YDID BigInt]
+        #[+Term--YDID 型]の#[+Term__Contrast--YDID プロパティ]が必要な場合は後処理で文字列から変換出来る為、此の機能の需要はそれほど高くない。
+
+    p.Article-Paragraph.
+      さて、#[+ImportantEntity--YDID RawObjectDataProcessor]は以下の#[+Keyword--YDID 4つ]の#[+Term--YDID オブジェクト]の
+        #[+Keyword--YDID サブタイプ]を扱っている。
+
+    +Table--YDF({ decorativeVariation: Table__YDF.DecorativeVariations.modestlyCalmingPastelSolid })
+
+      thead
+
+        tr
+
+          th(scope="col") ↓ キーの型 / ➝ 要素数
+          th(scope="col") 固定
+          th(scope="col") 任意
+
+      tbody
+
+        tr
+
+          th(scope="row") 文字列
+          td 固定構造オブジェクト
+          td 連想配列
+
+        tr
+
+          th(scope="row") 非負整数
+          td タプル
+          td インデックス配列
+
+
+    //- ╍╍╍ 固定構成のオブジェクト ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph
+      | これらの#[+Term--YDID オブジェクト]・サブタイプでは、#[+Keyword__Contrast--YDID あり得る]#[+Keyword--YDID 全て]の
+      |   #[+Term--YDID プロパティ]名が#[+Keyword--YDID 予め]判明している事が前提となる。
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.demo.$URI
+      }) デモ
+      | で使用されている#[+SecondaryEntity__Code--YDID SampleType]型は、此の様な#[+Term--YDID オブジェクト]・サブタイプの例である。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    p.Article-Paragraph.
+      #[+Term--YDID 固定構造]である事は、#[+Term--YDID 多態的な（ポリモフィックな）プロパティ]を禁止するものでは#[+Keyword--YDID ない]が、
+        以下の例の様に、あり得る選択肢が#[+Keyword--YDID 予め]分かっている#[+Keyword--YDID 必要]がある。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleTypeWithPolymopthocProperties = {
+          foo:
+              { hoge: string; } |
+              { fuga: number: }
+          bar: number:
+          baz: string;
+        };
+
+    p.Article-Paragraph.
+      此の型の#[+Term--YDID オブジェクト]は、#[+Keyword--YDID 最も]#[+Keyword__Contrast--YDID 一般的]である。
+      クライアントとサーバー間等で送受信されるシリアライズされたデータは、殆どの場合此の形式。
+      #[+ImportantEntity--YDID JSON]や#[+ImportantEntity--YDID YAML]形式等のファイルに保存される設定も、通常はこの形式である
+        （例えば#[+SecondaryEntity--YDID TypeScript]の設定ファイルの#[+SecondaryEntity__Code--YDID tsconfig.json]）。
+
+
+    //- ╍╍╍ 連想配列 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Term--YDID 連想配列]は、#[+Term--YDID 固定構造オブジェクト]とは異なり、#[+Term--YDID プロパティ]名が#[+Keyword--YDID 事前に]
+        分かっておらず、要素数も#[+ImportantEntity__Code--YDID 0]から最大整数範囲内ならいくらでも有り得る。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID ESMAScript 2015]規格#[+Keyword--YDID 以前]は、此の様な#[+Term--YDID 配列]として
+        #[+Keyword--YDID 通常の]#[+Term--YDID オブジェクト]が使用されていた。
+      #[+Keyphrase--YDID #[+Keyword--YDID 出力]#[+Term--YDID JavaScriptコード]の観点では]、#[+Term--YDID 固定構造オブジェクト]と何ら
+        #[+Keyword--YDID 変わりない]。
+      #[+ImportantEntity--YDID TypeScript]では、こうした#[+Term--YDID 連想配列]は以下の#[+Keyphrase--YDID 何れかのの]方法で
+        アノテーションされる。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type AssociativeArray<ValueType> = { [ key: string ]: ValueType };
+
+        // 又は
+
+        type AssociativeArray<ValueType> = Record<string, ValueType>;
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID ESMAScript 2015]#[+Term--YDID 規格]で導入された#[+ImportantEntity--YDID Map]
+        #[+Term--YDID データ型]を#[+Term--YDID 連想配列]と呼ぶかどうかは、其の#[+Term--YDID 配列]が#[+Keyword--YDID 何れでもの]型の
+        #[+Term__Contrast--YDID キー]を許容するかどうかに依存する。
+      特に#[+ImportantEntity--YDID Map]は#[+Term--YDID オブジェクト型]の#[+Term--YDID キー]を禁止#[+Keyword--YDID していない]。
+      何れにせよ、#[+ImportantEntity--YDID Map型]は#[+ImportantEntity--YDID JSON]と互換性が#[+Keyword--YDID ない]。
+      然し、#[+ImportantEntity--YDID Map]を#[+Keyword--YDID 二次元]の#[+Term--YDID インデックス配列]に変換する事で、互換性を持たせる事が出来る。
+      此の場合、#[+Keyword--YDID 各]#[+Keyword__Contrast--YDID 子]#[+Term--YDID 配列]の#[+Keyword--YDID 1番目]の
+        #[+Term--YDID 要素]を#[+Term--YDID キー]、#[+Keyword--YDID 2番目]の#[+Term--YDID 要素]を#[+Term--YDID 値]とする。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const sampleMap: Map<string, number> = new Map([
+          [ "alpha", 1 ],
+          [ "bravo", 2 ],
+          [ "charlie", 3 ]
+        ]);
+
+        const serializedMap: string = JSON.stringify(Array.from(sampleMap.entries()));
+
+    +AdmonitionBlock--YDF({
+      title: "用語の扱いに注意",
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    }).
+      #[+Term--YDID 固定構造オブジェクト]と#[+Term--YDID 連想配列]の何方に対しても、#[+Term--YDID 「キー」]と#[+Term--YDID 「値」]という用語が
+        使われる。
+      #[+Term--YDID 「キー」]については概ね明確だが、#[+Term--YDID 「値」]という用語は非常に広範であり、#[+Term--YDID オブジェクト]の
+        #[+Keyword--YDID 外]でも#[+Keyword--YDID あらゆる]#[+Term--YDID データ型]に対して使われ得る。
+
+    p.Article-Paragraph.
+      頻繁に使用される#[+Term--YDID 連想配列]の他の例として、#[+ImportantEntity--YDID package.json]の多くのフィールド
+        （#[+SecondaryEntity__Code--YDID scripts]、#[+SecondaryEntity__Code--YDID dependencies]、
+        #[+SecondaryEntity__Code--YDID devDependencies]、
+        #[+SecondaryEntity__Code--YDID peerDependencies]等）が挙げられる。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID RawObjectDataProcessor]は当然、#[+Keyword--YDID 文字列]の#[+Term--YDID キー]を持つ
+        #[+Keyword--YDID 通常の]#[+Term--YDID 連想配列]をサポートしているが、#[+ImportantEntity--YDID JSON]との互換性が無い為、
+        #[+ImportantEntity--YDID Map]型の入力データはサポートして#[+Keyword--YDID いない]。
+      #[+Keyword--YDID 但し]、#[+Term--YDID 後処理]機能を利用する事で、目的のデータを#[+ImportantEntity--YDID Map]に変換する事は可能である。
+
+
+    //- ╍╍╍ インデックス配列 ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Term--YDID 要素]の#[+Keyword--YDID 順番]が#[+Keyword--YDID 不可欠]であり、#[+Keyword--YDID 各]#[+Term--YDID 要素]への
+        アクセスが#[+Term--YDID インデックス]という#[+Keyphrase--YDID #[+ImportantEntity__Code--YDID 0]から始まる#[+Term--YDID 整数]]
+        に行わるコレクションの一種類である。
+      日本語でも英語でも、単に#[+Term--YDID 「配列」]（#[+Term--YDID array(s)]）と言う場合、#[+Term--YDID 連想配列]では
+        #[+Keyword--YDID なく]#[+Keyword__Contrast--YDID インデックス配列]を指す事が多い。
+
+    p.Article-Paragraph.
+      多くの静的型付け言語（例えば#[+SecondaryEntity--YDID C++]、#[+SecondaryEntity--YDID C#]、#[+SecondaryEntity--YDID Java]）では、
+        #[+Keyword--YDID 通常の]#[+Keyword__Contrast--YDID インデックス]#[+Term--YDID 配列]は#[+Term__Contrast--YDID 要素]数が
+        #[+Keyword--YDID 固定]されており、#[+Keyphrase--YDID 多くの場合]、#[+Term--YDID 要素]の#[+Keyword__Contrast--YDID 型]も
+        #[+Keyword__Contrast--YDID 統一]されている。
+      #[+Term--YDID 要素]の追加や削除が必要な場合は、専用の#[+Term--YDID コレクション]が使用される。
+      これ等は#[+Keyword--YDID 概念的には]同じ#[+Term--YDID インデックス配列]だが、内部で#[+Keyword--YDID 標準的な]#[+Term--YDID 配列]
+        を別のものに差し替える事に依り#[+Term--YDID 要素]の追加・削除を可能にしている。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID ECMAScript]に関しては、#[+Term--YDID インデックス配列]は#[+ImportantEntity--YDID Array]というクラス
+        の様な#[+Term--YDID オブジェクト]の#[+Term__Contrast--YDID インスタンス]である
+        （#[+ImportantEntity--YDID X instanceof Array]は真）。
+      こうした#[+Term--YDID インデックス配列]は柔軟に操作出来る（具体的には、全く異なる#[+Term--YDID 型]の#[+Term--YDID 要素]を指定したり、
+        #[+Term--YDID 要素]を追加・削除したり出来る）、今のところ追加の#[+Term--YDID コレクション]の必要性は#[+Keyword--YDID ない]。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID TypeScript]で#[+Term--YDID インデックス配列]をアノテーションするには、以下の何れかの方法がある。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const indexedArray: string[] = [ "Alpha", "Bravo" ];
+
+        // または
+
+        const indexedArray: Array<string> = [ "Alpha", "Bravo" ];
+
+    p.Article-Paragraph.
+      #[+Term--YDID 固定構造オブジェクト]と同様に、#[+Term__Contrast--YDID インデックス配列]は最も一般的な#[+Term--YDID データ型]の一つであり、至る所で広く使われている。
+      #[+Term--YDID 固定構造オブジェクト]や#[+Term--YDID 連想配列]とは異なり、#[+Keyword--YDID インデックス配列]は要素の順序を
+        #[+Keyword--YDID 保証する]為、順番の考慮が不可欠な場合、変わりの無いものになっている。
+
+
+    //- ╍╍╍ タプル ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.tuple.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.tuple.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID 概念的には]、#[+Term--YDID タプル]とは#[+Term--YDID 要素]数が#[+Keyword--YDID 固定]された#
+        [+Term__Contrast--YDID 配列]（一般的には#[+Term--YDID インデックス配列]に#[+Keyword--YDID 限らない]）のものである。
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID ECMAScript 2025]規格（前述の#[+ImportantEntity--YDID ECMAScript 2015]と混同しない事）
+        #[+Keyword--YDID 以前]は、#[+ImportantEntity--YDID JavaScript]に#[+Term--YDID 要素]数を制限した#[+Term--YDID 配列]
+        作成専用の機能は#[+Keyword--YDID 無かった]。
+      #[+ImportantEntity--YDID TypeScript]では、#[+Term--YDID 「タプル」]（#[+Term--YDID 「tuple」]）という用語は、
+        以下のようにアノテーションされる#[+Keyword--YDID インデックス配列]#[+Keyword__Contrast--YDID のみ]に適用されていた。
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const tupleOfTwoElements: [ string, number ] = [ "ALPHA", 1 ];
+        const tupleOfThreeElements: [ string, number, boolean ] = [ "BRAVO", 2, true ];
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID ECMAScript 2025]規格では、新しい#[+Term--YDID タプル]型が登場した。
+      此れは#[+Term--YDID 要素]数が固定されている事に加え、#[+Keyphrase--YDID 初期化後は読み取り専用と成る]。
+      それで不変性を#[+Keyword--YDID 保証する]為に、#[+ImportantEntity--YDID Array]や#[+ImportantEntity--YDID Map]や
+        #[+ImportantEntity--YDID Set]等を含めて、#[+Keyword--YDID 如何なる]#[+Term--YDID オブジェクト]のサブタイプが
+        #[+Keyword--YDID 禁じてある]。
+      此のデータ型は未だ非常に新しい為、様々な環境で広くサポートされる迄には時間がかかるだろう。
+      又、其の制限の為広く普及しない事も予想され、当然ながら#[+ImportantEntity--YDID RawObjectDataProcessor]は此のデータ型を
+        サポートして#[+Keyword--YDID いない]。
+      其の為、以降は既に#[+ImportantEntity--YDID RawObjectDataProcessor]と#[+Keyword--YDID 互換性がある]
+        #[+Keyword--YDID TypeScriptのタプル]について述べる。
+
+    p.Article-Paragraph.
+      #[+Term--YDID タプル]はそれほど一般的ではないが、使用例はある。
+      例えば、#[+SecondaryEntity--YDID React]の#[+SecondaryEntity__Code--YDID useState]#[+Term--YDID 関数]は、2つの要素からなる
+        #[+Term--YDID タプル]を返す。
+      全てではないが、#[+Keyword--YDID 多く]の#[+Term--YDID ESLintルール]の設定も、#[+Keyword--YDID 2番目]の要素が
+        #[+Keyword--YDID 任意]ではあるが、#[+Keyphrase--YDID 強いて言えば]#[+Term--YDID 「タプル」]と呼ぶ事が出来る。
+      何れにせよ、2つの位置それぞれに#[+Keyword--YDID 特定の]#[+Term--YDID 型]の#[+Term--YDID 要素]が期待されており、
+        此れが#[+Term--YDID タプル]の主な特徴である。

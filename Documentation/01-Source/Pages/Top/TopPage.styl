@@ -20,12 +20,12 @@
 
   +WideScreensConfiguration()
 
-    CenteredContentWithComputedHorizontalPaddings({ contentWidth: MAXIMAL_CONTENT_WIDTH })
+    CenteredContentWithComputedHorizontalPaddings--YDF({ contentWidth: MAXIMAL_CONTENT_WIDTH })
 
 
   +NarrowScreensConfiguration()
 
-    Paddings({ horizontalSymmetric: 12px })
+    Paddings--YDF({ horizontalSymmetric: 12px })
 
 
   &-ImageAndTopHeadingGroup
@@ -36,7 +36,7 @@
     align-items center
 
     width fit-content
-    centerHorizontallyWithoutWrapper({ targetElementType: HorizontalCenteringWithoutWrapper.TargetElementTypes.block })
+    centerHorizontallyWithoutWrapper--YDF({ targetElementType: HorizontalCenteringWithoutWrapper--YDF.TargetElementTypes.block })
 
     margin-top 12px
 
@@ -72,7 +72,7 @@
 
     &-Heading
 
-      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 20px, lineSpacing: 6px })
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight--YDF({ fontSize: 20px, lineSpacing: 6px })
       text-align center
 
       font-weight bold
@@ -83,7 +83,7 @@
 
     &-Paragraph
 
-      applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 16px, lineSpacing: 4px })
+      applyTextGeometryWithoutExtraSpaceCausedByLineHeight--YDF({ fontSize: 16px, lineSpacing: 4px })
       text-align center
 
       font-weight bold
@@ -99,7 +99,7 @@
 
       li
 
-        applyTextGeometryWithoutExtraSpaceCausedByLineHeight({ fontSize: 14px, lineSpacing: 4px })
+        applyTextGeometryWithoutExtraSpaceCausedByLineHeight--YDF({ fontSize: 14px, lineSpacing: 4px })
         list-style-type "■ "
 
 

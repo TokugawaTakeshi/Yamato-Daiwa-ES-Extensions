@@ -23,11 +23,17 @@ import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 abstract class AJAX_Service {
 
+  /* ━━━ Static Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ┅┅┅ Public ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   public static implementation: AJAX_Service | null = null;
 
+
+  /* ┅┅┅ Protected ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   protected static API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH: string | null = null;
   protected static URI_QueryParametersSerializer: URI_QueryParametersSerializer = serializeURI_QueryParameters;
 
+
+  /* ━━━ Setter ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static set API_SERVER_URI_CONSTANT_PART(value: string) {
     AJAX_Service.API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH = removeSpecificCharacterFromCertainPosition({
       targetString: value,
@@ -36,6 +42,8 @@ abstract class AJAX_Service {
     });
   }
 
+
+  /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   public static setup(
     properties: Readonly<{
       implementation?: AJAX_Service;
@@ -272,7 +280,7 @@ abstract class AJAX_Service {
           errorInstance: new InvalidConfigError({
             customMessage:
                 "The \"alternatingURI_PathPart\" has been specified while the static field " +
-                  "\"API_SERVER_URI_CONSTANT_PART\" has not been set."
+                  "\"API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH\" has not been set."
           }),
           title: InvalidConfigError.localization.defaultTitle,
           occurrenceLocation: "AJAX_Service.normalizeURI_UntilPath(URI_PathRawDefinition)"
