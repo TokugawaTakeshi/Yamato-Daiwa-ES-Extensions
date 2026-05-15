@@ -29,7 +29,7 @@ Promise.all([
               firstDayOfWeek: DaysOfWeekNames.sunday
             });
 
-            Assert.deepStrictEqual<Array<CalendarBuilder.CalendarCellData>>(
+            Assert.deepStrictEqual(
               dataFor42DaysMatrix,
               [
 
@@ -448,7 +448,7 @@ Promise.all([
               firstDayOfWeek: DaysOfWeekNames.monday
             });
 
-            Assert.deepStrictEqual<Array<CalendarBuilder.CalendarCellData>>(
+            Assert.deepStrictEqual(
               dataFor42DaysMatrix,
               [
 
@@ -877,7 +877,7 @@ Promise.all([
               firstDayOfWeek: DaysOfWeekNames.sunday
             });
 
-            Assert.deepStrictEqual<Array<CalendarBuilder.CalendarCellData>>(
+            Assert.deepStrictEqual(
               dataFor42DaysMatrix,
               [
 
@@ -1296,7 +1296,7 @@ Promise.all([
               firstDayOfWeek: DaysOfWeekNames.monday
             });
 
-            Assert.deepStrictEqual<Array<CalendarBuilder.CalendarCellData>>(
+            Assert.deepStrictEqual(
               dataFor42DaysMatrix,
               [
 

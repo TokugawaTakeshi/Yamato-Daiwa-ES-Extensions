@@ -1,5 +1,3 @@
-/* global NodeJS -- The`NodeJS` namespace isn't known by ESLint. */
-
 import FileSystem from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
@@ -30,7 +28,7 @@ export default class ImprovedFileSystem {
 
     return new Promise<boolean>((resolve: (isExists: boolean) => void, reject: (error: unknown) => unknown): void => {
       PromisfiedFileSystem.access(targetPath).
-          then((): void => { resolve(true) }).
+          then((): void => { resolve(true); }).
           catch(
             (error: unknown): void => {
 

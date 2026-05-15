@@ -102,32 +102,16 @@ abstract class LocalizableSampleDataRepository<
       this.cachedSamplesWithLocalizationsByHumanFriendlyIDs = samplesWithLocalizationsByHumanFriendlyIDs;
     }
 
-    return new LocalizableEntitiesByIDsMap(
-      Object.
-          values<LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>>
-              (samplesWithLocalizationsByHumanFriendlyIDs).
-          map(
-            (
-              entityWithLocalization:
-                  LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>
-            ):
-                Readonly<[
-                  EntityID,
-                  LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>
-                ]> =>
-                    [
-                      this.getEntityID(entityWithLocalization.entity),
-                      entityWithLocalization
-                    ]
-          )
-    );
+    return new LocalizableEntitiesByIDsMap({
+      getEntityID: this.getEntityID.bind(this),
+      initialEntitiesWithLocalizations: Object.values(samplesWithLocalizationsByHumanFriendlyIDs)
+    });
 
   }
 
   public getExpectedBeInitializedSamplesWithLocalizationsByHumanFriendlyIDs():
       LocalizableSampleDataRepository.
           SamplesWithLocalizationsByHumanFriendlyIDs<HumanFriendlyIDs, Entity, Localization, LocalizationsKeys>
-  /* eslint-disable-next-line @stylistic/brace-style -- Will be allowed soon. */
   {
     return this.cachedSamplesWithLocalizationsByHumanFriendlyIDs ??
         Logger.throwErrorWithFormattedMessage({

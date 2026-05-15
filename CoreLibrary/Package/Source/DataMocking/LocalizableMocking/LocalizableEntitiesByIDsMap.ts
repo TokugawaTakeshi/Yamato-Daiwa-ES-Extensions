@@ -6,24 +6,67 @@ class LocalizableEntitiesByIDsMap<
 >
     /* eslint-disable-next-line id-length -- Should Not be actual for built-in types. */
     extends Map<EntityID, LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>>
-/* eslint-disable-next-line @stylistic/brace-style -- Will be allowed soon. */
 {
 
+  private readonly getEntityID: (entity: Entity) => EntityID;
+
+
   public constructor(
-    entries?: ReadonlyArray<
-      readonly [ EntityID, LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys> ]
-    >
+    {
+      initialEntitiesWithLocalizations,
+      getEntityID
+    }: Readonly<{
+      initialEntitiesWithLocalizations?:
+          ReadonlyArray<LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>>;
+      getEntityID: (entity: Entity) => EntityID;
+    }>
+
   ) {
-    super(entries);
+
+    super(
+      (initialEntitiesWithLocalizations ?? []).
+          map(
+            (
+              { entity, localizations }:
+                  LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>
+            ):
+                Readonly<[
+                  EntityID,
+                  LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>
+                ]> =>
+                    [
+                      getEntityID(entity),
+                      {
+                        entity,
+                        localizations
+                      }
+                    ]
+          )
+    );
+
+    this.getEntityID = getEntityID;
+
   }
 
-  public addEntries(
-    entries: ReadonlyArray<
-      readonly [EntityID, LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>]
-    >
+
+  public addEntityWithLocalization(
+    { entity, localizations }: LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>
   ): void {
-    for (const [ key, value ] of entries) {
-      this.set(key, value);
+    super.set(
+      this.getEntityID(entity),
+      {
+        entity,
+        localizations
+      }
+    );
+  }
+
+  public addEntitiesWithLocalizations(
+    entitiesWithLocalization:
+        ReadonlyArray<LocalizableEntitiesByIDsMap.EntityWithLocalizations<Entity, Localization, LocalizationsKeys>>
+  ): void {
+    for (const { entity, localizations } of entitiesWithLocalization) {
+      this.set(this.getEntityID(entity), { entity, localizations });
     }
   }
 

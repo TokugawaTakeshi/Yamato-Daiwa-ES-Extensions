@@ -4,6 +4,8 @@
 
     "target": "ESNext",
 
+    "types": [ "node" ],
+
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true
