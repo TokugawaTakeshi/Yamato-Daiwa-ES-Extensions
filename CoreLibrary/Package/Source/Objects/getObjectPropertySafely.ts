@@ -7,20 +7,40 @@ import InvalidParameterValueError from "../Errors/InvalidParameterValue/InvalidP
 
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
 import isArbitraryObject from "../TypeGuards/Objects/isArbitraryObject";
+import isNaturalNumberOrZero from "../TypeGuards/Numbers/isNaturalNumberOrZero";
 
 
 export default function getObjectPropertySafely(
   targetObject: unknown,
-  dotSeparatedOrArrayedPathToTargetProperty: ReadonlyArray<string> | string
+  dotSeparatedOrArrayedPathToTargetProperty: ReadonlyArray<string | number> | string | number
 ): unknown {
 
+  /* [ Theory ] Arrays will pass this check. */
+  if (!isArbitraryObject(targetObject)) {
+    return;
+  }
+
+
+  let targetPropertyPathSegments: Array<string | number>;
+
   if (
-    !isNonEmptyString(dotSeparatedOrArrayedPathToTargetProperty) &&
-    (
-      !Array.isArray(dotSeparatedOrArrayedPathToTargetProperty) ||
-      dotSeparatedOrArrayedPathToTargetProperty.some((key: string): boolean => !isNonEmptyString(key))
-    )
+    Array.isArray(dotSeparatedOrArrayedPathToTargetProperty) &&
+        dotSeparatedOrArrayedPathToTargetProperty.length > 0 &&
+        dotSeparatedOrArrayedPathToTargetProperty.
+            every((key: unknown): boolean => isNonEmptyString(key) || isNaturalNumberOrZero(key))
   ) {
+
+    targetPropertyPathSegments = dotSeparatedOrArrayedPathToTargetProperty;
+
+  } else if (isNaturalNumberOrZero(dotSeparatedOrArrayedPathToTargetProperty)) {
+
+    targetPropertyPathSegments = [ String(dotSeparatedOrArrayedPathToTargetProperty) ];
+
+  } else if (isNonEmptyString(dotSeparatedOrArrayedPathToTargetProperty)) {
+
+    targetPropertyPathSegments = splitString(dotSeparatedOrArrayedPathToTargetProperty, ".");
+
+  } else {
 
     Logger.logError({
       errorType: InvalidParameterValueError.NAME,
@@ -28,7 +48,9 @@ export default function getObjectPropertySafely(
       description: InvalidParameterValueError.localization.generateDescription({
         parameterNumber: 2,
         parameterName: "dotSeparatedOrArrayedPathToTargetProperty",
-        messageSpecificPart: "This parameter must be either non-empty string or array of non-empty strings."
+        messageSpecificPart:
+            "This parameter must be either a non-empty string, or a non-negative integer, or a non-empty array " +
+              "of strings and/or non-negative integers."
       }),
       occurrenceLocation: "getObjectPropertySafely(targetObject, dotSeparatedOrArrayedPathToTargetProperty)"
     });
@@ -38,45 +60,38 @@ export default function getObjectPropertySafely(
   }
 
 
-  if (!isArbitraryObject(targetObject)) {
-    return;
-  }
-
-
-  let targetPropertyPathSegments: Array<string>;
-
-  if (Array.isArray(dotSeparatedOrArrayedPathToTargetProperty)) {
-    targetPropertyPathSegments = dotSeparatedOrArrayedPathToTargetProperty;
-  } else {
-    targetPropertyPathSegments = splitString(dotSeparatedOrArrayedPathToTargetProperty, ".");
-  }
-
-  if (targetPropertyPathSegments.length === 0) {
-    return;
-  }
-
-
   let objectOfCurrentDepthLevel: ArbitraryObject = targetObject;
 
-  for (let depthLevel: number = 1; depthLevel <= targetPropertyPathSegments.length; depthLevel++) {
+  for (
+    let depthLevel__numerationFrom1: number = 1;
+    depthLevel__numerationFrom1 <= targetPropertyPathSegments.length;
+    depthLevel__numerationFrom1++
+  ) {
 
-    const isLastDepthLevel: boolean = depthLevel === targetPropertyPathSegments.length;
-    const valueOfNextDepthLevel: unknown = objectOfCurrentDepthLevel[targetPropertyPathSegments[depthLevel - 1]];
+    const isLastDepthLevel: boolean = depthLevel__numerationFrom1 === targetPropertyPathSegments.length;
+    const valueOfCurrentDepthLevel: unknown =
+        objectOfCurrentDepthLevel[targetPropertyPathSegments[depthLevel__numerationFrom1 - 1]];
 
     if (isLastDepthLevel) {
-      return valueOfNextDepthLevel;
-    } else if (isArbitraryObject(valueOfNextDepthLevel)) {
-      objectOfCurrentDepthLevel = valueOfNextDepthLevel;
+
+      return valueOfCurrentDepthLevel;
+
+    } else if (isArbitraryObject(valueOfCurrentDepthLevel)) {
+
+      objectOfCurrentDepthLevel = valueOfCurrentDepthLevel;
+
     } else {
+
       return;
+
     }
 
   }
 
 
   /* eslint-disable-next-line no-useless-return --
-  * TypeScript could not see that this function will return value once `isLastDepthLevel` become truthy.
-  * If no bugs, `isLastDepthLevel` inevitably will become truthy because the requested property is in certain depth level. */
+  * TypeScript assumes that in the above loop it may be 0 iterations, while the `targetPropertyPathSegments`
+  *  cannot be an empty array with current validation of `dotSeparatedOrArrayedPathToTargetProperty`. */
   return;
 
 }

@@ -37,6 +37,8 @@ import isEitherUndefinedOrNull from "../TypeGuards/EmptyTypes/isEitherUndefinedO
 import isNeitherUndefinedNorNull from "../TypeGuards/EmptyTypes/isNeitherUndefinedNorNull";
 import emptyStringToNull from "../ValueTransformers/emptyStringToNull";
 import getLastElementOfArray from "../Arrays/01-RetrievingOfElements/getLastElementOfArray";
+import ValuesDeepCopier from "../ValuesDeepCopier";
+import getObjectPropertySafely from "../Objects/getObjectPropertySafely";
 
 
 class RawObjectDataProcessor {
@@ -49,8 +51,18 @@ class RawObjectDataProcessor {
   private readonly errorHandlingStrategies: RawObjectDataProcessor.ErrorsHandlingStrategies;
 
   private readonly validationErrorsMessages: Array<string> = [];
-  private readonly currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging: Array<string | number> = [];
+  private readonly currentlyIteratedPropertyQualifiedInitialNameSegments: Array<string | number> = [];
   private readonly currentlyIteratedPropertyNewNamesByDepthLevelsForLogging: Array<string | null> = [];
+
+  /* [ Approach ]
+   * Sometimes need to access to initial properties/elements even after renaming, deleting of properties/elements, etc.
+   * When the strategy is the assembling of a new object, the initial object will be such a reference.
+   * When the strategy is the manipulations with the source object, it is required to create the copy of an initial
+   *   object, herewith:
+   * ● For the performance optimization, the initialization (copying) is on-demand.
+   * ● The JSON-compatible properties are fully supported, but the remaining ones are supported partially.
+   *   Basically, it is unable to create 100% deep copy of an arbitrary object. */
+  private initialObjectSnapshot: ArbitraryObject | null;
 
 
   /* ━━━ Public Static Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -261,6 +273,22 @@ class RawObjectDataProcessor {
           RawObjectDataProcessor.ErrorHandlingStrategies.throwingOfError
     };
 
+    switch (this.processingApproach) {
+
+      case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
+        this.initialObjectSnapshot = this.rawData;
+        break;
+      }
+
+      case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
+
+        /* [ Approach ] Will be initialized on demand (see comment above the field declaration). */
+        this.initialObjectSnapshot = null;
+
+      }
+
+    }
+
   }
 
 
@@ -337,7 +365,7 @@ class RawObjectDataProcessor {
             targetObjectTypeSourceValue : {};
 
     const currentObjectDepthLevel__countFromZero: number =
-        this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.length;
+        this.currentlyIteratedPropertyQualifiedInitialNameSegments.length;
 
     const initialNamesOfNotCheckedYetProperties: Set<string> = new Set(Object.keys(targetObjectTypeSourceValue));
 
@@ -358,7 +386,8 @@ class RawObjectDataProcessor {
           possibleSchema.actualIf({
             rawData__currentObjectDepth: targetObjectTypeSourceValue,
             rawData__full: this.rawData,
-            targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+            targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyPathSegments: [ ...this.currentlyIteratedPropertyQualifiedInitialNameSegments ]
           })
         ) {
           propertiesSpecification = possibleSchema.properties;
@@ -391,15 +420,15 @@ class RawObjectDataProcessor {
 
       initialNamesOfNotCheckedYetProperties.delete(childPropertyInitialName);
 
-      this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[
-        currentObjectDepthLevel__countFromZero
-      ] = childPropertyInitialName;
+      this.currentlyIteratedPropertyQualifiedInitialNameSegments[currentObjectDepthLevel__countFromZero] =
+          childPropertyInitialName;
 
       let childPropertyFinalName: string;
 
       if (isUndefined(childPropertySpecification.newName)) {
         childPropertyFinalName = childPropertyInitialName;
         this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] = null;
+        this.createInitialObjectSnapshotIfNotCreatedYet();
       } else {
         childPropertyFinalName = childPropertySpecification.newName;
         this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] =
@@ -443,6 +472,8 @@ class RawObjectDataProcessor {
         hasChildPropertyValueDefinitelyNotChanged = false;
         hasAllChildrenPropertiesValuesDefinitelyNotChanged = false;
 
+        this.createInitialObjectSnapshotIfNotCreatedYet();
+
       }
 
       for (const preValidationModification of preValidationModifications) {
@@ -470,9 +501,9 @@ class RawObjectDataProcessor {
       /* ─── Undefinedability ─────────────────────────────────────────────────────────────────────────────────────── */
       if (
         !isBoolean(childPropertySpecification.isUndefinedForbidden) &&
-        isUndefined(childPropertySpecification.undefinedForbiddenIf) &&
-        isUndefined(childPropertySpecification.undefinedValueSubstitution) &&
-        childPropertySpecification.mustTransformUndefinedToNull !== true
+            isUndefined(childPropertySpecification.undefinedForbiddenIf) &&
+            isUndefined(childPropertySpecification.undefinedValueSubstitution) &&
+            childPropertySpecification.mustTransformUndefinedToNull !== true
       ) {
         Logger.throwErrorWithFormattedMessage({
           errorType: RawObjectDataProcessor.ThrowableErrorsNames.propertyUndefinedabilityNotSpecified,
@@ -510,11 +541,37 @@ class RawObjectDataProcessor {
 
         if (isNotUndefined(childPropertySpecification.undefinedForbiddenIf)) {
 
+          const rawData__full: ArbitraryObject = this.createInitialObjectSnapshotIfNotCreatedYet();
+          let rawData__currentObjectDepth: ArbitraryObject;
+
+          switch (this.processingApproach) {
+
+            case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
+              rawData__currentObjectDepth = targetObjectTypeSourceValue;
+              break;
+            }
+
+            case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
+
+              rawData__currentObjectDepth =
+                  /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                   * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                   *   be the initial version of `targetObjectTypeSourceValue` thus has `ArbitraryObject` type. */
+                  getObjectPropertySafely(
+                    rawData__full,
+                    this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                  ) as ArbitraryObject;
+
+            }
+
+          }
+
           if (
             childPropertySpecification.undefinedForbiddenIf.predicate({
-              rawData__currentObjectDepth: targetObjectTypeSourceValue,
-              rawData__full: this.rawData,
-              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+              rawData__full,
+              rawData__currentObjectDepth,
+              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName,
+              targetPropertyPathSegments: [ ...this.currentlyIteratedPropertyQualifiedInitialNameSegments ]
             })
           ) {
 
@@ -541,6 +598,8 @@ class RawObjectDataProcessor {
 
         } else if (isNotUndefined(childPropertySpecification.undefinedValueSubstitution)) {
 
+          this.createInitialObjectSnapshotIfNotCreatedYet();
+
           childPropertyMutableValue = childPropertySpecification.undefinedValueSubstitution;
 
           hasChildPropertyValueDefinitelyNotChanged = false;
@@ -550,31 +609,61 @@ class RawObjectDataProcessor {
 
         /* [ Approach ] Nothing required to do for allowed undefined values. */
 
-      } else if (
-        "mustBeUndefinedIf" in childPropertySpecification &&
-            childPropertySpecification.mustBeUndefinedIf?.predicate({
-              rawData__currentObjectDepth: targetObjectTypeSourceValue,
-              rawData__full: this.rawData,
-              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
-            }) === true
-      ) {
+      } else if ("mustBeUndefinedIf" in childPropertySpecification) {
 
-        this.registerValidationError({
-          title: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.title,
-          description: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.generateDescription({
-            verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark:
-                childPropertySpecification.mustBeUndefinedIf.descriptionForLogging
-          }),
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: childPropertySpecification.newName ?? null,
-          targetPropertyValue: childPropertyMutableValue,
-          targetPropertyValueSpecification: childPropertySpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-              childPropertyStringifiedValueBeforeFirstPreValidationModification,
-          documentationPageAnchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_UNDEFINED_VALUE"
-        });
+        const rawData__full: ArbitraryObject = this.createInitialObjectSnapshotIfNotCreatedYet();
+        let rawData__currentObjectDepth: ArbitraryObject;
 
-        continue;
+        switch (this.processingApproach) {
+
+          case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
+            rawData__currentObjectDepth = targetObjectTypeSourceValue;
+            break;
+          }
+
+          case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
+
+            rawData__currentObjectDepth =
+
+                /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                 * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                 *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                getObjectPropertySafely(
+                  rawData__full,
+                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                ) as ArbitraryObject;
+
+          }
+
+        }
+
+        if (
+          childPropertySpecification.mustBeUndefinedIf?.predicate({
+            rawData__currentObjectDepth,
+            rawData__full,
+            targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyPathSegments: [ ...this.currentlyIteratedPropertyQualifiedInitialNameSegments ]
+          }) === true
+        ) {
+
+          this.registerValidationError({
+            title: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.title,
+            description: this.localization.validationErrors.conditionallyForbiddenNonUndefinedValue.generateDescription({
+              verbalConditionWhenMustBeUndefinedWithoutEndOfSentenceMark:
+                  childPropertySpecification.mustBeUndefinedIf.descriptionForLogging
+            }),
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: childPropertySpecification.newName ?? null,
+            targetPropertyValue: childPropertyMutableValue,
+            targetPropertyValueSpecification: childPropertySpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                childPropertyStringifiedValueBeforeFirstPreValidationModification,
+            documentationPageAnchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_UNDEFINED_VALUE"
+          });
+
+          continue;
+
+        }
 
       }
 
@@ -582,9 +671,9 @@ class RawObjectDataProcessor {
       /* ─── Nullability ──────────────────────────────────────────────────────────────────────────────────────────── */
       if (
         !isBoolean(childPropertySpecification.isNullForbidden) &&
-        isUndefined(childPropertySpecification.nullForbiddenIf) &&
-        isUndefined(childPropertySpecification.nullValueSubstitution) &&
-        childPropertySpecification.mustTransformNullToUndefined !== true
+            isUndefined(childPropertySpecification.nullForbiddenIf) &&
+            isUndefined(childPropertySpecification.nullValueSubstitution) &&
+            childPropertySpecification.mustTransformNullToUndefined !== true
       ) {
         Logger.throwErrorWithFormattedMessage({
           errorType: RawObjectDataProcessor.ThrowableErrorsNames.propertyNullabilityNotSpecified,
@@ -623,11 +712,38 @@ class RawObjectDataProcessor {
 
         if (isNotUndefined(childPropertySpecification.nullForbiddenIf)) {
 
+          const rawData__full: ArbitraryObject = this.createInitialObjectSnapshotIfNotCreatedYet();
+          let rawData__currentObjectDepth: ArbitraryObject;
+
+          switch (this.processingApproach) {
+
+            case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
+              rawData__currentObjectDepth = targetObjectTypeSourceValue;
+              break;
+            }
+
+            case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
+
+              rawData__currentObjectDepth =
+
+                  /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                   * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                   *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                  getObjectPropertySafely(
+                    rawData__full,
+                    this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                  ) as ArbitraryObject;
+
+            }
+
+          }
+
           if (
             childPropertySpecification.nullForbiddenIf.predicate({
-              rawData__currentObjectDepth: targetObjectTypeSourceValue,
-              rawData__full: this.rawData,
-              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
+              rawData__full,
+              rawData__currentObjectDepth,
+              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName,
+              targetPropertyPathSegments: [ ...this.currentlyIteratedPropertyQualifiedInitialNameSegments ]
             })
           ) {
 
@@ -654,6 +770,8 @@ class RawObjectDataProcessor {
 
         } else if (isNotUndefined(childPropertySpecification.nullValueSubstitution)) {
 
+          this.createInitialObjectSnapshotIfNotCreatedYet();
+
           childPropertyMutableValue = childPropertySpecification.nullValueSubstitution;
 
           hasChildPropertyValueDefinitelyNotChanged = false;
@@ -663,30 +781,60 @@ class RawObjectDataProcessor {
 
         /* [ Approach ] Nothing required to do for allowed null values. */
 
-      } else if (
-        "mustBeNullIf" in childPropertySpecification &&
-            childPropertySpecification.mustBeNullIf?.predicate({
-              rawData__currentObjectDepth: targetObjectTypeSourceValue,
-              rawData__full: this.rawData,
-              targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName
-            }) === true
-      ) {
+      } else if ("mustBeNullIf" in childPropertySpecification) {
 
-        this.registerValidationError({
-          title: this.localization.validationErrors.conditionallyForbiddenNonNullValue.title,
-          description: this.localization.validationErrors.conditionallyForbiddenNonNullValue.generateDescription({
-            verbalConditionWhenMustBeNullWithoutEndOfSentenceMark: childPropertySpecification.mustBeNullIf.descriptionForLogging
-          }),
-          targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
-          targetPropertyNewName: childPropertySpecification.newName ?? null,
-          targetPropertyValue: childPropertyMutableValue,
-          targetPropertyValueSpecification: childPropertySpecification,
-          targetPropertyStringifiedValueBeforeFirstPreValidationModification:
-              childPropertyStringifiedValueBeforeFirstPreValidationModification,
-          documentationPageAnchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_NULL_VALUE"
-        });
+        const rawData__full: ArbitraryObject = this.createInitialObjectSnapshotIfNotCreatedYet();
+        let rawData__currentObjectDepth: ArbitraryObject;
 
-        continue;
+        switch (this.processingApproach) {
+
+          case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
+            rawData__currentObjectDepth = targetObjectTypeSourceValue;
+            break;
+          }
+
+          case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
+
+            rawData__currentObjectDepth =
+
+                /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                 * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                 *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                getObjectPropertySafely(
+                  rawData__full,
+                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1).join(".")
+                ) as ArbitraryObject;
+
+          }
+
+        }
+
+        if (
+          childPropertySpecification.mustBeNullIf?.predicate({
+            rawData__currentObjectDepth,
+            rawData__full,
+            targetPropertyDotSeparatedPath: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyPathSegments: [ ...this.currentlyIteratedPropertyQualifiedInitialNameSegments ]
+          }) === true
+        ) {
+
+          this.registerValidationError({
+            title: this.localization.validationErrors.conditionallyForbiddenNonNullValue.title,
+            description: this.localization.validationErrors.conditionallyForbiddenNonNullValue.generateDescription({
+              verbalConditionWhenMustBeNullWithoutEndOfSentenceMark: childPropertySpecification.mustBeNullIf.descriptionForLogging
+            }),
+            targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
+            targetPropertyNewName: childPropertySpecification.newName ?? null,
+            targetPropertyValue: childPropertyMutableValue,
+            targetPropertyValueSpecification: childPropertySpecification,
+            targetPropertyStringifiedValueBeforeFirstPreValidationModification:
+                childPropertyStringifiedValueBeforeFirstPreValidationModification,
+            documentationPageAnchor: "VALIDATION_ERRORS_MESSAGES-CONDITIONALLY_FORBIDDEN_NON_NULL_VALUE"
+          });
+
+          continue;
+
+        }
 
       }
 
@@ -731,7 +879,7 @@ class RawObjectDataProcessor {
         case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
 
           /* [ Approach ]
-           * Commonly, the omitted value is not equivalent to explicit `undefined`, thus explicit `undefined` must
+           * Commonly, the omitted value is not equivalent to explicit `undefined`; thus explicit `undefined` must
            *    be set to make the new object as equivalent to source one as possible. */
           if (!(!(childPropertyInitialName in targetObjectTypeSourceValue) && isUndefined(childPropertyMutableValue))) {
 
@@ -854,8 +1002,8 @@ class RawObjectDataProcessor {
             if (
               (
                 isBoolean(childPropertySpecification.mustMakeNonConfigurable) ||
-                isBoolean(childPropertySpecification.mustMakeNonEnumerable) ||
-                isBoolean(childPropertySpecification.mustMakeReadonly)
+                    isBoolean(childPropertySpecification.mustMakeNonEnumerable) ||
+                    isBoolean(childPropertySpecification.mustMakeReadonly)
               ) &&
               targetPropertyDescriptor?.configurable === false
             ) {
@@ -980,7 +1128,7 @@ class RawObjectDataProcessor {
 
     }
 
-    this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyQualifiedInitialNameSegments.splice(-1, 1);
     this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging.splice(-1, 1);
 
     if (
@@ -1048,10 +1196,15 @@ class RawObjectDataProcessor {
     }
 
 
-    for (
-      const postValidationModification of RawObjectDataProcessor.
-          getNormalizedPostValidationModifications(targetObjectTypeValueSpecification.postValidationModifications)
-    ) {
+    const normalizedPostValidationModifications: ReadonlyArray<(validValue: ArbitraryObject) => ArbitraryObject> =
+        RawObjectDataProcessor.
+            getNormalizedPostValidationModifications(targetObjectTypeValueSpecification.postValidationModifications);
+
+    if (normalizedPostValidationModifications.length > 0) {
+      this.createInitialObjectSnapshotIfNotCreatedYet();
+    }
+
+    for (const postValidationModification of normalizedPostValidationModifications) {
       processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
     }
 
@@ -1065,7 +1218,6 @@ class RawObjectDataProcessor {
        *  properties deleting. */
       delete processedValueWorkpiece[keyOfPropertyWhichWillBeDeleted];
     }
-
 
     return {
 
@@ -1234,10 +1386,10 @@ class RawObjectDataProcessor {
 
       const keysOfEitherUndefinedOrNullValues: Array<string> =
           targetAssociativeArrayTypeValueSpecification.keysOfNeitherUndefinedNorNullValues.
-          filter(
-            (keyOfNeitherUndefinedNorNullValue: string): boolean =>
-                isEitherUndefinedOrNull(targetObjectTypeSourceValue[keyOfNeitherUndefinedNorNullValue])
-          );
+              filter(
+                (keyOfNeitherUndefinedNorNullValue: string): boolean =>
+                    isEitherUndefinedOrNull(targetObjectTypeSourceValue[keyOfNeitherUndefinedNorNullValue])
+              );
 
       if (keysOfEitherUndefinedOrNullValues.length > 0) {
 
@@ -1269,7 +1421,7 @@ class RawObjectDataProcessor {
             targetObjectTypeSourceValue : {};
 
     const currentObjectDepthLevel__countFromZero: number =
-        this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.length;
+        this.currentlyIteratedPropertyQualifiedInitialNameSegments.length;
 
     let hasAtLeastOneInvalidValueBeenDetected: boolean = false;
 
@@ -1305,8 +1457,7 @@ class RawObjectDataProcessor {
 
     for (const [ initialKey, rawValue ] of Object.entries(targetObjectTypeSourceValue)) {
 
-      this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[currentObjectDepthLevel__countFromZero] =
-          initialKey;
+      this.currentlyIteratedPropertyQualifiedInitialNameSegments[currentObjectDepthLevel__countFromZero] = initialKey;
 
       if (!allowedKeys.includes(initialKey)) {
         foundDisallowedKeys.push(initialKey);
@@ -1316,11 +1467,15 @@ class RawObjectDataProcessor {
       const finalKey: string = newNameOfKey ?? initialKey;
 
       if (isNotNull(newNameOfKey)) {
+
         this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging[currentObjectDepthLevel__countFromZero] =
             newNameOfKey;
+
+        this.createInitialObjectSnapshotIfNotCreatedYet();
+
       }
 
-      if (hasAllEntriesDefinitelyNotChanged && finalKey !== initialKey) {
+      if (hasAllEntriesDefinitelyNotChanged && isNotNull(newNameOfKey)) {
         hasAllEntriesDefinitelyNotChanged = false;
       }
 
@@ -1343,6 +1498,8 @@ class RawObjectDataProcessor {
 
         hasValueDefinitelyNotChanged = false;
         hasAllEntriesDefinitelyNotChanged = false;
+
+        this.createInitialObjectSnapshotIfNotCreatedYet();
 
       }
 
@@ -1456,7 +1613,7 @@ class RawObjectDataProcessor {
         case RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject: {
 
           /* [ Approach ]
-           * Commonly, the omitted value is not equivalent to explicit `undefined`, thus explicit `undefined` must
+           * Commonly, the omitted value is not equivalent to explicit `undefined`; thus explicit `undefined` must
            *    be set to make the new object as equivalent to source one as possible. */
           if (!(!(initialKey in targetObjectTypeSourceValue) && isUndefined(mutableValue))) {
 
@@ -1485,7 +1642,7 @@ class RawObjectDataProcessor {
           if (isNotNull(newNameOfKey)) {
 
             /* [ Approach ]
-             * Commonly, the omitted value is not equivalent to explicit `undefined`, thus explicit `undefined` must
+             * Commonly, the omitted value is not equivalent to explicit `undefined`; thus explicit `undefined` must
              *    be set to make the new property as equivalent to initial one as possible.  */
             if (!(!(initialKey in targetObjectTypeSourceValue) && isUndefined(mutableValue))) {
               Object.defineProperty(
@@ -1566,7 +1723,7 @@ class RawObjectDataProcessor {
     }
 
 
-    this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyQualifiedInitialNameSegments.splice(-1, 1);
     this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging.splice(-1, 1);
 
     if (foundDisallowedKeys.length > 0) {
@@ -1629,10 +1786,15 @@ class RawObjectDataProcessor {
     }
 
 
-    for (
-      const postValidationModification of RawObjectDataProcessor.
-          getNormalizedPostValidationModifications(targetAssociativeArrayTypeValueSpecification.postValidationModifications)
-    ) {
+    const normalizedPostValidationModifications: ReadonlyArray<(validValue: ArbitraryObject) => ArbitraryObject> =
+        RawObjectDataProcessor.
+            getNormalizedPostValidationModifications(targetAssociativeArrayTypeValueSpecification.postValidationModifications);
+
+    if (normalizedPostValidationModifications.length > 0) {
+      this.createInitialObjectSnapshotIfNotCreatedYet();
+    }
+
+    for (const postValidationModification of normalizedPostValidationModifications) {
       processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
     }
 
@@ -1648,6 +1810,7 @@ class RawObjectDataProcessor {
     };
 
   }
+
 
   /* ╍╍╍ Indexed Arrays ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
   private processIndexedArrayTypeValue(
@@ -1814,15 +1977,14 @@ class RawObjectDataProcessor {
             targetArrayedTypeSourceValue : [];
 
     const currentObjectDepthLevel__beginWithZero: number =
-        this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.length;
+        this.currentlyIteratedPropertyQualifiedInitialNameSegments.length;
 
     let hasAtLeastOneInvalidElementBeenDetected: boolean = false;
     let hasAllElementsDefinitelyNotChanged: boolean = true;
 
     for (const [ index, rawElement ] of targetArrayedTypeSourceValue.entries()) {
 
-      this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[currentObjectDepthLevel__beginWithZero] =
-          index;
+      this.currentlyIteratedPropertyQualifiedInitialNameSegments[currentObjectDepthLevel__beginWithZero] = index;
 
       let hasElementDefinitelyNotChanged: boolean = true;
 
@@ -1843,6 +2005,8 @@ class RawObjectDataProcessor {
 
         hasElementDefinitelyNotChanged = false;
         hasAllElementsDefinitelyNotChanged = false;
+
+        this.createInitialObjectSnapshotIfNotCreatedYet();
 
       }
 
@@ -1975,7 +2139,7 @@ class RawObjectDataProcessor {
     }
 
 
-    this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyQualifiedInitialNameSegments.splice(-1, 1);
 
     for (
       const customValidator of
@@ -2018,10 +2182,15 @@ class RawObjectDataProcessor {
     }
 
 
-    for (
-      const postValidationModification of RawObjectDataProcessor.
-          getNormalizedPostValidationModifications(targetIndexedArrayTypeValueSpecification.postValidationModifications)
-    ) {
+    const normalizedPostValidationModifications: ReadonlyArray<(validValue: Array<unknown>) => Array<unknown>> =
+        RawObjectDataProcessor.
+            getNormalizedPostValidationModifications(targetIndexedArrayTypeValueSpecification.postValidationModifications);
+
+    if (normalizedPostValidationModifications.length > 0) {
+      this.createInitialObjectSnapshotIfNotCreatedYet();
+    }
+
+    for (const postValidationModification of normalizedPostValidationModifications) {
       processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
     }
 
@@ -2150,8 +2319,7 @@ class RawObjectDataProcessor {
         this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject ?
             targetArrayedTypeSourceValue : [];
 
-    const currentObjectDepthLevel__beginWithZero: number =
-        this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.length;
+    const currentObjectDepthLevel__beginWithZero: number = this.currentlyIteratedPropertyQualifiedInitialNameSegments.length;
 
     let hasAtLeastOneInvalidElementBeenDetected: boolean = false;
     let hasAllElementsDefinitelyNotChanged: boolean = true;
@@ -2163,8 +2331,7 @@ class RawObjectDataProcessor {
 
       const elementIndex: number = Number.parseInt(elementStringifiedIndex, 10);
 
-      this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging[currentObjectDepthLevel__beginWithZero] =
-          elementIndex;
+      this.currentlyIteratedPropertyQualifiedInitialNameSegments[currentObjectDepthLevel__beginWithZero] = elementIndex;
 
       let hasElementDefinitelyNotChanged: boolean = true;
 
@@ -2184,6 +2351,8 @@ class RawObjectDataProcessor {
 
         hasElementDefinitelyNotChanged = false;
         hasAllElementsDefinitelyNotChanged = false;
+
+        this.createInitialObjectSnapshotIfNotCreatedYet();
 
       }
 
@@ -2212,9 +2381,9 @@ class RawObjectDataProcessor {
       /* ─── Undefinedability ─────────────────────────────────────────────────────────────────────────────────────── */
       if (
         !isBoolean(elementSpecification.isUndefinedForbidden) &&
-        isUndefined(elementSpecification.undefinedForbiddenIf) &&
-        isUndefined(elementSpecification.undefinedValueSubstitution) &&
-        elementSpecification.mustTransformUndefinedToNull !== true
+            isUndefined(elementSpecification.undefinedForbiddenIf) &&
+            isUndefined(elementSpecification.undefinedValueSubstitution) &&
+            elementSpecification.mustTransformUndefinedToNull !== true
       ) {
         Logger.throwErrorWithFormattedMessage({
           errorType: RawObjectDataProcessor.ThrowableErrorsNames.propertyUndefinedabilityNotSpecified,
@@ -2323,9 +2492,9 @@ class RawObjectDataProcessor {
       /* ─── Nullability ──────────────────────────────────────────────────────────────────────────────────────────── */
       if (
         !isBoolean(elementSpecification.isNullForbidden) &&
-        isUndefined(elementSpecification.nullForbiddenIf) &&
-        isUndefined(elementSpecification.nullValueSubstitution) &&
-        elementSpecification.mustTransformNullToUndefined !== true
+            isUndefined(elementSpecification.nullForbiddenIf) &&
+            isUndefined(elementSpecification.nullValueSubstitution) &&
+            elementSpecification.mustTransformNullToUndefined !== true
       ) {
         Logger.throwErrorWithFormattedMessage({
           errorType: RawObjectDataProcessor.ThrowableErrorsNames.propertyNullabilityNotSpecified,
@@ -2490,7 +2659,7 @@ class RawObjectDataProcessor {
 
     }
 
-    this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.splice(-1, 1);
+    this.currentlyIteratedPropertyQualifiedInitialNameSegments.splice(-1, 1);
 
     for (
       const customValidator of
@@ -2533,13 +2702,17 @@ class RawObjectDataProcessor {
     }
 
 
-    for (
-      const postValidationModification of RawObjectDataProcessor.
-          getNormalizedPostValidationModifications(targetTupleTypeValueSpecification.postValidationModifications)
-    ) {
-      processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
+    const normalizedPostValidationModifications: ReadonlyArray<(validValue: Array<unknown>) => Array<unknown>> =
+        RawObjectDataProcessor.
+            getNormalizedPostValidationModifications(targetTupleTypeValueSpecification.postValidationModifications);
+
+    if (normalizedPostValidationModifications.length > 0) {
+      this.createInitialObjectSnapshotIfNotCreatedYet();
     }
 
+    for (const postValidationModification of normalizedPostValidationModifications) {
+      processedValueWorkpiece = postValidationModification(processedValueWorkpiece);
+    }
 
     return {
       /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
@@ -2798,10 +2971,10 @@ class RawObjectDataProcessor {
       this.registerValidationError({
         title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
         description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
-        generateDescription({
-          actualNativeType: typeof targetValue__expectedToBeNumber,
-          expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
-        }),
+            generateDescription({
+              actualNativeType: typeof targetValue__expectedToBeNumber,
+              expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
+            }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
         targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeNumber,
@@ -3116,10 +3289,10 @@ class RawObjectDataProcessor {
       this.registerValidationError({
         title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
         description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
-        generateDescription({
-          actualNativeType: typeof targetValue__expectedToBeString,
-          expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.number
-        }),
+            generateDescription({
+              actualNativeType: typeof targetValue__expectedToBeString,
+              expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.string
+            }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
         targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeString,
@@ -3428,10 +3601,10 @@ class RawObjectDataProcessor {
       this.registerValidationError({
         title: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.title,
         description: this.localization.validationErrors.valueTypeDoesNotMatchWithExpected.
-        generateDescription({
-          actualNativeType: typeof targetValue__expectedToBeBoolean,
-          expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.boolean
-        }),
+            generateDescription({
+              actualNativeType: typeof targetValue__expectedToBeBoolean,
+              expectedTypeID: RawObjectDataProcessor.ValuesTypesIDs.boolean
+            }),
         targetPropertyDotSeparatedQualifiedInitialName: this.currentObjectPropertyDotSeparatedQualifiedName,
         targetPropertyNewName: getLastElementOfArray(this.currentlyIteratedPropertyNewNamesByDepthLevelsForLogging),
         targetPropertyValue: targetValue__expectedToBeBoolean,
@@ -3651,13 +3824,25 @@ class RawObjectDataProcessor {
 
   /* ━━━ Helpers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   private get currentObjectPropertyDotSeparatedQualifiedName(): string {
-    return this.currentlyIteratedObjectPropertyQualifiedInitialNameSegmentsForLogging.join(".");
+    return this.currentlyIteratedPropertyQualifiedInitialNameSegments.join(".");
   }
 
   private registerValidationError(payload: RawObjectDataProcessor.Localization.DataForMessagesBuilding): void {
     this.validationErrorsMessages.push(
       RawObjectDataProcessor.generateValidationErrorMessage(payload, this.localization)
     );
+  }
+
+  private createInitialObjectSnapshotIfNotCreatedYet(): ArbitraryObject {
+
+    if (this.processingApproach === RawObjectDataProcessor.ProcessingApproaches.assemblingOfNewObject) {
+      return this.rawData;
+    }
+
+
+    return this.initialObjectSnapshot ??
+        (this.initialObjectSnapshot = ValuesDeepCopier.deeplyCloneObjectLikeValueAsPossible(this.rawData));
+
   }
 
   private handleFailedPreValidationModification(
@@ -4017,7 +4202,7 @@ namespace RawObjectDataProcessor {
 
   /* ┅┅┅ Condition Associated with Property ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 
-  type ConditionAssociatedWithProperty = Readonly<{
+  export type ConditionAssociatedWithProperty = Readonly<{
     predicate: ConditionAssociatedWithProperty.Predicate;
     descriptionForLogging: string;
   }>;
@@ -4032,6 +4217,7 @@ namespace RawObjectDataProcessor {
         rawData__currentObjectDepth: ArbitraryObject;
         rawData__full: ArbitraryObject;
         targetPropertyDotSeparatedPath: string;
+        targetPropertyPathSegments: Array<string | number>;
       }>;
 
     }
@@ -4041,7 +4227,7 @@ namespace RawObjectDataProcessor {
 
   /* ┅┅┅ Condition Associated with Tuple Element ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 
-  type ConditionAssociatedWithTupleElement = Readonly<{
+  export type ConditionAssociatedWithTupleElement = Readonly<{
     predicate: ConditionAssociatedWithTupleElement.Predicate;
     descriptionForLogging: string;
   }>;

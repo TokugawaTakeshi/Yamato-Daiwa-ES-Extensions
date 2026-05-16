@@ -82,6 +82,13 @@ export default class ImprovedGlob {
         every((globSelector: string): boolean => minimatch(compoundParameter.filePath, globSelector));
   }
 
+  public static isFilePathMatchingWithAtLeastOneGlobSelector(
+    { filePath, globSelectors }: Readonly<{ filePath: string; globSelectors: ReadonlyArray<string> | ReadonlySet<string>; }>
+  ): boolean {
+    return (Array.isArray(globSelectors) ? globSelectors : [ ...globSelectors ]).
+        some((globSelector: string): boolean => minimatch(filePath, globSelector));
+  }
+
   public static isExcludingGlobSelector(globSelector: string): boolean {
     return globSelector.startsWith("!");
   }
@@ -202,8 +209,13 @@ export default class ImprovedGlob {
           ] :
           [],
 
+      /* eslint-disable-next-line no-nested-ternary --
+      * Yes, the nested ternary expressions are hard to read and YDEE development side avoiding them as possible,
+      * while here to avoid the nested ternary expression, it is required to extract this part outside the outermost
+      * array expression that will break the sequential expressions' uniformity. */
       ...fileNamesExtensions.size > 0 ?
-          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] :
+              penultimateFileNamesExtensions.size > 0 ? [ "/*" ] : []
 
     ].join("");
 
