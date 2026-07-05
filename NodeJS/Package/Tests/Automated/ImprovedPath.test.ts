@@ -374,7 +374,7 @@ Promise.all([
         }
       ];
 
-      await Promise.all([
+      await Promise.all(
         tests.map(
           async (test: Test): Promise<void> =>
               Testing.test(
@@ -390,7 +390,7 @@ Promise.all([
                 }
               )
         )
-      ]);
+      );
 
     }
   ),

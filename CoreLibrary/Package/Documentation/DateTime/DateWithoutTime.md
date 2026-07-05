@@ -165,8 +165,6 @@ Assert.strictEqual(sample1.dayOfMonth, 8); // 8
 Assert.strictEqual(sample1.dayOfMonth__2Digits, "08"); "08"
 ```
 
-[//]: # (TODO Via object )
-
 
 ## Getters
 
@@ -294,9 +292,6 @@ Set the last day of specified year and month.
 The returned value will be the current self instance if the second parameter is not specified.
 With the second parameter, the new instance of `DateWithoutTime` will be created that is demanded in some frameworks like React.
 
-[//]: # (TODO テスト・例)
-
-
 
 #### `shiftBySpecificDaysCount`
 
@@ -320,8 +315,6 @@ With the second parameter, the new instance of `DateWithoutTime` will be created
 ```
 
 Rewinds date to past or forwards it to future by specified days count.
-
-[//]: # (TODO テスト・例)
 
 
 ### Formatting

@@ -1,8 +1,8 @@
 {
   "private": "true",
   "scripts": {
-    "Incremental Development Building": "rimraf 02-LocalDevelopmentBuild & yda build --mode LOCAL_DEVELOPMENT",
-    "Production Building": "rimraf 03-ProductionBuild & yda build --mode PRODUCTION",
+    "Incremental Development Building": "rimraf 02-LocalDevelopmentBuild && yda build --mode LOCAL_DEVELOPMENT",
+    "Production Building": "rimraf 03-ProductionBuild && yda build --mode PRODUCTION",
     "Distributable Packing": "rimraf --glob \"../docs/**/!(CNAME)\" && cpy 03-ProductionBuild/** ../docs && cd ../docs && git add .",
     "Page Creating": "tsx Automation/TemplatesGenerator.ts",
     "dev": "npm run \"Incremental Development Building\"",
