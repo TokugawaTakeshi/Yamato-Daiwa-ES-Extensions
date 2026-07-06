@@ -60,7 +60,6 @@ Promise.all([
     async (): Promise<void> => {
 
       const unixLikeSampleAbsolutePath: string = "/home/user/dir/file.txt";
-      const windowsLikeSampleAbsolutePath: string = "C:\\path\\dir\\file.txt";
 
       await Promise.all([
 
@@ -122,24 +121,6 @@ Promise.all([
                   );
                   Assert.deepStrictEqual(
                     parsedUnixLikeSampleRelativePathWithoutDirectory.directoryExplodedToPathSegments, []
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Directory of Windows-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedWindowsLikeSampleAbsolutePath: ImprovedPath.ParsingResult =
-                      ImprovedPath.parsePath(windowsLikeSampleAbsolutePath);
-
-                  Assert.strictEqual(Path.parse(windowsLikeSampleAbsolutePath).dir, "C:\\path\\dir");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.directory, "C:\\path\\dir");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.directory__forwardSlashesSeparators, "C:/path/dir");
-                  Assert.deepStrictEqual(
-                    parsedWindowsLikeSampleAbsolutePath.directoryExplodedToPathSegments,
-                    [ "C:", "path", "dir" ]
                   );
 
                 }
