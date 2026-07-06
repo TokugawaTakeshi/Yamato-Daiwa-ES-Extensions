@@ -154,7 +154,14 @@ export default class ImprovedGlob {
       }),
       "**/*",
       ...fileNamePostfixes.size > 0 ?
-          [ `@(${ Array.from(fileNamePostfixes).join("|").replace(/\./gu, "") })` ] : [],
+          [
+            `@(${ 
+              Array.from(fileNamePostfixes).
+                join("|").
+                replace(/\./gu, "")
+            })`
+          ] :
+          [],
       ...fileNamesExtensions.size > 0 ?
           [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
     ].join("");

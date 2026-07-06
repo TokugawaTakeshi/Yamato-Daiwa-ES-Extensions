@@ -29,6 +29,7 @@ export default class ImprovedFileSystem {
 
 
     return new Promise<boolean>((resolve: (isExists: boolean) => void): void => {
+      /* eslint-disable-next-line n/prefer-promises/fs -- The fixing of this issue is planned in v1.9 */
       FileSystem.access(
         targetPath,
         FileSystemConstants.F_OK,

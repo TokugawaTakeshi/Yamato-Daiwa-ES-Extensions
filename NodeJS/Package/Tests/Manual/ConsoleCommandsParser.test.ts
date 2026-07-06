@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console -- Allowed for retrieving of the feedback in tests purposes. */
 
 import ConsoleCommandsParser from "../../Source/ConsoleCommandsParser/ConsoleCommandsParser";
 import { RawObjectDataProcessor } from "@yamato-daiwa/es-extensions";

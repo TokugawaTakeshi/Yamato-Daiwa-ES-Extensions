@@ -59,9 +59,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
   /* ━━━ Ошибки валидации ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* [ Примечание для рецензоров ]
-   * Большинство следующих сообщений являются частью шаблона "generateValidationErrorMessage" выше.
-   * В контексте этого шаблона, такие относительные выражения, как "это свойство" или "этот элемент", являются
-   *   однозначными. */
+   * Большинство следующих сообщений являются частью шаблона "generateValidationErrorMessage" выше. В контексте этого
+   * шаблона такие относительные выражения, как "это свойство" или "этот элемент", являются однозначными. */
   validationErrors: {
 
     rawDataIsNotObject: {
@@ -98,9 +97,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         { stringifiedCaughtError }: ValidationErrors.PreValidationModificationFailed.TemplateVariables
       ): string =>
           "Предвалидационное преобразование этого свойства/элемента повлекло следующую ошибку: \n" +
-            `${ stringifiedCaughtError }\n` +
-          "Данные были помечены как невалидные потому что было выбрано \"ErrorHandlingStrategies.markingOfDataAsInvalid\" " +
-            "в качестве стратегии обработки ошибки \"onPreValidationModificationFailed\" что не рекомендуется."
+            stringifiedCaughtError
 
     },
 
@@ -239,8 +236,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           minimalEntriesCount
         }: ValidationErrors.AssociativeArrayEntriesCountIsLessThanRequiredMinimum.TemplateVariables
       ): string =>
-          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
-            `хотя затребовано не менее ${ minimalEntriesCount }.`
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, в то время как ` +
+            `ожидалось не менее ${ minimalEntriesCount }.`
     },
 
     associativeArrayPairsCountIsMoreThanAllowedMaximum: {
@@ -251,8 +248,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           actualEntriesCount
         }: ValidationErrors.AssociativeArrayPairsCountIsMoreThanAllowedMaximum.TemplateVariables
       ): string =>
-          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
-            `хотя затребовано максимум ${ maximalEntriesCount }.`
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, в то время как ` +
+            `ожидалось максимум ${ maximalEntriesCount }.`
     },
 
     associativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber: {
@@ -263,18 +260,18 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           actualEntriesCount
         }: ValidationErrors.AssociativeArrayPairsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
       ): string =>
-          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, ` +
-            `хотя затребовано ровно ${ exactEntriesCount }.`
+          `Это значение типа "ассоциативный массив" имеет ${ actualEntriesCount } вхождений, в то время как ` +
+            `ожидалось ровно ${ exactEntriesCount }.`
     },
 
     forbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject: {
-      title: "Запрещенные для определённых ключей значения undefined/null ассоциативного массива",
+      title: "Запрещенные для определённых ключей ассоциативного массива значения undefined/null",
       generateDescription: (
         { keysOfEitherUndefinedOrNullValues }:
             ValidationErrors.ForbiddenForSpecificKeysUndefinedOrNullValuesFoundInAssociativeArrayTypeObject.TemplateVariables
       ): string =>
-          "Значения следующих ключей ассоциативного массива либо имеют значение null, либо явный undefined, в то время " +
-            "как для этих ключей такие значения были запрещены:\n" +
+          "Значения следующих ключей ассоциативного массива либо имеют значение null, либо undefined, в то время " +
+            "как для этих ключей такие значения были запрещены.\n" +
           keysOfEitherUndefinedOrNullValues.
               map((keyOfEitherUndefinedOrNullValue: string): string => `  ● ${ keyOfEitherUndefinedOrNullValue }`).
               join("\n")
@@ -285,7 +282,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       generateDescription: (
         { foundDisallowedKeys }: ValidationErrors.DisallowedKeysFoundInAssociativeArray.TemplateVariables
       ): string =>
-          "Следующие ключи присутствуют в данном ассоциативном массиве в то время как эти ключ были запрещены.\n" +
+          "Следующие ключи присутствуют в данном ассоциативном массиве в то время как эти ключи были запрещены.\n" +
           foundDisallowedKeys.
               map((foundDisallowedKey: string): string => `  ● ${ foundDisallowedKey }`).
               join("\n")
@@ -314,7 +311,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         }: ValidationErrors.IndexedArrayElementsCountIsMoreThanAllowedMaximum.TemplateVariables
       ): string =>
           `Это значение типа "индексный массив" имеет ${ actualElementsCount } элементов, ` +
-            `хотя затребовано максимум ${ maximalElementsCount }.`
+            `хотя позволено максимум ${ maximalElementsCount }.`
     },
 
     indexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber: {
@@ -325,8 +322,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           actualElementsCount
         }: ValidationErrors.IndexedArrayOrTupleElementsCountDoesNotMatchWithSpecifiedExactNumber.TemplateVariables
       ): string =>
-          `Это значение типа "индексный массив" или "кортеж" имеет ${ actualElementsCount } вхождений, ` +
-            `хотя затребовано ровно ${ exactElementsCount }.`
+          `Это значение типа "индексный массив" или "кортеж" имеет ${ actualElementsCount } элементов, ` +
+            `хотя ожидалось ровно ${ exactElementsCount }.`
     },
 
 
@@ -334,7 +331,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
     forbiddenNaN_Value: {
       title: "Запрещённое значение NaN свойства/элемента",
       description:
-          "Данное значение числового свойства или элемента имеет значение NaN, что было запрещено в явном виде."
+          "Данное значение числового свойства или элемента имеет значение NaN, что не было позволено."
     },
 
     numericValueIsNotBelongToExpectedNumbersSet: {
@@ -353,8 +350,12 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         { allowedAlternatives }: ValidationErrors.ValueIsNotAmongAllowedAlternatives.TemplateVariables
       ): string =>
           "Данное значение не является ни одним из допустимых вариантов:\n" +
-          allowedAlternatives.map((allowedAlternative: string | number): string =>
-              `  ○ ${ allowedAlternative }`).join("\n")
+          allowedAlternatives.
+              map(
+                (allowedAlternative: string | number): string =>
+                    `  ○ ${ allowedAlternative }`
+              ).
+              join("\n")
     },
 
     numericValueIsSmallerThanRequiredMinimum: {
@@ -419,10 +420,10 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
     regularExpressionMismatch: {
       title: "Несоответствие регулярному выражения",
-      generateDescription: ({ regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables): string =>
-          `Данная строка не соответствует заданному регулярному выражению:\n ${ regularExpression.toString() }`
+      generateDescription:
+          ({ regularExpression }: ValidationErrors.RegularExpressionMismatch.TemplateVariables): string =>
+              `Данная строка не соответствует заданному регулярному выражению:\n ${ regularExpression.toString() }`
     },
-
 
     /* ╍╍╍ Другие ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
     disallowedBooleanValueVariant: {
@@ -437,7 +438,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       title: "Неподдерживаемый тип значения",
       generateDescription:
           ({ targetPropertyType }: ValidationErrors.UnsupportedValueType.TemplateVariables): string =>
-              `Данное значение имеет тип ${ targetPropertyType }, который на данный момент не поддерживается как любой ` +
+              `Данное значение имеет тип ${ targetPropertyType }, который на данный момент не поддерживается как и любой ` +
                 " другой несовместимый с JSON тип."
     }
 
@@ -447,8 +448,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
   /* ━━━ Бросаемые ошибки ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* [ Примечание для рецензоров ]
    * В отличие от сообщений об ошибках валидации, сообщения бросаемых ошибок не являются частью шаблона
-   *   "generateValidationErrorMessage", а потому такие выражения, как "это свойство" или "этот элемент" будут уже
-   *   неопределёнными. */
+   * "generateValidationErrorMessage", а потому такие выражения, как "это свойство" или "этот элемент" будут уже
+   * неопределёнными. */
   throwableErrors: {
 
     objectSchemaNotSpecified: {
@@ -476,7 +477,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         }: ThrowableErrors.MutuallyExclusiveTransformationsBetweenUndefinedAndNull.TemplateVariables
       ): string =>
         "Обоим опциям \"mustTransformUndefinedToNull\" и \"mustTransformNullToUndefined\" установлено булевское значение " +
-          `true для свойства "${ targetPropertyDotSeparatedQualifiedName }", что является противоречием. ` +
+          `\`true\` для свойства "${ targetPropertyDotSeparatedQualifiedName }", что является противоречием. ` +
         rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
@@ -492,8 +493,6 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       ): string =>
         "Произошла ошибка при предвалидационном преобразовании свойства/элемента  " +
           `"${ targetPropertyDotSeparatedQualifiedName }". ` +
-        "Эта ошибка была брошена потому что активной стратегией обработки ошибки \"onPreValidationModificationFailed\" " +
-          "является \"ErrorHandlingStrategies.throwingOfError\", что по умолчанию. " +
         rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -513,7 +512,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
 
     propertyNullabilityNotSpecified: {
 
-      title: "Не указана стратегия обработки undefined-значений",
+      title: "Не указана стратегия обработки null-значений",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
@@ -559,7 +558,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           `Невозможно удалить свойство "${ targetPropertyDotSeparatedQualifiedName }" после после создания его копии ` +
             `с именем "${ propertyNewKey }" потому что оно не конфигурируемо, а в качестве стратегии обработки ` +
             "объекта были выбраны манипуляции с уже существующим объектом, при этом опции \"mustLeaveEvenRenamed\" " +
-            "не было указано значение true." +
+            "не было указано значение `true`. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -574,7 +573,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           documentationPageAnchor
         }: ThrowableErrors.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-          `Невозможно изменить дескрипторы свойства ${ targetPropertyDotSeparatedQualifiedName }, потому что оно ` +
+          `Невозможно изменить дескрипторы свойства "${ targetPropertyDotSeparatedQualifiedName }", потому что оно ` +
             "неконфигурируемо, при этом в качестве стратегии обработки были выбраны манипуляции с уже существующим объектом. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
@@ -610,16 +609,15 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           "Для " +
               (
                 isNull(targetPropertyDotSeparatedQualifiedName) ?
-                  "корневого ассоциативного массива " :
-                  `ассоциативного массива "${ targetPropertyDotSeparatedQualifiedName }" `
+                  "корневого ассоциативного массива" :
+                  `ассоциативного массива "${ targetPropertyDotSeparatedQualifiedName }"`
               ) +
-              "указаны как разрешённые, так и запрещённые ключи, что является противоречием. " +
-              "Возможно указать либо разрешённые ключи, либо запрещённые, но не оба вместе. " +
+              " указаны как разрешённые, так и запрещённые ключи, что является противоречием. " +
               rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     incompatibleValuesTypesAlternatives: {
-      title: "Несовместимые варианты значений",
+      title: "Несовместимые варианты типов",
       generateDescription: (
         {
           isIndexedArrayLikeType,
@@ -629,16 +627,16 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           (
             isIndexedArrayLikeType ?
                 "`ValuesTypesIDs.indexedArray` (алиас: `Array`) и `ValuesTypesIDs.tuple`" :
-                "`ValuesTypesIDs.fixedSchemaObject` (алиса: `Object`) и `ValuesTypesIDs.associativeArray`"
+                "`ValuesTypesIDs.fixedSchemaObject` (алиас: `Object`) и `ValuesTypesIDs.associativeArray`"
           ) +
-            "являются несовместимыми вариантами для `ValuesTypesIDs.polymorphic` потому что с точки зрения ECMAScript " +
+            " являются несовместимыми вариантами для `ValuesTypesIDs.polymorphic` потому что с точки зрения ECMAScript " +
               "оба являются " +
-            (isIndexedArrayLikeType ? "`Array`" : "`Object`") +
+            `${ isIndexedArrayLikeType ? "`Array`" : "`Object`" }. ` +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     },
 
     bothAllowedAndForbiddenCharactersSpecified: {
-      title: "Взаимоисключающие ограничения конкретных символов",
+      title: "Взаимоисключающие ограничения символов",
       generateDescription: (
         {
           targetPropertyDotSeparatedQualifiedName,
@@ -646,8 +644,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
         }: ThrowableErrors.BothAllowedAndForbiddenCharactersSpecified.TemplateVariables
       ): string =>
           `Для строкового свойства/элемента "${ targetPropertyDotSeparatedQualifiedName }" указаны как разрешённые, ` +
-            "так и запрещённые символы, что является противоречием." +
-          "Возможно указать либо разрешённые символы, либо запрещённые, но не оба вместе. " +
+            "так и запрещённые символы, что является противоречием. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
     }
 
@@ -671,9 +668,6 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           "Произошла ошибка при предвалидационном преобразовании свойства/элемента  " +
             `"${ targetPropertyDotSeparatedQualifiedName }".\n` +
           `${ stringifiedCaughtError }\n` +
-          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
-            "\"onPreValidationModificationFailed\" было выбрано " +
-            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -692,10 +686,7 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           `Невозможно удалить свойство "${ targetPropertyDotSeparatedQualifiedName }" после после создания его копии ` +
             `с именем "${ propertyNewKey }" потому что оно не конфигурируемо, а в качестве стратегии обработки ` +
             "объекта были выбраны манипуляции с уже существующим объектом, при этом опции \"mustLeaveEvenRenamed\" " +
-            "не было указано значение true." +
-          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
-            "\"onPreValidationModificationFailed\" было выбрано " +
-            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
+            "не было указано значение `true`. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -710,11 +701,8 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
           documentationPageAnchor
         }: Warnings.UnableToChangePropertyDescriptors.TemplateVariables
       ): string =>
-            `Невозможно изменить дескрипторы свойства ${ targetPropertyDotSeparatedQualifiedName }, потому что оно ` +
+          `Невозможно изменить дескрипторы свойства "${ targetPropertyDotSeparatedQualifiedName }", потому что оно ` +
             "неконфигурируемо, при этом в качестве стратегии обработки были выбраны манипуляции с уже существующим объектом. " +
-          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
-            "\"onPreValidationModificationFailed\" было выбрано " +
-            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     },
@@ -731,15 +719,14 @@ export const rawObjectDataProcessorLocalization__russian: Localization = {
       ): string =>
           `Запрошено изменение значение свойства "${ targetPropertyDotSeparatedQualifiedName }" через подстановку ` +
             "значения по умолчанию либо предвалидационное преобразование, однако это свойство доступно только для чтения. " +
-          "Эта ошибка была выведена в виде предупреждения потому что активной стратегией обработки ошибки " +
-            "\"onPreValidationModificationFailed\" было выбрано " +
-            "\"ErrorHandlingStrategies.warningWithoutMarkingOfDataAsInvalid\", что не рекомендуется. " +
           rawObjectDataProcessorLocalization__russian.generateSeeMoreSentence({ documentationPageAnchor })
 
     }
 
   },
 
+
+  /* ━━━ Термины ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   getLocalizedValueType(valueTypeID: RawObjectDataProcessor.ValuesTypesIDs): string {
 
     switch (valueTypeID) {
