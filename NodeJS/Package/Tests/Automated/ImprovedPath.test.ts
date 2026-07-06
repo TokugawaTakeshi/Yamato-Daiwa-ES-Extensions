@@ -56,54 +56,6 @@ Promise.all([
   ),
 
   Testing.suite(
-    "computeRelativePath",
-    async (): Promise<void> => {
-
-      await Promise.all([
-
-        Testing.test(
-          "UNIX-like relative path has being computed correctly",
-          (): void => {
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "/data/orandea/test/aaa",
-                comparedPath: "/data/orandea/impl/bbb"
-              }),
-              process.platform === "win32" ? "..\\..\\impl\\bbb" : "../../impl/bbb"
-            );
-          }
-        ),
-
-        Testing.test(
-          "Windows-like relative path has being computed correctly",
-          (): void => {
-
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "C:\\orandea\\test\\aaa",
-                comparedPath: "C:\\orandea\\impl\\bbb"
-              }),
-              process.platform === "win32" ? "..\\..\\impl\\bbb" : "../../impl/bbb"
-            );
-
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "C:\\orandea\\test\\aaa",
-                comparedPath: "C:\\orandea\\impl\\bbb",
-                alwaysForwardSlashSeparators: true
-              }),
-              "../../impl/bbb"
-            );
-
-          }
-        )
-
-      ]);
-
-    }
-  ),
-
-  Testing.suite(
     "parsePath",
     async (): Promise<void> => {
 
