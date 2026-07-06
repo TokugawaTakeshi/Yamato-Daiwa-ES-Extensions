@@ -54,7 +54,7 @@
   "scripts": {
     "Check Types": "tsc --noEmit",
     "Lint": "eslint Source Tests",
-    "Run Tests": "node --require tsx/cjs --test \"Tests/**/*.test.ts\"",
+    "Run Tests": "node --require tsx/cjs --test \"Tests/Automated/**/*.test.ts\"",
     "Rebuild Distributable Without Preliminary Cleaning": "tsc",
     "Rebuild Distributable": "rimraf Distributable && tsc",
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
