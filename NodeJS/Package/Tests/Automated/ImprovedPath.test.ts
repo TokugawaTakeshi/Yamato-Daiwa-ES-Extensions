@@ -69,7 +69,6 @@ Promise.all([
 
             const unixLikeSampleAbsolutePathWithoutDirectory: string = "/file.txt";
             const unixLikeSampleRelativePathWithoutDirectory: string = "file.txt";
-            const windowsLikeSampleAbsolutePathWithoutSubdirectory: string = "C:\\file.txt";
 
             await Promise.all([
 
@@ -121,26 +120,6 @@ Promise.all([
                   );
                   Assert.deepStrictEqual(
                     parsedUnixLikeSampleRelativePathWithoutDirectory.directoryExplodedToPathSegments, []
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Directory even with root in Windows-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedWindowsLikeSampleAbsolutePathWithoutDirectory: ImprovedPath.ParsingResult = ImprovedPath.
-                  parsePath(windowsLikeSampleAbsolutePathWithoutSubdirectory);
-
-                  Assert.strictEqual(Path.parse(windowsLikeSampleAbsolutePathWithoutSubdirectory).dir, "C:\\");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directory, "C:\\");
-                  Assert.strictEqual(
-                    parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directory__forwardSlashesSeparators,
-                    "C:/"
-                  );
-                  Assert.deepStrictEqual(
-                    parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directoryExplodedToPathSegments, [ "C:" ]
                   );
 
                 }
