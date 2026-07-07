@@ -510,7 +510,10 @@ abstract class ConsoleApplicationLogger {
 
       const formatting: ConsoleApplicationLogger.Formatting = singleFormattedOutputData[1];
 
+      /* eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check --
+      /* eslint-disable-next-line no-console -- Nothing required to do then the `foregroundColor` is undefined */
       switch (formatting.foregroundColor) {
+
         case ConsoleApplicationLogger.FourBitColours.black: {
           templateWithFormatting = `${ templateWithFormatting }\x1b[30m`;
           break;
@@ -555,6 +558,8 @@ abstract class ConsoleApplicationLogger {
         }
       }
 
+      /* eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check --
+      /* eslint-disable-next-line no-console -- Nothing required to do then the `backgroundColor` is undefined */
       switch (formatting.backgroundColor) {
         case ConsoleApplicationLogger.FourBitColours.black: {
           templateWithFormatting = `${ templateWithFormatting }\x1b[40m`;

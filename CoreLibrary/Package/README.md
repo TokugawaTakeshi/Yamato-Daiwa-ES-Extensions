@@ -91,13 +91,14 @@ npm i @yamato-daiwa/es-extensions -E
 
   <dd>
 
- Obviously from the function name, creates an array of natural numbers.
- Elements count, ascending/descending and starting number can be specified.
+ As it is obvious from the function name, it creates an array of natural numbers.
+ Elements’ count, ascending/descending and starting number can be specified.
 
    ```
    (
-     compoudParameter: Readonly<{
+     compoudParameter: {
   
+       /** @description Must be the natural number. */
        elementsCount: number;
   
        /** @default false */
@@ -106,7 +107,7 @@ npm i @yamato-daiwa/es-extensions -E
        /** @default 1 */
        startingNumber?: number;
   
-     }>
+     }
    ): Array<number>
    ```
 
@@ -127,15 +128,17 @@ npm i @yamato-daiwa/es-extensions -E
      otherwise error will be thrown or null will be returned depending on dedicated option's value.
     
    ```
+   /** @description [ 1st overload ] Returns null when element satisfying the predicate is not exatcly one. */
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>, 
+     targetArray: Array<ArrayElement>, 
      predicate: (arrayElement: ArrayElement) => boolean
    ): ArrayElement | null
-    
+   
+   /** @description [ 2nd overload ] Throws a error when element satisfying the predicate is not exatcly one. */ 
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>,
+     targetArray: Array<ArrayElement>,
      predicate: (arrayElement: ArrayElement) => boolean,
-     options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
+     options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
    ): ArrayElement
    ```
 
@@ -144,15 +147,17 @@ npm i @yamato-daiwa/es-extensions -E
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
   <dd>
 
- Returns the last element of an array if such element exists, otherwise error will be thrown as default
+ Returns the last element of an array if such the element exists, otherwise error will be thrown as default, 
       or null will be returned if the dedicated option has been specified.
 
    ```
-   <ArrayElement>(targetArray: ReadonlyArray<ArrayElement>): ArrayElement | null;
+   /** @description [ 1st overload ] Returns null when target array is empty. */
+   <ArrayElement>(targetArray: Array<ArrayElement>): ArrayElement | null;
     
+   /** @description [ 2nd overload ] Throws error when target array is empty. */
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>,
-     options: Readonly<{ mustThrowErrorIfArrayIsEmpty: true; }>
+     targetArray: Array<ArrayElement>,
+     options: { mustThrowErrorIfArrayIsEmpty: true; }
    ): ArrayElement
    ```
 
@@ -173,8 +178,8 @@ npm i @yamato-daiwa/es-extensions -E
 
    ```
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>, 
-     predicate: (arrayElement: <ArrayElement) => boolean
+     targetArray: Array<ArrayElement>, 
+     predicate: (arrayElement: ArrayElement) => boolean
    ): Array<number>
    ```
 
@@ -187,15 +192,19 @@ npm i @yamato-daiwa/es-extensions -E
       be thrown or null will be returned depending on dedicated option's value.
 
    ```
+   /** @description [ 1st overload ] 
+    * Returns null when there is no matches with the predicate or such matches are more than one */
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>, 
+     targetArray: Array<ArrayElement>, 
      predicate: (arrayElement: ArrayElement) => boolean
    ): number | null;
     
+    /** @description [ 2st overload ] 
+    * Throws the error when there is no matches with the predicate or such matches are more than one */
    <ArrayElement>(
-     targetArray: ReadonlyArray<ArrayElement>,
+     targetArray: Array<ArrayElement>,
      predicate: (arrayElement: ArrayElement) => boolean,
-     options: Readonly<{ mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }>
+     options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
    ): number;
    ```
   </dd>
@@ -222,167 +231,58 @@ npm i @yamato-daiwa/es-extensions -E
 
    ```
    <ArrayElement>(
-     compoundParameter: Readonly<
-       (
-         {
-           mutably: true;
-           targetArray: Array<ArrayElement>;
-         } |
-         {
-           mutably: false;
-           targetArray: ReadonlyArray<ArrayElement>;
-         }
-       ) &
-       (
+   
+     compoundParameter:
+     
          (
            {
-             fromStart: true;
-             fromEnd?: undefined;
-           } &
-           (
-             {
-               startingElementNumber__numerationFrom0: number;
-               startingElementNumber__numerationFrom1?: undefined;
-               fromFirstElement?: undefined;
-             } |
-             {
-               startingElementNumber__numerationFrom1: number;
-               startingElementNumber__numerationFrom0?: undefined;
-               fromFirstElement?: undefined;
-             } |
-             {
-               fromFirstElement: true;
-               startingElementNumber__numerationFrom1?: undefined;
-               startingElementNumber__numerationFrom0?: undefined;
-             }
-           ) &
-           (
-             {
-               endingElementNumber__numerationFrom0__including: number;
-               endingElementNumber__numerationFrom1__including?: undefined;
-               endingElementNumber__numerationFrom0__notIncluding?: undefined;
-               endingElementNumber__numerationFrom1__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLastElement?: undefined;
-             } |
-             {
-               endingElementNumber__numerationFrom1__including: number;
-               endingElementNumber__numerationFrom0__including?: undefined;
-               endingElementNumber__numerationFrom0__notIncluding?: undefined;
-               endingElementNumber__numerationFrom1__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLastElement?: undefined;
-             } |
-             {
-               endingElementNumber__numerationFrom0__notIncluding: number;
-               endingElementNumber__numerationFrom0__including?: undefined;
-               endingElementNumber__numerationFrom1__including?: undefined;
-               endingElementNumber__numerationFrom1__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLastElement?: undefined;
-             } |
-             {
-               endingElementNumber__numerationFrom1__notIncluding: number;
-               endingElementNumber__numerationFrom0__including?: undefined;
-               endingElementNumber__numerationFrom1__including?: undefined;
-               endingElementNumber__numerationFrom0__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLastElement?: undefined;
-             } |
-             {
-               elementsCount: number;
-               endingElementNumber__numerationFrom0__including?: undefined;
-               endingElementNumber__numerationFrom1__including?: undefined;
-               endingElementNumber__numerationFrom0__notIncluding?: undefined;
-               endingElementNumber__numerationFrom1__notIncluding?: undefined;
-               untilLastElement?: undefined;
-             } |
-             {
-               untilLastElement: true;
-               endingElementNumber__numerationFrom0__including?: undefined;
-               endingElementNumber__numerationFrom1__including?: undefined;
-               endingElementNumber__numerationFrom0__notIncluding?: undefined;
-               endingElementNumber__numerationFrom1__notIncluding?: undefined;
-               elementsCount?: undefined;
-             }
-           )
-         ) |
-         (
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
            {
-             fromEnd: true;
-             fromStart?: undefined;
-           } &
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         ) &
+         
+         (
            (
-             {
-               rightElementNumber__numerationFrom0_AndRight: number;
-               rightElementNumber__numerationFrom1_AndRight?: undefined;
-               fromRightmostElement?: undefined;
-             } |
-             {
-               rightElementNumber__numerationFrom1_AndRight: number;
-               rightElementNumber__numerationFrom0_AndRight?: undefined;
-               fromRightmostElement?: undefined;
-             } |
-             {
-               fromRightmostElement: true;
-               rightElementNumber__numerationFrom1_AndRight?: undefined;
-               rightElementNumber__numerationFrom0_AndRight?: undefined;
-             }
-           ) &
+             { fromStart: true; } &
+             (
+               { startingElementNumber__numerationFrom0: number; } |
+               { startingElementNumber__numerationFrom1: number; } |
+               { fromFirstElement: true; }
+             ) &
+             (
+               { endingElementNumber__numerationFrom0__including: number; } |
+               { endingElementNumber__numerationFrom1__including: number; } |
+               { endingElementNumber__numerationFrom0__notIncluding: number; } |
+               { endingElementNumber__numerationFrom1__notIncluding: number; } |
+               { elementsCount: number; } |
+               { untilLastElement: true; }
+             )
+           ) |
+           
            (
-             {
-               leftElementNumber__numerationFrom0_AndRight__including: number;
-               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLeftmostElement?: undefined;
-             } |
-             {
-               leftElementNumber__numerationFrom1_AndRight__including: number;
-               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLeftmostElement?: undefined;
-             } |
-             {
-               leftElementNumber__numerationFrom0_AndRight__notIncluding: number;
-               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLeftmostElement?: undefined;
-             } |
-             {
-               leftElementNumber__numerationFrom1_AndRight__notIncluding: number;
-               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
-               elementsCount?: undefined;
-               untilLeftmostElement?: undefined;
-             } |
-             {
-               elementsCount: number;
-               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
-               untilLeftmostElement?: undefined;
-             } |
-             {
-               untilLeftmostElement: true;
-               leftElementNumber__numerationFrom0_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__including?: undefined;
-               leftElementNumber__numerationFrom0_AndRight__notIncluding?: undefined;
-               leftElementNumber__numerationFrom1_AndRight__notIncluding?: undefined;
-               elementsCount?: undefined;
-             }
+             { fromEnd: true; } &
+             (
+               { rightElementNumber__numerationFrom0_AndRight: number; } |
+               { rightElementNumber__numerationFrom1_AndRight: number; } |
+               { fromRightmostElement: true; }
+             ) &
+             (
+               { leftElementNumber__numerationFrom0_AndRight__including: number; } |
+               { leftElementNumber__numerationFrom1_AndRight__including: number; } |
+               { leftElementNumber__numerationFrom0_AndRight__notIncluding: number; } |
+               { leftElementNumber__numerationFrom1_AndRight__notIncluding: number; } |
+               { elementsCount: number; } |
+               { untilLeftmostElement: true; }
+             )
            )
-         )
-       ) &
-       { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
-     >
+         ) &
+         
+         { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+
    ): Array<ArrayElement> 
 ```
 
@@ -403,9 +303,11 @@ npm i @yamato-daiwa/es-extensions -E
 
   ```
   <ArrayElement>(
+
     compoundParameter:
-        Readonly<
+
           { newElements: ReadonlyArray<ArrayElement>; } &
+          
           (
             {
               mutably: true;
@@ -416,33 +318,14 @@ npm i @yamato-daiwa/es-extensions -E
               targetArray: ReadonlyArray<ArrayElement>;
             }
           ) &
+          
           (
-            {
-              toStart: true;
-              toEnd?: undefined;
-              toPosition__numerationFrom0?: undefined;
-              toPosition__numerationFrom1?: undefined;
-            } |
-            {
-              toEnd: true;
-              toStart?: undefined;
-              toPosition__numerationFrom0?: undefined;
-              toPosition__numerationFrom1?: undefined;
-            } |
-            {
-              toPosition__numerationFrom0: number;
-              toStart?: undefined;
-              toEnd?: undefined;
-              toPosition__numerationFrom1?: undefined;
-            } |
-            {
-              toPosition__numerationFrom1: number;
-              toStart?: undefined;
-              toEnd?: undefined;
-              toPosition__numerationFrom0?: undefined;
-            }
+            { toStart: true; } |
+            { toEnd: true; } |
+            { toPosition__numerationFrom0: number; } |
+            { toPosition__numerationFrom1: number; }
           )
-        >
+
     ): Array<ArrayElement>
    ```
 
@@ -462,25 +345,24 @@ npm i @yamato-daiwa/es-extensions -E
     
   ```
   <ArrayElement>(
+
     sourceDataAndOptions:
-      Readonly<
+
         { targetArray: ReadonlyArray<ArrayElement>; } &
+
         (
           {
             index: number;
             newElement: ArrayElement;
-            replacements?: never;
           } |
           {
-            index?: never;
-            newElement?: never;
             replacements: ReadonlyArray<{
               index: number;
               newElement: ArrayElement;
             }>;
           }
         )
-      >
+
   ): Array<ArrayElement>
   ```
 
@@ -493,8 +375,8 @@ npm i @yamato-daiwa/es-extensions -E
 
   ```
   <ArrayElement>(
-    sourceDataAndOptions: 
-      Readonly<
+    sourceDataAndOptions:
+
         (
           {
             mutably: true;
@@ -507,16 +389,24 @@ npm i @yamato-daiwa/es-extensions -E
         ) &
         (
           Replacement<ArrayElement> |
-          Readonly<{ replacements: ReadonlyArray<Replacement<ArrayElement>>; }>
+          { replacements: Array<Replacement<ArrayElement>>; }
         )
-      >
-    ): Readonly<
-      { predicate: (arrayElement: ArrayElement) => boolean; } &
-      (
-        { newValue: ArrayElement; } |
-        { replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
-      )
-    >
+
+  ): 
+      {
+        updatedArray: Array<ArrayElement>;
+        indexesOfReplacedElements: Array<number>;
+      }
+  ```
+
+  ```ts
+  type Replacement<ArrayElement> = Readonly<
+    { predicate: (arrayElement: ArrayElement) => boolean; } &
+    (
+      { newValue: ArrayElement; } |
+      { replacer: (currentValueOfElement: ArrayElement) => ArrayElement; }
+    )
+  >;
   ```
   </dd>
 
@@ -535,36 +425,32 @@ npm i @yamato-daiwa/es-extensions -E
 
    ```
    <ArrayElement>(
-     sourceDataAndOptions: Readonly<
-       (
+
+     sourceDataAndOptions:
+      
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         ) &
+         (
+           { targetElementNumber__numerationFrom0: number; } |
+           { targetElementNumber__numerationFrom1: number; }
+         ) &
          {
-           mutably: true;
-           targetArray: Array<ArrayElement>;
-         } |
-         {
-           mutably: false;
-           targetArray: ReadonlyArray<ArrayElement>;
+           toLeft: boolean;
+           errorMustBeThrownIf: {
+             elementsCountIsLessThan2: boolean;
+             targetElementNumberIsOutOfRange: boolean;
+           }
          }
-       ) &
-       (
-         {
-           targetElementNumber__numerationFrom0: number;
-           targetElementNumber__numerationFrom1?: never;
-         } |
-         {
-           targetElementNumber__numerationFrom0?: never;
-           targetElementNumber__numerationFrom1: number;
-         }
-       ) &
-       {
-         toLeft: boolean;
-         errorMustBeThrownIf: Readonly<{
-           elementsCountIsLessThan2: boolean;
-           targetElementNumberIsOutOfRange: boolean;
-         }>;
-       }
-   >
-): Array<ArrayElement>
+       
+   ): Array<ArrayElement>
    ```
 
   </dd>
@@ -580,8 +466,9 @@ npm i @yamato-daiwa/es-extensions -E
 
    ```
    <ArrayElement>(
+
      sourceDataAndOptions:
-       Readonly<
+
          (
            {
              mutably: true;
@@ -592,73 +479,48 @@ npm i @yamato-daiwa/es-extensions -E
              targetArray: ReadonlyArray<ArrayElement>;
            }
          ) &
+
          {
-           oneElement: Readonly<(
-             {
-               position__numerationFrom0: number;
-               position__numerationFrom1?: undefined;
-               isLastOne?: undefined;
-               finder?: undefined;
-               mustThrowErrorIfNotFound: boolean;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1: number;
-               isLastOne?: undefined;
-               finder?: undefined;
-               mustThrowErrorIfNotFound: boolean;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1?: undefined;
-               isLastOne: true;
-               finder?: undefined;
-               mustThrowErrorIfNotFound?: undefined;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1?: undefined;
-               isLastOne?: undefined;
-               finder: (arrayElement: ArrayElement) => boolean;
-               mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
-             }
-           )>;
-           otherElement: Readonly<(
-             {
-               position__numerationFrom0: number;
-               position__numerationFrom1?: undefined;
-               isLastOne?: undefined;
-               finder?: undefined;
-               mustThrowErrorIfNotFound: boolean;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1: number;
-               isLastOne?: undefined;
-               finder?: undefined;
-               mustThrowErrorIfNotFound: boolean;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1?: undefined;
-               isLastOne: true;
-               finder?: undefined;
-               mustThrowErrorIfNotFound?: undefined;
-             } |
-             {
-               position__numerationFrom0?: undefined;
-               position__numerationFrom1?: undefined;
-               isLastOne?: undefined;
-               finder: (arrayElement: ArrayElement) => boolean;
-               mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
-             }
-           )>;
-         } & 
+         
+           oneElement: 
+           
+               {
+                 position__numerationFrom0: number;
+                 mustThrowErrorIfNotFound: boolean;
+               } |
+               {
+                 position__numerationFrom1: number;
+                 mustThrowErrorIfNotFound: boolean;
+               } |
+               { isLastOne: true; } |
+               {
+                 finder: (arrayElement: ArrayElement) => boolean;
+                 mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+               };
+           
+           otherElement: 
+           
+               {
+                 position__numerationFrom0: number;
+                 mustThrowErrorIfNotFound: boolean;
+               } |
+               {
+                 position__numerationFrom1: number;
+                 mustThrowErrorIfNotFound: boolean;
+               } |
+               { isLastOne: true; } |
+               {
+                 finder: (arrayElement: ArrayElement) => boolean;
+                 mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: boolean;
+               }
+           
+         } &
+          
          {
            mustThrowErrorIfTargetArrayIsEmpty: boolean;
            mustThrowErrorIfSpecifiedBothElementsRefersToSamePosition: boolean;
          }
-       >
+
    ): Array<ArrayElement>
    ```
 
@@ -677,28 +539,26 @@ npm i @yamato-daiwa/es-extensions -E
  Removes array elements by indexes, herewith the removing can be mutable or no depending on the dedicated option.
 
    ```
-   <ArrayElement>(
-     {
-       targetArray,
-       mutably,
-       ...sourceData
-     }: Readonly<
-       (
-         {
-           mutably: true;
-           targetArray: Array<ArrayElement>;
-         } |
-         {
-           mutably: false;
-           targetArray: ReadonlyArray<ArrayElement>;
-         }
-       ) &
-       { indexes: number | ReadonlyArray<number>; }
-     >
-   ): Readonly<{
-     updatedArray: Array<ArrayElement>;
-     removedElements: Array<ArrayElement>;
-   }>
+   (
+     compoundParameter:
+      
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         ) &
+         { indexes: number | ReadonlyArray<number>; }
+     
+   ): 
+       {
+         updatedArray: Array<ArrayElement>;
+         removedElements: Array<ArrayElement>;
+       }
    ```
 
   </dd>
@@ -706,35 +566,36 @@ npm i @yamato-daiwa/es-extensions -E
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/07-RemovingOfElements/removeArrayElementsByPredicates/removeArrayElementsByPredicates.english.html"><code>removeArrayElementsByPredicates</code></a></dt>
   <dd>
 
- Removes array elements by one or more predicates, herewith the removing can be mutable or not depending on dedicated option.
+ Removes array elements by one or more predicates, herewith the removing can be mutable or not depending on the dedicated option.
 
    ```
    <ArrayElement>(
-     {
-       targetArray,
-       mutably,
-       ...sourceData
-     }: Readonly<
-       (
-         {
-           mutably: true;
-           targetArray: Array<ArrayElement>;
-         } |
-         {
-           mutably: false;
-           targetArray: ReadonlyArray<ArrayElement>;
-         }
-       ) &
-       (
-         { predicate: (arrayElement: ArrayElement) => boolean; } |
-         { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
-       )
-     >
-   ): Readonly<{
-     updatedArray: Array<ArrayElement>;
-     removedElements: Array<ArrayElement>;
-     indexesOfRemovedElements: Array<number>;
-   }>;    
+   
+     compoundParameter:
+     
+         (
+           {
+             mutably: true;
+             targetArray: Array<ArrayElement>;
+           } |
+           {
+             mutably: false;
+             targetArray: ReadonlyArray<ArrayElement>;
+           }
+         ) &
+         
+         (
+           { predicate: (arrayElement: ArrayElement) => boolean; } |
+           { predicates: ReadonlyArray<(arrayElement: ArrayElement) => boolean>; }
+         )
+     
+   ): 
+   
+       {
+         updatedArray: Array<ArrayElement>;
+         removedElements: Array<ArrayElement>;
+         indexesOfRemovedElements: Array<number>;
+       }    
    ```
 
   </dd>
@@ -756,11 +617,13 @@ npm i @yamato-daiwa/es-extensions -E
      {
        targetFlatArray,
        elementsCountPerNestedArray
-     }: Readonly<{
-       targetFlatArray: ReadonlyArray<ArrayElement>;
-       elementsCountPerNestedArray: number;
-     }>
-   ): Array<Array<ArrayElement>>
+     }: 
+         {
+           targetFlatArray: Array<ArrayElement>;
+           elementsCountPerNestedArray: number;
+         }
+   ): 
+      Array<Array<ArrayElement>>
    ```     
     
 </dd>
@@ -775,7 +638,7 @@ npm i @yamato-daiwa/es-extensions -E
   <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/09-Other/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove/addElementsToArrayIfTheyAreNotPresentOtherwiseRemove.english.html"><code>addElementsToArrayIfTheyAreNotPresentOtherwiseRemove</code></a></dt>
   <dd>
 
- <p>Obviously from the function name, add elements to an array if they do not present otherwise remove them.</p>
+ <p>Obviously from the function name, adds elements to an array if they do not present otherwise remove them.</p>
     <ul>
       <li>
         For all types of elements except numbers, bigints, strings and booleans the element finding predicate must be
@@ -785,19 +648,23 @@ npm i @yamato-daiwa/es-extensions -E
     </ul>
 
    ```
+   /** @description [ 1st overload ] The array of primitive type elements */
    <ArrayElement extends number | bigint | string | boolean>(
+   
      compoundParameter:
-       Readonly<
+       
          (
            { targetElement: ArrayElement; } |
            { targetElements: ReadonlyArray<ArrayElement>; }
          ) &
+         
          (
            { addingToStart: true; } |
            { addingToEnd: true; } |
            { addingToPosition__numerationFrom0: number; } |
            { addingToPosition__numerationFrom1: number; }
          ) &
+         
          (
            {
              mutably: true;
@@ -808,12 +675,14 @@ npm i @yamato-daiwa/es-extensions -E
              targetArray: ReadonlyArray<ArrayElement>;
            }
          )
-       >
-   ): Array<ArrayElement>;
+       
+   ): Array<ArrayElement>
 
+    /** @description [ 1st overload ] The array of non-primitive type elements */
    <ArrayElement extends Exclude<unknown, number | bigint | string | boolean>>(
+   
      compoundParameter:
-       Readonly<
+    
          (
            {
              targetElement: ArrayElement;
@@ -824,12 +693,14 @@ npm i @yamato-daiwa/es-extensions -E
              targetElementsFinder: (arrayElement: ArrayElement) => boolean;
            }
          ) &
+         
          (
            { addingToStart: true; } |
            { addingToEnd: true; } |
            { addingToPosition__numerationFrom0: number; } |
            { addingToPosition__numerationFrom1: number; }
          ) &
+         
          (
            {
              mutably: true;
@@ -840,7 +711,7 @@ npm i @yamato-daiwa/es-extensions -E
              targetArray: ReadonlyArray<ArrayElement>;
            }
          )
-       >
+    
    ): Array<ArrayElement>;
    ```
 

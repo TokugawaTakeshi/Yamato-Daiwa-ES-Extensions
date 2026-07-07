@@ -19,7 +19,10 @@ block append Metadata
     RegularWebPageTemplate__YDF.configure({
       metadata: {
         title: buildHTML_PageTitle(`RawObjectDataProcessor — ${ topHeading }`),
-        description: ""
+        description:
+            "Working with \"RawObjectDataProcessor\", the utility class from the \"Yamato Daiwa ECMAScript extensions\" " +
+              "(abbreviation: \"YDEE\") library, it is required to respect some fundamental constraints from the " +
+              "ECMAScript standard side."
       },
       stylesSheetsURIs: [
         "$CommonStyles",
@@ -48,7 +51,349 @@ block append SpecificContent
 
   article
 
-    //- ━━━ `RawObjectDataProcessor` — Theoretical Minimum ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    h1.Article-Heading1!= "<code>RawObjectDataProcessor</code>"
+    //- ━━━ `RawObjectDataProcessor` — Theoretical minimum ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    h1.Article-Heading1!= `<code>RawObjectDataProcessor</code> — ${ topHeading }`
 
-    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.initialTextNotWritten })
+    +PageNotReadyApology--YDPD({ currentState: PageNotReadyApology__YDPD.States.notCheckedByNativeSpeakers })
+
+    p.Article-Paragraph.
+      When working with #[+ImportantEntity--YDID RawObjectDataProcessor], it is necessary to take into account some nuances
+        of #[+ImportantEntity--YDID JavaScript]/#[+ImportantEntity--YDID TypeScript], or rather, the
+        #[+ImportantEntity--YDID ECMAScript] standard.
+      Such nuances, of course, are documented in official and unofficial sources, but many beginner programmers
+        often do not&nbsp;know them.
+
+
+    //- ┅┅┅ Object Like Data Classification ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 2,
+      text: localizedSectioning.objectLikeDataClassification.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$anchor
+    }).Article-Heading2
+
+    p.Article-Paragraph.
+      As seen from the name #[+ImportantEntity--YDID "RawObjectDataProcessor"], this utility #[+Term--YDID class]
+        is intended for working with #[+Keyword--YDID object-like] data, that is, data satisfying the condition
+        #[+ImportantEntity--YDID typeof N === "object"], while #[+Keyword--YDID not]&nbsp;being
+        #[+ImportantEntity__Code--YDID null] (and #[+ImportantEntity__Code--YDID typeof null] is #[+Keyword--YDID also]
+        #[+ImportantEntity__Code--YDID "object"]
+        #[+Keyphrase--YDID from the viewpoint of the #[+ImportantEntity--YDID ECMAScript] standard]).
+      However, #[+Keyword--YDID child] #[+Term--YDID properties] can have other types, including numeric, string or
+        boolean.
+      Nevertheless, at the moment, #[+Keyword--YDID only] #[+ImportantEntity--YDID JSON]-compatible data
+        is #[+Keyword--YDID fully] supported.
+      The corresponding #[+Term--YDID type] has the following definition:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        export type ParsedJSON = ParsedJSON_Object | ParsedJSON_Array;
+
+        export type ParsedJSON_Object = { [key: string]: ParsedJSON_NestedProperty; };
+
+        export type ParsedJSON_Array = Array<ParsedJSON_NestedProperty>;
+
+        export type ParsedJSON_NestedProperty =
+          number |
+          string |
+          boolean |
+          null |
+          ParsedJSON_Object |
+          ParsedJSON_Array |
+          undefined;
+
+    +AdmonitionBlock--YDF({
+      title: "JSON and objects",
+      SVG_Icon: true,
+      areThemesCSS_ClassesCommon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    })
+
+      p.Article-Paragraph.
+        Although terms such as #[+Term--YDID "objects"] and #[+Term--YDID "arrays"] are often applied to
+          #[+ImportantEntity--YDID JSON], it is necessary to understand that #[+ImportantEntity--YDID JSON] is a
+          #[+Keyword--YDID string], and #[+Keyword--YDID not]&nbsp;an #[+Term--YDID object].
+        This is why the #[+Term--YDID alias] names given above starting with #[+Term--YDID "parsed"] word,
+          and not&nbsp;just #[+SecondaryEntity__Code--YDID JSON_Object] or #[+SecondaryEntity__Code--YDID JSON_Array].
+
+      p.Article-Paragraph.
+        In the case of #[+Term--YDID ECMAScript-based] languages, to get a regular #[+Term--YDID object] from a
+          #[+Term--YDID JSON-string], #[+ImportantEntity__Code--YDID JSON.parse()] is most commonly used.
+        But although the #[+ImportantEntity--YDID JSON] format originated from #[+ImportantEntity--YDID JavaScript]
+          (which is clear from the abbreviation — #[+Term--YDID "JavaScript Object Notation"]), most other popular
+          programming languages also work with this data format, but there the #[+Term--YDID JSON-string] is converted
+          into data types supported by the corresponding programming languages.
+
+    p.Article-Paragraph.
+      Support for other #[+Term--YDID types] of #[+Keyword__Contrast--YDID child] #[+Term--YDID properties],
+        such as #[+ImportantEntity--YDID Date] or #[+ImportantEntity--YDID BigInt], may be added in the future.
+      But at the moment, this functionality is not very much in demand, since usually when reading data from external sources
+        and converting it into a #[+Term--YDID JavaScript object], they are compatible with #[+ImportantEntity--YDID JSON], and
+        if properties of type #[+ImportantEntity__Code--YDID Date] or #[+ImportantEntity__Code--YDID BigInt] are needed,
+        they can be converted from strings during #[+Term--YDID post-processing].
+
+    p.Article-Paragraph.
+      So, #[+ImportantEntity--YDID RawObjectDataProcessor] works with the following #[+Keyword--YDID four]
+        #[+Keyword__Contrast--YDID subtypes] of　#[+Term--YDID objects]:
+
+    +Table--YDF({　decorativeVariation: Table__YDF.DecorativeVariations.modestlyCalmingPastelSolid　})
+
+      thead
+
+        tr
+
+          th(scope="col") ↓ Keys type / ➝ Elements count
+          th(scope="col") Fixed
+          th(scope="col") Arbitrary
+
+      tbody
+
+        tr
+
+          th(scope="row") String
+          td Fixed structure object
+          td Associative array
+
+        tr
+
+          th(scope="row") Non-negative integer
+          td Tuple
+          td Indexed array
+
+
+    //- ┅┅┅ Fixed Schemas Objects ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.fixedSchema.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph
+      | For these #[+Term--YDID object] subtypes, it is implied that the names of #[+Keyword--YDID all]
+      |   #[+Keyword__Contrast--YDID possible] #[+Term--YDID properties] are known #[+Keyphrase--YDID in advance].
+      | The #[+SecondaryEntity__Code--YDID SampleType] #[+Term--YDID type] from the
+      |
+      +Link--YDF({
+        internalURI: localizedRouting.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.demo.$URI
+      }) demo
+      |
+      | is an example of such an #[+Term--YDID object] subtype:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleType = {
+          foo: number;
+          bar: string;
+          baz: boolean;
+          hoge?: number;
+          fuga: string | null;
+          quux: {
+            alpha: number;
+            bravo: "PLATINUM" | "GOLD" | "SILVER";
+          };
+        };
+
+    p.Article-Paragraph.
+      A #[+Term--YDID fixed structure] is #[+Keyword--YDID not]&nbsp;a prohibition on
+        #[+Term--YDID polymorphic properties], however, the possible options #[+Keyword--YDID must] be
+        known #[+Keyphrase--YDID in advance], as in the example below.
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type SampleTypeWithPolymopthocProperties = {
+          foo:
+              { hoge: string; } |
+              { fuga: number: }
+          bar: number:
+          baz: string;
+        };
+
+    p.Article-Paragraph.
+      This type of #[+Term--YDID objects] is the #[+Keyword--YDID most] #[+Keyword__Contrast--YDID popular] one,
+        because most often it is such data in serialized form that is sent from the client to the server and
+        vice versa.
+      The same type of data is usually representing the settings stored in files such as
+        #[+ImportantEntity--YDID JSON], #[+ImportantEntity--YDID YAML], and so on (for example, the
+        #[+SecondaryEntity--YDID TypeScript] configuration — usually #[+SecondaryEntity--YDID tsconfig.json]).
+
+
+    //- ╍╍╍ Associative arrays ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.associativeArrays.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Term--YDID Associative arrays], unlike #[+Term--YDID fixed structure objects], can have an
+        #[+Keyword--YDID arbitrary] number of #[+Term--YDID properties], the names of which are
+        #[+Keyphrase--YDID #[+Keyword--YDID not]&nbsp;known in advance].
+
+    p.Article-Paragraph.
+      #[+Keyword--YDID Before] the #[+ImportantEntity--YDID ESMAScript 2015] standard, #[+Keyword--YDID regular]
+        #[+Term--YDID objects] were used as such #[+Term--YDID arrays],
+        #[+Keyphrase--YDID from the viewpoint of the #[+Keyword--YDID output] #[+Term--YDID JavaScript code]]
+        differing #[+Keyphrase--YDID in no way] from #[+Term--YDID fixed structure objects].
+      In #[+ImportantEntity--YDID TypeScript], such #[+Term--YDID associative arrays] are annotated in
+        #[+Keyphrase--YDID one of] the following ways:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        type AssociativeArray<ValueType> = { [ key: string ]: ValueType };
+
+        // or
+
+        type AssociativeArray<ValueType> = Record<string, ValueType>;
+
+    p.Article-Paragraph.
+      The #[+ImportantEntity--YDID Map] #[+Term--YDID data type] introduced in the #[+ImportantEntity--YDID ESMAScript 2015]
+        #[+Term--YDID standard] may or may not be called an #[+Term--YDID associative array]
+        depending on whether #[+Keyword--YDID arbitrary] type #[+Term__Contrast--YDID keys] are allowed for such
+        #[+Term--YDID arrays].
+      In particular, #[+ImportantEntity--YDID Map] does #[+Keyword--YDID not]&nbsp;prohibit #[+Term--YDID object-like]
+        #[+Term--YDID keys].
+      In any case, the #[+ImportantEntity--YDID Map] #[+Term--YDID data type] is #[+Keyword--YDID incompatible] with
+        #[+ImportantEntity--YDID JSON], however, such compatibility can be achieved by converting a
+        #[+ImportantEntity--YDID Map] into a #[+Keyword--YDID two-dimensional] #[+Term--YDID indexed array], where
+        #[+Keyphrase--YDID in each #[+Keyword--YDID child]] array, the #[+Keyword--YDID first] element is the
+        #[+Term--YDID key], and the #[+Keyword--YDID second] is the #[+Term--YDID value]:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const sampleMap: Map<string, number> = new Map([
+          [ "alpha", 1 ],
+          [ "bravo", 2 ],
+          [ "charlie", 3 ]
+        ]);
+
+        const serializedMap: string = JSON.stringify(Array.from(sampleMap.entries()));
+
+    +AdmonitionBlock--YDF({
+      title: "Be careful with terminology",
+      SVG_Icon: true,
+      geometricVariation: AdmonitionBlock__YDF.GeometricVariations.stickyNoteLike,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.warning
+    }).
+      The terms #[+Term--YDID "key"] and #[+Term--YDID "value"] are applied both to #[+Term--YDID fixed structure objects]
+        and to #[+Term--YDID associative arrays].
+      With #[+Term--YDID keys], everything is more or less clear, but the #[+Term--YDID "value"] term is too broad,
+        because it can be applied #[+Keyword--YDID outside]&nbsp;#[+Term--YDID objects] to #[+Keyword--YDID any]
+        #[+Term--YDID data types].
+
+    p.Article-Paragraph.
+      Other examples of frequently used #[+Term--YDID associative arrays] are many fields of
+        #[+ImportantEntity--YDID package.json] — #[+SecondaryEntity__Code--YDID scripts],
+        #[+SecondaryEntity__Code--YDID dependencies], #[+SecondaryEntity__Code--YDID devDependencies],
+        #[+SecondaryEntity__Code--YDID peerDependencies], and so on.
+
+    p.Article-Paragraph.
+      #[+ImportantEntity--YDID RawObjectDataProcessor], of course, works with #[+Keyword--YDID regular]
+        #[+ImportantEntity--YDID associative arrays], which are #[+Term--YDID objects]
+        with #[+Keyword--YDID string] #[+Term--YDID keys], but it #[+Keyword--YDID does]&nbsp;#[+Keyword__Contrast--YDID not]
+        support input data of the #[+ImportantEntity--YDID Map] type due to their incompatibility with
+        #[+ImportantEntity--YDID JSON].
+      Nevertheless, with the help of the #[+Term--YDID post-processing] functionality, you can convert the
+        desired data to #[+ImportantEntity--YDID Map] as well.
+
+
+    //- ╍╍╍ Indexed Arrays ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.indexedArrays.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      A data #[+Term--YDID collection] where the #[+Term--YDID elements] #[+Keyword--YDID sequence]
+        #[+Keyword__Contrast--YDID matters], and each element can be access by the #[+Term--YDID indexes] —
+        #[+Term--YDID integers] #[+Keyphrase--YDID starting from #[+ImportantEntity__Code--YDID 0]].
+      It has happened English and many other languages that simply #[+Term--YDID "array(s)"]
+        often refers #[+Keyword--YDID specifically] to #[+Keyword__Contrast--YDID indexed]
+        and #[+Keyword--YDID not]&nbsp;#[+Term--YDID associative arrays].
+
+    p.Article-Paragraph.
+      In many strongly typed programming languages (for instance, #[+SecondaryEntity--YDID C++],
+        #[+SecondaryEntity--YDID C#], and #[+SecondaryEntity--YDID Java]), #[+Keyword--YDID regular]
+        #[+Keyword__Contrast--YDID indexed] #[+Term--YDID arrays] have a #[+Keyword--YDID fixed] number of
+        #[+Term--YDID elements] and #[+Keyword--YDID often] a #[+Keyword__Contrast--YDID single]
+        #[+Keyword__Contrast--YDID type] of #[+Term--YDID elements].
+      If adding and/or removing #[+Term--YDID elements] is required, then specialized
+        #[+Term--YDID collections] are used — from the #[+Keyphrase--YDID conceptual viewpoint], the same
+        #[+Term--YDID indexed arrays], but providing the ability to add and/or remove
+        #[+Term--YDID elements] by #[+Keyword--YDID replacing] one #[+Keyword__Contrast--YDID standard]
+        #[+Term--YDID array] with another internally.
+
+    p.Article-Paragraph.
+      As for #[+ImportantEntity--YDID ECMAScript], an #[+Term--YDID indexed array] is
+        an #[+Term__Contrast--YDID instance] of the class-like #[+Term--YDID object] #[+ImportantEntity--YDID Array]
+        (the statement #[+ImportantEntity--YDID X instanceof Array] is truthy).
+      Since such #[+Term--YDID indexed arrays] can be flexibly manipulated (in particular, you can specify
+        #[+Term--YDID elements] of completely different #[+Term--YDID types], add #[+Term--YDID elements], and
+        #[+Term--YDID remove] them), there is #[+Keyword--YDID no]&nbsp;need for additional #[+Term--YDID collections] yet.
+
+    p.Article-Paragraph.
+      An #[+Term--YDID indexed array] can be annotated in #[+ImportantEntity--YDID TypeScript] in one of the following
+        ways:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const indexedArray: string[] = [ "Alpha", "Bravo" ];
+
+        // Or
+
+        const indexedArray: Array<string> = [ "Alpha", "Bravo" ];
+
+    p.Article-Paragraph.
+      Like #[+Term--YDID fixed structure objects], #[+Term__Contrast--YDID indexed arrays] are one
+        of the most popular #[+Term--YDID data types], and therefore are widely used everywhere.
+      Unlike #[+Term--YDID fixed structure objects] and #[+Term--YDID associative arrays],
+        #[+Keyword--YDID indexed] #[+Term--YDID arrays] #[+Keyword--YDID guarantee] the order of #[+Term--YDID elements],
+        which makes them irreplaceable where such order is critical.
+
+
+    //- ┅┅┅ Tuples ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+    +Heading--YDF({
+      level: 3,
+      text: localizedSectioning.objectLikeDataClassification.$children.tuple.$heading,
+      HTML_ID: localizedSectioning.objectLikeDataClassification.$children.tuple.$anchor
+    }).Article-Heading3
+
+    p.Article-Paragraph.
+      #[+Keyphrase--YDID From a conceptual viewpoint], #[+Term--YDID tuples] are #[+Term__Contrast--YDID arrays]
+        (generally speaking, #[+Keyword--YDID not]&nbsp;only #[+Term--YDID indexed] ones) with a #[+Keyword--YDID fixed]
+        number of #[+Term--YDID elements].
+
+    p.Article-Paragraph.
+      Before the #[+ImportantEntity--YDID ECMAScript 2025] standard (not&nbsp;to be confused with the aforementioned
+        #[+ImportantEntity--YDID ECMAScript 2015]), there was #[+Keyword--YDID no] specialized tool in
+        #[+ImportantEntity--YDID JavaScript] for creating #[+Term--YDID arrays] of limited length.
+      In #[+ImportantEntity--YDID TypeScript], the term #[+Term--YDID "tuple"] was applied
+        #[+Keyword--YDID only] to #[+Keyword__Contrast--YDID indexed] #[+Term--YDID arrays] annotated
+        as follows:
+
+    +CodeViewer--YDF
+      +CodeViewer-Listing--YDF({ codeLanguage: CodeViewer__YDF.SupportedCodesLanguages.TypeScript }): :code_listing--yda
+        const tupleOfTwoElements: [ string, number ] = [ "ALPHA", 1 ];
+        const tupleOfThreeElements: [ string, number, boolean ] = [ "BRAVO", 2, true ];
+
+    p.Article-Paragraph.
+      In the #[+ImportantEntity--YDID ECMAScript 2025] standard, the #[+Term--YDID tuple] — new data type — has been
+        introduced, which, in addition to having a fixed number of #[+Term--YDID elements], is #[+Keyword--YDID also]
+        read-only after initialization, and therefore, to #[+Keyword--YDID guarantee] immutability,
+        #[+Keyword--YDID cannot] contain #[+Term--YDID objects] of #[+Keyword--YDID any] subtypes, whether it's
+        #[+ImportantEntity--YDID Array], #[+ImportantEntity--YDID Map], #[+ImportantEntity--YDID Set] etc..
+      This data type is still very young, so it will take some time before it becomes widely supported in various runtimes.
+      It can also be assumed that due to its limitations, it will not&nbsp;be widely used, and naturally,
+        #[+ImportantEntity--YDID RawObjectDataProcessor] does&nbsp;#[+Keyword--YDID not] support such a data type.
+      In view of this, further we will be talking about #[+Keyword--YDID TypeScript] #[+Term--YDID tuples], which are
+        already #[+Keyword--YDID supported] with #[+ImportantEntity--YDID RawObjectDataProcessor].
+
+    p.Article-Paragraph.
+      #[+Term--YDID Tuples] of any type are #[+Keyword--YDID not] very popular, but there are some examples of their use.
+      For instance, the #[+SecondaryEntity__Code--YDID useState] #[+Term--YDID function] from
+        #[+SecondaryEntity--YDID React] returns a #[+Term--YDID tuple] of two #[+Term--YDID elements].
+      The configuration of #[+Keyword--YDID many] (#[+Keyphrase--YDID but #[+Keyword--YDID not]&nbsp;all])
+        #[+Term--YDID ESLint rules], in which the #[+Keyword--YDID second] #[+Term--YDID element] is
+        #[+Keyword--YDID optional], can be called #[+Keyphrase--YDID #[+Term--YDID "tuples"] with a stretch].
+      Nevertheless, an #[+Term--YDID element] of a #[+Keyword--YDID specific] #[+Term--YDID type]
+        is expected at each of the two positions, which is the main feature of #[+Term--YDID tuples].

@@ -158,10 +158,6 @@ try {
 }
 ```
 
-Output will be like:
-
-[//]: # (TODO 再開点)
-
 
 ## Methods
 

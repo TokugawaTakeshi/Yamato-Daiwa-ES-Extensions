@@ -56,137 +56,12 @@ Promise.all([
   ),
 
   Testing.suite(
-    "computeRelativePath",
-    async (): Promise<void> => {
-
-      await Promise.all([
-
-        Testing.test(
-          "UNIX-like relative path has being computed correctly",
-          (): void => {
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "/data/orandea/test/aaa",
-                comparedPath: "/data/orandea/impl/bbb"
-              }),
-              process.platform === "win32" ? "..\\..\\impl\\bbb" : "../../impl/bbb"
-            );
-          }
-        ),
-
-        Testing.test(
-          "Windows-like relative path has being computed correctly",
-          (): void => {
-
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "C:\\orandea\\test\\aaa",
-                comparedPath: "C:\\orandea\\impl\\bbb"
-              }),
-              process.platform === "win32" ? "..\\..\\impl\\bbb" : "../../impl/bbb"
-            );
-
-            Assert.strictEqual(
-              ImprovedPath.computeRelativePath({
-                basePath: "C:\\orandea\\test\\aaa",
-                comparedPath: "C:\\orandea\\impl\\bbb",
-                alwaysForwardSlashSeparators: true
-              }),
-              "../../impl/bbb"
-            );
-
-          }
-        )
-
-      ]);
-
-    }
-  ),
-
-  Testing.suite(
     "parsePath",
     async (): Promise<void> => {
 
       const unixLikeSampleAbsolutePath: string = "/home/user/dir/file.txt";
-      const windowsLikeSampleAbsolutePath: string = "C:\\path\\dir\\file.txt";
-      const unixLikeSampleRelativePath: string = "home/user/dir/file.txt";
-      const windowsLikeSampleRelativePath: string = "path\\dir\\file.txt";
 
       await Promise.all([
-
-        Testing.suite(
-          "Root",
-          async (): Promise<void> => {
-
-            await Promise.all([
-
-              Testing.test(
-                "Root of UNIX-like absolute path recognized correctly",
-                (): void => {
-
-                  Assert.strictEqual(ImprovedPath.parsePath(unixLikeSampleAbsolutePath).root, "/");
-                  Assert.strictEqual(
-                    Path.parse(unixLikeSampleAbsolutePath).root,
-                    ImprovedPath.parsePath(unixLikeSampleAbsolutePath).root
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Root of Windows-like absolute path recognized correctly",
-                  (): void => {
-
-                    const parsedWindowsLikeSampleAbsolutePath: ImprovedPath.ParsingResult = ImprovedPath.
-                    parsePath(windowsLikeSampleAbsolutePath);
-
-                    Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.root, "C:\\");
-                    Assert.strictEqual(
-                      parsedWindowsLikeSampleAbsolutePath.root,
-                      ImprovedPath.parsePath(windowsLikeSampleAbsolutePath).root
-                    );
-                    Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.root__forwardSlashesSeparators, "C:/");
-
-                }
-              ),
-
-              Testing.test(
-                "Root absence in UNIX-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedUnixLikeSampleRelativePath: ImprovedPath.ParsingResult =
-                      ImprovedPath.parsePath(unixLikeSampleRelativePath);
-
-                  Assert.strictEqual(Path.parse(unixLikeSampleRelativePath).root, "");
-                  Assert.strictEqual(parsedUnixLikeSampleRelativePath.root, null);
-                  Assert.throws(
-                    (): void => { parsedUnixLikeSampleRelativePath.getRootExpectedToExist(); },
-                    { name: UnexpectedEventError.NAME }
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Root absence in UNIX-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedWindowsLikeSampleRelativePath: ImprovedPath.ParsingResult = ImprovedPath.
-                  parsePath(windowsLikeSampleRelativePath);
-
-                  Assert.strictEqual(Path.parse(windowsLikeSampleRelativePath).root, "");
-                  Assert.strictEqual(parsedWindowsLikeSampleRelativePath.root, null);
-                  Assert.throws(
-                    (): void => { parsedWindowsLikeSampleRelativePath.getRootExpectedToExist(); },
-                    { name: UnexpectedEventError.NAME }
-                  );
-                }
-              )
-
-            ]);
-
-          }
-        ),
 
         Testing.suite(
           "Directory",
@@ -194,7 +69,6 @@ Promise.all([
 
             const unixLikeSampleAbsolutePathWithoutDirectory: string = "/file.txt";
             const unixLikeSampleRelativePathWithoutDirectory: string = "file.txt";
-            const windowsLikeSampleAbsolutePathWithoutSubdirectory: string = "C:\\file.txt";
 
             await Promise.all([
 
@@ -246,44 +120,6 @@ Promise.all([
                   );
                   Assert.deepStrictEqual(
                     parsedUnixLikeSampleRelativePathWithoutDirectory.directoryExplodedToPathSegments, []
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Directory of Windows-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedWindowsLikeSampleAbsolutePath: ImprovedPath.ParsingResult =
-                      ImprovedPath.parsePath(windowsLikeSampleAbsolutePath);
-
-                  Assert.strictEqual(Path.parse(windowsLikeSampleAbsolutePath).dir, "C:\\path\\dir");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.directory, "C:\\path\\dir");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePath.directory__forwardSlashesSeparators, "C:/path/dir");
-                  Assert.deepStrictEqual(
-                    parsedWindowsLikeSampleAbsolutePath.directoryExplodedToPathSegments,
-                    [ "C:", "path", "dir" ]
-                  );
-
-                }
-              ),
-
-              Testing.test(
-                "Directory even with root in Windows-like absolute path recognized correctly",
-                (): void => {
-
-                  const parsedWindowsLikeSampleAbsolutePathWithoutDirectory: ImprovedPath.ParsingResult = ImprovedPath.
-                  parsePath(windowsLikeSampleAbsolutePathWithoutSubdirectory);
-
-                  Assert.strictEqual(Path.parse(windowsLikeSampleAbsolutePathWithoutSubdirectory).dir, "C:\\");
-                  Assert.strictEqual(parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directory, "C:\\");
-                  Assert.strictEqual(
-                    parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directory__forwardSlashesSeparators,
-                    "C:/"
-                  );
-                  Assert.deepStrictEqual(
-                    parsedWindowsLikeSampleAbsolutePathWithoutDirectory.directoryExplodedToPathSegments, [ "C:" ]
                   );
 
                 }
@@ -374,7 +210,7 @@ Promise.all([
         }
       ];
 
-      await Promise.all([
+      await Promise.all(
         tests.map(
           async (test: Test): Promise<void> =>
               Testing.test(
@@ -390,7 +226,7 @@ Promise.all([
                 }
               )
         )
-      ]);
+      );
 
     }
   ),

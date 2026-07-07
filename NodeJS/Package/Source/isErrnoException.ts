@@ -1,3 +1,5 @@
+/* global NodeJS -- It is the known ESLint issue: https://github.com/Chatie/eslint-config/issues/45 */
+
 import ErrnoException = NodeJS.ErrnoException;
 import {
   isArbitraryObject,
