@@ -32,9 +32,9 @@
   "devDependencies": {
     "@types/node": "22.7.4",
     "@yamato-daiwa/es-extensions": "../../Package",
-    "@yamato-daiwa/style_guides": "0.14.2",
+    "@yamato-daiwa/style_guides": "0.14.3",
     "rimraf": "6.1.3",
-    "tsx": "4.22.0",
+    "tsx": "4.23.0",
     "typescript": "6.0.3"
   },
   "scripts": {

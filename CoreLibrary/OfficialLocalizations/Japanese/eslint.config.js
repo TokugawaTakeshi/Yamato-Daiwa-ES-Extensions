@@ -2,17 +2,21 @@ const YamatoDaiwaStyleGuides = require("@yamato-daiwa/style_guides/ECMAScript");
 
 
 module.exports = [
+
   {
     ignores: [
       "Distributable/*"
     ]
   },
+
   ...YamatoDaiwaStyleGuides,
+
   {
     languageOptions: {
       parserOptions: {
-        project: "tsconfig.test.json"
+        project: "tsconfig.eslint.json"
       }
     }
   }
+
 ];

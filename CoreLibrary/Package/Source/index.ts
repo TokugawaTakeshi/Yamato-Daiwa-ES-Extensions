@@ -318,6 +318,7 @@ export { default as separateEach4_DigitsGroupWithComma } from "./Numbers/separat
 export { default as getEntriesOfObjectWithFixedKeysSetAndUniformValues } from
     "./Objects/getEntriesOfObjectWithFixedKeysSetAndUniformValues";
 export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
+export { default as setObjectProperties } from "./Objects/setObjectProperties";
 
 
 /* ━━━ Pagination ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

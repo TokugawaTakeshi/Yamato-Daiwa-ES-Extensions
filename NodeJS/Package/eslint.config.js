@@ -14,7 +14,7 @@ module.exports = [
   {
     languageOptions: {
       parserOptions: {
-        project: "tsconfig.test.json"
+        project: "tsconfig.eslint.json"
       }
     }
   }

@@ -20,9 +20,7 @@ export default abstract class ValuesDeepCopier {
 
 
     if (typeof arbitraryValue === "object") {
-      /* eslint-disable @typescript-eslint/consistent-type-assertions --
-      * It is unknown at advance which exactly type will be passed thus the copy is based on real, not expected value. */
-      return ValuesDeepCopier.deeplyCloneObjectLikeValueAsPossible(arbitraryValue as object) as TargetValue;
+      return ValuesDeepCopier.deeplyCloneObjectLikeValueAsPossible(arbitraryValue);
     }
 
 
@@ -34,6 +32,8 @@ export default abstract class ValuesDeepCopier {
     objectLikeValue: ObjectLikeType
   ): ObjectLikeType {
 
+    /* eslint-disable @typescript-eslint/consistent-type-assertions --
+      * It is unknown at advance which exactly type will be passed, thus the copy is based on real, not expected value. */
     if (Array.isArray(objectLikeValue)) {
       return objectLikeValue.map(
         (element: unknown): unknown => ValuesDeepCopier.deeplyCloneArbitraryValueAsPossible(element)
