@@ -42,16 +42,16 @@ export default function getObjectPropertySafely(
 
   } else {
 
-    Logger.logError({
-      errorType: InvalidParameterValueError.NAME,
+    Logger.throwErrorWithFormattedMessage({
+      errorInstance:
+          new InvalidParameterValueError({
+            parameterNumber: 2,
+            parameterName: "dotSeparatedOrArrayedPathToTargetProperty",
+            messageSpecificPart:
+                "This parameter must be either a non-empty string, or a non-negative integer, or a non-empty array " +
+                  "of strings and/or non-negative integers."
+          }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      description: InvalidParameterValueError.localization.generateDescription({
-        parameterNumber: 2,
-        parameterName: "dotSeparatedOrArrayedPathToTargetProperty",
-        messageSpecificPart:
-            "This parameter must be either a non-empty string, or a non-negative integer, or a non-empty array " +
-              "of strings and/or non-negative integers."
-      }),
       occurrenceLocation: "getObjectPropertySafely(targetObject, dotSeparatedOrArrayedPathToTargetProperty)"
     });
 
