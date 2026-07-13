@@ -554,13 +554,18 @@ class RawObjectDataProcessor {
             case RawObjectDataProcessor.ProcessingApproaches.manipulationsWithSourceObject: {
 
               rawData__currentObjectDepth =
-                  /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-                   * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
-                   *   be the initial version of `targetObjectTypeSourceValue` thus has `ArbitraryObject` type. */
-                  getObjectPropertySafely(
-                    rawData__full,
-                    this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
-                  ) as ArbitraryObject;
+
+                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.length > 1 ?
+
+                      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                       * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                       *   be the initial version of `targetObjectTypeSourceValue` thus has `ArbitraryObject` type. */
+                      getObjectPropertySafely(
+                        rawData__full,
+                        this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                      ) as ArbitraryObject :
+
+                      rawData__full;
 
             }
 
@@ -625,13 +630,17 @@ class RawObjectDataProcessor {
 
             rawData__currentObjectDepth =
 
-                /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-                 * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
-                 *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
-                getObjectPropertySafely(
-                  rawData__full,
-                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
-                ) as ArbitraryObject;
+                this.currentlyIteratedPropertyQualifiedInitialNameSegments.length > 1 ?
+
+                    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                     * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                     *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                    getObjectPropertySafely(
+                      rawData__full,
+                      this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                    ) as ArbitraryObject :
+
+                    rawData__full;
 
           }
 
@@ -726,13 +735,17 @@ class RawObjectDataProcessor {
 
               rawData__currentObjectDepth =
 
-                  /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-                   * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
-                   *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
-                  getObjectPropertySafely(
-                    rawData__full,
-                    this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
-                  ) as ArbitraryObject;
+                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.length > 1 ?
+
+                      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                       * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                       *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                      getObjectPropertySafely(
+                        rawData__full,
+                        this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1)
+                      ) as ArbitraryObject :
+
+                      rawData__full;
 
             }
 
@@ -797,13 +810,17 @@ class RawObjectDataProcessor {
 
             rawData__currentObjectDepth =
 
-                /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
-                 * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
-                 *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
-                getObjectPropertySafely(
-                  rawData__full,
-                  this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1).join(".")
-                ) as ArbitraryObject;
+                this.currentlyIteratedPropertyQualifiedInitialNameSegments.length > 1 ?
+
+                    /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions --
+                     * If `getObjectPropertySafely` works without bugs, then `rawData__currentObjectDepth` will
+                     *   be the initial version of `targetObjectTypeSourceValue` thus have `ArbitraryObject` type. */
+                    getObjectPropertySafely(
+                      rawData__full,
+                      this.currentlyIteratedPropertyQualifiedInitialNameSegments.slice(0, -1).join(".")
+                    ) as ArbitraryObject :
+
+                    rawData__full;
 
           }
 
