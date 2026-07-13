@@ -120,6 +120,8 @@ class LeftClickEventListener {
 
     this.targetElements = targetElements;
 
+    /* eslint-disable-next-line @typescript-eslint/strict-void-return --
+     * It is unknown at advance what `initializationProperties.handler` returns. */
     this.externalHandler = initializationProperties.handler;
     this.boundInternalHandler = this.onLeftClick.bind(this);
 

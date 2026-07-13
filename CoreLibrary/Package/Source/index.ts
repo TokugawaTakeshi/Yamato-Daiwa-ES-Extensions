@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.8
+ * @yamato-daiwa/es-extensions v1.9
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
@@ -112,6 +112,12 @@ export {
 
 /* ━━━ Data Mocking ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as DataMocking } from "./DataMocking/DataMocking";
+
+/* ┅┅┅ Localizable Mocking ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+export { default as LocalizableEntitiesByIDsMap } from "./DataMocking/LocalizableMocking/LocalizableEntitiesByIDsMap";
+export { default as LocalizableSampleDataRepository } from "./DataMocking/LocalizableMocking/LocalizableSampleDataRepository";
+
+/* ┅┅┅ Mock Gateway Helper ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as MockGatewayHelper } from "./DataMocking/MockGatewayHelpler/MockGatewayHelper";
 export { default as MockGatewayHelperLocalization__English } from
     "./DataMocking/MockGatewayHelpler/MockGatewayHelperLocalization.english";
@@ -285,6 +291,7 @@ export { default as addEntriesToMap } from "./Maps/addEntriesToMap";
 export { default as createMapBasedOnOtherMap } from "./Maps/createMapBasedOnOtherMap";
 export { default as filterMap } from "./Maps/filterMap";
 export { default as getExpectedToBeNonUndefinedMapValue } from "./Maps/getExpectedToBeNonUndefinedMapValue";
+export { default as getOneEntryOfMap } from "./Maps/getOneEntryOfMap";
 export { default as invertMapImmutably } from "./Maps/invertMapImmutably";
 export { default as mergeMaps } from "./Maps/mergeMaps";
 export { removeEntriesFromMap, type RemovingEntriesFromMap } from "./Maps/removeEntriesFromMap";
@@ -308,7 +315,10 @@ export { default as separateEach4_DigitsGroupWithComma } from "./Numbers/separat
 
 
 /* ━━━ Objects ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+export { default as getEntriesOfObjectWithFixedKeysSetAndUniformValues } from
+    "./Objects/getEntriesOfObjectWithFixedKeysSetAndUniformValues";
 export { default as getObjectPropertySafely } from "./Objects/getObjectPropertySafely";
+export { default as setObjectProperties } from "./Objects/setObjectProperties";
 
 
 /* ━━━ Pagination ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -357,8 +367,11 @@ export { default as destringifyBooleanValueIfPossible } from
 
 /* ━━━ Sets ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as addElementsToSet } from "./Sets/addElementsToSet";
+export { default as createSetBasedOnAnyArrayLikeCollection } from "./Sets/createSetBasedOnAnyArrayLikeCollection";
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
+export { default as getOneElementOfSet } from "./Sets/getOneElementOfSet";
 export { default as mergeSets } from "./Sets/mergeSets";
+export { default as removeOneElementFromSet, type RemovingOfOneElementFromSet } from "./Sets/removeOneElementOfSet";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
 
 
@@ -399,6 +412,8 @@ export { default as extractLastExtensionOfFileName } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractLastExtensionOfFileName";
 export { default as removeAllFileNameExtensions } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeAllFileNameExtensions";
+export { default as removeSpecifiedFileNameExtensionsFromPath } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeSpecifiedFileNameExtensionsFromPath";
 
 /* ─── Stem ───────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as extractFileNameWithoutAnyExtensions } from
@@ -478,8 +493,6 @@ export { default as isUndefined } from "./TypeGuards/EmptyTypes/isUndefined";
 /* ┅┅┅ Numbers ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as isBigInt } from "./TypeGuards/Numbers/isBigInt";
 export { default as isDecimalFractionOfAnySign } from "./TypeGuards/Numbers/isDecimalFractionOfAnySign";
-/* eslint-disable-next-line @typescript-eslint/no-deprecated -- Will be removed in 1.0  */
-export { default as isIntegerOnAnySign } from "./TypeGuards/Numbers/isIntegerOnAnySign";
 export { default as isIntegerOfAnySign } from "./TypeGuards/Numbers/isIntegerOfAnySign";
 export { default as isNaturalNumber } from "./TypeGuards/Numbers/isNaturalNumber";
 export { default as isNaturalNumberOrZero } from "./TypeGuards/Numbers/isNaturalNumberOrZero";

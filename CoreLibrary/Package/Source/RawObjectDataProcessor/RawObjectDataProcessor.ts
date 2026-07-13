@@ -38,7 +38,7 @@ import isNeitherUndefinedNorNull from "../TypeGuards/EmptyTypes/isNeitherUndefin
 import emptyStringToNull from "../ValueTransformers/emptyStringToNull";
 import getLastElementOfArray from "../Arrays/01-RetrievingOfElements/getLastElementOfArray";
 import ValuesDeepCopier from "../ValuesDeepCopier";
-import getObjectPropertySafely from "../Objects/getObjectPropertySafely__TEMP";
+import getObjectPropertySafely from "../Objects/getObjectPropertySafely";
 
 
 class RawObjectDataProcessor {

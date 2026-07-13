@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions-nodejs v1.8
+ * @yamato-daiwa/es-extensions-nodejs v1.9
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */

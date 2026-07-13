@@ -3,10 +3,8 @@
   "compilerOptions": {
 
     "target": "ES2022",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
 
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,

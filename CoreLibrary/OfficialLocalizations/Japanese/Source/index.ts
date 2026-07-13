@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions-localization-japanese v1.6
+ * @yamato-daiwa/es-extensions-localization-japanese v1.9
  * (c) 2023 Yamato Daiwa Co., Ltd
  * Released under the MIT License.
  */

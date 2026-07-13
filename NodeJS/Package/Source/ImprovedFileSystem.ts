@@ -1,11 +1,9 @@
-/* global NodeJS -- The`NodeJS` namespace isn't known by ESLint. */
-
-import FileSystem, { constants as FileSystemConstants } from "fs";
+import FileSystem from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
 import ImprovedPath from "./ImprovedPath/ImprovedPath";
 import isErrnoException from "./isErrnoException";
-import { isNull, Logger } from "@yamato-daiwa/es-extensions";
+import { Logger } from "@yamato-daiwa/es-extensions";
 
 
 export default class ImprovedFileSystem {
@@ -28,13 +26,22 @@ export default class ImprovedFileSystem {
     }
 
 
-    return new Promise<boolean>((resolve: (isExists: boolean) => void): void => {
-      /* eslint-disable-next-line n/prefer-promises/fs -- The fixing of this issue is planned in v1.9 */
-      FileSystem.access(
-        targetPath,
-        FileSystemConstants.F_OK,
-        (error: NodeJS.ErrnoException | null): void => { resolve(isNull(error)); }
-      );
+    return new Promise<boolean>((resolve: (isExists: boolean) => void, reject: (error: unknown) => unknown): void => {
+      PromisfiedFileSystem.access(targetPath).
+          then((): void => { resolve(true); }).
+          catch(
+            (error: unknown): void => {
+
+              if (isErrnoException(error) && error.code === "ENOENT") {
+                resolve(false);
+              }
+
+
+              reject(error);
+
+            }
+          );
+
     });
 
   }

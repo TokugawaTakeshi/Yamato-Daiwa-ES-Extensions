@@ -13,14 +13,17 @@ const sampleTimer: Timer = new BrowserJS_Timer({
 
 
 sampleTimer.
+
     countDown().
+
     then((outcome: Timer.Outcomes): void => {
       Logger.logInfo({
         title: "Timer elapsed",
         description: `With result: ${ outcome }`
       });
     }).
-    catch((error: Error): void => {
+    
+    catch((error: unknown): void => {
       Logger.logError({
         errorType: UnexpectedEventError.NAME,
         title: UnexpectedEventError.localization.defaultTitle,

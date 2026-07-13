@@ -1136,20 +1136,6 @@ nodeJS:
     #       $heading: "<code>isErrnoException</code>"
     #       $URI: "#"
 
-realiseNotes:
-
-  $heading: `realiseNotes.$heading`
-
-  $children:
-
-    v1d7:
-      $heading: "1.7"
-      $URI: `@All/RealiseNotes/v1d7/RealiseNotes-v1d7.${ fileNameLocalizationExtensions }`
-
-    v1d8:
-      $heading: "1.8"
-      $URI: `@All/RealiseNotes/v1d8/RealiseNotes-v1d8.${ fileNameLocalizationExtensions }`
-
 #supportProject:
 #
 #  $heading: `supportProject.$heading`

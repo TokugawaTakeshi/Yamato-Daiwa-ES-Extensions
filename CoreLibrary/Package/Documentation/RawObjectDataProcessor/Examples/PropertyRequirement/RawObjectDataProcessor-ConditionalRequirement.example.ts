@@ -19,7 +19,8 @@ const validDataSpecification: RawObjectDataProcessor.ObjectDataSpecification = {
   properties: {
     hasSwimmingPool: {
       type: Boolean,
-      required: false
+      isUndefinedForbidden: false,
+      isNullForbidden: false
     },
     swimmingPoolMaximalDepth__meters: {
       type: Number,

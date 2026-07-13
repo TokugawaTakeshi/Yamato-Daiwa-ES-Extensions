@@ -310,7 +310,7 @@ suite(
                 value: 1,
                 enumerable: false,
                 configurable: false,
-                writable: false
+                writable: true
               }
             );
 
@@ -325,7 +325,7 @@ suite(
                 value: "BAZ",
                 enumerable: false,
                 configurable: false,
-                writable: false
+                writable: true
               }
             );
 

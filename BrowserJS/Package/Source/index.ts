@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions-browserjs v1.8
+ * @yamato-daiwa/es-extensions-browserjs v1.9
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
@@ -29,8 +29,6 @@ export { default as LeftClickOutOfElementEventListener } from "./EventsHandling/
 /* ─── Other ──────────────────────────────────────────────────────────────────────────────────────────────────────── */
 export { default as FocusOutEventListener } from "./EventsHandling/FocusOutEventListener";
 export { default as InputEventListener } from "./EventsHandling/InputEventListener";
-/* eslint-disable-next-line @typescript-eslint/no-deprecated -- Cannot be removed during v1.8 as non-declared breading change. */
-export { default as addInputEventHandler } from "./EventsHandling/addInputEventHandler";
 export { default as EventPropagationTypes } from "./EventsHandling/EventPropagationTypes";
 
 /* ━━━ Logging ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

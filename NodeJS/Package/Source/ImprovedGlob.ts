@@ -5,6 +5,7 @@ import {
   removeSpecificCharacterFromCertainPosition,
   isUndefined,
   isNonEmptyArray,
+  isString,
   Logger,
   InvalidParameterValueError
 } from "@yamato-daiwa/es-extensions";
@@ -81,9 +82,19 @@ export default class ImprovedGlob {
         every((globSelector: string): boolean => minimatch(compoundParameter.filePath, globSelector));
   }
 
+  public static isFilePathMatchingWithAtLeastOneGlobSelector(
+    { filePath, globSelectors }: Readonly<{ filePath: string; globSelectors: ReadonlyArray<string> | ReadonlySet<string>; }>
+  ): boolean {
+    return (Array.isArray(globSelectors) ? globSelectors : [ ...globSelectors ]).
+        some((globSelector: string): boolean => minimatch(filePath, globSelector));
+  }
+
   public static isExcludingGlobSelector(globSelector: string): boolean {
     return globSelector.startsWith("!");
   }
+
+
+  /* ━━━ Building of Glob Selectors ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
   /* [ Output examples ]
    * C:/Users/.../SomeSPA/00-Source/01-Open/01-Markup/*.+(pug)
@@ -118,64 +129,134 @@ export default class ImprovedGlob {
   }
 
   public static buildAllFilesInCurrentDirectoryAndBelowGlobSelector(
-    compoundParameter: Readonly<{
-      basicDirectoryPath: string;
-      fileNamePostfixes?: ReadonlyArray<string> | ReadonlySet<string>;
-      fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
-    }>
+    polymorphicParameter:
+        string |
+        Readonly<{
+          basicDirectoryPath: string;
+          fileNamesPostfixes?: ReadonlyArray<string> | ReadonlySet<string>;
+          fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+          penultimateFileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+        }>
   ): string {
 
-    let fileNamePostfixes: ReadonlySet<string>;
 
-    if (isUndefined(compoundParameter.fileNamePostfixes)) {
-      fileNamePostfixes = new Set();
-    } else if (compoundParameter.fileNamePostfixes instanceof Set) {
-      fileNamePostfixes = compoundParameter.fileNamePostfixes;
+    let basicDirectoryPath: string;
+    let fileNamesPostfixes: ReadonlySet<string> = new Set();
+    let fileNamesExtensions: ReadonlySet<string> = new Set();
+    let penultimateFileNamesExtensions: ReadonlySet<string> = new Set();
+
+    if (isString(polymorphicParameter)) {
+
+      basicDirectoryPath = polymorphicParameter;
+
     } else {
-      fileNamePostfixes = new Set(compoundParameter.fileNamePostfixes);
+
+      basicDirectoryPath = polymorphicParameter.basicDirectoryPath;
+
+      if (polymorphicParameter.fileNamesPostfixes instanceof Set) {
+        fileNamesPostfixes = polymorphicParameter.fileNamesPostfixes;
+      } else if (Array.isArray(polymorphicParameter.fileNamesPostfixes)) {
+        fileNamesPostfixes = new Set(polymorphicParameter.fileNamesPostfixes);
+      }
+
+      if (polymorphicParameter.fileNamesExtensions instanceof Set) {
+        fileNamesExtensions = polymorphicParameter.fileNamesExtensions;
+      } else if (Array.isArray(polymorphicParameter.fileNamesExtensions)) {
+        fileNamesExtensions = new Set(polymorphicParameter.fileNamesExtensions);
+      }
+
+      if (polymorphicParameter.penultimateFileNamesExtensions instanceof Set) {
+        penultimateFileNamesExtensions = polymorphicParameter.penultimateFileNamesExtensions;
+      } else if (Array.isArray(polymorphicParameter.penultimateFileNamesExtensions)) {
+        penultimateFileNamesExtensions = new Set(polymorphicParameter.penultimateFileNamesExtensions);
+      }
+
     }
-
-
-    let fileNamesExtensions: ReadonlySet<string>;
-
-    if (isUndefined(compoundParameter.fileNamesExtensions)) {
-      fileNamesExtensions = new Set();
-    } else if (compoundParameter.fileNamesExtensions instanceof Set) {
-      fileNamesExtensions = compoundParameter.fileNamesExtensions;
-    } else {
-      fileNamesExtensions = new Set(compoundParameter.fileNamesExtensions);
-    }
-
 
     return [
+
       appendCharacterIfItDoesNotPresentInLastPosition({
-        targetString: replaceDoubleBackslashesWithForwardSlashes(compoundParameter.basicDirectoryPath),
+        targetString: replaceDoubleBackslashesWithForwardSlashes(basicDirectoryPath),
         trailingCharacter: "/"
       }),
+
       "**/*",
-      ...fileNamePostfixes.size > 0 ?
+
+      ...fileNamesPostfixes.size > 0 ?
           [
             `@(${ 
-              Array.from(fileNamePostfixes).
-                join("|").
-                replace(/\./gu, "")
+              Array.from(fileNamesPostfixes).
+                  join("|").
+                  replace(/\./gu, "") 
             })`
           ] :
           [],
+
+      ...penultimateFileNamesExtensions.size > 0 ?
+          [
+            `.@(${
+              Array.from(penultimateFileNamesExtensions).
+                  map(
+                    (penultimateFilenameExtension: string): string => 
+                        removeSpecificCharacterFromCertainPosition({
+                          targetString: penultimateFilenameExtension,
+                          targetCharacter: ".",
+                          fromFirstPosition: true
+                        })
+                  ).
+                  join("|")
+            })`
+          ] :
+          [],
+
+      /* eslint-disable-next-line no-nested-ternary --
+      * Yes, the nested ternary expressions are hard to read and YDEE development side avoiding them as possible,
+      * while here to avoid the nested ternary expression, it is required to extract this part outside the outermost
+      * array expression that will break the sequential expressions' uniformity. */
       ...fileNamesExtensions.size > 0 ?
-          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] : []
+          [ ImprovedGlob.createMultipleFilenameExtensionsGlobPostfix(fileNamesExtensions) ] :
+              penultimateFileNamesExtensions.size > 0 ? [ "/*" ] : []
+
     ].join("");
+
   }
 
-  public static buildExcludingOfDirectoryWithSubdirectoriesGlobSelector(targetDirectoryPath: string): string {
-    return [
-      "!",
-      appendCharacterIfItDoesNotPresentInLastPosition({
-        targetString: replaceDoubleBackslashesWithForwardSlashes(targetDirectoryPath),
-        trailingCharacter: "/"
-      }),
-      "**/*"
-    ].join("");
+
+  /* ┅┅┅ Excluding of Directory with Subdirectories ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+  public static buildExcludingOfDirectoryWithSubdirectoriesGlobSelector(
+    polymorphicParameter:
+      string |
+      Readonly<{
+        targetDirectoryPath: string;
+        fileNamesPostfixes?: ReadonlyArray<string> | ReadonlySet<string>;
+        fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+        penultimateFileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+      }>
+  ): string {
+
+    if (isString(polymorphicParameter)) {
+      return ImprovedGlob.includingGlobSelectorToExcludingOne(
+        ImprovedGlob.buildAllFilesInCurrentDirectoryAndBelowGlobSelector(polymorphicParameter)
+      );
+    }
+
+
+    const {
+      targetDirectoryPath,
+      ...options
+    }: Readonly<{
+      targetDirectoryPath: string;
+      fileNamesPostfixes?: ReadonlyArray<string> | ReadonlySet<string>;
+      fileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+      penultimateFileNamesExtensions?: ReadonlyArray<string> | ReadonlySet<string>;
+    }> = polymorphicParameter;
+
+    return ImprovedGlob.includingGlobSelectorToExcludingOne(
+        ImprovedGlob.buildAllFilesInCurrentDirectoryAndBelowGlobSelector({
+          basicDirectoryPath: targetDirectoryPath,
+          ...options
+        })
+    );
   }
 
   /* [ Theory ] '_**.@(pug)' is the valid alternative of '@(_)**.@(pug)' but only when excluding prefix is single while

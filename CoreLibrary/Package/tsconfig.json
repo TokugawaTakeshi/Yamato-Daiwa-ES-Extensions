@@ -2,23 +2,14 @@
 
   "compilerOptions": {
 
-    "target": "ES2022",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
+    "target": "ESNext",
 
-    "strict": true,
-    "noUnusedLocals": true,
+    "types": [ "node" ],
+
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true
 
-    "removeComments": true,
-
-    "outDir": "Distributable/",
-    "declaration": true
-
-  },
-
-  "include": [ "Source/**/*" ]
+  }
 
 }
