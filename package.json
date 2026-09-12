@@ -5,7 +5,7 @@
     "Desymlinkify Internal Dependencies and Publish": "ydmh publish"
   },
   "devDependencies": {
-    "@yamato-daiwa/monorepo-helper": "../../YamatoDaiwaMonorepoHelper"
+    "@yamato-daiwa/monorepo-helper": "0.3.0"
   },
   "ydmh": {
     "packages": [
