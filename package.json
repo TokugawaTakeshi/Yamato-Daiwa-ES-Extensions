@@ -10,23 +10,23 @@
   "ydmh": {
     "packages": [
       {
-        "relativePath": "CoreLibrary/Package",
+        "relativePath": "Main/Core",
         "productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "BrowserJS/Package",
+        "relativePath": "BrowserJS/Core",
         "productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "NodeJS/Package",
+        "relativePath": "NodeJS/Core",
         "productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "CoreLibrary/OfficialLocalizations/Japanese",
+        "relativePath": "Main/OfficialLocalizations/Japanese",
         "productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "CoreLibrary/OfficialLocalizations/Russian",
+        "relativePath": "Main/OfficialLocalizations/Russian",
         "productionBuildingScript": "Rebuild Distributable"
       }
     ]

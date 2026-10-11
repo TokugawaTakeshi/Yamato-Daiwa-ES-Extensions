@@ -26,16 +26,16 @@ jobs:
         run: node --version
 
       - name: Dependencies Installation
-        run: cd CoreLibrary/Package && npm install
+        run: cd Main/Core && npm install
 
       - name: Types Checking
-        run: cd CoreLibrary/Package && npm run "Check Types"
+        run: cd Main/Core && npm run "Check Types"
 
       - name: Linting
-        run: cd CoreLibrary/Package && npm run "Lint"
+        run: cd Main/Core && npm run "Lint"
 
       - name: Tests
-        run: cd CoreLibrary/Package && npm run "Run Tests"
+        run: cd Main/Core && npm run "Run Tests"
 
   browserJS_PackageQualityInspection:
 
@@ -58,16 +58,16 @@ jobs:
         run: node --version
 
       - name: Dependencies Installation
-        run: cd BrowserJS/Package && npm install
+        run: cd BrowserJS/Core && npm install
 
       - name: Types Checking
-        run: cd BrowserJS/Package && npm run "Check Types"
+        run: cd BrowserJS/Core && npm run "Check Types"
 
       - name: Linting
-        run: cd BrowserJS/Package && npm run "Lint"
+        run: cd BrowserJS/Core && npm run "Lint"
 
       - name: Tests
-        run: cd BrowserJS/Package && npm run "Run Tests"
+        run: cd BrowserJS/Core && npm run "Run Tests"
 
   nodeJS_PackageQualityInspection:
 
@@ -90,13 +90,13 @@ jobs:
         run: node --version
 
       - name: Dependencies Installation
-        run: cd NodeJS/Package && npm install
+        run: cd NodeJS/Core && npm install
 
       - name: Types Checking
-        run: cd NodeJS/Package && npm run "Check Types"
+        run: cd NodeJS/Core && npm run "Check Types"
 
       - name: Linting
-        run: cd NodeJS/Package && npm run "Lint"
+        run: cd NodeJS/Core && npm run "Lint"
 
       - name: Tests
-        run: cd NodeJS/Package && npm run "Run Tests"
+        run: cd NodeJS/Core && npm run "Run Tests"
