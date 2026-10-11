@@ -404,6 +404,8 @@ export {
 /* ┅┅┅ URI ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 /* ╍╍╍ Files and Directories ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
 /* ─── File Name Extensions ───────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addPenultimateFileNameExtension } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/addPenultimateFileNameExtension";
 export { default as appendLastFileNameExtension } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/appendLastFileNameExtension";
 export { default as extractAllFileNameExtensions } from
