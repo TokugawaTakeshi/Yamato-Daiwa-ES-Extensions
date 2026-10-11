@@ -27,7 +27,7 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.replacingOfElements.replaceArrayElementsByIndexesImmutably");
+    YDF.RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.replacingOfElements.replaceArrayElementsByIndexesImmutably");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: routing.english.coreLibrary.$children.functionality.$children.arrays.$children.
@@ -82,7 +82,7 @@ block append SpecificContent
                 index: {
                   localizedInterpretation: "Индекс элемента",
                   type: "number",
-                  numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+                  numbersSet: YDF.RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
                   required: true
                 },
                 newElement: {
@@ -115,7 +115,7 @@ block append SpecificContent
           index: {
             localizedInterpretation: "Индекс",
             type: Number,
-            numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+            numbersSet: YDF.RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
             required: true
           },
           newElement: {

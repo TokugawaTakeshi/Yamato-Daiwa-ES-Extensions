@@ -29,7 +29,7 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.commonScenarios");
+    YDF.RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.commonScenarios");
 
     LanguageDropDownList__YDF_DK.setLinks({
       english: routing.english.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.commonScenarios.$URI,
@@ -143,7 +143,7 @@ block append SpecificContent
                         type: Number,
                         isUndefinedForbidden: true,
                         isNullForbidden: true,
-                        numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber
+                        numbersSet: YDF.RawObjectDataProcessor.NumbersSets.anyRealNumber
                       },
 
                       bravo2: {
@@ -276,7 +276,7 @@ block append SpecificContent
             properties: {
               alpha: {
                 type: Number,
-                numbersSet: RawObjectDataProcessor.NumbersSets.anyRealNumber,
+                numbersSet: YDF.RawObjectDataProcessor.NumbersSets.anyRealNumber,
                 isUndefinedForbidden: true,
                 isNullForbidden: true
               }

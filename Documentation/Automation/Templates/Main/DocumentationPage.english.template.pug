@@ -29,7 +29,7 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("{{ $targetRouteWithoutChildrenPointers }}");
+    YDF.RoutingEmulator.setCurrentRoute("{{ $targetRouteWithoutChildrenPointers }}");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: routing.japanese.{{ $targetRouteWithChildrenPointers }}.$URI,

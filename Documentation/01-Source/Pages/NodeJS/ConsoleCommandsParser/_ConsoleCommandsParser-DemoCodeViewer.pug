@@ -116,13 +116,13 @@ mixin DemoCodeViewer(options)
                   numericOption: {
                     description: "Example numeric option",
                     type: ConsoleCommandsParser.ParametersTypes.number,
-                    numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber,
+                    numbersSet: YDF.RawObjectDataProcessor.NumbersSets.naturalNumber,
                     required: false
                   },
                   limitedNumericOption: {
                     description: "Example numeric option with fixed minimal and maximal value",
                     type: ConsoleCommandsParser.ParametersTypes.number,
-                    numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                    numbersSet: YDF.RawObjectDataProcessor.NumbersSets.anyInteger,
                     required: false,
                     minimalValue: -10,
                     maximalValue: 10
@@ -151,7 +151,7 @@ mixin DemoCodeViewer(options)
                       },
                       bar: {
                         type: RawObjectDataProcessor.ValuesTypesIDs.number,
-                        numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                        numbersSet: YDF.RawObjectDataProcessor.NumbersSets.anyInteger,
                         required: false,
                         minimalValue: 1
                       }

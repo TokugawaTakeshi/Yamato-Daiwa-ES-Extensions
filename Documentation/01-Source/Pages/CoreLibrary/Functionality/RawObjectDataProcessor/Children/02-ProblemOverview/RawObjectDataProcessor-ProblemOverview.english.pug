@@ -31,7 +31,7 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.problemOverview");
+    YDF.RoutingEmulator.setCurrentRoute("coreLibrary.functionality.RawObjectDataProcessor.problemOverview");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.RawObjectDataProcessor.$children.problemOverview.$URI,
@@ -368,7 +368,7 @@ block append SpecificContent
               type: Number,
               isUndefinedForbidden: true,
               isNullForbidden: true,
-              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              numbersSet: YDF.RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
               isNaN_Forbidden: true
             },
             bar: {
@@ -387,13 +387,13 @@ block append SpecificContent
               isUndefinedForbidden: false,
               isNullForbidden: true,
               isNaN_Forbidden: true,
-              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
+              numbersSet: YDF.RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero
             },
             fuga: {
               type: Number,
               isUndefinedForbidden: true,
               isNullForbidden: false,
-              numbersSet: RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
+              numbersSet: YDF.RawObjectDataProcessor.NumbersSets.positiveIntegerOrZero,
               isNaN_Forbidden: true
             },
             quux: {
@@ -405,7 +405,7 @@ block append SpecificContent
                   type: Number,
                   isUndefinedForbidden: true,
                   isNullForbidden: true,
-                  numbersSet: RawObjectDataProcessor.NumbersSets.anyInteger,
+                  numbersSet: YDF.RawObjectDataProcessor.NumbersSets.anyInteger,
                   isNaN_Forbidden: true,
                   minimalValue: 3
                 },

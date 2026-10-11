@@ -29,7 +29,7 @@ block append Metadata
       ]
     });
 
-    RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.creating.createArrayOfNaturalNumbers");
+    YDF.RoutingEmulator.setCurrentRoute("coreLibrary.functionality.arrays.creating.createArrayOfNaturalNumbers");
 
     LanguageDropDownList__YDF_DK.setLinks({
       japanese: routing.japanese.coreLibrary.$children.functionality.$children.arrays.$children.creating.$children.
@@ -70,12 +70,12 @@ block append SpecificContent
         propertiesSpecification: {
           elementsCount: {
             type: Number,
-            numbersSet: RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
+            numbersSet: YDF.RawObjectDataProcessor.NumbersSets.nonNegativeInteger,
             required: true
           },
           startingNumber: {
             type: Number,
-            numbersSet: RawObjectDataProcessor.NumbersSets.naturalNumber,
+            numbersSet: YDF.RawObjectDataProcessor.NumbersSets.naturalNumber,
             required: false
           },
           isDescendingOrder: {
