@@ -4,7 +4,7 @@ $projectBuilding:
 
     $publicDirectoriesRelativePaths: { $production: 03-ProductionBuild }
 
-    $filesWatching: { $relativePathsOfExcludeDirectories: [ 03-ProductionBuild ] }
+    $filesWatching: { $excludeDirectoriesWithPathsRelativeToProjectRootDirectory: [ 03-ProductionBuild ] }
 
     $processingOnDemand:
       $enabled: false
