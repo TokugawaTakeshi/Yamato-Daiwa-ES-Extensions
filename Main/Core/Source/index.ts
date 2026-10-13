@@ -46,6 +46,10 @@ export {
 /* ┅┅┅ Permutations of Elements ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as moveArrayElementToOnePosition } from "./Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition";
 export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
+export {
+  ObjectTypeElementsArrayOrdererByMultipleFields,
+  default as orderArrayOfObjectTypeElementsByMultipleFields
+} from "./Arrays/06-PermutationsOfElements/ObjectTypeElementsArrayOrdererByMultipleFields";
 
 /* ┅┅┅ Removing of Elements ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as removeArrayElementsByIndexes, type RemovingOfArrayElementsByIndexes } from
