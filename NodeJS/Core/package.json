@@ -46,10 +46,18 @@
     "@types/node": "22.15.31",
     "@types/yamljs": "0.2.34",
     "@yamato-daiwa/es-extensions": "../../Main/Core",
-    "@yamato-daiwa/style_guides": "0.14.4",
+    "@yamato-daiwa/style_guides": "0.15.0",
     "rimraf": "6.1.3",
-    "tsx": "4.23.12",
+    "tsx": "4.23.15",
     "typescript": "6.0.3"
+  },
+  "overrides": {
+    "yamljs": {
+      "argparse": "3.0.3"
+    }
+  },
+  "allowScripts": {
+    "esbuild": true
   },
   "scripts": {
     "Check Types": "tsc --noEmit",
