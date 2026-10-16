@@ -29,6 +29,16 @@ npm i @yamato-daiwa/es-extensions -E
 ```
 
 ## Documentation
+### Table of Contents
+
++ Get Started
+  + [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
+  + [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
+  + [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
+  + [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
++ <a href="#AJAX">AJAX</a>
+  + <a href="#AJAX_ServiceClass"><code>AJAX_Service</code> Class</a>
++ <a href="#Arrays">Arrays</a>
 
 ### Getting Started
 
@@ -37,8 +47,562 @@ npm i @yamato-daiwa/es-extensions -E
 + [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
 + [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
 
+<h3 id="AJAX">AJAX</h3>
+<h4 id="AJAX_ServiceClass"><code>AJAX_Service</code> Class</h4>
 
-### AJAX
+The facade for the convenient usage of [AJAX](https://developer.mozilla.org/en-US/docs/Glossary/AJAX") with maximal 
+  type-safety and less code.
+
++ Integrated with [RawObjectDataProcessor](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html)
+    for validation and, if required, processing of the response data.
++ Needs some implementation, but there is [FetchAPI_Service](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html),
+    the pre-made one.
+
+
+##### Public Static Fields
+
+<dl>
+
+  <dt><code>implementation</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd><code>AJAX_Service | null</code></dd>
+      <dt>Initial Value</dt>
+      <dd><code>null</code></dd>
+      <dt>Description</dt>
+      <dd>
+        Intended to be assigned with some inheritor of <code>AJAX_Service</code>, for example,
+          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html">FetchAPI_Service</a>.
+        It must be done before any other usage of <code>AJAX_Service</code>.  
+      </dd>
+    </dl>
+    
+  </dd>
+
+</dl>
+
+
+##### Protected Static Fields
+
+<dl>
+
+  <dt><code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd><code>string | null</code></dd>
+      <dt>Initial Value</dt>
+      <dd><code>null</code></dd>
+      <dt>Valid Value Example</dt>
+      <dd><code>https://example.com/api</code></dd>
+      <dt>Description</dt>
+      <dd>
+        Intended to be specified with the origin and, optioonally, partial path (like <code>/api</code>) via 
+          <code>API_SERVER_URI_CONSTANT_PART</code>, the public static setter.
+        <ul>
+          <li>If not specified, the call some API, the full request URI must be specified each time.</li>
+          <li>
+            As it following from the property name, the trailing shash is not required, but even it presents,
+              it will be correctly processed.
+          </li>
+        </ul>
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>URI_QueryParametersSerializer</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd><code>(URI_QueryParameters: ReadonlyParsedJSON) => string</code></dd>
+      <dt>Initial Value</dt>
+      <dd><code>serializeURI_QueryParameters</code></dd>
+      <dt>Description</dt>
+      <dd>
+        The function accepting the JSON-compatible object and returting the query string without leanding question mark.
+        Currently, the default implementation does not support the serialization of nested object/arrays, but the
+          <a href="https://www.npmjs.com/package/qs">qs</a> is the good option.
+      </dd>
+    </dl>
+  </dd>
+
+</dl>
+
+
+##### Public Static Setters
+
+<dl>
+
+  <dt><code>API_SERVER_URI_CONSTANT_PART</code></dt>
+  <dd>
+    Intended to be specified with the origin and, optioonally, partial path (like <code>/api</code>) 
+      <code>API_SERVER_URI_CONSTANT_PART</code>.
+    The trailing slash is optional.
+  </dd>
+
+</dl>
+
+
+##### Public Static Methods
+###### `setup`
+
+```
+(
+  properties: {
+    implementation?: AJAX_Service;
+    API_ServerURI_ConstantPart?: string;
+    URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
+  }
+) => void
+```
+
+Allows to initialize the facade at once.
+It is recommended to call this method in the entry point before any other usage.
+
+<dl>
+
+  <dt>Parameters</dt>
+  <dd>
+    <ol>
+      <li>
+        <dl>
+          <dt>Generic Name</dt>
+          <dd>Properties</dd>
+          <dt>Type</dt>
+          <dd><code>object</code></dd>
+          <dt>Schema</dt>
+          <dd>
+            <pre><code>
+{
+  implementation?: AJAX_Service;
+  API_ServerURI_ConstantPart?: string;
+  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
+}
+            </code></pre>
+          </dd>
+        </dl>
+      </li>
+    </ol>
+  </dd>
+
+  <dt>Is required</dt>
+  <dd>No</dd>
+
+  <dt>Schema<dt>
+  <dd><pre><code>
+{
+  presetFileRelativePath?: string;
+  enable?: boolean;
+}
+  </code></pre></dd>
+
+</dl>
+
+
+###### `retrieveData`
+
+```
+<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+  compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
+) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>
+```
+
+Retrieving the data, then validates it by 
+  [RawObjectDataProcessor](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html).
+
++ The data retrieving behavior is implementation-dependent, but the data validation behavior is common.
++ The implementation will fail the data retrieving with an error, the `DataRetrievingFailedError` will be thrown.
++ If the data will not pass the validation, the `InvalidExternalDataError` will be thrown.
+
+The implementation must support the following options:
+
+```typescript
+type CompoundParameter =
+  
+    URI_PathRawDefinition &
+    
+    URI_QueryParametersDefinition &
+    
+    Readonly<{
+      HTTP_Method?: HTTP_Methods;
+      HTTP_Headers?: HTTP_Headers;
+      validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
+      mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+    }>;
+```
+
+where
+
+```typescript
+type URI_PathRawDefinition = Readonly<
+  { alternatingURI_PathPart: string; } |
+  { specificURI_UntilPath: string; }
+>;
+
+type URI_QueryParametersDefinition = Readonly<{
+  URI_QueryParameters?: Readonly<ReadonlyParsedJSON_Object>;
+  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
+}>;
+```
+
+The return value is represented by the object will following schema:
+
+```typescript
+type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
+  
+    Readonly<(
+      (
+        {
+          isSuccessful: true;
+          data: ResponseData;
+        } |
+        (
+          { isSuccessful: false; } &
+          (
+            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+            { errorTextPayload: string; }
+          )
+        )
+      ) &
+      {
+        HTTP_Status: number;
+        HTTP_Headers: HTTP_Headers;
+      }
+    )>;
+```
+
+
+###### `submitData`
+
+```
+/* [ Overload No. 1 ] Validation of Response Data */
+(
+  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
+
+
+/* [ Overload No. 2 ] No response data expected */
+(
+  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
+) => Promise<AJAX_Service.ObjectDataResponse>
+```
+
+Submitting the data and, optionally, do the same things with response data as `retrieveData` method.
+
+For the case with response data, the implementation must support the following options:
+
+```typescript
+export type CompoundParameter =
+  URI_PathRawDefinition &
+  URI_QueryParametersDefinition &
+  Readonly<{
+    HTTP_Method?: HTTP_Methods;
+    HTTP_Headers?: HTTP_Headers;
+    requestData: Readonly<ReadonlyParsedJSON_Object>;
+    validResponseDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+  }>;
+```
+
+where 
+
+```typescript
+type URI_PathRawDefinition = Readonly<
+  { alternatingURI_PathPart: string; } |
+  { specificURI_UntilPath: string; }
+>;
+
+type URI_QueryParametersDefinition = Readonly<{
+  URI_QueryParameters?: Readonly<ReadonlyParsedJSON_Object>;
+  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
+}>;
+```
+
+For the case without response data, the parameter will not have `validResponseDataSpecification` property:
+
+```typescript
+export type CompoundParameter =
+  URI_PathRawDefinition &
+  URI_QueryParametersDefinition &
+  Readonly<{
+    HTTP_Method?: HTTP_Methods;
+    HTTP_Headers?: HTTP_Headers;
+    requestData: Readonly<ReadonlyParsedJSON_Object>;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+  }>;
+```
+
+In any case, the return value is represented by the object of the following schema:
+
+```typescript
+export type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
+    Readonly<(
+      (
+        {
+          isSuccessful: true;
+          data: ResponseData;
+        } |
+        (
+          { isSuccessful: false; } &
+          (
+            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+            { errorTextPayload: string; }
+          )
+        )
+      ) &
+      {
+        HTTP_Status: number;
+        HTTP_Headers: HTTP_Headers;
+      }
+    )>;
+```
+
+This way, when `validResponseDataSpecification` not specified, the `data` property of the return value
+  will have `PossiblyReadonlyParsedJSON` type.
+
+
+###### `retrieveText`
+
+```
+(
+  compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
+) => Promise<AJAX_Service.TextDataResponse>
+```
+
+Retrieve the text data including the HTML code.
+
+The implementation must support the following options:
+
+```typescript
+export type CompoundParameter =
+  URI_PathRawDefinition &
+  URI_QueryParametersDefinition &
+  Readonly<{
+    HTTP_Method?: HTTP_Methods;
+    HTTP_Headers?: HTTP_Headers;
+    requestData?: ReadonlyParsedJSON_Object;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
+  }>;
+```
+
+The return value will be represented by the object of the following scema:
+
+```typescript
+export type TextDataResponse = Readonly<
+  (
+    {
+      isSuccessful: true;
+      text: string;
+    } |
+    (
+      { isSuccessful: false; } &
+      (
+        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+        { errorTextPayload: string; }
+      )
+    )
+  ) &
+  {
+    HTTP_Status: number;
+    HTTP_Headers: HTTP_Headers;
+  }
+>;
+```
+
+
+##### Protected Abstract Methods
+###### `retrieveResponseWithRawObjectData`
+
+```
+(
+  compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
+) => Promise<AJAX_Service.RawObjectDataResponse>
+```
+
+The implementation of this method must retrieve the data corresponding to passed options without validation yet:
+
+```typescript
+namespace RawObjectDataRetrieving {
+
+  export type CompoundParameter = {
+    URI: string;
+    HTTP_Method: HTTP_Methods;
+    HTTP_Headers: HTTP_Headers;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
+  };
+
+}
+```
+
+The response must have the following schema:
+
+```typescript
+type RawObjectDataResponse = 
+  
+  (
+    {
+      isSuccessful: true;
+      data: PossiblyReadonlyParsedJSON;
+    } |
+    (
+      { isSuccessful: false; } &
+      (
+        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+        { errorTextPayload: string; }
+      )
+    )
+  ) &
+    
+  {
+    HTTP_Status: number;
+    HTTP_Headers: HTTP_Headers;
+  }
+```
+ 
+[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L15-L69) 
+  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
+
+
+###### `submitAndGetRawResponseDataIfAvailable`
+
+```
+(
+  compoundParameter: AJAX_Service.GeneralizedObjectDataSubmitting.CompoundParameter
+) => Promise<AJAX_Service.RawObjectDataResponse>
+```
+
+The implementation of this method must submit the data corresponding to passed options, then
+  process the response data if presents, but without validation yet.
+
+```typescript
+namespace GeneralizedObjectDataSubmitting {
+
+  export type CompoundParameter = {
+    URI: string;
+    HTTP_Method: HTTP_Methods;
+    HTTP_Headers: HTTP_Headers;
+    requestData: ReadonlyParsedJSON;
+    mustExpectResponseData: boolean;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
+  };
+
+}
+```
+
+The response must have the following schema:
+
+```typescript
+type RawObjectDataResponse = 
+  
+  (
+    {
+      isSuccessful: true;
+      data: PossiblyReadonlyParsedJSON;
+    } |
+    (
+      { isSuccessful: false; } &
+      (
+        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+        { errorTextPayload: string; }
+      )
+    )
+  ) &
+    
+  {
+    HTTP_Status: number;
+    HTTP_Headers: HTTP_Headers;
+  }
+```
+
+If no response data come, provide the empty object.
+
+[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L71-L130) 
+  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
+
+
+###### `retrieveResponseWithTextData`
+
+```
+(
+  compoundParameter: AJAX_Service.TextDataRetrieving.NormalizedCompoundParameter
+) => Promise<AJAX_Service.TextDataResponse>
+```
+
+The implementation of this method must retrieve the text data corresponding to passed options:
+
+```typescript
+namespace TextDataRetrieving {
+
+  export type NormalizedCompoundParameter = {
+    URI: string;
+    HTTP_Method: HTTP_Methods;
+    HTTP_Headers: HTTP_Headers;
+    requestData?: ReadonlyParsedJSON_Object;
+    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
+  };
+
+}
+```
+
+The response must have the following schema:
+
+```typescirpt
+export type TextDataResponse =
+
+  (
+    {
+      isSuccessful: true;
+      text: string;
+    } |
+    (
+      { isSuccessful: false; } &
+      (
+        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+        { errorTextPayload: string; }
+      )
+    )
+  ) &
+  
+  {
+    HTTP_Status: number;
+    HTTP_Headers: HTTP_Headers;
+  };
+```
+
+[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L132-L205) 
+  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
+
+
+<dl>
+
+  <dt><code>alternatingURI_PathPart</code></dt>
+  <dd>
+    <dl>
+    <dt>Type</dt>
+    <dd><code>string</code></dd>
+    <dt>Is required</dt>
+    <dd>No</dd>
+    <dt>Valid value example</dt>
+    <dd><code>"api/products/2"</code></dd>
+    <dt>Description</dt>
+    <dd>
+      Will be appended to <code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code> which may be defined via
+        configuration.
+      If <code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code> has not been defined but 
+        <code>alternatingURI_PathPart</code> option has been used, the <code>InvalidConfigError</code> will be thrown.
+    </dd>
+    </dl>
+  </dd>
+
+</dl>
+
+
+##### Public Instance Methods
+###### `retrieveData`
+
+[//]: # (TODO)
+
 
 <dl>
 
@@ -77,8 +641,8 @@ npm i @yamato-daiwa/es-extensions -E
 
 </dl>
 
+<h3 id="Arrays">Arrays</h3>
 
-### Arrays
 #### Creating
 
 <dl>
@@ -739,46 +1303,575 @@ npm i @yamato-daiwa/es-extensions -E
 
 ### Data Mocking
 
-+ [`DataMocking` Class/Namespace](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/DataMocking/DataMocking.ts)
-+ [`MockGatewayHelper` Class/Namespace](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Source/DataMocking/MockGatewayHelpler/MockGatewayHelper.ts)
+#### `DataMocking` Class/Namespace
+
++ The class is abstract, the instance can be created only with violating of the TypeScript type checking.
++ The namespace stores `OptionalPropertiesDecisionStrategies` enumeration.
 
 
-### Date and Time
+##### Public Static Methods
+###### `decideOptionalValue`
+
+```
+<ValueType>(
+  sourceDataAndOptions: Readonly<{
+    strategy: DataMocking.OptionalPropertiesDecisionStrategies;
+    randomValueGenerator: () => ValueType;
+    preDefinedValue?: ValueType;
+  }>
+): ValueType | undefined
+```
+
+When mocking the object with optional properties, for each optional property you can do one of the following:
+
++ Generate the value for the optional property
++ Do not generate the value for the optional property
++ Generate the value for the optional property with or not generate it randomly with specific probability
+
+Additionally, the value for the optional property can be specified explicitly instead of generating of random value.
+It is useful when you want to test, for example, the searching of some item by its description.
+
+`decideOptionalValue` method allows to generate or not generate the value for random optional property
+  depending on selected strategy.
+This method has the single parameter of the object type with the following properties:
 
 <dl>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/CalendarBuilder.ts">
-      <code>CalendarBuilder</code>
-    </a>
-  </dt>
+  <dt><code>strategy</code></dt>
   <dd>
-    Generates a flat array of 42 elements or 6x7 two-dimensional array for filling of calendar page.
-    Besides, Sunday any day of week can be specified as first day of week.
+    <dl>
+      <dt>Type</dt>
+      <dd><code>DataMocking.OptionalPropertiesDecisionStrategies</code></dd>
+      <dt>Is required</dt>
+      <dd>Yes</dd>
+      <dt>Description<dt>
+      <dd>
+        Specifying the strategy basing on which the optoinal property must be provided or not provided.
+        <dl>
+          <dt><code>OptionalPropertiesDecisionStrategies.mustGenerateAll</code></dt>
+          <dd>If <code>preDefinedValue</code> not specified, the random value will be generated.</dd>
+          <dt><code>OptionalPropertiesDecisionStrategies.mustGenerateWith50PercentageProbability</code></dt>
+          <dd>The random value will be generated with 50% probability herewith <code>preDefinedValue</code> will not be used even if defined.</dd>
+          <dt><code>OptionalPropertiesDecisionStrategies.mustSkipIfHasNotBeenPreDefined</code></dt>
+          <dd>If <code>preDefinedValue</code> not specified, the random value will not be generated.</dd>
+        </dl>
+      </dd>
+    </dl>
   </dd>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/convert24_HoursFormatTo12_HoursFormat.ts">
-      <code>convert24_HoursFormatTo12_HoursFormat</code>
-    </a>
-  </dt>
+  <dt><code>randomValueGenerator</code></dt>
   <dd>
-    As it obvious from the name, converts the hours amount from 24-hour format to 12-hour format.
-    Of course, besides the amount it also will be returned the boolean values to identify is amount corresponding to
-      before or after midnight.
+    <dl>
+      <dt>Type</dt>
+      <dd>Function</dd>
+      <dt>Signature</dt>
+      <dd><code>() => ValueType;</code></dd>
+      <dt>Is required</dt>
+      <dd>Yes</dd>
+      <dt>Description<dt>
+      <dd>Must generate the random value, but will be invoked only when this value actually must be generated.</dd>
+    </dl>
   </dd>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Documentation/DateTime/DateWithoutTime.md">
-      <code>DateWithoutTime</code>
-    </a>
-  </dt>
+  <dt><code>preDefinedValue</code></dt>
   <dd>
-    An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
-    As it obvious from the name, works only with date not associated with specific time zone and does not work with time.
-    The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
-      target date with optimized computing.
+    <dl>
+      <dt>Type</dt>
+      <dd>(As specified via generic parameter)</dd>
+      <dt>Is required</dt>
+      <dd>No</dd>
+      <dt>Description<dt>
+      <dd>Will be used instead of generating of a random value.</dd>
+    </dl>
   </dd>
+
+</dl>
+
+
+#### `MockGatewayHelper` Class/Namespace 
+
+Mocking the data, usually we need more that just the data.
+Additionally, we may need:
+
++ Simulate the data retrieving state, herewith adjust the time (for example, to check is loading placeholder displays correctly)
++ Simulate the data retrieving failure to check does application handles the error correctly.
+
+This is for what `MockGatewayHelper` class designed.
+
+
+##### Public Static Fields
+###### `localization`
+
+<dl>
+
+  <dt>Type</dt>
+  <dd><code>MockGatewayHelper.Localization</code></dd>
+
+  <dt>Is required</dt>
+  <dd>Yes</dd>
+
+  <dt>Default Value<dt>
+  <dd><code>MockGatewayHelperLocalization__English</code></dd>
+
+</dl>
+
+Used for generating of the messages to output them to console.
+Although the English reading skills are required in software development, the usage of native language will make 
+  professional growing faster for the engineers which are not English native speakers.
+
+```typescript
+type Localization = Readonly<{
+
+  generateErrorSimulationCompletedLog: (
+    compoundParameter: Localization.ErrorSimulationCompletedLog.CompoundParameter
+  ) => string;
+
+  generateDataRetrievingSimulationCompletedLog: (
+    compoundParameter: Localization.DataRetrievingSimulationCompletedLog.CompoundParameter
+  ) => Localization.DataRetrievingSimulationCompletedLog;
+
+  generateDataSubmittingSimulationCompletedLog: (
+    compoundParameter: Localization.DataSubmittingSimulationCompletedLog.CompoundParameter
+  ) => Localization.DataSubmittingSimulationCompletedLog;
+
+}>;
+
+namespace Localization {
+
+  export namespace ErrorSimulationCompletedLog {
+
+    export type CompoundParameter = Readonly<{
+      gatewayName: string;
+      transactionName: string;
+    }>;
+
+  }
+
+
+  export type DataRetrievingSimulationCompletedLog = Pick<SuccessLog, "title" | "description">;
+
+  export namespace DataRetrievingSimulationCompletedLog {
+
+    export type CompoundParameter = Readonly<{
+      gatewayName: string;
+      transactionName: string;
+      formattedRequestParameters?: string;
+      formattedResponseData?: string;
+    }>;
+
+  }
+
+
+  export type DataSubmittingSimulationCompletedLog = Pick<SuccessLog, "title" | "description">;
+
+  export namespace DataSubmittingSimulationCompletedLog {
+
+    export type CompoundParameter = Readonly<{
+      gatewayName: string;
+      transactionName: string;
+      formattedRequestData?: string;
+      formattedResponseData?: string;
+    }>;
+
+  }
+
+}
+```
+
+##### Public Static Methods
+###### `simulateDataRetrieving`
+
+```
+(
+  dataRetrievingSimulationConfiguration: MockGatewayHelper.
+      DataRetrievingSimulationConfiguration<RequestParameters, ResponseData>
+) => Promise<ResponseData>
+```
+
+Simulates the data retrieving; here the simulation means that your mock data will be returned
+  asynchronously (within the period depending on adjusted minimal and maximal value) as when it
+  comes from the server.
+Additionally, the error can be simulated.
+
+The single parameter has the object type of the following schema:
+
+<dl>
+
+  <dt><code>requestParameters</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Object</dd>
+      <dt>Schema</dt>
+      <dd>Generic</dd>
+      <dt>Is Required</dt>
+      <dd>Yes</dd>
+      <dt>Description</dt>
+      <dd>Will be used only for logging when the logging is enabled.</dd>
+    </dl>
+  </dd>
+
+  <dt><code>getResponseData</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Function</dd>
+      <dt>Parameters</dt>
+      <dd>No</dd>
+      <dt>Return Value</dt>
+      <dd>Your response data (intended to be mocked)</dd>
+      <dt>Description</dt>
+      <dd>
+        This function will be executed only when <code>mustSimulateError</code> option set to <code>false</code> 
+          (or not set).
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>minimalPendingPeriod__seconds</code></dt>
+  <dt><code>maximalPendingPeriod__seconds</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Number</dd>
+      <dt>Number Set</dt>
+      <dd>Any positive number</dd>
+      <dt>Default value</dt>
+      <dd>
+        <code>1</code> for <code>minimalPendingPeriod__seconds</code> and  
+          <code>2</code> for <code>maximalPendingPeriod__seconds</code>
+      </dd>
+      <dt>Description</dt>
+      <dd>
+        Used to simulate the asynchronous behavior (delay) during the data retrieving.
+        Actual period will be a random integer, but not smaller than <code>minimalPendingPeriod__seconds</code>
+          and not greater than <code>maximalPendingPeriod__seconds</code>. 
+        <code>getResponseData</code> function will be invoked once this period will elapsed.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>mustSimulateError</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Boolean</dd>
+      <dt>Default Value</dt>
+      <dd><code>false</code></dd>
+      <dt>Description</dt>
+      <dd>
+        If set to <code>true</code>, then <code>DataRetrievingFailedError</code> will be thrown
+          once simulated loading will end, and <code>getResponseData</code> will not be invoked.
+        Intended to be used for the testing how your application will react on error.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>mustLogResponseData</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Boolean</dd>
+      <dt>Default Value</dt>
+      <dd><code>false</code></dd>
+      <dt>Description</dt>
+      <dd>
+        If set to <code>true</code>, then formatted response data will be output to console, but this fromatted
+          data can to loo large and possibly truncated by the console.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>gatewayName</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>String</dd>
+      <dt>Minimal Characters Count</dt>
+      <dd>Not strictly limited but should represent the meaningful name</dd>
+      <dt>Description</dt>
+      <dd>
+        Used for logging only.
+        Basically the name of class or interfance related with exchage of specifc data, e. g. 
+          <code>ProductGateway</code>, <code>UserGateway</code> etc.  
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>transactionName</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>String</dd>
+      <dt>Minimal Characters Count</dt>
+      <dd>Not strictly limited but should represent the meaningful name</dd>
+      <dt>Description</dt>
+      <dd>
+        Used for logging only.
+        Basically the name of function/method which retrieving the data, or the name of transaction, e. g.
+          "productRetrieving", "Retrieving of User By ID" etc.
+      </dd>
+    </dl>
+  </dd>
+
+</dl>
+
+
+###### `simulateDataSubmitting`
+
+```
+(
+  dataSubmittingSimulationConfiguration: MockGatewayHelper.
+      DataSubmittingSimulationConfiguration<RequestData, ResponseData>
+) => Promise<ResponseData>
+```
+
+Simulates the data submitting and, optionally, retrieving of response data; here the simulation means that your mock 
+  data will be returned asynchronously (within the period depending on adjusted minimal and maximal value) as when it
+  comes from the server.
+Additionally, the error can be simulated.
+
+Well, this method doing same this as `simulateDataRetrieving` - the difference is the naming rather than
+  behavior.
+For instance, the argument of `simulateDataRetrieving` has `requestParameters` property while the
+  argument of `simulateDataSubmitting` has `requestData` property.
+The logging message also will be a little bit different.
+
+The single parameter has the object type of the following schema:
+
+<dl>
+
+  <dt><code>requestData</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Object</dd>
+      <dt>Schema</dt>
+      <dd>Generic</dd>
+      <dt>Is Required</dt>
+      <dd>Yes</dd>
+      <dt>Description</dt>
+      <dd>Will be used only for logging when the logging is enabled.</dd>
+    </dl>
+  </dd>
+
+  <dt><code>getResponseData</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Function</dd>
+      <dt>Parameters</dt>
+      <dd>No</dd>
+      <dt>Return Value</dt>
+      <dd>Your response data (intended to be mocked)</dd>
+      <dt>Description</dt>
+      <dd>
+        This function will be executed only when <code>mustSimulateError</code> option set to <code>false</code> 
+          (or not set).
+        If the transaction intended only to submit the data but not expect any response data, return the null, or empty
+          array, or like.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>minimalPendingPeriod__seconds</code></dt>
+  <dt><code>maximalPendingPeriod__seconds</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Number</dd>
+      <dt>Number Set</dt>
+      <dd>Any positive number</dd>
+      <dt>Default value</dt>
+      <dd>
+        <code>1</code> for <code>minimalPendingPeriod__seconds</code> and  
+          <code>2</code> for <code>maximalPendingPeriod__seconds</code>
+      </dd>
+      <dt>Description</dt>
+      <dd>
+        Used to simulate the asynchronous behavior (delay) during the data retrieving.
+        Actual period will be a random integer, but not smaller than <code>minimalPendingPeriod__seconds</code>
+          and not greater than <code>maximalPendingPeriod__seconds</code>. 
+        <code>getResponseData</code> function will be invoked once this period will elapsed.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>mustSimulateError</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Boolean</dd>
+      <dt>Default Value</dt>
+      <dd><code>false</code></dd>
+      <dt>Description</dt>
+      <dd>
+        If set to <code>true</code>, then <code>DataRetrievingFailedError</code> will be thrown
+          once simulated loading will end, and <code>getResponseData</code> will not be invoked.
+        Intended to be used for the testing how your application will react on error.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>mustLogResponseData</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>Boolean</dd>
+      <dt>Default Value</dt>
+      <dd><code>false</code></dd>
+      <dt>Description</dt>
+      <dd>
+        If set to <code>true</code>, then formatted response data will be output to console, but this fromatted
+          data can to loo large and possibly truncated by the console.
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>gatewayName</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>String</dd>
+      <dt>Minimal Characters Count</dt>
+      <dd>Not strictly limited but should represent the meaningful name</dd>
+      <dt>Description</dt>
+      <dd>
+        Used for logging only.
+        Basically the name of class or interfance related with exchage of specifc data, e. g. 
+          <code>ProductGateway</code>, <code>UserGateway</code> etc.  
+      </dd>
+    </dl>
+  </dd>
+
+  <dt><code>transactionName</code></dt>
+  <dd>
+    <dl>
+      <dt>Type</dt>
+      <dd>String</dd>
+      <dt>Minimal Characters Count</dt>
+      <dd>Not strictly limited but should represent the meaningful name</dd>
+      <dt>Description</dt>
+      <dd>
+        Used for logging only.
+        Basically the name of function/method which retrieving the data, or the name of transaction, e. g.
+          "productAdding", "Updating of User By ID" etc.
+      </dd>
+    </dl>
+  </dd>
+
+</dl>
+
+
+### Date and Time
+#### `CalendarBuilder` class
+
+To display all days any month of any year, you need 6 rows × 7 columns = 42 cell table.
+Each cell will include the data (number of day in month) - mostly of current month, but maybe also 
+  the last days of previous month and/or first days of next month.
+You may want to display them if developing the calendar for the GUI application, or just compute something
+  based on these days - anyway first you need the array of above numbers, and this is on what `CalendarBuilder`
+  specialized.
+
+
+##### Public Static Methods
+###### `generateDataFor42DaysMatrix`
+
+```
+(
+  compoundParameter: 
+      { targetYear: number; } &
+      (
+        { targetMonthNumber__numerationFrom0: number; } |
+        { targetMonthNumber__numerationFrom1: number; } |
+        { targetMonthName: MonthsNames; }
+      ) &
+      (
+        { firstDayOfWeek__numerationFrom0ForSunday: number; } |
+        { firstDayOfWeek__numerationFrom1ForSunday: number; } |
+        { firstDayOfWeek: DaysOfWeekNames; }
+      )
+) => 
+    Array<{
+      year: number;
+      monthNumber__numerationFrom0: number;
+      monthNumber__numerationFrom1: number;
+      monthName: MonthsNames;
+      dayOfMonth: number;
+      dayOfWeekName: DaysOfWeekNames;
+      dayOfWeekNumber__numerationFrom0ForSunday: number;
+    }>
+```
+
+Returns the array with data of 42 dates for specified year, month and first day of week
+  (not all countries has Sunday as standardized first day of week).
+The data for each date includes the year, month, day of month and day of week represented with difference forms.
+
+
+###### `generateDataFor6x7DaysMatrix`
+
+```
+(
+  compoundParameter: 
+      { targetYear: number; } &
+      (
+        { targetMonthNumber__numerationFrom0: number; } |
+        { targetMonthNumber__numerationFrom1: number; } |
+        { targetMonthName: MonthsNames; }
+      ) &
+      (
+        { firstDayOfWeek__numerationFrom0ForSunday: number; } |
+        { firstDayOfWeek__numerationFrom1ForSunday: number; } |
+        { firstDayOfWeek: DaysOfWeekNames; }
+      )
+) => 
+    Array<
+      Array<{
+        year: number;
+        monthNumber__numerationFrom0: number;
+        monthNumber__numerationFrom1: number;
+        monthName: MonthsNames;
+        dayOfMonth: number;
+        dayOfWeekName: DaysOfWeekNames;
+        dayOfWeekNumber__numerationFrom0ForSunday: number;
+      }>
+    >
+```
+
+Returns same data as `generateDataFor42DaysMatrix` but exploded to 6 array of 7 elements corresponding to calendar cells.
+
+
+##### `convert24_HoursFormatTo12_HoursFormat`
+
+```
+(hoursAmount__24Format: number) => 
+    {
+      hoursAmount__12HoursFormat: number;
+      isBeforeNoon: boolean;
+      isAfterNoon: boolean;
+    }
+```
+
+As it obvious from the name, converts the hours amount from 24-hour format to 12-hour format.
+Of course, besides the amount it also will be returned the boolean values to identify is amount corresponding to
+  before or after midnight.
+
+The type definition of return value available as `ConvertingOf24_HoursFormatTo12_HoursFormat.Result`.
+
+
+##### `DateWithoutTime`
+
+An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
+As it obvious from the name, works only with date not associated with specific time zone and does not work with time.
+The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
+  target date with optimized computing.
+
+[📖 Main Article](Documentation/DateTime/DateWithoutTime.md)
+
+
+[//]: # (再開)
+
+<dl>
 
   <dt>
     <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">
