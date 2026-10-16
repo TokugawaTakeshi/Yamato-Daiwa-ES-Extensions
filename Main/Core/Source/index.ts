@@ -375,6 +375,7 @@ export { default as createSetBasedOnAnyArrayLikeCollection } from "./Sets/create
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
 export { default as getOneElementOfSet } from "./Sets/getOneElementOfSet";
 export { default as mergeSets } from "./Sets/mergeSets";
+export { default as removeElementsFromSet } from "./Sets/removeElementsFromSet";
 export { default as removeOneElementFromSet, type RemovingOfOneElementFromSet } from "./Sets/removeOneElementOfSet";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
 
