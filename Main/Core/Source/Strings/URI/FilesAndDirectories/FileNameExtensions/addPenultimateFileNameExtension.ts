@@ -1,17 +1,16 @@
-import {
-  removeSpecificCharacterFromCertainPosition,
-  type ExtractingOfMatchingsWithRegularExpression,
-  extractMatchingsWithRegularExpression,
-  splitString,
-  addElementsToArray
-} from "../../../../index";
+import removeSpecificCharacterFromCertainPosition from "../../../removeSpecificCharacterFromCertainPosition";
+import extractMatchingsWithRegularExpression, { type ExtractingOfMatchingsWithRegularExpression } from
+    "../../../RegularExpressions/extractMatchingsWithRegularExpression";
+import splitString from "../../../splitString";
+import addElementsToArray from "../../../../Arrays/04-AddingOfElements/addElementsToArray";
 
 
 export default function addPenultimateFileNameExtension(
   {
     targetPath,
     targetFileNamePenultimateExtensionWithOrWithoutLeadingDot,
-    mustAppendDuplicateEvenIfTargetPenultimateFileNameExtensionAlreadyExist
+    mustAppendDuplicateEvenIfTargetPenultimateFileNameExtensionAlreadyExist,
+    mustAppendLastFileNameExtensionInsteadIfThereIsNoOne
   }: Readonly<{
     targetPath: string;
     targetFileNamePenultimateExtensionWithOrWithoutLeadingDot: string;
@@ -20,36 +19,49 @@ export default function addPenultimateFileNameExtension(
   }>
 ): string {
 
-  const targetFileNamePenultimateExtensionWithoutLeadingDot: string = removeSpecificCharacterFromCertainPosition({
-    targetString: targetFileNamePenultimateExtensionWithOrWithoutLeadingDot,
-    targetCharacter: ".",
-    fromFirstPosition: true
-  });
+  const targetFileNamePenultimateExtensionWithoutLeadingDot: string =
+      removeSpecificCharacterFromCertainPosition({
+        targetString: targetFileNamePenultimateExtensionWithOrWithoutLeadingDot,
+        targetCharacter: ".",
+        fromFirstPosition: true
+      });
 
   if (!targetPath.includes(".")) {
 
       const {
         updatedString: targetPathWithoutFragment,
         extractedMatching: targetPathFragmentWithLeadingHash
-      }: ExtractingOfMatchingsWithRegularExpression.NullableResult = extractMatchingsWithRegularExpression(
-        targetPath, /#.+$/u, { mustExpectOneOrZeroMatchings: true }
-      );
+      }: ExtractingOfMatchingsWithRegularExpression.NullableResult =
+          extractMatchingsWithRegularExpression(
+            targetPath,
+            /#.+$/u,
+            { mustExpectOneOrZeroMatchings: true }
+          );
 
-    return mustAppendDuplicateEvenIfTargetPenultimateFileNameExtensionAlreadyExist ?
+    return mustAppendLastFileNameExtensionInsteadIfThereIsNoOne ?
         `${ targetPathWithoutFragment }.${ targetFileNamePenultimateExtensionWithoutLeadingDot }` +
-            targetPathFragmentWithLeadingHash :
+            (targetPathFragmentWithLeadingHash ?? "") :
         targetPath;
 
   }
 
 
-  const pathDotSeparatedSegments: Array<string> = splitString(targetPath, ".");
+  const dotSeparatedPathSegments: Array<string> = splitString(targetPath, ".");
+
+  if (
+    dotSeparatedPathSegments[dotSeparatedPathSegments.length - 2] === targetFileNamePenultimateExtensionWithoutLeadingDot &&
+        !mustAppendDuplicateEvenIfTargetPenultimateFileNameExtensionAlreadyExist
+  ) {
+    return targetPath;
+  }
+
 
   return addElementsToArray({
-    targetArray: pathDotSeparatedSegments,
+    targetArray: dotSeparatedPathSegments,
     newElements: [ targetFileNamePenultimateExtensionWithoutLeadingDot ],
     mutably: true,
-    toPosition__numerationFrom1: pathDotSeparatedSegments.length
-  }).join(".");
+    toPosition__numerationFrom1: dotSeparatedPathSegments.length
+  }).
+      join(".");
 
 }
