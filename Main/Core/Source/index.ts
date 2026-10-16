@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.9
+ * @yamato-daiwa/es-extensions v1.10
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
@@ -378,6 +378,8 @@ export { default as mergeSets } from "./Sets/mergeSets";
 export { default as removeElementsFromSet } from "./Sets/removeElementsFromSet";
 export { default as removeOneElementFromSet, type RemovingOfOneElementFromSet } from "./Sets/removeOneElementOfSet";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
+export { removeThenGetSpecificNumberOfSetElements, type RemovingAndGettingOfSpecificNumberElementsFromSet } from
+    "./Sets/removeThenGetSpecificNumberOfSetElements";
 
 
 /* ━━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
