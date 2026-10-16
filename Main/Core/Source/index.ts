@@ -1,5 +1,5 @@
 /*!
- * @yamato-daiwa/es-extensions v1.9
+ * @yamato-daiwa/es-extensions v1.10
  * (c) 2023 Yamato Daiwa Co., Ltd.
  * Released under the MIT License.
  */
@@ -46,6 +46,10 @@ export {
 /* ┅┅┅ Permutations of Elements ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as moveArrayElementToOnePosition } from "./Arrays/06-PermutationsOfElements/moveArrayElementToOnePosition";
 export { default as swapArrayElements } from "./Arrays/06-PermutationsOfElements/swapArrayElements";
+export {
+  ObjectTypeElementsArrayOrdererByMultipleFields,
+  default as orderArrayOfObjectTypeElementsByMultipleFields
+} from "./Arrays/06-PermutationsOfElements/ObjectTypeElementsArrayOrdererByMultipleFields";
 
 /* ┅┅┅ Removing of Elements ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 export { default as removeArrayElementsByIndexes, type RemovingOfArrayElementsByIndexes } from
@@ -371,8 +375,11 @@ export { default as createSetBasedOnAnyArrayLikeCollection } from "./Sets/create
 export { default as createSetBasedOnOtherSet } from "./Sets/createSetBasedOnOtherSet";
 export { default as getOneElementOfSet } from "./Sets/getOneElementOfSet";
 export { default as mergeSets } from "./Sets/mergeSets";
+export { default as removeElementsFromSet } from "./Sets/removeElementsFromSet";
 export { default as removeOneElementFromSet, type RemovingOfOneElementFromSet } from "./Sets/removeOneElementOfSet";
 export { removeSetElementsByPredicates, type RemovingSetElementsByPredicates } from "./Sets/removeSetElementsByPredicates";
+export { removeThenGetSpecificNumberOfSetElements, type RemovingAndGettingOfSpecificNumberElementsFromSet } from
+    "./Sets/removeThenGetSpecificNumberOfSetElements";
 
 
 /* ━━━ Strings ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -404,6 +411,8 @@ export {
 /* ┅┅┅ URI ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
 /* ╍╍╍ Files and Directories ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
 /* ─── File Name Extensions ───────────────────────────────────────────────────────────────────────────────────────── */
+export { default as addPenultimateFileNameExtension } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/addPenultimateFileNameExtension";
 export { default as appendLastFileNameExtension } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/appendLastFileNameExtension";
 export { default as extractAllFileNameExtensions } from
@@ -412,6 +421,8 @@ export { default as extractLastExtensionOfFileName } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractLastExtensionOfFileName";
 export { default as removeAllFileNameExtensions } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeAllFileNameExtensions";
+export { default as removeLastFileNameExtensionFromPath } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeLastFileNameExtensionFromPath";
 export { default as removeSpecifiedFileNameExtensionsFromPath } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeSpecifiedFileNameExtensionsFromPath";
 
