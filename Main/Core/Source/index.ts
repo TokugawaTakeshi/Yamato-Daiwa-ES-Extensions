@@ -418,6 +418,8 @@ export { default as extractLastExtensionOfFileName } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/extractLastExtensionOfFileName";
 export { default as removeAllFileNameExtensions } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeAllFileNameExtensions";
+export { default as removeLastFileNameExtensionFromPath } from
+    "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeLastFileNameExtensionFromPath";
 export { default as removeSpecifiedFileNameExtensionsFromPath } from
     "./Strings/URI/FilesAndDirectories/FileNameExtensions/removeSpecifiedFileNameExtensionsFromPath";
 
