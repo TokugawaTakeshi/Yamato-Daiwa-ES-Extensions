@@ -28,15 +28,16 @@ export default function addPenultimateFileNameExtension(
 
   if (!targetPath.includes(".")) {
 
-      const {
-        updatedString: targetPathWithoutFragment,
-        extractedMatching: targetPathFragmentWithLeadingHash
-      }: ExtractingOfMatchingsWithRegularExpression.NullableResult =
-          extractMatchingsWithRegularExpression(
-            targetPath,
-            /#.+$/u,
-            { mustExpectOneOrZeroMatchings: true }
-          );
+    const {
+      updatedString: targetPathWithoutFragment,
+      extractedMatching: targetPathFragmentWithLeadingHash
+    }: ExtractingOfMatchingsWithRegularExpression.NullableResult =
+
+        extractMatchingsWithRegularExpression(
+          targetPath,
+          /#.+$/u,
+          { mustExpectOneOrZeroMatchings: true }
+        );
 
     return mustAppendLastFileNameExtensionInsteadIfThereIsNoOne ?
         `${ targetPathWithoutFragment }.${ targetFileNamePenultimateExtensionWithoutLeadingDot }` +

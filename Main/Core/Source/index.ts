@@ -52,6 +52,7 @@ export {
 } from "./Arrays/06-PermutationsOfElements/ObjectTypeElementsArrayOrdererByMultipleFields";
 
 /* ┅┅┅ Removing of Elements ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+export { default as removeAllElementsFromArray } from "./Arrays/07-RemovingOfElements/removeAllElementsFromArray";
 export { default as removeArrayElementsByIndexes, type RemovingOfArrayElementsByIndexes } from
     "./Arrays/07-RemovingOfElements/removeArrayElementsByIndexes";
 export { default as removeArrayElementsByPredicates, type RemovingOfArrayElementsByPredicates } from
@@ -336,6 +337,7 @@ export { default as getItemsOfPaginationPage } from "./Pagination/getItemsOfPagi
 
 /* ━━━ Promises ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 export { default as PromisesQueue } from "./Promises/PromisesQueue";
+export { default as PromisesLimitedParallel } from "./Promises/PromisesLimitedParallel";
 
 
 /* ━━━ Random Values Generators ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -438,6 +440,8 @@ export { default as extractFileNameWithoutLastExtension } from
 
 /* ╍╍╍ Fragment ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */
 export { default as appendFragmentToURI } from "./Strings/URI/Fragment/appendFragmentToURI";
+export { explodeURI_ToFragmentAndRemainPart, type ExplodingOfURI_ToFragmentAndRemainPart } from
+    "./Strings/URI/Fragment/explodeURI_ToFragmentAndRemainPart";
 export { default as getURI_Fragment } from "./Strings/URI/Fragment/getURI_Fragment";
 
 /* ╍╍╍ Path Segments ╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍ */

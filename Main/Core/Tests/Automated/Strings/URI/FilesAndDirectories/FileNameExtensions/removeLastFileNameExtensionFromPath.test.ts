@@ -29,7 +29,7 @@ Testing.
           ),
 
           Testing.test(
-            "Keeping as is Paths not Including File Name Extensions ",
+            "Keeping as is Paths not Including File Name Extensions",
             (): void => {
 
               Assert.strictEqual(
@@ -40,6 +40,33 @@ Testing.
               Assert.strictEqual(
                 removeLastFileNameExtensionFromPath("directory1/sub.directory2/file"),
                 "directory1/sub.directory2/file"
+              );
+
+            }
+          ),
+
+          Testing.test(
+            "Respecting of the Fragment",
+            (): void => {
+
+              Assert.strictEqual(
+                removeLastFileNameExtensionFromPath("directory1/directory2/file.razor.pug#section-1"),
+                "directory1/directory2/file.razor#section-1"
+              );
+
+              Assert.strictEqual(
+                removeLastFileNameExtensionFromPath("directory1/directory2/file.pug#section-1"),
+                "directory1/directory2/file#section-1"
+              );
+
+              Assert.strictEqual(
+                removeLastFileNameExtensionFromPath("directory1/directory2/file#section-1"),
+                "directory1/directory2/file#section-1"
+              );
+
+              Assert.strictEqual(
+                removeLastFileNameExtensionFromPath("directory1/sub.directory2/file#section-1"),
+                "directory1/sub.directory2/file#section-1"
               );
 
             }

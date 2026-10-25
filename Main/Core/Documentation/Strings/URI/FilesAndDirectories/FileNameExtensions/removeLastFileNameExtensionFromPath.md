@@ -22,8 +22,6 @@ The `string` with the path without the last file name extension.
 The path is returned unchanged if its last segment does not include the dot (the file name has no extension),
   including the case when only the directory names include dots.
 
-The function is pure: the `targetPath` is not mutated, and the file system is not accessed.
-
 
 ## Examples
 
@@ -56,5 +54,3 @@ removeLastFileNameExtensionFromPath("directory1/sub.directory2/file");
     the forward slashes before the splitting. When the extension is removed, the returned path is assembled with the
     forward slashes. When there is nothing to remove, the original `targetPath` is returned as is.
 * The path is not parsed as the URL: the query and the fragment (`#section-1`) are not treated specially, so they are
-    considered as a part of the last extension.
-* The path `"."` is returned unchanged.
