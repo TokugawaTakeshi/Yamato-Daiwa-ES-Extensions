@@ -115,13 +115,11 @@ export abstract class ObjectTypeElementsArrayOrdererByMultipleFields {
           hasCurrentElementBeenAssignedToGroup = true;
           break;
 
-        } else {
+        } else if (wasFirstElementGreaterThanSecondOne) {
 
-          if (wasFirstElementGreaterThanSecondOne) {
-            groups.splice(groupIndex, 0, { elements: [ targetElement ] });
-            hasCurrentElementBeenAssignedToGroup = true;
-            break;
-          }
+          groups.splice(groupIndex, 0, { elements: [ targetElement ] });
+          hasCurrentElementBeenAssignedToGroup = true;
+          break;
 
         }
 

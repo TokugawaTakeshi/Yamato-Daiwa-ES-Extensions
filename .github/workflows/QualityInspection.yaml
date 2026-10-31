@@ -15,7 +15,7 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: setup Node.js
         uses: actions/setup-node@v3
@@ -47,7 +47,7 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: setup Node.js
         uses: actions/setup-node@v3
@@ -75,16 +75,21 @@ jobs:
 
     needs: corePackageQualityInspection
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node-version: [ 22, 24, 26 ]
 
     steps:
 
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 22.15.0
+          node-version: ${{ matrix.node-version }}
 
       - name: Node.js Version Checking
         run: node --version
