@@ -365,3 +365,7 @@ stopwatch =
 Although `console.log(`${ secondsPassed } s`);` displays earlier than log from the bodies of above functions,
   the output is fully matching with expectations:
 
+TODO Waiting for Image
+
+[//]: # (TODO Waiting for Image)
+

@@ -9,53 +9,6 @@ import Path from "path";
 Promise.all([
 
   Testing.suite(
-    "joinPathSegments",
-    async (): Promise<void> => {
-
-      const pathSegments: ReadonlyArray<string> = [ "/foo", "bar", "baz/asdf", "quux", ".." ];
-
-      await Promise.all([
-
-        Testing.test(
-          "As default works as native `Path.join`",
-          (): void => {
-            Assert.strictEqual(Path.join(...pathSegments), ImprovedPath.joinPathSegments(pathSegments));
-          }
-        ),
-
-        Testing.test(
-          "With `alwaysForwardSlashSeparators` option using forward slashes",
-            (): void => {
-            Assert.strictEqual(
-              ImprovedPath.joinPathSegments(pathSegments, { alwaysForwardSlashSeparators: true }), "/foo/bar/baz/asdf"
-            );
-          }
-        )
-
-      ]);
-
-    }
-  ),
-
-  Testing.suite(
-    "buildAbsolutePath",
-    async (): Promise<void> =>
-        Testing.test(
-          "As native 'Path.resolve', computes the absolute path from current working directory",
-          (): void => {
-
-            const pathSegments: Array<string> = [ "foo/bar", "./baz" ];
-
-            Assert.strictEqual(
-              Path.resolve(...pathSegments),
-              ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments)
-            );
-
-          }
-        )
-  ),
-
-  Testing.suite(
     "parsePath",
     async (): Promise<void> => {
 

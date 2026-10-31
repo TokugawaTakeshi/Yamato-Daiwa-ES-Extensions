@@ -5,10 +5,10 @@ import Path from "path";
 import {
   replaceDoubleBackslashesWithForwardSlashes,
   getLastElementOfArray,
-  stringifyAndFormatArbitraryValue,
   splitString,
   isNull,
   isUndefined,
+  isString,
   Logger,
   InvalidParameterValueError,
   UnexpectedEventError
@@ -17,23 +17,59 @@ import {
 
 abstract class ImprovedPath {
 
+  /* ━━━ Path Segment Joining ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static joinPathSegments(...pathSegments: ReadonlyArray<string>): string;
+
   public static joinPathSegments(
     pathSegments: ReadonlyArray<string>,
-    options?: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
+    options: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
+  ): string;
+
+  public static joinPathSegments(
+    firstPathSegmentOrArrayOfAllOfThem: string | ReadonlyArray<string>,
+    secondPathSegmentOrOptions: string | Readonly<{ alwaysForwardSlashSeparators: boolean; }>,
+    ...pathRestSegments: ReadonlyArray<string>
   ): string {
+
+    let pathSegments: ReadonlyArray<string>;
+    let alwaysForwardSlashSeparators: boolean;
+
+    /* [ Performance Micro-optimization ]
+     * Avoid the check of all combinations of 1st and 2nd parameters.
+     * If the combination of 1st and 2nd parameters is invalid, the TypeScript error will occur,
+     * According to the YDEE policy, the exhaustive dynamic parameter validation with detailed logging for non-TypeScript
+     *   used is not executed for the performance optimization purposes. */
+    if (isString(firstPathSegmentOrArrayOfAllOfThem)) {
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See the note above. */
+      pathSegments = [ firstPathSegmentOrArrayOfAllOfThem, secondPathSegmentOrOptions as string, ...pathRestSegments ];
+      alwaysForwardSlashSeparators = false;
+
+    } else {
+
+      pathSegments = firstPathSegmentOrArrayOfAllOfThem;
+
+      alwaysForwardSlashSeparators =
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See the note above. */
+          (secondPathSegmentOrOptions as Readonly<{ alwaysForwardSlashSeparators: boolean; }>).alwaysForwardSlashSeparators;
+
+    }
 
     try {
 
-      return options?.alwaysForwardSlashSeparators === true ?
+      return alwaysForwardSlashSeparators ?
           replaceDoubleBackslashesWithForwardSlashes(Path.join(...pathSegments)) :
           Path.join(...pathSegments);
 
     } catch (error: unknown) {
 
       Logger.throwErrorWithFormattedMessage({
-        errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
+        errorInstance:
+            new InvalidParameterValueError({
+              customMessage: "Passed path segments must satisfy the requirements of native `path.join().`"
+            }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.joinPathSegments(pathSegments, options)",
+        occurrenceLocation: "ImprovedPath.joinPathSegments(...polymorphicParameters)",
         innerError: error
       });
 
@@ -41,43 +77,80 @@ abstract class ImprovedPath {
 
   }
 
+
+  /* ━━━ Absolute Path Building ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static buildAbsolutePathFromCurrentWorkingDirectory(...pathSegments: ReadonlyArray<string>): string;
+
   public static buildAbsolutePathFromCurrentWorkingDirectory(
     pathSegments: ReadonlyArray<string>,
-    options?: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
+    options: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
+  ): string;
+
+  public static buildAbsolutePathFromCurrentWorkingDirectory(
+    firstPathSegmentOrArrayOfAllOfThem: string | ReadonlyArray<string>,
+    secondPathSegmentOrOptions: string | Readonly<{ alwaysForwardSlashSeparators: boolean; }>,
+    ...pathRestSegments: ReadonlyArray<string>
   ): string {
 
-    const segmentsIncludingAbsolutePaths: ReadonlyArray<string> = pathSegments.
-        filter((pathSegment: string): boolean => Path.isAbsolute(pathSegment));
+    let pathSegments: ReadonlyArray<string>;
+    let alwaysForwardSlashSeparators: boolean;
+
+    /* [ Performance Micro-optimization ]
+     * Avoid the check of all combinations of 1st and 2nd parameters.
+     * If the combination of 1st and 2nd parameters is invalid, the TypeScript error will occur,
+     * According to the YDEE policy, the exhaustive dynamic parameter validation with detailed logging for non-TypeScript
+     *   used is not executed for the performance optimization purposes. */
+    if (isString(firstPathSegmentOrArrayOfAllOfThem)) {
+
+      /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See the note above. */
+      pathSegments = [ firstPathSegmentOrArrayOfAllOfThem, secondPathSegmentOrOptions as string, ...pathRestSegments ];
+      alwaysForwardSlashSeparators = false;
+
+    } else {
+
+      pathSegments = firstPathSegmentOrArrayOfAllOfThem;
+
+      alwaysForwardSlashSeparators =
+          /* eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- See the note above. */
+          (secondPathSegmentOrOptions as Readonly<{ alwaysForwardSlashSeparators: boolean; }>).alwaysForwardSlashSeparators;
+
+    }
+
+    const segmentsIncludingAbsolutePaths: ReadonlyArray<string> =
+        pathSegments.filter((pathSegment: string): boolean => Path.isAbsolute(pathSegment));
 
     if (segmentsIncludingAbsolutePaths.length > 0) {
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
-          parameterName: "pathSegments",
-          parameterNumber: 1,
-          messageSpecificPart: `${ segmentsIncludingAbsolutePaths.length } path segment(s) including absolute path:\n` +
-              `${ stringifyAndFormatArbitraryValue(segmentsIncludingAbsolutePaths) }\n` +
+          customMessage:
+              `${ segmentsIncludingAbsolutePaths.length } path segment(s) including absolute path:\n` +
+              `${ segmentsIncludingAbsolutePaths.map((pathSegment: string): string => `● ${ pathSegment }`).join("\n") }\n` +
               "As it follows from the method name, it builds absolute path from current working directory thus " +
-              "does not require the implicit absolute path. If you want join the arbitrary absolute path with other path " +
-              "segments, use 'joinPathSegments' method instead."
+                "does not require the implicit absolute path. " +
+              "If you want join the arbitrary absolute path with other path segments, use \"joinPathSegments\" method " +
+                "instead."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)"
+        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(...polymorphicParameters)"
       });
     }
 
 
     try {
 
-      return options?.alwaysForwardSlashSeparators === true ?
+      return alwaysForwardSlashSeparators ?
           replaceDoubleBackslashesWithForwardSlashes(Path.resolve(...pathSegments)) :
           Path.resolve(...pathSegments);
 
     } catch (error: unknown) {
 
       Logger.throwErrorWithFormattedMessage({
-        errorInstance: new InvalidParameterValueError({ parameterName: "pathSegments", parameterNumber: 1 }),
+        errorInstance:
+            new InvalidParameterValueError({
+              customMessage: "Passed path segments must satisfy the requirements of native `path.resolve().`"
+            }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, options)",
+        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(...polymorphicParameters)",
         innerError: error
       });
 
@@ -85,36 +158,51 @@ abstract class ImprovedPath {
 
   }
 
-  public static computeRelativePath(namedParameters: Readonly<{
-    basePath: string;
-    comparedPath: string;
-    alwaysForwardSlashSeparators?: boolean;
-  }>): string {
 
-    let operationingSystemDependentRelativePath: string;
+  /* ━━━ Relative Path Computing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  public static computeRelativePath(
+    {
+      forWhichPath,
+      relativeToWhichPath,
+      alwaysForwardSlashSeparators = false
+    }:
+        Readonly<{
+          forWhichPath: string;
+          relativeToWhichPath: string;
+          alwaysForwardSlashSeparators?: boolean;
+        }>
+  ): string {
+
+    let relativePath__operatingSystemDependentPathSeparators: string;
 
     try {
 
-      operationingSystemDependentRelativePath = Path.relative(namedParameters.basePath, namedParameters.comparedPath);
+      relativePath__operatingSystemDependentPathSeparators = Path.relative(relativeToWhichPath, forWhichPath);
 
     } catch (error: unknown) {
 
       Logger.throwErrorWithFormattedMessage({
-        errorInstance: new InvalidParameterValueError({ parameterName: "namedParameters", parameterNumber: 1 }),
+        errorInstance:
+            new InvalidParameterValueError({
+              parameterName: "namedParameters",
+              parameterNumber: 1,
+              messageSpecificPart: "Passed path segments must satisfy the requirements of native `path.relative().`"
+            }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.computeRelativePath(namedParameters)",
+        occurrenceLocation: "ImprovedPath.computeRelativePath(sourceDataAndOptions)",
         innerError: error
       });
 
     }
 
-    return namedParameters.alwaysForwardSlashSeparators === true ?
-        replaceDoubleBackslashesWithForwardSlashes(operationingSystemDependentRelativePath) :
-        operationingSystemDependentRelativePath;
+    return alwaysForwardSlashSeparators ?
+        replaceDoubleBackslashesWithForwardSlashes(relativePath__operatingSystemDependentPathSeparators) :
+        relativePath__operatingSystemDependentPathSeparators;
 
   }
 
 
+  // ━━━ TODO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   public static parsePath(targetPath: string): ImprovedPath.ParsingResult {
 
     const nativeParsedPath: Path.ParsedPath = Path.parse(targetPath);

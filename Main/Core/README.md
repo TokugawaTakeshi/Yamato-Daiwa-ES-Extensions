@@ -1869,7 +1869,7 @@ The most demanded functionality is <code>format</code> static method allows defi
 [📖 Main Article](Documentation/DateTime/DateWithoutTime.md)
 
 
-[//]: # (再開)
+[//]: # (TODO 再開)
 
 <dl>
 

@@ -1,7 +1,7 @@
 import FileSystem from "fs";
 import PromisfiedFileSystem from "fs/promises";
 import Path from "path";
-import ImprovedPath from "./ImprovedPath/ImprovedPath";
+import ImprovedPath from "./ImprovedPath";
 import isErrnoException from "./isErrnoException";
 import { Logger } from "@yamato-daiwa/es-extensions";
 
