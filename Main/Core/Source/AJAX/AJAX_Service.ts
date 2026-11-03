@@ -112,7 +112,7 @@ abstract class AJAX_Service {
 
 
   /* ━━━ Public Instance Methods ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  /* ─── Data Retrieving ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ┅┅┅ Data Retrieving ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   /** @throws InvalidConfigError */
   /** @throws DataRetrievingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
@@ -154,7 +154,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ─── Data Submitting ──────────────────────────────────────────────────────────────────────────────────────────── */
+  /* ┅┅┅ Data Submitting ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
   ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
@@ -228,7 +228,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ─── Text or HTML Retrieving ──────────────────────────────────────────────────────────────────────────────────── */
+  /* ┅┅┅ Text or HTML Retrieving ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   public async retrieveText(
     compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.TextDataResponse> {

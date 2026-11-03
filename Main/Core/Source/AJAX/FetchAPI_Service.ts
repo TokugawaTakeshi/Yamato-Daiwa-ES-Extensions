@@ -16,7 +16,12 @@ export default class FetchAPI_Service extends AJAX_Service {
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws UnsupportedScenarioError */
   protected override async retrieveResponseWithRawObjectData(
-    compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
+    {
+      URI,
+      HTTP_Method,
+      HTTP_Headers,
+      mustIncludeCookiesAndAuthenticationHeadersToRequest
+    }: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.RawObjectDataResponse> {
 
     let response: Response;
@@ -24,11 +29,11 @@ export default class FetchAPI_Service extends AJAX_Service {
     try {
 
       response = await fetch(
-        compoundParameter.URI,
+        URI,
         {
-          method: compoundParameter.HTTP_Method,
-          headers: { ...compoundParameter.HTTP_Headers },
-          ...compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
+          method: HTTP_Method,
+          headers: { ...HTTP_Headers },
+          ...mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
         }
       );
 
@@ -47,6 +52,7 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     return {
+
       ...response.ok ?
           {
             isSuccessful: true,
@@ -56,14 +62,22 @@ export default class FetchAPI_Service extends AJAX_Service {
             isSuccessful: false,
             ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
           },
-      HTTP_Headers: Array.from(response.headers).reduce(
-        (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
-          HTTP_Headers[key] = value;
-          return HTTP_Headers;
-        },
-        {}
-      ),
+
+      HTTP_Headers:
+          Array.from(response.headers).reduce(
+            (
+              objectTypeHTTP_Headers: { [key: string]: string; },
+              [ key, value ]: [ string, string ]
+            ): AJAX_Service.HTTP_Headers =>
+                {
+                  objectTypeHTTP_Headers[key] = value;
+                  return objectTypeHTTP_Headers;
+                },
+            {}
+          ),
+
       HTTP_Status: response.status
+
     };
 
   }
@@ -72,7 +86,14 @@ export default class FetchAPI_Service extends AJAX_Service {
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws UnsupportedScenarioError */
   protected override async submitAndGetRawResponseDataIfAvailable(
-    compoundParameter: AJAX_Service.GeneralizedObjectDataSubmitting.CompoundParameter
+    {
+      URI,
+      HTTP_Method,
+      HTTP_Headers,
+      requestData,
+      mustIncludeCookiesAndAuthenticationHeadersToRequest,
+      mustExpectResponseData
+    }: AJAX_Service.GeneralizedObjectDataSubmitting.CompoundParameter
   ): Promise<AJAX_Service.RawObjectDataResponse> {
 
     let response: Response;
@@ -80,15 +101,15 @@ export default class FetchAPI_Service extends AJAX_Service {
     try {
 
       response = await fetch(
-        compoundParameter.URI,
+        URI,
         {
-          method: compoundParameter.HTTP_Method,
+          method: HTTP_Method,
           headers: {
             "Content-Type": "application/json; charset=UTF-8",
-            ...compoundParameter.HTTP_Headers
+            ...HTTP_Headers
           },
-          body: JSON.stringify(compoundParameter.requestData),
-          ...compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
+          body: JSON.stringify(requestData),
+          ...mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
         }
       );
 
@@ -107,30 +128,45 @@ export default class FetchAPI_Service extends AJAX_Service {
 
 
     return {
+
       ...response.ok ?
           {
             isSuccessful: true,
-            data: compoundParameter.mustExpectResponseData ?
+            data: mustExpectResponseData ?
                 await FetchAPI_Service.extractRawObjectDataFromResponse(response) : {}
           } :
           {
             isSuccessful: false,
             ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
           },
-      HTTP_Headers: Array.from(response.headers).reduce(
-        (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
-          HTTP_Headers[key] = value;
-          return HTTP_Headers;
-        },
-        {}
-      ),
+
+      HTTP_Headers:
+          Array.from(response.headers).reduce(
+            (
+              objectTypeHTTP_Headers: { [key: string]: string; },
+              [ key, value ]: [ string, string ]
+            ): AJAX_Service.HTTP_Headers =>
+                {
+                  objectTypeHTTP_Headers[key] = value;
+                  return objectTypeHTTP_Headers;
+                },
+            {}
+          ),
+
       HTTP_Status: response.status
+
     };
 
   }
 
   protected override async retrieveResponseWithTextData(
-    compoundParameter: AJAX_Service.TextDataRetrieving.NormalizedCompoundParameter
+    {
+      URI,
+      HTTP_Method,
+      HTTP_Headers,
+      requestData,
+      mustIncludeCookiesAndAuthenticationHeadersToRequest
+    }: AJAX_Service.TextDataRetrieving.NormalizedCompoundParameter
   ): Promise<AJAX_Service.TextDataResponse> {
 
     let response: Response;
@@ -138,15 +174,15 @@ export default class FetchAPI_Service extends AJAX_Service {
     try {
 
       response = await fetch(
-        compoundParameter.URI,
+        URI,
         {
-          method: compoundParameter.HTTP_Method,
+          method: HTTP_Method,
           headers: {
-            ...isNotUndefined(compoundParameter.requestData) ? { "Content-Type": "application/json; charset=UTF-8" } : null,
-            ...compoundParameter.HTTP_Headers
+            ...isNotUndefined(requestData) ? { "Content-Type": "application/json; charset=UTF-8" } : null,
+            ...HTTP_Headers
           },
-          ...isNotUndefined(compoundParameter.requestData) ? { body: JSON.stringify(compoundParameter.requestData) } : null,
-          ...compoundParameter.mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
+          ...isNotUndefined(requestData) ? { body: JSON.stringify(requestData) } : null,
+          ...mustIncludeCookiesAndAuthenticationHeadersToRequest ? { credentials: "include" } : null
         }
       );
 
@@ -173,7 +209,7 @@ export default class FetchAPI_Service extends AJAX_Service {
       } catch (error: unknown) {
         Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(
-              "The HTTP response body could not be represented as text."
+            "The HTTP response body could not be represented as text."
           ),
           title: HTTP_ResponseBodyParsingFailureError.localization.defaultTitle,
           occurrenceLocation: "FetchAPI_Service.retrieveResponseWithTextData(compoundParameter)",
@@ -184,22 +220,31 @@ export default class FetchAPI_Service extends AJAX_Service {
     }
 
     return {
+
       ...isNotUndefined(decodedText) ?
-        {
-          isSuccessful: true,
-          text: decodedText
-        } : {
-          isSuccessful: false,
-          ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
-        },
-      HTTP_Headers: Array.from(response.headers).reduce(
-        (HTTP_Headers: { [key: string]: string; }, [ key, value ]: [ string, string ]): AJAX_Service.HTTP_Headers => {
-          HTTP_Headers[key] = value;
-          return HTTP_Headers;
-        },
-        {}
-      ),
+          {
+            isSuccessful: true,
+            text: decodedText
+          } : {
+            isSuccessful: false,
+            ...await FetchAPI_Service.extractErrorPayloadFromResponse(response)
+          },
+
+      HTTP_Headers:
+          Array.from(response.headers).reduce(
+            (
+              objectTypeHTTP_Headers: { [key: string]: string; },
+              [ key, value ]: [ string, string ]
+            ): AJAX_Service.HTTP_Headers =>
+                {
+                  objectTypeHTTP_Headers[key] = value;
+                  return objectTypeHTTP_Headers;
+                },
+            {}
+          ),
+
       HTTP_Status: response.status
+
     };
 
   }

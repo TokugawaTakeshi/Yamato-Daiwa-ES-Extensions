@@ -12,7 +12,7 @@
 
 [![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1)
 [![PAYPAL](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/tokugawatakeshi)
-[![LIBERAPAY](	https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black)](https://liberapay.com/TokugawaT-YD)
+[![LIBERAPAY](https://img.shields.io/badge/Liberapay-F6C915?style=for-the-badge&logo=liberapay&logoColor=black)](https://liberapay.com/TokugawaT-YD)
 
 
 Helper functions and classes aimed to reduce the routine code. 
@@ -31,14 +31,33 @@ npm i @yamato-daiwa/es-extensions -E
 ## Documentation
 ### Table of Contents
 
+[//]: # (⚠️ During the markdown processing, npm official site replaces custom anchors like `<a href="#Arrays">Arrays</a>` with)
+[//]: # (  `<h3 id="user-content-AJAX" class="heading-element">AJAX</h3>` what negates the manual anchors management with HTML )
+[//]: # (  syntax. Forces to use normal markdown headings and links with automatic IDs.)
+
 + Get Started
   + [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
   + [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
   + [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
   + [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
-+ <a href="#AJAX">AJAX</a>
-  + <a href="#AJAX_ServiceClass"><code>AJAX_Service</code> Class</a>
-+ <a href="#Arrays">Arrays</a>
++ [AJAX](#ajax)
+  + [`AJAX_Service` Class](#ajax_service-class)
++ [Arrays](#arrays)
+  + [Creating](#creating)
+  + [Retrieving of Elements](#retrieving-of-elements)
+  + [Retrieving of Indexes](#retrieving-of-indexes)
+  + [Retrieving of Subarrays](#retrieving-of-subarrays)
+  + [Adding of Elements](#adding-of-elements)
+  + [Replacing of Elements](#replacing-of-elements)
+  + [Permutations of Elements](#permutations-of-elements)
+  + [Removing of Elements](#removing-of-elements)
+  + [Restructuring](#restructuring)
+  + [Other](#other)
++ [Data Mocking](#data-mocking)
+  + [`DataMocking` Class/Namespace](#datamocking-classnamespace)
+  + [`MockGatewayHelper` Class/Namespace ](#mockgatewayhelper-classnamespace-)
++ [Date and Time](#date-and-time)
+
 
 ### Getting Started
 
@@ -47,8 +66,9 @@ npm i @yamato-daiwa/es-extensions -E
 + [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
 + [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
 
-<h3 id="AJAX">AJAX</h3>
-<h4 id="AJAX_ServiceClass"><code>AJAX_Service</code> Class</h4>
+
+### AJAX
+#### `AJAX_Service` Class
 
 The facade for the convenient usage of [AJAX](https://developer.mozilla.org/en-US/docs/Glossary/AJAX") with maximal 
   type-safety and less code.
@@ -574,34 +594,120 @@ export type TextDataResponse =
   in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
 
 
-<dl>
-
-  <dt><code>alternatingURI_PathPart</code></dt>
-  <dd>
-    <dl>
-    <dt>Type</dt>
-    <dd><code>string</code></dd>
-    <dt>Is required</dt>
-    <dd>No</dd>
-    <dt>Valid value example</dt>
-    <dd><code>"api/products/2"</code></dd>
-    <dt>Description</dt>
-    <dd>
-      Will be appended to <code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code> which may be defined via
-        configuration.
-      If <code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code> has not been defined but 
-        <code>alternatingURI_PathPart</code> option has been used, the <code>InvalidConfigError</code> will be thrown.
-    </dd>
-    </dl>
-  </dd>
-
-</dl>
-
-
 ##### Public Instance Methods
 ###### `retrieveData`
 
-[//]: # (TODO)
+```
+<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+  compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
+) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>
+```
+
+Have save signature as the [eponymous static method](#retrievedata) and, moreover, all what the static method doing is
+  delegates the execution to this instance method.
+Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
+  `implementation` static field), there is not need to take care about instance management across the files,
+  so the recommended usage way is the static version of `retrieveData`.
+If you are not want to follow this recommendation, you can use this instance version of `retrieveData`.
+
+
+###### `submitData`
+
+```
+/* [ Overload No. 1 ] Validation of Response Data */
+(
+  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
+) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
+
+
+/* [ Overload No. 2 ] No response data expected */
+(
+  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
+) => Promise<AJAX_Servic
+```
+
+Have save signature as the [eponymous static method](#submitdata) and, moreover, all what the static method doing is
+  delegates the execution to this instance method.
+Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
+  `implementation` static field), there is not need to take care about instance management across the files,
+  so the recommended usage way is the static version of `submitData`.
+If you are not want to follow this recommendation, you can use this instance version of `submitData`.
+
+
+###### `retrieveText`
+
+```
+(
+  compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
+) => Promise<AJAX_Service.TextDataResponse>
+```
+
+Have save signature as the [eponymous static method](#retrievetext) and, moreover, all what the static method doing is
+  delegates the execution to this instance method.
+Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
+  `implementation` static field), there is not need to take care about instance management across the files,
+  so the recommended usage way is the static version of `retrieveText`.
+If you are not want to follow this recommendation, you can use this instance version of `retrieveText`.
+
+
+##### Protected Abstract Methods
+###### `retrieveResponseWithRawObjectData`
+
+```
+(
+  compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
+): Promise<AJAX_Service.RawObjectDataResponse>
+```
+
+Intended to be implemented with the retrieving of data.
+
+Must support all options of the object type parameter:
+
+```typescript
+type CompoundParameter = Readonly<{
+  URI: string;
+  HTTP_Method: HTTP_Methods;
+  HTTP_Headers: HTTP_Headers;
+  mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
+}>;
+```
+
+Must return the object of following schema for response of any HTTP status (including the errored HTTP statuses):
+
+```typescript
+type RawObjectDataResponse = 
+    Readonly<(
+      (
+        {
+          isSuccessful: true;
+          data: PossiblyReadonlyParsedJSON;
+        } |
+        (
+          { isSuccessful: false; } &
+          (
+            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
+            { errorTextPayload: string; }
+          )
+        )
+      ) &
+      {
+        HTTP_Status: number;
+        HTTP_Headers: HTTP_Headers;
+      }
+    )>;
+```
+
+The data may come for any type of HTTP status (including the errored ones), so:
+
++ For the successful responses case, the data must be stored to the `data` field.
++ For the errored responses case, the data must be stored to either `errorObjectPayload` or `errorTextPayload` depending
+    on what server has returned.
+
+[//]: # (// TODO Reference to GitHub Source code)
+Here is how this method has been implemented in `FetchAPI_Service`.
+
+
+[//]: # (TODO 次は AJAX_Service(instance).submitAndGetRawResponseDataIfAvailable)
 
 
 <dl>
@@ -641,8 +747,7 @@ export type TextDataResponse =
 
 </dl>
 
-<h3 id="Arrays">Arrays</h3>
-
+### Arrays
 #### Creating
 
 <dl>
@@ -681,7 +786,6 @@ export type TextDataResponse =
 
 
 #### Retrieving of Elements
-
 
 <dl>
 
@@ -1869,33 +1973,73 @@ The most demanded functionality is <code>format</code> static method allows defi
 [📖 Main Article](Documentation/DateTime/DateWithoutTime.md)
 
 
-[//]: # (TODO 再開)
+##### `getDaysCountInSpecificMonth`
+
+```
+(
+  sourceData: Readonly<
+    { year: number; } &
+    (
+      { monthNumber__numerationFrom0: number; } |
+      { monthNumber__numerationFrom1: number; }
+    )
+  >
+) => number
+```
+
+Returns days count in specified year and month.
+
+[📖 Main Article](Documentation/DateTime/getDaysCountInSpecificMonth.md)
+
+
+##### `getISO8601_StringWithoutTimePart`
+
+```
+(
+  sourceDataAndOptions: Readonly<
+    (
+      {
+        ISO8601Definition: string;
+        mustConsiderAsLocalIfTimeNotSpecified: boolean;
+      } |
+      (
+        { year__UTC: number; } &
+        (
+          { monthName__UTC: MonthsNames; } |
+          { monthNumber__UTC__numerationFrom0: number; } |
+          { monthNumber__UTC__numerationFrom1: number; }
+        ) &
+        { dayOfMonth__UTC: number; }
+      ) |
+      { nativeDateInstance: Date; }
+    ) &
+    { mustAssociateOutputWithLocalDate: boolean; }
+  >
+) => string
+```
+
+Obviously to function name, returns the date definition without time in ISO8601 format.
+The parameters can be defined by various methods.
+
+[📖 Main Article](Documentation/DateTime/getISO8601_StringWithoutTimePart.md)
+
+
+##### `getMonthNameByNumber`
+
+```
+(
+  sourceData: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
+): MonthsNames
+```
+
+Converts the month number (from 0 or 1) to element of 
+  [`MonthsNames` enumeration](#https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md).
+
+[📖 Main Article](Documentation/DateTime/getMonthNameByNumber.md)
+
 
 <dl>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getDaysCountInSpecificMonth.md">
-      <code>getDaysCountInSpecificMonth</code>
-    </a>
-  </dt>
-  <dd>Returns days count in specified year and month.</dd>
-
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/getISO8601_StringWithoutTimePart.ts">
-      <code>getISO8601_StringWithoutTimePart</code>
-    </a>
-  </dt>
-  <dd>
-    Obviously to function name, returns the date definition without time in ISO8601 format.
-    The parameters can be defined by various methods.
-  </dd>
-
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNameByNumber.md">
-      <code>getMonthNameByNumber</code>
-    </a>
-  </dt>
-  <dd>Converts the month number (from 0 or 1) to element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"><code>MonthsNames</code> enumeration</a>.</dd>
 
   <dt>
     <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md">
