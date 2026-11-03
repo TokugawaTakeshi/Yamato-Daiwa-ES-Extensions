@@ -1,3 +1,5 @@
+/* global NodeJS -- Unknown by eslint by default even with `globals: { ...globals.node }`. */
+
 import { secondsToMilliseconds } from "../../../Source";
 import PromisesLimitedParallel from "../../../Source/Promises/PromisesLimitedParallel";
 
