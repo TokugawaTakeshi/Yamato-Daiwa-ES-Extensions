@@ -37,6 +37,9 @@ jobs:
       - name: Tests
         run: cd Main/Core && npm run "Run Tests"
 
+      - name: Building of Distributable for Dependents
+        run: cd Main/Core && npm run "Rebuild Distributable"
+
   browserJS_PackageQualityInspection:
 
     name: BrowserJS Package Quality Inspection
