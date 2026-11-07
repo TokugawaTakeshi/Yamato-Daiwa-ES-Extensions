@@ -28,6 +28,17 @@ Oriented to TypeScript users investing the time to quality including type-safety
 npm i @yamato-daiwa/es-extensions -E
 ```
 
+
+## Support
+
+|Versions Range | Status |
+|---|---|
+| ~1.10.0 | Alpha/Beta |
+| ~1.9.0  | Supported  |
+| &gt; = 1.6.0 <= 1.8  | Premum support on request only |
+| < 1.6  | End of Life |
+
+
 ## Documentation
 ### Table of Contents
 
@@ -57,6 +68,10 @@ npm i @yamato-daiwa/es-extensions -E
   + [`DataMocking` Class/Namespace](#datamocking-classnamespace)
   + [`MockGatewayHelper` Class/Namespace ](#mockgatewayhelper-classnamespace-)
 + [Date and Time](#date-and-time)
++ [Default Value Substituters](#default-value-subsituters)
++ [Errors](#errors)
++ [Files](#files)
++ [Logging](#logging)
 
 
 ### Getting Started
@@ -78,674 +93,30 @@ The facade for the convenient usage of [AJAX](https://developer.mozilla.org/en-U
 + Needs some implementation, but there is [FetchAPI_Service](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html),
     the pre-made one.
 
-
-##### Public Static Fields
-
-<dl>
-
-  <dt><code>implementation</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd><code>AJAX_Service | null</code></dd>
-      <dt>Initial Value</dt>
-      <dd><code>null</code></dd>
-      <dt>Description</dt>
-      <dd>
-        Intended to be assigned with some inheritor of <code>AJAX_Service</code>, for example,
-          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html">FetchAPI_Service</a>.
-        It must be done before any other usage of <code>AJAX_Service</code>.  
-      </dd>
-    </dl>
-    
-  </dd>
-
-</dl>
+[📖 Main Article](Documentation/AJAX/AJAX_Service.md)
 
 
-##### Protected Static Fields
+#### `FetchAPI_Service` Class
 
-<dl>
+The implementation of [`AJAX_Service` abstract class](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html). 
+  abstract class based on [`Fetch API`](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API). 
+Works with all modern browsers, and also stable in Node.js since version **22**. 
 
-  <dt><code>API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd><code>string | null</code></dd>
-      <dt>Initial Value</dt>
-      <dd><code>null</code></dd>
-      <dt>Valid Value Example</dt>
-      <dd><code>https://example.com/api</code></dd>
-      <dt>Description</dt>
-      <dd>
-        Intended to be specified with the origin and, optioonally, partial path (like <code>/api</code>) via 
-          <code>API_SERVER_URI_CONSTANT_PART</code>, the public static setter.
-        <ul>
-          <li>If not specified, the call some API, the full request URI must be specified each time.</li>
-          <li>
-            As it following from the property name, the trailing shash is not required, but even it presents,
-              it will be correctly processed.
-          </li>
-        </ul>
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>URI_QueryParametersSerializer</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd><code>(URI_QueryParameters: ReadonlyParsedJSON) => string</code></dd>
-      <dt>Initial Value</dt>
-      <dd><code>serializeURI_QueryParameters</code></dd>
-      <dt>Description</dt>
-      <dd>
-        The function accepting the JSON-compatible object and returting the query string without leanding question mark.
-        Currently, the default implementation does not support the serialization of nested object/arrays, but the
-          <a href="https://www.npmjs.com/package/qs">qs</a> is the good option.
-      </dd>
-    </dl>
-  </dd>
-
-</dl>
+[📖 Main Article](Documentation/AJAX/FetchAPI_Service.md)
 
 
-##### Public Static Setters
-
-<dl>
-
-  <dt><code>API_SERVER_URI_CONSTANT_PART</code></dt>
-  <dd>
-    Intended to be specified with the origin and, optioonally, partial path (like <code>/api</code>) 
-      <code>API_SERVER_URI_CONSTANT_PART</code>.
-    The trailing slash is optional.
-  </dd>
-
-</dl>
-
-
-##### Public Static Methods
-###### `setup`
+#### `URI_QueryParametersSerializer`
 
 ```
-(
-  properties: {
-    implementation?: AJAX_Service;
-    API_ServerURI_ConstantPart?: string;
-    URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
-  }
-) => void
+(URI_QueryParameters: ReadonlyParsedJSON) => string;
 ```
 
-Allows to initialize the facade at once.
-It is recommended to call this method in the entry point before any other usage.
+The function-like [TypeScript type](https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases)
+  [`AJAX_Service` class](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html)
+  and intended be used to implement the custom serializing algorithm for URI query parameters.
+The implementation of this signature must accept the JSON-compatible object as the argument and return the string 
+  represented the valid query part of a URI.  
 
-<dl>
-
-  <dt>Parameters</dt>
-  <dd>
-    <ol>
-      <li>
-        <dl>
-          <dt>Generic Name</dt>
-          <dd>Properties</dd>
-          <dt>Type</dt>
-          <dd><code>object</code></dd>
-          <dt>Schema</dt>
-          <dd>
-            <pre><code>
-{
-  implementation?: AJAX_Service;
-  API_ServerURI_ConstantPart?: string;
-  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
-}
-            </code></pre>
-          </dd>
-        </dl>
-      </li>
-    </ol>
-  </dd>
-
-  <dt>Is required</dt>
-  <dd>No</dd>
-
-  <dt>Schema<dt>
-  <dd><pre><code>
-{
-  presetFileRelativePath?: string;
-  enable?: boolean;
-}
-  </code></pre></dd>
-
-</dl>
-
-
-###### `retrieveData`
-
-```
-<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-  compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
-) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>
-```
-
-Retrieving the data, then validates it by 
-  [RawObjectDataProcessor](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html).
-
-+ The data retrieving behavior is implementation-dependent, but the data validation behavior is common.
-+ The implementation will fail the data retrieving with an error, the `DataRetrievingFailedError` will be thrown.
-+ If the data will not pass the validation, the `InvalidExternalDataError` will be thrown.
-
-The implementation must support the following options:
-
-```typescript
-type CompoundParameter =
-  
-    URI_PathRawDefinition &
-    
-    URI_QueryParametersDefinition &
-    
-    Readonly<{
-      HTTP_Method?: HTTP_Methods;
-      HTTP_Headers?: HTTP_Headers;
-      validResponseDataSpecification: Readonly<RawObjectDataProcessor.ObjectDataSpecification>;
-      mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-    }>;
-```
-
-where
-
-```typescript
-type URI_PathRawDefinition = Readonly<
-  { alternatingURI_PathPart: string; } |
-  { specificURI_UntilPath: string; }
->;
-
-type URI_QueryParametersDefinition = Readonly<{
-  URI_QueryParameters?: Readonly<ReadonlyParsedJSON_Object>;
-  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
-}>;
-```
-
-The return value is represented by the object will following schema:
-
-```typescript
-type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
-  
-    Readonly<(
-      (
-        {
-          isSuccessful: true;
-          data: ResponseData;
-        } |
-        (
-          { isSuccessful: false; } &
-          (
-            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-            { errorTextPayload: string; }
-          )
-        )
-      ) &
-      {
-        HTTP_Status: number;
-        HTTP_Headers: HTTP_Headers;
-      }
-    )>;
-```
-
-
-###### `submitData`
-
-```
-/* [ Overload No. 1 ] Validation of Response Data */
-(
-  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
-) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
-
-
-/* [ Overload No. 2 ] No response data expected */
-(
-  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
-) => Promise<AJAX_Service.ObjectDataResponse>
-```
-
-Submitting the data and, optionally, do the same things with response data as `retrieveData` method.
-
-For the case with response data, the implementation must support the following options:
-
-```typescript
-export type CompoundParameter =
-  URI_PathRawDefinition &
-  URI_QueryParametersDefinition &
-  Readonly<{
-    HTTP_Method?: HTTP_Methods;
-    HTTP_Headers?: HTTP_Headers;
-    requestData: Readonly<ReadonlyParsedJSON_Object>;
-    validResponseDataSpecification: RawObjectDataProcessor.ObjectDataSpecification;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-  }>;
-```
-
-where 
-
-```typescript
-type URI_PathRawDefinition = Readonly<
-  { alternatingURI_PathPart: string; } |
-  { specificURI_UntilPath: string; }
->;
-
-type URI_QueryParametersDefinition = Readonly<{
-  URI_QueryParameters?: Readonly<ReadonlyParsedJSON_Object>;
-  URI_QueryParametersSerializer?: URI_QueryParametersSerializer;
-}>;
-```
-
-For the case without response data, the parameter will not have `validResponseDataSpecification` property:
-
-```typescript
-export type CompoundParameter =
-  URI_PathRawDefinition &
-  URI_QueryParametersDefinition &
-  Readonly<{
-    HTTP_Method?: HTTP_Methods;
-    HTTP_Headers?: HTTP_Headers;
-    requestData: Readonly<ReadonlyParsedJSON_Object>;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-  }>;
-```
-
-In any case, the return value is represented by the object of the following schema:
-
-```typescript
-export type ObjectDataResponse<ResponseData extends PossiblyReadonlyParsedJSON = PossiblyReadonlyParsedJSON> =
-    Readonly<(
-      (
-        {
-          isSuccessful: true;
-          data: ResponseData;
-        } |
-        (
-          { isSuccessful: false; } &
-          (
-            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-            { errorTextPayload: string; }
-          )
-        )
-      ) &
-      {
-        HTTP_Status: number;
-        HTTP_Headers: HTTP_Headers;
-      }
-    )>;
-```
-
-This way, when `validResponseDataSpecification` not specified, the `data` property of the return value
-  will have `PossiblyReadonlyParsedJSON` type.
-
-
-###### `retrieveText`
-
-```
-(
-  compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
-) => Promise<AJAX_Service.TextDataResponse>
-```
-
-Retrieve the text data including the HTML code.
-
-The implementation must support the following options:
-
-```typescript
-export type CompoundParameter =
-  URI_PathRawDefinition &
-  URI_QueryParametersDefinition &
-  Readonly<{
-    HTTP_Method?: HTTP_Methods;
-    HTTP_Headers?: HTTP_Headers;
-    requestData?: ReadonlyParsedJSON_Object;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest?: boolean;
-  }>;
-```
-
-The return value will be represented by the object of the following scema:
-
-```typescript
-export type TextDataResponse = Readonly<
-  (
-    {
-      isSuccessful: true;
-      text: string;
-    } |
-    (
-      { isSuccessful: false; } &
-      (
-        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-        { errorTextPayload: string; }
-      )
-    )
-  ) &
-  {
-    HTTP_Status: number;
-    HTTP_Headers: HTTP_Headers;
-  }
->;
-```
-
-
-##### Protected Abstract Methods
-###### `retrieveResponseWithRawObjectData`
-
-```
-(
-  compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
-) => Promise<AJAX_Service.RawObjectDataResponse>
-```
-
-The implementation of this method must retrieve the data corresponding to passed options without validation yet:
-
-```typescript
-namespace RawObjectDataRetrieving {
-
-  export type CompoundParameter = {
-    URI: string;
-    HTTP_Method: HTTP_Methods;
-    HTTP_Headers: HTTP_Headers;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
-  };
-
-}
-```
-
-The response must have the following schema:
-
-```typescript
-type RawObjectDataResponse = 
-  
-  (
-    {
-      isSuccessful: true;
-      data: PossiblyReadonlyParsedJSON;
-    } |
-    (
-      { isSuccessful: false; } &
-      (
-        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-        { errorTextPayload: string; }
-      )
-    )
-  ) &
-    
-  {
-    HTTP_Status: number;
-    HTTP_Headers: HTTP_Headers;
-  }
-```
- 
-[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L15-L69) 
-  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
-
-
-###### `submitAndGetRawResponseDataIfAvailable`
-
-```
-(
-  compoundParameter: AJAX_Service.GeneralizedObjectDataSubmitting.CompoundParameter
-) => Promise<AJAX_Service.RawObjectDataResponse>
-```
-
-The implementation of this method must submit the data corresponding to passed options, then
-  process the response data if presents, but without validation yet.
-
-```typescript
-namespace GeneralizedObjectDataSubmitting {
-
-  export type CompoundParameter = {
-    URI: string;
-    HTTP_Method: HTTP_Methods;
-    HTTP_Headers: HTTP_Headers;
-    requestData: ReadonlyParsedJSON;
-    mustExpectResponseData: boolean;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
-  };
-
-}
-```
-
-The response must have the following schema:
-
-```typescript
-type RawObjectDataResponse = 
-  
-  (
-    {
-      isSuccessful: true;
-      data: PossiblyReadonlyParsedJSON;
-    } |
-    (
-      { isSuccessful: false; } &
-      (
-        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-        { errorTextPayload: string; }
-      )
-    )
-  ) &
-    
-  {
-    HTTP_Status: number;
-    HTTP_Headers: HTTP_Headers;
-  }
-```
-
-If no response data come, provide the empty object.
-
-[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L71-L130) 
-  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
-
-
-###### `retrieveResponseWithTextData`
-
-```
-(
-  compoundParameter: AJAX_Service.TextDataRetrieving.NormalizedCompoundParameter
-) => Promise<AJAX_Service.TextDataResponse>
-```
-
-The implementation of this method must retrieve the text data corresponding to passed options:
-
-```typescript
-namespace TextDataRetrieving {
-
-  export type NormalizedCompoundParameter = {
-    URI: string;
-    HTTP_Method: HTTP_Methods;
-    HTTP_Headers: HTTP_Headers;
-    requestData?: ReadonlyParsedJSON_Object;
-    mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
-  };
-
-}
-```
-
-The response must have the following schema:
-
-```typescirpt
-export type TextDataResponse =
-
-  (
-    {
-      isSuccessful: true;
-      text: string;
-    } |
-    (
-      { isSuccessful: false; } &
-      (
-        { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-        { errorTextPayload: string; }
-      )
-    )
-  ) &
-  
-  {
-    HTTP_Status: number;
-    HTTP_Headers: HTTP_Headers;
-  };
-```
-
-[Here is how this method has been implemented](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/Main/Core/Source/AJAX/FetchAPI_Service.ts#L132-L205) 
-  in **FetchAPI_Service**, the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) based implementation.
-
-
-##### Public Instance Methods
-###### `retrieveData`
-
-```
-<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
-  compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
-) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>
-```
-
-Have save signature as the [eponymous static method](#retrievedata) and, moreover, all what the static method doing is
-  delegates the execution to this instance method.
-Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
-  `implementation` static field), there is not need to take care about instance management across the files,
-  so the recommended usage way is the static version of `retrieveData`.
-If you are not want to follow this recommendation, you can use this instance version of `retrieveData`.
-
-
-###### `submitData`
-
-```
-/* [ Overload No. 1 ] Validation of Response Data */
-(
-  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
-) => Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
-
-
-/* [ Overload No. 2 ] No response data expected */
-(
-  compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
-) => Promise<AJAX_Servic
-```
-
-Have save signature as the [eponymous static method](#submitdata) and, moreover, all what the static method doing is
-  delegates the execution to this instance method.
-Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
-  `implementation` static field), there is not need to take care about instance management across the files,
-  so the recommended usage way is the static version of `submitData`.
-If you are not want to follow this recommendation, you can use this instance version of `submitData`.
-
-
-###### `retrieveText`
-
-```
-(
-  compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
-) => Promise<AJAX_Service.TextDataResponse>
-```
-
-Have save signature as the [eponymous static method](#retrievetext) and, moreover, all what the static method doing is
-  delegates the execution to this instance method.
-Once an instance has been initialized and stored inside `AJAX_Service` (via [`setup` static method](#setup) or 
-  `implementation` static field), there is not need to take care about instance management across the files,
-  so the recommended usage way is the static version of `retrieveText`.
-If you are not want to follow this recommendation, you can use this instance version of `retrieveText`.
-
-
-##### Protected Abstract Methods
-###### `retrieveResponseWithRawObjectData`
-
-```
-(
-  compoundParameter: AJAX_Service.RawObjectDataRetrieving.CompoundParameter
-): Promise<AJAX_Service.RawObjectDataResponse>
-```
-
-Intended to be implemented with the retrieving of data.
-
-Must support all options of the object type parameter:
-
-```typescript
-type CompoundParameter = Readonly<{
-  URI: string;
-  HTTP_Method: HTTP_Methods;
-  HTTP_Headers: HTTP_Headers;
-  mustIncludeCookiesAndAuthenticationHeadersToRequest: boolean;
-}>;
-```
-
-Must return the object of following schema for response of any HTTP status (including the errored HTTP statuses):
-
-```typescript
-type RawObjectDataResponse = 
-    Readonly<(
-      (
-        {
-          isSuccessful: true;
-          data: PossiblyReadonlyParsedJSON;
-        } |
-        (
-          { isSuccessful: false; } &
-          (
-            { errorObjectPayload: PossiblyReadonlyParsedJSON; } |
-            { errorTextPayload: string; }
-          )
-        )
-      ) &
-      {
-        HTTP_Status: number;
-        HTTP_Headers: HTTP_Headers;
-      }
-    )>;
-```
-
-The data may come for any type of HTTP status (including the errored ones), so:
-
-+ For the successful responses case, the data must be stored to the `data` field.
-+ For the errored responses case, the data must be stored to either `errorObjectPayload` or `errorTextPayload` depending
-    on what server has returned.
-
-[//]: # (// TODO Reference to GitHub Source code)
-Here is how this method has been implemented in `FetchAPI_Service`.
-
-
-[//]: # (TODO 次は AJAX_Service(instance).submitAndGetRawResponseDataIfAvailable)
-
-
-<dl>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a></dt>
-  <dd>
-    <p>
-      The facade for convenient usage of <a href="https://developer.mozilla.org/en-US/docs/Glossary/AJAX">AJAX</a> with
-        maximal type-safety and less code.
-    </p>
-    <ul>
-      <li>
-        Integrated with <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html"><code>RawObjectDataProcessor</code></a>
-          for validation and, if required, processing of response data.
-      </li>
-      <li>
-        Needs some implementation, but there is
-          <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a>,
-          the pre-made one.
-      </li>
-    </ul>
-  </dd>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html"><code>FetchAPI_Service</code></a></dt>
-  <dd>
-    The implementation of <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
-      abstract class based on <a href="https://developer.mozilla.org/ru/docs/Web/API/Fetch_API">Fetch API</a>. 
-    Works with all modern browsers, and also stable in Node.js since version <strong>22</strong>. 
-  </dd>
-
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/URI_QueryParametersSerializer/URI_QueryParametersSerializer.english.html"><code>URI_QueryParametersSerializer</code></a><dt>
-  <dd>
-    The function-like <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases">TypeScript type</a>
-      used by <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html"><code>AJAX_Service</code></a>
-      and intended be used to implement the custom serializing algorithm for URI query parameters.  
-  </dd>
-
-</dl>
 
 ### Arrays
 #### Creating
@@ -1977,13 +1348,12 @@ The most demanded functionality is <code>format</code> static method allows defi
 
 ```
 (
-  sourceData: Readonly<
-    { year: number; } &
-    (
-      { monthNumber__numerationFrom0: number; } |
-      { monthNumber__numerationFrom1: number; }
-    )
-  >
+  sourceDataAndOptions: 
+      { year: number; } &
+      (
+        { monthNumber__numerationFrom0: number; } |
+        { monthNumber__numerationFrom1: number; }
+      )
 ) => number
 ```
 
@@ -2028,8 +1398,8 @@ The parameters can be defined by various methods.
 
 ```
 (
-  sourceData: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
-): MonthsNames
+  sourceDataAndOptions: { targetMonthNumber: number; numerationFrom: number; }
+) => MonthsNames
 ```
 
 Converts the month number (from 0 or 1) to element of 
@@ -2038,105 +1408,172 @@ Converts the month number (from 0 or 1) to element of
 [📖 Main Article](Documentation/DateTime/getMonthNameByNumber.md)
 
 
-<dl>
+##### `getMonthNumberByName`
+
+```
+(
+  sourceDataAndOptions: { targetMonthName: MonthsNames; numerationFrom: number; }
+) => number
+```
+
+Converts the element of [`MonthsNames` enumeration](#https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md) to number of month (from 0 or 1).
+
+[📖 Main Article](Documentation/DateTime/getMonthNumberByName.md)
 
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getMonthNumberByName.md">
-      <code>getMonthNumberByName</code>
-    </a>
-  </dt>
-  <dd>Converts the element of <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/MonthsNames.md"><code>MonthsNames</code> enumeration</a> to number of month (from 0 or 1).</dd>
+##### `getNextMonthNumber`
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getNextMonthNumber.md">
-      <code>getNextMonthNumber</code>
-    </a>
-  </dt>
-  <dd>Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+```
+(
+  sourceDataAndOptions:
+      Readonly<
+        (
+          (
+            { referenceMonthNumber__numerationFrom0: number; } |
+            { referenceMonthNumber__numerationFrom1: number; }
+          ) |
+          { referenceMonthName: MonthsNames; }
+        ) &
+        { firstMonthNumberInRelationToReturnableValue: 0 | 1; }
+      >
+) => number
+```
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getPreviousMonthNumber.md">
-      <code>getPreviousMonthNumber</code>
-    </a>
-  </dt>
-  <dd>Returns previous month number in relation to specified year and month number; numeration from 0 and 1 is available for both parameter and returned value.</dd>
+Returns next month number in relation to specified year and month number; numeration from 0 and 1 is available for both 
+  parameter and returned value.
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfNextMonth.md">
-      <code>getYearOfNextMonth</code>
-    </a>
-  </dt>
-  <dd>Returns the year of next month in relation to specified year and month.</dd>
+[📖 Main Article](Documentation/DateTime/getNextMonthNumber.md)
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/getYearOfPreviousMonth.md">
-      <code>getYearOfPreviousMonth</code>
-    </a>
-  </dt>
-  <dd>Returns the year of previous month in relation to specified year and month.</dd>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/hasTimeCome.ts">
-      <code>hasTimeCome</code>
-    </a>
-  </dt>
-  <dd>
-    Returns boolean value indicates has specified date and time come. 
-    Native <code>Date</code> and <b>ISO8601</b> formats supported.
-  </dd>
-  
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/isValidNativeDate.ts">
-      <code>isValidNativeDate</code>
-    </a>
-  </dt>
-  <dd>Returns boolean value indicates does specified <code>Date</code> represents the valid date and time.</dd>
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/millisecondsToSeconds.md">
-      <code>millisecondsToSeconds</code>
-    </a>
-  </dt>
-  <dd>Converts milliseconds amount to amount of seconds.</dd>
+##### `getPreviousMonthNumber`
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/secondsToMilliseconds.md">
-      <code>secondsToMilliseconds</code>
-    </a>
-  </dt>
-  <dd>Converts seconds amount to amount of milliseconds.</dd>
+```
+(
+  sourceDataAndOptions:
+      Readonly<
+        (
+          (
+            { referenceMonthNumber__numerationFrom0: number; } |
+            { referenceMonthNumber__numerationFrom1: number; }
+          ) |
+          { referenceMonthName: MonthsNames; }
+        ) &
+        { firstMonthNumberInRelationToReturnableValue: 0 | 1; }
+      >
+): number
+```
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md"><code>TimePoint</code></a></dt>
-  <dd>
-    An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
-    <ul>
-      <li>
-        Has similar API with <code>DateWithoutTime</code>, but it also has the conceptual difference: is 
-          <code>DateWithoutTime</code> is the date not associated with specific time zone and does not work with time,
-          <code>TimePoint</code> work with time and also has the accusation with specific time zone 
-      </li>
-      <li>
-        The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
-          target date with optimized computing.
-      </li>
-    </ul>
-  </dd>
+Returns previous month number in relation to specified year and month number; numeration from 0 and 1 is available for 
+  both parameter and returned value.
 
-  <dt>
-    <a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/%40v1.8/CoreLibrary/Package/Source/DateTime/Timer.ts">
-      <code>Timer</code>
-    </a>
-  </dt>
-  <dd>Abstract class indented to be inherited and implemented with environment-dependent functionality.</dd>
+[📖 Main Article](Documentation/DateTime/getPreviousMonthNumber.md)
 
-</dl>
+
+##### `getYearOfNextMonth`
+
+```
+(
+  sourceDataAndOptions:
+      { referenceYear: number; } &
+      (
+        { referenceMonthNumber__numerationFrom0: number; } |
+        { referenceMonthNumber__numerationFrom1: number; }
+      )
+) => number
+```
+
+Returns the year of next month in relation to specified year and month.
+
+[📖 Main Article](Documentation/DateTime/getYearOfNextMonth.md)
+
+
+##### `getYearOfPreviousMonth`
+
+```
+(
+  sourceDataAndOptions:
+      { referenceYear: number; } &
+      (
+        { referenceMonthNumber__numerationFrom0: number; } |
+        { referenceMonthNumber__numerationFrom1: number; }
+      )
+) => number
+```
+
+Returns the year of previous month in relation to specified year and month.
+
+[📖 Main Article](Documentation/DateTime/getYearOfPreviousMonth.md)
+
+
+##### `hasTimeCome`
+
+```
+(targetDateTime: Date | string) => boolean
+```
+
+Returns boolean value indicates has specified date and time come. 
+Native [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) and 
+  [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) formats supported.
+
+
+##### `isValidNativeDate`
+
+```
+(targetDate: Date) => boolean
+```
+
+Returns boolean value indicates does specified date represents the valid date and time.
+The `Date` constructor will not throw error if to initialize it with some non-date expression like `new Date("---")`,
+  and if to call `toString()` on this `Date` instance, it will return `"Invalid Date"` string.
+A human can understand that date is invalid by this string value, but the comparing like 
+  `date.toString() !== "Invalid Date"` requires the memorizing of `"Invalid Date"`.  
+
+
+##### `millisecondsToSeconds`
+
+```
+(millisecondsAmount: number) => number
+```
+
+Converts milliseconds amount to amount of seconds.
+The JavaScript API using milliseconds widely, but for the human the seconds are easier to read. 
+
+
+##### `secondsToMilliseconds`
+
+```
+(secondsAmount: number) => number
+```
+
+Converts seconds amount to amount of milliseconds.
+The JavaScript API using milliseconds widely, but for the human the seconds are easier to read. 
+
+
+
+##### `TimePoint` Class
+
+An alternative of native [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) 
+  which actually is not only the Date but also the time.
+
++ Has similar API with [DateWithoutTime](Documentation/DateTime/DateWithoutTime.md), but there is also has the conceptual 
+  difference: while `DateWithoutTime` is the date not associated with specific time zone and does not work with time,
+  `TimePoint` works with time and also has the accusation with specific time zone
++ The most demanded functionality is `format` static method allows defining the arbitrary formatting of 
+  target date with optimized computing.
+
+[📖 Main Article](Documentation/DateTime/TimePoint.md)
+
+
+##### `Timer` Class
+
+Abstract class indented to be inherited and implemented with environment-dependent functionality.
 
 
 ### Default value Subsituters
 
 Although the [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
-  makes the below functions redundant, they still could be used in the environments with old ECMAScript versions.
+  makes the below functions redundant, they still can be used in the environments with old ECMAScript versions.
 
 <dl>
 
@@ -2248,38 +1685,218 @@ Although the [nullish coalescing operator](https://developer.mozilla.org/en-US/d
 
 </dl>
 
+
+### Files
+#### `encodeFileToBase64`
+
+```
+(targetFile: File) => Promise<string>
+```
+
+Represents an instance of [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) as Base64 encoded string.
+It may require, for instance, when uploading the file.
+
+The representing of an instance `File` as Base64 encoded string natively is not difficult, but a little bit verbose
+  and also the dealing with TypeScript types will require, because 
+  [`result` property](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result) of 
+  [`FileReader`](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) class may 
+  be string, `ArrayBuffer` or `null`.
+`encodeFileToBase64` function takes case about these routines and suggesting the promisfied API.
+
+
+### Logging
+#### `Logger` Facade
+
+Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.
+
+[📖 Main Article](Documentation/Logging/Logger/Logger.md)
+
+
+#### `ILogger` Interface
+
+Used for the custom implementation of loggers.
 [//]: # (todo =========================================================================================================&#41;)
 
-#### RawObjectDataProcessor
 
-The tool for the validation and processing of unknown at advance external data (from HTTP requests/responses, files, etc.).
+### Maps
+#### `addEntriesToMap`
 
-* [📖 Quick example](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
-* [📖 Problem overview](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview)
-* [📖 Theoretical minimum](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum)
-* [📖 Getting started](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
+```
+<Key, Value>(
+  compoundParameter: 
+      Readonly<
+        (
+          {
+            mutably?: true;
+            targetMap: Map<Key, Value>;
+          } |
+          {
+            mutably: false;
+            targetMap: ReadonlyMap<Key, Value>;
+          }
+        ) &
+        (
+          {
+            newKey: Key;
+            newValue: Value;
+          } |
+          { newEntries: ReadonlyMap<Key, Value> | ReadonlyArray<[ Key, Value ]>; }
+        )
+      >
+) => Map<Key, Value>
+```
+
+Adds multiple entries to map.
+May be done immutably — in this case, the new Map container will created, however if there are object-types values or keys, 
+  then the full depth copy of each element will not be created (and can not be created in general case).
 
 
-##### Pre-made pre-validation modifiers
+#### `createMapBasedOnOtherMap`
 
-Intended to be used when some property is expected to be the string but also expected to be a valid number if to parse it.
+```
+<InputMapKey, InputMapValue, OutputMapKey, OutputMapValue>(
+  initialMap: ReadonlyMap<InputMapKey, InputMapValue>,
+  transformer: (inputMapKey: InputMapKey, inputMapValue: InputMapValue) => [ OutputMapKey, OutputMapValue ]
+) => Map<OutputMapKey, OutputMapValue>
+```
 
-<dl>
+Creates map based on other map.
+The function like native [`Array.prototype.map()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+  but for the maps.
 
-  <dt>convertPotentialStringToFloatIfPossible</dt>
-  <dd>Tries to convert the string to decimal fraction; returns the number in success case otherwise returns the initial value.</dd>
 
-  <dt>convertPotentialStringToIntegerIfPossible</dt>
-  <dd>Tries to convert the string to integer; returns the number in success case otherwise returns the initial value.</dd>
+#### `filterMap`
 
-  <dt>convertPotentialStringToNumberIfPossible</dt>
-  <dd>
-    Tries to convert the string to integer or decimal fraction (depending on decimal part separator presence); 
-    returns the number in success case otherwise returns the initial value.
-  </dd>
+```
+(
+  targetMap: ReadonlyMap<Key, Value>, 
+  filteringPredicate: (key: Key, Value: Value) => boolean
+) => Map<Key, Value>
+```
 
-</dl>
+Created the map based on the source map, herewith the key-value pairs from the source will be included to new map
+  only if satisfied to specified predicate.
+The function like native [`Array.prototype.filter()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
+  but for the maps.
 
+
+#### `getExpectedToBeNonUndefinedMapValue`
+
+```
+<Key, Value extends Exclude<unknown, undefined>>(
+  targetMap: ReadonlyMap<Key, Value>, 
+  targetKey: Key
+) => Value
+```
+
+Intended to be used when the confidence about the existence of non-undefined value of certain map corresponding to 
+  specified key is enough high to be fine to be thrown the error when contrary to expectations the specified value is not
+  exists.
+
+The native [`Map.prototype.get()` method](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Map/get)
+  has `get(key: K): V | undefined` signature what means that a value corresponding to specified key may not exist.
+However, there are many cases when either target value exists, or it is the application bug when to be thrown the error 
+  is fine.
+Contrary to native `Map.prototype.get()` method,  `getExpectedToBeNonUndefinedMapValue` either returns the non-undefined 
+  value, or throws the error.
+
+
+#### `getOneEntryOfMap`
+
+```
+<Key, Value>(targetMap: ReadonlyMap<Key, Value>) => [ Key, Value ]
+```
+
+Returns one key-value pair of specified map.  
+Since the map is the collection without fixed order of elements, there is no so called "first" key-value pair.
+
+
+#### `invertMapImmutably`
+
+```
+<Key, Value>(initialMap: ReadonlyMap<Key, Value>) => Map<Value, Key>
+```
+
+Creates the map based on specified source one, but instead of the keys will be the values and vice versa.
+
+
+
+#### `mergeMaps`
+
+```
+<Key, Value>(...targetMaps: ReadonlyArray<ReadonlyMap<Key, Value>>) => Map<Key, Value>
+```
+
+Creates the map including the keys-value pars of all maps passed via parameters.
+
+
+#### `removeEntriesFromMap`
+
+```
+<Key, Value>(
+  {
+    targetMap,
+    mutably,
+    ...sourceData
+  }: 
+      (
+        {
+          mutably?: true;
+          targetMap: Map<Key, Value>;
+        } |
+        {
+          mutably: false;
+          targetMap: ReadonlyMap<Key, Value>;
+        }
+      ) &
+      (
+        { key: Key; } |
+        { keys: ReadonlyArray<Key>; }
+      )
+) => 
+    {
+      updatedMap: Map<Key, Value>;
+      removedEntries: Map<Key, Value>;
+    }
+```
+
+Obviously from the function name, removes the entries from map, herewith is can be done mutably or no.
+
++ If you are need to remove only by the one key, when specify the property `key` of the object-type parameter.
+  Otherwise, pass the array of keys via `keys` property.
++ If you are need the keys to be removed mutably, the the source map can not have type `ReadonlyMap`.
++ The removed entries will be returned inside the object of `RemovingEntriesFromMap.Result` type.
+
+
+#### `replaceValuesInMap`
+
+```
+(
+  compoundParameter:
+      (
+        {
+          mutably?: true;
+          targetMap: Map<Key, Value>;
+        } |
+        {
+          mutably: false;
+          targetMap: ReadonlyMap<Key, Value>;
+        }
+      ) &
+      (
+        ReplacingOfValuesInMap.Replacement<Key, Value> |
+        { replacements: ReadonlyArray<ReplacingOfValuesInMap.Replacement<Key, Value>>; }
+      )
+) => Map<Key, Value>
+```
+
+Replaces the value in specified map, herewith:
+
++ The replacement can be executed either by specified keys or by the replacing function which accepts the current value
+  as the single parameter.
++ The replace can be mutably or not, meanwhile for mutable replacement case the source map can not be of `ReadonlyMap` type.
+
+[//]: # (TODO -----------)
 
 #### Numbers
 
@@ -2311,6 +1928,37 @@ Intended to be used when some property is expected to be the string but also exp
 
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md">separateEach4DigitsGroupWithComma</a></dt>
   <dd>Formats the number separating each 4 digits group with comma</dd>
+
+</dl>
+
+
+#### RawObjectDataProcessor
+
+The tool for the validation and processing of unknown at advance external data (from HTTP requests/responses, files, etc.).
+
+* [📖 Quick example](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#quick-example)
+* [📖 Problem overview](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#problem-overview)
+* [📖 Theoretical minimum](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#theoretical-minimum)
+* [📖 Getting started](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/RawObjectDataProcessor/RawObjectDataProcessor.md#getting-started)
+
+
+##### Pre-made pre-validation modifiers
+
+Intended to be used when some property is expected to be the string but also expected to be a valid number if to parse it.
+
+<dl>
+
+  <dt>convertPotentialStringToFloatIfPossible</dt>
+  <dd>Tries to convert the string to decimal fraction; returns the number in success case otherwise returns the initial value.</dd>
+
+  <dt>convertPotentialStringToIntegerIfPossible</dt>
+  <dd>Tries to convert the string to integer; returns the number in success case otherwise returns the initial value.</dd>
+
+  <dt>convertPotentialStringToNumberIfPossible</dt>
+  <dd>
+    Tries to convert the string to integer or decimal fraction (depending on decimal part separator presence); 
+    returns the number in success case otherwise returns the initial value.
+  </dd>
 
 </dl>
 
@@ -2415,23 +2063,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
 <dl>
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Sets/addMultipleElementsToSet/addMultipleElementsToSet.md">addMultipleElementsToSet</a></dt>
   <dd>Adds multiple elements to set.</dd>
-</dl>
-
-
-
-#### Maps
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/addMultiplePairsToMap/addMultiplePairsToMap.md">addMultiplePairsToMap</a></dt>
-  <dd>Adds multiple entries to map.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/createMapBasedOnOtherMap/createMapBasedOnOtherMap.md">createMapBasedOnOtherMap</a></dt>
-  <dd>Creates map based on other map.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Maps/filterMap/filterMap.md">filterMap</a></dt>
-  <dd>Filters map by specified predicate.</dd>
-
 </dl>
 
 
@@ -2575,80 +2206,4 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md">computeLastItemNumberForSpecificPaginationPage</a></dt>
   <dd>Computes the last item number for specified pagination page.</dd>
 
-</dl>
-
-
-#### Logging
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Logging/Logger/Logger.md"><b>Logger</b> facade</a></dt>
-  <dd>Basic facade for providing of the high-quality logging with customizable output destinations, formatting and limitations.</dd>
-
-  <dt>Pre-made errors</dt>
-  <dd>
-    <dl>
-      <dt>AlgorithmMismatchError</dt>
-      <dd>Intended to be used in general cases when actual behaviour does not match with desired.</dd>
-      <dt>ClassRedundantSubsequentInitializationError</dt>
-      <dd>Intended to be used when the class developed as singleton has been attempted to initialize twice.</dd>
-      <dt>ClassRequiredInitializationHasNotBeenExecutedError</dt>
-      <dd>Intended to be used when the class besides the construction requires the initialization but the initializing method has not been called.</dd>
-      <dt>ConfigFileNotFoundError</dt>
-      <dd>Intended to be used when some utility requires the config file but it has not been found.</dd>
-      <dt>CrossBrowserIssueError</dt>
-      <dd>Intended to be used when some processing could not be executed because of certain browsers's limitations.</dd>
-      <dt>DataRetrievingFailedError</dt>
-      <dd>Intended to be used when the data retrieving from some external resource (server, database, file, etc.) failed.</dd>
-      <dt>DataSubmittingFailed</dt>
-      <dd>Intended to be used when the data submitting to any external resource (server, database, etc.) failed.</dd>
-      <dt>DOM_ElementRetrievingFailedError</dt>
-      <dd>
-        Intended be used when some element retrieving from the DOM has been failed.
-        It could occur not only on client side but also on server side, during rendering or HTML code processing.
-      </dd>
-      <dt>FileReadingFailedError</dt>
-      <dd>Intended to be used when the file reading was not go as expected</dd>
-      <dt>ImproperUsageError</dt>
-      <dd>
-        Intended to be used when the class/function has been attempted to use improperly. 
-        Herewith, try to name the function/methods such as it will be obvious how to use it and also limit the usage by TypeScript typing.
-      </dd>
-      <dt>IncompatiblePropertiesInObjectTypeParameterError</dt>
-      <dd>
-        Intended to be used when in parameter <b>exampleParameter</b> of object type one of properties 
-        <b>exampleParameter.propertyA</b> and <b>exampleParameter.propertyB</b> must be omitted but both has been specified.
-      </dd>
-      <dt>InterProcessInteractionFailedError</dt>
-      <dd>
-        Intended to be used when the interaction between NodeJS processed is not going as expected. 
-        Could be actual, for example, for the Electron.js where the main process and render process are exchanges by data.
-      </dd>
-      <dt>InvalidConfigError</dt>
-      <dd>
-        Intended to be used when config validation was not passed.
-        Appending of the validation errors messages to <b>InvalidConfigError</b>'s message is strongly recommended.
-      </dd>
-      <dt>InvalidExternalDataError</dt>
-      <dd>
-        Intended to be used when the data from the external data source does not match with expected. 
-        Appending of the validation errors messages to <b>InvalidExternalDataError</b>'s message is strongly recommended.</dd>
-      <dt>InvalidParameterValueError</dt>
-      <dd>
-        Intended to be used when the parameter's does not fit to some limitations.
-        Although the TypeScript allows to define and check the parameter's type, no type check will not be executed
-        once TypeScript will be compiled to JavaScript. Also, is the parameter has limitations like smallest numerical 
-        value or maximal characters count, <b>InvalidParameterValueError</b> has been developed for such cases.
-      </dd>
-      <dt>ModuleDynamicLoadingFailedError</dt>
-      <dd>Recommended to throw when the module dynamical loading failed. Actual for bundlers like Webpack.</dd>
-      <dt>UnexpectedEventError</dt>
-      <dd>
-        Intended to be used when the probability of the occurrence of some "else if" branch is very small and 
-        impossible for normal operation of the program.
-      </dd>
-      <dt>UnsupportedScenarioError</dt>
-      <dd>Intended to be used when occurred some scenario which is not supported yet.</dd>
-    </dl>
-  </dd>
 </dl>

@@ -2,7 +2,7 @@
 
 ```
 (
-  namedParameters: Readonly<
+  sourceDataAndOptions: Readonly<
     { year: number; } &
     (
       { monthNumber__numerationFrom0: number; } |

@@ -117,7 +117,7 @@ abstract class AJAX_Service {
   /** @throws DataRetrievingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws InvalidExternalDataError */
-  public async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+  protected async retrieveData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.ObjectDataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
 
@@ -155,11 +155,11 @@ abstract class AJAX_Service {
 
 
   /* ┅┅┅ Data Submitting ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
-  public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+  protected async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
   ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>>;
 
-  public async submitData(
+  protected async submitData(
     compoundParameter: AJAX_Service.ObjectDataSubmitting.WithoutExpectedResponseData.CompoundParameter
   ): Promise<AJAX_Service.ObjectDataResponse>;
 
@@ -167,7 +167,7 @@ abstract class AJAX_Service {
   /** @throws DataSubmittingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
   /** @throws InvalidExternalDataError */
-  public async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
+  protected async submitData<RawValidResponseData extends PossiblyReadonlyParsedJSON>(
     compoundParameter: AJAX_Service.ObjectDataSubmitting.WithExpectedResponseData.CompoundParameter
   ): Promise<AJAX_Service.ObjectDataResponse<RawValidResponseData>> {
 
@@ -229,7 +229,7 @@ abstract class AJAX_Service {
 
 
   /* ┅┅┅ Text or HTML Retrieving ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
-  public async retrieveText(
+  protected async retrieveText(
     compoundParameter: AJAX_Service.TextDataRetrieving.CompoundParameter
   ): Promise<AJAX_Service.TextDataResponse> {
     return this.retrieveResponseWithTextData({
@@ -243,7 +243,7 @@ abstract class AJAX_Service {
   }
 
 
-  /* ━━━ Routines ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  /* ┅┅┅ Routines ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   /** @throws InvalidConfigError */
   protected normalizeURI(
     compoundParameter: AJAX_Service.URI_PathRawDefinition & AJAX_Service.URI_QueryParametersDefinition
@@ -364,21 +364,17 @@ abstract class AJAX_Service {
   }
 
   protected static getExpectedToBeInitializedImplementation(): AJAX_Service {
-
-    if (isNull(AJAX_Service.implementation)) {
-      Logger.throwErrorWithFormattedMessage({
-        errorType: "ImplementationHasNotBeenSetError",
-        title: "Implementation has not been set",
-        description:
-            "To use the static methods of \"AJAX_Service\" class and its inheritors, it is required to set " +
-              "the \"implementation\" public static field first or use \"setup\" static method.",
-        occurrenceLocation: "AJAX_Service.getExpectedToBeInitializedImplementation()"
-      });
-    }
-
-
-    return AJAX_Service.implementation;
-
+    return AJAX_Service.implementation ??
+        ((): never => {
+          Logger.throwErrorWithFormattedMessage({
+            errorType: "ImplementationHasNotBeenSetError",
+            title: "Implementation has not been set",
+            description:
+                "To use the static methods of \"AJAX_Service\" class and its inheritors, it is required to set " +
+                  "the \"implementation\" public static field first or use \"setup\" static method.",
+            occurrenceLocation: "AJAX_Service.getExpectedToBeInitializedImplementation()"
+          });
+        })();
   }
 
 }

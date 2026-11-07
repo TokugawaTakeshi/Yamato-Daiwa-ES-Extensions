@@ -256,12 +256,15 @@ export default class FetchAPI_Service extends AJAX_Service {
     let responseRawData: unknown;
 
     try {
+
       responseRawData = await response.json();
+
     } catch (error: unknown) {
       Logger.throwErrorWithFormattedMessage({
-        errorInstance: new HTTP_ResponseBodyParsingFailureError(
-          "The HTTP response body could not be represented as JSON."
-        ),
+        errorInstance:
+            new HTTP_ResponseBodyParsingFailureError(
+              "The HTTP response body could not be represented as JSON."
+            ),
         title: HTTP_ResponseBodyParsingFailureError.localization.defaultTitle,
         occurrenceLocation: "FetchAPI_Service.extractRawObjectDataFromResponse(response)",
         innerError: error
@@ -296,7 +299,9 @@ export default class FetchAPI_Service extends AJAX_Service {
       let objectTypeData: unknown;
 
       try {
+
         objectTypeData = await response.json();
+
       } catch (error: unknown) {
         Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(
@@ -331,7 +336,9 @@ export default class FetchAPI_Service extends AJAX_Service {
       let decodedText: string;
 
       try {
+
         decodedText = await response.text();
+
       } catch (error: unknown) {
         Logger.throwErrorWithFormattedMessage({
           errorInstance: new HTTP_ResponseBodyParsingFailureError(

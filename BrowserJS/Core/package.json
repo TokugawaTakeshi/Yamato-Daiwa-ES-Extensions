@@ -29,12 +29,12 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.10.0-alpha.1"
+    "@yamato-daiwa/es-extensions": "1.10.0-alpha.2"
   },
   "devDependencies": {
     "@types/jsdom-global": "3.0.7",
     "@types/node": "22.15.31",
-    "@yamato-daiwa/es-extensions": "../../Main/Core",
+    "@yamato-daiwa/es-extensions": "1.10.0-alpha.2",
     "@yamato-daiwa/style_guides": "0.15.0",
     "jsdom": "26.1.0",
     "jsdom-global": "3.0.2",
@@ -51,5 +51,8 @@
     "Rebuild Distributable and Realize Alpha": "npm run \"Rebuild Distributable\" && npm publish --tag alpha",
     "Rebuild Distributable and Realize RC": "npm run \"Rebuild Distributable\" && npm publish --tag rc"
   },
-  "funding": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1"
+  "funding": "https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions?sponsor=1",
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
 }

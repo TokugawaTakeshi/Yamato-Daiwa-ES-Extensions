@@ -2,7 +2,7 @@
 
 ```
 (
-  namedParameters: Readonly<{ targetMonthName: MonthsNames; numerationFrom: number; }>
+  sourceDataAndOptions: Readonly<{ targetMonthName: MonthsNames; numerationFrom: number; }>
 ): number
 ```
 
@@ -22,4 +22,4 @@ console.log(getMonthNumberByName({ targetMonthName: MonthsNames.december, numera
 
 ## Errors
 
-Throws `InvalidParameterValueError` if `parametersObject.numerationFrom` is neither `0` nor `1`.
+Throws `InvalidParameterValueError` if `sourceDataAndOptions.numerationFrom` is neither `0` nor `1`.

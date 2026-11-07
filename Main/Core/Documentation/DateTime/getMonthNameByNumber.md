@@ -2,7 +2,7 @@
 
 ```
 (
-  namedParameters: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
+  sourceDataAndOptions: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
 ): MonthsNames
 ```
 
@@ -25,7 +25,7 @@ console.log(getMonthNameByNumber({ targetMonthNumber: 11, numerationFrom: 1 }));
 
 `InvalidParameterValueError` will be thrown if:
 
-1. `namedParameters.numerationFrom` is neither `0` nor `1`.
-2. Both `namedParameters.targetMonthNumber` is `0` while `namedParameters.numerationFrom` is `1`.
-3. Both `namedParameters.targetMonthNumber` is `12` while `namedParameters.numerationFrom` is `0`.
-4. `namedParameters.targetMonthNumber` has any value except integers from 0 to 12.
+1. `sourceDataAndOptions.numerationFrom` is neither `0` nor `1`.
+2. Both `sourceDataAndOptions.targetMonthNumber` is `0` while `sourceDataAndOptions.numerationFrom` is `1`.
+3. Both `sourceDataAndOptions.targetMonthNumber` is `12` while `sourceDataAndOptions.numerationFrom` is `0`.
+4. `sourceDataAndOptions.targetMonthNumber` has any value except integers from 0 to 12.

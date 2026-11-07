@@ -5,7 +5,7 @@ Except January case, the returned year will be even with specified one.
 
 ```
 (
-  namedParameters:
+  sourceDataAndOptions:
       Readonly<
         { referenceYear: number; } &
         (

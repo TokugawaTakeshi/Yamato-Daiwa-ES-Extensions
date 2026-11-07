@@ -5,13 +5,8 @@ import Logger from "../Logging/Logger";
 
 
 export default function getMonthNameByNumber(
-  sourceData: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
+  { targetMonthNumber, numerationFrom }: Readonly<{ targetMonthNumber: number; numerationFrom: number; }>
 ): MonthsNames {
-
-  const {
-    targetMonthNumber,
-    numerationFrom
-  }: Readonly<{ targetMonthNumber: number; numerationFrom: number; }> = sourceData;
 
   if (numerationFrom !== 0 && numerationFrom !== 1) {
     Logger.throwErrorWithFormattedMessage({
@@ -91,12 +86,12 @@ export default function getMonthNameByNumber(
       Logger.throwErrorWithFormattedMessage({
         errorInstance: new InvalidParameterValueError({
           parameterNumber: 1,
-          parameterName: "sourceData.targetMonthNumber",
+          parameterName: "sourceDataAndOptions.targetMonthNumber",
           messageSpecificPart: "The valid month number must be the non-negative integer from 0 to 11 or from 1 to 12 " +
               `(depending on "numerationFrom" option) while actual value is ${ targetMonthNumber }.`
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "getMonthNameByNumber(sourceData)"
+        occurrenceLocation: "getMonthNameByNumber(sourceDataAndOptions)"
       });
     }
 

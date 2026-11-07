@@ -30,6 +30,26 @@ npm i @yamato-daiwa/es-extensions-nodejs @yamato-daiwa/es-extensions -E
 ```
 
 
+## Support
+
+|Versions Range | Status |
+|---|---|
+| ~1.10.0 | Alpha/Beta |
+| ~1.9.0  | Supported  |
+| &gt; = 1.6.0 <= 1.8  | Premum support on request only |
+| < 1.6  | End of Life |
+
+
+### Node.js Versions Compatibility
+
+The policy is simple: the supported versions of YDEE supports the 
+  [supported versions of Node.js](https://nodejs.org/en/about/previous-releases).
+
+For instance, the 1.9.x versions realized in Jul 2026 supports minimal version **22** of Node.js.
+For the Jul 2026, the version **20** of Node.js reached the end of life and version **22** will be supported until
+  Apr 2027.
+
+
 ## Functionality
 ### Utils
 

@@ -5,7 +5,7 @@ parameter and returned value.
 
 ```
 (
-  namedParameters:
+  sourceDataAndOptions:
       Readonly<
         (
           (

@@ -5,7 +5,7 @@ Returns next month number in relation to specified year and month number; numera
 
 ```
 (
-  namedParameters:
+  sourceDataAndOptions:
       Readonly<
         (
           (
