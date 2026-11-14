@@ -1,15 +1,31 @@
 export default function filterMap<Key, Value>(
-  targetMap: ReadonlyMap<Key, Value>, filteringPredicate: (key: Key, Value: Value) => boolean
+  {
+    targetMap,
+    mutably,
+    filter
+  }: Readonly<
+    (
+      {
+        targetMap: Map<Key, Value>;
+        mutably: true;
+      } |
+      {
+        targetMap: ReadonlyMap<Key, Value>;
+        mutably: false;
+      }
+    ) &
+    { filter: (key: Key, value: Value) => boolean; }
+  >
 ): Map<Key, Value> {
 
-  const filteredMap: Map<Key, Value> = new Map<Key, Value>();
+  const workpiece: Map<Key, Value> = mutably ? targetMap : new Map<Key, Value>(targetMap.entries());
 
-  targetMap.forEach((value: Value, key: Key): void => {
-    if (filteringPredicate(key, value)) {
-      filteredMap.set(key, value);
+  for (const [ key, value ] of workpiece.entries()) {
+    if (!filter(key, value)) {
+      workpiece.delete(key);
     }
-  });
+  }
 
-  return filteredMap;
+  return workpiece;
 
 }

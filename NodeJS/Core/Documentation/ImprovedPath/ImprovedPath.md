@@ -4,8 +4,8 @@
 classDiagram
 class Logger{
   <<abstract>>
-  +joinPathSegments(Array<string> pathSegments, object options)$ void
-  +buildAbsolutePathFromCurrentWorkingDirectory(Array<string> pathSegments, object options)$ void
+  +joinSegments(Array<string> pathSegments, object options)$ void
+  +(Array<string> pathSegments, object options)$ void
   +replacePathSeparatorsToForwardSlashes(string targetPath)$ string
   +splitPathToSegments(string targetPath)$ Array~string~
   +doesPathEndWithFileNameExtension(object namedParameters)$ boolean
@@ -31,7 +31,7 @@ So neither forward not backslashes could be safely used on Windows in all cases.
 
 
 ## Methods
-### `joinPathSegments`: Join path segments
+### `joinSegments`: Join path segments
 
 ```
 (pathSegments: Array<string>, options?: { alwaysForwardSlashSeparators?: boolean; }) => string
@@ -50,10 +50,10 @@ const pathSegments: ReadonlyArray<string> = [ "/foo", "bar", "baz/asdf", "quux",
 
 /* Below two lines are equivalent */
 console.log(Path.join(...pathSegments));
-console.log(ImprovedPath.joinPathSegments(pathSegments));
+console.log(ImprovedPath.joinSegments(pathSegments));
 /* Example output for Windows: "\foo\bar\baz\asdf" */
 
-console.log(ImprovedPath.joinPathSegments(pathSegments, { alwaysForwardSlashSeparators: true }));
+console.log(ImprovedPath.joinSegments(pathSegments, { alwaysForwardSlashSeparators: true }));
 /* Example output for Windows: "/foo/bar/baz/asdf" */
 ```
 
@@ -62,7 +62,7 @@ console.log(ImprovedPath.joinPathSegments(pathSegments, { alwaysForwardSlashSepa
 `InvalidParameterValueError` will be thrown if one or more path segments are invalid.
 
 
-### `buildAbsolutePathFromCurrentWorkingDirectory`: Build absolute path from current working directory
+### ``: Build absolute path from current working directory
 
 ```
 (pathSegments: Array<string>, options?: { alwaysForwardSlashSeparators?: boolean; }) => string
@@ -74,7 +74,7 @@ parameter must not include the absolute path, that is the big difference with na
 
 The native `Path.resolve()` is being frequently used with absolute path as first parameter while in this case
 [`Path.join()`](https://nodejs.org/api/path.html#pathjoinpaths) could be safely used instead.
-The motivation of `ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory()` is creating of method specialized
+The motivation of `ImprovedPath.()` is creating of method specialized
 on computing of absolute path from current working directory method thus no need to specify it explicitly.
 
 Additionally, by `alwaysForwardSlashSeparators` option, the path with forward slashes separators will be returned
@@ -88,10 +88,10 @@ const pathSegments: ReadonlyArray<string> =[ "foo/bar", "./baz" ];
 
 /* Below two lines are equivalent */
 console.log(Path.join(...pathSegments));
-console.log(ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments));
+console.log(ImprovedPath.(pathSegments));
 /* Example output for Windows: "D:\IntelliJ IDEA\InHouseDevelopment\YamatoDaiwaES_Extensions\NodeJS\Package\foo\bar\baz" */
 
-console.log(ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(pathSegments, { alwaysForwardSlashSeparators: true }));
+console.log(ImprovedPath.(pathSegments, { alwaysForwardSlashSeparators: true }));
 /* Example output for Windows: "D:/IntelliJ IDEA/InHouseDevelopment/YamatoDaiwaES_Extensions/NodeJS/Package/foo/bar/baz" */
 ```
 

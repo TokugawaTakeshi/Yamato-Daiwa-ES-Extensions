@@ -72,6 +72,9 @@ npm i @yamato-daiwa/es-extensions -E
 + [Errors](#errors)
 + [Files](#files)
 + [Logging](#logging)
++ [Maps](#maps)
++ [Numbers](#numbers)
++ [Objects](#objects)
 
 
 ### Getting Started
@@ -1768,15 +1771,32 @@ The function like native [`Array.prototype.map()`](https://developer.mozilla.org
 #### `filterMap`
 
 ```
-(
-  targetMap: ReadonlyMap<Key, Value>, 
-  filteringPredicate: (key: Key, Value: Value) => boolean
+<Key, Value>(
+
+  sourceDataAndOptions:
+
+      (
+        {
+          targetMap: Map<Key, Value>;
+          mutably: true;
+        } |
+        {
+          targetMap: ReadonlyMap<Key, Value>;
+          mutably: false;
+        }
+      ) &
+  
+      { filter: (key: Key, value: Value) => boolean; }
+
 ) => Map<Key, Value>
 ```
 
-Created the map based on the source map, herewith the key-value pairs from the source will be included to new map
-  only if satisfied to specified predicate.
-The function like native [`Array.prototype.filter()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
++ When `mutably` option has been specified with `true`, deletes the entries from the source map which does not satisfy
+    the predicate. 
+  In this case, the source map can not have `ReadonlyMap` because `filterMap` needs to modify it. 
++ When `mutably` option has been specified with `false`, creates the map based on the source map, herewith the key-value 
+  pairs from the source will be included to new map only if satisfied to specified predicate.
+  In this case, `filterMap` function is like native [`Array.prototype.filter()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
   but for the maps.
 
 
@@ -1804,11 +1824,22 @@ Contrary to native `Map.prototype.get()` method,  `getExpectedToBeNonUndefinedMa
 #### `getOneEntryOfMap`
 
 ```
-<Key, Value>(targetMap: ReadonlyMap<Key, Value>) => [ Key, Value ]
+/** @description [ 1st overload ] Returns undefined when target map is empty. */
+<Key, Value>(targetMap: ReadonlyMap<Key, Value>) => [ Key, Value ] | undefined
+ 
+/** @description [ 2nd overload ] Throws a error when target map is empty but return value never will be `undefined`. */ 
+<Key, Value>(
+  targetMap: ReadonlyMap<Key, Value>,
+  options: Readonly<{ mustThrowErrorIfMapIsEmpty: true; }>
+) => [ Key, Value ]
 ```
 
 Returns one key-value pair of specified map.  
-Since the map is the collection without fixed order of elements, there is no so called "first" key-value pair.
+Since the map is the collection without fixed order of elements, there is no so-called "first" key-value pair.
+
++ If the second parameter is not specified then the return will be `undefined` when target map is empty
++ If the second parameter specified with `{ mustThrowErrorIfMapIsEmpty: true; }` then the return value does not need
+    the non-undefined check but is map is actually empty, `UnexpectedEventError` will be thrown.  
 
 
 #### `invertMapImmutably`
@@ -1896,40 +1927,350 @@ Replaces the value in specified map, herewith:
   as the single parameter.
 + The replace can be mutably or not, meanwhile for mutable replacement case the source map can not be of `ReadonlyMap` type.
 
-[//]: # (TODO -----------)
 
-#### Numbers
+### Numbers
+#### `formatNumberWith4_KetaKanji`
 
-<dl>
+```
+(targetNumber: number | bigint | string) => string
+```
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md">formatNumberWith4KetaKanji</a></dt>
-  <dd>Formats number with 4-digits Kanji 万, 億, 兆, 系 (CJK ideographic characters)</dd>
+Formats number with 4-digits Kanji 万, 億, 兆, 系 (CJK ideographic characters).
+Because this function is actual for multiple languages, is has not been moved to the localization package. 
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/getArithmeticMean.md">getArithmeticMean</a></dt>
-  <dd>Computed the arithmetic mean of arbitrary quantity of number.</dd>
+[📖 Main Article](Documentation/Numbers/formatNumberWith4KetaKanji/formatNumberWith4KetaKanji.md)
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md">isStringifiedNonNegativeIntegerOfRegularNotation</a></dt>
-  <dd>Checks is the value of string contains the number of non-scientific notation.</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundDownToSpecificIntegerPlaceValue.md">roundDownToSpecificIntegerPlaceValue</a></dt>
-  <dd>Rounds up the number to specific nearest integer place value.</dd>
+#### `getArithmeticMean`
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecificNearestIntegerPlaceValue.md">roundToSpecificNearestIntegerPlaceValue</a></dt>
-  <dd>Rounds the number to specific nearest integer place value.</dd>
+```
+(...numbers: Array<number>) => number
+```
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundToSpecifiedNearestDecimalPlaceValue.md">roundToSpecifiedNearestDecimalPlaceValue</a></dt>
-  <dd>Rounds the number to specific decimal place (tens, hundreds, thousands, etc.).</dd>
+Computes the arithmetic mean of arbitrary quantity of number.
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/roundUpToSpecificIntegerPlaceValue.md">roundUpToSpecificIntegerPlaceValue</a></dt>
-  <dd>Rounds the number to specific nearest integer place value.</dd>
+[📖 Main Article](Documentation/Numbers/getArithmeticMean.md)
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach3DigitsGroupWithComma/separateEach3DigitsGroupWithComma.md">separateEach3DigitsGroupWithComma</a></dt>
-  <dd>Formats the number separating each 3 digits group with comma</dd>
 
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Numbers/separateEach4DigitsGroupWithComma/separateEach4DigitsGroupWithComma.md">separateEach4DigitsGroupWithComma</a></dt>
-  <dd>Formats the number separating each 4 digits group with comma</dd>
+#### `isStringifiedNonNegativeIntegerOfRegularNotation`
 
-</dl>
+```
+(value: string) => boolean
+```
+
+Checks is the value of string contains the number of non-scientific notation.
+
+[📖 Main Article](Documentation/Numbers/isStringifiedNonNegativeIntegerOfRegularNotation/isStringifiedNonNegativeIntegerOfRegularNotation.md)
+
+
+#### `limitMaximalValue`
+
+```
+/** @description [ 1st overload ] For the numbers smaller than `Number.MAX_SAFE_INTEGER`. */
+(
+  compoundParameter: { targetNumber: number; maximalValue: number; }
+) => number
+
+/** @description [ 2nd overload ] For the number which may be greater than `Number.MAX_SAFE_INTEGER`. */ 
+(
+  compoundParameter: { targetNumber: number | bigint; maximalValue: bigint; }
+) => bigint;
+```
+
+Compares the target number with specified maximal value and returns either target number (when it less than maximal value)
+  or maximal value (when the target number is greater than maximal value).
+
+
+#### `limitMinimalAndMaximalValues`
+
+```
+/** @description [ 1st overload ] For the numbers smaller than `Number.MAX_SAFE_INTEGER`. */
+export default function limitMinimalAndMaximalValues(
+  sourceDataAndOptions: 
+      {
+        targetNumber: number;
+        minimalValue: number;
+        maximalValue: number;
+      }
+): number;
+
+/** @description [ 2nd overload ] For the number which may be greater than `Number.MAX_SAFE_INTEGER`. */ 
+export default function limitMinimalAndMaximalValues(
+  sourceDataAndOptions: 
+      {
+        targetNumber: number | bigint;
+        minimalValue: number | bigint;
+        maximalValue: bigint;
+      }
+): bigint;
+
+```
+
+The combination of `limitMaximalValue` and `limitMinimalValue`.
+Limits `targetNumber` from both left and right.
+Return `targetNumber` when it lies between specified `minimalValue` and `maximalValue`, otherwise returns the
+  specified limit which has been exceeded. 
+
+
+#### `limitMinimalValue`
+
+```
+/** @description [ 1st overload ] For the numbers smaller than `Number.MAX_SAFE_INTEGER`. */
+(
+  { targetNumber, minimalValue }: { targetNumber: number; minimalValue: number; }
+) => number
+
+/** @description [ 2nd overload ] For the number which may be greater than `Number.MAX_SAFE_INTEGER`. */ 
+(
+  { targetNumber, minimalValue }: { targetNumber: number | bigint; minimalValue: bigint; }
+) => bigint;
+```
+
+Compares the target number with specified minimal value and returns either target number (when it grater than minimal value)
+  or minimal value (when the target number is smaller than minimal value).
+
+
+#### `roundDownToSpecificIntegerPlaceValue`
+
+```
+(
+  sourceDataAndOptions:
+      {
+        targetNumber: number;
+        trailingZerosCount: number;
+      }
+) => number
+```
+
+Rounds down the number to specific nearest integer place value.
+
+[📖 Main Article](Documentation/Numbers/roundDownToSpecificIntegerPlaceValue.md)
+
+
+#### `roundToSpecificNearestIntegerPlaceValue`
+
+```
+(
+  sourceDataAndOptions:
+      {
+        targetNumber: number;
+        trailingZerosCount: number;
+      }
+) => number
+```
+
+Rounds to specific nearest integer place value, for instance the rounding of `15836`...
+
++ to tens will be `15840`
++ to hundreds will be `15800`
++ to thousands will be `16000`
+
+and so on.
+
+[📖 Main Article](Documentation/Numbers/roundToSpecificNearestIntegerPlaceValue.md)
+
+
+#### `roundToSpecifiedNearestDecimalPlaceValue`
+
+```
+(
+  sourceDataAndOptions: { targetNumber: number; digitsCountAfterDecimalPoint: number; }
+) => number
+```
+
+Rounds to specific nearest decimal place value, for instance the rounding of `1.11` to 1 digit after the decimal point
+  will be `1.1` and the routing of `1.115` to 2 digits after decimal point will be `1.12`.
+
+[📖 Main Article](Documentation/Numbers/roundToSpecifiedNearestDecimalPlaceValue/roundToSpecifiedNearestDecimalPlaceValue.md)
+
+
+#### `roundUpToSpecificIntegerPlaceValue`
+
+```
+(
+  sourceDataAndOptions: { targetNumber: number; trailingZerosCount: number; }
+) => number
+```
+
+Rounds the number to specific nearest integer place value.
+
+[📖 Main Article](Documentation/Numbers/roundUpToSpecificIntegerPlaceValue.md)
+
+
+#### `separateEach3_DigitsGroupWithComma`
+
+```
+(targetNumber: number | bigint | string) => string
+```
+
+Formats the number separating each 3 digits group with comma.
+
+[📖 Main Article](Documentation/Numbers/separateEach3_DigitsGroupWithComma.md)
+
+
+#### `separateEach4DigitsGroupWithComma`
+
+```
+(targetNumber: number | bigint | string) => string
+```
+
+Formats the number separating each 4 digits group with comma
+
+[📖 Main Article](Documentation/Numbers/separateEach4_DigitsGroupWithComma.md)
+
+
+### Objects
+#### `getEntriesOfObjectWithFixedKeysSetAndUniformValues`
+
+```
+<Keys extends string, Values>(
+  targetObject: Readonly<{ [key in Keys]?: Values; }>
+) => 
+    Array<[ Keys, Values ]>
+```
+
+The native [Object.values()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
+  returns the array of tuple `[string, T][]` where `T` is the union of all possible values but the keys are always `string`
+  even the object with filed keys passed.
+The `getEntriesOfObjectWithFixedKeysSetAndUniformValues` alternatives keeps the fixed keys.
+
+
+#### `getObjectPropertySafely`
+
+```
+(
+  targetObject: unknown,
+  dotSeparatedOrArrayedPathToTargetProperty: Array<string | number> | string | number
+) => unknown
+```
+
+Works as [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining](optional chaining)
+  but can be used for any fully-qualified name and returns value which being considered as `unknown`. 
+Intended to be used when the schema of value is not known enough (for example, because of lack of TypeScript type definition).
+
+
+#### `setObjectProperties`
+
+```
+setObjectProperties<TargetObject extends object>(
+  targetObject: TargetObject,
+  order:
+      {
+        [dotSeparatedFullyQualifiedName: string]:
+            Readonly<PropertyDescriptor & { mustCreateParentsObjectsIfNotPresent?: boolean; }>;
+      }
+) => void
+```
+
+Sets or adds the entries to object by the fully qualified name.
+Basically there is no need in such function when the TypeScript typing is strong, but if there some external
+  data with unknown at advance schema, it is a way to simply specify some properties even for arbitrary depth level.
+The `order` — the second parameters of this function — is the associative array like object where the keys are the
+  fully qualified named of target properties but the values the [property descriptors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor#description),  
+  not the raw values which must be set.
+In addition to native attributes (`value`, `writable`, etc.) there is also `mustCreateParentsObjectsIfNotPresent` option
+  which prevents the adding of new property when specified with `false` and there is not the parent object.
+
+
+### Pagination
+
+The working with pagination is actual for both client and server programming whether the displaying of the pagination or
+  just the computing from and until which item must be selected.
+
+#### `computeFirstItemNumberForSpecificPaginationPage`
+
+```
+(
+  sourceDataAndOptions: 
+      {
+        currentPageNumber: number;
+        itemsCountPerPage: number;
+      }
+) => number
+```
+
+Obviously from the function name, computes the first item number for the specific pagintion page.
+Current page number and items count per page must be specified.
+
+
+#### `computeLastItemNumberForSpecificPaginationPage`
+
+```
+(
+  sourceDataAndOptions: 
+      {
+        currentPageNumber: number;
+        itemsCountPerPage: number;
+        totalItemsCount: number;
+      }
+) => number
+```
+
+Obviously from the function name, computes the last item number for the specific pagintion page.
+Besides the current page number and items counts per pagination page, the total items count must be specified.
+
+
+#### `getItemsOfPaginationPage`
+
+```
+<Item>(
+  sourceDataAndOptions: 
+    
+      {
+        items: ReadonlyArray<Item>;
+        itemsCountPerPaginationPage: number;
+      } & 
+      (
+        {
+          targetPageNumber__numerationFrom1: number;
+          targetPageNumber__numerationFrom0?: undefined;
+        } | 
+        {
+          targetPageNumber__numerationFrom0: number;
+          targetPageNumber__numerationFrom1?: undefined;
+        }
+      )
+    >
+) => Array<Item>
+```
+
+Takes the subarray for specified page number (counting from `0` and `1` are both supported) and items
+  count per pagination page.
+
+
+#### `PaginationCollection` class
+
+The class storing the 2-dimensional array corresponding to items distributed by the pagination page.
+May be used instead of `getItemsOfPaginationPage` function if it is required to access the items of 
+  multiple pages.
+And contrary, it is better to use `getItemsOfPaginationPage` function if it is required only get the items
+  of specific pagination page without data storing. 
+
+
+##### Constructor
+
+```
+(sourceDataAndOptions: PaginationCollection.CompoundParameter<Item>)
+```
+
+Only target items and their count per pagination page must be specified.
+
+
+##### `pagesCount` Public Field
+
+The computed pagination pages count based on specified items and their count per pagination page.
+The readonly one since currently the mutating of `PaginationCollection` is not supported.
+
+
+##### `getItemsOfSpecificPage` method
+
+```
+(compoundParameter: Readonly<{ targetPageNumber: number; numerationFrom: 0 | 1; }>) => Array<Item>
+```
+
+Returns the items corresponding to specified target page number, the numeration from `0` or `1` supported.
+Unlike `getItemsOfPaginationPage` function, the items count per pagination page can not be explicitly specified
+  because it was already done during the creating of instance of `PaginationCollection`.
 
 
 #### RawObjectDataProcessor
@@ -2047,16 +2388,6 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
  
 </dl>
 
-
-#### Objects
-
-<dl>
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Objects/getObjectPropertySafely.md">getObjectPropertySafely</a></dt>
-  <dd>
-    Works as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">optional chaining</a> but could be used for any fully-qualified name and returns value which being considered as <code>unknown</code>. 
-    Intended to be used when the schema of value is not known enough (for example, because of lack of TypeScript type definition).
-  </dd>
-</dl>
 
 #### Sets
 
@@ -2194,16 +2525,3 @@ If some function works incorrectly with surrogate pairs, it means the bug; pleas
   * [Redirection messages](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#redirectionresponseshttp_statuscodes---redirection-messages)
   * [Client error responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#clienterrorshttp_statuscodes---client-error-responses)
   * [Server error responses](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/ConstantsAndEnumerations/HTTP_StatusCodes.md#servererrorshttp_statuscodes---server-error-responses)
-
-
-#### Pagination
-
-<dl>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeFirstItemNumberForSpecificPaginationPage/computeFirstItemNumberForSpecificPaginationPage.md">computeFirstItemNumberForSpecificPaginationPage</a></dt>
-  <dd>Computes the first item number for specified pagination page.</dd>
-
-  <dt><a href="https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/Pagination/computeLastItemNumberForSpecificPaginationPage/computeLastItemNumberForSpecificPaginationPage.md">computeLastItemNumberForSpecificPaginationPage</a></dt>
-  <dd>Computes the last item number for specified pagination page.</dd>
-
-</dl>

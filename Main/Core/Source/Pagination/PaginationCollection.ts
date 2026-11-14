@@ -8,11 +8,11 @@ class PaginationCollection<Item> {
 
   public readonly pagesCount: number;
 
-  private readonly itemsByPages: ReadonlyArray<Array<Item>> = [];
+  private readonly itemsByPages: ReadonlyArray<ReadonlyArray<Item>> = [];
 
-  public constructor(compoundParameter: PaginationCollection.CompoundParameter<Item>) {
 
-    const { items, itemsCountPerPaginationPage }: PaginationCollection.CompoundParameter<Item> = compoundParameter;
+  public constructor({ items, itemsCountPerPaginationPage }: PaginationCollection.CompoundParameter<Item>) {
+
     const itemsByPages: Array<Array<Item>> = [];
 
     this.pagesCount = Math.ceil(items.length / itemsCountPerPaginationPage);
@@ -20,10 +20,10 @@ class PaginationCollection<Item> {
     for (let pageIndex: number = 0; pageIndex < this.pagesCount; pageIndex++) {
 
       itemsByPages[pageIndex] = cropArray({
-        targetArray: compoundParameter.items,
+        targetArray: items,
         fromStart: true,
         startingElementNumber__numerationFrom0: pageIndex * itemsCountPerPaginationPage,
-        elementsCount: compoundParameter.itemsCountPerPaginationPage,
+        elementsCount: itemsCountPerPaginationPage,
         mutably: false,
         mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: false
       });
@@ -39,9 +39,11 @@ class PaginationCollection<Item> {
     compoundParameter: Readonly<{ targetPageNumber: number; numerationFrom: 0 | 1; }>
   ): Array<Item> {
 
-    const targetPageIndex: number = compoundParameter.numerationFrom === 0 ?
-        compoundParameter.targetPageNumber : compoundParameter.targetPageNumber - 1;
-    const itemsOfTargetPage: Array<Item> | undefined = this.itemsByPages[targetPageIndex];
+    const targetPageIndex: number =
+        compoundParameter.numerationFrom === 0 ?
+            compoundParameter.targetPageNumber : compoundParameter.targetPageNumber - 1;
+
+    const itemsOfTargetPage: Array<Item> | undefined = [ ...this.itemsByPages[targetPageIndex] ];
 
     if (isUndefined(itemsOfTargetPage)) {
       Logger.throwErrorWithFormattedMessage({
@@ -67,10 +69,12 @@ class PaginationCollection<Item> {
 
 namespace PaginationCollection {
 
-  export type CompoundParameter<Item> = Readonly<{
-    items: Array<Item>;
-    itemsCountPerPaginationPage: number;
-  }>;
+  export type CompoundParameter<Item> =
+
+      Readonly<{
+        items: Array<Item>;
+        itemsCountPerPaginationPage: number;
+      }>;
 
 }
 

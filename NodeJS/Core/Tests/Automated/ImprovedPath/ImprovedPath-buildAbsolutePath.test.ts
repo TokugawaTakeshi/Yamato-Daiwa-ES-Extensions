@@ -12,7 +12,7 @@ import {
 Testing.
 
     suite(
-      `${ ImprovedPath.name }.${ ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory.name }`,
+      `${ ImprovedPath.name }.${ ImprovedPath.buildAbsoluteFromCurrentWorkingDirectory.name }`,
       async (): Promise<void> => {
 
         const pathSegments: ReadonlyArray<string> = [ "foo/bar\\baz", "../../hoge/fuga" ];
@@ -24,7 +24,7 @@ Testing.
             (): void => {
               Assert.strictEqual(
                 Path.resolve(...pathSegments),
-                ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(...pathSegments)
+                ImprovedPath.buildAbsoluteFromCurrentWorkingDirectory(...pathSegments)
               );
             }
           ),
@@ -34,7 +34,7 @@ Testing.
               (): void => {
               Assert.strictEqual(
                 replaceDoubleBackslashesWithForwardSlashes(Path.resolve(...pathSegments)),
-                ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(
+                ImprovedPath.buildAbsoluteFromCurrentWorkingDirectory(
                   pathSegments,
                   { alwaysForwardSlashSeparators: true }
                 )
@@ -47,7 +47,7 @@ Testing.
             (): void => {
               Assert.throws(
                 (): void => {
-                  ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory("/foo/bar/baz", "hoge/fuga");
+                  ImprovedPath.buildAbsoluteFromCurrentWorkingDirectory("/foo/bar/baz", "hoge/fuga");
                 },
                 InvalidParameterValueError
               );

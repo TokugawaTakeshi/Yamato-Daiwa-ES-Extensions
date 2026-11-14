@@ -8,7 +8,7 @@ import { Logger } from "@yamato-daiwa/es-extensions";
 Testing.
 
     suite(
-      `${ ImprovedPath.name }.${ ImprovedPath.joinPathSegments.name }`,
+      `${ ImprovedPath.name }.${ ImprovedPath.joinSegments.name }`,
       async (): Promise<void> => {
 
         const pathSegments: ReadonlyArray<string> = [ "/foo", "bar", "baz\\asdf", "quux", ".." ];
@@ -18,7 +18,7 @@ Testing.
           Testing.test(
             "As default works as native `Path.join()`",
             (): void => {
-              Assert.strictEqual(Path.join(...pathSegments), ImprovedPath.joinPathSegments(...pathSegments));
+              Assert.strictEqual(Path.join(...pathSegments), ImprovedPath.joinSegments(...pathSegments));
             }
           ),
 
@@ -26,7 +26,7 @@ Testing.
             "With `alwaysForwardSlashSeparators` option using forward slashes",
               (): void => {
               Assert.strictEqual(
-                ImprovedPath.joinPathSegments(pathSegments, { alwaysForwardSlashSeparators: true }), "/foo/bar/baz/asdf"
+                ImprovedPath.joinSegments(pathSegments, { alwaysForwardSlashSeparators: true }), "/foo/bar/baz/asdf"
               );
             }
           )

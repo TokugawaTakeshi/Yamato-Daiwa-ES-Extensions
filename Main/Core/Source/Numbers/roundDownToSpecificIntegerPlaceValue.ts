@@ -1,17 +1,18 @@
 export default function roundDownToSpecificIntegerPlaceValue(
-  sourceData: Readonly<{
-    targetNumber: number;
-    trailingZerosCount: number;
-  }>
+  sourceDataAndOptions:
+      Readonly<{
+        targetNumber: number;
+        trailingZerosCount: number;
+      }>
 ): number {
 
-  const digitsCountInTargetNumber: number = sourceData.targetNumber.toString().length;
+  const digitsCountInTargetNumber: number = sourceDataAndOptions.targetNumber.toString().length;
 
-  const trailingZerosCount: number = sourceData.trailingZerosCount < digitsCountInTargetNumber ?
-      sourceData.trailingZerosCount : digitsCountInTargetNumber - 1;
+  const trailingZerosCount: number = sourceDataAndOptions.trailingZerosCount < digitsCountInTargetNumber ?
+      sourceDataAndOptions.trailingZerosCount : digitsCountInTargetNumber - 1;
 
   const coefficient: number = Math.pow(10, trailingZerosCount);
 
-  return Math.floor(sourceData.targetNumber / coefficient) * coefficient;
+  return Math.floor(sourceDataAndOptions.targetNumber / coefficient) * coefficient;
 
 }

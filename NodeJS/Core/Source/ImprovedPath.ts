@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file --
  * This limitation is unsolicited for the namespaced classes, however there is no ESLint option allowing this case. */
-import Path from "path";
+import Path from "node:path";
 
 import {
   replaceDoubleBackslashesWithForwardSlashes,
@@ -18,14 +18,14 @@ import {
 abstract class ImprovedPath {
 
   /* ━━━ Path Segment Joining ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  public static joinPathSegments(...pathSegments: ReadonlyArray<string>): string;
+  public static joinSegments(...pathSegments: ReadonlyArray<string>): string;
 
-  public static joinPathSegments(
+  public static joinSegments(
     pathSegments: ReadonlyArray<string>,
     options: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
   ): string;
 
-  public static joinPathSegments(
+  public static joinSegments(
     firstPathSegmentOrArrayOfAllOfThem: string | ReadonlyArray<string>,
     secondPathSegmentOrOptions: string | Readonly<{ alwaysForwardSlashSeparators: boolean; }>,
     ...pathRestSegments: ReadonlyArray<string>
@@ -69,7 +69,7 @@ abstract class ImprovedPath {
               customMessage: "Passed path segments must satisfy the requirements of native `path.join().`"
             }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.joinPathSegments(...polymorphicParameters)",
+        occurrenceLocation: "ImprovedPath.joinSegments(...polymorphicParameters)",
         innerError: error
       });
 
@@ -79,14 +79,14 @@ abstract class ImprovedPath {
 
 
   /* ━━━ Absolute Path Building ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  public static buildAbsolutePathFromCurrentWorkingDirectory(...pathSegments: ReadonlyArray<string>): string;
+  public static buildAbsoluteFromCurrentWorkingDirectory(...pathSegments: ReadonlyArray<string>): string;
 
-  public static buildAbsolutePathFromCurrentWorkingDirectory(
+  public static buildAbsoluteFromCurrentWorkingDirectory(
     pathSegments: ReadonlyArray<string>,
     options: Readonly<{ alwaysForwardSlashSeparators: boolean; }>
   ): string;
 
-  public static buildAbsolutePathFromCurrentWorkingDirectory(
+  public static buildAbsoluteFromCurrentWorkingDirectory(
     firstPathSegmentOrArrayOfAllOfThem: string | ReadonlyArray<string>,
     secondPathSegmentOrOptions: string | Readonly<{ alwaysForwardSlashSeparators: boolean; }>,
     ...pathRestSegments: ReadonlyArray<string>
@@ -127,11 +127,11 @@ abstract class ImprovedPath {
               `${ segmentsIncludingAbsolutePaths.map((pathSegment: string): string => `● ${ pathSegment }`).join("\n") }\n` +
               "As it follows from the method name, it builds absolute path from current working directory thus " +
                 "does not require the implicit absolute path. " +
-              "If you want join the arbitrary absolute path with other path segments, use \"joinPathSegments\" method " +
+              "If you want join the arbitrary absolute path with other path segments, use \"joinSegments\" method " +
                 "instead."
         }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(...polymorphicParameters)"
+        occurrenceLocation: "ImprovedPath.(...polymorphicParameters)"
       });
     }
 
@@ -150,7 +150,7 @@ abstract class ImprovedPath {
               customMessage: "Passed path segments must satisfy the requirements of native `path.resolve().`"
             }),
         title: InvalidParameterValueError.localization.defaultTitle,
-        occurrenceLocation: "ImprovedPath.buildAbsolutePathFromCurrentWorkingDirectory(...polymorphicParameters)",
+        occurrenceLocation: "ImprovedPath.(...polymorphicParameters)",
         innerError: error
       });
 
@@ -160,7 +160,7 @@ abstract class ImprovedPath {
 
 
   /* ━━━ Relative Path Computing ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  public static computeRelativePath(
+  public static computeRelative(
     {
       forWhichPath,
       relativeToWhichPath,
@@ -352,7 +352,7 @@ abstract class ImprovedPath {
       }
 
 
-      return ImprovedPath.joinPathSegments(
+      return ImprovedPath.joinSegments(
         pathSegments.slice(0, -1),
         { alwaysForwardSlashSeparators: compoundParameter.alwaysForwardSlashSeparators === true }
       );
@@ -367,7 +367,7 @@ abstract class ImprovedPath {
       }
 
 
-      return ImprovedPath.joinPathSegments(
+      return ImprovedPath.joinSegments(
         pathSegments.slice(0, -1),
         { alwaysForwardSlashSeparators: compoundParameter.alwaysForwardSlashSeparators === true }
       );
@@ -376,7 +376,7 @@ abstract class ImprovedPath {
 
 
     if (compoundParameter.ambiguitiesResolution.mustConsiderLastSegmentWithoutDotsAsFileNameWithoutExtension) {
-      return ImprovedPath.joinPathSegments(
+      return ImprovedPath.joinSegments(
         pathSegments.slice(0, -1),
         { alwaysForwardSlashSeparators: compoundParameter.alwaysForwardSlashSeparators === true }
       );

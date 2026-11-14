@@ -1,4 +1,3 @@
-import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 import Logger from "../Logging/Logger";
 import UnexpectedEventError from "../Errors/UnexpectedEvent/UnexpectedEventError";
 
@@ -18,7 +17,7 @@ export default function getOneElementOfSet<Element>(
 
   const element: Element | undefined = targetSet[Symbol.iterator]().next().value;
 
-  if (isUndefined(element)) {
+  if (typeof element === "undefined") {
 
     if (options?.mustThrowErrorIfSetIsEmpty === true) {
       Logger.throwErrorWithFormattedMessage({

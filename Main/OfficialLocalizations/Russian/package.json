@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions-localization-russian",
-  "version": "1.10.0-alpha.3",
+  "version": "1.10.0-alpha.4",
   "description": "Russian localization for @yamato-daiwa/es-extensions package.",
   "keywords": [
     "localization"
@@ -27,7 +27,7 @@
     "Distributable"
   ],
   "peerDependencies": {
-    "@yamato-daiwa/es-extensions": "1.10.0-alpha.2"
+    "@yamato-daiwa/es-extensions": "1.10.0-alpha.3"
   },
   "devDependencies": {
     "@types/node": "22.7.4",
