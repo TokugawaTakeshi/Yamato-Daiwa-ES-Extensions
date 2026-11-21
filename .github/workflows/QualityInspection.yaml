@@ -16,17 +16,17 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22.15.0 }
 
-      - name: setup Node.js
-        uses: actions/setup-node@v3
+      - name: Retrieving of Core Distributable
+        uses: actions/download-artifact@v4
         with:
-          node-version: 22.15.0
-
-      - name: Node.js Version Checking
-        run: node --version
+          name: core-distributable
+          path: Main/Core/Distributable
 
       - name: Dependencies Installation
-        run: cd Main/Core && npm install
+        run: cd Main/Core && npm ci
 
       - name: Types Checking
         run: cd Main/Core && npm run "Check Types"
@@ -40,6 +40,13 @@ jobs:
       - name: Building of Distributable for Dependents
         run: cd Main/Core && npm run "Rebuild Distributable"
 
+      - name: Passing of Distributable to Dependent Jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-distributable
+          path: Main/Core/Distributable
+          retention-days: 1
+
   browserJS_PackageQualityInspection:
 
     name: BrowserJS Package Quality Inspection
@@ -52,13 +59,17 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22.15.0
+      - uses: actions/setup-node@v4
+        with: { node-version: 22.15.0 }
 
-      - name: Node.js Version Checking
-        run: node --version
+      - name: Retrieving of Core Distributable
+        uses: actions/download-artifact@v4
+        with:
+          name: core-distributable
+          path: Main/Core/Distributable
+
+      - name: Core Runtime Dependencies Installation
+        run: cd Main/Core && npm ci --omit=dev
 
       - name: Dependencies Installation
         run: cd BrowserJS/Core && npm install
@@ -81,21 +92,38 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         node-version: [ 22, 24, 26 ]
 
     steps:
 
+      - name: Enabling of Long Paths (Windows)
+        if: runner.os == 'Windows'
+        run: git config --system core.longpaths true
+
       - uses: actions/checkout@v4
-
-      - name: setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          sparse-checkout: |
+            /*
+            !/Documentation/
+            !/docs/
+          sparse-checkout-cone-mode: false
 
-      - name: Node.js Version Checking
-        run: node --version
+      - uses: actions/setup-node@v4
+        with: { node-version: "${{ matrix.node-version }}" }
+
+      - run: node --version
+
+      - name: Retrieving of Core Distributable
+        uses: actions/download-artifact@v4
+        with:
+          name: core-distributable
+          path: Main/Core/Distributable
+
+      - name: Core Runtime Dependencies Installation
+        run: cd Main/Core && npm ci --omit=dev
 
       - name: Dependencies Installation
         run: cd NodeJS/Core && npm install

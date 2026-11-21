@@ -22,9 +22,10 @@ export default function getLastElementOfArray<ArrayElement>(
 
     if (options?.mustThrowErrorIfArrayIsEmpty === true) {
       Logger.throwErrorWithFormattedMessage({
-        errorInstance: new UnexpectedEventError(
-          "Contrary to expectations, target array is empty thus there is no the last element can be accessed."
-        ),
+        errorInstance:
+            new UnexpectedEventError(
+              "Contrary to expectations, target array is empty thus there is no the last element can be accessed."
+            ),
         title: UnexpectedEventError.localization.defaultTitle,
         occurrenceLocation: "getLastElementOfArray(targetArray, options)"
       });

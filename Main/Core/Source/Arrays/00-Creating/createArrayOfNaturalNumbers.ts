@@ -14,11 +14,12 @@ export default function createArrayOfNaturalNumbers(
      * The expanded version will require to make the `startingNumber` the let-variable what is undesirable for parameters. */
     startingNumber = isDescendingOrder ? (elementsCount === 0 ? 1 : elementsCount) : 1
 
-  }: Readonly<{
-    elementsCount: number;
-    isDescendingOrder?: boolean;
-    startingNumber?: number;
-  }>
+  }:
+      Readonly<{
+        elementsCount: number;
+        isDescendingOrder?: boolean;
+        startingNumber?: number;
+      }>
 ): Array<number> {
 
   if (!isNaturalNumberOrZero(elementsCount)) {

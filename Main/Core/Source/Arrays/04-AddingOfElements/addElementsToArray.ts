@@ -5,7 +5,7 @@ import InvalidParameterValueError from "../../Errors/InvalidParameterValue/Inval
 
 
 export default function addElementsToArray<ArrayElement>(
-  compoundParameter:
+  sourceDataAndOptions:
       Readonly<
         { newElements: ReadonlyArray<ArrayElement>; } &
         (
@@ -47,32 +47,32 @@ export default function addElementsToArray<ArrayElement>(
       >
 ): Array<ArrayElement> {
 
-  const workpiece: Array<ArrayElement> = compoundParameter.mutably ?
-      compoundParameter.targetArray : [ ...compoundParameter.targetArray ];
+  const workpiece: Array<ArrayElement> = sourceDataAndOptions.mutably ?
+      sourceDataAndOptions.targetArray : [ ...sourceDataAndOptions.targetArray ];
 
-  if (compoundParameter.toStart === true) {
-    workpiece.unshift(...compoundParameter.newElements);
+  if (sourceDataAndOptions.toStart === true) {
+    workpiece.unshift(...sourceDataAndOptions.newElements);
     return workpiece;
   }
 
 
-  if (compoundParameter.toEnd === true) {
-    workpiece.push(...compoundParameter.newElements);
+  if (sourceDataAndOptions.toEnd === true) {
+    workpiece.push(...sourceDataAndOptions.newElements);
     return workpiece;
   }
 
 
   let positionOfFirstNewElement__numerationFrom0: number;
 
-  if (isNaturalNumberOrZero(compoundParameter.toPosition__numerationFrom0)) {
-    positionOfFirstNewElement__numerationFrom0 = compoundParameter.toPosition__numerationFrom0;
-  } else if (isNaturalNumber(compoundParameter.toPosition__numerationFrom1)) {
-    positionOfFirstNewElement__numerationFrom0 = compoundParameter.toPosition__numerationFrom1 - 1;
+  if (isNaturalNumberOrZero(sourceDataAndOptions.toPosition__numerationFrom0)) {
+    positionOfFirstNewElement__numerationFrom0 = sourceDataAndOptions.toPosition__numerationFrom0;
+  } else if (isNaturalNumber(sourceDataAndOptions.toPosition__numerationFrom1)) {
+    positionOfFirstNewElement__numerationFrom0 = sourceDataAndOptions.toPosition__numerationFrom1 - 1;
   } else {
     Logger.throwErrorWithFormattedMessage({
       errorInstance: new InvalidParameterValueError({
         parameterNumber: 1,
-        parameterName: "compoundParameter",
+        parameterName: "sourceDataAndOptions",
         messageSpecificPart:
             "The target position has been incorrectly specified. " +
             "The valid alternatives are:\n" +
@@ -82,11 +82,11 @@ export default function addElementsToArray<ArrayElement>(
             "● \"toPosition__numerationFrom1\": must be the natural number"
       }),
       title: InvalidParameterValueError.localization.defaultTitle,
-      occurrenceLocation: "addElementsToArray(compoundParameter)"
+      occurrenceLocation: "addElementsToArray(sourceDataAndOptions)"
     });
   }
 
-  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...compoundParameter.newElements);
+  workpiece.splice(positionOfFirstNewElement__numerationFrom0, 0, ...sourceDataAndOptions.newElements);
 
   return workpiece;
 

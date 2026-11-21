@@ -1,4 +1,4 @@
-# Yamato Daiwa E(CMA)S(cript) Extensions [YDEE]
+# Yamato Daiwa E(CMA)S(cript) Extensions (YDEE)
 
 [![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@yamato-daiwa/es-extensions)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package)
@@ -16,10 +16,18 @@
 
 
 Helper functions and classes aimed to reduce the routine code. 
-Build-in TypeScript type safety without `any` type.
-Oriented to TypeScript users investing the time to quality including type-safety.
+Many of them even should be available natively.
 
 ![Hero image of @yamato-daiwa/es-extensions](https://repository-images.githubusercontent.com/376176365/ab848ff3-8bfb-4142-8b8f-fe191340bb3a)
+
++ ✅ Build-in TypeScript type safety without `any` type.
++ ✅ Oriented to TypeScript users investing the time to quality including type-safety.
+
+Functions names and parameters name may be considered as long and verbose but this is intentional because the API has
+  been developed such as the meaning must be clear without the referring of the documentation.
+Such approach is the opposite of short names which provides the quick inputting but it is required to memorize what
+  each function doing (can you clearly explain the difference between `pop`, `push`, `shift` and `unsift` native methods
+  right now?) and reach the documentation each time when forgot. 
 
 
 ## Installation
@@ -29,36 +37,48 @@ npm i @yamato-daiwa/es-extensions -E
 ```
 
 
-## Support
+## Support Status
 
 |Versions Range | Status |
 |---|---|
 | ~1.10.0 | Alpha/Beta |
 | ~1.9.0  | Supported  |
-| &gt; = 1.6.0 <= 1.8  | Premum support on request only |
+| &gt; = 1.6.0 <= 1.8  | Bugs and security issues fixer for premium users only |
 | < 1.6  | End of Life |
 
 
-## Documentation
+## Get started
+
++ [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
++ [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
++ [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
++ [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
+
+
+## Functionality Reference 
 ### Table of Contents
 
 [//]: # (⚠️ During the markdown processing, npm official site replaces custom anchors like `<a href="#Arrays">Arrays</a>` with)
 [//]: # (  `<h3 id="user-content-AJAX" class="heading-element">AJAX</h3>` what negates the manual anchors management with HTML )
 [//]: # (  syntax. Forces to use normal markdown headings and links with automatic IDs.)
 
-+ Get Started
-  + [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
-  + [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
-  + [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
-  + [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
 + [AJAX](#ajax)
-  + [`AJAX_Service` Class](#ajax_service-class)
+  + [`AJAX_Service` Class](#ajax_service-class) ([Main Article](Documentation/AJAX/AJAX_Service.md))
+  + [`FetchAPI_Service` Class](#fetchapi_service-class) ([Main Article](Documentation/AJAX/FetchAPI_Service.md))
+  + [`URI_QueryParametersSerializer` Type](#uri_queryparametersserializer-type)
 + [Arrays](#arrays)
   + [Creating](#creating)
+    + [`createArrayOfNaturalNumbers`](#createarrayofnaturalnumbers) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html))
   + [Retrieving of Elements](#retrieving-of-elements)
+    + [`getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`](#getarrayelementsatisfiesthepredicateifsuchelementisexactlyone) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html))
+    + [`getLastElementOfArray`](#getlastelementofarray) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html))
   + [Retrieving of Indexes](#retrieving-of-indexes)
+    + [`getIndexesOfSatisfiesThePredicateArrayElements`](#getindexesofsatisfiesthepredicatearrayelements)  ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html))
+    + [`getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne`](#getindexofarrayelementsatisfiesthepredicateifsuchelementisexactlyone) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html))
   + [Retrieving of Subarrays](#retrieving-of-subarrays)
+    + [`cropArray`](#croparray) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html))
   + [Adding of Elements](#adding-of-elements)
+    + [`addElementsToArray`](#addelementstoarray) ([Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html))
   + [Replacing of Elements](#replacing-of-elements)
   + [Permutations of Elements](#permutations-of-elements)
   + [Removing of Elements](#removing-of-elements)
@@ -77,14 +97,6 @@ npm i @yamato-daiwa/es-extensions -E
 + [Objects](#objects)
 
 
-### Getting Started
-
-+ [Installation](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#INSTALLATION--SECTION)
-+ [Information About Distribution Size](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#DISTRIBUTIVE_VOLUME_NOTICE--SECTION)
-+ [Precautions for Non-Users of TypeScript](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#NON_TYPE_SCRIPT_USAGE_WARNING--SECTION)
-+ [Importing Functionality](https://ee.yamato-daiwa.com/CoreLibrary/GettingStarted/GetStartedWithCoreLibraryPage.english.html#IMPORTING_OF_FUNCTIONALITY--SECTION)
-
-
 ### AJAX
 #### `AJAX_Service` Class
 
@@ -92,7 +104,7 @@ The facade for the convenient usage of [AJAX](https://developer.mozilla.org/en-U
   type-safety and less code.
 
 + Integrated with [RawObjectDataProcessor](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/RawObjectDataProcessor/RawObjectDataProcessor.english.html)
-    for validation and, if required, processing of the response data.
+    for validation and, if required, the processing of the response data.
 + Needs some implementation, but there is [FetchAPI_Service](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/FetchAPI_Service/FetchAPI_Service.english.html),
     the pre-made one.
 
@@ -102,278 +114,306 @@ The facade for the convenient usage of [AJAX](https://developer.mozilla.org/en-U
 #### `FetchAPI_Service` Class
 
 The implementation of [`AJAX_Service` abstract class](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html). 
-  abstract class based on [`Fetch API`](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API). 
+  based on [`Fetch API`](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API). 
 Works with all modern browsers, and also stable in Node.js since version **22**. 
 
 [📖 Main Article](Documentation/AJAX/FetchAPI_Service.md)
 
 
-#### `URI_QueryParametersSerializer`
+#### `URI_QueryParametersSerializer` Type
 
 ```
 (URI_QueryParameters: ReadonlyParsedJSON) => string;
 ```
 
-The function-like [TypeScript type](https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases)
-  [`AJAX_Service` class](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html)
-  and intended be used to implement the custom serializing algorithm for URI query parameters.
+The function-like [TypeScript type](https://www.typescriptlang.org/docs/handbook/declaration-files/by-example.html#reusable-types-type-aliases).
 The implementation of this signature must accept the JSON-compatible object as the argument and return the string 
   represented the valid query part of a URI.  
+
+May be used in any code dealing with a data exchange via HTTP.
+Inside YDEE, the [`AJAX_Service` class](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/AJAX/AJAX_Service/AJAX_Service.english.html) using this type for the eponymous protected static field.
 
 
 ### Arrays
 #### Creating
+##### createArrayOfNaturalNumbers
 
-<dl>
-
-  <dt>
-    <a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html">
-      <code>createArrayOfNaturalNumbers</code>
-    </a>
-  </dt>
-
-  <dd>
-
- As it is obvious from the function name, it creates an array of natural numbers.
- Elements’ count, ascending/descending and starting number can be specified.
-
-   ```
-   (
-     compoudParameter: {
+```
+(
+  compoudParameter:
+    {
   
-       /** @description Must be the natural number. */
-       elementsCount: number;
+      /** @description Must be the natural number. */
+      elementsCount: number;
   
-       /** @default false */
-       isDescendingOrder?: boolean;
+      /** @default false */
+      isDescendingOrder?: boolean;
   
-       /** @default 1 */
-       startingNumber?: number;
-  
-     }
-   ): Array<number>
-   ```
+      /** @default 1 */
+      startingNumber?: number;
 
-  </dd>
+    }
+) => Array<number>
+```
 
-</dl>
+Obviously from the function name, creates an array of natural numbers.
+Elements’ count, ascending/descending and starting number can be specified.
+
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+/* 〚 Output 〛[ 1, 2, 3 ]  */
+console.log(
+  createArrayOfNaturalNumbers({ elementsCount: 3 })
+);
+ 
+/* 〚 Output 〛[ 3, 2, 1 ]  */
+console.log(
+  createArrayOfNaturalNumbers({ elementsCount: 3, isDescendingOrder: true })
+);
+ 
+/* 〚 Output 〛[ 6, 7, 8 ]  */
+console.log(
+  createArrayOfNaturalNumbers({ elementsCount: 3, startingNumber: 6 })
+);
+ 
+/* `InvalidParameterValueError` will be thrown */
+console.log(
+  createArrayOfNaturalNumbers({ elementsCount: 3, startingNumber: 1, isDescendingOrder: true })
+);
+  </code></pre>
+</details>
+
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/00-Creating/createArrayOfNaturalNumbers/createArrayOfNaturalNumbers.english.html)
 
 
 #### Retrieving of Elements
+##### getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
+ 
+```
+/** @description [ 1st overload ] Returns null when element satisfying the predicate is not exatcly one. */
+<ArrayElement>(
+  targetArray: Array<ArrayElement>, 
+  predicate: (arrayElement: ArrayElement) => boolean
+) => ArrayElement | null
 
-<dl>
+/** @description [ 2nd overload ] Throws a error when element satisfying the predicate is not exatcly one. */ 
+<ArrayElement>(
+  targetArray: Array<ArrayElement>,
+  predicate: (arrayElement: ArrayElement) => boolean,
+  options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
+) => ArrayElement
+```
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
-  <dd>
+Returns the element of a specified array matching with the predicate if such an element is exactly one, 
+  otherwise `UnexpectedEventError` will be thrown or null will be returned depending on dedicated option's value.
 
-   Returns the element of a specified array matching with the predicate if such an element is exactly one, 
-     otherwise error will be thrown or null will be returned depending on dedicated option's value.
-    
-   ```
-   /** @description [ 1st overload ] Returns null when element satisfying the predicate is not exatcly one. */
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>, 
-     predicate: (arrayElement: ArrayElement) => boolean
-   ): ArrayElement | null
-   
-   /** @description [ 2nd overload ] Throws a error when element satisfying the predicate is not exatcly one. */ 
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>,
-     predicate: (arrayElement: ArrayElement) => boolean,
-     options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
-   ): ArrayElement
-   ```
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+ 
+  </code></pre>
+</details>
 
-  </dd>
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html"><code>getLastElementOfArray</code></a></dt>
-  <dd>
 
- Returns the last element of an array if such the element exists, otherwise error will be thrown as default, 
-      or null will be returned if the dedicated option has been specified.
+##### getLastElementOfArray
 
-   ```
-   /** @description [ 1st overload ] Returns null when target array is empty. */
-   <ArrayElement>(targetArray: Array<ArrayElement>): ArrayElement | null;
-    
-   /** @description [ 2nd overload ] Throws error when target array is empty. */
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>,
-     options: { mustThrowErrorIfArrayIsEmpty: true; }
-   ): ArrayElement
-   ```
+```
+/** @description [ 1st overload ] Returns null when target array is empty. */
+<ArrayElement>(targetArray: Array<ArrayElement>) => ArrayElement | null;
 
-  </dd>
+/** @description [ 2nd overload ] Throws error when target array is empty. */
+<ArrayElement>(
+ targetArray: Array<ArrayElement>,
+ options: { mustThrowErrorIfArrayIsEmpty: true; }
+) => ArrayElement
+```
 
-</dl>
+Returns the last element of an array if such the element exists, otherwise `UnexpectedEventError` will be thrown as default, 
+  or null will be returned if the dedicated option has been specified.
+
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+ 
+  </code></pre>
+</details>
+
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/01-RetrievingOfElements/getLastElementOfArray/getLastElementOfArray.english.html)
 
 
 #### Retrieving of Indexes
+##### getIndexesOfSatisfiesThePredicateArrayElements
 
-<dl>
+```
+<ArrayElement>(
+ targetArray: Array<ArrayElement>, 
+ predicate: (arrayElement: ArrayElement) => boolean
+) => Array<number>
+```
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html"><code>getIndexesOfSatisfiesThePredicateArrayElements</code></a></dt>
-  <dd>
+Obviously from the function name, returns the array of indexes of array elements which are satisfied to specified 
+  predicate function.
 
- Obviously from the function name, returns the array of indexes of array elements which are satisfied to specified 
-      predicate function.
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+ 
+  </code></pre>
+</details>
 
-   ```
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>, 
-     predicate: (arrayElement: ArrayElement) => boolean
-   ): Array<number>
-   ```
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexesOfSatisfiesThePredicateArrayElements/getIndexesOfSatisfiesThePredicateArrayElements.english.html)
 
-  </dd>
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html"><code>getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne</code></a></dt>
-  <dd>
+##### getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne
 
- Returns the index of the array element satisfies the predicate if such element is exactly one, otherwise error will 
-      be thrown or null will be returned depending on dedicated option's value.
+```
+/** @description [ 1st overload ] 
+* Returns null when there is no matches with the predicate or such matches are more than one */
+<ArrayElement>(
+ targetArray: Array<ArrayElement>, 
+ predicate: (arrayElement: ArrayElement) => boolean
+) => number | null;
 
-   ```
-   /** @description [ 1st overload ] 
-    * Returns null when there is no matches with the predicate or such matches are more than one */
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>, 
-     predicate: (arrayElement: ArrayElement) => boolean
-   ): number | null;
-    
-    /** @description [ 2st overload ] 
-    * Throws the error when there is no matches with the predicate or such matches are more than one */
-   <ArrayElement>(
-     targetArray: Array<ArrayElement>,
-     predicate: (arrayElement: ArrayElement) => boolean,
-     options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
-   ): number;
-   ```
-  </dd>
+/** @description [ 2st overload ] 
+* Throws the error when there is no matches with the predicate or such matches are more than one */
+<ArrayElement>(
+ targetArray: Array<ArrayElement>,
+ predicate: (arrayElement: ArrayElement) => boolean,
+ options: { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true; }
+) => number;
+```
 
-</dl>
+Returns the index of the array element satisfies the predicate if such element is exactly one, otherwise error will 
+  be thrown or null will be returned depending on dedicated option's value.
+
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
 
 #### Retrieving of Subarrays
+##### cropArray
 
-<dl>
+```
+<ArrayElement>(
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html"><code>cropArray</code></a></dt>
-  <dd>
-   <p>
-      Creates the subarray of the specified array.
-      In comparison with native <code>slice</code> and <code>splice</code> methods, suggests the extremely flexible API:
-   </p>
-   <ul>
-     <li>Mutable and immutable cropping</li>
-     <li>Specifying of starting element and ending element either from the start or from the end of an array</li>
-     <li>Absolute and relative specifying of starting and ending elements of subarray</li>
-     <li>Inclusive and exclusive absolute specifying of last element of subarray</li>
-   </ul>
-
-   ```
-   <ArrayElement>(
-   
-     compoundParameter:
+ sourceDataAndOptions:
+ 
+     (
+       {
+         mutably: true;
+         targetArray: Array<ArrayElement>;
+       } |
+       {
+         mutably: false;
+         targetArray: ReadonlyArray<ArrayElement>;
+       }
+     ) &
      
+     (
+       (
+         { fromStart: true; } &
          (
-           {
-             mutably: true;
-             targetArray: Array<ArrayElement>;
-           } |
-           {
-             mutably: false;
-             targetArray: ReadonlyArray<ArrayElement>;
-           }
+           { startingElementNumber__numerationFrom0: number; } |
+           { startingElementNumber__numerationFrom1: number; } |
+           { fromFirstElement: true; }
          ) &
-         
          (
-           (
-             { fromStart: true; } &
-             (
-               { startingElementNumber__numerationFrom0: number; } |
-               { startingElementNumber__numerationFrom1: number; } |
-               { fromFirstElement: true; }
-             ) &
-             (
-               { endingElementNumber__numerationFrom0__including: number; } |
-               { endingElementNumber__numerationFrom1__including: number; } |
-               { endingElementNumber__numerationFrom0__notIncluding: number; } |
-               { endingElementNumber__numerationFrom1__notIncluding: number; } |
-               { elementsCount: number; } |
-               { untilLastElement: true; }
-             )
-           ) |
-           
-           (
-             { fromEnd: true; } &
-             (
-               { rightElementNumber__numerationFrom0_AndRight: number; } |
-               { rightElementNumber__numerationFrom1_AndRight: number; } |
-               { fromRightmostElement: true; }
-             ) &
-             (
-               { leftElementNumber__numerationFrom0_AndRight__including: number; } |
-               { leftElementNumber__numerationFrom1_AndRight__including: number; } |
-               { leftElementNumber__numerationFrom0_AndRight__notIncluding: number; } |
-               { leftElementNumber__numerationFrom1_AndRight__notIncluding: number; } |
-               { elementsCount: number; } |
-               { untilLeftmostElement: true; }
-             )
-           )
+           { endingElementNumber__numerationFrom0__including: number; } |
+           { endingElementNumber__numerationFrom1__including: number; } |
+           { endingElementNumber__numerationFrom0__notIncluding: number; } |
+           { endingElementNumber__numerationFrom1__notIncluding: number; } |
+           { elementsCount: number; } |
+           { untilLastElement: true; }
+         )
+       ) |
+       
+       (
+         { fromEnd: true; } &
+         (
+           { rightElementNumber__numerationFrom0_AndRight: number; } |
+           { rightElementNumber__numerationFrom1_AndRight: number; } |
+           { fromRightmostElement: true; }
          ) &
-         
-         { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
+         (
+           { leftElementNumber__numerationFrom0_AndRight__including: number; } |
+           { leftElementNumber__numerationFrom1_AndRight__including: number; } |
+           { leftElementNumber__numerationFrom0_AndRight__notIncluding: number; } |
+           { leftElementNumber__numerationFrom1_AndRight__notIncluding: number; } |
+           { elementsCount: number; } |
+           { untilLeftmostElement: true; }
+         )
+       )
+     ) &
+     
+     { mustThrowErrorIfSpecifiedElementsNumbersAreOutOfRange: boolean; }
 
-   ): Array<ArrayElement> 
+) => Array<ArrayElement> 
 ```
 
-  </dd>
+Creates the subarray of the specified array.
+In comparison with native [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+  and [splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) methods, 
+  suggests the extremely flexible API:
 
-</dl>
++ Mutable and immutable cropping
++ Specifying of starting element and ending element either from the start or from the end of an array
++ Absolute and relative specifying of starting and ending elements of subarray
++ Inclusive and exclusive absolute specifying of last element of subarray
+
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+ 
+  </code></pre>
+</details>
+
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/03-RetrievingOfSubarrays/cropArray/cropArray.english.html)
 
 
 #### Adding of Elements
+##### addElementsToArray
 
-<dl>
+```
+<ArrayElement>(
 
-  <dt><a href="https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html"><code>addElementsToArray</code></a></dt>
-  <dd>
+  compoundParameter:
 
- Adds one or more elements to the start, end or specified position of the target array, herewith the adding can be 
-      mutable or not depending on dedicated property of the named parameters object.
+      { newElements: ReadonlyArray<ArrayElement>; } &
+      
+      (
+        {
+          mutably: true;
+          targetArray: Array<ArrayElement>;
+        } |
+        {
+          mutably: false;
+          targetArray: ReadonlyArray<ArrayElement>;
+        }
+      ) &
+      
+      (
+        { toStart: true; } |
+        { toEnd: true; } |
+        { toPosition__numerationFrom0: number; } |
+        { toPosition__numerationFrom1: number; }
+      )
 
-  ```
-  <ArrayElement>(
+  ): Array<ArrayElement>
+```
 
-    compoundParameter:
+Adds one or more elements to the start, end or specified position of the target array, herewith the adding can be 
+  mutable or not depending on dedicated property of the object-type parameter.
 
-          { newElements: ReadonlyArray<ArrayElement>; } &
-          
-          (
-            {
-              mutably: true;
-              targetArray: Array<ArrayElement>;
-            } |
-            {
-              mutably: false;
-              targetArray: ReadonlyArray<ArrayElement>;
-            }
-          ) &
-          
-          (
-            { toStart: true; } |
-            { toEnd: true; } |
-            { toPosition__numerationFrom0: number; } |
-            { toPosition__numerationFrom1: number; }
-          )
+<details open>
+  <summary>Examples</summary>
+  <pre><code>
+ 
+  </code></pre>
+</details>
 
-    ): Array<ArrayElement>
-   ```
-
-  </dd>
-
-</dl>
+[📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/04-AddingOfElements/addElementsToArray/addElementsToArray.english.html)
 
 
 #### Replacing of Elements
