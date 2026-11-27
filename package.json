@@ -2,32 +2,33 @@
   "private": true,
   "scripts": {
     "Set Version and Symlinkify Internal Dependencies": "ydmh version",
-    "Desymlinkify Internal Dependencies and Publish": "ydmh publish"
+    "Desymlinkify Internal Dependencies and Publish": "ydmh publish",
+    "Check Updates": "ydmh update"
   },
   "devDependencies": {
-    "@yamato-daiwa/monorepo-helper": "0.3.0"
+    "@yamato-daiwa/monorepo-helper": "0.4.0-alpha.1"
   },
   "ydmh": {
-    "packages": [
+    "$packages": [
       {
-        "relativePath": "Main/Core",
-        "productionBuildingScript": "Rebuild Distributable"
+        "$relativePath": "Main/Core",
+        "$productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "BrowserJS/Core",
-        "productionBuildingScript": "Rebuild Distributable"
+        "$relativePath": "BrowserJS/Core",
+        "$productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "NodeJS/Core",
-        "productionBuildingScript": "Rebuild Distributable"
+        "$relativePath": "NodeJS/Core",
+        "$productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "Main/OfficialLocalizations/Japanese",
-        "productionBuildingScript": "Rebuild Distributable"
+        "$relativePath": "Main/OfficialLocalizations/Japanese",
+        "$productionBuildingScript": "Rebuild Distributable"
       },
       {
-        "relativePath": "Main/OfficialLocalizations/Russian",
-        "productionBuildingScript": "Rebuild Distributable"
+        "$relativePath": "Main/OfficialLocalizations/Russian",
+        "$productionBuildingScript": "Rebuild Distributable"
       }
     ]
   }

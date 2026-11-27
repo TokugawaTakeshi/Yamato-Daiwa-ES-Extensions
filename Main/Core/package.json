@@ -1,6 +1,6 @@
 {
   "name": "@yamato-daiwa/es-extensions",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "description": "Helper functions and classes aimed to reduce the routine code. Build-in TypeScript type safety.",
   "keywords": [
     "typescript",
@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@types/node": "22.15.31",
-    "@yamato-daiwa/style_guides": "0.15.0",
-    "rimraf": "6.1.3",
+    "@yamato-daiwa/style_guides": "0.16.2",
+    "rimraf": "6.1.4",
     "timezone-mock": "1.4.3",
     "tsx": "4.23.15",
     "typescript": "6.0.3"
