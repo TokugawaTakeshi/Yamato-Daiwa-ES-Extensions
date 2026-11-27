@@ -1,5 +1,10 @@
 # `DateWithoutTime` class
 
+An alternative to native `Date` (which actually is not only the Date but also the time).
+Obvious from the class name, works only with date not associated with specific time zone and does not work with time.
+The most demanded functionality is `format` static method allows defining the arbitrary formatting of 
+  target date with optimized computing.
+
 Intended to be used instead of [TimePoint](https://github.com/TokugawaTakeshi/Yamato-Daiwa-ES-Extensions/blob/master/CoreLibrary/Package/Documentation/DateTime/TimePoint.md) 
   and native [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) when the time 
   (hours, minutes, seconds, milliseconds) does not matter.

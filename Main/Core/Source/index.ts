@@ -6,10 +6,10 @@
 
 
 /* ━━━ AJAX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-export { default as AJAX_Service } from "./AJAX/AJAX_Service";
-export { default as FetchAPI_Service } from "./AJAX/FetchAPI_Service";
-export { default as serializeURI_QueryParameters } from "./AJAX/serializeURI_QueryParameters";
-export type { default as URI_QueryParametersSerializer } from "./AJAX/URI_QueryParametersSerializer";
+export { AJAX_Service } from "./AJAX/AJAX_Service";
+export { FetchAPI_Service } from "./AJAX/FetchAPI_Service";
+export { URI_QueryParametersConverter } from "./AJAX/URI_QueryParametersConverter";
+export type { URI_QueryParametersSerializer } from "./AJAX/URI_QueryParametersSerializer";
 
 
 /* ━━━ Arrays ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -553,7 +553,8 @@ export type {
   ReadonlyParsedJSON_NestedProperty,
   PossiblyReadonlyParsedJSON
 } from "./Types/ParsedJSON";
-export type { PartialBy } from "./Types/PartialBy";
+export type { PartialBy } from "./Types/PartialObjects/PartialBy";
+export type { DeepPartial } from "./Types/PartialObjects/DeepPartial";
 
 
 /* ━━━ Value Transformers ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

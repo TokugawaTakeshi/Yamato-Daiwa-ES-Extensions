@@ -10,14 +10,14 @@ const sample: ReadonlyArray<Product> = [
   { title: "DELTA", price: 1500 }
 ];
 
-/* 〚 Output 〛[ 2, 3 ]  */
+/* 〚 Output 〛[ 2, 3 ] */
 console.log(
   getIndexesOfSatisfiesThePredicateArrayElements(
     sample, (arrayElement: Product): boolean => arrayElement.price > 500
   )
 );
 
-/* 〚 Output 〛[]  */
+/* 〚 Output 〛[] */
 console.log(
   getIndexesOfSatisfiesThePredicateArrayElements(
     sample, (arrayElement: Product): boolean => arrayElement.price > 1500

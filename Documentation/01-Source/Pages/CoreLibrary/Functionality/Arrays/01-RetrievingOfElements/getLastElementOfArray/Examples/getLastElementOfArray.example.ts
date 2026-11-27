@@ -1,12 +1,12 @@
 import { getLastElementOfArray } from "@yamato-daiwa/es-extensions";
 
 
-/* 〚 Output 〛charlie  */
+/* 〚 Output 〛"charlie" */
 console.log(
   getLastElementOfArray([ "alpha", "bravo", "charlie" ])
 );
 
-/* 〚 Output 〛null  */
+/* 〚 Output 〛null */
 console.log(
   getLastElementOfArray([])
 );

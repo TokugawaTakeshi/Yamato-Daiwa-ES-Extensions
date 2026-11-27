@@ -8,21 +8,21 @@ const sample: ReadonlyArray<Product> = [
   { ID: 2, title: "BRAVO", price: 500 }
 ];
 
-/* 〚 Output 〛1  */
+/* 〚 Output 〛1 */
 console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.ID === 2
   )
 );
 
-/* 〚 Output 〛null  */
+/* 〚 Output 〛null */
 console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.ID === 3
   )
 );
 
-/* 〚 Output 〛null  */
+/* 〚 Output 〛null */
 console.log(
   getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (product: Product): boolean => product.price > 50

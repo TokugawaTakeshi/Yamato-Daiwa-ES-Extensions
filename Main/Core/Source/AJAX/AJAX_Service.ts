@@ -12,8 +12,8 @@ import InvalidConfigError from "../Errors/InvalidConfig/InvalidConfigError";
 
 import removeSpecificCharacterFromCertainPosition from "../Strings/removeSpecificCharacterFromCertainPosition";
 import insertSubstring from "../Strings/insertSubstring";
-import type URI_QueryParametersSerializer from "./URI_QueryParametersSerializer";
-import serializeURI_QueryParameters from "./serializeURI_QueryParameters";
+import type { URI_QueryParametersSerializer } from "./URI_QueryParametersSerializer";
+import URI_QueryParametersConverter from "./URI_QueryParametersConverter";
 
 import isNonEmptyString from "../TypeGuards/Strings/isNonEmptyString";
 import isNull from "../TypeGuards/EmptyTypes/isNull";
@@ -21,7 +21,7 @@ import isUndefined from "../TypeGuards/EmptyTypes/isUndefined";
 import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
-abstract class AJAX_Service {
+export abstract class AJAX_Service {
 
   /* ━━━ Static Fields ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   /* ┅┅┅ Public ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
@@ -30,7 +30,7 @@ abstract class AJAX_Service {
 
   /* ┅┅┅ Protected ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
   protected static API_SERVER_URI_CONSTANT_PART__WITHOUT_TRAILING_SLASH: string | null = null;
-  protected static URI_QueryParametersSerializer: URI_QueryParametersSerializer = serializeURI_QueryParameters;
+  protected static URI_QueryParametersSerializer: URI_QueryParametersSerializer = URI_QueryParametersConverter.serialize;
 
 
   /* ━━━ Setter ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -380,7 +380,7 @@ abstract class AJAX_Service {
 }
 
 
-namespace AJAX_Service {
+export namespace AJAX_Service {
 
   /* ━━━ Common ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   export type URI_PathRawDefinition = Readonly<

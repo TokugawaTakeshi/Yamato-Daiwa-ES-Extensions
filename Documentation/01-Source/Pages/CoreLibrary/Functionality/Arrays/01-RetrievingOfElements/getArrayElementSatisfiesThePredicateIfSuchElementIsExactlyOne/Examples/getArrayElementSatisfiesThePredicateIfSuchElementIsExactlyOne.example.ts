@@ -3,21 +3,21 @@ import { getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne } from "@
 
 const sample: ReadonlyArray<string> = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
 
-/* 〚 Output 〛St. Louis  */
+/* 〚 Output 〛"St. Louis" */
 console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
   )
 );
 
-/* 〚 Output 〛null  */
+/* 〚 Output 〛null */
 console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
   )
 );
 
-/* 〚 Output 〛null  */
+/* 〚 Output 〛null */
 console.log(
   getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
     sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")

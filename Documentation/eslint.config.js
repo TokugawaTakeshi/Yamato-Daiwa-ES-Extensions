@@ -15,7 +15,8 @@ module.exports = [
   {
     files: [ "**/*.example.ts" ],
     rules: {
-      "no-console": "off"
+      "no-console": "off",
+      "@typescript-eslint/no-magic-numbers": "off"
     }
   },
 

@@ -10,7 +10,7 @@ import HTTP_ResponseBodyParsingFailureError from
 import isNotUndefined from "../TypeGuards/EmptyTypes/isNotUndefined";
 
 
-export default class FetchAPI_Service extends AJAX_Service {
+export class FetchAPI_Service extends AJAX_Service {
 
   /** @throws DataRetrievingFailedError */
   /** @throws HTTP_ResponseBodyParsingFailureError */
@@ -361,3 +361,6 @@ export default class FetchAPI_Service extends AJAX_Service {
   }
 
 }
+
+
+export default FetchAPI_Service;

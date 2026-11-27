@@ -43,7 +43,7 @@ npm i @yamato-daiwa/es-extensions -E
 |---|---|
 | ~1.10.0 | Alpha/Beta |
 | ~1.9.0  | Supported  |
-| &gt; = 1.6.0 <= 1.8  | Bugs and security issues fixer for premium users only |
+| &gt; = 1.6.0 <= 1.8.X  | Bugs and security issues fixes for premium users only |
 | < 1.6  | End of Life |
 
 
@@ -88,6 +88,9 @@ npm i @yamato-daiwa/es-extensions -E
   + [`DataMocking` Class/Namespace](#datamocking-classnamespace)
   + [`MockGatewayHelper` Class/Namespace ](#mockgatewayhelper-classnamespace-)
 + [Date and Time](#date-and-time)
+  + [`CalendarBuilder` Class](#calendarbuilder-class)
+  + [`convert24_HoursFormatTo12_HoursFormat`](#convert24_hoursformatto12_hoursformat)
+  + [`DateWithoutTime` Class](#datewithouttime-class)
 + [Default Value Substituters](#default-value-subsituters)
 + [Errors](#errors)
 + [Files](#files)
@@ -211,7 +214,37 @@ Returns the element of a specified array matching with the predicate if such an 
 <details open>
   <summary>Examples</summary>
   <pre><code>
+const sample: ReadonlyArray&lt;string&gt; = [ "Saint Paul", "Santa Barbara", "St. Louis", "Santa Monica" ];
  
+/* 〚 Output 〛"St. Louis" */
+console.log(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+    sample, (arrayElement: string): boolean => arrayElement.startsWith("St.")
+  )
+);
+ 
+/* 〚 Output 〛null */
+console.log(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+    sample, (arrayElement: string): boolean => arrayElement.startsWith("Santa")
+  )
+);
+ 
+/* 〚 Output 〛null */
+console.log(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+    sample, (arrayElement: string): boolean => arrayElement.startsWith("Las")
+  )
+);
+ 
+/* `UnexpectedEventError` will be thrown */
+console.log(
+  getArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne(
+    sample,
+    (arrayElement: string): boolean => arrayElement.startsWith("Santa"),
+    { mustThrowErrorIfElementNotFoundOrMatchesAreMultiple: true }
+  )
+);
   </code></pre>
 </details>
 
@@ -237,7 +270,20 @@ Returns the last element of an array if such the element exists, otherwise `Unex
 <details open>
   <summary>Examples</summary>
   <pre><code>
+/* 〚 Output 〛"charlie" */
+console.log(
+  getLastElementOfArray([ "alpha", "bravo", "charlie" ])
+);
  
+/* 〚 Output 〛null */
+console.log(
+  getLastElementOfArray([])
+);
+ 
+/* `UnexpectedEventError` will be thrown */
+console.log(
+  getLastElementOfArray([], { mustThrowErrorIfArrayIsEmpty: true })
+);
   </code></pre>
 </details>
 
@@ -260,7 +306,28 @@ Obviously from the function name, returns the array of indexes of array elements
 <details open>
   <summary>Examples</summary>
   <pre><code>
+type Product = { title: string; price: number; };
  
+const sample: ReadonlyArray&lt;Product&gt; = [
+  { title: "ALPHA", price: 100 },
+  { title: "BRAVO", price: 500 },
+  { title: "CHARLIE", price: 1000 },
+  { title: "DELTA", price: 1500 }
+];
+ 
+/* 〚 Output 〛[ 2, 3 ] */
+console.log(
+  getIndexesOfSatisfiesThePredicateArrayElements(
+    sample, (arrayElement: Product): boolean => arrayElement.price > 500
+  )
+);
+ 
+/* 〚 Output 〛[] */
+console.log(
+  getIndexesOfSatisfiesThePredicateArrayElements(
+    sample, (arrayElement: Product): boolean => arrayElement.price > 1500
+  )
+);
   </code></pre>
 </details>
 
@@ -291,6 +358,7 @@ Returns the index of the array element satisfies the predicate if such element i
 
 [📖 Main Article](https://ee.yamato-daiwa.com/CoreLibrary/Functionality/Arrays/02-RetrievingOfIndexes/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne/getIndexOfArrayElementSatisfiesThePredicateIfSuchElementIsExactlyOne.english.html)
 
+[//]: # (TODO Examples)
 
 #### Retrieving of Subarrays
 ##### cropArray
@@ -821,545 +889,58 @@ Adds one or more elements to the start, end or specified position of the target 
 
 ### Data Mocking
 
+The tools for the data mocking.
+The data mocking is demanded in both frontend and backend during the development of web and native
+  applications, websites and more.
+The mock data must satisfy the limitations by business rules and make tests easier.
+At the same time, this functionality is not intended to be used in production.
+
+
 #### `DataMocking` Class/Namespace
 
-+ The class is abstract, the instance can be created only with violating of the TypeScript type checking.
++ The class is abstract and have only static members (currently only `decideOptionalValue` method). 
+  So, the instance cannot be created without violation of TypeScript.
 + The namespace stores `OptionalPropertiesDecisionStrategies` enumeration.
 
-
-##### Public Static Methods
-###### `decideOptionalValue`
-
-```
-<ValueType>(
-  sourceDataAndOptions: Readonly<{
-    strategy: DataMocking.OptionalPropertiesDecisionStrategies;
-    randomValueGenerator: () => ValueType;
-    preDefinedValue?: ValueType;
-  }>
-): ValueType | undefined
-```
-
-When mocking the object with optional properties, for each optional property you can do one of the following:
-
-+ Generate the value for the optional property
-+ Do not generate the value for the optional property
-+ Generate the value for the optional property with or not generate it randomly with specific probability
-
-Additionally, the value for the optional property can be specified explicitly instead of generating of random value.
-It is useful when you want to test, for example, the searching of some item by its description.
-
-`decideOptionalValue` method allows to generate or not generate the value for random optional property
-  depending on selected strategy.
-This method has the single parameter of the object type with the following properties:
-
-<dl>
-
-  <dt><code>strategy</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd><code>DataMocking.OptionalPropertiesDecisionStrategies</code></dd>
-      <dt>Is required</dt>
-      <dd>Yes</dd>
-      <dt>Description<dt>
-      <dd>
-        Specifying the strategy basing on which the optoinal property must be provided or not provided.
-        <dl>
-          <dt><code>OptionalPropertiesDecisionStrategies.mustGenerateAll</code></dt>
-          <dd>If <code>preDefinedValue</code> not specified, the random value will be generated.</dd>
-          <dt><code>OptionalPropertiesDecisionStrategies.mustGenerateWith50PercentageProbability</code></dt>
-          <dd>The random value will be generated with 50% probability herewith <code>preDefinedValue</code> will not be used even if defined.</dd>
-          <dt><code>OptionalPropertiesDecisionStrategies.mustSkipIfHasNotBeenPreDefined</code></dt>
-          <dd>If <code>preDefinedValue</code> not specified, the random value will not be generated.</dd>
-        </dl>
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>randomValueGenerator</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Function</dd>
-      <dt>Signature</dt>
-      <dd><code>() => ValueType;</code></dd>
-      <dt>Is required</dt>
-      <dd>Yes</dd>
-      <dt>Description<dt>
-      <dd>Must generate the random value, but will be invoked only when this value actually must be generated.</dd>
-    </dl>
-  </dd>
-
-  <dt><code>preDefinedValue</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>(As specified via generic parameter)</dd>
-      <dt>Is required</dt>
-      <dd>No</dd>
-      <dt>Description<dt>
-      <dd>Will be used instead of generating of a random value.</dd>
-    </dl>
-  </dd>
-
-</dl>
+[📖 Main Article](Documentation/DataMocking/DataMocking.md)
 
 
 #### `MockGatewayHelper` Class/Namespace 
 
-Mocking the data, usually we need more that just the data.
-Additionally, we may need:
+The <def>gateway</def> is the **Clean Architecture** context is the polymorphic interface defines the basic transactions 
+  with the entities.
+It is critical to keep gateways not coupled with any frameworks and/or databased, the one implementations may be replaced
+  with another implementation or same gateway.
+Particularly, the implementations exchanging by data with the database (local or remote one) may be replaced with mock 
+  implementations.
+
+Also, mocking the data, usually we need more that just the data.
+Additionally, we may need to:
 
 + Simulate the data retrieving state, herewith adjust the time (for example, to check is loading placeholder displays correctly)
-+ Simulate the data retrieving failure to check does application handles the error correctly.
++ Simulate the data retrieving failure to check does application handle the error correctly.
 
-This is for what `MockGatewayHelper` class designed.
+The `MockGatewayHelper` can take care about the routines.
+It also not required to extend your gateways implementations from `MockGatewayHelper` — just use its static methods.
 
-
-##### Public Static Fields
-###### `localization`
-
-<dl>
-
-  <dt>Type</dt>
-  <dd><code>MockGatewayHelper.Localization</code></dd>
-
-  <dt>Is required</dt>
-  <dd>Yes</dd>
-
-  <dt>Default Value<dt>
-  <dd><code>MockGatewayHelperLocalization__English</code></dd>
-
-</dl>
-
-Used for generating of the messages to output them to console.
-Although the English reading skills are required in software development, the usage of native language will make 
-  professional growing faster for the engineers which are not English native speakers.
-
-```typescript
-type Localization = Readonly<{
-
-  generateErrorSimulationCompletedLog: (
-    compoundParameter: Localization.ErrorSimulationCompletedLog.CompoundParameter
-  ) => string;
-
-  generateDataRetrievingSimulationCompletedLog: (
-    compoundParameter: Localization.DataRetrievingSimulationCompletedLog.CompoundParameter
-  ) => Localization.DataRetrievingSimulationCompletedLog;
-
-  generateDataSubmittingSimulationCompletedLog: (
-    compoundParameter: Localization.DataSubmittingSimulationCompletedLog.CompoundParameter
-  ) => Localization.DataSubmittingSimulationCompletedLog;
-
-}>;
-
-namespace Localization {
-
-  export namespace ErrorSimulationCompletedLog {
-
-    export type CompoundParameter = Readonly<{
-      gatewayName: string;
-      transactionName: string;
-    }>;
-
-  }
-
-
-  export type DataRetrievingSimulationCompletedLog = Pick<SuccessLog, "title" | "description">;
-
-  export namespace DataRetrievingSimulationCompletedLog {
-
-    export type CompoundParameter = Readonly<{
-      gatewayName: string;
-      transactionName: string;
-      formattedRequestParameters?: string;
-      formattedResponseData?: string;
-    }>;
-
-  }
-
-
-  export type DataSubmittingSimulationCompletedLog = Pick<SuccessLog, "title" | "description">;
-
-  export namespace DataSubmittingSimulationCompletedLog {
-
-    export type CompoundParameter = Readonly<{
-      gatewayName: string;
-      transactionName: string;
-      formattedRequestData?: string;
-      formattedResponseData?: string;
-    }>;
-
-  }
-
-}
-```
-
-##### Public Static Methods
-###### `simulateDataRetrieving`
-
-```
-(
-  dataRetrievingSimulationConfiguration: MockGatewayHelper.
-      DataRetrievingSimulationConfiguration<RequestParameters, ResponseData>
-) => Promise<ResponseData>
-```
-
-Simulates the data retrieving; here the simulation means that your mock data will be returned
-  asynchronously (within the period depending on adjusted minimal and maximal value) as when it
-  comes from the server.
-Additionally, the error can be simulated.
-
-The single parameter has the object type of the following schema:
-
-<dl>
-
-  <dt><code>requestParameters</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Object</dd>
-      <dt>Schema</dt>
-      <dd>Generic</dd>
-      <dt>Is Required</dt>
-      <dd>Yes</dd>
-      <dt>Description</dt>
-      <dd>Will be used only for logging when the logging is enabled.</dd>
-    </dl>
-  </dd>
-
-  <dt><code>getResponseData</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Function</dd>
-      <dt>Parameters</dt>
-      <dd>No</dd>
-      <dt>Return Value</dt>
-      <dd>Your response data (intended to be mocked)</dd>
-      <dt>Description</dt>
-      <dd>
-        This function will be executed only when <code>mustSimulateError</code> option set to <code>false</code> 
-          (or not set).
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>minimalPendingPeriod__seconds</code></dt>
-  <dt><code>maximalPendingPeriod__seconds</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Number</dd>
-      <dt>Number Set</dt>
-      <dd>Any positive number</dd>
-      <dt>Default value</dt>
-      <dd>
-        <code>1</code> for <code>minimalPendingPeriod__seconds</code> and  
-          <code>2</code> for <code>maximalPendingPeriod__seconds</code>
-      </dd>
-      <dt>Description</dt>
-      <dd>
-        Used to simulate the asynchronous behavior (delay) during the data retrieving.
-        Actual period will be a random integer, but not smaller than <code>minimalPendingPeriod__seconds</code>
-          and not greater than <code>maximalPendingPeriod__seconds</code>. 
-        <code>getResponseData</code> function will be invoked once this period will elapsed.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>mustSimulateError</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Boolean</dd>
-      <dt>Default Value</dt>
-      <dd><code>false</code></dd>
-      <dt>Description</dt>
-      <dd>
-        If set to <code>true</code>, then <code>DataRetrievingFailedError</code> will be thrown
-          once simulated loading will end, and <code>getResponseData</code> will not be invoked.
-        Intended to be used for the testing how your application will react on error.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>mustLogResponseData</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Boolean</dd>
-      <dt>Default Value</dt>
-      <dd><code>false</code></dd>
-      <dt>Description</dt>
-      <dd>
-        If set to <code>true</code>, then formatted response data will be output to console, but this fromatted
-          data can to loo large and possibly truncated by the console.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>gatewayName</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>String</dd>
-      <dt>Minimal Characters Count</dt>
-      <dd>Not strictly limited but should represent the meaningful name</dd>
-      <dt>Description</dt>
-      <dd>
-        Used for logging only.
-        Basically the name of class or interfance related with exchage of specifc data, e. g. 
-          <code>ProductGateway</code>, <code>UserGateway</code> etc.  
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>transactionName</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>String</dd>
-      <dt>Minimal Characters Count</dt>
-      <dd>Not strictly limited but should represent the meaningful name</dd>
-      <dt>Description</dt>
-      <dd>
-        Used for logging only.
-        Basically the name of function/method which retrieving the data, or the name of transaction, e. g.
-          "productRetrieving", "Retrieving of User By ID" etc.
-      </dd>
-    </dl>
-  </dd>
-
-</dl>
-
-
-###### `simulateDataSubmitting`
-
-```
-(
-  dataSubmittingSimulationConfiguration: MockGatewayHelper.
-      DataSubmittingSimulationConfiguration<RequestData, ResponseData>
-) => Promise<ResponseData>
-```
-
-Simulates the data submitting and, optionally, retrieving of response data; here the simulation means that your mock 
-  data will be returned asynchronously (within the period depending on adjusted minimal and maximal value) as when it
-  comes from the server.
-Additionally, the error can be simulated.
-
-Well, this method doing same this as `simulateDataRetrieving` - the difference is the naming rather than
-  behavior.
-For instance, the argument of `simulateDataRetrieving` has `requestParameters` property while the
-  argument of `simulateDataSubmitting` has `requestData` property.
-The logging message also will be a little bit different.
-
-The single parameter has the object type of the following schema:
-
-<dl>
-
-  <dt><code>requestData</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Object</dd>
-      <dt>Schema</dt>
-      <dd>Generic</dd>
-      <dt>Is Required</dt>
-      <dd>Yes</dd>
-      <dt>Description</dt>
-      <dd>Will be used only for logging when the logging is enabled.</dd>
-    </dl>
-  </dd>
-
-  <dt><code>getResponseData</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Function</dd>
-      <dt>Parameters</dt>
-      <dd>No</dd>
-      <dt>Return Value</dt>
-      <dd>Your response data (intended to be mocked)</dd>
-      <dt>Description</dt>
-      <dd>
-        This function will be executed only when <code>mustSimulateError</code> option set to <code>false</code> 
-          (or not set).
-        If the transaction intended only to submit the data but not expect any response data, return the null, or empty
-          array, or like.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>minimalPendingPeriod__seconds</code></dt>
-  <dt><code>maximalPendingPeriod__seconds</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Number</dd>
-      <dt>Number Set</dt>
-      <dd>Any positive number</dd>
-      <dt>Default value</dt>
-      <dd>
-        <code>1</code> for <code>minimalPendingPeriod__seconds</code> and  
-          <code>2</code> for <code>maximalPendingPeriod__seconds</code>
-      </dd>
-      <dt>Description</dt>
-      <dd>
-        Used to simulate the asynchronous behavior (delay) during the data retrieving.
-        Actual period will be a random integer, but not smaller than <code>minimalPendingPeriod__seconds</code>
-          and not greater than <code>maximalPendingPeriod__seconds</code>. 
-        <code>getResponseData</code> function will be invoked once this period will elapsed.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>mustSimulateError</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Boolean</dd>
-      <dt>Default Value</dt>
-      <dd><code>false</code></dd>
-      <dt>Description</dt>
-      <dd>
-        If set to <code>true</code>, then <code>DataRetrievingFailedError</code> will be thrown
-          once simulated loading will end, and <code>getResponseData</code> will not be invoked.
-        Intended to be used for the testing how your application will react on error.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>mustLogResponseData</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>Boolean</dd>
-      <dt>Default Value</dt>
-      <dd><code>false</code></dd>
-      <dt>Description</dt>
-      <dd>
-        If set to <code>true</code>, then formatted response data will be output to console, but this fromatted
-          data can to loo large and possibly truncated by the console.
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>gatewayName</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>String</dd>
-      <dt>Minimal Characters Count</dt>
-      <dd>Not strictly limited but should represent the meaningful name</dd>
-      <dt>Description</dt>
-      <dd>
-        Used for logging only.
-        Basically the name of class or interfance related with exchage of specifc data, e. g. 
-          <code>ProductGateway</code>, <code>UserGateway</code> etc.  
-      </dd>
-    </dl>
-  </dd>
-
-  <dt><code>transactionName</code></dt>
-  <dd>
-    <dl>
-      <dt>Type</dt>
-      <dd>String</dd>
-      <dt>Minimal Characters Count</dt>
-      <dd>Not strictly limited but should represent the meaningful name</dd>
-      <dt>Description</dt>
-      <dd>
-        Used for logging only.
-        Basically the name of function/method which retrieving the data, or the name of transaction, e. g.
-          "productAdding", "Updating of User By ID" etc.
-      </dd>
-    </dl>
-  </dd>
-
-</dl>
+[📖 Main Article](Documentation/DataMocking/MockGatewayHelpler.md)
 
 
 ### Date and Time
-#### `CalendarBuilder` class
+#### `CalendarBuilder` Class
 
-To display all days any month of any year, you need 6 rows × 7 columns = 42 cell table.
-Each cell will include the data (number of day in month) - mostly of current month, but maybe also 
+To display all days of any month of any year, you need **6 rows × 7 columns = 42 cells** table.
+Each cell will include the data (number of day in month) — mostly of current month, but maybe also 
   the last days of previous month and/or first days of next month.
 You may want to display them if developing the calendar for the GUI application, or just compute something
-  based on these days - anyway first you need the array of above numbers, and this is on what `CalendarBuilder`
+  based on these days — anyway first you need the array of above numbers, and this is on what `CalendarBuilder`
   specialized.
 
-
-##### Public Static Methods
-###### `generateDataFor42DaysMatrix`
-
-```
-(
-  compoundParameter: 
-      { targetYear: number; } &
-      (
-        { targetMonthNumber__numerationFrom0: number; } |
-        { targetMonthNumber__numerationFrom1: number; } |
-        { targetMonthName: MonthsNames; }
-      ) &
-      (
-        { firstDayOfWeek__numerationFrom0ForSunday: number; } |
-        { firstDayOfWeek__numerationFrom1ForSunday: number; } |
-        { firstDayOfWeek: DaysOfWeekNames; }
-      )
-) => 
-    Array<{
-      year: number;
-      monthNumber__numerationFrom0: number;
-      monthNumber__numerationFrom1: number;
-      monthName: MonthsNames;
-      dayOfMonth: number;
-      dayOfWeekName: DaysOfWeekNames;
-      dayOfWeekNumber__numerationFrom0ForSunday: number;
-    }>
-```
-
-Returns the array with data of 42 dates for specified year, month and first day of week
-  (not all countries has Sunday as standardized first day of week).
-The data for each date includes the year, month, day of month and day of week represented with difference forms.
+[📖 Main Article](Documentation/DateTime/CalendarBuilder.md)
 
 
-###### `generateDataFor6x7DaysMatrix`
 
-```
-(
-  compoundParameter: 
-      { targetYear: number; } &
-      (
-        { targetMonthNumber__numerationFrom0: number; } |
-        { targetMonthNumber__numerationFrom1: number; } |
-        { targetMonthName: MonthsNames; }
-      ) &
-      (
-        { firstDayOfWeek__numerationFrom0ForSunday: number; } |
-        { firstDayOfWeek__numerationFrom1ForSunday: number; } |
-        { firstDayOfWeek: DaysOfWeekNames; }
-      )
-) => 
-    Array<
-      Array<{
-        year: number;
-        monthNumber__numerationFrom0: number;
-        monthNumber__numerationFrom1: number;
-        monthName: MonthsNames;
-        dayOfMonth: number;
-        dayOfWeekName: DaysOfWeekNames;
-        dayOfWeekNumber__numerationFrom0ForSunday: number;
-      }>
-    >
-```
-
-Returns same data as `generateDataFor42DaysMatrix` but exploded to 6 array of 7 elements corresponding to calendar cells.
-
-
-##### `convert24_HoursFormatTo12_HoursFormat`
+#### `convert24_HoursFormatTo12_HoursFormat`
 
 ```
 (hoursAmount__24Format: number) => 
@@ -1370,18 +951,18 @@ Returns same data as `generateDataFor42DaysMatrix` but exploded to 6 array of 7 
     }
 ```
 
-As it obvious from the name, converts the hours amount from 24-hour format to 12-hour format.
+Obviously from the function name, converts the hours amount from 24-hour format to 12-hour format.
 Of course, besides the amount it also will be returned the boolean values to identify is amount corresponding to
   before or after midnight.
 
 The type definition of return value available as `ConvertingOf24_HoursFormatTo12_HoursFormat.Result`.
 
 
-##### `DateWithoutTime`
+#### `DateWithoutTime` Class
 
-An alternative of native <code>Date</code> (which actually is not only the Date but also the time).
-As it obvious from the name, works only with date not associated with specific time zone and does not work with time.
-The most demanded functionality is <code>format</code> static method allows defining the arbitrary formatting of 
+An alternative to native `Date` (which actually is not only the Date but also the time).
+Obvious from the class name, works only with date not associated with specific time zone and does not work with time.
+The most demanded functionality is `format` static method allows defining the arbitrary formatting of 
   target date with optimized computing.
 
 [📖 Main Article](Documentation/DateTime/DateWithoutTime.md)

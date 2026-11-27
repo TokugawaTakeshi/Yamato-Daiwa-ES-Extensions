@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="URI_QueryParametersConverter - GeneralStrings" type="NodeJsTestRunner" folderName="AJAX">
+    <node-interpreter value="project" />
+    <working-dir value="$PROJECT_DIR$" />
+    <language value="TYPE_SCRIPT" />
+    <typescript-loader value="TSX" />
+    <envs />
+    <scope-kind value="TEST_FILE" />
+    <test-file value="$PROJECT_DIR$/Tests/Automated/AJAX/URI_QueryParametersConverter/URI_QueryParametersConverter-GeneralStrings.test.ts" />
+    <method v="2" />
+  </configuration>
+</component>
